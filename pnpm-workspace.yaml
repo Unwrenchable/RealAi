@@ -1,0 +1,10 @@
+packages:
+  - "realai-frontend"
+  - "realai-dashboard"
+  - "realai-widget"
+  - "realai-core"
+  - "realai-ui"
+  - "providers/*"
+  - "plugins/*"
+  - "models/*"
+  - "server"
