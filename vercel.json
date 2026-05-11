@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "env": {
+    "NEXT_PUBLIC_API_URL": {
+      "required": true
+    }
+  },
+  "buildCommand": "pnpm build",
+  "installCommand": "pnpm install",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "nodeVersion": "20",
+  "previewMaxDurationSeconds": 604800,
+  "functions": {
+    "api/chat": {
+      "maxDuration": 30,
+      "memory": 1024,
+      "runtime": "nodejs20.x"
+    }
+  }
+}

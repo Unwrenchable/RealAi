@@ -1,8 +1,5 @@
 packages:
-  - "realai-frontend"
-  - "realai-widget"
-  - "realai-core"
-  - "realai-core/ui"
+  - "apps/*"
+  - "packages/*"
   - "providers/*"
-  - "plugins/*"
   - "models/*"

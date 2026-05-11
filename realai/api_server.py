@@ -707,7 +707,11 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
         """Handle GET requests."""
         parsed_path = urlparse(self.path)
 
-        if parsed_path.path in ('/', '/ui'):
+        if parsed_path.path == '/health':
+            # Health check endpoint for load balancers and monitoring
+            self._send_response(200, {"status": "ok"})
+
+        elif parsed_path.path in ('/', '/ui'):
             self._send_html_response(200, _WEB_UI_HTML)
 
         elif parsed_path.path == '/ui/providers':

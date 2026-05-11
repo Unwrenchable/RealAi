@@ -7,6 +7,6 @@
     "build": "pnpm -r --if-present build",
     "lint": "pnpm -r --if-present lint",
     "typecheck": "pnpm -r --if-present typecheck",
-    "dev": "pnpm --filter realai-frontend dev"
+    "dev": "pnpm --filter @realai/frontend dev"
   }
 }

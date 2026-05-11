@@ -8,25 +8,32 @@ importers:
 
   .: {}
 
-  models/realai-1.0: {}
-
-  models/realai-overseer: {}
-
-  models/realai-vision: {}
-
-  providers/openai:
+  apps/dashboard:
     dependencies:
-      openai:
-        specifier: ^4.104.0
-        version: 4.104.0(zod@3.25.76)
+      next:
+        specifier: ^15.5.0
+        version: 15.5.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.40
+      '@types/react':
+        specifier: ^18.2.0
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.2.0
+        version: 18.3.7(@types/react@18.3.28)
+      typescript:
+        specifier: ^5.0.0
+        version: 5.9.3
 
-  providers/realai: {}
-
-  realai-core: {}
-
-  realai-core/ui: {}
-
-  realai-frontend:
+  apps/frontend:
     dependencies:
       lucide-react:
         specifier: ^0.468.0
@@ -78,7 +85,45 @@ importers:
         specifier: ^5
         version: 5.9.3
 
-  realai-widget: {}
+  apps/widget: {}
+
+  models/realai-1.0: {}
+
+  models/realai-overseer: {}
+
+  models/realai-vision: {}
+
+  packages/cli:
+    devDependencies:
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.40
+      typescript:
+        specifier: ^5.0.0
+        version: 5.9.3
+
+  packages/core: {}
+
+  packages/sdk-py: {}
+
+  packages/sdk-ts:
+    devDependencies:
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.40
+      typescript:
+        specifier: ^5.0.0
+        version: 5.9.3
+
+  packages/ui: {}
+
+  providers/openai:
+    dependencies:
+      openai:
+        specifier: ^4.104.0
+        version: 4.104.0(zod@3.25.76)
+
+  providers/realai: {}
 
 packages:
 
