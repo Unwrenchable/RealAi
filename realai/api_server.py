@@ -22,6 +22,7 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 from . import RealAI, PROVIDER_CONFIGS, PROVIDER_ENV_VARS, _KEY_PREFIX_TO_PROVIDER
 from .model_registry import MODEL_REGISTRY, get_model_metadata
+from .server_settings import settings
 
 # ---------------------------------------------------------------------------
 # Database helpers
@@ -581,11 +582,32 @@ function toast(msg) {
 class RealAIAPIHandler(BaseHTTPRequestHandler):
     """HTTP request handler for RealAI API."""
 
+    def _cors_allow_origin(self) -> str:
+        """Resolve the CORS allow-origin value for the current request."""
+        origins = settings.cors_allowed_origins()
+        if origins == ["*"]:
+            return "*"
+
+        requested_origin = self.headers.get("Origin", "")
+        if requested_origin and requested_origin in origins:
+            return requested_origin
+
+        return origins[0] if origins else "*"
+
+    def _set_cors_headers(self):
+        """Attach CORS headers to the active response."""
+        allow_origin = self._cors_allow_origin()
+        self.send_header('Access-Control-Allow-Origin', allow_origin)
+        self.send_header('Vary', 'Origin')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers',
+                         'Content-Type, Authorization, X-Provider, X-Base-URL')
+
     def _send_response(self, status_code: int, data):
         """Send JSON response."""
         self.send_response(status_code)
         self.send_header('Content-Type', 'application/json')
-        self.send_header('Access-Control-Allow-Origin', '*')
+        self._set_cors_headers()
         self.end_headers()
         self.wfile.write(json.dumps(data).encode())
 
@@ -640,7 +662,7 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
             )
         return f"anon:{client_ip}"
 
-    def _get_model(self, model_name: str = "realai-2.0") -> RealAI:
+    def _get_model(self, model_name: str = None) -> RealAI:
         """Build a :class:`~realai.RealAI` instance from request headers.
 
         Reads the API key from the ``Authorization: Bearer <key>`` header, the
@@ -652,6 +674,9 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
         can pass keys via the process environment without requiring callers to
         set the header explicitly.
         """
+        if not model_name:
+            model_name = settings.REALAI_MODEL
+
         auth = self.headers.get("Authorization", "")
         api_key = auth[len("Bearer "):].strip() if auth.startswith("Bearer ") else None
         provider = self.headers.get("X-Provider") or None
@@ -675,10 +700,7 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
         """Handle CORS preflight requests."""
         self.send_response(200)
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers',
-                         'Content-Type, Authorization, X-Provider, X-Base-URL')
+        self._set_cors_headers()
         self.end_headers()
 
     def do_GET(self):
@@ -1235,7 +1257,8 @@ def run_server(host: str = "0.0.0.0", port: int = 8000):
 
 def main():
     """Entry point for running the API server as a module."""
-    port = int(os.environ.get("PORT", 8000))
+    print("Loaded settings:", settings.public_dict())
+    port = settings.PORT
     run_server(port=port)
 
 

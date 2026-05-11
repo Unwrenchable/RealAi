@@ -5,6 +5,7 @@ import time
 from collections import defaultdict, deque
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from apps.api.middleware.logging import RequestLogger
@@ -17,9 +18,19 @@ from apps.api.state import (
     web3_registry,
 )
 from core.logging.logger import log
+from realai.server_settings import settings
 
 app = FastAPI(title="RealAI API")
 app.add_middleware(RequestLogger)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.cors_allowed_origins(),
+    allow_credentials=settings.cors_allowed_origins() != ["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+log("api.settings.loaded", settings.public_dict())
 
 MAX_REQUESTS_PER_SECOND = 10
 MAX_REQUESTS_PER_MINUTE = 100
