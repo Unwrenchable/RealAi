@@ -1,20 +1,13 @@
 {
   "version": 2,
-  "env": {
-    "NEXT_PUBLIC_API_URL": {
-      "required": true
-    }
-  },
-  "buildCommand": "pnpm build",
+  "buildCommand": "pnpm --filter realai-frontend build",
   "installCommand": "pnpm install",
-  "outputDirectory": ".next",
+  "outputDirectory": "apps/frontend/.next",
   "framework": "nextjs",
-  "nodeVersion": "20",
-  "previewMaxDurationSeconds": 604800,
   "functions": {
-    "api/chat": {
+    "apps/frontend/src/app/api/chat/route.ts": {
       "maxDuration": 30,
-      "memory": 1024      
+      "memory": 1024
     }
   }
 }

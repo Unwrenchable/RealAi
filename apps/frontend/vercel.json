@@ -1,9 +1,13 @@
 {
-  "buildCommand": "npm run build",
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm build",
   "outputDirectory": ".next",
   "framework": "nextjs",
   "regions": ["iad1"],
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://your-realai-server.com/$1" }
-  ]
+  "functions": {
+    "src/app/api/chat/route.ts": {
+      "maxDuration": 30,
+      "memory": 1024
+    }
+  }
 }
