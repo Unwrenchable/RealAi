@@ -14,8 +14,7 @@
   "functions": {
     "api/chat": {
       "maxDuration": 30,
-      "memory": 1024,
-      "runtime": "nodejs20.x"
+      "memory": 1024      
     }
   }
 }
