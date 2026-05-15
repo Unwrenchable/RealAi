@@ -1,8 +1,37 @@
 models:
-  - id: realai-default
+  - id: realai-1.0
+    name: "RealAI 1.0"
     type: chat
-    backend: stub
+    provider: local
+    backend: realai-fallback
+    path: realai-2.0
+    owned_by: realai
+    context_length: 8192
+    capabilities:
+      - chat
+      - reasoning
+      - tools
 
-  - id: realai-embed-default
-    type: embeddings
-    backend: stub
+  - id: realai-overseer
+    name: "RealAI Overseer"
+    type: chat
+    provider: local
+    backend: realai-fallback
+    path: realai-overseer
+    owned_by: realai
+    context_length: 8192
+    capabilities:
+      - analysis
+      - planning
+      - critique
+
+  - id: realai-embed
+    name: "RealAI Embed"
+    type: embedding
+    provider: local
+    backend: deterministic
+    path: realai-embed
+    owned_by: realai
+    embedding_dimensions: 64
+    capabilities:
+      - embedding

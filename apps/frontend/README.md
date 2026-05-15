@@ -32,7 +32,7 @@ API, so you need only one Vercel project.
 ### Step 1 — Import the repository on Vercel
 
 1. Go to [vercel.com/new](https://vercel.com/new) and import this repository.
-2. In the **Root Directory** field, enter `realai-frontend`.
+2. In the **Root Directory** field, enter `apps/frontend`.
 3. Leave all other build settings at their defaults.
 
 ### Step 2 — Add environment variables
@@ -60,13 +60,12 @@ Click **Deploy**. That's it — both the chat UI and the API route run on Vercel
 
 ## Self-hosted Python Backend (optional)
 
-If you want to run the Python API server yourself (adds extra features like
-provider auto-detection and the built-in chat UI):
+If you want to run the Python backend yourself, use the structured server:
 
 ```bash
 # From the repo root
 pip install -r requirements.txt
-python -m realai.api_server   # listens on :8000 by default
+python -m realai.server.app   # listens on :8000 by default
 ```
 
 Then set `REALAI_API_BASE=http://localhost:8000` (or your server's URL) in your
@@ -97,5 +96,5 @@ API keys never reach the browser — they stay in the serverless function.
 
 - **"Backend URL is not configured"** — make sure `REALAI_API_BASE` is set in Vercel env vars and that you re-deployed after adding it.
 - **"Cannot auto-detect provider"** — if using the self-hosted Python backend, select your provider in the Settings drawer or pass `X-Provider` header.
-- **Vercel Root Directory** — must be set to `realai-frontend`, not the repo root.
+- **Vercel Root Directory** — must be set to `apps/frontend`, not the repo root.
 - **No trailing `/v1`** — `REALAI_API_BASE` should be the base origin only (e.g. `https://openrouter.ai/api`, not `https://openrouter.ai/api/v1`).

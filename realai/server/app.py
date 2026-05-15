@@ -156,6 +156,14 @@ if FastAPI is not None and BaseModel is not None:
     def model_details(model_id: str):
         return _dispatch_json('GET', '/v1/models/{0}'.format(model_id))
 
+    @app.get('/v1/providers')
+    def providers():
+        return _dispatch_json('GET', '/v1/providers')
+
+    @app.get('/v1/providers/{provider_id}')
+    def provider_details(provider_id: str):
+        return _dispatch_json('GET', '/v1/providers/{0}'.format(provider_id))
+
     @app.post('/v1/images/generations')
     def image_generations(request: ImageGenerationRequest):
         return _dispatch_json('POST', '/v1/images/generations', request.dict())

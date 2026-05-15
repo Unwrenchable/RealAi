@@ -1,9 +1,7 @@
 """Inference backend abstractions for structured RealAI server."""
 
 from dataclasses import dataclass
-from typing import Dict, List, Optional
-
-from realai import RealAI
+from typing import Dict
 
 from .logging_utils import setup_logging
 
@@ -112,6 +110,8 @@ class RealAIFallbackBackend(InferenceBackend):
 
     def generate(self, model_path: str, prompt: str, sampling: SamplingConfig):
         try:
+            from .. import RealAI
+
             model = RealAI(model_name=model_path, provider='local', use_local=True)
             messages = [{'role': 'user', 'content': prompt}]
             response = model.chat_completion(
@@ -162,4 +162,3 @@ class BackendResolver(object):
 
 
 RESOLVER = BackendResolver()
-

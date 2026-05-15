@@ -1,11 +1,11 @@
-# 🚀 RealAI Local Llama.cpp - Quick Reference
+# 🚀 RealAI Local Structured Server - Quick Reference
 
 ## ⚡ Quick Start (3 Commands)
 
 ```powershell
-# 1. Download llama-cli.exe from https://github.com/ggerganov/llama.cpp/releases
+# 1. (Optional) Download llama-cli.exe from https://github.com/ggerganov/llama.cpp/releases
 
-# 2. Download a GGUF model (e.g., Llama 3.2 3B Q4_K_M) to C:\Users\tsmit\models\
+# 2. (Optional) Download a GGUF model if you want llama-cli or llama.cpp execution
 
 # 3. Start server
 python -m realai.server.app
@@ -16,7 +16,8 @@ python -m realai.server.app
 | File | Purpose | Example |
 |------|---------|---------|
 | `realai.toml` | Server config | See `realai.toml.example` |
-| `realai/models/registry.json` | Model registry | See `registry.json.example` |
+| `models.yaml` | Model registry | Edit the structured registry entries here |
+| `providers.yaml` | Provider registry | Enable and configure providers here |
 
 ## 🔧 Essential Commands
 
@@ -30,11 +31,14 @@ python -m realai.server.app
 # Start server (FastAPI with reload)
 uvicorn realai.server.app:app --host 127.0.0.1 --port 8000 --reload
 
-# Run examples
-python examples/local_llama_example.py
-
 # Test endpoint
 curl http://127.0.0.1:8000/health
+
+# List models
+curl http://127.0.0.1:8000/v1/models
+
+# List providers
+curl http://127.0.0.1:8000/v1/providers
 ```
 
 ## 🎯 API Usage
@@ -46,7 +50,7 @@ import requests
 response = requests.post(
 	'http://127.0.0.1:8000/v1/chat/completions',
 	json={
-		'model': 'llama-local',
+		'model': 'realai-1.0',
 		'messages': [{'role': 'user', 'content': 'Hello!'}]
 	}
 )
@@ -63,7 +67,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-	model="llama-local",
+	model="realai-1.0",
 	messages=[{"role": "user", "content": "Hello!"}]
 )
 print(response.choices[0].message.content)
@@ -74,23 +78,27 @@ print(response.choices[0].message.content)
 curl -X POST http://127.0.0.1:8000/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
-	"model": "llama-local",
+	"model": "realai-1.0",
 	"messages": [{"role": "user", "content": "Hello!"}]
   }'
 ```
 
 ## 🗂️ Model Registry Example
 
-```json
-{
-  "llama-local": {
-	"type": "chat",
-	"backend": "llama-cli",
-	"path": "C:/Users/tsmit/models/llama-3.2-3b-instruct.Q4_K_M.gguf",
-	"context_length": 8192,
-	"owned_by": "local"
-  }
-}
+```yaml
+models:
+  - id: realai-1.0
+    type: chat
+    provider: local
+    backend: realai-fallback
+    path: realai-2.0
+    context_length: 8192
+
+  - id: realai-embed
+    type: embedding
+    provider: local
+    backend: deterministic
+    embedding_dimensions: 64
 ```
 
 ## 📍 File Locations
@@ -98,39 +106,39 @@ curl -X POST http://127.0.0.1:8000/v1/chat/completions \
 ```
 realai/
 ├── realai.toml                    # Server configuration
+├── models.yaml                    # Structured model registry
+├── providers.yaml                 # Structured provider registry
 ├── realai/
-│   ├── models/
-│   │   ├── registry.json          # Model registry (EDIT THIS)
-│   │   └── registry.json.example  # Example registry
 │   └── server/
 │       ├── app.py                 # Server entrypoint
+│       ├── router.py              # HTTP route dispatcher
+│       ├── config.py              # Typed config loader
 │       ├── backends.py            # Backend resolver
-│       └── llama_cli_backend.py   # NEW: llama-cli backend
+│       ├── providers.py           # Provider registry
+│       └── llama_cli_backend.py   # Optional llama-cli backend
 ├── docs/
 │   ├── local-llama-setup.md       # Complete setup guide
 │   └── LOCAL_LLAMA_README.md      # Overview & benefits
-├── scripts/
-│   └── setup_local_llama.py       # Setup checker tool
-└── examples/
-	└── local_llama_example.py     # Usage examples
+└── apps/
+    └── frontend/                  # Next.js web client
 ```
 
 ## 🔍 Troubleshooting Quick Fixes
 
 | Problem | Quick Fix |
 |---------|-----------|
-| "llama-cli not found" | Add to PATH or set in `realai.toml` |
-| "Model file not found" | Check path in `registry.json` |
+| "llama-cli not found" | Install llama.cpp binaries or use the default fallback backends |
+| "Model file not found" | Check `models.yaml` and the configured model path |
 | Slow inference | Use Q4_K_M quantization, enable GPU |
 | Out of memory | Use smaller model or Q3_K_M quantization |
-| Server won't start | Check `python scripts/setup_local_llama.py` |
+| Server won't start | Check `realai.toml`, `models.yaml`, and `providers.yaml` |
 
 ## 📚 Documentation
 
 - **Complete Setup**: `docs/local-llama-setup.md`
 - **Overview**: `docs/LOCAL_LLAMA_README.md`
-- **Setup Checker**: `python scripts/setup_local_llama.py`
-- **Examples**: `examples/local_llama_example.py`
+- **Backend config**: `realai.toml`, `models.yaml`, `providers.yaml`
+- **Frontend**: `apps/frontend/README.md`
 
 ## 🎨 Recommended Models
 
@@ -143,13 +151,15 @@ realai/
 
 ## 🎯 Success Checklist
 
-- [ ] llama-cli.exe downloaded and in PATH
-- [ ] GGUF model downloaded to `C:\Users\tsmit\models\`
-- [ ] `realai/models/registry.json` configured with model path
+- [ ] `realai.toml` configured if you need custom defaults
+- [ ] `models.yaml` contains the models you want to expose
+- [ ] `providers.yaml` reflects the providers you want enabled
 - [ ] Server starts without errors
 - [ ] `/health` endpoint returns `"status": "ok"`
+- [ ] `/v1/models` returns the registered models
+- [ ] `/v1/providers` returns provider health/status
 - [ ] Chat completion request returns response
-- [ ] No cloud API keys required ✨
+- [ ] Optional provider credentials are set if you want hosted models
 
 ## 🔗 Quick Links
 
@@ -159,4 +169,4 @@ realai/
 
 ---
 
-**Need help?** Run `python scripts/setup_local_llama.py` to diagnose issues.
+**Need help?** Start with `/health`, `/v1/models`, and `/v1/providers` to verify the structured server state.

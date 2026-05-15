@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getEnv } from "@/lib/env";
-import { rateLimit, getRateLimitStatus } from "@/lib/ratelimit";
+import { rateLimit } from "@/lib/ratelimit";
 import type { ChatRequest } from "@/lib/realai";
 
 export const dynamic = "force-dynamic";

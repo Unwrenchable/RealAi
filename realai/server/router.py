@@ -9,6 +9,7 @@ from .logging_utils import setup_logging
 from .memory_store import MEMORY
 from .metrics import CONTENT_TYPE_LATEST, generate_latest
 from .orchestration import TASKS
+from .providers import get_provider, list_providers, provider_for_model
 from .tools_runtime import TOOLS
 
 logger = setup_logging()
@@ -88,6 +89,7 @@ def health_response():
         'provider': settings.provider,
         'profile': settings.profile,
         'available_models': list_models(),
+        'providers': list_providers(),
     }
 
 
@@ -213,6 +215,7 @@ def handle_model_read(path):
         'id': model_id,
         'object': 'model',
         'owned_by': cfg.get('owned_by', 'realai'),
+        'provider': cfg.get('provider', load_settings().provider),
         'type': cfg.get('type', 'chat'),
         'backend': cfg.get('backend', 'unknown'),
         'context_length': cfg.get('context_length'),
@@ -220,6 +223,20 @@ def handle_model_read(path):
         'capabilities': cfg.get('capabilities', []),
         'path': cfg.get('path'),
     }
+
+
+def handle_providers_list():
+    return {'object': 'list', 'data': list_providers()}
+
+
+def handle_provider_read(path):
+    marker = '/v1/providers/'
+    if marker not in path:
+        raise RequestValidationError('Invalid provider path.')
+    provider_id = path.split(marker, 1)[1]
+    if not provider_id:
+        raise RequestValidationError('provider_id is required.')
+    return get_provider(provider_id)
 
 
 def handle_memory_store(payload):
@@ -303,6 +320,10 @@ def dispatch_request(method, path, payload=None):
             return 200, handle_models_list(), 'application/json'
         if method == 'GET' and path.startswith('/v1/models/'):
             return 200, handle_model_read(path), 'application/json'
+        if method == 'GET' and path == '/v1/providers':
+            return 200, handle_providers_list(), 'application/json'
+        if method == 'GET' and path.startswith('/v1/providers/'):
+            return 200, handle_provider_read(path), 'application/json'
         if method == 'POST' and path == '/v1/chat/completions':
             return 200, handle_chat_request(payload or {}), 'application/json'
         if method == 'POST' and path == '/v1/embeddings':

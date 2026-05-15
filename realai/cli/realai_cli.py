@@ -1,6 +1,7 @@
 """Command-line entrypoint for structured RealAI workflows."""
 
 import argparse
+import json
 import os
 
 try:
@@ -11,10 +12,18 @@ except ImportError:
 from realai.sdk.python.realai_client import RealAIClient
 
 
+def _make_client(api_url):
+    return RealAIClient(api_url=api_url)
+
+
 def _chat_command(prompt, model, api_url):
-    client = RealAIClient(api_url=api_url)
+    client = _make_client(api_url)
     response = client.chat(model=model, messages=[{'role': 'user', 'content': prompt}])
     print(response['choices'][0]['message']['content'])
+
+
+def _json_command(value):
+    print(json.dumps(value, indent=2, sort_keys=True))
 
 
 if click is not None:
@@ -30,6 +39,30 @@ if click is not None:
         """Send a prompt to the RealAI server."""
         _chat_command(prompt, model, api_url)
 
+    @cli.command('health')
+    @click.option('--api-url', envvar='REALAI_API_URL', default='http://localhost:8000')
+    def health(api_url):
+        """Show server health."""
+        _json_command(_make_client(api_url).health())
+
+    @cli.command('models')
+    @click.option('--api-url', envvar='REALAI_API_URL', default='http://localhost:8000')
+    def models(api_url):
+        """List server models."""
+        _json_command(_make_client(api_url).models())
+
+    @cli.command('providers')
+    @click.option('--api-url', envvar='REALAI_API_URL', default='http://localhost:8000')
+    def providers(api_url):
+        """List configured providers."""
+        _json_command(_make_client(api_url).providers())
+
+    @cli.command('tasks')
+    @click.option('--api-url', envvar='REALAI_API_URL', default='http://localhost:8000')
+    def tasks(api_url):
+        """List persisted tasks."""
+        _json_command(_make_client(api_url).list_tasks())
+
     def main(argv=None):
         """CLI entrypoint."""
         cli.main(args=argv, standalone_mode=False)
@@ -38,12 +71,21 @@ else:
     def main(argv=None):
         """Fallback CLI entrypoint when click is unavailable."""
         parser = argparse.ArgumentParser(description='RealAI command-line interface.')
-        parser.add_argument('command', choices=['chat'])
-        parser.add_argument('prompt')
+        parser.add_argument('command', choices=['chat', 'health', 'models', 'providers', 'tasks'])
+        parser.add_argument('prompt', nargs='?')
         parser.add_argument('--model', default='realai-1.0')
         parser.add_argument('--api-url', default=os.environ.get('REALAI_API_URL', 'http://localhost:8000'))
         args = parser.parse_args(argv)
-        _chat_command(args.prompt, args.model, args.api_url)
+        if args.command == 'chat':
+            _chat_command(args.prompt or '', args.model, args.api_url)
+        elif args.command == 'health':
+            _json_command(_make_client(args.api_url).health())
+        elif args.command == 'models':
+            _json_command(_make_client(args.api_url).models())
+        elif args.command == 'providers':
+            _json_command(_make_client(args.api_url).providers())
+        elif args.command == 'tasks':
+            _json_command(_make_client(args.api_url).list_tasks())
         return 0
 
 

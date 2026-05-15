@@ -4,11 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "dev": "node -e \"console.log('Dashboard app not implemented yet')\"",
+    "build": "node -e \"console.log('No build configured for dashboard yet')\"",
+    "start": "node -e \"console.log('Dashboard app not implemented yet')\"",
+    "lint": "node -e \"console.log('No lint configured for dashboard yet')\"",
+    "typecheck": "node -e \"console.log('No typecheck configured for dashboard yet')\""
   },
   "dependencies": {
     "react": "^18.2.0",

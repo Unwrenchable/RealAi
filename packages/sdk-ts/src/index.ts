@@ -1,10 +1,10 @@
 /**
  * RealAI TypeScript SDK
- * OpenAI-compatible client for RealAI platform
+ * Structured client for the RealAI platform surface.
  */
 
 export interface RealAIOptions {
-  apiKey: string;
+  apiKey?: string;
   baseUrl?: string;
 }
 
@@ -18,45 +18,83 @@ export interface ChatCompletionRequest {
   messages: ChatCompletionMessage[];
   temperature?: number;
   max_tokens?: number;
+  stream?: boolean;
+}
+
+export interface EmbeddingsRequest {
+  model: string;
+  input: string[];
+}
+
+export interface TaskRequest {
+  task: string;
+  context?: string;
 }
 
 export class RealAI {
-  private apiKey: string;
+  private apiKey?: string;
   private baseUrl: string;
 
-  constructor(opts: RealAIOptions) {
+  constructor(opts: RealAIOptions = {}) {
     this.apiKey = opts.apiKey;
-    this.baseUrl = (opts.baseUrl || "https://api.realai.com").replace(/\/+$/, "");
+    this.baseUrl = (opts.baseUrl || process.env.REALAI_API_URL || "http://127.0.0.1:8000").replace(/\/+$/, "");
   }
 
-  async chat(request: ChatCompletionRequest): Promise<any> {
-    const response = await fetch(`${this.baseUrl}/v1/chat/completions`, {
+  private async request<T>(path: string, init?: RequestInit): Promise<T> {
+    const headers = new Headers(init?.headers || {});
+    if (!headers.has("Content-Type") && init?.body) {
+      headers.set("Content-Type", "application/json");
+    }
+    if (this.apiKey) {
+      headers.set("Authorization", `Bearer ${this.apiKey}`);
+    }
+
+    const response = await fetch(`${this.baseUrl}${path}`, {
+      ...init,
+      headers,
+    });
+
+    if (!response.ok) {
+      throw new Error(`RealAI API error: ${response.status} ${response.statusText}`);
+    }
+
+    return response.json() as Promise<T>;
+  }
+
+  chat(request: ChatCompletionRequest): Promise<any> {
+    return this.request("/v1/chat/completions", {
       method: "POST",
-      headers: {
-        "Authorization": `Bearer ${this.apiKey}`,
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(request),
     });
-
-    if (!response.ok) {
-      throw new Error(`RealAI API error: ${response.statusText}`);
-    }
-
-    return response.json();
   }
 
-  async models(): Promise<any> {
-    const response = await fetch(`${this.baseUrl}/v1/models`, {
-      headers: {
-        "Authorization": `Bearer ${this.apiKey}`,
-      },
+  embeddings(request: EmbeddingsRequest): Promise<any> {
+    return this.request("/v1/embeddings", {
+      method: "POST",
+      body: JSON.stringify(request),
     });
+  }
 
-    if (!response.ok) {
-      throw new Error(`RealAI API error: ${response.statusText}`);
-    }
+  models(): Promise<any> {
+    return this.request("/v1/models");
+  }
 
-    return response.json();
+  providers(): Promise<any> {
+    return this.request("/v1/providers");
+  }
+
+  health(): Promise<any> {
+    return this.request("/health");
+  }
+
+  createTask(request: TaskRequest): Promise<any> {
+    return this.request("/v1/tasks", {
+      method: "POST",
+      body: JSON.stringify(request),
+    });
+  }
+
+  listTasks(): Promise<any> {
+    return this.request("/v1/tasks");
   }
 }

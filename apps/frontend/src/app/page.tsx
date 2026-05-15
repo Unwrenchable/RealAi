@@ -192,7 +192,11 @@ export default function HomePage() {
 
     try {
       const allMessages = [...(convo.messages), userMsg];
-      const response = await sendMessage(allMessages, settings);
+      const response = await sendMessage(
+        allMessages,
+        settings,
+        abortRef.current?.signal
+      );
 
       setConversations((prev) =>
         prev.map((c) =>

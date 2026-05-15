@@ -10,6 +10,23 @@ Prepared by Travis | May 7, 2026 | Version 0.1.0
 > to guide future implementation and refactoring work. Some sections describe the
 > desired end-state rather than the exact current repository layout.
 
+## Current implementation snapshot
+
+Before reading the target-state sections below, anchor on the parts that are
+already implemented in the repository today:
+
+- The primary runtime is the **structured Python backend** in `realai/server/`.
+- Runtime configuration is loaded from `realai.toml`, `models.yaml`, and `providers.yaml`.
+- The backend exposes working endpoints for chat, embeddings, models, providers,
+  memory, tasks, tools, health, and metrics.
+- Memory and task state are persisted via SQLite instead of staying in-memory.
+- The frontend in `apps/frontend` calls the same structured backend contract via
+  its `/api/chat` proxy route.
+- The Python and TypeScript SDK/CLI surfaces now align to the structured backend.
+
+Use the rest of this document as the **direction of travel**, not as a literal
+map of every file that currently exists.
+
 ## Table of Contents
 
 1. [Executive Summary](#1-executive-summary)
