@@ -245,6 +245,7 @@ header {
 <div class="settings-bar">
   <label for="provider-select">Provider</label>
   <select id="provider-select" onchange="onSettingChange()">
+    <option value="local">Local RealAI (no key)</option>
     <option value="auto">Auto-detect from key</option>
     <option value="openai">OpenAI</option>
     <option value="anthropic">Anthropic (Claude)</option>
@@ -264,7 +265,7 @@ header {
 
   <label for="api-key-input">API Key</label>
   <input type="password" id="api-key-input"
-         placeholder="Paste your provider API key&#x2026;"
+         placeholder="Paste provider API key (optional for Local mode)&#x2026;"
          oninput="onKeyInput()"
          onkeydown="if(event.key==='Enter')saveKey()">
   <button class="btn btn-sm btn-secondary" onclick="toggleKeyVis()" title="Show / hide key">&#x1F441;</button>
@@ -277,7 +278,7 @@ header {
   <div id="welcome">
     <div class="big-icon">&#x1F916;</div>
     <h2>Welcome to RealAI</h2>
-    <p>Paste your API key above, pick a provider &amp; model, then start chatting.</p>
+    <p>Pick Local RealAI for no-key local mode, or paste an API key for cloud providers.</p>
     <div class="cap-grid">
       <span class="cap-pill">&#x1F4AC; Chat</span>
       <span class="cap-pill">&#x1F517; Chain-of-thought</span>
@@ -377,6 +378,11 @@ function detectProvider(key) {
 function onKeyInput() {
   var key = document.getElementById('api-key-input').value;
   updateKeyStatus(key);
+  var currentProvider = document.getElementById('provider-select').value;
+  if (currentProvider === 'local') {
+    showProviderHint('');
+    return;
+  }
   // Auto-select provider when the key prefix is recognizable.
   var detected = detectProvider(key);
   var select = document.getElementById('provider-select');
@@ -449,7 +455,7 @@ function clearChat() {
   var c = document.getElementById('chat-messages');
   c.innerHTML = '<div id="welcome"><div class="big-icon">&#x1F916;</div>'
     + '<h2>Welcome to RealAI</h2>'
-    + '<p>Paste your API key above, pick a provider &amp; model, then start chatting.</p>'
+    + '<p>Pick Local RealAI for no-key local mode, or paste an API key for cloud providers.</p>'
     + '<div class="cap-grid">'
     + '<span class="cap-pill">&#x1F4AC; Chat</span>'
     + '<span class="cap-pill">&#x1F517; Chain-of-thought</span>'
