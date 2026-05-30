@@ -46,3 +46,4 @@ temp/
 tmp/
 cache/
 *.tmp
+apps/frontend/src/lib/
