@@ -2404,7 +2404,17 @@ class RealAI:
                 }, capability=ModelCapability.TEXT_GENERATION.value, modality="text",
                    extra={"persona": self.persona, "source": "error", "error": _api_error})
 
-        # Placeholder response (no provider configured).
+        # Placeholder response when neither local nor API generation is available.
+        if self._use_local:
+            missing_credentials_msg = (
+                "Local RealAI is selected, but no local model is configured/loaded yet. "
+                "Register a local model and set it as default_llm, then retry."
+            )
+        else:
+            missing_credentials_msg = (
+                "No API key configured. Select Local RealAI to run locally without a key, "
+                "or paste a provider API key in the settings bar."
+            )
         return self._with_metadata({
             "id": f"chatcmpl-{int(time.time())}",
             "object": "chat.completion",
@@ -2414,7 +2424,7 @@ class RealAI:
                 "index": 0,
                 "message": {
                     "role": "assistant",
-                    "content": "No API key configured. Paste your provider API key in the settings bar above to connect to a real AI model."
+                    "content": missing_credentials_msg
                 },
                 "finish_reason": "stop"
             }],
@@ -2464,6 +2474,16 @@ class RealAI:
                     )
 
                     if response_text:
+                        if self._use_local:
+                            missing_credentials_msg = (
+                                "Local RealAI is selected, but no local model is configured/loaded yet. "
+                                "Register a local model and set it as default_llm, then retry."
+                            )
+                        else:
+                            missing_credentials_msg = (
+                                "No API key configured. Select Local RealAI to run locally without a key, "
+                                "or paste a provider API key in the settings bar."
+                            )
                         return self._with_metadata({
                             "id": f"cmpl-local-{int(time.time())}",
                             "object": "text_completion",
@@ -2537,7 +2557,7 @@ class RealAI:
             "created": int(time.time()),
             "model": self.model_name,
             "choices": [{
-                "text": "No API key configured. Paste your provider API key in the settings bar above to connect to a real AI model.",
+                "text": missing_credentials_msg,
                 "index": 0,
                 "finish_reason": "stop"
             }],

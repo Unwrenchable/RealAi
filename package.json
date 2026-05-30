@@ -7,6 +7,10 @@
     "build": "pnpm -r --if-present build",
     "lint": "pnpm -r --if-present lint",
     "typecheck": "pnpm -r --if-present typecheck",
-    "dev": "pnpm --filter @realai/frontend dev"
+    "dev": "pnpm --filter @realai/frontend dev",
+    "autopilot": "tsx autopilot/index.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.6"
   }
 }
