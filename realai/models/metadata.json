@@ -1,0 +1,393 @@
+{
+  "capabilities": [
+    "chat",
+    "coding",
+    "reasoning",
+    "vision",
+    "long-context",
+    "tool-calling",
+    "multimodal",
+    "speed",
+    "local",
+    "embeddings",
+    "planning",
+    "web-research",
+    "task-automation",
+    "knowledge-synthesis",
+    "self-reflection",
+    "multi-agent"
+  ],
+  "models": [
+    {
+      "id": "realai-2.0",
+      "name": "RealAI 2.0",
+      "display_name": "RealAI 2.0 General",
+      "owned_by": "realai",
+      "description": "General-purpose orchestration model with strong reasoning, coding, multimodal understanding, and tool use.",
+      "context_window": 128000,
+      "max_output_tokens": 8192,
+      "training_cutoff": "2025-01",
+      "modalities": ["text", "image", "audio", "video"],
+      "tool_calling": true,
+      "structured_output": true,
+      "cost_score": 3,
+      "speed_score": 4,
+      "quality_score": 5,
+      "local_available": false,
+      "family": "realai",
+      "tier": "general",
+      "default": true,
+      "capabilities": [
+        "chat",
+        "coding",
+        "reasoning",
+        "vision",
+        "long-context",
+        "tool-calling",
+        "multimodal",
+        "planning",
+        "web-research",
+        "task-automation",
+        "knowledge-synthesis",
+        "self-reflection",
+        "multi-agent"
+      ],
+      "compatibility_matrix": {
+        "openai_chat_completions": true,
+        "streaming": true,
+        "tool_calls": true,
+        "vision_input": true,
+        "audio_input": true,
+        "local_runtime": false
+      },
+      "performance_profile": {
+        "quality": "high",
+        "speed": "fast",
+        "cost": "medium",
+        "best_for": ["coding", "reasoning", "tool-calling", "multimodal"]
+      },
+      "routing_policies": {
+        "coding": {"priority": 95},
+        "reasoning": {"priority": 93},
+        "vision": {"priority": 88},
+        "planning": {"priority": 90},
+        "tool-calling": {"priority": 92}
+      }
+    },
+    {
+      "id": "realai-1.0-base",
+      "name": "RealAI 1.0 Base",
+      "display_name": "RealAI 1.0 Base",
+      "owned_by": "realai",
+      "description": "Base pre-trained model for local inference and low-cost experimentation.",
+      "context_window": 32768,
+      "max_output_tokens": 4096,
+      "training_cutoff": "2024-06",
+      "modalities": ["text"],
+      "tool_calling": false,
+      "structured_output": false,
+      "cost_score": 1,
+      "speed_score": 5,
+      "quality_score": 3,
+      "local_available": true,
+      "family": "realai-1.0",
+      "tier": "base",
+      "capabilities": ["chat", "local", "speed"],
+      "compatibility_matrix": {
+        "openai_chat_completions": true,
+        "streaming": true,
+        "tool_calls": false,
+        "vision_input": false,
+        "audio_input": false,
+        "local_runtime": true
+      },
+      "performance_profile": {
+        "quality": "medium",
+        "speed": "very_fast",
+        "cost": "low",
+        "best_for": ["speed", "local"]
+      },
+      "routing_policies": {
+        "speed": {"priority": 90},
+        "local": {"priority": 95}
+      }
+    },
+    {
+      "id": "realai-1.0-instruct",
+      "name": "RealAI 1.0 Instruct",
+      "display_name": "RealAI 1.0 Instruct",
+      "owned_by": "realai",
+      "description": "Instruction-tuned local variant optimized for chat and tool-centric workflows.",
+      "context_window": 32768,
+      "max_output_tokens": 4096,
+      "training_cutoff": "2024-06",
+      "modalities": ["text"],
+      "tool_calling": true,
+      "structured_output": false,
+      "cost_score": 2,
+      "speed_score": 4,
+      "quality_score": 4,
+      "local_available": true,
+      "family": "realai-1.0",
+      "tier": "instruct",
+      "capabilities": ["chat", "local", "tool-calling"],
+      "compatibility_matrix": {
+        "openai_chat_completions": true,
+        "streaming": true,
+        "tool_calls": true,
+        "vision_input": false,
+        "audio_input": false,
+        "local_runtime": true
+      },
+      "performance_profile": {
+        "quality": "medium_high",
+        "speed": "fast",
+        "cost": "low_medium",
+        "best_for": ["chat", "tool-calling", "local"]
+      },
+      "routing_policies": {
+        "tool-calling": {"priority": 82},
+        "local": {"priority": 92}
+      }
+    },
+    {
+      "id": "realai-1.0-agentic",
+      "name": "RealAI 1.0 Agentic",
+      "display_name": "RealAI 1.0 Agentic",
+      "owned_by": "realai",
+      "description": "Agent-native local variant tuned for multi-step reasoning and orchestration.",
+      "context_window": 128000,
+      "max_output_tokens": 8192,
+      "training_cutoff": "2024-06",
+      "modalities": ["text"],
+      "tool_calling": true,
+      "structured_output": true,
+      "cost_score": 3,
+      "speed_score": 3,
+      "quality_score": 5,
+      "local_available": true,
+      "family": "realai-1.0",
+      "tier": "agentic",
+      "capabilities": [
+        "chat",
+        "local",
+        "reasoning",
+        "tool-calling",
+        "long-context",
+        "planning",
+        "multi-agent",
+        "self-reflection"
+      ],
+      "compatibility_matrix": {
+        "openai_chat_completions": true,
+        "streaming": true,
+        "tool_calls": true,
+        "vision_input": false,
+        "audio_input": false,
+        "local_runtime": true
+      },
+      "performance_profile": {
+        "quality": "high",
+        "speed": "balanced",
+        "cost": "medium",
+        "best_for": ["reasoning", "planning", "multi-agent", "local"]
+      },
+      "routing_policies": {
+        "reasoning": {"priority": 94},
+        "planning": {"priority": 96},
+        "multi-agent": {"priority": 97},
+        "local": {"priority": 90}
+      }
+    },
+    {
+      "id": "gpt-4o",
+      "name": "GPT-4o",
+      "display_name": "GPT-4o",
+      "owned_by": "openai",
+      "description": "OpenAI multimodal flagship model.",
+      "context_window": 128000,
+      "max_output_tokens": 4096,
+      "training_cutoff": "2024-04",
+      "modalities": ["text", "image"],
+      "tool_calling": true,
+      "structured_output": true,
+      "cost_score": 4,
+      "speed_score": 4,
+      "quality_score": 5,
+      "local_available": false,
+      "family": "gpt-4",
+      "tier": "flagship",
+      "capabilities": ["chat", "vision", "reasoning", "tool-calling", "multimodal"],
+      "compatibility_matrix": {
+        "openai_chat_completions": true,
+        "streaming": true,
+        "tool_calls": true,
+        "vision_input": true,
+        "audio_input": false,
+        "local_runtime": false
+      },
+      "performance_profile": {
+        "quality": "high",
+        "speed": "fast",
+        "cost": "high",
+        "best_for": ["vision", "multimodal", "reasoning"]
+      },
+      "routing_policies": {
+        "vision": {"priority": 94},
+        "multimodal": {"priority": 95}
+      }
+    },
+    {
+      "id": "gpt-4o-mini",
+      "name": "GPT-4o mini",
+      "display_name": "GPT-4o mini",
+      "owned_by": "openai",
+      "description": "Smaller, faster, cheaper OpenAI model.",
+      "context_window": 128000,
+      "max_output_tokens": 4096,
+      "training_cutoff": "2024-04",
+      "modalities": ["text"],
+      "tool_calling": true,
+      "structured_output": false,
+      "cost_score": 1,
+      "speed_score": 5,
+      "quality_score": 3,
+      "local_available": false,
+      "family": "gpt-4",
+      "tier": "fast",
+      "capabilities": ["chat", "speed", "tool-calling"],
+      "compatibility_matrix": {
+        "openai_chat_completions": true,
+        "streaming": true,
+        "tool_calls": true,
+        "vision_input": false,
+        "audio_input": false,
+        "local_runtime": false
+      },
+      "performance_profile": {
+        "quality": "medium",
+        "speed": "very_fast",
+        "cost": "low",
+        "best_for": ["speed", "tool-calling"]
+      },
+      "routing_policies": {
+        "speed": {"priority": 96}
+      }
+    },
+    {
+      "id": "claude-3-5-sonnet-20241022",
+      "name": "Claude 3.5 Sonnet",
+      "display_name": "Claude 3.5 Sonnet",
+      "owned_by": "anthropic",
+      "description": "Anthropic balanced reasoning model.",
+      "context_window": 200000,
+      "max_output_tokens": 8192,
+      "training_cutoff": "2024-04",
+      "modalities": ["text"],
+      "tool_calling": true,
+      "structured_output": true,
+      "cost_score": 3,
+      "speed_score": 3,
+      "quality_score": 5,
+      "local_available": false,
+      "family": "claude-3.5",
+      "tier": "reasoning",
+      "capabilities": ["chat", "reasoning", "long-context", "tool-calling"],
+      "compatibility_matrix": {
+        "openai_chat_completions": false,
+        "streaming": true,
+        "tool_calls": true,
+        "vision_input": false,
+        "audio_input": false,
+        "local_runtime": false
+      },
+      "performance_profile": {
+        "quality": "high",
+        "speed": "balanced",
+        "cost": "medium",
+        "best_for": ["reasoning", "long-context"]
+      },
+      "routing_policies": {
+        "reasoning": {"priority": 91},
+        "long-context": {"priority": 93}
+      }
+    },
+    {
+      "id": "llama-3.1-8b-instant",
+      "name": "Llama 3.1 8B Instant",
+      "display_name": "Llama 3.1 8B Instant",
+      "owned_by": "groq",
+      "description": "Meta Llama 3.1 8B served at Groq speed.",
+      "context_window": 128000,
+      "max_output_tokens": 8192,
+      "training_cutoff": "2023-12",
+      "modalities": ["text"],
+      "tool_calling": false,
+      "structured_output": false,
+      "cost_score": 1,
+      "speed_score": 5,
+      "quality_score": 3,
+      "local_available": true,
+      "family": "llama-3.1",
+      "tier": "speed",
+      "capabilities": ["chat", "local", "speed"],
+      "compatibility_matrix": {
+        "openai_chat_completions": true,
+        "streaming": true,
+        "tool_calls": false,
+        "vision_input": false,
+        "audio_input": false,
+        "local_runtime": true
+      },
+      "performance_profile": {
+        "quality": "medium",
+        "speed": "very_fast",
+        "cost": "low",
+        "best_for": ["speed", "local"]
+      },
+      "routing_policies": {
+        "speed": {"priority": 94},
+        "local": {"priority": 88}
+      }
+    },
+    {
+      "id": "gemini-1.5-pro",
+      "name": "Gemini 1.5 Pro",
+      "display_name": "Gemini 1.5 Pro",
+      "owned_by": "gemini",
+      "description": "Google long-context multimodal model.",
+      "context_window": 1000000,
+      "max_output_tokens": 8192,
+      "training_cutoff": "2024-04",
+      "modalities": ["text", "image", "audio"],
+      "tool_calling": true,
+      "structured_output": false,
+      "cost_score": 3,
+      "speed_score": 3,
+      "quality_score": 5,
+      "local_available": false,
+      "family": "gemini-1.5",
+      "tier": "long-context",
+      "capabilities": ["chat", "vision", "reasoning", "long-context", "multimodal"],
+      "compatibility_matrix": {
+        "openai_chat_completions": false,
+        "streaming": true,
+        "tool_calls": true,
+        "vision_input": true,
+        "audio_input": true,
+        "local_runtime": false
+      },
+      "performance_profile": {
+        "quality": "high",
+        "speed": "balanced",
+        "cost": "medium",
+        "best_for": ["long-context", "vision", "multimodal"]
+      },
+      "routing_policies": {
+        "long-context": {"priority": 99},
+        "vision": {"priority": 90},
+        "multimodal": {"priority": 92}
+      }
+    }
+  ]
+}

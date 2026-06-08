@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "realai"
+requires-python = ">=3.12,<4.0"
+dynamic = ["version", "description", "readme", "classifiers"]
+
+[project.scripts]
+realai        = "realai:main"
+realai-cli    = "realai.cli.realai_cli:main"
+realai-server = "realai.server.app:main"

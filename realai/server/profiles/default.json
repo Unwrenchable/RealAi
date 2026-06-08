@@ -1,0 +1,9 @@
+{
+  "permissions": ["filesystem.read"],
+  "tool_allowlist": ["web_search", "file_read"],
+  "memory": {
+    "enabled": true,
+    "max_records": 5000
+  }
+}
+

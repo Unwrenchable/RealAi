@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://realai.ai/schema/tool.schema.json",
+  "title": "RealAI Tool Manifest",
+  "description": "Schema for tool definitions registered in the RealAI tool registry.",
+  "type": "object",
+  "required": [
+    "name",
+    "description",
+    "input_schema",
+    "output_schema",
+    "safety"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "description": "Unique snake_case tool name used in tools_allowed lists."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What the tool does, including when to call it and what it returns."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semver version of the tool implementation."
+    },
+    "input_schema": {
+      "type": "object",
+      "description": "JSON Schema describing the arguments object the tool accepts.",
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string", "const": "object" },
+        "properties": { "type": "object" },
+        "required": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "output_schema": {
+      "type": "object",
+      "description": "JSON Schema describing the structure of the tool's return value.",
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "safety": {
+      "type": "object",
+      "description": "Safety classification and restrictions for this tool.",
+      "required": ["risk_level"],
+      "properties": {
+        "risk_level": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "critical"],
+          "description": "Risk classification — used to enforce profile-based access."
+        },
+        "requires_approval": {
+          "type": "boolean",
+          "description": "Whether a human approval step is required before execution."
+        },
+        "dry_run_supported": {
+          "type": "boolean",
+          "description": "Whether the tool can simulate its action without side effects."
+        },
+        "rate_limit_per_minute": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum invocations per minute (0 = unlimited)."
+        },
+        "allowed_profiles": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["safe", "balanced", "power"] },
+          "description": "Access profiles permitted to call this tool."
+        }
+      },
+      "additionalProperties": true
+    },
+    "examples": {
+      "type": "array",
+      "description": "Example invocations for documentation and self-testing.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "description": { "type": "string" },
+          "input": { "type": "object" },
+          "expected_output": {}
+        },
+        "additionalProperties": true
+      }
+    }
+  }
+}
