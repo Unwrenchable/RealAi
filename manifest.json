@@ -1,0 +1,48 @@
+{
+  "project": "RealAI",
+  "version": "4.0",
+  "description": "Unified multi-agent runtime with orchestrator, tools, memory, server, and apps.",
+  "roots": [
+    "realai/",
+    "agents/",
+    "apps/",
+    "server/",
+    "tools/",
+    "tasks/",
+    "scripts/"
+  ],
+  "subsystems": {
+    "orchestrator": "realai/orchestrator.py",
+    "agent_loop": "realai/agent_loop.py",
+    "memory": "realai/memory/",
+    "tools": "tools/",
+    "tasks": "tasks/",
+    "server": "server/",
+    "frontend": "apps/frontend/",
+    "vscode_extension": "apps/vscode/",
+    "cli": "scripts/cli.py"
+  },
+  "phases": [
+    "scan",
+    "repair",
+    "extend",
+    "evaluate",
+    "train",
+    "improve"
+  ],
+  "goals": {
+    "unification": "Ensure all subsystems are wired into the orchestrator.",
+    "coverage": "Ensure Continue.dev can discover and patch all modules.",
+    "integration": "Ensure agents, tools, tasks, memory, and server work together.",
+    "completion": "Ensure all intended features are accounted for and implemented."
+  },
+  "missing_or_incomplete": [
+    "Unified orchestrator wiring",
+    "Unified agent loop",
+    "Automatic tool registry",
+    "Automatic task registry",
+    "Self-improvement cycle",
+    "Training pipeline",
+    "Evaluation harness"
+  ]
+}
