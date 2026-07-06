@@ -1,10 +1,15 @@
 """
-RealAI Orchestrator (Generated from manifest.json)
-This orchestrator is designed for Continue.dev to unify the entire RealAI system,
-including active subsystems, archive clusters, duplicates, buried features, and
-historical backups.
+RealAI Orchestrator — Full Scanning + Patch Target Engine
+Generated from manifest.json and repo tree.
 
-Every subsystem is exposed here so Continue.dev can patch and complete the system.
+This orchestrator actively scans:
+- active subsystems
+- archive clusters
+- duplicates
+- buried features
+- historical backups
+
+It produces patch targets for Continue.dev to fix, merge, or promote.
 """
 
 import os
@@ -13,223 +18,180 @@ from typing import Dict, Any, List
 
 
 class RealAIOrchestrator:
-    """
-    The orchestrator coordinates:
-    - agent selection
-    - tool execution
-    - task execution
-    - memory updates
-    - server integration
-    - evaluation and training phases
-    - archive scanning
-    - duplicate detection
-    - buried feature recovery
-    - full-system unification
-
-    Continue.dev will fill in all missing logic.
-    """
-
     def __init__(self):
-        # Load manifest
         manifest_path = os.path.join("realai", "manifest.json")
         with open(manifest_path, "r") as f:
             self.manifest = json.load(f)
 
-        # Registries (Continue.dev will populate these)
-        self.agents: Dict[str, Any] = {}
-        self.tools: Dict[str, Any] = {}
-        self.tasks: Dict[str, Any] = {}
-
-        # Subsystems
-        self.memory = None
-        self.server = None
-        self.training = None
-        self.evaluation = None
-
-        # Internal state
-        self.scan_results: Dict[str, Any] = {
+        # Results of scanning
+        self.scan_results = {
             "active": {},
             "archive": {},
             "duplicates": {},
             "buried": {},
-            "missing": self.manifest.get("missing_or_incomplete", [])
+            "missing": self.manifest.get("missing_or_incomplete", []),
+            "patch_targets": []
         }
 
     # ---------------------------------------------------------
-    # Initialization Phase
+    # Utility: Walk a directory and collect all files
     # ---------------------------------------------------------
-    def initialize(self):
-        """
-        Initialize all subsystems.
+    def _walk(self, root: str) -> List[str]:
+        collected = []
+        if not os.path.exists(root):
+            return collected
 
-        Continue.dev will implement:
-        - agent loading
-        - tool registry loading
-        - task registry loading
-        - memory initialization
-        - server startup
-        - training/evaluation pipeline setup
-        - archive integration
-        - duplicate resolution
-        - buried feature recovery
-        """
-        pass
+        for dirpath, _, filenames in os.walk(root):
+            for f in filenames:
+                collected.append(os.path.join(dirpath, f))
+        return collected
 
     # ---------------------------------------------------------
     # PHASE: Scan Active Subsystems
     # ---------------------------------------------------------
     def phase_scan(self):
-        """
-        Scan active subsystems listed in manifest['active_subsystems'].
-        Continue.dev will implement:
-        - directory traversal
-        - dependency graph building
-        - module classification
-        """
         active = self.manifest.get("active_subsystems", {})
-        self.scan_results["active"] = active
-        return active
+        active_files = {}
+
+        for name, path in active.items():
+            if isinstance(path, str):
+                active_files[name] = self._walk(path)
+            else:
+                active_files[name] = path
+
+        self.scan_results["active"] = active_files
+        return active_files
 
     # ---------------------------------------------------------
     # PHASE: Scan Archive Clusters
     # ---------------------------------------------------------
     def phase_scan_archive(self):
-        """
-        Scan archive clusters listed in manifest['archive_clusters'].
-        Continue.dev will implement:
-        - detection of old orchestrators
-        - detection of old core engines
-        - detection of old frontends
-        - detection of agent-tools frameworks
-        - detection of historical backups
-        - promotion of important modules
-        - ignoring junk
-        """
         archive = self.manifest.get("archive_clusters", {})
-        self.scan_results["archive"] = archive
-        return archive
+        archive_files = {}
+
+        for name, path in archive.items():
+            if isinstance(path, str):
+                archive_files[name] = self._walk(path)
+            elif isinstance(path, list):
+                archive_files[name] = []
+                for p in path:
+                    archive_files[name].extend(self._walk(p))
+
+        self.scan_results["archive"] = archive_files
+        return archive_files
 
     # ---------------------------------------------------------
     # PHASE: Scan Duplicates
     # ---------------------------------------------------------
     def phase_scan_duplicates(self):
-        """
-        Scan duplicate subsystems listed in manifest['duplicate_detection'].
-        Continue.dev will implement:
-        - duplicate detection
-        - diffing
-        - merging
-        - conflict resolution
-        """
         duplicates = self.manifest.get("duplicate_detection", {})
-        self.scan_results["duplicates"] = duplicates
-        return duplicates
+        duplicate_files = {}
+
+        for name, paths in duplicates.items():
+            collected = []
+            for p in paths:
+                collected.extend(self._walk(p))
+            duplicate_files[name] = collected
+
+        self.scan_results["duplicates"] = duplicate_files
+        return duplicate_files
 
     # ---------------------------------------------------------
     # PHASE: Scan Buried Features
     # ---------------------------------------------------------
     def phase_scan_buried_features(self):
-        """
-        Scan buried features listed in manifest['buried_features'].
-        Continue.dev will implement:
-        - recovery of abandoned modules
-        - identification of missing intended features
-        - promotion of buried logic
-        """
         buried = self.manifest.get("buried_features", {})
-        self.scan_results["buried"] = buried
-        return buried
+        buried_files = {}
+
+        for name, paths in buried.items():
+            collected = []
+            for p in paths:
+                collected.extend(self._walk(p))
+            buried_files[name] = collected
+
+        self.scan_results["buried"] = buried_files
+        return buried_files
 
     # ---------------------------------------------------------
-    # PHASE: Repair
+    # PHASE: Generate Patch Targets
     # ---------------------------------------------------------
-    def phase_repair(self):
+    def phase_generate_patch_targets(self):
         """
-        Repair missing or broken subsystems.
-        Continue.dev will implement:
-        - missing module creation
-        - broken module repair
-        - dependency fixes
-        """
-        pass
+        This is the key phase:
+        It identifies files that need to be:
+        - merged
+        - repaired
+        - promoted
+        - unified
+        - replaced
+        - deduplicated
 
-    # ---------------------------------------------------------
-    # PHASE: Extend
-    # ---------------------------------------------------------
-    def phase_extend(self):
+        Continue.dev will use these patch targets to generate actual fixes.
         """
-        Extend functionality and add new capabilities.
-        Continue.dev will implement:
-        - new agent types
-        - new tools
-        - new tasks
-        - new memory backends
-        - new inference backends
-        """
-        pass
 
-    # ---------------------------------------------------------
-    # PHASE: Evaluate
-    # ---------------------------------------------------------
-    def phase_evaluate(self):
-        """
-        Run evaluation harness.
-        Continue.dev will implement:
-        - benchmark integration
-        - scoring
-        - reporting
-        """
-        pass
+        targets = []
 
-    # ---------------------------------------------------------
-    # PHASE: Train
-    # ---------------------------------------------------------
-    def phase_train(self):
-        """
-        Run training pipeline.
-        Continue.dev will implement:
-        - training loops
-        - fine-tuning
-        - reinforcement learning
-        """
-        pass
+        # 1. Missing features from manifest
+        for missing in self.scan_results["missing"]:
+            targets.append({
+                "type": "missing_feature",
+                "name": missing,
+                "action": "implement"
+            })
 
-    # ---------------------------------------------------------
-    # PHASE: Improve
-    # ---------------------------------------------------------
-    def phase_improve(self):
-        """
-        Self-improvement cycle.
-        Continue.dev will implement:
-        - iterative refinement
-        - architecture optimization
-        - auto-patching
-        """
-        pass
+        # 2. Duplicate files
+        for dup_group, files in self.scan_results["duplicates"].items():
+            if len(files) > 1:
+                targets.append({
+                    "type": "duplicate_group",
+                    "name": dup_group,
+                    "files": files,
+                    "action": "merge_or_select_best"
+                })
+
+        # 3. Buried features
+        for buried_group, files in self.scan_results["buried"].items():
+            if len(files) > 0:
+                targets.append({
+                    "type": "buried_feature",
+                    "name": buried_group,
+                    "files": files,
+                    "action": "promote_or_recover"
+                })
+
+        # 4. Archive clusters
+        for archive_group, files in self.scan_results["archive"].items():
+            if len(files) > 0:
+                targets.append({
+                    "type": "archive_cluster",
+                    "name": archive_group,
+                    "files": files,
+                    "action": "review_and_promote_if_needed"
+                })
+
+        self.scan_results["patch_targets"] = targets
+        return targets
 
     # ---------------------------------------------------------
     # MAIN LOOP
     # ---------------------------------------------------------
-    def run(self, input_data: Dict[str, Any]) -> Dict[str, Any]:
+    def run_full_scan(self):
         """
-        Main orchestrator loop.
-        Continue.dev will implement:
-        - agent selection
-        - tool invocation
-        - task execution
-        - memory updates
-        - server communication
-        - evaluation hooks
+        Run all scanning phases and produce patch targets.
+        Continue.dev will use these results to generate actual patches.
         """
-        return {
-            "status": "not_implemented",
-            "input": input_data,
-            "scan_results": self.scan_results
-        }
+
+        self.phase_scan()
+        self.phase_scan_archive()
+        self.phase_scan_duplicates()
+        self.phase_scan_buried_features()
+        self.phase_generate_patch_targets()
+
+        return self.scan_results
 
 
-# Entry point
 if __name__ == "__main__":
     orchestrator = RealAIOrchestrator()
-    orchestrator.initialize()
-    print("RealAI Orchestrator initialized.")
+    results = orchestrator.run_full_scan()
+    print("Full scan complete.")
+    print(json.dumps(results, indent=2))
