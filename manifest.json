@@ -1,29 +1,114 @@
 {
   "project": "RealAI",
   "version": "4.0",
-  "description": "Unified multi-agent runtime with orchestrator, tools, memory, server, and apps.",
+  "description": "Unified multi-agent runtime with orchestrator, tools, memory, server, apps, and archived legacy modules.",
   "roots": [
-    "realai/",
+    "",
     "agents/",
+    "api/",
     "apps/",
-    "server/",
-    "tools/",
-    "tasks/",
-    "scripts/"
+    "archive/",
+    "aura/",
+    "autopilot/",
+    "benchmarks/",
+    "billing/",
+    "config/",
+    "context/",
+    "core/",
+    "realai_historical_backups/",
+    "realai_repo/",
+    "realai_sdk/"
   ],
-  "subsystems": {
-    "orchestrator": "realai/orchestrator.py",
-    "agent_loop": "realai/agent_loop.py",
-    "memory": "realai/memory/",
-    "tools": "tools/",
-    "tasks": "tasks/",
-    "server": "server/",
-    "frontend": "apps/frontend/",
-    "vscode_extension": "apps/vscode/",
-    "cli": "scripts/cli.py"
+  "active_subsystems": {
+    "python_entrypoints": [
+      "main.py",
+      "api_server.py",
+      "realai_server.py",
+      "realai_local_server.py",
+      "realai_gui.py"
+    ],
+    "agents": "agents/",
+    "core_agents": "core/agents/",
+    "core_inference": "core/inference/",
+    "core_api": "core/api/",
+    "core_config": "core/config/",
+    "core_memory": "core/memory/",
+    "core_logging": "core/logging/",
+    "apps_api": "apps/api/",
+    "apps_frontend": "apps/frontend/",
+    "apps_desktop": "apps/desktop/",
+    "apps_vscode": "apps/vscode/",
+    "apps_widget": "apps/widget/",
+    "benchmarks": "benchmarks/",
+    "aura": "aura/",
+    "autopilot": "autopilot/",
+    "billing": "billing/",
+    "config": "config/",
+    "context": "context/"
+  },
+  "archive_clusters": {
+    "agent_tools": [
+      "archive/agent-tools/",
+      "archive/agent-tools-main/"
+    ],
+    "real_fin": "archive/real-fin/",
+    "realai_clean_variants": [
+      "archive/realai-clean/",
+      "archive/realai-clean__dup1/"
+    ],
+    "realai_project": "archive/RealAIProject/",
+    "realai_repo": "archive/realai_repo/",
+    "realai_sdk": "archive/realai_sdk/",
+    "historical_backups": "archive/realai_historical_backups/"
+  },
+  "duplicate_detection": {
+    "core_ui_lib": [
+      "archive/realai-clean/realai-core/ui/lib/",
+      "archive/realai-clean__dup1/realai-core/ui/lib/",
+      "archive/RealAIProject/realai-core/ui/lib/",
+      "archive/realai_repo/realai-core/ui/lib/",
+      "archive/realai_sdk/realai-core/ui/lib/"
+    ],
+    "frontend_lib": [
+      "archive/realai-clean__dup1/realai-frontend__dup1/src/lib/",
+      "archive/RealAIProject/realai-frontend/src/lib/",
+      "archive/realai_repo/realai-frontend__dup1/src/lib/",
+      "archive/realai_sdk/realai-frontend__dup1/src/lib/"
+    ],
+    "agent_frameworks": [
+      "archive/agent-tools/",
+      "archive/agent-tools-main/"
+    ]
+  },
+  "buried_features": {
+    "world_engines": [
+      "archive/real-fin/",
+      "archive/realai_repo/",
+      "archive/realai_sdk/"
+    ],
+    "old_orchestrators": [
+      "archive/realai-clean/",
+      "archive/realai-clean__dup1/",
+      "archive/RealAIProject/"
+    ],
+    "old_frontends": [
+      "archive/RealAIProject/realai-frontend/",
+      "archive/realai_repo/realai-frontend__dup1/",
+      "archive/realai_sdk/realai-frontend__dup1/"
+    ],
+    "old_core_engines": [
+      "archive/realai-clean/realai-core/",
+      "archive/realai-clean__dup1/realai-core/",
+      "archive/RealAIProject/realai-core/",
+      "archive/realai_repo/realai-core/",
+      "archive/realai_sdk/realai-core/"
+    ]
   },
   "phases": [
     "scan",
+    "scan_archive",
+    "scan_duplicates",
+    "scan_buried_features",
     "repair",
     "extend",
     "evaluate",
@@ -31,10 +116,35 @@
     "improve"
   ],
   "goals": {
-    "unification": "Ensure all subsystems are wired into the orchestrator.",
-    "coverage": "Ensure Continue.dev can discover and patch all modules.",
-    "integration": "Ensure agents, tools, tasks, memory, and server work together.",
+    "unification": "Ensure all subsystems, including archived modules, are wired into the orchestrator.",
+    "coverage": "Ensure Continue.dev can discover and patch all modules, including archive and duplicates.",
+    "integration": "Ensure agents, tools, tasks, memory, server, and archived logic work together.",
     "completion": "Ensure all intended features are accounted for and implemented."
+  },
+  "archive_policy": {
+    "include": true,
+    "scan_for": [
+      "duplicate agents",
+      "duplicate orchestrators",
+      "old world engines",
+      "old core engines",
+      "old frontends",
+      "experimental subsystems",
+      "abandoned migrations",
+      "lost features",
+      "half-wired modules"
+    ],
+    "promote_if": [
+      "contains missing intended features",
+      "contains newer logic than main",
+      "contains abandoned but required modules"
+    ],
+    "ignore_if": [
+      "pure junk",
+      "build artifacts",
+      "generated files",
+      "dependencies"
+    ]
   },
   "missing_or_incomplete": [
     "Unified orchestrator wiring",
@@ -43,6 +153,9 @@
     "Automatic task registry",
     "Self-improvement cycle",
     "Training pipeline",
-    "Evaluation harness"
+    "Evaluation harness",
+    "Archive integration",
+    "Duplicate resolution",
+    "Buried feature recovery"
   ]
 }
