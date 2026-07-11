@@ -1,0 +1,22 @@
+---
+pid: 2052
+cwd: "C:\Users\tsmit\realai"
+command: "py -3.14 -c \"print('start'); from realai.cli.launcher import cmd_start; import argparse; args=argparse.Namespace(provider_port=8001,port=3847,production=True,detach=True,no_browser=True,auto_port=True,no_autostart=True); print('calling'); r=cmd_start(args); print('done', r)\""
+started_at: 2026-06-04T13:18:39.672Z
+running_for_ms: 13950015 
+---
+start
+[RealAI] Core modules loaded.
+calling
+[RealAI] Runtime bootstrap: active_backend=ollama
+[RealAI] Compute mode=auto (GPU detected=False, recommended=hybrid)
+[RealAI] GPU accelerator (LLM): ollama — AMD GPU: Ollama uses the GPU without CUDA PyTorch.
+[RealAI] Ollama online at http://localhost:11434 (default model: kimi-k2.6:cloud)
+[RealAI] Starting provider on :8001...
+[RealAI] Provider ready.
+[RealAI] UI already running on :3847
+[RealAI] RealAI is running.
+[RealAI]   App:      http://127.0.0.1:3847/
+[RealAI]   Provider: http://127.0.0.1:8001/health
+[RealAI]   Install as app: use the banner in the browser (Chrome/Edge → Install RealAI).
+done 0

@@ -1,0 +1,29 @@
+You are operating inside /workspaces/RealAi/server.
+
+Your task is PHASE 5: SERVER HARDENING.
+
+MANDATORY RULES:
+- No questions.
+- No testing.
+- No checkpoints.
+- No pausing.
+- No stopping early.
+
+TASKS:
+1. Read all server code.
+2. Identify:
+   - missing validation
+   - missing error paths
+   - malformed JSON handling gaps
+   - invalid model handling gaps
+   - missing endpoint guards
+3. Produce:
+   - endpoint hardening plan
+   - error-path hardening plan
+   - malformed JSON plan
+   - invalid model plan
+4. Produce Phase‑6 prerequisites.
+
+Do NOT run tests.
+Do NOT modify files.
+Produce analysis + plans only.

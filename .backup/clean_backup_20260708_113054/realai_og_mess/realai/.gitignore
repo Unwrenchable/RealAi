@@ -1,0 +1,107 @@
+# === LARGE / TEMP FILES - NEVER COMMIT ===
+models/*.gguf
+models/models/
+models/realai-*/
+*.sqlite3
+realai_memory.*
+realai_memory.db
+realai_memory.sqlite3
+realai_knowledge_store.json
+realai.egg-info/
+*.egg-info/
+Output/
+_backup/
+.env*
+*.env
+realai.toml.local
+# === LARGE AI MODELS - NEVER COMMIT ===
+*.gguf
+*.pt
+*.pth
+*.bin
+*.ckpt
+*.safetensors
+*.onnx
+*.tflite
+*.pb
+*.h5
+*.weights
+*.model
+
+# Common model directories
+models/
+model/
+checkpoints/
+weights/
+sd-models/
+stable-diffusion/
+llama.cpp/models/
+llama/
+realai-models/
+realai/models/
+realai/checkpoints/
+realai/weights/
+embeddings/
+
+# Build / Caches
+__pycache__/
+*.pyc
+node_modules/
+dist/
+build/
+.pytest_cache/
+.cache/
+*.log
+
+# Virtual Envs
+.venv/
+venv/
+wsl-env/
+windows-env/
+**/venv/
+**/.venv/
+
+# Old copies
+oldrealai*
+
+# IDE / VS
+.vs/
+*.code-workspace
+.vscode/
+.DS_Store
+
+# Package locks (regenerate if needed)
+pnpm-lock.yaml
+package-lock.json
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# VS Code extension build
+apps/vscode/out/
+apps/vscode/dist/
+
+# RealAI
+realai/logs/
+realai/cache/
+realai/models/
+realai/tmp/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+
+# Build artifacts
+dist/
+build/
+target/
+
+# OS junk
+.DS_Store
+Thumbs.db

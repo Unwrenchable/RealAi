@@ -105,3 +105,10 @@ target/
 # OS junk
 .DS_Store
 Thumbs.db
+realai-core.tar.gz
+.gitignore
+realai-core.tar.gz
+realai-core.tar.gz
+realai-core.tar.gz.part-aa
+realai-core.tar.gz.part-ac
+realai_full_cavity_manifest.json
