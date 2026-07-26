@@ -10,7 +10,7 @@ class Reasoner:
     a user's request into a concrete plan of action (e.g., which skill to use).
     """
     def __init__(self):
-        self.api_base_url = "http://127.0.0.1:8080/v1"
+        self.api_base_url = "http://127.0.0.1:8000/v1"
         self.model_name = "local-model" # The server uses the model it was loaded with
 
     def create_plan(self, user_input: str, memories: list) -> dict:
