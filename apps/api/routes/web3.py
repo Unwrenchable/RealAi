@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter
 
-from apps.api.main import web3_policy, web3_registry
+from apps.api.state import web3_policy, web3_registry
 from core.api.schemas.web3 import Web3Request
 from core.logging.logger import log
 from core.tracing.tracer import tracer

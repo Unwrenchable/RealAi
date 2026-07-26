@@ -36,7 +36,7 @@ realai-overseer:
 realai-default-8b:
   type: chat
   backend: llama.cpp
-  path: meta-llama/Meta-Llama-3-8B-Instruct-Q4_K_M.gguf
+  path: C:\llama\models\Llama-3.1-8B-Instruct-Q4_K_M.gguf
   context_length: 8192
   quantization: q4_k_m
   capabilities:
@@ -52,3 +52,11 @@ realai-embed:
   capabilities:
     - embeddings
     - retrieval
+
+realai-2.0:
+  type: chat
+  backend: transformers
+  path: microsoft/Phi-3-mini-4k-instruct
+  context_length: 4096
+  capabilities:
+    - chat

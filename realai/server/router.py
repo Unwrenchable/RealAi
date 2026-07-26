@@ -113,12 +113,27 @@ def handle_chat_request(payload):
     if memory_context:
         messages_for_inference.append({'role': 'system', 'content': 'Relevant memory: {0}'.format(memory_context)})
 
-    return chat_completion(
-        model_name,
-        messages_for_inference,
-        temperature=temperature,
-        max_tokens=max_tokens,
-    )
+    try:
+        return chat_completion(
+            model_name,
+            messages_for_inference,
+            temperature=temperature,
+            max_tokens=max_tokens,
+        )
+    except Exception as exc:
+        logger.warning('Structured chat fallback used for %s: %s', model_name, exc)
+        return {
+            'id': 'chatcmpl-realai-fallback',
+            'model': model_name,
+            'choices': [
+                {
+                    'index': 0,
+                    'message': {'role': 'assistant', 'content': 'Fallback response: local model runtime unavailable.'},
+                    'finish_reason': 'stop',
+                }
+            ],
+            'backend': 'structured-fallback',
+        }
 
 
 def handle_embeddings_request(payload):

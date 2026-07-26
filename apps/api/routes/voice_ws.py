@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter, WebSocket
 
-from apps.api.main import inference_registry, voice_registry
+from apps.api.state import inference_registry, voice_registry
 
 router = APIRouter()
 

@@ -2,6 +2,7 @@
 
 import os
 import subprocess
+import sys
 import tempfile
 from typing import Any, Dict, Iterable, Set
 
@@ -65,7 +66,7 @@ socket.create_connection = _blocked
                 handle.write(str(code))
             try:
                 proc = subprocess.run(
-                    ["python3", "-I", script_path],
+                    [sys.executable, "-I", script_path],
                     cwd=tmp_dir,
                     capture_output=True,
                     text=True,

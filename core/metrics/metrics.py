@@ -23,8 +23,8 @@ except ImportError:  # pragma: no cover
         return _NoopMetric()
 
 
-REQUEST_COUNT = Counter("realai_requests_total", "Total API requests", ["path"])
-REQUEST_LATENCY = Histogram("realai_request_latency_seconds", "Request latency", ["path"])
+REQUEST_COUNT = Counter("realai_core_requests_total", "Total API requests", ["path"])
+REQUEST_LATENCY = Histogram("realai_core_request_latency_seconds", "Request latency", ["path"])
 AGENT_STEPS = Counter("realai_agent_steps_total", "Agent steps executed")
 TOOL_CALLS = Counter("realai_tool_calls_total", "Tool calls", ["tool"])
 

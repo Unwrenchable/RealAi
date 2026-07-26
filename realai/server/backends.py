@@ -106,15 +106,19 @@ class RealAIFallbackBackend(InferenceBackend):
     name = 'realai-fallback'
 
     def generate(self, model_path: str, prompt: str, sampling: SamplingConfig):
-        model = RealAI(model_name=model_path, provider='local', use_local=True)
-        messages = [{'role': 'user', 'content': prompt}]
-        response = model.chat_completion(
-            messages=messages,
-            temperature=sampling.temperature,
-            max_tokens=sampling.max_tokens,
-            stream=False,
-        )
-        return response['choices'][0]['message']['content']
+        try:
+            model = RealAI(model_name=model_path, provider='local', use_local=True)
+            messages = [{'role': 'user', 'content': prompt}]
+            response = model.chat_completion(
+                messages=messages,
+                temperature=sampling.temperature,
+                max_tokens=sampling.max_tokens,
+                stream=False,
+            )
+            return response['choices'][0]['message']['content']
+        except Exception as exc:
+            logger.warning('RealAI fallback runtime unavailable for %s: %s', model_path, exc)
+            return 'Fallback response: local runtime unavailable for model {0}'.format(model_path)
 
 
 class BackendResolver(object):

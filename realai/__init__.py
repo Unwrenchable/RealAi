@@ -49,6 +49,7 @@ The sky is the limit - RealAI has no limits and can truly do anything!
 import json
 import logging
 import re
+import sys
 import time
 import subprocess
 import tempfile
@@ -5420,7 +5421,7 @@ class RealAI:
 
             # Execute the file with timeout and capture output
             proc = subprocess.run([
-                "python3",
+                sys.executable,
                 tmp_file
             ], capture_output=True, text=True, timeout=timeout, preexec_fn=_limit_resources if sandbox and resource is not None else None)
 

@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter
 
-from apps.api.main import inference_registry
+from apps.api.state import inference_registry
 from core.api.schemas.chat import ChatCompletionRequest, ChatCompletionResponse
 from core.inference.chat_pipeline import run_chat_pipeline
 

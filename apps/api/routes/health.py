@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter
 
-from apps.api.main import model_cache
+from apps.api.state import model_cache
 
 router = APIRouter()
 

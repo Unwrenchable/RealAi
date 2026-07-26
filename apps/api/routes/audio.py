@@ -6,7 +6,7 @@ from fastapi import APIRouter, UploadFile
 from fastapi import HTTPException
 from fastapi.responses import StreamingResponse
 
-from apps.api.main import voice_registry
+from apps.api.state import voice_registry
 from core.api.schemas.audio import TTSRequest
 
 router = APIRouter()

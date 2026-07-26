@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter
 
-from apps.api.main import inference_registry, tool_registry
+from apps.api.state import inference_registry, tool_registry
 from core.agents.critic import CriticAgent
 from core.agents.executor import TaskExecutor
 from core.agents.planner import PlannerAgent

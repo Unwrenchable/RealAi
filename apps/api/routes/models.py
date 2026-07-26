@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter
 
-from apps.api.main import model_cache
+from apps.api.state import model_cache
 from core.api.schemas.models import ModelsListResponse
 from core.models.registry import ModelRegistry
 

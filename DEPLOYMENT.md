@@ -181,7 +181,7 @@ python api_server.py
 python -m realai.api_server
 
 # Custom port (use PORT env var)
-PORT=8080 python api_server.py
+PORT=8000 python api_server.py
 ```
 
 ### Production Server
@@ -610,7 +610,7 @@ lsof -i :8000  # Linux/Mac
 netstat -ano | findstr :8000  # Windows
 
 # Kill process or use different port (use PORT env var)
-PORT=8080 python api_server.py
+PORT=8000 python api_server.py
 ```
 
 #### Render: "Port scan timeout, no open ports detected"
