@@ -1,0 +1,20 @@
+---
+pid: 29424
+cwd: "C:\Users\tsmit\realai"
+command: "py -3.14 -c \"import time,urllib.request
+for i in range(60):
+  try:
+    r=urllib.request.urlopen('http://127.0.0.1:8001/health/live',timeout=2)
+    print('provider',r.status); break
+  except Exception as e:
+    if i%10==9: print('wait',i+1)
+    time.sleep(2)
+else: print('timeout')\""
+started_at: 2026-06-04T13:20:53.451Z
+running_for_ms: 13785002 
+---
+wait 10
+wait 20
+wait 30
+wait 40
+provider 200

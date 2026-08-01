@@ -12,8 +12,9 @@ export const realaiProvider: Provider = {
   id: "realai",
   name: "RealAI",
   models: [
-    { name: "realai-1.0", context: 128000, type: "text" },
-    { name: "realai-overseer", context: 256000, type: "text" },
+    { name: "realai-1.0-instruct", context: 32768, type: "text" },
+    { name: "realai-1.0", context: 8192, type: "text" },
+    { name: "realai-overseer", context: 65536, type: "text" },
   ],
   async call({ model, messages, temperature, maxTokens }) {
     const response = await fetch(`${getRealAIBaseUrl()}/v1/chat/completions`, {

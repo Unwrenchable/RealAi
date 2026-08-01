@@ -4,6 +4,7 @@ import { X, ChevronDown, Check } from "lucide-react";
 import { useState } from "react";
 import type { Settings, ModelOption } from "@/lib/types";
 import { DEFAULT_MODELS } from "@/lib/types";
+import SystemStatusPanel from "@/components/SystemStatusPanel";
 
 interface SettingsDrawerProps {
   open: boolean;
@@ -202,6 +203,9 @@ export default function SettingsDrawer({
               Stored in memory only — never sent to third parties.
             </p>
           </section>
+
+          {/* Training / self-improve / self-heal (Phase 4) */}
+          <SystemStatusPanel />
         </div>
 
         {/* Footer */}

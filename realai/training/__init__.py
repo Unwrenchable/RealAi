@@ -6,8 +6,8 @@ from realai.self_improvement import PerformanceEvaluator, TrainingDataGenerator,
 from .build_datasets import build_dataset_bundle
 from .eval import evaluate_instruction_dataset
 from .extract_from_agent_tools import extract_agent_tool_data
-from .finetune import build_finetune_plan
-
+from .export_gguf import publish_gguf
+from .finetune import build_finetune_plan, run_finetune
 __all__ = [
     'PerformanceEvaluator',
     'PersonaTrainer',
@@ -17,4 +17,13 @@ __all__ = [
     'build_finetune_plan',
     'evaluate_instruction_dataset',
     'extract_agent_tool_data',
+    'publish_gguf',
+    'run_finetune',
+    'run_stage',
 ]
+
+
+def run_stage(*args, **kwargs):
+    from .pipeline import run_stage as _run_stage
+
+    return _run_stage(*args, **kwargs)

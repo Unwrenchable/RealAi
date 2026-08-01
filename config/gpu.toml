@@ -16,3 +16,5 @@ tools = ["network", "filesystem", "code_exec", "web3"]
 solana_rpc_url = "https://api.mainnet-beta.solana.com"
 evm_rpc_url = ""
 
+[preferences]
+gpu_enabled = true

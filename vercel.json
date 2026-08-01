@@ -1,13 +1,15 @@
 {
   "version": 2,
-  "buildCommand": "pnpm --filter realai-frontend build",
-  "installCommand": "pnpm install",
-  "outputDirectory": "apps/frontend/.next",
-  "framework": "nextjs",
-  "functions": {
-    "apps/frontend/src/app/api/chat/route.ts": {
-      "maxDuration": 30,
-      "memory": 1024
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
     }
-  }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api/index.py"
+    }
+  ]
 }

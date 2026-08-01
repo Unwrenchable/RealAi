@@ -1,0 +1,15 @@
+{
+  "realai-1.0": {
+    "type": "chat",
+    "backend": "llama-cpp-python",
+    "path": "C:/Users/tsmit/realai/models/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+    "context_length": 4096,
+    "owned_by": "travis",
+    "capabilities": ["chat", "completion"]
+  },
+  "realai-embed": {
+    "type": "embedding",
+    "backend": "hf",
+    "path": "sentence-transformers/all-MiniLM-L6-v2"
+  }
+}

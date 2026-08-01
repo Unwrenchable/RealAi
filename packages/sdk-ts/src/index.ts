@@ -98,3 +98,14 @@ export class RealAI {
     return this.request("/v1/tasks");
   }
 }
+
+// Recovered from archive/ (GOLD contracts) — registry + env chat helpers
+export * from "./registryClient";
+export {
+  chatCompletion as envChatCompletion,
+  extractContent as envExtractContent,
+  type ChatMessage as EnvChatMessage,
+  type ChatCompletion as EnvChatCompletion,
+  type RealAIClientOptions as EnvChatClientOptions,
+} from "./envChatClient";
+

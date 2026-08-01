@@ -18,20 +18,17 @@ if not exist "%VENV%" (
   exit /b 1
 )
 
-echo Running health checks...
-"%VENV%" -m realai.cli.realai_cli doctor
-if errorlevel 1 (
-  echo.
-  echo Health checks reported a problem. Continuing to start the server anyway.
-  echo.
-)
+echo Bootstrapping native weights if needed...
+"%VENV%" -m realai.training.bootstrap_weights
 
-if not defined REALAI_SELF_IMPROVE set REALAI_SELF_IMPROVE=0
+if not defined REALAI_SELF_IMPROVE set REALAI_SELF_IMPROVE=1
+if not defined REALAI_API_URL set REALAI_API_URL=%API_URL%
 
 echo.
 echo Starting RealAI server on %API_URL% ...
+echo In another terminal: realai-build "your task"  OR  python -m realai.closed_loop
 echo Press Ctrl+C to stop.
 echo.
-"%VENV%" -m realai.cli.realai_cli serve --host 127.0.0.1 --port 8000
+"%VENV%" -m realai.server.app
 
 endlocal

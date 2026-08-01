@@ -6,15 +6,28 @@
 profile = "default"
 provider = "local"
 
+# Stand up native RealAI weights from an existing repo GGUF when instruct weights are missing
+[native]
+auto_bootstrap = true
+bootstrap_gguf = "models/Llama-3.2-1B-Instruct-Q4_K_M.gguf"
+
+# Local agent that edits this repo via REALAI_API_URL (no OpenAI/xAI keys)
+[self_builder]
+api_url = "http://127.0.0.1:8000"
+# Prefer qwen-coder-7b when weights exist; falls back to realai-1.0-instruct
+model = ""
+max_steps = 20
+timeout = 300
+
 # Default models
-default_chat_model = "llama-local"
+default_chat_model = "realai-1.0-instruct"
 default_embedding_model = "realai-embed"
 
 # Enable legacy paths for backwards compatibility
 enable_legacy_paths = true
 
 # Path to model registry (relative to project root)
-model_registry_path = "realai/models/registry.json"
+model_registry_path = "models/models/registry.json"
 
 # Backend-specific configuration
 [backends]
