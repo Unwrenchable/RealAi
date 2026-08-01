@@ -49,15 +49,17 @@ export interface Settings {
 }
 
 export const DEFAULT_SETTINGS: Settings = {
-  model: "realai",
-  systemPrompt: "",
+  // Matches AMD Vulkan llama-server loaded model (Qwen 7B coder)
+  model: "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+  systemPrompt:
+    "You are RealAI 3.0 — a local-first operator-grade assistant. Be capable, direct, and amplify the user's tools, code, and infrastructure. Prefer action and structure over chatty filler.",
   temperature: 0.7,
   maxTokens: 2048,
-  apiKey: "",
+  apiKey: "local",
   agentId: "",
   stream: false,
   autoRoute: true,
-  computeMode: "auto",
+  computeMode: "gpu",
 };
 
 const MODEL_META: Record<string, Omit<ModelOption, "id">> = {

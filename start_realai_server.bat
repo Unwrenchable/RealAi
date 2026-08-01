@@ -1,20 +1,21 @@
 @echo off
-echo Starting RealAI Local Server powered by llama.cpp server...
+REM ============================================================
+REM RealAI inference backend = llama-vulkan (AMD GPU), NOT Python UI
+REM ============================================================
+echo Starting RealAI backend via C:\llama-vulkan (AMD Vulkan)...
 echo.
-echo This will start a local OpenAI-compatible API server.
+echo OpenAI-compatible API:
+echo   http://127.0.0.1:8080/v1
 echo.
-echo Configure RealAI with:
-echo   API Base URL: http://127.0.0.1:8080/v1
-echo   API Key: local (or any value)
+echo Point RealAI / VS Code / clients at that base URL.
+echo API Key: local
 echo.
-echo Press Ctrl+C to stop the server
+echo Optional models: qwen (default) | realai | 1b | llama
+echo   start_realai_server.bat qwen
+echo   start_realai_server.bat realai
 echo.
 
-"C:\llama.cpp\build\bin\Release\llama-server.exe" ^
-  -m "C:\Users\tsmit\OneDrive\Apps\realai\models\llama3.2-1b\Llama-3.2-1B-Instruct-Q4_K_M.gguf" ^
-  --host 127.0.0.1 ^
-  --port 8080 ^
-  -c 4096 ^
-  --log-disable
+set MODEL_ARG=%~1
+if "%MODEL_ARG%"=="" set MODEL_ARG=qwen
 
-pause
+call "C:\llama-vulkan\start_vulkan_server.bat" %MODEL_ARG%
