@@ -1,0 +1,18 @@
+{
+  "name": "realai-overseer",
+  "version": "1.0.0",
+  "provider": "realai",
+  "context": 256000,
+  "type": "text",
+  "description": "High-context supervisory model for agent orchestration and long-form reasoning.",
+  "capabilities": [
+    "planning",
+    "analysis",
+    "agent-control",
+    "long-context"
+  ],
+  "tags": [
+    "experimental",
+    "high-context"
+  ]
+}
