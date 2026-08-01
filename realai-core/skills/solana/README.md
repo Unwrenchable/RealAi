@@ -1,1 +1,0 @@
-# solana skill pack\n\nOptional skill metadata for Solana-focused behavior.\n
