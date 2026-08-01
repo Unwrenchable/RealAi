@@ -1,0 +1,12 @@
+---
+pid: 18548
+cwd: "C:\Users\tsmit\realai\apps\frontend\.next\standalone\apps\frontend"
+command: "$env:PORT='3847'; $env:HOSTNAME='127.0.0.1'; py -3.14 C:\\Users\\tsmit\\realai\\apps\\frontend\\.next\\standalone\\apps\\frontend\\server.js"
+started_at: 2026-06-04T13:27:53.133Z
+running_for_ms: 13515002 
+---
+ParserError: 
+Line |
+   1 |  . ntend\\.next\\standalone\\apps\\frontend" && $env:PORT='3847'; $env:H .
+     |                                                          ~~~~~~~
+     | Unexpected token '='3847'' in expression or statement.

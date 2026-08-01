@@ -53,6 +53,8 @@ setup(
             "realai=realai:main",
             "realai-cli=realai.cli.realai_cli:main",
             "realai-server=realai.server.app:main",
+            "realai-build=realai.self_builder:main",
+            "realai-loop=realai.closed_loop:main",
         ],
     },
 )

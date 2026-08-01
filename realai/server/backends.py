@@ -1,9 +1,7 @@
 """Inference backend abstractions for structured RealAI server."""
 
 from dataclasses import dataclass
-from typing import Dict, List, Optional
-
-from realai import RealAI
+from typing import Dict
 
 from .logging_utils import setup_logging
 
@@ -105,25 +103,37 @@ class LlamaCppBackend(InferenceBackend):
         return choices[0].get('text')
 
 
+class RealAIGGUFBackend(InferenceBackend):
+    """Run RealAI-owned weights via local GGUF backends only (no API wrapper)."""
+
+    name = 'realai-gguf'
+
+    def __init__(self, resolver: 'BackendResolver'):
+        self._resolver = resolver
+
+    def generate(self, model_path: str, prompt: str, sampling: SamplingConfig):
+        for hint in ('llama-cli', 'llama.cpp'):
+            backend = self._resolver.select_backend(hint)
+            if backend.name == 'realai-gguf':
+                continue
+            text = backend.generate(model_path, prompt, sampling)
+            if text:
+                return text
+        logger.error('No local GGUF backend available for RealAI weights: %s', model_path)
+        return None
+
+
 class RealAIFallbackBackend(InferenceBackend):
-    """Legacy fallback backend based on RealAI runtime."""
+    """Legacy fallback for non-owned models when local engines are unavailable."""
 
     name = 'realai-fallback'
 
     def generate(self, model_path: str, prompt: str, sampling: SamplingConfig):
-        try:
-            model = RealAI(model_name=model_path, provider='local', use_local=True)
-            messages = [{'role': 'user', 'content': prompt}]
-            response = model.chat_completion(
-                messages=messages,
-                temperature=sampling.temperature,
-                max_tokens=sampling.max_tokens,
-                stream=False,
-            )
-            return response['choices'][0]['message']['content']
-        except Exception as exc:
-            logger.warning('RealAI fallback runtime unavailable for %s: %s', model_path, exc)
-            return 'Fallback response: local runtime unavailable for model {0}'.format(model_path)
+        logger.warning(
+            'realai-fallback invoked for %s; configure llama-cli or place RealAI GGUF weights.',
+            model_path,
+        )
+        return None
 
 
 class BackendResolver(object):
@@ -134,9 +144,12 @@ class BackendResolver(object):
         self._llama_cpp = LlamaCppBackend()
         self._llama_cli = LlamaCliBackend() if LlamaCliBackend is not None else None
         self._fallback = RealAIFallbackBackend()
+        self._realai_gguf = RealAIGGUFBackend(self)
 
     def select_backend(self, backend_hint: str):
         hint = (backend_hint or '').lower()
+        if hint in ('realai-gguf', 'realai-native'):
+            return self._realai_gguf
         if hint == 'vllm' and self._vllm.available():
             return self._vllm
         if hint in ('llama.cpp', 'llamacpp') and self._llama_cpp.available():
@@ -157,9 +170,14 @@ class BackendResolver(object):
         text = backend.generate(model_path, prompt, sampling)
         if text is not None:
             return text, backend.name
+        if (backend_hint or '').lower() in ('realai-gguf', 'realai-native'):
+            return (
+                'RealAI weights are missing or llama-cli/llama.cpp is unavailable. '
+                'Place a .gguf under models/<model-id>/weights/ and install llama.cpp.',
+                self._realai_gguf.name,
+            )
         text = self._fallback.generate(model_path, prompt, sampling)
-        return text, self._fallback.name
+        return text or 'Local inference unavailable.', self._fallback.name
 
 
 RESOLVER = BackendResolver()
-

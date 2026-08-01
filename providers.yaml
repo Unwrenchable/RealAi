@@ -1,15 +1,52 @@
 providers:
   local:
     enabled: true
+    label: "Local Runtime"
+    type: local
     default_backend: vllm
     fallback_backend: llama.cpp
+    capabilities:
+      - chat
+      - embeddings
+      - tools
+    retry_policy:
+      max_retries: 1
+      backoff_seconds: 0.1
   openai:
     enabled: false
+    label: "OpenAI"
+    type: api
     api_base: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    capabilities:
+      - chat
+      - embeddings
+      - vision
+    retry_policy:
+      max_retries: 2
+      backoff_seconds: 0.5
   anthropic:
     enabled: false
+    label: "Anthropic"
+    type: api
     api_base: https://api.anthropic.com
+    api_key_env: ANTHROPIC_API_KEY
+    capabilities:
+      - chat
+      - analysis
+    retry_policy:
+      max_retries: 2
+      backoff_seconds: 0.5
   gemini:
     enabled: false
+    label: "Google Gemini"
+    type: api
     api_base: https://generativelanguage.googleapis.com
-
+    api_key_env: GEMINI_API_KEY
+    capabilities:
+      - chat
+      - vision
+      - embeddings
+    retry_policy:
+      max_retries: 2
+      backoff_seconds: 0.5

@@ -879,16 +879,18 @@ python -m realai.api_server
 # or: python api_server.py
 ```
 
-**Vercel (full-stack, recommended):**
+**Vercel (Python backend):**
 1. Import repo on [vercel.com/new](https://vercel.com/new)
-2. Set **Root Directory** → `realai-frontend`
-3. Add env vars: `REALAI_API_BASE=https://openrouter.ai/api` + `REALAI_API_KEY=sk-or-v1-...`
-4. Deploy — both the UI and the `/api/chat` serverless function run on Vercel.
+2. Set **Framework Preset** → `Other` or `Python`
+3. Leave **Root Directory** at the repo root so Vercel picks up `vercel.json`, `api/index.py`, and `requirements.txt`
+4. Add backend env vars in Vercel (for example your provider API keys)
+5. Deploy — the backend serves `/health` and `/v1/chat/completions`
 
-**Render (Python backend):**
-```bash
-# Configured via render.yaml — just connect your repo on render.com
-```
+**Render (static frontend):**
+1. Connect the repo on Render
+2. Use the included `render.yaml`
+3. Set `NEXT_PUBLIC_REALAI_API_BASE=https://your-vercel-backend.vercel.app`
+4. Deploy the `realai-frontend` static site
 
 **Desktop App (Windows):**
 ```bash

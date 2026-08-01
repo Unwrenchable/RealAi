@@ -46,8 +46,12 @@ class LlamaCliBackend(InferenceBackend):
             if found:
                 return Path(found)
 
-        # Try common installation locations on Windows
-        common_paths = [
+        repo_root = Path(__file__).resolve().parents[2]
+        vendor_llama = [
+            repo_root / 'vendor' / 'llama.cpp' / 'b4400' / 'llama-cli.exe',
+            repo_root / 'vendor' / 'llama.cpp' / 'b9663' / 'llama-b9663' / 'llama-cli',
+        ]
+        common_paths = vendor_llama + [
             Path.home() / 'llama.cpp' / 'build' / 'bin' / 'Release' / 'llama-cli.exe',
             Path.home() / 'llama.cpp' / 'llama-cli.exe',
             Path('C:/llama.cpp/llama-cli.exe'),

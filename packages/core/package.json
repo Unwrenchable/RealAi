@@ -1,0 +1,10 @@
+{
+  "name": "realai-core",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "lint": "node -e \"console.log('No lint configured for realai-core')\"",
+    "typecheck": "node -e \"console.log('No typecheck configured for realai-core')\"",
+    "build": "node -e \"console.log('No build configured for realai-core')\""
+  }
+}

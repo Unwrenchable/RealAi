@@ -7,6 +7,8 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List
 
+from ..model_assets import is_realai_owned_model, resolve_inference_gguf_path
+
 try:
     import tomllib
 except ImportError:  # pragma: no cover
@@ -19,7 +21,7 @@ except ImportError:  # pragma: no cover
 
 _ROOT = Path(__file__).resolve().parents[2]
 _SERVER_ROOT = Path(__file__).resolve().parent
-_DEFAULT_REGISTRY_PATH = _ROOT / 'models' / 'registry.json'
+_DEFAULT_REGISTRY_PATH = _ROOT / 'models.yaml'
 
 
 @dataclass
@@ -176,6 +178,94 @@ def _read_profiles() -> Dict[str, Dict[str, Any]]:
     return profiles
 
 
+def _default_registry() -> Dict[str, Dict[str, Any]]:
+    return {
+        'realai-1.0': {
+            'id': 'realai-1.0',
+            'name': 'RealAI 1.0',
+            'type': 'chat',
+            'backend': 'realai-gguf',
+            'path': 'realai-1.0',
+            'owned_by': 'realai',
+            'context_length': 8192,
+            'capabilities': ['chat', 'reasoning', 'tools'],
+        },
+        'realai-overseer': {
+            'id': 'realai-overseer',
+            'name': 'RealAI Overseer',
+            'type': 'chat',
+            'backend': 'realai-gguf',
+            'path': 'realai-overseer',
+            'owned_by': 'realai',
+            'context_length': 8192,
+            'capabilities': ['analysis', 'planning', 'critique'],
+        },
+        'realai-embed': {
+            'id': 'realai-embed',
+            'name': 'RealAI Embed',
+            'type': 'embedding',
+            'backend': 'deterministic',
+            'path': 'realai-embed',
+            'owned_by': 'realai',
+            'embedding_dimensions': 64,
+            'capabilities': ['embedding'],
+        },
+    }
+
+
+def _normalize_model_type(raw_type: Any) -> str:
+    text = str(raw_type or 'chat').strip().lower()
+    if text == 'embeddings':
+        return 'embedding'
+    return text
+
+
+def _normalize_model_entry(model_id: str, payload: Dict[str, Any]) -> Dict[str, Any]:
+    normalized = copy.deepcopy(payload)
+    normalized['id'] = model_id
+    normalized['type'] = _normalize_model_type(normalized.get('type', 'chat'))
+    owned = str(normalized.get('owned_by', '')).lower() == 'realai' or str(model_id).startswith('realai-')
+    if normalized['type'] == 'chat':
+        if owned and model_id not in ('realai-embed',):
+            normalized.setdefault('backend', 'realai-gguf')
+        else:
+            normalized.setdefault('backend', 'llama-cli')
+    else:
+        normalized.setdefault('backend', 'deterministic')
+    normalized.setdefault('path', model_id)
+    normalized.setdefault('owned_by', 'realai')
+    normalized.setdefault('capabilities', ['embedding'] if normalized['type'] == 'embedding' else ['chat'])
+    if normalized['type'] == 'embedding':
+        normalized.setdefault('embedding_dimensions', 64)
+    return normalized
+
+
+def _coerce_registry(data: Any) -> Dict[str, Dict[str, Any]]:
+    if isinstance(data, dict) and 'models' in data:
+        data = data.get('models')
+
+    if isinstance(data, list):
+        registry = {}
+        for item in data:
+            if not isinstance(item, dict):
+                raise ValueError('Each model entry must be an object.')
+            model_id = str(item.get('id', '')).strip()
+            if not model_id:
+                raise ValueError('Each model entry must include an id.')
+            registry[model_id] = _normalize_model_entry(model_id, item)
+        return registry
+
+    if isinstance(data, dict):
+        registry = {}
+        for model_id, payload in data.items():
+            if not isinstance(payload, dict):
+                raise ValueError('Model registry entries must be objects.')
+            registry[str(model_id)] = _normalize_model_entry(str(model_id), payload)
+        return registry
+
+    raise ValueError('Model registry must be a mapping or a list of model objects.')
+
+
 def _resolve_registry_path(raw_path: str) -> Path:
     path = Path(raw_path)
     if not path.is_absolute():
@@ -214,30 +304,50 @@ def _validate_settings(settings: ServerSettings) -> None:
 
 @lru_cache()
 def load_registry() -> Dict[str, Dict[str, Any]]:
-    """Load model registry from models.yaml (preferred) or registry.json fallback."""
+    """Load model registry from configuration and normalize it."""
     settings = load_settings()
     registry_path = _resolve_registry_path(settings.model_registry_path)
+    data = None
     if registry_path.exists():
         if registry_path.suffix.lower() in ('.yaml', '.yml'):
             data = _load_yaml_file(registry_path)
         else:
             data = json.loads(registry_path.read_text(encoding='utf-8'))
     else:
-        data = _load_yaml_file(_ROOT / 'models.yaml')
-        if not data:
-            data = json.loads(_DEFAULT_REGISTRY_PATH.read_text(encoding='utf-8'))
-    if not isinstance(data, dict):
-        raise ValueError('Model registry must be a JSON/YAML object keyed by model id.')
-    return data
+        models_path = _ROOT / 'models.yaml'
+        if models_path.exists():
+            data = _load_yaml_file(models_path)
+    if not data:
+        data = _default_registry()
+    registry = _coerce_registry(data)
+    providers = settings.providers.get('providers', settings.providers)
+    if isinstance(providers, dict):
+        for model_id, cfg in registry.items():
+            provider = cfg.get('provider')
+            if provider and provider not in providers:
+                raise ValueError('Model {0} references unknown provider {1}.'.format(model_id, provider))
+    return registry
 
 
-def get_model_config(name: str) -> Dict[str, Any]:
+def get_model_config(name: str, resolve_weights: bool = False) -> Dict[str, Any]:
     """Return the configuration for a registered model."""
     registry = load_registry()
     if name not in registry:
         raise ValueError('Unknown model {0}'.format(name))
     config = copy.deepcopy(registry[name])
     config.setdefault('id', name)
+    if resolve_weights and config.get('type') == 'chat':
+        resolved_path, enriched = resolve_inference_gguf_path(name, config)
+        config['path'] = resolved_path
+        for key, value in enriched.items():
+            if key.startswith('weight') or key == 'resolved_gguf':
+                config[key] = value
+    elif config.get('type') == 'chat' and is_realai_owned_model(name, config):
+        from ..model_assets import resolve_realai_gguf
+
+        gguf, diag = resolve_realai_gguf(name, str(config.get('path', name)))
+        config['weight_diagnostics'] = diag
+        config['weights_ready'] = gguf is not None
     return config
 
 
@@ -251,7 +361,7 @@ def list_model_objects() -> List[Dict[str, Any]]:
     data = []
     for model_id in list_models():
         cfg = get_model_config(model_id)
-        data.append({
+        row = {
             'id': model_id,
             'object': 'model',
             'owned_by': cfg.get('owned_by', 'realai'),
@@ -260,5 +370,10 @@ def list_model_objects() -> List[Dict[str, Any]]:
             'context_length': cfg.get('context_length'),
             'embedding_dimensions': cfg.get('embedding_dimensions'),
             'capabilities': cfg.get('capabilities', []),
-        })
+        }
+        if 'weights_ready' in cfg:
+            row['weights_ready'] = cfg['weights_ready']
+        if cfg.get('weight_diagnostics'):
+            row['weight_status'] = cfg['weight_diagnostics'].get('status')
+        data.append(row)
     return data

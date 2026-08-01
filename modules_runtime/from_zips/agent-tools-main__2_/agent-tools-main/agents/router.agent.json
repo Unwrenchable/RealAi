@@ -1,0 +1,17 @@
+{
+  "id": "router",
+  "name": "Routing Agent",
+  "description": "Analyzes the user request and selects the most appropriate specialized agent to handle it.",
+  "role": "system",
+  "tools": [],
+  "permissions": ["safe"],
+  "routing": {
+    "strategy": "semantic",
+    "can_override_preferred": true
+  },
+  "provider_preferences": ["realai"],
+  "metadata": {
+    "category": "router",
+    "version": "1.0.0"
+  }
+}

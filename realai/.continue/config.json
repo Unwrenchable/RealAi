@@ -1,0 +1,18 @@
+{
+  "models": [
+    {
+      "title": "RealAI Local",
+      "model": "realai-2.0",
+      "apiBase": "http://127.0.0.1:8000/v1",
+      "provider": "openai",
+      "apiKey": "sk-realai"
+    },
+    {
+      "title": "RealAI Embed",
+      "model": "realai-embed",
+      "apiBase": "http://127.0.0.1:8000/v1",
+      "provider": "openai",
+      "apiKey": "sk-realai"
+    }
+  ]
+}

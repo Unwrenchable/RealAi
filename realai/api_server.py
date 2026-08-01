@@ -236,7 +236,7 @@ header {
     <span style="font-size:0.68rem;color:var(--text2);font-weight:400"> v2.0</span>
   </div>
   <div class="header-right">
-    <span id="key-status" class="status-none">No API key</span>
+    <span id="key-status" class="status-none" style="display:none;">No API key</span>
     <button class="btn btn-secondary btn-sm" onclick="clearChat()">Clear chat</button>
   </div>
 </header>
@@ -605,8 +605,25 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
             content_length = int(raw_cl)
         except (ValueError, TypeError):
             raise ValueError(f"Invalid Content-Length header: {raw_cl!r}")
+
         body = self.rfile.read(content_length)
+
+        # Optional debug logging: enable via REALAI_DEBUG_HTTP=1
+        if os.environ.get("REALI_DEBUG_HTTP") == "1":
+            try:
+                decoded = body.decode("utf-8", errors="replace")
+            except Exception:
+                decoded = "<un-decodable>"
+            print("\n=== RealAI HTTP Debug ===")
+            print("Path:", self.path)
+            print("Content-Length:", content_length)
+            print("Headers:", dict(self.headers))
+            print("Raw body bytes:", body)
+            print("Decoded body:", decoded)
+            print("===========================\n")
+
         return json.loads(body.decode()) if body else {}
+
 
     def _resolve_user_id(self) -> str:
         """Return a stable external identifier for the calling user.
@@ -686,7 +703,32 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
         parsed_path = urlparse(self.path)
 
         if parsed_path.path in ('/', '/ui'):
+            # v3 UI proxy: if a Next server is running, forward /ui to it.
+            # This is required because we don't have a static dist/index.html build.
+            next_base = os.environ.get("REALAI_NEXT_UI_BASE_URL", "http://127.0.0.1:3000")
+            try:
+                import requests
+
+                # Ensure we always end up with / so Next renders the index page.
+                target = next_base.rstrip('/') + '/'
+                r = requests.get(target, timeout=5)
+                if r.status_code == 200 and r.text:
+                    # Basic v3 marker heuristic: avoid serving v2 fallback.
+                    body = r.text
+                    if 'v3' in body.lower() or '<title' in body.lower():
+                        self.send_response(200)
+                        self.send_header('Content-Type', 'text/html; charset=utf-8')
+                        self.send_header('Access-Control-Allow-Origin', '*')
+                        self.end_headers()
+                        self.wfile.write(body.encode('utf-8', errors='ignore'))
+                        return
+            except Exception:
+                pass
+
+            # Fallback: embedded v2 HTML.
             self._send_html_response(200, _WEB_UI_HTML)
+
+
 
         elif parsed_path.path == '/ui/providers':
             # Return provider metadata so the web UI can populate helper text.
@@ -845,12 +887,54 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
 
             if parsed_path.path == '/v1/chat/completions':
                 response = model.chat_completion(
+
                     messages=body.get('messages', []),
                     temperature=body.get('temperature', 0.7),
                     max_tokens=body.get('max_tokens'),
                     stream=body.get('stream', False)
                 )
+                # Normalize to OpenAI-compatible shape so UI can always read
+                # choices[0].message.content.
+                try:
+                    if isinstance(response, dict):
+                        choices = response.get('choices')
+                        if choices and isinstance(choices, list) and isinstance(choices[0], dict):
+                            c0 = choices[0]
+
+                            # If message exists but content is missing, try common aliases.
+                            msg = c0.get('message')
+                            if isinstance(msg, dict) and ('content' not in msg or msg.get('content') is None):
+                                for alias in ('content', 'text', 'output'):
+                                    if alias in response and response.get(alias) is not None:
+                                        msg['content'] = response.get(alias)
+                                        break
+
+                            # If message missing or None, create it from aliases.
+                            if msg is None or not isinstance(msg, dict):
+                                content = None
+                                for alias in ('content', 'text', 'output'):
+                                    if alias in response and response.get(alias) is not None:
+                                        content = response.get(alias)
+                                        break
+
+                                # Some backends return assistant text as choices[0].text.
+                                if content is None:
+                                    if 'text' in c0 and c0.get('text') is not None:
+                                        content = c0.get('text')
+
+                                # Some backends return streaming-like {delta:{content:...}}.
+                                if content is None and isinstance(c0.get('delta'), dict):
+                                    content = c0.get('delta', {}).get('content')
+
+                                if content is not None:
+                                    c0['message'] = {'role': 'assistant', 'content': content}
+
+                    # If response already matches the OpenAI shape, this is a no-op.
+                except Exception:
+                    pass
+
                 self._send_response(200, response)
+
 
             elif parsed_path.path == '/v1/completions':
                 response = model.text_completion(
@@ -1182,6 +1266,7 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
 
 def run_server(host: str = "0.0.0.0", port: int = 8000):
     """
+
     Start the RealAI API server.
 
     Args:
@@ -1235,8 +1320,15 @@ def run_server(host: str = "0.0.0.0", port: int = 8000):
 
 def main():
     """Entry point for running the API server as a module."""
-    port = int(os.environ.get("PORT", 8000))
-    run_server(port=port)
+    import argparse
+
+    parser = argparse.ArgumentParser(add_help=True)
+    parser.add_argument("--host", type=str, default=os.environ.get("HOST", "0.0.0.0"))
+    parser.add_argument("--port", type=int, default=int(os.environ.get("PORT", 8000)))
+    args = parser.parse_args()
+
+    run_server(host=args.host, port=args.port)
+
 
 
 if __name__ == "__main__":

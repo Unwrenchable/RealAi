@@ -5,22 +5,48 @@ export interface ChatRequest {
   settings: Settings;
 }
 
+const RAW_API_BASE =
+  process.env.NEXT_PUBLIC_REALAI_API_BASE ??
+  (process.env.NODE_ENV === "development" ? "http://localhost:8000" : "");
+
+function normalizeApiBase(url: string): string {
+  const trimmed = url.trim().replace(/\/+$/, "");
+  return trimmed.endsWith("/v1") ? trimmed.slice(0, -3) : trimmed;
+}
+
+const API_BASE = normalizeApiBase(RAW_API_BASE);
+
 /**
- * Send a list of messages to the RealAI backend via the Next.js proxy route
- * and return the assistant's reply text.
+ * Send a list of messages to the RealAI backend and return the assistant's
+ * reply text.
  */
 export async function sendMessage(
   messages: ChatMessage[],
   settings: Settings
 ): Promise<string> {
+  if (!API_BASE) {
+    throw new Error(
+      "Backend URL is not configured. Set NEXT_PUBLIC_REALAI_API_BASE."
+    );
+  }
+
   const payload: ChatRequest = {
     messages: messages.map((m) => ({ role: m.role, content: m.content })),
     settings,
   };
 
-  const res = await fetch("/api/chat", {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+
+  const apiKey = settings.apiKey.trim();
+  if (apiKey) {
+    headers.Authorization = `Bearer ${apiKey}`;
+  }
+
+  const res = await fetch(`${API_BASE}/v1/chat/completions`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers,
     body: JSON.stringify(payload),
   });
 

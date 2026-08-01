@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+.next/
 build/
 develop-eggs/
 dist/
@@ -159,15 +160,14 @@ samconfig.toml
 
 # Visual Studio / VS Code cache
 .vs/
-.vscode/settings.json   # optional - only if you want to ignore personal settings
+.vscode/settings.json # optional - only if you want to ignore personal settings
 *.slnx
-
 # Python
 __pycache__/
 *.pyc
 .venv/
 venv/
-
 # Frontend
+node_modules/
 realai-frontend/node_modules/
 realai-frontend/.next/

@@ -1,0 +1,16 @@
+---
+pid: 17184
+cwd: "C:\Users\tsmit\realai"
+command: "taskkill /PID 5596 /F; Start-Sleep 2; cd C:\\Users\\tsmit\\realai; $env:REALAI_PROVIDER_PORT='8001'; py -3.14 -m realai.provider"
+started_at: 2026-06-04T14:09:18.869Z
+running_for_ms: 11030002 
+---
+ERROR: The process with PID 5596 could not be terminated.
+Reason: Access is denied.
+[RealAI] Core modules loaded.
+INFO:     Started server process [18828]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:    [Errno 10048] error while attempting to bind on address ('0.0.0.0', 8001): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.

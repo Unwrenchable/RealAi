@@ -2,12 +2,12 @@ name: CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, realaiproject ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main, realaiproject ]
 
 jobs:
-  test:
+  python-tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -32,3 +32,32 @@ jobs:
 
       - name: Run tests
         run: python3 test_realai.py
+
+  workspace:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint all packages
+        run: pnpm -r --if-present lint
+
+      - name: Typecheck all packages
+        run: pnpm -r --if-present typecheck
+
+      - name: Build all packages
+        run: pnpm -r --if-present build

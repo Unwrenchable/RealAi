@@ -1,0 +1,815 @@
+========================================
+Building RealAI Windows Installer
+========================================
+
+[1/5] Installing build and packaging dependencies
+Requirement already satisfied: pyinstaller in C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages (6.20.0)
+Requirement already satisfied: altgraph in C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages (from pyinstaller) (0.17.5)
+Requirement already satisfied: packaging>=22.0 in C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages (from pyinstaller) (26.2)
+Requirement already satisfied: pefile>=2022.5.30 in C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages (from pyinstaller) (2024.8.26)
+Requirement already satisfied: pyinstaller-hooks-contrib>=2026.4 in C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages (from pyinstaller) (2026.4)
+Requirement already satisfied: pywin32-ctypes>=0.2.1 in C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages (from pyinstaller) (0.2.3)
+Requirement already satisfied: setuptools>=42.0.0 in C:\Users\tsmit\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages (from pyinstaller) (82.0.1)
+
+[notice] A new release of pip is available: 26.1.1 -> 26.1.2
+[notice] To update, run: C:\Users\tsmit\AppData\Local\Python\pythoncore-3.14-64\python.exe -m pip install --upgrade pip
+
+[notice] A new release of pip is available: 26.1.1 -> 26.1.2
+[notice] To update, run: C:\Users\tsmit\AppData\Local\Python\pythoncore-3.14-64\python.exe -m pip install --upgrade pip
+[2/5] Building RealAI UI executable
+116 INFO: PyInstaller: 6.20.0, contrib hooks: 2026.4
+116 INFO: Python: 3.14.4
+140 INFO: Platform: Windows-11-10.0.26200-SP0
+140 INFO: Python environment: C:\Users\tsmit\AppData\Local\Python\pythoncore-3.14-64
+141 INFO: wrote C:\Users\tsmit\realai\RealAI.spec
+143 INFO: Removing temporary files and cleaning cache in C:\Users\tsmit\AppData\Local\pyinstaller
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+[RealAI] Core modules loaded.
+[RealAI] ≡ƒöì Discovering plugins in realai/plugins...
+[RealAI] Plugin system initialized.
+[RealAI] Γ£à Loaded plugin: advanced_rag
+[RealAI] Γ£à Loaded plugin: computer_mode
+[RealAI] Γ£à Loaded plugin: game_world_engine
+[RealAI] Γ£à Loaded plugin: git_repo_intel
+[RealAI] Γ£à Loaded plugin: gpu_balancer
+[RealAI] Γ£à Loaded plugin: image_gen
+[RealAI] Γ£à Loaded plugin: knowledge_rag
+[RealAI] Γ£à Loaded plugin: llm_chat
+[RealAI] Γ£à Loaded plugin: lora_loader
+[RealAI Plugin] FAISS not available. Install with: pip install faiss-cpu
+[RealAI] Γ£à Loaded plugin: memory_faiss
+[RealAI] Γ£à Loaded plugin: memory_sqlite
+[RealAI] Γ£à Loaded plugin: model_manager
+[RealAI] Γ£à Loaded plugin: multi_agent_system
+[RealAI] Γ£à Loaded plugin: npc_personality
+[RealAI] Γ£à Loaded plugin: ocr
+[RealAI] Γ£à Loaded plugin: quest_generator
+[RealAI] Γ£à Loaded plugin: rag_memory
+[RealAI] Γ£à Loaded plugin: scheduler_switcher
+[RealAI] Γ£à Loaded plugin: self_evolution_loop
+[RealAI] Γ£à Loaded plugin: self_improvement
+[RealAI] Γ£à Loaded plugin: self_reflection
+[RealAI] Γ£à Loaded plugin: social_autoposter
+[RealAI] Γ£à Loaded plugin: solana_tx
+[RealAI] Γ£à Loaded plugin: synthetic_data
+[RealAI] Γ£à Loaded plugin: tool_use_framework
+[RealAI Plugin] ΓÜá∩╕Å Twitter credentials not found in environment variables.
+[RealAI] Γ£à Loaded plugin: twitter
+[RealAI] Γ£à Loaded plugin: voice_audio
+[RealAI] Γ£à Loaded plugin: web_research
+[RealAI] Loaded 28 plugins.
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+[RealAI] Core modules loaded.
+[RealAI] ≡ƒöì Discovering plugins in realai/plugins...
+[RealAI] Plugin system initialized.
+[RealAI] Γ£à Loaded plugin: advanced_rag
+[RealAI] Γ£à Loaded plugin: computer_mode
+[RealAI] Γ£à Loaded plugin: game_world_engine
+[RealAI] Γ£à Loaded plugin: git_repo_intel
+[RealAI] Γ£à Loaded plugin: gpu_balancer
+[RealAI] Γ£à Loaded plugin: image_gen
+[RealAI] Γ£à Loaded plugin: knowledge_rag
+[RealAI] Γ£à Loaded plugin: llm_chat
+[RealAI] Γ£à Loaded plugin: lora_loader
+[RealAI Plugin] FAISS not available. Install with: pip install faiss-cpu
+[RealAI] Γ£à Loaded plugin: memory_faiss
+[RealAI] Γ£à Loaded plugin: memory_sqlite
+[RealAI] Γ£à Loaded plugin: model_manager
+[RealAI] Γ£à Loaded plugin: multi_agent_system
+[RealAI] Γ£à Loaded plugin: npc_personality
+[RealAI] Γ£à Loaded plugin: ocr
+[RealAI] Γ£à Loaded plugin: quest_generator
+[RealAI] Γ£à Loaded plugin: rag_memory
+[RealAI] Γ£à Loaded plugin: scheduler_switcher
+[RealAI] Γ£à Loaded plugin: self_evolution_loop
+[RealAI] Γ£à Loaded plugin: self_improvement
+[RealAI] Γ£à Loaded plugin: self_reflection
+[RealAI] Γ£à Loaded plugin: social_autoposter
+[RealAI] Γ£à Loaded plugin: solana_tx
+[RealAI] Γ£à Loaded plugin: synthetic_data
+[RealAI] Γ£à Loaded plugin: tool_use_framework
+[RealAI Plugin] ΓÜá∩╕Å Twitter credentials not found in environment variables.
+[RealAI] Γ£à Loaded plugin: twitter
+[RealAI] Γ£à Loaded plugin: voice_audio
+[RealAI] Γ£à Loaded plugin: web_research
+[RealAI] Loaded 28 plugins.
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+[RealAI] Core modules loaded.
+[RealAI] ≡ƒöì Discovering plugins in realai/plugins...
+[RealAI] Plugin system initialized.
+[RealAI] Γ£à Loaded plugin: advanced_rag
+[RealAI] Γ£à Loaded plugin: computer_mode
+[RealAI] Γ£à Loaded plugin: game_world_engine
+[RealAI] Γ£à Loaded plugin: git_repo_intel
+[RealAI] Γ£à Loaded plugin: gpu_balancer
+[RealAI] Γ£à Loaded plugin: image_gen
+[RealAI] Γ£à Loaded plugin: knowledge_rag
+[RealAI] Γ£à Loaded plugin: llm_chat
+[RealAI] Γ£à Loaded plugin: lora_loader
+[RealAI Plugin] FAISS not available. Install with: pip install faiss-cpu
+[RealAI] Γ£à Loaded plugin: memory_faiss
+[RealAI] Γ£à Loaded plugin: memory_sqlite
+[RealAI] Γ£à Loaded plugin: model_manager
+[RealAI] Γ£à Loaded plugin: multi_agent_system
+[RealAI] Γ£à Loaded plugin: npc_personality
+[RealAI] Γ£à Loaded plugin: ocr
+[RealAI] Γ£à Loaded plugin: quest_generator
+[RealAI] Γ£à Loaded plugin: rag_memory
+[RealAI] Γ£à Loaded plugin: scheduler_switcher
+[RealAI] Γ£à Loaded plugin: self_evolution_loop
+[RealAI] Γ£à Loaded plugin: self_improvement
+[RealAI] Γ£à Loaded plugin: self_reflection
+[RealAI] Γ£à Loaded plugin: social_autoposter
+[RealAI] Γ£à Loaded plugin: solana_tx
+[RealAI] Γ£à Loaded plugin: synthetic_data
+[RealAI] Γ£à Loaded plugin: tool_use_framework
+[RealAI Plugin] ΓÜá∩╕Å Twitter credentials not found in environment variables.
+[RealAI] Γ£à Loaded plugin: twitter
+[RealAI] Γ£à Loaded plugin: voice_audio
+[RealAI] Γ£à Loaded plugin: web_research
+[RealAI] Loaded 28 plugins.
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+[RealAI] Core modules loaded.
+[RealAI] ≡ƒöì Discovering plugins in realai/plugins...
+[RealAI] Plugin system initialized.
+[RealAI] Γ£à Loaded plugin: advanced_rag
+[RealAI] Γ£à Loaded plugin: computer_mode
+[RealAI] Γ£à Loaded plugin: game_world_engine
+[RealAI] Γ£à Loaded plugin: git_repo_intel
+[RealAI] Γ£à Loaded plugin: gpu_balancer
+[RealAI] Γ£à Loaded plugin: image_gen
+[RealAI] Γ£à Loaded plugin: knowledge_rag
+[RealAI] Γ£à Loaded plugin: llm_chat
+[RealAI] Γ£à Loaded plugin: lora_loader
+[RealAI Plugin] FAISS not available. Install with: pip install faiss-cpu
+[RealAI] Γ£à Loaded plugin: memory_faiss
+[RealAI] Γ£à Loaded plugin: memory_sqlite
+[RealAI] Γ£à Loaded plugin: model_manager
+[RealAI] Γ£à Loaded plugin: multi_agent_system
+[RealAI] Γ£à Loaded plugin: npc_personality
+[RealAI] Γ£à Loaded plugin: ocr
+[RealAI] Γ£à Loaded plugin: quest_generator
+[RealAI] Γ£à Loaded plugin: rag_memory
+[RealAI] Γ£à Loaded plugin: scheduler_switcher
+[RealAI] Γ£à Loaded plugin: self_evolution_loop
+[RealAI] Γ£à Loaded plugin: self_improvement
+[RealAI] Γ£à Loaded plugin: self_reflection
+[RealAI] Γ£à Loaded plugin: social_autoposter
+[RealAI] Γ£à Loaded plugin: solana_tx
+[RealAI] Γ£à Loaded plugin: synthetic_data
+[RealAI] Γ£à Loaded plugin: tool_use_framework
+[RealAI Plugin] ΓÜá∩╕Å Twitter credentials not found in environment variables.
+[RealAI] Γ£à Loaded plugin: twitter
+[RealAI] Γ£à Loaded plugin: voice_audio
+[RealAI] Γ£à Loaded plugin: web_research
+[RealAI] Loaded 28 plugins.
+17988 INFO: Module search paths (PYTHONPATH):
+['C:\\Users\\tsmit\\realai',
+ 'C:\\Users\\tsmit\\AppData\\Local\\Python\\pythoncore-3.14-64\\python314.zip',
+ 'C:\\Users\\tsmit\\AppData\\Local\\Python\\pythoncore-3.14-64\\DLLs',
+ 'C:\\Users\\tsmit\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib',
+ 'C:\\Users\\tsmit\\AppData\\Local\\Python\\pythoncore-3.14-64',
+ 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages',
+ 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\win32',
+ 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\win32\\lib',
+ 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\Pythonwin',
+ 'C:\\Users\\tsmit\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages',
+ 'C:\\Users\\tsmit\\realai']
+18395 INFO: Appending 'datas' from .spec
+18396 INFO: checking Analysis
+18396 INFO: Building Analysis because Analysis-00.toc is non existent
+18396 INFO: Looking for Python shared library...
+18396 INFO: Using Python shared library: C:\Users\tsmit\AppData\Local\Python\pythoncore-3.14-64\python314.dll
+18396 INFO: Running Analysis Analysis-00.toc
+18396 INFO: Target bytecode optimization level: 0
+18396 INFO: Initializing module dependency graph...
+18397 INFO: Initializing module graph hook caches...
+18411 INFO: Analyzing modules for base_library.zip ...
+21919 INFO: Processing standard module hook 'hook-encodings.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+22409 INFO: Processing standard module hook 'hook-pickle.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+22745 INFO: Processing standard module hook 'hook-difflib.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+22756 INFO: Processing standard module hook 'hook-heapq.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+25071 INFO: Caching module dependency graph...
+25104 INFO: Analyzing C:\Users\tsmit\realai\realai\ui.py
+25189 INFO: Processing standard module hook 'hook-platform.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+25229 INFO: Processing standard module hook 'hook-sysconfig.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+25234 INFO: Processing standard module hook 'hook-_ctypes.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+25466 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+25561 INFO: Processing standard module hook 'hook-xml.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+26639 INFO: Processing standard module hook 'hook-certifi.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+26766 INFO: Processing standard module hook 'hook-anyio.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+28251 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+28252 INFO: SetuptoolsInfo: initializing cached setuptools info...
+29816 INFO: Processing pre-safe-import-module hook 'hook-importlib_metadata.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+29845 INFO: Processing standard module hook 'hook-importlib_metadata.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+29867 INFO: Processing pre-safe-import-module hook 'hook-zipp.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+29894 INFO: Processing standard module hook 'hook-rich.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+32903 INFO: Processing standard module hook 'hook-pandas.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+35110 INFO: Processing standard module hook 'hook-numpy.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+36324 INFO: Processing standard module hook 'hook-psutil.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+37480 INFO: Processing standard module hook 'hook-charset_normalizer.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+37987 INFO: Processing standard module hook 'hook-zoneinfo.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+39473 INFO: Processing standard module hook 'hook-pandas.io.formats.style.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+42914 INFO: Processing standard module hook 'hook-pandas.plotting.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+43459 INFO: Processing standard module hook 'hook-dateutil.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+43612 INFO: Processing pre-safe-import-module hook 'hook-six.moves.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+45093 INFO: Processing standard module hook 'hook-sqlite3.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+45447 INFO: Processing standard module hook 'hook-pandas.io.clipboard.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+45542 INFO: Processing standard module hook 'hook-fsspec.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+46167 INFO: Processing pre-safe-import-module hook 'hook-backports.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+46167 INFO: Setuptools: 'backports' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.backports'!
+46174 INFO: Processing standard module hook 'hook-setuptools.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+46187 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+46216 INFO: Processing pre-safe-import-module hook 'hook-jaraco.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+46217 INFO: Setuptools: 'jaraco' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco'!
+46227 INFO: Processing pre-safe-import-module hook 'hook-more_itertools.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+46227 INFO: Setuptools: 'more_itertools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.more_itertools'!
+46451 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+46676 INFO: Processing standard module hook 'hook-setuptools._vendor.jaraco.text.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+46677 INFO: Processing pre-safe-import-module hook 'hook-importlib_resources.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+46678 INFO: Processing standard module hook 'hook-importlib_resources.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+47148 INFO: Processing pre-safe-import-module hook 'hook-tomli.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+47149 INFO: Setuptools: 'tomli' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.tomli'!
+47687 INFO: Processing pre-safe-import-module hook 'hook-wheel.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+47687 INFO: Setuptools: 'wheel' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.wheel'!
+47825 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+47835 INFO: Processing standard module hook 'hook-xml.dom.domreg.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+48728 INFO: Processing standard module hook 'hook-pydantic.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+51424 INFO: Processing standard module hook 'hook-PIL.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+51549 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+52085 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+53779 INFO: Processing standard module hook 'hook-jinja2.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+55081 INFO: Processing standard module hook 'hook-orjson.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+55789 INFO: Processing standard module hook 'hook-uvicorn.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+56879 INFO: Processing standard module hook 'hook-websockets.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+57837 INFO: Processing standard module hook 'hook-cryptography.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+63214 INFO: hook-cryptography: cryptography does not seem to be using dynamically linked OpenSSL.
+63596 INFO: Processing standard module hook 'hook-bcrypt.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages\pydub\utils.py:300: SyntaxWarning: "\(" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\("? A raw string is also an option.
+  m = re.match('([su]([0-9]{1,2})p?) \(([0-9]{1,2}) bit\)$', token)
+C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages\pydub\utils.py:301: SyntaxWarning: "\(" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\("? A raw string is also an option.
+  m2 = re.match('([su]([0-9]{1,2})p?)( \(default\))?$', token)
+C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages\pydub\utils.py:310: SyntaxWarning: "\(" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\("? A raw string is also an option.
+  elif re.match('(flt)p?( \(default\))?$', token):
+C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages\pydub\utils.py:314: SyntaxWarning: "\(" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\("? A raw string is also an option.
+  elif re.match('(dbl)p?( \(default\))?$', token):
+64575 INFO: Processing standard module hook 'hook-transformers.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+66422 INFO: Processing standard module hook 'hook-regex.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+97059 INFO: Processing standard module hook 'hook-urllib3.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+98899 INFO: Processing standard module hook 'hook-onnxruntime.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+98983 INFO: Processing pre-safe-import-module hook 'hook-tensorflow.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\pre_safe_import_module'
+114495 INFO: Processing standard module hook 'hook-pytz.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+118298 INFO: Processing standard module hook 'hook-Crypto.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+122122 INFO: Processing standard module hook 'hook-pycparser.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+122832 INFO: Analyzing hidden import 'realai.plugins'
+122834 INFO: Analyzing hidden import 'realai.plugins.advanced_rag'
+122929 INFO: Analyzing hidden import 'realai.plugins.computer_mode'
+123007 INFO: Processing pre-find-module-path hook 'hook-tkinter.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+123007 INFO: TclTkInfo: initializing cached Tcl/Tk info...
+124676 INFO: Processing standard module hook 'hook-_tkinter.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages\pyautogui\_pyautogui_x11.py:284: SyntaxWarning: "\e" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\e"? A raw string is also an option.
+  '\e': _display.keysym_to_keycode(Xlib.XK.string_to_keysym('Escape')),
+124900 INFO: Analyzing hidden import 'realai.plugins.flux_optimizer'
+124901 INFO: Analyzing hidden import 'realai.plugins.game_world_engine'
+124904 INFO: Analyzing hidden import 'realai.plugins.git_repo_intel'
+124910 INFO: Analyzing hidden import 'realai.plugins.gpu_balancer'
+124911 INFO: Analyzing hidden import 'realai.plugins.image_gen'
+124915 INFO: Analyzing hidden import 'realai.plugins.knowledge_rag'
+124922 INFO: Analyzing hidden import 'realai.plugins.lora_loader'
+124924 INFO: Analyzing hidden import 'realai.plugins.memory_faiss'
+124926 INFO: Analyzing hidden import 'realai.plugins.memory_sqlite'
+124927 INFO: Analyzing hidden import 'realai.plugins.model_manager'
+124931 INFO: Analyzing hidden import 'realai.plugins.multi_agent_system'
+124934 INFO: Analyzing hidden import 'realai.plugins.npc_personality'
+124935 INFO: Analyzing hidden import 'realai.plugins.ocr'
+124936 INFO: Analyzing hidden import 'realai.plugins.quest_generator'
+124937 INFO: Analyzing hidden import 'realai.plugins.rag_memory'
+125271 INFO: Processing standard module hook 'hook-jsonschema.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+125456 INFO: Processing standard module hook 'hook-jsonschema_specifications.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+126227 INFO: Processing standard module hook 'hook-opentelemetry.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+126708 INFO: Processing standard module hook 'hook-grpc.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+127535 INFO: Analyzing hidden import 'realai.plugins.scheduler_switcher'
+127538 INFO: Analyzing hidden import 'realai.plugins.self_evolution_loop'
+127546 INFO: Analyzing hidden import 'realai.plugins.self_improvement'
+127550 INFO: Analyzing hidden import 'realai.plugins.self_reflection'
+127554 INFO: Analyzing hidden import 'realai.plugins.social_autoposter'
+127559 INFO: Analyzing hidden import 'realai.plugins.solana_tx'
+128441 INFO: Analyzing hidden import 'realai.plugins.synthetic_data'
+128445 INFO: Analyzing hidden import 'realai.plugins.tool_use_framework'
+128449 INFO: Analyzing hidden import 'realai.plugins.twitter'
+128881 INFO: Analyzing hidden import 'realai.plugins.voice_audio'
+128888 INFO: Analyzing hidden import 'realai.plugins.web_research'
+128895 INFO: Processing module hooks (post-graph stage)...
+130999 WARNING: Hidden import "pycparser.lextab" not found!
+130999 WARNING: Hidden import "pycparser.yacctab" not found!
+131645 WARNING: Hidden import "importlib_resources.trees" not found!
+132010 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+132112 INFO: Processing standard module hook 'hook-_tkinter.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+132113 INFO: Processing standard module hook 'hook-tzdata.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+132679 INFO: Performing binary vs. data reclassification (2424 entries)
+132915 INFO: Looking for ctypes DLLs
+133177 INFO: Analyzing run-time hooks ...
+133209 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\rthooks'
+133213 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\rthooks'
+133215 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\rthooks'
+133217 INFO: Including run-time hook 'pyi_rth_setuptools.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\rthooks'
+133218 INFO: Including run-time hook 'pyi_rth_cryptography_openssl.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\rthooks'
+133220 INFO: Including run-time hook 'pyi_rth__tkinter.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\rthooks'
+133381 INFO: Creating base_library.zip...
+133404 INFO: Looking for dynamic libraries
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+Modular Diffusers is currently an experimental feature under active development. The API is subject to breaking changes in future releases.
+[RealAI] Core modules loaded.
+[RealAI] ≡ƒöì Discovering plugins in realai/plugins...
+[RealAI] Plugin system initialized.
+[RealAI] Γ£à Loaded plugin: advanced_rag
+[RealAI] Γ£à Loaded plugin: computer_mode
+[RealAI] Γ£à Loaded plugin: game_world_engine
+[RealAI] Γ£à Loaded plugin: git_repo_intel
+[RealAI] Γ£à Loaded plugin: gpu_balancer
+[RealAI] Γ£à Loaded plugin: image_gen
+[RealAI] Γ£à Loaded plugin: knowledge_rag
+[RealAI] Γ£à Loaded plugin: llm_chat
+[RealAI] Γ£à Loaded plugin: lora_loader
+[RealAI Plugin] FAISS not available. Install with: pip install faiss-cpu
+[RealAI] Γ£à Loaded plugin: memory_faiss
+[RealAI] Γ£à Loaded plugin: memory_sqlite
+[RealAI] Γ£à Loaded plugin: model_manager
+[RealAI] Γ£à Loaded plugin: multi_agent_system
+[RealAI] Γ£à Loaded plugin: npc_personality
+[RealAI] Γ£à Loaded plugin: ocr
+[RealAI] Γ£à Loaded plugin: quest_generator
+[RealAI] Γ£à Loaded plugin: rag_memory
+[RealAI] Γ£à Loaded plugin: scheduler_switcher
+[RealAI] Γ£à Loaded plugin: self_evolution_loop
+[RealAI] Γ£à Loaded plugin: self_improvement
+[RealAI] Γ£à Loaded plugin: self_reflection
+[RealAI] Γ£à Loaded plugin: social_autoposter
+[RealAI] Γ£à Loaded plugin: solana_tx
+[RealAI] Γ£à Loaded plugin: synthetic_data
+[RealAI] Γ£à Loaded plugin: tool_use_framework
+[RealAI Plugin] ΓÜá∩╕Å Twitter credentials not found in environment variables.
+[RealAI] Γ£à Loaded plugin: twitter
+[RealAI] Γ£à Loaded plugin: voice_audio
+[RealAI] Γ£à Loaded plugin: web_research
+[RealAI] Loaded 28 plugins.
+142085 INFO: Extra DLL search directories (AddDllDirectory): ['C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs', 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\pandas.libs', 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\llama_cpp\\lib', 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\llama_cpp\\lib']
+142086 INFO: Extra DLL search directories (PATH): ['C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\llama_cpp\\lib']
+143727 INFO: Warnings written to C:\Users\tsmit\realai\build\RealAI\warn-RealAI.txt
+144353 INFO: Graph cross-reference written to C:\Users\tsmit\realai\build\RealAI\xref-RealAI.html
+144567 INFO: checking PYZ
+144568 INFO: Building PYZ because PYZ-00.toc is non existent
+144568 INFO: Building PYZ (ZlibArchive) C:\Users\tsmit\realai\build\RealAI\PYZ-00.pyz
+147705 INFO: Building PYZ (ZlibArchive) C:\Users\tsmit\realai\build\RealAI\PYZ-00.pyz completed successfully.
+147876 INFO: checking PKG
+147876 INFO: Building PKG because PKG-00.toc is non existent
+147876 INFO: Building PKG (CArchive) RealAI.pkg
+156116 INFO: Building PKG (CArchive) RealAI.pkg completed successfully.
+156194 INFO: Bootloader C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+156194 INFO: checking EXE
+156194 INFO: Building EXE because EXE-00.toc is non existent
+156194 INFO: Building EXE from EXE-00.toc
+156195 INFO: Copying bootloader EXE to C:\Users\tsmit\realai\dist\RealAI.exe
+156199 INFO: Copying icon to EXE
+156202 INFO: Copying 0 resources to EXE
+156202 INFO: Embedding manifest in EXE
+156205 INFO: Appending PKG archive to EXE
+156284 INFO: Fixing EXE headers
+156760 INFO: Building EXE from EXE-00.toc completed successfully.
+156836 INFO: Build complete! The results are available in: C:\Users\tsmit\realai\dist
+[3/5] Building RealAI Provider executable
+124 INFO: PyInstaller: 6.20.0, contrib hooks: 2026.4
+124 INFO: Python: 3.14.4
+149 INFO: Platform: Windows-11-10.0.26200-SP0
+149 INFO: Python environment: C:\Users\tsmit\AppData\Local\Python\pythoncore-3.14-64
+150 INFO: wrote C:\Users\tsmit\realai\RealAIProvider.spec
+152 INFO: Removing temporary files and cleaning cache in C:\Users\tsmit\AppData\Local\pyinstaller
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+[RealAI] Core modules loaded.
+[RealAI] ≡ƒöì Discovering plugins in realai/plugins...
+[RealAI] Plugin system initialized.
+[RealAI] Γ£à Loaded plugin: advanced_rag
+[RealAI] Γ£à Loaded plugin: computer_mode
+[RealAI] Γ£à Loaded plugin: game_world_engine
+[RealAI] Γ£à Loaded plugin: git_repo_intel
+[RealAI] Γ£à Loaded plugin: gpu_balancer
+[RealAI] Γ£à Loaded plugin: image_gen
+[RealAI] Γ£à Loaded plugin: knowledge_rag
+[RealAI] Γ£à Loaded plugin: llm_chat
+[RealAI] Γ£à Loaded plugin: lora_loader
+[RealAI Plugin] FAISS not available. Install with: pip install faiss-cpu
+[RealAI] Γ£à Loaded plugin: memory_faiss
+[RealAI] Γ£à Loaded plugin: memory_sqlite
+[RealAI] Γ£à Loaded plugin: model_manager
+[RealAI] Γ£à Loaded plugin: multi_agent_system
+[RealAI] Γ£à Loaded plugin: npc_personality
+[RealAI] Γ£à Loaded plugin: ocr
+[RealAI] Γ£à Loaded plugin: quest_generator
+[RealAI] Γ£à Loaded plugin: rag_memory
+[RealAI] Γ£à Loaded plugin: scheduler_switcher
+[RealAI] Γ£à Loaded plugin: self_evolution_loop
+[RealAI] Γ£à Loaded plugin: self_improvement
+[RealAI] Γ£à Loaded plugin: self_reflection
+[RealAI] Γ£à Loaded plugin: social_autoposter
+[RealAI] Γ£à Loaded plugin: solana_tx
+[RealAI] Γ£à Loaded plugin: synthetic_data
+[RealAI] Γ£à Loaded plugin: tool_use_framework
+[RealAI Plugin] ΓÜá∩╕Å Twitter credentials not found in environment variables.
+[RealAI] Γ£à Loaded plugin: twitter
+[RealAI] Γ£à Loaded plugin: voice_audio
+[RealAI] Γ£à Loaded plugin: web_research
+[RealAI] Loaded 28 plugins.
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+[RealAI] Core modules loaded.
+[RealAI] ≡ƒöì Discovering plugins in realai/plugins...
+[RealAI] Plugin system initialized.
+[RealAI] Γ£à Loaded plugin: advanced_rag
+[RealAI] Γ£à Loaded plugin: computer_mode
+[RealAI] Γ£à Loaded plugin: game_world_engine
+[RealAI] Γ£à Loaded plugin: git_repo_intel
+[RealAI] Γ£à Loaded plugin: gpu_balancer
+[RealAI] Γ£à Loaded plugin: image_gen
+[RealAI] Γ£à Loaded plugin: knowledge_rag
+[RealAI] Γ£à Loaded plugin: llm_chat
+[RealAI] Γ£à Loaded plugin: lora_loader
+[RealAI Plugin] FAISS not available. Install with: pip install faiss-cpu
+[RealAI] Γ£à Loaded plugin: memory_faiss
+[RealAI] Γ£à Loaded plugin: memory_sqlite
+[RealAI] Γ£à Loaded plugin: model_manager
+[RealAI] Γ£à Loaded plugin: multi_agent_system
+[RealAI] Γ£à Loaded plugin: npc_personality
+[RealAI] Γ£à Loaded plugin: ocr
+[RealAI] Γ£à Loaded plugin: quest_generator
+[RealAI] Γ£à Loaded plugin: rag_memory
+[RealAI] Γ£à Loaded plugin: scheduler_switcher
+[RealAI] Γ£à Loaded plugin: self_evolution_loop
+[RealAI] Γ£à Loaded plugin: self_improvement
+[RealAI] Γ£à Loaded plugin: self_reflection
+[RealAI] Γ£à Loaded plugin: social_autoposter
+[RealAI] Γ£à Loaded plugin: solana_tx
+[RealAI] Γ£à Loaded plugin: synthetic_data
+[RealAI] Γ£à Loaded plugin: tool_use_framework
+[RealAI Plugin] ΓÜá∩╕Å Twitter credentials not found in environment variables.
+[RealAI] Γ£à Loaded plugin: twitter
+[RealAI] Γ£à Loaded plugin: voice_audio
+[RealAI] Γ£à Loaded plugin: web_research
+[RealAI] Loaded 28 plugins.
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+[RealAI] Core modules loaded.
+[RealAI] ≡ƒöì Discovering plugins in realai/plugins...
+[RealAI] Plugin system initialized.
+[RealAI] Γ£à Loaded plugin: advanced_rag
+[RealAI] Γ£à Loaded plugin: computer_mode
+[RealAI] Γ£à Loaded plugin: game_world_engine
+[RealAI] Γ£à Loaded plugin: git_repo_intel
+[RealAI] Γ£à Loaded plugin: gpu_balancer
+[RealAI] Γ£à Loaded plugin: image_gen
+[RealAI] Γ£à Loaded plugin: knowledge_rag
+[RealAI] Γ£à Loaded plugin: llm_chat
+[RealAI] Γ£à Loaded plugin: lora_loader
+[RealAI Plugin] FAISS not available. Install with: pip install faiss-cpu
+[RealAI] Γ£à Loaded plugin: memory_faiss
+[RealAI] Γ£à Loaded plugin: memory_sqlite
+[RealAI] Γ£à Loaded plugin: model_manager
+[RealAI] Γ£à Loaded plugin: multi_agent_system
+[RealAI] Γ£à Loaded plugin: npc_personality
+[RealAI] Γ£à Loaded plugin: ocr
+[RealAI] Γ£à Loaded plugin: quest_generator
+[RealAI] Γ£à Loaded plugin: rag_memory
+[RealAI] Γ£à Loaded plugin: scheduler_switcher
+[RealAI] Γ£à Loaded plugin: self_evolution_loop
+[RealAI] Γ£à Loaded plugin: self_improvement
+[RealAI] Γ£à Loaded plugin: self_reflection
+[RealAI] Γ£à Loaded plugin: social_autoposter
+[RealAI] Γ£à Loaded plugin: solana_tx
+[RealAI] Γ£à Loaded plugin: synthetic_data
+[RealAI] Γ£à Loaded plugin: tool_use_framework
+[RealAI Plugin] ΓÜá∩╕Å Twitter credentials not found in environment variables.
+[RealAI] Γ£à Loaded plugin: twitter
+[RealAI] Γ£à Loaded plugin: voice_audio
+[RealAI] Γ£à Loaded plugin: web_research
+[RealAI] Loaded 28 plugins.
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+[RealAI] Core modules loaded.
+[RealAI] ≡ƒöì Discovering plugins in realai/plugins...
+[RealAI] Plugin system initialized.
+[RealAI] Γ£à Loaded plugin: advanced_rag
+[RealAI] Γ£à Loaded plugin: computer_mode
+[RealAI] Γ£à Loaded plugin: game_world_engine
+[RealAI] Γ£à Loaded plugin: git_repo_intel
+[RealAI] Γ£à Loaded plugin: gpu_balancer
+[RealAI] Γ£à Loaded plugin: image_gen
+[RealAI] Γ£à Loaded plugin: knowledge_rag
+[RealAI] Γ£à Loaded plugin: llm_chat
+[RealAI] Γ£à Loaded plugin: lora_loader
+[RealAI Plugin] FAISS not available. Install with: pip install faiss-cpu
+[RealAI] Γ£à Loaded plugin: memory_faiss
+[RealAI] Γ£à Loaded plugin: memory_sqlite
+[RealAI] Γ£à Loaded plugin: model_manager
+[RealAI] Γ£à Loaded plugin: multi_agent_system
+[RealAI] Γ£à Loaded plugin: npc_personality
+[RealAI] Γ£à Loaded plugin: ocr
+[RealAI] Γ£à Loaded plugin: quest_generator
+[RealAI] Γ£à Loaded plugin: rag_memory
+[RealAI] Γ£à Loaded plugin: scheduler_switcher
+[RealAI] Γ£à Loaded plugin: self_evolution_loop
+[RealAI] Γ£à Loaded plugin: self_improvement
+[RealAI] Γ£à Loaded plugin: self_reflection
+[RealAI] Γ£à Loaded plugin: social_autoposter
+[RealAI] Γ£à Loaded plugin: solana_tx
+[RealAI] Γ£à Loaded plugin: synthetic_data
+[RealAI] Γ£à Loaded plugin: tool_use_framework
+[RealAI Plugin] ΓÜá∩╕Å Twitter credentials not found in environment variables.
+[RealAI] Γ£à Loaded plugin: twitter
+[RealAI] Γ£à Loaded plugin: voice_audio
+[RealAI] Γ£à Loaded plugin: web_research
+[RealAI] Loaded 28 plugins.
+18475 INFO: Module search paths (PYTHONPATH):
+['C:\\Users\\tsmit\\realai',
+ 'C:\\Users\\tsmit\\AppData\\Local\\Python\\pythoncore-3.14-64\\python314.zip',
+ 'C:\\Users\\tsmit\\AppData\\Local\\Python\\pythoncore-3.14-64\\DLLs',
+ 'C:\\Users\\tsmit\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib',
+ 'C:\\Users\\tsmit\\AppData\\Local\\Python\\pythoncore-3.14-64',
+ 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages',
+ 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\win32',
+ 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\win32\\lib',
+ 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\Pythonwin',
+ 'C:\\Users\\tsmit\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages',
+ 'C:\\Users\\tsmit\\realai']
+18862 INFO: Appending 'datas' from .spec
+18864 INFO: checking Analysis
+18864 INFO: Building Analysis because Analysis-00.toc is non existent
+18864 INFO: Looking for Python shared library...
+18864 INFO: Using Python shared library: C:\Users\tsmit\AppData\Local\Python\pythoncore-3.14-64\python314.dll
+18864 INFO: Running Analysis Analysis-00.toc
+18864 INFO: Target bytecode optimization level: 0
+18864 INFO: Initializing module dependency graph...
+18866 INFO: Initializing module graph hook caches...
+18877 INFO: Analyzing modules for base_library.zip ...
+22524 INFO: Processing standard module hook 'hook-encodings.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+23022 INFO: Processing standard module hook 'hook-pickle.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+23243 INFO: Processing standard module hook 'hook-difflib.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+23255 INFO: Processing standard module hook 'hook-heapq.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+25629 INFO: Caching module dependency graph...
+25662 INFO: Analyzing C:\Users\tsmit\realai\realai\provider.py
+25811 INFO: Processing standard module hook 'hook-anyio.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+27297 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+27298 INFO: SetuptoolsInfo: initializing cached setuptools info...
+28061 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+28154 INFO: Processing standard module hook 'hook-xml.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+28434 INFO: Processing standard module hook 'hook-sysconfig.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+28439 INFO: Processing standard module hook 'hook-_ctypes.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+29382 INFO: Processing standard module hook 'hook-pydantic.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+29879 INFO: Processing standard module hook 'hook-platform.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+30127 INFO: Processing standard module hook 'hook-rich.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+33191 INFO: Processing standard module hook 'hook-zoneinfo.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+34764 INFO: Processing standard module hook 'hook-uvicorn.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+35953 INFO: Processing pre-safe-import-module hook 'hook-importlib_metadata.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+35986 INFO: Processing standard module hook 'hook-importlib_metadata.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+36007 INFO: Processing pre-safe-import-module hook 'hook-zipp.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+36437 INFO: Processing standard module hook 'hook-websockets.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+37445 INFO: Processing standard module hook 'hook-cryptography.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+40960 INFO: hook-cryptography: cryptography does not seem to be using dynamically linked OpenSSL.
+41341 INFO: Processing standard module hook 'hook-bcrypt.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+42188 INFO: Processing standard module hook 'hook-certifi.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+42716 INFO: Processing standard module hook 'hook-pandas.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+44860 INFO: Processing standard module hook 'hook-numpy.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+46085 INFO: Processing standard module hook 'hook-psutil.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+47105 INFO: Processing standard module hook 'hook-charset_normalizer.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+49261 INFO: Processing standard module hook 'hook-pandas.io.formats.style.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+52805 INFO: Processing standard module hook 'hook-pandas.plotting.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+53385 INFO: Processing standard module hook 'hook-dateutil.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+53544 INFO: Processing pre-safe-import-module hook 'hook-six.moves.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+55026 INFO: Processing standard module hook 'hook-sqlite3.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+55358 INFO: Processing standard module hook 'hook-pandas.io.clipboard.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+55449 INFO: Processing standard module hook 'hook-fsspec.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+56054 INFO: Processing pre-safe-import-module hook 'hook-backports.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+56055 INFO: Setuptools: 'backports' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.backports'!
+56062 INFO: Processing standard module hook 'hook-setuptools.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+56075 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+56104 INFO: Processing pre-safe-import-module hook 'hook-jaraco.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+56104 INFO: Setuptools: 'jaraco' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco'!
+56115 INFO: Processing pre-safe-import-module hook 'hook-more_itertools.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+56116 INFO: Setuptools: 'more_itertools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.more_itertools'!
+56341 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+56569 INFO: Processing standard module hook 'hook-setuptools._vendor.jaraco.text.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+56570 INFO: Processing pre-safe-import-module hook 'hook-importlib_resources.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+56571 INFO: Processing standard module hook 'hook-importlib_resources.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+56956 INFO: Processing pre-safe-import-module hook 'hook-tomli.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+56957 INFO: Setuptools: 'tomli' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.tomli'!
+57496 INFO: Processing pre-safe-import-module hook 'hook-wheel.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+57497 INFO: Setuptools: 'wheel' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.wheel'!
+57634 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+57644 INFO: Processing standard module hook 'hook-xml.dom.domreg.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+59473 INFO: Processing standard module hook 'hook-PIL.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+59601 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+60137 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+61161 INFO: Processing standard module hook 'hook-jinja2.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+62309 INFO: Processing standard module hook 'hook-orjson.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages\pydub\utils.py:300: SyntaxWarning: "\(" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\("? A raw string is also an option.
+  m = re.match('([su]([0-9]{1,2})p?) \(([0-9]{1,2}) bit\)$', token)
+C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages\pydub\utils.py:301: SyntaxWarning: "\(" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\("? A raw string is also an option.
+  m2 = re.match('([su]([0-9]{1,2})p?)( \(default\))?$', token)
+C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages\pydub\utils.py:310: SyntaxWarning: "\(" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\("? A raw string is also an option.
+  elif re.match('(flt)p?( \(default\))?$', token):
+C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages\pydub\utils.py:314: SyntaxWarning: "\(" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\("? A raw string is also an option.
+  elif re.match('(dbl)p?( \(default\))?$', token):
+63834 INFO: Processing standard module hook 'hook-transformers.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+65642 INFO: Processing standard module hook 'hook-regex.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+96508 INFO: Processing standard module hook 'hook-urllib3.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+98529 INFO: Processing standard module hook 'hook-onnxruntime.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+98614 INFO: Processing pre-safe-import-module hook 'hook-tensorflow.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\pre_safe_import_module'
+114389 INFO: Processing standard module hook 'hook-pytz.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+116922 INFO: Analyzing hidden import 'realai.plugins'
+116923 INFO: Analyzing hidden import 'realai.plugins.advanced_rag'
+117070 INFO: Analyzing hidden import 'realai.plugins.computer_mode'
+117145 INFO: Processing pre-find-module-path hook 'hook-tkinter.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+117146 INFO: TclTkInfo: initializing cached Tcl/Tk info...
+118799 INFO: Processing standard module hook 'hook-_tkinter.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages\pyautogui\_pyautogui_x11.py:284: SyntaxWarning: "\e" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\e"? A raw string is also an option.
+  '\e': _display.keysym_to_keycode(Xlib.XK.string_to_keysym('Escape')),
+119034 INFO: Analyzing hidden import 'realai.plugins.flux_optimizer'
+119035 INFO: Analyzing hidden import 'realai.plugins.game_world_engine'
+119038 INFO: Analyzing hidden import 'realai.plugins.git_repo_intel'
+119044 INFO: Analyzing hidden import 'realai.plugins.gpu_balancer'
+119046 INFO: Analyzing hidden import 'realai.plugins.image_gen'
+119051 INFO: Analyzing hidden import 'realai.plugins.knowledge_rag'
+120399 INFO: Processing standard module hook 'hook-Crypto.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+124143 INFO: Processing standard module hook 'hook-pycparser.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+124862 INFO: Analyzing hidden import 'realai.plugins.lora_loader'
+124863 INFO: Analyzing hidden import 'realai.plugins.memory_faiss'
+124865 INFO: Analyzing hidden import 'realai.plugins.memory_sqlite'
+124867 INFO: Analyzing hidden import 'realai.plugins.model_manager'
+124871 INFO: Analyzing hidden import 'realai.plugins.multi_agent_system'
+124873 INFO: Analyzing hidden import 'realai.plugins.npc_personality'
+124874 INFO: Analyzing hidden import 'realai.plugins.ocr'
+124875 INFO: Analyzing hidden import 'realai.plugins.quest_generator'
+124876 INFO: Analyzing hidden import 'realai.plugins.rag_memory'
+125204 INFO: Processing standard module hook 'hook-jsonschema.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+125353 INFO: Processing standard module hook 'hook-jsonschema_specifications.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+126134 INFO: Processing standard module hook 'hook-opentelemetry.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+126615 INFO: Processing standard module hook 'hook-grpc.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+127380 INFO: Analyzing hidden import 'realai.plugins.scheduler_switcher'
+127383 INFO: Analyzing hidden import 'realai.plugins.self_evolution_loop'
+127389 INFO: Analyzing hidden import 'realai.plugins.self_improvement'
+127393 INFO: Analyzing hidden import 'realai.plugins.self_reflection'
+127397 INFO: Analyzing hidden import 'realai.plugins.social_autoposter'
+127401 INFO: Analyzing hidden import 'realai.plugins.solana_tx'
+128273 INFO: Analyzing hidden import 'realai.plugins.synthetic_data'
+128278 INFO: Analyzing hidden import 'realai.plugins.tool_use_framework'
+128281 INFO: Analyzing hidden import 'realai.plugins.twitter'
+128713 INFO: Analyzing hidden import 'realai.plugins.voice_audio'
+128718 INFO: Analyzing hidden import 'realai.plugins.web_research'
+128725 INFO: Processing module hooks (post-graph stage)...
+130815 WARNING: Hidden import "pycparser.lextab" not found!
+130815 WARNING: Hidden import "pycparser.yacctab" not found!
+131461 WARNING: Hidden import "importlib_resources.trees" not found!
+131828 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+131930 INFO: Processing standard module hook 'hook-_tkinter.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks'
+131931 INFO: Processing standard module hook 'hook-tzdata.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+132462 INFO: Performing binary vs. data reclassification (2424 entries)
+132701 INFO: Looking for ctypes DLLs
+132968 INFO: Analyzing run-time hooks ...
+133001 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\rthooks'
+133003 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\rthooks'
+133006 INFO: Including run-time hook 'pyi_rth_setuptools.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\rthooks'
+133008 INFO: Including run-time hook 'pyi_rth_cryptography_openssl.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\_pyinstaller_hooks_contrib\\rthooks'
+133010 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\rthooks'
+133013 INFO: Including run-time hook 'pyi_rth__tkinter.py' from 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\PyInstaller\\hooks\\rthooks'
+133175 INFO: Creating base_library.zip...
+133200 INFO: Looking for dynamic libraries
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+Modular Diffusers is currently an experimental feature under active development. The API is subject to breaking changes in future releases.
+[RealAI] Core modules loaded.
+[RealAI] ≡ƒöì Discovering plugins in realai/plugins...
+[RealAI] Plugin system initialized.
+[RealAI] Γ£à Loaded plugin: advanced_rag
+[RealAI] Γ£à Loaded plugin: computer_mode
+[RealAI] Γ£à Loaded plugin: game_world_engine
+[RealAI] Γ£à Loaded plugin: git_repo_intel
+[RealAI] Γ£à Loaded plugin: gpu_balancer
+[RealAI] Γ£à Loaded plugin: image_gen
+[RealAI] Γ£à Loaded plugin: knowledge_rag
+[RealAI] Γ£à Loaded plugin: llm_chat
+[RealAI] Γ£à Loaded plugin: lora_loader
+[RealAI Plugin] FAISS not available. Install with: pip install faiss-cpu
+[RealAI] Γ£à Loaded plugin: memory_faiss
+[RealAI] Γ£à Loaded plugin: memory_sqlite
+[RealAI] Γ£à Loaded plugin: model_manager
+[RealAI] Γ£à Loaded plugin: multi_agent_system
+[RealAI] Γ£à Loaded plugin: npc_personality
+[RealAI] Γ£à Loaded plugin: ocr
+[RealAI] Γ£à Loaded plugin: quest_generator
+[RealAI] Γ£à Loaded plugin: rag_memory
+[RealAI] Γ£à Loaded plugin: scheduler_switcher
+[RealAI] Γ£à Loaded plugin: self_evolution_loop
+[RealAI] Γ£à Loaded plugin: self_improvement
+[RealAI] Γ£à Loaded plugin: self_reflection
+[RealAI] Γ£à Loaded plugin: social_autoposter
+[RealAI] Γ£à Loaded plugin: solana_tx
+[RealAI] Γ£à Loaded plugin: synthetic_data
+[RealAI] Γ£à Loaded plugin: tool_use_framework
+[RealAI Plugin] ΓÜá∩╕Å Twitter credentials not found in environment variables.
+[RealAI] Γ£à Loaded plugin: twitter
+[RealAI] Γ£à Loaded plugin: voice_audio
+[RealAI] Γ£à Loaded plugin: web_research
+[RealAI] Loaded 28 plugins.
+142055 INFO: Extra DLL search directories (AddDllDirectory): ['C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs', 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\pandas.libs', 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\llama_cpp\\lib', 'C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\llama_cpp\\lib']
+142055 INFO: Extra DLL search directories (PATH): ['C:\\Users\\tsmit\\AppData\\Roaming\\Python\\Python314\\site-packages\\llama_cpp\\lib']
+143674 INFO: Warnings written to C:\Users\tsmit\realai\build\RealAIProvider\warn-RealAIProvider.txt
+144296 INFO: Graph cross-reference written to C:\Users\tsmit\realai\build\RealAIProvider\xref-RealAIProvider.html
+144530 INFO: checking PYZ
+144530 INFO: Building PYZ because PYZ-00.toc is non existent
+144530 INFO: Building PYZ (ZlibArchive) C:\Users\tsmit\realai\build\RealAIProvider\PYZ-00.pyz
+147507 INFO: Building PYZ (ZlibArchive) C:\Users\tsmit\realai\build\RealAIProvider\PYZ-00.pyz completed successfully.
+147716 INFO: checking PKG
+147717 INFO: Building PKG because PKG-00.toc is non existent
+147717 INFO: Building PKG (CArchive) RealAIProvider.pkg
+156081 INFO: Building PKG (CArchive) RealAIProvider.pkg completed successfully.
+156156 INFO: Bootloader C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages\PyInstaller\bootloader\Windows-64bit-intel\run.exe
+156156 INFO: checking EXE
+156156 INFO: Building EXE because EXE-00.toc is non existent
+156156 INFO: Building EXE from EXE-00.toc
+156156 INFO: Copying bootloader EXE to C:\Users\tsmit\realai\dist\RealAIProvider.exe
+156162 INFO: Copying icon to EXE
+156165 INFO: Copying 0 resources to EXE
+156165 INFO: Embedding manifest in EXE
+156168 INFO: Appending PKG archive to EXE
+156236 INFO: Fixing EXE headers
+156740 INFO: Building EXE from EXE-00.toc completed successfully.
+156813 INFO: Build complete! The results are available in: C:\Users\tsmit\realai\dist
+[4/5] Building installer with Inno Setup
+Inno Setup 6 Command-Line Compiler
+Copyright (C) 1997-2026 Jordan Russell. All rights reserved.
+Portions Copyright (C) 2000-2026 Martijn Laan. All rights reserved.
+Portions Copyright (C) 2001-2004 Alex Yackimoff. All rights reserved.
+https://www.innosetup.com
+
+Compiler engine version: Inno Setup 6.7.3
+Non-commercial use only
+
+Preprocessing
+   Reading file: C:\Program Files (x86)\Inno Setup 6\ISPPBuiltins.iss
+Parsing [Setup] section, line 5
+Parsing [Setup] section, line 6
+Parsing [Setup] section, line 7
+Parsing [Setup] section, line 8
+Parsing [Setup] section, line 9
+Parsing [Setup] section, line 10
+Parsing [Setup] section, line 11
+Parsing [Setup] section, line 12
+Parsing [Setup] section, line 13
+Parsing [Setup] section, line 14
+Parsing [Setup] section, line 15
+Parsing [Setup] section, line 16
+Parsing [Setup] section, line 17
+Parsing [Setup] section, line 18
+Reading file (LicenseFile)
+Reading file (WizardImageFile)
+Reading file (WizardSmallImageFile)
+Preparing Setup program executable
+   Verification successful
+   Updating icons (Setup.e32)
+   Updating version info (Setup.e32)
+Determining language code pages
+Parsing [Languages] section, line 21
+   Reading file: C:\Program Files (x86)\Inno Setup 6\Default.isl
+   Messages in script file
+Reading default messages from Default.isl
+Parsing [Languages] section, line 21
+   Reading file: C:\Program Files (x86)\Inno Setup 6\Default.isl
+Parsing [LangOptions], [Messages], and [CustomMessages] sections
+   Messages in script file
+Reading [Code] section
+Parsing [Tasks] section, line 24
+Parsing [Icons] section, line 37
+Parsing [Icons] section, line 38
+Parsing [Run] section, line 41
+Parsing [Files] section, line 28
+Parsing [Files] section, line 29
+Parsing [Files] section, line 32
+Parsing [Files] section, line 33
+Parsing [Files] section, line 34
+Deleting RealAI-Setup.exe from output directory
+Creating setup files
+   Verification successful
+   Updating icons (Setup.exe)
+   Compressing: C:\Users\tsmit\realai\dist\RealAI.exe
+   Compressing: C:\Users\tsmit\realai\dist\RealAIProvider.exe
+   Compressing: C:\Users\tsmit\realai\launch_realai.bat
+   Compressing: C:\Users\tsmit\realai\README.md
+   Compressing: C:\Users\tsmit\realai\LICENSE
+   Compressing Setup program executable
+   Updating version info (Setup.exe)
+   Updating manifest (Setup.exe)
+
+Warning: Architecture identifier "x64" is deprecated. Substituting "x64os", but note that "x64compatible" is preferred in most cases. See the "Architecture Identifiers" topic in help file for more information.
+
+Successful compile (38.328 sec). Resulting Setup program filename is:
+C:\Users\tsmit\realai\Output\RealAI-Setup.exe
+[5/5] Done
+
+[SUCCESS] Installer created: Output\RealAI-Setup.exe
+
