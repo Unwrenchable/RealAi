@@ -9,6 +9,10 @@
 
 # 3. Start server
 python -m realai.server.app
+
+# 4. Self-build (no API keys)
+$env:REALAI_API_URL = "http://127.0.0.1:8000"
+python -m realai.closed_loop
 ```
 
 ## 📝 Configuration Files

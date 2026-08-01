@@ -94,18 +94,20 @@
 
   "realai-1.0": {
 	"type": "chat",
-	"backend": "vllm",
-	"path": "meta-llama/Meta-Llama-3-8B-Instruct",
-	"context_length": 32768,
-	"description": "Default vLLM model (requires GPU)"
+	"backend": "realai-gguf",
+	"path": "realai-1.0",
+	"owned_by": "realai",
+	"context_length": 8192,
+	"description": "Native RealAI weights: models/realai-1.0/weights/*.gguf"
   },
 
   "realai-overseer": {
 	"type": "chat",
-	"backend": "vllm",
-	"path": "meta-llama/Meta-Llama-3-8B-Instruct",
+	"backend": "realai-gguf",
+	"path": "realai-overseer",
+	"owned_by": "realai",
 	"context_length": 65536,
-	"description": "Extended context vLLM model"
+	"description": "Native RealAI overseer weights"
   },
 
   "realai-embed": {

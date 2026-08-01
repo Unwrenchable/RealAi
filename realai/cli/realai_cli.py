@@ -33,7 +33,7 @@ if click is not None:
 
     @cli.command()
     @click.argument('prompt')
-    @click.option('--model', default='realai-1.0')
+    @click.option('--model', default='realai-1.0-instruct')
     @click.option('--api-url', envvar='REALAI_API_URL', default='http://localhost:8000')
     def chat(prompt, model, api_url):
         """Send a prompt to the RealAI server."""
@@ -62,6 +62,19 @@ if click is not None:
     def tasks(api_url):
         """List persisted tasks."""
         _json_command(_make_client(api_url).list_tasks())
+
+    @cli.command('build')
+    @click.argument('task')
+    @click.option('--api-url', envvar='REALAI_API_URL', default='http://localhost:8000')
+    @click.option('--model', default=None)
+    @click.option('--max-steps', default=20, type=int)
+    def build(task, api_url, model, max_steps):
+        """Run the local self-builder agent (repo tools + local GGUF)."""
+        from realai.self_builder import SelfBuilder
+
+        result = SelfBuilder(api_url=api_url, model=model, max_steps=max_steps).run(task)
+        _json_command(result)
+        raise SystemExit(0 if result.get('status') == 'done' else 1)
 
     def main(argv=None):
         """CLI entrypoint."""

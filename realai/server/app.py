@@ -1,5 +1,19 @@
 """Structured RealAI inference server."""
 
+import warnings
+
+# Suppress the benign but noisy RuntimeWarning that appears on Windows (and sometimes
+# other platforms) when you run:
+#     python -m realai.server.app
+# It is emitted by runpy because the package 'realai.server' gets imported in one form
+# and then the module is executed under a slightly different name. Completely harmless
+# for our use case — we just don't want it polluting the user's terminal every startup.
+warnings.filterwarnings(
+    "ignore",
+    message=r".*found in sys.modules after import of package 'realai\.server'.*",
+    category=RuntimeWarning,
+)
+
 import json
 from wsgiref.simple_server import make_server
 
@@ -263,9 +277,26 @@ def _reason_phrase(status_code):
 
 def main(host='0.0.0.0', port=8000):
     """Run the structured WSGI server."""
+    try:
+        from .native_bootstrap import apply_native_bootstrap
+
+        boot = apply_native_bootstrap()
+        if boot.get("status") == "published":
+            print('[realai] Native weights bootstrapped:', boot.get('gguf'))
+    except Exception as exc:
+        print('[realai] Native bootstrap skipped:', exc)
+
     httpd = make_server(host, int(port), wsgi_app)
     print('Structured RealAI server listening on http://{0}:{1}'.format(host, port))
-    httpd.serve_forever()
+    print('Press Ctrl+C to stop.')
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print('\n[realai] Server stopped by user (Ctrl+C).')
+        try:
+            httpd.server_close()
+        except Exception:
+            pass
 
 
 if __name__ == '__main__':
