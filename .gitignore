@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+.next/
 build/
 develop-eggs/
 dist/
@@ -169,4 +170,5 @@ venv/
 
 # Frontend
 realai-frontend/node_modules/
+node_modules/
 realai-frontend/.next/

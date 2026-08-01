@@ -9,7 +9,7 @@ Your local llama.cpp model is now running and ready to be used by RealAI!
 - **Backend**: llama.cpp native server (`llama-server.exe`)
 - **Model**: Llama 3.2 1B Instruct (Q4_K_M quantization)
 - **Location**: `C:\Users\tsmit\OneDrive\Apps\realai\models\llama3.2-1b\Llama-3.2-1B-Instruct-Q4_K_M.gguf`
-- **Endpoint**: http://127.0.0.1:8080/v1
+- **Endpoint**: http://127.0.0.1:8000/v1
 - **Compatible**: OpenAI API format (chat completions, completions)
 
 ## How to Start the Server
@@ -24,7 +24,7 @@ start_realai_server.bat
 C:\llama.cpp\build\bin\Release\llama-server.exe `
   -m "C:\Users\tsmit\OneDrive\Apps\realai\models\llama3.2-1b\Llama-3.2-1B-Instruct-Q4_K_M.gguf" `
   --host 127.0.0.1 `
-  --port 8080 `
+  --port 8000 `
   -c 4096
 ```
 
@@ -34,7 +34,7 @@ Once the server is running, configure your RealAI CLI or application:
 
 ```bash
 # For RealAI CLI (if supported)
-realai config set api_base_url http://127.0.0.1:8080/v1
+realai config set api_base_url http://127.0.0.1:8000/v1
 realai config set api_key local
 ```
 
@@ -43,7 +43,7 @@ Or in your RealAI configuration file:
 providers:
   - type: openai
 	name: local-llama
-	base_url: http://127.0.0.1:8080/v1
+	base_url: http://127.0.0.1:8000/v1
 	api_key: local  # Can be any value
 
 default_provider: local-llama
@@ -63,7 +63,7 @@ $body = @{
 } | ConvertTo-Json -Depth 10
 
 $response = Invoke-RestMethod `
-	-Uri 'http://127.0.0.1:8080/v1/chat/completions' `
+	-Uri 'http://127.0.0.1:8000/v1/chat/completions' `
 	-Method Post `
 	-Body $body `
 	-ContentType 'application/json'
@@ -76,7 +76,8 @@ Write-Host $response.choices[0].message.content
 import requests
 
 response = requests.post(
-	'http://127.0.0.1:8080/v1/chat/completions',
+	'http://127.0.0.1:80
+	00/v1/chat/completions',
 	json={
 		'model': 'llama-3.2-1b',
 		'messages': [
@@ -91,7 +92,7 @@ print(response.json()['choices'][0]['message']['content'])
 
 ### Using curl
 ```bash
-curl -X POST http://127.0.0.1:8080/v1/chat/completions \
+curl -X POST http://127.0.0.1:8000/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
 	"model": "llama-3.2-1b",
@@ -115,7 +116,7 @@ The llama-server exposes a full OpenAI-compatible API:
 llama-server also includes a built-in web UI! Open your browser to:
 
 ```
-http://127.0.0.1:8080
+http://127.0.0.1:8000
 ```
 
 You'll see a chat interface where you can interact with your model directly.
@@ -151,12 +152,12 @@ If you have an NVIDIA GPU, rebuild llama.cpp with CUDA support for 10-50x faster
 When ready, deploy this same setup to Vercel/Render by:
 - Containerizing llama-server
 - Mounting your model files
-- Exposing port 8080
+- Exposing port 8000
 
 ## Troubleshooting
 
 ### Server won't start
-- Check if port 8080 is already in use: `netstat -ano | findstr :8080`
+- Check if port 8000 is already in use: `netstat -ano | findstr :8000`
 - Verify model file exists: `Test-Path "C:\Users\tsmit\OneDrive\Apps\realai\models\llama3.2-1b\Llama-3.2-1B-Instruct-Q4_K_M.gguf"`
 
 ### Slow inference
@@ -165,8 +166,8 @@ When ready, deploy this same setup to Vercel/Render by:
 - Enable GPU: Rebuild with CUDA support
 
 ### RealAI not connecting
-- Verify server is running: `curl http://127.0.0.1:8080/health`
-- Check RealAI config points to correct base URL: `http://127.0.0.1:8080/v1`
+- Verify server is running: `curl http://127.0.0.1:8000/health`
+- Check RealAI config points to correct base URL: `http://127.0.0.1:8000/v1`
 - API key can be any value (not validated for local server)
 
 ## Files Created
