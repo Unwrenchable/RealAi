@@ -1,0 +1,2118 @@
+archive/.agentx
+archive/.venv-directml-train/Include
+archive/.venv-directml-train/Lib/site-packages/81d243bd2c585b0f4821__mypyc.cp312-win_amd64.pyd
+archive/.venv-directml-train/Lib/site-packages/PIL
+archive/.venv-directml-train/Lib/site-packages/_distutils_hack
+archive/.venv-directml-train/Lib/site-packages/_multiprocess
+archive/.venv-directml-train/Lib/site-packages/_yaml
+archive/.venv-directml-train/Lib/site-packages/aiohappyeyeballs
+archive/.venv-directml-train/Lib/site-packages/aiohappyeyeballs-2.6.2.dist-info
+archive/.venv-directml-train/Lib/site-packages/aiosignal
+archive/.venv-directml-train/Lib/site-packages/aiosignal-1.4.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/annotated_doc
+archive/.venv-directml-train/Lib/site-packages/annotated_doc-0.0.4.dist-info
+archive/.venv-directml-train/Lib/site-packages/anyio
+archive/.venv-directml-train/Lib/site-packages/anyio-4.14.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/attr
+archive/.venv-directml-train/Lib/site-packages/attrs
+archive/.venv-directml-train/Lib/site-packages/attrs-26.1.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/certifi
+archive/.venv-directml-train/Lib/site-packages/certifi-2026.6.17.dist-info
+archive/.venv-directml-train/Lib/site-packages/charset_normalizer
+archive/.venv-directml-train/Lib/site-packages/charset_normalizer-3.4.7.dist-info
+archive/.venv-directml-train/Lib/site-packages/click
+archive/.venv-directml-train/Lib/site-packages/click-8.4.1.dist-info
+archive/.venv-directml-train/Lib/site-packages/colorama
+archive/.venv-directml-train/Lib/site-packages/colorama-0.4.6.dist-info
+archive/.venv-directml-train/Lib/site-packages/dateutil
+archive/.venv-directml-train/Lib/site-packages/dill
+archive/.venv-directml-train/Lib/site-packages/dill-0.4.1.dist-info
+archive/.venv-directml-train/Lib/site-packages/distutils-precedence.pth
+archive/.venv-directml-train/Lib/site-packages/filelock
+archive/.venv-directml-train/Lib/site-packages/filelock-3.29.4.dist-info
+archive/.venv-directml-train/Lib/site-packages/frozenlist
+archive/.venv-directml-train/Lib/site-packages/frozenlist-1.8.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/fsspec
+archive/.venv-directml-train/Lib/site-packages/fsspec-2026.4.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/functorch
+archive/.venv-directml-train/Lib/site-packages/h11
+archive/.venv-directml-train/Lib/site-packages/h11-0.16.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/hf_xet
+archive/.venv-directml-train/Lib/site-packages/hf_xet-1.5.1.dist-info
+archive/.venv-directml-train/Lib/site-packages/httpcore
+archive/.venv-directml-train/Lib/site-packages/httpcore-1.0.9.dist-info
+archive/.venv-directml-train/Lib/site-packages/idna
+archive/.venv-directml-train/Lib/site-packages/idna-3.18.dist-info
+archive/.venv-directml-train/Lib/site-packages/isympy.py
+archive/.venv-directml-train/Lib/site-packages/jinja2
+archive/.venv-directml-train/Lib/site-packages/jinja2-3.1.6.dist-info
+archive/.venv-directml-train/Lib/site-packages/markdown_it
+archive/.venv-directml-train/Lib/site-packages/markdown_it_py-4.2.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/markupsafe
+archive/.venv-directml-train/Lib/site-packages/markupsafe-3.0.3.dist-info
+archive/.venv-directml-train/Lib/site-packages/mdurl
+archive/.venv-directml-train/Lib/site-packages/mdurl-0.1.2.dist-info
+archive/.venv-directml-train/Lib/site-packages/mpmath
+archive/.venv-directml-train/Lib/site-packages/mpmath-1.3.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/multidict
+archive/.venv-directml-train/Lib/site-packages/multidict-6.7.1.dist-info
+archive/.venv-directml-train/Lib/site-packages/multiprocess
+archive/.venv-directml-train/Lib/site-packages/multiprocess-0.70.19.dist-info
+archive/.venv-directml-train/Lib/site-packages/networkx
+archive/.venv-directml-train/Lib/site-packages/networkx-3.6.1.dist-info
+archive/.venv-directml-train/Lib/site-packages/numpy
+archive/.venv-directml-train/Lib/site-packages/numpy-2.5.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/numpy.libs
+archive/.venv-directml-train/Lib/site-packages/packaging
+archive/.venv-directml-train/Lib/site-packages/packaging-26.2.dist-info
+archive/.venv-directml-train/Lib/site-packages/pandas
+archive/.venv-directml-train/Lib/site-packages/pandas-3.0.3.dist-info
+archive/.venv-directml-train/Lib/site-packages/pandas.libs
+archive/.venv-directml-train/Lib/site-packages/pillow-12.2.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/pip-26.1.2.dist-info
+archive/.venv-directml-train/Lib/site-packages/pip/__init__.py
+archive/.venv-directml-train/Lib/site-packages/pip/__main__.py
+archive/.venv-directml-train/Lib/site-packages/pip/__pip-runner__.py
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/__init__.py
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/build_env.py
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/cache.py
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/cli
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/commands
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/configuration.py
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/distributions
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/exceptions.py
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/index
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/locations
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/main.py
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/metadata
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/models
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/network
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/operations/__init__.py
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/operations/check.py
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/operations/freeze.py
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/operations/install
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/operations/prepare.py
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/pyproject.py
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/req
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/resolution
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/self_outdated_check.py
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/utils
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/vcs
+archive/.venv-directml-train/Lib/site-packages/pip/_internal/wheel_builder.py
+archive/.venv-directml-train/Lib/site-packages/pip/_vendor
+archive/.venv-directml-train/Lib/site-packages/pip/py.typed
+archive/.venv-directml-train/Lib/site-packages/pkg_resources
+archive/.venv-directml-train/Lib/site-packages/propcache
+archive/.venv-directml-train/Lib/site-packages/propcache-0.5.2.dist-info
+archive/.venv-directml-train/Lib/site-packages/psutil
+archive/.venv-directml-train/Lib/site-packages/psutil-7.2.2.dist-info
+archive/.venv-directml-train/Lib/site-packages/pyarrow
+archive/.venv-directml-train/Lib/site-packages/pyarrow-24.0.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/pyarrow.libs
+archive/.venv-directml-train/Lib/site-packages/pygments
+archive/.venv-directml-train/Lib/site-packages/pygments-2.20.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/python_dateutil-2.9.0.post0.dist-info
+archive/.venv-directml-train/Lib/site-packages/pyyaml-6.0.3.dist-info
+archive/.venv-directml-train/Lib/site-packages/regex
+archive/.venv-directml-train/Lib/site-packages/regex-2026.5.9.dist-info
+archive/.venv-directml-train/Lib/site-packages/requests
+archive/.venv-directml-train/Lib/site-packages/requests-2.34.2.dist-info
+archive/.venv-directml-train/Lib/site-packages/rich
+archive/.venv-directml-train/Lib/site-packages/rich-15.0.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/safetensors
+archive/.venv-directml-train/Lib/site-packages/safetensors-0.8.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/setuptools
+archive/.venv-directml-train/Lib/site-packages/setuptools-81.0.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/shellingham
+archive/.venv-directml-train/Lib/site-packages/shellingham-1.5.4.dist-info
+archive/.venv-directml-train/Lib/site-packages/six-1.17.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/six.py
+archive/.venv-directml-train/Lib/site-packages/sympy
+archive/.venv-directml-train/Lib/site-packages/sympy-1.14.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/torch
+archive/.venv-directml-train/Lib/site-packages/torch-2.4.1.dist-info
+archive/.venv-directml-train/Lib/site-packages/torch_directml
+archive/.venv-directml-train/Lib/site-packages/torch_directml-0.2.5.dev240914.dist-info
+archive/.venv-directml-train/Lib/site-packages/torch_directml_native.cp312-win_amd64.pyd
+archive/.venv-directml-train/Lib/site-packages/torchgen
+archive/.venv-directml-train/Lib/site-packages/torchvision
+archive/.venv-directml-train/Lib/site-packages/torchvision-0.19.1.dist-info
+archive/.venv-directml-train/Lib/site-packages/tqdm
+archive/.venv-directml-train/Lib/site-packages/tqdm-4.68.3.dist-info
+archive/.venv-directml-train/Lib/site-packages/typing_extensions-4.15.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/typing_extensions.py
+archive/.venv-directml-train/Lib/site-packages/tzdata
+archive/.venv-directml-train/Lib/site-packages/tzdata-2026.2.dist-info
+archive/.venv-directml-train/Lib/site-packages/urllib3
+archive/.venv-directml-train/Lib/site-packages/urllib3-2.7.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/xxhash
+archive/.venv-directml-train/Lib/site-packages/xxhash-3.7.0.dist-info
+archive/.venv-directml-train/Lib/site-packages/yaml
+archive/.venv-directml-train/Lib/site-packages/yarl
+archive/.venv-directml-train/Lib/site-packages/yarl-1.24.2.dist-info
+archive/.venv-directml-train/Scripts
+archive/.venv-directml-train/pyvenv.cfg
+archive/.venv-directml-train/share
+archive/RealAI-builder
+archive/RealAIProject/.git_disabled
+archive/RealAIProject/.github
+archive/RealAIProject/.gitignore
+archive/RealAIProject/.python-version
+archive/RealAIProject/.sixth
+archive/RealAIProject/API.md
+archive/RealAIProject/CONTRIBUTING.md
+archive/RealAIProject/DEPLOYMENT.md
+archive/RealAIProject/Dockerfile
+archive/RealAIProject/Dockerfile.gpu
+archive/RealAIProject/LICENSE
+archive/RealAIProject/PAGES
+archive/RealAIProject/QUICKSTART.md
+archive/RealAIProject/QUICKSTART_LOCAL.md
+archive/RealAIProject/README.md
+archive/RealAIProject/REALAI_3.0.md
+archive/RealAIProject/SETUP_COMPLETE.md
+archive/RealAIProject/__init__.py
+archive/RealAIProject/api
+archive/RealAIProject/api_server.py
+archive/RealAIProject/apps
+archive/RealAIProject/aura
+archive/RealAIProject/benchmarks
+archive/RealAIProject/config
+archive/RealAIProject/core
+archive/RealAIProject/docker-compose.yml
+archive/RealAIProject/docs
+archive/RealAIProject/examples
+archive/RealAIProject/local_models.py
+archive/RealAIProject/main.py
+archive/RealAIProject/models.yaml
+archive/RealAIProject/plugins
+archive/RealAIProject/providers
+archive/RealAIProject/providers.yaml
+archive/RealAIProject/pyproject.toml
+archive/RealAIProject/pyrightconfig.json
+archive/RealAIProject/realai-core/agent_tools
+archive/RealAIProject/realai-core/tests
+archive/RealAIProject/realai-core/tools
+archive/RealAIProject/realai-frontend/.gitignore
+archive/RealAIProject/realai-frontend/README.md
+archive/RealAIProject/realai-frontend/next.config.js
+archive/RealAIProject/realai-frontend/package.json
+archive/RealAIProject/realai-frontend/pnpm-workspace.yaml
+archive/RealAIProject/realai-frontend/postcss.config.js
+archive/RealAIProject/realai-frontend/src
+archive/RealAIProject/realai-frontend/tailwind.config.js
+archive/RealAIProject/realai-frontend/tsconfig.json
+archive/RealAIProject/realai.toml
+archive/RealAIProject/realai.toml.example
+archive/RealAIProject/realai/__init__.py
+archive/RealAIProject/realai/agent_runtime.py
+archive/RealAIProject/realai/api_server.py
+archive/RealAIProject/realai/app_framework.py
+archive/RealAIProject/realai/audit.py
+archive/RealAIProject/realai/cli
+archive/RealAIProject/realai/critique.py
+archive/RealAIProject/realai/datasets
+archive/RealAIProject/realai/execution_history.jsonl
+archive/RealAIProject/realai/identity.py
+archive/RealAIProject/realai/knowledge_graph.py
+archive/RealAIProject/realai/local_models.py
+archive/RealAIProject/realai/local_runtime.py
+archive/RealAIProject/realai/memory
+archive/RealAIProject/realai/model_registry.py
+archive/RealAIProject/realai/models
+archive/RealAIProject/realai/plugin_marketplace.py
+archive/RealAIProject/realai/realai
+archive/RealAIProject/realai/router.py
+archive/RealAIProject/realai/safety.py
+archive/RealAIProject/realai/sdk
+archive/RealAIProject/realai/self_improvement.py
+archive/RealAIProject/realai/server
+archive/RealAIProject/realai/tools.py
+archive/RealAIProject/realai/training
+archive/RealAIProject/realai/world_model.py
+archive/RealAIProject/realai_gui.py
+archive/RealAIProject/realai_local_server.py
+archive/RealAIProject/render.yaml
+archive/RealAIProject/requirements-ci.txt
+archive/RealAIProject/requirements-full.txt
+archive/RealAIProject/requirements-gpu.txt
+archive/RealAIProject/requirements.txt
+archive/RealAIProject/schema
+archive/RealAIProject/scripts
+archive/RealAIProject/server
+archive/RealAIProject/setup.py
+archive/RealAIProject/src
+archive/RealAIProject/start_realai_server.bat
+archive/RealAIProject/test_local_server.py
+archive/RealAIProject/test_realai.py
+archive/RealAIProject/tests
+archive/RealAIProject/traefik.yml
+archive/RealAIProject/vercel.json
+archive/agent-tools-main/.github
+archive/agent-tools-main/.gitignore
+archive/agent-tools-main/.sixth
+archive/agent-tools-main/README.md
+archive/agent-tools-main/agent-tools-main/.github
+archive/agent-tools-main/agent-tools-main/.gitignore
+archive/agent-tools-main/agent-tools-main/README.md
+archive/agent-tools-main/agent-tools-main/agent_tools/__init__.py
+archive/agent-tools-main/agent-tools-main/agent_tools/agents_impl
+archive/agent-tools-main/agent-tools-main/agent_tools/backends.py
+archive/agent-tools-main/agent-tools-main/agent_tools/cli.py
+archive/agent-tools-main/agent-tools-main/agent_tools/dashboard.py
+archive/agent-tools-main/agent-tools-main/agent_tools/data
+archive/agent-tools-main/agent-tools-main/agent_tools/engine/__init__.py
+archive/agent-tools-main/agent-tools-main/agent_tools/engine/executor.py
+archive/agent-tools-main/agent-tools-main/agent_tools/engine/loader.py
+archive/agent-tools-main/agent-tools-main/agent_tools/engine/logger.py
+archive/agent-tools-main/agent-tools-main/agent_tools/engine/memory.py
+archive/agent-tools-main/agent-tools-main/agent_tools/engine/router.py
+archive/agent-tools-main/agent-tools-main/agent_tools/engine/test_harness.py
+archive/agent-tools-main/agent-tools-main/agent_tools/evals.py
+archive/agent-tools-main/agent-tools-main/agent_tools/executor.py
+archive/agent-tools-main/agent-tools-main/agent_tools/importer.py
+archive/agent-tools-main/agent-tools-main/agent_tools/models.py
+archive/agent-tools-main/agent-tools-main/agent_tools/providers
+archive/agent-tools-main/agent-tools-main/agent_tools/registry.py
+archive/agent-tools-main/agent-tools-main/agent_tools/runtime.py
+archive/agent-tools-main/agent-tools-main/agent_tools/tooling
+archive/agent-tools-main/agent-tools-main/agents
+archive/agent-tools-main/agent-tools-main/console
+archive/agent-tools-main/agent-tools-main/docs
+archive/agent-tools-main/agent-tools-main/examples
+archive/agent-tools-main/agent-tools-main/poetry.lock
+archive/agent-tools-main/agent-tools-main/policy.json
+archive/agent-tools-main/agent-tools-main/pyproject.toml
+archive/agent-tools-main/agent-tools-main/registry/.gitignore
+archive/agent-tools-main/agent-tools-main/registry/Dockerfile
+archive/agent-tools-main/agent-tools-main/registry/cli
+archive/agent-tools-main/agent-tools-main/registry/package.json
+archive/agent-tools-main/agent-tools-main/registry/render.yaml
+archive/agent-tools-main/agent-tools-main/registry/src
+archive/agent-tools-main/agent-tools-main/registry/tsconfig.json
+archive/agent-tools-main/agent-tools-main/sanity_check.py
+archive/agent-tools-main/agent-tools-main/schema
+archive/agent-tools-main/agent-tools-main/scripts
+archive/agent-tools-main/agent-tools-main/skills
+archive/agent-tools-main/agent-tools-main/tests
+archive/agent-tools-main/agent-tools-main/tools
+archive/agent-tools-main/agent-tools-main/ui/.gitignore
+archive/agent-tools-main/agent-tools-main/ui/lib
+archive/agent-tools-main/agent-tools-main/ui/package.json
+archive/agent-tools-main/agent-tools-main/ui/pages
+archive/agent-tools-main/agent-tools-main/ui/tsconfig.json
+archive/agent-tools-main/agent-tools-main/ui/tsconfig.tsbuildinfo
+archive/agent-tools-main/agent-tools-main/vercel.json
+archive/agent-tools-main/agent-tools-main/web
+archive/agent-tools-main/agent_tools/__init__.py
+archive/agent-tools-main/agent_tools/agents_impl
+archive/agent-tools-main/agent_tools/cli.py
+archive/agent-tools-main/agent_tools/dashboard.py
+archive/agent-tools-main/agent_tools/data
+archive/agent-tools-main/agent_tools/engine/__init__.py
+archive/agent-tools-main/agent_tools/engine/executor.py
+archive/agent-tools-main/agent_tools/engine/loader.py
+archive/agent-tools-main/agent_tools/engine/logger.py
+archive/agent-tools-main/agent_tools/engine/memory.py
+archive/agent-tools-main/agent_tools/engine/router.py
+archive/agent-tools-main/agent_tools/engine/test_harness.py
+archive/agent-tools-main/agent_tools/executor.py
+archive/agent-tools-main/agent_tools/importer.py
+archive/agent-tools-main/agent_tools/models.py
+archive/agent-tools-main/agent_tools/providers
+archive/agent-tools-main/agent_tools/registry.py
+archive/agent-tools-main/agent_tools/runtime.py
+archive/agent-tools-main/agent_tools/tooling
+archive/agent-tools-main/agents
+archive/agent-tools-main/console
+archive/agent-tools-main/docs
+archive/agent-tools-main/examples
+archive/agent-tools-main/poetry.lock
+archive/agent-tools-main/policy.json
+archive/agent-tools-main/pyproject.toml
+archive/agent-tools-main/registry/.gitignore
+archive/agent-tools-main/registry/Dockerfile
+archive/agent-tools-main/registry/cli
+archive/agent-tools-main/registry/package.json
+archive/agent-tools-main/registry/render.yaml
+archive/agent-tools-main/registry/src
+archive/agent-tools-main/registry/tsconfig.json
+archive/agent-tools-main/sanity_check.py
+archive/agent-tools-main/schema
+archive/agent-tools-main/scripts
+archive/agent-tools-main/skills
+archive/agent-tools-main/tests
+archive/agent-tools-main/tools
+archive/agent-tools-main/ui/.gitignore
+archive/agent-tools-main/ui/lib
+archive/agent-tools-main/ui/package.json
+archive/agent-tools-main/ui/pages
+archive/agent-tools-main/ui/tsconfig.json
+archive/agent-tools-main/ui/tsconfig.tsbuildinfo
+archive/agent-tools-main/vercel.json
+archive/agent-tools-main/web
+archive/agent-tools/agent-tools-main/.github
+archive/agent-tools/agent-tools-main/.gitignore
+archive/agent-tools/agent-tools-main/README.md
+archive/agent-tools/agent-tools-main/agent_tools
+archive/agent-tools/agent-tools-main/agents
+archive/agent-tools/agent-tools-main/console
+archive/agent-tools/agent-tools-main/docs
+archive/agent-tools/agent-tools-main/examples
+archive/agent-tools/agent-tools-main/poetry.lock
+archive/agent-tools/agent-tools-main/policy.json
+archive/agent-tools/agent-tools-main/pyproject.toml
+archive/agent-tools/agent-tools-main/registry/.gitignore
+archive/agent-tools/agent-tools-main/registry/Dockerfile
+archive/agent-tools/agent-tools-main/registry/cli
+archive/agent-tools/agent-tools-main/registry/package.json
+archive/agent-tools/agent-tools-main/registry/render.yaml
+archive/agent-tools/agent-tools-main/registry/src
+archive/agent-tools/agent-tools-main/registry/tsconfig.json
+archive/agent-tools/agent-tools-main/schema
+archive/agent-tools/agent-tools-main/skills
+archive/agent-tools/agent-tools-main/tests
+archive/agent-tools/agent-tools-main/tools
+archive/agent-tools/agent-tools-main/ui/.gitignore
+archive/agent-tools/agent-tools-main/ui/lib
+archive/agent-tools/agent-tools-main/ui/package.json
+archive/agent-tools/agent-tools-main/ui/pages
+archive/agent-tools/agent-tools-main/ui/tsconfig.json
+archive/agent-tools/agent-tools-main/ui/tsconfig.tsbuildinfo
+archive/agent-tools/agent-tools-main/vercel.json
+archive/checkpoints_lora
+archive/cli
+archive/config_docs
+archive/datasets__local_backup
+archive/lambda
+archive/legacy
+archive/legacy_realai_scripts
+archive/logs_data/LOADING_TRAIN_ONLY_INDEX_PATCH.txt
+archive/logs_data/SECURITY_SUMMARY.txt
+archive/logs_data/can you explore my file.txt
+archive/logs_data/copilot-session-39a9656a-48d7-4b7a-8ad4-aa82a2c153ee.txt
+archive/logs_data/dadaset.jsonl
+archive/logs_data/dataset.code-search.jsonl
+archive/logs_data/dataset.jsonl
+archive/logs_data/dataset.jsonl.backup_20260621_002751
+archive/logs_data/dataset.jsonl.backup_20260621_213134
+archive/logs_data/dataset.jsonl.backup_20260622_014705
+archive/logs_data/dataset.jsonl.backup_20260622_015054
+archive/logs_data/dataset.jsonl.backup_20260622_015302
+archive/logs_data/dataset.jsonl.backup_20260622_015411
+archive/logs_data/dataset.jsonl.backup_20260622_warning: failed to remove archive/real-fin/realai/.agentx/: Permission denied
+archive/logs_data/datasetcode-search.code-search
+archive/logs_data/execution_history.jsonl
+archive/logs_data/from fastapi import APIRouter, Requ.txt
+archive/logs_data/realai_finetune_dataset .jsonl
+archive/logs_data/realai_finetune_dataset.jsonl
+archive/logs_data/reorg_manifest.jsonl
+archive/logs_data/repo_tree_shallow.txt
+archive/logs_data/requirements-ci.txt
+archive/logs_data/requirements-full.txt
+archive/logs_data/requirements-gpu.txt
+archive/logs_data/requirements-lambda-advanced.txt
+archive/logs_data/requirements-lambda-chat.txt
+archive/logs_data/requirements-lambda-core.txt
+archive/logs_data/requirements-lambda-embeddings-audio.txt
+archive/logs_data/requirements-lambda-image.txt
+archive/logs_data/requirements-lambda-video.txt
+archive/logs_data/requirements-training.txt
+archive/logs_data/requirements.txt
+archive/logs_data/t.txt
+archive/logs_data/test.txt
+archive/memory
+archive/prompts
+archive/providers/local_llama.py
+archive/real-fin/realai/.agentx/Autonomous_Modular_Agent
+archive/real-fin/realai/.agentx/README.md
+archive/real-fin/realai/.agentx/access_profiles.json
+archive/real-fin/realai/.agentx/agency_import.json
+archive/real-fin/realai/.agentx/agents.json
+archive/real-fin/realai/.git_disabled/COMMIT_EDITMSG
+archive/real-fin/realai/.git_disabled/FETCH_HEAD
+archive/real-fin/realai/.git_disabled/HEAD
+archive/real-fin/realai/.git_disabled/ORIG_HEAD
+archive/real-fin/realai/.git_disabled/config
+archive/real-fin/realai/.git_disabled/description
+archive/real-fin/realai/.git_disabled/hooks/applypatch-msg.sample
+archive/real-fin/realai/.git_disabled/hooks/commit-msg.sample
+archive/real-fin/realai/.git_disabled/hooks/fsmonitor-watchman.sample
+archive/real-fin/realai/.git_disabled/hooks/post-checkout
+archive/real-fin/realai/.git_disabled/hooks/post-commit
+archive/real-fin/realai/.git_disabled/hooks/post-merge
+archive/real-fin/realai/.git_disabled/hooks/post-update.sample
+archive/real-fin/realai/.git_disabled/hooks/pre-applypatch.sample
+archive/real-fin/realai/.git_disabled/hooks/pre-commit.sample
+archive/real-fin/realai/.git_disabled/hooks/pre-merge-commit.sample
+archive/real-fin/realai/.git_disabled/hooks/pre-push
+archive/real-fin/realai/.git_disabled/hooks/pre-push.sample
+archive/real-fin/realai/.git_disabled/hooks/pre-rebase.sample
+archive/real-fin/realai/.git_disabled/hooks/pre-receive.sample
+archive/real-fin/realai/.git_disabled/hooks/prepare-commit-msg.sample
+archive/real-fin/realai/.git_disabled/hooks/push-to-checkout.sample
+archive/real-fin/realai/.git_disabled/hooks/sendemail-validate.sample
+archive/real-fin/realai/.git_disabled/hooks/update.sample
+archive/real-fin/realai/.git_disabled/index
+archive/real-fin/realai/.git_disabled/info/exclude
+archive/real-fin/realai/.git_disabled/lfs/cache/lwarning: failed to remove archive/real-fin/realai/.git_disabled/lfs/tmp: Permission denied
+archive/real-fin/realai/.git_disabled/logs/HEAD
+archive/real-fin/realai/.git_disabled/logs/refs/heads/main
+archive/real-fin/realai/.git_disabled/logs/refs/remotes/origin/HEAD
+archive/real-fin/realai/.git_disabled/logs/refs/remotes/origin/main
+archive/real-fin/realai/.git_disabled/objects/00/b0765e03c291da5733e4a342580c07e8955267
+archive/real-fin/realai/.git_disabled/objects/02/3fce666b8a8ceba71e40673749efc9bd2b01fa
+archive/real-fin/realai/.git_disabled/objects/03/96a1045cfdcafe32643965a377240ead39a9d2
+archive/real-fin/realai/.git_disabled/objects/05/163e3b5483069ceec165b47aac8b1b379f2acb
+archive/real-fin/realai/.git_disabled/objects/0b/981a9459ace651051de0c64ca3f5966b3e4ee0
+archive/real-fin/realai/.git_disabled/objects/0c/6b29c2d9550e4bac3ed079b4b0e37860096c4e
+archive/real-fin/realai/.git_disabled/objects/0f/4bd84654878a5808a5d3798f3fab1fae207d1f
+archive/real-fin/realai/.git_disabled/objects/0f/bdffbac84694b43d2bcd4276a235a31a71d6e8
+archive/real-fin/realai/.git_disabled/objects/0f/e5cf7b9f138c34e65f4ff2f69486465155aa06
+archive/real-fin/realai/.git_disabled/objects/11/eacf8133ed911985a4bd8e01e6381da124b8f1
+archive/real-fin/realai/.git_disabled/objects/13/8922f9afd3da0b8fa37e0e155d61db84def3f5
+archive/real-fin/realai/.git_disabled/objects/19/34e959e727bba364b9a55570889dcfd4c15a57
+archive/real-fin/realai/.git_disabled/objects/19/565365b91725d1acd64f9e7cfb3f1e53674445
+archive/real-fin/realai/.git_disabled/objects/1a/3e46a73eda6b17eef1eb9c94db35b4ca475e3f
+archive/real-fin/realai/.git_disabled/objects/1a/f4fc75366e922ac665873fd00d166382d513c8
+archive/real-fin/realai/.git_disabled/objects/1c/33a86b9ac3f68c77b38f5ef26d55cb155122e2
+archive/real-fin/realai/.git_disabled/objects/1c/44df1c1cd7f89632a6f78a54967cd27f8fb836
+archive/real-fin/realai/.git_disabled/objects/1f/38dd02966dc202b2f7877aa9c5a53c9be76949
+archive/real-fin/realai/.git_disabled/objects/1f/48344cc9a290f35182fa6ec74683b4c4812ad3
+archive/real-fin/realai/.git_disabled/objects/22/5dfb070c89fd1542c9445937913ef63cfbd6c0
+archive/real-fin/realai/.git_disabled/objects/23/13a8e980e20558d9b8a059256427ac5db6a1f0
+archive/real-fin/realai/.git_disabled/objects/25/590382f5dbdfddbe39890f4fa1643904ea1cb2
+archive/real-fin/realai/.git_disabled/objects/26/4b3b17de240e23ae72850b4fdd59e389d248e1
+archive/real-fin/realai/.git_disabled/objects/2d/b982a18d4ed22fe77ef2e01e9e3757a0ceb804
+archive/real-fin/realai/.git_disabled/objects/2f/111b03375802e66f998b76693ae65af13f85a5
+archive/real-fin/realai/.git_disabled/objects/2f/b2583c33f430fac47b2d17494a5b54eb4f8180
+archive/real-fin/realai/.git_disabled/objects/32/1bf83a4533109e0fcd60a45cf0ee8a3d2bf85c
+archive/real-fin/realai/.git_disabled/objects/32/d80a98961f6e010a9e8bb4878d2fc0266500cf
+archive/real-fin/realai/.git_disabled/objects/33/0b120e42fe7918f75a5ee9d3bff92fcf32d341
+archive/real-fin/realai/.git_disabled/objects/33/7532e403046c83745b7898073d047e8c0b7b5a
+archive/real-fin/realai/.git_disabled/objects/36/eabc6151dc3d4df43d44ddc956dd60f9d2e2c2
+archive/real-fin/realai/.git_disabled/objects/37/8e090bbcc7a4fd6cbc24314f74411310d4222d
+archive/real-fin/realai/.git_disabled/objects/38/a51364906059eb55a71e8c2a056c9a49626a74
+archive/real-fin/realai/.git_disabled/objects/38/d553f00001ecc557a7af4b4dd832e6ea50d916
+archive/real-fin/realai/.git_disabled/objects/3e/4001fd7c0363025cdd5ee04a5928a5bb0dbcd0
+archive/real-fin/realai/.git_disabled/objects/3f/5a6db4ee6e97444c6f1c4a7a6a12428255ef8f
+archive/real-fin/realai/.git_disabled/objects/41/3748959c234be16ffa8363cdaf04c6584dae1f
+archive/real-fin/realai/.git_disabled/objects/43/84e2421f584343f8494a0725c97ebd5650cd9d
+archive/real-fin/realai/.git_disabled/objects/46/fbc09ea90ce34abe00cb8ad7c79cfc0f9d817a
+archive/real-fin/realai/.git_disabled/objects/55/ae540460dc8cbebccddaa0e115bcf3a5be2f62
+archive/real-fin/realai/.git_disabled/objects/56/3c1aa3bbd2e6998469f71694d72db636d42c52
+archive/real-fin/realai/.git_disabled/objects/5d/f60ca2b905f55b0032e10fee60fa2f01f251ce
+archive/real-fin/realai/.git_disabled/objects/5f/0bc9ef4b3f153f2e8ea676c9d64e52a4e9b7c2
+archive/real-fin/realai/.git_disabled/objects/60/a30fbf07fbf5e4cdd3b0bd8776a597ba7e0c56
+archive/real-fin/realai/.git_disabled/objects/61/308b72e3b00d50cf5536f0f8e80aa17ebccf72
+archive/real-fin/realai/.git_disabled/objects/61/c8353e12bc6af45bfc6399b1821b1e20654b83
+archive/real-fin/realai/.git_disabled/objects/64/8771b0b0e083dd88a9fdc346c0b1e19be3595b
+archive/real-fin/realai/.git_disabled/objects/66/dd4438bc802978ab518b76c05292afbeb4a480
+archive/real-fin/realai/.git_disabled/objects/67/01d84ea2afbc9d9423a907abcb1c475e4ca9ee
+archive/real-fin/realai/.git_disabled/objects/67/0c7ab20cf07f59943f2a99b41bdc7e16f1f6b7
+archive/real-fin/realai/.git_disabled/objects/68/8a09673dbe5e451b442cd309446f2e7625836b
+archive/real-fin/realai/.git_disabled/objects/6c/09aeda14eb5d2d8c72ed8d932b7ddd79d45254
+archive/real-fin/realai/.git_disabled/objects/6c/bef72862799122ede8de3b31c2da4c8017167d
+archive/real-fin/realai/.git_disabled/objects/71/f285e48bad0d94965bd2a42d03b16bb77d4f1e
+archive/real-fin/realai/.git_disabled/objects/72/f61113699145d37ad38c6afce9eb113b3644fa
+archive/real-fin/realai/.git_disabled/objects/73/4c3f3023ad7c4a4fb1ef3673d8f6b2cc4a2060
+archive/real-fin/realai/.git_disabled/objects/73/6b98ab95680c0749ed0da8804653e3a0d59406
+archive/real-fin/realai/.git_disabled/objects/75/22073ea903ef04ff1531f0b2fd656fedd56578
+archive/real-fin/realai/.git_disabled/objects/78/83e0a2f890e8b1e0853c516e02ab01eabc6fb9
+archive/real-fin/realai/.git_disabled/objects/79/2b709a340cda236d3279fe315c80559fec63e0
+archive/real-fin/realai/.git_disabled/objects/7e/1595d3ebb97890a6590fa6fb4187605abbb182
+archive/real-fin/realai/.git_disabled/objects/7f/3ed3a727456abcf431fc4b28f0e966194a4a33
+archive/real-fin/realai/.git_disabled/objects/82/562ee716e5d8ea76a74be54d902d38b119a585
+archive/real-fin/realai/.git_disabled/objects/84/149bb60669d9f75aaf7e79a6ea568db51f376c
+archive/real-fin/realai/.git_disabled/objects/88/728c63ab89bc83086f68b50a266c03113d921c
+archive/real-fin/realai/.git_disabled/objects/8b/137891791fe96927ad78e64b0aad7bded08bdc
+archive/real-fin/realai/.git_disabled/objects/90/25ffe3c72e0896f152e70f0dde0929194dd8f4
+archive/real-fin/realai/.git_disabled/objects/90/e258ee0692e6bc7c7354cc0c38fc5c4ac1dc54
+archive/real-fin/realai/.git_disabled/objects/92/1c405bcb79c1d0f2c1964c2c41b5c3bf2f2a3e
+archive/real-fin/realai/.git_disabled/objects/9b/7c73c4feacbcbc91bd0ead9748b8ab42bf8636
+archive/real-fin/realai/.git_disabled/objects/9e/180edd541559d30942bd53c5416325c943d19a
+archive/real-fin/realai/.git_disabled/objects/9e/21adbdaaed59a533241a63dfade2a90956778a
+archive/real-fin/realai/.git_disabled/objects/a1/0692c1528066d91c65c29f0d49c3f49aafa702
+archive/real-fin/realai/.git_disabled/objects/a4/08b5f3345197ea69c5ea1f1903654615a3106c
+archive/real-fin/realai/.git_disabled/objects/a5/4ad7c9e839be47db9faa32f21c1483c7ba38d7
+archive/real-fin/realai/.git_disabled/objects/a5/fabac699a0e3517bf1902a0d983e44303cf759
+archive/real-fin/realai/.git_disabled/objects/ac/45b4d1837534b7b1f86d50ba6e8b207cc6b247
+archive/real-fin/realai/.git_disabled/objects/ad/42a3aad8d288a0c05e5d6e29daa80991a0f6df
+archive/real-fin/realai/.git_disabled/objects/b6/988e272cc0dfcb398afc7a572d74d3c3c0920a
+archive/real-fin/realai/.git_disabled/objects/bd/f51cd04251926dbf618f12136b226f28ce3d92
+archive/real-fin/realai/.git_disabled/objects/c4/8818cd5a02cbb79e5b599b102cc7a40eefb5ef
+archive/real-fin/realai/.git_disabled/objects/c6/10db04931bb5f8a9402ca9b29b672b62df5524
+archive/real-fin/realai/.git_disabled/objects/c7/9b398acc13aaa25f5ea9c0d137ad5a881d558b
+archive/real-fin/realai/.git_disabled/objects/ca/a662f7e9e46cacfc036b44e225b7eff1b4465b
+archive/real-fin/realai/.git_disabled/objects/cd/71430a6a9294e8d96a1968e6c36becf79bd52d
+archive/real-fin/realai/.git_disabled/objects/cd/ec78650b73a0591e7dc57105faa68d6fdbe192
+archive/real-fin/realai/.git_disabled/objects/ce/c0592f1bca78e029840929649492fbf25b0e90
+archive/real-fin/realai/.git_disabled/objects/d6/c6cba7f4ea9c3bcfc03344fe8f825a347b6d9c
+archive/real-fin/realai/.git_disabled/objects/db/c0ac088dc97afac8522c6d9c0d32bdfbbce266
+archive/real-fin/realai/.git_disabled/objects/dc/d73497b5401e239e4f65261cfcac3e593506d1
+archive/real-fin/realai/.git_disabled/objects/e3/b02f17fd522387f29e3d2a978e98bdf0545638
+archive/real-fin/realai/.git_disabled/objects/e4/c167f2da1ca0af171682d76a6dc6649349f41f
+archive/real-fin/realai/.git_disabled/objects/e7/457c15ab168d2fbdf59fde3478d7b8d9b80b8f
+archive/real-fin/realai/.git_disabled/objects/e9/5091367fc74448be7b7d963ebf1bb715cb64a3
+archive/real-fin/realai/.git_disabled/objects/e9/913168f5e7c2155e6cc255e380f36e7d790ee4
+archive/real-fin/realai/.git_disabled/objects/ef/37f75349529c978d3926329d5e6b4537171f06
+archive/real-fin/realai/.git_disabled/objects/ef/5e0da7380369153c444c41930c390a8ffda14c
+archive/real-fin/realai/.git_disabled/objects/f1/35f7bc49a84239b072310ef315cb359d8a4c6c
+archive/real-fin/realai/.git_disabled/objects/f9/c47ff60788f246826f63fd6ef80c97da3c67fb
+archive/real-fin/realai/.git_disabled/objects/fa/ac8db9b2a5fb59c1dfe10eaa5659de4749945d
+archive/real-fin/realai/.git_disabled/objects/ff/5afee37fc3710dd49a33f6fd42a70b0532ed94
+archive/real-fin/realai/.git_disabled/objects/pack/pack-49ef805505384cf3487bb4f855ef4becd6ff801a.idx
+archive/real-fin/realai/.git_disabled/objects/pack/pack-49ef805505384cf3487bb4f855ef4becd6ff801a.pack
+archive/real-fin/realai/.git_disabled/objects/pack/pack-49ef805505384cf3487bb4f855ef4becd6ff801a.rev
+archive/real-fin/realai/.git_disabled/objects/pack/pack-4d25856acdebb453fb8b8796b0400cc4714552b3.idx
+archive/real-fin/realai/.git_disabled/objects/pack/pack-4d25856acdebb453fb8b8796b0400cc4714552b3.pack
+archive/real-fin/realai/.git_disabled/objects/pack/pack-4d25856acdebb453fb8b8796b0400cc4714552b3.rev
+archive/real-fin/realai/.git_disabled/objects/pack/pack-98ef98a9586a1d42ed7369f0bae8f72e7d811d71.idx
+archive/real-fin/realai/.git_disabled/objects/pack/pack-98ef98a9586a1d42ed7369f0bae8f72e7d811d71.pack
+archive/real-fin/realai/.git_disabled/objects/pack/pack-98ef98a9586a1d42ed7369f0bae8f72e7d811d71.rev
+archive/real-fin/realai/.git_disabled/packed-refs
+archive/real-fin/realai/.git_disabled/refs/heads/main
+archive/real-fin/realai/.git_disabled/refs/remotes/origin/HEAD
+archive/real-fin/realai/.git_disabled/refs/remotes/origin/main
+archive/real-fin/realai/.gitattributes
+archive/real-fin/realai/.github/agents/README.md
+archive/real-fin/realai/.github/agents/agent.md
+archive/real-fin/realai/.github/agents/bootstrap.md
+archive/real-fin/realai/.github/agents/capability-dev.md
+archive/real-fin/realai/.github/agents/fullstack-dev.md
+archive/real-fin/realai/.github/agents/memory.md
+archive/real-fin/realai/.github/agents/provider-specialist.md
+archive/real-fin/realai/.github/workflows/ci.yml
+archive/real-fin/realai/.github/workflows/codeql.yml
+archive/real-fin/realai/.gitignore
+archive/real-fin/realai/API.md
+archive/real-fin/realai/CONTRIwarning: failed to remove archive/real-fin/realai/api/: Permission denied
+archive/real-fin/realai/DEPLOYMENT.md
+archive/real-fin/realai/DEPLOYMENT_FRONTEND_FIX.md
+archive/real-fin/realai/LAMBDA_DEPLOYMENT.md
+archive/real-fin/realai/LAMBDA_SIZE_OPTIMIZATION.md
+archive/real-fin/realai/LICENSE
+archive/real-fin/realai/LOCAL_AI_GUIDE.md
+archive/real-fin/realai/LOCAL_AI_SUMMARY.md
+archive/real-fin/realai/PROJECT_SUMMARY.md
+archive/real-fin/realai/QUICKSTART.md
+archive/real-fin/realai/README.md
+archive/real-fin/realai/SECURITY_SUMMARY.txt
+archive/real-fin/realai/VALIDATION_REPORT.md
+archive/real-fin/realai/__init__.py
+archive/real-fin/realai/api/index.py
+archive/real-fin/realai/api_server.py
+archive/real-fin/realai/build_lambda.sh
+archive/real-fin/realai/config/models.yaml
+archive/real-fin/realai/examples.py
+archive/real-fin/realai/examples_limitless.py
+archive/real-fin/realai/examples_local_ai.py
+archive/real-fin/realai/examples_ultimate.py
+archive/real-fin/realai/index.html
+archive/real-fin/realai/lambda_advanced.py
+archive/real-fin/realai/lambda_chat.py
+archive/real-fin/realai/lambda_core.py
+archive/real-fin/realai/lambda_core_shared.py
+archive/real-fin/realai/lambda_embeddings_audio.py
+archive/real-fin/realai/lambda_image.py
+archive/real-fin/realai/lambda_video.py
+archive/real-fin/realai/local_model_cli.py
+archive/real-fin/realai/local_models.py
+archive/real-fin/realai/main.py
+archive/real-fin/realai/plugins/__init__.py
+archive/real-fin/realai/plugins/sample_plugin.py
+archive/real-fin/realai/providers/llama_cpp/provider.yaml
+archive/real-fin/realai/providers/llama_cpp/run.ps1
+archive/real-fin/realai/quick_start_local.py
+archive/real-fin/realai/realai - Copy/.agentx/Autonomous_Modular_Agent
+archive/real-fin/realai/realai - Copy/.agentx/README.md
+archive/real-fin/realai/realai - Copy/.agentx/access_profiles.json
+archive/real-fin/realai/realai - Copy/.agentx/agency_import.json
+archive/real-fin/realai/realai - Copy/.agentx/agents.json
+archive/real-fin/realai/realai - Copy/.git_disabled/COMMIT_EDITMSG
+archive/real-fin/realai/realai - Copy/.git_disabled/FETCH_HEAD
+archive/real-fin/realai/realai - Copy/.git_disabled/HEAD
+archive/real-fin/realai/realai - Copy/.git_disabled/ORIG_HEAD
+archive/real-fin/realai/realai - Copy/.git_disabled/config
+archive/real-fin/realai/realai - Copy/.git_disabled/description
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/applypatch-msg.sample
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/commit-msg.sample
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/fsmonitor-watchman.sample
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/post-checkout
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/post-commit
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/post-merge
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/post-update.sample
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/pre-applypatch.sample
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/pre-commit.sample
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/pre-merge-commit.sample
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/pre-push
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/pre-push.sample
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/pre-rebase.sample
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/pre-receive.sample
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/prepare-commit-msg.sample
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/push-to-checkout.sample
+archive/real-fin/realai/realai - Copy/.git_disabled/hooks/update.sample
+archive/real-fin/realai/realai - Copy/.git_disabled/index
+archive/real-fin/realai/realai - Copy/.git_disabled/info/exclude
+archive/real-fin/realai/realai - Copy/.git_disabled/lfs/cache/locks/refs/heads/main/verifiable
+archive/real-fin/realai/realai - Copy/.git_disabled/logs/HEAD
+archive/real-fin/realai/realai - Copy/.git_disabled/logs/refs/heads/main
+archive/real-fin/realai/realai - Copy/.git_disabled/logs/refs/remotes/origin/HEAD
+archive/real-fin/realai/realai - Copy/.git_disabled/logs/refs/remotes/origin/main
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/00/b0765e03c291da5733e4a342580c07e8955267
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/02/3fce666b8a8ceba71e40673749efc9bd2b01fa
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/03/96a1045cfdcafe32643965a377240ead39a9d2
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/05/163e3b5483069ceec165b47aac8b1b379f2acb
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/0b/981a9459ace651051de0c64ca3f5966b3e4ee0
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/0c/6b29c2d9550e4bac3ed079b4b0e37860096c4e
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/0f/4bd84654878a5808a5d3798f3fab1fae207d1f
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/0f/bdffbac84694b43d2bcd4276a235a31a71d6e8
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/0f/e5cf7b9f138c34e65f4ff2f69486465155aa06
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/11/eacf8133ed911985a4bd8e01e6381da124b8f1
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/13/8922f9afd3da0b8fa37e0e155d61db84def3f5
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/19/34e959e727bba364b9a55570889dcfd4c15a57
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/19/565365b91725d1acd64f9e7cfb3f1e53674445
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/1a/3e46a73eda6b17eef1eb9c94db35b4ca475e3f
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/1a/f4fc75366e922ac665873fd00d166382d513c8
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/1c/33a86b9ac3f68c77b38f5ef26d55cb155122e2
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/1c/44df1c1cd7f89632a6f78a54967cd27f8fb836
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/1f/38dd02966dc202b2f7877aa9c5a53c9be76949
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/1f/48344cc9a290f35182fa6ec74683b4c4812ad3
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/22/5dfb070c89fd1542c9445937913ef63cfbd6c0
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/23/13a8e980e20558d9b8a059256427ac5db6a1f0
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/25/590382f5dbdfddbe39890f4fa1643904ea1cb2
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/26/4b3b17de240e23ae72850b4fdd59e389d248e1
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/2d/b982a18d4ed22fe77ef2e01e9e3757a0ceb804
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/2f/111b03375802e66f998b76693ae65af13f85a5
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/2f/b2583c33f430fac47b2d17494a5b54eb4f8180
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/32/1bf83a4533109e0fcd60a45cf0ee8a3d2bf85c
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/32/d80a98961f6e010a9e8bb4878d2fc0266500cf
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/33/0b120e42fe7918f75a5ee9d3bff92fcf32d341
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/33/7532e403046c83745b7898073d047e8c0b7b5a
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/37/8e090bbcc7a4fd6cbc24314f74411310d4222d
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/38/a51364906059eb55a71e8c2a056c9a49626a74
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/38/d553f00001ecc557a7af4b4dd832e6ea50d916
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/3e/4001fd7c0363025cdd5ee04a5928a5bb0dbcd0
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/3f/5a6db4ee6e97444c6f1c4a7a6a12428255ef8f
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/41/3748959c234be16ffa8363cdaf04c6584dae1f
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/43/84e2421f584343f8494a0725c97ebd5650cd9d
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/46/fbc09ea90ce34abe00cb8ad7c79cfc0f9d817a
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/4c/405b006cf58a87b6975242ed9bfc7eacb0820f
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/55/ae540460dc8cbebccddaa0e115bcf3a5be2f62
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/56/3c1aa3bbd2e6998469f71694d72db636d42c52
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/5d/f60ca2b905f55b0032e10fee60fa2f01f251ce
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/5f/0bc9ef4b3f153f2e8ea676c9d64e52a4e9b7c2
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/60/a30fbf07fbf5e4cdd3b0bd8776a597ba7e0c56
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/61/308b72e3b00d50cf5536f0f8e80aa17ebccf72
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/61/c8353e12bc6af45bfc6399b1821b1e20654b83
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/64/8771b0b0e083dd88a9fdc346c0b1e19be3595b
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/66/dd4438bc802978ab518b76c05292afbeb4a480
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/67/01d84ea2afbc9d9423a907abcb1c475e4ca9ee
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/67/0c7ab20cf07f59943f2a99b41bdc7e16f1f6b7
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/68/8a09673dbe5e451b442cd309446f2e7625836b
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/6c/09aeda14eb5d2d8c72ed8d932b7ddd79d45254
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/6c/bef72862799122ede8de3b31c2da4c8017167d
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/71/f285e48bad0d94965bd2a42d03b16bb77d4f1e
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/72/f61113699145d37ad38c6afce9eb113b3644fa
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/73/4c3f3023ad7c4a4fb1ef3673d8f6b2cc4a2060
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/73/6b98ab95680c0749ed0da8804653e3a0d59406
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/75/22073ea903ef04ff1531f0b2fd656fedd56578
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/78/83e0a2f890e8b1e0853c516e02ab01eabc6fb9
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/79/2b709a340cda236d3279fe315c80559fec63e0
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/7e/1595d3ebb97890a6590fa6fb4187605abbb182
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/7f/3ed3a727456abcf431fc4b28f0e966194a4a33
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/82/562ee716e5d8ea76a74be54d902d38b119a585
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/84/149bb60669d9f75aaf7e79a6ea568db51f376c
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/88/728c63ab89bc83086f68b50a266c03113d921c
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/8b/137891791fe96927ad78e64b0aad7bded08bdc
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/90/e258ee0692e6bc7c7354cc0c38fc5c4ac1dc54
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/92/1c405bcb79c1d0f2c1964c2c41b5c3bf2f2a3e
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/9b/7c73c4feacbcbc91bd0ead9748b8ab42bf8636
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/9e/180edd541559d30942bd53c5416325c943d19a
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/9e/21adbdaaed59a533241a63dfade2a90956778a
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/a1/0692c1528066d91c65c29f0d49c3f49aafa702
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/a4/08b5f3345197ea69c5ea1f1903654615a3106c
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/a5/4ad7c9e839be47db9faa32f21c1483c7ba38d7
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/a5/fabac699a0e3517bf1902a0d983e44303cf759
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/ac/45b4d1837534b7b1f86d50ba6e8b207cc6b247
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/ad/42a3aad8d288a0c05e5d6e29daa80991a0f6df
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/b6/988e272cc0dfcb398afc7a572d74d3c3c0920a
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/bd/f51cd04251926dbf618f12136b226f28ce3d92
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/be/e12f99cdbb494d3a8298c4b87b88502d1a71f8
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/c4/8818cd5a02cbb79e5b599b102cc7a40eefb5ef
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/c6/10db04931bb5f8a9402ca9b29b672b62df5524
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/c7/9b398acc13aaa25f5ea9c0d137ad5a881d558b
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/ca/a662f7e9e46cacfc036b44e225b7eff1b4465b
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/cd/71430a6a9294e8d96a1968e6c36becf79bd52d
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/cd/ec78650b73a0591e7dc57105faa68d6fdbe192
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/ce/c0592f1bca78e029840929649492fbf25b0e90
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/d6/c6cba7f4ea9c3bcfc03344fe8f825a347b6d9c
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/db/c0ac088dc97afac8522c6d9c0d32bdfbbce266
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/dc/d73497b5401e239e4f65261cfcac3e593506d1
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/e3/b02f17fd522387f29e3d2a978e98bdf0545638
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/e4/c167f2da1ca0af171682d76a6dc6649349f41f
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/e7/457c15ab168d2fbdf59fde3478d7b8d9b80b8f
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/e9/5091367fc74448be7b7d963ebf1bb715cb64a3
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/e9/913168f5e7c2155e6cc255e380f36e7d790ee4
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/ef/37f75349529c978d3926329d5e6b4537171f06
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/ef/5e0da7380369153c444c41930c390a8ffda14c
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/f1/35f7bc49a84239b072310ef315cb359d8a4c6c
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/f9/c47ff60788f246826f63fd6ef80c97da3c67fb
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/fa/ac8db9b2a5fb59c1dfe10eaa5659de4749945d
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/ff/5afee37fc3710dd49a33f6fd42a70b0532ed94
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/pack/pack-49ef805505384cf3487bb4f855ef4becd6ff801a.idx
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/pack/pack-49ef805505384cf3487bb4f855ef4becd6ff801a.rev
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/pack/pack-4d25856acdebb453fb8b8796b0400cc4714552b3.idx
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/pack/pack-4d25856acdebb453fb8b8796b0400cc4714552b3.pack
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/pack/pack-4d25856acdebb453fb8b8796b0400cc4714552b3.rev
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/pack/pack-98ef98a9586a1d42ed7369f0bae8f72e7d811d71.idx
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/pack/pack-98ef98a9586a1d42ed7369f0bae8f72e7d811d71.pack
+archive/real-fin/realai/realai - Copy/.git_disabled/objects/pack/pack-98ef98a9586a1d42ed7369f0bae8f72e7d811d71.rev
+archive/real-fin/realai/realai - Copy/.git_disabled/packed-refs
+archive/real-fin/realai/realai - Copy/.git_disabled/refs/heads/main
+archive/real-fin/realai/realai - Copy/.git_disabled/refs/remotes/origin/HEAD
+archive/real-fin/realai/realai - Copy/.git_disabled/refs/remotes/origin/main
+archive/real-fin/realai/realai - Copy/.gitattributes
+archive/real-fin/realai/realai - Copy/.github/agents/README.md
+archive/real-fin/realai/realai - Copy/.github/agents/agent.md
+archive/real-fin/realai/realai - Copy/.github/agents/bootstrap.md
+archive/real-fin/realai/realai - Copy/.github/agents/capability-dev.md
+archive/real-fin/realai/realai - Copy/.github/agents/fullstack-dev.md
+archive/real-fin/realai/realai - Copy/.github/agents/memory.md
+archive/real-fin/realai/realai - Copy/.github/agents/provider-specialist.md
+archive/real-fin/realai/realai - Copy/.github/workflows/ci.yml
+archive/real-fin/realai/realai - Copy/.github/workflows/codeql.yml
+archive/real-fin/realai/realai - Copy/.gitignore
+archive/real-fin/realai/realai - Copy/API.md
+archive/real-fin/realai/realai - Copy/CONTRIBUTING.md
+archive/real-fin/realai/realai - Copy/DEPLOYMENT.md
+archive/real-fin/realai/realai - Copy/DEPLOYMENT_FRONTEND_FIX.md
+archive/real-fin/realai/realai - Copy/LAMBDA_DEPLOYMENT.md
+archive/real-fin/realai/realai - Copy/LAMBDA_SIZE_OPTIMIZATION.md
+archive/real-fin/realai/realai - Copy/LICENSE
+archive/real-fin/realai/realai - Copy/LOCAL_AI_GUIDE.md
+archive/real-fin/realai/realai - Copy/LOCAL_AI_SUMMARY.md
+archive/real-fin/realai/realai - Copy/PROJECT_SUMMARY.md
+archive/real-fin/realai/realai - Copy/QUICKSTART.md
+archive/real-fin/realai/realai - Copy/README.md
+archive/real-fin/realai/realai - Copy/SECURITY_SUMMARY.txt
+archive/real-fin/realai/realai - Copy/VALIDATION_REPORT.md
+archive/real-fin/realai/realai - Copy/__init__.py
+archive/real-fin/realai/realai - Copy/api/index.py
+archive/real-fin/realai/realai - Copy/api_server.py
+archive/real-fin/realai/realai - Copy/build_lambda.sh
+archive/real-fin/realai/realai - Copy/examples.py
+archive/real-fin/realai/realai - Copy/examples_limitless.py
+archive/real-fin/realai/realai - Copy/examples_local_ai.py
+archive/real-fin/realai/realai - Copy/examples_ultimate.py
+archive/real-fin/realai/realai - Copy/index.html
+archive/real-fin/realai/realai - Copy/lambda_advanced.py
+archive/real-fin/realai/realai - Copy/lambda_chat.py
+archive/real-fin/realai/realai - Copy/lambda_core.py
+archive/real-fin/realai/realai - Copy/lambda_core_shared.py
+archive/real-fin/realai/realai - Copy/lambda_embeddings_audio.py
+archive/real-fin/realai/realai - Copy/lambda_image.py
+archive/real-fin/realai/realai - Copy/lambda_video.py
+archive/real-fin/realai/realai - Copy/local_models.py
+archive/real-fin/realai/realai - Copy/localwarning: failed to remove archive/real-fin/realai/realai - Copy/plugins/: Permission denied
+archive/real-fin/realai/realai - Copy/main.py
+archive/real-fin/realai/realai - Copy/plugins/__init__.py
+archive/real-fin/realai/realai - Copy/plugins/sample_plugin.py
+archive/real-fin/realai/realai - Copy/quick_start_local.py
+archive/real-fin/realai/realai - Copy/realai-cli/package.json
+archive/real-fin/realai/realai - Copy/realai-cli/src/commands/chat.ts
+archive/real-fin/realai/realai - Copy/realai-cli/src/commands/login.ts
+archive/real-fin/realai/realai - Copy/realai-cli/src/commands/models.ts
+archive/real-fin/realai/realai - Copy/realai-cli/src/commands/whoami.ts
+archive/real-fin/realai/realai - Copy/realai-cli/src/config.ts
+archive/real-fin/realai/realai - Copy/realai-cli/src/index.ts
+archive/real-fin/realai/realai - Copy/realai-cli/tsconfig.json
+archive/real-fin/realai/realai - Copy/realai-design-system/package.json
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Avatar/Avatar.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Avatar/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Badge/Badge.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Badge/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Button/Button.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Button/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Card/Card.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Card/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/ChatBubble/ChatBubble.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/ChatBubble/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/CodeBlock/CodeBlock.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/CodeBlock/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Dropdown/Dropdown.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Dropdown/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Input/Input.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Input/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Modal/Modal.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Modal/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/ModelTag/ModelTag.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/ModelTag/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Tabs/Tabs.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Tabs/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/TextArea/TextArea.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/TextArea/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Tooltip/Tooltip.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/components/Tooltip/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/icons/CopyIcon.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/icons/MemoryIcon.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/icons/OverseerIcon.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/icons/RealAILogo.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/icons/RunIcon.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/icons/SaveIcon.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/icons/StopIcon.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/icons/ToolsIcon.tsx
+archive/real-fin/realai/realai - Copy/realai-design-system/src/icons/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/index.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/theme/tailwind.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/src/theme/theme.css
+archive/real-fin/realai/realai - Copy/realai-design-system/src/theme/tokens.ts
+archive/real-fin/realai/realai - Copy/realai-design-system/srwarning: failed to remove archive/real-fin/realai/realai - Copy/realai-design-system/src/theme: Permission denied
+archive/real-fin/realai/realai - Copy/realai-design-system/tailwind.config.js
+archive/real-fin/realai/realai - Copy/realai-design-system/tsconfig.json
+archive/real-fin/realai/realai - Copy/realai-design-system/tsup.config.ts
+archive/real-fin/realai/realai - Copy/realai-orchestration/README.md
+archive/real-fin/realai/realai - Copy/realai-orchestration/__init__.py
+archive/real-fin/realai/realai - Copy/realai-orchestration/agent.py
+archive/real-fin/realai/realai - Copy/realai-orchestration/memory.py
+archive/real-fin/realai/realai - Copy/realai-orchestration/orchestrator.py
+archive/real-fin/realai/realai - Copy/realai-orchestration/pipeline.py
+archive/real-fin/realai/realai - Copy/realai-orchestration/tools.py
+archive/real-fin/realai/realai - Copy/realai-sdk-js/package.json
+archive/real-fin/realai/realai - Copy/realai-sdk-js/src/client.ts
+archive/real-fin/realai/realai - Copy/realai-sdk-js/src/index.ts
+archive/real-fin/realai/realai - Copy/realai-sdk-js/src/providers.ts
+archive/real-fin/realai/realai - Copy/realai-sdk-js/src/types.ts
+archive/real-fin/realai/realai - Copy/realai-sdk-js/tsconfig.json
+archive/real-fin/realai/realai - Copy/realai-sdk-js/tsup.config.ts
+archive/real-fin/realai/realai - Copy/realai/__init__.py
+archive/real-fin/realai/realai - Copy/realai/api_server.py
+archive/real-fin/realai/realai - Copy/realai/memory/sqlite_memory.p
+archive/real-fin/realai/realai - Copy/realai_agent/README.md
+archive/real-fin/realai/realai - Copy/realai_agent/__init__.py
+archive/real-fin/realai/realai - Copy/realai_agent/agents.py
+archive/real-fin/realai/realai - Copy/realai_agent/hierarchical_agent.py
+archive/real-fin/realai/realai - Copy/realai_agent/main.py
+archive/real-fin/realai/realai - Copy/realai_agent/rise_system.py
+archive/real-fin/realai/realai - Copy/realai_agent/supervisor.py
+archive/real-fin/realai/realai - Copy/realai_agent/test_agent.py
+archive/real-fin/realai/realai - Copy/realai_agent/tools.py
+archive/real-fin/realai/realai - Copy/realai_agent/training_pipeline.py
+archive/real-fin/realai/realai - Copy/realai_api/README.md
+archive/real-fin/realai/realai - Copy/realai_api/__init__.py
+archive/real-fin/realai/realai - Copy/realai_api/app.py
+archive/real-fin/realai/realai - Copy/realai_api/auth.py
+archive/real-fin/realai/realai - Copy/realai_api/config.py
+archive/real-fin/realai/realai - Copy/realai_api/providers.py
+archive/real-fin/realai/realai - Copy/realai_api/schemas.py
+archive/real-fin/realai/realai - Copy/realai_gui.py
+archive/real-fin/realai/realai - Copy/realai_launcher.spec
+archive/real-fin/realai/realai - Copy/render.yaml
+archive/real-fin/realai/realai - Copy/requirements-ci.txt
+archive/real-fin/realai/realai - Copy/requirements-full.txt
+archive/real-fin/realai/realai - Copy/requirements-lambda-advanced.txt
+archive/real-fin/realai/realai - Copy/requirements-lambda-chat.txt
+archive/real-fin/realai/realai - Copy/requirements-lambda-embeddings-audio.txt
+archive/real-fin/realai/realai - Copy/requirements-lambda-image.txt
+archive/real-fin/realai/realai - Copy/requirements-lambda-video.txt
+archive/real-fin/realai/realai - Copy/requirements.txt
+archive/real-fin/realai/realai - Copy/setup.py
+archive/real-fin/realai/realai - Copy/standalone_ai.py
+archive/real-fin/realai/realai - Copy/template.yaml
+archive/real-fin/realai/realai - Copy/test_realai.py
+archive/real-fin/realai/realai - Copy/travis smith.lnk
+archive/real-fin/realai/realai - Copy/vercel.json
+archive/real-fin/realai/realai - Copywarning: failed to remove archive/real-fin/realai/realai-cli/src/commands: Permission denied
+archive/real-fin/realai/realai-cli/package.json
+archive/real-fin/realai/realai-cli/src/commands/chat.ts
+archive/real-fin/realai/realai-cli/src/commands/login.ts
+archive/real-fin/realai/realai-cli/src/commands/models.ts
+archive/real-fin/realai/realai-cli/src/commands/whoami.ts
+archive/real-fin/realai/realai-cli/src/config.ts
+archive/real-fin/realai/realai-cli/src/index.ts
+archive/real-fin/realai/realai-cli/tsconfig.json
+archive/real-fin/realai/realai-design-system/package.json
+archive/real-fin/realai/realai-design-system/src/components/Avatar/Avatar.tsx
+archive/real-fin/realai/realai-design-system/src/components/Avatar/index.ts
+archive/real-fin/realai/realai-design-system/src/components/Badge/Badge.tsx
+archive/real-fin/realai/realai-design-system/src/components/Badge/index.ts
+archive/real-fin/realai/realai-design-system/src/components/Button/Button.tsx
+archive/real-fin/realai/realai-design-system/src/components/Button/index.ts
+archive/real-fin/realai/realai-design-system/src/components/Card/Card.tsx
+archive/real-fin/realai/realai-design-system/src/components/Card/index.ts
+archive/real-fin/realai/realai-design-system/src/components/ChatBubble/ChatBubble.tsx
+archive/real-fin/realai/realai-design-system/src/components/ChatBubble/index.ts
+archive/real-fin/realai/realai-design-system/src/components/CodeBlock/CodeBlock.tsx
+archive/real-fin/realai/realai-design-system/src/components/CodeBlock/index.ts
+archive/real-fin/realai/realai-design-system/src/components/Dropdown/Dropdown.tsx
+archive/real-fin/realai/realai-design-system/src/components/Dropdown/index.ts
+archive/real-fin/realai/realai-design-system/src/components/Input/Input.tsx
+archive/real-fin/realai/realai-design-system/src/components/Input/index.ts
+archive/real-fin/realai/realai-design-system/src/components/Modal/Modal.tsx
+archive/real-fin/realai/realai-design-system/src/components/Modal/index.ts
+archive/real-fin/realai/realai-design-system/src/components/ModelTag/ModelTag.tsx
+archive/real-fin/realai/realai-design-system/src/components/ModelTag/index.ts
+archive/real-fin/realai/realai-design-system/src/components/Tabs/Tabs.tsx
+archive/real-fin/realai/realai-design-system/src/components/Tabs/index.ts
+archive/real-fin/realai/realai-design-system/src/components/TextArea/TextArea.tsx
+archive/real-fin/realai/realai-design-system/src/components/TextArea/index.ts
+archive/real-fin/realai/realai-design-system/src/components/Tooltip/Tooltip.tsx
+archive/real-fin/realai/realai-design-system/src/components/Tooltip/index.ts
+archive/real-fin/realai/realai-design-system/src/icons/CopyIcon.tsx
+archive/real-fin/realai/realai-design-system/src/icons/MemoryIcon.tsx
+archive/real-fin/realai/realai-design-system/src/icons/OverseerIcon.tsx
+archive/real-fin/realai/realai-design-system/src/icons/RealAILogo.tsx
+archive/real-fin/realai/realai-design-system/src/icons/RouterIcon.tsx
+archive/real-fin/realai/realai-design-system/src/icons/RunIcon.tsx
+archive/real-fin/realai/realai-design-system/src/icons/SaveIcon.tsx
+archive/real-fin/realai/realai-design-system/src/icons/ToolsIcon.tsx
+archive/real-fin/realai/realai-design-system/src/icons/index.ts
+archive/real-fin/realai/realai-design-system/src/index.ts
+archive/real-fin/realai/realai-design-system/src/theme/tailwind.ts
+archive/real-fin/realai/realai-design-system/src/theme/theme.css
+archive/real-fin/realai/realai-design-system/src/theme/tokens.ts
+archive/real-fin/realai/realai-design-system/tailwind.config.js
+archive/real-fin/realai/realai-design-system/tsconfig.json
+archive/real-fin/realai/realai-design-system/tsup.config.ts
+archive/real-fin/realai/realai-orchestration/README.md
+archive/real-fin/realai/realai-orchestration/__init__.py
+archive/real-fin/realai/realai-orchestration/agent.py
+archive/real-fin/realai/realai-orchestration/memory.py
+archive/real-fin/realai/realai-orchestration/orchestrator.py
+archive/real-fin/realai/realai-orchestration/pipeline.py
+archive/real-fin/realai/realai-orchestration/tools.py
+archive/real-fin/realai/realai-sdk-js/package.json
+archive/real-fin/realai/realai-sdk-js/src/client.ts
+archive/real-fin/realai/realai-sdk-js/src/index.ts
+archive/real-fin/realai/realai-sdk-js/src/providers.ts
+archive/real-fin/realai/realai-sdk-js/src/types.ts
+archive/real-fin/realai/realai-sdk-js/tsconfig.json
+archive/real-fin/realai/realai-sdk-js/tsup.config.ts
+archive/real-fin/realai/realai/__init__.py
+archive/real-fin/realai/realai/api_server.py
+archive/real-fin/realai/realai/memory/sqlite_memory.p
+archive/real-fin/realai/realai_agent/README.md
+archive/real-fin/realai/realai_agent/__init__.py
+archive/real-fin/realai/realai_agent/agents.py
+archive/real-fin/realai/realai_agent/hierarchical_agent.py
+archive/real-fin/realai/realai_agent/main.py
+archive/real-fin/realai/realai_agent/rise_system.py
+archive/real-fin/realai/realai_agent/supervisor.py
+archive/real-fin/realai/realai_agent/test_agent.py
+archive/real-fin/realai/realai_agent/tools.py
+archive/real-fin/realai/realai_agent/training_pipeline.py
+archive/real-fin/realai/realai_api/README.md
+archive/real-fin/realai/realai_api/__init__.py
+archive/real-fin/realai/realai_api/app.py
+archive/real-fin/realai/realai_api/auth.py
+archive/real-fin/realai/realai_api/config.py
+archive/real-fin/realai/realai_api/providers.py
+archive/real-fin/realai/realai_api/schemas.py
+archive/real-fin/realai/realai_gui.py
+archive/real-fin/realai/realai_launcher.spec
+archive/real-fin/realai/reawarning: failed to remove archive/real-fin/realai/realai - Copy/.git_disabled/objects/37: Permission denied
+archive/real-fin/realai/render.yaml
+archive/real-fin/realai/requirements-ci.txt
+archive/real-fin/realai/requirements-full.txt
+archive/real-fin/realai/requirements-lambda-advanced.txt
+archive/real-fin/realai/requirements-lambda-chat.txt
+archive/real-fin/realai/requirements-lambda-core.txt
+archive/real-fin/realai/requirements-lambda-embeddings-audio.txt
+archive/real-fin/realai/requirements-lambda-image.txt
+archive/real-fin/realai/requirements-lambda-video.txt
+archive/real-fin/realai/requirements.txt
+archive/real-fin/realai/setup.py
+archive/real-fin/realai/standalone_ai.py
+archive/real-fin/realai/template.yaml
+archive/real-fin/realai/test_realai.py
+archive/real-fin/realai/travis smith.lnk
+archive/real-fin/realai/vercel.json
+archive/real-finwarning: failed to remove archive/real-fin/realai/realai - Copy/.git_disabled/objects/92: Permission denied
+archive/real-fiwarning: failed to remove archive/real-fin/realai/.git_disabled/objects/c4: Permission denied
+archive/real-fiwarning: failed to remove archive/real-fin/realai/realai - Copy/.git_disabled/info/: Permission denied
+archive/realai-backend/package.json
+archive/realai-backend/server.js
+archive/realai-clean/.git_disabled
+archive/realai-clean/.github
+archive/realai-clean/.gitignore
+archive/realai-clean/.python-version
+archive/realai-clean/API.md
+archive/realai-clean/CONTRIBUTING.md
+archive/realai-clean/DEPLOYMENT.md
+archive/realai-clean/Dockerfile
+archive/realai-clean/Dockerfile.gpu
+archive/realai-clean/LICENSE
+archive/realai-clean/PAGES
+archive/realai-clean/QUICKSTART.md
+archive/realai-clean/QUICKSTART_LOCAL.md
+archive/realai-clean/README.md
+archive/realai-clean/REALAI_3.0.md
+archive/realai-clean/SETUP_COMPLETE.md
+archive/realai-clean/__init__.py
+archive/realai-clean/api
+archive/realai-clean/api_server.py
+archive/realai-clean/apps
+archive/realai-clean/aura
+archive/realai-clean/benchmarks
+archive/realai-clean/config
+archive/realai-clean/core
+archive/realai-clean/docker-compose.yml
+archive/realai-clean/docs
+archive/realai-clean/examples
+archive/realai-clean/local_models.py
+archive/realai-clean/main.py
+archive/realai-clean/models.yaml
+archive/realai-clean/plugins
+archive/realai-clean/providers
+archive/realai-clean/providers.yaml
+archive/realai-clean/pyproject.toml
+archive/realai-clean/pyrightconfig.json
+archive/realai-clean/realai
+archive/realai-clean/realai-core/agent_tools
+archive/realai-clean/realai-core/tests
+archive/realai-clean/realai-core/tools
+archive/realai-clean/realai-frontend/.gitignore
+archive/realai-clean/realai-frontend/README.md
+archive/realai-clean/realai-frontend/next.config.js
+archive/realai-clean/realai-frontend/package.json
+archive/realai-clean/realai-frontend/pnpm-workspace.yaml
+archive/realai-clean/realai-frontend/postcss.config.js
+archive/realai-clean/realai-frontend/src
+archive/realai-clean/realai-frontend/tailwind.config.js
+archive/realai-clean/realai-frontend/tsconfig.json
+archive/realai-clean/realai-frontend/vercel.json
+archive/realai-clean/realai.toml
+archive/realai-clean/realai.toml.example
+archive/realai-clean/realai_gui.py
+archive/realai-clean/realai_local_server.py
+archive/realai-clean/render.yaml
+archive/realai-clean/requirements-ci.txt
+archive/realai-clean/requirements-full.txt
+archive/realai-clean/requirements-gpu.txt
+archive/realai-clean/requirements.txt
+archive/realai-clean/schema
+archive/realai-clean/scripts
+archive/realai-clean/setup.py
+archive/realai-clean/src
+archive/realai-clean/start_realai_server.bat
+archive/realai-clean/test_local_server.py
+archive/realai-clean/test_realai.py
+archive/realai-clean/tests
+archive/realai-clean/traefik.yml
+archive/realai-clean__dup1/.git__dup1
+archive/realai-clean__dup1/.git_disabled
+archive/realai-clean__dup1/.github
+archive/realai-clean__dup1/.github__dup1
+archive/realai-clean__dup1/.gitignore
+archive/realai-clean__dup1/.gitignore__dup1
+archive/realai-clean__dup1/.python-version
+archive/realai-clean__dup1/.python-version__dup1
+archive/realai-clean__dup1/API.md
+archive/realai-clean__dup1/API__dup1.md
+archive/realai-clean__dup1/CONTRIBUTING.md
+archive/realai-clean__dup1/CONTRIBUTING__dup1.md
+archive/realai-clean__dup1/DEPLOYMENT.md
+archive/realai-clean__dup1/DEPLOYMENT__dup1.md
+archive/realai-clean__dup1/Dockerfile
+archive/realai-clean__dup1/Dockerfile.gpu
+archive/realai-clean__dup1/Dockerfile__dup1
+archive/realai-clean__dup1/Dockerfile__dup1.gpu
+archive/realai-clean__dup1/LICENSE
+archive/realai-clean__dup1/LICENSE__dup1
+archive/realai-clean__dup1/PAGES
+archive/realai-clean__dup1/PAGES__dup1
+archive/realai-clean__dup1/QUICKSTART.md
+archive/realai-clean__dup1/QUICKSTART_LOCAL.md
+archive/realai-clean__dup1/QUICKSTART_LOCAL__dup1.md
+archive/realai-clean__dup1/QUICKSTART__dup1.md
+archive/realai-clean__dup1/README.md
+archive/realai-clean__dup1/README__dup1.md
+archive/realai-clean__dup1/REALAI_3.0.md
+archive/realai-clean__dup1/REALAI_3.0__dup1.md
+archive/realai-clean__dup1/SETUP_COMPLETE.md
+archive/realai-clean__dup1/SETUP_COMPLETE__dup1.md
+archive/realai-clean__dup1/__init__.py
+archive/realai-clean__dup1/__init____dup1.py
+archive/realai-clean__dup1/api
+archive/realai-clean__dup1/api__dup1
+archive/realai-clean__dup1/api_server.py
+archive/realai-clean__dup1/api_server__dup1.py
+archive/realai-clean__dup1/apps
+archive/realai-clean__dup1/apps__dup1
+archive/realai-clean__dup1/aura
+archive/realai-clean__dup1/aura__dup1
+archive/realai-clean__dup1/benchmarks
+archive/realai-clean__dup1/benchmarks__dup1
+archive/realai-clean__dup1/config
+archive/realai-clean__dup1/config__dup1
+archive/realai-clean__dup1/core
+archive/realai-clean__dup1/core__dup1
+archive/realai-clean__dup1/docker-compose.yml
+archive/realai-clean__dup1/docker-compose__dup1.yml
+archive/realai-clean__dup1/docs
+archive/realai-clean__dup1/docs__dup1
+archive/realai-clean__dup1/examples
+archive/realai-clean__dup1/examples__dup1
+archive/realai-clean__dup1/local_models.py
+archive/realai-clean__dup1/local_models__dup1.py
+archive/realai-clean__dup1/main.py
+archive/realai-clean__dup1/main__dup1.py
+archive/realai-clean__dup1/models.yaml
+archive/realai-clean__dup1/models__dup1.yaml
+archive/realai-clean__dup1/plugins
+archive/realai-clean__dup1/plugins__dup1
+archive/realai-clean__dup1/providers
+archive/realai-clean__dup1/providers.yaml
+archive/realai-clean__dup1/providers__dup1
+archive/realai-clean__dup1/providers__dup1.yaml
+archive/realai-clean__dup1/pyproject.toml
+archive/realai-clean__dup1/pyproject__dup1.toml
+archive/realai-clean__dup1/pyrightconfig.json
+archive/realai-clean__dup1/pyrightconfig__dup1.json
+archive/realai-clean__dup1/realai
+archive/realai-clean__dup1/realai-core/agent_tools
+archive/realai-clean__dup1/realai-core/tests
+archive/realai-clean__dup1/realai-core/tools
+archive/realai-clean__dup1/realai-core__dup1/agent_tools
+archive/realai-clean__dup1/realai-core__dup1/tests
+archive/realai-clean__dup1/realai-core__dup1/tools
+archive/realai-clean__dup1/realai-frontend/.gitignore
+archive/realai-clean__dup1/realai-frontend/README.md
+archive/realai-clean__dup1/realai-frontend/next.config.js
+archive/realai-clean__dup1/realai-frontend/package.json
+archive/realai-clean__dup1/realai-frontend/pnpm-workspace.yaml
+archive/realai-clean__dup1/realai-frontend/postcss.config.js
+archive/realai-clean__dup1/realai-frontend/src
+archive/realai-clean__dup1/realai-frontend/tailwind.config.js
+archive/realai-clean__dup1/realai-frontend/tsconfig.json
+archive/realai-clean__dup1/realai-frontend/vercel.json
+archive/realai-clean__dup1/realai-frontend__dup1/.gitignore
+archive/realai-clean__dup1/realai-frontend__dup1/README.md
+archive/realai-clean__dup1/realai-frontend__dup1/next.config.js
+archive/realai-clean__dup1/realai-frontend__dup1/package.json
+archive/realai-clean__dup1/realai-frontend__dup1/pnpm-workspace.yaml
+archive/realai-clean__dup1/realai-frontend__dup1/postcss.config.js
+archive/realai-clean__dup1/realai-frontend__dup1/src/app
+archive/realai-clean__dup1/realai-frontend__dup1/src/components
+archive/realai-clean__dup1/realai-frontend__dup1/tailwind.config.js
+archive/realai-clean__dup1/realai-frontend__dup1/tsconfig.json
+archive/realai-clean__dup1/realai-frontend__dup1/vercel.json
+archive/realai-clean__dup1/realai.toml
+archive/realai-clean__dup1/realai.toml.example
+archive/realai-clean__dup1/realai.toml__dup1.example
+archive/realai-clean__dup1/realai__dup1
+archive/realai-clean__dup1/realai__dup1.toml
+archive/realai-clean__dup1/realai_gui.py
+archive/realai-clean__dup1/realai_gui__dup1.py
+archive/realai-clean__dup1/realai_local_server.py
+archive/realai-clean__dup1/realai_local_server__dup1.py
+archive/realai-clean__dup1/render.yaml
+archive/realai-clean__dup1/render__dup1.yaml
+archive/realai-clean__dup1/requirements-ci.txt
+archive/realai-clean__dup1/requirements-ci__dup1.txt
+archive/realai-clean__dup1/requirements-full.txt
+archive/realai-clean__dup1/requirements-full__dup1.txt
+archive/realai-clean__dup1/requirements-gpu.txt
+archive/realai-clean__dup1/requirements-gpu__dup1.txt
+archive/realai-clean__dup1/requirements.txt
+archive/realai-clean__dup1/requirements__dup1.txt
+archive/realai-clean__dup1/schema
+archive/realai-clean__dup1/schema__dup1
+archive/realai-clean__dup1/scripts
+archive/realai-clean__dup1/scripts__dup1
+archive/realai-clean__dup1/setup.py
+archive/realai-clean__dup1/setup__dup1.py
+archive/realai-clean__dup1/src
+archive/realai-clean__dup1/src__dup1
+archive/realai-clean__dup1/start_realai_server.bat
+archive/realai-clean__dup1/start_realai_server__dup1.bat
+archive/realai-clean__dup1/test_local_server.py
+archive/realai-clean__dup1/test_local_server__dup1.py
+archive/realai-clean__dup1/test_realai.py
+archive/realai-clean__dup1/test_realai__dup1.py
+archive/realai-clean__dup1/tests
+archive/realai-clean__dup1/tests__dup1
+archive/realai-clean__dup1/traefik.yml
+archive/realai-clean__dup1/traefik__dup1.yml
+archive/realai-clean__dup_2
+archive/realai-cli/package.json
+archive/realai-cli/src
+archive/realai-cli/tsconfig.json
+archive/realai-core/.github
+archive/realai-core/.gitignore
+archive/realai-core/README.md
+archive/realai-core/agents
+archive/realai-core/console
+archive/realai-core/docs
+archive/realai-core/examples
+archive/realai-core/poetry.lock
+archive/realai-core/policy.json
+archive/realai-core/pyproject.toml
+archive/realai-core/registry/.gitignore
+archive/realai-core/registry/Dockerfile
+archive/realai-core/registry/package.json
+archive/realai-core/registry/render.yaml
+archive/realai-core/registry/tsconfig.json
+archive/realai-core/sanity_check.py
+archive/realai-core/schema
+archive/realai-core/scripts
+archive/realai-core/test
+archive/realai-core/tests
+archive/realai-core/tools
+archive/realai-core/ui/.gitignore
+archive/realai-core/ui/package.json
+archive/realai-core/ui/tsconfig.json
+archive/realai-core/ui/tsconfig.tsbuildinfo
+archive/realai-core/vercel.json
+archive/realai-design-system
+archive/realai-frontend/.gitignore
+archive/realai-frontend/README.md
+archive/realai-frontend/next.config.js
+archive/realai-frontend/package.json
+archive/realai-frontend/postcss.config.js
+archive/realai-frontend/src
+archive/realai-frontend/tailwind.config.js
+archive/realai-frontend/tsconfig.json
+archive/realai-frontend/vercel.json
+archive/realai-orchestration
+archive/realai-sdk-js
+archive/realai_agent
+archive/realai_api
+archive/realai_clean
+archive/realai_good/realai/.gitattributes
+archive/realai_good/realai/.gitignore
+archive/realai_good/realai/CONTRIBUTING.md
+archive/realai_good/realai/DEPLOYMENT_FRONTEND_FIX.md
+archive/realai_good/realai/LAMBDA_DEPLOYMENT.md
+archive/realai_good/realai/LAMBDA_SIZE_OPTIMIZATION.md
+archive/realai_good/realai/LICENSE
+archive/realai_good/realai/LOCAL_AI_GUIDE.md
+archive/realai_good/realai/PROJECT_SUMMARY.md
+archive/realai_good/realai/QUICKSTART.md
+archive/realai_good/realai/SECURITY_SUMMARY.txt
+archive/realai_good/realai/VALIDATION_REPORT.md
+archive/realai_good/realai/__init__.py
+archive/realai_good/realai/api_server.py
+archive/realai_good/realai/build_lambda.sh
+archive/realai_good/realai/examples.py
+archive/realai_good/realai/examples_local_ai.py
+archive/realai_good/realai/examples_ultimate.py
+archive/realai_good/realai/lambda_advanced.py
+archive/realai_good/realai/lambda_chat.py
+archive/realai_good/realai/lambda_core.py
+archive/realai_good/realai/lambda_core_shared.py
+archive/realai_good/realai/lambda_embeddings_audio.py
+archive/realai_good/realai/lambda_image.py
+archive/realai_good/realai/lambda_video.py
+archive/realai_good/realai/local_model_cli.py
+archive/realai_good/realai/main.py
+archive/realai_good/realai/realai/__init__.py
+archive/realai_good/realai/realai/api_server.py
+archive/realai_good/realai/realai/memory
+archive/realai_good/realai/realai_launcher.spec
+archive/realai_good/realai/render.yaml
+archive/realai_good/realai/requirements-ci.txt
+archive/realai_good/realai/requirements-full.txt
+archive/realai_good/realai/requirements-lambda-advanced.txt
+archive/realai_good/realai/requirements-lambda-chat.txt
+archive/realai_good/realai/requirements-lambda-core.txt
+archive/realai_good/realai/requirements-lambda-embeddings-audio.txt
+archive/realai_good/realai/requirements-lambda-image.txt
+archive/realai_good/realai/requirements-lambda-video.txt
+archive/realai_good/realai/requirements.txt
+archive/realai_good/realai/setup.py
+archive/realai_good/realai/standalone_ai.py
+archive/realai_good/realai/template.yaml
+archive/realai_good/realai/vercel.json
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/.git_disabled
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/.github
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/.gitignore
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/.python-version
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/.sixth
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/API.md
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/CONTRIBUTING.md
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/DEPLOYMENT.md
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/Dockerfile
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/Dockerfile.gpu
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/LICENSE
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/PAGES
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/QUICKSTART.md
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/QUICKSTART_LOCAL.md
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/README.md
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/REALAI_3.0.md
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/SETUP_COMPLETE.md
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/__init__.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/api
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/api_server.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/apps
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/aura
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/benchmarks
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/config
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/core
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/docker-compose.yml
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/docs
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/examples
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/local_models.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/main.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/models.yaml
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/plugins
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/providers
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/providers.yaml
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/pyproject.toml
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/pyrightconfig.json
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-core/agent_tools
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-core/tests
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-core/tools
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-frontend/.gitignore
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-frontend/README.md
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-frontend/next.config.js
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-frontend/package.json
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-frontend/pnpm-workspace.yaml
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-frontend/postcss.config.js
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-frontend/tailwind.config.js
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-frontend/tsconfig.json
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai.toml
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai.toml.example
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/__init__.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/agent_runtime.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/api_server.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/app_framework.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/audit.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/cli
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/critique.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/datasets
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/execution_history.jsonl
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/identity.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/knowledge_graph.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/local_models.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/local_runtime.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/memory
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/model_registry.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/models
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/plugin_marketplace.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/realai
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/router.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/safety.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/sdk
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/self_improvement.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/server
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/tools.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/training
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/world_model.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai_gui.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai_local_server.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/render.yaml
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/requirements-ci.txt
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/requirements-full.txt
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/requirements-gpu.txt
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/requirements.txt
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/setup.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/start_realai_server.bat
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/test_local_server.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/test_realai.py
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/traefik.yml
+archive/realai_historical_backups/realai_versions_20260612/RealAIProject/vercel.json
+archive/realai_historical_backups/realai_versions_20260612/agent-tools-main/agent-tools-main/agent_tools
+archive/realai_historical_backups/realai_versions_20260612/agent-tools-main/agent-tools-main/tests
+archive/realai_historical_backups/realai_versions_20260612/agent-tools-main/agent-tools-main/tools
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.agentx
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.git_disabled/COMMIT_EDITMSG
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.git_disabled/FETCH_HEAD
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.git_disabled/HEAD
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.git_disabled/ORIG_HEAD
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.git_disabled/config
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.git_disabled/description
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.git_disabled/hooks
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.git_disabled/index
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.git_disabled/info
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.git_disabled/lfs
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.git_disabled/logs
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.git_disabled/objects
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.git_disabled/packed-refs
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.git_disabled/refs
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.gitattributes
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.github
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/.gitignore
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/API.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/CONTRIBUTING.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/DEPLOYMENT.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/DEPLOYMENT_FRONTEND_FIX.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/LAMBDA_DEPLOYMENT.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/LAMBDA_SIZE_OPTIMIZATION.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/LICENSE
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/LOCAL_AI_GUIDE.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/LOCAL_AI_SUMMARY.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/PROJECT_SUMMARY.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/QUICKSTART.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/README.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/SECURITY_SUMMARY.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/VALIDATION_REPORT.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/__init__.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/api
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/api_server.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/build_lambda.sh
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/config
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/examples.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/examples_limitless.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/examples_local_ai.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/examples_ultimate.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/index.html
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/lambda_advanced.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/lambda_chat.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/lambda_core.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/lambda_core_shared.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/lambda_embeddings_audio.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/lambda_image.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/lambda_video.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/local_model_cli.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/local_models.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/main.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/plugins
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/providers
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/quick_start_local.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.agentx
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/COMMIT_EDITMSG
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/FETCH_HEAD
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/HEAD
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/ORIG_HEAD
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/config
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/description
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/gk
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/hooks
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/index
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/info
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/lfs
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/logs
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/objects
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/packed-refs
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.git_disabled/refs
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.gitattributes
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.github
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.gitignore
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/API.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/CONTRIBUTING.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/DEPLOYMENT.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/DEPLOYMENT_FRONTEND_FIX.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/LAMBDA_DEPLOYMENT.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/LAMBDA_SIZE_OPTIMIZATION.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/LICENSE
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/LOCAL_AI_GUIDE.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/LOCAL_AI_SUMMARY.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/PROJECT_SUMMARY.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/QUICKSTART.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/README.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/SECURITY_SUMMARY.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/VALIDATION_REPORT.md
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/__init__.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/api
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/api_server.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/build_lambda.sh
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/examples.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/examples_limitless.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/examples_local_ai.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/examples_ultimate.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/index.html
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/lambda_advanced.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/lambda_chat.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/lambda_core.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/lambda_core_shared.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/lambda_embeddings_audio.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/lambda_image.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/lambda_video.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/local_model_cli.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/local_models.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/main.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/plugins
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/quick_start_local.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai-cli
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai-design-system
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai-orchestration
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai-sdk-js
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai/__init__.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai/api_server.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai/memory
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai_agent
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai_api
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai_gui.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai_launcher.spec
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/render.yaml
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-ci.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-full.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-lambda-advanced.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-lambda-chat.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-lambda-core.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-lambda-embeddings-audio.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-lambda-image.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-lambda-video.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/setup.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/standalone_ai.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/template.yaml
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/test_realai.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/travis smith.lnk
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/vercel.json
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai-cli
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai-design-system
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai-orchestration
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai-sdk-js
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai/__init__.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai/api_server.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai/memory
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai_agent
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai_api
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai_gui.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai_launcher.spec
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/render.yaml
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-ci.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-full.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-lambda-advanced.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-lambda-chat.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-lambda-core.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-lambda-embeddings-audio.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-lambda-image.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-lambda-video.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements.txt
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/setup.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/standalone_ai.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/template.yaml
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/test_realai.py
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/travis smith.lnk
+archive/realai_historical_backups/realai_versions_20260612/real-fin/realai/vercel.json
+archive/realai_repo/.git__dup1
+archive/realai_repo/.git_disabled
+archive/realai_repo/.github
+archive/realai_repo/.github__dup1
+archive/realai_repo/.gitignore
+archive/realai_repo/.gitignore__dup1
+archive/realai_repo/.python-version
+archive/realai_repo/.python-version__dup1
+archive/realai_repo/.sixth
+archive/realai_repo/.sixth__dup1
+archive/realai_repo/.vs__dup1/ProjectSettings.json
+archive/realai_repo/.vs__dup1/VSWorkspaceState.json
+archive/realai_repo/.vs__dup1/slnx.sqlite
+archive/realai_repo/API.md
+archive/realai_repo/API__dup1.md
+archive/realai_repo/CONTRIBUTING.md
+archive/realai_repo/CONTRIBUTING__dup1.md
+archive/realai_repo/DEPLOYMENT.md
+archive/realai_repo/DEPLOYMENT__dup1.md
+archive/realai_repo/Dockerfile
+archive/realai_repo/Dockerfile.gpu
+archive/realai_repo/Dockerfile__dup1
+archive/realai_repo/Dockerfile__dup1.gpu
+archive/realai_repo/LICENSE
+archive/realai_repo/LICENSE__dup1
+archive/realai_repo/PAGES
+archive/realai_repo/PAGES__dup1
+archive/realai_repo/QUICKSTART.md
+archive/realai_repo/QUICKSTART_LOCAL.md
+archive/realai_repo/QUICKSTART_LOCAL__dup1.md
+archive/realai_repo/QUICKSTART__dup1.md
+archive/realai_repo/README.md
+archive/realai_repo/README__dup1.md
+archive/realai_repo/REALAI_3.0.md
+archive/realai_repo/REALAI_3.0__dup1.md
+archive/realai_repo/SETUP_COMPLETE.md
+archive/realai_repo/SETUP_COMPLETE__dup1.md
+archive/realai_repo/__init__.py
+archive/realai_repo/__init____dup1.py
+archive/realai_repo/api
+archive/realai_repo/api__dup1
+archive/realai_repo/api_server.py
+archive/realai_repo/api_server__dup1.py
+archive/realai_repo/app
+archive/realai_repo/app__dup1
+archive/realai_repo/aura
+archive/realai_repo/aura__dup1
+archive/realai_repo/benchmarks
+archive/realai_repo/benchmarks__dup1
+archive/realai_repo/config
+archive/realai_repo/config__dup1
+archive/realai_repo/core
+archive/realai_repo/core__dup1
+archive/realai_repo/docker-compose.yml
+archive/realai_repo/docker-compose__dup1.yml
+archive/realai_repo/docs
+archive/realai_repo/docs__dup1
+archive/realai_repo/examples
+archive/realai_repo/examples__dup1
+archive/realai_repo/local_models.py
+archive/realai_repo/local_models__dup1.py
+archive/realai_repo/main.py
+archive/realai_repo/main__dup1.py
+archive/realai_repo/models.yaml
+archive/realai_repo/models__dup1.yaml
+archive/realai_repo/plugins
+archive/realai_repo/plugins__dup1
+archive/realai_repo/providers
+archive/realai_repo/providers.yaml
+archive/realai_repo/providers__dup1
+archive/realai_repo/providers__dup1.yaml
+archive/realai_repo/pyproject.toml
+archive/realai_repo/pyproject__dup1.toml
+archive/realai_repo/pyrightconfig.json
+archive/realai_repo/pyrightconfig__dup1.json
+archive/realai_repo/realai-core/.github
+archive/realai_repo/realai-core/.gitignore
+archive/realai_repo/realai-core/README.md
+archive/realai_repo/realai-core/agent_tools
+archive/realai_repo/realai-core/agents
+archive/realai_repo/realai-core/console
+archive/realai_repo/realai-core/docs
+archive/realai_repo/realai-core/examples
+archive/realai_repo/realai-core/poetry.lock
+archive/realai_repo/realai-core/policy.json
+archive/realai_repo/realai-core/pyproject.toml
+archive/realai_repo/realai-core/registry/.gitignore
+archive/realai_repo/realai-core/registry/Dockerfile
+archive/realai_repo/realai-core/registry/cli
+archive/realai_repo/realai-core/registry/package.json
+archive/realai_repo/realai-core/registry/render.yaml
+archive/realai_repo/realai-core/registry/src
+archive/realai_repo/realai-core/registry/tsconfig.json
+archive/realai_repo/realai-core/sanity_check.py
+archive/realai_repo/realai-core/schema
+archive/realai_repo/realai-core/scripts
+archive/realai_repo/realai-core/skills
+archive/realai_repo/realai-core/test
+archive/realai_repo/realai-core/tests
+archive/realai_repo/realai-core/tools
+archive/realai_repo/realai-core/ui/.gitignore
+archive/realai_repo/realai-core/ui/package.json
+archive/realai_repo/realai-core/ui/pages
+archive/realai_repo/realai-core/ui/tsconfig.json
+archive/realai_repo/realai-core/ui/tsconfig.tsbuildinfo
+archive/realai_repo/realai-core/vercel.json
+archive/realai_repo/realai-core/web
+archive/realai_repo/realai-core__dup1/.github
+archive/realai_repo/realai-core__dup1/.gitignore
+archive/realai_repo/realai-core__dup1/README.md
+archive/realai_repo/realai-core__dup1/agent_tools
+archive/realai_repo/realai-core__dup1/agents
+archive/realai_repo/realai-core__dup1/console
+archive/realai_repo/realai-core__dup1/docs
+archive/realai_repo/realai-core__dup1/examples
+archive/realai_repo/realai-core__dup1/poetry.lock
+archive/realai_repo/realai-core__dup1/policy.json
+archive/realai_repo/realai-core__dup1/pyproject.toml
+archive/realai_repo/realai-core__dup1/registry/.gitignore
+archive/realai_repo/realai-core__dup1/registry/Dockerfile
+archive/realai_repo/realai-core__dup1/registry/cli
+archive/realai_repo/realai-core__dup1/registry/package.json
+archive/realai_repo/realai-core__dup1/registry/render.yaml
+archive/realai_repo/realai-core__dup1/registry/src
+archive/realai_repo/realai-core__dup1/registry/tsconfig.json
+archive/realai_repo/realai-core__dup1/sanity_check.py
+archive/realai_repo/realai-core__dup1/schema
+archive/realai_repo/realai-core__dup1/scripts
+archive/realai_repo/realai-core__dup1/skills
+archive/realai_repo/realai-core__dup1/test
+archive/realai_repo/realai-core__dup1/tests
+archive/realai_repo/realai-core__dup1/tools
+archive/realai_repo/realai-core__dup1/ui/.gitignore
+archive/realai_repo/realai-core__dup1/ui/package.json
+archive/realai_repo/realai-core__dup1/ui/pages
+archive/realai_repo/realai-core__dup1/ui/tsconfig.json
+archive/realai_repo/realai-core__dup1/ui/tsconfig.tsbuildinfo
+archive/realai_repo/realai-core__dup1/vercel.json
+archive/realai_repo/realai-core__dup1/web
+archive/realai_repo/realai-frontend/.gitignore
+archive/realai_repo/realai-frontend/README.md
+archive/realai_repo/realai-frontend/next.config.js
+archive/realai_repo/realai-frontend/package.json
+archive/realai_repo/realai-frontend/pnpm-workspace.yaml
+archive/realai_repo/realai-frontend/postcss.config.js
+archive/realai_repo/realai-frontend/src
+archive/realai_repo/realai-frontend/tailwind.config.js
+archive/realai_repo/realai-frontend/tsconfig.json
+archive/realai_repo/realai-frontend/vercel.json
+archive/realai_repo/realai-frontend__dup1/.gitignore
+archive/realai_repo/realai-frontend__dup1/README.md
+archive/realai_repo/realai-frontend__dup1/next.config.js
+archive/realai_repo/realai-frontend__dup1/package.json
+archive/realai_repo/realai-frontend__dup1/pnpm-workspace.yaml
+archive/realai_repo/realai-frontend__dup1/postcss.config.js
+archive/realai_repo/realai-frontend__dup1/src/app
+archive/realai_repo/realai-frontend__dup1/src/components
+archive/realai_repo/realai-frontend__dup1/tailwind.config.js
+archive/realai_repo/realai-frontend__dup1/tsconfig.json
+archive/realai_repo/realai-frontend__dup1/vercel.json
+archive/realai_repo/realai.toml
+archive/realai_repo/realai.toml.example
+archive/realai_repo/realai.toml__dup1.example
+archive/realai_repo/realai/__init__.py
+archive/realai_repo/realai/agent_runtime.py
+archive/realai_repo/realai/api_server.py
+archive/realai_repo/realai/app_framework.py
+archive/realai_repo/realai/audit.py
+archive/realai_repo/realai/cli
+archive/realai_repo/realai/critique.py
+archive/realai_repo/realai/datasets
+archive/realai_repo/realai/execution_history.jsonl
+archive/realai_repo/realai/identity.py
+archive/realai_repo/realai/knowledge_graph.py
+archive/realai_repo/realai/local_models.py
+archive/realai_repo/realai/local_runtime.py
+archive/realai_repo/realai/memory
+archive/realai_repo/realai/model_registry.py
+archive/realai_repo/realai/models
+archive/realai_repo/realai/plugin_marketplace.py
+archive/realai_repo/realai/router.py
+archive/realai_repo/realai/safety.py
+archive/realai_repo/realai/sdk
+archive/realai_repo/realai/self_improvement.py
+archive/realai_repo/realai/server
+archive/realai_repo/realai/tools.py
+archive/realai_repo/realai/training
+archive/realai_repo/realai/world_model.py
+archive/realai_repo/realai__dup1.toml
+archive/realai_repo/realai__dup1/__init__.py
+archive/realai_repo/realai__dup1/agent_runtime.py
+archive/realai_repo/realai__dup1/api_server.py
+archive/realai_repo/realai__dup1/app_framework.py
+archive/realai_repo/realai__dup1/audit.py
+archive/realai_repo/realai__dup1/cli
+archive/realai_repo/realai__dup1/critique.py
+archive/realai_repo/realai__dup1/datasets
+archive/realai_repo/realai__dup1/execution_history.jsonl
+archive/realai_repo/realai__dup1/identity.py
+archive/realai_repo/realai__dup1/knowledge_graph.py
+archive/realai_repo/realai__dup1/local_models.py
+archive/realai_repo/realai__dup1/local_runtime.py
+archive/realai_repo/realai__dup1/memory
+archive/realai_repo/realai__dup1/model_registry.py
+archive/realai_repo/realai__dup1/models
+archive/realai_repo/realai__dup1/plugin_marketplace.py
+archive/realai_repo/realai__dup1/router.py
+archive/realai_repo/realai__dup1/safety.py
+archive/realai_repo/realai__dup1/sdk
+archive/realai_repo/realai__dup1/self_improvement.py
+archive/realai_repo/realai__dup1/server
+archive/realai_repo/realai__dup1/tools.py
+archive/realai_repo/realai__dup1/training
+archive/realai_repo/realai__dup1/world_model.py
+archive/realai_repo/realai_gui.py
+archive/realai_repo/realai_gui__dup1.py
+archive/realai_repo/realai_local_server.py
+archive/realai_repo/realai_local_server__dup1.py
+archive/realai_repo/render.yaml
+archive/realai_repo/render__dup1.yaml
+archive/realai_repo/requirements-ci.txt
+archive/realai_repo/requirements-ci__dup1.txt
+archive/realai_repo/requirements-full.txt
+archive/realai_repo/requirements-full__dup1.txt
+archive/realai_repo/requirements-gpu.txt
+archive/realai_repo/requirements-gpu__dup1.txt
+archive/realai_repo/requirements.txt
+archive/realai_repo/requirements__dup1.txt
+archive/realai_repo/schema
+archive/realai_repo/schema__dup1
+archive/realai_repo/scripts
+archive/realai_repo/scripts__dup1
+archive/realai_repo/setup.py
+archive/realai_repo/setup__dup1.py
+archive/realai_repo/src
+archive/realai_repo/src__dup1
+archive/realai_repo/start_realai_server.bat
+archive/realai_repo/start_realai_server__dup1.bat
+archive/realai_repo/test_local_server.py
+archive/realai_repo/test_local_server__dup1.py
+archive/realai_repo/test_realai.py
+archive/realai_repo/test_realai__dup1.py
+archive/realai_repo/tests
+archive/realai_repo/tests__dup1
+archive/realai_repo/traefik.yml
+archive/realai_repo/traefik__dup1.yml
+archive/realai_repo__dup_1
+archive/realai_sdk/.git__dup1
+archive/realai_sdk/.git_disabled
+archive/realai_sdk/.github
+archive/realai_sdk/.github__dup1
+archive/realai_sdk/.gitignore
+archive/realai_sdk/.gitignore__dup1
+archive/realai_sdk/.python-version
+archive/realai_sdk/.python-version__dup1
+archive/realai_sdk/.vs__dup1
+archive/realai_sdk/API.md
+archive/realai_sdk/API__dup1.md
+archive/realai_sdk/CONTRIBUTING.md
+archive/realai_sdk/CONTRIBUTING__dup1.md
+archive/realai_sdk/DEPLOYMENT.md
+archive/realai_sdk/DEPLOYMENT__dup1.md
+archive/realai_sdk/Dockerfile
+archive/realai_sdk/Dockerfile.gpu
+archive/realai_sdk/Dockerfile__dup1
+archive/realai_sdk/Dockerfile__dup1.gpu
+archive/realai_sdk/LICENSE
+archive/realai_sdk/LICENSE__dup1
+archive/realai_sdk/QUICKSTART.md
+archive/realai_sdk/QUICKSTART__dup1.md
+archive/realai_sdk/README.md
+archive/realai_sdk/README__dup1.md
+archive/realai_sdk/REALAI_3.0.md
+archive/realai_sdk/REALAI_3.0__dup1.md
+archive/realai_sdk/__init__.py
+archive/realai_sdk/__init____dup1.py
+archive/realai_sdk/api
+archive/realai_sdk/api__dup1
+archive/realai_sdk/api_server.py
+archive/realai_sdk/api_server__dup1.py
+archive/realai_sdk/apps
+archive/realai_sdk/apps__dup1
+archive/realai_sdk/benchmarks
+archive/realai_sdk/benchmarks__dup1
+archive/realai_sdk/client.py
+archive/realai_sdk/client__dup1.py
+archive/realai_sdk/config
+archive/realai_sdk/config__dup1
+archive/realai_sdk/core
+archive/realai_sdk/core__dup1
+archive/realai_sdk/docker-compose.yml
+archive/realai_sdk/docker-compose__dup1.yml
+archive/realai_sdk/docs
+archive/realai_sdk/docs__dup1
+archive/realai_sdk/local_models.py
+archive/realai_sdk/local_models__dup1.py
+archive/realai_sdk/main.py
+archive/realai_sdk/main__dup1.py
+archive/realai_sdk/models.yaml
+archive/realai_sdk/models__dup1.yaml
+archive/realai_sdk/plugins
+archive/realai_sdk/plugins__dup1
+archive/realai_sdk/providers
+archive/realai_sdk/providers.yaml
+archive/realai_sdk/providers__dup1
+archive/realai_sdk/providers__dup1.yaml
+archive/realai_sdk/pyproject.toml
+archive/realai_sdk/pyproject__dup1.toml
+archive/realai_sdk/realai-core/.github
+archive/realai_sdk/realai-core/.gitignore
+archive/realai_sdk/realai-core/README.md
+archive/realai_sdk/realai-core/agent_tools
+archive/realai_sdk/realai-core/agents
+archive/realai_sdk/realai-core/console
+archive/realai_sdk/realai-core/docs
+archive/realai_sdk/realai-core/examples
+archive/realai_sdk/realai-core/poetry.lock
+archive/realai_sdk/realai-core/policy.json
+archive/realai_sdk/realai-core/pyproject.toml
+archive/realai_sdk/realai-core/registry/.gitignore
+archive/realai_sdk/realai-core/registry/Dockerfile
+archive/realai_sdk/realai-core/registry/cli
+archive/realai_sdk/realai-core/registry/package.json
+archive/realai_sdk/realai-core/registry/render.yaml
+archive/realai_sdk/realai-core/registry/src
+archive/realai_sdk/realai-core/registry/tsconfig.json
+archive/realai_sdk/realai-core/sanity_check.py
+archive/realai_sdk/realai-core/schema
+archive/realai_sdk/realai-core/scripts
+archive/realai_sdk/realai-core/skills
+archive/realai_sdk/realai-core/test
+archive/realai_sdk/realai-core/tests
+archive/realai_sdk/realai-core/tools
+archive/realai_sdk/realai-core/ui/.gitignore
+archive/realai_sdk/realai-core/ui/package.json
+archive/realai_sdk/realai-core/ui/pages
+archive/realai_sdk/realai-core/ui/tsconfig.json
+archive/realai_sdk/realai-core/ui/tsconfig.tsbuildinfo
+archive/realai_sdk/realai-core/vercel.json
+archive/realai_sdk/realai-core/web
+archive/realai_sdk/realai-core__dup1/.github
+archive/realai_sdk/realai-core__dup1/.gitignore
+archive/realai_sdk/realai-core__dup1/README.md
+archive/realai_sdk/realai-core__dup1/agent_tools
+archive/realai_sdk/realai-core__dup1/agents
+archive/realai_sdk/realai-core__dup1/console
+archive/realai_sdk/realai-core__dup1/docs
+archive/realai_sdk/realai-core__dup1/examples
+archive/realai_sdk/realai-core__dup1/poetry.lock
+archive/realai_sdk/realai-core__dup1/policy.json
+archive/realai_sdk/realai-core__dup1/pyproject.toml
+archive/realai_sdk/realai-core__dup1/registry/.gitignore
+archive/realai_sdk/realai-core__dup1/registry/Dockerfile
+archive/realai_sdk/realai-core__dup1/registry/cli
+archive/realai_sdk/realai-core__dup1/registry/package.json
+archive/realai_sdk/realai-core__dup1/registry/render.yaml
+archive/realai_sdk/realai-core__dup1/registry/src
+archive/realai_sdk/realai-core__dup1/registry/tsconfig.json
+archive/realai_sdk/realai-core__dup1/sanity_check.py
+archive/realai_sdk/realai-core__dup1/schema
+archive/realai_sdk/realai-core__dup1/scripts
+archive/realai_sdk/realai-core__dup1/skills
+archive/realai_sdk/realai-core__dup1/test
+archive/realai_sdk/realai-core__dup1/tests
+archive/realai_sdk/realai-core__dup1/tools
+archive/realai_sdk/realai-core__dup1/ui/.gitignore
+archive/realai_sdk/realai-core__dup1/ui/package.json
+archive/realai_sdk/realai-core__dup1/ui/pages
+archive/realai_sdk/realai-core__dup1/ui/tsconfig.json
+archive/realai_sdk/realai-core__dup1/ui/tsconfig.tsbuildinfo
+archive/realai_sdk/realai-core__dup1/vercel.json
+archive/realai_sdk/realai-core__dup1/web
+archive/realai_sdk/realai-frontend/.gitignore
+archive/realai_sdk/realai-frontend/README.md
+archive/realai_sdk/realai-frontend/next.config.js
+archive/realai_sdk/realai-frontend/package.json
+archive/realai_sdk/realai-frontend/postcss.config.js
+archive/realai_sdk/realai-frontend/src
+archive/realai_sdk/realai-frontend/tailwind.config.js
+archive/realai_sdk/realai-frontend/tsconfig.json
+archive/realai_sdk/realai-frontend/vercel.json
+archive/realai_sdk/realai-frontend__dup1/.gitignore
+archive/realai_sdk/realai-frontend__dup1/README.md
+archive/realai_sdk/realai-frontend__dup1/next.config.js
+archive/realai_sdk/realai-frontend__dup1/package.json
+archive/realai_sdk/realai-frontend__dup1/postcss.config.js
+archive/realai_sdk/realai-frontend__dup1/src/app
+archive/realai_sdk/realai-frontend__dup1/src/components
+archive/realai_sdk/realai-frontend__dup1/tailwind.config.js
+archive/realai_sdk/realai-frontend__dup1/tsconfig.json
+archive/realai_sdk/realai-frontend__dup1/vercel.json
+archive/realai_sdk/realai-sdk
+archive/realai_sdk/realai-sdk__dup1
+archive/realai_sdk/realai.toml
+archive/realai_sdk/realai/__init__.py
+archive/realai_sdk/realai/agent_runtime.py
+archive/realai_sdk/realai/api_server.py
+archive/realai_sdk/realai/app_framework.py
+archive/realai_sdk/realai/audit.py
+archive/realai_sdk/realai/cli
+archive/realai_sdk/realai/critique.py
+archive/realai_sdk/realai/datasets
+archive/realai_sdk/realai/identity.py
+archive/realai_sdk/realai/knowledge_graph.py
+archive/realai_sdk/realai/local_models.py
+archive/realai_sdk/realai/local_runtime.py
+archive/realai_sdk/realai/memory
+archive/realai_sdk/realai/model_registry.py
+archive/realai_sdk/realai/models
+archive/realai_sdk/realai/plugin_marketplace.py
+archive/realai_sdk/realai/router.py
+archive/realai_sdk/realai/safety.py
+archive/realai_sdk/realai/sdk
+archive/realai_sdk/realai/self_improvement.py
+archive/realai_sdk/realai/server
+archive/realai_sdk/realai/tools.py
+archive/realai_sdk/realai/training
+archive/realai_sdk/realai/world_model.py
+archive/realai_sdk/realai__dup1.toml
+archive/realai_sdk/realai__dup1/__init__.py
+archive/realai_sdk/realai__dup1/agent_runtime.py
+archive/realai_sdk/realai__dup1/api_server.py
+archive/realai_sdk/realai__dup1/app_framework.py
+archive/realai_sdk/realai__dup1/audit.py
+archive/realai_sdk/realai__dup1/cli
+archive/realai_sdk/realai__dup1/critique.py
+archive/realai_sdk/realai__dup1/datasets
+archive/realai_sdk/realai__dup1/identity.py
+archive/realai_sdk/realai__dup1/knowledge_graph.py
+archive/realai_sdk/realai__dup1/local_models.py
+archive/realai_sdk/realai__dup1/local_runtime.py
+archive/realai_sdk/realai__dup1/memory
+archive/realai_sdk/realai__dup1/model_registry.py
+archive/realai_sdk/realai__dup1/models
+archive/realai_sdk/realai__dup1/plugin_marketplace.py
+archive/realai_sdk/realai__dup1/router.py
+archive/realai_sdk/realai__dup1/safety.py
+archive/realai_sdk/realai__dup1/sdk
+archive/realai_sdk/realai__dup1/self_improvement.py
+archive/realai_sdk/realai__dup1/server
+archive/realai_sdk/realai__dup1/tools.py
+archive/realai_sdk/realai__dup1/training
+archive/realai_sdk/realai__dup1/world_model.py
+archive/realai_sdk/realai_gui.py
+archive/realai_sdk/realai_gui__dup1.py
+archive/realai_sdk/realai_repo
+archive/realai_sdk/realai_repo__dup1
+archive/realai_sdk/realai_sdk/__init__.py
+archive/realai_sdk/realai_sdk/agent_runtime.py
+archive/realai_sdk/realai_sdk/api_server.py
+archive/realai_sdk/realai_sdk/app_framework.py
+archive/realai_sdk/realai_sdk/audit.py
+archive/realai_sdk/realai_sdk/cli
+archive/realai_sdk/realai_sdk/critique.py
+archive/realai_sdk/realai_sdk/datasets
+archive/realai_sdk/realai_sdk/execution_history.jsonl
+archive/realai_sdk/realai_sdk/identity.py
+archive/realai_sdk/realai_sdk/knowledge_graph.py
+archive/realai_sdk/realai_sdk/local_models.py
+archive/realai_sdk/realai_sdk/local_runtime.py
+archive/realai_sdk/realai_sdk/memory
+archive/realai_sdk/realai_sdk/model_registry.py
+archive/realai_sdk/realai_sdk/models
+archive/realai_sdk/realai_sdk/plugin_marketplace.py
+archive/realai_sdk/realai_sdk/router.py
+archive/realai_sdk/realai_sdk/sdk
+archive/realai_sdk/realai_sdk/self_improvement.py
+archive/realai_sdk/realai_sdk/server
+archive/realai_sdk/realai_sdk/tools.py
+archive/realai_sdk/realai_sdk/training
+archive/realai_sdk/realai_sdk/world_model.py
+archive/realai_sdk/realai_sdk__dup1/__init__.py
+archive/realai_sdk/realai_sdk__dup1/agent_runtime.py
+archive/realai_sdk/realai_sdk__dup1/api_server.py
+archive/realai_sdk/realai_sdk__dup1/app_framework.py
+archive/realai_sdk/realai_sdk__dup1/audit.py
+archive/realai_sdk/realai_sdk__dup1/cli
+archive/realai_sdk/realai_sdk__dup1/critique.py
+archive/realai_sdk/realai_sdk__dup1/datasets
+archive/realai_sdk/realai_sdk__dup1/execution_history.jsonl
+archive/realai_sdk/realai_sdk__dup1/identity.py
+archive/realai_sdk/realai_sdk__dup1/knowledge_graph.py
+archive/realai_sdk/realai_sdk__dup1/local_models.py
+archive/realai_sdk/realai_sdk__dup1/local_runtime.py
+archive/realai_sdk/realai_sdk__dup1/memory
+archive/realai_sdk/realai_sdk__dup1/model_registry.py
+archive/realai_sdk/realai_sdk__dup1/models
+archive/realai_sdk/realai_sdk__dup1/plugin_marketplace.py
+archive/realai_sdk/realai_sdk__dup1/router.py
+archive/realai_sdk/realai_sdk__dup1/safety.py
+archive/realai_sdk/realai_sdk__dup1/sdk
+archive/realai_sdk/realai_sdk__dup1/self_improvement.py
+archive/realai_sdk/realai_sdk__dup1/server
+archive/realai_sdk/realai_sdk__dup1/tools.py
+archive/realai_sdk/realai_sdk__dup1/training
+archive/realai_sdk/realai_sdk__dup1/world_model.py
+archive/realai_sdk/render.yaml
+archive/realai_sdk/render__dup1.yaml
+archive/realai_sdk/requirements-ci.txt
+archive/realai_sdk/requirements-ci__dup1.txt
+archive/realai_sdk/requirements-full.txt
+archive/realai_sdk/requirements-full__dup1.txt
+archive/realai_sdk/requirements-gpu.txt
+archive/realai_sdk/requirements-gpu__dup1.txt
+archive/realai_sdk/requirements.txt
+archive/realai_sdk/requirements__dup1.txt
+archive/realai_sdk/schema
+archive/realai_sdk/schema__dup1
+archive/realai_sdk/setup.py
+archive/realai_sdk/setup__dup1.py
+archive/realai_sdk/test_realai.py
+archive/realai_sdk/test_realai__dup1.py
+archive/realai_sdk/tests
+archive/realai_sdk/tests__dup1
+archive/realai_sdk/traefik.yml
+archive/realai_sdk/traefik__dup1.yml
+archive/realai_sdk__dup_1
+archive/realwarning: failed to remove archive/real-fin/realai/realai-design-system/src/theme: Permission denied
+archive/reawarning: failed to remove archive_extracted/real-fin/realai/plugins: Permission denied
+archive/root_scripts
+archive/sdk
+archive/servers
+archive/solana-client/swap.ts
+archive/tools
+archive/utilities/.python-version
+archive/utilities/6.0
+archive/utilities/=
+archive/utilities/=10.4.0
+archive/utilities/Dockerfile.gpu
+archive/utilities/agent_manifests_for_finetuning.json
+archive/utilities/agent_manifests_for_finetuning_training_runs.json
+archive/utilities/blackbox_mcp_settings.json
+archive/utilities/build_lambda.sh
+archive/utilities/index.html
+archive/utilities/pnpm-workspace.yaml
+archive/utilities/pyrightconfig.json
+archive/utilities/realai_launcher.spec
+archive/vendor
