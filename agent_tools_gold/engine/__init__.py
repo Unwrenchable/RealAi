@@ -1,6 +1,16 @@
-"""Placeholder for agent_tools/engine/__init__.py — listed in SOURCES.txt, source missing from disk.
-Recover from git history or bytecode when available.
-RECOVERY_STATUS = "missing_source"
-"""
-RECOVERY_STATUS = "missing_source"
-MODULE = 'agent_tools/engine/__init__.py'
+from __future__ import annotations
+
+from .executor import AgentExecutor, ExecutionResult
+from .loader import AgentManifest, AgentManifestLoader, ManifestValidationError
+from .memory import create_memory_adapter
+from .router import AgentRouter
+
+__all__ = [
+    "AgentExecutor",
+    "ExecutionResult",
+    "AgentManifest",
+    "AgentManifestLoader",
+    "ManifestValidationError",
+    "create_memory_adapter",
+    "AgentRouter",
+]
