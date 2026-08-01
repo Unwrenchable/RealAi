@@ -14,5 +14,7 @@
   "tags": [
     "experimental",
     "high-context"
-  ]
+  ],
+  "preferred_gguf": "realai-overseer-Q4_K_M.gguf",
+  "bootstrap_note": "Until a dedicated overseer checkpoint is trained, bootstrap copies the same dev GGUF as realai-1.0-instruct."
 }
