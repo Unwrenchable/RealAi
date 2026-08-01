@@ -1,0 +1,202 @@
+[
+  {
+    "name": "plugins",
+    "snap_count": 26108,
+    "exists_live": true
+  },
+  {
+    "name": "bootstrap_dump",
+    "snap_count": 9570,
+    "exists_live": false
+  },
+  {
+    "name": "archive",
+    "snap_count": 6977,
+    "exists_live": true
+  },
+  {
+    "name": "checkpoints_lora",
+    "snap_count": 668,
+    "exists_live": false
+  },
+  {
+    "name": "realai_sdk",
+    "snap_count": 659,
+    "exists_live": true
+  },
+  {
+    "name": "realai_repo",
+    "snap_count": 605,
+    "exists_live": true
+  },
+  {
+    "name": "rebase_dryrun",
+    "snap_count": 437,
+    "exists_live": true
+  },
+  {
+    "name": "realai-clean__dup1",
+    "snap_count": 434,
+    "exists_live": true
+  },
+  {
+    "name": "realai_historical_backups",
+    "snap_count": 417,
+    "exists_live": true
+  },
+  {
+    "name": "realai",
+    "snap_count": 389,
+    "exists_live": true
+  },
+  {
+    "name": "realai_search_temp",
+    "snap_count": 358,
+    "exists_live": true
+  },
+  {
+    "name": "chocolatey",
+    "snap_count": 249,
+    "exists_live": true
+  },
+  {
+    "name": "RealAIProject",
+    "snap_count": 246,
+    "exists_live": true
+  },
+  {
+    "name": "agent-tools-main",
+    "snap_count": 218,
+    "exists_live": true
+  },
+  {
+    "name": "realai-clean",
+    "snap_count": 217,
+    "exists_live": true
+  },
+  {
+    "name": "real-fin",
+    "snap_count": 180,
+    "exists_live": true
+  },
+  {
+    "name": "src",
+    "snap_count": 130,
+    "exists_live": true
+  },
+  {
+    "name": "agent-tools",
+    "snap_count": 81,
+    "exists_live": true
+  },
+  {
+    "name": "apps",
+    "snap_count": 75,
+    "exists_live": true
+  },
+  {
+    "name": "core",
+    "snap_count": 73,
+    "exists_live": true
+  },
+  {
+    "name": "scripts",
+    "snap_count": 66,
+    "exists_live": true
+  },
+  {
+    "name": "realai-core",
+    "snap_count": 47,
+    "exists_live": true
+  },
+  {
+    "name": "terminals",
+    "snap_count": 45,
+    "exists_live": true
+  },
+  {
+    "name": "realai_good",
+    "snap_count": 37,
+    "exists_live": true
+  },
+  {
+    "name": "archive_extracted",
+    "snap_count": 33,
+    "exists_live": true
+  },
+  {
+    "name": "models",
+    "snap_count": 31,
+    "exists_live": true
+  },
+  {
+    "name": ".venv-new",
+    "snap_count": 28,
+    "exists_live": true
+  },
+  {
+    "name": "logs_data",
+    "snap_count": 26,
+    "exists_live": true
+  },
+  {
+    "name": "docs",
+    "snap_count": 22,
+    "exists_live": true
+  },
+  {
+    "name": "examples",
+    "snap_count": 22,
+    "exists_live": true
+  },
+  {
+    "name": "server",
+    "snap_count": 21,
+    "exists_live": true
+  },
+  {
+    "name": "tests",
+    "snap_count": 20,
+    "exists_live": true
+  },
+  {
+    "name": "agents",
+    "snap_count": 16,
+    "exists_live": true
+  },
+  {
+    "name": "aura",
+    "snap_count": 12,
+    "exists_live": true
+  },
+  {
+    "name": "root_scripts",
+    "snap_count": 12,
+    "exists_live": false
+  },
+  {
+    "name": "realai_agent",
+    "snap_count": 10,
+    "exists_live": false
+  },
+  {
+    "name": "benchmarks",
+    "snap_count": 9,
+    "exists_live": true
+  },
+  {
+    "name": ".github",
+    "snap_count": 8,
+    "exists_live": true
+  },
+  {
+    "name": "packages",
+    "snap_count": 8,
+    "exists_live": true
+  },
+  {
+    "name": "realai_memory",
+    "snap_count": 8,
+    "exists_live": true
+  }
+]
