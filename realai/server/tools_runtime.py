@@ -47,7 +47,7 @@ class ToolRuntime(object):
             description='Read local files',
             params={'path': 'string'},
             permissions=['filesystem.read'],
-            timeout_ms=5000,
+            timeout_ms=8000,
             safety_class='restricted',
         ))
         self.register(ToolManifest(
