@@ -1,5 +1,5 @@
 # dependencies
-/node_modules
+
 /.pnp
 .pnp.js
 
@@ -12,7 +12,7 @@
 
 # production
 /build
-
+/node_modules/
 # env files
 .env*.local
 
