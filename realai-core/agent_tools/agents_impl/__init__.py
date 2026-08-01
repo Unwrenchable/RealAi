@@ -1,2 +1,6 @@
-# Stub package to satisfy legacy setup.py package_dir during editable install.
-# The realai-core/agent_tools code is incomplete / not required for the local self-build loop.
+"""realai_core/agents_impl — Concrete agent implementations.
+
+These classes provide the Python-level logic for agents whose behaviour goes
+beyond a simple LLM completion call.  They are designed to be used directly
+or via :class:`~realai_core.engine.executor.AgentExecutor`.
+"""
