@@ -171,3 +171,7 @@ venv/
 node_modules/
 realai-frontend/node_modules/
 realai-frontend/.next/
+.venv
+*.pyc
+__pycache__
+
