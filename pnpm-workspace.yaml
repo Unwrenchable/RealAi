@@ -3,3 +3,7 @@ packages:
   - "packages/*"
   - "providers/*"
   - "models/*"
+allowBuilds:
+  esbuild: true
+  sharp: false
+  unrs-resolver: false
