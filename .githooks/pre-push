@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Local push guard: reject pushes that contain blobs above GitHub's hard 100 MB limit.
+repo_root=$(git rev-parse --show-toplevel)
+"$repo_root/scripts/check_outgoing_blob_sizes.sh"

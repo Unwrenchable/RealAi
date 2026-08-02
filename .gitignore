@@ -1,3 +1,11 @@
+# Large local artifacts (prevent GitHub >100MB push rejections)
+realai_local_export.zip
+realai_full_cavity_manifest.json
+realai-core.tar.gz
+realai-core.tar.gz.part-*
+
+# Common generated archives
+*_export.zip
 # === LARGE / TEMP FILES - NEVER COMMIT ===
 models/*.gguf
 models/models/
