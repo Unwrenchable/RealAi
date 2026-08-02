@@ -4,6 +4,8 @@ from dataclasses import dataclass, field
 from functools import lru_cache
 import copy
 import json
+import os
+import shutil
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -28,7 +30,7 @@ class ServerSettings:
 
     profile: str = 'default'
     provider: str = 'local'
-    default_chat_model: str = 'realai-1.0'
+    default_chat_model: str = 'realai-native'
     default_embedding_model: str = 'realai-embed'
     enable_legacy_paths: bool = True
     model_registry_path: str = str(_DEFAULT_REGISTRY_PATH)
@@ -176,6 +178,57 @@ def _read_profiles() -> Dict[str, Dict[str, Any]]:
     return profiles
 
 
+def _discover_local_model_candidates() -> List[Path]:
+    candidates: List[Path] = []
+    search_roots = [
+        Path.home() / '.realai' / 'models',
+        Path('/opt/realai/models'),
+        Path('/mnt/c/Users').exists() and Path('/mnt/c/Users') or None,
+        Path('/mnt/d/Models'),
+        Path('models'),
+        _ROOT / 'models',
+    ]
+    for root in search_roots:
+        if root is None:
+            continue
+        if not root.exists():
+            continue
+        for pattern in ('*.gguf', '*.bin', '*.safetensors', '*.onnx', '*.pt', '*.pth'):
+            candidates.extend(root.rglob(pattern))
+    # also include explicit common locations when they exist
+    for path in [
+        Path.home() / 'models',
+        Path.home() / 'Downloads',
+        Path('/usr/share/models'),
+        Path('/opt/models'),
+    ]:
+        if path.exists():
+            for pattern in ('*.gguf', '*.bin', '*.safetensors', '*.onnx', '*.pt', '*.pth'):
+                candidates.extend(path.rglob(pattern))
+    seen = set()
+    unique_candidates: List[Path] = []
+    for candidate in candidates:
+        if candidate.is_file() and str(candidate) not in seen:
+            seen.add(str(candidate))
+            unique_candidates.append(candidate)
+    return unique_candidates
+
+
+def _resolve_model_path(raw_path: str | None) -> str | None:
+    if not raw_path:
+        return None
+    path = Path(raw_path)
+    if path.exists():
+        return str(path)
+    if path.is_absolute():
+        return None
+    discovered = _discover_local_model_candidates()
+    for candidate in discovered:
+        if candidate.name.lower() == path.name.lower() or str(candidate).endswith(str(path)):
+            return str(candidate)
+    return None
+
+
 def _default_registry() -> Dict[str, Dict[str, Any]]:
     return {
         'realai-1.0': {
@@ -228,6 +281,9 @@ def _normalize_model_entry(model_id: str, payload: Dict[str, Any]) -> Dict[str, 
     normalized.setdefault('capabilities', ['embedding'] if normalized['type'] == 'embedding' else ['chat'])
     if normalized['type'] == 'embedding':
         normalized.setdefault('embedding_dimensions', 64)
+    resolved_path = _resolve_model_path(normalized.get('path'))
+    if resolved_path:
+        normalized['path'] = resolved_path
     return normalized
 
 

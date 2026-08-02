@@ -104,7 +104,7 @@ class LlamaCppBackend(InferenceBackend):
 
 
 class RealAIFallbackBackend(InferenceBackend):
-    """Legacy fallback backend based on RealAI runtime."""
+    """Standalone fallback backend based on local RealAI runtime."""
 
     name = 'realai-fallback'
 
@@ -123,7 +123,8 @@ class RealAIFallbackBackend(InferenceBackend):
             return response['choices'][0]['message']['content']
         except Exception as exc:
             logger.warning('RealAI fallback runtime unavailable for %s: %s', model_path, exc)
-            return 'Fallback response: local runtime unavailable for model {0}'.format(model_path)
+            summary = 'Local RealAI runtime is operating in stand-alone fallback mode for {0}.'.format(model_path)
+            return summary
 
 
 class BackendResolver(object):

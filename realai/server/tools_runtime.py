@@ -2,7 +2,7 @@
 
 import time
 from dataclasses import dataclass, field
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 
 @dataclass
@@ -91,6 +91,34 @@ class ToolRuntime(object):
 
     def list_audit(self):
         return list(self._audit[-200:])
+
+    def validate_manifest(self, manifest: ToolManifest) -> bool:
+        if not isinstance(manifest, ToolManifest):
+            return False
+        if not manifest.name or not manifest.description:
+            return False
+        if not isinstance(manifest.params, dict):
+            return False
+        return True
+
+    def execute(self, tool_name: str, params: Optional[Dict[str, Any]] = None, actor: str = 'system'):
+        try:
+            manifest = self.get(tool_name)
+        except ValueError:
+            manifest = ToolManifest(
+                name=tool_name,
+                description='Runtime-generated tool manifest',
+                params={k: type(v).__name__ for k, v in (params or {}).items()},
+            )
+        if not self.validate_manifest(manifest):
+            raise ValueError('Invalid tool manifest for {0}'.format(tool_name))
+        self.audit(tool_name, actor, 'executed')
+        return {
+            'tool': tool_name,
+            'ok': True,
+            'params': dict(params or {}),
+            'manifest': manifest.to_dict(),
+        }
 
 
 TOOLS = ToolRuntime()

@@ -192,6 +192,38 @@ if FastAPI is not None and BaseModel is not None:
     def tools():
         return _dispatch_json('GET', '/v1/tools')
 
+    @app.get('/v1/skills')
+    def skills():
+        return _dispatch_json('GET', '/v1/skills')
+
+    @app.get('/v1/agents')
+    def agents():
+        return _dispatch_json('GET', '/v1/agents')
+
+    @app.post('/v1/synthetic/organism')
+    def synthetic_organism(payload: dict):
+        return _dispatch_json('POST', '/v1/synthetic/organism', payload)
+
+    @app.get('/v1/synthetic/organisms')
+    def synthetic_organisms():
+        return _dispatch_json('GET', '/v1/synthetic/organisms')
+
+    @app.get('/v1/synthetic/organisms/{organism_id}')
+    def synthetic_organism_detail(organism_id: str):
+        return _dispatch_json('GET', '/v1/synthetic/organisms/{0}'.format(organism_id))
+
+    @app.post('/v1/curiosity')
+    def curiosity(payload: dict):
+        return _dispatch_json('POST', '/v1/curiosity', payload)
+
+    @app.post('/v1/archeology')
+    def archeology(payload: dict):
+        return _dispatch_json('POST', '/v1/archeology', payload)
+
+    @app.post('/v1/workspace/catalog')
+    def workspace_catalog(payload: dict):
+        return _dispatch_json('POST', '/v1/workspace/catalog', payload)
+
     @app.post('/v1/tasks')
     def tasks_create(request: TaskRequest):
         return _dispatch_json('POST', '/v1/tasks', request.dict())

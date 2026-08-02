@@ -11,8 +11,11 @@ Then configure RealAI:
     API Key: local (or any value)
 """
 
+import os
+import shutil
 import subprocess
 import json
+from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -20,9 +23,57 @@ from typing import List, Optional
 import uvicorn
 import time
 
-# Configure your paths here
-LLAMA_CLI_PATH = r"C:\llama.cpp\build\bin\Release\llama-simple.exe"
-DEFAULT_MODEL_PATH = r"C:\Users\tsmit\OneDrive\Apps\realai\models\llama3.2-1b\Llama-3.2-1B-Instruct-Q4_K_M.gguf"
+
+def _discover_llama_cli() -> Optional[str]:
+    configured = os.getenv("REALAI_LLAMA_CLI_PATH")
+    if configured:
+        candidate = Path(configured)
+        if candidate.exists():
+            return str(candidate)
+    for name in ("llama-cli", "llama-cli.exe", "llama", "llama-simple", "llama-simple.exe"):
+        found = shutil.which(name)
+        if found:
+            return found
+    for candidate in [
+        Path.home() / ".local" / "bin" / "llama-cli",
+        Path.home() / ".local" / "bin" / "llama",
+        Path.home() / "bin" / "llama-cli",
+        Path.home() / "bin" / "llama",
+        Path("/usr/local/bin/llama-cli"),
+        Path("/usr/local/bin/llama"),
+        Path("/opt/llama.cpp/bin/llama-cli"),
+        Path("/opt/llama.cpp/bin/llama"),
+    ]:
+        if candidate.exists():
+            return str(candidate)
+    return None
+
+
+def _discover_model_path() -> Optional[str]:
+    configured = os.getenv("REALAI_MODEL_PATH")
+    if configured:
+        candidate = Path(configured)
+        if candidate.exists():
+            return str(candidate)
+    for root in [
+        Path.home() / ".realai" / "models",
+        Path.home() / "models",
+        Path("/opt/realai/models"),
+        Path("/opt/models"),
+        Path("models"),
+        Path(__file__).resolve().parent / "models",
+    ]:
+        if not root.exists():
+            continue
+        for pattern in ("*.gguf", "*.bin", "*.safetensors", "*.onnx", "*.pt", "*.pth"):
+            matches = sorted(root.rglob(pattern))
+            if matches:
+                return str(matches[0])
+    return None
+
+
+LLAMA_CLI_PATH = _discover_llama_cli()
+DEFAULT_MODEL_PATH = _discover_model_path()
 
 app = FastAPI(title="RealAI Local Inference Server")
 
@@ -102,7 +153,12 @@ def chat_completions(req: ChatRequest):
 
         prompt += "Assistant:"
 
-        # Call llama-simple.exe
+        if not LLAMA_CLI_PATH:
+            raise HTTPException(status_code=500, detail="No llama-cli executable found. Set REALAI_LLAMA_CLI_PATH to the binary path.")
+        if not DEFAULT_MODEL_PATH:
+            raise HTTPException(status_code=500, detail="No local model file found. Set REALAI_MODEL_PATH to a GGUF or other supported model file.")
+
+        # Call llama-cli/llama-simple-compatible executable
         cmd = [
             LLAMA_CLI_PATH,
             "-m", DEFAULT_MODEL_PATH,
@@ -173,7 +229,12 @@ def chat_completions(req: ChatRequest):
 def completions(req: CompletionRequest):
     """OpenAI-compatible completions endpoint"""
     try:
-        # Call llama-simple.exe
+        if not LLAMA_CLI_PATH:
+            raise HTTPException(status_code=500, detail="No llama-cli executable found. Set REALAI_LLAMA_CLI_PATH to the binary path.")
+        if not DEFAULT_MODEL_PATH:
+            raise HTTPException(status_code=500, detail="No local model file found. Set REALAI_MODEL_PATH to a GGUF or other supported model file.")
+
+        # Call llama-cli/llama-simple-compatible executable
         cmd = [
             LLAMA_CLI_PATH,
             "-m", DEFAULT_MODEL_PATH,

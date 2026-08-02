@@ -7,14 +7,14 @@ profile = "default"
 provider = "local"
 
 # Default models
-default_chat_model = "llama-local"
+default_chat_model = "realai-native"
 default_embedding_model = "realai-embed"
 
 # Enable legacy paths for backwards compatibility
 enable_legacy_paths = true
 
 # Path to model registry (relative to project root)
-model_registry_path = "realai/models/registry.json"
+model_registry_path = "models.yaml"
 
 # Backend-specific configuration
 [backends]
@@ -23,6 +23,7 @@ model_registry_path = "realai/models/registry.json"
 [backends.llama-cli]
 # Path to llama-cli executable (optional - will auto-detect if not specified)
 # llama_cli_path = "C:/llama.cpp/build/bin/Release/llama-cli.exe"
+# llama_cli_path = "C:/llama.cpp/tools/llama-cli.exe"
 # llama_cli_path = "/home/user/llama.cpp/build/bin/llama-cli"
 
 # Enable chat mode for better message formatting (experimental)

@@ -322,6 +322,14 @@ class BeliefUpdater:
         re.compile(r"(\w[\w\s]*?)\s*=\s*(.+?)(?:\.|,|$)", re.IGNORECASE),
     ]
 
+    def _normalize_key(self, key: str) -> str:
+        normalized = key.strip().lower().replace(" ", "_")
+        for article in ("the", "a", "an"):
+            prefix = article + "_"
+            if normalized.startswith(prefix):
+                return normalized[len(prefix):]
+        return normalized
+
     def update(self, state: WorldState, observation: Observation) -> None:
         """Extract facts from an observation and update world state.
 
@@ -331,7 +339,7 @@ class BeliefUpdater:
         """
         for pattern in self._KV_PATTERNS:
             for match in pattern.finditer(observation.content):
-                key = match.group(1).strip().lower().replace(" ", "_")
+                key = self._normalize_key(match.group(1))
                 value = match.group(2).strip()
 
                 # Confidence-weighted merge
@@ -353,3 +361,4 @@ class BeliefUpdater:
 WORLD_STATE = WorldState()
 GOAL_TRACKER = GoalTracker()
 PLANNING_ENGINE = PlanningEngine()
+BELIEF_UPDATER = BeliefUpdater()

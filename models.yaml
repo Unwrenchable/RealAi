@@ -4,13 +4,28 @@ models:
     type: chat
     provider: local
     backend: realai-fallback
-    path: realai-2.0
+    path: realai-1.0
     owned_by: realai
     context_length: 8192
     capabilities:
       - chat
       - reasoning
       - tools
+      - local-first
+
+  - id: realai-native
+    name: "RealAI Native"
+    type: chat
+    provider: local
+    backend: realai-fallback
+    path: realai-native
+    owned_by: realai
+    context_length: 8192
+    capabilities:
+      - chat
+      - reasoning
+      - planning
+      - local-first
 
   - id: realai-overseer
     name: "RealAI Overseer"

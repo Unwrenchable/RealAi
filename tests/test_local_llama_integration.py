@@ -1,5 +1,6 @@
 """Unit tests for local structured-server backends."""
 
+import tempfile
 from pathlib import Path
 from unittest import TestCase
 from unittest.mock import Mock, patch
@@ -24,6 +25,21 @@ class TestLlamaCliBackend(TestCase):
         backend = LlamaCliBackend()
         found = backend._find_llama_cli()
         self.assertEqual(found, Path('/usr/bin/llama-cli'))
+
+    @patch('realai.server.llama_cli_backend.shutil.which', return_value=None)
+    def test_find_llama_cli_in_local_user_bin(self, mock_which):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            home_dir = Path(tmpdir)
+            local_bin = home_dir / '.local' / 'bin' / 'llama-cli'
+            local_bin.parent.mkdir(parents=True, exist_ok=True)
+            local_bin.write_text('#!/bin/sh\n', encoding='utf-8')
+            local_bin.chmod(0o755)
+
+            with patch('realai.server.llama_cli_backend.Path.home', return_value=home_dir):
+                backend = LlamaCliBackend()
+                found = backend._find_llama_cli()
+
+            self.assertEqual(found, local_bin)
 
     def test_sampling_config_defaults(self):
         config = SamplingConfig()
