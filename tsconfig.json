@@ -1,34 +1,18 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
+    "lib": ["ES2020", "DOM"],
     "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
-    "paths": {
-      "@realai/frontend/*": ["apps/frontend/src/*"],
-      "@realai/widget/*": ["apps/widget/src/*"],
-      "@realai/dashboard/*": ["apps/dashboard/src/*"],
-      "@realai/core/*": ["packages/core/src/*"],
-      "@realai/ui/*": ["packages/ui/src/*"],
-      "@realai/sdk-ts/*": ["packages/sdk-ts/src/*"],
-      "@realai/sdk-py/*": ["packages/sdk-py/*"],
-      "@realai/cli/*": ["packages/cli/src/*"],
-      "@providers/*": ["providers/*"],
-      "@models/*": ["models/*"]
-    }
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "outDir": "dist"
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts"],
-  "exclude": ["node_modules", "dist", ".next", ".turbo"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
