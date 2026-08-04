@@ -1,0 +1,6 @@
+services:
+  - type: static
+    name: realai-frontend
+    rootDir: realai-frontend
+    buildCommand: npm install --no-package-lock && npm run build
+    publishPath: out
