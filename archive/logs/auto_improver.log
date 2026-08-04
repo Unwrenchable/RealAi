@@ -1,0 +1,15 @@
+[2026-06-17 03:11:34,853] INFO - === RealAI Auto Improver started ===
+[2026-06-17 03:11:34,854] INFO - Target thresholds: examples≥150, success≥25%
+[2026-06-17 03:11:34,854] INFO - Managing server: False
+[2026-06-17 03:11:34,854] INFO - 
+=== Cycle #1 ===
+[2026-06-17 03:11:34,854] INFO - Collecting data: 2 closed-loop iterations...
+[2026-06-17 03:12:20,000] INFO - === RealAI Auto Improver started ===
+[2026-06-17 03:12:20,000] INFO - Target thresholds: examples≥150, success≥25%
+[2026-06-17 03:12:20,000] INFO - Managing server: False
+[2026-06-17 03:12:20,000] INFO - 
+=== Cycle #1 ===
+[2026-06-17 03:12:20,002] INFO - Dry run: skipping actual collection (no server).
+[2026-06-17 03:12:20,016] INFO - Learning ability check: only 9 training examples (need ≥150) | recent success rate 0% (need ≥25%)
+[2026-06-17 03:12:20,016] INFO - Not ready yet. Continuing data collection...
+[2026-06-17 03:12:20,016] INFO - One-shot mode and not ready. Exiting.

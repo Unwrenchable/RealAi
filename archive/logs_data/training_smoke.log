@@ -1,0 +1,12 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Device detected: cpu
+Loaded dataset rows: 8209
+========================================================================================
+Starting run [0/3]: qwen2.5-1.5b-lora-smoke-test
+
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 338/338 [00:00<00:00, 8680.93it/s]
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+trainable params: 4,358,144 || all params: 1,548,072,448 || trainable%: 0.2815
+
+  0%|          | 0/20 [00:00<?, ?it/s]
