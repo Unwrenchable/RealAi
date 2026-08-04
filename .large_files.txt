@@ -1,0 +1,18 @@
+./.git/objects/fe/tmp_obj_9hUtTD
+./.git/objects/pack/pack-2736838c2512932c18b363596a3f3f931be7acbc.pack
+./.git/objects/pack/pack-3a7b0ee1015e090437024c6207b65befa8be15f5.pack
+./.git/objects/pack/pack-3f32a1d30e78a3679a3b0452b43ff71636ed19a6.pack
+./.git/objects/pack/pack-427f32fb23194eb6b440496b2b8c7acc120b7722.pack
+./.git/objects/pack/pack-49a9b536a3d13e553cff6a764af44bb624c2a8f7.pack
+./.git/objects/pack/pack-78c70e11c59bdb9d603f6be05929129165977025.pack
+./.git/objects/pack/pack-7cb3e13b584f92b4a8d44743345dbd5dbc8d5998.pack
+./.git/objects/pack/pack-85cef3c109bf83aebdc8087ccb36d6d63fc1261f.pack
+./.git/objects/pack/pack-8b164d5e8779d41ff4ec3c2078babd9cedb986b6.pack
+./.git/objects/pack/pack-d6f09322c2d9253f8d643b7c5a984f3592fc41b9.pack
+./.git/objects/pack/pack-ee0c9ec3506b5d1de977f9759a040644a35f8198.pack
+./modules_runtime/from_accident/desktop/realai - Copy/build/realai_launcher/RealAI.pkg
+./modules_runtime/from_accident/desktop/realai - Copy/dist/RealAI.exe
+./modules_runtime/from_accident/desktop/realai - Copy/realai/models/llama3.2-1b/Llama-3.2-1B-Instruct-Q4_K_M.gguf
+./node_modules/.pnpm/@next+swc-win32-x64-msvc@15.5.21/node_modules/@next/swc-win32-x64-msvc/next-swc.win32-x64-msvc.node
+./node_modules/.pnpm/@next+swc-win32-x64-msvc@15.5.22/node_modules/@next/swc-win32-x64-msvc/next-swc.win32-x64-msvc.node
+./realai-frontend/node_modules/@next/swc-win32-x64-msvc/next-swc.win32-x64-msvc.node

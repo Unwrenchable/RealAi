@@ -1,0 +1,44 @@
+[
+  {
+    "sessionId": "287b94bf-d1b3-4677-acad-e28cdcb7d17d",
+    "title": "Message Copilot",
+    "dateCreated": "1783258169914",
+    "workspaceDirectory": "file:///c%3A/Users/tsmit/realai",
+    "messageCount": 1
+  },
+  {
+    "sessionId": "5067b9dd-7339-4ebc-b74d-fe727562322e",
+    "title": "Start now. Use the tools. Be thorough, careful, and systematic. Give me a clear summary + the fir...",
+    "dateCreated": "1783259431614",
+    "workspaceDirectory": "file:///c%3A/Users/tsmit/realai",
+    "messageCount": 1
+  },
+  {
+    "sessionId": "f948eceb-da6e-4778-b550-78d298070df5",
+    "title": "Start now. Use the tools. Be thorough, careful, and systematic. Give me a clear summary + the fir...",
+    "dateCreated": "1783260138212",
+    "workspaceDirectory": "file:///c%3A/Users/tsmit/realai",
+    "messageCount": 1
+  },
+  {
+    "sessionId": "1cff49da-ae28-47b0-8fee-9f077c3ac0a0",
+    "title": "Start now with actual tool calls. Read all important files. plan — and show real output.",
+    "dateCreated": "1783349063255",
+    "workspaceDirectory": "file:///c%3A/Users/tsmit/realai-clean",
+    "messageCount": 3
+  },
+  {
+    "sessionId": "dce0a890-1d0d-4603-a806-9b39ba1bc831",
+    "title": "Begin now by scanning the repo structure and summarizing all subsystems and archive clusters you ...",
+    "dateCreated": "1783365512862",
+    "workspaceDirectory": "file:///c%3A/Users/tsmit/realai-clean",
+    "messageCount": 3
+  },
+  {
+    "sessionId": "2f313391-8dd1-489f-af07-94b370059b07",
+    "title": "@",
+    "dateCreated": "1783366453844",
+    "workspaceDirectory": "file:///c%3A/Users/tsmit/realai-clean",
+    "messageCount": 7
+  }
+]

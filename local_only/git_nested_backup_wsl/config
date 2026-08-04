@@ -1,0 +1,15 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[commit]
+	gpgsign = false
+[remote "origin"]
+	url = https://github.com/Unwrenchable/RealAi.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "recovery/wsl-RealAi/2026-07-31/HOMEPC/w4a8c2"]
+	remote = origin
+	merge = refs/heads/recovery/wsl-RealAi/2026-07-31/HOMEPC/w4a8c2

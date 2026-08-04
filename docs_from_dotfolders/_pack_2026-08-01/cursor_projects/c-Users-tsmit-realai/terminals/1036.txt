@@ -1,0 +1,12 @@
+---
+cwd: "C:\\Users\\tsmit\\realai"
+command: ".\\build_installer.bat"
+started_at: 2026-06-02T10:09:33.925Z
+running_for_ms: 2        
+---
+
+---
+error: "Sandbox policy 'workspace_readwrite' is not supported on this system. Ensure the sandbox helper binary is available, or use 'insecure_none'. Reason: Windows sandbox helper only provides network proxy, not filesystem isolation"
+elapsed_ms: 3
+ended_at: 2026-06-02T10:09:33.928Z
+---

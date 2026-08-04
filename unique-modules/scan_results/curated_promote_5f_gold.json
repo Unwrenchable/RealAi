@@ -1,0 +1,1136 @@
+{
+  "started": "2026-07-14T14:08:26.261956+00:00",
+  "policy": "curated promote only \u2014 never bulk-merge",
+  "actions": [
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-orchestration\\agent.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-orchestration\\agent.py",
+      "md5": "ec8e1c27095cfc21d02454261d9e8114",
+      "reason": "desktop:realai-orchestration"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-orchestration\\memory.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-orchestration\\memory.py",
+      "md5": "6336aef540f0f7d56b459ed51d6be4b7",
+      "reason": "desktop:realai-orchestration"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-orchestration\\orchestrator.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-orchestration\\orchestrator.py",
+      "md5": "cdec598168129873b901ae5006834e61",
+      "reason": "desktop:realai-orchestration"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-orchestration\\pipeline.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-orchestration\\pipeline.py",
+      "md5": "137258315222c03536d84c0e5fd84f5b",
+      "reason": "desktop:realai-orchestration"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-orchestration\\README.md",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-orchestration\\README.md",
+      "md5": "f3dc15b5bd0a7204b79ac0a0cb050216",
+      "reason": "desktop:realai-orchestration"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-orchestration\\tools.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-orchestration\\tools.py",
+      "md5": "4cf04ea4b865ba8237f189ccae52a9d7",
+      "reason": "desktop:realai-orchestration"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-orchestration\\__init__.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-orchestration\\__init__.py",
+      "md5": "39d0a158ae6b49e2350a15d8623b9cec",
+      "reason": "desktop:realai-orchestration"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent\\agents.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_agent\\agents.py",
+      "md5": "6ad553f9ce6319750f8d42c0bae767f5",
+      "reason": "desktop:realai_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent\\hierarchical_agent.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_agent\\hierarchical_agent.py",
+      "md5": "39345cb8e0d3adf9aee834771f6d17b0",
+      "reason": "desktop:realai_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent\\main.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_agent\\main.py",
+      "md5": "208d71a17843c646cc1661abec166972",
+      "reason": "desktop:realai_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent\\README.md",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_agent\\README.md",
+      "md5": "f66e8ac5373f066674b6ffe8a495a285",
+      "reason": "desktop:realai_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent\\rise_system.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_agent\\rise_system.py",
+      "md5": "3dc724ae2c06c3cb8732f473e03fd32b",
+      "reason": "desktop:realai_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent\\supervisor.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_agent\\supervisor.py",
+      "md5": "51da8441cc4f70a216eb1a4d463d7209",
+      "reason": "desktop:realai_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent\\test_agent.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_agent\\test_agent.py",
+      "md5": "cdab2a454afbf9ff73afb3d62c73c597",
+      "reason": "desktop:realai_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent\\tools.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_agent\\tools.py",
+      "md5": "84f4f3047547a9c68b5d76e5a1740f66",
+      "reason": "desktop:realai_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent\\training_pipeline.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_agent\\training_pipeline.py",
+      "md5": "bde7bb149d82629f0e164e06d1558196",
+      "reason": "desktop:realai_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent\\__init__.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_agent\\__init__.py",
+      "md5": "3356fd79278313b0ac909e847c1f2fde",
+      "reason": "desktop:realai_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_api\\app.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_api\\app.py",
+      "md5": "5d6e8bfb9529a7985709d4d89dff9963",
+      "reason": "desktop:realai_api"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_api\\auth.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_api\\auth.py",
+      "md5": "fd5ff43dda28bfa95bb1f32b84b95ea3",
+      "reason": "desktop:realai_api"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_api\\config.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_api\\config.py",
+      "md5": "89f1e7a43cfcf81494f0404a42a24553",
+      "reason": "desktop:realai_api"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_api\\providers.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_api\\providers.py",
+      "md5": "158c64a19c3fe840baa708544e33a510",
+      "reason": "desktop:realai_api"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_api\\README.md",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_api\\README.md",
+      "md5": "95aef06f47e390d05c5e41b07d2554d2",
+      "reason": "desktop:realai_api"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_api\\schemas.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_api\\schemas.py",
+      "md5": "d023c06f519f70a0e18ce0f82bb5508d",
+      "reason": "desktop:realai_api"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_api\\__init__.py",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_api\\__init__.py",
+      "md5": "b06258c88fc132e8fc59e7d7fbb789a1",
+      "reason": "desktop:realai_api"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-cli\\package.json",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-cli\\package.json",
+      "md5": "0035100416f5d1ba2a3d369be5c73ba3",
+      "reason": "desktop:realai-cli"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-cli\\tsconfig.json",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-cli\\tsconfig.json",
+      "md5": "a1b8db882f1edab03e3ab47fb3f2b495",
+      "reason": "desktop:realai-cli"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-cli\\src\\config.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-cli\\src\\config.ts",
+      "md5": "9687ad5fdc9c72b6131e722a7afd7b05",
+      "reason": "desktop:realai-cli"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-cli\\src\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-cli\\src\\index.ts",
+      "md5": "f550610d65af9203d6de9c0e241e902c",
+      "reason": "desktop:realai-cli"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-cli\\src\\commands\\chat.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-cli\\src\\commands\\chat.ts",
+      "md5": "d735d4243c5443f5ffcb98512c9133bc",
+      "reason": "desktop:realai-cli"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-cli\\src\\commands\\login.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-cli\\src\\commands\\login.ts",
+      "md5": "8e0c0ee141ed6a90d23f5dcee9b6a0a7",
+      "reason": "desktop:realai-cli"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-cli\\src\\commands\\models.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-cli\\src\\commands\\models.ts",
+      "md5": "49716919c1ffbe13c6f239e706cf2256",
+      "reason": "desktop:realai-cli"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-cli\\src\\commands\\whoami.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-cli\\src\\commands\\whoami.ts",
+      "md5": "079db73d641a570f89967b1bcc4ca896",
+      "reason": "desktop:realai-cli"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-sdk-js\\package.json",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-sdk-js\\package.json",
+      "md5": "816bb014d52fd71cdca71068c9d2b6ae",
+      "reason": "desktop:realai-sdk-js"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-sdk-js\\tsconfig.json",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-sdk-js\\tsconfig.json",
+      "md5": "7b7ea03906027c06a5dd801afbf5f8ea",
+      "reason": "desktop:realai-sdk-js"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-sdk-js\\tsup.config.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-sdk-js\\tsup.config.ts",
+      "md5": "de307f59b13917506b50e9892f29b06b",
+      "reason": "desktop:realai-sdk-js"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-sdk-js\\src\\client.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-sdk-js\\src\\client.ts",
+      "md5": "9ae9f1d5a2b8a69a6461fe0b1226c596",
+      "reason": "desktop:realai-sdk-js"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-sdk-js\\src\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-sdk-js\\src\\index.ts",
+      "md5": "23543321461340ef968163c99efab034",
+      "reason": "desktop:realai-sdk-js"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-sdk-js\\src\\providers.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-sdk-js\\src\\providers.ts",
+      "md5": "cc34135ae0bf3f7a62fd7c6074f0fcfe",
+      "reason": "desktop:realai-sdk-js"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-sdk-js\\src\\types.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-sdk-js\\src\\types.ts",
+      "md5": "1300e4d419da10921f6b434277bfbcac",
+      "reason": "desktop:realai-sdk-js"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\package.json",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\package.json",
+      "md5": "eb018ec435c988a750fa06041a1b08ec",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\tailwind.config.js",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\tailwind.config.js",
+      "md5": "7c7f3a4ce3637879f562c8fb283f199a",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\tsconfig.json",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\tsconfig.json",
+      "md5": "728efa45e5d1ec66aa4262530fe302b1",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\tsup.config.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\tsup.config.ts",
+      "md5": "ba30dcda73809ca4889b7d1ecaca39b0",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\index.ts",
+      "md5": "5b1ab801cd1bdf102ae89f923c50629e",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Avatar\\Avatar.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Avatar\\Avatar.tsx",
+      "md5": "fb423142dd5bef47b1dad5ecea850f8a",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Avatar\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Avatar\\index.ts",
+      "md5": "bfadf27f359270253e3cd5f84090181e",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Badge\\Badge.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Badge\\Badge.tsx",
+      "md5": "1684be040b17d78e62bb62d5fd6f8b1d",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Badge\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Badge\\index.ts",
+      "md5": "9ac3fd06bf8e00b43e141dccd5e6285d",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Button\\Button.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Button\\Button.tsx",
+      "md5": "7275d9cb3e8e1a932a9fc3a4711af8e7",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Button\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Button\\index.ts",
+      "md5": "e6c555deb0517c40057d5320d7ed72f7",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Card\\Card.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Card\\Card.tsx",
+      "md5": "620ce84b96f54f6633a85ca04cdf339d",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Card\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Card\\index.ts",
+      "md5": "0e1591ce40daf30fd447bfa15e6ef76f",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\ChatBubble\\ChatBubble.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\ChatBubble\\ChatBubble.tsx",
+      "md5": "7e9f0342facfce1d7afcf12387e897d7",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\ChatBubble\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\ChatBubble\\index.ts",
+      "md5": "b846f758ef7041e9bb9be77bdb8738dd",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\CodeBlock\\CodeBlock.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\CodeBlock\\CodeBlock.tsx",
+      "md5": "395602dcd97d89d9766b76d2771047e1",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\CodeBlock\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\CodeBlock\\index.ts",
+      "md5": "1ff19e9e86b3000f11fbdf3daf35a321",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Dropdown\\Dropdown.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Dropdown\\Dropdown.tsx",
+      "md5": "c0160e15eb01b3be8ed8b7bb55098232",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Dropdown\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Dropdown\\index.ts",
+      "md5": "7e13cb267ede2d0b115d1f97fbecfff6",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Input\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Input\\index.ts",
+      "md5": "72c559c6fa05de37befaa312c18a4a5a",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Input\\Input.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Input\\Input.tsx",
+      "md5": "0e4bc7cb8807180f22232a465a243d0e",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Modal\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Modal\\index.ts",
+      "md5": "a13936d47798cba5613e173c29bc2e5f",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Modal\\Modal.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Modal\\Modal.tsx",
+      "md5": "ffc5b5d32998833095ab3d9a0120a66a",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\ModelTag\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\ModelTag\\index.ts",
+      "md5": "8595182d0bd56bec68e1cb7d109d3282",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\ModelTag\\ModelTag.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\ModelTag\\ModelTag.tsx",
+      "md5": "edb221a13edc960a998375f6ac279de0",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Tabs\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Tabs\\index.ts",
+      "md5": "150859e4549d029a4934440f263965e7",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Tabs\\Tabs.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Tabs\\Tabs.tsx",
+      "md5": "495c794f6e3534da1325aad3e67836f0",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\TextArea\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\TextArea\\index.ts",
+      "md5": "55ef2026cf07a3ee98c14e8b008139ea",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\TextArea\\TextArea.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\TextArea\\TextArea.tsx",
+      "md5": "1ee221b84db701c0a70a24ea1605bf67",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Tooltip\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Tooltip\\index.ts",
+      "md5": "5a216d782c7a54b095c10fdd4cd70ce3",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\components\\Tooltip\\Tooltip.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\components\\Tooltip\\Tooltip.tsx",
+      "md5": "06e2add39183a101b3808616bc2a303c",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\icons\\CopyIcon.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\icons\\CopyIcon.tsx",
+      "md5": "4c4b06d22f4a726e46bba04ba8e25735",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\icons\\index.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\icons\\index.ts",
+      "md5": "da9aa088759eb9c10a856d83a8f4b87f",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\icons\\MemoryIcon.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\icons\\MemoryIcon.tsx",
+      "md5": "aa08449398a9f2ce680b38dc579c3eeb",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\icons\\OverseerIcon.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\icons\\OverseerIcon.tsx",
+      "md5": "39853faf85c2e729cb581e6e53695e2a",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\icons\\RealAILogo.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\icons\\RealAILogo.tsx",
+      "md5": "97d1ee7b205a5bc3a956db022c0b9b13",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\icons\\RouterIcon.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\icons\\RouterIcon.tsx",
+      "md5": "24f0bb4825c0fc542a341db121880c1e",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\icons\\RunIcon.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\icons\\RunIcon.tsx",
+      "md5": "858da1ae08e451fb7ef80b0b35abf899",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\icons\\SaveIcon.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\icons\\SaveIcon.tsx",
+      "md5": "e4b0bc1b94183e32bb0c75bcbd48b088",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\icons\\StopIcon.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\icons\\StopIcon.tsx",
+      "md5": "d82f389990868c93eab0af6f412dbe4d",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\icons\\ToolsIcon.tsx",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\icons\\ToolsIcon.tsx",
+      "md5": "fd2730389fffa980639cba4ee5d6c58a",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\theme\\tailwind.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\theme\\tailwind.ts",
+      "md5": "a4b22368165a4543b3ac92a200441bbb",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\theme\\theme.css",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\theme\\theme.css",
+      "md5": "a969b92280c8304f8b1d6303be1d9e4e",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system\\src\\theme\\tokens.ts",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai-design-system\\src\\theme\\tokens.ts",
+      "md5": "63834ad39ef41f3ca0825b0ffa23a042",
+      "reason": "desktop:realai-design-system"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\CONTRIBUTING.md",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\CONTRIBUTING.md",
+      "md5": "bc36613c591425a66f12d256df55748f",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\DEPLOYMENT_FRONTEND_FIX.md",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\DEPLOYMENT_FRONTEND_FIX.md",
+      "md5": "00519dd794850a0b7ccddb8dcd5d8d0c",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\LAMBDA_DEPLOYMENT.md",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\LAMBDA_DEPLOYMENT.md",
+      "md5": "055b05ea109e5c3c97ea7a85539b740b",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\LAMBDA_SIZE_OPTIMIZATION.md",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\LAMBDA_SIZE_OPTIMIZATION.md",
+      "md5": "84e8362e870ea2f9bdf8bcb6601bd3d0",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\LOCAL_AI_GUIDE.md",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\LOCAL_AI_GUIDE.md",
+      "md5": "93d75252c04272321f10028c5e26ebbd",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\PROJECT_SUMMARY.md",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\PROJECT_SUMMARY.md",
+      "md5": "b8392ffe4f282102bd9152811af8ffa6",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\QUICKSTART.md",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\QUICKSTART.md",
+      "md5": "cf0111d01236ddca647b44721ab5d805",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\requirements-ci.txt",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\requirements-ci.txt",
+      "md5": "182ae2992e9e162a560b0061c2e5b808",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\requirements-full.txt",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\requirements-full.txt",
+      "md5": "503133cc4575b4cd285d0572a880a1b1",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\requirements-lambda-advanced.txt",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\requirements-lambda-advanced.txt",
+      "md5": "096165aa5e228f2cb649c85a86dc0170",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\requirements-lambda-chat.txt",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\requirements-lambda-chat.txt",
+      "md5": "3f915018fea7c3f5c7e51c1fb920f32a",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\requirements-lambda-core.txt",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\requirements-lambda-core.txt",
+      "md5": "a3a1106f1d4384e52060e89b0a8c737f",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\requirements-lambda-embeddings-audio.txt",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\requirements-lambda-embeddings-audio.txt",
+      "md5": "52234739057d8a91dd0f3bff93bb5e2f",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\requirements-lambda-image.txt",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\requirements-lambda-image.txt",
+      "md5": "c9b6c29c2884ed3eb786fa4130b43d0e",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\requirements-lambda-video.txt",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\requirements-lambda-video.txt",
+      "md5": "ba5768df7fd2b2fe52fa71e70e04db18",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\requirements.txt",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\requirements.txt",
+      "md5": "b80995ec6e1797369024cdadc341e6dc",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\SECURITY_SUMMARY.txt",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\SECURITY_SUMMARY.txt",
+      "md5": "a05af4ba6d34ce87cc68b4f9feaac88c",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\VALIDATION_REPORT.md",
+      "dst": "C:\\realai\\recovered\\from_desktop\\realai_desktop_tree\\VALIDATION_REPORT.md",
+      "md5": "78cc9de5d05e4016c653b22f1df7187d",
+      "reason": "desktop_realai_docs"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai\\dialogue-engine.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\dialogue-engine.js",
+      "md5": "96490d6dd54c7376120384f1ac0ee272",
+      "reason": "atomic_fizz_vault_backend_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai\\dungeon-generator.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\dungeon-generator.js",
+      "md5": "cef082d2b7b8cc3a88fc807cf02adba6",
+      "reason": "atomic_fizz_vault_backend_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai\\generate-npc.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\generate-npc.js",
+      "md5": "78b1d10e6a85484d1ed165acbb5aadc9",
+      "reason": "atomic_fizz_vault_backend_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai\\load-module.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\load-module.js",
+      "md5": "1f06535eac4d0586f3ab6d71fb4da641",
+      "reason": "atomic_fizz_vault_backend_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai\\local-overseer.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\local-overseer.js",
+      "md5": "911dc0ae383cf5e3eecba9cc6d8ca927",
+      "reason": "atomic_fizz_vault_backend_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai\\npc-repo-enricher.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\npc-repo-enricher.js",
+      "md5": "b9a9181a87959673b98f10f936e30539",
+      "reason": "atomic_fizz_vault_backend_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai\\overseer-context.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\overseer-context.js",
+      "md5": "22c59f0fb93122ba470ea29e0345a875",
+      "reason": "atomic_fizz_vault_backend_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai\\overseer-creator.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\overseer-creator.js",
+      "md5": "87c1b945132ad022e02e4b4d1606a395",
+      "reason": "atomic_fizz_vault_backend_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai\\quest-generator.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\quest-generator.js",
+      "md5": "c0f0e44ec54d93f227195515aee45d86",
+      "reason": "atomic_fizz_vault_backend_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai\\realai-client.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\realai-client.js",
+      "md5": "f4421a1ea5daa0fe889fa75bedd6ae74",
+      "reason": "atomic_fizz_vault_backend_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai\\realai-overseer.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\realai-overseer.js",
+      "md5": "88cab919d1685677c132676a419accc8",
+      "reason": "atomic_fizz_vault_backend_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai\\survival-reward.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\survival-reward.js",
+      "md5": "2b17ea47928c2fc88a48d6741b3b9837",
+      "reason": "atomic_fizz_vault_backend_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai\\world-event.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\world-event.js",
+      "md5": "9b8682a0dbb92e37aac1d251eda532ea",
+      "reason": "atomic_fizz_vault_backend_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-OLD\\ai\\realai\\load-module.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai_old_diff\\load-module.js",
+      "md5": "530ccea136c671e53d1ab0d6a26d08a5",
+      "reason": "atomic_fizz_old_diff"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-OLD\\ai\\realai\\local-overseer.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai_old_diff\\local-overseer.js",
+      "md5": "de77d860df9a916f9698e6cd66ae7aec",
+      "reason": "atomic_fizz_old_diff"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai-client\\create-npc.js",
+      "dst": "C:\\realai\\recovered\\from_atomic_fizz\\realai-client\\create-npc.js",
+      "md5": "505319125b84590b5e5e7a691bb37b1f",
+      "reason": "atomic_fizz_realai_client"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\realai\\apps\\frontend\\src\\app\\api\\models\\route.ts",
+      "dst": "C:\\realai\\apps\\frontend\\src\\app\\api\\models\\route.ts",
+      "md5": "6f7ff01a60e207a0f05c1990342586d3",
+      "reason": "frontend_models_api_route"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\realai\\apps\\frontend\\src\\app\\api\\models\\route.ts",
+      "dst": "C:\\realai\\recovered\\from_users_realai\\frontend\\api\\models\\route.ts",
+      "md5": "6f7ff01a60e207a0f05c1990342586d3",
+      "reason": "stage_models_route"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\realai\\realai_memory\\evolution_proposals.json",
+      "dst": "C:\\realai\\recovered\\from_users_realai\\realai_memory\\evolution_proposals.json",
+      "md5": "bc471a3dae198a1f236db15478f7eccd",
+      "reason": "users_memory_stage"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\realai\\realai_memory\\hive_missions.json",
+      "dst": "C:\\realai\\recovered\\from_users_realai\\realai_memory\\hive_missions.json",
+      "md5": "4a85da3e6caed14083f3018881e7171a",
+      "reason": "users_memory_stage"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\realai\\realai_memory\\rag_memory_store.json",
+      "dst": "C:\\realai\\recovered\\from_users_realai\\realai_memory\\rag_memory_store.json",
+      "md5": "88163b38579031946aa50f90ef4b8185",
+      "reason": "users_memory_stage"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\realai\\realai_memory\\workflow_runs_test.json",
+      "dst": "C:\\realai\\recovered\\from_users_realai\\realai_memory\\workflow_runs_test.json",
+      "md5": "cfa630f73fa410c28e289c47b7cf8844",
+      "reason": "users_memory_stage"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\realai\\realai_memory\\model_promotions.jsonl",
+      "dst": "C:\\realai\\recovered\\from_users_realai\\realai_memory\\model_promotions.jsonl",
+      "md5": "39d0ccd5f7dbd2dc0170bc6e5e0be28d",
+      "reason": "users_memory_stage"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\realai\\realai_memory\\embodied_narratives\\narrative_1780597611.json",
+      "dst": "C:\\realai\\recovered\\from_users_realai\\realai_memory\\embodied_narratives\\narrative_1780597611.json",
+      "md5": "c392019094565707910cc5420363a162",
+      "reason": "users_memory_narratives"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\realai\\realai_memory\\embodied_narratives\\narrative_1780599365.json",
+      "dst": "C:\\realai\\recovered\\from_users_realai\\realai_memory\\embodied_narratives\\narrative_1780599365.json",
+      "md5": "2a94290a33fc34bc6a7b94a4622a1c3a",
+      "reason": "users_memory_narratives"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\Users\\tsmit\\realai\\realai_memory\\embodied_narratives\\narrative_1780605682.json",
+      "dst": "C:\\realai\\recovered\\from_users_realai\\realai_memory\\embodied_narratives\\narrative_1780605682.json",
+      "md5": "c92e6389cb87164a1a3a5a6cad375bc1",
+      "reason": "users_memory_narratives"
+    },
+    {
+      "action": "note_chroma_path",
+      "src": "C:\\Users\\tsmit\\realai\\realai_memory\\chroma",
+      "dst": "C:\\realai\\recovered\\from_users_realai\\realai_memory\\chroma"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai-orchestration\\agent.py",
+      "dst": "C:\\realai\\realai\\orchestration_gold\\agent.py",
+      "md5": "ec8e1c27095cfc21d02454261d9e8114",
+      "reason": "authority_discoverable_orchestration"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai-orchestration\\memory.py",
+      "dst": "C:\\realai\\realai\\orchestration_gold\\memory.py",
+      "md5": "6336aef540f0f7d56b459ed51d6be4b7",
+      "reason": "authority_discoverable_orchestration"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai-orchestration\\orchestrator.py",
+      "dst": "C:\\realai\\realai\\orchestration_gold\\orchestrator.py",
+      "md5": "cdec598168129873b901ae5006834e61",
+      "reason": "authority_discoverable_orchestration"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai-orchestration\\pipeline.py",
+      "dst": "C:\\realai\\realai\\orchestration_gold\\pipeline.py",
+      "md5": "137258315222c03536d84c0e5fd84f5b",
+      "reason": "authority_discoverable_orchestration"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai-orchestration\\README.md",
+      "dst": "C:\\realai\\realai\\orchestration_gold\\README.md",
+      "md5": "f3dc15b5bd0a7204b79ac0a0cb050216",
+      "reason": "authority_discoverable_orchestration"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai-orchestration\\tools.py",
+      "dst": "C:\\realai\\realai\\orchestration_gold\\tools.py",
+      "md5": "4cf04ea4b865ba8237f189ccae52a9d7",
+      "reason": "authority_discoverable_orchestration"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai-orchestration\\__init__.py",
+      "dst": "C:\\realai\\realai\\orchestration_gold\\__init__.py",
+      "md5": "39d0a158ae6b49e2350a15d8623b9cec",
+      "reason": "authority_discoverable_orchestration"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai_agent\\agents.py",
+      "dst": "C:\\realai\\realai\\hierarchical_agent_gold\\agents.py",
+      "md5": "6ad553f9ce6319750f8d42c0bae767f5",
+      "reason": "authority_discoverable_hierarchical_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai_agent\\hierarchical_agent.py",
+      "dst": "C:\\realai\\realai\\hierarchical_agent_gold\\hierarchical_agent.py",
+      "md5": "39345cb8e0d3adf9aee834771f6d17b0",
+      "reason": "authority_discoverable_hierarchical_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai_agent\\main.py",
+      "dst": "C:\\realai\\realai\\hierarchical_agent_gold\\main.py",
+      "md5": "208d71a17843c646cc1661abec166972",
+      "reason": "authority_discoverable_hierarchical_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai_agent\\README.md",
+      "dst": "C:\\realai\\realai\\hierarchical_agent_gold\\README.md",
+      "md5": "f66e8ac5373f066674b6ffe8a495a285",
+      "reason": "authority_discoverable_hierarchical_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai_agent\\rise_system.py",
+      "dst": "C:\\realai\\realai\\hierarchical_agent_gold\\rise_system.py",
+      "md5": "3dc724ae2c06c3cb8732f473e03fd32b",
+      "reason": "authority_discoverable_hierarchical_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai_agent\\supervisor.py",
+      "dst": "C:\\realai\\realai\\hierarchical_agent_gold\\supervisor.py",
+      "md5": "51da8441cc4f70a216eb1a4d463d7209",
+      "reason": "authority_discoverable_hierarchical_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai_agent\\test_agent.py",
+      "dst": "C:\\realai\\realai\\hierarchical_agent_gold\\test_agent.py",
+      "md5": "cdab2a454afbf9ff73afb3d62c73c597",
+      "reason": "authority_discoverable_hierarchical_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai_agent\\tools.py",
+      "dst": "C:\\realai\\realai\\hierarchical_agent_gold\\tools.py",
+      "md5": "84f4f3047547a9c68b5d76e5a1740f66",
+      "reason": "authority_discoverable_hierarchical_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai_agent\\training_pipeline.py",
+      "dst": "C:\\realai\\realai\\hierarchical_agent_gold\\training_pipeline.py",
+      "md5": "bde7bb149d82629f0e164e06d1558196",
+      "reason": "authority_discoverable_hierarchical_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_desktop\\realai_agent\\__init__.py",
+      "dst": "C:\\realai\\realai\\hierarchical_agent_gold\\__init__.py",
+      "md5": "3356fd79278313b0ac909e847c1f2fde",
+      "reason": "authority_discoverable_hierarchical_agent"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\dialogue-engine.js",
+      "dst": "C:\\realai\\plugins\\atomic_fizz_realai\\dialogue-engine.js",
+      "md5": "96490d6dd54c7376120384f1ac0ee272",
+      "reason": "authority_plugin_atomic_fizz_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\dungeon-generator.js",
+      "dst": "C:\\realai\\plugins\\atomic_fizz_realai\\dungeon-generator.js",
+      "md5": "cef082d2b7b8cc3a88fc807cf02adba6",
+      "reason": "authority_plugin_atomic_fizz_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\generate-npc.js",
+      "dst": "C:\\realai\\plugins\\atomic_fizz_realai\\generate-npc.js",
+      "md5": "78b1d10e6a85484d1ed165acbb5aadc9",
+      "reason": "authority_plugin_atomic_fizz_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\load-module.js",
+      "dst": "C:\\realai\\plugins\\atomic_fizz_realai\\load-module.js",
+      "md5": "1f06535eac4d0586f3ab6d71fb4da641",
+      "reason": "authority_plugin_atomic_fizz_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\local-overseer.js",
+      "dst": "C:\\realai\\plugins\\atomic_fizz_realai\\local-overseer.js",
+      "md5": "911dc0ae383cf5e3eecba9cc6d8ca927",
+      "reason": "authority_plugin_atomic_fizz_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\npc-repo-enricher.js",
+      "dst": "C:\\realai\\plugins\\atomic_fizz_realai\\npc-repo-enricher.js",
+      "md5": "b9a9181a87959673b98f10f936e30539",
+      "reason": "authority_plugin_atomic_fizz_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\overseer-context.js",
+      "dst": "C:\\realai\\plugins\\atomic_fizz_realai\\overseer-context.js",
+      "md5": "22c59f0fb93122ba470ea29e0345a875",
+      "reason": "authority_plugin_atomic_fizz_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\overseer-creator.js",
+      "dst": "C:\\realai\\plugins\\atomic_fizz_realai\\overseer-creator.js",
+      "md5": "87c1b945132ad022e02e4b4d1606a395",
+      "reason": "authority_plugin_atomic_fizz_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\quest-generator.js",
+      "dst": "C:\\realai\\plugins\\atomic_fizz_realai\\quest-generator.js",
+      "md5": "c0f0e44ec54d93f227195515aee45d86",
+      "reason": "authority_plugin_atomic_fizz_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\realai-client.js",
+      "dst": "C:\\realai\\plugins\\atomic_fizz_realai\\realai-client.js",
+      "md5": "f4421a1ea5daa0fe889fa75bedd6ae74",
+      "reason": "authority_plugin_atomic_fizz_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\realai-overseer.js",
+      "dst": "C:\\realai\\plugins\\atomic_fizz_realai\\realai-overseer.js",
+      "md5": "88cab919d1685677c132676a419accc8",
+      "reason": "authority_plugin_atomic_fizz_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\survival-reward.js",
+      "dst": "C:\\realai\\plugins\\atomic_fizz_realai\\survival-reward.js",
+      "md5": "2b17ea47928c2fc88a48d6741b3b9837",
+      "reason": "authority_plugin_atomic_fizz_realai"
+    },
+    {
+      "action": "copy",
+      "src": "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai\\world-event.js",
+      "dst": "C:\\realai\\plugins\\atomic_fizz_realai\\world-event.js",
+      "md5": "9b8682a0dbb92e37aac1d251eda532ea",
+      "reason": "authority_plugin_atomic_fizz_realai"
+    },
+    {
+      "action": "write_plugin_manifest",
+      "dst": "C:\\realai\\plugins\\atomic_fizz_realai\\plugin_manifest.json"
+    }
+  ],
+  "skipped": [],
+  "errors": [],
+  "finished": "2026-07-14T14:08:27.363524+00:00",
+  "index": {
+    "generated_at": "2026-07-14T14:08:27.363524+00:00",
+    "promoted": {
+      "desktop": "C:\\realai\\recovered\\from_desktop",
+      "atomic_fizz": "C:\\realai\\recovered\\from_atomic_fizz",
+      "users_realai": "C:\\realai\\recovered\\from_users_realai",
+      "discoverable": {
+        "realai/orchestration_gold": "C:\\realai\\realai\\orchestration_gold",
+        "realai/hierarchical_agent_gold": "C:\\realai\\realai\\hierarchical_agent_gold",
+        "plugins/atomic_fizz_realai": "C:\\realai\\plugins\\atomic_fizz_realai",
+        "apps/frontend models route": "C:\\realai\\apps\\frontend\\src\\app\\api\\models\\route.ts"
+      }
+    },
+    "counts": {
+      "actions": 159,
+      "skipped": 0,
+      "errors": 0
+    }
+  }
+}

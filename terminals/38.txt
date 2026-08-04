@@ -1,0 +1,12 @@
+---
+pid: 24452
+cwd: "C:\Users\tsmit\realai"
+command: "cd C:\\Users\\tsmit\\realai\\apps\\frontend; $env:REALAI_API_BASE='http://127.0.0.1:8001'; .\\node_modules\\.bin\\next.cmd start -p 3847 2>&1"
+started_at: 2026-06-04T14:25:26.372Z
+running_for_ms: 10065000 
+---
+▲ Next.js 16.2.6
+- Local:         http://localhost:3847
+- Network:       http://192.168.0.19:3847
+✓ Ready in 151ms
+⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.

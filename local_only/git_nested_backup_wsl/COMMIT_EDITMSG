@@ -1,0 +1,5 @@
+RealAI WSL snapshot
+Source: /home/tsmit/RealAi (WSL)
+Date: 2026-07-31
+Machine: HOMEPC
+Notes: Source-only ~2.2 MB. training/, plugins/, realai/, core/. Excluded node_modules, venv, git, gguf.

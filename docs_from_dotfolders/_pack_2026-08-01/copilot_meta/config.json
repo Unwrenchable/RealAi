@@ -1,0 +1,18 @@
+// User settings belong in settings.json.
+// This file is managed automatically.
+{
+  "firstLaunchAt": "2026-05-01T19:32:12.502Z",
+  "askedSetupTerminals": [
+    "windows-terminal"
+  ],
+  "lastLoggedInUser": {
+    "host": "https://github.com",
+    "login": "Unwrenchable"
+  },
+  "loggedInUsers": [
+    {
+      "host": "https://github.com",
+      "login": "Unwrenchable"
+    }
+  ]
+}
