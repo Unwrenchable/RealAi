@@ -1,0 +1,2499 @@
+PowerShell 7.6.3
+
+   A new PowerShell stable release is available: v7.6.4
+   Upgrade now, or check out the release page at:
+     https://aka.ms/PowerShell-Release?tag=v7.6.4
+
+PS C:\Users\tsmit> cd /c
+Set-Location: Cannot find path 'C:\c' because it does not exist.
+PS C:\Users\tsmit> Get-ChildItem -Recurse -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -match "realai" }
+
+    Directory: C:\Users\tsmit
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/13/2026 10:54 AM                .real
+                                                  ai
+d-r--           7/24/2026  6:14 AM                reala
+                                                  i
+d----           6/12/2026  8:21 PM                reala
+                                                  i_his
+                                                  toric
+                                                  al_ba
+                                                  ckups
+d----           7/31/2026  8:42 PM                reala
+                                                  i-cle
+                                                  an
+
+    Directory: C:\Users\tsmit\.claude\projects
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/18/2026  3:37 AM                C--Users-tsmit-realai
+
+    Directory: C:\Users\tsmit\.cursor\projects
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/16/2026  6:20 AM                c-Users-tsmit-realai
+
+    Directory: C:\Users\tsmit\.grok\sessions
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/11/2026  9:25 AM                C%3A%5Crealai
+d----           6/16/2026 12:05 PM                C%3A%5CUsers%5Ctsmit%5C.grok%5Cworktree
+                                                  s%5Ctsmit-realai%5C2026-06-16-262686d6
+d----           7/11/2026  9:20 AM                C%3A%5CUsers%5Ctsmit%5Crealai
+
+    Directory: C:\Users\tsmit\.grok\worktrees
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/27/2026  9:47 PM                tsmit-realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-r--           7/31/2026  8:41 PM                realai2
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\2026-06-16-262686d6
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/16/2026 12:05 PM                realai
+d----           6/16/2026 12:05 PM                realai_memory
+d----           6/16/2026 12:05 PM                realai-core
+
+    Directory:
+C:\Users\tsmit\.grok\worktrees\tsmit-realai\2026-06-16-262686d6\packages\sdk-py
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/16/2026 12:05 PM                realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\2026-06-16-262686d6\providers
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/16/2026 12:05 PM                realai
+
+    Directory:
+C:\Users\tsmit\.grok\worktrees\tsmit-realai\2026-06-16-262686d6\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/16/2026 12:05 PM                realai-1.0
+d----           6/16/2026 12:05 PM                realai-embed
+d----           6/16/2026 12:05 PM                realai-overseer
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:42 PM                realai
+d----           7/31/2026  8:42 PM                realai_agent
+d----           7/31/2026  8:42 PM                realai_api
+d----            6/6/2026  6:29 AM                realai_clean
+d----           6/22/2026  8:09 AM                realai_good
+d----           6/22/2026  8:09 AM                realai_historical_backups
+d----           6/22/2026  8:11 AM                realai_memory
+d----           7/31/2026  8:42 PM                realai_repo
+d----           7/31/2026  8:42 PM                realai_sdk
+d----           7/31/2026  8:42 PM                realai-backend
+d----           7/31/2026  8:42 PM                RealAI-builder
+d----           7/31/2026  8:42 PM                realai-clean
+d----           7/31/2026  8:42 PM                realai-cli
+d----           7/31/2026  8:42 PM                realai-core
+d----           6/22/2026  8:00 AM                realai-design-system
+d----           6/22/2026  8:00 AM                realai-frontend
+d----           7/31/2026  8:42 PM                realai-orchestration
+d----           6/22/2026  8:00 AM                realai-sdk-js
+d----           6/22/2026  8:00 AM                realai.egg-info
+d----           7/31/2026  8:42 PM                RealAIProject
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  7:39 AM                realai
+d----           6/22/2026  7:39 AM                realai.slnx
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\checkpoints_lora
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  7:44 AM                realai-fullstack-dev-default-run
+d----           6/22/2026  7:44 AM                realai-integrator-default-run
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  7:44 AM                realai-1.0
+d----           7/31/2026  8:35 PM                realai-1.0-instruct
+d----           6/22/2026  7:44 AM                realai-embed
+d----           6/22/2026  7:44 AM                realai-overseer
+d----           6/22/2026  7:44 AM                realai-vision
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\packages\sdk-py
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:42 PM                realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\providers
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:00 AM                realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\real-fin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--           7/31/2026  8:42 PM                realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\real-fin\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--           7/31/2026  8:42 PM                realai
+dar--           7/31/2026  8:42 PM                realai - Copy
+dar--           7/31/2026  8:42 PM                realai_agent
+dar--           7/31/2026  8:42 PM                realai_api
+dar--           6/22/2026  8:00 AM                realai-cli
+dar--           6/22/2026  8:00 AM                realai-design-system
+dar--           7/31/2026  8:42 PM                realai-orchestration
+dar--           6/22/2026  8:00 AM                realai-sdk-js
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\real-fin\realai\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--           6/22/2026  8:00 AM                realai_launcher
+
+    Directory:
+C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\real-fin\realai\realai - Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--           7/31/2026  8:42 PM                realai
+dar--           7/31/2026  8:42 PM                realai_agent
+dar--           7/31/2026  8:42 PM                realai_api
+dar--           6/22/2026  8:00 AM                realai-cli
+dar--           6/22/2026  8:00 AM                realai-design-system
+dar--           7/31/2026  8:42 PM                realai-orchestration
+dar--           6/22/2026  8:00 AM                realai-sdk-js
+
+    Directory:
+C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\real-fin\realai\realai - Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--           6/22/2026  8:00 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/12/2026  2:46 AM                realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/12/2026  3:01 AM                realai
+d----           6/22/2026  8:00 AM                realai-1.0
+d----           6/22/2026  8:00 AM                realai-embed
+d----           6/22/2026  8:00 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai\server
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/12/2026  2:48 AM                realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai-clean
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:42 PM                realai
+d----           7/31/2026  8:42 PM                realai-core
+d----           6/22/2026  8:00 AM                realai-frontend
+d----           7/31/2026  8:42 PM                realai-widget
+
+    Directory:
+C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai-clean\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:00 AM                realai-1.0
+d----           6/22/2026  8:00 AM                realai-embed
+d----           6/22/2026  8:00 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:42 PM                realai
+d----           7/31/2026  8:42 PM                realai-core
+d----           7/31/2026  8:42 PM                realai-dashboard
+d----           7/31/2026  8:42 PM                realai-frontend
+d----           7/31/2026  8:42 PM                realai-widget
+d----           6/22/2026  8:09 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\RealAIProject\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:00 AM                realai.slnx
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\RealAIProject\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/12/2026  2:46 AM                realai
+
+    Directory:
+C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\RealAIProject\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/12/2026  3:01 AM                realai
+d----           6/22/2026  8:00 AM                realai-1.0
+d----           6/22/2026  8:00 AM                realai-embed
+d----           6/22/2026  8:00 AM                realai-overseer
+
+    Directory:
+C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\RealAIProject\realai\server
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/12/2026  2:48 AM                realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\RealAIProject\server
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/12/2026 12:32 AM                realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_good
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:42 PM                realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_good\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:42 PM                realai
+
+    Directory:
+C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_historical_backups
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:09 AM                realai_versions_20260612
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_historical_back
+ups\realai_versions_20260612
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:09 AM                .realai
+d----           7/31/2026  8:42 PM                realai-backend
+d----           7/31/2026  8:42 PM                RealAIProject
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_historical_back
+ups\realai_versions_20260612\real-fin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:42 PM                realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_historical_back
+ups\realai_versions_20260612\real-fin\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:42 PM                realai
+d----           7/31/2026  8:42 PM                realai - Copy
+d----           7/31/2026  8:42 PM                realai_agent
+d----           7/31/2026  8:42 PM                realai_api
+d----           6/22/2026  8:09 AM                realai-cli
+d----           6/22/2026  8:09 AM                realai-design-system
+d----           7/31/2026  8:42 PM                realai-orchestration
+d----           6/22/2026  8:09 AM                realai-sdk-js
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_historical_back
+ups\realai_versions_20260612\real-fin\realai\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:09 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_historical_back
+ups\realai_versions_20260612\real-fin\realai\realai - Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:42 PM                realai
+d----           7/31/2026  8:42 PM                realai_agent
+d----           7/31/2026  8:42 PM                realai_api
+d----           6/22/2026  8:09 AM                realai-cli
+d----           6/22/2026  8:09 AM                realai-design-system
+d----           7/31/2026  8:42 PM                realai-orchestration
+d----           6/22/2026  8:09 AM                realai-sdk-js
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_historical_back
+ups\realai_versions_20260612\real-fin\realai\realai - Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:09 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_historical_back
+ups\realai_versions_20260612\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:42 PM                realai
+d----           7/31/2026  8:42 PM                realai-core
+d----           7/31/2026  8:42 PM                realai-dashboard
+d----           7/31/2026  8:42 PM                realai-frontend
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_historical_back
+ups\realai_versions_20260612\RealAIProject\.git\logs\refs\remotes
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:09 AM                target-realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_historical_back
+ups\realai_versions_20260612\RealAIProject\.git\refs\remotes
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:09 AM                target-realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_historical_back
+ups\realai_versions_20260612\RealAIProject\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:10 AM                realai.slnx
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_historical_back
+ups\realai_versions_20260612\RealAIProject\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  3:08 AM                realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_historical_back
+ups\realai_versions_20260612\RealAIProject\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  3:08 AM                realai
+d----           6/22/2026  8:10 AM                realai-1.0
+d----           6/22/2026  8:10 AM                realai-embed
+d----           6/22/2026  8:10 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_historical_back
+ups\realai_versions_20260612\RealAIProject\realai\server
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  3:08 AM                realai
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_repo
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:42 PM                realai
+d----           7/31/2026  8:42 PM                realai-core
+d----           7/31/2026  8:42 PM                realai-frontend
+d----           6/22/2026  8:17 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_repo\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:12 AM                realai_repo.slnx
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_repo\realai\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:12 AM                realai.slnx
+
+    Directory:
+C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_repo\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:12 AM                realai-1.0
+d----           6/22/2026  8:12 AM                realai-embed
+d----           6/22/2026  8:12 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_sdk
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:42 PM                realai
+d----            5/8/2026  6:25 AM                realai_repo
+d----           7/31/2026  8:42 PM                realai_sdk
+d----           7/31/2026  8:42 PM                realai-core
+d----           6/22/2026  8:17 AM                realai-frontend
+d----            5/8/2026  6:24 AM                realai-sdk
+d----           6/22/2026  8:17 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_sdk\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:17 AM                realai_sdk.slnx
+
+    Directory:
+C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_sdk\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:17 AM                realai-1.0
+d----           6/22/2026  8:17 AM                realai-embed
+d----           6/22/2026  8:17 AM                realai-overseer
+
+    Directory:
+C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_sdk\realai_sdk\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:17 AM                realai_sdk.slnx
+
+    Directory:
+C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\realai_sdk\realai_sdk\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/22/2026  8:17 AM                realai-1.0
+d----           6/22/2026  8:17 AM                realai-embed
+d----           6/22/2026  8:17 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\.grok\worktrees\tsmit-realai\realai2\server
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/12/2026  2:48 AM                realai
+
+    Directory: C:\Users\tsmit\.lmstudio\conversations
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/18/2026  5:19 PM                realai
+
+    Directory: C:\Users\tsmit\.ollama\models\manifests\registry.ollama.ai\library
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/6/2026  4:14 AM                realai-1.0
+
+    Directory: C:\Users\tsmit\atomic-fizz-backup-2026-05-30\backend
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/30/2026  7:15 AM                realai
+
+    Directory: C:\Users\tsmit\atomic-fizz-backup-2026-05-30\backend\src
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/30/2026  7:15 AM                realai
+
+    Directory: C:\Users\tsmit\atomic-fizz-backup-2026-05-30\public\assets
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/30/2026  7:14 AM                portraits-realai
+
+    Directory: C:\Users\tsmit\atomic-fizz-backup-2026-05-30\scripts
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/30/2026  7:15 AM                realai
+
+    Directory: C:\Users\tsmit\ATOMIC-FIZZ-CAPS-OLD\ai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/30/2026  8:56 AM                realai
+
+    Directory:
+C:\Users\tsmit\ATOMIC-FIZZ-CAPS-OLD\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\scripts
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/30/2026  5:02 AM                realai
+
+    Directory: C:\Users\tsmit\ATOMIC-FIZZ-CAPS-OLD\backend
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/30/2026  8:56 AM                realai
+
+    Directory: C:\Users\tsmit\ATOMIC-FIZZ-CAPS-OLD\backend\src
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/30/2026  8:56 AM                realai
+
+    Directory: C:\Users\tsmit\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\backend
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            8/2/2026  2:33 AM                realai
+d----            8/2/2026  2:33 AM                realai-client
+
+    Directory: C:\Users\tsmit\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\backend\src
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/30/2026  9:01 AM                realai
+
+    Directory: C:\Users\tsmit\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\scripts
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            8/2/2026  2:33 AM                realai
+
+    Directory: C:\Users\tsmit\backups
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  9:06 AM                realai-sync-20260508-090605
+
+    Directory: C:\Users\tsmit\backups\realai-sync-20260508-090605
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  9:06 AM                realai_sdk
+d----            5/8/2026  9:06 AM                realai-main
+
+    Directory: C:\Users\tsmit\backups\realai-sync-20260508-090605\realai-main
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  9:06 AM                realai
+d----            5/8/2026  9:06 AM                realai-core
+d----            5/8/2026  9:06 AM                realai-frontend
+
+    Directory:
+C:\Users\tsmit\backups\realai-sync-20260508-090605\realai-main\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  9:06 AM                realai-1.0
+d----            5/8/2026  9:06 AM                realai-embed
+d----            5/8/2026  9:06 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\backups\realai-sync-20260508-090605\realai_sdk
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  9:06 AM                realai
+d----            5/8/2026  9:06 AM                realai_repo
+d----            5/8/2026  9:06 AM                realai_sdk
+d----            5/8/2026  9:06 AM                realai-core
+d----            5/8/2026  9:06 AM                realai-frontend
+d----            5/8/2026  9:06 AM                realai-sdk
+d----            5/8/2026  9:06 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\backups\realai-sync-20260508-090605\realai_sdk\.git\logs\re
+fs\remotes\origin\recovery
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            8/4/2026  3:44 AM                grok-realai-repo
+d----            8/4/2026  3:44 AM                grok-realai-sdk
+d----            8/4/2026  3:44 AM                grok-realai2-clean
+d----            8/4/2026  3:44 AM                grok-RealAIProject-clean
+d----            8/4/2026  3:44 AM                users-tsmit-realai
+d----            8/4/2026  3:44 AM                users-tsmit-realai-clean
+d----            8/4/2026  3:44 AM                wsl-RealAi
+
+    Directory: C:\Users\tsmit\backups\realai-sync-20260508-090605\realai_sdk\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  9:06 AM                realai_sdk.slnx
+
+    Directory:
+C:\Users\tsmit\backups\realai-sync-20260508-090605\realai_sdk\realai_sdk\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  9:06 AM                realai_sdk.slnx
+
+    Directory:
+C:\Users\tsmit\backups\realai-sync-20260508-090605\realai_sdk\realai_sdk\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  9:06 AM                realai-1.0
+d----            5/8/2026  9:06 AM                realai-embed
+d----            5/8/2026  9:06 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\Documents\Codex\2026-06-16
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/16/2026  6:26 AM                realai-the-autonomous-ai-core-for
+
+    Directory: C:\Users\tsmit\Documents\GitHub
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  5:19 PM                realai
+
+    Directory:
+C:\Users\tsmit\Documents\GitHub\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\backend
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/6/2026  5:48 AM                realai
+
+    Directory:
+C:\Users\tsmit\Documents\GitHub\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\scripts
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/6/2026  5:49 AM                realai
+
+    Directory: C:\Users\tsmit\Documents\GitHub\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/6/2026  5:49 AM                realai
+d----            6/6/2026  5:49 AM                realai-core
+d----            6/6/2026  5:48 AM                realai-frontend
+
+    Directory: C:\Users\tsmit\OneDrive\Apps
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+lar--           5/19/2026 12:35 PM                realai
+
+    Directory: C:\Users\tsmit\OneDrive\Desktop
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+lar--           5/10/2026  7:03 AM                realai
+lar--           5/10/2026  5:23 AM                realai - Copy
+lar--           5/10/2026  3:12 AM                realai_agent
+lar--           5/10/2026  3:12 AM                realai_api
+lar--           5/10/2026  3:12 AM                realai-cli
+lar--           5/10/2026  3:12 AM                realai-design-system
+lar--           5/10/2026  3:12 AM                realai-orchestration
+lar--           5/10/2026  3:12 AM                realai-sdk-js
+
+    Directory: C:\Users\tsmit\OneDrive\Desktop\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+l-r--           5/10/2026  5:37 AM                realai.slnx
+
+    Directory: C:\Users\tsmit\OneDrive\Desktop\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+lar--           5/10/2026  3:12 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\OneDrive\Desktop\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+lar--           5/10/2026  6:34 AM                realai
+
+    Directory: C:\Users\tsmit\OneDrive\Desktop\realai\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+l-r--           5/10/2026  6:37 AM                realai
+
+    Directory: C:\Users\tsmit\OneDrive\Desktop\realai\realai\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+l-r--           5/10/2026  6:37 AM                realai
+
+    Directory: C:\Users\tsmit\OneDrive\Desktop\realai - Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+lar--           5/10/2026  5:23 AM                realai
+lar--           5/10/2026  3:12 AM                realai_agent
+lar--           5/10/2026  3:12 AM                realai_api
+lar--           5/10/2026  3:12 AM                realai-cli
+lar--           5/10/2026  3:12 AM                realai-design-system
+lar--           5/10/2026  3:12 AM                realai-orchestration
+lar--           5/10/2026  3:12 AM                realai-sdk-js
+
+    Directory: C:\Users\tsmit\OneDrive\Desktop\realai - Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+lar--           5/10/2026  3:12 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\OneDrive\Documents\GitHub
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+lar--            6/6/2026  5:47 AM                realai
+d----           7/26/2026  3:09 AM                realai_recovered_files
+
+    Directory:
+C:\Users\tsmit\OneDrive\Documents\GitHub\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\backend
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+lar--            6/6/2026  5:48 AM                realai
+
+    Directory:
+C:\Users\tsmit\OneDrive\Documents\GitHub\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\scripts
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+lar--            6/6/2026  5:49 AM                realai
+
+    Directory: C:\Users\tsmit\OneDrive\Documents\GitHub\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+lar--            6/6/2026  5:48 AM                realai
+lar--            6/6/2026  5:48 AM                realai-core
+lar--            6/6/2026  5:48 AM                realai-frontend
+
+    Directory: C:\Users\tsmit\OneDrive\Documents\GitHub\realai\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+lar--           5/10/2026  3:12 AM                realai-1.0
+lar--           5/10/2026  3:12 AM                realai-embed
+lar--           5/10/2026  3:12 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\projects
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-r--           7/15/2026 12:55 AM                realai-clean
+
+    Directory: C:\Users\tsmit\projects\realai-clean
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/15/2026 12:55 AM                realai
+d----            7/5/2026  9:15 AM                realai_memory
+d----            7/5/2026  9:15 AM                realai-core
+d----            7/5/2026  9:15 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\projects\realai-clean\archive
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/18/2026  2:47 AM                realai_historical_backups
+d----           7/15/2026 12:55 AM                realai_repo
+d----           7/15/2026 12:55 AM                realai_sdk
+d----           7/15/2026 12:54 AM                realai-clean
+d----           7/15/2026 12:54 AM                realai-clean__dup1
+d----           7/15/2026 12:55 AM                RealAIProject
+
+    Directory: C:\Users\tsmit\projects\realai-clean\archive\realai-clean
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/15/2026 12:54 AM                realai-core
+
+    Directory: C:\Users\tsmit\projects\realai-clean\archive\realai-clean__dup1
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/15/2026 12:54 AM                realai-core
+d----           7/15/2026 12:54 AM                realai-core__dup1
+d----           7/15/2026 12:54 AM                realai-frontend__dup1
+
+    Directory: C:\Users\tsmit\projects\realai-clean\archive\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/15/2026 12:54 AM                realai-core
+d----           7/15/2026 12:54 AM                realai-frontend
+
+    Directory: C:\Users\tsmit\projects\realai-clean\archive\realai_historical_backups
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/15/2026 12:55 AM                realai_versions_20260612
+
+    Directory: C:\Users\tsmit\projects\realai-clean\archive\realai_historical_backups\rea
+lai_versions_20260612
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/15/2026 12:55 AM                RealAIProject
+
+    Directory: C:\Users\tsmit\projects\realai-clean\archive\realai_historical_backups\rea
+lai_versions_20260612\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/15/2026 12:55 AM                realai-core
+d----           7/15/2026 12:55 AM                realai-frontend
+
+    Directory: C:\Users\tsmit\projects\realai-clean\archive\realai_repo
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/15/2026 12:55 AM                realai-core
+d----           7/15/2026 12:55 AM                realai-core__dup1
+d----           7/15/2026 12:55 AM                realai-frontend__dup1
+
+    Directory: C:\Users\tsmit\projects\realai-clean\archive\realai_repo\.vs__dup1
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/10/2026  8:34 AM                realai_repo.slnx
+
+    Directory: C:\Users\tsmit\projects\realai-clean\archive\realai_sdk
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/15/2026 12:55 AM                realai-core
+d----           7/15/2026 12:55 AM                realai-core__dup1
+d----           7/15/2026 12:55 AM                realai-frontend__dup1
+
+    Directory: C:\Users\tsmit\projects\realai-clean\packages\sdk-py
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:15 AM                realai
+
+    Directory: C:\Users\tsmit\projects\realai-clean\providers
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:15 AM                realai
+
+    Directory: C:\Users\tsmit\Rack_em_up\rackup-backend\src
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/24/2026  2:09 AM                realai
+
+    Directory: C:\Users\tsmit\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----           6/29/2026 12:26 PM                realai_good
+d----           6/29/2026 12:26 PM                realai_historical_backups
+d----            7/5/2026  9:15 AM                realai_memory
+d----            7/5/2026  9:16 AM                realai_repo
+d----            7/5/2026  9:16 AM                realai_sdk
+d----            7/5/2026  9:16 AM                realai_search_temp
+d----            7/5/2026  9:16 AM                realai-backend
+d----            7/5/2026  9:16 AM                realai-clean
+d----            7/5/2026  9:16 AM                realai-clean__dup1
+d----            7/5/2026  9:16 AM                realai-cli
+d----            7/5/2026  9:15 AM                realai-core
+d----            7/5/2026  9:15 AM                realai.egg-info
+d----            7/5/2026  9:15 AM                RealAIProject
+
+    Directory: C:\Users\tsmit\realai\.kilo\worktrees\cotton-mistake
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  8:39 AM                realai
+d----            7/5/2026  8:39 AM                realai_memory
+d----            7/5/2026  8:39 AM                realai-core
+d----            7/5/2026  8:39 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai\.kilo\worktrees\cotton-mistake\packages\sdk-py
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  8:39 AM                realai
+
+    Directory: C:\Users\tsmit\realai\.kilo\worktrees\cotton-mistake\providers
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  8:39 AM                realai
+
+    Directory: C:\Users\tsmit\realai\.kilo\worktrees\cotton-mistake\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  8:39 AM                realai-1.0
+d----            7/5/2026  8:39 AM                realai-embed
+d----            7/5/2026  8:39 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\realai\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai\archive
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/10/2026  6:19 AM                realai_good
+d----           6/18/2026  2:47 AM                realai_historical_backups
+d----            7/5/2026  9:16 AM                realai_memory
+d----            7/5/2026  9:16 AM                realai_repo
+d----            7/5/2026  9:16 AM                realai_sdk
+d----            7/5/2026  9:16 AM                realai-backend
+d----            7/5/2026  9:16 AM                realai-clean
+d----            7/5/2026  9:16 AM                realai-clean__dup1
+d----            7/5/2026  9:16 AM                realai-cli
+d----            7/5/2026  9:16 AM                realai-core
+d----            7/5/2026  9:16 AM                realai-frontend
+d----           6/17/2026 12:49 AM                realai.egg-info
+d----            7/5/2026  9:15 AM                RealAIProject
+
+    Directory: C:\Users\tsmit\realai\archive\.venv
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/17/2026  3:33 AM                realai
+
+    Directory: C:\Users\tsmit\realai\archive\.venv\Lib\site-packages
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/17/2026 12:49 AM                realai-2.0.0.dist-info
+
+    Directory: C:\Users\tsmit\realai\archive\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/7/2026  4:30 PM                realai
+d----            6/7/2026  4:28 PM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai\archive\real-fin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\archive\real-fin\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--            7/5/2026  9:16 AM                realai
+dar--            7/5/2026  9:16 AM                realai - Copy
+dar--            7/5/2026  9:16 AM                realai_agent
+dar--            7/5/2026  9:16 AM                realai_api
+dar--            7/5/2026  9:16 AM                realai-cli
+dar--            7/5/2026  9:16 AM                realai-design-system
+dar--            7/5/2026  9:16 AM                realai-orchestration
+dar--            7/5/2026  9:16 AM                realai-sdk-js
+
+    Directory: C:\Users\tsmit\realai\archive\real-fin\realai\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--           5/10/2026  4:06 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai\archive\real-fin\realai\realai - Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--            7/5/2026  9:16 AM                realai
+dar--            7/5/2026  9:16 AM                realai_agent
+dar--            7/5/2026  9:16 AM                realai_api
+dar--            7/5/2026  9:16 AM                realai-cli
+dar--            7/5/2026  9:16 AM                realai-design-system
+dar--            7/5/2026  9:16 AM                realai-orchestration
+dar--            7/5/2026  9:16 AM                realai-sdk-js
+
+    Directory: C:\Users\tsmit\realai\archive\real-fin\realai\realai - Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--           5/10/2026  4:06 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai\archive\realai-clean
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai-core
+d----            7/5/2026  9:16 AM                realai-frontend
+d----           5/10/2026  3:36 PM                realai-widget
+
+    Directory: C:\Users\tsmit\realai\archive\realai-clean\realai-widget\node_modules
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/10/2026  3:36 PM                realai-core
+
+    Directory: C:\Users\tsmit\realai\archive\realai-clean__dup1
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai-core
+d----            7/5/2026  9:16 AM                realai-core__dup1
+d----            7/5/2026  9:16 AM                realai-frontend
+d----            7/5/2026  9:16 AM                realai-frontend__dup1
+d----           5/10/2026  3:36 PM                realai-widget
+d----           5/10/2026  3:36 PM                realai-widget__dup1
+
+    Directory:
+C:\Users\tsmit\realai\archive\realai-clean__dup1\realai-widget\node_modules
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/10/2026  3:36 PM                realai-core
+
+    Directory:
+C:\Users\tsmit\realai\archive\realai-clean__dup1\realai-widget__dup1\node_modules
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/10/2026  3:36 PM                realai-core
+
+    Directory: C:\Users\tsmit\realai\archive\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:15 AM                realai
+d----            7/5/2026  9:15 AM                realai-core
+d----           5/10/2026  9:50 AM                realai-dashboard
+d----            7/5/2026  9:15 AM                realai-frontend
+d----           5/10/2026  9:50 AM                realai-widget
+d----           5/15/2026  7:11 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai\archive\RealAIProject\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/10/2026  3:18 PM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai\archive\RealAIProject\realai-widget\node_modules
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+l----           5/10/2026  9:07 AM                realai-core -> C:\Users\tsmit\RealAIPro
+                                                  ject\realai-core
+
+    Directory: C:\Users\tsmit\realai\archive\realai_good
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\archive\realai_good\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\archive\realai_historical_backups
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/18/2026  2:47 AM                realai_versions_20260612
+
+    Directory:
+C:\Users\tsmit\realai\archive\realai_historical_backups\realai_versions_20260612
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/18/2026  2:47 AM                .realai
+d----           6/18/2026  2:47 AM                realai-backend
+d----            7/5/2026  9:16 AM                RealAIProject
+
+    Directory:
+C:\Users\tsmit\realai\archive\realai_historical_backups\realai_versions_20260612\real-fin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\archive\realai_historical_backups\realai_versions_20
+260612\real-fin\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----            7/5/2026  9:16 AM                realai - Copy
+
+    Directory: C:\Users\tsmit\realai\archive\realai_historical_backups\realai_versions_20
+260612\real-fin\realai\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/18/2026  2:47 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai\archive\realai_historical_backups\realai_versions_20
+260612\real-fin\realai\realai - Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\archive\realai_historical_backups\realai_versions_20
+260612\real-fin\realai\realai - Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/18/2026  2:47 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai\archive\realai_historical_backups\realai_versions_20
+260612\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----            7/5/2026  9:16 AM                realai-core
+d----           6/18/2026  2:47 AM                realai-dashboard
+d----            7/5/2026  9:16 AM                realai-frontend
+
+    Directory: C:\Users\tsmit\realai\archive\realai_historical_backups\realai_versions_20
+260612\RealAIProject\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/18/2026  2:47 AM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai\archive\realai_repo
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----            7/5/2026  9:16 AM                realai__dup1
+d----            5/7/2026  9:10 PM                realai__dup1.egg-info
+d----            7/5/2026  9:16 AM                realai-core
+d----            7/5/2026  9:16 AM                realai-core__dup1
+d----            7/5/2026  9:16 AM                realai-frontend
+d----            7/5/2026  9:16 AM                realai-frontend__dup1
+d----            5/7/2026  9:10 PM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai\archive\realai_repo\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/10/2026  8:34 AM                realai_repo.slnx
+
+    Directory: C:\Users\tsmit\realai\archive\realai_repo\.vs__dup1
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/10/2026  8:34 AM                realai_repo.slnx
+
+    Directory: C:\Users\tsmit\realai\archive\realai_repo\realai\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  8:46 AM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai\archive\realai_repo\realai__dup1\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  8:46 AM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai\archive\realai_sdk
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----            7/5/2026  9:16 AM                realai__dup1
+d----            5/8/2026  5:17 AM                realai__dup1.egg-info
+d----            7/5/2026  9:16 AM                realai_sdk
+d----            7/5/2026  9:16 AM                realai_sdk__dup1
+d----            7/5/2026  9:16 AM                realai-core
+d----            7/5/2026  9:16 AM                realai-core__dup1
+d----            7/5/2026  9:16 AM                realai-frontend
+d----            7/5/2026  9:16 AM                realai-frontend__dup1
+d----            5/8/2026  5:17 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai\archive\realai_sdk\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  8:46 AM                realai_sdk.slnx
+
+    Directory: C:\Users\tsmit\realai\archive\realai_sdk\realai_sdk\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  8:46 AM                realai_sdk.slnx
+
+    Directory: C:\Users\tsmit\realai\archive\realai_sdk\realai_sdk__dup1\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  8:46 AM                realai_sdk.slnx
+
+    Directory: C:\Users\tsmit\realai\archive_extracted\real-fin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\archive_extracted\real-fin\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai - Copy
+
+    Directory: C:\Users\tsmit\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/16/2026  9:13 AM                realai-1.0
+d----           5/15/2026  1:10 AM                realai-embed
+d----           6/16/2026  9:13 AM                realai-overseer
+d----            6/7/2026  4:11 PM                realai-vision
+
+    Directory: C:\Users\tsmit\realai\node_modules\.pnpm\node_modules
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/27/2026  7:21 PM                @realai
+l----           6/27/2026  7:21 PM                realai-frontend ->
+                                                  C:\Users\tsmit\realai\apps\frontend\
+l----           6/27/2026  7:21 PM                realai-model-realai-1-0 -> C:\Users\tsm
+                                                  it\realai\models\realai-1.0\
+l----           6/27/2026  7:21 PM                realai-model-realai-overseer -> C:\User
+                                                  s\tsmit\realai\models\realai-overseer\
+l----           6/27/2026  7:21 PM                realai-model-realai-vision -> C:\Users\
+                                                  tsmit\realai\models\realai-vision\
+l----           6/27/2026  7:21 PM                realai-vscode ->
+                                                  C:\Users\tsmit\realai\apps\vscode\
+l----           6/27/2026  7:21 PM                realai-widget ->
+                                                  C:\Users\tsmit\realai\apps\widget\
+
+    Directory: C:\Users\tsmit\realai\packages\sdk-py
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:15 AM                realai
+
+    Directory: C:\Users\tsmit\realai\plugins\extracted
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-r--           6/29/2026  5:59 AM                real-fin_realai_plugins
+d-r--            7/5/2026  9:16 AM                real-fin_realai_plugins_1
+d-r--            7/5/2026  9:16 AM                realai_realai_-_Copy_plugins
+d-r--            7/5/2026  9:16 AM                realai_realai_-_Copy_plugins_1
+
+    Directory: C:\Users\tsmit\realai\providers
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:15 AM                realai
+
+    Directory: C:\Users\tsmit\realai\real-fin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\real-fin\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----            7/5/2026  9:16 AM                realai - Copy
+
+    Directory: C:\Users\tsmit\realai\real-fin\realai\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai\real-fin\realai\realai - Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\real-fin\realai\realai - Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----            7/5/2026  9:16 AM                realai - Copy
+
+    Directory: C:\Users\tsmit\realai\realai\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026  8:05 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:15 AM                realai-1.0
+d----            7/5/2026  9:15 AM                realai-embed
+d----            7/5/2026  9:15 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\realai\realai\realai - Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\realai\realai - Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026  8:05 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai\realai-clean
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai-core
+d----            7/5/2026  9:16 AM                realai-frontend
+d----           6/29/2026 12:26 PM                realai-widget
+
+    Directory: C:\Users\tsmit\realai\realai-clean\realai-widget\node_modules
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai-core
+
+    Directory: C:\Users\tsmit\realai\realai-clean__dup1
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai-core
+d----           6/29/2026 12:26 PM                realai-core__dup1
+d----            7/5/2026  9:16 AM                realai-frontend
+d----            7/5/2026  9:16 AM                realai-frontend__dup1
+d----           6/29/2026 12:26 PM                realai-widget
+d----           6/29/2026 12:26 PM                realai-widget__dup1
+
+    Directory: C:\Users\tsmit\realai\realai-clean__dup1\realai-widget\node_modules
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai-core
+
+    Directory: C:\Users\tsmit\realai\realai-clean__dup1\realai-widget__dup1\node_modules
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai-core
+
+    Directory: C:\Users\tsmit\realai\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:15 AM                realai
+d----           6/29/2026 12:26 PM                realai-core
+d----           6/29/2026 12:26 PM                realai-dashboard
+d----            7/5/2026  9:15 AM                realai-frontend
+d----           6/29/2026 12:26 PM                realai-widget
+d----           6/29/2026 12:26 PM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai\RealAIProject\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai\realai_good
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\realai_good\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\realai_historical_backups
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai_versions_20260612
+
+    Directory: C:\Users\tsmit\realai\realai_historical_backups\realai_versions_20260612
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai-backend
+d----            7/5/2026  9:16 AM                RealAIProject
+
+    Directory:
+C:\Users\tsmit\realai\realai_historical_backups\realai_versions_20260612\real-fin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory:
+C:\Users\tsmit\realai\realai_historical_backups\realai_versions_20260612\real-fin\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----            7/5/2026  9:16 AM                realai - Copy
+
+    Directory: C:\Users\tsmit\realai\realai_historical_backups\realai_versions_20260612\r
+eal-fin\realai\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai\realai_historical_backups\realai_versions_20260612\r
+eal-fin\realai\realai - Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\realai_historical_backups\realai_versions_20260612\r
+eal-fin\realai\realai - Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai_launcher
+
+    Directory:
+C:\Users\tsmit\realai\realai_historical_backups\realai_versions_20260612\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----           6/29/2026 12:26 PM                realai-core
+d----           6/29/2026 12:26 PM                realai-dashboard
+d----            7/5/2026  9:16 AM                realai-frontend
+
+    Directory: C:\Users\tsmit\realai\realai_historical_backups\realai_versions_20260612\R
+ealAIProject\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai\realai_repo
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----            7/5/2026  9:16 AM                realai__dup1
+d----           6/29/2026 12:27 PM                realai__dup1.egg-info
+d----            7/5/2026  9:16 AM                realai-core
+d----            7/5/2026  9:16 AM                realai-core__dup1
+d----            7/5/2026  9:16 AM                realai-frontend
+d----            7/5/2026  9:16 AM                realai-frontend__dup1
+d----           6/29/2026 12:27 PM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai\realai_repo\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai_repo.slnx
+
+    Directory: C:\Users\tsmit\realai\realai_repo\realai\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai\realai_repo\realai__dup1\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:27 PM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai\realai_sdk
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----            7/5/2026  9:16 AM                realai__dup1
+d----           6/29/2026 12:27 PM                realai__dup1.egg-info
+d----            7/5/2026  9:16 AM                realai_sdk
+d----            7/5/2026  9:16 AM                realai_sdk__dup1
+d----            7/5/2026  9:16 AM                realai-core
+d----            7/5/2026  9:16 AM                realai-core__dup1
+d----            7/5/2026  9:16 AM                realai-frontend
+d----            7/5/2026  9:16 AM                realai-frontend__dup1
+d----           6/29/2026 12:27 PM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai\realai_sdk\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:27 PM                realai_sdk.slnx
+
+    Directory: C:\Users\tsmit\realai\realai_sdk\realai_sdk\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:27 PM                realai_sdk.slnx
+
+    Directory: C:\Users\tsmit\realai\realai_sdk\realai_sdk__dup1\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:27 PM                realai_sdk.slnx
+
+    Directory: C:\Users\tsmit\realai\rebase_dryrun\backups_resolved
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\rebase_dryrun\merged
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\rebase_dryrun\merged\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----            7/5/2026  9:16 AM                realai - Copy
+
+    Directory: C:\Users\tsmit\realai\rebase_dryrun\merged\realai\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026  7:47 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai\rebase_dryrun\merged\realai\realai - Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai\rebase_dryrun\merged\realai\realai - Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026  7:47 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai\src
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:43 PM                realai
+d----           6/29/2026 12:26 PM                realai_good
+d----           6/29/2026 12:26 PM                realai_historical_backups
+d----            7/6/2026 11:19 AM                realai_memory
+d----           7/31/2026  8:43 PM                realai_repo
+d----            7/5/2026  9:16 AM                realai-backend
+d----            7/5/2026  9:16 AM                realai-clean
+d----            7/5/2026  9:16 AM                realai-clean__dup1
+d----            7/5/2026  9:16 AM                realai-cli
+d----            7/6/2026 11:19 AM                realai-core
+d----            7/6/2026 11:19 AM                realai.egg-info
+d----           7/31/2026  8:43 PM                RealAIProject
+
+    Directory: C:\Users\tsmit\realai-clean\.backup\clean_backup_20260708_041701
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/8/2026  4:17 AM                realai
+d----            7/8/2026  4:17 AM                realai_memory
+d----            7/8/2026  4:17 AM                realai-core
+d----            7/8/2026  4:17 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai-clean\.backup\clean_backup_20260708_041701\archive
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/8/2026  4:17 AM                realai_historical_backups
+d----            7/8/2026  4:17 AM                realai_repo
+d----            7/8/2026  4:17 AM                realai_sdk
+d----            7/8/2026  4:17 AM                realai-clean
+d----            7/8/2026  4:17 AM                realai-clean__dup1
+d----            7/8/2026  4:17 AM                RealAIProject
+
+    Directory:
+C:\Users\tsmit\realai-clean\.backup\clean_backup_20260708_041701\archive\realai-clean
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/8/2026  4:17 AM                realai-core
+
+    Directory: C:\Users\tsmit\realai-clean\.backup\clean_backup_20260708_041701\archive\r
+ealai-clean__dup1
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/8/2026  4:17 AM                realai-core
+d----            7/8/2026  4:17 AM                realai-core__dup1
+d----            7/8/2026  4:17 AM                realai-frontend__dup1
+
+    Directory:
+C:\Users\tsmit\realai-clean\.backup\clean_backup_20260708_041701\archive\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/8/2026  4:17 AM                realai-core
+d----           7/31/2026  8:42 PM                realai-frontend
+
+    Directory: C:\Users\tsmit\realai-clean\.backup\clean_backup_20260708_041701\archive\r
+ealai_historical_backups
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/8/2026  4:17 AM                realai_versions_20260612
+
+    Directory: C:\Users\tsmit\realai-clean\.backup\clean_backup_20260708_041701\archive\r
+ealai_historical_backups\realai_versions_20260612
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/8/2026  4:17 AM                RealAIProject
+
+    Directory: C:\Users\tsmit\realai-clean\.backup\clean_backup_20260708_041701\archive\r
+ealai_historical_backups\realai_versions_20260612\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/8/2026  4:17 AM                realai-core
+d----           7/31/2026  8:42 PM                realai-frontend
+
+    Directory:
+C:\Users\tsmit\realai-clean\.backup\clean_backup_20260708_041701\archive\realai_repo
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/8/2026  4:17 AM                realai-core
+d----            7/8/2026  4:17 AM                realai-core__dup1
+d----            7/8/2026  4:17 AM                realai-frontend__dup1
+
+    Directory: C:\Users\tsmit\realai-clean\.backup\clean_backup_20260708_041701\archive\r
+ealai_repo\.vs__dup1
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/8/2026  4:17 AM                realai_repo.slnx
+
+    Directory:
+C:\Users\tsmit\realai-clean\.backup\clean_backup_20260708_041701\archive\realai_sdk
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/8/2026  4:17 AM                realai-core
+d----            7/8/2026  4:17 AM                realai-core__dup1
+d----            7/8/2026  4:17 AM                realai-frontend__dup1
+
+    Directory:
+C:\Users\tsmit\realai-clean\.backup\clean_backup_20260708_041701\packages\sdk-py
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/8/2026  4:17 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\.backup\clean_backup_20260708_041701\providers
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/8/2026  4:17 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\.kilo\worktrees\cotton-mistake
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  8:39 AM                realai
+d----            7/5/2026  8:39 AM                realai_memory
+d----            7/5/2026  8:39 AM                realai-core
+d----            7/5/2026  8:39 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai-clean\.kilo\worktrees\cotton-mistake\packages\sdk-py
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  8:39 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\.kilo\worktrees\cotton-mistake\providers
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  8:39 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\.kilo\worktrees\cotton-mistake\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  8:39 AM                realai-1.0
+d----            7/5/2026  8:39 AM                realai-embed
+d----            7/5/2026  8:39 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\realai-clean\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai-clean\archive
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/10/2026  6:19 AM                realai_good
+d----            7/6/2026 11:19 AM                realai_historical_backups
+d----            7/5/2026  9:16 AM                realai_memory
+d----           7/31/2026  8:43 PM                realai_repo
+d----           7/15/2026 12:55 AM                realai_sdk
+d----            7/5/2026  9:16 AM                realai-backend
+d----           7/15/2026 12:54 AM                realai-clean
+d----           7/15/2026 12:54 AM                realai-clean__dup1
+d----            7/5/2026  9:16 AM                realai-cli
+d----            7/5/2026  9:16 AM                realai-core
+d----            7/5/2026  9:16 AM                realai-frontend
+d----           6/17/2026 12:49 AM                realai.egg-info
+d----           7/31/2026  8:43 PM                RealAIProject
+
+    Directory: C:\Users\tsmit\realai-clean\archive\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/7/2026  4:30 PM                realai
+d----            6/7/2026  4:28 PM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai-clean\archive\real-fin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:43 PM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\archive\real-fin\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--            7/5/2026  9:16 AM                realai
+d----           7/31/2026  8:43 PM                realai - Copy
+dar--            7/5/2026  9:16 AM                realai_agent
+dar--            7/5/2026  9:16 AM                realai_api
+dar--            7/5/2026  9:16 AM                realai-cli
+dar--            7/5/2026  9:16 AM                realai-design-system
+dar--            7/5/2026  9:16 AM                realai-orchestration
+dar--            7/5/2026  9:16 AM                realai-sdk-js
+
+    Directory: C:\Users\tsmit\realai-clean\archive\real-fin\realai\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--           5/10/2026  4:06 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai-clean\archive\real-fin\realai\realai - Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--            7/5/2026  9:16 AM                realai
+dar--            7/5/2026  9:16 AM                realai_agent
+dar--            7/5/2026  9:16 AM                realai_api
+dar--            7/5/2026  9:16 AM                realai-cli
+dar--            7/5/2026  9:16 AM                realai-design-system
+dar--            7/5/2026  9:16 AM                realai-orchestration
+dar--            7/5/2026  9:16 AM                realai-sdk-js
+
+    Directory: C:\Users\tsmit\realai-clean\archive\real-fin\realai\realai - Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--           5/10/2026  4:06 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai-clean
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/15/2026 12:54 AM                realai-core
+d----            7/5/2026  9:16 AM                realai-frontend
+d----           5/10/2026  3:36 PM                realai-widget
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai-clean__dup1
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/15/2026 12:54 AM                realai-core
+d----           7/15/2026 12:54 AM                realai-core__dup1
+d----            7/5/2026  9:16 AM                realai-frontend
+d----           7/15/2026 12:54 AM                realai-frontend__dup1
+d----           5/10/2026  3:36 PM                realai-widget
+d----           5/10/2026  3:36 PM                realai-widget__dup1
+
+    Directory: C:\Users\tsmit\realai-clean\archive\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:15 AM                realai
+d----           7/31/2026  8:43 PM                realai-core
+d----           7/31/2026  8:43 PM                realai-dashboard
+d----           7/31/2026  8:43 PM                realai-frontend
+d----           5/10/2026  9:50 AM                realai-widget
+d----           5/15/2026  7:11 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai-clean\archive\RealAIProject\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/10/2026  3:18 PM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_good
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_good\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_historical_backups
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/15/2026 12:55 AM                realai_versions_20260612
+
+    Directory:
+C:\Users\tsmit\realai-clean\archive\realai_historical_backups\realai_versions_20260612
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/18/2026  2:47 AM                .realai
+d----           6/18/2026  2:47 AM                realai-backend
+d----           7/31/2026  8:43 PM                RealAIProject
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_historical_backups\realai_versi
+ons_20260612\real-fin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:43 PM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_historical_backups\realai_versi
+ons_20260612\real-fin\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----           7/31/2026  8:43 PM                realai - Copy
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_historical_backups\realai_versi
+ons_20260612\real-fin\realai\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/18/2026  2:47 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_historical_backups\realai_versi
+ons_20260612\real-fin\realai\realai - Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_historical_backups\realai_versi
+ons_20260612\real-fin\realai\realai - Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/18/2026  2:47 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_historical_backups\realai_versi
+ons_20260612\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----           7/31/2026  8:43 PM                realai-core
+d----           7/31/2026  8:43 PM                realai-dashboard
+d----           7/31/2026  8:43 PM                realai-frontend
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_historical_backups\realai_versi
+ons_20260612\RealAIProject\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/18/2026  2:47 AM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_repo
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----            7/5/2026  9:16 AM                realai__dup1
+d----            5/7/2026  9:10 PM                realai__dup1.egg-info
+d----           7/15/2026 12:55 AM                realai-core
+d----           7/15/2026 12:55 AM                realai-core__dup1
+d----            7/5/2026  9:16 AM                realai-frontend
+d----           7/15/2026 12:55 AM                realai-frontend__dup1
+d----            5/7/2026  9:10 PM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_repo\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           5/10/2026  8:34 AM                realai_repo.slnx
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_repo\.vs__dup1
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/6/2026 11:19 AM                realai_repo.slnx
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_repo\realai\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  8:46 AM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_repo\realai__dup1\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  8:46 AM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_sdk
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----            7/5/2026  9:16 AM                realai__dup1
+d----            5/8/2026  5:17 AM                realai__dup1.egg-info
+d----            7/5/2026  9:16 AM                realai_sdk
+d----            7/5/2026  9:16 AM                realai_sdk__dup1
+d----           7/15/2026 12:55 AM                realai-core
+d----           7/15/2026 12:55 AM                realai-core__dup1
+d----            7/5/2026  9:16 AM                realai-frontend
+d----           7/15/2026 12:55 AM                realai-frontend__dup1
+d----            5/8/2026  5:17 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_sdk\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  8:46 AM                realai_sdk.slnx
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_sdk\realai_sdk\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  8:46 AM                realai_sdk.slnx
+
+    Directory: C:\Users\tsmit\realai-clean\archive\realai_sdk\realai_sdk__dup1\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            5/8/2026  8:46 AM                realai_sdk.slnx
+
+    Directory: C:\Users\tsmit\realai-clean\archive_extracted\real-fin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\archive_extracted\real-fin\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai - Copy
+
+    Directory: C:\Users\tsmit\realai-clean\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/16/2026  9:13 AM                realai-1.0
+d----           6/27/2026 12:46 AM                realai-1.0-instruct
+d----           5/15/2026  1:10 AM                realai-embed
+d----           6/16/2026  9:13 AM                realai-overseer
+d----            6/7/2026  4:11 PM                realai-vision
+
+    Directory: C:\Users\tsmit\realai-clean\packages\sdk-py
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/6/2026 11:19 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\plugins\extracted
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-r--           6/29/2026  5:59 AM                real-fin_realai_plugins
+d-r--            7/5/2026  9:16 AM                real-fin_realai_plugins_1
+d-r--            7/5/2026  9:16 AM                realai_realai_-_Copy_plugins
+d-r--            7/5/2026  9:16 AM                realai_realai_-_Copy_plugins_1
+
+    Directory: C:\Users\tsmit\realai-clean\providers
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/6/2026 11:19 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\real-fin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:43 PM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\real-fin\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----            7/5/2026  9:16 AM                realai - Copy
+
+    Directory: C:\Users\tsmit\realai-clean\real-fin\realai\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai-clean\real-fin\realai\realai - Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\real-fin\realai\realai - Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai-clean\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:43 PM                realai
+d----           7/31/2026  8:43 PM                realai - Copy
+
+    Directory: C:\Users\tsmit\realai-clean\realai\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026  8:05 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai-clean\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:15 AM                realai-1.0
+d----            7/5/2026  9:15 AM                realai-embed
+d----            7/5/2026  9:15 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\realai-clean\realai\realai - Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\realai\realai - Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026  8:05 AM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai-clean\realai-clean
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai-core
+d----            7/5/2026  9:16 AM                realai-frontend
+d----           6/29/2026 12:26 PM                realai-widget
+
+    Directory: C:\Users\tsmit\realai-clean\realai-clean__dup1
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai-core
+d----           6/29/2026 12:26 PM                realai-core__dup1
+d----            7/5/2026  9:16 AM                realai-frontend
+d----            7/5/2026  9:16 AM                realai-frontend__dup1
+d----           6/29/2026 12:26 PM                realai-widget
+d----           6/29/2026 12:26 PM                realai-widget__dup1
+
+    Directory: C:\Users\tsmit\realai-clean\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:15 AM                realai
+d----           6/29/2026 12:26 PM                realai-core
+d----           6/29/2026 12:26 PM                realai-dashboard
+d----            7/5/2026  9:15 AM                realai-frontend
+d----           6/29/2026 12:26 PM                realai-widget
+d----           6/29/2026 12:26 PM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai-clean\RealAIProject\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai-clean\realai_good
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\realai_good\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\realai_historical_backups
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai_versions_20260612
+
+    Directory:
+C:\Users\tsmit\realai-clean\realai_historical_backups\realai_versions_20260612
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai-backend
+d----           7/31/2026  8:43 PM                RealAIProject
+
+    Directory:
+C:\Users\tsmit\realai-clean\realai_historical_backups\realai_versions_20260612\real-fin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           7/31/2026  8:43 PM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\realai_historical_backups\realai_versions_2026
+0612\real-fin\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----            7/5/2026  9:16 AM                realai - Copy
+
+    Directory: C:\Users\tsmit\realai-clean\realai_historical_backups\realai_versions_2026
+0612\real-fin\realai\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai-clean\realai_historical_backups\realai_versions_2026
+0612\real-fin\realai\realai - Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+
+    Directory: C:\Users\tsmit\realai-clean\realai_historical_backups\realai_versions_2026
+0612\real-fin\realai\realai - Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai_launcher
+
+    Directory: C:\Users\tsmit\realai-clean\realai_historical_backups\realai_versions_2026
+0612\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            7/5/2026  9:16 AM                realai
+d----           6/29/2026 12:26 PM                realai-core
+d----           6/29/2026 12:26 PM                realai-dashboard
+d----            7/5/2026  9:16 AM                realai-frontend
+
+    Directory: C:\Users\tsmit\realai-clean\realai_historical_backups\realai_versions_2026
+0612\RealAIProject\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/29/2026 12:26 PM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai_historical_backups
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/8/2026 10:01 AM                realai_versions_20260612
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/8/2026 10:01 AM                .realai
+d----            6/1/2026  2:27 AM                realai_good
+d----            6/1/2026  2:28 AM                realai_repo
+d----            6/1/2026  2:27 AM                realai_sdk
+d----            6/8/2026 10:01 AM                realai-backend
+d----            6/1/2026  3:10 AM                RealAIProject
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\real-fin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\real-fin\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai
+d----            6/1/2026  3:31 AM                realai - Copy
+d----            6/1/2026  2:27 AM                realai_agent
+d----            6/1/2026  2:27 AM                realai_api
+d----            6/1/2026  2:27 AM                realai-cli
+d----            6/1/2026  2:27 AM                realai-design-system
+d----            6/1/2026  2:27 AM                realai-orchestration
+d----            6/1/2026  2:27 AM                realai-sdk-js
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\real-fin\realai\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai_launcher
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\real-fin\realai\realai
+- Copy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai
+d----            6/1/2026  3:31 AM                realai_agent
+d----            6/1/2026  2:27 AM                realai_api
+d----            6/1/2026  2:27 AM                realai-cli
+d----            6/1/2026  2:27 AM                realai-design-system
+d----            6/1/2026  2:27 AM                realai-orchestration
+d----            6/1/2026  2:27 AM                realai-sdk-js
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\real-fin\realai\realai
+- Copy\build
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai_launcher
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\RealAIProject
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  3:08 AM                realai
+d----            6/1/2026  3:08 AM                realai-core
+d----            6/1/2026  3:08 AM                realai-dashboard
+d----            6/1/2026  3:10 AM                realai-frontend
+d----            6/1/2026  3:10 AM                realai-widget
+d----            6/1/2026  3:10 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\RealAIPr
+oject\.git\logs\refs\remotes
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  3:08 AM                target-realai
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\RealAIPr
+oject\.git\refs\remotes
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  3:08 AM                target-realai
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\RealAIProject\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  3:08 AM                realai.slnx
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\RealAIProject\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  3:08 AM                realai
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\RealAIPr
+oject\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  3:08 AM                realai
+d----            6/1/2026  3:08 AM                realai-1.0
+d----            6/1/2026  3:08 AM                realai-embed
+d----            6/1/2026  3:08 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\RealAIPr
+oject\realai\server
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  3:08 AM                realai
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\RealAIPr
+oject\realai-widget\node_modules
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+l----            6/1/2026  3:10 AM                realai-core -> c:\Users\tsmit\realai\re
+                                                  alai_versions\RealAIProject\realai-core
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\RealAIProject\server
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  3:10 AM                realai
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_good
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/8/2026 10:01 AM                realai
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_good\realai
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/8/2026 10:01 AM                realai
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_repo
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai
+d----            6/1/2026  2:27 AM                realai-core
+d----            6/1/2026  2:28 AM                realai-frontend
+d----            6/1/2026  2:28 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_r
+epo\.git\logs\refs\remotes\origin\dependabot\npm_and_yarn
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai-frontend
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_r
+epo\.git\refs\remotes\origin\dependabot\npm_and_yarn
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai-frontend
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_repo\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai_repo.slnx
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_repo\realai\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai.slnx
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_r
+epo\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai-1.0
+d----            6/1/2026  2:27 AM                realai-embed
+d----            6/1/2026  2:27 AM                realai-overseer
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_sdk
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai
+d----            6/1/2026  2:27 AM                realai_repo
+d----            6/1/2026  2:27 AM                realai_sdk
+d----            6/1/2026  2:27 AM                realai-core
+d----            6/1/2026  2:27 AM                realai-frontend
+d----            6/1/2026  2:27 AM                realai-sdk
+d----            6/1/2026  2:27 AM                realai.egg-info
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_s
+dk\.git\logs\refs\remotes\origin\dependabot\npm_and_yarn
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai-frontend
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_s
+dk\.git\refs\remotes\origin\dependabot\npm_and_yarn
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai-frontend
+
+    Directory:
+C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_sdk\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai_sdk.slnx
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_s
+dk\realai\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai-1.0
+d----            6/1/2026  2:27 AM                realai-embed
+d----            6/1/2026  2:27 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_s
+dk\realai_sdk\.vs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai_sdk.slnx
+
+    Directory: C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_s
+dk\realai_sdk\models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----            6/1/2026  2:27 AM                realai-1.0
+d----            6/1/2026  2:27 AM                realai-embed
+d----            6/1/2026  2:27 AM                realai-overseer
+
+    Directory: C:\Users\tsmit\source\repos\Unwrenchable
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----           6/20/2026  5:03 AM                realai
