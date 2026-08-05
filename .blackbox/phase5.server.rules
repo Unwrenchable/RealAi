@@ -1,0 +1,2 @@
+phase: server-hardening
+description: Endpoint validation, error-path hardening, malformed JSON handling.

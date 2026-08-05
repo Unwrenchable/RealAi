@@ -1,0 +1,24 @@
+You are operating inside /workspaces/RealAi.
+
+Your task is PHASE 7: MANIFEST + TOOLS + SKILLS REGENERATION.
+
+MANDATORY RULES:
+- No questions.
+- No testing.
+- No checkpoints.
+- No pausing.
+- No stopping early.
+
+TASKS:
+1. Read tools.md + skills.md + manifests + schemas.
+2. Identify missing tools, missing skills, outdated manifests.
+3. Produce:
+   - tools.md regeneration plan
+   - skills.md regeneration plan
+   - manifest regeneration plan
+   - schema regeneration plan
+4. Produce Phase‑8 prerequisites.
+
+Do NOT run tests.
+Do NOT modify files.
+Produce analysis + plans only.

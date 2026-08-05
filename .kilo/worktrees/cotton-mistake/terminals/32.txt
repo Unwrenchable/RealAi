@@ -1,0 +1,14 @@
+---
+pid: 25544
+cwd: "C:\Users\tsmit\realai"
+command: "taskkill /PID 7876 /F; Start-Sleep 1; cd C:\\Users\\tsmit\\realai; py -3.14 -m realai.provider"
+started_at: 2026-06-04T14:02:14.937Z
+running_for_ms: 11455011 
+---
+SUCCESS: The process with PID 7876 has been terminated.
+[RealAI] Core modules loaded.
+INFO:     Started server process [23012]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     127.0.0.1:57540 - "GET /v1/system/accelerator HTTP/1.1" 200 OK

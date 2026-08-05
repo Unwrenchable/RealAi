@@ -1,0 +1,97 @@
+
+Path             : C:\realai_recovery_
+Exists           : True
+HasGit           : True
+FileCount        : 9332
+MissingInCurrent : 8816
+Notes            : Already a git repo | Many unique files
+SampleMissing    : __init__.py; .env.local.example; .large_files.txt; agent_manifests_for_finetuning_training_runs.json; agent_manifests_for_finetuning.json; AGENTS.md; api_big_server.py; api_server_backup.py
+
+Path             : C:\RealAI_Recovery_SAFE
+Exists           : True
+HasGit           : False
+FileCount        : 131570
+MissingInCurrent : 131570
+Notes            : No .git | Many unique files
+SampleMissing    : C__llama_agent_build_realai.py; C__llama-vulkan_models_realai-1.0_manifest.json; C__llama-vulkan_models_realai-1.0_package.json; C__llama-vulkan_models_realai-1.0_README.md; C__llama-vulkan_models_realai-1.0-instruct_manifest.json; C__llama-vulkan_models_realai-1.0-instruct_weights_artifact.json; C__llama-vulkan_models_realai-embed_README.md; C__llama-vulkan_models_realai-overseer_manifest.json
+
+Path             : C:\RealAi-unified
+Exists           : True
+HasGit           : True
+FileCount        : 6930
+MissingInCurrent : 6423
+Notes            : Already a git repo | Many unique files
+SampleMissing    : __init__.py; .env.local.example; agent_manifests_for_finetuning_training_runs.json; agent_manifests_for_finetuning.json; AGENTS.md; api_big_server.py; api_server_backup.py; api_server_cpu.py
+
+Path             : C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\RealAIProject
+Exists           : True
+HasGit           : True
+FileCount        : 408
+MissingInCurrent : 156
+Notes            : Already a git repo | Many unique files
+SampleMissing    : __init__.py; .env.local.example; models\llama3.2-1b\.cache\huggingface\.gitignore; models\llama3.2-1b\.cache\huggingface\CACHEDIR.TAG; models\llama3.2-1b\.cache\huggingface\download\Llama-3.2-1B-Instruct-Q4_K_M.gguf.metadata; realai-core\agent_tools.egg-info\dependency_links.txt; realai-core\agent_tools.egg-info\entry_points.txt; realai-core\agent_tools.egg-info\PKG-INFO
+
+Path             : C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\real-fin
+Exists           : True
+HasGit           : False
+FileCount        : 327
+MissingInCurrent : 316
+Notes            : No .git | Many unique files
+SampleMissing    : realai\.gitattributes; realai\.gitignore; realai\API.md; realai\build_lambda.sh; realai\CONTRIBUTING.md; realai\DEPLOYMENT_FRONTEND_FIX.md; realai\DEPLOYMENT.md; realai\examples_limitless.py
+
+Path             : C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai-backend
+Exists           : True
+HasGit           : False
+FileCount        : 1
+MissingInCurrent : 0
+Notes            : No .git
+SampleMissing    : 
+
+Path             : C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_sdk
+Exists           : True
+HasGit           : True
+FileCount        : 419
+MissingInCurrent : 191
+Notes            : Already a git repo | Many unique files
+SampleMissing    : __init__.py; client.py; realai-core\.gitignore; realai-core\poetry.lock; realai-core\policy.json; realai-core\pyproject.toml; realai-core\README.md; realai-core\sanity_check.py
+
+Path             : C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_repo
+Exists           : True
+HasGit           : True
+FileCount        : 402
+MissingInCurrent : 154
+Notes            : Already a git repo | Many unique files
+SampleMissing    : __init__.py; app\__init__.py; app\api\__init__.py; app\api\main.py; app\api\state.py; app\api\middleware\__init__.py; app\api\middleware\logging.py; app\api\routes\__init__.py
+
+Path             : C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\realai_good
+Exists           : True
+HasGit           : False
+FileCount        : 3
+MissingInCurrent : 0
+Notes            : No .git
+SampleMissing    : 
+
+Path             : C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\agent-tools-main
+Exists           : True
+HasGit           : False
+FileCount        : 8
+MissingInCurrent : 8
+Notes            : No .git
+SampleMissing    : agent-tools-main\.vscode\mcp.json; agent-tools-main\.vscode\settings.json; agent-tools-main\agent_tools.egg-info\dependency_links.txt; agent-tools-main\agent_tools.egg-info\entry_points.txt; agent-tools-main\agent_tools.egg-info\PKG-INFO; agent-tools-main\agent_tools.egg-info\requires.txt; agent-tools-main\agent_tools.egg-info\SOURCES.txt; agent-tools-main\agent_tools.egg-info\top_level.txt
+
+Path             : C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\.realai
+Exists           : True
+HasGit           : False
+FileCount        : 1
+MissingInCurrent : 1
+Notes            : No .git
+SampleMissing    : server.sqlite3
+
+Path             : C:\Users\tsmit\realai-clean
+Exists           : True
+HasGit           : True
+FileCount        : 21540
+MissingInCurrent : 20688
+Notes            : Already a git repo | Many unique files
+SampleMissing    : AGENTS.md; orchestrator.py; R; repo-tree.txt; .backup\clean_backup_20260708_041701\.env.example; .backup\clean_backup_20260708_041701\.gitattributes; .backup\clean_backup_20260708_041701\.gitignore; .backup\clean_backup_20260708_041701\.python-version
+

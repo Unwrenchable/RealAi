@@ -1,0 +1,6 @@
+{
+  "name": "@realai/sdk-py",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Python SDK for RealAI"
+}

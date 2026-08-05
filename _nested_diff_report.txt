@@ -1,0 +1,107 @@
+
+Status             RelativePath
+------             ------------                         
+MISSING in current __init__.py                          
+DIFFERENT          .env                                 
+DIFFERENT          .env.example                         
+MISSING in current agent_runtime.py                     
+DIFFERENT          api_server.py                        
+MISSING in current app_framework.py                     
+MISSING in current audit.py                             
+MISSING in current coding_agent.py                      
+MISSING in current critique.py                          
+MISSING in current execution_history.jsonl              
+MISSING in current identity.py                          
+MISSING in current knowledge_graph.py                   
+DIFFERENT          local_models.py                      
+MISSING in current local_runtime.py                     
+MISSING in current model_registry.py                    
+DIFFERENT          package-lock.json                    
+MISSING in current plugin_marketplace.py                
+MISSING in current realai_memory.db                     
+MISSING in current realai_memory.json                   
+DIFFERENT          realai_memory.sqlite3                
+MISSING in current router.py                            
+MISSING in current safety.py                            
+MISSING in current self_improvement.py                  
+MISSING in current server_settings.py                   
+MISSING in current tools.py                             
+MISSING in current world_model.py                       
+DIFFERENT          .pytest_cache\.gitignore             
+DIFFERENT          .pytest_cache\CACHEDIR.TAG           
+DIFFERENT          .pytest_cache\README.md              
+DIFFERENT          .pytest_cache\v\cache\lastfailed     
+DIFFERENT          .pytest_cache\v\cache\nodeids        
+DIFFERENT          apps\frontend\.env.local             
+DIFFERENT          apps\frontend\.env.local.example     
+DIFFERENT          apps\frontend\package-lock.json      
+MISSING in current cli\__init__.py                      
+MISSING in current cli\realai_cli.py                    
+DIFFERENT          core\models\__init__.py              
+DIFFERENT          core\models\base.py                  
+DIFFERENT          core\models\cache.py                 
+DIFFERENT          core\models\registry.py              
+DIFFERENT          core\models\stub.py                  
+MISSING in current datasets\__init__.py                 
+MISSING in current datasets\processed\.gitkeep          
+MISSING in current datasets\raw\.gitkeep                
+MISSING in current memory\__init__.py                   
+MISSING in current memory\engine.py                     
+MISSING in current memory\sqlite_memory.p               
+MISSING in current models\__init__.py                   
+MISSING in current models\metadata.json                 
+MISSING in current models\registry.json                 
+MISSING in current models\registry.json.example         
+MISSING in current models\.cache\huggingface\.gitignore 
+MISSING in current models\.cache\huggingface\CACHEDIR.T…
+MISSING in current models\llama3.2-1b\.cache\huggingfac…
+MISSING in current models\llama3.2-1b\.cache\huggingfac…
+DIFFERENT          models\realai-1.0\manifest.json      
+DIFFERENT          models\realai-1.0\package.json       
+MISSING in current models\realai-1.0\README.md          
+MISSING in current models\realai-1.0\weights\.gitkeep   
+MISSING in current models\realai-embed\README.md        
+DIFFERENT          models\realai-overseer\manifest.json 
+DIFFERENT          models\realai-overseer\package.json  
+MISSING in current models\realai-overseer\README.md     
+MISSING in current models\realai-overseer\weights\READM…
+DIFFERENT          models\realai-vision\manifest.json   
+DIFFERENT          models\realai-vision\package.json    
+DIFFERENT          realai\realai_memory.json            
+DIFFERENT          realai\models\__init__.py            
+DIFFERENT          realai\models\metadata.json          
+DIFFERENT          realai\models\registry.json          
+DIFFERENT          realai\models\registry.json.example  
+DIFFERENT          realai\models\realai-1.0\README.md   
+DIFFERENT          realai\models\realai-embed\README.md 
+DIFFERENT          realai\models\realai-overseer\README…
+MISSING in current realai - Copy\realai_memory.db       
+MISSING in current realai - Copy\realai_memory.json     
+MISSING in current realai - Copy\realai\realai_memory.j…
+MISSING in current sdk\__init__.py                      
+MISSING in current sdk\python\__init__.py               
+MISSING in current sdk\python\realai_client.py          
+MISSING in current server\__init__.py                   
+MISSING in current server\app.py                        
+MISSING in current server\backends.py                   
+MISSING in current server\config.py                     
+MISSING in current server\embeddings_backend.py         
+MISSING in current server\embeddings.py                 
+MISSING in current server\inference.py                  
+MISSING in current server\llama_cli_backend.py          
+MISSING in current server\logging_utils.py              
+MISSING in current server\logging.py                    
+MISSING in current server\memory_store.py               
+MISSING in current server\metrics.py                    
+MISSING in current server\orchestration.py              
+MISSING in current server\persistence.py                
+MISSING in current server\providers.py                  
+MISSING in current server\router.py                     
+MISSING in current server\tools_runtime.py              
+MISSING in current server\profiles\default.json         
+DIFFERENT          training\__init__.py                 
+MISSING in current training\build_datasets.py           
+MISSING in current training\eval.py                     
+MISSING in current training\extract_from_agent_tools.py 
+MISSING in current training\finetune.py                 
+

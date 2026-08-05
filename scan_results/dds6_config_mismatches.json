@@ -1,0 +1,38 @@
+[
+  {
+    "type": "model_path_missing",
+    "path": "realai-2.0"
+  },
+  {
+    "type": "model_path_missing",
+    "path": "realai-overseer"
+  },
+  {
+    "type": "model_path_missing",
+    "path": "realai-embed"
+  },
+  {
+    "type": "provider_entry_missing",
+    "path": "local"
+  },
+  {
+    "type": "provider_entry_missing",
+    "path": "openai"
+  },
+  {
+    "type": "provider_entry_missing",
+    "path": "anthropic"
+  },
+  {
+    "type": "provider_entry_missing",
+    "path": "gemini"
+  },
+  {
+    "type": "toml_path_missing",
+    "path": "c:/llama.cpp/build/bin/release/llama-cli.exe"
+  },
+  {
+    "type": "toml_path_missing",
+    "path": "/home/user/llama.cpp/build/bin/llama-cli"
+  }
+]

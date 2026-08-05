@@ -1,0 +1,27 @@
+# RealAI Requirements
+# Core packages – required for the API server and chat completions
+fastapi>=0.111.0
+pydantic>=2.7.0
+uvicorn>=0.30.1
+requests>=2.28.0
+beautifulsoup4>=4.12.0
+prometheus-client>=0.20.0
+opentelemetry-api>=1.25.0
+python-multipart>=0.0.6
+
+# Optional features – install manually for full-featured local use:
+#   pip install sentence-transformers>=2.2.2  # semantic search / embeddings (~2-3 GB)
+#   pip install pyttsx3>=2.90                 # text-to-speech
+#   pip install vosk>=0.3.45                  # speech recognition (~1-2 GB)
+#   pip install web3>=6.0.0                   # blockchain / Web3 integration
+#   pip install python-gnupg>=0.5.0           # GPG signing for Web3 transactions
+
+# Local AI Models (run your own AI without external APIs):
+#   pip install llama-cpp-python>=0.2.0       # Local LLM inference with GGUF models (CPU/GPU)
+#   pip install transformers>=4.30.0          # Hugging Face models
+#   pip install torch>=2.0.0                  # PyTorch for transformers
+#   pip install diffusers>=0.21.0             # Stable Diffusion for image generation
+#   pip install accelerate>=0.20.0            # Faster model loading
+#   pip install safetensors>=0.3.0            # Safe model format
+#   pip install openai-whisper>=20230314      # Local speech-to-text (Whisper)
+#   pip install TTS>=0.15.0                   # Local text-to-speech (Coqui TTS)

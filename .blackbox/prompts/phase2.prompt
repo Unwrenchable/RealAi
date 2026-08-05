@@ -1,0 +1,35 @@
+You are operating inside two RealAI repos:
+
+1. analysis-clean
+2. realai_og_mess
+
+Your task is PHASE 2: ARCHIVE EXTRACTION + SUBSYSTEM MERGING.
+
+MANDATORY RULES:
+- No questions.
+- No testing.
+- No checkpoints.
+- No pausing.
+- No stopping early.
+
+TASKS:
+1. Extract ALL legacy logic from OG repo archives.
+2. Identify:
+   - mergeable logic
+   - rewrite-required logic
+   - reference-only logic
+   - obsolete logic
+3. Map OG → Clean subsystem merges.
+4. Produce:
+   - subsystem merge plan
+   - legacy logic import plan
+   - unified agent runtime plan
+   - unified memory engine plan
+   - unified tool runner plan
+   - unified provider registry plan
+   - unified model registry plan
+5. Produce Phase‑3 prerequisites.
+
+Do NOT run tests.
+Do NOT modify files.
+Produce analysis + plans only.

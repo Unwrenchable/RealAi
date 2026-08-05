@@ -1,0 +1,3301 @@
+{
+  "version": 11,
+  "updated_at": "2026-07-16T17:59:22.562952+00:00",
+  "keywords": [
+    "$recycle.bin",
+    ".agentx",
+    ".env.local",
+    ".env.local.fizz",
+    ".lmstudio",
+    ".openclaw",
+    ".realai",
+    "Agent",
+    "AnthropicProvider",
+    "AuraMemory",
+    "BaseAgent",
+    "CachedModel",
+    "ChatModel",
+    "ChatSidebarProvider",
+    "CloudProvider",
+    "CodeEngineerAgent",
+    "CodeExecutionTool",
+    "CodeGPTCopilotProvider",
+    "CodingAgent",
+    "CreativeAgent",
+    "CriticAgent",
+    "CustomerModel",
+    "DevOpsAgent",
+    "DiffCodeLensProvider",
+    "EpisodicMemory",
+    "ExecutionAgent",
+    "FileTool",
+    "GroqProvider",
+    "ImageModel",
+    "LocalProvider",
+    "LongTermMemory",
+    "MemorySummarizerAgent",
+    "MockProvider",
+    "Model",
+    "NDArrayTypeResolveProvider",
+    "OpenAIProvider",
+    "PandasDataFrameTypeResolveProvider",
+    "PandasSeriesTypeResolveProvider",
+    "PandasStylerTypeResolveProvider",
+    "PlannerAgent",
+    "Provider",
+    "RealAIProvider",
+    "ResearchAgent",
+    "SemanticMemory",
+    "SharedMemory",
+    "ShortTermMemory",
+    "SpecialistAgent",
+    "StrPresentationProvider",
+    "SupervisorAgent",
+    "SymbolicMemory",
+    "SynthesizerAgent",
+    "TRAINING",
+    "Tool",
+    "TypeResolveProvider",
+    "Web3Tool",
+    "WebSearchTool",
+    "WorkerAgent",
+    "WorkingMemory",
+    "_AbstractProvider",
+    "ability_surface",
+    "adapter",
+    "agent_assignments",
+    "agent_contributions",
+    "agent_counts",
+    "agent_dest",
+    "agent_found",
+    "agent_frameworks",
+    "agent_id",
+    "agent_ids",
+    "agent_input",
+    "agent_instructions",
+    "agent_list",
+    "agent_manifests",
+    "agent_manifests_for_finetuning",
+    "agent_name",
+    "agent_names",
+    "agent_not_found",
+    "agent_or_manifest_json",
+    "agent_orchestration",
+    "agent_registry",
+    "agent_results",
+    "agent_role",
+    "agent_roles",
+    "agent_runtime",
+    "agent_src",
+    "agent_summaries",
+    "agent_system",
+    "agent_tools",
+    "agent_tools_assess",
+    "agent_tools_bridge",
+    "agent_tools_gold",
+    "agent_tools_list_agents",
+    "agent_tools_list_profiles",
+    "agent_tools_main",
+    "agent_tools_status",
+    "agent_type",
+    "agentic os",
+    "agents",
+    "agentx",
+    "asr",
+    "assembled_realai_core",
+    "atomic fizz",
+    "atomic_fizz",
+    "atomic_fizz_backup_2026_05_30",
+    "atomic_fizz_caps_old",
+    "atomic_fizz_caps_vault_77_wasteland_gps",
+    "audio speech",
+    "audio transcription",
+    "audio/speech",
+    "audio/transcriptions",
+    "audit",
+    "automation",
+    "bootstrap",
+    "business plan",
+    "business planning",
+    "caps_token",
+    "chain-of-thought",
+    "chain_of_thought",
+    "chat",
+    "chat completion",
+    "chat ui",
+    "chat/completions",
+    "checkpoints_lora",
+    "chroma",
+    "clear_name_restore",
+    "cli",
+    "cli surface",
+    "code execution",
+    "code generation",
+    "coding",
+    "commands",
+    "completion",
+    "completions",
+    "counseling",
+    "counsellor",
+    "critic",
+    "critique",
+    "dall-e",
+    "dataset",
+    "deepen_cycle",
+    "defi",
+    "dialogue-engine",
+    "dungeon-generator",
+    "embedding",
+    "embeddings",
+    "enterprise",
+    "env_local_fizz",
+    "evm",
+    "exec",
+    "execution_history",
+    "executor",
+    "finetune",
+    "finetune adapter",
+    "from_recycle_bin",
+    "from_users_dotfiles",
+    "frontend",
+    "frontend UI",
+    "frontend ui",
+    "game world",
+    "generate",
+    "gguf",
+    "gguf_connect",
+    "git clean",
+    "governance",
+    "heartbeat",
+    "help",
+    "hierarchical_agent",
+    "hive",
+    "hive_priority_uniques",
+    "hominis",
+    "hominis enterprise",
+    "huggingface",
+    "identity",
+    "identity_md",
+    "image",
+    "image analysis",
+    "image gen",
+    "image generation",
+    "image_url",
+    "images/generations",
+    "infra",
+    "kilo",
+    "kilo recovery",
+    "knowledge graph",
+    "knowledge synthesis",
+    "knowledge_graph",
+    "llama",
+    "llama-server",
+    "llama.cpp",
+    "llama_3.2_1b_instruct_q4_k_m",
+    "llama_3.2_3b_instruct_q5_k_m",
+    "llama_local",
+    "llama_vulkan",
+    "local inference",
+    "local model",
+    "local-overseer",
+    "local_llama",
+    "local_models",
+    "local_models_json",
+    "local_qwen",
+    "lora",
+    "lora adapters",
+    "lora_adapter",
+    "lora_adapter_count",
+    "lora_adapters",
+    "lora_adapters_sample",
+    "lora_alpha",
+    "lora_config",
+    "lora_dropout",
+    "lora_manifest",
+    "lora_path",
+    "lora_root",
+    "lora_scan",
+    "mcp",
+    "mcp_data",
+    "mcp_manifest",
+    "mcp_path",
+    "mcp_scan",
+    "mcp_server",
+    "mcp_servers",
+    "memory",
+    "memory learning",
+    "memory_adapter",
+    "memory_bytes",
+    "memory_clear",
+    "memory_context",
+    "memory_data",
+    "memory_engine",
+    "memory_file",
+    "memory_injected",
+    "memory_inspect",
+    "memory_keys",
+    "memory_learning",
+    "memory_map",
+    "memory_mb",
+    "memory_namespace",
+    "memory_on",
+    "memory_or_training_snapshot",
+    "memory_path",
+    "memory_policy",
+    "memory_rag",
+    "memory_records",
+    "memory_snaps",
+    "memory_snapshot",
+    "memory_snapshots",
+    "memory_staging",
+    "memory_storage",
+    "memory_store",
+    "memory_summarizer",
+    "memory_summarizer_agent",
+    "memory_updated",
+    "memory_usage",
+    "memory_used",
+    "messages",
+    "models",
+    "multi agent",
+    "multi-agent",
+    "multi_agent",
+    "multi_agent_pipeline",
+    "multilingual",
+    "multimodal",
+    "next.js",
+    "nft",
+    "npc",
+    "npc_context_",
+    "npc_context_missing_",
+    "npc_conversation_complete",
+    "npc_conversation_end",
+    "npc_generator",
+    "npc_generator_rules",
+    "npc_generator_template",
+    "npc_id",
+    "npc_intel",
+    "npc_line",
+    "npc_manifest",
+    "npc_scan",
+    "npc_sidequest_",
+    "npc_signal_runner",
+    "npc_traits",
+    "npc_video",
+    "npc_video_lore_overrides",
+    "observability",
+    "observability self improve",
+    "openclaw",
+    "openclaw_workspace",
+    "orchestration_gold",
+    "orchestrator",
+    "overseer",
+    "overseer_bot_ai",
+    "overseer_bot_ui",
+    "peft",
+    "persistent learning",
+    "pip-boy",
+    "planner",
+    "plugin",
+    "plugin system",
+    "plugin_architecture",
+    "plugin_call_breakpoint_found",
+    "plugin_call_stepping",
+    "plugin_config",
+    "plugin_fn",
+    "plugin_import",
+    "plugin_line_breakpoint_found",
+    "plugin_line_stepping",
+    "plugin_manager",
+    "plugin_marketplace",
+    "plugin_name",
+    "plugin_return_stepping",
+    "plugin_stop",
+    "plugin_system",
+    "plugindiscovery",
+    "pluginmanifest",
+    "quest",
+    "quest_caps_daddy",
+    "quest_giver",
+    "quest_id",
+    "quest_iron_curtain",
+    "quest_items",
+    "quest_little_ember",
+    "quest_log",
+    "quest_lost_signal",
+    "quest_mapintel",
+    "quest_marker",
+    "quest_nodes",
+    "quest_red_signals",
+    "quest_reward",
+    "quest_seeker",
+    "quest_stuck_quips",
+    "quest_the_door",
+    "quest_the_loop",
+    "quest_the_loop_complete",
+    "quest_tomorrows_wasteland",
+    "quest_update",
+    "quest_vault77_open",
+    "quest_vault_zero",
+    "qwen",
+    "qwen2.5-coder",
+    "qwen2.5_coder_7b_instruct_q5_k_m",
+    "qwen_coder_7b",
+    "rag_manifest",
+    "rag_memory",
+    "rag_scan",
+    "real_fin",
+    "realai",
+    "realai _ copy",
+    "realai help",
+    "realai-1.0",
+    "realai-embed",
+    "realai.cmd",
+    "realai.tar.gz",
+    "realai.zip",
+    "realai2",
+    "realai_1.0",
+    "realai_1.0_instruct",
+    "realai_1.0_instruct_q4_k_m",
+    "realai_agent",
+    "realai_agent_from_desktop",
+    "realai_agent_pkg",
+    "realai_agent_steps_total",
+    "realai_alt_cavity_manifest",
+    "realai_alt_cavity_search",
+    "realai_alt_cavity_summary",
+    "realai_alt_v2_cavity_search",
+    "realai_alt_v3_cavity_search",
+    "realai_api",
+    "realai_api_key",
+    "realai_chat",
+    "realai_clean",
+    "realai_clean_variants",
+    "realai_cli",
+    "realai_cli_help",
+    "realai_client",
+    "realai_config",
+    "realai_core",
+    "realai_core_request_latency_seconds",
+    "realai_core_requests_total",
+    "realai_default_coder",
+    "realai_design_system",
+    "realai_embed",
+    "realai_embeddings",
+    "realai_family",
+    "realai_finetune_dataset",
+    "realai_finetune_dataset.jsonl",
+    "realai_full_cavity_",
+    "realai_full_cavity_manifest",
+    "realai_full_cavity_search",
+    "realai_full_cavity_summary",
+    "realai_full_module_scan",
+    "realai_full_spectrum_scan",
+    "realai_gui",
+    "realai_historical_backups",
+    "realai_hivemind",
+    "realai_icon",
+    "realai_knowledge_store",
+    "realai_launcher",
+    "realai_live_xxx",
+    "realai_local_server",
+    "realai_lora",
+    "realai_main",
+    "realai_main (1).zip",
+    "realai_main.zip",
+    "realai_mcp",
+    "realai_memory",
+    "realai_memory__dup1",
+    "realai_memory_injected",
+    "realai_meta",
+    "realai_model",
+    "realai_model_family",
+    "realai_model_id_suggestion",
+    "realai_models",
+    "realai_multi_agent",
+    "realai_multi_agent_error",
+    "realai_og",
+    "realai_og_mess",
+    "realai_ollama",
+    "realai_orchestration",
+    "realai_overseer",
+    "realai_plan_failed",
+    "realai_plan_not_json",
+    "realai_plugin",
+    "realai_program_id",
+    "realai_project",
+    "realai_provider",
+    "realai_repo",
+    "realai_request_latency_seconds",
+    "realai_requests_total",
+    "realai_sdk",
+    "realai_sdk_js",
+    "realai_search_temp",
+    "realai_server",
+    "realai_solana",
+    "realai_sync_20260508_090605",
+    "realai_tokens_total",
+    "realai_tool_calls_total",
+    "realai_training_output",
+    "realai_tri_cavity_search",
+    "realai_ui",
+    "realai_ui.html",
+    "realai_ultimate",
+    "realai_versions",
+    "realai_vscode",
+    "realai_worldmodel",
+    "realaiproject",
+    "recovery",
+    "recycle_bin_gold",
+    "render",
+    "research",
+    "rise_system",
+    "sandbox",
+    "scraping",
+    "self reflection",
+    "self-heal",
+    "self-improve",
+    "self-reflection",
+    "self_heal",
+    "self_improve",
+    "self_improvement",
+    "self_reflect",
+    "self_reflection",
+    "settings",
+    "settings drawer",
+    "shared memory",
+    "smart contract",
+    "solana",
+    "solana_backend",
+    "solana_client",
+    "solana_keypair",
+    "solana_manifest",
+    "solana_private_key",
+    "solana_rpc",
+    "solana_rpc_url",
+    "solana_scan",
+    "soul",
+    "soul_md",
+    "speech synthesis",
+    "speech-to-text",
+    "streaming voice",
+    "super_grok_1_0",
+    "synthesis",
+    "synthesizer",
+    "system",
+    "task",
+    "task automation",
+    "test_embeddings",
+    "text Generation",
+    "text generation",
+    "text-to-speech",
+    "therapy",
+    "therapy counseling",
+    "tool_calls",
+    "tools",
+    "trading",
+    "train",
+    "training",
+    "training pipeline",
+    "transcription",
+    "translate",
+    "translation",
+    "tsmit_realai",
+    "tts",
+    "tts conversation",
+    "unwrenchable",
+    "user",
+    "users_dotfiles",
+    "vector",
+    "vector memory",
+    "video",
+    "video generation",
+    "video.js",
+    "vision",
+    "voice",
+    "voice streaming",
+    "vulkan",
+    "wallet",
+    "wasteland",
+    "web research",
+    "web3",
+    "web3 integration",
+    "web_search",
+    "weights_gold",
+    "whisper",
+    "worker",
+    "world-event",
+    "world_model"
+  ],
+  "patterns": [
+    {
+      "kind": "token",
+      "keyword": "Agent",
+      "regex": "\\bAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "AnthropicProvider",
+      "regex": "\\bAnthropicProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "AuraMemory",
+      "regex": "\\bAuraMemory\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "BaseAgent",
+      "regex": "\\bBaseAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "CachedModel",
+      "regex": "\\bCachedModel\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "ChatModel",
+      "regex": "\\bChatModel\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "ChatSidebarProvider",
+      "regex": "\\bChatSidebarProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "CloudProvider",
+      "regex": "\\bCloudProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "CodeEngineerAgent",
+      "regex": "\\bCodeEngineerAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "CodeExecutionTool",
+      "regex": "\\bCodeExecutionTool\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "CodeGPTCopilotProvider",
+      "regex": "\\bCodeGPTCopilotProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "CodingAgent",
+      "regex": "\\bCodingAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "CreativeAgent",
+      "regex": "\\bCreativeAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "CriticAgent",
+      "regex": "\\bCriticAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "CustomerModel",
+      "regex": "\\bCustomerModel\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "DevOpsAgent",
+      "regex": "\\bDevOpsAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "DiffCodeLensProvider",
+      "regex": "\\bDiffCodeLensProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "EpisodicMemory",
+      "regex": "\\bEpisodicMemory\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "ExecutionAgent",
+      "regex": "\\bExecutionAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "FileTool",
+      "regex": "\\bFileTool\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "GroqProvider",
+      "regex": "\\bGroqProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "ImageModel",
+      "regex": "\\bImageModel\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "LocalProvider",
+      "regex": "\\bLocalProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "LongTermMemory",
+      "regex": "\\bLongTermMemory\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "MemorySummarizerAgent",
+      "regex": "\\bMemorySummarizerAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "MockProvider",
+      "regex": "\\bMockProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "Model",
+      "regex": "\\bModel\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "NDArrayTypeResolveProvider",
+      "regex": "\\bNDArrayTypeResolveProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "OpenAIProvider",
+      "regex": "\\bOpenAIProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "PandasDataFrameTypeResolveProvider",
+      "regex": "\\bPandasDataFrameTypeResolveProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "PandasSeriesTypeResolveProvider",
+      "regex": "\\bPandasSeriesTypeResolveProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "PandasStylerTypeResolveProvider",
+      "regex": "\\bPandasStylerTypeResolveProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "PlannerAgent",
+      "regex": "\\bPlannerAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "Provider",
+      "regex": "\\bProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "RealAIProvider",
+      "regex": "\\bRealAIProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "ResearchAgent",
+      "regex": "\\bResearchAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "SemanticMemory",
+      "regex": "\\bSemanticMemory\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "SharedMemory",
+      "regex": "\\bSharedMemory\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "ShortTermMemory",
+      "regex": "\\bShortTermMemory\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "SpecialistAgent",
+      "regex": "\\bSpecialistAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "StrPresentationProvider",
+      "regex": "\\bStrPresentationProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "SupervisorAgent",
+      "regex": "\\bSupervisorAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "SymbolicMemory",
+      "regex": "\\bSymbolicMemory\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "SynthesizerAgent",
+      "regex": "\\bSynthesizerAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "TRAINING",
+      "regex": "\\bTRAINING\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "Tool",
+      "regex": "\\bTool\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "TypeResolveProvider",
+      "regex": "\\bTypeResolveProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "Web3Tool",
+      "regex": "\\bWeb3Tool\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "WebSearchTool",
+      "regex": "\\bWebSearchTool\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "WorkerAgent",
+      "regex": "\\bWorkerAgent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "WorkingMemory",
+      "regex": "\\bWorkingMemory\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "_AbstractProvider",
+      "regex": "\\b_AbstractProvider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "adapter",
+      "regex": "\\badapter\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_assignments",
+      "regex": "\\bagent_assignments\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_contributions",
+      "regex": "\\bagent_contributions\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_counts",
+      "regex": "\\bagent_counts\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_dest",
+      "regex": "\\bagent_dest\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_found",
+      "regex": "\\bagent_found\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_frameworks",
+      "regex": "\\bagent_frameworks\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_id",
+      "regex": "\\bagent_id\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_ids",
+      "regex": "\\bagent_ids\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_input",
+      "regex": "\\bagent_input\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_instructions",
+      "regex": "\\bagent_instructions\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_list",
+      "regex": "\\bagent_list\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_manifests",
+      "regex": "\\bagent_manifests\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_manifests_for_finetuning",
+      "regex": "\\bagent_manifests_for_finetuning\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_name",
+      "regex": "\\bagent_name\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_names",
+      "regex": "\\bagent_names\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_not_found",
+      "regex": "\\bagent_not_found\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_or_manifest_json",
+      "regex": "\\bagent_or_manifest_json\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_orchestration",
+      "regex": "\\bagent_orchestration\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_registry",
+      "regex": "\\bagent_registry\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_results",
+      "regex": "\\bagent_results\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_role",
+      "regex": "\\bagent_role\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_roles",
+      "regex": "\\bagent_roles\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_runtime",
+      "regex": "\\bagent_runtime\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_src",
+      "regex": "\\bagent_src\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_summaries",
+      "regex": "\\bagent_summaries\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_system",
+      "regex": "\\bagent_system\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_tools",
+      "regex": "\\bagent_tools\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_tools_assess",
+      "regex": "\\bagent_tools_assess\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_tools_bridge",
+      "regex": "\\bagent_tools_bridge\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_tools_gold",
+      "regex": "\\bagent_tools_gold\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_tools_list_agents",
+      "regex": "\\bagent_tools_list_agents\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_tools_list_profiles",
+      "regex": "\\bagent_tools_list_profiles\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_tools_main",
+      "regex": "\\bagent_tools_main\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_tools_status",
+      "regex": "\\bagent_tools_status\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agent_type",
+      "regex": "\\bagent_type\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "agentic os",
+      "regex": "agentic\\ os"
+    },
+    {
+      "kind": "token",
+      "keyword": "agents",
+      "regex": "\\bagents\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "agentx",
+      "regex": "\\bagentx\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "asr",
+      "regex": "\\basr\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "atomic fizz",
+      "regex": "atomic\\ fizz"
+    },
+    {
+      "kind": "token",
+      "keyword": "atomic_fizz",
+      "regex": "\\batomic_fizz\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "atomic_fizz_backup_2026_05_30",
+      "regex": "\\batomic_fizz_backup_2026_05_30\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "atomic_fizz_caps_old",
+      "regex": "\\batomic_fizz_caps_old\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "atomic_fizz_caps_vault_77_wasteland_gps",
+      "regex": "\\batomic_fizz_caps_vault_77_wasteland_gps\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "audio speech",
+      "regex": "audio\\ speech"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "audio transcription",
+      "regex": "audio\\ transcription"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "audio/speech",
+      "regex": "audio/speech"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "audio/transcriptions",
+      "regex": "audio/transcriptions"
+    },
+    {
+      "kind": "token",
+      "keyword": "audit",
+      "regex": "\\baudit\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "automation",
+      "regex": "\\bautomation\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "business plan",
+      "regex": "business\\ plan"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "business planning",
+      "regex": "business\\ planning"
+    },
+    {
+      "kind": "token",
+      "keyword": "chain-of-thought",
+      "regex": "\\bchain_of_thought\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "chain_of_thought",
+      "regex": "\\bchain_of_thought\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "chat",
+      "regex": "\\bchat\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "chat completion",
+      "regex": "chat\\ completion"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "chat ui",
+      "regex": "chat\\ ui"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "chat/completions",
+      "regex": "chat/completions"
+    },
+    {
+      "kind": "token",
+      "keyword": "checkpoints_lora",
+      "regex": "\\bcheckpoints_lora\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "chroma",
+      "regex": "\\bchroma\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "cli",
+      "regex": "\\bcli\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "cli surface",
+      "regex": "cli\\ surface"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "code execution",
+      "regex": "code\\ execution"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "code generation",
+      "regex": "code\\ generation"
+    },
+    {
+      "kind": "token",
+      "keyword": "coding",
+      "regex": "\\bcoding\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "commands",
+      "regex": "\\bcommands\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "completion",
+      "regex": "\\bcompletion\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "completions",
+      "regex": "\\bcompletions\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "counseling",
+      "regex": "\\bcounseling\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "counsellor",
+      "regex": "\\bcounsellor\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "critic",
+      "regex": "\\bcritic\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "critique",
+      "regex": "\\bcritique\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "dall-e",
+      "regex": "\\bdall_e\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "dataset",
+      "regex": "\\bdataset\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "defi",
+      "regex": "\\bdefi\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "dialogue-engine",
+      "regex": "\\bdialogue_engine\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "dungeon-generator",
+      "regex": "\\bdungeon_generator\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "embedding",
+      "regex": "\\bembedding\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "embeddings",
+      "regex": "\\bembeddings\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "enterprise",
+      "regex": "\\benterprise\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "evm",
+      "regex": "\\bevm\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "exec",
+      "regex": "\\bexec\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "executor",
+      "regex": "\\bexecutor\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "finetune",
+      "regex": "\\bfinetune\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "finetune adapter",
+      "regex": "finetune\\ adapter"
+    },
+    {
+      "kind": "token",
+      "keyword": "from_recycle_bin",
+      "regex": "\\bfrom_recycle_bin\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "from_users_dotfiles",
+      "regex": "\\bfrom_users_dotfiles\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "frontend",
+      "regex": "\\bfrontend\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "frontend UI",
+      "regex": "frontend\\ UI"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "frontend ui",
+      "regex": "frontend\\ ui"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "game world",
+      "regex": "game\\ world"
+    },
+    {
+      "kind": "token",
+      "keyword": "generate",
+      "regex": "\\bgenerate\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "gguf",
+      "regex": "\\bgguf\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "git clean",
+      "regex": "git\\ clean"
+    },
+    {
+      "kind": "token",
+      "keyword": "governance",
+      "regex": "\\bgovernance\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "help",
+      "regex": "\\bhelp\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "hierarchical_agent",
+      "regex": "\\bhierarchical_agent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "hive",
+      "regex": "\\bhive\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "hominis",
+      "regex": "\\bhominis\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "hominis enterprise",
+      "regex": "hominis\\ enterprise"
+    },
+    {
+      "kind": "token",
+      "keyword": "huggingface",
+      "regex": "\\bhuggingface\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "image",
+      "regex": "\\bimage\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "image analysis",
+      "regex": "image\\ analysis"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "image gen",
+      "regex": "image\\ gen"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "image generation",
+      "regex": "image\\ generation"
+    },
+    {
+      "kind": "token",
+      "keyword": "image_url",
+      "regex": "\\bimage_url\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "images/generations",
+      "regex": "images/generations"
+    },
+    {
+      "kind": "token",
+      "keyword": "infra",
+      "regex": "\\binfra\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "kilo",
+      "regex": "\\bkilo\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "kilo recovery",
+      "regex": "kilo\\ recovery"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "knowledge graph",
+      "regex": "knowledge\\ graph"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "knowledge synthesis",
+      "regex": "knowledge\\ synthesis"
+    },
+    {
+      "kind": "token",
+      "keyword": "knowledge_graph",
+      "regex": "\\bknowledge_graph\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "llama",
+      "regex": "\\bllama\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "llama-server",
+      "regex": "\\bllama_server\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "llama_vulkan",
+      "regex": "\\bllama_vulkan\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "local inference",
+      "regex": "local\\ inference"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "local model",
+      "regex": "local\\ model"
+    },
+    {
+      "kind": "token",
+      "keyword": "local-overseer",
+      "regex": "\\blocal_overseer\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "lora",
+      "regex": "\\blora\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "lora adapters",
+      "regex": "lora\\ adapters"
+    },
+    {
+      "kind": "token",
+      "keyword": "lora_adapter",
+      "regex": "\\blora_adapter\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "lora_adapter_count",
+      "regex": "\\blora_adapter_count\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "lora_adapters",
+      "regex": "\\blora_adapters\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "lora_adapters_sample",
+      "regex": "\\blora_adapters_sample\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "lora_alpha",
+      "regex": "\\blora_alpha\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "lora_config",
+      "regex": "\\blora_config\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "lora_dropout",
+      "regex": "\\blora_dropout\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "lora_manifest",
+      "regex": "\\blora_manifest\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "lora_path",
+      "regex": "\\blora_path\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "lora_root",
+      "regex": "\\blora_root\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "lora_scan",
+      "regex": "\\blora_scan\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "mcp_data",
+      "regex": "\\bmcp_data\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "mcp_manifest",
+      "regex": "\\bmcp_manifest\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "mcp_path",
+      "regex": "\\bmcp_path\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "mcp_scan",
+      "regex": "\\bmcp_scan\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "mcp_server",
+      "regex": "\\bmcp_server\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "mcp_servers",
+      "regex": "\\bmcp_servers\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory",
+      "regex": "\\bmemory\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "memory learning",
+      "regex": "memory\\ learning"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_adapter",
+      "regex": "\\bmemory_adapter\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_bytes",
+      "regex": "\\bmemory_bytes\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_clear",
+      "regex": "\\bmemory_clear\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_context",
+      "regex": "\\bmemory_context\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_data",
+      "regex": "\\bmemory_data\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_engine",
+      "regex": "\\bmemory_engine\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_file",
+      "regex": "\\bmemory_file\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_injected",
+      "regex": "\\bmemory_injected\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_inspect",
+      "regex": "\\bmemory_inspect\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_keys",
+      "regex": "\\bmemory_keys\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_learning",
+      "regex": "\\bmemory_learning\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_map",
+      "regex": "\\bmemory_map\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_mb",
+      "regex": "\\bmemory_mb\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_namespace",
+      "regex": "\\bmemory_namespace\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_on",
+      "regex": "\\bmemory_on\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_or_training_snapshot",
+      "regex": "\\bmemory_or_training_snapshot\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_path",
+      "regex": "\\bmemory_path\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_policy",
+      "regex": "\\bmemory_policy\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_rag",
+      "regex": "\\bmemory_rag\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_records",
+      "regex": "\\bmemory_records\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_snaps",
+      "regex": "\\bmemory_snaps\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_snapshot",
+      "regex": "\\bmemory_snapshot\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_snapshots",
+      "regex": "\\bmemory_snapshots\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_staging",
+      "regex": "\\bmemory_staging\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_storage",
+      "regex": "\\bmemory_storage\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_store",
+      "regex": "\\bmemory_store\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_summarizer",
+      "regex": "\\bmemory_summarizer\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_summarizer_agent",
+      "regex": "\\bmemory_summarizer_agent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_updated",
+      "regex": "\\bmemory_updated\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_usage",
+      "regex": "\\bmemory_usage\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "memory_used",
+      "regex": "\\bmemory_used\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "messages",
+      "regex": "\\bmessages\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "models",
+      "regex": "\\bmodels\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "multi agent",
+      "regex": "multi\\ agent"
+    },
+    {
+      "kind": "token",
+      "keyword": "multi-agent",
+      "regex": "\\bmulti_agent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "multi_agent",
+      "regex": "\\bmulti_agent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "multilingual",
+      "regex": "\\bmultilingual\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "multimodal",
+      "regex": "\\bmultimodal\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "nft",
+      "regex": "\\bnft\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc",
+      "regex": "\\bnpc\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_context_",
+      "regex": "\\bnpc_context_\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_context_missing_",
+      "regex": "\\bnpc_context_missing_\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_conversation_complete",
+      "regex": "\\bnpc_conversation_complete\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_conversation_end",
+      "regex": "\\bnpc_conversation_end\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_generator",
+      "regex": "\\bnpc_generator\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_generator_rules",
+      "regex": "\\bnpc_generator_rules\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_generator_template",
+      "regex": "\\bnpc_generator_template\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_id",
+      "regex": "\\bnpc_id\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_intel",
+      "regex": "\\bnpc_intel\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_line",
+      "regex": "\\bnpc_line\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_manifest",
+      "regex": "\\bnpc_manifest\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_scan",
+      "regex": "\\bnpc_scan\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_sidequest_",
+      "regex": "\\bnpc_sidequest_\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_signal_runner",
+      "regex": "\\bnpc_signal_runner\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_traits",
+      "regex": "\\bnpc_traits\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_video",
+      "regex": "\\bnpc_video\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "npc_video_lore_overrides",
+      "regex": "\\bnpc_video_lore_overrides\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "observability",
+      "regex": "\\bobservability\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "observability self improve",
+      "regex": "observability\\ self\\ improve"
+    },
+    {
+      "kind": "token",
+      "keyword": "orchestrator",
+      "regex": "\\borchestrator\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "overseer",
+      "regex": "\\boverseer\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "peft",
+      "regex": "\\bpeft\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "persistent learning",
+      "regex": "persistent\\ learning"
+    },
+    {
+      "kind": "token",
+      "keyword": "pip-boy",
+      "regex": "\\bpip_boy\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "planner",
+      "regex": "\\bplanner\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin",
+      "regex": "\\bplugin\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "plugin system",
+      "regex": "plugin\\ system"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin_architecture",
+      "regex": "\\bplugin_architecture\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin_call_breakpoint_found",
+      "regex": "\\bplugin_call_breakpoint_found\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin_call_stepping",
+      "regex": "\\bplugin_call_stepping\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin_config",
+      "regex": "\\bplugin_config\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin_fn",
+      "regex": "\\bplugin_fn\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin_import",
+      "regex": "\\bplugin_import\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin_line_breakpoint_found",
+      "regex": "\\bplugin_line_breakpoint_found\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin_line_stepping",
+      "regex": "\\bplugin_line_stepping\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin_manager",
+      "regex": "\\bplugin_manager\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin_marketplace",
+      "regex": "\\bplugin_marketplace\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin_name",
+      "regex": "\\bplugin_name\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin_return_stepping",
+      "regex": "\\bplugin_return_stepping\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin_stop",
+      "regex": "\\bplugin_stop\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugin_system",
+      "regex": "\\bplugin_system\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "plugindiscovery",
+      "regex": "\\bplugindiscovery\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "pluginmanifest",
+      "regex": "\\bpluginmanifest\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest",
+      "regex": "\\bquest\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_caps_daddy",
+      "regex": "\\bquest_caps_daddy\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_giver",
+      "regex": "\\bquest_giver\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_id",
+      "regex": "\\bquest_id\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_iron_curtain",
+      "regex": "\\bquest_iron_curtain\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_items",
+      "regex": "\\bquest_items\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_little_ember",
+      "regex": "\\bquest_little_ember\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_log",
+      "regex": "\\bquest_log\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_lost_signal",
+      "regex": "\\bquest_lost_signal\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_mapintel",
+      "regex": "\\bquest_mapintel\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_marker",
+      "regex": "\\bquest_marker\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_nodes",
+      "regex": "\\bquest_nodes\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_red_signals",
+      "regex": "\\bquest_red_signals\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_reward",
+      "regex": "\\bquest_reward\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_seeker",
+      "regex": "\\bquest_seeker\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_stuck_quips",
+      "regex": "\\bquest_stuck_quips\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_the_door",
+      "regex": "\\bquest_the_door\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_the_loop",
+      "regex": "\\bquest_the_loop\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_the_loop_complete",
+      "regex": "\\bquest_the_loop_complete\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_tomorrows_wasteland",
+      "regex": "\\bquest_tomorrows_wasteland\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_update",
+      "regex": "\\bquest_update\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_vault77_open",
+      "regex": "\\bquest_vault77_open\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "quest_vault_zero",
+      "regex": "\\bquest_vault_zero\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "qwen",
+      "regex": "\\bqwen\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "rag_manifest",
+      "regex": "\\brag_manifest\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "rag_memory",
+      "regex": "\\brag_memory\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "rag_scan",
+      "regex": "\\brag_scan\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "real_fin",
+      "regex": "\\breal_fin\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai",
+      "regex": "\\brealai\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "realai _ copy",
+      "regex": "realai\\ _\\ copy"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "realai help",
+      "regex": "realai\\ help"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai-embed",
+      "regex": "\\brealai_embed\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai2",
+      "regex": "\\brealai2\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_agent",
+      "regex": "\\brealai_agent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_agent_from_desktop",
+      "regex": "\\brealai_agent_from_desktop\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_agent_pkg",
+      "regex": "\\brealai_agent_pkg\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_agent_steps_total",
+      "regex": "\\brealai_agent_steps_total\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_alt_cavity_manifest",
+      "regex": "\\brealai_alt_cavity_manifest\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_alt_cavity_search",
+      "regex": "\\brealai_alt_cavity_search\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_alt_cavity_summary",
+      "regex": "\\brealai_alt_cavity_summary\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_alt_v2_cavity_search",
+      "regex": "\\brealai_alt_v2_cavity_search\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_alt_v3_cavity_search",
+      "regex": "\\brealai_alt_v3_cavity_search\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_api",
+      "regex": "\\brealai_api\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_api_key",
+      "regex": "\\brealai_api_key\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_chat",
+      "regex": "\\brealai_chat\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_clean",
+      "regex": "\\brealai_clean\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_clean_variants",
+      "regex": "\\brealai_clean_variants\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_cli",
+      "regex": "\\brealai_cli\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_cli_help",
+      "regex": "\\brealai_cli_help\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_client",
+      "regex": "\\brealai_client\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_config",
+      "regex": "\\brealai_config\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_core",
+      "regex": "\\brealai_core\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_core_request_latency_seconds",
+      "regex": "\\brealai_core_request_latency_seconds\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_core_requests_total",
+      "regex": "\\brealai_core_requests_total\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_design_system",
+      "regex": "\\brealai_design_system\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_embed",
+      "regex": "\\brealai_embed\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_embeddings",
+      "regex": "\\brealai_embeddings\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_family",
+      "regex": "\\brealai_family\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_finetune_dataset",
+      "regex": "\\brealai_finetune_dataset\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_full_cavity_",
+      "regex": "\\brealai_full_cavity_\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_full_cavity_manifest",
+      "regex": "\\brealai_full_cavity_manifest\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_full_cavity_search",
+      "regex": "\\brealai_full_cavity_search\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_full_cavity_summary",
+      "regex": "\\brealai_full_cavity_summary\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_full_module_scan",
+      "regex": "\\brealai_full_module_scan\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_full_spectrum_scan",
+      "regex": "\\brealai_full_spectrum_scan\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_gui",
+      "regex": "\\brealai_gui\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_historical_backups",
+      "regex": "\\brealai_historical_backups\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_hivemind",
+      "regex": "\\brealai_hivemind\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_knowledge_store",
+      "regex": "\\brealai_knowledge_store\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_launcher",
+      "regex": "\\brealai_launcher\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_live_xxx",
+      "regex": "\\brealai_live_xxx\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_local_server",
+      "regex": "\\brealai_local_server\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_lora",
+      "regex": "\\brealai_lora\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_main",
+      "regex": "\\brealai_main\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "realai_main (1).zip",
+      "regex": "realai_main\\ \\(1\\)\\.zip"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_mcp",
+      "regex": "\\brealai_mcp\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_memory",
+      "regex": "\\brealai_memory\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_memory__dup1",
+      "regex": "\\brealai_memory__dup1\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_memory_injected",
+      "regex": "\\brealai_memory_injected\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_meta",
+      "regex": "\\brealai_meta\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_model",
+      "regex": "\\brealai_model\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_model_family",
+      "regex": "\\brealai_model_family\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_model_id_suggestion",
+      "regex": "\\brealai_model_id_suggestion\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_models",
+      "regex": "\\brealai_models\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_multi_agent",
+      "regex": "\\brealai_multi_agent\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_multi_agent_error",
+      "regex": "\\brealai_multi_agent_error\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_og",
+      "regex": "\\brealai_og\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_og_mess",
+      "regex": "\\brealai_og_mess\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_ollama",
+      "regex": "\\brealai_ollama\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_orchestration",
+      "regex": "\\brealai_orchestration\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_overseer",
+      "regex": "\\brealai_overseer\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_plan_failed",
+      "regex": "\\brealai_plan_failed\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_plan_not_json",
+      "regex": "\\brealai_plan_not_json\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_plugin",
+      "regex": "\\brealai_plugin\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_program_id",
+      "regex": "\\brealai_program_id\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_project",
+      "regex": "\\brealai_project\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_provider",
+      "regex": "\\brealai_provider\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_repo",
+      "regex": "\\brealai_repo\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_request_latency_seconds",
+      "regex": "\\brealai_request_latency_seconds\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_requests_total",
+      "regex": "\\brealai_requests_total\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_sdk",
+      "regex": "\\brealai_sdk\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_sdk_js",
+      "regex": "\\brealai_sdk_js\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_search_temp",
+      "regex": "\\brealai_search_temp\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_server",
+      "regex": "\\brealai_server\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_solana",
+      "regex": "\\brealai_solana\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_sync_20260508_090605",
+      "regex": "\\brealai_sync_20260508_090605\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_tokens_total",
+      "regex": "\\brealai_tokens_total\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_tool_calls_total",
+      "regex": "\\brealai_tool_calls_total\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_training_output",
+      "regex": "\\brealai_training_output\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_tri_cavity_search",
+      "regex": "\\brealai_tri_cavity_search\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_ui",
+      "regex": "\\brealai_ui\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_ultimate",
+      "regex": "\\brealai_ultimate\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_vscode",
+      "regex": "\\brealai_vscode\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "realai_worldmodel",
+      "regex": "\\brealai_worldmodel\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "recovery",
+      "regex": "\\brecovery\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "render",
+      "regex": "\\brender\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "research",
+      "regex": "\\bresearch\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "rise_system",
+      "regex": "\\brise_system\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "sandbox",
+      "regex": "\\bsandbox\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "scraping",
+      "regex": "\\bscraping\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "self reflection",
+      "regex": "self\\ reflection"
+    },
+    {
+      "kind": "token",
+      "keyword": "self-heal",
+      "regex": "\\bself_heal\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "self-improve",
+      "regex": "\\bself_improve\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "self-reflection",
+      "regex": "\\bself_reflection\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "self_heal",
+      "regex": "\\bself_heal\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "self_improve",
+      "regex": "\\bself_improve\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "self_improvement",
+      "regex": "\\bself_improvement\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "self_reflect",
+      "regex": "\\bself_reflect\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "self_reflection",
+      "regex": "\\bself_reflection\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "settings drawer",
+      "regex": "settings\\ drawer"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "shared memory",
+      "regex": "shared\\ memory"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "smart contract",
+      "regex": "smart\\ contract"
+    },
+    {
+      "kind": "token",
+      "keyword": "solana",
+      "regex": "\\bsolana\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "solana_backend",
+      "regex": "\\bsolana_backend\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "solana_client",
+      "regex": "\\bsolana_client\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "solana_keypair",
+      "regex": "\\bsolana_keypair\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "solana_manifest",
+      "regex": "\\bsolana_manifest\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "solana_rpc",
+      "regex": "\\bsolana_rpc\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "solana_rpc_url",
+      "regex": "\\bsolana_rpc_url\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "solana_scan",
+      "regex": "\\bsolana_scan\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "speech synthesis",
+      "regex": "speech\\ synthesis"
+    },
+    {
+      "kind": "token",
+      "keyword": "speech-to-text",
+      "regex": "\\bspeech_to_text\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "streaming voice",
+      "regex": "streaming\\ voice"
+    },
+    {
+      "kind": "token",
+      "keyword": "synthesis",
+      "regex": "\\bsynthesis\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "synthesizer",
+      "regex": "\\bsynthesizer\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "system",
+      "regex": "\\bsystem\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "task",
+      "regex": "\\btask\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "task automation",
+      "regex": "task\\ automation"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "text generation",
+      "regex": "text\\ generation"
+    },
+    {
+      "kind": "token",
+      "keyword": "text-to-speech",
+      "regex": "\\btext_to_speech\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "therapy",
+      "regex": "\\btherapy\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "therapy counseling",
+      "regex": "therapy\\ counseling"
+    },
+    {
+      "kind": "token",
+      "keyword": "tool_calls",
+      "regex": "\\btool_calls\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "trading",
+      "regex": "\\btrading\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "train",
+      "regex": "\\btrain\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "training",
+      "regex": "\\btraining\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "training pipeline",
+      "regex": "training\\ pipeline"
+    },
+    {
+      "kind": "token",
+      "keyword": "transcription",
+      "regex": "\\btranscription\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "translate",
+      "regex": "\\btranslate\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "translation",
+      "regex": "\\btranslation\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "tts",
+      "regex": "\\btts\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "tts conversation",
+      "regex": "tts\\ conversation"
+    },
+    {
+      "kind": "token",
+      "keyword": "unwrenchable",
+      "regex": "\\bunwrenchable\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "vector",
+      "regex": "\\bvector\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "vector memory",
+      "regex": "vector\\ memory"
+    },
+    {
+      "kind": "token",
+      "keyword": "video",
+      "regex": "\\bvideo\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "video generation",
+      "regex": "video\\ generation"
+    },
+    {
+      "kind": "token",
+      "keyword": "vision",
+      "regex": "\\bvision\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "voice",
+      "regex": "\\bvoice\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "voice streaming",
+      "regex": "voice\\ streaming"
+    },
+    {
+      "kind": "token",
+      "keyword": "vulkan",
+      "regex": "\\bvulkan\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "wallet",
+      "regex": "\\bwallet\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "wasteland",
+      "regex": "\\bwasteland\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "web research",
+      "regex": "web\\ research"
+    },
+    {
+      "kind": "token",
+      "keyword": "web3",
+      "regex": "\\bweb3\\b"
+    },
+    {
+      "kind": "phrase",
+      "keyword": "web3 integration",
+      "regex": "web3\\ integration"
+    },
+    {
+      "kind": "token",
+      "keyword": "web_search",
+      "regex": "\\bweb_search\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "whisper",
+      "regex": "\\bwhisper\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "worker",
+      "regex": "\\bworker\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "world-event",
+      "regex": "\\bworld_event\\b"
+    },
+    {
+      "kind": "token",
+      "keyword": "world_model",
+      "regex": "\\bworld_model\\b"
+    }
+  ],
+  "added_this_cycle": [],
+  "added_count": 0,
+  "total_count": 524,
+  "sources": [
+    "C:\\tools\\realai",
+    "dds3_ability_inventory",
+    "deepen_cycle_mine_gold",
+    "era_map_external_roots",
+    "technical_rundown"
+  ],
+  "tools_cli_surface": {
+    "path": "C:\\tools\\realai",
+    "exists": true,
+    "commands": [
+      {
+        "name": "chat",
+        "bytes": 0,
+        "stub": true
+      },
+      {
+        "name": "help",
+        "bytes": 342,
+        "stub": false
+      },
+      {
+        "name": "image",
+        "bytes": 0,
+        "stub": true
+      },
+      {
+        "name": "research",
+        "bytes": 0,
+        "stub": true
+      },
+      {
+        "name": "system",
+        "bytes": 0,
+        "stub": true
+      },
+      {
+        "name": "video",
+        "bytes": 0,
+        "stub": true
+      },
+      {
+        "name": "web3",
+        "bytes": 0,
+        "stub": true
+      }
+    ],
+    "plugins": [
+      {
+        "name": "overseer",
+        "bytes": 0,
+        "stub": true
+      },
+      {
+        "name": "render",
+        "bytes": 0,
+        "stub": true
+      },
+      {
+        "name": "solana",
+        "bytes": 0,
+        "stub": true
+      },
+      {
+        "name": "trading",
+        "bytes": 0,
+        "stub": true
+      }
+    ],
+    "core": [
+      {
+        "name": "api",
+        "bytes": 0,
+        "stub": true
+      },
+      {
+        "name": "config",
+        "bytes": 0,
+        "stub": true
+      },
+      {
+        "name": "logger",
+        "bytes": 0,
+        "stub": true
+      },
+      {
+        "name": "plugins",
+        "bytes": 327,
+        "stub": false
+      },
+      {
+        "name": "updater",
+        "bytes": 0,
+        "stub": true
+      }
+    ],
+    "entrypoints": [
+      {
+        "name": "realai.js",
+        "bytes": 677
+      },
+      {
+        "name": "realai.cmd",
+        "bytes": 37
+      },
+      {
+        "name": "realai.ps1",
+        "bytes": 38
+      }
+    ],
+    "ability_hints": [
+      "chat",
+      "help",
+      "image",
+      "research",
+      "system",
+      "video",
+      "web3",
+      "overseer",
+      "render",
+      "solana",
+      "trading"
+    ]
+  },
+  "external_roots": [
+    {
+      "path": "C:\\tools\\realai",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\agent-tools\\agent-tools-main",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\archive\\agent-tools-main",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\agents",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai-clean",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai-clean\\agents",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai_historical_backups",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\backups\\realai-sync-20260508-090605",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.realai",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.agentx",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-OLD",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\atomic-fizz-backup-2026-05-30",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-OLD\\ai\\realai",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\Documents\\GitHub\\realai",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai - Copy",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-cli",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-orchestration",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-sdk-js",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_api",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Apps\\realai",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\AppData\\Roaming\\RealAi",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\models\\realai-1.0",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\models\\realai-overseer",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Unwrenchable",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\temp",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\llama-vulkan",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\llama",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\$Recycle.Bin",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\realai\\recovered\\from_recycle_bin",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\realai\\models",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\llama-vulkan\\models",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.lmstudio",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\realai\\recovered\\from_users_dotfiles",
+      "exists": true,
+      "source": "external_scan_roots_for_abilities"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\AppData\\Local\\RealAI",
+      "exists": true,
+      "era_id": "runtime_appdata",
+      "role": "runtime_state",
+      "notes": "Installed app logs + Roaming config/providers/registry.json",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\models\\realai-embed",
+      "exists": true,
+      "era_id": "gold_users_model_family",
+      "role": "assets",
+      "notes": "Users-tree model family manifests/weights (realai-1.0, embed, overseer)",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\Downloads\\realai-main.zip",
+      "exists": true,
+      "era_id": "gold_archive_files",
+      "role": "archive_file_gold",
+      "notes": "Zips/datasets/UI artifact \u2014 register for self-improve search; do not auto-extract bulk",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\Downloads\\realai-main (1).zip",
+      "exists": true,
+      "era_id": "gold_archive_files",
+      "role": "archive_file_gold",
+      "notes": "Zips/datasets/UI artifact \u2014 register for self-improve search; do not auto-extract bulk",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\Downloads\\realai.zip",
+      "exists": true,
+      "era_id": "gold_archive_files",
+      "role": "archive_file_gold",
+      "notes": "Zips/datasets/UI artifact \u2014 register for self-improve search; do not auto-extract bulk",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\Downloads\\realai_finetune_dataset.jsonl",
+      "exists": true,
+      "era_id": "gold_archive_files",
+      "role": "archive_file_gold",
+      "notes": "Zips/datasets/UI artifact \u2014 register for self-improve search; do not auto-extract bulk",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai.tar.gz",
+      "exists": true,
+      "era_id": "gold_archive_files",
+      "role": "archive_file_gold",
+      "notes": "Zips/datasets/UI artifact \u2014 register for self-improve search; do not auto-extract bulk",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\temp\\realai_ui.html",
+      "exists": true,
+      "era_id": "gold_archive_files",
+      "role": "archive_file_gold",
+      "notes": "Zips/datasets/UI artifact \u2014 register for self-improve search; do not auto-extract bulk",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\llama.cpp",
+      "exists": true,
+      "era_id": "inference_siblings",
+      "role": "inference_assets",
+      "notes": "Sibling llama builds / model dirs; reference for local intelligence pillar",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\models",
+      "exists": true,
+      "era_id": "inference_siblings",
+      "role": "inference_assets",
+      "notes": "Sibling llama builds / model dirs; reference for local intelligence pillar",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.realai\\models",
+      "exists": true,
+      "era_id": "assets_models",
+      "role": "assets",
+      "notes": "GGUF/safetensors/etc. Scan with scanners/scan_model_weights.py or POST /v1/weights/scan. See scan_results/weights_gold_map.md",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\models",
+      "exists": true,
+      "era_id": "assets_models",
+      "role": "assets",
+      "notes": "GGUF/safetensors/etc. Scan with scanners/scan_model_weights.py or POST /v1/weights/scan. See scan_results/weights_gold_map.md",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.ollama\\models",
+      "exists": true,
+      "era_id": "assets_models",
+      "role": "assets",
+      "notes": "GGUF/safetensors/etc. Scan with scanners/scan_model_weights.py or POST /v1/weights/scan. See scan_results/weights_gold_map.md",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\agent-tools-main",
+      "exists": true,
+      "era_id": "gold_agent_tools",
+      "role": "agent_tools_gold",
+      "notes": "agent-tools package mostly hollow at live path (egg-info + locks only). SOURCES.txt lists full module set. Historical backup has .pyc only (cli/dashboard/executor/runtime/\u2026). Archive has .agentx identical to C:\\realai\\agents\\agentx. See scan_results/agent_tools_gold_map.md",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main",
+      "exists": true,
+      "era_id": "gold_agent_tools",
+      "role": "agent_tools_gold",
+      "notes": "agent-tools package mostly hollow at live path (egg-info + locks only). SOURCES.txt lists full module set. Historical backup has .pyc only (cli/dashboard/executor/runtime/\u2026). Archive has .agentx identical to C:\\realai\\agents\\agentx. See scan_results/agent_tools_gold_map.md",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\Unwrenchable\\agent-tools",
+      "exists": true,
+      "era_id": "gold_agent_tools",
+      "role": "agent_tools_gold",
+      "notes": "agent-tools package mostly hollow at live path (egg-info + locks only). SOURCES.txt lists full module set. Historical backup has .pyc only (cli/dashboard/executor/runtime/\u2026). Archive has .agentx identical to C:\\realai\\agents\\agentx. See scan_results/agent_tools_gold_map.md",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.env.local",
+      "exists": true,
+      "era_id": "gold_users_dotfiles",
+      "role": "runtime_and_agent_workspace_gold",
+      "notes": "Dotfile gold staged redacted. openclaw=agent soul/workspace; .realai=local_models; env.fizz=web3 mints keys names only",
+      "source": "era_map.eras"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.env.local.fizz",
+      "exists": true,
+      "era_id": "gold_users_dotfiles",
+      "role": "runtime_and_agent_workspace_gold",
+      "notes": "Dotfile gold staged redacted. openclaw=agent soul/workspace; .realai=local_models; env.fizz=web3 mints keys names only",
+      "source": "era_map.eras"
+    }
+  ],
+  "note": "Loaded by scanners/dds3_missing_files.py for deeper ability scans"
+}

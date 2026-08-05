@@ -1,0 +1,23 @@
+{
+  "default_llm": "llama-local",
+  "default_embedding": "all-MiniLM-L6-v2",
+  "models": {
+    "llama-local": {
+      "type": "llm",
+      "backend": "llama-cpp",
+      "path": "C:\\Users\\tsmit\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m__dup1.gguf",
+      "context_length": 8192
+    },
+    "qwen-coder-7b": {
+      "type": "llm",
+      "backend": "llama-cpp",
+      "path": "C:\\Users\\tsmit\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m__dup1.gguf",
+      "context_length": 8192
+    }
+  },
+  "preferences": {
+    "use_local_first": true,
+    "gpu_enabled": true,
+    "max_memory_gb": 8
+  }
+}

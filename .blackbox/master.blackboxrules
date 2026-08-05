@@ -1,0 +1,209 @@
+# ============================================================
+# REALAI — COMPLETE UNIFICATION, EXTRACTION, MIGRATION, REPAIR
+# ============================================================
+
+# -------------------------
+# GLOBAL BEHAVIOR OVERRIDES
+# -------------------------
+mode: analysis-and-repair
+interaction: none
+questions: forbidden
+checkpoints: forbidden
+branching: forbidden
+pausing: forbidden
+confirmation: forbidden
+stop-early: forbidden
+fallback-modes: forbidden
+ignore-runtime-context-switch: true
+force-analysis-mode: true
+force-repair-mode: true
+force-completion: true
+
+# -------------------------
+# TESTING BEHAVIOR OVERRIDES
+# -------------------------
+testing-mode: forbidden
+runtime-tests: forbidden
+curl-tests: forbidden
+pytest: forbidden
+ui-tests: forbidden
+coverage-prompts: forbidden
+validation-prompts: forbidden
+ignore-testing-prompts: true
+ignore-coverage-prompts: true
+ignore-validation-prompts: true
+
+# -------------------------
+# RECURSIVE READ REQUIREMENTS
+# -------------------------
+recursive-read: required
+read-every-file: required
+read-hidden-files: required
+read-archive: required
+read-nested-directories: required
+read-manifests: required
+read-schemas: required
+
+# -------------------------
+# SUBSYSTEM ANALYSIS REQUIREMENTS
+# -------------------------
+subsystem-analysis: required
+subsystems:
+  - agents
+  - memory
+  - tools
+  - providers
+  - models
+  - inference
+  - server
+  - cli
+  - vscode-extension
+  - fusion-ui
+  - archive
+  - docs
+  - manifests
+  - schemas
+  - prompts
+  - workflows
+
+# -------------------------
+# INTEGRATION MAP REQUIREMENTS
+# -------------------------
+integration-map: required
+compare-og-vs-clean: required
+detect-conflicts: required
+detect-missing-features: required
+detect-obsolete-code: required
+detect-gold-code: required
+detect-merge-points: required
+detect-rewrite-points: required
+detect-dead-code: required
+detect-duplicate-logic: required
+detect-missing-endpoints: required
+detect-missing-cli-commands: required
+detect-missing-models: required
+detect-missing-providers: required
+
+# -------------------------
+# MIGRATION CHECKLIST REQUIREMENTS
+# -------------------------
+migration-checklist: required
+file-classification: required
+file-classes:
+  - migrate-as-is
+  - migrate-with-modifications
+  - reference-only
+  - remove-entirely
+  - rewrite-entirely
+  - merge-into-clean
+  - extract-patterns-only
+
+# -------------------------
+# UNIFIED ARCHITECTURE REQUIREMENTS
+# -------------------------
+unified-architecture: required
+architecture-components:
+  - unified-server
+  - unified-agent-runtime
+  - unified-memory-engine
+  - unified-tool-runner
+  - unified-provider-registry
+  - unified-model-registry
+  - unified-cli
+  - unified-vscode-extension
+  - unified-fusion-ui
+  - unified-archive-extraction
+  - unified-manifest-system
+  - unified-schema-system
+  - unified-prompt-system
+  - unified-workflow-engine
+
+# -------------------------
+# PHASE EXECUTION PLANS
+# -------------------------
+phase0-deep-dive: required
+phase1-core-unification: required
+phase2-extraction-plan: required
+phase3-extension-alignment: required
+phase4-cli-repair: required
+phase5-server-hardening: required
+phase6-model-provider-registry-finalization: required
+phase7-tools-skills-regeneration: required
+phase8-final-repo-stabilization: required
+
+phase0-tasks:
+  - full-recursive-read
+  - subsystem-extraction
+  - logic-extraction
+  - dependency-mapping
+
+phase1-tasks:
+  - server-gating-unification
+  - fusion-ui-dom-verification
+  - cli-entrypoint-repair
+  - manifest-normalization
+
+phase2-tasks:
+  - archive-extraction
+  - subsystem-merging
+  - legacy-logic-import
+  - model-registry-unification
+  - provider-registry-unification
+  - agent-runtime-unification
+  - memory-engine-unification
+  - tool-runner-unification
+
+phase3-tasks:
+  - vscode-command-alignment
+  - vscode-schema-alignment
+  - vscode-webview-messaging
+  - vscode-endpoint-alignment
+  - vscode-build-alignment
+
+phase4-tasks:
+  - cli-command-restoration
+  - cli-doctor-repair
+  - cli-extract-data-repair
+  - cli-repo-loop-repair
+
+phase5-tasks:
+  - endpoint-hardening
+  - error-path-hardening
+  - malformed-json-handling
+  - invalid-model-handling
+  - missing-field-handling
+
+phase6-tasks:
+  - model-schema-finalization
+  - provider-schema-finalization
+  - registry-consistency-check
+
+phase7-tasks:
+  - tools-md-regeneration
+  - skills-md-regeneration
+  - manifest-regeneration
+  - schema-regeneration
+
+phase8-tasks:
+  - final-pytest-sweep
+  - final-curl-matrix
+  - final-ui-matrix
+  - final-cleanup-report
+
+# -------------------------
+# OUTPUT REQUIREMENTS
+# -------------------------
+output-sections:
+  - subsystem-analysis
+  - integration-map
+  - migration-checklist
+  - unified-architecture
+  - phase0-deep-dive
+  - phase1-core-unification
+  - phase2-extraction-plan
+  - phase3-extension-alignment
+  - phase4-cli-repair
+  - phase5-server-hardening
+  - phase6-model-provider-registry-finalization
+  - phase7-tools-skills-regeneration
+  - phase8-final-repo-stabilization

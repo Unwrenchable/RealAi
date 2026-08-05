@@ -1,0 +1,22 @@
+You are operating inside /workspaces/RealAi.
+
+Your task is PHASE 8: FINAL REPO STABILIZATION.
+
+MANDATORY RULES:
+- No questions.
+- No checkpoints.
+- No pausing.
+- No stopping early.
+
+TASKS:
+1. Produce:
+   - pytest sweep plan
+   - curl matrix plan
+   - Fusion UI matrix plan
+   - final cleanup plan
+2. Identify final inconsistencies.
+3. Produce final unified RealAI stabilization report.
+
+Do NOT run tests.
+Do NOT modify files.
+Produce analysis + plans only.
