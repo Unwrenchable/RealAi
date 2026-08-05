@@ -1,0 +1,12 @@
+---
+pid: 29936
+cwd: "C:\Users\tsmit\realai\apps\frontend\.next\standalone\apps\frontend"
+command: "$env:PORT=\"3847\"; $env:HOSTNAME=\"127.0.0.1\"; node server.js"
+started_at: 2026-06-04T13:28:31.324Z
+running_for_ms: 13479999 
+---
+ParserError: 
+Line |
+   1 |  . ntend\\.next\\standalone\\apps\\frontend" && $env:PORT="3847"; $env:H .
+     |                                                          ~~~~~~~
+     | Unexpected token '="3847"' in expression or statement.

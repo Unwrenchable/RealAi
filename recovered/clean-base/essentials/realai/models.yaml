@@ -1,0 +1,60 @@
+models:
+  - id: qwen-coder-7b
+    name: "Qwen2.5 Coder 7B Instruct"
+    type: chat
+    provider: local
+    backend: llama-cpp
+    path: "C:/realai/models/qwen2.5-coder-7b-instruct-q5_k_m.gguf"
+    owned_by: local
+    context_length: 16384
+    default: true
+    capabilities:
+      - chat
+      - coding
+      - tools
+
+  - id: realai-1.0
+    name: "RealAI 1.0"
+    type: chat
+    provider: local
+    backend: llama-cpp
+    path: "C:/llama-vulkan/models/realai-1.0/weights/realai-1.0-instruct-Q4_K_M.gguf"
+    owned_by: travis
+    context_length: 8192
+    capabilities:
+      - chat
+      - reasoning
+      - tools
+
+  - id: realai-1.0-instruct
+    name: "RealAI 1.0 Instruct"
+    type: chat
+    provider: local
+    backend: llama-cpp
+    path: "C:/llama-vulkan/models/realai-1.0-instruct/weights/realai-1.0-instruct-Q4_K_M.gguf"
+    owned_by: travis
+    context_length: 8192
+    capabilities:
+      - chat
+      - tools
+
+  - id: llama-local
+    name: "Llama Local 1B"
+    type: chat
+    provider: local
+    backend: llama-cpp
+    path: "C:/realai/models/llama-local-1b-Q4_K_M.gguf"
+    owned_by: local
+    context_length: 8192
+    capabilities:
+      - chat
+
+  - id: realai-embed
+    name: "RealAI Embed"
+    type: embedding
+    provider: local
+    backend: hf
+    path: "sentence-transformers/all-MiniLM-L6-v2"
+    owned_by: local
+    capabilities:
+      - embedding

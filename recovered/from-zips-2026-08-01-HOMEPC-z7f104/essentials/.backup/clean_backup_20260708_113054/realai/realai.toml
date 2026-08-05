@@ -1,0 +1,74 @@
+# RealAI Server Configuration
+# Save as: realai.toml
+
+[server]
+# Server profile and provider settings
+profile = "default"
+provider = "local"
+
+# Default models
+default_chat_model = "llama-local"
+default_embedding_model = "realai-embed"
+
+# Enable legacy paths for backwards compatibility
+enable_legacy_paths = true
+
+# Path to model registry (relative to project root)
+model_registry_path = "realai/models/registry.json"
+
+# Backend-specific configuration
+[backends]
+
+# llama-cli backend settings
+[backends.llama-cli]
+# Path to llama-cli executable (optional - will auto-detect if not specified)
+# llama_cli_path = "C:/llama.cpp/build/bin/Release/llama-cli.exe"
+# llama_cli_path = "/home/user/llama.cpp/build/bin/llama-cli"
+
+# Enable chat mode for better message formatting (experimental)
+chat_mode = false
+
+# llama.cpp Python bindings backend settings
+[backends.llama-cpp]
+# GPU layers (0 = CPU only, -1 = all layers on GPU)
+gpu_layers = 0
+
+# Context window size
+n_ctx = 8192
+
+# vLLM backend settings
+[backends.vllm]
+# GPU memory utilization (0.0 to 1.0)
+gpu_memory_utilization = 0.9
+
+# Tensor parallelism (number of GPUs)
+tensor_parallel_size = 1
+
+# Server settings
+[server.http]
+host = "127.0.0.1"
+port = 8000
+
+# Enable CORS for web frontend
+enable_cors = true
+cors_origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
+
+# Logging
+[server.logging]
+level = "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+log_file = "logs/realai-server.log"
+
+# Enable metrics
+enable_metrics = true
+metrics_port = 9090
+
+# Performance tuning
+[server.performance]
+# Maximum concurrent requests
+max_concurrent_requests = 10
+
+# Request timeout (seconds)
+request_timeout = 300
+
+# Worker processes (for production deployment)
+workers = 1

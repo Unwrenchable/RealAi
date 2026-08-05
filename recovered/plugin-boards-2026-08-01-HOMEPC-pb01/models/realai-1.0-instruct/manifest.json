@@ -1,0 +1,12 @@
+{
+  "name": "realai-1.0-instruct",
+  "version": "1.0.0",
+  "provider": "realai",
+  "context": 32768,
+  "type": "text",
+  "description": "Instruction-tuned RealAI weights (GGUF).",
+  "weights_layout": "models/realai-1.0-instruct/weights/*.gguf",
+  "preferred_gguf": "realai-1.0-instruct-Q4_K_M.gguf",
+  "capabilities": ["chat", "tool-calling", "local"],
+  "tags": ["native", "instruct"]
+}

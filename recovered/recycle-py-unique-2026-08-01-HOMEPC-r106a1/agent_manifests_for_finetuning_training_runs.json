@@ -1,0 +1,40 @@
+[
+  {
+    "id": "qwen2.5-1.5b-lora-smoke-test",
+    "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
+    "dataset_path": "dataset.jsonl",
+    "output_dir": "./checkpoints_lora",
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"]
+    },
+    "training": {
+    "lr": 5e-06,
+    "max_steps": 100,     // <-- lowered for faster test
+    "batch_size": 1,
+    "max_length": 1024
+    },
+    "adapter_subdir": "qwen2.5-1.5b-lora-smoke-test"
+  },
+  {
+    "id": "realai-1.0-instruct-lora-smoke",
+    "model_name": "C:\\Users\\tsmit\\realai\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+    "dataset_path": "dataset.jsonl",
+    "output_dir": "./checkpoints_lora",
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"]
+    },
+    "training": {
+      "lr": 5e-06,
+      "max_steps": 20,
+      "batch_size": 1,
+      "max_length": 1024
+    },
+    "adapter_subdir": "realai-1.0-instruct-lora-smoke"
+  }
+]

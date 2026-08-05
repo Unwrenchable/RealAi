@@ -1,0 +1,4 @@
+providers:
+  - llama_cpp
+
+default_model: llama-3.2-1b

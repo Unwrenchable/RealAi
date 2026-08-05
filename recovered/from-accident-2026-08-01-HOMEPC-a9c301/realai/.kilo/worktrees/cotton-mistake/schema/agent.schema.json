@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://realai.ai/schema/agent.schema.json",
+  "title": "RealAI Agent Manifest",
+  "description": "Schema for .agentx agent manifest files used by both the agentx CLI and the RealAI AgentRegistry.",
+  "type": "object",
+  "required": [
+    "id",
+    "role",
+    "goals",
+    "input_format",
+    "output_format",
+    "tools_allowed",
+    "memory_policy",
+    "routing_tags"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Unique kebab-case identifier for the agent."
+    },
+    "role": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable role title (e.g. 'System Architect')."
+    },
+    "description": {
+      "type": "string",
+      "description": "Longer description of what the agent does and when to use it."
+    },
+    "goals": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Ordered list of primary objectives the agent tries to achieve."
+    },
+    "input_format": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["text", "json", "multimodal"],
+          "description": "Primary input modality."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Optional JSON Schema describing the expected input structure when type is 'json'."
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "output_format": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["text", "json", "markdown", "code", "multimodal"],
+          "description": "Primary output modality."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Optional JSON Schema describing the output structure when type is 'json'."
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "tools_allowed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Explicit allow-list of tool names this agent may invoke. Empty array means no tools."
+    },
+    "memory_policy": {
+      "type": "object",
+      "required": ["enabled", "scope"],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the agent uses persistent memory."
+        },
+        "scope": {
+          "type": "string",
+          "enum": ["none", "session", "user", "global"],
+          "description": "How broadly memory is shared."
+        },
+        "vector": {
+          "type": "boolean",
+          "description": "Whether to use vector/semantic memory in addition to key-value."
+        },
+        "ttl_seconds": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "How long memories persist (0 = forever)."
+        }
+      },
+      "additionalProperties": true
+    },
+    "routing_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags used by the provider router and orchestrator to select this agent (e.g. ['agentic', 'code', 'security'])."
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Fine-grained capability names that map to ModelCapability enum values."
+    },
+    "required_tools": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tools the agent requires to function correctly (used for access assessment)."
+    },
+    "preferred_profile": {
+      "type": "string",
+      "enum": ["safe", "balanced", "power"],
+      "default": "balanced",
+      "description": "Recommended access profile for this agent."
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "default": "medium",
+      "description": "Risk classification affecting audit and approval requirements."
+    },
+    "model_prefs": {
+      "type": "object",
+      "description": "Optional model selection preferences for this agent.",
+      "properties": {
+        "preferred_models": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "max_tokens": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "realai-1.0": {
+    "type": "chat",
+    "backend": "vllm",
+    "path": "meta-llama/Meta-Llama-3-8B-Instruct",
+    "context_length": 32768
+  },
+  "realai-overseer": {
+    "type": "chat",
+    "backend": "vllm",
+    "path": "meta-llama/Meta-Llama-3-8B-Instruct",
+    "context_length": 65536
+  },
+  "realai-embed": {
+    "type": "embedding",
+    "backend": "hf",
+    "path": "sentence-transformers/all-MiniLM-L6-v2"
+  }
+}

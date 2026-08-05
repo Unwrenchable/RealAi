@@ -1,0 +1,9 @@
+{
+  "file_count": 8633,
+  "imported_at": "2026-08-05T06:27:16.6101245-07:00",
+  "giants_moved_out": 50,
+  "batch": 3,
+  "slug": "clean-base",
+  "source_sha": "5371650ca6b7afebf00b8d6d6541492f5f1e1c2d",
+  "source_branch": "recovery/clean-base"
+}

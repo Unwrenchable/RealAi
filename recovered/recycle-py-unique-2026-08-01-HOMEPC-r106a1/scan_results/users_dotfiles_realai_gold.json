@@ -1,0 +1,2177 @@
+{
+  "meta": {
+    "generated_at": "2026-07-15T16:14:44.776833+00:00",
+    "home": "C:\\Users\\tsmit",
+    "answer": "BEFORE: partial (only known dots). NOW: fuller scan of all 58 dot entries under Users\\tsmit.",
+    "dot_entries_total": 58,
+    "hits_total": 229,
+    "previously_known": [
+      ".agentx",
+      ".cache/huggingface",
+      ".claude",
+      ".continue",
+      ".cursor",
+      ".grok",
+      ".lmstudio",
+      ".ollama",
+      ".realai"
+    ],
+    "newly_interesting_roots": [
+      ".env.example",
+      ".env.local",
+      ".env.local.fizz",
+      ".gitconfig",
+      ".python_history",
+      ".agents",
+      ".claude",
+      ".cline",
+      ".codegpt",
+      ".codex",
+      ".continue",
+      ".copilot",
+      ".cursor",
+      ".openclaw"
+    ]
+  },
+  "dot_entries": [
+    ".agents",
+    ".agentx",
+    ".aitk",
+    ".asc",
+    ".base44",
+    ".bashrc",
+    ".cache",
+    ".chocolatey",
+    ".claude",
+    ".claude.json",
+    ".cline",
+    ".codegpt",
+    ".codex",
+    ".config",
+    ".continue",
+    ".copilot",
+    ".cursor",
+    ".docker",
+    ".dotnet",
+    ".env.example",
+    ".env.local",
+    ".env.local.fizz",
+    ".ghcp-appmod",
+    ".ghcp-appmod-java",
+    ".gitconfig",
+    ".gitlab",
+    ".grok",
+    ".hf-cli",
+    ".ipfs",
+    ".lesshst",
+    ".lmstudio",
+    ".lmstudio-home-pointer",
+    ".local",
+    ".localforge",
+    ".localforge-logs",
+    ".next",
+    ".node_repl_history",
+    ".npmrc",
+    ".nuget",
+    ".ollama",
+    ".openclaw",
+    ".overture",
+    ".pnpm-store",
+    ".profile",
+    ".python_history",
+    ".realai",
+    ".redhat",
+    ".redis-insight",
+    ".render-cli",
+    ".ssh",
+    ".templateengine",
+    ".th-client",
+    ".venv",
+    ".vscode",
+    ".vscode-server",
+    ".vscode-shared",
+    ".windows-build-tools",
+    ".work-iq-cli"
+  ],
+  "hits_by_dot_root": {
+    ".grok": 119,
+    ".copilot": 52,
+    ".openclaw": 15,
+    ".claude": 8,
+    ".continue": 8,
+    ".cursor": 4,
+    ".ollama": 4,
+    ".codex": 3,
+    ".lmstudio": 3,
+    ".realai": 2,
+    ".codegpt": 2,
+    ".agentx": 1,
+    ".env.example": 1,
+    ".env.local": 1,
+    ".env.local.fizz": 1,
+    ".gitconfig": 1,
+    ".python_history": 1,
+    ".agents": 1,
+    ".cache": 1,
+    ".cline": 1
+  },
+  "priority_with_zero_hits": [
+    ".config",
+    ".local",
+    ".overture",
+    ".vscode"
+  ],
+  "hits": [
+    {
+      "path": "C:\\Users\\tsmit\\.agentx",
+      "kind": "dot_name",
+      "dot_root": ".agentx",
+      "name_hit": true,
+      "content_hit": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.realai",
+      "kind": "dot_name",
+      "dot_root": ".realai",
+      "name_hit": true,
+      "content_hit": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.env.example",
+      "kind": "env_file",
+      "dot_root": ".env.example",
+      "name_hit": false,
+      "content_hit": true,
+      "size": 132
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.env.local",
+      "kind": "env_file",
+      "dot_root": ".env.local",
+      "name_hit": false,
+      "content_hit": true,
+      "size": 132
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.env.local.fizz",
+      "kind": "env_file",
+      "dot_root": ".env.local.fizz",
+      "name_hit": true,
+      "content_hit": true,
+      "size": 267
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.gitconfig",
+      "kind": "env_file",
+      "dot_root": ".gitconfig",
+      "name_hit": false,
+      "content_hit": true,
+      "size": 784
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.python_history",
+      "kind": "env_file",
+      "dot_root": ".python_history",
+      "name_hit": false,
+      "content_hit": true,
+      "size": 7586
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.agents\\skills\\microsoft-foundry\\project\\connections.md",
+      "kind": "file",
+      "size": 3264,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "undry project. Many agent tools (Azure AI Search, Bing Ground",
+      "dot_root": ".agents"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\plugins\\github.com-vercel-vercel-plugin\\tests\\pretooluse-subagent-spawn-observe.test.ts",
+      "kind": "file",
+      "size": 3302,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " not record for non-Agent tools\", async () => {\r       const ",
+      "dot_root": ".cache"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.claude\\history.jsonl",
+      "kind": "file",
+      "size": 3756,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": ":\"C:\\\\Users\\\\tsmit\\\\realai\",\"sessionId\":\"3ad5956e-f630-4",
+      "dot_root": ".claude"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.claude\\daemon\\roster.json",
+      "kind": "file",
+      "size": 2134,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\",       \"dispatch\": {        ",
+      "dot_root": ".claude"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.claude\\jobs\\964b93e5\\state.json",
+      "kind": "file",
+      "size": 1467,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cts\\\\C--Users-tsmit-realai\\\\964b93e5-d580-4bb7-b820-e733",
+      "dot_root": ".claude"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.claude\\plans\\help-me-fi-my-ethereal-llama.md",
+      "kind": "file",
+      "size": 19496,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "# RealAI Consolidation Plan \u2014 \"Unity T",
+      "dot_root": ".claude"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.claude\\projects\\C--Users-tsmit-realai\\3ad5956e-f630-4b7d-9534-c0fb75e337c6.jsonl",
+      "kind": "file",
+      "size": 487530,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".claude"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.claude\\projects\\C--Users-tsmit-realai\\964b93e5-d580-4bb7-b820-e7335b6b9560.jsonl",
+      "kind": "file",
+      "size": 1044861,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".claude"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.claude\\projects\\C--Users-tsmit-realai\\b5536105-eaae-4754-8203-b51aef4993ec.jsonl",
+      "kind": "file",
+      "size": 4650,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": ":\"C:\\\\Users\\\\tsmit\\\\realai\",\"sessionId\":\"b5536105-eaae-4",
+      "dot_root": ".claude"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.claude\\sessions\\7840.json",
+      "kind": "file",
+      "size": 357,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": ":\"C:\\\\Users\\\\tsmit\\\\realai\",\"startedAt\":1781777170211,\"p",
+      "dot_root": ".claude"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cline\\data\\globalState.json",
+      "kind": "file",
+      "size": 1281,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " \"c:\\\\Users\\\\tsmit\\\\realai-clean\",       \"name\": \"realai",
+      "dot_root": ".cline"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.codegpt\\config.json",
+      "kind": "file",
+      "size": 387,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " {\r       \"title\": \"RealAI Local\",\r       \"model\": \"real",
+      "dot_root": ".codegpt"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.codegpt\\New Text Document.txt",
+      "kind": "file",
+      "size": 387,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " {\r       \"title\": \"RealAI Local\",\r       \"model\": \"real",
+      "dot_root": ".codegpt"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.codex\\.codex-global-state.json",
+      "kind": "file",
+      "size": 8011,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "w-conversation\":[\"# RealAi\\r\\n\\r\\n**The Autonomous AI Co",
+      "dot_root": ".codex"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.codex\\config.toml",
+      "kind": "file",
+      "size": 368,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cts.'c:\\Users\\tsmit\\realai'] trust_level = \"trusted\" ",
+      "dot_root": ".codex"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.codex\\session_index.jsonl",
+      "kind": "file",
+      "size": 380,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "hread_name\":\"Update RealAi README\",\"updated_at\":\"2026-06",
+      "dot_root": ".codex"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.continue\\dev_data\\0.2.0\\tokensGenerated.jsonl",
+      "kind": "file",
+      "size": 8818,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "a\":\"0.2.0\",\"model\":\"realai-1.0:latest\",\"provider\":\"ollam",
+      "dot_root": ".continue"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.continue\\index\\globalContext.json",
+      "kind": "file",
+      "size": 1357,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "///c%3A/Users/tsmit/realai\": \"local\",     \"file:///c%3A/",
+      "dot_root": ".continue"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.continue\\sessions\\1cff49da-ae28-47b0-8fee-9f077c3ac0a0.json",
+      "kind": "file",
+      "size": 119322,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "///c%3A/Users/tsmit/realai-clean\",   \"history\": [     { ",
+      "dot_root": ".continue"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.continue\\sessions\\287b94bf-d1b3-4677-acad-e28cdcb7d17d.json",
+      "kind": "file",
+      "size": 40511,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "///c%3A/Users/tsmit/realai\",   \"history\": [     {       ",
+      "dot_root": ".continue"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.continue\\sessions\\5067b9dd-7339-4ebc-b74d-fe727562322e.json",
+      "kind": "file",
+      "size": 12058,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "///c%3A/Users/tsmit/realai\",   \"history\": [     {       ",
+      "dot_root": ".continue"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.continue\\sessions\\dce0a890-1d0d-4603-a806-9b39ba1bc831.json",
+      "kind": "file",
+      "size": 85713,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "///c%3A/Users/tsmit/realai-clean\",   \"history\": [     { ",
+      "dot_root": ".continue"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.continue\\sessions\\f948eceb-da6e-4778-b550-78d298070df5.json",
+      "kind": "file",
+      "size": 12058,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "///c%3A/Users/tsmit/realai\",   \"history\": [     {       ",
+      "dot_root": ".continue"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.continue\\sessions\\sessions.json",
+      "kind": "file",
+      "size": 1638,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "///c%3A/Users/tsmit/realai\",     \"messageCount\": 1   }, ",
+      "dot_root": ".continue"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\permissions-config.json",
+      "kind": "file",
+      "size": 1873,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\agent-tools-main\": {       \"tool_approval",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\vscode.session.metadata.cache.json",
+      "kind": "file",
+      "size": 7965,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " \"c:\\\\Users\\\\tsmit\\\\realai\",       \"timestamp\": 17803846",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\22a5211d-db10-49f0-8e77-0581e8155718\\vscode.metadata.json",
+      "kind": "file",
+      "size": 614,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " \"c:\\\\Users\\\\tsmit\\\\realai\",     \"timestamp\": 1782555882",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\22a5211d-db10-49f0-8e77-0581e8155718\\workspace.yaml",
+      "kind": "file",
+      "size": 292,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: c:\\Users\\tsmit\\realai git_root: C:\\Users\\tsmit\\real",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\242e130f-c3fc-4a16-a5de-ae821cbaf6be\\workspace.yaml",
+      "kind": "file",
+      "size": 244,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\overseer-bot-ai-main name: Initialize ",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\290e5bf6-d915-4f75-9d43-c44ac028af29\\workspace.yaml",
+      "kind": "file",
+      "size": 357,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\realai git_root: C:\\Users\\tsmit\\real",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\290e5bf6-d915-4f75-9d43-c44ac028af29\\rewind-snapshots\\index.json",
+      "kind": "file",
+      "size": 9308,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "userMessage\": \"from realai import RealAI\\n\\nmodel = Real",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\3e8636fc-ca98-41a2-86fa-c7d735c76125\\workspace.yaml",
+      "kind": "file",
+      "size": 371,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS u",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\47735f9e-2507-44ed-b7b5-7496fb181171\\vscode.metadata.json",
+      "kind": "file",
+      "size": 666,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " \"c:\\\\Users\\\\tsmit\\\\realai\",     \"timestamp\": 1783260513",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\47735f9e-2507-44ed-b7b5-7496fb181171\\workspace.yaml",
+      "kind": "file",
+      "size": 292,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: c:\\Users\\tsmit\\realai git_root: C:\\Users\\tsmit\\real",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\4baaa487-89af-4fd6-98d2-c6aa2cd30cdd\\workspace.yaml",
+      "kind": "file",
+      "size": 407,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS g",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\4baaa487-89af-4fd6-98d2-c6aa2cd30cdd\\checkpoints\\001-building-realai-world-brain.md",
+      "kind": "file",
+      "size": 21263,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "o into a cloud-only RealAI-powered \u201cworld brain\u201d for Ato",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\4baaa487-89af-4fd6-98d2-c6aa2cd30cdd\\checkpoints\\index.md",
+      "kind": "file",
+      "size": 245,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "---| | 1 | Building RealAI world brain | 001-building-re",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\6252b523-8c30-4861-aba8-fb99bf0999a6\\plan.md",
+      "kind": "file",
+      "size": 4194,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "# RealAI platform completion plan\r \r #",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\6252b523-8c30-4861-aba8-fb99bf0999a6\\workspace.yaml",
+      "kind": "file",
+      "size": 203,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "Change Directory To RealAI user_named: false summary_cou",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\69f8fced-0f67-4f7d-955a-ad80788b619b\\plan.md",
+      "kind": "file",
+      "size": 1790,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "ality hooks, so the Overseer needed a bulk, low-cost enric",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\69f8fced-0f67-4f7d-955a-ad80788b619b\\workspace.yaml",
+      "kind": "file",
+      "size": 389,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS g",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\69f8fced-0f67-4f7d-955a-ad80788b619b\\checkpoints\\001-self-hosted-overseer-rollout.md",
+      "kind": "file",
+      "size": 16577,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "The user wanted the Overseer backend fixed so it would wor",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\69f8fced-0f67-4f7d-955a-ad80788b619b\\checkpoints\\002-persisting-overseer-memory.md",
+      "kind": "file",
+      "size": 17529,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "The user wanted the Overseer moved from a merely working s",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\69f8fced-0f67-4f7d-955a-ad80788b619b\\checkpoints\\003-overseer-character-generator.md",
+      "kind": "file",
+      "size": 18425,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "ted the self-hosted Overseer to become the creative engine",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\69f8fced-0f67-4f7d-955a-ad80788b619b\\checkpoints\\index.md",
+      "kind": "file",
+      "size": 393,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "| | 1 | Self-Hosted Overseer Rollout | 001-self-hosted-ove",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\6c8f006b-10dc-4917-a108-6242bdc4e02f\\events.jsonl",
+      "kind": "file",
+      "size": 58500,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": ":\"c:\\\\Users\\\\tsmit\\\\realai\",\"gitRoot\":\"C:\\\\Users\\\\tsmit\\",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\6c8f006b-10dc-4917-a108-6242bdc4e02f\\vscode.metadata.json",
+      "kind": "file",
+      "size": 640,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " \"c:\\\\Users\\\\tsmit\\\\realai\",     \"timestamp\": 1782015880",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\6c8f006b-10dc-4917-a108-6242bdc4e02f\\workspace.yaml",
+      "kind": "file",
+      "size": 334,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: c:\\Users\\tsmit\\realai git_root: C:\\Users\\tsmit\\real",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\70726555-12b9-4a6f-819e-b1827e53be7a\\workspace.yaml",
+      "kind": "file",
+      "size": 191,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\overseer-bot-ai-main user_named: false",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\7d9cbde4-0212-4489-b985-8ac90c709cf7\\vscode.metadata.json",
+      "kind": "file",
+      "size": 614,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " \"c:\\\\Users\\\\tsmit\\\\realai\",     \"timestamp\": 1782555854",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\7d9cbde4-0212-4489-b985-8ac90c709cf7\\workspace.yaml",
+      "kind": "file",
+      "size": 292,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: c:\\Users\\tsmit\\realai git_root: C:\\Users\\tsmit\\real",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\9b9501aa-b14d-4e7a-b201-3398e61e497a\\plan.md",
+      "kind": "file",
+      "size": 1524,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "t is C:\\Users\\tsmit\\agent-tools-main\\agent-tools-main.\r - A .",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\9b9501aa-b14d-4e7a-b201-3398e61e497a\\workspace.yaml",
+      "kind": "file",
+      "size": 240,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\agent-tools-main name: Initialize Project",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\a8142a1f-84c1-4be0-97ed-35b9bbc79cd0\\events.jsonl",
+      "kind": "file",
+      "size": 37292,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "t.LOG2\\nntuser.ini\\noverseer-bot-ai\\\\\\noverseer-bot-ui\\\\\\n",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\b76289c5-1362-43b1-82f5-d799152eb608\\workspace.yaml",
+      "kind": "file",
+      "size": 328,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\overseer-bot-ai git_root: C:\\Users\\tsm",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\b76289c5-1362-43b1-82f5-d799152eb608\\rewind-snapshots\\index.json",
+      "kind": "file",
+      "size": 24917,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "ype: web\\n    name: overseer-bot\\n    env: python\\n    bui",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\b960530b-86cf-44be-a5d8-92f35516c074\\vscode.metadata.json",
+      "kind": "file",
+      "size": 655,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " \"c:\\\\Users\\\\tsmit\\\\realai\",     \"timestamp\": 1782556022",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\b960530b-86cf-44be-a5d8-92f35516c074\\workspace.yaml",
+      "kind": "file",
+      "size": 292,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: c:\\Users\\tsmit\\realai git_root: C:\\Users\\tsmit\\real",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\bdbbe0d3-c1cc-4e37-860c-66c9127a25eb\\workspace.yaml",
+      "kind": "file",
+      "size": 299,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\overseer-bot-ai user_named: false summ",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\c7355d7e-ae08-422f-a8f2-9ff8f0224a18\\workspace.yaml",
+      "kind": "file",
+      "size": 286,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\RealAIProject user_named: false summ",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\d9df4712-f320-4686-9e8e-d102af1561b2\\workspace.yaml",
+      "kind": "file",
+      "size": 337,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\realaiproject git_root: C:\\Users\\tsm",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\d9df4712-f320-4686-9e8e-d102af1561b2\\checkpoints\\001-split-deployment-push.md",
+      "kind": "file",
+      "size": 16815,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "default branch was `realaiproject`, and the local `main`",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\e589fd9e-3906-4802-a38d-59d01df31d3b\\events.jsonl",
+      "kind": "file",
+      "size": 37874,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": ":\"C:\\\\Users\\\\tsmit\\\\realai\",\"gitRoot\":\"C:\\\\Users\\\\tsmit\\",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\e589fd9e-3906-4802-a38d-59d01df31d3b\\workspace.yaml",
+      "kind": "file",
+      "size": 299,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\realai git_root: C:\\Users\\tsmit\\real",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\e589fd9e-3906-4802-a38d-59d01df31d3b\\rewind-snapshots\\index.json",
+      "kind": "file",
+      "size": 892,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\\\\realai\\\\realai_memory.json\" ",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\e5cccdc6-acda-44b7-9d1b-fa326e9d8b44\\vscode.metadata.json",
+      "kind": "file",
+      "size": 666,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " \"c:\\\\Users\\\\tsmit\\\\realai\",     \"timestamp\": 1783260553",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\e5cccdc6-acda-44b7-9d1b-fa326e9d8b44\\workspace.yaml",
+      "kind": "file",
+      "size": 292,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: c:\\Users\\tsmit\\realai git_root: C:\\Users\\tsmit\\real",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\ebffe6e1-b8f5-43d5-afcf-ab07b3d200a5\\events.jsonl",
+      "kind": "file",
+      "size": 42383,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": ":\"c:\\\\Users\\\\tsmit\\\\realai\",\"gitRoot\":\"C:\\\\Users\\\\tsmit\\",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\ebffe6e1-b8f5-43d5-afcf-ab07b3d200a5\\vscode.metadata.json",
+      "kind": "file",
+      "size": 640,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " \"c:\\\\Users\\\\tsmit\\\\realai\",     \"timestamp\": 1782019286",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\ebffe6e1-b8f5-43d5-afcf-ab07b3d200a5\\workspace.yaml",
+      "kind": "file",
+      "size": 828,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: c:\\Users\\tsmit\\realai git_root: C:\\Users\\tsmit\\real",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\efacc2de-b7bb-4e83-86ad-244c69d3653e\\workspace.yaml",
+      "kind": "file",
+      "size": 400,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS g",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\f080a43d-c2f8-4729-90a0-1a6daecea5be\\workspace.yaml",
+      "kind": "file",
+      "size": 240,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\agent-tools-main name: Initialize Session",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\f0d0c980-f95e-449e-a4db-e59f1415af32\\vscode.metadata.json",
+      "kind": "file",
+      "size": 513,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " \"c:\\\\Users\\\\tsmit\\\\realai\",     \"timestamp\": 1780384644",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\f0d0c980-f95e-449e-a4db-e59f1415af32\\workspace.yaml",
+      "kind": "file",
+      "size": 274,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: c:\\Users\\tsmit\\realai user_named: false summary_cou",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\f1ff2384-c5a8-4fcc-a724-ad1c142971bf\\workspace.yaml",
+      "kind": "file",
+      "size": 367,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "cwd: C:\\Users\\tsmit\\overseer-bot-ai-main git_root: C:\\User",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.copilot\\session-state\\f1ff2384-c5a8-4fcc-a724-ad1c142971bf\\rewind-snapshots\\index.json",
+      "kind": "file",
+      "size": 2249,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "nd what it does for atomicfizzcaps.xyz and the social for tw",
+      "dot_root": ".copilot"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cursor\\projects\\c-Users-tsmit-ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\canvases\\tsconfig.json",
+      "kind": "file",
+      "size": 289,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".cursor"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cursor\\projects\\c-Users-tsmit-realai\\canvases\\tsconfig.json",
+      "kind": "file",
+      "size": 289,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".cursor"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cursor\\projects\\c-Users-tsmit-realai\\terminals\\1036.txt",
+      "kind": "file",
+      "size": 430,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\" command: \".\\\\build_installer",
+      "dot_root": ".cursor"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cursor\\projects\\c-Users-tsmit-realai\\terminals\\868741.txt",
+      "kind": "file",
+      "size": 77009,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\" command: \".\\\\build_installer",
+      "dot_root": ".cursor"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\auth.json",
+      "kind": "file",
+      "size": 1644,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "08d\",     \"email\": \"atomicfizzcaps@gmail.com\",     \"first_na",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\README.md",
+      "kind": "file",
+      "size": 98567,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "earch tool from the agent toolset                          | ",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5Crealai\\prompt_history.jsonl",
+      "kind": "file",
+      "size": 4280,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "b00f\",\"prompt\":\"C:\\\\realai\",\"is_bash\":false} {\"timestamp",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5Crealai\\019f51fd-f6c4-7451-a683-135d57e0b00f\\announcement_state.json",
+      "kind": "file",
+      "size": 612,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5Crealai\\019f51fd-f6c4-7451-a683-135d57e0b00f\\chat_history.jsonl",
+      "kind": "file",
+      "size": 56146,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "Workspace Path: C:\\\\realai\\nToday's date: 2026-07-11\\nNo",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5Crealai\\019f51fd-f6c4-7451-a683-135d57e0b00f\\events.jsonl",
+      "kind": "file",
+      "size": 70656,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5Crealai\\019f51fd-f6c4-7451-a683-135d57e0b00f\\plan_mode.json",
+      "kind": "file",
+      "size": 151,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5Crealai\\019f51fd-f6c4-7451-a683-135d57e0b00f\\prompt_context.json",
+      "kind": "file",
+      "size": 7246,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "  \"file_path\": \"C:\\\\realai\\\\Agents.md\",       \"content\":",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5Crealai\\019f51fd-f6c4-7451-a683-135d57e0b00f\\resources_state.json",
+      "kind": "file",
+      "size": 1437,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5Crealai\\019f51fd-f6c4-7451-a683-135d57e0b00f\\rewind_points.jsonl",
+      "kind": "file",
+      "size": 106,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5Crealai\\019f51fd-f6c4-7451-a683-135d57e0b00f\\signals.json",
+      "kind": "file",
+      "size": 1418,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5Crealai\\019f51fd-f6c4-7451-a683-135d57e0b00f\\summary.json",
+      "kind": "file",
+      "size": 920,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "f\",     \"cwd\": \"C:\\\\realai\"   },   \"session_summary\": \"R",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5Crealai\\019f51fd-f6c4-7451-a683-135d57e0b00f\\summary.json.lock",
+      "kind": "file",
+      "size": 0,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5Crealai\\019f51fd-f6c4-7451-a683-135d57e0b00f\\system_prompt.txt",
+      "kind": "file",
+      "size": 5447,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5Crealai\\019f51fd-f6c4-7451-a683-135d57e0b00f\\updates.jsonl",
+      "kind": "file",
+      "size": 170605,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit\\prompt_history.jsonl",
+      "kind": "file",
+      "size": 20495,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "\\\\C:\\\\Users\\\\tsmit\\\\realai and \\\\\\\\?\\\\C:\\\\Users\\\\tsmit\\\\",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit\\318a7d16-0866-4b68-adf2-7188290e2299\\hunk_records.jsonl",
+      "kind": "file",
+      "size": 74628,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "ePath\":\"/home/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/p",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit\\318a7d16-0866-4b68-adf2-7188290e2299\\resources_state.json",
+      "kind": "file",
+      "size": 14062,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "\"/mnt/c/Users/tsmit/realai/CLEANUP_REPORT.md\": {        ",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit\\318a7d16-0866-4b68-adf2-7188290e2299\\summary.json",
+      "kind": "file",
+      "size": 766,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "\"session_summary\": \"Atomic Fizz Mainnet Prep Goonforge Separa",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit\\d8cc3ba9-0152-42e2-ba88-96f3434606e6\\resources_state.json",
+      "kind": "file",
+      "size": 18777,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "        \"C:\\\\tools\\\\realai\\\\realai.js\": {           \"mti",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit\\d8cc3ba9-0152-42e2-ba88-96f3434606e6\\summary.json",
+      "kind": "file",
+      "size": 889,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "\"/mnt/c/Users/tsmit/realai/\",   \"git_remotes\": [     \"ht",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit\\ef641527-5fc4-41ef-87e5-72ebe3045cc1\\chat_history.jsonl",
+      "kind": "file",
+      "size": 99989,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " /mnt/c/Users/tsmit/realai\\nToday's date: 2026-06-16\\nNo",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit\\ef641527-5fc4-41ef-87e5-72ebe3045cc1\\resources_state.json",
+      "kind": "file",
+      "size": 1629,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "\"/mnt/c/Users/tsmit/realai/.env.example\": {           \"m",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit\\ef641527-5fc4-41ef-87e5-72ebe3045cc1\\summary.json",
+      "kind": "file",
+      "size": 859,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "\"/mnt/c/Users/tsmit/realai/\",   \"git_remotes\": [     \"ht",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit\\ef641527-5fc4-41ef-87e5-72ebe3045cc1\\updates.jsonl",
+      "kind": "file",
+      "size": 143086,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "\"/mnt/c/Users/tsmit/realai\"}},\"_meta\":{\"totalTokens\":236",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5C.grok%5Cworktrees%5Ctsmit-realai%5C2026-06-16-262686d6\\019ed1d3-4a23-7b53-8735-bc15ef57c25d\\announcement_state.json",
+      "kind": "file",
+      "size": 170,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5C.grok%5Cworktrees%5Ctsmit-realai%5C2026-06-16-262686d6\\019ed1d3-4a23-7b53-8735-bc15ef57c25d\\chat_history.jsonl",
+      "kind": "file",
+      "size": 992373,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5C.grok%5Cworktrees%5Ctsmit-realai%5C2026-06-16-262686d6\\019ed1d3-4a23-7b53-8735-bc15ef57c25d\\events.jsonl",
+      "kind": "file",
+      "size": 1675,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5C.grok%5Cworktrees%5Ctsmit-realai%5C2026-06-16-262686d6\\019ed1d3-4a23-7b53-8735-bc15ef57c25d\\plan.json",
+      "kind": "file",
+      "size": 17,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5C.grok%5Cworktrees%5Ctsmit-realai%5C2026-06-16-262686d6\\019ed1d3-4a23-7b53-8735-bc15ef57c25d\\plan_mode.json",
+      "kind": "file",
+      "size": 116,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5C.grok%5Cworktrees%5Ctsmit-realai%5C2026-06-16-262686d6\\019ed1d3-4a23-7b53-8735-bc15ef57c25d\\prompt_context.json",
+      "kind": "file",
+      "size": 4252,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "k\\\\worktrees\\\\tsmit-realai\\\\2026-06-16-262686d6\",   \"cur",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5C.grok%5Cworktrees%5Ctsmit-realai%5C2026-06-16-262686d6\\019ed1d3-4a23-7b53-8735-bc15ef57c25d\\signals.json",
+      "kind": "file",
+      "size": 1598,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5C.grok%5Cworktrees%5Ctsmit-realai%5C2026-06-16-262686d6\\019ed1d3-4a23-7b53-8735-bc15ef57c25d\\summary.json",
+      "kind": "file",
+      "size": 948,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "k\\\\worktrees\\\\tsmit-realai\\\\2026-06-16-262686d6\"   },   ",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5C.grok%5Cworktrees%5Ctsmit-realai%5C2026-06-16-262686d6\\019ed1d3-4a23-7b53-8735-bc15ef57c25d\\system_prompt.txt",
+      "kind": "file",
+      "size": 13193,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5C.grok%5Cworktrees%5Ctsmit-realai%5C2026-06-16-262686d6\\019ed1d3-4a23-7b53-8735-bc15ef57c25d\\updates.jsonl",
+      "kind": "file",
+      "size": 15176385,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\prompt_history.jsonl",
+      "kind": "file",
+      "size": 573920,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eb9f5-516e-7c40-9d14-8896718536fd\\chat_history.jsonl",
+      "kind": "file",
+      "size": 512086,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eb9f5-516e-7c40-9d14-8896718536fd\\events.jsonl",
+      "kind": "file",
+      "size": 479161,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eb9f5-516e-7c40-9d14-8896718536fd\\hunk_records.jsonl",
+      "kind": "file",
+      "size": 18050,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": ":\"C:\\\\Users\\\\tsmit\\\\realai\\\\realai\\\\tools.py\",\"hunkStart",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eb9f5-516e-7c40-9d14-8896718536fd\\prompt_context.json",
+      "kind": "file",
+      "size": 4236,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\",   \"current_date\": \"2026-06-",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eb9f5-516e-7c40-9d14-8896718536fd\\resources_state.json",
+      "kind": "file",
+      "size": 12744,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "\\\\C:\\\\Users\\\\tsmit\\\\realai\\\\node_modules\\\\.pnpm\\\\@metapl",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eb9f5-516e-7c40-9d14-8896718536fd\\rewind_points.jsonl",
+      "kind": "file",
+      "size": 373046,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eb9f5-516e-7c40-9d14-8896718536fd\\signals.json",
+      "kind": "file",
+      "size": 1568,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eb9f5-516e-7c40-9d14-8896718536fd\\summary.json",
+      "kind": "file",
+      "size": 878,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\"   },   \"session_summary\": \"R",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eb9f5-516e-7c40-9d14-8896718536fd\\system_prompt.txt",
+      "kind": "file",
+      "size": 1833,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eb9f5-516e-7c40-9d14-8896718536fd\\updates.jsonl",
+      "kind": "file",
+      "size": 3090870,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eba12-ef79-7ee2-9ef8-a91d945af421\\announcement_state.json",
+      "kind": "file",
+      "size": 407,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eba12-ef79-7ee2-9ef8-a91d945af421\\chat_history.jsonl",
+      "kind": "file",
+      "size": 646688,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eba12-ef79-7ee2-9ef8-a91d945af421\\events.jsonl",
+      "kind": "file",
+      "size": 704331,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eba12-ef79-7ee2-9ef8-a91d945af421\\hunk_records.jsonl",
+      "kind": "file",
+      "size": 30318,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": ":\"C:\\\\Users\\\\tsmit\\\\realai\\\\solana-client\\\\airdrop-devne",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eba12-ef79-7ee2-9ef8-a91d945af421\\prompt_context.json",
+      "kind": "file",
+      "size": 4207,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\",   \"current_date\": \"2026-06-",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eba12-ef79-7ee2-9ef8-a91d945af421\\resources_state.json",
+      "kind": "file",
+      "size": 10078,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "\\\\C:\\\\Users\\\\tsmit\\\\overseerold\\\\overseer-bot-ui-main\\\\ove",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eba12-ef79-7ee2-9ef8-a91d945af421\\rewind_points.jsonl",
+      "kind": "file",
+      "size": 17484,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "\\\\\\Local\\\\\\\\Temp\\\\\\\\realai_hive_devnet_signer.json';\\nco",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eba12-ef79-7ee2-9ef8-a91d945af421\\signals.json",
+      "kind": "file",
+      "size": 1574,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eba12-ef79-7ee2-9ef8-a91d945af421\\summary.json",
+      "kind": "file",
+      "size": 779,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\"   },   \"session_summary\": \"c",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eba12-ef79-7ee2-9ef8-a91d945af421\\system_prompt.txt",
+      "kind": "file",
+      "size": 13193,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019eba12-ef79-7ee2-9ef8-a91d945af421\\updates.jsonl",
+      "kind": "file",
+      "size": 3149598,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ec10c-3c2b-7553-945e-51799fea35d1\\announcement_state.json",
+      "kind": "file",
+      "size": 170,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ec10c-3c2b-7553-945e-51799fea35d1\\chat_history.jsonl",
+      "kind": "file",
+      "size": 989448,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ec10c-3c2b-7553-945e-51799fea35d1\\events.jsonl",
+      "kind": "file",
+      "size": 4409486,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ec10c-3c2b-7553-945e-51799fea35d1\\hunk_records.jsonl",
+      "kind": "file",
+      "size": 430028,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ec10c-3c2b-7553-945e-51799fea35d1\\plan.json",
+      "kind": "file",
+      "size": 17,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ec10c-3c2b-7553-945e-51799fea35d1\\plan_mode.json",
+      "kind": "file",
+      "size": 116,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ec10c-3c2b-7553-945e-51799fea35d1\\prompt_context.json",
+      "kind": "file",
+      "size": 4207,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\",   \"current_date\": \"2026-06-",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ec10c-3c2b-7553-945e-51799fea35d1\\resources_state.json",
+      "kind": "file",
+      "size": 10275,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "\\\\C:\\\\Users\\\\tsmit\\\\realai\\\\solana-client\\\\package.json\"",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ec10c-3c2b-7553-945e-51799fea35d1\\rewind_points.jsonl",
+      "kind": "file",
+      "size": 36084,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "47:49.274437400Z\"},\"realai/models/registry.json\":{\"path\"",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ec10c-3c2b-7553-945e-51799fea35d1\\signals.json",
+      "kind": "file",
+      "size": 1598,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ec10c-3c2b-7553-945e-51799fea35d1\\summary.json",
+      "kind": "file",
+      "size": 881,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\"   },   \"session_summary\": \"L",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ec10c-3c2b-7553-945e-51799fea35d1\\system_prompt.txt",
+      "kind": "file",
+      "size": 13193,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ec10c-3c2b-7553-945e-51799fea35d1\\updates.jsonl",
+      "kind": "file",
+      "size": 15176385,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ecf76-ec97-7051-8acc-806990999f35\\chat_history.jsonl",
+      "kind": "file",
+      "size": 22351,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ecf76-ec97-7051-8acc-806990999f35\\events.jsonl",
+      "kind": "file",
+      "size": 1675,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ecf76-ec97-7051-8acc-806990999f35\\prompt_context.json",
+      "kind": "file",
+      "size": 4207,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\",   \"current_date\": \"2026-06-",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ecf76-ec97-7051-8acc-806990999f35\\summary.json",
+      "kind": "file",
+      "size": 622,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\"   },   \"session_summary\": \"\"",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ecf76-ec97-7051-8acc-806990999f35\\system_prompt.txt",
+      "kind": "file",
+      "size": 13415,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ecfa2-5e0d-7200-a43b-c9dd0a5954f3\\chat_history.jsonl",
+      "kind": "file",
+      "size": 24913,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": ": C:\\\\Users\\\\tsmit\\\\realai\\n\\nIs directory a git repo: Y",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ecfa2-5e0d-7200-a43b-c9dd0a5954f3\\events.jsonl",
+      "kind": "file",
+      "size": 3350,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ecfa2-5e0d-7200-a43b-c9dd0a5954f3\\prompt_context.json",
+      "kind": "file",
+      "size": 4236,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\",   \"current_date\": \"2026-06-",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ecfa2-5e0d-7200-a43b-c9dd0a5954f3\\summary.json",
+      "kind": "file",
+      "size": 625,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\"   },   \"session_summary\": \"\"",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ecfa2-5e0d-7200-a43b-c9dd0a5954f3\\system_prompt.txt",
+      "kind": "file",
+      "size": 1833,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ed0fd-353e-7093-beb1-f1812cb6c564\\chat_history.jsonl",
+      "kind": "file",
+      "size": 1907,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ed0fd-353e-7093-beb1-f1812cb6c564\\events.jsonl",
+      "kind": "file",
+      "size": 1675,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ed0fd-353e-7093-beb1-f1812cb6c564\\prompt_context.json",
+      "kind": "file",
+      "size": 4236,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\",   \"current_date\": \"2026-06-",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ed0fd-353e-7093-beb1-f1812cb6c564\\summary.json",
+      "kind": "file",
+      "size": 622,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\"   },   \"session_summary\": \"\"",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019ed0fd-353e-7093-beb1-f1812cb6c564\\system_prompt.txt",
+      "kind": "file",
+      "size": 1833,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019f0c78-91fc-7cf1-b468-1994b202dd66\\chat_history.jsonl",
+      "kind": "file",
+      "size": 22593,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019f0c78-91fc-7cf1-b468-1994b202dd66\\events.jsonl",
+      "kind": "file",
+      "size": 2917,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019f0c78-91fc-7cf1-b468-1994b202dd66\\plan_mode.json",
+      "kind": "file",
+      "size": 116,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019f0c78-91fc-7cf1-b468-1994b202dd66\\prompt_context.json",
+      "kind": "file",
+      "size": 4207,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\",   \"current_date\": \"2026-06-",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019f0c78-91fc-7cf1-b468-1994b202dd66\\summary.json",
+      "kind": "file",
+      "size": 726,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\"   },   \"session_summary\": \"\"",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019f0c78-91fc-7cf1-b468-1994b202dd66\\summary.json.lock",
+      "kind": "file",
+      "size": 0,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019f0c78-91fc-7cf1-b468-1994b202dd66\\system_prompt.txt",
+      "kind": "file",
+      "size": 13415,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\019f0c78-91fc-7cf1-b468-1994b202dd66\\updates.jsonl",
+      "kind": "file",
+      "size": 840,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\b02d750b-3fb3-449c-ae80-3765d63d8668\\announcement_state.json",
+      "kind": "file",
+      "size": 170,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\b02d750b-3fb3-449c-ae80-3765d63d8668\\chat_history.jsonl",
+      "kind": "file",
+      "size": 517619,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\b02d750b-3fb3-449c-ae80-3765d63d8668\\events.jsonl",
+      "kind": "file",
+      "size": 6629347,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\b02d750b-3fb3-449c-ae80-3765d63d8668\\hunk_records.jsonl",
+      "kind": "file",
+      "size": 130258,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "\"/mnt/c/Users/tsmit/realai/realai/hive/__init__.py\",\"hun",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\b02d750b-3fb3-449c-ae80-3765d63d8668\\plan.json",
+      "kind": "file",
+      "size": 17,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\b02d750b-3fb3-449c-ae80-3765d63d8668\\plan_mode.json",
+      "kind": "file",
+      "size": 116,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\b02d750b-3fb3-449c-ae80-3765d63d8668\\prompt_context.json",
+      "kind": "file",
+      "size": 4207,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\",   \"current_date\": \"2026-06-",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\b02d750b-3fb3-449c-ae80-3765d63d8668\\resources_state.json",
+      "kind": "file",
+      "size": 28886,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": "\"/mnt/c/Users/tsmit/realai/realai_local_server.py\": {   ",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\b02d750b-3fb3-449c-ae80-3765d63d8668\\rewind_points.jsonl",
+      "kind": "file",
+      "size": 1293002,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\b02d750b-3fb3-449c-ae80-3765d63d8668\\signals.json",
+      "kind": "file",
+      "size": 1650,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\b02d750b-3fb3-449c-ae80-3765d63d8668\\summary.json",
+      "kind": "file",
+      "size": 912,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\"   },   \"session_summary\": \"R",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\b02d750b-3fb3-449c-ae80-3765d63d8668\\system_prompt.txt",
+      "kind": "file",
+      "size": 13193,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\b02d750b-3fb3-449c-ae80-3765d63d8668\\updates.jsonl",
+      "kind": "file",
+      "size": 14190953,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\d8fbcb74-2391-45ac-a84e-f55e4e3ca0b1\\announcement_state.json",
+      "kind": "file",
+      "size": 170,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\d8fbcb74-2391-45ac-a84e-f55e4e3ca0b1\\chat_history.jsonl",
+      "kind": "file",
+      "size": 475098,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\d8fbcb74-2391-45ac-a84e-f55e4e3ca0b1\\events.jsonl",
+      "kind": "file",
+      "size": 2612960,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\d8fbcb74-2391-45ac-a84e-f55e4e3ca0b1\\hunk_records.jsonl",
+      "kind": "file",
+      "size": 99822,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": ":\"C:\\\\Users\\\\tsmit\\\\realai\\\\realai/model_assets.py\",\"hun",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\d8fbcb74-2391-45ac-a84e-f55e4e3ca0b1\\plan.json",
+      "kind": "file",
+      "size": 17,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\d8fbcb74-2391-45ac-a84e-f55e4e3ca0b1\\plan_mode.json",
+      "kind": "file",
+      "size": 116,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\d8fbcb74-2391-45ac-a84e-f55e4e3ca0b1\\prompt_context.json",
+      "kind": "file",
+      "size": 4207,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\",   \"current_date\": \"2026-06-",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\d8fbcb74-2391-45ac-a84e-f55e4e3ca0b1\\resources_state.json",
+      "kind": "file",
+      "size": 26848,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\\\\realai\\\\tools.py\": {        ",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\d8fbcb74-2391-45ac-a84e-f55e4e3ca0b1\\rewind_points.jsonl",
+      "kind": "file",
+      "size": 1066401,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\d8fbcb74-2391-45ac-a84e-f55e4e3ca0b1\\signals.json",
+      "kind": "file",
+      "size": 1628,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\d8fbcb74-2391-45ac-a84e-f55e4e3ca0b1\\summary.json",
+      "kind": "file",
+      "size": 920,
+      "name_hit": true,
+      "content_hit": true,
+      "snip": " \"C:\\\\Users\\\\tsmit\\\\realai\"   },   \"session_summary\": \"E",
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\d8fbcb74-2391-45ac-a84e-f55e4e3ca0b1\\system_prompt.txt",
+      "kind": "file",
+      "size": 13415,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.grok\\sessions\\C%3A%5CUsers%5Ctsmit%5Crealai\\d8fbcb74-2391-45ac-a84e-f55e4e3ca0b1\\updates.jsonl",
+      "kind": "file",
+      "size": 17635920,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".grok"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.lmstudio\\.internal\\conversation-config.json",
+      "kind": "file",
+      "size": 634,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "ctedConversation\": \"realai/1781828366599.conversation.js",
+      "dot_root": ".lmstudio"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.lmstudio\\.internal\\ui-state\\window-1.json",
+      "kind": "file",
+      "size": 2835,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "sationIdentifier\": \"realai/1781828366599.conversation.js",
+      "dot_root": ".lmstudio"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.lmstudio\\conversations\\realai\\1781828366599.conversation.json",
+      "kind": "file",
+      "size": 411,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".lmstudio"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.ollama\\models\\Modelfile-realai",
+      "kind": "file",
+      "size": 116,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".ollama"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.ollama\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "kind": "weight",
+      "size": 5444831232,
+      "name_hit": false,
+      "content_hit": false,
+      "dot_root": ".ollama"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.ollama\\models\\qwen2.5-coder-7b-instruct-q5_k_m__dup1.gguf",
+      "kind": "weight",
+      "size": 5444831232,
+      "name_hit": false,
+      "content_hit": false,
+      "dot_root": ".ollama"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.ollama\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+      "kind": "weight",
+      "size": 807690656,
+      "name_hit": true,
+      "content_hit": false,
+      "snip": null,
+      "dot_root": ".ollama"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\audit-BUnh7jdS.js",
+      "kind": "file",
+      "size": 47878,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "neEval=true (or per-agent tools.exec.strictInlineEval=true) w",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\audit.nondeep.runtime-CDPrDBgP.js",
+      "kind": "file",
+      "size": 64947,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "st profile = params.agentTools?.profile ?? params.cfg.tools?",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\channel-tools-BNMmkLMe.js",
+      "kind": "file",
+      "size": 4298,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "function listChannelAgentTools(params) { \tconst tools = []; ",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\doctor-security-CwzlQIHu.js",
+      "kind": "file",
+      "size": 10602,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": " \t\tscopeExecConfig: agent.tools?.exec, \t\tglobalExecConfig: cf",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\effective-tool-policy-CR24lvGA.js",
+      "kind": "file",
+      "size": 3605,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "licy, \t\t\tlabel: \"subagent tools.allow\" \t\t} \t].map((step) => O",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\exec-approvals-effective-D0qxEaRx.js",
+      "kind": "file",
+      "size": 5989,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "nt.id !== \"main\" || agent.tools?.exec !== void 0).map((agent)",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\exec-safe-bins-Cta4rDn4.js",
+      "kind": "file",
+      "size": 7229,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "ec = asObjectRecord(agent.tools?.exec); \t\tif (!agentExec) con",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\gateway-B0qlF1tf.js",
+      "kind": "file",
+      "size": 4622,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "atewayUrlOverrideForAgentTools(params) { \tconst { cfg } = pa",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\pi-tools-hI2Hhdd_.js",
+      "kind": "file",
+      "size": 42245,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "t { i as listChannelAgentTools, t as copyChannelAgentToolMet",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\pi-tools.policy-Bn2zw7-3.js",
+      "kind": "file",
+      "size": 12948,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "tToolSection(params.agentTools?.exec) || hasExplicitToolSect",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\preview-warnings-DrbfmGxN.js",
+      "kind": "file",
+      "size": 6526,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "agent) && hasRecord(agent.tools) ? agent.tools.exec : void 0;",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\tool-fs-policy-DWqTCwxF.js",
+      "kind": "file",
+      "size": 1716,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "return true; \tconst agentTools = params.agentId ? resolveAge",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\tool-policy-pipeline-DEFU3Zw9.js",
+      "kind": "file",
+      "size": 5132,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "Id}.tools.allow` : \"agent tools.allow\", \t\t\tstripPluginOnlyAll",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\tool-resolution-CrAs1wqk.js",
+      "kind": "file",
+      "size": 4149,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "licy, \t\t\tlabel: \"subagent tools.allow\" \t\t}] \t}); \tconst surfa",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.openclaw\\plugin-runtime-deps\\openclaw-2026.4.29-40da55965890\\dist\\zod-schema.agent-runtime-BIWWd7du.js",
+      "kind": "file",
+      "size": 26067,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "optional() }; const AgentToolsSchema = z.object({ \t...Common",
+      "dot_root": ".openclaw"
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.realai\\local_models.json",
+      "kind": "file",
+      "size": 1229,
+      "name_hit": false,
+      "content_hit": true,
+      "snip": "       \"path\": \"C:\\\\realai\\\\models\\\\qwen2.5-coder-7b-ins",
+      "dot_root": ".realai"
+    }
+  ],
+  "errors": []
+}

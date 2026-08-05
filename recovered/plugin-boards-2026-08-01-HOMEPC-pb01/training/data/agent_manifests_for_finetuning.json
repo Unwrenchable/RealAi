@@ -1,0 +1,2704 @@
+[
+  {
+    "id": "agent",
+    "role": "RealAI — Agent Guidance",
+    "description": "",
+    "tags": [
+      "agents"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "agent-evals-engineer",
+    "role": "Agent Evals Engineer",
+    "description": "Designs and maintains evaluation suites for AI agents so quality improvements are measurable instead of anecdotal. Defines golden tasks, scoring rubrics, regression tests, and failure taxonomies, then uses the results to guide prompt, tooling, and workflow changes.",
+    "tags": [
+      "ai",
+      "evaluation",
+      "regression",
+      "quality",
+      "benchmarking",
+      "agents"
+    ],
+    "capabilities": [
+      "eval-design",
+      "rubric-authoring",
+      "golden-task-curation",
+      "regression-detection",
+      "failure-taxonomy",
+      "benchmark-analysis"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "agent-observability-engineer",
+    "role": "Agent Observability Engineer",
+    "description": "Instruments agent systems so behavior is explainable in production. Defines traces, metrics, structured logs, latency and cost budgets, and review workflows that make it easier to diagnose failures, spot drift, and understand real-world agent performance over time.",
+    "tags": [
+      "ai",
+      "observability",
+      "telemetry",
+      "monitoring",
+      "operations",
+      "agents"
+    ],
+    "capabilities": [
+      "trace-instrumentation",
+      "metrics-design",
+      "structured-logging",
+      "latency-budgeting",
+      "cost-analysis",
+      "drift-detection"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "agent-tools-documentation-pilot",
+    "role": "agent-tools Documentation Pilot",
+    "description": "Produces and maintains living documentation for agent-tools: README files, architecture decision records (ADRs), API reference docs, runbooks, and onboarding guides. Keeps docs in sync with every code change.",
+    "tags": [
+      "agent-tools",
+      "python",
+      "documentation",
+      "knowledge-base"
+    ],
+    "capabilities": [
+      "readme-authoring",
+      "adr-writing",
+      "api-reference-generation",
+      "runbook-creation",
+      "onboarding-guide",
+      "doc-sync"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "low"
+  },
+  {
+    "id": "agent-tools-implementation-pilot",
+    "role": "agent-tools Implementation Pilot",
+    "description": "Executes scoped code changes with validation and release hygiene for agent-tools. Validates each change with targeted tests, enforces code-style consistency, and ensures CI gates pass before marking work complete.",
+    "tags": [
+      "agent-tools",
+      "python",
+      "implementation",
+      "quality"
+    ],
+    "capabilities": [
+      "code-changes",
+      "refactoring",
+      "test-validation",
+      "style-enforcement",
+      "ci-gate-compliance"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "agent-tools-orchestrator",
+    "role": "agent-tools Multi-Agent Orchestrator",
+    "description": "Coordinates planning, implementation, and verification agents for agent-tools. Breaks features into sub-tasks, routes work to the right specialist, tracks delivery status, and resolves blockers to keep releases on schedule.",
+    "tags": [
+      "agent-tools",
+      "python",
+      "orchestration",
+      "multi-agent"
+    ],
+    "capabilities": [
+      "task-routing",
+      "handoffs",
+      "delivery-status",
+      "blocker-resolution",
+      "release-coordination"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "runSubagent",
+      "github_repo"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "agent-tools-performance-engineer",
+    "role": "agent-tools Performance Engineer",
+    "description": "Profiles agent-tools to locate CPU, memory, I/O, and network bottlenecks. Implements caching strategies, tunes database queries, and establishes performance budgets with automated regression alerts in CI.",
+    "tags": [
+      "agent-tools",
+      "python",
+      "performance",
+      "profiling",
+      "optimization"
+    ],
+    "capabilities": [
+      "profiling",
+      "bottleneck-analysis",
+      "caching-strategy",
+      "query-optimization",
+      "load-testing",
+      "performance-budgeting"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "agent-tools-qa-pilot",
+    "role": "agent-tools QA Pilot",
+    "description": "Plans and runs unit, integration, and end-to-end tests for agent-tools. Defines coverage targets, maintains CI test gates, authors test fixtures, and drives regression-prevention culture across the team.",
+    "tags": [
+      "agent-tools",
+      "python",
+      "testing",
+      "quality"
+    ],
+    "capabilities": [
+      "test-planning",
+      "unit-testing",
+      "integration-testing",
+      "e2e-testing",
+      "coverage-reporting",
+      "regression-prevention"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "agent-tools-repo-architect",
+    "role": "agent-tools Repository Architect",
+    "description": "Maintains architecture consistency and coordinates upgrades for agent-tools. Produces ADRs, tracks dependency health, flags breaking changes, and ensures the codebase evolves in a deliberate, well-documented direction.",
+    "tags": [
+      "agent-tools",
+      "python",
+      "architecture",
+      "planning"
+    ],
+    "capabilities": [
+      "roadmap-alignment",
+      "upgrade-planning",
+      "dependency-review",
+      "adr-authoring",
+      "breaking-change-detection"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  },
+  {
+    "id": "agent-tools-security-hardener",
+    "role": "agent-tools Security Hardener",
+    "description": "Performs OWASP Top-10 reviews, dependency CVE triage, and secrets hygiene audits for agent-tools. Applies targeted remediations, enforces secure-by-default patterns, and documents residual risk with a clear remediation roadmap.",
+    "tags": [
+      "agent-tools",
+      "python",
+      "security",
+      "vulnerability",
+      "remediation"
+    ],
+    "capabilities": [
+      "vulnerability-scanning",
+      "cve-triage",
+      "secrets-audit",
+      "secure-code-review",
+      "security-remediation",
+      "risk-reporting"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "agents-orchestrator",
+    "role": "agents-orchestrator",
+    "description": "Autonomous pipeline manager that orchestrates the entire development workflow. You are the leader of this process.",
+    "tags": [
+      "specialized"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "runSubagent",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "ai-agent-developer",
+    "role": "AI Agent Developer",
+    "description": "Builds intelligent AI agents and multi-agent workflows using modern frameworks. Designs agent architectures, integrates LLMs, implements tool calling, and orchestrates complex interactions for autonomous systems.",
+    "tags": [
+      "ai",
+      "agents",
+      "llm",
+      "workflows",
+      "autonomous"
+    ],
+    "capabilities": [
+      "agent-architecture",
+      "llm-integration",
+      "tool-calling",
+      "workflow-orchestration",
+      "prompt-engineering",
+      "evaluation-setup"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal",
+      "runSubagent"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "high"
+  },
+  {
+    "id": "ai-expansion-architect",
+    "role": "AI Expansion Architect",
+    "description": "Plans and architects future expansions of the AI agent ecosystem. Analyzes emerging technologies, designs integration points, and creates roadmaps for scaling AI capabilities across domains.",
+    "tags": [
+      "expansion",
+      "architecture",
+      "roadmap",
+      "emerging-tech",
+      "scalability"
+    ],
+    "capabilities": [
+      "expansion-planning",
+      "technology-analysis",
+      "integration-design",
+      "roadmap-creation",
+      "scalability-assessment",
+      "future-proofing"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "ai-incident-responder",
+    "role": "AI Incident Responder",
+    "description": "Handles production incidents caused by AI agents and model-backed workflows. Coordinates containment, rollback, user impact assessment, communication, and postmortem follow-through so unsafe or degraded behavior is mitigated quickly and does not repeat.",
+    "tags": [
+      "ai",
+      "incident-response",
+      "rollback",
+      "operations",
+      "safety",
+      "agents"
+    ],
+    "capabilities": [
+      "incident-triage",
+      "rollback-planning",
+      "impact-assessment",
+      "runbook-execution",
+      "postmortem-analysis",
+      "guardrail-hardening"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "run_in_terminal",
+      "github_repo",
+      "runSubagent"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "high"
+  },
+  {
+    "id": "ai-model-manager",
+    "role": "AI Model Manager",
+    "description": "Manages the lifecycle of AI models including deployment, versioning, monitoring, and optimization. Handles model registries, inference endpoints, and performance tracking for production AI systems.",
+    "tags": [
+      "ai",
+      "models",
+      "deployment",
+      "versioning",
+      "monitoring",
+      "optimization"
+    ],
+    "capabilities": [
+      "model-deployment",
+      "version-control",
+      "performance-monitoring",
+      "inference-optimization",
+      "registry-management",
+      "production-readiness"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "run_in_terminal",
+      "github_repo"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "high"
+  },
+  {
+    "id": "ai-orchestrator",
+    "role": "AI Orchestrator",
+    "description": "Coordinates complex multi-agent AI workflows using advanced orchestration frameworks. Manages agent interactions, handles parallel processing, and ensures coherent outcomes from distributed AI systems.",
+    "tags": [
+      "ai",
+      "orchestration",
+      "multi-agent",
+      "workflow",
+      "coordination"
+    ],
+    "capabilities": [
+      "workflow-design",
+      "agent-coordination",
+      "parallel-processing",
+      "result-aggregation",
+      "error-handling",
+      "performance-optimization"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "runSubagent",
+      "github_repo"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "high"
+  },
+  {
+    "id": "ai-self-builder",
+    "role": "AI Self-Builder",
+    "description": "Creates new AI agents and systems autonomously using meta-programming techniques. Generates agent code, configures capabilities, and bootstraps intelligent systems that can evolve and improve themselves.",
+    "tags": [
+      "ai",
+      "meta-programming",
+      "self-creation",
+      "autonomous",
+      "evolution"
+    ],
+    "capabilities": [
+      "agent-generation",
+      "code-synthesis",
+      "capability-configuration",
+      "system-bootstrapping",
+      "self-improvement",
+      "ai-evolution"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal",
+      "runSubagent"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "high"
+  },
+  {
+    "id": "analytics-reporter",
+    "role": "Analytics Reporter",
+    "description": "Expert data analyst transforming raw data into actionable business insights. Creates dashboards, performs statistical analysis, tracks KPIs, and provides strategic decision support through data visualization and reporting.",
+    "tags": [
+      "support"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "api",
+    "role": "RealAI API Documentation",
+    "description": "",
+    "tags": [
+      "realai"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "runSubagent",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "api-designer",
+    "role": "API Designer",
+    "description": "Leads contract-first API design using OpenAPI/GraphQL specs, enforces versioning discipline, designs pagination and error schemas, and ensures APIs are consistent, self-documenting, and backward-compatible.",
+    "tags": [
+      "api",
+      "openapi",
+      "graphql",
+      "design",
+      "contracts"
+    ],
+    "capabilities": [
+      "openapi-spec-authoring",
+      "graphql-schema-design",
+      "versioning-strategy",
+      "error-schema-design",
+      "pagination-patterns",
+      "backward-compatibility-review"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "api-tester",
+    "role": "API Tester",
+    "description": "Expert API testing specialist focused on comprehensive API validation, performance testing, and quality assurance across all systems and third-party integrations",
+    "tags": [
+      "testing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "app-store-optimizer",
+    "role": "App Store Optimizer",
+    "description": "Expert app store marketing specialist focused on App Store Optimization (ASO), conversion rate optimization, and app discoverability",
+    "tags": [
+      "marketing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "architectux",
+    "role": "ArchitectUX",
+    "description": "Technical architecture and UX specialist who provides developers with solid foundations, CSS systems, and clear implementation guidance",
+    "tags": [
+      "design"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "backend-architect",
+    "role": "Backend Architect",
+    "description": "Senior backend architect specializing in scalable system design, database architecture, API development, and cloud infrastructure. Builds robust, secure, performant server-side applications and microservices",
+    "tags": [
+      "engineering"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "backend-engineer",
+    "role": "Backend Engineer",
+    "description": "Designs and implements server-side APIs, business logic, data models, and integration points for scalable applications. Enforces input validation, error boundaries, structured logging, and graceful degradation at every layer.",
+    "tags": [
+      "backend",
+      "api",
+      "server",
+      "database"
+    ],
+    "capabilities": [
+      "api-design",
+      "business-logic",
+      "data-modelling",
+      "authentication",
+      "performance-tuning",
+      "error-handling"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "brand-guardian",
+    "role": "Brand Guardian",
+    "description": "Expert brand strategist and guardian specializing in brand identity development, consistency maintenance, and strategic brand positioning",
+    "tags": [
+      "design"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "browser-test-engineer",
+    "role": "Browser Test Engineer",
+    "description": "Scans code changes (git diff) to identify what needs browser validation, generates AI-driven step-by-step test plans, and executes them against a live browser using Playwright. Integrates with CI pipelines via exit-code conventions, records sessions for replay, and authors persistent Playwright test suites from validated flows.",
+    "tags": [
+      "testing",
+      "browser",
+      "e2e",
+      "playwright",
+      "qa"
+    ],
+    "capabilities": [
+      "diff-analysis",
+      "test-plan-generation",
+      "browser-automation",
+      "playwright-execution",
+      "ci-integration",
+      "session-recording"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "capability-guardian",
+    "role": "Capability Guardian",
+    "description": "Enforces least-privilege access across every agent assignment. Audits required_tools vs granted profile tools, flags over-provisioned agents, recommends the narrowest profile that satisfies each task, and documents access decisions.",
+    "tags": [
+      "security",
+      "policy",
+      "governance",
+      "least-privilege"
+    ],
+    "capabilities": [
+      "least-privilege",
+      "policy-check",
+      "access-recommendation",
+      "over-provisioning-audit",
+      "access-documentation"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  },
+  {
+    "id": "cloud-architect",
+    "role": "Cloud Architect",
+    "description": "Designs scalable, secure cloud-native architectures across multiple providers. Optimizes for cost, performance, and reliability using infrastructure-as-code, serverless, and microservices patterns.",
+    "tags": [
+      "cloud",
+      "architecture",
+      "infrastructure",
+      "scalability",
+      "serverless"
+    ],
+    "capabilities": [
+      "cloud-design",
+      "infrastructure-as-code",
+      "multi-cloud-strategy",
+      "cost-optimization",
+      "security-architecture",
+      "performance-tuning"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal",
+      "github_repo"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "contributing",
+    "role": "🤝 Contributing to The Agency",
+    "description": "",
+    "tags": [
+      "agency-agents"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "cybersecurity-expert",
+    "role": "Cybersecurity Expert",
+    "description": "White-hat security specialist who finds the weakest link in code and systems, exposes the risk with clear evidence, and applies targeted remediations to harden defenses. Performs OWASP Top-10 reviews, dependency CVE triage, and secrets hygiene audits.",
+    "tags": [
+      "security",
+      "vulnerability",
+      "penetration-testing",
+      "remediation",
+      "owasp"
+    ],
+    "capabilities": [
+      "vulnerability-scanning",
+      "threat-modeling",
+      "penetration-testing",
+      "secure-code-review",
+      "security-remediation",
+      "risk-reporting"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "data-analytics-reporter",
+    "role": "data-analytics-reporter",
+    "description": "Expert data analyst transforming raw data into actionable business insights. Creates dashboards, performs statistical analysis, tracks KPIs, and provides strategic decision support through data visualization and reporting.",
+    "tags": [
+      "data analysis",
+      "data visualization",
+      "reporting systems",
+      "specialized"
+    ],
+    "capabilities": [
+      "Data Analysis",
+      "Reporting Systems",
+      "Data Visualization",
+      "Business Intelligence",
+      "Data Management",
+      "Statistical Modeling"
+    ],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "data-scientist",
+    "role": "Data Scientist",
+    "description": "Analyzes data to extract insights, builds predictive models, and drives data-informed decisions. Handles data cleaning, feature engineering, model training, and visualization for business intelligence.",
+    "tags": [
+      "data",
+      "analytics",
+      "ml",
+      "insights",
+      "visualization"
+    ],
+    "capabilities": [
+      "data-analysis",
+      "model-building",
+      "feature-engineering",
+      "predictive-modeling",
+      "data-visualization",
+      "business-intelligence"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "database-architect",
+    "role": "Database Architect",
+    "description": "Designs normalized schemas, authors and validates migrations, optimizes slow queries with explain-plan analysis, implements indexing strategies, and establishes data-integrity constraints and backup policies.",
+    "tags": [
+      "database",
+      "schema",
+      "migrations",
+      "sql",
+      "data-integrity"
+    ],
+    "capabilities": [
+      "schema-design",
+      "migration-authoring",
+      "query-optimization",
+      "index-strategy",
+      "data-integrity-enforcement",
+      "backup-policy"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "deployment",
+    "role": "RealAI Deployment Guide",
+    "description": "",
+    "tags": [
+      "realai"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "design-visual-storyteller",
+    "role": "design-visual-storyteller",
+    "description": "Expert visual communication specialist focused on creating compelling visual narratives, multimedia content, and brand storytelling through design. Specializes in transforming complex information into engaging visual stories that connect with audiences and drive emotional engagement.",
+    "tags": [
+      "design"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "devops-automator",
+    "role": "DevOps Automator",
+    "description": "Expert DevOps engineer specializing in infrastructure automation, CI/CD pipeline development, and cloud operations",
+    "tags": [
+      "engineering"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "devops-engineer",
+    "role": "DevOps Engineer",
+    "description": "Manages CI/CD pipelines, container orchestration, infrastructure-as-code, and deployment workflows to keep apps shipping fast and reliably. Instruments observability, automates secret rotation, and enforces deployment gates.",
+    "tags": [
+      "devops",
+      "ci-cd",
+      "containers",
+      "infrastructure",
+      "deployment"
+    ],
+    "capabilities": [
+      "pipeline-configuration",
+      "container-management",
+      "infrastructure-as-code",
+      "secret-rotation",
+      "monitoring-setup",
+      "release-automation"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal",
+      "github_repo"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "devsecops-engineer",
+    "role": "DevSecOps Engineer",
+    "description": "Integrates security into DevOps pipelines, automating vulnerability scanning, compliance checks, and secure deployments. Implements shift-left security practices and maintains security gates in CI/CD.",
+    "tags": [
+      "security",
+      "devops",
+      "ci-cd",
+      "compliance",
+      "automation"
+    ],
+    "capabilities": [
+      "security-automation",
+      "vulnerability-scanning",
+      "compliance-enforcement",
+      "secure-deployment",
+      "pipeline-security",
+      "threat-modeling"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal",
+      "github_repo"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "documentation-specialist",
+    "role": "Documentation Specialist",
+    "description": "Produces and maintains living documentation: README files, architecture decision records (ADRs), API reference docs, runbooks, onboarding guides, and inline code comments. Keeps docs in sync with code changes.",
+    "tags": [
+      "documentation",
+      "adr",
+      "runbook",
+      "readme",
+      "knowledge-base"
+    ],
+    "capabilities": [
+      "readme-authoring",
+      "adr-writing",
+      "api-reference-generation",
+      "runbook-creation",
+      "onboarding-guide",
+      "inline-doc-review"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "low"
+  },
+  {
+    "id": "dynamic-agent-loader",
+    "role": "Dynamic Agent Loader",
+    "description": "Loads and manages agents dynamically at runtime. Enables on-demand agent instantiation, capability hot-swapping, and adaptive agent composition for evolving project needs.",
+    "tags": [
+      "dynamic",
+      "runtime",
+      "loading",
+      "adaptive",
+      "composition"
+    ],
+    "capabilities": [
+      "runtime-loading",
+      "agent-instantiation",
+      "capability-swapping",
+      "adaptive-composition",
+      "on-demand-deployment",
+      "system-flexibility"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "run_in_terminal",
+      "runSubagent"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "high"
+  },
+  {
+    "id": "engineering-ai-engineer",
+    "role": "engineering-ai-engineer",
+    "description": "Expert AI/ML engineer specializing in machine learning model development, deployment, and integration into production systems. Focused on building intelligent features, data pipelines, and AI-powered applications with emphasis on practical, scalable solutions.",
+    "tags": [
+      "engineering"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "engineering-senior-developer",
+    "role": "engineering-senior-developer",
+    "description": "Premium implementation specialist   - Masters Laravel/Livewire/FluxUI, advanced CSS, Three.js integration",
+    "tags": [
+      "engineering"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "evidenceqa",
+    "role": "EvidenceQA",
+    "description": "Screenshot-obsessed, fantasy-allergic QA specialist   - Default to finding 3-5 issues, requires visual proof for everything",
+    "tags": [
+      "testing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "executive-summary-generator",
+    "role": "Executive Summary Generator",
+    "description": "Consultant-grade AI specialist trained to think and communicate like a senior strategy consultant. Transforms complex business inputs into concise, actionable executive summaries using McKinsey SCQA, BCG Pyramid Principle, and Bain frameworks for C-suite decision-makers.",
+    "tags": [
+      "support"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "expansion-coordinator",
+    "role": "Expansion Coordinator",
+    "description": "Coordinates future expansions and integrations across the agent ecosystem. Manages roadmap execution, dependency resolution, and seamless integration of new capabilities and frameworks.",
+    "tags": [
+      "expansion",
+      "coordination",
+      "roadmap",
+      "integration",
+      "scalability"
+    ],
+    "capabilities": [
+      "expansion-coordination",
+      "roadmap-execution",
+      "dependency-management",
+      "integration-testing",
+      "capability-synthesis",
+      "system-scalability"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "runSubagent",
+      "github_repo"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "experiment-tracker",
+    "role": "Experiment Tracker",
+    "description": "Expert project manager specializing in experiment design, execution tracking, and data-driven decision making. Focused on managing A/B tests, feature experiments, and hypothesis validation through systematic experimentation and rigorous analysis.",
+    "tags": [
+      "project-management"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "feedback-learning-engineer",
+    "role": "Feedback Learning Engineer",
+    "description": "Turns user and operator feedback into durable improvements for agent behavior. Clusters recurring failures, curates correction datasets, updates prompts and policies, and closes the loop between production mistakes and future agent performance.",
+    "tags": [
+      "ai",
+      "feedback",
+      "learning",
+      "datasets",
+      "quality",
+      "agents"
+    ],
+    "capabilities": [
+      "feedback-triage",
+      "correction-dataset-curation",
+      "prompt-iteration",
+      "policy-refinement",
+      "failure-clustering",
+      "continuous-improvement"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "finance-tracker",
+    "role": "Finance Tracker",
+    "description": "Expert financial analyst and controller specializing in financial planning, budget management, and business performance analysis. Maintains financial health, optimizes cash flow, and provides strategic financial insights for business growth.",
+    "tags": [
+      "support"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "frontend-developer",
+    "role": "Frontend Developer",
+    "description": "Expert frontend developer specializing in modern web technologies, React/Vue/Angular frameworks, UI implementation, and performance optimization",
+    "tags": [
+      "engineering"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "frontend-engineer",
+    "role": "Frontend Engineer",
+    "description": "Specializes in UI components, responsive design, state management, and browser performance for web applications. Enforces accessibility standards (WCAG 2.1), optimizes Core Web Vitals, and maintains design-system consistency.",
+    "tags": [
+      "frontend",
+      "ui",
+      "components",
+      "design-system",
+      "accessibility"
+    ],
+    "capabilities": [
+      "component-development",
+      "responsive-design",
+      "state-management",
+      "accessibility",
+      "performance-optimization",
+      "design-system-integration"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "fullstack-engineer",
+    "role": "Full-Stack Engineer",
+    "description": "Builds complete features end-to-end across frontend, backend, and database layers, shipping production-ready code with tests. Owns the feature from ticket to deployment, coordinating UI, API, data, and pipeline concerns.",
+    "tags": [
+      "frontend",
+      "backend",
+      "fullstack",
+      "delivery"
+    ],
+    "capabilities": [
+      "feature-delivery",
+      "api-design",
+      "ui-implementation",
+      "database-integration",
+      "test-writing",
+      "deployment-prep",
+      "future-tech-integration"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "game-creative-director",
+    "role": "Game Creative Director",
+    "description": "The highest-level creative authority for a game project. Guards the game vision, tone, and aesthetic direction across design, art, narrative, and audio. Resolves cross-discipline creative conflicts using MDA framework analysis and player psychology. Presents 2-3 strategic options with trade-offs before recommending; final call always stays with the user.",
+    "tags": [
+      "game",
+      "creative",
+      "vision",
+      "design",
+      "mda"
+    ],
+    "capabilities": [
+      "vision-guardianship",
+      "pillar-conflict-resolution",
+      "tone-definition",
+      "scope-arbitration",
+      "competitive-positioning",
+      "reference-curation"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "low"
+  },
+  {
+    "id": "game-designer",
+    "role": "Game Designer",
+    "description": "Designs the rules, systems, and mechanics that define how a game plays. Applies MDA framework (Mechanics-Dynamics-Aesthetics), Self-Determination Theory, and Flow State Design to create engaging, balanced, and implementable designs. Maintains GDDs, defines balancing methodology, documents edge cases and degenerate strategies, and uses the sink/faucet model for virtual economies.",
+    "tags": [
+      "game",
+      "design",
+      "mechanics",
+      "balance",
+      "gdd",
+      "mda"
+    ],
+    "capabilities": [
+      "core-loop-design",
+      "systems-design",
+      "balancing-framework",
+      "player-experience-mapping",
+      "edge-case-documentation",
+      "gdd-authoring"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "low"
+  },
+  {
+    "id": "game-producer",
+    "role": "Game Producer",
+    "description": "Manages game project schedule, scope, milestones, and cross-team coordination. Runs sprint planning, tracks delivery status, identifies risks early, negotiates scope cuts that protect core pillars, and coordinates between creative, technical, QA, and art departments. Maintains sprint plans and milestone documents in the production folder.",
+    "tags": [
+      "game",
+      "production",
+      "planning",
+      "sprints",
+      "milestones",
+      "coordination"
+    ],
+    "capabilities": [
+      "sprint-planning",
+      "milestone-tracking",
+      "scope-management",
+      "risk-identification",
+      "cross-team-coordination",
+      "release-coordination"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "low"
+  },
+  {
+    "id": "game-qa-lead",
+    "role": "Game QA Lead",
+    "description": "Owns test strategy, bug triage, release quality gates, and testing process design for game projects. Defines quality gates per milestone (crash rate, critical bug count, performance benchmarks, feature completeness), evaluates bugs by severity (S1-S4 taxonomy), coordinates playtests, and maintains regression suites covering critical gameplay paths.",
+    "tags": [
+      "game",
+      "qa",
+      "testing",
+      "quality",
+      "release",
+      "playtesting"
+    ],
+    "capabilities": [
+      "test-strategy",
+      "bug-triage",
+      "quality-gates",
+      "regression-management",
+      "playtest-coordination",
+      "release-readiness"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "game-technical-director",
+    "role": "Game Technical Director",
+    "description": "Owns all high-level technical decisions for a game project: engine architecture, technology choices, performance strategy, and technical risk management. Evaluates third-party libraries, sets performance budgets (frame time, memory, load times), and resolves cross-system technical conflicts. Produces Architecture Decision Records (ADRs) for every major technical choice.",
+    "tags": [
+      "game",
+      "architecture",
+      "performance",
+      "technical",
+      "adr"
+    ],
+    "capabilities": [
+      "architecture-ownership",
+      "technology-evaluation",
+      "performance-strategy",
+      "technical-risk-assessment",
+      "cross-system-integration",
+      "adr-authoring"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "gameplay-programmer",
+    "role": "Gameplay Programmer",
+    "description": "Translates game design documents into clean, performant, data-driven code. Implements game mechanics, player systems, combat, and interactive features. Enforces data-driven design (all gameplay values from config files, never hardcoded), writes frame-rate-independent logic, designs clean state machines, and authors unit tests for all gameplay logic.",
+    "tags": [
+      "game",
+      "programming",
+      "mechanics",
+      "implementation",
+      "data-driven"
+    ],
+    "capabilities": [
+      "feature-implementation",
+      "data-driven-design",
+      "state-management",
+      "input-handling",
+      "system-integration",
+      "gameplay-testing"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "grounding-engineer",
+    "role": "Grounding Engineer",
+    "description": "Improves answer reliability by designing strong retrieval and grounding patterns for AI agents. Optimizes retrieval quality, source ranking, citation behavior, context assembly, and freshness checks to reduce hallucinations and keep responses tied to trustworthy evidence.",
+    "tags": [
+      "ai",
+      "grounding",
+      "retrieval",
+      "rag",
+      "citations",
+      "reliability"
+    ],
+    "capabilities": [
+      "retrieval-tuning",
+      "source-ranking",
+      "citation-design",
+      "context-assembly",
+      "freshness-validation",
+      "hallucination-reduction"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "hive-mind-coordinator",
+    "role": "Hive Mind Coordinator",
+    "description": "Orchestrates collaborative development across multiple agents, enabling knowledge sharing and coordinated decision-making. Facilitates cross-agent communication, aggregates insights, and ensures cohesive fullstack delivery.",
+    "tags": [
+      "coordination",
+      "collaboration",
+      "hive-mind",
+      "knowledge-sharing",
+      "fullstack"
+    ],
+    "capabilities": [
+      "agent-orchestration",
+      "knowledge-aggregation",
+      "decision-coordination",
+      "cross-agent-communication",
+      "insight-synthesis",
+      "cohesive-delivery"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "runSubagent",
+      "github_repo"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "implementation-engineer",
+    "role": "Implementation Engineer",
+    "description": "Applies focused code changes with validation across the full stack, navigating any layer from UI components to backend APIs. Validates each change with targeted tests and ensures CI passes before marking work complete.",
+    "tags": [
+      "coding",
+      "fixes",
+      "delivery",
+      "fullstack"
+    ],
+    "capabilities": [
+      "patching",
+      "validation",
+      "targeted-refactors",
+      "api-integration",
+      "test-writing",
+      "ai-assisted-coding"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "infrastructure-maintainer",
+    "role": "Infrastructure Maintainer",
+    "description": "Expert infrastructure specialist focused on system reliability, performance optimization, and technical operations management. Maintains robust, scalable infrastructure supporting business operations with security, performance, and cost efficiency.",
+    "tags": [
+      "support"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "lambda-deployment",
+    "role": "RealAI Lambda Deployment",
+    "description": "",
+    "tags": [
+      "realai"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "lambda-size-optimization",
+    "role": "Lambda Size Optimization Summary",
+    "description": "",
+    "tags": [
+      "realai"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  },
+  {
+    "id": "legal-compliance-checker",
+    "role": "Legal Compliance Checker",
+    "description": "Expert legal and compliance specialist ensuring business operations, data handling, and content creation comply with relevant laws, regulations, and industry standards across multiple jurisdictions.",
+    "tags": [
+      "support"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "local-ai-guide",
+    "role": "Your Own AI - Local Model Guide",
+    "description": "",
+    "tags": [
+      "realai"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "local-ai-summary",
+    "role": "Your Own AI System - Implementation Summary",
+    "description": "",
+    "tags": [
+      "realai"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "lsp-index-engineer",
+    "role": "LSP/Index Engineer",
+    "description": "Language Server Protocol specialist building unified code intelligence systems through LSP client orchestration and semantic indexing",
+    "tags": [
+      "specialized"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "macos-spatial-metal-engineer",
+    "role": "macOS Spatial/Metal Engineer",
+    "description": "Native Swift and Metal specialist building high-performance 3D rendering systems and spatial computing experiences for macOS and Vision Pro",
+    "tags": [
+      "spatial-computing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "marketing-content-creator",
+    "role": "marketing-content-creator",
+    "description": "Expert content strategist and creator for multi-platform campaigns. Develops editorial calendars, creates compelling copy, manages brand storytelling, and optimizes content for engagement across all digital channels.",
+    "tags": [
+      "brand storytelling",
+      "content strategy",
+      "marketing",
+      "multi format creation"
+    ],
+    "capabilities": [
+      "Content Strategy",
+      "Multi-Format Creation",
+      "Brand Storytelling",
+      "SEO Content",
+      "Video Production",
+      "Copy Writing"
+    ],
+    "required_tools": [
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  },
+  {
+    "id": "marketing-growth-hacker",
+    "role": "marketing-growth-hacker",
+    "description": "Expert growth strategist specializing in rapid user acquisition through data-driven experimentation. Develops viral loops, optimizes conversion funnels, and finds scalable growth channels for exponential business growth.",
+    "tags": [
+      "analytics attribution",
+      "experimentation",
+      "growth strategy",
+      "marketing"
+    ],
+    "capabilities": [
+      "Growth Strategy",
+      "Experimentation",
+      "Analytics & Attribution",
+      "Viral Mechanics",
+      "Channel Optimization",
+      "Product-Led Growth"
+    ],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "marketing-social-media-strategist",
+    "role": "marketing-social-media-strategist",
+    "description": "Expert social media strategist for Twitter, LinkedIn, and professional platforms. Creates viral campaigns, builds communities, manages real-time engagement, and develops thought leadership strategies.",
+    "tags": [
+      "community building",
+      "marketing",
+      "real time engagement",
+      "thread strategy"
+    ],
+    "capabilities": [
+      "Real-Time Engagement",
+      "Thread Strategy",
+      "Community Building",
+      "Twitter Advertising",
+      "Influencer Relations",
+      "Crisis Management"
+    ],
+    "required_tools": [
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  },
+  {
+    "id": "memory",
+    "role": "RealAI — Agent Memory",
+    "description": "",
+    "tags": [
+      "agents"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "meta-agent-engineer",
+    "role": "Meta-Agent Engineer",
+    "description": "Designs and implements meta-agents that can analyze, modify, and create other agents. Enables self-evolving AI systems that adapt to new requirements and improve their own architectures.",
+    "tags": [
+      "meta-agent",
+      "self-evolution",
+      "architecture",
+      "adaptation",
+      "ai-engineering"
+    ],
+    "capabilities": [
+      "agent-analysis",
+      "architecture-design",
+      "self-modification",
+      "adaptive-learning",
+      "system-evolution",
+      "meta-programming"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal",
+      "runSubagent"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "high"
+  },
+  {
+    "id": "mobile-app-builder",
+    "role": "Mobile App Builder",
+    "description": "Specialized mobile application developer with expertise in native iOS/Android development and cross-platform frameworks",
+    "tags": [
+      "engineering"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "model-trainer",
+    "role": "AI Model Trainer",
+    "description": "Trains, fine-tunes, and optimizes AI models for specific tasks. Handles data preparation, model architecture selection, training pipelines, and performance evaluation to create production-ready AI systems.",
+    "tags": [
+      "ai",
+      "training",
+      "fine-tuning",
+      "optimization",
+      "ml",
+      "model-deployment"
+    ],
+    "capabilities": [
+      "data-preparation",
+      "model-architecture",
+      "training-pipeline",
+      "hyperparameter-tuning",
+      "performance-evaluation",
+      "model-deployment"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal",
+      "github_repo"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "high"
+  },
+  {
+    "id": "orchestrator",
+    "role": "Workflow Orchestrator",
+    "description": "Coordinates multi-agent workflows and handoffs across repos, breaking down full-stack features into sub-tasks and routing work to the right specialist agents. Tracks delivery status, resolves blockers, and ensures orderly release coordination.",
+    "tags": [
+      "planning",
+      "coordination",
+      "multi-repo",
+      "fullstack"
+    ],
+    "capabilities": [
+      "task-breakdown",
+      "status-tracking",
+      "dependency-ordering",
+      "cross-repo-handoff",
+      "release-coordination",
+      "hive-mind-coordination"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "runSubagent",
+      "github_repo"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "performance-benchmarker",
+    "role": "Performance Benchmarker",
+    "description": "Expert performance testing and optimization specialist focused on measuring, analyzing, and improving system performance across all applications and infrastructure",
+    "tags": [
+      "testing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "performance-engineer",
+    "role": "Performance Engineer",
+    "description": "Profiles applications to locate bottlenecks in CPU, memory, I/O, and network. Implements caching strategies, tunes database queries, right-sizes infrastructure, and establishes performance budgets with automated regression alerts.",
+    "tags": [
+      "performance",
+      "profiling",
+      "optimization",
+      "caching",
+      "scalability"
+    ],
+    "capabilities": [
+      "profiling",
+      "bottleneck-analysis",
+      "caching-strategy",
+      "query-optimization",
+      "load-testing",
+      "performance-budgeting"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "plugin-manager",
+    "role": "Plugin Manager",
+    "description": "Manages external plugins and extensions for the agent system. Handles plugin discovery, installation, updates, and integration to enable future expansions and third-party capabilities.",
+    "tags": [
+      "plugins",
+      "extensions",
+      "management",
+      "integration",
+      "future-expansion"
+    ],
+    "capabilities": [
+      "plugin-discovery",
+      "plugin-installation",
+      "plugin-updates",
+      "extension-integration",
+      "capability-expansion",
+      "system-modularity"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "run_in_terminal",
+      "github_repo"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "product-feedback-synthesizer",
+    "role": "product-feedback-synthesizer",
+    "description": "Expert in collecting, analyzing, and synthesizing user feedback from multiple channels to extract actionable product insights. Transforms qualitative feedback into quantitative priorities and strategic recommendations.",
+    "tags": [
+      "feedback categorization",
+      "multi channel collection",
+      "product",
+      "sentiment analysis"
+    ],
+    "capabilities": [
+      "Multi-Channel Collection",
+      "Sentiment Analysis",
+      "Feedback Categorization",
+      "User Research",
+      "Data Visualization",
+      "Statistical Analysis"
+    ],
+    "required_tools": [
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  },
+  {
+    "id": "product-manager",
+    "role": "Product Manager",
+    "description": "Defines product vision, prioritizes features, and drives roadmap execution. Collaborates with stakeholders to gather requirements, writes user stories, and ensures features deliver value to users.",
+    "tags": [
+      "product",
+      "roadmap",
+      "requirements",
+      "stakeholders",
+      "user-stories"
+    ],
+    "capabilities": [
+      "vision-definition",
+      "feature-prioritization",
+      "requirement-gathering",
+      "roadmap-planning",
+      "stakeholder-management",
+      "value-delivery"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "low"
+  },
+  {
+    "id": "product-sprint-prioritizer",
+    "role": "product-sprint-prioritizer",
+    "description": "Expert product manager specializing in agile sprint planning, feature prioritization, and resource allocation. Focused on maximizing team velocity and business value delivery through data-driven prioritization frameworks.",
+    "tags": [
+      "agile methodologies",
+      "capacity planning",
+      "prioritization frameworks",
+      "product"
+    ],
+    "capabilities": [
+      "Prioritization Frameworks",
+      "Agile Methodologies",
+      "Capacity Planning",
+      "Stakeholder Management",
+      "Metrics & Analytics",
+      "User Story Creation"
+    ],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "product-trend-researcher",
+    "role": "product-trend-researcher",
+    "description": "Expert market intelligence analyst specializing in identifying emerging trends, competitive analysis, and opportunity assessment. Focused on providing actionable insights that drive product strategy and innovation decisions.",
+    "tags": [
+      "data sources",
+      "market research",
+      "product",
+      "trend analysis"
+    ],
+    "capabilities": [
+      "Market Research",
+      "Trend Analysis",
+      "Data Sources",
+      "Research Tools",
+      "Social Listening",
+      "Consumer Insights"
+    ],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "project-manager-senior",
+    "role": "project-manager-senior",
+    "description": "Converts specs to tasks, remembers previous projects  - Focused on realistic scope, no background processes, exact spec requirements",
+    "tags": [
+      "project-management"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "project-shepherd",
+    "role": "Project Shepherd",
+    "description": "Expert project manager specializing in cross-functional project coordination, timeline management, and stakeholder alignment. Focused on shepherding projects from conception to completion while managing resources, risks, and communications across multiple teams and departments.",
+    "tags": [
+      "project-management"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "project-summary",
+    "role": "RealAI Project Summary",
+    "description": "",
+    "tags": [
+      "realai"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "runSubagent",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "qa-engineer",
+    "role": "QA Engineer",
+    "description": "Plans and implements testing strategies covering unit, integration, and end-to-end tests to ensure shipping quality. Defines coverage targets, sets up test fixtures, maintains CI test gates, and drives regression-prevention culture.",
+    "tags": [
+      "testing",
+      "quality",
+      "qa",
+      "validation"
+    ],
+    "capabilities": [
+      "test-planning",
+      "unit-testing",
+      "integration-testing",
+      "e2e-testing",
+      "coverage-reporting",
+      "regression-prevention"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "rapid-prototyper",
+    "role": "Rapid Prototyper",
+    "description": "Specialized in ultra-fast proof-of-concept development and MVP creation using efficient tools and frameworks",
+    "tags": [
+      "engineering"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "readme",
+    "role": "RealAI — Copilot Agent Pack",
+    "description": "",
+    "tags": [
+      "agents"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "realai-fullstack-dev",
+    "role": "RealAI FullStack Dev",
+    "description": ">",
+    "tags": [
+      "agents"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "realai-integrator",
+    "role": "RealAI Integrator",
+    "description": "Integrates with the RealAI framework for limitless AI capabilities. Leverages RealAI's orchestration, web research, business planning, and multi-agent workflows to enhance agent creation and AI development.",
+    "tags": [
+      "realai",
+      "integration",
+      "limitless-ai",
+      "orchestration",
+      "web-research"
+    ],
+    "capabilities": [
+      "realai-orchestration",
+      "web-research-integration",
+      "business-planning",
+      "multi-agent-workflows",
+      "ai-capability-expansion",
+      "framework-integration"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "run_in_terminal",
+      "github_repo",
+      "runSubagent"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "high"
+  },
+  {
+    "id": "repo-auditor",
+    "role": "Repository Auditor",
+    "description": "Scans repositories for patterns, quality, migration opportunities, and skill gaps needed for full-stack delivery. Produces gap-analysis reports with prioritized recommendations and tracks remediation progress over time.",
+    "tags": [
+      "analysis",
+      "quality",
+      "migration",
+      "audit"
+    ],
+    "capabilities": [
+      "code-search",
+      "gap-analysis",
+      "reporting",
+      "dependency-audit",
+      "stack-assessment"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  },
+  {
+    "id": "solana-payment-engineer",
+    "role": "Solana Payment Engineer",
+    "description": "Builds and verifies on-chain payment flows for tokenized agents using the @pump-fun/agent-payments-sdk. Constructs Solana payment instructions, serializes unsigned transactions for client signing, verifies on-chain invoice payments server-side, and integrates Solana wallet adapters. Enforces the mandatory pre-flight checklist (mint address, currency, amount, RPC URL, framework) and all safety rules: never logs key material, never signs on behalf of users, always validates server-side.",
+    "tags": [
+      "solana",
+      "web3",
+      "payments",
+      "pump-fun",
+      "blockchain",
+      "nft"
+    ],
+    "capabilities": [
+      "payment-instruction-building",
+      "invoice-verification",
+      "wallet-adapter-integration",
+      "transaction-serialization",
+      "on-chain-validation",
+      "solana-rpc-integration"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "high"
+  },
+  {
+    "id": "studio-operations",
+    "role": "Studio Operations",
+    "description": "Expert operations manager specializing in day-to-day studio efficiency, process optimization, and resource coordination. Focused on ensuring smooth operations, maintaining productivity standards, and supporting all teams with the tools and processes needed for success.",
+    "tags": [
+      "project-management"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "studio-producer",
+    "role": "Studio Producer",
+    "description": "Senior strategic leader specializing in high-level creative and technical project orchestration, resource allocation, and multi-project portfolio management. Focused on aligning creative vision with business objectives while managing complex cross-functional initiatives and ensuring optimal studio operations.",
+    "tags": [
+      "project-management"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "support-responder",
+    "role": "Support Responder",
+    "description": "Expert customer support specialist delivering exceptional customer service, issue resolution, and user experience optimization. Specializes in multi-channel support, proactive customer care, and turning support interactions into positive brand experiences.",
+    "tags": [
+      "support"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "test-results-analyzer",
+    "role": "Test Results Analyzer",
+    "description": "Expert test analysis specialist focused on comprehensive test result evaluation, quality metrics analysis, and actionable insight generation from testing activities",
+    "tags": [
+      "testing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "testing-reality-checker",
+    "role": "testing-reality-checker",
+    "description": "Stops fantasy approvals, evidence-based certification   - Default to \"NEEDS WORK\", requires overwhelming proof for production readiness",
+    "tags": [
+      "testing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "tool-evaluator",
+    "role": "Tool Evaluator",
+    "description": "Expert technology assessment specialist focused on evaluating, testing, and recommending tools, software, and platforms for business use and productivity optimization",
+    "tags": [
+      "testing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "ui-designer",
+    "role": "UI Designer",
+    "description": "Expert UI designer specializing in visual design systems, component libraries, and pixel-perfect interface creation. Creates beautiful, consistent, accessible user interfaces that enhance UX and reflect brand identity",
+    "tags": [
+      "design"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "ux-researcher",
+    "role": "UX Researcher",
+    "description": "Expert user experience researcher specializing in user behavior analysis, usability testing, and data-driven design insights. Provides actionable research findings that improve product usability and user satisfaction",
+    "tags": [
+      "design"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "ux-ui-designer",
+    "role": "UX/UI Designer",
+    "description": "Designs intuitive user experiences and interfaces that balance usability, aesthetics, and functionality. Conducts user research, creates wireframes and prototypes, and ensures design consistency across platforms.",
+    "tags": [
+      "ux",
+      "ui",
+      "design",
+      "usability",
+      "prototyping",
+      "user-research"
+    ],
+    "capabilities": [
+      "user-research",
+      "wireframing",
+      "prototyping",
+      "usability-testing",
+      "design-systems",
+      "accessibility-design"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search",
+      "apply_patch",
+      "create_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "low"
+  },
+  {
+    "id": "whimsy-injector",
+    "role": "Whimsy Injector",
+    "description": "Expert creative specialist focused on adding personality, delight, and playful elements to brand experiences. Creates memorable, joyful interactions that differentiate brands through unexpected moments of whimsy",
+    "tags": [
+      "design"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "workflow-optimizer",
+    "role": "Workflow Optimizer",
+    "description": "Expert process improvement specialist focused on analyzing, optimizing, and automating workflows across all business functions for maximum productivity and efficiency",
+    "tags": [
+      "testing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "xr-cockpit-interaction-specialist",
+    "role": "XR Cockpit Interaction Specialist",
+    "description": "Specialist in designing and developing immersive cockpit-based control systems for XR environments",
+    "tags": [
+      "spatial-computing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "xr-immersive-developer",
+    "role": "XR Immersive Developer",
+    "description": "Expert WebXR and immersive technology developer with specialization in browser-based AR/VR/XR applications",
+    "tags": [
+      "spatial-computing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "xr-interface-architect",
+    "role": "XR Interface Architect",
+    "description": "Spatial interaction designer and interface strategist for immersive AR/VR/XR environments",
+    "tags": [
+      "spatial-computing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  }
+]

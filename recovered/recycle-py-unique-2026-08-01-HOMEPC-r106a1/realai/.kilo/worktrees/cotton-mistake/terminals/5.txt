@@ -1,0 +1,15 @@
+---
+pid: 18732
+cwd: "C:\Users\tsmit\realai"
+command: "cd C:\\Users\\tsmit\\realai && py -3.14 -m pytest tests/test_compute.py tests/test_ollama_client.py -q 2>&1"
+started_at: 2026-06-04T12:01:19.847Z
+running_for_ms: 18680000 
+---
+.........                                                                [100%]
+============================== warnings summary ===============================
+..\AppData\Roaming\Python\Python314\site-packages\chromadb\telemetry\opentelemetry\__init__.py:128
+  C:\Users\tsmit\AppData\Roaming\Python\Python314\site-packages\chromadb\telemetry\opentelemetry\__init__.py:128: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if asyncio.iscoroutinefunction(f):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+9 passed, 1 warning in 88.24s (0:01:28)

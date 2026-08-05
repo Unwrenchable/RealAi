@@ -1,0 +1,30 @@
+---
+pid: 11796
+cwd: "C:\Users\tsmit\realai"
+command: "py -3.14 -c \"import urllib.request,time; 
+for i in range(15):
+  try:
+    print(urllib.request.urlopen('http://127.0.0.1:8001/health/live',timeout=2).read())
+    print(urllib.request.urlopen('http://127.0.0.1:8001/v1/system/accelerator',timeout=5).read()[:300])
+    break
+  except Exception as e:
+    print(i,e); time.sleep(1)\""
+started_at: 2026-06-04T13:59:25.902Z
+running_for_ms: 11595011 
+---
+b'{"status":"ok","provider":"realai"}'
+0 timed out
+1 timed out
+2 timed out
+3 timed out
+4 timed out
+5 timed out
+6 timed out
+7 timed out
+8 timed out
+9 timed out
+10 timed out
+11 timed out
+12 timed out
+13 timed out
+14 timed out

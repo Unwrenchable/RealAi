@@ -1,0 +1,8 @@
+---
+pid: 17384
+cwd: "C:\Users\tsmit\realai"
+command: "cmd.exe /c \"cd /d C:\\Users\\tsmit\\realai\\apps\\frontend && node_modules\\.bin\\next.cmd start -p 3847\""
+started_at: 2026-06-04T16:58:26.986Z
+running_for_ms: 884998   
+---
+⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.

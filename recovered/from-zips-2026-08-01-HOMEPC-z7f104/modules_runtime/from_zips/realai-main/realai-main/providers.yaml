@@ -1,0 +1,15 @@
+providers:
+  local:
+    enabled: true
+    default_backend: vllm
+    fallback_backend: llama.cpp
+  openai:
+    enabled: false
+    api_base: https://api.openai.com/v1
+  anthropic:
+    enabled: false
+    api_base: https://api.anthropic.com
+  gemini:
+    enabled: false
+    api_base: https://generativelanguage.googleapis.com
+

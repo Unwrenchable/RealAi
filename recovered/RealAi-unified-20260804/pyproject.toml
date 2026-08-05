@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "realai"
+version = "2.0.0"
+description = "The limitless AI that can truly do anything - from Web3 to groceries, therapy to business building"
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+authors = [{ name = "RealAI Team" }]
+license = { text = "MIT" }
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Operating System :: OS Independent",
+]
+
+[project.scripts]
+realai        = "realai:main"
+realai-cli    = "realai.cli.realai_cli:main"
+realai-server = "realai.server.app:main"
