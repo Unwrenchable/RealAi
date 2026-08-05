@@ -281,18 +281,41 @@ def recommend_shot_of_the_day(
         payload.get("pyramid") or payload.get("game") == "pyramid"
     )
 
-    ranked = sorted(
-        _SHOT_LIBRARY,
-        key=lambda s: _score_shot(s, player, pyramid=pyr if is_pyramid else None),
-        reverse=True,
-    )
+    # Merge static + grown library
+    try:
+        from plugins.rackup_coach.sotd_library import (
+            load_grown_shots,
+            recently_shown,
+            record_shown,
+            variety_penalty,
+            growth_policy,
+        )
+        grown = load_grown_shots()
+        host_shown = list(payload.get("shown_shot_ids") or [])
+        recent = host_shown or recently_shown(player.player_id, limit=14)
+    except Exception:
+        grown = []
+        recent = list(payload.get("shown_shot_ids") or [])
+        growth_policy = lambda: {}  # type: ignore
+        record_shown = None  # type: ignore
+        variety_penalty = lambda sid, r: 0.0  # type: ignore
+
+    library = list(_SHOT_LIBRARY) + [
+        g for g in grown if isinstance(g, dict) and g.get("id") and g.get("title")
+    ]
+
+    def total_score(s: dict[str, Any]) -> float:
+        base = _score_shot(s, player, pyramid=pyr if is_pyramid else None)
+        base -= variety_penalty(str(s.get("id") or ""), recent)
+        return base
+
+    ranked = sorted(library, key=total_score, reverse=True)
     if is_pyramid:
-        # Prefer pyramid-tagged first among equal-ish scores
         ranked = sorted(
             ranked,
             key=lambda s: (
                 0 if "pyramid" in s.get("discipline", []) else 1,
-                -_score_shot(s, player, pyramid=pyr),
+                -total_score(s),
             ),
         )
     if seed_hint:
@@ -304,6 +327,16 @@ def recommend_shot_of_the_day(
     picks = ranked[: max(1, min(count, 5))]
     primary = picks[0]
     band = player.band.value
+    # Persist variety (provider-local); RackUp should also store shown IDs
+    if record_shown and primary.get("id"):
+        try:
+            record_shown(
+                player.player_id,
+                str(primary["id"]),
+                meta={"table_size": cfg.table_size, "skill": cfg.skill_level},
+            )
+        except Exception:
+            pass
 
     coaching_line = {
         RatingBand.BEGINNER: "Keep it simple today — own the fundamentals.",
@@ -321,13 +354,15 @@ def recommend_shot_of_the_day(
     primary_out = {
         "id": primary["id"],
         "title": primary["title"],
-        "setup": primary["setup"],
-        "objective": primary["objective"],
-        "why_this_shot": primary["why"],
-        "targets_weaknesses": primary["weaknesses"],
-        "reps": primary["reps"],
-        "success_metric": primary["success_metric"],
-        "pro_tip": primary["pro_tip"],
+        "setup": primary.get("setup"),
+        "objective": primary.get("objective"),
+        "why_this_shot": primary.get("why"),
+        "why_helps_regular_play": primary.get("why")
+        or "Builds transferable skills for regular match play (not a trick shot).",
+        "targets_weaknesses": primary.get("weaknesses"),
+        "reps": primary.get("reps"),
+        "success_metric": primary.get("success_metric"),
+        "pro_tip": primary.get("pro_tip"),
         "not_a_trick_shot": True,
         "pyramid_rack": primary.get("pyramid_rack"),
     }
@@ -346,9 +381,10 @@ def recommend_shot_of_the_day(
             {
                 "id": s["id"],
                 "title": s["title"],
-                "targets_weaknesses": s["weaknesses"],
-                "reps": s["reps"],
+                "targets_weaknesses": s.get("weaknesses"),
+                "reps": s.get("reps"),
                 "pyramid_rack": s.get("pyramid_rack"),
+                "why_helps_regular_play": s.get("why"),
             }
             for s in picks[1:]
         ],
@@ -361,6 +397,12 @@ def recommend_shot_of_the_day(
             "rack_size": cfg.rack_size,
             "points_to_win": cfg.points_to_win,
             "skill_level": cfg.skill_level,
+            "avoided_recent_ids": recent[:14],
+        },
+        "variety": {
+            "policy": growth_policy() if callable(growth_policy) else growth_policy,
+            "library_size_static": len(_SHOT_LIBRARY),
+            "library_size_grown": len(grown) if isinstance(grown, list) else 0,
         },
     }
 
