@@ -754,7 +754,14 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
         elif parsed_path.path == '/v1/tools':
             try:
                 from realai.tools import TOOL_REGISTRY
-                self._send_response(200, {"tools": TOOL_REGISTRY.to_openai_format()})
+                include_catalog = True
+                q = parse_qs(parsed_path.query)
+                if q.get("catalog", ["1"])[0] in ("0", "false", "no"):
+                    include_catalog = False
+                self._send_response(200, {
+                    "tools": TOOL_REGISTRY.to_openai_format(include_catalog=include_catalog),
+                    "catalog": TOOL_REGISTRY.catalog_status(),
+                })
             except Exception as e:
                 self._send_response(500, {"error": str(e)})
 
@@ -932,23 +939,66 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
                 self._send_response(200, response)
 
             elif parsed_path.path == '/v1/completions':
+                organ_trace = None
+                try:
+                    if body.get("organs", True) and self.headers.get("X-RealAI-Organs", "1").lower() not in ("0", "false", "off"):
+                        from modules.organs.request_path import enrich_chat_messages
+                        msgs, organ_trace = enrich_chat_messages(
+                            [{"role": "user", "content": body.get("prompt", "")}],
+                        )
+                        if msgs and msgs[-1].get("content") and not body.get("prompt"):
+                            pass
+                except Exception as _oe:
+                    organ_trace = {"enabled": False, "error": str(_oe)}
                 response = model.text_completion(
                     prompt=body.get('prompt', ''),
                     temperature=body.get('temperature', 0.7),
                     max_tokens=body.get('max_tokens')
                 )
+                if isinstance(response, dict) and organ_trace is not None:
+                    response.setdefault("realai", {})["organs"] = organ_trace
                 self._send_response(200, response)
 
             elif parsed_path.path == '/v1/images/generations':
+                organ_trace = None
+                try:
+                    if body.get("organs", True) and self.headers.get("X-RealAI-Organs", "1").lower() not in ("0", "false", "off"):
+                        from modules.organs.request_path import run_organ_pipeline
+                        organ_trace = {
+                            "enabled": True,
+                            "results": run_organ_pipeline(
+                                ("organ.synthetic-creativity-furnace", "organ.synthetic-sensory-system"),
+                                goal=str(body.get("prompt") or "")[:200],
+                                payload={"mode": "images"},
+                            ),
+                        }
+                except Exception as _oe:
+                    organ_trace = {"enabled": False, "error": str(_oe)}
                 response = model.generate_image(
                     prompt=body.get('prompt', ''),
                     size=body.get('size', '1024x1024'),
                     quality=body.get('quality', 'standard'),
                     n=body.get('n', 1)
                 )
+                if isinstance(response, dict) and organ_trace is not None:
+                    response.setdefault("realai", {})["organs"] = organ_trace
                 self._send_response(200, response)
 
             elif parsed_path.path == '/v1/videos/generations':
+                organ_trace = None
+                try:
+                    if body.get("organs", True) and self.headers.get("X-RealAI-Organs", "1").lower() not in ("0", "false", "off"):
+                        from modules.organs.request_path import run_organ_pipeline
+                        organ_trace = {
+                            "enabled": True,
+                            "results": run_organ_pipeline(
+                                ("organ.synthetic-creativity-furnace", "organ.synthetic-respiratory-system"),
+                                goal=str(body.get("prompt") or "")[:200],
+                                payload={"mode": "videos"},
+                            ),
+                        }
+                except Exception as _oe:
+                    organ_trace = {"enabled": False, "error": str(_oe)}
                 response = model.generate_video(
                     prompt=body.get('prompt', ''),
                     image_url=body.get('image_url'),
@@ -959,29 +1009,62 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
                     response_format=body.get('response_format', 'url'),
                     model=body.get('model')
                 )
+                if isinstance(response, dict) and organ_trace is not None:
+                    response.setdefault("realai", {})["organs"] = organ_trace
                 self._send_response(200, response)
 
             elif parsed_path.path == '/v1/embeddings':
+                organ_trace = None
+                try:
+                    if body.get("organs", True) and self.headers.get("X-RealAI-Organs", "1").lower() not in ("0", "false", "off"):
+                        from modules.organs.request_path import embeddings_with_organs
+                        inp = body.get("input", "")
+                        preview = inp if isinstance(inp, str) else str(inp)[:200]
+                        organ_trace = embeddings_with_organs(preview)
+                except Exception as _oe:
+                    organ_trace = {"enabled": False, "error": str(_oe)}
                 response = model.create_embeddings(
                     input_text=body.get('input', ''),
                     model=body.get('model', 'realai-embeddings')
                 )
+                if isinstance(response, dict) and organ_trace is not None:
+                    response.setdefault("realai", {})["organs"] = organ_trace
                 self._send_response(200, response)
 
             elif parsed_path.path == '/v1/audio/transcriptions':
+                organ_trace = None
+                try:
+                    if body.get("organs", True) and self.headers.get("X-RealAI-Organs", "1").lower() not in ("0", "false", "off"):
+                        from modules.organs.request_path import audio_with_organs
+                        organ_trace = audio_with_organs("transcription", str(body.get("file") or "")[:80])
+                except Exception as _oe:
+                    organ_trace = {"enabled": False, "error": str(_oe)}
                 response = model.transcribe_audio(
                     audio_file=body.get('file', ''),
                     language=body.get('language'),
                     prompt=body.get('prompt')
                 )
+                if isinstance(response, dict) and organ_trace is not None:
+                    response.setdefault("realai", {})["organs"] = organ_trace
                 self._send_response(200, response)
 
             elif parsed_path.path == '/v1/audio/speech':
+                organ_trace = None
+                try:
+                    if body.get("organs", True) and self.headers.get("X-RealAI-Organs", "1").lower() not in ("0", "false", "off"):
+                        from modules.organs.request_path import audio_with_organs
+                        organ_trace = audio_with_organs("speech", str(body.get("input") or "")[:80])
+                except Exception as _oe:
+                    organ_trace = {"enabled": False, "error": str(_oe)}
                 response = model.generate_audio(
                     text=body.get('input', ''),
                     voice=body.get('voice', 'alloy'),
                     model=body.get('model', 'realai-tts')
                 )
+                if isinstance(response, dict) and organ_trace is not None:
+                    response.setdefault("realai", {})["organs"] = organ_trace
+                elif organ_trace is not None:
+                    response = {"data": response, "realai": {"organs": organ_trace}}
                 self._send_response(200, response)
 
             elif parsed_path.path == '/v1/reasoning/chain':
@@ -1063,15 +1146,29 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
             elif parsed_path.path == '/v1/tools/validate':
                 try:
                     from realai.tools import ToolCallValidator
+                    tool_name = body.get("name", "")
+                    arguments = body.get("arguments", {}) or {}
+                    organ_trace = None
+                    try:
+                        if body.get("organs", True):
+                            from modules.organs.request_path import tools_with_organs
+                            organ_trace = tools_with_organs(tool_name, arguments if isinstance(arguments, dict) else {})
+                    except Exception as _oe:
+                        organ_trace = {"enabled": False, "error": str(_oe)}
                     validator = ToolCallValidator()
-                    result = validator.validate(
-                        body.get("name", ""),
-                        body.get("arguments", {}),
-                    )
-                    self._send_response(200, {
+                    result = validator.validate(tool_name, arguments if isinstance(arguments, dict) else {})
+                    payload = {
                         "valid": result.valid,
                         "errors": result.errors,
-                    })
+                    }
+                    try:
+                        from realai.guardian import guardian_mode
+                        payload["guardian_mode"] = guardian_mode()
+                    except Exception:
+                        pass
+                    if organ_trace is not None:
+                        payload["organs"] = organ_trace
+                    self._send_response(200, payload)
                 except Exception as e:
                     self._send_response(500, {"error": str(e)})
 

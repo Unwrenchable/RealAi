@@ -1,4 +1,4 @@
-"""Synthetic Guardian Layer — synthetic organ (first-class hive module)."""
+"""Synthetic Guardian Layer — policy envelope for tool effectors."""
 from __future__ import annotations
 
 from typing import Any
@@ -10,11 +10,15 @@ class SyntheticGuardianLayerOrgan(Organ):
     id = "organ.synthetic-guardian-layer"
     name = "Synthetic Guardian Layer"
     category = "body"
-    description = "Policy envelope and permission sandbox for effectors"
+    description = (
+        "Policy envelope and permission sandbox for effectors. "
+        "Default REALAI_GUARDIAN_MODE=advisory; set hard_block to enforce."
+    )
     capabilities = [
         "guardian",
         "policy",
         "permissions",
+        "tool_safety",
     ]
     hook = "safety"
 
@@ -31,31 +35,39 @@ class SyntheticGuardianLayerOrgan(Organ):
         }
         notes: list[str] = []
         try:
-            if self.hook == "memory":
-                from core.memory.bridge import load_long_term_engine, memory_capabilities
-                output["memory_capabilities"] = memory_capabilities()
-                output["long_term_available"] = load_long_term_engine() is not None
-                notes.append("linked core.memory")
-            elif self.hook == "training":
-                from adapters.training import training_status
-                output["training"] = training_status()
-                notes.append("linked adapters.training")
-            elif self.hook == "orchestration":
-                from adapters.agents import list_orchestration_modules
-                output["orchestration_modules"] = list_orchestration_modules()
-                notes.append("linked orchestration modules")
-            elif self.hook == "registry":
-                from adapters import load_modules
-                output["registry_count"] = len(load_modules())
-                notes.append("linked registry")
-            elif self.hook in ("planner", "critic", "executor", "synthesizer", "safety"):
-                notes.append(f"maps to hierarchical agent role: {self.hook}")
-            elif self.hook == "self_improvement":
-                notes.append("maps to realai.self_improvement")
-            elif self.hook == "identity":
-                notes.append("maps to realai.identity")
+            from realai.guardian import check_tool_call, guardian_mode
+
+            mode = guardian_mode()
+            output["guardian_mode"] = mode
+            tool_name = str(payload.get("tool_name") or payload.get("tool") or "")
+            arguments = payload.get("arguments") or payload.get("args") or {}
+            if tool_name:
+                try:
+                    from realai.tools import TOOL_REGISTRY
+
+                    schema = TOOL_REGISTRY.get(tool_name)
+                except Exception:
+                    schema = None
+                if schema is None:
+                    # Synthetic schema for advisory check
+                    class _S:
+                        safety_level = str(payload.get("safety_level") or "safe")
+                        source = str(payload.get("source") or "unknown")
+                        ability_status = str(payload.get("ability_status") or "")
+
+                    schema = _S()
+                decision = check_tool_call(tool_name, arguments if isinstance(arguments, dict) else {}, schema)
+                output["decision"] = decision
+                notes.append(f"mode={mode} decision={decision.get('decision')}")
             else:
-                notes.append(f"hook={self.hook} armed")
+                output["decision"] = {
+                    "mode": mode,
+                    "policy": (
+                        "advisory default — set REALAI_GUARDIAN_MODE=hard_block to enforce tool blocks"
+                    ),
+                }
+                notes.append(f"guardian armed mode={mode}")
+            notes.append("maps to realai.guardian + ToolCallValidator")
         except Exception as e:
             notes.append(f"soft-fail: {e}")
         return OrganResult(

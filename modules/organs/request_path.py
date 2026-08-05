@@ -185,3 +185,57 @@ def living_stack_status() -> dict[str, Any]:
     except Exception as e:
         status["adapters_error"] = str(e)
     return status
+
+
+def embeddings_with_organs(text_preview: str = "") -> dict[str, Any]:
+    """Sensory + circulatory organs for embedding path."""
+    if not organs_enabled():
+        return {"enabled": False, "results": []}
+    return {
+        "enabled": True,
+        "results": run_organ_pipeline(
+            (
+                "organ.synthetic-sensory-system",
+                "organ.synthetic-circulatory-system",
+                "organ.semantic-memory",
+            ),
+            goal=f"embed: {(text_preview or '')[:200]}",
+            payload={"mode": "embeddings"},
+        ),
+    }
+
+
+def audio_with_organs(kind: str = "transcription", preview: str = "") -> dict[str, Any]:
+    """Sensory + respiratory organs for ASR/TTS paths."""
+    if not organs_enabled():
+        return {"enabled": False, "results": []}
+    return {
+        "enabled": True,
+        "results": run_organ_pipeline(
+            (
+                "organ.synthetic-sensory-system",
+                "organ.synthetic-respiratory-system",
+                "organ.short-term-memory",
+            ),
+            goal=f"audio:{kind} {(preview or '')[:120]}",
+            payload={"mode": "audio", "kind": kind},
+        ),
+    }
+
+
+def tools_with_organs(tool_name: str = "", arguments: Optional[dict] = None) -> dict[str, Any]:
+    """Guardian + muscular path for tool validation/execution."""
+    if not organs_enabled():
+        return {"enabled": False, "results": []}
+    return {
+        "enabled": True,
+        "results": run_organ_pipeline(
+            (
+                "organ.synthetic-guardian-layer",
+                "organ.synthetic-muscular-system",
+                "organ.procedural-memory",
+            ),
+            goal=f"tool:{tool_name}",
+            payload={"mode": "tools", "tool_name": tool_name, "arguments": arguments or {}},
+        ),
+    }

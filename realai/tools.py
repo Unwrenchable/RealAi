@@ -30,6 +30,9 @@ class ToolSchema:
         parameters: JSON Schema object describing parameters.
         required: List of required parameter names.
         safety_level: One of "safe", "restricted", "dangerous".
+        source: Origin tag — builtin | ability_catalog | plugin.
+        ability_status: Catalog status when source is ability_catalog.
+        live_path: Optional HTTP path associated with the ability.
     """
     name: str
     description: str
@@ -38,6 +41,9 @@ class ToolSchema:
     safety_level: str = "safe"
     requires_confirmation: bool = False
     rate_limit_rpm: int = 60
+    source: str = "builtin"
+    ability_status: str = ""
+    live_path: Optional[str] = None
 
 
 @dataclass
@@ -85,6 +91,8 @@ class ToolRegistry:
     def __init__(self) -> None:
         """Initialize an empty tool registry."""
         self._tools: Dict[str, ToolSchema] = {}
+        self._catalog_loaded: bool = False
+        self._catalog_load_error: Optional[str] = None
 
     def register(self, schema: ToolSchema) -> None:
         """Register a tool schema.
@@ -103,6 +111,7 @@ class ToolRegistry:
         Returns:
             ToolSchema or None if not found.
         """
+        self.ensure_ability_catalog_loaded()
         return self._tools.get(name)
 
     def list_all(self) -> List[ToolSchema]:
@@ -111,16 +120,30 @@ class ToolRegistry:
         Returns:
             List of all ToolSchema objects.
         """
+        self.ensure_ability_catalog_loaded()
         return list(self._tools.values())
 
-    def to_openai_format(self) -> List[Dict[str, Any]]:
+    def list_by_source(self, source: str) -> List[ToolSchema]:
+        """Return tools matching a source tag."""
+        if not self._catalog_loaded:
+            self.ensure_ability_catalog_loaded()
+        return [t for t in self._tools.values() if t.source == source]
+
+    def to_openai_format(self, *, include_catalog: bool = True) -> List[Dict[str, Any]]:
         """Export tools in OpenAI tools array format.
+
+        Args:
+            include_catalog: When False, only builtin/plugin tools (not ability.*).
 
         Returns:
             List of tool dicts compatible with OpenAI API.
         """
+        if not self._catalog_loaded:
+            self.ensure_ability_catalog_loaded()
         result = []
         for schema in self._tools.values():
+            if not include_catalog and schema.source == "ability_catalog":
+                continue
             result.append({
                 "type": "function",
                 "function": {
@@ -130,6 +153,151 @@ class ToolRegistry:
                 },
             })
         return result
+
+    def ensure_ability_catalog_loaded(self, force: bool = False) -> Dict[str, Any]:
+        """Load RUNDOWN abilities from ability_catalog into the registry once.
+
+        Does not overwrite existing builtin tool names. Catalog entries are
+        registered as ``ability.<id>`` so agents/tools can discover them.
+
+        Returns:
+            Status dict with counts / errors.
+        """
+        if self._catalog_loaded and not force:
+            return {
+                "loaded": True,
+                "count": sum(1 for t in self._tools.values() if t.source == "ability_catalog"),
+                "error": self._catalog_load_error,
+            }
+        return self.load_ability_catalog(force=force)
+
+    def load_ability_catalog(self, force: bool = False) -> Dict[str, Any]:
+        """Import ability_catalog.RUNDOWN_ABILITIES as discoverable tools."""
+        import logging
+        import os
+
+        log = logging.getLogger("realai.tools")
+        # Optional disable
+        if os.environ.get("REALAI_LOAD_ABILITY_CATALOG", "1").strip() in (
+            "0", "false", "False", "no",
+        ):
+            self._catalog_loaded = True
+            self._catalog_load_error = "disabled_by_env"
+            return {"loaded": False, "count": 0, "error": "disabled_by_env"}
+
+        if self._catalog_loaded and not force:
+            return {
+                "loaded": True,
+                "count": sum(1 for t in self._tools.values() if t.source == "ability_catalog"),
+                "error": self._catalog_load_error,
+            }
+
+        registered = 0
+        skipped = 0
+        try:
+            from realai.ability_catalog import RUNDOWN_ABILITIES
+
+            # Prefer enriched statuses when build_catalog is cheap enough
+            abilities = list(RUNDOWN_ABILITIES)
+            try:
+                from realai.ability_catalog import build_catalog
+
+                cat = build_catalog()
+                if cat.get("abilities"):
+                    abilities = cat["abilities"]
+            except Exception as enrich_err:
+                log.debug("ability_catalog enrich soft-fail: %s", enrich_err)
+
+            for entry in abilities:
+                aid = str(entry.get("id") or "").strip()
+                if not aid:
+                    skipped += 1
+                    continue
+                name = f"ability.{aid}"
+                # Never clobber builtins
+                existing = self._tools.get(name)
+                if existing and existing.source != "ability_catalog" and not force:
+                    skipped += 1
+                    continue
+                status = str(entry.get("status") or "UNKNOWN").upper()
+                # Map catalog status → safety
+                if status in ("MISSING", "STUB"):
+                    safety = "restricted"
+                elif status in ("GOLD", "CODE"):
+                    safety = "restricted"
+                else:
+                    safety = "safe"
+                desc = (
+                    f"[ability_catalog:{status}] {entry.get('name') or aid}. "
+                    f"Pillar={entry.get('pillar') or 'n/a'}. "
+                    f"Live={entry.get('live_path') or 'n/a'}."
+                )
+                schema = ToolSchema(
+                    name=name,
+                    description=desc[:500],
+                    parameters={
+                        "type": "object",
+                        "properties": {
+                            "input": {
+                                "type": "string",
+                                "description": "Natural-language input for this ability.",
+                            },
+                            "context": {
+                                "type": "object",
+                                "description": "Optional structured context from the host.",
+                            },
+                        },
+                    },
+                    required=[],
+                    safety_level=safety,
+                    requires_confirmation=status in ("MISSING", "STUB", "GOLD"),
+                    source="ability_catalog",
+                    ability_status=status,
+                    live_path=entry.get("live_path"),
+                )
+                self.register(schema)
+                registered += 1
+
+            self._catalog_loaded = True
+            self._catalog_load_error = None
+            log.info(
+                "ability_catalog loaded into TOOL_REGISTRY: registered=%s skipped=%s",
+                registered,
+                skipped,
+            )
+            return {
+                "loaded": True,
+                "registered": registered,
+                "skipped": skipped,
+                "total_tools": len(self._tools),
+                "error": None,
+            }
+        except Exception as e:
+            self._catalog_loaded = True  # avoid tight retry loops
+            self._catalog_load_error = str(e)
+            log.warning("ability_catalog load failed (soft): %s", e)
+            return {
+                "loaded": False,
+                "registered": registered,
+                "skipped": skipped,
+                "error": str(e),
+            }
+
+    def catalog_status(self) -> Dict[str, Any]:
+        """Return load status for diagnostics."""
+        self.ensure_ability_catalog_loaded()
+        catalog_tools = [t for t in self._tools.values() if t.source == "ability_catalog"]
+        by_status: Dict[str, int] = {}
+        for t in catalog_tools:
+            by_status[t.ability_status or "UNKNOWN"] = by_status.get(t.ability_status or "UNKNOWN", 0) + 1
+        return {
+            "catalog_loaded": self._catalog_loaded,
+            "catalog_error": self._catalog_load_error,
+            "ability_tool_count": len(catalog_tools),
+            "builtin_count": sum(1 for t in self._tools.values() if t.source == "builtin"),
+            "total": len(self._tools),
+            "by_status": by_status,
+        }
 
 
 class ToolCallValidator:
@@ -165,6 +333,22 @@ class ToolCallValidator:
         schema = TOOL_REGISTRY.get(tool_name)
         if schema is None:
             return ValidationResult(valid=False, errors=["Unknown tool: {0}".format(tool_name)])
+
+        # Guardian policy (advisory by default; hard_block via REALAI_GUARDIAN_MODE)
+        try:
+            from realai.guardian import check_tool_call
+
+            g = check_tool_call(tool_name, arguments, schema)
+            if not g.get("allowed", True):
+                return ValidationResult(
+                    valid=False,
+                    errors=g.get("errors") or ["Blocked by guardian"],
+                )
+            if g.get("warnings"):
+                # Non-fatal — surface as errors only in hard mode (already handled)
+                pass
+        except Exception:
+            pass
 
         # Check required fields
         for req in schema.required:
@@ -526,4 +710,11 @@ TOOL_REGISTRY.register(ToolSchema(
     },
     required=["audio_path"],
     safety_level="safe",
+    source="builtin",
 ))
+
+# Auto-load ability catalog at import (soft-fail). Does not replace builtins.
+try:
+    TOOL_REGISTRY.ensure_ability_catalog_loaded()
+except Exception:
+    pass
