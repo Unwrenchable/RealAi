@@ -43,6 +43,11 @@ def living_stack() -> dict[str, Any]:
     from adapters.memory import get_memory_stack
     from adapters.agents import agents_status
     from adapters.organs import organs_status
+    try:
+        from adapters.self_improvement import self_improvement_status
+        si = self_improvement_status()
+    except Exception as e:
+        si = {"error": str(e)}
     return {
         "provider": "realai",
         "provider_kind": "local-first OpenAI-compatible full provider (not a wrapper)",
@@ -50,4 +55,13 @@ def living_stack() -> dict[str, Any]:
         "memory": get_memory_stack(),
         "agents": agents_status(),
         "organs_hive": organs_status(),
+        "self_improvement": si,
+        "promoted_unique": {
+            "ability_catalog": (ROOT / "realai" / "ability_catalog.py").exists(),
+            "agent_protocol": (ROOT / "realai" / "agent_protocol.py").exists(),
+            "aura_memory": (ROOT / "realai" / "aura_memory.py").exists(),
+            "hierarchical_agent": (ROOT / "core" / "agents" / "hierarchical_agent.py").exists(),
+            "desktop_unique": (ROOT / "modules" / "desktop_unique").exists(),
+            "agents_advanced": (ROOT / "modules" / "agents_advanced").exists(),
+        },
     }

@@ -275,3 +275,60 @@ modules:
     status: promoted
     organ_count: 44
     notes: All 44 synthetic organs first-class under modules/organs + adapters.organs
+
+  - id: realai-ability-catalog
+    path: realai/ability_catalog.py
+    kind: living
+    capabilities: [abilities, catalog, tools]
+    status: promoted
+    source: unique-modules ability_catalog.py
+  - id: realai-agent-protocol
+    path: realai/agent_protocol.py
+    kind: living
+    capabilities: [agents, protocol]
+    status: promoted
+  - id: realai-aura-memory
+    path: realai/aura_memory.py
+    kind: living
+    capabilities: [memory, aura]
+    status: promoted
+  - id: core-agents-hierarchical
+    path: core/agents/hierarchical_agent.py
+    kind: living
+    capabilities: [agents, hierarchical]
+    status: promoted
+  - id: core-agents-rise
+    path: core/agents/rise_system.py
+    kind: living
+    capabilities: [agents, rise]
+    status: promoted
+  - id: core-agents-supervisor
+    path: core/agents/supervisor.py
+    kind: living
+    capabilities: [agents, supervisor]
+    status: promoted
+  - id: core-training-pipeline
+    path: core/training/training_pipeline.py
+    kind: living
+    capabilities: [training, pipeline]
+    status: promoted
+  - id: modules-self-improvement
+    path: modules/self_improvement
+    kind: living
+    capabilities: [self-improvement, closed-loop, self-builder]
+    status: promoted
+  - id: modules-agents-advanced
+    path: modules/agents_advanced
+    kind: living
+    capabilities: [agents, code-engineer, overmind]
+    status: promoted
+  - id: modules-desktop-unique
+    path: modules/desktop_unique
+    kind: living
+    capabilities: [lambda, local-cli, desktop]
+    status: promoted
+  - id: organs-request-path
+    path: modules/organs/request_path.py
+    kind: living
+    capabilities: [organs, hive, request-path, api-fusion]
+    status: promoted
