@@ -31,10 +31,15 @@ class RackupCoachOrgan(Organ):
         goal = (ctx.goal or "").strip()
         # Allow ability in goal shorthand: "moderation: some text"
         ability = str(payload.get("ability") or payload.get("action") or "coach")
-        if goal.startswith("shot"):
+        gl = goal.lower()
+        if gl.startswith("shot") or "shot of the day" in gl:
             ability = payload.get("ability") or "shot_of_the_day"
-        if goal.lower().startswith("moderat"):
+        if gl.startswith("moderat"):
             ability = payload.get("ability") or "moderation"
+        if "pyramid" in gl or "points-to" in gl or "10-ball rack" in gl or "15-ball" in gl:
+            ability = payload.get("ability") or "pyramid"
+        if "pyramid rule" in gl or "rules matrix" in gl:
+            ability = "pyramid_rules"
 
         body: dict[str, Any] = {
             "ability": ability,

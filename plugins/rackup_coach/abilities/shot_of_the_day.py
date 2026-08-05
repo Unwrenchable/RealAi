@@ -1,9 +1,13 @@
-"""Shot of the Day — useful, rating-aware recommendations (not pure trick shots)."""
+"""Shot of the Day — useful, rating-aware recommendations (not pure trick shots).
+
+Includes RackUp Pyramid variants for 7ft/10-ball and 9ft/15-ball racks.
+"""
 from __future__ import annotations
 
 from typing import Any
 
-from plugins.rackup_coach.types import PlayerProfile, RatingBand, rating_band
+from plugins.rackup_coach.pyramid import classical_mindset_tips, resolve_pyramid
+from plugins.rackup_coach.types import PlayerProfile, RatingBand
 
 
 # Catalog: practical shots keyed by weakness + rating appropriateness
@@ -138,37 +142,127 @@ _SHOT_LIBRARY: list[dict[str, Any]] = [
         "success_metric": "Clear plan + successful out or smart safety 7/10",
         "pro_tip": "Identify problem ball first; build the pattern backward from the 8.",
     },
+    # --- RackUp Pyramid (classical points on American tables) ---
+    {
+        "id": "pyramid-1ball-premium",
+        "title": "Pyramid: protect & take the 1-ball (11 pts)",
+        "weaknesses": ["pattern_play", "safety_play", "cue_ball_control", "mental_focus"],
+        "bands": ["beginner", "intermediate", "advanced", "pro"],
+        "discipline": ["pyramid", "straight_pool"],
+        "pyramid_rack": [10, 15],
+        "setup": "1-ball mid-table with traffic; practice legal approach + CB shape after.",
+        "objective": "Either bury opponent from the 1 or pot 1 when percentage ≥70%.",
+        "why": "In Pyramid the 1-ball is worth 11 — largest single classical swing.",
+        "reps": 16,
+        "success_metric": "12/16: either safe bury or clean pot with shape",
+        "pro_tip": "Count points before touching the 1; never gift 11.",
+    },
+    {
+        "id": "pyramid-10ball-value-route",
+        "title": "Pyramid 7ft/10-ball: high-value two-ball route",
+        "weaknesses": ["pattern_play", "position_play", "speed_control"],
+        "bands": ["beginner", "intermediate", "advanced", "pro"],
+        "discipline": ["pyramid"],
+        "pyramid_rack": [10],
+        "setup": "10-ball rack open; identify next 2 highest available values + shape link.",
+        "objective": "Pot value sequence without losing CB; track score to skill target.",
+        "why": "10-ball Pyramid has fewer objects — each ball is a larger share of race points.",
+        "reps": 12,
+        "success_metric": "Score ≥ half of points-to-win in a controlled drill set",
+        "pro_tip": "On 7ft, prefer stop/soft-follow chains over multi-rail recovery.",
+    },
+    {
+        "id": "pyramid-15ball-number-ladder",
+        "title": "Pyramid 9ft/15-ball: number ladder (low risk → high value)",
+        "weaknesses": ["pattern_play", "long_potting", "position_play"],
+        "bands": ["intermediate", "advanced", "pro"],
+        "discipline": ["pyramid"],
+        "pyramid_rack": [15],
+        "setup": "Scattered 15-ball set; build a ladder that finishes on 1-ball (11) or 15.",
+        "objective": "Verbalize full point path before first tip; execute or two-way safe.",
+        "why": "15-ball Pyramid rewards classical pattern depth on a full American table.",
+        "reps": 10,
+        "success_metric": "7/10 plans hold without emergency hero pots",
+        "pro_tip": "Open traffic early; save premium numbers for key innings.",
+    },
+    {
+        "id": "pyramid-call-shot-discipline",
+        "title": "Pyramid call-shot discipline (advanced/pro)",
+        "weaknesses": ["pre_shot_routine", "mental_focus", "long_potting"],
+        "bands": ["advanced", "pro"],
+        "discipline": ["pyramid"],
+        "pyramid_rack": [10, 15],
+        "setup": "Any open balls; call ball+pocket every shot (even if skill allows optional).",
+        "objective": "Zero slop; if not makeable as called, safety instead.",
+        "why": "Pro Pyramid requires call-shot; advanced should train it early.",
+        "reps": 20,
+        "success_metric": "20 consecutive legal called shots or safeties",
+        "pro_tip": "Call early in PSR — don't invent the pocket at tip time.",
+    },
+    {
+        "id": "pyramid-endgame-count",
+        "title": "Pyramid endgame point-count drills",
+        "weaknesses": ["mental_focus", "pattern_play", "match_pressure"],
+        "bands": ["beginner", "intermediate", "advanced", "pro"],
+        "discipline": ["pyramid"],
+        "pyramid_rack": [10, 15],
+        "setup": "Start mid-score (e.g. need 12–18 pts); play out with full classical counting.",
+        "objective": "Know points needed before every stroke; never chase dead balls.",
+        "why": "First-to-target races are lost by players who stop counting.",
+        "reps": 8,
+        "success_metric": "Correct points-needed stated before each of 8 racks",
+        "pro_tip": "Announce 'need X' out loud during practice.",
+    },
 ]
 
 
-def _score_shot(shot: dict[str, Any], player: PlayerProfile) -> float:
+def _score_shot(
+    shot: dict[str, Any],
+    player: PlayerProfile,
+    *,
+    pyramid: dict[str, Any] | None = None,
+) -> float:
     band = player.band.value
     score = 0.0
     if band in shot.get("bands", []):
         score += 3.0
-    # Prefer mid-band fit
     bands = shot.get("bands") or []
     if bands and band == bands[len(bands) // 2]:
         score += 1.0
-    disc = player.discipline or "eight_ball"
+    disc = (player.discipline or "eight_ball").lower()
     if disc in shot.get("discipline", []):
         score += 2.0
     weak = {w.lower() for w in (player.weaknesses or [])}
     for w in shot.get("weaknesses", []):
         if w in weak:
             score += 4.0
-    # Recent losses → emphasize fundamentals for lower bands
     losses = sum(1 for r in (player.recent_results or []) if not r.get("won", True))
     if losses >= 2 and band in ("beginner", "intermediate"):
         if "cue_ball_control" in shot.get("weaknesses", []) or "speed_control" in shot.get(
             "weaknesses", []
         ):
             score += 2.0
-    # History notes keyword boost
     notes = " ".join(player.history_notes or []).lower()
     for w in shot.get("weaknesses", []):
         if w.replace("_", " ") in notes:
             score += 1.5
+
+    # Pyramid boosts
+    if pyramid:
+        rack = int(pyramid.get("rack_size") or 15)
+        skill = str(pyramid.get("skill_level") or band)
+        if "pyramid" in shot.get("discipline", []):
+            score += 5.0
+            allowed = shot.get("pyramid_rack") or [10, 15]
+            if rack in allowed:
+                score += 4.0
+            else:
+                score -= 8.0  # wrong rack size variant
+            if skill in shot.get("bands", []):
+                score += 2.0
+        elif disc == "pyramid" and "pyramid" not in shot.get("discipline", []):
+            # Prefer pyramid-tagged when playing Pyramid
+            score -= 1.0
     return score
 
 
@@ -177,9 +271,30 @@ def recommend_shot_of_the_day(
     *,
     seed_hint: str = "",
     count: int = 1,
+    payload: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Return 1+ practical shots ranked for this player."""
-    ranked = sorted(_SHOT_LIBRARY, key=lambda s: _score_shot(s, player), reverse=True)
+    """Return 1+ practical shots ranked for this player (Pyramid-aware)."""
+    payload = payload or {}
+    cfg = resolve_pyramid(player=player, payload=payload)
+    pyr = cfg.to_dict()
+    is_pyramid = (player.discipline or "").lower() == "pyramid" or bool(
+        payload.get("pyramid") or payload.get("game") == "pyramid"
+    )
+
+    ranked = sorted(
+        _SHOT_LIBRARY,
+        key=lambda s: _score_shot(s, player, pyramid=pyr if is_pyramid else None),
+        reverse=True,
+    )
+    if is_pyramid:
+        # Prefer pyramid-tagged first among equal-ish scores
+        ranked = sorted(
+            ranked,
+            key=lambda s: (
+                0 if "pyramid" in s.get("discipline", []) else 1,
+                -_score_shot(s, player, pyramid=pyr),
+            ),
+        )
     if seed_hint:
         hint = seed_hint.lower()
         hinted = [s for s in ranked if hint in s["title"].lower() or hint in s["id"]]
@@ -196,6 +311,26 @@ def recommend_shot_of_the_day(
         RatingBand.ADVANCED: "Demand shape windows, not just pots.",
         RatingBand.PRO: "Pressure-test the shot under match tempo.",
     }[player.band]
+    if is_pyramid:
+        coaching_line = (
+            f"Pyramid {cfg.table_size}/{cfg.rack_size}-ball · "
+            f"first to {cfg.points_to_win} · call_shot={cfg.call_shot}. "
+            f"{coaching_line} Count points; 1-ball = 11."
+        )
+
+    primary_out = {
+        "id": primary["id"],
+        "title": primary["title"],
+        "setup": primary["setup"],
+        "objective": primary["objective"],
+        "why_this_shot": primary["why"],
+        "targets_weaknesses": primary["weaknesses"],
+        "reps": primary["reps"],
+        "success_metric": primary["success_metric"],
+        "pro_tip": primary["pro_tip"],
+        "not_a_trick_shot": True,
+        "pyramid_rack": primary.get("pyramid_rack"),
+    }
 
     return {
         "date_role": "shot_of_the_day",
@@ -204,24 +339,16 @@ def recommend_shot_of_the_day(
         "band": band,
         "discipline": player.discipline,
         "coaching_line": coaching_line,
-        "primary": {
-            "id": primary["id"],
-            "title": primary["title"],
-            "setup": primary["setup"],
-            "objective": primary["objective"],
-            "why_this_shot": primary["why"],
-            "targets_weaknesses": primary["weaknesses"],
-            "reps": primary["reps"],
-            "success_metric": primary["success_metric"],
-            "pro_tip": primary["pro_tip"],
-            "not_a_trick_shot": True,
-        },
+        "pyramid": pyr if is_pyramid else None,
+        "classical_mindset": classical_mindset_tips(cfg) if is_pyramid else [],
+        "primary": primary_out,
         "alternates": [
             {
                 "id": s["id"],
                 "title": s["title"],
                 "targets_weaknesses": s["weaknesses"],
                 "reps": s["reps"],
+                "pyramid_rack": s.get("pyramid_rack"),
             }
             for s in picks[1:]
         ],
@@ -230,6 +357,10 @@ def recommend_shot_of_the_day(
             "strengths_noted": player.strengths,
             "recent_results_count": len(player.recent_results or []),
             "table_speed": player.table_speed,
+            "table_size": cfg.table_size,
+            "rack_size": cfg.rack_size,
+            "points_to_win": cfg.points_to_win,
+            "skill_level": cfg.skill_level,
         },
     }
 
@@ -240,4 +371,5 @@ def run(player: PlayerProfile, payload: dict[str, Any] | None = None) -> dict[st
         player,
         seed_hint=str(payload.get("hint") or payload.get("focus") or ""),
         count=int(payload.get("count") or 1),
+        payload=payload,
     )

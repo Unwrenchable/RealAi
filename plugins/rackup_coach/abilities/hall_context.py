@@ -1,8 +1,9 @@
-"""Hall / session context awareness."""
+"""Hall / session context awareness (Pyramid table size aware)."""
 from __future__ import annotations
 
 from typing import Any
 
+from plugins.rackup_coach.pyramid import resolve_pyramid
 from plugins.rackup_coach.types import PlayerProfile
 
 
@@ -12,8 +13,8 @@ def hall_session_context(
 ) -> dict[str, Any]:
     """
     Host may send:
-      hall: {id, name, tables, noise_level, cloth, pockets}
-      session: {started_at, games_played, fatigue?, lighting?}
+      hall: {id, name, tables, noise_level, cloth, pockets, table_size}
+      session: {started_at, games_played, fatigue?, lighting?, game?}
     """
     payload = payload or {}
     hall = dict(payload.get("hall") or {})
@@ -24,6 +25,11 @@ def hall_session_context(
     cloth = str(hall.get("cloth") or player.table_speed or "medium")
     noise = str(hall.get("noise_level") or "moderate")
     games = int(session.get("games_played") or 0)
+
+    # Infer table size from hall if provided
+    table_hint = hall.get("table_size") or session.get("table_size") or player.table_size
+    pyr_payload = {**payload, "table_size": table_hint}
+    cfg = resolve_pyramid(player=player, payload=pyr_payload)
 
     adaptations = []
     if cloth.lower() in ("fast", "slick"):
@@ -40,6 +46,16 @@ def hall_session_context(
     if games == 0:
         adaptations.append("Cold start: 10-ball warm-up before rated play.")
 
+    adaptations.append(
+        f"Pyramid context: {cfg.table_size} → {cfg.rack_size}-ball rack, "
+        f"skill={cfg.skill_level}, first to {cfg.points_to_win}, "
+        f"call_shot={cfg.call_shot}."
+    )
+    if cfg.rack_size == 10:
+        adaptations.append("Bar-box 7ft: tighter patterns; value density high per ball.")
+    else:
+        adaptations.append("9ft full table: use pattern depth; isolate premium numbers.")
+
     return {
         "player_id": player.player_id,
         "hall_id": hall_id,
@@ -47,12 +63,14 @@ def hall_session_context(
         "table_speed": cloth,
         "noise_level": noise,
         "session": session,
+        "pyramid": cfg.to_dict(),
         "adaptations": adaptations,
         "equipment_check": [
             "Tip chalked and shaped",
             "Shaft clean",
             "Bridge hand dry",
-            f"Note pocket tightness if observed at {hall_name}",
+            "Designated cue ball only (Pyramid)",
+            f"Confirm table size {cfg.table_size} / rack {cfg.rack_size} at {hall_name}",
         ],
     }
 

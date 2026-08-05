@@ -1,8 +1,9 @@
-"""Dynamic player rating intelligence."""
+"""Dynamic player rating intelligence (includes Pyramid skill weights)."""
 from __future__ import annotations
 
 from typing import Any
 
+from plugins.rackup_coach.pyramid import resolve_pyramid, weighted_rating_delta
 from plugins.rackup_coach.types import PlayerProfile, rating_band
 
 
@@ -12,8 +13,8 @@ def rating_intelligence(
 ) -> dict[str, Any]:
     payload = payload or {}
     history = list(payload.get("rating_history") or [])
-    # history: [{rating, ts?}, ...] oldest→newest or with results
     results = player.recent_results or list(payload.get("results") or [])
+    cfg = resolve_pyramid(player=player, payload=payload)
 
     current = float(player.rating or 0)
     band = rating_band(current).value
@@ -55,8 +56,24 @@ def rating_intelligence(
         recommendations.append("Possible soft schedule — seek closer ratings to validate climb.")
     if win_rate is not None and win_rate < 0.35:
         recommendations.append("Shrink aggression; add safety drills before rating events.")
+    recommendations.append(
+        f"Pyramid skill={cfg.skill_level}: rating moves weight {cfg.rating_weight}× "
+        f"({cfg.table_size}/{cfg.rack_size}-ball, first to {cfg.points_to_win})."
+    )
+    if cfg.rating_weight < 1.0:
+        recommendations.append(
+            "Lower skill weight means smaller rating swings — focus on consistency vs spikes."
+        )
+    if cfg.rating_weight > 1.0:
+        recommendations.append(
+            "Pro weight amplifies rating swings — avoid soft schedules and tilt losses."
+        )
     if not recommendations:
         recommendations.append("Maintain current plan; reassess after 5 more rated sessions.")
+
+    # Example weighted delta if host sent last raw delta
+    raw_last = float(payload.get("last_raw_delta") or delta or 0)
+    weighted_last = weighted_rating_delta(raw_last, cfg.skill_level)
 
     return {
         "player_id": player.player_id,
@@ -68,6 +85,9 @@ def rating_intelligence(
         "win_rate_recent": win_rate,
         "avg_opponent_rating": avg_opp,
         "sample_size": n,
+        "pyramid": cfg.to_dict(),
+        "rating_weight": cfg.rating_weight,
+        "weighted_delta_example": round(weighted_last, 2),
         "recommendations": recommendations,
         "next_band_distance": _distance_to_next_band(current),
     }

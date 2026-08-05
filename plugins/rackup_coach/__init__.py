@@ -27,7 +27,7 @@ __all__ = [
 
 METADATA = {
     "name": "rackup-coach",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "capabilities": [
         "professional_coach",
         "shot_of_the_day",
@@ -39,18 +39,30 @@ METADATA = {
         "hall_session_context",
         "mental_game",
         "practice_plans",
+        "rackup_pyramid",
+        "pyramid_rules",
+        "classical_scoring",
     ],
     "methods": [
         "invoke",
         "shot_of_the_day",
         "moderate",
         "coach",
+        "pyramid",
+        "pyramid_rules",
         "video_analysis",
         "matchmaking",
         "rating_intel",
         "tournament",
         "hall_context",
     ],
+    "pyramid": {
+        "7ft": {"rack": 10, "points": {"beginner": 25, "intermediate": 35, "advanced": 45, "pro": 50}},
+        "9ft": {"rack": 15, "points": {"beginner": 40, "intermediate": 55, "advanced": 71, "pro": 71}},
+        "call_shot": {"beginner": "no", "intermediate": "no", "advanced": "optional", "pro": "yes"},
+        "rating_weight": {"beginner": 0.7, "intermediate": 0.85, "advanced": 1.0, "pro": 1.15},
+        "scoring": {"1_ball": 11, "cue": "designated_only", "style": "classical"},
+    },
 }
 
 

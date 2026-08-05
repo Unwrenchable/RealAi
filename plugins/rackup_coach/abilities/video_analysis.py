@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from plugins.rackup_coach.pyramid import classical_mindset_tips, resolve_pyramid
 from plugins.rackup_coach.types import PlayerProfile, RatingBand
 
 
@@ -15,6 +16,7 @@ def analyze_video(
       - video_meta: {clip_type, duration_s, fps, url_ref}
       - observations: free text or checklist flags from client CV / coach notes
       - checklist: {stance_stable, chin_drop, elbow_tuck, grip_tension, follow_through, ...}
+      - pyramid / table_size / skill_level for Pyramid-scaled feedback
     Pure AI structure — no binary video decode here.
     """
     payload = payload or {}
@@ -22,6 +24,10 @@ def analyze_video(
     clip_type = str(meta.get("clip_type") or payload.get("clip_type") or "stroke").lower()
     checklist = dict(payload.get("checklist") or {})
     observations = str(payload.get("observations") or payload.get("notes") or "")
+    cfg = resolve_pyramid(player=player, payload=payload)
+    is_pyramid = (player.discipline or "").lower() == "pyramid" or bool(
+        payload.get("pyramid") or payload.get("game") == "pyramid"
+    )
 
     issues: list[dict[str, str]] = []
     drills: list[str] = []
@@ -83,6 +89,32 @@ def analyze_video(
     if clip_type in ("stance",) and player.band == RatingBand.BEGINNER:
         drills.append("Chin-over-cue check photo every 5 balls.")
 
+    if is_pyramid:
+        if cfg.rack_size == 10:
+            issues.append(
+                {
+                    "area": "pyramid_10ball",
+                    "finding": "7ft/10-ball Pyramid: CB errors cost more race share per miss.",
+                    "fix": f"Prioritize stop/soft-follow; target first-to-{cfg.points_to_win}.",
+                }
+            )
+            drills.append(
+                f"Point-count set: play short races to {cfg.points_to_win} with verbal scores."
+            )
+        else:
+            issues.append(
+                {
+                    "area": "pyramid_15ball",
+                    "finding": "9ft/15-ball Pyramid: pattern depth + 1-ball (11) decisions matter.",
+                    "fix": "Film a full value-route; call high-value balls before shooting.",
+                }
+            )
+            drills.append("15-ball ladder: open traffic then isolate 1-ball (11 pts).")
+        if cfg.call_shot == "yes":
+            drills.append("Call-shot only set: ball+pocket every stroke (pro rule).")
+        elif cfg.call_shot == "optional":
+            drills.append("Optional call-shot practice: call outs on pressure balls.")
+
     if not issues:
         issues.append(
             {
@@ -93,13 +125,17 @@ def analyze_video(
         )
         drills.append("20-ball PSR set: every shot 8–12 seconds, unbroken routine.")
 
-    # Band-level expectation
     expectation = {
         RatingBand.BEGINNER: "Prioritize stillness and center-ball contact over shape.",
         RatingBand.INTERMEDIATE: "Connect stroke quality to a planned CB landing zone.",
         RatingBand.ADVANCED: "Demand repeatable tip precision under slight time pressure.",
         RatingBand.PRO: "Micro-adjust for cloth speed; track variance across 3 sessions.",
     }[player.band]
+    if is_pyramid:
+        expectation = (
+            f"Pyramid {cfg.table_size}/{cfg.rack_size}-ball · skill={cfg.skill_level} · "
+            f"first to {cfg.points_to_win}. " + expectation
+        )
 
     return {
         "player_id": player.player_id,
@@ -109,12 +145,20 @@ def analyze_video(
         "expectation": expectation,
         "findings": issues,
         "recommended_drills": drills,
+        "pyramid": cfg.to_dict() if is_pyramid else None,
+        "classical_mindset": classical_mindset_tips(cfg) if is_pyramid else [],
         "scorecard": {
             "checklist_provided": bool(checklist),
             "issue_count": len(issues),
             "ready_for_match_sim": player.band.value in ("advanced", "pro") and len(issues) <= 2,
+            "points_to_win": cfg.points_to_win if is_pyramid else None,
+            "rack_size": cfg.rack_size if is_pyramid else None,
         },
-        "next_upload_prompt": "Upload a side-angle stop-shot set (10 balls) for cue-ball kill check.",
+        "next_upload_prompt": (
+            "Upload side-angle value-route (include 1-ball decision) for Pyramid CB kill check."
+            if is_pyramid
+            else "Upload a side-angle stop-shot set (10 balls) for cue-ball kill check."
+        ),
     }
 
 
