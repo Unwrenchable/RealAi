@@ -1,0 +1,11 @@
+{
+  "slug": "realai-clean-20260726-source-only",
+  "source_sha": "516a59a49b6f91e7bc8292c7bc8037e296ea731a",
+  "giants_moved_out": 104,
+  "batch": 2,
+  "file_count": 1221,
+  "imported_at": "2026-08-05T05:56:02.2221941-07:00",
+  "dest": "recovered/realai-clean-20260726-source-only",
+  "source_ref": "origin/local/realai-clean-20260726-source-only",
+  "source_branch": "local/realai-clean-20260726-source-only"
+}

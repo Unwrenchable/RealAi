@@ -1,0 +1,1118 @@
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	deleted:    .env.example
+	deleted:    .gitattributes
+	modified:   .github/agents/README.md
+	modified:   .github/agents/agent.md
+	modified:   .github/agents/bootstrap.md
+	modified:   .github/agents/capability-dev.md
+	modified:   .github/agents/fullstack-dev.md
+	modified:   .github/agents/memory.md
+	modified:   .github/agents/provider-specialist.md
+	modified:   .github/copilot-instructions.md
+	modified:   .github/workflows/ci.yml
+	modified:   .github/workflows/codeql.yml
+	modified:   .gitignore
+	modified:   .python-version
+	deleted:    6.0
+	deleted:    =10.4.0
+	modified:   API.md
+	modified:   CONTRIBUTING.md
+	modified:   DEPLOYMENT.md
+	modified:   Dockerfile
+	modified:   Dockerfile.gpu
+	modified:   LICENSE
+	deleted:    PAGES
+	modified:   QUICKSTART.md
+	modified:   QUICKSTART_LOCAL.md
+	modified:   README.md
+	modified:   REALAI_3.0.md
+	modified:   SETUP_COMPLETE.md
+	renamed:    realai.egg-info/dependency_links.txt -> __init__.py
+	deleted:    agents/README.md
+	deleted:    agents/agent.md
+	deleted:    agents/bootstrap.md
+	deleted:    agents/capability-dev.md
+	deleted:    agents/coder.agent.json
+	deleted:    agents/devops_agent.ts
+	deleted:    agents/fullstack-dev.md
+	deleted:    agents/index.ts
+	deleted:    agents/memory.md
+	deleted:    agents/provider-specialist.md
+	deleted:    agents/runtime/index.ts
+	deleted:    agents/runtime/planner.ts
+	deleted:    agents/templates/coder.ts
+	deleted:    agents/templates/researcher.ts
+	deleted:    agents/tools/browser.ts
+	deleted:    agents/tools/web-search.ts
+	modified:   api/index.py
+	modified:   api_server.py
+	modified:   apps/__init__.py
+	modified:   apps/api/__init__.py
+	modified:   apps/api/main.py
+	modified:   apps/api/middleware/__init__.py
+	modified:   apps/api/middleware/logging.py
+	modified:   apps/api/routes/__init__.py
+	modified:   apps/api/routes/audio.py
+	modified:   apps/api/routes/chat.py
+	modified:   apps/api/routes/embeddings.py
+	modified:   apps/api/routes/health.py
+	modified:   apps/api/routes/metrics.py
+	modified:   apps/api/routes/models.py
+	modified:   apps/api/routes/tasks.py
+	modified:   apps/api/routes/voice_ws.py
+	modified:   apps/api/routes/web3.py
+	deleted:    apps/api/state.py
+	deleted:    apps/dashboard/package.json
+	modified:   apps/desktop/__init__.py
+	modified:   apps/desktop/voice_mode.py
+	deleted:    apps/widget/package.json
+	modified:   aura/main.py
+	modified:   aura/memory.py
+	modified:   aura/reasoning.py
+	modified:   aura/skills/__init__.py
+	modified:   aura/skills/code.py
+	modified:   aura/skills/core.py
+	modified:   aura/skills/file_io.py
+	modified:   aura/skills/registry.py
+	modified:   aura/skills/web.py
+	deleted:    autopilot/autopilot.ts
+	deleted:    autopilot/index.ts
+	modified:   benchmarks/__init__.py
+	modified:   benchmarks/base.py
+	modified:   benchmarks/bench_agent.py
+	modified:   benchmarks/bench_coding.py
+	modified:   benchmarks/bench_memory.py
+	modified:   benchmarks/bench_reasoning.py
+	modified:   benchmarks/bench_safety.py
+	modified:   benchmarks/bench_tool_use.py
+	modified:   benchmarks/runner.py
+	deleted:    billing/__init__.py
+	deleted:    build_latest.log
+	deleted:    build_latest2.log
+	deleted:    build_provider.log
+	deleted:    build_provider_min.log
+	deleted:    build_ui.log
+	modified:   config/dev.toml
+	modified:   config/gpu.toml
+	deleted:    config/models.json
+	deleted:    config/models.yaml
+	modified:   config/prod.toml
+	deleted:    context/realai_master_context.md
+	modified:   core/__init__.py
+	modified:   core/agents/__init__.py
+	modified:   core/agents/base.py
+	modified:   core/agents/critic.py
+	modified:   core/agents/executor.py
+	modified:   core/agents/planner.py
+	modified:   core/agents/safety.py
+	modified:   core/agents/synthesizer.py
+	modified:   core/agents/worker.py
+	modified:   core/api/__init__.py
+	modified:   core/api/errors.py
+	modified:   core/api/schemas/__init__.py
+	modified:   core/api/schemas/audio.py
+	modified:   core/api/schemas/chat.py
+	modified:   core/api/schemas/embeddings.py
+	modified:   core/api/schemas/models.py
+	modified:   core/api/schemas/tasks.py
+	modified:   core/api/schemas/web3.py
+	modified:   core/config/__init__.py
+	modified:   core/config/loader.py
+	modified:   core/config/types.py
+	deleted:    core/index.ts
+	modified:   core/inference/__init__.py
+	modified:   core/inference/backend.py
+	modified:   core/inference/chat_pipeline.py
+	modified:   core/inference/llamacpp_backend.py
+	modified:   core/inference/local_stub.py
+	modified:   core/inference/registry.py
+	modified:   core/inference/vllm_backend.py
+	modified:   core/logging/__init__.py
+	modified:   core/logging/logger.py
+	modified:   core/memory/__init__.py
+	modified:   core/memory/base.py
+	modified:   core/memory/sqlite_store.py
+	modified:   core/memory/summarizer.py
+	modified:   core/metrics/__init__.py
+	modified:   core/metrics/metrics.py
+	modified:   core/models/__init__.py
+	modified:   core/models/base.py
+	modified:   core/models/cache.py
+	modified:   core/models/registry.py
+	modified:   core/models/stub.py
+	modified:   core/security/__init__.py
+	modified:   core/security/python_sandbox.py
+	modified:   core/security/sandbox.py
+	modified:   core/tools/__init__.py
+	modified:   core/tools/base.py
+	modified:   core/tools/code.py
+	modified:   core/tools/file.py
+	modified:   core/tools/permissions.py
+	modified:   core/tools/registry.py
+	modified:   core/tools/web.py
+	modified:   core/tools/web3.py
+	modified:   core/tracing/__init__.py
+	modified:   core/tracing/tracer.py
+	modified:   core/voice/__init__.py
+	modified:   core/voice/asr_base.py
+	modified:   core/voice/asr_whisper.py
+	modified:   core/voice/registry.py
+	modified:   core/voice/tts_base.py
+	modified:   core/voice/tts_piper.py
+	modified:   core/web3/__init__.py
+	modified:   core/web3/base.py
+	modified:   core/web3/evm_backend.py
+	modified:   core/web3/policy.py
+	modified:   core/web3/registry.py
+	modified:   core/web3/solana_backend.py
+	modified:   docker-compose.yml
+	modified:   docs/CAPABILITIES.md
+	modified:   docs/DELIVERABLES.md
+	modified:   docs/IMPLEMENTATION_SUMMARY.md
+	modified:   docs/INDEX.md
+	modified:   docs/LOCAL_LLAMA_README.md
+	modified:   docs/MIGRATION_GUIDE.md
+	modified:   docs/REALAI_3.0.md
+	modified:   docs/TRAVIS_README.md
+	modified:   docs/architecture.md
+	deleted:    docs/developer-onboarding.md
+	modified:   docs/github_issue_board.md
+	modified:   docs/local-llama-setup.md
+	deleted:    docs/model-manifest.md
+	deleted:    docs/provider-authoring.md
+	modified:   docs/roadmap.md
+	modified:   docs/structure.md
+	modified:   examples/local_llama_example.py
+	modified:   local_models.py
+	modified:   main.py
+	deleted:    marketplace/loader.ts
+	modified:   models.yaml
+	deleted:    models/__init__.py
+	deleted:    models/image.py
+	deleted:    models/index.ts
+	deleted:    models/metadata.json
+	deleted:    models/models.yaml
+	deleted:    models/registry.json.example
+	deleted:    models/types.ts
+	deleted:    package-lock.json
+	deleted:    package.json
+	deleted:    packages/cli/package.json
+	deleted:    packages/cli/src/index.ts
+	deleted:    packages/cli/tsconfig.json
+	deleted:    packages/core/package.json
+	deleted:    packages/sdk-py/package.json
+	deleted:    packages/sdk-py/realai/__init__.py
+	deleted:    packages/sdk-ts/package.json
+	deleted:    packages/sdk-ts/src/index.ts
+	deleted:    packages/sdk-ts/tsconfig.json
+	deleted:    packages/ui/package.json
+	modified:   plugins/__init__.py
+	modified:   plugins/sample_plugin.py
+	deleted:    pnpm-lock.yaml
+	deleted:    pnpm-workspace.yaml
+	modified:   providers.yaml
+	deleted:    providers/openai/index.ts
+	deleted:    providers/openai/package.json
+	deleted:    providers/provider.yaml
+	deleted:    providers/realai/index.ts
+	deleted:    providers/realai/package.json
+	deleted:    providers/registry.ts
+	deleted:    providers/run.ps1
+	deleted:    providers/types.ts
+	modified:   pyproject.toml
+	modified:   pyrightconfig.json
+	new file:   realai-core/.github/agents/browser-test-engineer.agent.md
+	new file:   realai-core/.github/agents/cybersecurity-expert.agent.md
+	new file:   realai-core/.github/agents/game-creative-director.agent.md
+	new file:   realai-core/.github/agents/game-designer.agent.md
+	new file:   realai-core/.github/agents/game-technical-director.agent.md
+	new file:   realai-core/.github/agents/gameplay-programmer.agent.md
+	new file:   realai-core/.github/agents/my-agent.agent.md
+	new file:   realai-core/.github/agents/tokenized-agents.agent.md
+	new file:   realai-core/.github/copilot-instructions.md
+	new file:   realai-core/.gitignore
+	new file:   realai-core/README.md
+	new file:   realai-core/agent_tools.egg-info/PKG-INFO
+	new file:   realai-core/agent_tools.egg-info/SOURCES.txt
+	new file:   realai-core/agent_tools.egg-info/dependency_links.txt
+	new file:   realai-core/agent_tools.egg-info/entry_points.txt
+	new file:   realai-core/agent_tools.egg-info/requires.txt
+	new file:   realai-core/agent_tools.egg-info/top_level.txt
+	modified:   realai-core/agent_tools/__init__.py
+	new file:   realai-core/agent_tools/__pycache__/__init__.cpython-314.pyc
+	new file:   realai-core/agent_tools/__pycache__/cli.cpython-314.pyc
+	new file:   realai-core/agent_tools/__pycache__/dashboard.cpython-314.pyc
+	new file:   realai-core/agent_tools/__pycache__/executor.cpython-314.pyc
+	new file:   realai-core/agent_tools/__pycache__/importer.cpython-314.pyc
+	new file:   realai-core/agent_tools/__pycache__/models.cpython-314.pyc
+	new file:   realai-core/agent_tools/__pycache__/registry.cpython-314.pyc
+	new file:   realai-core/agent_tools/__pycache__/runtime.cpython-314.pyc
+	new file:   realai-core/agent_tools/agents_impl/__init__.py
+	new file:   realai-core/agent_tools/agents_impl/code_engineer_agent.py
+	new file:   realai-core/agent_tools/agents_impl/memory_summarizer_agent.py
+	new file:   realai-core/agent_tools/cli.py
+	new file:   realai-core/agent_tools/dashboard.py
+	new file:   realai-core/agent_tools/data/__init__.py
+	new file:   realai-core/agent_tools/data/__pycache__/__init__.cpython-314.pyc
+	new file:   realai-core/agent_tools/data/access_profiles.json
+	new file:   realai-core/agent_tools/data/agents.json
+	new file:   realai-core/agent_tools/engine/__init__.py
+	new file:   realai-core/agent_tools/engine/__pycache__/__init__.cpython-314.pyc
+	new file:   realai-core/agent_tools/engine/__pycache__/executor.cpython-314.pyc
+	new file:   realai-core/agent_tools/engine/__pycache__/loader.cpython-314.pyc
+	new file:   realai-core/agent_tools/engine/__pycache__/logger.cpython-314.pyc
+	new file:   realai-core/agent_tools/engine/__pycache__/memory.cpython-314.pyc
+	new file:   realai-core/agent_tools/engine/__pycache__/router.cpython-314.pyc
+	new file:   realai-core/agent_tools/engine/__pycache__/test_harness.cpython-314.pyc
+	new file:   realai-core/agent_tools/engine/executor.py
+	new file:   realai-core/agent_tools/engine/loader.py
+	new file:   realai-core/agent_tools/engine/logger.py
+	new file:   realai-core/agent_tools/engine/memory.py
+	new file:   realai-core/agent_tools/engine/router.py
+	new file:   realai-core/agent_tools/engine/test_harness.py
+	new file:   realai-core/agent_tools/executor.py
+	new file:   realai-core/agent_tools/importer.py
+	new file:   realai-core/agent_tools/models.py
+	new file:   realai-core/agent_tools/providers/__init__.py
+	new file:   realai-core/agent_tools/providers/__pycache__/__init__.cpython-314.pyc
+	new file:   realai-core/agent_tools/providers/__pycache__/anthropic.cpython-314.pyc
+	new file:   realai-core/agent_tools/providers/__pycache__/groq.cpython-314.pyc
+	new file:   realai-core/agent_tools/providers/__pycache__/local.cpython-314.pyc
+	new file:   realai-core/agent_tools/providers/__pycache__/openai.cpython-314.pyc
+	new file:   realai-core/agent_tools/providers/__pycache__/realai.cpython-314.pyc
+	new file:   realai-core/agent_tools/providers/__pycache__/router.cpython-314.pyc
+	new file:   realai-core/agent_tools/providers/anthropic.py
+	new file:   realai-core/agent_tools/providers/groq.py
+	new file:   realai-core/agent_tools/providers/local.py
+	new file:   realai-core/agent_tools/providers/openai.py
+	new file:   realai-core/agent_tools/providers/realai.py
+	new file:   realai-core/agent_tools/providers/router.py
+	new file:   realai-core/agent_tools/registry.py
+	new file:   realai-core/agent_tools/runtime.py
+	new file:   realai-core/agent_tools/tooling/__init__.py
+	new file:   realai-core/agent_tools/tooling/__pycache__/__init__.cpython-314.pyc
+	new file:   realai-core/agent_tools/tooling/__pycache__/crypto.cpython-314.pyc
+	new file:   realai-core/agent_tools/tooling/__pycache__/filesystem.cpython-314.pyc
+	new file:   realai-core/agent_tools/tooling/__pycache__/http.cpython-314.pyc
+	new file:   realai-core/agent_tools/tooling/__pycache__/registry.cpython-314.pyc
+	new file:   realai-core/agent_tools/tooling/__pycache__/solana.cpython-314.pyc
+	new file:   realai-core/agent_tools/tooling/crypto.py
+	new file:   realai-core/agent_tools/tooling/filesystem.py
+	new file:   realai-core/agent_tools/tooling/http.py
+	new file:   realai-core/agent_tools/tooling/registry.py
+	new file:   realai-core/agent_tools/tooling/solana.py
+	new file:   realai-core/agents/master.agent.json
+	new file:   realai-core/agents/master/tests/basic.json
+	new file:   realai-core/agents/master/tests/dry-run.json
+	new file:   realai-core/agents/router.agent.json
+	new file:   realai-core/agents/router/tests/route.json
+	new file:   realai-core/console/agent-runner.js
+	new file:   realai-core/console/console.js
+	new file:   realai-core/console/index.html
+	new file:   realai-core/docs/REAL_TIME_EXECUTION.md
+	new file:   realai-core/docs/VERCEL_DEPLOY.md
+	new file:   realai-core/docs/knowledge-base/ai-browser-testing.md
+	new file:   realai-core/docs/knowledge-base/pump-fun-agent-payments.md
+	new file:   realai-core/docs/knowledge-base/quantitative-methods-formulas.md
+	new file:   realai-core/examples/workflow-feature-dev.json
+	new file:   realai-core/examples/workflow-security-review.json
+	new file:   realai-core/poetry.lock
+	new file:   realai-core/policy.json
+	new file:   realai-core/pyproject.toml
+	new file:   realai-core/registry/.gitignore
+	new file:   realai-core/registry/Dockerfile
+	new file:   realai-core/registry/cli/index.js
+	new file:   realai-core/registry/cli/package.json
+	new file:   realai-core/registry/package-lock.json
+	new file:   realai-core/registry/package.json
+	new file:   realai-core/registry/render.yaml
+	new file:   realai-core/registry/src/api/routes.ts
+	new file:   realai-core/registry/src/api/server.ts
+	new file:   realai-core/registry/src/api/webhook.ts
+	new file:   realai-core/registry/src/config.ts
+	new file:   realai-core/registry/src/detectors.ts
+	new file:   realai-core/registry/src/github/client.ts
+	new file:   realai-core/registry/src/github/scanner.ts
+	new file:   realai-core/registry/src/index.ts
+	new file:   realai-core/registry/src/registry.ts
+	new file:   realai-core/registry/src/scanner.ts
+	new file:   realai-core/registry/src/types.ts
+	new file:   realai-core/registry/src/utils.ts
+	new file:   realai-core/registry/tsconfig.json
+	new file:   realai-core/sanity_check.py
+	new file:   realai-core/schema/agent.schema.json
+	new file:   realai-core/schema/tool.schema.json
+	new file:   realai-core/scripts/overmind_runner.py
+	new file:   realai-core/skills/fallout-lore/README.md
+	new file:   realai-core/skills/game-design/README.md
+	new file:   realai-core/skills/solana/README.md
+	new file:   realai-core/skills/webdev/README.md
+	new file:   realai-core/test
+	renamed:    realai-core/__init__.py -> realai-core/tests/__init__.py
+	new file:   realai-core/tests/__pycache__/__init__.cpython-314.pyc
+	new file:   realai-core/tests/__pycache__/test_dashboard.cpython-314-pytest-9.0.3.pyc
+	new file:   realai-core/tests/__pycache__/test_hardening.cpython-314-pytest-9.0.3.pyc
+	new file:   realai-core/tests/__pycache__/test_orchestration.cpython-314-pytest-9.0.3.pyc
+	new file:   realai-core/tests/__pycache__/test_registry.cpython-314-pytest-9.0.3.pyc
+	new file:   realai-core/tests/test_dashboard.py
+	new file:   realai-core/tests/test_hardening.py
+	new file:   realai-core/tests/test_orchestration.py
+	new file:   realai-core/tests/test_registry.py
+	new file:   realai-core/tools/__pycache__/_shared.cpython-314.pyc
+	new file:   realai-core/tools/__pycache__/harden_repos.cpython-314.pyc
+	new file:   realai-core/tools/_shared.py
+	new file:   realai-core/tools/harden_repos.py
+	new file:   realai-core/tools/retry_rollout_pushes.py
+	new file:   realai-core/tools/rollout_all_repos.py
+	new file:   realai-core/ui/.gitignore
+	new file:   realai-core/ui/lib/realaiClient.ts
+	new file:   realai-core/ui/lib/registryClient.ts
+	new file:   realai-core/ui/package-lock.json
+	new file:   realai-core/ui/package.json
+	new file:   realai-core/ui/pages/api/orchestrator/run.ts
+	new file:   realai-core/ui/pages/api/playground/run.ts
+	new file:   realai-core/ui/tsconfig.json
+	new file:   realai-core/ui/tsconfig.tsbuildinfo
+	new file:   realai-core/vercel.json
+	new file:   realai-core/web/dashboard/README.md
+	new file:   realai-core/web/dashboard/package.json
+	new file:   realai-core/web/dashboard/public/index.html
+	new file:   realai-core/web/dashboard/src/App.js
+	new file:   realai-core/web/dashboard/src/api.js
+	new file:   realai-core/web/dashboard/src/index.js
+	new file:   realai-frontend/.env.local.example
+	new file:   realai-frontend/.gitignore
+	new file:   realai-frontend/README.md
+	new file:   realai-frontend/next.config.js
+	new file:   realai-frontend/package-lock.json
+	new file:   realai-frontend/package.json
+	new file:   realai-frontend/postcss.config.js
+	new file:   realai-frontend/src/app/api/chat/route.ts
+	new file:   realai-frontend/src/app/globals.css
+	new file:   realai-frontend/src/app/layout.tsx
+	new file:   realai-frontend/src/app/page.tsx
+	new file:   realai-frontend/src/components/ChatInput.tsx
+	new file:   realai-frontend/src/components/MessageList.tsx
+	new file:   realai-frontend/src/components/SettingsDrawer.tsx
+	new file:   realai-frontend/src/components/Sidebar.tsx
+	new file:   realai-frontend/src/lib/realai.ts
+	new file:   realai-frontend/src/lib/types.ts
+	new file:   realai-frontend/tailwind.config.js
+	new file:   realai-frontend/tsconfig.json
+	new file:   realai-frontend/vercel.json
+	deleted:    realai.egg-info/PKG-INFO
+	deleted:    realai.egg-info/SOURCES.txt
+	deleted:    realai.egg-info/entry_points.txt
+	deleted:    realai.egg-info/top_level.txt
+	modified:   realai.toml
+	modified:   realai.toml.example
+	modified:   realai/__init__.py
+	modified:   realai/agent_runtime.py
+	modified:   realai/api_server.py
+	modified:   realai/app_framework.py
+	modified:   realai/audit.py
+	modified:   realai/cli/__init__.py
+	modified:   realai/cli/realai_cli.py
+	deleted:    realai/coding_agent.py
+	modified:   realai/critique.py
+	modified:   realai/datasets/__init__.py
+	modified:   realai/execution_history.jsonl
+	modified:   realai/identity.py
+	modified:   realai/knowledge_graph.py
+	modified:   realai/local_models.py
+	modified:   realai/local_runtime.py
+	modified:   realai/memory/__init__.py
+	modified:   realai/memory/engine.py
+	modified:   realai/memory/sqlite_memory.p
+	modified:   realai/model_registry.py
+	modified:   realai/models/__init__.py
+	modified:   realai/models/metadata.json
+	modified:   realai/models/realai-1.0/README.md
+	modified:   realai/models/realai-embed/README.md
+	modified:   realai/models/realai-overseer/README.md
+	modified:   realai/models/registry.json
+	modified:   realai/models/registry.json.example
+	modified:   realai/plugin_marketplace.py
+	modified:   realai/router.py
+	modified:   realai/safety.py
+	modified:   realai/sdk/__init__.py
+	modified:   realai/sdk/python/__init__.py
+	modified:   realai/sdk/python/realai_client.py
+	modified:   realai/self_improvement.py
+	modified:   realai/server/__init__.py
+	modified:   realai/server/app.py
+	modified:   realai/server/backends.py
+	modified:   realai/server/config.py
+	modified:   realai/server/embeddings.py
+	modified:   realai/server/embeddings_backend.py
+	modified:   realai/server/inference.py
+	modified:   realai/server/llama_cli_backend.py
+	modified:   realai/server/logging.py
+	modified:   realai/server/logging_utils.py
+	modified:   realai/server/memory_store.py
+	modified:   realai/server/metrics.py
+	modified:   realai/server/orchestration.py
+	deleted:    realai/server/persistence.py
+	modified:   realai/server/profiles/default.json
+	modified:   realai/server/providers.py
+	modified:   realai/server/router.py
+	modified:   realai/server/tools_runtime.py
+	deleted:    realai/server_settings.py
+	modified:   realai/tools.py
+	modified:   realai/training/__init__.py
+	modified:   realai/training/build_datasets.py
+	modified:   realai/training/eval.py
+	modified:   realai/training/extract_from_agent_tools.py
+	modified:   realai/training/finetune.py
+	modified:   realai/world_model.py
+	modified:   realai_gui.py
+	deleted:    realai_knowledge_store.json
+	modified:   realai_local_server.py
+	deleted:    realai_memory.sqlite3
+	deleted:    realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/data_level0.bin
+	deleted:    realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/header.bin
+	deleted:    realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/length.bin
+	deleted:    realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/link_lists.bin
+	deleted:    realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/data_level0.bin
+	deleted:    realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/header.bin
+	deleted:    realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/length.bin
+	deleted:    realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/link_lists.bin
+	deleted:    realai_memory/embodied_narratives/narrative_1780597611.json
+	deleted:    realai_memory/embodied_narratives/narrative_1780599365.json
+	deleted:    realai_memory/embodied_narratives/narrative_1780605682.json
+	deleted:    realai_memory/evolution_proposals.json
+	deleted:    realai_memory/hive_missions.json
+	deleted:    realai_memory/model_promotions.jsonl
+	deleted:    realai_memory/rag_memory_store.json
+	deleted:    realai_memory/workflow_runs_test.json
+	modified:   render.yaml
+	deleted:    render.yml
+	deleted:    repo_tree.txt
+	deleted:    repo_tree_clean.txt
+	deleted:    repo_tree_filtered.txt
+	deleted:    repo_tree_shallow.txt
+	modified:   requirements-ci.txt
+	modified:   requirements-full.txt
+	modified:   requirements-gpu.txt
+	modified:   requirements.txt
+	modified:   schema/agent.schema.json
+	modified:   schema/tool.schema.json
+	modified:   scripts/setup_local_llama.py
+	modified:   setup.py
+	modified:   src/app/page.tsx
+	modified:   src/components/ChatArena.tsx
+	modified:   src/components/LeftSidebar.tsx
+	modified:   src/components/RightPanel.tsx
+	modified:   src/components/TopBar.tsx
+	modified:   src/components/VoiceFab.tsx
+	deleted:    start_realai.bat
+	modified:   start_realai_server.bat
+	deleted:    terminals/1.txt
+	deleted:    terminals/10.txt
+	deleted:    terminals/11.txt
+	deleted:    terminals/12.txt
+	deleted:    terminals/13.txt
+	deleted:    terminals/14.txt
+	deleted:    terminals/15.txt
+	deleted:    terminals/16.txt
+	deleted:    terminals/17.txt
+	deleted:    terminals/18.txt
+	deleted:    terminals/19.txt
+	deleted:    terminals/2.txt
+	deleted:    terminals/20.txt
+	deleted:    terminals/21.txt
+	deleted:    terminals/22.txt
+	deleted:    terminals/23.txt
+	deleted:    terminals/24.txt
+	deleted:    terminals/25.txt
+	deleted:    terminals/26.txt
+	deleted:    terminals/27.txt
+	deleted:    terminals/28.txt
+	deleted:    terminals/29.txt
+	deleted:    terminals/3.txt
+	deleted:    terminals/30.txt
+	deleted:    terminals/31.txt
+	deleted:    terminals/32.txt
+	deleted:    terminals/33.txt
+	deleted:    terminals/34.txt
+	deleted:    terminals/35.txt
+	deleted:    terminals/36.txt
+	deleted:    terminals/37.txt
+	deleted:    terminals/38.txt
+	deleted:    terminals/39.txt
+	deleted:    terminals/4.txt
+	deleted:    terminals/40.txt
+	deleted:    terminals/41.txt
+	deleted:    terminals/42.txt
+	deleted:    terminals/43.txt
+	deleted:    terminals/44.txt
+	deleted:    terminals/45.txt
+	deleted:    terminals/5.txt
+	deleted:    terminals/6.txt
+	deleted:    terminals/7.txt
+	deleted:    terminals/8.txt
+	deleted:    terminals/9.txt
+	modified:   test_local_server.py
+	modified:   test_realai.py
+	modified:   tests/__init__.py
+	modified:   tests/api/__init__.py
+	modified:   tests/api/test_chat.py
+	modified:   tests/api/test_embeddings.py
+	modified:   tests/api/test_models.py
+	deleted:    tests/api/test_providers.py
+	deleted:    tests/test_cli_commands.py
+	modified:   tests/test_local_llama_integration.py
+	modified:   traefik.yml
+	deleted:    training/__init__.py
+	deleted:    tsconfig.json
+	deleted:    vercel.json
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	deleted:    .github/workflows/ci.yml
+	deleted:    .github/workflows/codeql.yml
+	modified:   .gitignore
+	deleted:    .python-version
+	deleted:    API.md
+	deleted:    CONTRIBUTING.md
+	deleted:    DEPLOYMENT.md
+	deleted:    Dockerfile.gpu
+	deleted:    QUICKSTART_LOCAL.md
+	modified:   README.md
+	deleted:    REALAI_3.0.md
+	deleted:    SETUP_COMPLETE.md
+	deleted:    __init__.py
+	modified:   api/index.py
+	deleted:    api_server.py
+	modified:   apps/api/routes/audio.py
+	modified:   apps/api/routes/chat.py
+	modified:   apps/api/routes/embeddings.py
+	modified:   apps/api/routes/health.py
+	modified:   apps/api/routes/models.py
+	modified:   apps/api/routes/tasks.py
+	modified:   apps/api/routes/voice_ws.py
+	modified:   apps/api/routes/web3.py
+	modified:   apps/frontend/.env.local.example
+	modified:   apps/frontend/src/app/api/chat/route.ts
+	modified:   apps/frontend/src/components/ChatInput.tsx
+	modified:   apps/frontend/src/components/MessageList.tsx
+	modified:   apps/frontend/src/components/SettingsDrawer.tsx
+	modified:   apps/frontend/src/components/Sidebar.tsx
+	deleted:    aura/memory.py
+	deleted:    aura/reasoning.py
+	modified:   config/gpu.toml
+	deleted:    local_models.py
+	modified:   main.py
+	modified:   models.yaml
+	modified:   pyproject.toml
+	deleted:    pyrightconfig.json
+	deleted:    realai-core/.github/agents/browser-test-engineer.agent.md
+	deleted:    realai-core/.github/agents/cybersecurity-expert.agent.md
+	deleted:    realai-core/.github/agents/game-creative-director.agent.md
+	deleted:    realai-core/.github/agents/game-designer.agent.md
+	deleted:    realai-core/.github/agents/game-technical-director.agent.md
+	deleted:    realai-core/.github/agents/gameplay-programmer.agent.md
+	deleted:    realai-core/.github/agents/my-agent.agent.md
+	deleted:    realai-core/.github/agents/tokenized-agents.agent.md
+	deleted:    realai-core/.gitignore
+	deleted:    realai-core/agent_tools.egg-info/PKG-INFO
+	deleted:    realai-core/agent_tools/__pycache__/__init__.cpython-314.pyc
+	deleted:    realai-core/agent_tools/__pycache__/cli.cpython-314.pyc
+	deleted:    realai-core/agent_tools/__pycache__/dashboard.cpython-314.pyc
+	deleted:    realai-core/agent_tools/__pycache__/executor.cpython-314.pyc
+	deleted:    realai-core/agent_tools/__pycache__/importer.cpython-314.pyc
+	deleted:    realai-core/agent_tools/__pycache__/models.cpython-314.pyc
+	deleted:    realai-core/agent_tools/__pycache__/registry.cpython-314.pyc
+	deleted:    realai-core/agent_tools/__pycache__/runtime.cpython-314.pyc
+	modified:   realai-core/agent_tools/agents_impl/__init__.py
+	deleted:    realai-core/agent_tools/agents_impl/code_engineer_agent.py
+	deleted:    realai-core/agent_tools/agents_impl/memory_summarizer_agent.py
+	deleted:    realai-core/agent_tools/data/__init__.py
+	deleted:    realai-core/agent_tools/data/__pycache__/__init__.cpython-314.pyc
+	deleted:    realai-core/agent_tools/data/access_profiles.json
+	deleted:    realai-core/agent_tools/data/agents.json
+	modified:   realai-core/agent_tools/engine/__init__.py
+	deleted:    realai-core/agent_tools/engine/__pycache__/__init__.cpython-314.pyc
+	deleted:    realai-core/agent_tools/engine/__pycache__/executor.cpython-314.pyc
+	deleted:    realai-core/agent_tools/engine/__pycache__/loader.cpython-314.pyc
+	deleted:    realai-core/agent_tools/engine/__pycache__/logger.cpython-314.pyc
+	deleted:    realai-core/agent_tools/engine/__pycache__/memory.cpython-314.pyc
+	deleted:    realai-core/agent_tools/engine/__pycache__/router.cpython-314.pyc
+	deleted:    realai-core/agent_tools/engine/__pycache__/test_harness.cpython-314.pyc
+	deleted:    realai-core/agent_tools/engine/executor.py
+	deleted:    realai-core/agent_tools/engine/loader.py
+	deleted:    realai-core/agent_tools/engine/logger.py
+	deleted:    realai-core/agent_tools/engine/memory.py
+	deleted:    realai-core/agent_tools/engine/router.py
+	deleted:    realai-core/agent_tools/engine/test_harness.py
+	modified:   realai-core/agent_tools/providers/__init__.py
+	deleted:    realai-core/agent_tools/providers/__pycache__/__init__.cpython-314.pyc
+	deleted:    realai-core/agent_tools/providers/__pycache__/anthropic.cpython-314.pyc
+	deleted:    realai-core/agent_tools/providers/__pycache__/groq.cpython-314.pyc
+	deleted:    realai-core/agent_tools/providers/__pycache__/local.cpython-314.pyc
+	deleted:    realai-core/agent_tools/providers/__pycache__/openai.cpython-314.pyc
+	deleted:    realai-core/agent_tools/providers/__pycache__/realai.cpython-314.pyc
+	deleted:    realai-core/agent_tools/providers/__pycache__/router.cpython-314.pyc
+	deleted:    realai-core/agent_tools/providers/anthropic.py
+	deleted:    realai-core/agent_tools/providers/groq.py
+	deleted:    realai-core/agent_tools/providers/local.py
+	deleted:    realai-core/agent_tools/providers/openai.py
+	deleted:    realai-core/agent_tools/providers/realai.py
+	deleted:    realai-core/agent_tools/providers/router.py
+	modified:   realai-core/agent_tools/tooling/__init__.py
+	deleted:    realai-core/agent_tools/tooling/__pycache__/__init__.cpython-314.pyc
+	deleted:    realai-core/agent_tools/tooling/__pycache__/crypto.cpython-314.pyc
+	deleted:    realai-core/agent_tools/tooling/__pycache__/filesystem.cpython-314.pyc
+	deleted:    realai-core/agent_tools/tooling/__pycache__/http.cpython-314.pyc
+	deleted:    realai-core/agent_tools/tooling/__pycache__/registry.cpython-314.pyc
+	deleted:    realai-core/agent_tools/tooling/__pycache__/solana.cpython-314.pyc
+	deleted:    realai-core/agent_tools/tooling/crypto.py
+	deleted:    realai-core/agent_tools/tooling/filesystem.py
+	deleted:    realai-core/agent_tools/tooling/http.py
+	deleted:    realai-core/agent_tools/tooling/registry.py
+	deleted:    realai-core/agent_tools/tooling/solana.py
+	deleted:    realai-core/agents/master/tests/basic.json
+	deleted:    realai-core/agents/master/tests/dry-run.json
+	deleted:    realai-core/agents/router/tests/route.json
+	deleted:    realai-core/console/agent-runner.js
+	deleted:    realai-core/console/console.js
+	deleted:    realai-core/console/index.html
+	deleted:    realai-core/docs/knowledge-base/ai-browser-testing.md
+	deleted:    realai-core/docs/knowledge-base/pump-fun-agent-payments.md
+	deleted:    realai-core/docs/knowledge-base/quantitative-methods-formulas.md
+	deleted:    realai-core/poetry.lock
+	deleted:    realai-core/pyproject.toml
+	deleted:    realai-core/registry/.gitignore
+	deleted:    realai-core/registry/Dockerfile
+	deleted:    realai-core/registry/cli/index.js
+	deleted:    realai-core/registry/cli/package.json
+	deleted:    realai-core/registry/render.yaml
+	deleted:    realai-core/registry/src/api/routes.ts
+	deleted:    realai-core/registry/src/api/server.ts
+	deleted:    realai-core/registry/src/api/webhook.ts
+	deleted:    realai-core/registry/src/config.ts
+	deleted:    realai-core/registry/src/detectors.ts
+	deleted:    realai-core/registry/src/github/client.ts
+	deleted:    realai-core/registry/src/github/scanner.ts
+	deleted:    realai-core/registry/src/index.ts
+	deleted:    realai-core/registry/src/registry.ts
+	deleted:    realai-core/registry/src/scanner.ts
+	deleted:    realai-core/registry/src/types.ts
+	deleted:    realai-core/registry/src/utils.ts
+	deleted:    realai-core/skills/fallout-lore/README.md
+	deleted:    realai-core/skills/game-design/README.md
+	deleted:    realai-core/skills/solana/README.md
+	deleted:    realai-core/skills/webdev/README.md
+	deleted:    realai-core/test
+	deleted:    realai-core/tests/__pycache__/__init__.cpython-314.pyc
+	deleted:    realai-core/tests/__pycache__/test_dashboard.cpython-314-pytest-9.0.3.pyc
+	deleted:    realai-core/tests/__pycache__/test_hardening.cpython-314-pytest-9.0.3.pyc
+	deleted:    realai-core/tests/__pycache__/test_orchestration.cpython-314-pytest-9.0.3.pyc
+	deleted:    realai-core/tests/__pycache__/test_registry.cpython-314-pytest-9.0.3.pyc
+	deleted:    realai-core/tools/__pycache__/_shared.cpython-314.pyc
+	deleted:    realai-core/tools/__pycache__/harden_repos.cpython-314.pyc
+	deleted:    realai-core/ui/.gitignore
+	deleted:    realai-core/ui/lib/realaiClient.ts
+	deleted:    realai-core/ui/lib/registryClient.ts
+	deleted:    realai-core/ui/pages/api/orchestrator/run.ts
+	deleted:    realai-core/ui/pages/api/playground/run.ts
+	deleted:    realai-core/ui/tsconfig.tsbuildinfo
+	deleted:    realai-core/web/dashboard/README.md
+	deleted:    realai-core/web/dashboard/package.json
+	deleted:    realai-core/web/dashboard/public/index.html
+	deleted:    realai-core/web/dashboard/src/App.js
+	deleted:    realai-core/web/dashboard/src/api.js
+	deleted:    realai-core/web/dashboard/src/index.js
+	deleted:    realai-frontend/.env.local.example
+	deleted:    realai-frontend/.gitignore
+	deleted:    realai-frontend/next.config.js
+	deleted:    realai-frontend/postcss.config.js
+	deleted:    realai-frontend/src/app/api/chat/route.ts
+	deleted:    realai-frontend/src/app/globals.css
+	deleted:    realai-frontend/src/app/layout.tsx
+	deleted:    realai-frontend/src/app/page.tsx
+	deleted:    realai-frontend/src/components/ChatInput.tsx
+	deleted:    realai-frontend/src/components/MessageList.tsx
+	deleted:    realai-frontend/src/components/SettingsDrawer.tsx
+	deleted:    realai-frontend/src/components/Sidebar.tsx
+	deleted:    realai-frontend/src/lib/realai.ts
+	deleted:    realai-frontend/src/lib/types.ts
+	deleted:    realai-frontend/tailwind.config.js
+	modified:   realai.toml
+	modified:   realai/api_server.py
+	modified:   realai/local_models.py
+	modified:   realai/models/registry.json
+	modified:   realai/server/backends.py
+	modified:   realai/server/inference.py
+	modified:   realai/server/profiles/default.json
+	modified:   realai/server/providers.py
+	modified:   realai/server/router.py
+	modified:   realai/server/tools_runtime.py
+	modified:   realai/tools.py
+	deleted:    realai_gui.py
+	deleted:    realai_local_server.py
+	modified:   render.yaml
+	deleted:    requirements-ci.txt
+	deleted:    requirements-full.txt
+	deleted:    requirements-gpu.txt
+	deleted:    requirements.txt
+	modified:   scripts/setup_local_llama.py
+	modified:   setup.py
+	modified:   src/app/page.tsx
+	deleted:    start_realai_server.bat
+	deleted:    test_local_server.py
+	deleted:    test_realai.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.agentx/
+	.blackbox/
+	.env.example
+	.env.local
+	.gitattributes
+	.kilo/
+	.venv-new/
+	2.md
+	LOCAL_AI_GUIDE.md
+	LOCAL_AI_SUMMARY.md
+	Output/
+	RealAI-builder/
+	RealAIProject/
+	TODO.md
+	agent-tools-main/
+	agent-tools/
+	agents/
+	all_files.txt
+	all_files.zip
+	apps/api/state.py
+	apps/dashboard/
+	apps/frontend/package-lock.json
+	apps/frontend/pnpm-lock.yaml
+	apps/frontend/src/components/layout/
+	apps/frontend/src/components/screens/
+	apps/vscode/
+	apps/widget/
+	archive/
+	archive_extracted/
+	archive_plugin_report.json
+	archive_tree.txt
+	aura/memory/
+	aura/memory_store/
+	aura/reasoning/
+	billing/
+	bootstrap_dump/
+	bootstrap_dump_extracted.json
+	checkpoints/
+	checkpoints_lora/
+	chocolatey/
+	clean_project_files.txt
+	cli/
+	config/models.json
+	config/models.yaml
+	context/
+	core/devmode.py
+	core/devmode_config.json
+	core/index.ts
+	core/inference/local_llama_proxy.py
+	core/mcp_server.py
+	core/realai_gui.py
+	core/realai_server.py
+	data/
+	datasets__local_backup/
+	deep_extract_and_patch.py
+	docs/COMMANDS_AND_LAYERS.md
+	docs/PROJECT_READINESS.md
+	docs/QUICKSTART.md
+	docs/REALAI_NATIVE_MODEL.md
+	docs/SELF_BUILD_LOCAL.md
+	docs/developer-onboarding.md
+	docs/model-manifest.md
+	docs/provider-authoring.md
+	docs/training_agent_asset_inventory.md
+	entrypoints.txt
+	examples/API.md
+	examples/BlackBoxAI.md
+	examples/CONTRIBUTING.md
+	examples/DEPLOYMENT.md
+	examples/DEPLOYMENT_FRONTEND_FIX.md
+	examples/LAMBDA_DEPLOYMENT.md
+	examples/LAMBDA_SIZE_OPTIMIZATION.md
+	examples/PROJECT_SUMMARY.md
+	examples/QUICKSTART_LOCAL.md
+	examples/REALAI_3.0.md
+	examples/SETUP_COMPLETE.md
+	examples/TODO.md
+	examples/VALIDATION_REPORT.md
+	examples/examples.py
+	examples/examples_limitless.py
+	examples/examples_local_ai.py
+	examples/examples_ultimate.py
+	examples/plugin_analysis.md
+	examples/quick_start_local.py
+	examples/workflow-ai-training.json
+	examples/workflow-fullstack.json
+	explore_dump.py
+	find_realai_bootstrap.py
+	find_realai_entrypoints.py
+	find_realai_entrypoints_safe.py
+	full_repo_scan.json
+	full_repo_scan_summary.txt
+	fusion-ui/
+	gui/
+	installer/
+	key_files_list.txt
+	lambda/
+	local_plugin_hits.txt
+	local_real_plugins.txt
+	logs_data/
+	mcp_server.py
+	memory/
+	models/
+	package-lock.json
+	package.json
+	packages/
+	payload.json
+	plugins/autodiscovered/
+	plugins/core/
+	plugins/extracted/
+	plugins/registry.py
+	plugins/tools/
+	project_structure.txt
+	prompts/
+	providers/
+	pytest.ini
+	real-fin/
+	realai-backend/
+	realai-clean/
+	realai-clean__dup1/
+	realai-cli/
+	realai-core/__init__.py
+	realai-design-system/
+	realai-orchestration/
+	realai-sdk-js/
+	realai.http
+	realai/.agentx/
+	realai/.gitattributes
+	realai/.github/
+	realai/.gitignore
+	realai/API.md
+	realai/CONTRIBUTING.md
+	realai/DEPLOYMENT.md
+	realai/DEPLOYMENT_FRONTEND_FIX.md
+	realai/LAMBDA_DEPLOYMENT.md
+	realai/LAMBDA_SIZE_OPTIMIZATION.md
+	realai/LICENSE
+	realai/LOCAL_AI_GUIDE.md
+	realai/LOCAL_AI_SUMMARY.md
+	realai/PROJECT_SUMMARY.md
+	realai/QUICKSTART.md
+	realai/README.md
+	realai/SECURITY_SUMMARY.txt
+	realai/VALIDATION_REPORT.md
+	realai/__init__core_path_patch__.py
+	realai/agents/
+	realai/api/
+	realai/build_lambda.sh
+	realai/config/
+	realai/evolver/
+	realai/examples.py
+	realai/examples_limitless.py
+	realai/examples_local_ai.py
+	realai/examples_ultimate.py
+	realai/index.html
+	realai/index.ts
+	realai/lambda_advanced.py
+	realai/lambda_chat.py
+	realai/lambda_core.py
+	realai/lambda_core_shared.py
+	realai/lambda_embeddings_audio.py
+	realai/lambda_image.py
+	realai/lambda_video.py
+	realai/local_model_cli.py
+	realai/main.py
+	realai/memory/aura_memory.py
+	realai/package.json
+	realai/plugin_marketplace/
+	realai/plugins/
+	realai/providers/
+	realai/quick_start_local.py
+	realai/realai - Copy/
+	realai/realai-cli/
+	realai/realai-design-system/
+	realai/realai-orchestration/
+	realai/realai-sdk-js/
+	realai/realai/
+	realai/realai_agent/
+	realai/realai_api/
+	realai/realai_gui.py
+	realai/realai_launcher.spec
+	realai/render.yaml
+	realai/requirements-ci.txt
+	realai/requirements-full.txt
+	realai/requirements-lambda-advanced.txt
+	realai/requirements-lambda-chat.txt
+	realai/requirements-lambda-core.txt
+	realai/requirements-lambda-embeddings-audio.txt
+	realai/requirements-lambda-image.txt
+	realai/requirements-lambda-video.txt
+	realai/requirements.txt
+	realai/server/client.py
+	realai/server/core.py
+	realai/server/tasks/
+	realai/server/tools/
+	realai/setup.py
+	realai/standalone_ai.py
+	realai/template.yaml
+	realai/test_realai.py
+	realai/tools_repo_exec.py
+	realai/travis smith.lnk
+	realai/v3_ui_proxy.py
+	realai/vercel.json
+	realai_agent/
+	realai_api/
+	realai_extract_bootstrap.py
+	realai_good/
+	realai_historical_backups/
+	realai_memory.ids.sqlite3
+	realai_memory.sqlite3
+	realai_memory/
+	realai_plugins_deep_search_report.md
+	realai_repo/
+	realai_sdk/
+	realai_search_temp/
+	realai_server.py
+	rebase_dryrun/
+	render.yml
+	reorg_manifest.jsonl
+	repo_structure.txt
+	repo_structure.zip
+	root_scripts/
+	scripts/REALI_NEXT_UI_BASE_URL.bat
+	scripts/TODO_fix_api_server_tools_block.py
+	scripts/__init__.py
+	scripts/_runner.py
+	scripts/add_evolver.py
+	scripts/agent_runtime.py
+	scripts/app_framework.py
+	scripts/apply_migration.py
+	scripts/audit.py
+	scripts/auto_fix.py
+	scripts/autodiscover_plugins.py
+	scripts/batch_vet_autodiscovered.py
+	scripts/chat_qwen_lora_directml.py
+	scripts/cleanup_autodiscovered.py
+	scripts/config.py
+	scripts/critique.py
+	scripts/device_utils.py
+	scripts/extract_agent_tool_data.py
+	scripts/extract_archive_plugins.py
+	scripts/full_repo_scan.py
+	scripts/generate_migration_plan.py
+	scripts/identity.py
+	scripts/improved_code.py
+	scripts/improved_llama_endpoint.py
+	scripts/knowledge_graph.py
+	scripts/local_model_cli.py
+	scripts/local_models.py
+	scripts/local_runtime.py
+	scripts/model_registry.py
+	scripts/newmethods.py
+	scripts/plugin_marketplace.py
+	scripts/probe_chat.py
+	scripts/python fix_and_test.py
+	scripts/realai_architect_agent.py
+	scripts/realai_broad_search.py
+	scripts/realai_full_autonomous.py
+	scripts/realai_local_server.py
+	scripts/realai_plugin_hunter.py
+	scripts/realai_rebuilder.py
+	scripts/realai_reorg_agent.py
+	scripts/realai_repo_improver.py
+	scripts/realai_self_improving_agent.py
+	scripts/realai_v3_server.py
+	scripts/rebase_apply.py
+	scripts/rebase_dryrun.py
+	scripts/rebase_generate_diffs.py
+	scripts/rebase_report.py
+	scripts/rebase_resolve_conflicts.py
+	scripts/reorganize_safe.py
+	scripts/report_archive_plugins.py
+	scripts/router.py
+	scripts/run_tests_shortlist.py
+	scripts/safety.py
+	scripts/scan_autodiscovered.py
+	scripts/self_improvement.py
+	scripts/self_improving_agent.py
+	scripts/stabilize_and_package.py
+	scripts/standalone_ai.py
+	scripts/start_realai_server.py
+	scripts/t.py
+	scripts/test_load_whitelist.py
+	scripts/tools.py
+	scripts/verify_adapter_load_and_generate.py
+	scripts/vet_autodiscovered.py
+	scripts/world_model.py
+	sdk/
+	search_realai_plugins,py
+	search_realai_plugins.py
+	server/
+	server_settings.py
+	src/app/api/
+	src/app/globals.css
+	src/app/layout.tsx
+	src/client.ts
+	src/commands/
+	src/components/Avatar/
+	src/components/Badge/
+	src/components/Button/
+	src/components/Card/
+	src/components/ChatBubble/
+	src/components/ChatInput.tsx
+	src/components/CodeBlock/
+	src/components/Dropdown/
+	src/components/Input/
+	src/components/MessageList.tsx
+	src/components/Modal/
+	src/components/ModelTag/
+	src/components/SettingsDrawer.tsx
+	src/components/Sidebar.tsx
+	src/components/Tabs/
+	src/components/TextArea/
+	src/components/Tooltip/
+	src/config.ts
+	src/data/
+	src/icons/
+	src/index.ts
+	src/providers.ts
+	src/realai/
+	src/theme/
+	src/types.ts
+	start-realai.bat
+	template.yaml
+	terminals/
+	tests/api/test_providers.py
+	tests/test64.py
+	tests/test_agent_protocol.py
+	tests/test_bootstrap_weights.py
+	tests/test_cli_commands.py
+	tests/test_client.py
+	tests/test_extract_sessions.py
+	tests/test_import_realai_module.py
+	tests/test_llama.py
+	tests/test_local_server.py
+	tests/test_model_assets.py
+	tests/test_realai.py
+	tests/test_self_builder.py
+	tests/test_training_tools.py
+	tools/
+	training/
+	tsconfig.json
+	utilities/
+	vendor/
+	vercel.json
+

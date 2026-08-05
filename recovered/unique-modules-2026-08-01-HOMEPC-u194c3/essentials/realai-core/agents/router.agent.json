@@ -1,0 +1,7 @@
+{
+  "id": "router",
+  "name": "Router Agent",
+  "description": "Routes tasks to the correct specialized agent.",
+  "tools": [],
+  "permissions": ["safe"]
+}

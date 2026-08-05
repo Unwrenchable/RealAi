@@ -1,0 +1,143 @@
+{
+  "finished": "2026-07-14T15:41:05.701597+00:00",
+  "actions": [
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\cli.py",
+      "to": "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\cli.py",
+      "bytes": 14638
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\cli.py",
+      "to": "C:\\realai\\realai\\agent_tools_gold\\cli.py",
+      "bytes": 14638
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\cli.py",
+      "to": "C:\\realai\\realai-core\\agent_tools\\cli.py",
+      "bytes": 14638
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\dashboard.py",
+      "to": "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\dashboard.py",
+      "bytes": 45383
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\dashboard.py",
+      "to": "C:\\realai\\realai\\agent_tools_gold\\dashboard.py",
+      "bytes": 45383
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\dashboard.py",
+      "to": "C:\\realai\\realai-core\\agent_tools\\dashboard.py",
+      "bytes": 45383
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\executor.py",
+      "to": "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\executor.py",
+      "bytes": 4644
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\executor.py",
+      "to": "C:\\realai\\realai\\agent_tools_gold\\executor.py",
+      "bytes": 4644
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\executor.py",
+      "to": "C:\\realai\\realai-core\\agent_tools\\executor.py",
+      "bytes": 4644
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\importer.py",
+      "to": "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\importer.py",
+      "bytes": 7919
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\importer.py",
+      "to": "C:\\realai\\realai\\agent_tools_gold\\importer.py",
+      "bytes": 7919
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\importer.py",
+      "to": "C:\\realai\\realai-core\\agent_tools\\importer.py",
+      "bytes": 7919
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\models.py",
+      "to": "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\models.py",
+      "bytes": 1105
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\models.py",
+      "to": "C:\\realai\\realai\\agent_tools_gold\\models.py",
+      "bytes": 1105
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\models.py",
+      "to": "C:\\realai\\realai-core\\agent_tools\\models.py",
+      "bytes": 1105
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\registry.py",
+      "to": "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\registry.py",
+      "bytes": 4392
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\registry.py",
+      "to": "C:\\realai\\realai\\agent_tools_gold\\registry.py",
+      "bytes": 4392
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\registry.py",
+      "to": "C:\\realai\\realai-core\\agent_tools\\registry.py",
+      "bytes": 4392
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\runtime.py",
+      "to": "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\runtime.py",
+      "bytes": 10071
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\runtime.py",
+      "to": "C:\\realai\\realai\\agent_tools_gold\\runtime.py",
+      "bytes": 10071
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\runtime.py",
+      "to": "C:\\realai\\realai-core\\agent_tools\\runtime.py",
+      "bytes": 10071
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\__init__.py",
+      "to": "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\__init__.py",
+      "bytes": 82
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\__init__.py",
+      "to": "C:\\realai\\realai\\agent_tools_gold\\__init__.py",
+      "bytes": 82
+    },
+    {
+      "force_copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools\\__init__.py",
+      "to": "C:\\realai\\realai-core\\agent_tools\\__init__.py",
+      "bytes": 82
+    },
+    {
+      "copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\scripts\\overmind_runner.py",
+      "to": "C:\\realai\\recovered\\from_agent_tools\\scripts\\overmind_runner.py"
+    },
+    {
+      "copy": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai\\training\\extract_from_agent_tools.py",
+      "to": "C:\\realai\\recovered\\from_agent_tools\\training\\extract_from_agent_tools.py"
+    }
+  ],
+  "core_modules_bytes": {
+    "cli.py": 14638,
+    "dashboard.py": 45383,
+    "executor.py": 4644,
+    "importer.py": 7919,
+    "models.py": 1105,
+    "registry.py": 4392,
+    "runtime.py": 10071,
+    "__init__.py": 82
+  }
+}

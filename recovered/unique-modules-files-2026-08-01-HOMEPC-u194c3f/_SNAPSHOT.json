@@ -1,0 +1,11 @@
+{
+  "slug": "unique-modules-files-2026-08-01-HOMEPC-u194c3f",
+  "source_sha": "053cb31089e55dc6fbd9baa5c383b070129e652a",
+  "giants_moved_out": 36,
+  "batch": 2,
+  "file_count": 8739,
+  "imported_at": "2026-08-05T05:52:29.9565166-07:00",
+  "dest": "recovered/unique-modules-files-2026-08-01-HOMEPC-u194c3f",
+  "source_ref": "origin/recovery/unique-modules-files/2026-08-01/HOMEPC/u194c3f",
+  "source_branch": "recovery/unique-modules-files/2026-08-01/HOMEPC/u194c3f"
+}

@@ -1,0 +1,11 @@
+{
+  "slug": "realai-3.0-clean",
+  "source_sha": "255042ade85b258cc6427235801ec6cfec2f39f8",
+  "giants_moved_out": 0,
+  "batch": 2,
+  "file_count": 420,
+  "imported_at": "2026-08-05T05:58:53.0177614-07:00",
+  "dest": "recovered/realai-3.0-clean",
+  "source_ref": "origin/realai-3.0-clean",
+  "source_branch": "realai-3.0-clean"
+}

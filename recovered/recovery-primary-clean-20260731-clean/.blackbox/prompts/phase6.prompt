@@ -1,0 +1,27 @@
+You are operating inside /workspaces/RealAi.
+
+Your task is PHASE 6: MODEL + PROVIDER REGISTRY FINALIZATION.
+
+MANDATORY RULES:
+- No questions.
+- No testing.
+- No checkpoints.
+- No pausing.
+- No stopping early.
+
+TASKS:
+1. Read model registry + provider registry.
+2. Identify:
+   - missing models
+   - missing providers
+   - schema mismatches
+   - inconsistent naming
+3. Produce:
+   - unified model registry plan
+   - unified provider registry plan
+   - schema finalization plan
+4. Produce Phase‑7 prerequisites.
+
+Do NOT run tests.
+Do NOT modify files.
+Produce analysis + plans only.

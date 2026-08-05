@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+realai.egg-info/PKG-INFO
+realai.egg-info/SOURCES.txt
+realai.egg-info/dependency_links.txt
+realai.egg-info/entry_points.txt
+realai.egg-info/top_level.txt
+tests/test_cli_commands.py
+tests/test_local_llama_integration.py

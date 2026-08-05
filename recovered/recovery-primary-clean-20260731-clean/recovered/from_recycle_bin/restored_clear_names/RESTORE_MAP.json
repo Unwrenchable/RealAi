@@ -1,0 +1,496 @@
+{
+  "generated_at": "2026-07-15T14:43:38.807675+00:00",
+  "out": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names",
+  "restored_files": 30,
+  "restored_bytes": 5016227255,
+  "dir_notes": 12,
+  "missing_payload": 10,
+  "secrets_skipped": 3,
+  "errors": [],
+  "actions": [
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai-clean\\realai-core.tar.gz.part-ab",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai-clean/realai-core.tar.gz.part-ab",
+      "size": 2097152000,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R4PMDPQ.part-ab",
+      "deleted_time": "2026-07-06T18:34:46.694000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai-clean\\realai-core.tar.gz.part-aa",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai-clean/realai-core.tar.gz.part-aa",
+      "size": 2097152000,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R2KPIYR.part-aa",
+      "deleted_time": "2026-07-06T18:34:49.068000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai-clean\\realai-core.tar.gz.part-ac",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai-clean/realai-core.tar.gz.part-ac",
+      "size": 821370880,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RT30RJN.part-ac",
+      "deleted_time": "2026-07-06T18:35:15.747000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\overseer-bot-ai\\.env.txt",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/overseer-bot-ai/.env.txt",
+      "size": 1843,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RHY9YZG.txt",
+      "deleted_time": "2026-04-25T19:23:36.098000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\models\\registry.json.txt",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/models/registry.json.txt",
+      "size": 1195,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RJ6ZQ48.txt",
+      "deleted_time": "2026-05-10T14:58:53.721000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\api_server.py",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/api_server.py",
+      "size": 571,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RNL4H7T.py",
+      "deleted_time": "2026-06-01T11:18:10.129000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\config.py",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/config.py",
+      "size": 432,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RJHPSTO.py",
+      "deleted_time": "2026-06-01T11:18:14.761000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main\\scripts\\realai.js",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main/scripts/realai.js",
+      "size": 404,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R1LIGZ5.js",
+      "deleted_time": "2026-05-12T07:17:49.850000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\AppData\\Roaming\\RealAi\\config\\models.yaml",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/AppData/Roaming/RealAi/config/models.yaml",
+      "size": 300,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RVKTKEG.yaml",
+      "deleted_time": "2026-06-06T15:20:45.771000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\realai\\models\\models.yaml",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/realai/models/models.yaml",
+      "size": 219,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R5GTF55.yaml",
+      "deleted_time": "2026-06-06T16:11:35.409000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\PAGES",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/PAGES",
+      "size": 3,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RAQWIZX",
+      "deleted_time": "2026-06-28T06:57:16.828000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "\\\\?\\C:\\Users\\tsmit\\realai\\realai\\\u2502\u251c\u2500\u2500 .vscode\\\u2502   \u251c\u2500\u2500 settings.json\u2502   \u251c\u2500\u2500 launch.json\u2502   \u251c\u2500\u2500 tasks.json\u2502   \u2514\u2500\u2500 extensions.json\u2502\u251c\u2500\u2500 src\\\u2502   \u251c\u2500\u2500 index.ts\u2502   \u251c\u2500\u2500 core\\\u2502   \u2502   \u251c\u2500\u2500 logger.ts\u2502   \u2502   \u251c\u2500\u2500 config.ts\u2502   \u2502   \u2514\u2500\u2500 errors.ts\u2502   \u2502\u2502   \u251c\u2500\u2500 agents\\\u2502   \u2502   \u251c\u2500\u2500 base-agent.ts\u2502   \u2502   \u251c\u2500\u2500 overseer-agent.ts\u2502   \u2502   \u2514\u2500\u2500 image-agent.ts\u2502   \u2502\u2502   \u251c\u2500\u2500 mcp\\\u2502   \u2502   \u251c\u2500\u2500 server.ts\u2502   \u2502   \u251c\u2500\u2500 tools\\\u2502   \u2502   \u2502   \u251c\u2500\u2500 filesystem.ts\u2502   \u2502   \u2502   \u251c\u2500\u2500 search.ts\u2502   \u2502   \u2502   \u2514\u2500\u2500 python-runner.ts\u2502   \u2502   \u2514\u2500\u2500 schemas\\\u2502   \u2502       \u251c\u2500\u2500 request.ts\u2502   \u2502       \u2514\u2500\u2500 response.ts\u2502   \u2502\u2502   \u2514\u2500\u2500 utils\\\u2502       \u251c\u2500\u2500 paths.ts\u2502       \u251c\u2500\u2500 env.ts\u2502       \u2514\u2500\u2500 types.ts\u2502\u251c\u2500\u2500 python\\\u2502   \u251c\u2500\u2500 scripts\\\u2502   \u2502   \u251c\u2500\u2500 train.py\u2502   \u2502   \u251c\u2500\u2500 embed.py\u2502   \u2502   \u2514\u2500\u2500 doctor.py\u2502   \u2502\u2502   \u2514\u2500\u2500 notebooks\\\u2502       \u2514\u2500\u2500 exploration.ipynb\u2502\u251c\u2500\u2500 tests\\\u2502   \u251c\u2500\u2500 test_agents.py\u2502   \u251c\u2500\u2500 test_api.py\u2502   \u2514\u2500\u2500 test_memory.py\u2502\u251c\u2500\u2500 models\\\u251c\u2500\u2500 snapshots\\\u251c\u2500\u2500 docs\\\u2502   \u2514\u2500\u2500 architecture.md\u2502\u251c\u2500\u2500 .gitignore\u251c\u2500\u2500 package.json\u251c\u2500\u2500 pnpm-lock.yaml\u251c\u2500\u2500 tsconfig.json\u251c\u2500\u2500 pyproject.toml\u251c\u2500\u2500 README.md\u2502\u251c\u2500\u2500 bootstrap.ps1\u251c\u2500\u2500 scaffold.ps1\u2514\u2500\u2500 install.ps1",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/_weird_paths/_._._._-_._._._._._._._",
+      "size": 0,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RTU4WFN.PS1",
+      "deleted_time": "2026-06-02T08:07:14.352000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main\\public\\js\\overseer\\realai.js.txt",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main/public/js/overseer/realai.js.txt",
+      "size": 0,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RWVRM3U.txt",
+      "deleted_time": "2026-05-12T07:10:23.848000+00:00"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\overseer-bot-ui",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/overseer-bot-ui.DIR_NOTE.json",
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RVP6BKD"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\pnpm-lock.yaml",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/pnpm-lock.yaml",
+      "size": 208088,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R2JSHT4.yaml",
+      "deleted_time": "2026-06-15T08:23:40.739000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\apps\\vscode\\images\\realai-icon.svg",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/apps/vscode/images/realai-icon.svg",
+      "size": 111838,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RD1RWT4.svg",
+      "deleted_time": "2026-06-28T01:00:57.122000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Python314\\Scripts\\realai.exe",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Python314/Scripts/realai.exe",
+      "size": 108312,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R2Q8M5Y.exe",
+      "deleted_time": "2026-06-06T13:20:36.470000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\copilot-session-39a9656a-48d7-4b7a-8ad4-aa82a2c153ee.7z",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/copilot-session-39a9656a-48d7-4b7a-8ad4-aa82a2c153ee.7z",
+      "size": 79116,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RA67G6P.7z",
+      "deleted_time": "2026-06-06T08:14:48.823000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\apps\\frontend\\pnpm-lock.yaml",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/apps/frontend/pnpm-lock.yaml",
+      "size": 18091,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RGF6MCJ.yaml",
+      "deleted_time": "2026-06-01T11:29:51.882000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\package-lock.json",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/package-lock.json",
+      "size": 15285,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RAJRULD.json",
+      "deleted_time": "2026-06-01T11:29:51.863000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\tsconfig.json.disabled",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/tsconfig.json.disabled",
+      "size": 1142,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RB7IKOA.disabled",
+      "deleted_time": "2026-06-15T08:24:18.486000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\.realai\\local_models.json",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/.realai/local_models.json",
+      "size": 671,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RWH5ZJ1.json",
+      "deleted_time": "2026-06-16T09:41:55.478000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\RealAIProject\\.env.local.txt",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/RealAIProject/.env.local.txt",
+      "size": 606,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RQT5MGC.txt",
+      "deleted_time": "2026-05-10T16:09:18.507000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\agent-tools\\agent-tools-main\\agents\\router.agent.json.txt",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/agent-tools/agent-tools-main/agents/router.agent.json.txt",
+      "size": 163,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RVPF27U.txt",
+      "deleted_time": "2026-05-06T20:16:14.455000+00:00"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Program Files\\RealAI",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Program Files/RealAI.DIR_NOTE.json",
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RSGEXD6"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\realai",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai.DIR_NOTE.json",
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RUYES7M"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\New Python.File.py",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/New Python.File.py",
+      "size": 0,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RZE6D53.py",
+      "deleted_time": "2026-06-16T21:21:55.382000+00:00"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\realai\\realai\\\u2502\u251c\u2500\u2500 .vscode",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/_weird_paths/_._.DIR_NOTE.json",
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R1M4T4X.vscode"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\New Python Script.py",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/New Python Script.py",
+      "size": 0,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RVR42B1.py",
+      "deleted_time": "2026-06-24T04:08:19.900000+00:00"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main\\scripts",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main/scripts.DIR_NOTE.json",
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RSQD50W"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\__init__.py",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/__init__.py",
+      "size": 0,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RHQONFX.py",
+      "deleted_time": "2026-06-20T20:42:29.006000+00:00"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Python314\\Lib\\site-packages\\realai-2.0.0.dist-info",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Python314/Lib/site-packages/realai-2.0.0.dist-info.DIR_NOTE.json",
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RZFS669.dist-info"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\realai\\history",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/history.DIR_NOTE.json",
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RKCD4S5"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\RealAI",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/ProgramData/Microsoft/Windows/Start Menu/Programs/RealAI.DIR_NOTE.json",
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R4U3ZT9"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\realai\\.sixth",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/.sixth.DIR_NOTE.json",
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R9JDDJ4.sixth"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\llama\\models",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/llama/models.DIR_NOTE.json",
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RMLNDGH"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\.py",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/.py",
+      "size": 0,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R0PW9O0.py",
+      "deleted_time": "2026-06-20T17:40:24.127000+00:00"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\realai\\.continue\\.continue",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/.continue/.continue.DIR_NOTE.json",
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R4BYJCS.continue"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\.grok\\worktrees\\tsmit-realai\\realai - Copy\\New Python Script.py",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/.grok/worktrees/tsmit-realai/realai - Copy/New Python Script.py",
+      "size": 0,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RV8TIK4.py",
+      "deleted_time": "2026-06-27T06:51:55.590000+00:00"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\.grok\\worktrees\\tsmit-realai\\realai - Copy\\New Text Document.txt",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/.grok/worktrees/tsmit-realai/realai - Copy/New Text Document.txt",
+      "size": 0,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RHGHWKU.txt",
+      "deleted_time": "2026-06-27T06:50:09.831000+00:00"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\realai\\backend",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/backend.DIR_NOTE.json",
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R9XIRXK"
+    },
+    {
+      "type": "restored_file",
+      "orig": "C:\\Users\\tsmit\\realai\\.continue",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai/.continue",
+      "size": 4096,
+      "recycle_was": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RCX9TQ0.continue",
+      "deleted_time": "2026-07-06T10:42:32.962000+00:00"
+    },
+    {
+      "type": "assembled_tar",
+      "parts": {
+        "aa": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai-clean/realai-core.tar.gz.part-aa",
+        "ab": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai-clean/realai-core.tar.gz.part-ab",
+        "ac": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/Users/tsmit/realai-clean/realai-core.tar.gz.part-ac"
+      },
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/restored_clear_names/ASSEMBLED_realai-core.tar.gz",
+      "size": 5015674880
+    }
+  ],
+  "skipped_sample": [
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\03_battle_combat_readiness.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\04_random_encounter_supermutant_patrol.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\02_pipboy_battle_idle.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\RealAI\\RealAI.lnk"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\04_random_encounter_ghoul_horde.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\node_modules\\rpc-websockets\\dist\\index.d.mts"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\node_modules\\helmet\\index.d.mts"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\05d_battle_active_supermutants.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\05c_battle_active_ghoul_horde.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\AtomicFizz (@AtomicFizzCaps) _ X_files\\02tbbOlA_normal.jpg"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\node_modules\\rpc-websockets\\node_modules\\@types\\ws\\index.d.mts"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\node_modules\\rpc-websockets\\node_modules\\@types\\ws\\index.d.mts"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\realai\\apps\\vscode\\images\\realai_icon.jpg"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\node_modules\\express-rate-limit\\dist\\index.d.mts"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\07b_dungeon_combat_battle_panel.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\Public\\Desktop\\RealAI.lnk"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\node_modules\\rpc-websockets\\dist\\index.browser.d.mts"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\nvm4w\\nodejs\\node_modules\\openclaw\\node_modules\\@anthropic-ai\\sdk\\lib\\parser.d.mts"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\06_dungeon_raider_stronghold_room3_loot.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\node_modules\\rpc-websockets\\dist\\index.browser.d.mts"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\06_dungeon_raider_stronghold_room1_combat.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\node_modules\\@eslint-community\\eslint-utils\\index.d.mts"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\02_pipboy_quests.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\node_modules\\express-rate-limit\\dist\\index.d.mts"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\node_modules\\leaflet\\dist\\images\\marker-shadow.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\04_random_encounter_deathclaw.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\realai\\apps\\vscode\\images\\realai-icon.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\node_modules\\acorn\\dist\\acorn.d.mts"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\07a_dungeon_combat_room_entry.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\05a_battle_active_raider_ambush.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\06_dungeon_vault_12_ruins_room2_combat.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\05b_battle_active_deathclaw.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\02_pipboy_exchange.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\node_modules\\rpc-websockets\\dist\\index.d.mts"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\06_dungeon_raider_stronghold_room4_boss.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\04_random_encounter_raider_ambush.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\node_modules\\commander\\typings\\esm.d.mts"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\01_game_loaded_map.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\06_dungeon_vault_12_ruins_room4_boss.png"
+    },
+    {
+      "reason": "noise",
+      "orig": "C:\\Users\\tsmit\\OneDrive\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\tests\\screenshots\\06_dungeon_vault_12_ruins_room3_loot.png"
+    }
+  ]
+}

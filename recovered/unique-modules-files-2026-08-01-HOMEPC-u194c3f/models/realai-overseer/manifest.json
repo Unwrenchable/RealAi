@@ -1,0 +1,20 @@
+{
+  "name": "realai-overseer",
+  "version": "1.0.0",
+  "provider": "realai",
+  "context": 256000,
+  "type": "text",
+  "description": "High-context supervisory model for agent orchestration and long-form reasoning.",
+  "capabilities": [
+    "planning",
+    "analysis",
+    "agent-control",
+    "long-context"
+  ],
+  "tags": [
+    "experimental",
+    "high-context"
+  ],
+  "preferred_gguf": "realai-overseer-Q4_K_M.gguf",
+  "bootstrap_note": "Until a dedicated overseer checkpoint is trained, bootstrap copies the same dev GGUF as realai-1.0-instruct."
+}

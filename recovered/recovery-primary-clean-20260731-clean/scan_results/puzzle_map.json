@@ -1,0 +1,963 @@
+{
+  "meta": {
+    "root": "C:\\realai",
+    "generated_at": "2026-07-13T16:53:10.048760+00:00",
+    "purpose": "Index of all discovery scanners and artifacts. Does not re-crawl the repo. Use to sort the puzzle.",
+    "decision_order": [
+      "1. Boot clean realai/ package",
+      "2. dds3_archive_triage recover candidates",
+      "3. dds3_ability_inventory only_outside_clean",
+      "4. dds3_missing_files_summary",
+      "5. Phase-4 summary counts (not bulk merge)",
+      "6. Ignore multi-GB cavity JSON as primary truth"
+    ]
+  },
+  "facts_from_high_trust": {
+    "unique_missing": 127,
+    "files_scanned": 569,
+    "by_era": {
+      "clean_runtime": 274,
+      "training": 9,
+      "other": 52,
+      "archive": 3
+    },
+    "archive_recover_candidates": 63,
+    "archive_only_in_archive": 15,
+    "archive_memory_snapshots": 24,
+    "ability_tokens": 119,
+    "ability_only_outside_clean": 36,
+    "ability_multi_era": 83
+  },
+  "read_order": [
+    {
+      "path": "scanners/PUZZLE_MAP.md",
+      "why": "Narrative map of every generation"
+    },
+    {
+      "path": "scan_results/puzzle_map.md",
+      "why": "Auto checklist with file sizes"
+    },
+    {
+      "path": "scan_results/dds3_missing_files_summary.json",
+      "why": "Scoped missing overview"
+    },
+    {
+      "path": "scan_results/dds3_archive_triage.json",
+      "why": "Accidental moves in archive/"
+    },
+    {
+      "path": "scan_results/dds3_ability_inventory.json",
+      "why": "Multi-era abilities to preserve"
+    },
+    {
+      "path": "phase4_tools/plan_phase4_preview/phase4_preview_summary.txt",
+      "why": "Merge counts only"
+    },
+    {
+      "path": "realai/api_server.py",
+      "why": "Boot spine (clean runtime)"
+    }
+  ],
+  "pieces": [
+    {
+      "id": "gen0-tri-cavity",
+      "generation": 0,
+      "script": "realai_tri_cavity_search.py",
+      "outputs": [
+        "manifests/tri_cavity_manifest.json"
+      ],
+      "purpose": "Early 3-group keyword cavity search",
+      "trust": "archaeology",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "manifests/tri_cavity_manifest.json",
+          "exists": true,
+          "size": 20509703,
+          "size_human": "19.6 MB",
+          "mtime": "2026-07-11T13:55:10.775871+00:00",
+          "open_advice": "Large \u2014 open summary/top keys only"
+        }
+      ],
+      "outputs_present": 1,
+      "outputs_total_size": 20509703,
+      "outputs_total_size_human": "19.6 MB",
+      "status": "has_output"
+    },
+    {
+      "id": "gen0-alt-v2",
+      "generation": 0,
+      "script": "realai_alt_v2_cavity_search.py",
+      "outputs": [
+        "manifests/alt_v2_cavity_manifest.json"
+      ],
+      "purpose": "Alt keyword cavity v2",
+      "trust": "archaeology",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "manifests/alt_v2_cavity_manifest.json",
+          "exists": true,
+          "size": 3766336,
+          "size_human": "3.6 MB",
+          "mtime": "2026-07-11T14:02:34.776845+00:00",
+          "open_advice": "OK if needed"
+        }
+      ],
+      "outputs_present": 1,
+      "outputs_total_size": 3766336,
+      "outputs_total_size_human": "3.6 MB",
+      "status": "has_output"
+    },
+    {
+      "id": "gen0-alt-v3",
+      "generation": 0,
+      "script": "realai_alt_v3_cavity_search.py",
+      "outputs": [
+        "manifests/alt_v3_cavity_manifest.json"
+      ],
+      "purpose": "Alt keyword cavity v3",
+      "trust": "archaeology",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "manifests/alt_v3_cavity_manifest.json",
+          "exists": true,
+          "size": 14071901,
+          "size_human": "13.4 MB",
+          "mtime": "2026-07-11T14:34:39.268390+00:00",
+          "open_advice": "Large \u2014 open summary/top keys only"
+        }
+      ],
+      "outputs_present": 1,
+      "outputs_total_size": 14071901,
+      "outputs_total_size_human": "13.4 MB",
+      "status": "has_output"
+    },
+    {
+      "id": "gen0-alt-cavity",
+      "generation": 0,
+      "script": "realai_alt_cavity_search.py",
+      "outputs": [
+        "manifests/realai_alt_cavity_manifest.json",
+        "realai_alt_cavity_summary.txt"
+      ],
+      "purpose": "Massive keyword dump (multi-GB risk)",
+      "trust": "noise_if_huge",
+      "open_first": false,
+      "do_not_rerun": true,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "manifests/realai_alt_cavity_manifest.json",
+          "exists": true,
+          "size": 2915031798,
+          "size_human": "2.7 GB",
+          "mtime": "2026-07-11T14:39:03.200651+00:00",
+          "open_advice": "TOO_LARGE_for_editor \u2014 use summary only or jq filters"
+        },
+        {
+          "path": "realai_alt_cavity_summary.txt",
+          "exists": true,
+          "size": 4528,
+          "size_human": "4.4 KB",
+          "mtime": "2026-07-11T14:39:03.209604+00:00",
+          "open_advice": "Safe to open"
+        }
+      ],
+      "outputs_present": 2,
+      "outputs_total_size": 2915036326,
+      "outputs_total_size_human": "2.7 GB",
+      "status": "done_do_not_rerun"
+    },
+    {
+      "id": "gen0-full-cavity",
+      "generation": 0,
+      "script": "realai_full_cavity_search.py",
+      "outputs": [
+        "manifests/realai_full_cavity_manifest.json",
+        "realai_full_cavity_summary.txt"
+      ],
+      "purpose": "Full keyword cavity + group summaries",
+      "trust": "archaeology",
+      "open_first": false,
+      "do_not_rerun": true,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "manifests/realai_full_cavity_manifest.json",
+          "exists": true,
+          "size": 403506164,
+          "size_human": "384.8 MB",
+          "mtime": "2026-07-11T17:49:36+00:00",
+          "open_advice": "TOO_LARGE_for_editor \u2014 use summary only or jq filters"
+        },
+        {
+          "path": "realai_full_cavity_summary.txt",
+          "exists": true,
+          "size": 4405,
+          "size_human": "4.3 KB",
+          "mtime": "2026-07-11T17:49:36+00:00",
+          "open_advice": "Safe to open"
+        }
+      ],
+      "outputs_present": 2,
+      "outputs_total_size": 403510569,
+      "outputs_total_size_human": "384.8 MB",
+      "status": "done_do_not_rerun"
+    },
+    {
+      "id": "gen0-full-spectrum",
+      "generation": 0,
+      "script": "realai_full_spectrum_scan.py",
+      "outputs": [
+        "manifests/full_spectrum_cavity_manifest.json"
+      ],
+      "purpose": "Spectrum keyword scan (root copy)",
+      "trust": "archaeology",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "manifests/full_spectrum_cavity_manifest.json",
+          "exists": true,
+          "size": 41588421,
+          "size_human": "39.7 MB",
+          "mtime": "2026-07-11T14:41:24.513649+00:00",
+          "open_advice": "Large \u2014 open summary/top keys only"
+        }
+      ],
+      "outputs_present": 1,
+      "outputs_total_size": 41588421,
+      "outputs_total_size_human": "39.7 MB",
+      "status": "has_output"
+    },
+    {
+      "id": "gen0-full-module",
+      "generation": 0,
+      "script": "realai_full_module_scan.py",
+      "outputs": [
+        "manifests/full_module_manifest.json"
+      ],
+      "purpose": "Module listing (root copy)",
+      "trust": "archaeology",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "manifests/full_module_manifest.json",
+          "exists": true,
+          "size": 9887111,
+          "size_human": "9.4 MB",
+          "mtime": "2026-07-11T14:41:03.659000+00:00",
+          "open_advice": "Large \u2014 open summary/top keys only"
+        }
+      ],
+      "outputs_present": 1,
+      "outputs_total_size": 9887111,
+      "outputs_total_size_human": "9.4 MB",
+      "status": "has_output"
+    },
+    {
+      "id": "gen0-orchestrator",
+      "generation": 0,
+      "script": "orchestrator.py",
+      "outputs": [],
+      "purpose": "Phase scan/patch-target orchestrator (design)",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [],
+      "outputs_present": 0,
+      "outputs_total_size": 0,
+      "outputs_total_size_human": "\u2014",
+      "status": "script_only_no_output_yet"
+    },
+    {
+      "id": "gen0-dry-run",
+      "generation": 0,
+      "script": "dry_run_scaffold.py",
+      "outputs": [
+        "phase4_tools/plan_phase4_preview/phase4_preview_summary.txt",
+        "phase4_tools/plan_phase4_preview/phase4_preview.json"
+      ],
+      "purpose": "Phase-4 merge dry-run preview",
+      "trust": "medium",
+      "open_first": true,
+      "note": "Use SUMMARY counts only; do not execute bulk merge yet",
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "phase4_tools/plan_phase4_preview/phase4_preview_summary.txt",
+          "exists": true,
+          "size": 322,
+          "size_human": "322 B",
+          "mtime": "2026-07-11T15:45:56.485413+00:00",
+          "open_advice": "Safe to open"
+        },
+        {
+          "path": "phase4_tools/plan_phase4_preview/phase4_preview.json",
+          "exists": true,
+          "size": 6664726,
+          "size_human": "6.4 MB",
+          "mtime": "2026-07-11T15:45:56.478516+00:00",
+          "open_advice": "Large \u2014 open summary/top keys only"
+        }
+      ],
+      "outputs_present": 2,
+      "outputs_total_size": 6665048,
+      "outputs_total_size_human": "6.4 MB",
+      "status": "ready_open_first"
+    },
+    {
+      "id": "gen0-smart-merge",
+      "generation": 0,
+      "script": "smart_merge_realai.py",
+      "outputs": [],
+      "purpose": "Early merge helper \u2014 do not bulk-run",
+      "trust": "low",
+      "open_first": false,
+      "do_not_rerun": true,
+      "script_exists": true,
+      "outputs_detail": [],
+      "outputs_present": 0,
+      "outputs_total_size": 0,
+      "outputs_total_size_human": "\u2014",
+      "status": "script_only_no_output_yet"
+    },
+    {
+      "id": "fs1",
+      "generation": 2,
+      "script": "scanners/fs1_full_spectrum_scan.py",
+      "outputs": [
+        "scan_results/fs1_full_spectrum_manifest.json"
+      ],
+      "purpose": "Full spectrum feature keywords",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/fs1_full_spectrum_manifest.json",
+          "exists": false,
+          "size": 0,
+          "size_human": "\u2014",
+          "mtime": null
+        }
+      ],
+      "outputs_present": 0,
+      "outputs_total_size": 0,
+      "outputs_total_size_human": "\u2014",
+      "status": "script_only_no_output_yet"
+    },
+    {
+      "id": "fs2",
+      "generation": 2,
+      "script": "scanners/fs2_module_scan.py",
+      "outputs": [
+        "scan_results/fs2_module_manifest.json"
+      ],
+      "purpose": "Module inventory",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/fs2_module_manifest.json",
+          "exists": false,
+          "size": 0,
+          "size_human": "\u2014",
+          "mtime": null
+        }
+      ],
+      "outputs_present": 0,
+      "outputs_total_size": 0,
+      "outputs_total_size_human": "\u2014",
+      "status": "script_only_no_output_yet"
+    },
+    {
+      "id": "alt-v4",
+      "generation": 2,
+      "script": "scanners/alt_v4_autonomy_scan.py",
+      "outputs": [
+        "scan_results/alt_v4_autonomy_manifest.json"
+      ],
+      "purpose": "Autonomy keywords",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/alt_v4_autonomy_manifest.json",
+          "exists": false,
+          "size": 0,
+          "size_human": "\u2014",
+          "mtime": null
+        }
+      ],
+      "outputs_present": 0,
+      "outputs_total_size": 0,
+      "outputs_total_size_human": "\u2014",
+      "status": "script_only_no_output_yet"
+    },
+    {
+      "id": "tri-v2",
+      "generation": 2,
+      "script": "scanners/tri_v2_worldmodel_scan.py",
+      "outputs": [
+        "scan_results/tri_v2_worldmodel_manifest.json"
+      ],
+      "purpose": "World-model keywords",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/tri_v2_worldmodel_manifest.json",
+          "exists": false,
+          "size": 0,
+          "size_human": "\u2014",
+          "mtime": null
+        }
+      ],
+      "outputs_present": 0,
+      "outputs_total_size": 0,
+      "outputs_total_size_human": "\u2014",
+      "status": "script_only_no_output_yet"
+    },
+    {
+      "id": "lora",
+      "generation": 2,
+      "script": "scanners/lora_scan.py",
+      "outputs": [
+        "scan_results/lora_manifest.json"
+      ],
+      "purpose": "LoRA / training surface",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/lora_manifest.json",
+          "exists": false,
+          "size": 0,
+          "size_human": "\u2014",
+          "mtime": null
+        }
+      ],
+      "outputs_present": 0,
+      "outputs_total_size": 0,
+      "outputs_total_size_human": "\u2014",
+      "status": "script_only_no_output_yet"
+    },
+    {
+      "id": "rag",
+      "generation": 2,
+      "script": "scanners/rag_scan.py",
+      "outputs": [
+        "scan_results/rag_manifest.json"
+      ],
+      "purpose": "RAG / retrieval surface",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/rag_manifest.json",
+          "exists": false,
+          "size": 0,
+          "size_human": "\u2014",
+          "mtime": null
+        }
+      ],
+      "outputs_present": 0,
+      "outputs_total_size": 0,
+      "outputs_total_size_human": "\u2014",
+      "status": "script_only_no_output_yet"
+    },
+    {
+      "id": "mcp",
+      "generation": 2,
+      "script": "scanners/mcp_scan.py",
+      "outputs": [
+        "scan_results/mcp_manifest.json"
+      ],
+      "purpose": "MCP / tools surface",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/mcp_manifest.json",
+          "exists": false,
+          "size": 0,
+          "size_human": "\u2014",
+          "mtime": null
+        }
+      ],
+      "outputs_present": 0,
+      "outputs_total_size": 0,
+      "outputs_total_size_human": "\u2014",
+      "status": "script_only_no_output_yet"
+    },
+    {
+      "id": "npc",
+      "generation": 2,
+      "script": "scanners/npc_scan.py",
+      "outputs": [
+        "scan_results/npc_manifest.json"
+      ],
+      "purpose": "NPC / game surface",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/npc_manifest.json",
+          "exists": false,
+          "size": 0,
+          "size_human": "\u2014",
+          "mtime": null
+        }
+      ],
+      "outputs_present": 0,
+      "outputs_total_size": 0,
+      "outputs_total_size_human": "\u2014",
+      "status": "script_only_no_output_yet"
+    },
+    {
+      "id": "solana",
+      "generation": 2,
+      "script": "scanners/solana_scan.py",
+      "outputs": [
+        "scan_results/solana_manifest.json"
+      ],
+      "purpose": "Solana / web3 surface",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/solana_manifest.json",
+          "exists": false,
+          "size": 0,
+          "size_human": "\u2014",
+          "mtime": null
+        }
+      ],
+      "outputs_present": 0,
+      "outputs_total_size": 0,
+      "outputs_total_size_human": "\u2014",
+      "status": "script_only_no_output_yet"
+    },
+    {
+      "id": "backend",
+      "generation": 2,
+      "script": "scanners/backend_scan.py",
+      "outputs": [
+        "scan_results/backend_manifest.json"
+      ],
+      "purpose": "Backend surface",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/backend_manifest.json",
+          "exists": false,
+          "size": 0,
+          "size_human": "\u2014",
+          "mtime": null
+        }
+      ],
+      "outputs_present": 0,
+      "outputs_total_size": 0,
+      "outputs_total_size_human": "\u2014",
+      "status": "script_only_no_output_yet"
+    },
+    {
+      "id": "dds1",
+      "generation": 3,
+      "script": "scanners/dds1_dependency_doc_scan.py",
+      "outputs": [
+        "scan_results/dds1_dependency_doc_manifest.json"
+      ],
+      "purpose": "Dependency + documentation keywords",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/dds1_dependency_doc_manifest.json",
+          "exists": false,
+          "size": 0,
+          "size_human": "\u2014",
+          "mtime": null
+        }
+      ],
+      "outputs_present": 0,
+      "outputs_total_size": 0,
+      "outputs_total_size_human": "\u2014",
+      "status": "script_only_no_output_yet"
+    },
+    {
+      "id": "dds2",
+      "generation": 3,
+      "script": "scanners/dds2_dependency_crosscheck.py",
+      "outputs": [
+        "scan_results/dds2_dependency_crosscheck.json"
+      ],
+      "purpose": "Dependency cross-check",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/dds2_dependency_crosscheck.json",
+          "exists": false,
+          "size": 0,
+          "size_human": "\u2014",
+          "mtime": null
+        }
+      ],
+      "outputs_present": 0,
+      "outputs_total_size": 0,
+      "outputs_total_size_human": "\u2014",
+      "status": "script_only_no_output_yet"
+    },
+    {
+      "id": "dds3",
+      "generation": 3,
+      "script": "scanners/dds3_missing_files.py",
+      "outputs": [
+        "scan_results/dds3_missing_files.json",
+        "scan_results/dds3_missing_files_summary.json",
+        "scan_results/dds3_archive_triage.json",
+        "scan_results/dds3_ability_inventory.json"
+      ],
+      "purpose": "Scoped missing map + archive triage + ability inventory",
+      "trust": "high",
+      "open_first": true,
+      "note": "Primary scanner after polish. Run operational + archive + abilities.",
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/dds3_missing_files.json",
+          "exists": true,
+          "size": 104558,
+          "size_human": "102.1 KB",
+          "mtime": "2026-07-13T16:09:41.895272+00:00",
+          "open_advice": "Safe to open (primary)"
+        },
+        {
+          "path": "scan_results/dds3_missing_files_summary.json",
+          "exists": true,
+          "size": 9788,
+          "size_human": "9.6 KB",
+          "mtime": "2026-07-13T16:09:41.895272+00:00",
+          "open_advice": "Safe to open"
+        },
+        {
+          "path": "scan_results/dds3_archive_triage.json",
+          "exists": true,
+          "size": 41832,
+          "size_human": "40.9 KB",
+          "mtime": "2026-07-13T16:09:42.066675+00:00",
+          "open_advice": "Safe to open"
+        },
+        {
+          "path": "scan_results/dds3_ability_inventory.json",
+          "exists": true,
+          "size": 49236,
+          "size_human": "48.1 KB",
+          "mtime": "2026-07-13T16:09:44.822083+00:00",
+          "open_advice": "Safe to open (primary)"
+        }
+      ],
+      "outputs_present": 4,
+      "outputs_total_size": 205414,
+      "outputs_total_size_human": "200.6 KB",
+      "status": "ready_open_first"
+    },
+    {
+      "id": "dds4",
+      "generation": 3,
+      "script": "scanners/dds4_orphan_modules.py",
+      "outputs": [
+        "scan_results/dds4_orphan_modules.json"
+      ],
+      "purpose": "Orphan modules",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/dds4_orphan_modules.json",
+          "exists": true,
+          "size": 228734,
+          "size_human": "223.4 KB",
+          "mtime": "2026-07-11T15:31:46.656260+00:00",
+          "open_advice": "OK if needed"
+        }
+      ],
+      "outputs_present": 1,
+      "outputs_total_size": 228734,
+      "outputs_total_size_human": "223.4 KB",
+      "status": "has_output"
+    },
+    {
+      "id": "dds5",
+      "generation": 3,
+      "script": "scanners/dds5_unused_features.py",
+      "outputs": [
+        "scan_results/dds5_unused_features.json"
+      ],
+      "purpose": "Unused feature symbols (often huge/noisy)",
+      "trust": "low",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/dds5_unused_features.json",
+          "exists": true,
+          "size": 2045939,
+          "size_human": "2.0 MB",
+          "mtime": "2026-07-11T15:34:03.405183+00:00",
+          "open_advice": "OK if needed"
+        }
+      ],
+      "outputs_present": 1,
+      "outputs_total_size": 2045939,
+      "outputs_total_size_human": "2.0 MB",
+      "status": "has_output"
+    },
+    {
+      "id": "dds6",
+      "generation": 3,
+      "script": "scanners/dds6_config_mismatches.py",
+      "outputs": [
+        "scan_results/dds6_config_mismatches.json"
+      ],
+      "purpose": "Config mismatches",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/dds6_config_mismatches.json",
+          "exists": true,
+          "size": 722,
+          "size_human": "722 B",
+          "mtime": "2026-07-11T15:52:55.447799+00:00",
+          "open_advice": "OK if needed"
+        }
+      ],
+      "outputs_present": 1,
+      "outputs_total_size": 722,
+      "outputs_total_size_human": "722 B",
+      "status": "has_output"
+    },
+    {
+      "id": "dds7",
+      "generation": 3,
+      "script": "scanners/dds7_doc_code_consistency.py",
+      "outputs": [
+        "scan_results/dds7_doc_code_consistency.json"
+      ],
+      "purpose": "Doc vs code consistency",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/dds7_doc_code_consistency.json",
+          "exists": true,
+          "size": 1880460,
+          "size_human": "1.8 MB",
+          "mtime": "2026-07-11T15:55:30.211309+00:00",
+          "open_advice": "OK if needed"
+        }
+      ],
+      "outputs_present": 1,
+      "outputs_total_size": 1880460,
+      "outputs_total_size_human": "1.8 MB",
+      "status": "has_output"
+    },
+    {
+      "id": "dds8",
+      "generation": 3,
+      "script": "scanners/dds8_runtime_path_integrity.py",
+      "outputs": [
+        "scan_results/dds8_runtime_path_integrity.json"
+      ],
+      "purpose": "Runtime path integrity (re-scope before trusting)",
+      "trust": "low",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/dds8_runtime_path_integrity.json",
+          "exists": true,
+          "size": 30570531,
+          "size_human": "29.2 MB",
+          "mtime": "2026-07-11T15:58:08.760468+00:00",
+          "open_advice": "Large \u2014 open summary/top keys only"
+        }
+      ],
+      "outputs_present": 1,
+      "outputs_total_size": 30570531,
+      "outputs_total_size_human": "29.2 MB",
+      "status": "has_output"
+    },
+    {
+      "id": "dds9-deep",
+      "generation": 3,
+      "script": "scanners/dds9_subsystem_completeness_deep.py",
+      "outputs": [
+        "scan_results/dds9_subsystem_completeness_deep.json",
+        "scan_results/dds9_subsystem_completeness.json"
+      ],
+      "purpose": "Subsystem completeness",
+      "trust": "medium",
+      "open_first": false,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/dds9_subsystem_completeness_deep.json",
+          "exists": true,
+          "size": 82851,
+          "size_human": "80.9 KB",
+          "mtime": "2026-07-11T16:06:30.232772+00:00",
+          "open_advice": "OK if needed"
+        },
+        {
+          "path": "scan_results/dds9_subsystem_completeness.json",
+          "exists": true,
+          "size": 930,
+          "size_human": "930 B",
+          "mtime": "2026-07-11T15:58:54.884736+00:00",
+          "open_advice": "OK if needed"
+        }
+      ],
+      "outputs_present": 2,
+      "outputs_total_size": 83781,
+      "outputs_total_size_human": "81.8 KB",
+      "status": "has_output"
+    },
+    {
+      "id": "dds10",
+      "generation": 3,
+      "script": "scanners/dds10_merge_plan_validator.py",
+      "outputs": [
+        "scan_results/dds10_merge_plan_validator.json"
+      ],
+      "purpose": "Validate Phase-4 merge plan structure",
+      "trust": "high",
+      "open_first": true,
+      "note": "Validates plan files only; does not walk product code",
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/dds10_merge_plan_validator.json",
+          "exists": true,
+          "size": 1918108,
+          "size_human": "1.8 MB",
+          "mtime": "2026-07-11T16:08:56.494689+00:00",
+          "open_advice": "OK if needed"
+        }
+      ],
+      "outputs_present": 1,
+      "outputs_total_size": 1918108,
+      "outputs_total_size_human": "1.8 MB",
+      "status": "ready_open_first"
+    },
+    {
+      "id": "puzzle-map",
+      "generation": 4,
+      "script": "scanners/build_puzzle_map.py",
+      "outputs": [
+        "scan_results/puzzle_map.json",
+        "scan_results/puzzle_map.md",
+        "scanners/PUZZLE_MAP.md"
+      ],
+      "purpose": "This index \u2014 consolidates the puzzle without re-crawling",
+      "trust": "high",
+      "open_first": true,
+      "script_exists": true,
+      "outputs_detail": [
+        {
+          "path": "scan_results/puzzle_map.json",
+          "exists": true,
+          "size": 28884,
+          "size_human": "28.2 KB",
+          "mtime": "2026-07-13T16:20:42.359584+00:00",
+          "open_advice": "Safe to open"
+        },
+        {
+          "path": "scan_results/puzzle_map.md",
+          "exists": true,
+          "size": 8604,
+          "size_human": "8.4 KB",
+          "mtime": "2026-07-13T16:20:42.359584+00:00",
+          "open_advice": "Safe to open"
+        },
+        {
+          "path": "scanners/PUZZLE_MAP.md",
+          "exists": true,
+          "size": 8290,
+          "size_human": "8.1 KB",
+          "mtime": "2026-07-13T16:53:09.673186+00:00",
+          "open_advice": "Safe to open"
+        }
+      ],
+      "outputs_present": 3,
+      "outputs_total_size": 45778,
+      "outputs_total_size_human": "44.7 KB",
+      "status": "ready_open_first"
+    }
+  ],
+  "open_first_pieces": [
+    "gen0-dry-run",
+    "dds3",
+    "dds10",
+    "puzzle-map"
+  ],
+  "missing_scripts": [],
+  "huge_artifacts": [
+    {
+      "path": "manifests/realai_alt_cavity_manifest.json",
+      "exists": true,
+      "size": 2915031798,
+      "size_human": "2.7 GB",
+      "mtime": "2026-07-11T14:39:03.200651+00:00",
+      "open_advice": "TOO_LARGE_for_editor \u2014 use summary only or jq filters"
+    },
+    {
+      "path": "manifests/realai_full_cavity_manifest.json",
+      "exists": true,
+      "size": 403506164,
+      "size_human": "384.8 MB",
+      "mtime": "2026-07-11T17:49:36+00:00",
+      "open_advice": "TOO_LARGE_for_editor \u2014 use summary only or jq filters"
+    }
+  ],
+  "orphan_outputs": [
+    {
+      "path": "scan_results/archive_recovery_log.json",
+      "exists": true,
+      "size": 10427,
+      "size_human": "10.2 KB",
+      "mtime": "2026-07-13T16:52:51.512140+00:00",
+      "open_advice": "OK if needed"
+    }
+  ],
+  "counts": {
+    "catalog_pieces": 31,
+    "scripts_present": 31,
+    "open_first": 4,
+    "huge_artifacts": 2
+  }
+}

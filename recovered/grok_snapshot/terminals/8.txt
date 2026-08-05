@@ -1,0 +1,119 @@
+---
+pid: 21936
+cwd: "C:\Users\tsmit\realai\apps\frontend"
+command: "pnpm exec next dev -p 3847"
+started_at: 2026-06-04T12:35:54.680Z
+running_for_ms: 16609993 
+---
+⨯ ./apps/frontend/src/components/SettingsDrawer.tsx:3:1
+Export Gpu doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { X, ChevronDown, Check, RefreshCw, Wifi, WifiOff, Cpu, Gpu } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useState } from "react";
+  5 | import type { Settings, ModelOption, AgentOption, ComputeMode } from "@/lib/types";
+  6 | import type { ConnectionState } from "@/lib/connection";
+
+The export Gpu was not found in module [project]/node_modules/.pnpm/lucide-react@0.468.0_react@18.3.1/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Cpu?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/SettingsDrawer.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/SettingsDrawer.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+
+
+./apps/frontend/src/components/SettingsDrawer.tsx:3:1
+Export Gpu doesn't exist in target module
+  1 | "use client";
+  2 |
+> 3 | import { X, ChevronDown, Check, RefreshCw, Wifi, WifiOff, Cpu, Gpu } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useState } from "react";
+  5 | import type { Settings, ModelOption, AgentOption, ComputeMode } from "@/lib/types";
+  6 | import type { ConnectionState } from "@/lib/connection";
+
+The export Gpu was not found in module [project]/node_modules/.pnpm/lucide-react@0.468.0_react@18.3.1/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Cpu?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/SettingsDrawer.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/SettingsDrawer.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+
+⚠ Blocked cross-origin request to Next.js dev resource /_next/webpack-hmr from "127.0.0.1".
+Cross-origin access to Next.js dev resources is blocked by default for safety.
+
+To allow this host in development, add it to "allowedDevOrigins" in next.config.js and restart the dev server:
+
+// next.config.js
+module.exports = {
+  allowedDevOrigins: ['127.0.0.1'],
+}
+
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+⚠ Blocked cross-origin request to Next.js dev resource /__nextjs_font/geist-latin.woff2 from "127.0.0.1".
+Cross-origin access to Next.js dev resources is blocked by default for safety.
+
+To allow this host in development, add it to "allowedDevOrigins" in next.config.js and restart the dev server:
+
+// next.config.js
+module.exports = {
+  allowedDevOrigins: ['127.0.0.1'],
+}
+
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3847
+- Network:       http://192.168.0.19:3847
+- Environments: .env.local
+✓ Ready in 383ms
+
+ GET /api/live 200 in 148ms (next.js: 128ms, application-code: 20ms)
+ GET / 500 in 227ms (next.js: 103ms, application-code: 123ms)
+ GET /api/live 500 in 10ms (next.js: 6ms, application-code: 4ms)
+✓ Compiled in 899ms
+ GET / 200 in 300ms (next.js: 66ms, application-code: 234ms)
+ GET /api/live 200 in 50ms (next.js: 37ms, application-code: 13ms)
+ GET /api/live 200 in 6ms (next.js: 3ms, application-code: 4ms)
+ GET /api/live 200 in 5ms (next.js: 2ms, application-code: 3ms)
+ GET / 200 in 41ms (next.js: 2ms, application-code: 39ms)
+ GET / 200 in 86ms (next.js: 6ms, application-code: 80ms)
+ GET /api/live 200 in 6ms (next.js: 2ms, application-code: 4ms)
+ GET / 200 in 50ms (next.js: 3ms, application-code: 47ms)
+ GET / 200 in 50ms (next.js: 4ms, application-code: 46ms)
+ GET / 200 in 42ms (next.js: 3ms, application-code: 39ms)
+ GET / 200 in 47ms (next.js: 3ms, application-code: 44ms)
+ GET / 200 in 48ms (next.js: 5ms, application-code: 43ms)
+ GET / 200 in 50ms (next.js: 4ms, application-code: 47ms)
+ GET / 200 in 48ms (next.js: 2ms, application-code: 45ms)
+ GET / 200 in 60ms (next.js: 4ms, application-code: 56ms)
+ GET / 200 in 52ms (next.js: 3ms, application-code: 49ms)
+ GET / 200 in 43ms (next.js: 4ms, application-code: 39ms)
+ GET / 200 in 51ms (next.js: 4ms, application-code: 47ms)
+ GET / 200 in 42ms (next.js: 4ms, application-code: 38ms)
+ GET / 200 in 38ms (next.js: 3ms, application-code: 35ms)
+ GET / 200 in 41ms (next.js: 3ms, application-code: 39ms)
+ GET / 200 in 41ms (next.js: 3ms, application-code: 38ms)
+ GET / 200 in 224ms (next.js: 53ms, application-code: 171ms)
+ GET / 200 in 53ms (next.js: 3ms, application-code: 50ms)
+ GET / 200 in 38ms (next.js: 3ms, application-code: 35ms)
+ GET / 200 in 45ms (next.js: 3ms, application-code: 43ms)
+

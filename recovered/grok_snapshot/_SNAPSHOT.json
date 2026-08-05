@@ -1,0 +1,11 @@
+{
+  "slug": "grok_snapshot",
+  "source_sha": "70aec7e9f3fd194aea1746ff28008d96dac5dcfa",
+  "giants_moved_out": 0,
+  "batch": 2,
+  "file_count": 550,
+  "imported_at": "2026-08-05T05:58:58.4127677-07:00",
+  "dest": "recovered/grok_snapshot",
+  "source_ref": "origin/grok_snapshot",
+  "source_branch": "grok_snapshot"
+}

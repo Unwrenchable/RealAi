@@ -1,0 +1,19 @@
+services:
+  realai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - "8000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.realai.rule=PathPrefix(`/`)"
+      - "traefik.http.services.realai.loadbalancer.server.port=8000"
+
+  proxy:
+    image: traefik:v2.10
+    ports:
+      - "80:80"
+    volumes:
+      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro

@@ -1,0 +1,22 @@
+{
+  "name": "realai-vscode",
+  "displayName": "RealAI",
+  "description": "RealAI extension for VS Code",
+  "version": "0.3.0",
+  "publisher": "Unwrenchable",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": ["AI"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.0",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.0.0"
+  }
+}

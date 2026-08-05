@@ -1,0 +1,11 @@
+{
+  "slug": "users-tsmit-realai-clean-2026-07-31-HOMEPC-d4b912",
+  "source_sha": "1c454524041fd22976423e8f7eea491ad095210a",
+  "giants_moved_out": 0,
+  "batch": 2,
+  "file_count": 290,
+  "imported_at": "2026-08-05T05:58:48.9666523-07:00",
+  "dest": "recovered/users-tsmit-realai-clean-2026-07-31-HOMEPC-d4b912",
+  "source_ref": "origin/recovery/users-tsmit-realai-clean/2026-07-31/HOMEPC/d4b912",
+  "source_branch": "recovery/users-tsmit-realai-clean/2026-07-31/HOMEPC/d4b912"
+}

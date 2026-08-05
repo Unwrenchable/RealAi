@@ -1,0 +1,22 @@
+---
+pid: 24128
+cwd: "C:\Users\tsmit\realai"
+command: "powershell -NoProfile -Command \"Get-NetTCPConnection -LocalPort 8001 -State Listen -EA SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -EA SilentlyContinue }\"; Start-Sleep 2; cd C:\\Users\\tsmit\\realai; py -3.14 -m realai.provider"
+started_at: 2026-06-04T14:10:19.302Z
+running_for_ms: 10969993 
+---
+ForEach-Object : Cannot bind parameter 'Id'. Cannot convert value ".OwningProcess" to type "System.Int32". Error: 
+"Input string was not in a correct format."
+At line:1 char:75
++ ... yContinue | ForEach-Object { Stop-Process -Id .OwningProcess -Force - ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [ForEach-Object], ParameterBindingException
+    + FullyQualifiedErrorId : CannotConvertArgumentNoMessage,Microsoft.PowerShell.Commands.ForEachObjectCommand
+ 
+[RealAI] Core modules loaded.
+INFO:     Started server process [28208]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:    [Errno 10048] error while attempting to bind on address ('0.0.0.0', 8001): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.

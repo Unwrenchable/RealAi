@@ -1,0 +1,43 @@
+{
+  "default_llm": "qwen-coder-7b",
+  "default_embedding": "all-MiniLM-L6-v2",
+  "models": {
+    "qwen-coder-7b": {
+      "type": "llm",
+      "backend": "llama-cpp",
+      "path": "C:\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "context_length": 16384,
+      "gpu_layers": -1,
+      "owned_by": "local"
+    },
+    "realai-1.0": {
+      "type": "llm",
+      "backend": "llama-cpp",
+      "path": "C:\\llama-vulkan\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+      "context_length": 8192,
+      "gpu_layers": -1,
+      "owned_by": "travis"
+    },
+    "realai-1.0-instruct": {
+      "type": "llm",
+      "backend": "llama-cpp",
+      "path": "C:\\llama-vulkan\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+      "context_length": 8192,
+      "gpu_layers": -1,
+      "owned_by": "travis"
+    },
+    "llama-local": {
+      "type": "llm",
+      "backend": "llama-cpp",
+      "path": "C:\\realai\\models\\llama-local-1b-Q4_K_M.gguf",
+      "context_length": 8192,
+      "gpu_layers": -1,
+      "owned_by": "local"
+    }
+  },
+  "preferences": {
+    "use_local_first": true,
+    "gpu_enabled": true,
+    "max_memory_gb": 16
+  }
+}

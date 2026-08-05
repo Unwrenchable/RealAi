@@ -1,0 +1,25 @@
+{
+  "default_llm": "llama-local",
+  "default_embedding": "all-MiniLM-L6-v2",
+  "models": {
+    "llama3.2-1b": {
+      "type": "llm",
+      "path": "C:\\Users\\tsmit\\realai\\models\\llama3.2-1b\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "backend": "llama-cpp",
+      "context_length": 2048,
+      "gpu_layers": -1
+    },
+    "llama-local": {
+      "type": "llm",
+      "backend": "llama-cpp",
+      "path": "C:\\Users\\tsmit\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "context_length": 8192
+    }
+  },
+  "preferences": {
+    "use_local_first": true,
+    "gpu_enabled": true,
+    "max_memory_gb": 8,
+    "compute_mode": "auto"
+  }
+}

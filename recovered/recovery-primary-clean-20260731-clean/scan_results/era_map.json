@@ -1,0 +1,383 @@
+{
+  "meta": {
+    "generated_at": "2026-07-14",
+    "updated_at": "2026-07-14",
+    "root": "C:\\realai",
+    "purpose": "Freeze authority vs gold vs noise for RealAI v3 multi-era consolidation",
+    "policy": "Never bulk-merge. Promote uniques into authority only after promote_queue review. External roots are gold/search targets for self-improve ability discovery.",
+    "phase_5f_note": "Registered all machine RealAI-related roots found by scan for ability keyword learning + self-heal discover."
+  },
+  "eras": [
+    {
+      "id": "authority_runtime",
+      "paths": [
+        "realai",
+        "api_server.py",
+        "main.py",
+        "local_models.py"
+      ],
+      "role": "authority",
+      "promote_policy": "never_overwrite_without_review",
+      "notes": "Clean package spine; OpenAI-compatible API and RealAI core"
+    },
+    {
+      "id": "authority_surface",
+      "paths": [
+        "apps",
+        "core",
+        "agents",
+        "packages",
+        "providers",
+        "plugins",
+        "config",
+        "schema",
+        "aura",
+        "cli",
+        "scripts",
+        "training",
+        "fusion-ui",
+        "src"
+      ],
+      "role": "authority",
+      "promote_policy": "never_overwrite_without_review",
+      "notes": "UI, agents, SDK, providers under top-level authority"
+    },
+    {
+      "id": "authority_inference",
+      "paths": [
+        "C:\\llama-vulkan"
+      ],
+      "role": "authority_inference",
+      "promote_policy": "reference_only",
+      "notes": "AMD Vulkan llama-server; do not merge into repo as code"
+    },
+    {
+      "id": "gold_og_mess",
+      "paths": [
+        "realai_og_mess"
+      ],
+      "role": "gold_source",
+      "promote_policy": "promote_uniques_only",
+      "notes": "OG messy tree \u2014 contracts and buried features"
+    },
+    {
+      "id": "gold_archive",
+      "paths": [
+        "archive"
+      ],
+      "role": "gold_source",
+      "promote_policy": "promote_uniques_only",
+      "notes": "Includes accidental moves; see dds3_archive_triage"
+    },
+    {
+      "id": "gold_backup_dups",
+      "paths": [
+        ".backup",
+        "realai_historical_backups",
+        "realai-clean__dup1",
+        "realai - Copy"
+      ],
+      "role": "gold_source_dup",
+      "promote_policy": "prefer_newer_or_clean_hash",
+      "notes": "Duplicates of known trees under C:\\realai; promote only if unique content"
+    },
+    {
+      "id": "secondary_users_realai",
+      "paths": [
+        "C:\\Users\\tsmit\\realai"
+      ],
+      "role": "secondary_gold",
+      "promote_policy": "promote_if_missing_in_authority",
+      "notes": "Older full tree, LFS/tar, working frontend with node_modules; nested realai_memory, RealAIProject, sdk, repo"
+    },
+    {
+      "id": "secondary_users_realai_clean",
+      "paths": [
+        "C:\\Users\\tsmit\\realai-clean"
+      ],
+      "role": "secondary_gold",
+      "promote_policy": "promote_if_missing_in_authority",
+      "notes": "Separate clean tree sibling to Users\\realai; high overlap, check uniques"
+    },
+    {
+      "id": "gold_tools_cli",
+      "paths": [
+        "C:\\tools\\realai"
+      ],
+      "role": "secondary_gold",
+      "promote_policy": "promote_surface_blueprint",
+      "notes": "Node CLI install: commands (chat/image/video/research/web3/system) + plugins (overseer/render/solana/trading). Many stubs; ability surface for keyword learning."
+    },
+    {
+      "id": "gold_historical_backups_users",
+      "paths": [
+        "C:\\Users\\tsmit\\realai_historical_backups"
+      ],
+      "role": "backup_gold",
+      "promote_policy": "promote_uniques_only",
+      "notes": "realai_versions_20260612 vault: RealAIProject, agent-tools-main, real-fin, realai-backend, realai_good, realai_repo, realai_sdk"
+    },
+    {
+      "id": "gold_sync_backup",
+      "paths": [
+        "C:\\Users\\tsmit\\backups\\realai-sync-20260508-090605"
+      ],
+      "role": "backup_gold",
+      "promote_policy": "promote_uniques_only",
+      "notes": "May 2026 sync: realai-main + realai_sdk"
+    },
+    {
+      "id": "runtime_state_user",
+      "paths": [
+        "C:\\Users\\tsmit\\.realai",
+        "C:\\Users\\tsmit\\.agentx"
+      ],
+      "role": "runtime_state",
+      "promote_policy": "path_register_only",
+      "notes": "conversations.db, local_models.json, models, server.sqlite3, execution_history \u2014 do not bulk-merge as code; mine for memory/self-improve"
+    },
+    {
+      "id": "gold_atomic_fizz",
+      "paths": [
+        "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+        "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-OLD",
+        "C:\\Users\\tsmit\\atomic-fizz-backup-2026-05-30",
+        "C:\\Unwrenchable",
+        "C:\\Users\\tsmit\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+        "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai",
+        "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-OLD\\ai\\realai"
+      ],
+      "role": "game_gold",
+      "promote_policy": "promote_game_integration_uniques",
+      "notes": "Atomic Fizz / Overseer / NPC engines (dialogue, quest, dungeon, local-overseer) \u2014 high game-world ability gold"
+    },
+    {
+      "id": "secondary_github_realai",
+      "paths": [
+        "C:\\Users\\tsmit\\Documents\\GitHub\\realai"
+      ],
+      "role": "secondary_gold",
+      "promote_policy": "promote_if_missing_in_authority",
+      "notes": "GitHub clone of realai (~278 source files); compare uniques vs C:\\realai"
+    },
+    {
+      "id": "gold_onedrive_desktop_modules",
+      "paths": [
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai - Copy",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-cli",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-orchestration",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-sdk-js",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_api",
+        "C:\\Users\\tsmit\\OneDrive\\Apps\\realai"
+      ],
+      "role": "module_gold",
+      "promote_policy": "promote_uniques_only",
+      "notes": "Desktop modular slices: orchestration (agent/memory/pipeline), agent hierarchy, API, CLI, design-system, sdk-js \u2014 high missing-piece odds for multi-agent pillar"
+    },
+    {
+      "id": "runtime_appdata",
+      "paths": [
+        "C:\\Users\\tsmit\\AppData\\Local\\RealAI",
+        "C:\\Users\\tsmit\\AppData\\Roaming\\RealAi"
+      ],
+      "role": "runtime_state",
+      "promote_policy": "path_register_only",
+      "notes": "Installed app logs + Roaming config/providers/registry.json"
+    },
+    {
+      "id": "gold_users_model_family",
+      "paths": [
+        "C:\\Users\\tsmit\\realai\\models\\realai-1.0",
+        "C:\\Users\\tsmit\\realai\\models\\realai-embed",
+        "C:\\Users\\tsmit\\realai\\models\\realai-overseer"
+      ],
+      "role": "assets",
+      "promote_policy": "path_register_only",
+      "notes": "Users-tree model family manifests/weights (realai-1.0, embed, overseer)"
+    },
+    {
+      "id": "gold_archive_files",
+      "paths": [
+        "C:\\Users\\tsmit\\Downloads\\realai-main.zip",
+        "C:\\Users\\tsmit\\Downloads\\realai-main (1).zip",
+        "C:\\Users\\tsmit\\Downloads\\realai.zip",
+        "C:\\Users\\tsmit\\Downloads\\realai_finetune_dataset.jsonl",
+        "C:\\Users\\tsmit\\realai.tar.gz",
+        "C:\\temp\\realai_ui.html"
+      ],
+      "role": "archive_file_gold",
+      "promote_policy": "catalog_only_until_extracted",
+      "notes": "Zips/datasets/UI artifact \u2014 register for self-improve search; do not auto-extract bulk"
+    },
+    {
+      "id": "inference_siblings",
+      "paths": [
+        "C:\\llama",
+        "C:\\llama.cpp",
+        "C:\\models"
+      ],
+      "role": "inference_assets",
+      "promote_policy": "path_register_only",
+      "notes": "Sibling llama builds / model dirs; reference for local intelligence pillar"
+    },
+    {
+      "id": "assets_models",
+      "paths": [
+        "models",
+        "C:\\realai\\models",
+        "C:\\llama-vulkan\\models",
+        "C:\\Users\\tsmit\\.realai\\models",
+        "C:\\Users\\tsmit\\models",
+        "C:\\Users\\tsmit\\.cache\\huggingface",
+        "C:\\Users\\tsmit\\.lmstudio",
+        "C:\\Users\\tsmit\\.ollama\\models",
+        "C:\\models"
+      ],
+      "role": "assets",
+      "promote_policy": "path_register_only",
+      "notes": "GGUF/safetensors/etc. Scan with scanners/scan_model_weights.py or POST /v1/weights/scan. See scan_results/weights_gold_map.md"
+    },
+    {
+      "id": "gold_agent_tools",
+      "paths": [
+        "C:\\Users\\tsmit\\realai\\agent-tools\\agent-tools-main",
+        "C:\\Users\\tsmit\\realai\\agent-tools-main",
+        "C:\\Users\\tsmit\\realai\\archive\\agent-tools-main",
+        "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main",
+        "C:\\Unwrenchable\\agent-tools"
+      ],
+      "role": "agent_tools_gold",
+      "promote_policy": "recover_source_from_pyc_or_git_if_missing",
+      "notes": "agent-tools package mostly hollow at live path (egg-info + locks only). SOURCES.txt lists full module set. Historical backup has .pyc only (cli/dashboard/executor/runtime/\u2026). Archive has .agentx identical to C:\\realai\\agents\\agentx. See scan_results/agent_tools_gold_map.md"
+    },
+    {
+      "id": "gold_agents_trees",
+      "paths": [
+        "agents",
+        "agents/agentx",
+        "C:\\Users\\tsmit\\realai\\agents",
+        "C:\\Users\\tsmit\\realai-clean\\agents",
+        "C:\\Users\\tsmit\\Documents\\GitHub\\realai",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-orchestration",
+        "realai/hierarchical_agent_gold",
+        "recovered/from_desktop/realai_agent"
+      ],
+      "role": "agents_gold",
+      "promote_policy": "authority_agents_first_then_users_uniques",
+      "notes": "Live hive: C:\\realai\\agents + agentx (68 agents). Users agents mostly docs overlap. GitHub Unwrenchable/RealAi. Desktop hierarchical gold already staged."
+    },
+    {
+      "id": "gold_recycle_bin",
+      "paths": [
+        "C:\\$Recycle.Bin",
+        "::{645FF040-5081-101B-9F08-00AA002F954E}"
+      ],
+      "role": "recycle_bin_gold",
+      "promote_policy": "curated_restore_only_never_bulk",
+      "notes": "Shell CLSID ::{645FF040-5081-101B-9F08-00AA002F954E} = Recycle Bin. Physical files under C:\\$Recycle.Bin\\<SID>\\ as $I* metadata + $R* payload. Scan results: scan_results/recycle_bin_gold_map.json. Curated stage: recovered/from_recycle_bin/. Secrets not staged."
+    },
+    {
+      "id": "staging_recovered",
+      "paths": [
+        "recovered",
+        "recovered/from_recycle_bin"
+      ],
+      "role": "staging",
+      "promote_policy": "already_promoted_or_staged",
+      "notes": "Curated archive recovery output including recycle bin stage"
+    },
+    {
+      "id": "noise",
+      "paths": [
+        "node_modules",
+        "venv",
+        ".venv",
+        ".vs",
+        "build",
+        "dist",
+        "__pycache__",
+        ".pytest_cache",
+        ".next",
+        "site-packages",
+        "phase4_tools",
+        "plan_phase4_preview",
+        "scan_results",
+        "terminals",
+        ".blackbox",
+        "chocolatey"
+      ],
+      "role": "noise",
+      "promote_policy": "never_promote",
+      "notes": "Millions of files; never merge as product code"
+    },
+    {
+      "id": "gold_users_dotfiles",
+      "paths": [
+        "C:\\Users\\tsmit\\.realai",
+        "C:\\Users\\tsmit\\.agentx",
+        "C:\\Users\\tsmit\\.openclaw",
+        "C:\\Users\\tsmit\\.env.local",
+        "C:\\Users\\tsmit\\.env.local.fizz",
+        "C:\\realai\\recovered\\from_users_dotfiles"
+      ],
+      "role": "runtime_and_agent_workspace_gold",
+      "promote_policy": "redact_secrets_then_stage",
+      "notes": "Dotfile gold staged redacted. openclaw=agent soul/workspace; .realai=local_models; env.fizz=web3 mints keys names only"
+    }
+  ],
+  "external_scan_roots_for_abilities": [
+    "C:\\tools\\realai",
+    "C:\\Users\\tsmit\\realai",
+    "C:\\Users\\tsmit\\realai\\agent-tools\\agent-tools-main",
+    "C:\\Users\\tsmit\\realai\\archive\\agent-tools-main",
+    "C:\\Users\\tsmit\\realai\\agents",
+    "C:\\Users\\tsmit\\realai-clean",
+    "C:\\Users\\tsmit\\realai-clean\\agents",
+    "C:\\Users\\tsmit\\realai_historical_backups",
+    "C:\\Users\\tsmit\\backups\\realai-sync-20260508-090605",
+    "C:\\Users\\tsmit\\.realai",
+    "C:\\Users\\tsmit\\.agentx",
+    "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+    "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-OLD",
+    "C:\\Users\\tsmit\\atomic-fizz-backup-2026-05-30",
+    "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai",
+    "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-OLD\\ai\\realai",
+    "C:\\Users\\tsmit\\Documents\\GitHub\\realai",
+    "C:\\Users\\tsmit\\Documents\\GitHub\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+    "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai",
+    "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai - Copy",
+    "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-cli",
+    "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-design-system",
+    "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-orchestration",
+    "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-sdk-js",
+    "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent",
+    "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_api",
+    "C:\\Users\\tsmit\\OneDrive\\Apps\\realai",
+    "C:\\Users\\tsmit\\AppData\\Roaming\\RealAi",
+    "C:\\Users\\tsmit\\realai\\models\\realai-1.0",
+    "C:\\Users\\tsmit\\realai\\models\\realai-overseer",
+    "C:\\Unwrenchable",
+    "C:\\temp",
+    "C:\\llama-vulkan",
+    "C:\\llama",
+    "C:\\$Recycle.Bin",
+    "C:\\realai\\recovered\\from_recycle_bin",
+    "C:\\realai\\models",
+    "C:\\llama-vulkan\\models",
+    "C:\\Users\\tsmit\\.cache\\huggingface",
+    "C:\\Users\\tsmit\\.lmstudio",
+    "C:\\Users\\tsmit\\.openclaw",
+    "C:\\realai\\recovered\\from_users_dotfiles"
+  ],
+  "live_stack": {
+    "ui": "http://127.0.0.1:3000",
+    "orchestrator": "http://127.0.0.1:8001",
+    "inference": "http://127.0.0.1:8080",
+    "ui_tree": "C:\\realai\\apps\\frontend (synced with Users tree as needed)",
+    "inference_bin": "C:\\llama-vulkan\\llama-server.exe"
+  }
+}

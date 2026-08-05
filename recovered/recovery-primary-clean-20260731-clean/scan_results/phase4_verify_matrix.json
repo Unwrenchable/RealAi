@@ -1,0 +1,580 @@
+{
+  "generated_at": "2026-07-16T17:59:25.574132+00:00",
+  "passed": 31,
+  "total": 32,
+  "all_ok": false,
+  "endpoints": {
+    "ui": "http://127.0.0.1:3000",
+    "orchestrator": "http://127.0.0.1:8001",
+    "vulkan": "http://127.0.0.1:8080"
+  },
+  "checks": [
+    {
+      "check": "vulkan_health",
+      "ok": true,
+      "detail": {
+        "status": "ok"
+      }
+    },
+    {
+      "check": "orchestrator_health",
+      "ok": true,
+      "detail": {
+        "status": "ok",
+        "service": "realai-v3-orchestrator",
+        "vulkan": {
+          "ok": true,
+          "base": "http://127.0.0.1:8080",
+          "body": {
+            "status": "ok"
+          }
+        },
+        "self_improve_enabled": true,
+        "training_data": "C:\\realai\\training\\data",
+        "recovery": "GET /v1/recovery",
+        "embeddings": "POST /v1/embeddings",
+        "lora": "GET /v1/lora",
+        "lora_root": "C:\\Users\\tsmit\\.grok\\worktrees\\tsmit-realai\\realai2\\checkpoints_lora"
+      }
+    },
+    {
+      "check": "ui_http",
+      "ok": false,
+      "detail": {
+        "status": 0
+      }
+    },
+    {
+      "check": "orch_chat",
+      "ok": true,
+      "detail": "Matrix OK"
+    },
+    {
+      "check": "training_status",
+      "ok": true,
+      "detail": {
+        "files": 4
+      }
+    },
+    {
+      "check": "self_improve_status",
+      "ok": true,
+      "detail": {
+        "enabled": true,
+        "env": "REALAI_SELF_IMPROVE",
+        "modules": {
+          "TrainingDataGenerator": true,
+          "PerformanceEvaluator": true,
+          "FineTuneOrchestrator": true,
+          "VersionManager": true
+        },
+        "training": {
+          "training_data_dir": "C:\\realai\\training\\data",
+          "files": [
+            {
+              "name": "ability_surface.jsonl",
+              "path": "C:\\realai\\training\\data\\ability_surface.jsonl",
+              "size": 11617,
+              "lines": 33
+            },
+            {
+              "name": "agent_manifests_for_finetuning.json",
+              "path": "C:\\realai\\training\\data\\agent_manifests_for_finetuning.json",
+              "size": 76554,
+              "lines": 2704
+            },
+            {
+              "name": "README.md",
+              "path": "C:\\realai\\training\\data\\README.md",
+              "size": 260,
+              "lines": 0
+            },
+            {
+              "name": "realai_finetune_dataset.jsonl",
+              "path": "C:\\realai\\training\\data\\realai_finetune_dataset.jsonl",
+              "size": 36267,
+              "lines": 73
+            }
+          ],
+          "finetune_dataset": true,
+          "agent_manifests": true,
+          "self_improve_enabled": true,
+          "vulkan_base": "http://127.0.0.1:8080",
+          "default_model": "realai-default-coder"
+        },
+        "note": "Set REALAI_SELF_IMPROVE=true to unlock evaluate/export endpoints"
+      }
+    },
+    {
+      "check": "self_heal_status",
+      "ok": true,
+      "detail": {
+        "scan_messy_repo": true,
+        "assemble_gold": true,
+        "promote_gold": true,
+        "training_data": true,
+        "self_improvement": true,
+        "ability_catalog": true,
+        "keyword_learning": true
+      }
+    },
+    {
+      "check": "self_heal_abilities",
+      "ok": true,
+      "detail": "RealAI Self-Heal"
+    },
+    {
+      "check": "capabilities_catalog",
+      "ok": true,
+      "detail": {
+        "weighted_pct": 46.0,
+        "ability_count": 31,
+        "external_roots_exist": 60
+      }
+    },
+    {
+      "check": "tools_catalog",
+      "ok": true,
+      "detail": {
+        "n": 10
+      }
+    },
+    {
+      "check": "agent_tools_status",
+      "ok": true,
+      "detail": {
+        "agents_count": 68,
+        "packages": 3
+      }
+    },
+    {
+      "check": "tools_agent_tools_list",
+      "ok": true,
+      "detail": 3
+    },
+    {
+      "check": "models_realai_facade",
+      "ok": true,
+      "detail": {
+        "ids": [
+          "realai-default-coder",
+          "realai-1.0-instruct",
+          "local-llama-3b",
+          "local-llama-1b",
+          "local-llama-1b-2",
+          "realai-embeddings",
+          "realai-lora-agent-default-run",
+          "realai-lora-agent-evals-engineer-default-run"
+        ],
+        "default": "realai-default-coder"
+      }
+    },
+    {
+      "check": "agents_list",
+      "ok": true,
+      "detail": {
+        "count": 68
+      }
+    },
+    {
+      "check": "tools_list_agents",
+      "ok": true,
+      "detail": {
+        "tool": "list_agents",
+        "result": {
+          "count": 68,
+          "agents": [
+            {
+              "id": "agent-tools-documentation-pilot",
+              "role": "agent-tools Documentation Pilot",
+              "risk": "low"
+            },
+            {
+              "id": "agent-tools-implementation-pilot",
+              "role": "agent-tools Implementation Pilot",
+              "risk": "medium"
+            },
+            {
+              "id": "agent-tools-orchestrator",
+              "role": "agent-tools Multi-Agent Orchestrator",
+              "risk": "medium"
+            },
+            {
+              "id": "agent-tools-performance-engineer",
+              "role": "agent-tools Performance Engineer",
+              "risk": "medium"
+            },
+            {
+              "id": "agent-tools-qa-pilot",
+              "role": "agent-tools QA Pilot",
+              "risk": "medium"
+            },
+            {
+              "id": "agent-tools-repo-architect",
+              "role": "agent-tools Repository Architect",
+              "risk": "low"
+            },
+            {
+              "id": "agent-tools-security-hardener",
+              "role": "agent-tools Security Hardener",
+              "risk": "medium"
+            },
+            {
+              "id": "agents-orchestrator",
+              "role": "agents-orchestrator",
+              "risk": "medium"
+            },
+            {
+              "id": "analytics-reporter",
+              "role": "Analytics Reporter",
+              "risk": "medium"
+            },
+            {
+              "id": "api-designer",
+              "role": "API Designer",
+              "risk": "medium"
+            },
+            {
+              "id": "api-tester",
+              "role": "API Tester",
+              "risk": "medium"
+            },
+            {
+              "id": "app-store-optimizer",
+              "role": "App Store Optimizer",
+              "risk": "medium"
+            },
+            {
+              "id": "architectux",
+              "role": "ArchitectUX",
+              "risk": "medium"
+            },
+            {
+              "id": "backend-architect",
+              "role": "Backend Architect",
+              "risk": "medium"
+            },
+            {
+              "id": "backend-engineer",
+              "role": "Backend Engineer",
+              "risk": "medium"
+            },
+            {
+              "id": "brand-guardian",
+              "role": "Brand Guardian",
+              "risk": "medium"
+            },
+            {
+              "id": "capability-guardian",
+              "role": "Capability Guardian",
+              "risk": "low"
+            },
+            {
+              "id": "contributing",
+              "role": "\ud83e\udd1d Contributing to The Agency",
+              "risk": "medium"
+            },
+            {
+              "id": "cybersecurity-expert",
+              "role": "Cybersecurity Expert",
+              "risk": "medium"
+            },
+            {
+              "id": "data-analytics-reporter",
+              "role": "data-analytics-reporter",
+              "risk": "medium"
+            },
+            {
+              "id": "database-architect",
+              "role": "Database Architect",
+              "risk": "medium"
+            },
+            {
+              "id": "design-visual-storyteller",
+              "role": "design-visual-storyteller",
+              "risk": "medium"
+            },
+            {
+              "id": "devops-automator",
+              "role": "DevOps Automator",
+              "risk": "medium"
+            },
+            {
+              "id": "devops-engineer",
+              "role": "DevOps Engineer",
+              "risk": "medium"
+            },
+            {
+              "id": "documentation-specialist",
+              "role": "Documentation Specialist",
+              "risk": "low"
+            },
+            {
+              "id": "engineering-ai-engineer",
+              "role": "engineering-ai-engineer",
+              "risk": "medium"
+            },
+            {
+              "id": "engineering-senior-developer",
+              "role": "engineering-senior-developer",
+              "risk": "medium"
+            },
+            {
+              "id": "evidenceqa",
+              "role": "EvidenceQA",
+              "risk": "medium"
+            },
+            {
+              "id": "executive-summary-generator",
+              "role": "Executive Summary Generator",
+              "risk": "medium"
+            },
+            {
+              "id": "experiment-tracker",
+              "role": "Experiment Tracker",
+              "risk": "medium"
+            },
+            {
+              "id": "finance-tracker",
+              "role": "Finance Tracker",
+              "risk": "medium"
+            },
+            {
+              "id": "frontend-developer",
+              "role": "Frontend Developer",
+              "risk": "medium"
+            },
+            {
+              "id": "frontend-engineer",
+              "role": "Frontend Engineer",
+              "risk": "medium"
+            },
+            {
+              "id": "fullstack-engineer",
+              "role": "Full-Stack Engineer",
+              "risk": "medium"
+            },
+            {
+              "id": "implementation-engineer",
+              "role": "Implementation Engineer",
+              "risk": "medium"
+            },
+            {
+              "id": "infrastructure-maintainer",
+              "role": "Infrastructure Maintainer",
+              "risk": "medium"
+            },
+            {
+              "id": "legal-compliance-checker",
+              "role": "Legal Compliance Checker",
+              "risk": "medium"
+            },
+            {
+              "id": "lsp-index-engineer",
+              "role": "LSP/Index Engineer",
+              "risk": "medium"
+            },
+            {
+              "id": "macos-spatial-metal-engineer",
+              "role": "macOS Spatial/Metal Engineer",
+              "risk": "medium"
+            },
+            {
+              "id": "marketing-content-creator",
+              "role": "marketing-content-creator",
+              "risk": "low"
+            },
+            {
+              "id": "marketing-growth-hacker",
+              "role": "marketing-growth-hacker",
+              "risk": "medium"
+            },
+            {
+              "id": "marketing-social-media-strategist",
+              "role": "marketing-social-media-strategist",
+              "risk": "low"
+            },
+            {
+              "id": "mobile-app-builder",
+              "role": "Mobile App Builder",
+              "risk": "medium"
+            },
+            {
+              "id": "orchestrator",
+              "role": "Workflow Orchestrator",
+              "risk": "medium"
+            },
+            {
+              "id": "performance-benchmarker",
+              "role": "Performance Benchmarker",
+              "risk": "medium"
+            },
+            {
+              "id": "performance-engineer",
+              "role": "Performance Engineer",
+              "risk": "medium"
+            },
+            {
+              "id": "product-feedback-synthesizer",
+              "role": "product-feedback-synthesizer",
+              "risk": "low"
+            },
+            {
+              "id": "product-sprint-prioritizer",
+              "role": "product-sprint-prioritizer",
+              "risk": "medium"
+            },
+            {
+              "id": "product-trend-researcher",
+              "role": "product-trend-researcher",
+              "risk": "medium"
+            },
+            {
+              "id": "project-manager-senior",
+              "role": "project-manager-senior",
+              "risk": "medium"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "check": "chat_with_agent_memory",
+      "ok": true,
+      "detail": {
+        "meta": {
+          "orchestrator": "v3",
+          "provider": "realai",
+          "vulkan_base": "http://127.0.0.1:8080",
+          "self_improve_enabled": true,
+          "self_heal": true,
+          "agent": {
+            "id": "agent-tools-documentation-pilot",
+            "role": "agent-tools Documentation Pilot"
+          },
+          "memory_injected": true,
+          "multi_agent_requested": false,
+          "model": {
+            "requested": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+            "resolved_id": "realai-default-coder",
+            "display_name": "realai-default-coder",
+            "gguf_path": "C:\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+            "gguf_filename": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+            "backend_model_id": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+            "loaded_now": true,
+            "switch_required": false,
+            "switch_cmd": "llama-server.exe -m \"C:\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf\" --host 127.0.0.1 --port 8080 -c 8192 -ngl 99 --jinja",
+            "owned_by": "realai",
+            "family": "qwen",
+            "note": null
+          }
+        },
+        "snip": {
+          "finish_reason": "stop",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "agent ok"
+          }
+        }
+      }
+    },
+    {
+      "check": "self_improve_evaluate",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "scores": {
+          "ability_coverage_pct": 0.46,
+          "ability_live_count": 7.0,
+          "ability_count": 31.0,
+          "ability_surface_samples": 33.0,
+          "reasoning": 1.0,
+          "coding": 1.0,
+          "safety": 0.8,
+          "tool_use": 1.0,
+          "memory": 1.0,
+          "agent": 0.0,
+          "overall": 0.8,
+          "training_jsonl_lines": 106.0,
+          "training_ready": 1.0
+        }
+      }
+    },
+    {
+      "check": "artifact:scan_results/era_map.json",
+      "ok": true,
+      "detail": "scan_results/era_map.json"
+    },
+    {
+      "check": "artifact:scan_results/gold_index.json",
+      "ok": true,
+      "detail": "scan_results/gold_index.json"
+    },
+    {
+      "check": "artifact:scan_results/promote_queue.json",
+      "ok": true,
+      "detail": "scan_results/promote_queue.json"
+    },
+    {
+      "check": "artifact:scan_results/ability_catalog.json",
+      "ok": true,
+      "detail": "scan_results/ability_catalog.json"
+    },
+    {
+      "check": "artifact:scan_results/ability_keywords_learned.json",
+      "ok": true,
+      "detail": "scan_results/ability_keywords_learned.json"
+    },
+    {
+      "check": "artifact:training/data/realai_finetune_dataset.jsonl",
+      "ok": true,
+      "detail": "training/data/realai_finetune_dataset.jsonl"
+    },
+    {
+      "check": "artifact:training/data/ability_surface.jsonl",
+      "ok": true,
+      "detail": "training/data/ability_surface.jsonl"
+    },
+    {
+      "check": "artifact:realai/self_heal.py",
+      "ok": true,
+      "detail": "realai/self_heal.py"
+    },
+    {
+      "check": "artifact:realai/self_improvement.py",
+      "ok": true,
+      "detail": "realai/self_improvement.py"
+    },
+    {
+      "check": "artifact:realai/ability_catalog.py",
+      "ok": true,
+      "detail": "realai/ability_catalog.py"
+    },
+    {
+      "check": "artifact:realai/v3_orchestrator.py",
+      "ok": true,
+      "detail": "realai/v3_orchestrator.py"
+    },
+    {
+      "check": "artifact:docs/ABILITY_SURFACE.md",
+      "ok": true,
+      "detail": "docs/ABILITY_SURFACE.md"
+    },
+    {
+      "check": "artifact:scanners/assemble_gold_index.py",
+      "ok": true,
+      "detail": "scanners/assemble_gold_index.py"
+    },
+    {
+      "check": "artifact:scanners/promote_gold.py",
+      "ok": true,
+      "detail": "scanners/promote_gold.py"
+    },
+    {
+      "check": "artifact:scanners/dds3_missing_files.py",
+      "ok": true,
+      "detail": "scanners/dds3_missing_files.py"
+    }
+  ]
+}

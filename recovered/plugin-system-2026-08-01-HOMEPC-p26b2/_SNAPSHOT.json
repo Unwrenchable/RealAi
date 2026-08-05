@@ -1,0 +1,11 @@
+{
+  "slug": "plugin-system-2026-08-01-HOMEPC-p26b2",
+  "source_sha": "c90b7944d160b897ab1b458d4c7afb22f85de63c",
+  "giants_moved_out": 36,
+  "batch": 2,
+  "file_count": 8053,
+  "imported_at": "2026-08-05T05:54:40.7615984-07:00",
+  "dest": "recovered/plugin-system-2026-08-01-HOMEPC-p26b2",
+  "source_ref": "origin/recovery/plugin-system/2026-08-01/HOMEPC/p26b2",
+  "source_branch": "recovery/plugin-system/2026-08-01/HOMEPC/p26b2"
+}

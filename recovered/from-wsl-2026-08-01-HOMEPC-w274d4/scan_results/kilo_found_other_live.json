@@ -1,0 +1,92 @@
+{
+  ".blackbox": [
+    "/mnt/c/realai/.blackbox"
+  ],
+  "TODO.md": [
+    "/mnt/c/realai/TODO.md"
+  ],
+  "fusion-ui/index.html": [
+    "/mnt/c/realai/fusion-ui/index.html"
+  ],
+  "realai/.gitattributes": [
+    "/mnt/c/realai/realai/.gitattributes"
+  ],
+  "realai/.github": [
+    "/mnt/c/realai/realai/.github"
+  ],
+  "realai/.gitignore": [
+    "/mnt/c/realai/realai/.gitignore"
+  ],
+  "realai/API.md": [
+    "/mnt/c/realai/realai/API.md"
+  ],
+  "realai/CONTRIBUTING.md": [
+    "/mnt/c/realai/realai/CONTRIBUTING.md"
+  ],
+  "realai/DEPLOYMENT.md": [
+    "/mnt/c/realai/realai/DEPLOYMENT.md"
+  ],
+  "realai/LICENSE": [
+    "/mnt/c/realai/realai/LICENSE"
+  ],
+  "realai/QUICKSTART.md": [
+    "/mnt/c/realai/realai/QUICKSTART.md"
+  ],
+  "realai/README.md": [
+    "/mnt/c/realai/realai/README.md"
+  ],
+  "realai/agents": [
+    "/mnt/c/realai/realai/agents"
+  ],
+  "realai/api": [
+    "/mnt/c/realai/realai/api"
+  ],
+  "realai/config": [
+    "/mnt/c/realai/realai/config"
+  ],
+  "realai/main.py": [
+    "/mnt/c/realai/realai/main.py"
+  ],
+  "realai/package.json": [
+    "/mnt/c/realai/realai/package.json"
+  ],
+  "realai/plugins": [
+    "/mnt/c/realai/realai/plugins"
+  ],
+  "realai/providers": [
+    "/mnt/c/realai/realai/providers"
+  ],
+  "realai/realai/__init__.py": [
+    "/mnt/c/realai/realai/realai/__init__.py"
+  ],
+  "realai/realai/api_server.py": [
+    "/mnt/c/realai/realai/realai/api_server.py"
+  ],
+  "realai/realai/memory": [
+    "/mnt/c/realai/realai/realai/memory"
+  ],
+  "realai/realai_gui.py": [
+    "/mnt/c/realai/realai/realai_gui.py"
+  ],
+  "realai/render.yaml": [
+    "/mnt/c/realai/realai/render.yaml"
+  ],
+  "realai/requirements-ci.txt": [
+    "/mnt/c/realai/realai/requirements-ci.txt"
+  ],
+  "realai/requirements-full.txt": [
+    "/mnt/c/realai/realai/requirements-full.txt"
+  ],
+  "realai/requirements.txt": [
+    "/mnt/c/realai/realai/requirements.txt"
+  ],
+  "realai/setup.py": [
+    "/mnt/c/realai/realai/setup.py"
+  ],
+  "realai/test_realai.py": [
+    "/mnt/c/realai/realai/test_realai.py"
+  ],
+  "realai/vercel.json": [
+    "/mnt/c/realai/realai/vercel.json"
+  ]
+}

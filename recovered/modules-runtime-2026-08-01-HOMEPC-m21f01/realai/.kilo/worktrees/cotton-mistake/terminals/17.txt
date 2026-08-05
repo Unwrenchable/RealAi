@@ -1,0 +1,13 @@
+---
+pid: 12488
+cwd: "C:\Users\tsmit\realai"
+command: "py -3.14 -m realai.provider"
+started_at: 2026-06-04T13:25:26.649Z
+running_for_ms: 13665008 
+---
+INFO:     Started server process [18364]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+[RealAI] Core modules loaded.
+INFO:     127.0.0.1:63548 - "GET /health/live HTTP/1.1" 200 OK

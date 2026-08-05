@@ -1,0 +1,48 @@
+[
+  {
+    "subsystem": "agents",
+    "type": "classes_detected",
+    "directory": "agents",
+    "classes": [
+      "DevOpsAgent"
+    ]
+  },
+  {
+    "subsystem": "memory",
+    "type": "missing_subsystem_directory",
+    "directory": "memory"
+  },
+  {
+    "subsystem": "tools",
+    "type": "missing_subsystem_directory",
+    "directory": "tools"
+  },
+  {
+    "subsystem": "providers",
+    "type": "no_classes_found",
+    "directory": "providers"
+  },
+  {
+    "subsystem": "models",
+    "type": "classes_detected",
+    "directory": "models",
+    "classes": [
+      "ImageModel"
+    ]
+  },
+  {
+    "subsystem": "sdk",
+    "type": "missing_subsystem_directory",
+    "directory": "sdk"
+  },
+  {
+    "subsystem": "cli",
+    "type": "missing_subsystem_directory",
+    "directory": "cli"
+  },
+  {
+    "subsystem": "fusion_ui",
+    "type": "no_classes_found",
+    "directory": "fusion-ui"
+  }
+]

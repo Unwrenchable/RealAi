@@ -1,0 +1,79 @@
+{
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "ollama/kimi-k2.6:cloud"
+      },
+      "workspace": "C:\\Users\\tsmit\\.openclaw\\workspace"
+    }
+  },
+  "gateway": {
+    "auth": {
+      "mode": "token",
+***REDACTED***
+    },
+    "bind": "loopback",
+    "mode": "local",
+    "port": 18789,
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    }
+  },
+  "meta": {
+    "lastTouchedAt": "2026-05-01T19:41:10.347Z",
+    "lastTouchedVersion": "2026.4.29"
+  },
+  "models": {
+    "providers": {
+      "ollama": {
+        "api": "ollama",
+        "apiKey": "ollama-local",
+        "baseUrl": "http://127.0.0.1:11434",
+        "models": [
+          {
+            "contextWindow": 262144,
+            "cost": {
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "input": 0,
+              "output": 0
+            },
+            "id": "kimi-k2.6:cloud",
+            "input": [
+              "text",
+              "image"
+            ],
+            "name": "kimi-k2.6:cloud",
+            "reasoning": true
+          }
+        ]
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "ollama": {
+        "enabled": true
+      }
+    }
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "tools": {
+    "profile": "coding",
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "ollama"
+      }
+    }
+  },
+  "wizard": {
+    "lastRunAt": "2026-05-01T19:41:10.327Z",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local",
+    "lastRunVersion": "2026.4.29"
+  }
+}

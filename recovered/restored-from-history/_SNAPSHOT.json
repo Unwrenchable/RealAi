@@ -1,0 +1,11 @@
+{
+  "slug": "restored-from-history",
+  "source_sha": "66be87fb868aac3dba1882a34221dbb214f4989e",
+  "giants_moved_out": 0,
+  "batch": 2,
+  "file_count": 328,
+  "imported_at": "2026-08-05T05:58:59.2416241-07:00",
+  "dest": "recovered/restored-from-history",
+  "source_ref": "origin/restored-from-history",
+  "source_branch": "restored-from-history"
+}

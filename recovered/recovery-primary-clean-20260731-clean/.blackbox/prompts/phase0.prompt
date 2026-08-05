@@ -1,0 +1,50 @@
+You are operating inside a GitHub Codespace containing two RealAI repositories:
+
+1. /workspaces/RealAi (analysis-clean)
+2. /workspaces/RealAi/realai_og_mess
+
+Your task is PHASE 0: FULL DEEP-DIVE of the legacy repo at:
+/workspaces/RealAi/realai_og_mess
+
+MANDATORY RULES:
+- Do NOT ask questions.
+- Do NOT pause.
+- Do NOT switch into testing mode.
+- Do NOT produce checkpoints.
+- Do NOT request confirmation.
+- Do NOT stop early.
+
+This run is PURE read + analysis + extraction.
+
+REQUIREMENTS:
+1. Recursively walk and READ EVERY FILE under:
+   - agents
+   - memory
+   - tools
+   - providers
+   - models
+   - inference
+   - server
+   - cli
+   - vscode-extension
+   - fusion-ui
+   - archive
+   - docs
+   - manifests
+   - schemas
+
+2. Extract logic, dependencies, patterns, obsolete code, gold code.
+
+3. Produce subsystem-by-subsystem analysis.
+
+4. Produce OG → Clean integration map.
+
+5. Produce file-level migration checklist.
+
+6. Produce unified architecture draft.
+
+7. Produce Phase‑1 prerequisites.
+
+Begin immediately by recursively walking:
+/workspaces/RealAi/realai_og_mess
+and reading every file.

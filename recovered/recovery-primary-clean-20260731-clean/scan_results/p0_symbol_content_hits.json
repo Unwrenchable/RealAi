@@ -1,0 +1,132 @@
+{
+  "mcp_server": [
+    {
+      "path": "/mnt/c/Users/tsmit/realai_historical_backups/realai_versions_20260612/realai_repo/realai-core/tools/rollout_all_repos.py",
+      "snip": "write_text(readme, encoding=\"utf-8\")   _MCP_SERVERS: dict = {     \"servers\": {         \"github\": {             \"type\": \""
+    },
+    {
+      "path": "/mnt/c/Users/tsmit/realai_historical_backups/realai_versions_20260612/realai_sdk/realai-core/tools/rollout_all_repos.py",
+      "snip": "write_text(readme, encoding=\"utf-8\")   _MCP_SERVERS: dict = {     \"servers\": {         \"github\": {             \"type\": \""
+    },
+    {
+      "path": "/mnt/c/Users/tsmit/backups/realai-sync-20260508-090605/realai-main/realai-core/tools/rollout_all_repos.py",
+      "snip": "write_text(readme, encoding=\"utf-8\")   _MCP_SERVERS: dict = {     \"servers\": {         \"github\": {             \"type\": \""
+    },
+    {
+      "path": "/mnt/c/Users/tsmit/backups/realai-sync-20260508-090605/realai_sdk/realai-core/tools/rollout_all_repos.py",
+      "snip": "write_text(readme, encoding=\"utf-8\")   _MCP_SERVERS: dict = {     \"servers\": {         \"github\": {             \"type\": \""
+    },
+    {
+      "path": "/mnt/c/Users/tsmit/Documents/GitHub/realai/realai-core/tools/rollout_all_repos.py",
+      "snip": "write_text(readme, encoding=\"utf-8\")   _MCP_SERVERS: dict = {     \"servers\": {         \"github\": {             \"type\": \""
+    },
+    {
+      "path": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/agent-tools/agent-tools-main/tools/rollout_all_repos.py",
+      "snip": "write_text(readme, encoding=\"utf-8\")   _MCP_SERVERS: dict = {     \"servers\": {         \"github\": {             \"type\": \""
+    },
+    {
+      "path": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/agent-tools-main/agent-tools-main/tools/rollout_all_repos.py",
+      "snip": "write_text(readme, encoding=\"utf-8\")   _MCP_SERVERS: dict = {     \"servers\": {         \"github\": {             \"type\": \""
+    },
+    {
+      "path": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/agent-tools-main/tools/rollout_all_repos.py",
+      "snip": "write_text(readme, encoding=\"utf-8\")   _MCP_SERVERS: dict = {     \"servers\": {         \"github\": {             \"type\": \""
+    },
+    {
+      "path": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/realai-core/tools/rollout_all_repos.py",
+      "snip": "write_text(readme, encoding=\"utf-8\")   _MCP_SERVERS: dict = {     \"servers\": {         \"github\": {             \"type\": \""
+    },
+    {
+      "path": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/realai_repo/realai-core/tools/rollout_all_repos.py",
+      "snip": "write_text(readme, encoding=\"utf-8\")   _MCP_SERVERS: dict = {     \"servers\": {         \"github\": {             \"type\": \""
+    },
+    {
+      "path": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/realai_sdk/realai-core/tools/rollout_all_repos.py",
+      "snip": "write_text(readme, encoding=\"utf-8\")   _MCP_SERVERS: dict = {     \"servers\": {         \"github\": {             \"type\": \""
+    },
+    {
+      "path": "/mnt/c/realai/recovered/from_kilo/kilo_snap_summary.json",
+      "snip": "files.zip\",       1     ],     [       \"mcp_server.py\",       1     ],     [       \"archive_tree.txt\",       1     ],   "
+    }
+  ],
+  "device_selector": [
+    {
+      "path": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/api_server_cpu.py",
+      "snip": "ager, get_llm_engine from plugins.tools.device_selector import get_device_name from aura.memory.engine import get_memory"
+    },
+    {
+      "path": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/device_utils.py",
+      "snip": "ctml from typing import Optional  class DeviceSelector:     \"\"\"Automatically selects the best available compute device.\""
+    },
+    {
+      "path": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/realai_local_server.py",
+      "snip": "ager, get_llm_engine from plugins.tools.device_selector import get_device_name from aura.memory.engine import get_memory"
+    },
+    {
+      "path": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/plugins/tools/device_selector.py",
+      "snip": ":     DIRECTML_AVAILABLE = False  class DeviceSelector:     \"\"\"Plugin for selecting the best available device.\"\"\"       "
+    },
+    {
+      "path": "/mnt/c/realai/realai/v3_orchestrator.py",
+      "snip": "turn _r(arguments)         if name in (\"device_selector\", \"get_device\"):             try:                 from realai.pl"
+    },
+    {
+      "path": "/mnt/c/realai/realai/plugins/tools/device_selector.py",
+      "snip": ":     DIRECTML_AVAILABLE = False  class DeviceSelector:     \"\"\"Plugin for selecting the best available device.\"\"\"       "
+    },
+    {
+      "path": "/mnt/c/realai/recovered/from_aura_p0_hunt/device_selector.py",
+      "snip": ":     DIRECTML_AVAILABLE = False  class DeviceSelector:     \"\"\"Plugin for selecting the best available device.\"\"\"       "
+    },
+    {
+      "path": "/mnt/c/realai/recovered/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_api_server_cpu.py",
+      "snip": "ager, get_llm_engine from plugins.tools.device_selector import get_device_name from aura.memory.engine import get_memory"
+    }
+  ],
+  "aura_memory": [
+    {
+      "path": "/mnt/c/realai/realai/aura_memory.py",
+      "snip": "aura/memory.py`.  The missing filename `aura_memory.py` never existed as a standalone module in tsmit trees; the gold im"
+    },
+    {
+      "path": "/mnt/c/realai/realai/v3_orchestrator.py",
+      "snip": "ocal_llama_health()         if name == \"aura_memory\":             from realai.aura_memory import AuraMemory             "
+    }
+  ],
+  "self_extend": [
+    {
+      "path": "/mnt/c/realai/realai/v3_orchestrator.py",
+      "snip": "t(\"top_k\") or 5))}         if name in (\"self_extend_tool\", \"self_extend\"):             from realai.server.tools.self_ext"
+    },
+    {
+      "path": "/mnt/c/realai/realai/server/tools/self_extend_tool.py",
+      "snip": "\"\"\" self_extend_tool \u2014 recovered capability surface.  No historical file named self_"
+    }
+  ],
+  "self_repair": [
+    {
+      "path": "/mnt/c/realai/realai/v3_orchestrator.py",
+      "snip": "turn _r(arguments)         if name in (\"self_repair_tool\", \"self_repair\"):             from realai.server.tools.self_rep"
+    },
+    {
+      "path": "/mnt/c/realai/realai/server/tools/self_repair_tool.py",
+      "snip": "\"\"\" self_repair_tool \u2014 recovered capability surface.  No historical file named self_"
+    }
+  ],
+  "system_scan": [
+    {
+      "path": "/mnt/c/realai/realai/v3_orchestrator.py",
+      "snip": "turn _r(arguments)         if name in (\"system_scan_tool\", \"system_scan\"):             from realai.server.tools.system_s"
+    },
+    {
+      "path": "/mnt/c/realai/realai/server/tools/system_scan_tool.py",
+      "snip": "\"\"\" system_scan_tool \u2014 recovered capability surface.  No historical file named syste"
+    }
+  ],
+  "find_realai_bootstrap": [
+    {
+      "path": "/mnt/c/realai/recovered/from_kilo/kilo_snap_summary.json",
+      "snip": "ugins\",       26108     ],     [       \"bootstrap_dump\",       9570     ],     [       \"archive\",       6977     ],     "
+    }
+  ]
+}

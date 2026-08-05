@@ -1,0 +1,11 @@
+{
+  "slug": "from-wsl-2026-08-01-HOMEPC-w274d4",
+  "source_sha": "d8e4cebb4e5a3993798a3cfb7255924326859eec",
+  "giants_moved_out": 36,
+  "batch": 2,
+  "file_count": 8053,
+  "imported_at": "2026-08-05T05:57:11.8210648-07:00",
+  "dest": "recovered/from-wsl-2026-08-01-HOMEPC-w274d4",
+  "source_ref": "origin/recovery/from-wsl/2026-08-01/HOMEPC/w274d4",
+  "source_branch": "recovery/from-wsl/2026-08-01/HOMEPC/w274d4"
+}

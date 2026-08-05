@@ -1,0 +1,11 @@
+{
+  "slug": "grok-realai2-clean-2026-07-31-HOMEPC-e5c023",
+  "source_sha": "1a5ea9c9c7093bd7a111ac4870414296c9eaf0eb",
+  "giants_moved_out": 0,
+  "batch": 2,
+  "file_count": 433,
+  "imported_at": "2026-08-05T05:58:26.3661377-07:00",
+  "dest": "recovered/grok-realai2-clean-2026-07-31-HOMEPC-e5c023",
+  "source_ref": "origin/recovery/grok-realai2-clean/2026-07-31/HOMEPC/e5c023",
+  "source_branch": "recovery/grok-realai2-clean/2026-07-31/HOMEPC/e5c023"
+}

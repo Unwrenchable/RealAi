@@ -1,0 +1,37 @@
+{
+  "models": [
+    {
+      "id": "qwen-coder-7b",
+      "name": "Qwen2.5 Coder 7B Instruct",
+      "type": "chat",
+      "provider": "local",
+      "backend": "llama-cpp",
+      "path": "C:/realai/models/qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "default_llm": true,
+      "context_length": 16384,
+      "capabilities": ["chat", "coding", "tools"]
+    },
+    {
+      "id": "realai-1.0",
+      "name": "RealAI 1.0",
+      "type": "chat",
+      "provider": "local",
+      "backend": "llama-cpp",
+      "path": "C:/llama-vulkan/models/realai-1.0/weights/realai-1.0-instruct-Q4_K_M.gguf",
+      "default_llm": false,
+      "context_length": 8192,
+      "capabilities": ["chat", "reasoning", "tools"]
+    },
+    {
+      "id": "llama-local",
+      "name": "Llama Local 1B",
+      "type": "chat",
+      "provider": "local",
+      "backend": "llama-cpp",
+      "path": "C:/realai/models/llama-local-1b-Q4_K_M.gguf",
+      "default_llm": false,
+      "context_length": 8192,
+      "capabilities": ["chat"]
+    }
+  ]
+}

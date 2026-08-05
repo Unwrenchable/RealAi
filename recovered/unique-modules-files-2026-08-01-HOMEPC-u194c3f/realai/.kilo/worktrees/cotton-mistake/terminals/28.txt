@@ -1,0 +1,14 @@
+---
+pid: 26060
+cwd: "C:\Users\tsmit\realai"
+command: "cd C:\\Users\\tsmit\\realai; $env:REALAI_PROVIDER_PORT='8001'; $env:REALAI_API_KEY='realai'; py -3.14 -m realai.provider"
+started_at: 2026-06-04T13:59:14.946Z
+running_for_ms: 11635009 
+---
+[RealAI] Core modules loaded.
+INFO:     Started server process [14756]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     127.0.0.1:50137 - "GET /health/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50138 - "GET /v1/system/accelerator HTTP/1.1" 200 OK

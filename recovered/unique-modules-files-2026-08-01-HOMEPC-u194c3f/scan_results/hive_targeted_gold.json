@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-07-15T15:11:38.802156+00:00",
+  "extract": "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai",
+  "authority": "C:\\realai",
+  "interesting_checked": 183,
+  "missing_on_authority": 12,
+  "content_diff": 8,
+  "same_or_equiv": 163,
+  "priority_missing": 6,
+  "priority_diff": 4,
+  "missing_prio_list": [
+    "realai_historical_backups/realai_versions_20260612/agent-tools-main/agent-tools-main/.vscode/mcp.json",
+    "realai_historical_backups/realai_versions_20260612/agent-tools-main/agent-tools-main/.vscode/settings.json",
+    "realai_historical_backups/realai_versions_20260612/real-fin/realai/realai/realai_memory.json",
+    "realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai_memory.json",
+    "realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai/realai_memory.json",
+    "tests/api/test_embeddings.py"
+  ],
+  "diff_prio_list": [
+    "realai/self_improvement.py",
+    "realai/models/registry.json",
+    "realai/training/finetune.py",
+    "realai-core/agent_tools/__init__.py"
+  ],
+  "staged_to": "C:\\realai\\recovered\\from_recycle_bin\\hive_priority_uniques",
+  "staged_count": 6,
+  "hive_codename": "Real Super Grok 1.0 Hive \u2014 recycle gold recovery"
+}

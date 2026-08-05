@@ -1,0 +1,11 @@
+---
+pid: 8696
+cwd: "C:\Users\tsmit\realai"
+command: "py -3.14 -m realai.provider"
+started_at: 2026-06-04T16:58:26.986Z
+running_for_ms: 885006   
+---
+INFO:     Started server process [23488]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)

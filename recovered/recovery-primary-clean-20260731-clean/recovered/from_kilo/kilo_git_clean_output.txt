@@ -1,0 +1,678 @@
+...
+
+realai__dup1/server/
+Removing realai_repo/realai__dup1/tools.py
+Removing realai_repo/realai__dup1/training/
+Removing realai_repo/realai__dup1/world_model.py
+Removing realai_repo/realai_gui.py
+Removing realai_repo/realai_gui__dup1.py
+Removing realai_repo/realai_local_server.py
+Removing realai_repo/realai_local_server__dup1.py
+Removing realai_repo/requirements-ci.txt
+Removing realai_repo/requirements-ci__dup1.txt
+Removing realai_repo/requirements-full.txt
+Removing realai_repo/requirements-full__dup1.txt
+Removing realai_repo/requirements-gpu.txt
+Removing realai_repo/requirements-gpu__dup1.txt
+Removing realai_repo/requirements.txt
+Removing realai_repo/requirements__dup1.txt
+Removing realai_repo/schema/
+Removing realai_repo/schema__dup1/
+Removing realai_repo/scripts/
+Removing realai_repo/scripts__dup1/
+Removing realai_repo/setup.py
+Removing realai_repo/setup__dup1.py
+Removing realai_repo/test_local_server.py
+Removing realai_repo/test_local_server__dup1.py
+Removing realai_repo/test_realai.py
+Removing realai_repo/test_realai__dup1.py
+Removing realai_repo/tests/
+Removing realai_repo/tests__dup1/
+Removing realai_sdk/.github/
+Removing realai_sdk/.github__dup1/
+Removing realai_sdk/.pytest_cache__dup1/
+Removing realai_sdk/.vs__dup1/
+Removing realai_sdk/API.md
+Removing realai_sdk/API__dup1.md
+Removing realai_sdk/CONTRIBUTING.md
+Removing realai_sdk/CONTRIBUTING__dup1.md
+Removing realai_sdk/DEPLOYMENT.md
+Removing realai_sdk/DEPLOYMENT__dup1.md
+Removing realai_sdk/QUICKSTART.md
+Removing realai_sdk/QUICKSTART__dup1.md
+Removing realai_sdk/README.md
+Removing realai_sdk/README__dup1.md
+Removing realai_sdk/REALAI_3.0.md
+Removing realai_sdk/REALAI_3.0__dup1.md
+Removing realai_sdk/__init__.py
+Removing realai_sdk/__init____dup1.py
+Removing realai_sdk/api/
+Removing realai_sdk/api__dup1/
+Removing realai_sdk/api_server.py
+Removing realai_sdk/api_server__dup1.py
+Removing realai_sdk/apps/
+Removing realai_sdk/apps__dup1/
+Removing realai_sdk/benchmarks/
+Removing realai_sdk/benchmarks__dup1/
+Removing realai_sdk/client.py
+Removing realai_sdk/client__dup1.py
+Removing realai_sdk/core/
+Removing realai_sdk/core__dup1/
+Removing realai_sdk/docs/
+Removing realai_sdk/docs__dup1/
+Removing realai_sdk/local_models.py
+Removing realai_sdk/local_models__dup1.py
+Removing realai_sdk/main.py
+Removing realai_sdk/main__dup1.py
+Removing realai_sdk/plugins/
+Removing realai_sdk/plugins__dup1/
+Removing realai_sdk/realai-core/.github/
+Removing realai_sdk/realai-core/README.md
+Removing realai_sdk/realai-core/agent_tools/
+Removing realai_sdk/realai-core/agents/
+Removing realai_sdk/realai-core/docs/
+Removing realai_sdk/realai-core/examples/
+Removing realai_sdk/realai-core/policy.json
+Removing realai_sdk/realai-core/registry/cli/
+Removing realai_sdk/realai-core/registry/package.json
+Removing realai_sdk/realai-core/registry/tsconfig.json
+Removing realai_sdk/realai-core/sanity_check.py
+Removing realai_sdk/realai-core/schema/
+Removing realai_sdk/realai-core/scripts/
+Removing realai_sdk/realai-core/skills/
+Removing realai_sdk/realai-core/tests/
+Removing realai_sdk/realai-core/tools/
+Removing realai_sdk/realai-core/ui/package.json
+Removing realai_sdk/realai-core/ui/tsconfig.json
+Removing realai_sdk/realai-core/vercel.json
+Removing realai_sdk/realai-core/web/
+Removing realai_sdk/realai-core__dup1/.github/
+Removing realai_sdk/realai-core__dup1/README.md
+Removing realai_sdk/realai-core__dup1/agent_tools/
+Removing realai_sdk/realai-core__dup1/agents/
+Removing realai_sdk/realai-core__dup1/docs/
+Removing realai_sdk/realai-core__dup1/examples/
+Removing realai_sdk/realai-core__dup1/policy.json
+Removing realai_sdk/realai-core__dup1/registry/cli/
+Removing realai_sdk/realai-core__dup1/registry/package.json
+Removing realai_sdk/realai-core__dup1/registry/tsconfig.json
+Removing realai_sdk/realai-core__dup1/sanity_check.py
+Removing realai_sdk/realai-core__dup1/schema/
+Removing realai_sdk/realai-core__dup1/scripts/
+Removing realai_sdk/realai-core__dup1/skills/
+Removing realai_sdk/realai-core__dup1/tests/
+Removing realai_sdk/realai-core__dup1/tools/
+Removing realai_sdk/realai-core__dup1/ui/package.json
+Removing realai_sdk/realai-core__dup1/ui/tsconfig.json
+Removing realai_sdk/realai-core__dup1/vercel.json
+Removing realai_sdk/realai-core__dup1/web/
+Removing realai_sdk/realai-frontend/README.md
+Removing realai_sdk/realai-frontend/package.json
+Removing realai_sdk/realai-frontend/tsconfig.json
+Removing realai_sdk/realai-frontend/vercel.json
+Removing realai_sdk/realai-frontend__dup1/README.md
+Removing realai_sdk/realai-frontend__dup1/package.json
+Removing realai_sdk/realai-frontend__dup1/tsconfig.json
+Removing realai_sdk/realai-frontend__dup1/vercel.json
+Removing realai_sdk/realai/__init__.py
+Removing realai_sdk/realai/agent_runtime.py
+Removing realai_sdk/realai/api_server.py
+Removing realai_sdk/realai/app_framework.py
+Removing realai_sdk/realai/audit.py
+Removing realai_sdk/realai/cli/
+Removing realai_sdk/realai/critique.py
+Removing realai_sdk/realai/datasets/
+Removing realai_sdk/realai/identity.py
+Removing realai_sdk/realai/knowledge_graph.py
+Removing realai_sdk/realai/local_models.py
+Removing realai_sdk/realai/local_runtime.py
+Removing realai_sdk/realai/memory/
+Removing realai_sdk/realai/model_registry.py
+Removing realai_sdk/realai/models/
+Removing realai_sdk/realai/plugin_marketplace.py
+Removing realai_sdk/realai/router.py
+Removing realai_sdk/realai/safety.py
+Removing realai_sdk/realai/sdk/
+Removing realai_sdk/realai/self_improvement.py
+Removing realai_sdk/realai/server/
+Removing realai_sdk/realai/tools.py
+Removing realai_sdk/realai/training/
+Removing realai_sdk/realai/world_model.py
+Removing realai_sdk/realai__dup1/__init__.py
+Removing realai_sdk/realai__dup1/agent_runtime.py
+Removing realai_sdk/realai__dup1/api_server.py
+Removing realai_sdk/realai__dup1/app_framework.py
+Removing realai_sdk/realai__dup1/audit.py
+Removing realai_sdk/realai__dup1/cli/
+Removing realai_sdk/realai__dup1/critique.py
+Removing realai_sdk/realai__dup1/datasets/
+Removing realai_sdk/realai__dup1/identity.py
+Removing realai_sdk/realai__dup1/knowledge_graph.py
+Removing realai_sdk/realai__dup1/local_models.py
+Removing realai_sdk/realai__dup1/local_runtime.py
+Removing realai_sdk/realai__dup1/memory/
+Removing realai_sdk/realai__dup1/model_registry.py
+Removing realai_sdk/realai__dup1/models/
+Removing realai_sdk/realai__dup1/plugin_marketplace.py
+Removing realai_sdk/realai__dup1/router.py
+Removing realai_sdk/realai__dup1/safety.py
+Removing realai_sdk/realai__dup1/sdk/
+Removing realai_sdk/realai__dup1/self_improvement.py
+Removing realai_sdk/realai__dup1/server/
+Removing realai_sdk/realai__dup1/tools.py
+Removing realai_sdk/realai__dup1/training/
+Removing realai_sdk/realai__dup1/world_model.py
+Removing realai_sdk/realai_gui.py
+Removing realai_sdk/realai_gui__dup1.py
+Removing realai_sdk/realai_sdk/__init__.py
+Removing realai_sdk/realai_sdk/agent_runtime.py
+Removing realai_sdk/realai_sdk/api_server.py
+Removing realai_sdk/realai_sdk/app_framework.py
+Removing realai_sdk/realai_sdk/audit.py
+Removing realai_sdk/realai_sdk/cli/
+Removing realai_sdk/realai_sdk/critique.py
+Removing realai_sdk/realai_sdk/datasets/
+Removing realai_sdk/realai_sdk/execution_history.jsonl
+Removing realai_sdk/realai_sdk/identity.py
+Removing realai_sdk/realai_sdk/knowledge_graph.py
+Removing realai_sdk/realai_sdk/local_models.py
+Removing realai_sdk/realai_sdk/local_runtime.py
+Removing realai_sdk/realai_sdk/memory/
+Removing realai_sdk/realai_sdk/model_registry.py
+Removing realai_sdk/realai_sdk/models/
+Removing realai_sdk/realai_sdk/plugin_marketplace.py
+Removing realai_sdk/realai_sdk/router.py
+Removing realai_sdk/realai_sdk/safety.py
+Removing realai_sdk/realai_sdk/sdk/
+Removing realai_sdk/realai_sdk/self_improvement.py
+Removing realai_sdk/realai_sdk/server/
+Removing realai_sdk/realai_sdk/tools.py
+Removing realai_sdk/realai_sdk/training/
+Removing realai_sdk/realai_sdk/world_model.py
+Removing realai_sdk/realai_sdk__dup1/__init__.py
+Removing realai_sdk/realai_sdk__dup1/agent_runtime.py
+Removing realai_sdk/realai_sdk__dup1/api_server.py
+Removing realai_sdk/realai_sdk__dup1/app_framework.py
+Removing realai_sdk/realai_sdk__dup1/audit.py
+Removing realai_sdk/realai_sdk__dup1/cli/
+Removing realai_sdk/realai_sdk__dup1/critique.py
+Removing realai_sdk/realai_sdk__dup1/datasets/
+Removing realai_sdk/realai_sdk__dup1/execution_history.jsonl
+Removing realai_sdk/realai_sdk__dup1/identity.py
+Removing realai_sdk/realai_sdk__dup1/knowledge_graph.py
+Removing realai_sdk/realai_sdk__dup1/local_models.py
+Removing realai_sdk/realai_sdk__dup1/local_runtime.py
+Removing realai_sdk/realai_sdk__dup1/memory/
+Removing realai_sdk/realai_sdk__dup1/model_registry.py
+Removing realai_sdk/realai_sdk__dup1/models/
+Removing realai_sdk/realai_sdk__dup1/plugin_marketplace.py
+Removing realai_sdk/realai_sdk__dup1/router.py
+Removing realai_sdk/realai_sdk__dup1/safety.py
+Removing realai_sdk/realai_sdk__dup1/sdk/
+Removing realai_sdk/realai_sdk__dup1/self_improvement.py
+Removing realai_sdk/realai_sdk__dup1/server/
+Removing realai_sdk/realai_sdk__dup1/tools.py
+Removing realai_sdk/realai_sdk__dup1/training/
+Removing realai_sdk/realai_sdk__dup1/world_model.py
+Removing realai_sdk/requirements-ci.txt
+Removing realai_sdk/requirements-ci__dup1.txt
+Removing realai_sdk/requirements-full.txt
+Removing realai_sdk/requirements-full__dup1.txt
+Removing realai_sdk/requirements-gpu.txt
+Removing realai_sdk/requirements-gpu__dup1.txt
+Removing realai_sdk/requirements.txt
+Removing realai_sdk/requirements__dup1.txt
+Removing realai_sdk/schema/
+Removing realai_sdk/schema__dup1/
+Removing realai_sdk/setup.py
+Removing realai_sdk/setup__dup1.py
+Removing realai_sdk/test_realai.py
+Removing realai_sdk/test_realai__dup1.py
+Removing realai_sdk/tests/
+Removing realai_sdk/tests__dup1/
+Removing realai_search_temp/.git_disabled/
+Removing realai_search_temp/.gitattributes
+Removing realai_search_temp/.github/
+Removing realai_search_temp/.gitignore
+Removing realai_search_temp/.python-version
+Removing realai_search_temp/API.md
+Removing realai_search_temp/CONTRIBUTING.md
+Removing realai_search_temp/DEPLOYMENT.md
+Removing realai_search_temp/Dockerfile
+Removing realai_search_temp/Dockerfile.gpu
+Removing realai_search_temp/LICENSE
+Removing realai_search_temp/PAGES
+Removing realai_search_temp/QUICKSTART.md
+Removing realai_search_temp/QUICKSTART_LOCAL.md
+Removing realai_search_temp/README.md
+Removing realai_search_temp/REALAI_3.0.md
+Removing realai_search_temp/SETUP_COMPLETE.md
+Removing realai_search_temp/agents/
+Removing realai_search_temp/api/
+Removing realai_search_temp/api_server.py
+Removing realai_search_temp/apps/__init__.py
+Removing realai_search_temp/apps/api/
+Removing realai_search_temp/apps/dashboard/
+Removing realai_search_temp/apps/desktop/
+Removing realai_search_temp/apps/frontend/.eslintrc.json
+Removing realai_search_temp/apps/frontend/.gitignore
+Removing realai_search_temp/apps/frontend/README.md
+Removing realai_search_temp/apps/frontend/next.config.js
+Removing realai_search_temp/apps/frontend/package.json
+Removing realai_search_temp/apps/frontend/pnpm-workspace.yaml
+Removing realai_search_temp/apps/frontend/postcss.config.js
+Removing realai_search_temp/apps/frontend/src/
+Removing realai_search_temp/apps/frontend/tailwind.config.js
+Removing realai_search_temp/apps/frontend/tsconfig.json
+Removing realai_search_temp/apps/frontend/vercel.json
+Removing realai_search_temp/apps/widget/
+Removing realai_search_temp/aura/
+Removing realai_search_temp/autopilot/
+Removing realai_search_temp/benchmarks/
+Removing realai_search_temp/billing/
+Removing realai_search_temp/config/
+Removing realai_search_temp/core/
+Removing realai_search_temp/docker-compose.yml
+Removing realai_search_temp/docs/
+Removing realai_search_temp/examples/
+Removing realai_search_temp/local_models.py
+Removing realai_search_temp/main.py
+Removing realai_search_temp/marketplace/
+Removing realai_search_temp/models.yaml
+Removing realai_search_temp/models/
+Removing realai_search_temp/package.json
+Removing realai_search_temp/packages/
+Removing realai_search_temp/plugins/
+Removing realai_search_temp/pnpm-workspace.yaml
+Removing realai_search_temp/providers.yaml
+Removing realai_search_temp/providers/
+Removing realai_search_temp/pyproject.toml
+Removing realai_search_temp/pyrightconfig.json
+Removing realai_search_temp/realai.toml
+Removing realai_search_temp/realai.toml.example
+Removing realai_search_temp/realai/
+Removing realai_search_temp/realai_gui.py
+Removing realai_search_temp/realai_local_server.py
+Removing realai_search_temp/render.yaml
+Removing realai_search_temp/render.yml
+Removing realai_search_temp/requirements-ci.txt
+Removing realai_search_temp/requirements-full.txt
+Removing realai_search_temp/requirements-gpu.txt
+Removing realai_search_temp/requirements.txt
+Removing realai_search_temp/schema/
+Removing realai_search_temp/scripts/
+Removing realai_search_temp/setup.py
+Removing realai_search_temp/src/
+Removing realai_search_temp/start_realai_server.bat
+Removing realai_search_temp/test_local_server.py
+Removing realai_search_temp/test_realai.py
+Removing realai_search_temp/tests/
+Removing realai_search_temp/traefik.yml
+Removing realai_search_temp/training/
+Removing realai_search_temp/tsconfig.json
+Removing realai_search_temp/vercel.json
+Removing realai_server.py
+Removing rebase_dryrun/apply_report.txt
+Removing rebase_dryrun/backups/
+Removing rebase_dryrun/backups_resolved/README.md
+Removing rebase_dryrun/backups_resolved/main.py
+Removing rebase_dryrun/backups_resolved/models.yaml
+Removing rebase_dryrun/backups_resolved/package.json
+Removing rebase_dryrun/backups_resolved/plugins/
+Removing rebase_dryrun/backups_resolved/pyproject.toml
+Removing rebase_dryrun/backups_resolved/realai/__init__.py
+Removing rebase_dryrun/backups_resolved/realai/api_server.py
+Removing rebase_dryrun/backups_resolved/realai/local_models.py
+Removing rebase_dryrun/backups_resolved/realai/memory/
+Removing rebase_dryrun/backups_resolved/realai/models/
+Removing rebase_dryrun/backups_resolved/realai/server/
+Removing rebase_dryrun/backups_resolved/setup.py
+Removing rebase_dryrun/backups_resolved/src/
+Removing rebase_dryrun/backups_resolved/start-realai.bat
+Removing rebase_dryrun/conflicts.txt
+Removing rebase_dryrun/diffs/
+Removing rebase_dryrun/diffs_summary.txt
+Removing rebase_dryrun/merged/README.md.conflict
+Removing rebase_dryrun/merged/main.py.conflict
+Removing rebase_dryrun/merged/models.yaml.conflict
+Removing rebase_dryrun/merged/package.json.conflict
+Removing rebase_dryrun/merged/plugins/
+Removing rebase_dryrun/merged/pyproject.toml.conflict
+Removing rebase_dryrun/merged/realai/.agentx/
+Removing rebase_dryrun/merged/realai/.gitattributes
+Removing rebase_dryrun/merged/realai/.github/
+Removing rebase_dryrun/merged/realai/.gitignore
+Removing rebase_dryrun/merged/realai/API.md
+Removing rebase_dryrun/merged/realai/CONTRIBUTING.md
+Removing rebase_dryrun/merged/realai/DEPLOYMENT.md
+Removing rebase_dryrun/merged/realai/DEPLOYMENT_FRONTEND_FIX.md
+Removing rebase_dryrun/merged/realai/LAMBDA_DEPLOYMENT.md
+Removing rebase_dryrun/merged/realai/LAMBDA_SIZE_OPTIMIZATION.md
+Removing rebase_dryrun/merged/realai/LICENSE
+Removing rebase_dryrun/merged/realai/LOCAL_AI_GUIDE.md
+Removing rebase_dryrun/merged/realai/LOCAL_AI_SUMMARY.md
+Removing rebase_dryrun/merged/realai/PROJECT_SUMMARY.md
+Removing rebase_dryrun/merged/realai/QUICKSTART.md
+Removing rebase_dryrun/merged/realai/README.md
+Removing rebase_dryrun/merged/realai/SECURITY_SUMMARY.txt
+Removing rebase_dryrun/merged/realai/VALIDATION_REPORT.md
+Removing rebase_dryrun/merged/realai/__init__.py.conflict
+Removing rebase_dryrun/merged/realai/api/
+Removing rebase_dryrun/merged/realai/api_server.py.conflict
+Removing rebase_dryrun/merged/realai/build_lambda.sh
+Removing rebase_dryrun/merged/realai/cli/
+Removing rebase_dryrun/merged/realai/config/
+Removing rebase_dryrun/merged/realai/datasets/
+Removing rebase_dryrun/merged/realai/examples.py
+Removing rebase_dryrun/merged/realai/examples_limitless.py
+Removing rebase_dryrun/merged/realai/examples_local_ai.py
+Removing rebase_dryrun/merged/realai/examples_ultimate.py
+Removing rebase_dryrun/merged/realai/index.html
+Removing rebase_dryrun/merged/realai/index.ts
+Removing rebase_dryrun/merged/realai/lambda_advanced.py
+Removing rebase_dryrun/merged/realai/lambda_chat.py
+Removing rebase_dryrun/merged/realai/lambda_core.py
+Removing rebase_dryrun/merged/realai/lambda_core_shared.py
+Removing rebase_dryrun/merged/realai/lambda_embeddings_audio.py
+Removing rebase_dryrun/merged/realai/lambda_image.py
+Removing rebase_dryrun/merged/realai/lambda_video.py
+Removing rebase_dryrun/merged/realai/local_model_cli.py
+Removing rebase_dryrun/merged/realai/local_models.py.conflict
+Removing rebase_dryrun/merged/realai/main.py
+Removing rebase_dryrun/merged/realai/memory/
+Removing rebase_dryrun/merged/realai/models/realai-1.0/
+Removing rebase_dryrun/merged/realai/models/realai-embed/
+Removing rebase_dryrun/merged/realai/models/realai-overseer/
+Removing rebase_dryrun/merged/realai/models/registry.json.conflict
+Removing rebase_dryrun/merged/realai/package.json
+Removing rebase_dryrun/merged/realai/plugins/
+Removing rebase_dryrun/merged/realai/providers/
+Removing rebase_dryrun/merged/realai/quick_start_local.py
+Removing rebase_dryrun/merged/realai/realai - Copy/.agentx/
+Removing rebase_dryrun/merged/realai/realai - Copy/.gitattributes
+Removing rebase_dryrun/merged/realai/realai - Copy/.github/
+Removing rebase_dryrun/merged/realai/realai - Copy/.gitignore
+Removing rebase_dryrun/merged/realai/realai - Copy/API.md
+Removing rebase_dryrun/merged/realai/realai - Copy/CONTRIBUTING.md
+Removing rebase_dryrun/merged/realai/realai - Copy/DEPLOYMENT.md
+Removing rebase_dryrun/merged/realai/realai - Copy/DEPLOYMENT_FRONTEND_FIX.md
+Removing rebase_dryrun/merged/realai/realai - Copy/LAMBDA_DEPLOYMENT.md
+Removing rebase_dryrun/merged/realai/realai - Copy/LAMBDA_SIZE_OPTIMIZATION.md
+Removing rebase_dryrun/merged/realai/realai - Copy/LICENSE
+Removing rebase_dryrun/merged/realai/realai - Copy/LOCAL_AI_GUIDE.md
+Removing rebase_dryrun/merged/realai/realai - Copy/LOCAL_AI_SUMMARY.md
+Removing rebase_dryrun/merged/realai/realai - Copy/PROJECT_SUMMARY.md
+Removing rebase_dryrun/merged/realai/realai - Copy/QUICKSTART.md
+Removing rebase_dryrun/merged/realai/realai - Copy/README.md
+Removing rebase_dryrun/merged/realai/realai - Copy/SECURITY_SUMMARY.txt
+Removing rebase_dryrun/merged/realai/realai - Copy/VALIDATION_REPORT.md
+Removing rebase_dryrun/merged/realai/realai - Copy/__init__.py
+Removing rebase_dryrun/merged/realai/realai - Copy/api/
+Removing rebase_dryrun/merged/realai/realai - Copy/api_server.py
+Removing rebase_dryrun/merged/realai/realai - Copy/build_lambda.sh
+Removing rebase_dryrun/merged/realai/realai - Copy/examples.py
+Removing rebase_dryrun/merged/realai/realai - Copy/examples_limitless.py
+Removing rebase_dryrun/merged/realai/realai - Copy/examples_local_ai.py
+Removing rebase_dryrun/merged/realai/realai - Copy/examples_ultimate.py
+Removing rebase_dryrun/merged/realai/realai - Copy/index.html
+Removing rebase_dryrun/merged/realai/realai - Copy/lambda_advanced.py
+Removing rebase_dryrun/merged/realai/realai - Copy/lambda_chat.py
+Removing rebase_dryrun/merged/realai/realai - Copy/lambda_core.py
+Removing rebase_dryrun/merged/realai/realai - Copy/lambda_core_shared.py
+Removing rebase_dryrun/merged/realai/realai - Copy/lambda_embeddings_audio.py
+Removing rebase_dryrun/merged/realai/realai - Copy/lambda_image.py
+Removing rebase_dryrun/merged/realai/realai - Copy/lambda_video.py
+Removing rebase_dryrun/merged/realai/realai - Copy/local_model_cli.py
+Removing rebase_dryrun/merged/realai/realai - Copy/local_models.py
+Removing rebase_dryrun/merged/realai/realai - Copy/main.py
+Removing rebase_dryrun/merged/realai/realai - Copy/plugins/
+Removing rebase_dryrun/merged/realai/realai - Copy/quick_start_local.py
+Removing rebase_dryrun/merged/realai/realai - Copy/realai-cli/
+Removing rebase_dryrun/merged/realai/realai - Copy/realai-design-system/
+Removing rebase_dryrun/merged/realai/realai - Copy/realai-orchestration/
+Removing rebase_dryrun/merged/realai/realai - Copy/realai-sdk-js/
+Removing rebase_dryrun/merged/realai/realai - Copy/realai/__init__.py
+Removing rebase_dryrun/merged/realai/realai - Copy/realai/api_server.py
+Removing rebase_dryrun/merged/realai/realai - Copy/realai/memory/
+Removing rebase_dryrun/merged/realai/realai - Copy/realai_agent/
+Removing rebase_dryrun/merged/realai/realai - Copy/realai_api/
+Removing rebase_dryrun/merged/realai/realai - Copy/realai_gui.py
+Removing rebase_dryrun/merged/realai/realai - Copy/realai_launcher.spec
+Removing rebase_dryrun/merged/realai/realai - Copy/render.yaml
+Removing rebase_dryrun/merged/realai/realai - Copy/requirements-ci.txt
+Removing rebase_dryrun/merged/realai/realai - Copy/requirements-full.txt
+Removing rebase_dryrun/merged/realai/realai - Copy/requirements-lambda-advanced.txt
+Removing rebase_dryrun/merged/realai/realai - Copy/requirements-lambda-chat.txt
+Removing rebase_dryrun/merged/realai/realai - Copy/requirements-lambda-core.txt
+Removing rebase_dryrun/merged/realai/realai - Copy/requirements-lambda-embeddings-audio.txt
+Removing rebase_dryrun/merged/realai/realai - Copy/requirements-lambda-image.txt
+Removing rebase_dryrun/merged/realai/realai - Copy/requirements-lambda-video.txt
+Removing rebase_dryrun/merged/realai/realai - Copy/requirements.txt
+Removing rebase_dryrun/merged/realai/realai - Copy/setup.py
+Removing rebase_dryrun/merged/realai/realai - Copy/standalone_ai.py
+Removing rebase_dryrun/merged/realai/realai - Copy/template.yaml
+Removing rebase_dryrun/merged/realai/realai - Copy/test_realai.py
+Removing rebase_dryrun/merged/realai/realai - Copy/travis smith.lnk
+Removing rebase_dryrun/merged/realai/realai - Copy/vercel.json
+Removing rebase_dryrun/merged/realai/realai-cli/
+Removing rebase_dryrun/merged/realai/realai-design-system/
+Removing rebase_dryrun/merged/realai/realai-orchestration/
+Removing rebase_dryrun/merged/realai/realai-sdk-js/
+Removing rebase_dryrun/merged/realai/realai/__init__.py
+Removing rebase_dryrun/merged/realai/realai/api_server.py
+Removing rebase_dryrun/merged/realai/realai/memory/
+Removing rebase_dryrun/merged/realai/realai_agent/
+Removing rebase_dryrun/merged/realai/realai_api/
+Removing rebase_dryrun/merged/realai/realai_gui.py
+Removing rebase_dryrun/merged/realai/realai_launcher.spec
+Removing rebase_dryrun/merged/realai/render.yaml
+Removing rebase_dryrun/merged/realai/requirements-ci.txt
+Removing rebase_dryrun/merged/realai/requirements-full.txt
+Removing rebase_dryrun/merged/realai/requirements-lambda-advanced.txt
+Removing rebase_dryrun/merged/realai/requirements-lambda-chat.txt
+Removing rebase_dryrun/merged/realai/requirements-lambda-core.txt
+Removing rebase_dryrun/merged/realai/requirements-lambda-embeddings-audio.txt
+Removing rebase_dryrun/merged/realai/requirements-lambda-image.txt
+Removing rebase_dryrun/merged/realai/requirements-lambda-video.txt
+Removing rebase_dryrun/merged/realai/requirements.txt
+Removing rebase_dryrun/merged/realai/sdk/
+Removing rebase_dryrun/merged/realai/server/
+Removing rebase_dryrun/merged/realai/setup.py
+Removing rebase_dryrun/merged/realai/standalone_ai.py
+Removing rebase_dryrun/merged/realai/template.yaml
+Removing rebase_dryrun/merged/realai/test_realai.py
+Removing rebase_dryrun/merged/realai/training/
+Removing rebase_dryrun/merged/realai/travis smith.lnk
+Removing rebase_dryrun/merged/realai/vercel.json
+Removing rebase_dryrun/merged/setup.py.conflict
+Removing rebase_dryrun/merged/src/
+Removing rebase_dryrun/merged/start-realai.bat.conflict
+Removing rebase_dryrun/resolution_report.txt
+Removing reorg_manifest.jsonl
+Removing repo_structure.txt
+Removing repo_structure.zip
+Removing root_scripts/
+Removing scripts/REALI_NEXT_UI_BASE_URL.bat
+Removing scripts/TODO_fix_api_server_tools_block.py
+Removing scripts/__init__.py
+Removing scripts/_runner.py
+Removing scripts/add_evolver.py
+Removing scripts/agent_runtime.py
+Removing scripts/app_framework.py
+Removing scripts/apply_migration.py
+Removing scripts/audit.py
+Removing scripts/auto_fix.py
+Removing scripts/autodiscover_plugins.py
+Removing scripts/batch_vet_autodiscovered.py
+Removing scripts/chat_qwen_lora_directml.py
+Removing scripts/cleanup_autodiscovered.py
+Removing scripts/config.py
+Removing scripts/critique.py
+Removing scripts/device_utils.py
+Removing scripts/extract_agent_tool_data.py
+Removing scripts/extract_archive_plugins.py
+Removing scripts/full_repo_scan.py
+Removing scripts/generate_migration_plan.py
+Removing scripts/identity.py
+Removing scripts/improved_code.py
+Removing scripts/improved_llama_endpoint.py
+Removing scripts/knowledge_graph.py
+Removing scripts/local_model_cli.py
+Removing scripts/local_models.py
+Removing scripts/local_runtime.py
+Removing scripts/model_registry.py
+Removing scripts/newmethods.py
+Removing scripts/plugin_marketplace.py
+Removing scripts/probe_chat.py
+Removing scripts/python fix_and_test.py
+Removing scripts/realai_architect_agent.py
+Removing scripts/realai_broad_search.py
+Removing scripts/realai_full_autonomous.py
+Removing scripts/realai_local_server.py
+Removing scripts/realai_plugin_hunter.py
+Removing scripts/realai_rebuilder.py
+Removing scripts/realai_reorg_agent.py
+Removing scripts/realai_repo_improver.py
+Removing scripts/realai_self_improving_agent.py
+Removing scripts/realai_v3_server.py
+Removing scripts/rebase_apply.py
+Removing scripts/rebase_dryrun.py
+Removing scripts/rebase_generate_diffs.py
+Removing scripts/rebase_report.py
+Removing scripts/rebase_resolve_conflicts.py
+Removing scripts/reorganize_safe.py
+Removing scripts/report_archive_plugins.py
+Removing scripts/router.py
+Removing scripts/run_tests_shortlist.py
+Removing scripts/safety.py
+Removing scripts/scan_autodiscovered.py
+Removing scripts/self_improvement.py
+Removing scripts/self_improving_agent.py
+Removing scripts/stabilize_and_package.py
+Removing scripts/standalone_ai.py
+Removing scripts/start_realai_server.py
+Removing scripts/t.py
+Removing scripts/test_load_whitelist.py
+Removing scripts/tools.py
+Removing scripts/verify_adapter_load_and_generate.py
+Removing scripts/vet_autodiscovered.py
+Removing scripts/world_model.py
+Removing sdk/
+Removing search_realai_plugins,py
+Removing search_realai_plugins.py
+Removing server/__init__.py
+Removing server/api_server.py
+Removing server/api_server_backup.py
+Removing server/api_server_cpu.py
+Removing server/api_server_old.py
+Removing server/app.py
+Removing server/backends.py
+Removing server/config.py
+Removing server/embeddings.py
+Removing server/embeddings_backend.py
+Removing server/inference.py
+Removing server/llama_cli_backend.py
+Removing server/logging.py
+Removing server/logging_utils.py
+Removing server/memory_store.py
+Removing server/metrics.py
+Removing server/orchestration.py
+Removing server/profiles/
+Removing server/providers.py
+Removing server/router.py
+Removing server/tools_runtime.py
+Removing server_settings.py
+Removing servers/
+Removing src/app/api/
+Removing src/app/globals.css
+Removing src/app/layout.tsx
+Removing src/client.ts
+Removing src/commands/
+Removing src/components/Avatar/
+Removing src/components/Badge/
+Removing src/components/Button/
+Removing src/components/Card/
+Removing src/components/ChatBubble/
+Removing src/components/ChatInput.tsx
+Removing src/components/CodeBlock/
+Removing src/components/Dropdown/
+Removing src/components/Input/
+Removing src/components/MessageList.tsx
+Removing src/components/Modal/
+Removing src/components/ModelTag/
+Removing src/components/SettingsDrawer.tsx
+Removing src/components/Sidebar.tsx
+Removing src/components/Tabs/
+Removing src/components/TextArea/
+Removing src/components/Tooltip/
+Removing src/config.ts
+Removing src/data/
+Removing src/icons/
+Removing src/index.ts
+Removing src/providers.ts
+Removing src/realai/__init__.py
+Removing src/realai/agent_society/
+Removing src/realai/agents/__init__.py
+Removing src/realai/agents/agent.py
+Removing src/realai/agents/master.py
+Removing src/realai/agents/registry.py
+Removing src/realai/agents/router.py
+Removing src/realai/agents/types.py
+Removing src/realai/api_server.py
+Removing src/realai/architect/
+Removing src/realai/cli/
+Removing src/realai/core/__init__.py
+Removing src/realai/core/api_server.py
+Removing src/realai/core/data/
+Removing src/realai/core/plugin_marketplace_stub.py
+Removing src/realai/core/realai_engine.py
+Removing src/realai/core/realai_engine_backup.py
+Removing src/realai/core/realai_engine_v3.py
+Removing src/realai/dream/
+Removing src/realai/evolver/__init__.py
+Removing src/realai/evolver/recursive_self_evolver.py
+Removing src/realai/gui/
+Removing src/realai/init_fix.py
+Removing src/realai/living_plugins/
+Removing src/realai/memory/__init__.py
+Removing src/realai/memory/aura.py
+Removing src/realai/memory/chroma_store.py
+Removing src/realai/meta_arch/
+Removing src/realai/models/
+Removing src/realai/narrative/
+Removing src/realai/patches/
+Removing src/realai/plugins/
+Removing src/realai/providers/
+Removing src/realai/repair/
+Removing src/realai/test.txt
+Removing src/realai/training/
+Removing src/realai/value_guardian/
+Removing src/realai/world/
+Removing src/theme/
+Removing src/types.ts
+Removing start-realai.bat
+Removing template.yaml
+Removing tests/test64.py
+Removing tests/test_agent_protocol.py
+Removing tests/test_bootstrap_weights.py
+Removing tests/test_client.py
+Removing tests/test_extract_sessions.py
+Removing tests/test_import_realai_module.py
+Removing tests/test_llama.py
+Removing tests/test_local_server.py
+Removing tests/test_model_assets.py
+Removing tests/test_realai.py
+Removing tests/test_self_builder.py
+Removing tests/test_training_tools.py
+Removing tools/
+Removing training/build_datasets.py
+Removing training/create_training_runs_json.py
+Removing training/directml_lora_train.py
+Removing training/train_from_agent_manifests.py
+Removing training/train_qwen_directml.py
+Removing training/train_qwen_lora_directml.py
+Removing utilities/agent_manifests_for_finetuning.json
+Removing utilities/agent_manifests_for_finetuning_training_runs.json
+Removing utilities/blackbox_mcp_settings.json
+Removing utilities/pyrightconfig.json
+Removing vendor/

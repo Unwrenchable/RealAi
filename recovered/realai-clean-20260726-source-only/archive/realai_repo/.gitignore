@@ -1,0 +1,47 @@
+# === LARGE / TEMP FILES - NEVER COMMIT ===
+models/*.gguf
+models/models/
+models/realai-*/
+*.sqlite3
+realai_memory.*
+realai_memory.db
+realai_memory.sqlite3
+realai_knowledge_store.json
+realai.egg-info/
+*.egg-info/
+Output/
+_backup/
+.env*
+*.env
+realai.toml.local
+
+# Build / Caches
+__pycache__/
+*.pyc
+node_modules/
+dist/
+build/
+.pytest_cache/
+.cache/
+*.log
+
+# Virtual Envs
+.venv/
+venv/
+wsl-env/
+windows-env/
+**/venv/
+**/.venv/
+
+# Old copies
+oldrealai*
+
+# IDE / VS
+.vs/
+*.code-workspace
+.vscode/
+.DS_Store
+
+# Package locks (regenerate if needed)
+pnpm-lock.yaml
+package-lock.json

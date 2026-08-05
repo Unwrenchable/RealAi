@@ -1,0 +1,18 @@
+{
+  "started": "2026-07-14T15:40:19.284662+00:00",
+  "actions": [
+    {
+      "copy_tree": "/mnt/c/Users/tsmit/Documents/GitHub/realai/realai-core/agent_tools",
+      "to": "/mnt/c/realai/recovered/from_agent_tools/from_github_realai_core",
+      "files": 8
+    },
+    {
+      "copy": "/mnt/c/Users/tsmit/Documents/GitHub/realai/realai/training/extract_from_agent_tools.py",
+      "to": "/mnt/c/realai/recovered/from_agent_tools/extract_from_agent_tools.py"
+    },
+    {
+      "discoverable": "/mnt/c/realai/realai/agent_tools_gold",
+      "py_files": 28
+    }
+  ]
+}

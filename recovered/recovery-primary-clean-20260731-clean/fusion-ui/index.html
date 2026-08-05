@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealAI — Fusion Interface</title>
+    <style>
+        body { font-family: system-ui; margin: 40px; background: #0d0d1a; color: #e0e0ff; }
+        h1 { color: #7c5cfc; }
+    </style>
+</head>
+<body>
+    <h1>✅ RealAI Fusion Interface</h1>
+    <p>Fusion UI is now loaded successfully.</p>
+    <p><strong>Server is running.</strong> Chat should work below once fully wired.</p>
+
+    <div id="backend-error-banner" style="margin:8px 0;padding:8px 12px;border:1px solid rgba(120,120,255,0.4);border-radius:6px;background:rgba(10,10,30,0.7);color:#dce2ff;font-family:Consolas,monospace;font-size:12px;">
+        Initializing backend status...
+    </div>
+
+    <div id="health-indicator" style="margin:8px 0;color:#9fb1ff;font-size:13px;">
+        Health: checking...
+    </div>
+
+    <div id="chat-log" style="padding:8px;border:1px solid #2f2f5f;border-radius:8px;min-height:120px;margin:12px 0;"></div>
+
+    <form id="chat-form" style="display:flex;gap:8px;">
+        <input id="chat-input" type="text" placeholder="Type a message..." style="flex:1;padding:8px;border-radius:6px;border:1px solid #555;" />
+        <button type="submit" style="padding:8px 12px;">Send</button>
+    </form>
+
+    <pre id="request-viewer" style="margin-top:12px;padding:8px;border:1px solid #2f2f5f;border-radius:8px;background:#0a0a14;color:#aab6ff;white-space:pre-wrap;"></pre>
+    
+    <script src="script.js"></script>
+</body>
+</html>

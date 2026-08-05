@@ -1,0 +1,7 @@
+# Optional: RealAI native model fine-tune + HF export
+# Install: pip install -r requirements-training.txt
+datasets>=2.14.0
+transformers>=4.40.0
+accelerate>=0.28.0
+torch>=2.1.0
+safetensors>=0.4.0
