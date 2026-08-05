@@ -1,0 +1,31 @@
+-- users of RealAI
+CREATE TABLE IF NOT EXISTS users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  external_id TEXT UNIQUE,           -- e.g. auth user id, or "anon:<session>"
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  profile_json TEXT                  -- JSON: { "tone": "concise", "language": "en", ... }
+);
+
+-- each interaction (one user message + one RealAI answer)
+CREATE TABLE IF NOT EXISTS interactions (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  session_id TEXT,
+  input_text TEXT,
+  output_text TEXT,
+  models_used_json TEXT,             -- JSON list: ["gpt-4.1", "local-llama-8b"]
+  tools_used_json TEXT,              -- JSON list: ["web_search", "code_exec"]
+  meta_json TEXT,                    -- anything else: latency, cost, tags
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- explicit feedback from the user
+CREATE TABLE IF NOT EXISTS feedback (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  interaction_id INTEGER NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  rating INTEGER,                    -- 1-5 or -1/0/1
+  comment TEXT,
+  FOREIGN KEY (interaction_id) REFERENCES interactions(id)
+);

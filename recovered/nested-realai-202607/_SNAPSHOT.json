@@ -1,0 +1,10 @@
+{
+  "slug": "nested-realai-202607",
+  "dest": "recovered/nested-realai-202607",
+  "source_sha": "0e810e270dc08d327b06892a54f7a6c064112776",
+  "giants_moved_out": 284,
+  "source_ref": "origin/local/nested-realai-202607",
+  "source_branch": "local/nested-realai-202607",
+  "file_count": 624,
+  "imported_at": "2026-08-05T05:35:01.5535023-07:00"
+}

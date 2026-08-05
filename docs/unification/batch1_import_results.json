@@ -1,0 +1,72 @@
+[
+  {
+    "Branch": "local/nested-realai-202607",
+    "Slug": "nested-realai-202607",
+    "Status": "ok",
+    "Files": 624,
+    "Sha": "0e810e27"
+  },
+  {
+    "Branch": "local/desktop-realai-202605",
+    "Slug": "desktop-realai-202605",
+    "Status": "ok",
+    "Files": 97,
+    "Sha": "9e896882"
+  },
+  {
+    "Branch": "local/desktop-realai-agent-202604",
+    "Slug": "desktop-realai-agent-202604",
+    "Status": "ok",
+    "Files": 10,
+    "Sha": "1e3ddeab"
+  },
+  {
+    "Branch": "local/desktop-realai-api-202604",
+    "Slug": "desktop-realai-api-202604",
+    "Status": "ok",
+    "Files": 7,
+    "Sha": "a568a3b2"
+  },
+  {
+    "Branch": "local/desktop-realai-orchestration-202604",
+    "Slug": "desktop-realai-orchestration-202604",
+    "Status": "ok",
+    "Files": 7,
+    "Sha": "29d9a5ae"
+  },
+  {
+    "Branch": "local/desktop-realai-design-system-202604",
+    "Slug": "desktop-realai-design-system-202604",
+    "Status": "ok",
+    "Files": 44,
+    "Sha": "eb33cadd"
+  },
+  {
+    "Branch": "local/desktop-realai-cli-202604",
+    "Slug": "desktop-realai-cli-202604",
+    "Status": "ok",
+    "Files": 8,
+    "Sha": "e3179216"
+  },
+  {
+    "Branch": "local/desktop-realai-sdk-js-202604",
+    "Slug": "desktop-realai-sdk-js-202604",
+    "Status": "ok",
+    "Files": 8,
+    "Sha": "5d631069"
+  },
+  {
+    "Branch": "local/RealAIProject-clean-20260612",
+    "Slug": "RealAIProject-clean-20260612",
+    "Status": "ok",
+    "Files": 295,
+    "Sha": "b4b325e3"
+  },
+  {
+    "Branch": "local/real-fin-realai-source-only",
+    "Slug": "real-fin-realai-source-only",
+    "Status": "ok",
+    "Files": 162,
+    "Sha": "65e02465"
+  }
+]

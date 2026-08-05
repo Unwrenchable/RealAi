@@ -1,0 +1,116 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "RealAI (core)"
+    },
+    {
+      "path": "../ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+      "name": "Atomic Fizz - Wasteland GPS (game)"
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "${workspaceFolder}/windows-env/Scripts/python.exe",
+    "python.envFile": "${workspaceFolder}/.env",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.extraPaths": [
+      "${workspaceFolder}/src"
+    ],
+
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": ["tests", "benchmarks"],
+
+    "terminal.integrated.env.windows": {
+      "PYTHONPATH": "${workspaceFolder}/src"
+    },
+    "terminal.integrated.env.linux": {
+      "PYTHONPATH": "${workspaceFolder}/src"
+    },
+
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/*.pyc": true,
+      "**/node_modules": true,
+      "**/venv": true,
+      "**/.venv": true,
+      "**/dist": true,
+      "**/build": true,
+      "**/.pytest_cache": true
+    },
+
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/venv": true,
+      "**/.venv": true,
+      "**/__pycache__": true,
+      "**/realai.egg-info": true
+    },
+
+    
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/node_modules/*/**": true,
+      "**/venv/**": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "ms-azuretools.vscode-docker",
+      "rust-lang.rust-analyzer",
+      "tamasfe.even-better-toml"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "RealAI: Setup Windows",
+        "type": "shell",
+        "command": "./scripts/setup_windows.ps1",
+        "group": "build"
+      },
+      {
+        "label": "RealAI: Run src API (Windows)",
+        "type": "shell",
+        "command": "./scripts/run_src_api.ps1",
+        "group": "build",
+        "isBackground": true
+      },
+      {
+        "label": "RealAI: Run src UI (Windows)",
+        "type": "shell",
+        "command": "./scripts/run_src_ui.ps1",
+        "group": "build",
+        "isBackground": true
+      },
+      {
+        "label": "RealAI: Start Provider Server (for game)",
+        "type": "shell",
+        "command": "pwsh -Command \"$env:PYTHONPATH='src'; python -m realai.provider\"",
+        "group": "build",
+        "isBackground": true
+      },
+      {
+        "label": "pnpm: Install all workspaces",
+        "type": "shell",
+        "command": "pnpm install",
+        "group": "build"
+      },
+      {
+        "label": "pnpm: Build TS packages",
+        "type": "shell",
+        "command": "pnpm --filter \"./packages/*\" --filter \"./apps/*\" build",
+        "group": "build"
+      }
+    ]
+  }
+}
+

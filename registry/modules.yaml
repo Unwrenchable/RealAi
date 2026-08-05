@@ -1,0 +1,53 @@
+version: 1
+description: Discoverable modules on unification/ultimate-all
+modules:
+  - id: nested-realai-202607
+    path: recovered/nested-realai-202607
+    kind: snapshot
+    capabilities: [runtime, server, tools, memory]
+    status: archived
+  - id: desktop-realai-202605
+    path: recovered/desktop-realai-202605
+    kind: snapshot
+    capabilities: [desktop, ui]
+    status: archived
+  - id: desktop-realai-agent-202604
+    path: recovered/desktop-realai-agent-202604
+    kind: snapshot
+    capabilities: [agents]
+    status: archived
+  - id: desktop-realai-api-202604
+    path: recovered/desktop-realai-api-202604
+    kind: snapshot
+    capabilities: [api, server]
+    status: archived
+  - id: desktop-realai-orchestration-202604
+    path: recovered/desktop-realai-orchestration-202604
+    kind: snapshot
+    capabilities: [orchestration]
+    status: archived
+  - id: desktop-realai-design-system-202604
+    path: recovered/desktop-realai-design-system-202604
+    kind: snapshot
+    capabilities: [design-system, ui]
+    status: archived
+  - id: desktop-realai-cli-202604
+    path: recovered/desktop-realai-cli-202604
+    kind: snapshot
+    capabilities: [cli]
+    status: archived
+  - id: desktop-realai-sdk-js-202604
+    path: recovered/desktop-realai-sdk-js-202604
+    kind: snapshot
+    capabilities: [sdk, javascript]
+    status: archived
+  - id: RealAIProject-clean-20260612
+    path: recovered/RealAIProject-clean-20260612
+    kind: snapshot
+    capabilities: [project]
+    status: archived
+  - id: real-fin-realai-source-only
+    path: recovered/real-fin-realai-source-only
+    kind: snapshot
+    capabilities: [real-fin]
+    status: archived

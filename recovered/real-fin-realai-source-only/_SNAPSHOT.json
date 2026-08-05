@@ -1,0 +1,10 @@
+{
+  "slug": "real-fin-realai-source-only",
+  "dest": "recovered/real-fin-realai-source-only",
+  "source_sha": "65e02465d5e30550e2dadcda5630cc805fa030a9",
+  "giants_moved_out": 0,
+  "source_ref": "origin/local/real-fin-realai-source-only",
+  "source_branch": "local/real-fin-realai-source-only",
+  "file_count": 162,
+  "imported_at": "2026-08-05T05:35:15.4176845-07:00"
+}

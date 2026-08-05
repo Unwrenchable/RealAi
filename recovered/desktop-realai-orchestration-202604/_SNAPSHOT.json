@@ -1,0 +1,10 @@
+{
+  "slug": "desktop-realai-orchestration-202604",
+  "dest": "recovered/desktop-realai-orchestration-202604",
+  "source_sha": "29d9a5ae5eef96c150a02c5107b60ff3ed10ac3d",
+  "giants_moved_out": 0,
+  "source_ref": "origin/local/desktop-realai-orchestration-202604",
+  "source_branch": "local/desktop-realai-orchestration-202604",
+  "file_count": 7,
+  "imported_at": "2026-08-05T05:35:02.4312989-07:00"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "realai-1.0",
+  "version": "1.0.0",
+  "provider": "realai",
+  "context": 8192,
+  "type": "text",
+  "description": "RealAI-owned general model. Inference loads GGUF from weights/ only.",
+  "weights_layout": "models/realai-1.0/weights/*.gguf",
+  "preferred_gguf": "realai-1.0-instruct-Q4_K_M.gguf",
+  "capabilities": [
+    "chat",
+    "reasoning",
+    "summarization",
+    "creative-writing"
+  ],
+  "tags": [
+    "native",
+    "local-gguf"
+  ]
+}
