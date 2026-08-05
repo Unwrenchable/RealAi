@@ -27,7 +27,7 @@ __all__ = [
 
 METADATA = {
     "name": "rackup-coach",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "capabilities": [
         "professional_coach",
         "shot_of_the_day",
@@ -35,6 +35,8 @@ METADATA = {
         "chat_moderation",
         "matchmaking_support",
         "rating_intelligence",
+        "rating_update",
+        "league_validate",
         "tournament_insights",
         "hall_session_context",
         "mental_game",
@@ -42,6 +44,7 @@ METADATA = {
         "rackup_pyramid",
         "pyramid_rules",
         "classical_scoring",
+        "sotd_variety_growth",
     ],
     "methods": [
         "invoke",
@@ -53,6 +56,9 @@ METADATA = {
         "video_analysis",
         "matchmaking",
         "rating_intel",
+        "rating_update",
+        "league_validate",
+        "sotd_contribute",
         "tournament",
         "hall_context",
     ],

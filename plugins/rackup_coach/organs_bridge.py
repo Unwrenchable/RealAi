@@ -87,6 +87,23 @@ ABILITY_ORGANS: dict[str, tuple[str, ...]] = {
         "organ.architecture-memory",
         "organ.prefrontal-cortex",
     ),
+    "rating_update": (
+        "organ.prefrontal-cortex",
+        "organ.long-term-memory",
+        "organ.synthetic-intuition-layer",
+        "organ.neuroplasticity-module",
+    ),
+    "league_validate": (
+        "organ.synthetic-guardian-layer",
+        "organ.prefrontal-cortex",
+        "organ.architecture-memory",
+        "organ.semantic-memory",
+    ),
+    "sotd_contribute": (
+        "organ.synthetic-creativity-furnace",
+        "organ.procedural-memory",
+        "organ.cerebellum",
+    ),
 }
 
 

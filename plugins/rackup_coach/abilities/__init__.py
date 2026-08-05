@@ -8,11 +8,14 @@ from plugins.rackup_coach.types import PlayerProfile
 from . import (
     coach,
     hall_context,
+    league_validate,
     matchmaking,
     moderation,
     pyramid_rules,
     rating_intel,
+    rating_update,
     shot_of_the_day,
+    sotd_contribute,
     tournament,
     video_analysis,
 )
@@ -43,6 +46,14 @@ ABILITY_RUNNERS: dict[str, Callable[[PlayerProfile, dict[str, Any]], dict[str, A
     "tournament_insights": tournament.run,
     "hall_context": hall_context.run,
     "hall_session_context": hall_context.run,
+    "rating_update": rating_update.run,
+    "skill_update": rating_update.run,
+    "post_match_rating": rating_update.run,
+    "league_validate": league_validate.run,
+    "league_score": league_validate.run,
+    "score_validate": league_validate.run,
+    "sotd_contribute": sotd_contribute.run,
+    "shot_library_contribute": sotd_contribute.run,
 }
 
 
