@@ -6,6 +6,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from plugins.rackup_coach.games import game_knowledge, normalize_discipline
 from plugins.rackup_coach.pyramid import classical_mindset_tips, resolve_pyramid
 from plugins.rackup_coach.types import PlayerProfile, RatingBand
 
@@ -213,6 +214,88 @@ _SHOT_LIBRARY: list[dict[str, Any]] = [
         "success_metric": "Correct points-needed stated before each of 8 racks",
         "pro_tip": "Announce 'need X' out loud during practice.",
     },
+    # --- 8-Ball ---
+    {
+        "id": "eight-group-clear-shape",
+        "title": "8-ball: group clear with 8-path open",
+        "weaknesses": ["pattern_play", "position_play"],
+        "bands": ["beginner", "intermediate", "advanced", "pro"],
+        "discipline": ["eight_ball"],
+        "setup": "Open table solids or stripes; 8 not blocked.",
+        "objective": "Clear 3 of your balls leaving 8 path free; no scratch.",
+        "why": "Prevents the #1 intermediate loss — 8 blocked by own ball.",
+        "reps": 12,
+        "success_metric": "10/12 leave 8 path open",
+        "pro_tip": "Plan last two of your group before the first tip.",
+    },
+    {
+        "id": "eight-safety-dry-table",
+        "title": "8-ball: two-way safety when dry",
+        "weaknesses": ["safety_play", "mental_focus"],
+        "bands": ["intermediate", "advanced", "pro"],
+        "discipline": ["eight_ball"],
+        "setup": "No easy ball of your group; opponent has a runner.",
+        "objective": "Legal hit + poor leave; leave yourself a shot if they miss.",
+        "why": "Wins frames when the table is dry — percentage over hero pot.",
+        "reps": 10,
+        "success_metric": "8/10 opponent has no makeable out",
+        "pro_tip": "Distance + angle > fancy snookers you can't execute.",
+    },
+    # --- 9-Ball ---
+    {
+        "id": "nine-lowest-first-shape",
+        "title": "9-ball: shape off lowest for next two",
+        "weaknesses": ["position_play", "cue_ball_control"],
+        "bands": ["beginner", "intermediate", "advanced", "pro"],
+        "discipline": ["nine_ball"],
+        "setup": "Balls 1–3 open; plan stop/follow/stun for 2 then 3.",
+        "objective": "Pocket 1–2–3 without losing CB; always lowest first.",
+        "why": "Rotation discipline + CB control is the entire 9-ball skill tree.",
+        "reps": 15,
+        "success_metric": "12/15 clean three-ball sequences",
+        "pro_tip": "Natural angles first; english only when required.",
+    },
+    {
+        "id": "nine-two-way-safety",
+        "title": "9-ball: two-way safety on stuck lowest",
+        "weaknesses": ["safety_play", "kicks"],
+        "bands": ["intermediate", "advanced", "pro"],
+        "discipline": ["nine_ball"],
+        "setup": "No percentage out on lowest ball.",
+        "objective": "Legal contact on lowest + snooker or long kick for opponent.",
+        "why": "Stops opponent runouts; advanced matches are safety wars.",
+        "reps": 12,
+        "success_metric": "9/12 leave no makeable shot on lowest",
+        "pro_tip": "Hit lowest thin; hide CB behind a cluster.",
+    },
+    # --- 10-Ball ---
+    {
+        "id": "ten-call-shot-discipline",
+        "title": "10-ball: call ball+pocket every stroke",
+        "weaknesses": ["pre_shot_routine", "mental_focus", "long_potting"],
+        "bands": ["beginner", "intermediate", "advanced", "pro"],
+        "discipline": ["ten_ball"],
+        "setup": "Open 1–5; call every pot including combos.",
+        "objective": "Zero uncalled makes; safety when you cannot call honestly.",
+        "why": "10-ball punishes slop — builds pro call accuracy for all games.",
+        "reps": 20,
+        "success_metric": "20 consecutive legal called shots or safeties",
+        "pro_tip": "Call in the PSR before stepping in — never at tip time.",
+    },
+    # --- One Pocket ---
+    {
+        "id": "onepocket-freeze-defense",
+        "title": "One Pocket: freeze and cluster near your pocket",
+        "weaknesses": ["safety_play", "banks", "mental_focus"],
+        "bands": ["beginner", "intermediate", "advanced", "pro"],
+        "discipline": ["one_pocket"],
+        "setup": "Your corner designated; object balls mid-table.",
+        "objective": "Move balls toward your pocket without opening opponent run.",
+        "why": "One Pocket is won with defense and patience, not early fire.",
+        "reps": 10,
+        "success_metric": "Score or freeze progress without gifting opponent pocket",
+        "pro_tip": "Count race; never open their pocket when behind.",
+    },
 ]
 
 
@@ -229,9 +312,13 @@ def _score_shot(
     bands = shot.get("bands") or []
     if bands and band == bands[len(bands) // 2]:
         score += 1.0
-    disc = (player.discipline or "eight_ball").lower()
-    if disc in shot.get("discipline", []):
-        score += 2.0
+    disc_local = normalize_discipline(player.discipline)
+    if disc_local in shot.get("discipline", []):
+        score += 5.0
+    elif shot.get("discipline") and disc_local not in shot.get("discipline", []):
+        # Prefer matching game style strongly
+        if "pyramid" not in (shot.get("discipline") or []):
+            score -= 2.0
     weak = {w.lower() for w in (player.weaknesses or [])}
     for w in shot.get("weaknesses", []):
         if w in weak:
@@ -260,7 +347,7 @@ def _score_shot(
                 score -= 8.0  # wrong rack size variant
             if skill in shot.get("bands", []):
                 score += 2.0
-        elif disc == "pyramid" and "pyramid" not in shot.get("discipline", []):
+        elif disc_local == "pyramid" and "pyramid" not in shot.get("discipline", []):
             # Prefer pyramid-tagged when playing Pyramid
             score -= 1.0
     return score
@@ -277,8 +364,14 @@ def recommend_shot_of_the_day(
     payload = payload or {}
     cfg = resolve_pyramid(player=player, payload=payload)
     pyr = cfg.to_dict()
-    is_pyramid = (player.discipline or "").lower() == "pyramid" or bool(
-        payload.get("pyramid") or payload.get("game") == "pyramid"
+    disc = normalize_discipline(
+        payload.get("discipline") or payload.get("game") or player.discipline
+    )
+    gk = game_knowledge(disc)
+    is_pyramid = disc == "pyramid" or bool(
+        payload.get("pyramid") or str(payload.get("game") or "").lower() in (
+            "pyramid", "rackup-pyramid", "rackup_pyramid",
+        )
     )
 
     # Merge static + grown library
@@ -372,8 +465,10 @@ def recommend_shot_of_the_day(
         "player_id": player.player_id,
         "rating": player.rating,
         "band": band,
-        "discipline": player.discipline,
+        "discipline": disc,
+        "discipline_display": gk.get("display"),
         "coaching_line": coaching_line,
+        "game_focus": gk.get("sotd_focus"),
         "pyramid": pyr if is_pyramid else None,
         "classical_mindset": classical_mindset_tips(cfg) if is_pyramid else [],
         "primary": primary_out,

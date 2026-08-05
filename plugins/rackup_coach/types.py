@@ -93,10 +93,28 @@ class PlayerProfile:
     skill_level: str = ""  # alias for pyramid_skill
     pyramid_score: int = 0  # current match score if mid-game
     pyramid_opp_score: int = 0
+    # Cross-league (APA/BCA/TAP/VNEA) — display/convert; shared rating is competitive truth
+    league_ratings: dict = field(default_factory=dict)
+    # e.g. {"apa": 5, "bca": 62, "tap": null, "vnea": "B"}
+    league_ratings_meta: dict = field(default_factory=dict)
+    primary_rating_system: str = ""
+    matches_played_rackup: int = 0
+    ruleset: str = ""  # APA | BCA | WPA | house | ...
+    race_to: int = 0  # 9-ball/10-ball/one-pocket race when applicable
 
     @property
     def band(self) -> RatingBand:
         return rating_band(self.rating)
+
+    def effective_rating(self) -> dict:
+        from plugins.rackup_coach.leagues import resolve_effective_rating
+
+        return resolve_effective_rating(self)
+
+    def normalized_discipline(self) -> str:
+        from plugins.rackup_coach.games import normalize_discipline
+
+        return normalize_discipline(self.discipline)
 
     def effective_pyramid_skill(self) -> str:
         from plugins.rackup_coach.pyramid import normalize_skill

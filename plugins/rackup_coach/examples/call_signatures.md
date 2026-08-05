@@ -197,3 +197,34 @@ invoke({
 | Intermediate | 35 | 55 | No | 0.85× |
 | Advanced | 45 | 71 | Optional | 1.0× |
 | Pro | 50 | 71 | Yes | 1.15× |
+
+## Multi-game + cross-league (v1.3)
+
+```python
+from plugins.rackup_coach import invoke
+
+# 8-ball coach
+invoke({"ability": "coach", "player": {"player_id": "p", "rating": 1100, "discipline": "eight_ball"}})
+
+# 9-ball SOTD
+invoke({"ability": "shot_of_the_day", "player": {"player_id": "p", "rating": 1000, "discipline": "nine_ball", "weaknesses": ["position_play"]}})
+
+# Convert APA SL 5 → RackUp
+invoke({"ability": "rating_convert", "player": {"player_id": "p"}, "payload": {"from_system": "apa", "from_value": 5, "from_scale": "skill_1_9"}})
+
+# Mixed-league matchmaking
+invoke({
+  "ability": "matchmaking",
+  "player": {"player_id": "p", "rating": 1200, "discipline": "eight_ball", "league_ratings": {"apa": 4}, "primary_rating_system": "apa", "matches_played_rackup": 2},
+  "payload": {"candidates": [
+    {"player_id": "x", "league_ratings": {"apa": 3}, "primary_rating_system": "apa"},
+    {"player_id": "y", "rating": 1180}
+  ]}
+})
+
+# Game knowledge pack
+invoke({"ability": "game_knowledge", "player": {"player_id": "p", "discipline": "one_pocket"}})
+```
+
+Disciplines: eight_ball | nine_ball | ten_ball | one_pocket | pyramid  
+League systems: apa | bca | tap | vnea (convert to shared RackUp ladder)

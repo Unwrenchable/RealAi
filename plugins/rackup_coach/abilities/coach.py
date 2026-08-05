@@ -3,6 +3,12 @@ from __future__ import annotations
 
 from typing import Any
 
+from plugins.rackup_coach.games import (
+    coaching_focus,
+    game_knowledge,
+    normalize_discipline,
+    skill_band_from_rating,
+)
 from plugins.rackup_coach.pyramid import (
     classical_mindset_tips,
     race_context,
@@ -236,23 +242,40 @@ def coach(
     payload = payload or {}
     mode = (mode or payload.get("mode") or "session").lower()
     band = player.band
-    cfg = resolve_pyramid(player=player, payload=payload)
-    is_pyramid = (
-        mode == "pyramid"
-        or (player.discipline or "").lower() == "pyramid"
-        or bool(payload.get("pyramid") or payload.get("game") == "pyramid")
+    disc = normalize_discipline(
+        payload.get("discipline") or payload.get("game") or player.discipline
     )
+    gk = game_knowledge(disc)
+    cfg = resolve_pyramid(player=player, payload=payload)
+    is_pyramid = disc == "pyramid" or mode == "pyramid" or bool(
+        payload.get("pyramid") or str(payload.get("game") or "").lower() in (
+            "pyramid", "rackup-pyramid", "rackup_pyramid",
+        )
+    )
+    continuum_band = skill_band_from_rating(player.rating)
 
     result: dict[str, Any] = {
         "player_id": player.player_id,
         "display_name": player.display_name,
         "rating": player.rating,
         "band": band.value,
-        "discipline": player.discipline,
+        "continuum_band": continuum_band,
+        "discipline": disc,
+        "discipline_display": gk.get("display"),
         "mode": mode,
         "goal": goal,
         "band_curriculum": _BAND_CURRICULUM[band],
-        "pyramid": cfg.to_dict() if is_pyramid or mode in ("full", "session", "pyramid") else None,
+        "game_knowledge": {
+            "objective": gk.get("objective"),
+            "rack": gk.get("rack"),
+            "key_rules": gk.get("key_rules"),
+            "good_play": gk.get("good_play"),
+            "bad_play": gk.get("bad_play"),
+            "coaching_focus": coaching_focus(disc, player.rating),
+            "fouls": gk.get("fouls"),
+        },
+        "pyramid": cfg.to_dict() if is_pyramid else None,
+        "ruleset": player.ruleset or payload.get("ruleset") or "",
     }
 
     if is_pyramid or mode == "pyramid":
@@ -315,14 +338,23 @@ def coach(
                 f"{cfg.table_size} → {cfg.rack_size}-ball rack; target {cfg.points_to_win}.",
                 "Value density: protect 1-ball (11) and high numbers in traffic.",
             ] + notes
+        else:
+            notes = list(gk.get("good_play") or [])[:3] + notes
         result["pattern_recognition"] = notes
+
+    from plugins.rackup_coach.games import default_rating_weight
 
     result["individualization"] = {
         "train_now": (player.weaknesses or [])[:4] or _BAND_CURRICULUM[band]["focus"][:3],
         "protect": (player.strengths or [])[:3],
         "recent_form": _form_summary(player),
-        "pyramid_skill": cfg.skill_level,
-        "rating_weight": cfg.rating_weight,
+        "pyramid_skill": cfg.skill_level if is_pyramid else None,
+        "rating_weight": (
+            cfg.rating_weight
+            if is_pyramid
+            else default_rating_weight(disc, skill_level=player.skill_level or "")
+        ),
+        "discipline": disc,
     }
 
     if goal:

@@ -104,6 +104,17 @@ ABILITY_ORGANS: dict[str, tuple[str, ...]] = {
         "organ.procedural-memory",
         "organ.cerebellum",
     ),
+    "rating_convert": (
+        "organ.prefrontal-cortex",
+        "organ.semantic-memory",
+        "organ.architecture-memory",
+        "organ.synthetic-intuition-layer",
+    ),
+    "game_knowledge": (
+        "organ.semantic-memory",
+        "organ.architecture-memory",
+        "organ.procedural-memory",
+    ),
 }
 
 
