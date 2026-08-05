@@ -12,6 +12,7 @@ from . import (
     matchmaking,
     moderation,
     pyramid_rules,
+    rating_convert,
     rating_intel,
     rating_update,
     shot_of_the_day,
@@ -54,7 +55,27 @@ ABILITY_RUNNERS: dict[str, Callable[[PlayerProfile, dict[str, Any]], dict[str, A
     "score_validate": league_validate.run,
     "sotd_contribute": sotd_contribute.run,
     "shot_library_contribute": sotd_contribute.run,
+    "rating_convert": rating_convert.run,
+    "league_convert": rating_convert.run,
+    "convert_rating": rating_convert.run,
+    "game_knowledge": lambda p, d: _game_knowledge_ability(p, d),
 }
+
+
+def _game_knowledge_ability(player: PlayerProfile, payload: dict[str, Any]) -> dict[str, Any]:
+    from plugins.rackup_coach.games import game_knowledge, list_disciplines, normalize_discipline
+
+    disc = normalize_discipline(
+        (payload or {}).get("discipline") or (payload or {}).get("game") or player.discipline
+    )
+    out = dict(game_knowledge(disc))
+    out["disciplines"] = list_disciplines()
+    out["normalized_discipline"] = disc
+    return out
+
+
+# ensure type for helper
+from typing import Any  # noqa: E402  — used by _game_knowledge_ability
 
 
 def run_ability(name: str, player: PlayerProfile, payload: dict[str, Any] | None = None) -> dict[str, Any]:

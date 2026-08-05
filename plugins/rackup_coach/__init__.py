@@ -27,7 +27,7 @@ __all__ = [
 
 METADATA = {
     "name": "rackup-coach",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "capabilities": [
         "professional_coach",
         "shot_of_the_day",
@@ -36,6 +36,7 @@ METADATA = {
         "matchmaking_support",
         "rating_intelligence",
         "rating_update",
+        "rating_convert",
         "league_validate",
         "tournament_insights",
         "hall_session_context",
@@ -45,6 +46,12 @@ METADATA = {
         "pyramid_rules",
         "classical_scoring",
         "sotd_variety_growth",
+        "multi_game",
+        "cross_league",
+        "eight_ball",
+        "nine_ball",
+        "ten_ball",
+        "one_pocket",
     ],
     "methods": [
         "invoke",
@@ -57,11 +64,15 @@ METADATA = {
         "matchmaking",
         "rating_intel",
         "rating_update",
+        "rating_convert",
         "league_validate",
         "sotd_contribute",
+        "game_knowledge",
         "tournament",
         "hall_context",
     ],
+    "disciplines": ["eight_ball", "nine_ball", "ten_ball", "one_pocket", "pyramid"],
+    "league_systems": ["apa", "bca", "tap", "vnea", "rackup"],
     "pyramid": {
         "7ft": {"rack": 10, "points": {"beginner": 25, "intermediate": 35, "advanced": 45, "pro": 50}},
         "9ft": {"rack": 15, "points": {"beginner": 40, "intermediate": 55, "advanced": 71, "pro": 71}},

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from plugins.rackup_coach.games import coaching_focus, game_knowledge, normalize_discipline
 from plugins.rackup_coach.pyramid import classical_mindset_tips, resolve_pyramid
 from plugins.rackup_coach.types import PlayerProfile, RatingBand
 
@@ -25,8 +26,14 @@ def analyze_video(
     checklist = dict(payload.get("checklist") or {})
     observations = str(payload.get("observations") or payload.get("notes") or "")
     cfg = resolve_pyramid(player=player, payload=payload)
-    is_pyramid = (player.discipline or "").lower() == "pyramid" or bool(
-        payload.get("pyramid") or payload.get("game") == "pyramid"
+    disc = normalize_discipline(
+        payload.get("discipline") or payload.get("game") or player.discipline
+    )
+    gk = game_knowledge(disc)
+    is_pyramid = disc == "pyramid" or bool(
+        payload.get("pyramid") or str(payload.get("game") or "").lower() in (
+            "pyramid", "rackup-pyramid",
+        )
     )
 
     issues: list[dict[str, str]] = []
@@ -137,14 +144,30 @@ def analyze_video(
             f"first to {cfg.points_to_win}. " + expectation
         )
 
+    if not is_pyramid:
+        issues.append(
+            {
+                "area": "discipline",
+                "finding": f"{gk.get('display')}: {coaching_focus(disc, player.rating)}",
+                "fix": (gk.get("good_play") or ["Percentage over hero pots"])[0],
+            }
+        )
+        drills.append(f"Drill set for {gk.get('display')}: focus {(gk.get('sotd_focus') or ['fundamentals'])[0]}")
+
     return {
         "player_id": player.player_id,
         "band": player.band.value,
+        "discipline": disc,
+        "discipline_display": gk.get("display"),
         "clip_type": clip_type,
         "video_meta": meta,
         "expectation": expectation,
         "findings": issues,
         "recommended_drills": drills,
+        "game_knowledge_summary": {
+            "objective": gk.get("objective"),
+            "key_rules": (gk.get("key_rules") or [])[:3],
+        },
         "pyramid": cfg.to_dict() if is_pyramid else None,
         "classical_mindset": classical_mindset_tips(cfg) if is_pyramid else [],
         "scorecard": {
@@ -157,7 +180,7 @@ def analyze_video(
         "next_upload_prompt": (
             "Upload side-angle value-route (include 1-ball decision) for Pyramid CB kill check."
             if is_pyramid
-            else "Upload a side-angle stop-shot set (10 balls) for cue-ball kill check."
+            else f"Upload a side-angle stroke set for {gk.get('display')} cue-ball control check."
         ),
     }
 

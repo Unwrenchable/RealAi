@@ -4,6 +4,8 @@ from __future__ import annotations
 import math
 from typing import Any
 
+from plugins.rackup_coach.games import default_rating_weight, normalize_discipline
+from plugins.rackup_coach.leagues import clamp_rackup, resolve_effective_rating
 from plugins.rackup_coach.pyramid import resolve_pyramid, weighted_rating_delta
 from plugins.rackup_coach.types import PlayerProfile, rating_band
 
@@ -25,12 +27,33 @@ def compute_rating_update(
       won: bool  OR  score / opp_score for Pyramid point races
     Optional:
       k_factor, discipline, table_size, skill_level, margin, forfeit, provisional
+      rating_weight (host override)
     """
     payload = payload or {}
+    disc = normalize_discipline(
+        payload.get("discipline") or payload.get("game") or player.discipline
+    )
     cfg = resolve_pyramid(player=player, payload=payload)
-    rating = float(player.rating or 500.0)
+    # Shared ladder: use effective rating when seeding from leagues
+    eff = resolve_effective_rating(player)
+    rating = float(player.rating or eff.get("rating") or 500.0)
     opp = float(payload.get("opponent_rating") or payload.get("opp_rating") or rating)
-    k = float(payload.get("k_factor") or (32 if rating < 700 else 24))
+    # Opponent may only have league rating
+    if payload.get("opponent_league_ratings") and not payload.get("opponent_rating"):
+        from plugins.rackup_coach.leagues import resolve_effective_rating as _rer
+
+        opp = float(
+            _rer(
+                {
+                    "rating": None,
+                    "league_ratings": payload.get("opponent_league_ratings"),
+                    "league_ratings_meta": payload.get("opponent_league_ratings_meta") or {},
+                    "primary_rating_system": payload.get("opponent_primary_rating_system") or "",
+                    "matches_played_rackup": 0,
+                }
+            )["rating"]
+        )
+    k = float(payload.get("k_factor") or (32 if rating < 900 else 24))
 
     # Outcome 1.0 win / 0.0 loss / 0.5 draw
     if "won" in payload:
@@ -69,26 +92,38 @@ def compute_rating_update(
     if payload.get("forfeit"):
         raw_delta *= 0.5
 
-    # Pyramid skill weight
-    weight = float(cfg.rating_weight)
-    if (player.discipline or "").lower() == "pyramid" or payload.get("game") == "pyramid":
-        weighted = weighted_rating_delta(raw_delta, cfg.skill_level)
+    # Game-specific weight (Pyramid matrix or discipline defaults); host override wins
+    if payload.get("rating_weight") is not None:
+        weight = float(payload["rating_weight"])
+    elif disc == "pyramid" or str(payload.get("game") or "").lower() in (
+        "pyramid",
+        "rackup-pyramid",
+        "rackup_pyramid",
+    ):
+        weight = float(cfg.rating_weight)
     else:
-        # Still allow skill_level weight when provided
-        weighted = raw_delta * weight if payload.get("skill_level") or player.skill_level else raw_delta
+        weight = float(
+            default_rating_weight(
+                disc,
+                skill_level=payload.get("skill_level") or player.skill_level or "",
+            )
+        )
+
+    weighted = raw_delta * weight
 
     if payload.get("provisional"):
         weighted *= 1.5  # faster movement for new players
 
-    new_rating = max(100.0, rating + weighted)
+    new_rating = float(clamp_rackup(rating + weighted))
     old_band = rating_band(rating).value
     new_band = rating_band(new_rating).value
 
     return {
         "player_id": player.player_id,
         "algorithm": "elo_logistic_v1",
-        "discipline": player.discipline or payload.get("discipline") or "pyramid",
-        "pyramid": cfg.to_dict(),
+        "discipline": disc,
+        "shared_ladder": True,
+        "pyramid": cfg.to_dict() if disc == "pyramid" else None,
         "input": {
             "rating_before": rating,
             "opponent_rating": opp,
@@ -96,19 +131,23 @@ def compute_rating_update(
             "expected": round(expected, 4),
             "k_factor": k,
             "rating_weight": weight,
+            "discipline": disc,
+            "effective_rating_source": eff.get("source"),
         },
         "raw_delta": round(raw_delta, 3),
         "weighted_delta": round(weighted, 3),
-        "rating_after": round(new_rating, 2),
+        "rating_after": new_rating,
         "band_before": old_band,
         "band_after": new_band,
         "band_changed": old_band != new_band,
         "skill_signals": {
-            "suggested_skill_level": cfg.skill_level,
-            "points_to_win_next": cfg.points_to_win,
-            "table_size": cfg.table_size,
-            "rack_size": cfg.rack_size,
+            "suggested_skill_level": cfg.skill_level if disc == "pyramid" else None,
+            "points_to_win_next": cfg.points_to_win if disc == "pyramid" else None,
+            "table_size": cfg.table_size if disc == "pyramid" else payload.get("table_size"),
+            "rack_size": cfg.rack_size if disc == "pyramid" else None,
+            "discipline": disc,
         },
+        "league_ratings_note": "APA/BCA/TAP/VNEA are not updated here — display/import only",
         "persist_hint": {
             "fields_to_write": ["rating", "rating_updated_at", "last_match_delta"],
             "owner": "RackUp DB — RealAI does not persist ratings",
