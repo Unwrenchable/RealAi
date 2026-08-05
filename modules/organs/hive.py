@@ -79,7 +79,7 @@ def hive_status() -> dict[str, Any]:
         by_cat[o.category] = by_cat.get(o.category, 0) + 1
     return {
         "organ_count": len(organs),
-        "expected": 44,
+        "expected": 44,  # base synthetic organs; plugins may add more (e.g. organ.rackup-coach)
         "complete": len(organs) >= 44,
         "by_category": by_cat,
         "ids": sorted(organs.keys()),
