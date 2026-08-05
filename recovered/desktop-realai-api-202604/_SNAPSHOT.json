@@ -1,0 +1,10 @@
+{
+  "slug": "desktop-realai-api-202604",
+  "dest": "recovered/desktop-realai-api-202604",
+  "source_sha": "a568a3b2146a875f6e6874fac32bebddb3769632",
+  "giants_moved_out": 0,
+  "source_ref": "origin/local/desktop-realai-api-202604",
+  "source_branch": "local/desktop-realai-api-202604",
+  "file_count": 7,
+  "imported_at": "2026-08-05T05:35:02.2033333-07:00"
+}

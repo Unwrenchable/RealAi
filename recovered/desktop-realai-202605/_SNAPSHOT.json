@@ -1,0 +1,10 @@
+{
+  "slug": "desktop-realai-202605",
+  "dest": "recovered/desktop-realai-202605",
+  "source_sha": "9e896882d332712f8b5d14a121a7535d3415acce",
+  "giants_moved_out": 0,
+  "source_ref": "origin/local/desktop-realai-202605",
+  "source_branch": "local/desktop-realai-202605",
+  "file_count": 97,
+  "imported_at": "2026-08-05T05:35:01.8651156-07:00"
+}

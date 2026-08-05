@@ -1,0 +1,10 @@
+{
+  "slug": "desktop-realai-agent-202604",
+  "dest": "recovered/desktop-realai-agent-202604",
+  "source_sha": "1e3ddeabe8fae0bbdadde29bfc6d3154da1e0f26",
+  "giants_moved_out": 0,
+  "source_ref": "origin/local/desktop-realai-agent-202604",
+  "source_branch": "local/desktop-realai-agent-202604",
+  "file_count": 10,
+  "imported_at": "2026-08-05T05:35:02.0084971-07:00"
+}
