@@ -1,4 +1,4 @@
-"""Adapter registry bootstrap for recovered snapshots + promoted core modules."""
+"""Adapter registry bootstrap for recovered snapshots + promoted core modules + organs hive."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -42,8 +42,12 @@ def living_stack() -> dict[str, Any]:
     from adapters.training import training_status
     from adapters.memory import get_memory_stack
     from adapters.agents import agents_status
+    from adapters.organs import organs_status
     return {
+        "provider": "realai",
+        "provider_kind": "local-first OpenAI-compatible full provider (not a wrapper)",
         "training": training_status(),
         "memory": get_memory_stack(),
         "agents": agents_status(),
+        "organs_hive": organs_status(),
     }
