@@ -1,0 +1,2789 @@
+{
+  "meta": {
+    "mode": "deep_gold",
+    "root": "C:\\realai",
+    "started": "2026-07-16T17:58:32.496755+00:00",
+    "finished": "2026-07-16T17:59:01.315178+00:00",
+    "elapsed_seconds": 28.82,
+    "files_scanned": 5879,
+    "files_with_gold": 5840,
+    "dirs_skipped": {
+      "agent_tools.egg-info": 183,
+      ".vs": 146,
+      ".pytest_cache": 86,
+      "realai.egg-info": 68,
+      "dist": 62,
+      "build": 51,
+      "node_modules": 47,
+      "realai__dup1.egg-info": 34,
+      ".next": 26,
+      ".cache": 26,
+      "__pycache____dup1": 24,
+      "__pycache__": 21,
+      ".venv": 19,
+      "Output": 17,
+      "venv": 17,
+      "terminals": 12,
+      "node_modules.disabled": 10,
+      ".kilo": 9,
+      "chocolatey": 9,
+      "realai_search_temp": 9,
+      "rebase_dryrun": 9,
+      "site-packages": 7,
+      ".blackbox": 4,
+      ".git": 2,
+      "phase4_tools": 1,
+      "scan_results": 1,
+      "worktrees": 1,
+      "env": 1
+    },
+    "preservation_note": "READ-ONLY deep gold map. Scans md/txt + code in archive/OG/nested trees. Skips node_modules/venv/.next only. Complements operational DDS-3."
+  },
+  "group_counts": {
+    "models_inference": 7631,
+    "server_api_ui": 4896,
+    "agents_orchestrate": 4877,
+    "tools_mcp_plugins": 4127,
+    "missing_broken": 4033,
+    "self_improve_training": 3585,
+    "web3_solana": 2179,
+    "v2_v3_migration": 1850,
+    "memory_rag": 1686,
+    "world_npc_game": 1171
+  },
+  "era_counts": {
+    "backup": 1703,
+    "og_mess": 1569,
+    "recovered": 1280,
+    "clean": 612,
+    "archive": 330,
+    "other": 198,
+    "duplicate": 78,
+    "docs": 48,
+    "models_tree": 19,
+    "training": 3
+  },
+  "top_keywords": [
+    {
+      "keyword": "embedding",
+      "count": 2628
+    },
+    {
+      "keyword": "plugin",
+      "count": 2012
+    },
+    {
+      "keyword": "llama",
+      "count": 1974
+    },
+    {
+      "keyword": "orchestrat",
+      "count": 1939
+    },
+    {
+      "keyword": "training",
+      "count": 1718
+    },
+    {
+      "keyword": "placeholder",
+      "count": 1620
+    },
+    {
+      "keyword": "web3",
+      "count": 1454
+    },
+    {
+      "keyword": "stub",
+      "count": 1424
+    },
+    {
+      "keyword": "lora",
+      "count": 1099
+    },
+    {
+      "keyword": "chat/completions",
+      "count": 1059
+    },
+    {
+      "keyword": "manifest",
+      "count": 1008
+    },
+    {
+      "keyword": "persona",
+      "count": 889
+    },
+    {
+      "keyword": "missing",
+      "count": 850
+    },
+    {
+      "keyword": "/v1/models",
+      "count": 839
+    },
+    {
+      "keyword": "api_server",
+      "count": 792
+    },
+    {
+      "keyword": "vector",
+      "count": 782
+    },
+    {
+      "keyword": "openai-compatible",
+      "count": 742
+    },
+    {
+      "keyword": "agent-tools",
+      "count": 663
+    },
+    {
+      "keyword": "streaming",
+      "count": 628
+    },
+    {
+      "keyword": "migration",
+      "count": 616
+    },
+    {
+      "keyword": "mistral",
+      "count": 608
+    },
+    {
+      "keyword": "overseer",
+      "count": 561
+    },
+    {
+      "keyword": "/health",
+      "count": 546
+    },
+    {
+      "keyword": "solana",
+      "count": 524
+    },
+    {
+      "keyword": "gguf",
+      "count": 510
+    },
+    {
+      "keyword": "planner",
+      "count": 488
+    },
+    {
+      "keyword": "qwen",
+      "count": 479
+    },
+    {
+      "keyword": "instruct",
+      "count": 456
+    },
+    {
+      "keyword": "critic",
+      "count": 421
+    },
+    {
+      "keyword": "tool_registry",
+      "count": 417
+    },
+    {
+      "keyword": "memory_engine",
+      "count": 416
+    },
+    {
+      "keyword": "multi-agent",
+      "count": 397
+    },
+    {
+      "keyword": "dataset",
+      "count": 395
+    },
+    {
+      "keyword": "v2",
+      "count": 394
+    },
+    {
+      "keyword": "executor",
+      "count": 380
+    },
+    {
+      "keyword": "agentx",
+      "count": 311
+    },
+    {
+      "keyword": "knowledge_graph",
+      "count": 304
+    },
+    {
+      "keyword": "model_registry",
+      "count": 291
+    },
+    {
+      "keyword": "quest_",
+      "count": 291
+    },
+    {
+      "keyword": "vscode",
+      "count": 260
+    },
+    {
+      "keyword": "v3",
+      "count": 258
+    },
+    {
+      "keyword": "local model",
+      "count": 227
+    },
+    {
+      "keyword": "legacy",
+      "count": 221
+    },
+    {
+      "keyword": "world_model",
+      "count": 208
+    },
+    {
+      "keyword": "finetune",
+      "count": 198
+    },
+    {
+      "keyword": "realai-embed",
+      "count": 181
+    },
+    {
+      "keyword": "port 8000",
+      "count": 177
+    },
+    {
+      "keyword": "vllm",
+      "count": 158
+    },
+    {
+      "keyword": "realai_memory",
+      "count": 147
+    },
+    {
+      "keyword": "wallet",
+      "count": 118
+    },
+    {
+      "keyword": "evolution",
+      "count": 102
+    },
+    {
+      "keyword": "realai 2",
+      "count": 94
+    },
+    {
+      "keyword": "realai 3",
+      "count": 89
+    },
+    {
+      "keyword": "anchor",
+      "count": 83
+    },
+    {
+      "keyword": "atomic fizz",
+      "count": 78
+    },
+    {
+      "keyword": "self_improvement",
+      "count": 73
+    },
+    {
+      "keyword": "todo",
+      "count": 59
+    },
+    {
+      "keyword": "sentence_transformers",
+      "count": 56
+    },
+    {
+      "keyword": "agent_runtime",
+      "count": 52
+    },
+    {
+      "keyword": "default_llm",
+      "count": 36
+    }
+  ],
+  "top_files": [
+    {
+      "file": "recovered/from_kilo/kilo_snap_large_paths.txt",
+      "era": "recovered",
+      "hit_count": 80,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "realai/ability_catalog.py",
+      "era": "clean",
+      "hit_count": 77,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo/kilo_git_clean_removed_paths.txt",
+      "era": "recovered",
+      "hit_count": 75,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo/kilo_tool_output_clean.txt",
+      "era": "recovered",
+      "hit_count": 75,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/realai/__init__.py",
+      "era": "backup",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/realai/__init__.py",
+      "era": "og_mess",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai/__init__.py",
+      "era": "backup",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai/realai/__init__.py",
+      "era": "backup",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/realai/__init__.py",
+      "era": "og_mess",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/realai/__init__.py",
+      "era": "backup",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/realai/realai/__init__.py",
+      "era": "backup",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/realai/__init__.py",
+      "era": "og_mess",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "realai/__init__.py",
+      "era": "clean",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "realai/realai/__init__.py",
+      "era": "clean",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "realai_og_mess/realai/realai/__init__.py",
+      "era": "og_mess",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_gold/py/__init__.py",
+      "era": "recovered",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo/kilo_git_status_before_reset.txt",
+      "era": "recovered",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_recycle_bin/extracted_realai_core/realai/realai/__init__.py",
+      "era": "recovered",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_desktop_missing/C_Users_tsmit_OneDrive_Desktop_realai_-_Copy_realai___init__.py",
+      "era": "recovered",
+      "hit_count": 68,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_desktop_missing/C_Users_tsmit_OneDrive_Desktop_realai_realai_realai_realai___init__.py",
+      "era": "recovered",
+      "hit_count": 68,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_desktop_missing/C_Users_tsmit_OneDrive_Desktop_realai_realai___init__.py",
+      "era": "recovered",
+      "hit_count": 68,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "realai/v3_orchestrator.py",
+      "era": "clean",
+      "hit_count": 61,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/PROMOTE_LOG.json",
+      "era": "recovered",
+      "hit_count": 60,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/realai/api_server.py",
+      "era": "og_mess",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai/realai/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/realai/api_server.py",
+      "era": "og_mess",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/realai/realai/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/realai/api_server.py",
+      "era": "og_mess",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "realai/api_server.py",
+      "era": "clean",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "realai/realai/api_server.py",
+      "era": "clean",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "realai_og_mess/realai/realai/api_server.py",
+      "era": "og_mess",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_desktop_missing/C_Users_tsmit_realai_realai_api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_gold/py/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo/kilo_git_clean_output.txt",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/real-fin/realai/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/real-fin/realai/realai/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/real-fin/realai/realai - Copy/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/real-fin/realai/realai - Copy/realai/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai/realai - Copy/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai/realai - Copy/realai/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai-clean/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai-clean__dup1/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/RealAIProject/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/RealAIProject/realai/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_good/realai/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_good/realai/realai/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/RealAIProject/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_repo/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_repo/realai/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_repo/realai__dup1/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_sdk/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_sdk/realai/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_sdk/realai_sdk/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_sdk/realai_sdk__dup1/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_sdk/realai__dup1/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/server/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/src/realai/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/src/realai/core/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_realai_clean/realai/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_recycle_bin/extracted_realai_core/realai/realai/api_server.py",
+      "era": "recovered",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo/kilo_snap_small_paths.txt",
+      "era": "recovered",
+      "hit_count": 56,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/docs/architecture.md",
+      "era": "backup",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/docs/architecture.md",
+      "era": "og_mess",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/docs/architecture.md",
+      "era": "backup",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai/docs/architecture.md",
+      "era": "backup",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/docs/architecture.md",
+      "era": "og_mess",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/docs/architecture.md",
+      "era": "backup",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/realai/docs/architecture.md",
+      "era": "backup",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/docs/architecture.md",
+      "era": "og_mess",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "docs/architecture.md",
+      "era": "docs",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "realai/docs/architecture.md",
+      "era": "clean",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "realai_og_mess/realai/docs/architecture.md",
+      "era": "og_mess",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_2026-06-16-262686d6_realai_api_server.py",
+      "era": "recovered",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_realai-clean_realai_api_server.py",
+      "era": "recovered",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_RealAIProject_realai_api_server.py",
+      "era": "recovered",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    }
+  ],
+  "model_related_docs": [
+    ".backup/clean_backup_20260708_112400/.continue/config.json",
+    ".backup/clean_backup_20260708_112400/.github/agents/agent.md",
+    ".backup/clean_backup_20260708_112400/.github/agents/bootstrap.md",
+    ".backup/clean_backup_20260708_112400/.github/agents/fullstack-dev.md",
+    ".backup/clean_backup_20260708_112400/.github/agents/memory.md",
+    ".backup/clean_backup_20260708_112400/.github/agents/provider-specialist.md",
+    ".backup/clean_backup_20260708_112400/.github/copilot-instructions.md",
+    ".backup/clean_backup_20260708_112400/AGENTS.md",
+    ".backup/clean_backup_20260708_112400/API.md",
+    ".backup/clean_backup_20260708_112400/DEPLOYMENT.md",
+    ".backup/clean_backup_20260708_112400/QUICKSTART.md",
+    ".backup/clean_backup_20260708_112400/QUICKSTART_LOCAL.md",
+    ".backup/clean_backup_20260708_112400/README.md",
+    ".backup/clean_backup_20260708_112400/REALAI_3.0.md",
+    ".backup/clean_backup_20260708_112400/SETUP_COMPLETE.md",
+    ".backup/clean_backup_20260708_112400/TODO.md",
+    ".backup/clean_backup_20260708_112400/agents/agent.md",
+    ".backup/clean_backup_20260708_112400/agents/bootstrap.md",
+    ".backup/clean_backup_20260708_112400/agents/coder.agent.json",
+    ".backup/clean_backup_20260708_112400/agents/fullstack-dev.md",
+    ".backup/clean_backup_20260708_112400/agents/memory.md",
+    ".backup/clean_backup_20260708_112400/agents/provider-specialist.md",
+    ".backup/clean_backup_20260708_112400/apps/api/main.py",
+    ".backup/clean_backup_20260708_112400/apps/api/routes/chat.py",
+    ".backup/clean_backup_20260708_112400/apps/api/routes/embeddings.py",
+    ".backup/clean_backup_20260708_112400/apps/api/state.py",
+    ".backup/clean_backup_20260708_112400/apps/frontend/README.md",
+    ".backup/clean_backup_20260708_112400/apps/frontend/src/lib/compute.ts",
+    ".backup/clean_backup_20260708_112400/apps/frontend/src/lib/types.ts",
+    ".backup/clean_backup_20260708_112400/benchmarks/bench_safety.py",
+    ".backup/clean_backup_20260708_112400/config/dev.toml",
+    ".backup/clean_backup_20260708_112400/config/gpu.toml",
+    ".backup/clean_backup_20260708_112400/config/models.json",
+    ".backup/clean_backup_20260708_112400/config/models.yaml",
+    ".backup/clean_backup_20260708_112400/config/prod.toml",
+    ".backup/clean_backup_20260708_112400/context/realai_master_context.md",
+    ".backup/clean_backup_20260708_112400/core/api/schemas/embeddings.py",
+    ".backup/clean_backup_20260708_112400/core/inference/__init__.py",
+    ".backup/clean_backup_20260708_112400/core/inference/backend.py",
+    ".backup/clean_backup_20260708_112400/core/inference/chat_pipeline.py",
+    ".backup/clean_backup_20260708_112400/core/inference/llamacpp_backend.py",
+    ".backup/clean_backup_20260708_112400/core/inference/local_stub.py",
+    ".backup/clean_backup_20260708_112400/core/inference/registry.py",
+    ".backup/clean_backup_20260708_112400/core/inference/vllm_backend.py",
+    ".backup/clean_backup_20260708_112400/core/memory/sqlite_store.py",
+    ".backup/clean_backup_20260708_112400/core/memory/summarizer.py",
+    ".backup/clean_backup_20260708_112400/docs/CAPABILITIES.md",
+    ".backup/clean_backup_20260708_112400/docs/DELIVERABLES.md",
+    ".backup/clean_backup_20260708_112400/docs/IMPLEMENTATION_SUMMARY.md",
+    ".backup/clean_backup_20260708_112400/docs/INDEX.md",
+    ".backup/clean_backup_20260708_112400/docs/LOCAL_LLAMA_README.md",
+    ".backup/clean_backup_20260708_112400/docs/MIGRATION_GUIDE.md",
+    ".backup/clean_backup_20260708_112400/docs/TRAVIS_README.md",
+    ".backup/clean_backup_20260708_112400/docs/architecture.md",
+    ".backup/clean_backup_20260708_112400/docs/github_issue_board.md",
+    ".backup/clean_backup_20260708_112400/docs/local-llama-setup.md",
+    ".backup/clean_backup_20260708_112400/docs/roadmap.md",
+    ".backup/clean_backup_20260708_112400/docs/structure.md",
+    ".backup/clean_backup_20260708_112400/examples/local_llama_example.py",
+    ".backup/clean_backup_20260708_112400/local_models.py",
+    ".backup/clean_backup_20260708_112400/models.yaml",
+    ".backup/clean_backup_20260708_112400/packages/sdk-ts/src/index.ts",
+    ".backup/clean_backup_20260708_112400/providers.yaml",
+    ".backup/clean_backup_20260708_112400/providers/provider.yaml",
+    ".backup/clean_backup_20260708_112400/providers/types.ts",
+    ".backup/clean_backup_20260708_112400/realai.toml",
+    ".backup/clean_backup_20260708_112400/realai/__init__.py",
+    ".backup/clean_backup_20260708_112400/realai/api_server.py",
+    ".backup/clean_backup_20260708_112400/realai/critique.py",
+    ".backup/clean_backup_20260708_112400/realai/knowledge_graph.py",
+    ".backup/clean_backup_20260708_112400/realai/local_models.py",
+    ".backup/clean_backup_20260708_112400/realai/local_runtime.py",
+    ".backup/clean_backup_20260708_112400/realai/memory/engine.py",
+    ".backup/clean_backup_20260708_112400/realai/model_registry.py",
+    ".backup/clean_backup_20260708_112400/realai/router.py",
+    ".backup/clean_backup_20260708_112400/realai/sdk/python/realai_client.py",
+    ".backup/clean_backup_20260708_112400/realai/server/__init__.py",
+    ".backup/clean_backup_20260708_112400/realai/server/app.py",
+    ".backup/clean_backup_20260708_112400/realai/server/backends.py",
+    ".backup/clean_backup_20260708_112400/realai/server/config.py",
+    ".backup/clean_backup_20260708_112400/realai/server/embeddings.py",
+    ".backup/clean_backup_20260708_112400/realai/server/embeddings_backend.py",
+    ".backup/clean_backup_20260708_112400/realai/server/llama_cli_backend.py",
+    ".backup/clean_backup_20260708_112400/realai/server/router.py",
+    ".backup/clean_backup_20260708_112400/realai/training/__init__.py",
+    ".backup/clean_backup_20260708_112400/realai/training/build_datasets.py",
+    ".backup/clean_backup_20260708_112400/realai/training/eval.py",
+    ".backup/clean_backup_20260708_112400/realai/training/extract_from_agent_tools.py",
+    ".backup/clean_backup_20260708_112400/realai_gui.py",
+    ".backup/clean_backup_20260708_112400/realai_local_server.py",
+    ".backup/clean_backup_20260708_112400/realai_memory/evolution_proposals.json",
+    ".backup/clean_backup_20260708_112400/realai_memory/hive_missions.json",
+    ".backup/clean_backup_20260708_112400/realai_memory/rag_memory_store.json",
+    ".backup/clean_backup_20260708_112400/realai_og_mess/realai/.continue/config.json",
+    ".backup/clean_backup_20260708_112400/realai_og_mess/realai/.github/agents/agent.md",
+    ".backup/clean_backup_20260708_112400/realai_og_mess/realai/.github/agents/bootstrap.md",
+    ".backup/clean_backup_20260708_112400/realai_og_mess/realai/.github/agents/fullstack-dev.md",
+    ".backup/clean_backup_20260708_112400/realai_og_mess/realai/.github/agents/memory.md",
+    ".backup/clean_backup_20260708_112400/realai_og_mess/realai/.github/agents/provider-specialist.md",
+    ".backup/clean_backup_20260708_112400/realai_og_mess/realai/.github/copilot-instructions.md"
+  ],
+  "only_outside_clean_top": [
+    {
+      "file": ".backup/clean_backup_20260708_112400/realai/__init__.py",
+      "era": "backup",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/realai/__init__.py",
+      "era": "og_mess",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai/__init__.py",
+      "era": "backup",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai/realai/__init__.py",
+      "era": "backup",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/realai/__init__.py",
+      "era": "og_mess",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/realai/__init__.py",
+      "era": "backup",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/realai/realai/__init__.py",
+      "era": "backup",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/realai/__init__.py",
+      "era": "og_mess",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "realai_og_mess/realai/realai/__init__.py",
+      "era": "og_mess",
+      "hit_count": 69,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/realai/api_server.py",
+      "era": "og_mess",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai/realai/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/realai/api_server.py",
+      "era": "og_mess",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/realai/realai/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/realai/api_server.py",
+      "era": "og_mess",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "realai_og_mess/realai/realai/api_server.py",
+      "era": "og_mess",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/real-fin/realai/realai - Copy/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/real-fin/realai/realai - Copy/realai/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai/realai - Copy/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai/realai - Copy/realai/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai-clean__dup1/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/RealAIProject/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/api_server.py",
+      "era": "backup",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_repo/realai__dup1/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_sdk/realai_sdk__dup1/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_kilo_restore/realai_sdk/realai__dup1/api_server.py",
+      "era": "duplicate",
+      "hit_count": 58,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/docs/architecture.md",
+      "era": "backup",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/docs/architecture.md",
+      "era": "og_mess",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/docs/architecture.md",
+      "era": "backup",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai/docs/architecture.md",
+      "era": "backup",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/docs/architecture.md",
+      "era": "og_mess",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/docs/architecture.md",
+      "era": "backup",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/realai/docs/architecture.md",
+      "era": "backup",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/docs/architecture.md",
+      "era": "og_mess",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "docs/architecture.md",
+      "era": "docs",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "realai_og_mess/realai/docs/architecture.md",
+      "era": "og_mess",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "recovered/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_realai_historical_backups_realai_versions_20260612_RealAIProject_realai_api_server.py",
+      "era": "backup",
+      "hit_count": 54,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "scanners/dds3_missing_files.py",
+      "era": "other",
+      "hit_count": 49,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "scanners/assemble_gold_index.py",
+      "era": "other",
+      "hit_count": 48,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": "scanners/PUZZLE_MAP.md",
+      "era": "docs",
+      "hit_count": 45,
+      "groups": [
+        "models_inference",
+        "agents_orchestrate",
+        "memory_rag",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "self_improve_training",
+        "world_npc_game",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/.github/agents/agent.md",
+      "era": "backup",
+      "hit_count": 43,
+      "groups": [
+        "models_inference",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/agents/agent.md",
+      "era": "backup",
+      "hit_count": 43,
+      "groups": [
+        "models_inference",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/.github/agents/agent.md",
+      "era": "og_mess",
+      "hit_count": 43,
+      "groups": [
+        "models_inference",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/agents/agent.md",
+      "era": "og_mess",
+      "hit_count": 43,
+      "groups": [
+        "models_inference",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/.github/agents/agent.md",
+      "era": "backup",
+      "hit_count": 43,
+      "groups": [
+        "models_inference",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/agents/agent.md",
+      "era": "backup",
+      "hit_count": 43,
+      "groups": [
+        "models_inference",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112721/realai/.github/agents/agent.md",
+      "era": "backup",
+      "hit_count": 43,
+      "groups": [
+        "models_inference",
+        "tools_mcp_plugins",
+        "server_api_ui",
+        "web3_solana",
+        "v2_v3_migration",
+        "missing_broken"
+      ]
+    }
+  ],
+  "v2_v3_hit_count": 1850,
+  "v2_v3_sample": [
+    {
+      "file": "API.md",
+      "era": "docs",
+      "keyword": "legacy",
+      "line": 394,
+      "snippet": "Legacy non-`/v1` path variants remain as compatibility shims when enabled by config."
+    },
+    {
+      "file": "API.md",
+      "era": "docs",
+      "keyword": "realai 2",
+      "line": 422,
+      "snippet": "\"display_name\": \"RealAI 2.0 General\","
+    },
+    {
+      "file": "API.md",
+      "era": "docs",
+      "keyword": "migration",
+      "line": 576,
+      "snippet": "## Migration from OpenAI"
+    },
+    {
+      "file": "API.md",
+      "era": "docs",
+      "keyword": "v2",
+      "line": 619,
+      "snippet": "## New Endpoints (v2.1)"
+    },
+    {
+      "file": "API.md",
+      "era": "docs",
+      "keyword": "v2",
+      "line": 621,
+      "snippet": "The following endpoints are planned/implemented for RealAI v2.1:"
+    },
+    {
+      "file": "DEPLOYMENT.md",
+      "era": "docs",
+      "keyword": "port 8000",
+      "line": 178,
+      "snippet": "# Start the server (default port 8000)"
+    },
+    {
+      "file": "docker-compose.yml",
+      "era": "other",
+      "keyword": "v2",
+      "line": 14,
+      "snippet": "image: traefik:v2.10"
+    },
+    {
+      "file": "local_models.py",
+      "era": "other",
+      "keyword": "v2",
+      "line": 72,
+      "snippet": "\"default_embedding\": \"all-MiniLM-L6-v2\","
+    },
+    {
+      "file": "manifest.json",
+      "era": "other",
+      "keyword": "legacy",
+      "line": 4,
+      "snippet": "\"description\": \"Unified multi-agent runtime with orchestrator, tools, memory, server, apps, and archived legacy modules.\","
+    },
+    {
+      "file": "manifest.json",
+      "era": "other",
+      "keyword": "migration",
+      "line": 133,
+      "snippet": "\"abandoned migrations\","
+    },
+    {
+      "file": "models.yaml",
+      "era": "other",
+      "keyword": "v2",
+      "line": 57,
+      "snippet": "path: \"sentence-transformers/all-MiniLM-L6-v2\""
+    },
+    {
+      "file": "QUICKSTART.md",
+      "era": "docs",
+      "keyword": "legacy",
+      "line": 96,
+      "snippet": "# or (legacy, still works)"
+    },
+    {
+      "file": "QUICKSTART_LOCAL.md",
+      "era": "docs",
+      "keyword": "port 8000",
+      "line": 32,
+      "snippet": "uvicorn realai.server.app:app --host 127.0.0.1 --port 8000 --reload"
+    },
+    {
+      "file": "realai.toml",
+      "era": "other",
+      "keyword": "legacy",
+      "line": 13,
+      "snippet": "# Enable legacy paths for backwards compatibility"
+    },
+    {
+      "file": "realai.toml",
+      "era": "other",
+      "keyword": "legacy",
+      "line": 14,
+      "snippet": "enable_legacy_paths = true"
+    },
+    {
+      "file": "REALAI_3.0.md",
+      "era": "docs",
+      "keyword": "realai 3",
+      "line": 1,
+      "snippet": "# RealAI 3.0 \u2013 Vision"
+    },
+    {
+      "file": "REALAI_3.0.md",
+      "era": "docs",
+      "keyword": "realai 3",
+      "line": 31,
+      "snippet": "## Pillars of RealAI 3.0"
+    },
+    {
+      "file": "REALAI_3.0.md",
+      "era": "docs",
+      "keyword": "realai 3",
+      "line": 78,
+      "snippet": "RealAI 3.0 should feel like:"
+    },
+    {
+      "file": "realai_alt_cavity_search.py",
+      "era": "other",
+      "keyword": "legacy",
+      "line": 22,
+      "snippet": "r\"DEPRECATED\", r\"LEGACY\", r\"REMOVE\", r\"REPLACE\","
+    },
+    {
+      "file": "realai_alt_v2_cavity_search.py",
+      "era": "other",
+      "keyword": "v2",
+      "line": 6,
+      "snippet": "OUT = \"alt_v2_cavity_manifest.json\""
+    },
+    {
+      "file": "realai_alt_v2_cavity_search.py",
+      "era": "other",
+      "keyword": "v2",
+      "line": 64,
+      "snippet": "print(f\"[alt-v2-scan] Complete. Output written to {OUT}\")"
+    },
+    {
+      "file": "realai_alt_v3_cavity_search.py",
+      "era": "other",
+      "keyword": "v3",
+      "line": 6,
+      "snippet": "OUT = \"alt_v3_cavity_manifest.json\""
+    },
+    {
+      "file": "realai_alt_v3_cavity_search.py",
+      "era": "other",
+      "keyword": "v3",
+      "line": 9,
+      "snippet": "ALT_V3_TERMS = ["
+    },
+    {
+      "file": "realai_alt_v3_cavity_search.py",
+      "era": "other",
+      "keyword": "v3",
+      "line": 57,
+      "snippet": "for term in ALT_V3_TERMS:"
+    },
+    {
+      "file": "realai_alt_v3_cavity_search.py",
+      "era": "other",
+      "keyword": "v3",
+      "line": 83,
+      "snippet": "print(f\"[alt-v3-scan] Complete. Output written to {OUT}\")"
+    },
+    {
+      "file": "realai_full_cavity_search.py",
+      "era": "other",
+      "keyword": "migration",
+      "line": 101,
+      "snippet": "# 14) Archive / migration / versioning"
+    },
+    {
+      "file": "realai_full_cavity_search.py",
+      "era": "other",
+      "keyword": "migration",
+      "line": 102,
+      "snippet": "\"archive_migration\": ["
+    },
+    {
+      "file": "realai_full_cavity_search.py",
+      "era": "other",
+      "keyword": "migration",
+      "line": 104,
+      "snippet": "r\"\\bversions\\b\", r\"\\bmigration\\b\","
+    },
+    {
+      "file": "realai_full_cavity_summary.txt",
+      "era": "other",
+      "keyword": "migration",
+      "line": 8,
+      "snippet": "archive_migration: 115429"
+    },
+    {
+      "file": "realai_full_spectrum_scan.py",
+      "era": "other",
+      "keyword": "v2",
+      "line": 70,
+      "snippet": "\"upgrade\", \"refactor\", \"v2\", \"v3\""
+    },
+    {
+      "file": "realai_gui.py",
+      "era": "other",
+      "keyword": "v2",
+      "line": 138,
+      "snippet": "self.title(\"RealAI v2.0 \\u2014 API Key Setup\")"
+    },
+    {
+      "file": "realai_gui.py",
+      "era": "other",
+      "keyword": "v2",
+      "line": 164,
+      "snippet": "text=\"\\U0001f916  RealAI v2.0\","
+    },
+    {
+      "file": "TODO.md",
+      "era": "docs",
+      "keyword": "port 8000",
+      "line": 70,
+      "snippet": "- [ ] Confirm port 8000 ownership process guidance"
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/API.md",
+      "era": "backup",
+      "keyword": "legacy",
+      "line": 394,
+      "snippet": "Legacy non-`/v1` path variants remain as compatibility shims when enabled by config."
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/API.md",
+      "era": "backup",
+      "keyword": "realai 2",
+      "line": 422,
+      "snippet": "\"display_name\": \"RealAI 2.0 General\","
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/API.md",
+      "era": "backup",
+      "keyword": "migration",
+      "line": 576,
+      "snippet": "## Migration from OpenAI"
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/API.md",
+      "era": "backup",
+      "keyword": "v2",
+      "line": 619,
+      "snippet": "## New Endpoints (v2.1)"
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/API.md",
+      "era": "backup",
+      "keyword": "v2",
+      "line": 621,
+      "snippet": "The following endpoints are planned/implemented for RealAI v2.1:"
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/DEPLOYMENT.md",
+      "era": "backup",
+      "keyword": "port 8000",
+      "line": 178,
+      "snippet": "# Start the server (default port 8000)"
+    },
+    {
+      "file": ".backup/clean_backup_20260708_112400/docker-compose.yml",
+      "era": "backup",
+      "keyword": "v2",
+      "line": 14,
+      "snippet": "image: traefik:v2.10"
+    }
+  ]
+}

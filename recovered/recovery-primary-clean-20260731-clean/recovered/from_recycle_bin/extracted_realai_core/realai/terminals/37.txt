@@ -1,0 +1,66 @@
+---
+pid: 15880
+cwd: "C:\Users\tsmit\realai"
+command: "cd C:\\Users\\tsmit\\realai; $env:REALAI_PROVIDER_PORT='8001'; py -3.14 -m realai.provider 2>&1"
+started_at: 2026-06-04T14:24:28.806Z
+running_for_ms: 10075003 
+---
+INFO:     Started server process [21152]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+[RealAI] Core modules loaded.
+INFO:     127.0.0.1:49245 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52492 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63055 - "GET /health/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62016 - "GET /health/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62017 - "GET /v1/system/accelerator?lite=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61330 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55593 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55596 - "GET /health/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55598 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49917 - "GET /health/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51776 - "GET /health/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51777 - "GET /health/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51778 - "GET /health/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51779 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57707 - "GET /health/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59244 - "GET /health HTTP/1.1" 200 OK
+[RealAI] Discovering plugins in realai/plugins...
+[RealAI] Plugin system initialized.
+[RealAI] Loaded plugin: advanced_rag
+[RealAI] Loaded plugin: computer_mode
+[RealAI] Loaded plugin: game_world_engine
+[RealAI] Loaded plugin: git_repo_intel
+[RealAI] Loaded plugin: gpu_balancer
+[RealAI] Loaded plugin: image_gen
+[RealAI] Loaded plugin: knowledge_rag
+[RealAI] Loaded plugin: llm_chat
+[RealAI] Loaded plugin: lora_loader
+[RealAI] Loaded plugin: memory_faiss
+[RealAI] Loaded plugin: memory_sqlite
+[RealAI] Loaded plugin: model_manager
+[RealAI] Loaded plugin: multi_agent_system
+[RealAI] Loaded plugin: npc_personality
+[RealAI] Loaded plugin: ocr
+[RealAI] Loaded plugin: quest_generator
+[RealAI] Loaded plugin: rag_memory
+[RealAI] Loaded plugin: scheduler_switcher
+[RealAI] Loaded plugin: self_evolution_loop
+[RealAI] Loaded plugin: self_improvement
+[RealAI] Loaded plugin: self_reflection
+[RealAI] Loaded plugin: social_autoposter
+[RealAI] Loaded plugin: solana_tx
+[RealAI] Loaded plugin: synthetic_data
+[RealAI] Loaded plugin: tool_use_framework
+[RealAI Plugin] Twitter credentials not found in environment variables.
+[RealAI] Loaded plugin: twitter
+[RealAI] Loaded plugin: voice_audio
+[RealAI] Loaded plugin: web_research
+[RealAI] Loaded 28 plugins.
+INFO:     127.0.0.1:51248 - "GET /v1/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51249 - "GET /v1/capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51250 - "GET /v1/system/compute HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59244 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61507 - "GET /health/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61507 - "GET /favicon.ico HTTP/1.1" 404 Not Found

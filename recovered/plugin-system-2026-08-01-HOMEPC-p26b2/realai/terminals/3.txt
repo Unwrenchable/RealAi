@@ -1,0 +1,7 @@
+---
+pid: 32132
+cwd: "C:\Users\tsmit\realai"
+command: "cd C:\\Users\\tsmit\\realai; $env:GRADIO_SERVER_PORT='7872'; py -3.14 realai_src_ui_entry.py 2>&1"
+started_at: 2026-06-04T09:07:25.450Z
+running_for_ms: 29120012 
+---

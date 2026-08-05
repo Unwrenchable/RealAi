@@ -1,0 +1,1072 @@
+Folder PATH listing
+Volume serial number is 000000DE 089F:CC78
+C:.
+¦   .env.example
+¦   .gitattributes
+¦   .gitignore
+¦   .python-version
+¦   6.0
+¦   =10.4.0
+¦   AGENTS.md
+¦   allfiles.txt
+¦   API.md
+¦   api_server.py
+¦   build_latest.log
+¦   build_latest2.log
+¦   build_provider.log
+¦   build_provider_min.log
+¦   build_ui.log
+¦   CONTRIBUTING.md
+¦   DEPLOYMENT.md
+¦   docker-compose.yml
+¦   Dockerfile
+¦   Dockerfile.gpu
+¦   LICENSE
+¦   local_models.py
+¦   main.py
+¦   models.yaml
+¦   package-lock.json
+¦   package.json
+¦   PAGES
+¦   pnpm-lock.yaml
+¦   pnpm-workspace.yaml
+¦   providers.yaml
+¦   pyproject.toml
+¦   pyrightconfig.json
+¦   QUICKSTART.md
+¦   QUICKSTART_LOCAL.md
+¦   re
+¦   README.md
+¦   realai.toml
+¦   realai.toml.example
+¦   REALAI_3.0.md
+¦   realai_gui.py
+¦   realai_knowledge_store.json
+¦   realai_local_server.py
+¦   realai_memory.sqlite3
+¦   realai_server.py
+¦   render.yaml
+¦   render.yml
+¦   repo-tree.txt
+¦   repo_tree.txt
+¦   repo_tree_clean.txt
+¦   repo_tree_filtered.txt
+¦   repo_tree_shallow.txt
+¦   requirements-ci.txt
+¦   requirements-full.txt
+¦   requirements-gpu.txt
+¦   requirements.txt
+¦   restore-history.ps1
+¦   setup.py
+¦   SETUP_COMPLETE.md
+¦   start_realai.bat
+¦   start_realai_server.bat
+¦   test_local_server.py
+¦   test_realai.py
+¦   traefik.yml
+¦   tsconfig.json
+¦   vercel.json
+¦   
++---.continue
+¦       config.json
+¦       
++---.github
+¦   ¦   copilot-instructions.md
+¦   ¦   
+¦   +---agents
+¦   ¦       agent.md
+¦   ¦       bootstrap.md
+¦   ¦       capability-dev.md
+¦   ¦       fullstack-dev.md
+¦   ¦       memory.md
+¦   ¦       provider-specialist.md
+¦   ¦       README.md
+¦   ¦       
+¦   +---workflows
+¦           ci.yml
+¦           codeql.yml
+¦           
++---agents
+¦   ¦   agent.md
+¦   ¦   bootstrap.md
+¦   ¦   capability-dev.md
+¦   ¦   coder.agent.json
+¦   ¦   devops_agent.ts
+¦   ¦   fullstack-dev.md
+¦   ¦   index.ts
+¦   ¦   memory.md
+¦   ¦   provider-specialist.md
+¦   ¦   README.md
+¦   ¦   
+¦   +---runtime
+¦   ¦       index.ts
+¦   ¦       planner.ts
+¦   ¦       
+¦   +---templates
+¦   ¦       coder.ts
+¦   ¦       researcher.ts
+¦   ¦       
+¦   +---tools
+¦           browser.ts
+¦           web-search.ts
+¦           
++---api
+¦       index.py
+¦       
++---apps
+¦   ¦   __init__.py
+¦   ¦   
+¦   +---api
+¦   ¦   ¦   main.py
+¦   ¦   ¦   state.py
+¦   ¦   ¦   __init__.py
+¦   ¦   ¦   
+¦   ¦   +---middleware
+¦   ¦   ¦       logging.py
+¦   ¦   ¦       __init__.py
+¦   ¦   ¦       
+¦   ¦   +---routes
+¦   ¦           audio.py
+¦   ¦           chat.py
+¦   ¦           embeddings.py
+¦   ¦           health.py
+¦   ¦           metrics.py
+¦   ¦           models.py
+¦   ¦           tasks.py
+¦   ¦           voice_ws.py
+¦   ¦           web3.py
+¦   ¦           __init__.py
+¦   ¦           
+¦   +---dashboard
+¦   ¦       package.json
+¦   ¦       
+¦   +---desktop
+¦   ¦       voice_mode.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---frontend
+¦   ¦   ¦   .env.local.example
+¦   ¦   ¦   .eslintrc.json
+¦   ¦   ¦   .gitignore
+¦   ¦   ¦   next.config.js
+¦   ¦   ¦   package.json
+¦   ¦   ¦   pnpm-workspace.yaml
+¦   ¦   ¦   postcss.config.js
+¦   ¦   ¦   README.md
+¦   ¦   ¦   tailwind.config.js
+¦   ¦   ¦   tsconfig.json
+¦   ¦   ¦   vercel.json
+¦   ¦   ¦   
+¦   ¦   +---src
+¦   ¦       +---app
+¦   ¦       ¦   ¦   error.tsx
+¦   ¦       ¦   ¦   globals.css
+¦   ¦       ¦   ¦   layout.tsx
+¦   ¦       ¦   ¦   page.tsx
+¦   ¦       ¦   ¦   
+¦   ¦       ¦   +---api
+¦   ¦       ¦       +---chat
+¦   ¦       ¦       ¦       route.ts
+¦   ¦       ¦       ¦       
+¦   ¦       ¦       +---models
+¦   ¦       ¦               route.ts
+¦   ¦       ¦               
+¦   ¦       +---components
+¦   ¦       ¦       ChatInput.tsx
+¦   ¦       ¦       MessageList.tsx
+¦   ¦       ¦       SettingsDrawer.tsx
+¦   ¦       ¦       Sidebar.tsx
+¦   ¦       ¦       
+¦   ¦       +---lib
+¦   ¦               compute.ts
+¦   ¦               connection.ts
+¦   ¦               env.ts
+¦   ¦               identity.ts
+¦   ¦               ratelimit.ts
+¦   ¦               realai.ts
+¦   ¦               types.ts
+¦   ¦               
+¦   +---vscode
+¦   ¦   ¦   extension.ts
+¦   ¦   ¦   package.json
+¦   ¦   ¦   tsconfig.json
+¦   ¦   ¦   
+¦   ¦   +---src
+¦   ¦   ¦       chatPanel.ts
+¦   ¦   ¦       realaiClient.ts
+¦   ¦   ¦       
+¦   ¦   +---webview
+¦   ¦           index.html
+¦   ¦           
+¦   +---widget
+¦           package.json
+¦           
++---archive
+¦   +---agent-tools
+¦   ¦   +---agent-tools-main
+¦   ¦       +---.agentx
+¦   ¦               access_profiles.json
+¦   ¦               agency_import.json
+¦   ¦               agents.json
+¦   ¦               README.md
+¦   ¦               
+¦   +---agent-tools-main
+¦   ¦   +---.agentx
+¦   ¦   ¦       access_profiles.json
+¦   ¦   ¦       agency_import.json
+¦   ¦   ¦       agents.json
+¦   ¦   ¦       README.md
+¦   ¦   ¦       
+¦   ¦   +---agent-tools-main
+¦   ¦       +---.agentx
+¦   ¦               access_profiles.json
+¦   ¦               agency_import.json
+¦   ¦               agents.json
+¦   ¦               README.md
+¦   ¦               
+¦   +---real-fin
+¦   ¦   +---realai
+¦   ¦       +---.git_disabled
+¦   ¦       ¦       .MERGE_MSG.swp
+¦   ¦       ¦       
+¦   ¦       +---realai - Copy
+¦   ¦           +---.git_disabled
+¦   ¦                   .MERGE_MSG.swp
+¦   ¦                   
+¦   +---realai-clean
+¦   ¦   +---realai-core
+¦   ¦       +---ui
+¦   ¦           +---lib
+¦   ¦                   realaiClient.ts
+¦   ¦                   registryClient.ts
+¦   ¦                   
+¦   +---realai-clean__dup1
+¦   ¦   +---realai-core
+¦   ¦   ¦   +---ui
+¦   ¦   ¦       +---lib
+¦   ¦   ¦               realaiClient.ts
+¦   ¦   ¦               registryClient.ts
+¦   ¦   ¦               
+¦   ¦   +---realai-core__dup1
+¦   ¦   ¦   +---ui
+¦   ¦   ¦       +---lib
+¦   ¦   ¦               realaiClient.ts
+¦   ¦   ¦               registryClient.ts
+¦   ¦   ¦               
+¦   ¦   +---realai-frontend__dup1
+¦   ¦       +---src
+¦   ¦           +---lib
+¦   ¦                   realai.ts
+¦   ¦                   types.ts
+¦   ¦                   
+¦   +---RealAIProject
+¦   ¦   +---realai-core
+¦   ¦   ¦   +---ui
+¦   ¦   ¦       +---lib
+¦   ¦   ¦               realaiClient.ts
+¦   ¦   ¦               registryClient.ts
+¦   ¦   ¦               
+¦   ¦   +---realai-frontend
+¦   ¦       ¦   next-env.d.ts
+¦   ¦       ¦   
+¦   ¦       +---.next
+¦   ¦       ¦   ¦   app-build-manifest.json
+¦   ¦       ¦   ¦   app-path-routes-manifest.json
+¦   ¦       ¦   ¦   build-manifest.json
+¦   ¦       ¦   ¦   BUILD_ID
+¦   ¦       ¦   ¦   export-detail.json
+¦   ¦       ¦   ¦   export-marker.json
+¦   ¦       ¦   ¦   images-manifest.json
+¦   ¦       ¦   ¦   next-minimal-server.js.nft.json
+¦   ¦       ¦   ¦   next-server.js.nft.json
+¦   ¦       ¦   ¦   package.json
+¦   ¦       ¦   ¦   prerender-manifest.json
+¦   ¦       ¦   ¦   react-loadable-manifest.json
+¦   ¦       ¦   ¦   required-server-files.json
+¦   ¦       ¦   ¦   routes-manifest.json
+¦   ¦       ¦   ¦   trace
+¦   ¦       ¦   ¦   
+¦   ¦       ¦   +---cache
+¦   ¦       ¦   ¦   ¦   .previewinfo
+¦   ¦       ¦   ¦   ¦   .rscinfo
+¦   ¦       ¦   ¦   ¦   .tsbuildinfo
+¦   ¦       ¦   ¦   ¦   next-devtools-config.json
+¦   ¦       ¦   ¦   ¦   
+¦   ¦       ¦   ¦   +---webpack
+¦   ¦       ¦   ¦       +---client-development
+¦   ¦       ¦   ¦       ¦       0.pack.gz
+¦   ¦       ¦   ¦       ¦       1.pack.gz
+¦   ¦       ¦   ¦       ¦       2.pack.gz
+¦   ¦       ¦   ¦       ¦       index.pack.gz
+¦   ¦       ¦   ¦       ¦       index.pack.gz.old
+¦   ¦       ¦   ¦       ¦       
+¦   ¦       ¦   ¦       +---client-production
+¦   ¦       ¦   ¦       ¦       0.pack
+¦   ¦       ¦   ¦       ¦       1.pack
+¦   ¦       ¦   ¦       ¦       2.pack
+¦   ¦       ¦   ¦       ¦       index.pack
+¦   ¦       ¦   ¦       ¦       index.pack.old
+¦   ¦       ¦   ¦       ¦       
+¦   ¦       ¦   ¦       +---edge-server-production
+¦   ¦       ¦   ¦       ¦       0.pack
+¦   ¦       ¦   ¦       ¦       index.pack
+¦   ¦       ¦   ¦       ¦       index.pack.old
+¦   ¦       ¦   ¦       ¦       
+¦   ¦       ¦   ¦       +---server-development
+¦   ¦       ¦   ¦       ¦       0.pack.gz
+¦   ¦       ¦   ¦       ¦       1.pack.gz
+¦   ¦       ¦   ¦       ¦       index.pack.gz
+¦   ¦       ¦   ¦       ¦       index.pack.gz.old
+¦   ¦       ¦   ¦       ¦       
+¦   ¦       ¦   ¦       +---server-production
+¦   ¦       ¦   ¦               0.pack
+¦   ¦       ¦   ¦               1.pack
+¦   ¦       ¦   ¦               2.pack
+¦   ¦       ¦   ¦               index.pack
+¦   ¦       ¦   ¦               index.pack.old
+¦   ¦       ¦   ¦               
+¦   ¦       ¦   +---diagnostics
+¦   ¦       ¦   ¦       build-diagnostics.json
+¦   ¦       ¦   ¦       framework.json
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---server
+¦   ¦       ¦   ¦   ¦   app-paths-manifest.json
+¦   ¦       ¦   ¦   ¦   functions-config-manifest.json
+¦   ¦       ¦   ¦   ¦   interception-route-rewrite-manifest.js
+¦   ¦       ¦   ¦   ¦   middleware-build-manifest.js
+¦   ¦       ¦   ¦   ¦   middleware-manifest.json
+¦   ¦       ¦   ¦   ¦   middleware-react-loadable-manifest.js
+¦   ¦       ¦   ¦   ¦   next-font-manifest.js
+¦   ¦       ¦   ¦   ¦   next-font-manifest.json
+¦   ¦       ¦   ¦   ¦   pages-manifest.json
+¦   ¦       ¦   ¦   ¦   server-reference-manifest.js
+¦   ¦       ¦   ¦   ¦   server-reference-manifest.json
+¦   ¦       ¦   ¦   ¦   webpack-runtime.js
+¦   ¦       ¦   ¦   ¦   
+¦   ¦       ¦   ¦   +---app
+¦   ¦       ¦   ¦   ¦   ¦   index.html
+¦   ¦       ¦   ¦   ¦   ¦   index.meta
+¦   ¦       ¦   ¦   ¦   ¦   index.rsc
+¦   ¦       ¦   ¦   ¦   ¦   page.js
+¦   ¦       ¦   ¦   ¦   ¦   page.js.nft.json
+¦   ¦       ¦   ¦   ¦   ¦   page_client-reference-manifest.js
+¦   ¦       ¦   ¦   ¦   ¦   _not-found.html
+¦   ¦       ¦   ¦   ¦   ¦   _not-found.meta
+¦   ¦       ¦   ¦   ¦   ¦   _not-found.rsc
+¦   ¦       ¦   ¦   ¦   ¦   
+¦   ¦       ¦   ¦   ¦   +---_not-found
+¦   ¦       ¦   ¦   ¦           page.js
+¦   ¦       ¦   ¦   ¦           page.js.nft.json
+¦   ¦       ¦   ¦   ¦           page_client-reference-manifest.js
+¦   ¦       ¦   ¦   ¦           
+¦   ¦       ¦   ¦   +---chunks
+¦   ¦       ¦   ¦   ¦       611.js
+¦   ¦       ¦   ¦   ¦       778.js
+¦   ¦       ¦   ¦   ¦       
+¦   ¦       ¦   ¦   +---pages
+¦   ¦       ¦   ¦           404.html
+¦   ¦       ¦   ¦           500.html
+¦   ¦       ¦   ¦           _app.js
+¦   ¦       ¦   ¦           _app.js.nft.json
+¦   ¦       ¦   ¦           _document.js
+¦   ¦       ¦   ¦           _document.js.nft.json
+¦   ¦       ¦   ¦           _error.js
+¦   ¦       ¦   ¦           _error.js.nft.json
+¦   ¦       ¦   ¦           
+¦   ¦       ¦   +---static
+¦   ¦       ¦   ¦   +---5WhcrN2JUIIm4kaYYcVJy
+¦   ¦       ¦   ¦   ¦       _buildManifest.js
+¦   ¦       ¦   ¦   ¦       _ssgManifest.js
+¦   ¦       ¦   ¦   ¦       
+¦   ¦       ¦   ¦   +---chunks
+¦   ¦       ¦   ¦   ¦   ¦   139.0a92edaa0bd72a9e.js
+¦   ¦       ¦   ¦   ¦   ¦   255-6b79f309a27fb98b.js
+¦   ¦       ¦   ¦   ¦   ¦   4bd1b696-c023c6e3521b1417.js
+¦   ¦       ¦   ¦   ¦   ¦   631-9f119fa1fcd6b92b.js
+¦   ¦       ¦   ¦   ¦   ¦   646.f342b7cffc01feb0.js
+¦   ¦       ¦   ¦   ¦   ¦   framework-a6e0b7e30f98059a.js
+¦   ¦       ¦   ¦   ¦   ¦   main-3ac57c782ae89f24.js
+¦   ¦       ¦   ¦   ¦   ¦   main-app-d2621a3c7a3fe77b.js
+¦   ¦       ¦   ¦   ¦   ¦   polyfills-42372ed130431b0a.js
+¦   ¦       ¦   ¦   ¦   ¦   webpack-0e20cad5555fb5b8.js
+¦   ¦       ¦   ¦   ¦   ¦   
+¦   ¦       ¦   ¦   ¦   +---app
+¦   ¦       ¦   ¦   ¦   ¦   ¦   layout-425fe07c0f60bd4f.js
+¦   ¦       ¦   ¦   ¦   ¦   ¦   page-1a60ced4f22bd918.js
+¦   ¦       ¦   ¦   ¦   ¦   ¦   
+¦   ¦       ¦   ¦   ¦   ¦   +---_not-found
+¦   ¦       ¦   ¦   ¦   ¦           page-3c5d568fb8ad5bce.js
+¦   ¦       ¦   ¦   ¦   ¦           
+¦   ¦       ¦   ¦   ¦   +---pages
+¦   ¦       ¦   ¦   ¦           _app-0dc0bbbffe7a398e.js
+¦   ¦       ¦   ¦   ¦           _error-013f4188946cdd04.js
+¦   ¦       ¦   ¦   ¦           
+¦   ¦       ¦   ¦   +---css
+¦   ¦       ¦   ¦           6520db2da84faea4.css
+¦   ¦       ¦   ¦           
+¦   ¦       ¦   +---types
+¦   ¦       ¦       ¦   cache-life.d.ts
+¦   ¦       ¦       ¦   package.json
+¦   ¦       ¦       ¦   routes.d.ts
+¦   ¦       ¦       ¦   validator.ts
+¦   ¦       ¦       ¦   
+¦   ¦       ¦       +---app
+¦   ¦       ¦               layout.ts
+¦   ¦       ¦               page.ts
+¦   ¦       ¦               
+¦   ¦       +---out
+¦   ¦           ¦   404.html
+¦   ¦           ¦   index.html
+¦   ¦           ¦   index.txt
+¦   ¦           ¦   
+¦   ¦           +---_next
+¦   ¦               +---static
+¦   ¦                   +---5WhcrN2JUIIm4kaYYcVJy
+¦   ¦                   ¦       _buildManifest.js
+¦   ¦                   ¦       _ssgManifest.js
+¦   ¦                   ¦       
+¦   ¦                   +---chunks
+¦   ¦                   ¦   ¦   139.0a92edaa0bd72a9e.js
+¦   ¦                   ¦   ¦   255-6b79f309a27fb98b.js
+¦   ¦                   ¦   ¦   4bd1b696-c023c6e3521b1417.js
+¦   ¦                   ¦   ¦   631-9f119fa1fcd6b92b.js
+¦   ¦                   ¦   ¦   646.f342b7cffc01feb0.js
+¦   ¦                   ¦   ¦   framework-a6e0b7e30f98059a.js
+¦   ¦                   ¦   ¦   main-3ac57c782ae89f24.js
+¦   ¦                   ¦   ¦   main-app-d2621a3c7a3fe77b.js
+¦   ¦                   ¦   ¦   polyfills-42372ed130431b0a.js
+¦   ¦                   ¦   ¦   webpack-0e20cad5555fb5b8.js
+¦   ¦                   ¦   ¦   
+¦   ¦                   ¦   +---app
+¦   ¦                   ¦   ¦   ¦   layout-425fe07c0f60bd4f.js
+¦   ¦                   ¦   ¦   ¦   page-1a60ced4f22bd918.js
+¦   ¦                   ¦   ¦   ¦   
+¦   ¦                   ¦   ¦   +---_not-found
+¦   ¦                   ¦   ¦           page-3c5d568fb8ad5bce.js
+¦   ¦                   ¦   ¦           
+¦   ¦                   ¦   +---pages
+¦   ¦                   ¦           _app-0dc0bbbffe7a398e.js
+¦   ¦                   ¦           _error-013f4188946cdd04.js
+¦   ¦                   ¦           
+¦   ¦                   +---css
+¦   ¦                           6520db2da84faea4.css
+¦   ¦                           
+¦   +---realai_historical_backups
+¦   ¦   +---realai_versions_20260612
+¦   ¦       +---real-fin
+¦   ¦       ¦   +---realai
+¦   ¦       ¦       +---.git_disabled
+¦   ¦       ¦       ¦       .MERGE_MSG.swp
+¦   ¦       ¦       ¦       
+¦   ¦       ¦       +---realai - Copy
+¦   ¦       ¦           +---.git_disabled
+¦   ¦       ¦                   .MERGE_MSG.swp
+¦   ¦       ¦                   
+¦   ¦       +---RealAIProject
+¦   ¦           +---realai-core
+¦   ¦           ¦   +---ui
+¦   ¦           ¦       +---lib
+¦   ¦           ¦               realaiClient.ts
+¦   ¦           ¦               registryClient.ts
+¦   ¦           ¦               
+¦   ¦           +---realai-frontend
+¦   ¦               ¦   next-env.d.ts
+¦   ¦               ¦   
+¦   ¦               +---.next
+¦   ¦                   ¦   app-build-manifest.json
+¦   ¦                   ¦   app-path-routes-manifest.json
+¦   ¦                   ¦   build-manifest.json
+¦   ¦                   ¦   BUILD_ID
+¦   ¦                   ¦   export-detail.json
+¦   ¦                   ¦   export-marker.json
+¦   ¦                   ¦   images-manifest.json
+¦   ¦                   ¦   next-minimal-server.js.nft.json
+¦   ¦                   ¦   next-server.js.nft.json
+¦   ¦                   ¦   package.json
+¦   ¦                   ¦   prerender-manifest.json
+¦   ¦                   ¦   react-loadable-manifest.json
+¦   ¦                   ¦   required-server-files.json
+¦   ¦                   ¦   routes-manifest.json
+¦   ¦                   ¦   trace
+¦   ¦                   ¦   
+¦   ¦                   +---cache
+¦   ¦                   ¦   ¦   .previewinfo
+¦   ¦                   ¦   ¦   .rscinfo
+¦   ¦                   ¦   ¦   .tsbuildinfo
+¦   ¦                   ¦   ¦   next-devtools-config.json
+¦   ¦                   ¦   ¦   
+¦   ¦                   ¦   +---webpack
+¦   ¦                   ¦       +---client-development
+¦   ¦                   ¦       ¦       0.pack.gz
+¦   ¦                   ¦       ¦       1.pack.gz
+¦   ¦                   ¦       ¦       2.pack.gz
+¦   ¦                   ¦       ¦       index.pack.gz
+¦   ¦                   ¦       ¦       index.pack.gz.old
+¦   ¦                   ¦       ¦       
+¦   ¦                   ¦       +---client-production
+¦   ¦                   ¦       ¦       0.pack
+¦   ¦                   ¦       ¦       1.pack
+¦   ¦                   ¦       ¦       2.pack
+¦   ¦                   ¦       ¦       index.pack
+¦   ¦                   ¦       ¦       index.pack.old
+¦   ¦                   ¦       ¦       
+¦   ¦                   ¦       +---edge-server-production
+¦   ¦                   ¦       ¦       0.pack
+¦   ¦                   ¦       ¦       index.pack
+¦   ¦                   ¦       ¦       index.pack.old
+¦   ¦                   ¦       ¦       
+¦   ¦                   ¦       +---server-development
+¦   ¦                   ¦       ¦       0.pack.gz
+¦   ¦                   ¦       ¦       1.pack.gz
+¦   ¦                   ¦       ¦       index.pack.gz
+¦   ¦                   ¦       ¦       index.pack.gz.old
+¦   ¦                   ¦       ¦       
+¦   ¦                   ¦       +---server-production
+¦   ¦                   ¦               0.pack
+¦   ¦                   ¦               1.pack
+¦   ¦                   ¦               2.pack
+¦   ¦                   ¦               index.pack
+¦   ¦                   ¦               index.pack.old
+¦   ¦                   ¦               
+¦   ¦                   +---diagnostics
+¦   ¦                   ¦       build-diagnostics.json
+¦   ¦                   ¦       framework.json
+¦   ¦                   ¦       
+¦   ¦                   +---server
+¦   ¦                   ¦   ¦   app-paths-manifest.json
+¦   ¦                   ¦   ¦   functions-config-manifest.json
+¦   ¦                   ¦   ¦   interception-route-rewrite-manifest.js
+¦   ¦                   ¦   ¦   middleware-build-manifest.js
+¦   ¦                   ¦   ¦   middleware-manifest.json
+¦   ¦                   ¦   ¦   middleware-react-loadable-manifest.js
+¦   ¦                   ¦   ¦   next-font-manifest.js
+¦   ¦                   ¦   ¦   next-font-manifest.json
+¦   ¦                   ¦   ¦   pages-manifest.json
+¦   ¦                   ¦   ¦   server-reference-manifest.js
+¦   ¦                   ¦   ¦   server-reference-manifest.json
+¦   ¦                   ¦   ¦   webpack-runtime.js
+¦   ¦                   ¦   ¦   
+¦   ¦                   ¦   +---app
+¦   ¦                   ¦   ¦   ¦   index.html
+¦   ¦                   ¦   ¦   ¦   index.meta
+¦   ¦                   ¦   ¦   ¦   index.rsc
+¦   ¦                   ¦   ¦   ¦   page.js
+¦   ¦                   ¦   ¦   ¦   page.js.nft.json
+¦   ¦                   ¦   ¦   ¦   page_client-reference-manifest.js
+¦   ¦                   ¦   ¦   ¦   _not-found.html
+¦   ¦                   ¦   ¦   ¦   _not-found.meta
+¦   ¦                   ¦   ¦   ¦   _not-found.rsc
+¦   ¦                   ¦   ¦   ¦   
+¦   ¦                   ¦   ¦   +---_not-found
+¦   ¦                   ¦   ¦           page.js
+¦   ¦                   ¦   ¦           page.js.nft.json
+¦   ¦                   ¦   ¦           page_client-reference-manifest.js
+¦   ¦                   ¦   ¦           
+¦   ¦                   ¦   +---chunks
+¦   ¦                   ¦   ¦       611.js
+¦   ¦                   ¦   ¦       778.js
+¦   ¦                   ¦   ¦       
+¦   ¦                   ¦   +---pages
+¦   ¦                   ¦           404.html
+¦   ¦                   ¦           500.html
+¦   ¦                   ¦           _app.js
+¦   ¦                   ¦           _app.js.nft.json
+¦   ¦                   ¦           _document.js
+¦   ¦                   ¦           _document.js.nft.json
+¦   ¦                   ¦           _error.js
+¦   ¦                   ¦           _error.js.nft.json
+¦   ¦                   ¦           
+¦   ¦                   +---static
+¦   ¦                   ¦   +---5WhcrN2JUIIm4kaYYcVJy
+¦   ¦                   ¦   ¦       _buildManifest.js
+¦   ¦                   ¦   ¦       _ssgManifest.js
+¦   ¦                   ¦   ¦       
+¦   ¦                   ¦   +---chunks
+¦   ¦                   ¦   ¦   ¦   139.0a92edaa0bd72a9e.js
+¦   ¦                   ¦   ¦   ¦   255-6b79f309a27fb98b.js
+¦   ¦                   ¦   ¦   ¦   4bd1b696-c023c6e3521b1417.js
+¦   ¦                   ¦   ¦   ¦   631-9f119fa1fcd6b92b.js
+¦   ¦                   ¦   ¦   ¦   646.f342b7cffc01feb0.js
+¦   ¦                   ¦   ¦   ¦   framework-a6e0b7e30f98059a.js
+¦   ¦                   ¦   ¦   ¦   main-3ac57c782ae89f24.js
+¦   ¦                   ¦   ¦   ¦   main-app-d2621a3c7a3fe77b.js
+¦   ¦                   ¦   ¦   ¦   polyfills-42372ed130431b0a.js
+¦   ¦                   ¦   ¦   ¦   webpack-0e20cad5555fb5b8.js
+¦   ¦                   ¦   ¦   ¦   
+¦   ¦                   ¦   ¦   +---app
+¦   ¦                   ¦   ¦   ¦   ¦   layout-425fe07c0f60bd4f.js
+¦   ¦                   ¦   ¦   ¦   ¦   page-1a60ced4f22bd918.js
+¦   ¦                   ¦   ¦   ¦   ¦   
+¦   ¦                   ¦   ¦   ¦   +---_not-found
+¦   ¦                   ¦   ¦   ¦           page-3c5d568fb8ad5bce.js
+¦   ¦                   ¦   ¦   ¦           
+¦   ¦                   ¦   ¦   +---pages
+¦   ¦                   ¦   ¦           _app-0dc0bbbffe7a398e.js
+¦   ¦                   ¦   ¦           _error-013f4188946cdd04.js
+¦   ¦                   ¦   ¦           
+¦   ¦                   ¦   +---css
+¦   ¦                   ¦           6520db2da84faea4.css
+¦   ¦                   ¦           
+¦   ¦                   +---types
+¦   ¦                       ¦   cache-life.d.ts
+¦   ¦                       ¦   package.json
+¦   ¦                       ¦   routes.d.ts
+¦   ¦                       ¦   validator.ts
+¦   ¦                       ¦   
+¦   ¦                       +---app
+¦   ¦                               layout.ts
+¦   ¦                               page.ts
+¦   ¦                               
+¦   +---realai_repo
+¦   ¦   +---.vs__dup1
+¦   ¦   ¦   +---realai_repo.slnx
+¦   ¦   ¦       +---FileContentIndex
+¦   ¦   ¦       ¦       94db74ae-66b6-4870-9427-92716d48855a.vsidx
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---v18
+¦   ¦   ¦               DocumentLayout.json
+¦   ¦   ¦               
+¦   ¦   +---realai-core
+¦   ¦   ¦   +---ui
+¦   ¦   ¦       +---lib
+¦   ¦   ¦               realaiClient.ts
+¦   ¦   ¦               registryClient.ts
+¦   ¦   ¦               
+¦   ¦   +---realai-core__dup1
+¦   ¦   ¦   +---ui
+¦   ¦   ¦       +---lib
+¦   ¦   ¦               realaiClient.ts
+¦   ¦   ¦               registryClient.ts
+¦   ¦   ¦               
+¦   ¦   +---realai-frontend__dup1
+¦   ¦       +---src
+¦   ¦           +---lib
+¦   ¦                   realai.ts
+¦   ¦                   types.ts
+¦   ¦                   
+¦   +---realai_sdk
+¦       +---realai-core
+¦       ¦   +---ui
+¦       ¦       +---lib
+¦       ¦               realaiClient.ts
+¦       ¦               registryClient.ts
+¦       ¦               
+¦       +---realai-core__dup1
+¦       ¦   +---ui
+¦       ¦       +---lib
+¦       ¦               realaiClient.ts
+¦       ¦               registryClient.ts
+¦       ¦               
+¦       +---realai-frontend__dup1
+¦           +---src
+¦               +---lib
+¦                       realai.ts
+¦                       types.ts
+¦                       
++---aura
+¦   ¦   main.py
+¦   ¦   memory.py
+¦   ¦   reasoning.py
+¦   ¦   
+¦   +---skills
+¦           code.py
+¦           core.py
+¦           file_io.py
+¦           registry.py
+¦           web.py
+¦           __init__.py
+¦           
++---autopilot
+¦       autopilot.ts
+¦       index.ts
+¦       
++---benchmarks
+¦       base.py
+¦       bench_agent.py
+¦       bench_coding.py
+¦       bench_memory.py
+¦       bench_reasoning.py
+¦       bench_safety.py
+¦       bench_tool_use.py
+¦       runner.py
+¦       __init__.py
+¦       
++---billing
+¦       __init__.py
+¦       
++---config
+¦       dev.toml
+¦       gpu.toml
+¦       models.json
+¦       models.yaml
+¦       prod.toml
+¦       
++---context
+¦       realai_master_context.md
+¦       
++---core
+¦   ¦   index.ts
+¦   ¦   __init__.py
+¦   ¦   
+¦   +---agents
+¦   ¦       base.py
+¦   ¦       critic.py
+¦   ¦       executor.py
+¦   ¦       planner.py
+¦   ¦       safety.py
+¦   ¦       synthesizer.py
+¦   ¦       worker.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---api
+¦   ¦   ¦   errors.py
+¦   ¦   ¦   __init__.py
+¦   ¦   ¦   
+¦   ¦   +---schemas
+¦   ¦           audio.py
+¦   ¦           chat.py
+¦   ¦           embeddings.py
+¦   ¦           models.py
+¦   ¦           tasks.py
+¦   ¦           web3.py
+¦   ¦           __init__.py
+¦   ¦           
+¦   +---config
+¦   ¦       loader.py
+¦   ¦       types.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---inference
+¦   ¦       backend.py
+¦   ¦       chat_pipeline.py
+¦   ¦       llamacpp_backend.py
+¦   ¦       local_stub.py
+¦   ¦       registry.py
+¦   ¦       vllm_backend.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---logging
+¦   ¦       logger.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---memory
+¦   ¦       base.py
+¦   ¦       sqlite_store.py
+¦   ¦       summarizer.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---metrics
+¦   ¦       metrics.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---models
+¦   ¦       base.py
+¦   ¦       cache.py
+¦   ¦       registry.py
+¦   ¦       stub.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---security
+¦   ¦       python_sandbox.py
+¦   ¦       sandbox.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---tools
+¦   ¦       base.py
+¦   ¦       code.py
+¦   ¦       file.py
+¦   ¦       permissions.py
+¦   ¦       registry.py
+¦   ¦       web.py
+¦   ¦       web3.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---tracing
+¦   ¦       tracer.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---voice
+¦   ¦       asr_base.py
+¦   ¦       asr_whisper.py
+¦   ¦       registry.py
+¦   ¦       tts_base.py
+¦   ¦       tts_piper.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---web3
+¦           base.py
+¦           evm_backend.py
+¦           policy.py
+¦           registry.py
+¦           solana_backend.py
+¦           __init__.py
+¦           
++---docs
+¦       architecture.md
+¦       CAPABILITIES.md
+¦       DELIVERABLES.md
+¦       developer-onboarding.md
+¦       github_issue_board.md
+¦       IMPLEMENTATION_SUMMARY.md
+¦       INDEX.md
+¦       local-llama-setup.md
+¦       LOCAL_LLAMA_README.md
+¦       MIGRATION_GUIDE.md
+¦       model-manifest.md
+¦       provider-authoring.md
+¦       REALAI_3.0.md
+¦       roadmap.md
+¦       structure.md
+¦       TRAVIS_README.md
+¦       
++---examples
+¦       local_llama_example.py
+¦       
++---fusion-ui
+¦       script.js
+¦       
++---history
+¦       .txt
+¦       
++---marketplace
+¦       loader.ts
+¦       
++---packages
+¦   +---cli
+¦   ¦   ¦   package.json
+¦   ¦   ¦   tsconfig.json
+¦   ¦   ¦   
+¦   ¦   +---src
+¦   ¦           index.ts
+¦   ¦           
+¦   +---core
+¦   ¦       package.json
+¦   ¦       
+¦   +---sdk-py
+¦   ¦   ¦   package.json
+¦   ¦   ¦   
+¦   ¦   +---realai
+¦   ¦           __init__.py
+¦   ¦           
+¦   +---sdk-ts
+¦   ¦   ¦   package.json
+¦   ¦   ¦   tsconfig.json
+¦   ¦   ¦   
+¦   ¦   +---src
+¦   ¦           index.ts
+¦   ¦           
+¦   +---ui
+¦           package.json
+¦           
++---plugins
+¦       sample_plugin.py
+¦       __init__.py
+¦       
++---providers
+¦   ¦   provider.yaml
+¦   ¦   registry.ts
+¦   ¦   run.ps1
+¦   ¦   types.ts
+¦   ¦   
+¦   +---openai
+¦   ¦       index.ts
+¦   ¦       package.json
+¦   ¦       
+¦   +---realai
+¦           index.ts
+¦           package.json
+¦           
++---realai
+¦   ¦   agent_runtime.py
+¦   ¦   api_server.py
+¦   ¦   app_framework.py
+¦   ¦   audit.py
+¦   ¦   coding_agent.py
+¦   ¦   critique.py
+¦   ¦   execution_history.jsonl
+¦   ¦   identity.py
+¦   ¦   knowledge_graph.py
+¦   ¦   local_models.py
+¦   ¦   local_runtime.py
+¦   ¦   model_registry.py
+¦   ¦   plugin_marketplace.py
+¦   ¦   router.py
+¦   ¦   safety.py
+¦   ¦   self_improvement.py
+¦   ¦   server_settings.py
+¦   ¦   tools.py
+¦   ¦   world_model.py
+¦   ¦   __init__.py
+¦   ¦   
+¦   +---cli
+¦   ¦       realai_cli.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---datasets
+¦   ¦   ¦   __init__.py
+¦   ¦   ¦   
+¦   ¦   +---processed
+¦   ¦   ¦       .gitkeep
+¦   ¦   ¦       
+¦   ¦   +---raw
+¦   ¦           .gitkeep
+¦   ¦           
+¦   +---memory
+¦   ¦       engine.py
+¦   ¦       sqlite_memory.p
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---sdk
+¦   ¦   ¦   __init__.py
+¦   ¦   ¦   
+¦   ¦   +---python
+¦   ¦           realai_client.py
+¦   ¦           __init__.py
+¦   ¦           
+¦   +---server
+¦   ¦   ¦   app.py
+¦   ¦   ¦   backends.py
+¦   ¦   ¦   config.py
+¦   ¦   ¦   embeddings.py
+¦   ¦   ¦   embeddings_backend.py
+¦   ¦   ¦   inference.py
+¦   ¦   ¦   llama_cli_backend.py
+¦   ¦   ¦   logging.py
+¦   ¦   ¦   logging_utils.py
+¦   ¦   ¦   memory_store.py
+¦   ¦   ¦   metrics.py
+¦   ¦   ¦   orchestration.py
+¦   ¦   ¦   persistence.py
+¦   ¦   ¦   providers.py
+¦   ¦   ¦   router.py
+¦   ¦   ¦   tools_runtime.py
+¦   ¦   ¦   __init__.py
+¦   ¦   ¦   
+¦   ¦   +---profiles
+¦   ¦           default.json
+¦   ¦           
+¦   +---training
+¦           build_datasets.py
+¦           eval.py
+¦           extract_from_agent_tools.py
+¦           finetune.py
+¦           __init__.py
+¦           
++---realai-core
+¦   ¦   __init__.py
+¦   ¦   
+¦   +---agent_tools
+¦           __init__.py
+¦           
++---realai.egg-info
+¦       dependency_links.txt
+¦       entry_points.txt
+¦       PKG-INFO
+¦       SOURCES.txt
+¦       top_level.txt
+¦       
++---realai_memory
+¦   ¦   evolution_proposals.json
+¦   ¦   hive_missions.json
+¦   ¦   model_promotions.jsonl
+¦   ¦   rag_memory_store.json
+¦   ¦   workflow_runs_test.json
+¦   ¦   
+¦   +---7c37cb57-6c85-4909-8f92-e3e903e95a82
+¦   ¦       data_level0.bin
+¦   ¦       header.bin
+¦   ¦       length.bin
+¦   ¦       link_lists.bin
+¦   ¦       
+¦   +---chroma
+¦   ¦   +---bb9b30c9-86d2-45ba-934f-cd2170c6ca28
+¦   ¦           data_level0.bin
+¦   ¦           header.bin
+¦   ¦           length.bin
+¦   ¦           link_lists.bin
+¦   ¦           
+¦   +---embodied_narratives
+¦           narrative_1780597611.json
+¦           narrative_1780599365.json
+¦           narrative_1780605682.json
+¦           
++---schema
+¦       agent.schema.json
+¦       tool.schema.json
+¦       
++---scripts
+¦       setup_local_llama.py
+¦       
++---src
+¦   +---app
+¦   ¦       page.tsx
+¦   ¦       
+¦   +---components
+¦           ChatArena.tsx
+¦           LeftSidebar.tsx
+¦           RightPanel.tsx
+¦           TopBar.tsx
+¦           VoiceFab.tsx
+¦           
++---terminals
+¦       1.txt
+¦       10.txt
+¦       11.txt
+¦       12.txt
+¦       13.txt
+¦       14.txt
+¦       15.txt
+¦       16.txt
+¦       17.txt
+¦       18.txt
+¦       19.txt
+¦       2.txt
+¦       20.txt
+¦       21.txt
+¦       22.txt
+¦       23.txt
+¦       24.txt
+¦       25.txt
+¦       26.txt
+¦       27.txt
+¦       28.txt
+¦       29.txt
+¦       3.txt
+¦       30.txt
+¦       31.txt
+¦       32.txt
+¦       33.txt
+¦       34.txt
+¦       35.txt
+¦       36.txt
+¦       37.txt
+¦       38.txt
+¦       39.txt
+¦       4.txt
+¦       40.txt
+¦       41.txt
+¦       42.txt
+¦       43.txt
+¦       44.txt
+¦       45.txt
+¦       5.txt
+¦       6.txt
+¦       7.txt
+¦       8.txt
+¦       9.txt
+¦       
++---tests
+¦   ¦   test_cli_commands.py
+¦   ¦   test_local_llama_integration.py
+¦   ¦   __init__.py
+¦   ¦   
+¦   +---api
+¦           test_chat.py
+¦           test_embeddings.py
+¦           test_models.py
+¦           test_providers.py
+¦           __init__.py
+¦           
++---training
+        __init__.py
+        

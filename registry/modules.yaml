@@ -1,53 +1,269 @@
 version: 1
-description: Discoverable modules on unification/ultimate-all
+description: Discoverable modules on unification/ultimate-all — snapshots + promoted living stack
 modules:
+  # --- Living promoted (not ghosted) ---
+  - id: core-training
+    path: core/training
+    kind: living
+    capabilities: [training, finetune, datasets, directml, lora]
+    status: promoted
+    source: unique-modules + primary-clean + nested training
+  - id: core-memory
+    path: core/memory
+    kind: living
+    capabilities: [memory, sqlite, long-term]
+    status: promoted
+    source: core + primary-clean realai.memory.engine
+  - id: core-agents
+    path: core/agents
+    kind: living
+    capabilities: [agents, planner, self-heal, agent-runtime]
+    status: promoted
+    source: core + agents-skills + unique-modules
+  - id: core-orchestration
+    path: core/orchestration
+    kind: living
+    capabilities: [orchestration, v3, pipeline]
+    status: promoted
+    source: primary-clean v3 + orchestration_gold
+  - id: modules-training-datasets
+    path: modules/training
+    kind: living
+    capabilities: [training, datasets]
+    status: promoted
+  - id: modules-agents-skills
+    path: modules/agents_skills
+    kind: living
+    capabilities: [agents, skills]
+    status: promoted
+    source: recovery/agents-skills
+  - id: modules-orchestrators
+    path: modules/orchestrators
+    kind: living
+    capabilities: [orchestration]
+    status: promoted
+    source: unique-plugins-orchestrators-agenttools
   - id: nested-realai-202607
     path: recovered/nested-realai-202607
     kind: snapshot
-    capabilities: [runtime, server, tools, memory]
+    capabilities: [snapshot]
     status: archived
+    source_branch: local/nested-realai-202607
+    source_sha: 0e810e27
   - id: desktop-realai-202605
     path: recovered/desktop-realai-202605
     kind: snapshot
-    capabilities: [desktop, ui]
+    capabilities: [snapshot, desktop]
     status: archived
+    source_branch: local/desktop-realai-202605
+    source_sha: 9e896882
   - id: desktop-realai-agent-202604
     path: recovered/desktop-realai-agent-202604
     kind: snapshot
-    capabilities: [agents]
+    capabilities: [snapshot, agents, desktop]
     status: archived
+    source_branch: local/desktop-realai-agent-202604
+    source_sha: 1e3ddeab
   - id: desktop-realai-api-202604
     path: recovered/desktop-realai-api-202604
     kind: snapshot
-    capabilities: [api, server]
+    capabilities: [snapshot, desktop]
     status: archived
+    source_branch: local/desktop-realai-api-202604
+    source_sha: a568a3b2
   - id: desktop-realai-orchestration-202604
     path: recovered/desktop-realai-orchestration-202604
     kind: snapshot
-    capabilities: [orchestration]
+    capabilities: [snapshot, orchestration, desktop]
     status: archived
+    source_branch: local/desktop-realai-orchestration-202604
+    source_sha: 29d9a5ae
   - id: desktop-realai-design-system-202604
     path: recovered/desktop-realai-design-system-202604
     kind: snapshot
-    capabilities: [design-system, ui]
+    capabilities: [snapshot, desktop]
     status: archived
+    source_branch: local/desktop-realai-design-system-202604
+    source_sha: eb33cadd
   - id: desktop-realai-cli-202604
     path: recovered/desktop-realai-cli-202604
     kind: snapshot
-    capabilities: [cli]
+    capabilities: [snapshot, desktop]
     status: archived
+    source_branch: local/desktop-realai-cli-202604
+    source_sha: e3179216
   - id: desktop-realai-sdk-js-202604
     path: recovered/desktop-realai-sdk-js-202604
     kind: snapshot
-    capabilities: [sdk, javascript]
+    capabilities: [snapshot, desktop]
     status: archived
+    source_branch: local/desktop-realai-sdk-js-202604
+    source_sha: 5d631069
   - id: RealAIProject-clean-20260612
     path: recovered/RealAIProject-clean-20260612
     kind: snapshot
-    capabilities: [project]
+    capabilities: [snapshot]
     status: archived
+    source_branch: local/RealAIProject-clean-20260612
+    source_sha: b4b325e3
   - id: real-fin-realai-source-only
     path: recovered/real-fin-realai-source-only
     kind: snapshot
-    capabilities: [real-fin]
+    capabilities: [snapshot]
     status: archived
+    source_branch: local/real-fin-realai-source-only
+    source_sha: 65e02465
+  - id: recovery-primary-clean-20260731-clean
+    path: recovered/recovery-primary-clean-20260731-clean
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: local/recovery-primary-clean-20260731-clean
+    source_sha: 13092f8f
+  - id: primary-clean-2026-07-31-HOMEPC-p1c9e2
+    path: recovered/primary-clean-2026-07-31-HOMEPC-p1c9e2
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: recovery/primary-clean/2026-07-31/HOMEPC/p1c9e2
+    source_sha: 362a55b1
+  - id: og-mess-clean-2026-07-26-HOMEPC-9c2d11
+    path: recovered/og-mess-clean-2026-07-26-HOMEPC-9c2d11
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: recovery/og-mess-clean/2026-07-26/HOMEPC/9c2d11
+    source_sha: 7ac91b32
+  - id: unique-modules-2026-08-01-HOMEPC-u194c3
+    path: recovered/unique-modules-2026-08-01-HOMEPC-u194c3
+    kind: snapshot
+    capabilities: [snapshot, modules]
+    status: archived
+    source_branch: recovery/unique-modules/2026-08-01/HOMEPC/u194c3
+    source_sha: f9dc7409
+  - id: unique-modules-files-2026-08-01-HOMEPC-u194c3f
+    path: recovered/unique-modules-files-2026-08-01-HOMEPC-u194c3f
+    kind: snapshot
+    capabilities: [snapshot, modules]
+    status: archived
+    source_branch: recovery/unique-modules-files/2026-08-01/HOMEPC/u194c3f
+    source_sha: 053cb310
+  - id: modules-runtime-2026-08-01-HOMEPC-m21f01
+    path: recovered/modules-runtime-2026-08-01-HOMEPC-m21f01
+    kind: snapshot
+    capabilities: [snapshot, modules]
+    status: archived
+    source_branch: recovery/modules-runtime/2026-08-01/HOMEPC/m21f01
+    source_sha: 764490f9
+  - id: plugin-system-2026-08-01-HOMEPC-p26b2
+    path: recovered/plugin-system-2026-08-01-HOMEPC-p26b2
+    kind: snapshot
+    capabilities: [snapshot, orchestration]
+    status: archived
+    source_branch: recovery/plugin-system/2026-08-01/HOMEPC/p26b2
+    source_sha: c90b7944
+  - id: agents-skills-2026-08-01-HOMEPC-s137e5
+    path: recovered/agents-skills-2026-08-01-HOMEPC-s137e5
+    kind: snapshot
+    capabilities: [snapshot, agents]
+    status: archived
+    source_branch: recovery/agents-skills/2026-08-01/HOMEPC/s137e5
+    source_sha: 60b9818e
+  - id: unique-plugins-orchestrators-agenttools-2026-07-31-HOMEPC-u9f2a1
+    path: recovered/unique-plugins-orchestrators-agenttools-2026-07-31-HOMEPC-u9f2a1
+    kind: snapshot
+    capabilities: [snapshot, agents, orchestration]
+    status: archived
+    source_branch: recovery/unique-plugins-orchestrators-agenttools/2026-07-31/HOMEPC/u9f2a1
+    source_sha: 232927ad
+  - id: realai-clean-20260726-source-only
+    path: recovered/realai-clean-20260726-source-only
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: local/realai-clean-20260726-source-only
+    source_sha: 516a59a4
+  - id: from-wsl-2026-08-01-HOMEPC-w274d4
+    path: recovered/from-wsl-2026-08-01-HOMEPC-w274d4
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: recovery/from-wsl/2026-08-01/HOMEPC/w274d4
+    source_sha: d8e4cebb
+  - id: from-wsl-files-2026-08-01-HOMEPC-w274d4f
+    path: recovered/from-wsl-files-2026-08-01-HOMEPC-w274d4f
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: recovery/from-wsl-files/2026-08-01/HOMEPC/w274d4f
+    source_sha: 053cb310
+  - id: wsl-RealAi-2026-07-31-HOMEPC-w4a8c2
+    path: recovered/wsl-RealAi-2026-07-31-HOMEPC-w4a8c2
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: recovery/wsl-RealAi/2026-07-31/HOMEPC/w4a8c2
+    source_sha: e5ac3319
+  - id: grok-realai2-clean-2026-07-31-HOMEPC-e5c023
+    path: recovered/grok-realai2-clean-2026-07-31-HOMEPC-e5c023
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: recovery/grok-realai2-clean/2026-07-31/HOMEPC/e5c023
+    source_sha: 1a5ea9c9
+  - id: grok-export-2026-07-31-HOMEPC-e1a2b3
+    path: recovered/grok-export-2026-07-31-HOMEPC-e1a2b3
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: recovery/grok-export/2026-07-31/HOMEPC/e1a2b3
+    source_sha: 70aec7e9
+  - id: essentials-2026-07-26-HOMEPC-snapshot1
+    path: recovered/essentials-2026-07-26-HOMEPC-snapshot1
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: recovery/essentials/2026-07-26/HOMEPC/snapshot1
+    source_sha: 66f21544
+  - id: users-tsmit-realai-clean-2026-07-31-HOMEPC-d4b912
+    path: recovered/users-tsmit-realai-clean-2026-07-31-HOMEPC-d4b912
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: recovery/users-tsmit-realai-clean/2026-07-31/HOMEPC/d4b912
+    source_sha: 1c454524
+  - id: users-tsmit-realai-2026-07-31-HOMEPC-c3a801
+    path: recovered/users-tsmit-realai-2026-07-31-HOMEPC-c3a801
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: recovery/users-tsmit-realai/2026-07-31/HOMEPC/c3a801
+    source_sha: 04cc07cf
+  - id: realai-3.0-update
+    path: recovered/realai-3.0-update
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: realai-3.0-update
+    source_sha: 66be87fb
+  - id: realai-3.0-clean
+    path: recovered/realai-3.0-clean
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: realai-3.0-clean
+    source_sha: 255042ad
+  - id: grok_snapshot
+    path: recovered/grok_snapshot
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: grok_snapshot
+    source_sha: 70aec7e9
+  - id: restored-from-history
+    path: recovered/restored-from-history
+    kind: snapshot
+    capabilities: [snapshot]
+    status: archived
+    source_branch: restored-from-history
+    source_sha: 66be87fb

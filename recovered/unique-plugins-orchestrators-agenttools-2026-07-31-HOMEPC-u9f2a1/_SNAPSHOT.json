@@ -1,0 +1,11 @@
+{
+  "slug": "unique-plugins-orchestrators-agenttools-2026-07-31-HOMEPC-u9f2a1",
+  "source_sha": "232927ad8bfd1927f3150966e9d3edfed6e05a9f",
+  "giants_moved_out": 0,
+  "batch": 2,
+  "file_count": 228,
+  "imported_at": "2026-08-05T05:55:45.6094642-07:00",
+  "dest": "recovered/unique-plugins-orchestrators-agenttools-2026-07-31-HOMEPC-u9f2a1",
+  "source_ref": "origin/recovery/unique-plugins-orchestrators-agenttools/2026-07-31/HOMEPC/u9f2a1",
+  "source_branch": "recovery/unique-plugins-orchestrators-agenttools/2026-07-31/HOMEPC/u9f2a1"
+}

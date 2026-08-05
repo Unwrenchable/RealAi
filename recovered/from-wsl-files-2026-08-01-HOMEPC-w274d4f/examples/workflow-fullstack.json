@@ -1,0 +1,26 @@
+{
+  "name": "Full-Stack Feature Development",
+  "description": "Complete workflow for building a new production feature from architecture through deployment. Mirrors the agent-tools workflow-feature-dev.json but uses RealAI's richer agent fleet.",
+  "steps": [
+    {
+      "agent_id": "architect",
+      "task": "Design the system architecture for the new feature. Produce an ADR covering data model, API contract, dependency graph, and scalability considerations."
+    },
+    {
+      "agent_id": "security",
+      "task": "Review the architectural design for security risks. Identify authentication requirements, data sensitivity, attack surface, and recommended mitigations."
+    },
+    {
+      "agent_id": "implementer",
+      "task": "Implement the feature based on the approved architecture. Write clean, well-tested Python code with type hints and docstrings. Follow the existing code style."
+    },
+    {
+      "agent_id": "qa",
+      "task": "Create a comprehensive test suite covering unit tests, integration tests, and edge cases for the new feature. Achieve at least 90% line coverage."
+    },
+    {
+      "agent_id": "deployment",
+      "task": "Set up the CI/CD pipeline for the new feature. Configure staging deployment, smoke tests, rollback triggers, and production promotion gates."
+    }
+  ]
+}

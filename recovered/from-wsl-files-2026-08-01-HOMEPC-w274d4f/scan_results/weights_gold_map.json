@@ -1,0 +1,2995 @@
+{
+  "meta": {
+    "generated_at": "2026-07-15T15:52:09.870998+00:00",
+    "elapsed_seconds": 0.57,
+    "root_authority": "C:\\realai",
+    "purpose": "Find local model weights gold for RealAI connect / registry"
+  },
+  "roots_scanned": [
+    "C:\\realai\\models",
+    "C:\\llama-vulkan\\models",
+    "C:\\llama-vulkan",
+    "C:\\llama\\models",
+    "C:\\models",
+    "C:\\Users\\tsmit\\.realai\\models",
+    "C:\\Users\\tsmit\\.realai",
+    "C:\\Users\\tsmit\\models",
+    "C:\\Users\\tsmit\\realai\\models",
+    "C:\\Users\\tsmit\\realai-clean\\models",
+    "C:\\Users\\tsmit\\.cache\\huggingface\\hub",
+    "C:\\Users\\tsmit\\.cache\\huggingface",
+    "C:\\Users\\tsmit\\.lmstudio\\models",
+    "C:\\Users\\tsmit\\.lmstudio",
+    "C:\\Users\\tsmit\\.ollama\\models",
+    "C:\\Users\\tsmit\\AppData\\Local\\llama.cpp",
+    "C:\\Users\\tsmit\\OneDrive\\Desktop",
+    "C:\\Users\\tsmit\\Downloads",
+    "C:\\Users\\tsmit\\Documents",
+    "C:\\Users\\tsmit\\Meta-Llama-3-70B-Instruct",
+    "C:\\realai\\recovered",
+    "C:\\llama-vulkan\\models\\realai-1.0",
+    "C:\\llama-vulkan\\models\\realai-overseer"
+  ],
+  "roots_missing": [
+    "C:\\Users\\tsmit\\AppData\\Roaming\\llama.cpp"
+  ],
+  "stats": {
+    "files_found": 103,
+    "unique_fingerprints": 32,
+    "connectable_gguf": 5,
+    "total_bytes": 157698305782,
+    "total_gb": 146.87,
+    "by_family": {
+      "llama": 25,
+      "qwen": 9,
+      "realai": 15,
+      "hf": 54
+    },
+    "by_ext": {
+      ".gguf": 49,
+      ".safetensors": 32,
+      ".bin": 22
+    }
+  },
+  "weights": [
+    {
+      "path": "C:\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "size": 807694464,
+      "size_gb": 0.752,
+      "mtime": "2026-05-06T08:26:13.926829+00:00",
+      "ext": ".gguf",
+      "fingerprint": "8a059b1d500378b61a122f489a8f33f7",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\realai\\models\\llama-3.2-1b.gguf",
+      "name": "llama-3.2-1b.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T09:33:48.644242+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\realai\\models\\llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "size": 5444831232,
+      "size_gb": 5.071,
+      "mtime": "2026-06-06T18:32:16.768477+00:00",
+      "ext": ".gguf",
+      "fingerprint": "5269638c71149c410adad3d771597529",
+      "family": "qwen",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q5",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": true,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\realai\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    },
+    {
+      "path": "C:\\realai\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    },
+    {
+      "path": "C:\\realai\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "size": 5444831232,
+      "size_gb": 5.071,
+      "mtime": "2026-06-06T18:32:16.768477+00:00",
+      "ext": ".gguf",
+      "fingerprint": "5269638c71149c410adad3d771597529",
+      "family": "qwen",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q5",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": true,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\llama-local-1b\\weights\\llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\realai-1.0-instruct\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\realai-overseer\\weights\\llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\realai-overseer\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "size": 5444831232,
+      "size_gb": 5.071,
+      "mtime": "2026-06-06T18:32:16.768477+00:00",
+      "ext": ".gguf",
+      "fingerprint": "5269638c71149c410adad3d771597529",
+      "family": "qwen",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q5",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": true,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\llama-local-1b\\weights\\llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\realai-1.0-instruct\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\realai-overseer\\weights\\llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\realai-overseer\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    },
+    {
+      "path": "C:\\llama\\models\\Llama-3.2-1B-Instruct-Q4_K_M-GGUF.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M-GGUF.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\llama\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "size": 5444831232,
+      "size_gb": 5.071,
+      "mtime": "2026-06-06T18:32:16.768477+00:00",
+      "ext": ".gguf",
+      "fingerprint": "5269638c71149c410adad3d771597529",
+      "family": "qwen",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q5",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": true,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai-clean\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "size": 807694464,
+      "size_gb": 0.752,
+      "mtime": "2026-05-06T08:26:13.926829+00:00",
+      "ext": ".gguf",
+      "fingerprint": "8a059b1d500378b61a122f489a8f33f7",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai-clean\\models\\llama-3.2-1b.gguf",
+      "name": "llama-3.2-1b.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T09:33:48.644242+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai-clean\\models\\llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai-clean\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "size": 5444831232,
+      "size_gb": 5.071,
+      "mtime": "2026-06-06T18:32:16.768477+00:00",
+      "ext": ".gguf",
+      "fingerprint": "5269638c71149c410adad3d771597529",
+      "family": "qwen",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q5",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": true,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai-clean\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+      "name": "Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+      "size": 2322154016,
+      "size_gb": 2.163,
+      "mtime": "2026-06-20T09:27:26.433762+00:00",
+      "ext": ".gguf",
+      "fingerprint": "904d588d6a29bbde3f5c30c1119af0cc",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q5",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-random-bert\\snapshots\\f171d7baecaf37b5da5a3616d8833b9969753535\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 520212,
+      "size_gb": 0.0,
+      "mtime": "2026-06-01T15:51:54.721773+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "142763cc0944b9789898ab998cec998d",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-stable-diffusion-pipe\\snapshots\\3ee6c9f225f088ad5d35b624b6514b091e6a4849\\unet\\diffusion_pytorch_model.bin",
+      "name": "diffusion_pytorch_model.bin",
+      "size": 5824609,
+      "size_gb": 0.005,
+      "mtime": "2026-05-31T16:05:27.534159+00:00",
+      "ext": ".bin",
+      "fingerprint": "4939360d470303b66e535ad46568e190",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-stable-diffusion-pipe\\snapshots\\3ee6c9f225f088ad5d35b624b6514b091e6a4849\\vae\\diffusion_pytorch_model.bin",
+      "name": "diffusion_pytorch_model.bin",
+      "size": 2678089,
+      "size_gb": 0.002,
+      "mtime": "2026-05-31T16:05:26.668064+00:00",
+      "ext": ".bin",
+      "fingerprint": "9d188520c16421d04b561182d08892d2",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hugging-quants--Llama-3.2-1B-Instruct-Q4_K_M-GGUF\\snapshots\\7d1f70022fcab2038000074bd0342e03e1d8b755\\llama-3.2-1b-instruct-q4_k_m.gguf",
+      "name": "llama-3.2-1b-instruct-q4_k_m.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--Qwen--Qwen2.5-1.5B-Instruct\\snapshots\\989aa7980e4cf806f80c7fef2b1adb7bc71aa306\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 3087467144,
+      "size_gb": 2.875,
+      "mtime": "2026-06-16T19:25:27.245559+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "300bbbe5ecc385260e01b4d586c245a1",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\v1-5-pruned-emaonly.safetensors",
+      "name": "v1-5-pruned-emaonly.safetensors",
+      "size": 4265146304,
+      "size_gb": 3.972,
+      "mtime": "2026-05-31T18:42:28.330599+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "dbc3283f191f907258539155a3b8c46b",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\v1-5-pruned.safetensors",
+      "name": "v1-5-pruned.safetensors",
+      "size": 7703324286,
+      "size_gb": 7.174,
+      "mtime": "2026-05-31T19:09:42.787818+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "27b169453a5a28adf33a0b4eec08d315",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\model.fp16.safetensors",
+      "name": "model.fp16.safetensors",
+      "size": 608018440,
+      "size_gb": 0.566,
+      "mtime": "2026-05-31T16:37:27.858025+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "9bc76cad848873f0deb8055c5f8f29eb",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 1215981830,
+      "size_gb": 1.132,
+      "mtime": "2026-05-31T16:40:59.789087+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "021e537b10aa9a75e3af5de23a619d79",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\pytorch_model.bin",
+      "name": "pytorch_model.bin",
+      "size": 1216061799,
+      "size_gb": 1.133,
+      "mtime": "2026-05-31T16:30:30.151329+00:00",
+      "ext": ".bin",
+      "fingerprint": "3f8fa11f01904458e2fb6270efc1bd1e",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\pytorch_model.fp16.bin",
+      "name": "pytorch_model.fp16.bin",
+      "size": 608103564,
+      "size_gb": 0.566,
+      "mtime": "2026-05-31T15:48:37.337136+00:00",
+      "ext": ".bin",
+      "fingerprint": "ce755befb8368f592f6a1cf2eb10d780",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\model.fp16.safetensors",
+      "name": "model.fp16.safetensors",
+      "size": 246144864,
+      "size_gb": 0.229,
+      "mtime": "2026-05-31T16:21:49.009602+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "35db6001d05f4e17ff1362fd239b097a",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 492265874,
+      "size_gb": 0.458,
+      "mtime": "2026-05-31T16:26:52.759758+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "eda4611c38801f8a35c81143fae87214",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\pytorch_model.bin",
+      "name": "pytorch_model.bin",
+      "size": 492305335,
+      "size_gb": 0.458,
+      "mtime": "2026-05-31T16:25:21.607414+00:00",
+      "ext": ".bin",
+      "fingerprint": "35929d9b615560d98c4b95cb6ce07f14",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\pytorch_model.fp16.bin",
+      "name": "pytorch_model.fp16.bin",
+      "size": 246187076,
+      "size_gb": 0.229,
+      "mtime": "2026-05-31T16:20:27.448246+00:00",
+      "ext": ".bin",
+      "fingerprint": "59b0ab017b3e7a954b48369e024dc103",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.bin",
+      "name": "diffusion_pytorch_model.bin",
+      "size": 3438354725,
+      "size_gb": 3.202,
+      "mtime": "2026-05-31T17:35:55.490608+00:00",
+      "ext": ".bin",
+      "fingerprint": "77f762c4f22f5fac7f291eac450beff3",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.fp16.bin",
+      "name": "diffusion_pytorch_model.fp16.bin",
+      "size": 1719327893,
+      "size_gb": 1.601,
+      "mtime": "2026-05-31T18:03:37.805393+00:00",
+      "ext": ".bin",
+      "fingerprint": "616f84c92ca210ec19d4d5763fb8f7fa",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.fp16.safetensors",
+      "name": "diffusion_pytorch_model.fp16.safetensors",
+      "size": 1719125304,
+      "size_gb": 1.601,
+      "mtime": "2026-05-31T18:04:02.444703+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "b8bee6efdf06fa40dd89fdce35da52d0",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.non_ema.bin",
+      "name": "diffusion_pytorch_model.non_ema.bin",
+      "size": 3438366373,
+      "size_gb": 3.202,
+      "mtime": "2026-05-31T18:00:49.191669+00:00",
+      "ext": ".bin",
+      "fingerprint": "0703a03fd92732bbd7660303c3014fe2",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.non_ema.safetensors",
+      "name": "diffusion_pytorch_model.non_ema.safetensors",
+      "size": 3438167536,
+      "size_gb": 3.202,
+      "mtime": "2026-05-31T17:46:45.317243+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "ee125229e11bc09ba25f39adb33c62d1",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.safetensors",
+      "name": "diffusion_pytorch_model.safetensors",
+      "size": 3438167540,
+      "size_gb": 3.202,
+      "mtime": "2026-05-31T17:45:55.491325+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "4100be7edec7aa4cfb2a58b64459a5e9",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.bin",
+      "name": "diffusion_pytorch_model.bin",
+      "size": 334707217,
+      "size_gb": 0.312,
+      "mtime": "2026-05-31T18:04:32.526410+00:00",
+      "ext": ".bin",
+      "fingerprint": "4aaebd8c85425cfa85e10222906944eb",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.fp16.bin",
+      "name": "diffusion_pytorch_model.fp16.bin",
+      "size": 167405651,
+      "size_gb": 0.156,
+      "mtime": "2026-05-31T18:16:25.048969+00:00",
+      "ext": ".bin",
+      "fingerprint": "dd39e31865b2f13e800c7d43f7f6d8ec",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.fp16.safetensors",
+      "name": "diffusion_pytorch_model.fp16.safetensors",
+      "size": 167335342,
+      "size_gb": 0.156,
+      "mtime": "2026-05-31T18:13:08.723353+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "5c1059588849be144dc5d205d42e10b2",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.safetensors",
+      "name": "diffusion_pytorch_model.safetensors",
+      "size": 334643276,
+      "size_gb": 0.312,
+      "mtime": "2026-05-31T18:33:12.764441+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "5d75abadd9f8fcfa5b4e0b120740f438",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--sentence-transformers--all-MiniLM-L6-v2\\snapshots\\1110a243fdf4706b3f48f1d95db1a4f5529b4d41\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 90868376,
+      "size_gb": 0.085,
+      "mtime": "2026-06-01T07:56:07.287702+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "6ff03936ad438f55e094119d77889bff",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "embedding",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--sentence-transformers--all-MiniLM-L6-v2\\snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 90868376,
+      "size_gb": 0.085,
+      "mtime": "2026-05-08T15:56:03.943847+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "6ff03936ad438f55e094119d77889bff",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "embedding",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--sentence-transformers--all-mpnet-base-v2\\snapshots\\e8c3b32edf5434bc2275fc9bab85f82640a19130\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 437971872,
+      "size_gb": 0.408,
+      "mtime": "2026-05-08T15:53:53.675115+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "e7ae34cc14839204084bb7ef8a00a958",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "embedding",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+      "name": "Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+      "size": 2322154016,
+      "size_gb": 2.163,
+      "mtime": "2026-06-20T09:27:26.433762+00:00",
+      "ext": ".gguf",
+      "fingerprint": "904d588d6a29bbde3f5c30c1119af0cc",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q5",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-random-bert\\snapshots\\f171d7baecaf37b5da5a3616d8833b9969753535\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 520212,
+      "size_gb": 0.0,
+      "mtime": "2026-06-01T15:51:54.721773+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "142763cc0944b9789898ab998cec998d",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-stable-diffusion-pipe\\snapshots\\3ee6c9f225f088ad5d35b624b6514b091e6a4849\\unet\\diffusion_pytorch_model.bin",
+      "name": "diffusion_pytorch_model.bin",
+      "size": 5824609,
+      "size_gb": 0.005,
+      "mtime": "2026-05-31T16:05:27.534159+00:00",
+      "ext": ".bin",
+      "fingerprint": "4939360d470303b66e535ad46568e190",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-stable-diffusion-pipe\\snapshots\\3ee6c9f225f088ad5d35b624b6514b091e6a4849\\vae\\diffusion_pytorch_model.bin",
+      "name": "diffusion_pytorch_model.bin",
+      "size": 2678089,
+      "size_gb": 0.002,
+      "mtime": "2026-05-31T16:05:26.668064+00:00",
+      "ext": ".bin",
+      "fingerprint": "9d188520c16421d04b561182d08892d2",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hugging-quants--Llama-3.2-1B-Instruct-Q4_K_M-GGUF\\snapshots\\7d1f70022fcab2038000074bd0342e03e1d8b755\\llama-3.2-1b-instruct-q4_k_m.gguf",
+      "name": "llama-3.2-1b-instruct-q4_k_m.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--Qwen--Qwen2.5-1.5B-Instruct\\snapshots\\989aa7980e4cf806f80c7fef2b1adb7bc71aa306\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 3087467144,
+      "size_gb": 2.875,
+      "mtime": "2026-06-16T19:25:27.245559+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "300bbbe5ecc385260e01b4d586c245a1",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\v1-5-pruned-emaonly.safetensors",
+      "name": "v1-5-pruned-emaonly.safetensors",
+      "size": 4265146304,
+      "size_gb": 3.972,
+      "mtime": "2026-05-31T18:42:28.330599+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "dbc3283f191f907258539155a3b8c46b",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\v1-5-pruned.safetensors",
+      "name": "v1-5-pruned.safetensors",
+      "size": 7703324286,
+      "size_gb": 7.174,
+      "mtime": "2026-05-31T19:09:42.787818+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "27b169453a5a28adf33a0b4eec08d315",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\model.fp16.safetensors",
+      "name": "model.fp16.safetensors",
+      "size": 608018440,
+      "size_gb": 0.566,
+      "mtime": "2026-05-31T16:37:27.858025+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "9bc76cad848873f0deb8055c5f8f29eb",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 1215981830,
+      "size_gb": 1.132,
+      "mtime": "2026-05-31T16:40:59.789087+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "021e537b10aa9a75e3af5de23a619d79",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\pytorch_model.bin",
+      "name": "pytorch_model.bin",
+      "size": 1216061799,
+      "size_gb": 1.133,
+      "mtime": "2026-05-31T16:30:30.151329+00:00",
+      "ext": ".bin",
+      "fingerprint": "3f8fa11f01904458e2fb6270efc1bd1e",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\pytorch_model.fp16.bin",
+      "name": "pytorch_model.fp16.bin",
+      "size": 608103564,
+      "size_gb": 0.566,
+      "mtime": "2026-05-31T15:48:37.337136+00:00",
+      "ext": ".bin",
+      "fingerprint": "ce755befb8368f592f6a1cf2eb10d780",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\model.fp16.safetensors",
+      "name": "model.fp16.safetensors",
+      "size": 246144864,
+      "size_gb": 0.229,
+      "mtime": "2026-05-31T16:21:49.009602+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "35db6001d05f4e17ff1362fd239b097a",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 492265874,
+      "size_gb": 0.458,
+      "mtime": "2026-05-31T16:26:52.759758+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "eda4611c38801f8a35c81143fae87214",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\pytorch_model.bin",
+      "name": "pytorch_model.bin",
+      "size": 492305335,
+      "size_gb": 0.458,
+      "mtime": "2026-05-31T16:25:21.607414+00:00",
+      "ext": ".bin",
+      "fingerprint": "35929d9b615560d98c4b95cb6ce07f14",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\pytorch_model.fp16.bin",
+      "name": "pytorch_model.fp16.bin",
+      "size": 246187076,
+      "size_gb": 0.229,
+      "mtime": "2026-05-31T16:20:27.448246+00:00",
+      "ext": ".bin",
+      "fingerprint": "59b0ab017b3e7a954b48369e024dc103",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.bin",
+      "name": "diffusion_pytorch_model.bin",
+      "size": 3438354725,
+      "size_gb": 3.202,
+      "mtime": "2026-05-31T17:35:55.490608+00:00",
+      "ext": ".bin",
+      "fingerprint": "77f762c4f22f5fac7f291eac450beff3",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.fp16.bin",
+      "name": "diffusion_pytorch_model.fp16.bin",
+      "size": 1719327893,
+      "size_gb": 1.601,
+      "mtime": "2026-05-31T18:03:37.805393+00:00",
+      "ext": ".bin",
+      "fingerprint": "616f84c92ca210ec19d4d5763fb8f7fa",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.fp16.safetensors",
+      "name": "diffusion_pytorch_model.fp16.safetensors",
+      "size": 1719125304,
+      "size_gb": 1.601,
+      "mtime": "2026-05-31T18:04:02.444703+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "b8bee6efdf06fa40dd89fdce35da52d0",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.non_ema.bin",
+      "name": "diffusion_pytorch_model.non_ema.bin",
+      "size": 3438366373,
+      "size_gb": 3.202,
+      "mtime": "2026-05-31T18:00:49.191669+00:00",
+      "ext": ".bin",
+      "fingerprint": "0703a03fd92732bbd7660303c3014fe2",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.non_ema.safetensors",
+      "name": "diffusion_pytorch_model.non_ema.safetensors",
+      "size": 3438167536,
+      "size_gb": 3.202,
+      "mtime": "2026-05-31T17:46:45.317243+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "ee125229e11bc09ba25f39adb33c62d1",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.safetensors",
+      "name": "diffusion_pytorch_model.safetensors",
+      "size": 3438167540,
+      "size_gb": 3.202,
+      "mtime": "2026-05-31T17:45:55.491325+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "4100be7edec7aa4cfb2a58b64459a5e9",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.bin",
+      "name": "diffusion_pytorch_model.bin",
+      "size": 334707217,
+      "size_gb": 0.312,
+      "mtime": "2026-05-31T18:04:32.526410+00:00",
+      "ext": ".bin",
+      "fingerprint": "4aaebd8c85425cfa85e10222906944eb",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.fp16.bin",
+      "name": "diffusion_pytorch_model.fp16.bin",
+      "size": 167405651,
+      "size_gb": 0.156,
+      "mtime": "2026-05-31T18:16:25.048969+00:00",
+      "ext": ".bin",
+      "fingerprint": "dd39e31865b2f13e800c7d43f7f6d8ec",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.fp16.safetensors",
+      "name": "diffusion_pytorch_model.fp16.safetensors",
+      "size": 167335342,
+      "size_gb": 0.156,
+      "mtime": "2026-05-31T18:13:08.723353+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "5c1059588849be144dc5d205d42e10b2",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.safetensors",
+      "name": "diffusion_pytorch_model.safetensors",
+      "size": 334643276,
+      "size_gb": 0.312,
+      "mtime": "2026-05-31T18:33:12.764441+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "5d75abadd9f8fcfa5b4e0b120740f438",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--sentence-transformers--all-MiniLM-L6-v2\\snapshots\\1110a243fdf4706b3f48f1d95db1a4f5529b4d41\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 90868376,
+      "size_gb": 0.085,
+      "mtime": "2026-06-01T07:56:07.287702+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "6ff03936ad438f55e094119d77889bff",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "embedding",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--sentence-transformers--all-MiniLM-L6-v2\\snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 90868376,
+      "size_gb": 0.085,
+      "mtime": "2026-05-08T15:56:03.943847+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "6ff03936ad438f55e094119d77889bff",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "embedding",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--sentence-transformers--all-mpnet-base-v2\\snapshots\\e8c3b32edf5434bc2275fc9bab85f82640a19130\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 437971872,
+      "size_gb": 0.408,
+      "mtime": "2026-05-08T15:53:53.675115+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "e7ae34cc14839204084bb7ef8a00a958",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "embedding",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.ollama\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "size": 5444831232,
+      "size_gb": 5.071,
+      "mtime": "2026-06-06T18:32:16.768477+00:00",
+      "ext": ".gguf",
+      "fingerprint": "5269638c71149c410adad3d771597529",
+      "family": "qwen",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q5",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": true,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.ollama\\models\\qwen2.5-coder-7b-instruct-q5_k_m__dup1.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m__dup1.gguf",
+      "size": 5444831232,
+      "size_gb": 5.071,
+      "mtime": "2026-06-06T18:32:16.768477+00:00",
+      "ext": ".gguf",
+      "fingerprint": "5269638c71149c410adad3d771597529",
+      "family": "qwen",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q5",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.ollama\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\realai\\models\\llama3.2-1b\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "size": 807694464,
+      "size_gb": 0.752,
+      "mtime": "2026-05-06T08:26:13.926829+00:00",
+      "ext": ".gguf",
+      "fingerprint": "8a059b1d500378b61a122f489a8f33f7",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\realai\\realai\\realai\\models\\llama3.2-1b\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "size": 0,
+      "size_gb": 0.0,
+      "mtime": "2026-05-10T13:34:49.145561+00:00",
+      "ext": ".gguf",
+      "fingerprint": "cfcd208495d565ef66e7dff9f98764da",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai - Copy\\realai\\models\\llama3.2-1b\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "size": 807694464,
+      "size_gb": 0.752,
+      "mtime": "2026-05-06T08:26:13.926829+00:00",
+      "ext": ".gguf",
+      "fingerprint": "8a059b1d500378b61a122f489a8f33f7",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\Documents\\models\\Llama-3.2-1B-Instruct-Q4_K_M-GGUF.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M-GGUF.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\Documents\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "size": 5444831232,
+      "size_gb": 5.071,
+      "mtime": "2026-06-06T18:32:16.768477+00:00",
+      "ext": ".gguf",
+      "fingerprint": "5269638c71149c410adad3d771597529",
+      "family": "qwen",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q5",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": true,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "size": 807694464,
+      "size_gb": 0.752,
+      "mtime": "2026-05-06T08:26:13+00:00",
+      "ext": ".gguf",
+      "fingerprint": "8a059b1d500378b61a122f489a8f33f7",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\llama-3.2-1b.gguf",
+      "name": "llama-3.2-1b.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T09:33:48+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "size": 1600096768,
+      "size_gb": 1.49,
+      "mtime": "2026-07-15T15:07:35.364206+00:00",
+      "ext": ".gguf",
+      "fingerprint": "0fa0189c4ad6273ffb1be7c35c38549f",
+      "family": "qwen",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q5",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": true,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\realai-overseer\\weights\\llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false
+    },
+    {
+      "path": "C:\\llama-vulkan\\models\\realai-overseer\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T08:21:30.600089+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "realai",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "realai_family",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": true
+    }
+  ],
+  "uniques": [
+    {
+      "path": "C:\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "size": 807694464,
+      "size_gb": 0.752,
+      "mtime": "2026-05-06T08:26:13.926829+00:00",
+      "ext": ".gguf",
+      "fingerprint": "8a059b1d500378b61a122f489a8f33f7",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\realai\\models\\llama3.2-1b\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai - Copy\\realai\\models\\llama3.2-1b\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf"
+      ]
+    },
+    {
+      "path": "C:\\realai\\models\\llama-3.2-1b.gguf",
+      "name": "llama-3.2-1b.gguf",
+      "size": 807690656,
+      "size_gb": 0.752,
+      "mtime": "2026-05-12T09:33:48.644242+00:00",
+      "ext": ".gguf",
+      "fingerprint": "094d61eae0a63f1f5909a8ffa99b3c98",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\realai\\models\\llama-3.2-1b.gguf",
+        "C:\\realai\\models\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\realai\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\realai\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\realai\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\llama-local-1b\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0-instruct\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\llama-local-1b\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0-instruct\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama\\models\\Llama-3.2-1B-Instruct-Q4_K_M-GGUF.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\llama-3.2-1b.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hugging-quants--Llama-3.2-1B-Instruct-Q4_K_M-GGUF\\snapshots\\7d1f70022fcab2038000074bd0342e03e1d8b755\\llama-3.2-1b-instruct-q4_k_m.gguf",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hugging-quants--Llama-3.2-1B-Instruct-Q4_K_M-GGUF\\snapshots\\7d1f70022fcab2038000074bd0342e03e1d8b755\\llama-3.2-1b-instruct-q4_k_m.gguf",
+        "C:\\Users\\tsmit\\.ollama\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\Documents\\models\\Llama-3.2-1B-Instruct-Q4_K_M-GGUF.gguf",
+        "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\llama-3.2-1b.gguf",
+        "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\realai-1.0-instruct-Q4_K_M.gguf"
+      ]
+    },
+    {
+      "path": "C:\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "size": 5444831232,
+      "size_gb": 5.071,
+      "mtime": "2026-06-06T18:32:16.768477+00:00",
+      "ext": ".gguf",
+      "fingerprint": "5269638c71149c410adad3d771597529",
+      "family": "qwen",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q5",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": true,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\llama-vulkan\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\llama-vulkan\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\llama\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\Users\\tsmit\\.ollama\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\Users\\tsmit\\.ollama\\models\\qwen2.5-coder-7b-instruct-q5_k_m__dup1.gguf",
+        "C:\\Users\\tsmit\\Documents\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+      "name": "Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+      "size": 2322154016,
+      "size_gb": 2.163,
+      "mtime": "2026-06-20T09:27:26.433762+00:00",
+      "ext": ".gguf",
+      "fingerprint": "904d588d6a29bbde3f5c30c1119af0cc",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q5",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q5_K_M.gguf"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-random-bert\\snapshots\\f171d7baecaf37b5da5a3616d8833b9969753535\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 520212,
+      "size_gb": 0.0,
+      "mtime": "2026-06-01T15:51:54.721773+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "142763cc0944b9789898ab998cec998d",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-random-bert\\snapshots\\f171d7baecaf37b5da5a3616d8833b9969753535\\model.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-random-bert\\snapshots\\f171d7baecaf37b5da5a3616d8833b9969753535\\model.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-stable-diffusion-pipe\\snapshots\\3ee6c9f225f088ad5d35b624b6514b091e6a4849\\unet\\diffusion_pytorch_model.bin",
+      "name": "diffusion_pytorch_model.bin",
+      "size": 5824609,
+      "size_gb": 0.005,
+      "mtime": "2026-05-31T16:05:27.534159+00:00",
+      "ext": ".bin",
+      "fingerprint": "4939360d470303b66e535ad46568e190",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-stable-diffusion-pipe\\snapshots\\3ee6c9f225f088ad5d35b624b6514b091e6a4849\\unet\\diffusion_pytorch_model.bin",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-stable-diffusion-pipe\\snapshots\\3ee6c9f225f088ad5d35b624b6514b091e6a4849\\unet\\diffusion_pytorch_model.bin"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-stable-diffusion-pipe\\snapshots\\3ee6c9f225f088ad5d35b624b6514b091e6a4849\\vae\\diffusion_pytorch_model.bin",
+      "name": "diffusion_pytorch_model.bin",
+      "size": 2678089,
+      "size_gb": 0.002,
+      "mtime": "2026-05-31T16:05:26.668064+00:00",
+      "ext": ".bin",
+      "fingerprint": "9d188520c16421d04b561182d08892d2",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-stable-diffusion-pipe\\snapshots\\3ee6c9f225f088ad5d35b624b6514b091e6a4849\\vae\\diffusion_pytorch_model.bin",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hf-internal-testing--tiny-stable-diffusion-pipe\\snapshots\\3ee6c9f225f088ad5d35b624b6514b091e6a4849\\vae\\diffusion_pytorch_model.bin"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--Qwen--Qwen2.5-1.5B-Instruct\\snapshots\\989aa7980e4cf806f80c7fef2b1adb7bc71aa306\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 3087467144,
+      "size_gb": 2.875,
+      "mtime": "2026-06-16T19:25:27.245559+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "300bbbe5ecc385260e01b4d586c245a1",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--Qwen--Qwen2.5-1.5B-Instruct\\snapshots\\989aa7980e4cf806f80c7fef2b1adb7bc71aa306\\model.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--Qwen--Qwen2.5-1.5B-Instruct\\snapshots\\989aa7980e4cf806f80c7fef2b1adb7bc71aa306\\model.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\v1-5-pruned-emaonly.safetensors",
+      "name": "v1-5-pruned-emaonly.safetensors",
+      "size": 4265146304,
+      "size_gb": 3.972,
+      "mtime": "2026-05-31T18:42:28.330599+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "dbc3283f191f907258539155a3b8c46b",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\v1-5-pruned-emaonly.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\v1-5-pruned-emaonly.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\v1-5-pruned.safetensors",
+      "name": "v1-5-pruned.safetensors",
+      "size": 7703324286,
+      "size_gb": 7.174,
+      "mtime": "2026-05-31T19:09:42.787818+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "27b169453a5a28adf33a0b4eec08d315",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_xl"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\v1-5-pruned.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\v1-5-pruned.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\model.fp16.safetensors",
+      "name": "model.fp16.safetensors",
+      "size": 608018440,
+      "size_gb": 0.566,
+      "mtime": "2026-05-31T16:37:27.858025+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "9bc76cad848873f0deb8055c5f8f29eb",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\model.fp16.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\model.fp16.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 1215981830,
+      "size_gb": 1.132,
+      "mtime": "2026-05-31T16:40:59.789087+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "021e537b10aa9a75e3af5de23a619d79",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\model.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\model.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\pytorch_model.bin",
+      "name": "pytorch_model.bin",
+      "size": 1216061799,
+      "size_gb": 1.133,
+      "mtime": "2026-05-31T16:30:30.151329+00:00",
+      "ext": ".bin",
+      "fingerprint": "3f8fa11f01904458e2fb6270efc1bd1e",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\pytorch_model.bin",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\pytorch_model.bin"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\pytorch_model.fp16.bin",
+      "name": "pytorch_model.fp16.bin",
+      "size": 608103564,
+      "size_gb": 0.566,
+      "mtime": "2026-05-31T15:48:37.337136+00:00",
+      "ext": ".bin",
+      "fingerprint": "ce755befb8368f592f6a1cf2eb10d780",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\pytorch_model.fp16.bin",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\safety_checker\\pytorch_model.fp16.bin"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\model.fp16.safetensors",
+      "name": "model.fp16.safetensors",
+      "size": 246144864,
+      "size_gb": 0.229,
+      "mtime": "2026-05-31T16:21:49.009602+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "35db6001d05f4e17ff1362fd239b097a",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\model.fp16.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\model.fp16.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 492265874,
+      "size_gb": 0.458,
+      "mtime": "2026-05-31T16:26:52.759758+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "eda4611c38801f8a35c81143fae87214",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\model.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\model.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\pytorch_model.bin",
+      "name": "pytorch_model.bin",
+      "size": 492305335,
+      "size_gb": 0.458,
+      "mtime": "2026-05-31T16:25:21.607414+00:00",
+      "ext": ".bin",
+      "fingerprint": "35929d9b615560d98c4b95cb6ce07f14",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\pytorch_model.bin",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\pytorch_model.bin"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\pytorch_model.fp16.bin",
+      "name": "pytorch_model.fp16.bin",
+      "size": 246187076,
+      "size_gb": 0.229,
+      "mtime": "2026-05-31T16:20:27.448246+00:00",
+      "ext": ".bin",
+      "fingerprint": "59b0ab017b3e7a954b48369e024dc103",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\pytorch_model.fp16.bin",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\text_encoder\\pytorch_model.fp16.bin"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.bin",
+      "name": "diffusion_pytorch_model.bin",
+      "size": 3438354725,
+      "size_gb": 3.202,
+      "mtime": "2026-05-31T17:35:55.490608+00:00",
+      "ext": ".bin",
+      "fingerprint": "77f762c4f22f5fac7f291eac450beff3",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.bin",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.bin"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.fp16.bin",
+      "name": "diffusion_pytorch_model.fp16.bin",
+      "size": 1719327893,
+      "size_gb": 1.601,
+      "mtime": "2026-05-31T18:03:37.805393+00:00",
+      "ext": ".bin",
+      "fingerprint": "616f84c92ca210ec19d4d5763fb8f7fa",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.fp16.bin",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.fp16.bin"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.fp16.safetensors",
+      "name": "diffusion_pytorch_model.fp16.safetensors",
+      "size": 1719125304,
+      "size_gb": 1.601,
+      "mtime": "2026-05-31T18:04:02.444703+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "b8bee6efdf06fa40dd89fdce35da52d0",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.fp16.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.fp16.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.non_ema.bin",
+      "name": "diffusion_pytorch_model.non_ema.bin",
+      "size": 3438366373,
+      "size_gb": 3.202,
+      "mtime": "2026-05-31T18:00:49.191669+00:00",
+      "ext": ".bin",
+      "fingerprint": "0703a03fd92732bbd7660303c3014fe2",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.non_ema.bin",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.non_ema.bin"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.non_ema.safetensors",
+      "name": "diffusion_pytorch_model.non_ema.safetensors",
+      "size": 3438167536,
+      "size_gb": 3.202,
+      "mtime": "2026-05-31T17:46:45.317243+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "ee125229e11bc09ba25f39adb33c62d1",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.non_ema.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.non_ema.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.safetensors",
+      "name": "diffusion_pytorch_model.safetensors",
+      "size": 3438167540,
+      "size_gb": 3.202,
+      "mtime": "2026-05-31T17:45:55.491325+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "4100be7edec7aa4cfb2a58b64459a5e9",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\unet\\diffusion_pytorch_model.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.bin",
+      "name": "diffusion_pytorch_model.bin",
+      "size": 334707217,
+      "size_gb": 0.312,
+      "mtime": "2026-05-31T18:04:32.526410+00:00",
+      "ext": ".bin",
+      "fingerprint": "4aaebd8c85425cfa85e10222906944eb",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.bin",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.bin"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.fp16.bin",
+      "name": "diffusion_pytorch_model.fp16.bin",
+      "size": 167405651,
+      "size_gb": 0.156,
+      "mtime": "2026-05-31T18:16:25.048969+00:00",
+      "ext": ".bin",
+      "fingerprint": "dd39e31865b2f13e800c7d43f7f6d8ec",
+      "family": "hf",
+      "role": "hf_bin",
+      "tags": [
+        "hf_bin",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.fp16.bin",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.fp16.bin"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.fp16.safetensors",
+      "name": "diffusion_pytorch_model.fp16.safetensors",
+      "size": 167335342,
+      "size_gb": 0.156,
+      "mtime": "2026-05-31T18:13:08.723353+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "5c1059588849be144dc5d205d42e10b2",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.fp16.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.fp16.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.safetensors",
+      "name": "diffusion_pytorch_model.safetensors",
+      "size": 334643276,
+      "size_gb": 0.312,
+      "mtime": "2026-05-31T18:33:12.764441+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "5d75abadd9f8fcfa5b4e0b120740f438",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--runwayml--stable-diffusion-v1-5\\snapshots\\451f4fe16113bff5a5d2269ed5ad43b0592e9a14\\vae\\diffusion_pytorch_model.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--sentence-transformers--all-MiniLM-L6-v2\\snapshots\\1110a243fdf4706b3f48f1d95db1a4f5529b4d41\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 90868376,
+      "size_gb": 0.085,
+      "mtime": "2026-06-01T07:56:07.287702+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "6ff03936ad438f55e094119d77889bff",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "embedding",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--sentence-transformers--all-MiniLM-L6-v2\\snapshots\\1110a243fdf4706b3f48f1d95db1a4f5529b4d41\\model.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--sentence-transformers--all-MiniLM-L6-v2\\snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\model.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--sentence-transformers--all-MiniLM-L6-v2\\snapshots\\1110a243fdf4706b3f48f1d95db1a4f5529b4d41\\model.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--sentence-transformers--all-MiniLM-L6-v2\\snapshots\\c9745ed1d9f207416be6d2e6f8de32d1f16199bf\\model.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--sentence-transformers--all-mpnet-base-v2\\snapshots\\e8c3b32edf5434bc2275fc9bab85f82640a19130\\model.safetensors",
+      "name": "model.safetensors",
+      "size": 437971872,
+      "size_gb": 0.408,
+      "mtime": "2026-05-08T15:53:53.675115+00:00",
+      "ext": ".safetensors",
+      "fingerprint": "e7ae34cc14839204084bb7ef8a00a958",
+      "family": "hf",
+      "role": "hf_shard",
+      "tags": [
+        "safetensors",
+        "embedding",
+        "size_m"
+      ],
+      "connectable_gguf_or_engine": false,
+      "connectable_note": "Needs conversion/training export for Vulkan",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--sentence-transformers--all-mpnet-base-v2\\snapshots\\e8c3b32edf5434bc2275fc9bab85f82640a19130\\model.safetensors",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--sentence-transformers--all-mpnet-base-v2\\snapshots\\e8c3b32edf5434bc2275fc9bab85f82640a19130\\model.safetensors"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\realai\\realai\\realai\\models\\llama3.2-1b\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "size": 0,
+      "size_gb": 0.0,
+      "mtime": "2026-05-10T13:34:49.145561+00:00",
+      "ext": ".gguf",
+      "fingerprint": "cfcd208495d565ef66e7dff9f98764da",
+      "family": "llama",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q4",
+        "size_s"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\realai\\realai\\realai\\models\\llama3.2-1b\\Llama-3.2-1B-Instruct-Q4_K_M.gguf"
+      ]
+    },
+    {
+      "path": "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "size": 1600096768,
+      "size_gb": 1.49,
+      "mtime": "2026-07-15T15:07:35.364206+00:00",
+      "ext": ".gguf",
+      "fingerprint": "0fa0189c4ad6273ffb1be7c35c38549f",
+      "family": "qwen",
+      "role": "gguf_chat",
+      "tags": [
+        "gguf",
+        "quant_q5",
+        "size_l"
+      ],
+      "connectable_gguf_or_engine": true,
+      "connectable_note": "Ready for llama-server -m path",
+      "is_live_default": true,
+      "is_realai_named": false,
+      "copies": [
+        "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf"
+      ]
+    }
+  ],
+  "connect_candidates": [
+    {
+      "id": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "path": "C:\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "size_gb": 5.071,
+      "family": "qwen",
+      "role": "gguf_chat",
+      "is_live_default": true,
+      "is_realai_named": false,
+      "incomplete_copy": false,
+      "copies": [
+        "C:\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\llama-vulkan\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\llama-vulkan\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\llama\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\Users\\tsmit\\.ollama\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\Users\\tsmit\\.ollama\\models\\qwen2.5-coder-7b-instruct-q5_k_m__dup1.gguf",
+        "C:\\Users\\tsmit\\Documents\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf"
+      ],
+      "copy_count": 8,
+      "vulkan_cmd": "llama-server.exe -m \"C:\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf\" --host 127.0.0.1 --port 8080 -c 8192 -ngl 99 --jinja",
+      "realai_model_id_suggestion": "realai-default-coder"
+    },
+    {
+      "id": "realai-1.0-instruct-q4_k_m.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "path": "C:\\realai\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+      "size_gb": 0.752,
+      "family": "realai",
+      "role": "gguf_chat",
+      "is_live_default": false,
+      "is_realai_named": true,
+      "incomplete_copy": false,
+      "copies": [
+        "C:\\realai\\models\\llama-3.2-1b.gguf",
+        "C:\\realai\\models\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\realai\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\realai\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\realai\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\llama-local-1b\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0-instruct\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\llama-local-1b\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0-instruct\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama\\models\\Llama-3.2-1B-Instruct-Q4_K_M-GGUF.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\llama-3.2-1b.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hugging-quants--Llama-3.2-1B-Instruct-Q4_K_M-GGUF\\snapshots\\7d1f70022fcab2038000074bd0342e03e1d8b755\\llama-3.2-1b-instruct-q4_k_m.gguf",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hugging-quants--Llama-3.2-1B-Instruct-Q4_K_M-GGUF\\snapshots\\7d1f70022fcab2038000074bd0342e03e1d8b755\\llama-3.2-1b-instruct-q4_k_m.gguf",
+        "C:\\Users\\tsmit\\.ollama\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\Documents\\models\\Llama-3.2-1B-Instruct-Q4_K_M-GGUF.gguf",
+        "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\llama-3.2-1b.gguf",
+        "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\realai-1.0-instruct-Q4_K_M.gguf"
+      ],
+      "copy_count": 32,
+      "vulkan_cmd": "llama-server.exe -m \"C:\\realai\\models\\realai-1.0-instruct-Q4_K_M.gguf\" --host 127.0.0.1 --port 8080 -c 8192 -ngl 99 --jinja",
+      "realai_model_id_suggestion": "realai-1.0-instruct"
+    },
+    {
+      "id": "llama-3.2-3b-instruct-q5_k_m.gguf",
+      "name": "Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+      "size_gb": 2.163,
+      "family": "llama",
+      "role": "gguf_chat",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "incomplete_copy": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q5_K_M.gguf"
+      ],
+      "copy_count": 2,
+      "vulkan_cmd": "llama-server.exe -m \"C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q5_K_M.gguf\" --host 127.0.0.1 --port 8080 -c 8192 -ngl 99 --jinja",
+      "realai_model_id_suggestion": "local-llama"
+    },
+    {
+      "id": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "path": "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "size_gb": 1.49,
+      "family": "qwen",
+      "role": "gguf_chat",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "incomplete_copy": true,
+      "copies": [
+        "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf"
+      ],
+      "copy_count": 1,
+      "vulkan_cmd": "llama-server.exe -m \"C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf\" --host 127.0.0.1 --port 8080 -c 8192 -ngl 99 --jinja",
+      "realai_model_id_suggestion": "local-qwen"
+    },
+    {
+      "id": "llama-3.2-1b-instruct-q4_k_m.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "path": "C:\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "size_gb": 0.752,
+      "family": "llama",
+      "role": "gguf_chat",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "incomplete_copy": false,
+      "copies": [
+        "C:\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\realai\\models\\llama3.2-1b\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai - Copy\\realai\\models\\llama3.2-1b\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf"
+      ],
+      "copy_count": 5,
+      "vulkan_cmd": "llama-server.exe -m \"C:\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf\" --host 127.0.0.1 --port 8080 -c 8192 -ngl 99 --jinja",
+      "realai_model_id_suggestion": "local-llama"
+    }
+  ],
+  "errors": []
+}

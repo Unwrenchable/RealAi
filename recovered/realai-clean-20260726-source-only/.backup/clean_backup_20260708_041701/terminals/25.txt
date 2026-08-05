@@ -1,0 +1,22 @@
+---
+pid: 16144
+cwd: "C:\Users\tsmit\realai"
+command: "py -3.14 -m realai.cli.launcher start --auto-port --production --detach --no-browser"
+started_at: 2026-06-04T13:43:01.613Z
+running_for_ms: 12519986 
+---
+[RealAI] Core modules loaded.
+[RealAI] Starting RealAI...
+[RealAI] Runtime bootstrap: active_backend=ollama
+[RealAI] Compute mode=auto
+[RealAI] GPU accelerator (LLM): ollama (local GPU via Ollama)
+[RealAI] Ollama online at http://localhost:11434 (default model: kimi-k2.6:cloud)
+[RealAI] Starting provider on :8001...
+[RealAI] Still waiting for provider :8001 (10s)...
+[RealAI] Still waiting for provider :8001 (20s)...
+[RealAI] Provider ready.
+[RealAI] Starting production UI on :3847...
+[RealAI] RealAI is running.
+[RealAI]   App:      http://127.0.0.1:3847/
+[RealAI]   Provider: http://127.0.0.1:8001/health
+[RealAI]   Install as app: use the banner in the browser (Chrome/Edge → Install RealAI).

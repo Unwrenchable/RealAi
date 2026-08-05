@@ -1,0 +1,13 @@
+{
+  "id": "worker",
+  "name": "Worker Agent",
+  "description": "Executes concrete tasks delegated by the master or router agents.",
+  "role": "assistant",
+  "tools": [],
+  "permissions": ["safe"],
+  "provider_preferences": ["realai"],
+  "metadata": {
+    "category": "worker",
+    "version": "1.0.0"
+  }
+}

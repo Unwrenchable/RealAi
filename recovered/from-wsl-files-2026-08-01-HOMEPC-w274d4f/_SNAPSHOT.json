@@ -1,0 +1,11 @@
+{
+  "slug": "from-wsl-files-2026-08-01-HOMEPC-w274d4f",
+  "source_sha": "053cb31089e55dc6fbd9baa5c383b070129e652a",
+  "giants_moved_out": 36,
+  "batch": 2,
+  "file_count": 8739,
+  "imported_at": "2026-08-05T05:58:24.1898373-07:00",
+  "dest": "recovered/from-wsl-files-2026-08-01-HOMEPC-w274d4f",
+  "source_ref": "origin/recovery/from-wsl-files/2026-08-01/HOMEPC/w274d4f",
+  "source_branch": "recovery/from-wsl-files/2026-08-01/HOMEPC/w274d4f"
+}

@@ -1,0 +1,11 @@
+{
+  "slug": "grok-export-2026-07-31-HOMEPC-e1a2b3",
+  "source_sha": "70aec7e9f3fd194aea1746ff28008d96dac5dcfa",
+  "giants_moved_out": 0,
+  "batch": 2,
+  "file_count": 550,
+  "imported_at": "2026-08-05T05:58:31.7048703-07:00",
+  "dest": "recovered/grok-export-2026-07-31-HOMEPC-e1a2b3",
+  "source_ref": "origin/recovery/grok-export/2026-07-31/HOMEPC/e1a2b3",
+  "source_branch": "recovery/grok-export/2026-07-31/HOMEPC/e1a2b3"
+}

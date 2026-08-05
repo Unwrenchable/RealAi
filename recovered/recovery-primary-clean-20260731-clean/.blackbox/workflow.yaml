@@ -1,0 +1,21 @@
+phases:
+  - phase0.deepdive.rules
+  - phase1.core.rules
+  - phase2.extraction.rules
+  - phase3.vscode.rules
+  - phase4.cli.rules
+  - phase5.server.rules
+  - phase6.registry.rules
+  - phase7.manifest.rules
+  - phase8.final.rules
+
+execution:
+  mode: sequential
+  stop_on_error: false
+  require_master_ruleset: true
+
+description: |
+  This workflow defines the complete RealAI unification pipeline.
+  Each phase corresponds to a rule file inside .blackbox/.
+  Blackbox will execute them in order, using master.blackboxrules
+  as the global governance layer.

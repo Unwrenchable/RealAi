@@ -1,0 +1,11 @@
+---
+pid: 22060
+cwd: "C:\Users\tsmit\realai"
+command: "cd C:\\Users\\tsmit\\realai; $env:REALAI_PROVIDER_PORT='8003'; cmd /c \"C:\\Users\\tsmit\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe -m realai.provider >> C:\\Users\\tsmit\\.realai\\logs\\test-detach.log 2>&1\"; Start-Sleep -Seconds 5; netstat -aon | findstr \":8003\"; Get-Content C:\\Users\\tsmit\\.realai\\logs\\test-detach.log -Tail 5"
+started_at: 2026-06-04T14:37:16.368Z
+running_for_ms: 9340002  
+---
+INFO:     Started server process [15916]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8003 (Press CTRL+C to quit)

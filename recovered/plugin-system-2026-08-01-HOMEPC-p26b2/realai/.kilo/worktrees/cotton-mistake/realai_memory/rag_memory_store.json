@@ -1,0 +1,69 @@
+[
+  {
+    "id": "mem_20260601_091400_754519",
+    "content": "RealAI stores long-term memory safely.",
+    "metadata": {
+      "timestamp": "2026-06-01T09:14:00.754536Z"
+    }
+  },
+  {
+    "id": "mem_20260604_105119_172285",
+    "content": "NPC Test NPC: A test wasteland trader. Traits: greedy, funny",
+    "metadata": {
+      "character_id": "test-npc-50b68bb5",
+      "style": "fallout-meme",
+      "user_id": "game-studio",
+      "agent_id": "character-creator"
+    }
+  },
+  {
+    "id": "mem_20260604_105119_312090",
+    "content": "User: How do I run the provider?\nAssistant: Run py -3.14 -m realai.provider",
+    "metadata": {
+      "trace_id": "tr_51fbef76a9894a39",
+      "model": "realai",
+      "user_id": "user-b",
+      "agent_id": "realai"
+    }
+  },
+  {
+    "id": "mem_20260604_105119_442582",
+    "content": "User: Hello learning loop\nAssistant: Recorded assistant reply",
+    "metadata": {
+      "trace_id": "tr_532e284b9abd4a46",
+      "model": "realai",
+      "user_id": "user-d",
+      "agent_id": "realai"
+    }
+  },
+  {
+    "id": "mem_20260604_141253_332504",
+    "content": "User: Explain quantum computing simply\nAssistant: [RealAI] I am online but no LLM engine is ready yet.\n\nOllama HTTP 403: {\"error\":\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: 04de005b-b99e-41e1-8714-eb5bd64e6adf)\"}\n",
+    "metadata": {
+      "trace_id": "tr_53793f435c754e9c",
+      "model": "realai",
+      "user_id": "04a8efea-0a62-4e5d-b0f9-b039dd00c41b",
+      "agent_id": "realai"
+    }
+  },
+  {
+    "id": "mem_20260604_153849_917758",
+    "content": "User: Reply with exactly: REALAI_OK\nAssistant: REALAI_OK",
+    "metadata": {
+      "trace_id": "tr_3a2aaa06f5604948",
+      "model": "realai",
+      "user_id": "anonymous",
+      "agent_id": "realai"
+    }
+  },
+  {
+    "id": "mem_20260604_170920_836204",
+    "content": "User: hey\nAssistant: Quantum computing is a new way of processing information that uses the principles of quantum mechanics to perform calculations.\n\nImagine you have a giant library with an infinite number of books, each representing a possible solution to a problem. A classical computer would look through these books one by one, checking each possibility until it finds the correct answer.\n\nA quantum computer, on the other hand, can look at all the books simultaneously and find the correct answer instantly. This is because quantum computers use something called qubits (quantum bits), which can exist in multiple states at the same time.\n\nThink of it like a coin that can be both heads and tails at the same time. A classical computer would have to check each side separately, but a quantum computer could just look at the coin and see both sides simultaneously.\n\nThis allows quantum computers to solve certain problems way faster than classical computers, especially for complex problems like cryptography and optimization. However, it's still an emerging field, and we're just starting to understand how it all works!",
+    "metadata": {
+      "trace_id": "tr_e503135c85af4d90",
+      "model": "realai",
+      "user_id": "04a8efea-0a62-4e5d-b0f9-b039dd00c41b",
+      "agent_id": "realai"
+    }
+  }
+]

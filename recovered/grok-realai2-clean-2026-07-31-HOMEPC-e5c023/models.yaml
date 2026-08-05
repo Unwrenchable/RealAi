@@ -1,0 +1,54 @@
+realai-default:
+  type: chat
+  backend: stub
+  path: local-stub-chat
+  capabilities:
+    - chat
+
+realai-embed-default:
+  type: embeddings
+  backend: stub
+  path: local-stub-embed
+  embedding_dimensions: 10
+  capabilities:
+    - embeddings
+
+realai-1.0:
+  type: chat
+  backend: vllm
+  path: meta-llama/Meta-Llama-3-8B-Instruct
+  context_length: 32768
+  capabilities:
+    - chat
+    - tools
+    - streaming
+
+realai-overseer:
+  type: chat
+  backend: vllm
+  path: meta-llama/Meta-Llama-3-8B-Instruct
+  context_length: 65536
+  capabilities:
+    - chat
+    - planning
+    - critique
+
+realai-default-8b:
+  type: chat
+  backend: llama.cpp
+  path: meta-llama/Meta-Llama-3-8B-Instruct-Q4_K_M.gguf
+  context_length: 8192
+  quantization: q4_k_m
+  capabilities:
+    - chat
+    - local-inference
+    - cpu-fallback
+
+realai-embed:
+  type: embedding
+  backend: hf
+  path: sentence-transformers/all-MiniLM-L6-v2
+  embedding_dimensions: 384
+  capabilities:
+    - embeddings
+    - retrieval

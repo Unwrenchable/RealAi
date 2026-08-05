@@ -1,0 +1,283 @@
+{
+  "priority_count": 55,
+  "staged": [
+    {
+      "type": "dir_note",
+      "orig": "C:\\Program Files\\RealAI",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/000_RealAI.DIR_NOTE.json"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\realai",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/001_realai.DIR_NOTE.json"
+    },
+    {
+      "type": "large_note",
+      "orig": "C:\\Users\\tsmit\\realai-clean\\realai-core.tar.gz.part-ac",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/004_realai-core.tar.gz.part-ac.LARGE_NOTE.json",
+      "size": 821370880
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\realai\\New Python.File.py",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/006_New_Python.File.py",
+      "size": 0,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RZE6D53.py"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\realai\\api_server.py",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/007_api_server.py",
+      "size": 571,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RNL4H7T.py"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\realai\\realai\\models\\models.yaml",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/008_models.yaml",
+      "size": 219,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R5GTF55.yaml"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\realai\\realai\\\u2502\u251c\u2500\u2500 .vscode",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/009__.vscode.DIR_NOTE.json"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Program Files\\RealAI",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/010_RealAI.DIR_NOTE.json"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Program Files\\RealAI",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/012_RealAI.DIR_NOTE.json"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\realai\\PAGES",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/013_PAGES",
+      "size": 3,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RGZZZ85"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\realai\\PAGES",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/014_PAGES",
+      "size": 3,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RAQWIZX"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\realai\\config.py",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/015_config.py",
+      "size": 432,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RJHPSTO.py"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main\\public\\js\\overseer\\realai.js.txt",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/016_realai.js.txt",
+      "size": 0,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RWVRM3U.txt"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\realai\\New Python Script.py",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/017_New_Python_Script.py",
+      "size": 0,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RVR42B1.py"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\models\\registry.json.txt",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/018_registry.json.txt",
+      "size": 1195,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RJ6ZQ48.txt"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\realai\\apps\\vscode\\images\\realai-icon.svg",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/019_realai-icon.svg",
+      "size": 0,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RZBHQ0L.svg"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\overseer-bot-ui",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/020_overseer-bot-ui.DIR_NOTE.json"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main\\scripts",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/021_scripts.DIR_NOTE.json"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\realai\\__init__.py",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/023___init__.py",
+      "size": 0,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RHQONFX.py"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\realai\\copilot-session-39a9656a-48d7-4b7a-8ad4-aa82a2c153ee.7z",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/024_copilot-session-39a9656a-48d7-4b7a-8ad4-aa82a2c153ee.7z",
+      "size": 79116,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RA67G6P.7z"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Python314\\Lib\\site-packages\\realai-2.0.0.dist-info",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/026_realai-2.0.0.dist-info.DIR_NOTE.json"
+    },
+    {
+      "type": "large_note",
+      "orig": "C:\\Users\\tsmit\\realai-clean\\realai-core.tar.gz.part-ab",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/027_realai-core.tar.gz.part-ab.LARGE_NOTE.json",
+      "size": 2097152000
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\realai\\history",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/028_history.DIR_NOTE.json"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\AppData\\Roaming\\RealAi\\config\\models.yaml",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/030_models.yaml",
+      "size": 300,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RVKTKEG.yaml"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\realai\\apps\\vscode\\images\\realai-icon.svg",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/031_realai-icon.svg",
+      "size": 111838,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RD1RWT4.svg"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\RealAI",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/032_RealAI.DIR_NOTE.json"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\realai\\.sixth",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/034_.sixth.DIR_NOTE.json"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\.realai\\local_models.json",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/035_local_models.json",
+      "size": 671,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RWH5ZJ1.json"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\realai",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/036_realai.DIR_NOTE.json"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\realai\\tsconfig.json.disabled",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/037_tsconfig.json.disabled",
+      "size": 1142,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RB7IKOA.disabled"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\models\\registry.json.txt",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/039_registry.json.txt",
+      "size": 261,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RZF3PDI.txt"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\realai\\.py",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/040_.py",
+      "size": 0,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R0PW9O0.py"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\realai\\.continue\\.continue",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/041_.continue.DIR_NOTE.json"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\overseer-bot-ai\\.env.txt",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/042_.env.txt",
+      "size": 1843,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RHY9YZG.txt"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\.grok\\worktrees\\tsmit-realai\\realai - Copy\\New Python Script.py",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/043_New_Python_Script.py",
+      "size": 0,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RV8TIK4.py"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\.grok\\worktrees\\tsmit-realai\\realai - Copy\\New Text Document.txt",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/044_New_Text_Document.txt",
+      "size": 0,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RHGHWKU.txt"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\agent-tools\\agent-tools-main\\agents\\router.agent.json.txt",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/045_router.agent.json.txt",
+      "size": 163,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RVPF27U.txt"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Users\\tsmit\\realai\\backend",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/046_backend.DIR_NOTE.json"
+    },
+    {
+      "type": "large_note",
+      "orig": "C:\\Users\\tsmit\\realai-clean\\realai-core.tar.gz.part-aa",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/047_realai-core.tar.gz.part-aa.LARGE_NOTE.json",
+      "size": 2097152000
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\RealAIProject\\.env.local.txt",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/050_.env.local.txt",
+      "size": 606,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RQT5MGC.txt"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main\\scripts\\realai.js",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/051_realai.js",
+      "size": 404,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R1LIGZ5.js"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Python314\\Scripts\\realai.exe",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/052_realai.exe",
+      "size": 108312,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R2Q8M5Y.exe"
+    },
+    {
+      "type": "file",
+      "orig": "C:\\Users\\tsmit\\realai\\.continue",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/053_.continue",
+      "size": 0,
+      "recycle": "/mnt/c/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RCX9TQ0.continue"
+    },
+    {
+      "type": "dir_note",
+      "orig": "C:\\Program Files\\RealAI",
+      "dest": "/mnt/c/realai/recovered/from_recycle_bin/054_RealAI.DIR_NOTE.json"
+    }
+  ],
+  "secrets_count": 3,
+  "noise_count": 55,
+  "skipped_missing_payload": 11
+}

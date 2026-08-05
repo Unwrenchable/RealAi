@@ -1,0 +1,314 @@
+# ============================
+# PHASE 0 — DEEP-DIVE MEGA PROMPT
+# ============================
+You are operating inside a GitHub Codespace containing two RealAI repositories:
+
+1. /workspaces/RealAi (analysis-clean)
+2. /workspaces/RealAi/realai_og_mess
+
+Your task is PHASE 0: FULL DEEP-DIVE of the legacy repo at:
+/workspaces/RealAi/realai_og_mess
+
+MANDATORY RULES:
+- Do NOT ask questions.
+- Do NOT pause.
+- Do NOT switch into testing mode.
+- Do NOT produce checkpoints.
+- Do NOT request confirmation.
+- Do NOT stop early.
+
+This run is PURE read + analysis + extraction.
+
+REQUIREMENTS:
+1. Recursively walk and READ EVERY FILE under:
+   - agents
+   - memory
+   - tools
+   - providers
+   - models
+   - inference
+   - server
+   - cli
+   - vscode-extension
+   - fusion-ui
+   - archive
+   - docs
+   - manifests
+   - schemas
+
+2. Extract logic, dependencies, patterns, obsolete code, gold code.
+
+3. Produce subsystem-by-subsystem analysis.
+
+4. Produce OG → Clean integration map.
+
+5. Produce file-level migration checklist.
+
+6. Produce unified architecture draft.
+
+7. Produce Phase‑1 prerequisites.
+
+Begin immediately by recursively walking:
+/workspaces/RealAi/realai_og_mess
+and reading every file.
+
+
+# ============================
+# PHASE 1 — CORE UNIFICATION PROMPT
+# ============================
+You are operating inside /workspaces/RealAi (analysis-clean).
+
+Your task is PHASE 1: CORE UNIFICATION.
+
+MANDATORY RULES:
+- No questions.
+- No testing.
+- No checkpoints.
+- No pausing.
+- No stopping early.
+
+TASKS:
+1. Unify server gating + validation.
+2. Unify CLI entrypoints + commands.
+3. Unify Fusion UI DOM IDs + request viewer + health indicator.
+4. Normalize manifests + schemas.
+5. Identify missing endpoints, missing CLI commands, missing UI flows.
+6. Produce Phase‑1 output:
+   - unified server plan
+   - unified CLI plan
+   - unified UI plan
+   - unified manifest plan
+   - Phase‑2 prerequisites
+
+Do NOT run tests.
+Do NOT modify files.
+Produce analysis + plans only.
+
+
+# ============================
+# PHASE 2 — EXTRACTION PROMPT
+# ============================
+You are operating inside two RealAI repos:
+
+1. analysis-clean
+2. realai_og_mess
+
+Your task is PHASE 2: ARCHIVE EXTRACTION + SUBSYSTEM MERGING.
+
+MANDATORY RULES:
+- No questions.
+- No testing.
+- No checkpoints.
+- No pausing.
+- No stopping early.
+
+TASKS:
+1. Extract ALL legacy logic from OG repo archives.
+2. Identify:
+   - mergeable logic
+   - rewrite-required logic
+   - reference-only logic
+   - obsolete logic
+3. Map OG → Clean subsystem merges.
+4. Produce:
+   - subsystem merge plan
+   - legacy logic import plan
+   - unified agent runtime plan
+   - unified memory engine plan
+   - unified tool runner plan
+   - unified provider registry plan
+   - unified model registry plan
+5. Produce Phase‑3 prerequisites.
+
+Do NOT run tests.
+Do NOT modify files.
+Produce analysis + plans only.
+
+
+# ============================
+# PHASE 3 — VS CODE EXTENSION ALIGNMENT PROMPT
+# ============================
+You are operating inside /workspaces/RealAi/apps/vscode.
+
+Your task is PHASE 3: VS CODE EXTENSION ALIGNMENT.
+
+MANDATORY RULES:
+- No questions.
+- No testing.
+- No checkpoints.
+- No pausing.
+- No stopping early.
+
+TASKS:
+1. Read all extension files:
+   - extension.ts
+   - commands
+   - schemas
+   - webview messaging
+   - VSIX packaging
+2. Identify mismatches with unified server API.
+3. Produce:
+   - command alignment plan
+   - schema alignment plan
+   - webview messaging alignment plan
+   - endpoint alignment plan
+   - VSIX build alignment plan
+4. Produce Phase‑4 prerequisites.
+
+Do NOT run tests.
+Do NOT modify files.
+Produce analysis + plans only.
+
+
+# ============================
+# PHASE 4 — CLI REPAIR PROMPT
+# ============================
+You are operating inside /workspaces/RealAi.
+
+Your task is PHASE 4: CLI REPAIR.
+
+MANDATORY RULES:
+- No questions.
+- No testing.
+- No checkpoints.
+- No pausing.
+- No stopping early.
+
+TASKS:
+1. Read CLI code:
+   - doctor
+   - repo-loop
+   - extract-data
+   - entrypoints
+2. Identify broken logic, missing commands, outdated patterns.
+3. Produce:
+   - CLI restoration plan
+   - CLI consistency plan
+   - CLI endpoint alignment plan
+4. Produce Phase‑5 prerequisites.
+
+Do NOT run tests.
+Do NOT modify files.
+Produce analysis + plans only.
+
+
+# ============================
+# PHASE 5 — SERVER HARDENING PROMPT
+# ============================
+You are operating inside /workspaces/RealAi/server.
+
+Your task is PHASE 5: SERVER HARDENING.
+
+MANDATORY RULES:
+- No questions.
+- No testing.
+- No checkpoints.
+- No pausing.
+- No stopping early.
+
+TASKS:
+1. Read all server code.
+2. Identify:
+   - missing validation
+   - missing error paths
+   - malformed JSON handling gaps
+   - invalid model handling gaps
+   - missing endpoint guards
+3. Produce:
+   - endpoint hardening plan
+   - error-path hardening plan
+   - malformed JSON plan
+   - invalid model plan
+4. Produce Phase‑6 prerequisites.
+
+Do NOT run tests.
+Do NOT modify files.
+Produce analysis + plans only.
+
+
+# ============================
+# PHASE 6 — REGISTRY FINALIZATION PROMPT
+# ============================
+You are operating inside /workspaces/RealAi.
+
+Your task is PHASE 6: MODEL + PROVIDER REGISTRY FINALIZATION.
+
+MANDATORY RULES:
+- No questions.
+- No testing.
+- No checkpoints.
+- No pausing.
+- No stopping early.
+
+TASKS:
+1. Read model registry + provider registry.
+2. Identify:
+   - missing models
+   - missing providers
+   - schema mismatches
+   - inconsistent naming
+3. Produce:
+   - unified model registry plan
+   - unified provider registry plan
+   - schema finalization plan
+4. Produce Phase‑7 prerequisites.
+
+Do NOT run tests.
+Do NOT modify files.
+Produce analysis + plans only.
+
+
+# ============================
+# PHASE 7 — MANIFEST + TOOLS + SKILLS REGENERATION PROMPT
+# ============================
+You are operating inside /workspaces/RealAi.
+
+Your task is PHASE 7: MANIFEST + TOOLS + SKILLS REGENERATION.
+
+MANDATORY RULES:
+- No questions.
+- No testing.
+- No checkpoints.
+- No pausing.
+- No stopping early.
+
+TASKS:
+1. Read tools.md + skills.md + manifests + schemas.
+2. Identify missing tools, missing skills, outdated manifests.
+3. Produce:
+   - tools.md regeneration plan
+   - skills.md regeneration plan
+   - manifest regeneration plan
+   - schema regeneration plan
+4. Produce Phase‑8 prerequisites.
+
+Do NOT run tests.
+Do NOT modify files.
+Produce analysis + plans only.
+
+
+# ============================
+# PHASE 8 — FINAL REPO STABILIZATION PROMPT
+# ============================
+You are operating inside /workspaces/RealAi.
+
+Your task is PHASE 8: FINAL REPO STABILIZATION.
+
+MANDATORY RULES:
+- No questions.
+- No checkpoints.
+- No pausing.
+- No stopping early.
+
+TASKS:
+1. Produce:
+   - pytest sweep plan
+   - curl matrix plan
+   - Fusion UI matrix plan
+   - final cleanup plan
+2. Identify final inconsistencies.
+3. Produce final unified RealAI stabilization report.
+
+Do NOT run tests.
+Do NOT modify files.
+Produce analysis + plans only.

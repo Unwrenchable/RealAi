@@ -1,0 +1,514 @@
+{
+  "meta": {
+    "mode": "operational",
+    "root": "C:\\realai",
+    "started": "2026-07-16T17:49:37.975039+00:00",
+    "finished": "2026-07-16T17:49:41.597372+00:00",
+    "elapsed_seconds": 3.62,
+    "files_scanned": 671,
+    "refs_checked": 2223,
+    "missing_rows": 595,
+    "unique_missing": 205,
+    "include_og": false,
+    "include_archive": true,
+    "include_config": true,
+    "include_tokens": true,
+    "skip_rules_version": 3,
+    "dirs_skipped": {
+      "agent_tools.egg-info": 121,
+      ".vs": 93,
+      ".pytest_cache": 55,
+      "dist": 53,
+      "node_modules": 48,
+      "realai.egg-info": 44,
+      "build": 37,
+      "__pycache__": 36,
+      "realai__dup1.egg-info": 22,
+      "__pycache____dup1": 21,
+      ".next": 20,
+      ".git_disabled": 19,
+      ".cache": 15,
+      ".venv": 12,
+      "Output": 11,
+      "venv": 11,
+      "node_modules.disabled": 8,
+      "site-packages": 5,
+      ".kilo": 4,
+      "chocolatey": 4,
+      "realai_search_temp": 4,
+      "rebase_dryrun": 4,
+      "terminals": 4,
+      ".git": 1
+    },
+    "preservation_note": "READ-ONLY scan. No files deleted. Noise-only skips (venv/node_modules/.next/etc). Top-level archive/ is scanned for accidental-move recovery. OG/training/memory remain on disk. Use --also-archive for full triage."
+  },
+  "unique_missing": 205,
+  "by_kind": {
+    "path_ref": 66,
+    "token": 304,
+    "from_import": 96,
+    "import": 85,
+    "es_import": 35,
+    "require": 9
+  },
+  "by_era": {
+    "clean_runtime": 509,
+    "training": 9,
+    "other": 74,
+    "archive": 3
+  },
+  "by_prefix": {
+    "": 54,
+    "agent_tools": 29,
+    "agent_id": 28,
+    "type": 24,
+    "langchain_core": 24,
+    "lucide-react": 19,
+    "train": 15,
+    "langgraph": 15,
+    "apps": 10,
+    "agent_registry": 10,
+    "agent_roles": 10,
+    "realai_agent": 9,
+    "dataset": 9,
+    "realai": 8,
+    "agent_type": 8,
+    "realai_orchestration": 7,
+    "prometheus_client": 6,
+    "memory_mb": 6,
+    "solana_rpc_url": 6,
+    "realai_ultimate": 6,
+    "core": 6,
+    "memory_engine": 5,
+    "cryptography": 4,
+    "memory_path": 4,
+    "tkinter": 4,
+    "agent_manifests": 4,
+    "realai_meta": 4,
+    "resource": 4,
+    "web3": 4,
+    "ReactMarkdown": 4,
+    "react-markdown": 4,
+    "vllm": 4,
+    "memory_records": 4,
+    "agent_tools_gold": 3,
+    "memory_learning": 3,
+    "plugin_system": 3,
+    "realai_model": 3,
+    "realai_historical_backups": 3,
+    "finetune": 3,
+    "agent_role": 3,
+    "langgraph_supervisor": 3,
+    "tools": 3,
+    "wandb": 3,
+    "unsloth": 3,
+    "datasets": 3,
+    "trl": 3,
+    "realai_training_output": 3,
+    "agent_system": 3,
+    "lora_config": 3,
+    "lora_alpha": 3
+  },
+  "top_missing": [
+    {
+      "reference": "agent_tools",
+      "count": 28
+    },
+    {
+      "reference": "agent_id",
+      "count": 28
+    },
+    {
+      "reference": "type",
+      "count": 24
+    },
+    {
+      "reference": "lucide-react",
+      "count": 19
+    },
+    {
+      "reference": "train",
+      "count": 15
+    },
+    {
+      "reference": "./load-module",
+      "count": 12
+    },
+    {
+      "reference": "agent_registry",
+      "count": 10
+    },
+    {
+      "reference": "agent_roles",
+      "count": 10
+    },
+    {
+      "reference": "realai_agent",
+      "count": 9
+    },
+    {
+      "reference": "dataset",
+      "count": 9
+    },
+    {
+      "reference": "langchain_core.messages",
+      "count": 9
+    },
+    {
+      "reference": "langgraph.graph",
+      "count": 9
+    },
+    {
+      "reference": "agent_type",
+      "count": 8
+    },
+    {
+      "reference": "../core",
+      "count": 6
+    },
+    {
+      "reference": "prometheus_client",
+      "count": 6
+    },
+    {
+      "reference": "memory_mb",
+      "count": 6
+    },
+    {
+      "reference": "solana_rpc_url",
+      "count": 6
+    },
+    {
+      "reference": "langchain_core.prompts",
+      "count": 6
+    },
+    {
+      "reference": "langchain_core.runnables",
+      "count": 6
+    },
+    {
+      "reference": "langgraph.prebuilt",
+      "count": 6
+    },
+    {
+      "reference": "realai_ultimate",
+      "count": 6
+    },
+    {
+      "reference": "memory_engine",
+      "count": 5
+    },
+    {
+      "reference": "realai_orchestration",
+      "count": 5
+    },
+    {
+      "reference": "memory_path",
+      "count": 4
+    },
+    {
+      "reference": "tkinter",
+      "count": 4
+    },
+    {
+      "reference": "agent_manifests",
+      "count": 4
+    },
+    {
+      "reference": "realai_meta",
+      "count": 4
+    },
+    {
+      "reference": "resource",
+      "count": 4
+    },
+    {
+      "reference": "web3",
+      "count": 4
+    },
+    {
+      "reference": "./globals.css",
+      "count": 4
+    },
+    {
+      "reference": "ReactMarkdown",
+      "count": 4
+    },
+    {
+      "reference": "react-markdown",
+      "count": 4
+    },
+    {
+      "reference": "vllm",
+      "count": 4
+    },
+    {
+      "reference": "memory_records",
+      "count": 4
+    },
+    {
+      "reference": "agent_tools_gold",
+      "count": 3
+    },
+    {
+      "reference": "memory_learning",
+      "count": 3
+    },
+    {
+      "reference": "plugin_system",
+      "count": 3
+    },
+    {
+      "reference": "realai_model",
+      "count": 3
+    },
+    {
+      "reference": "realai_historical_backups",
+      "count": 3
+    },
+    {
+      "reference": "finetune",
+      "count": 3
+    },
+    {
+      "reference": "agent_role",
+      "count": 3
+    },
+    {
+      "reference": "./training_output",
+      "count": 3
+    },
+    {
+      "reference": "langgraph_supervisor",
+      "count": 3
+    },
+    {
+      "reference": "tools",
+      "count": 3
+    },
+    {
+      "reference": "langchain_core.tools",
+      "count": 3
+    },
+    {
+      "reference": "wandb",
+      "count": 3
+    },
+    {
+      "reference": "unsloth",
+      "count": 3
+    },
+    {
+      "reference": "datasets",
+      "count": 3
+    },
+    {
+      "reference": "trl",
+      "count": 3
+    },
+    {
+      "reference": "./realai_training_output",
+      "count": 3
+    },
+    {
+      "reference": "realai_training_output",
+      "count": 3
+    },
+    {
+      "reference": "agent_system",
+      "count": 3
+    },
+    {
+      "reference": "lora_config",
+      "count": 3
+    },
+    {
+      "reference": "lora_alpha",
+      "count": 3
+    },
+    {
+      "reference": "lora_dropout",
+      "count": 3
+    },
+    {
+      "reference": "langchain_openai",
+      "count": 3
+    },
+    {
+      "reference": "lora_adapters",
+      "count": 2
+    },
+    {
+      "reference": "agent_input",
+      "count": 2
+    },
+    {
+      "reference": "realai_api_key",
+      "count": 2
+    },
+    {
+      "reference": "realai_provider",
+      "count": 2
+    },
+    {
+      "reference": "cryptography.hazmat.primitives.ciphers",
+      "count": 2
+    },
+    {
+      "reference": "cryptography.hazmat.backends",
+      "count": 2
+    },
+    {
+      "reference": "realai/audit_log.jsonl",
+      "count": 2
+    },
+    {
+      "reference": "realai/consent_store.json",
+      "count": 2
+    },
+    {
+      "reference": "realai_model_id_suggestion",
+      "count": 2
+    },
+    {
+      "reference": "memory_namespace",
+      "count": 2
+    },
+    {
+      "reference": "lora_adapter",
+      "count": 2
+    },
+    {
+      "reference": "plugin_fn",
+      "count": 2
+    },
+    {
+      "reference": "providers/*",
+      "count": 2
+    },
+    {
+      "reference": "realai_launcher",
+      "count": 2
+    },
+    {
+      "reference": "lora_root",
+      "count": 2
+    },
+    {
+      "reference": "agent_tools_status",
+      "count": 2
+    },
+    {
+      "reference": "agent_tools_list_agents",
+      "count": 2
+    },
+    {
+      "reference": "agent_tools_list_profiles",
+      "count": 2
+    },
+    {
+      "reference": "agent_tools_assess",
+      "count": 2
+    },
+    {
+      "reference": "agent_not_found",
+      "count": 2
+    },
+    {
+      "reference": "pyautogui",
+      "count": 2
+    },
+    {
+      "reference": "pygetwindow",
+      "count": 2
+    },
+    {
+      "reference": "wave",
+      "count": 2
+    },
+    {
+      "reference": "pyttsx3",
+      "count": 2
+    },
+    {
+      "reference": "smtplib",
+      "count": 2
+    },
+    {
+      "reference": "pyaudio",
+      "count": 2
+    },
+    {
+      "reference": "gnupg",
+      "count": 2
+    },
+    {
+      "reference": "vosk",
+      "count": 2
+    },
+    {
+      "reference": "bs4",
+      "count": 2
+    },
+    {
+      "reference": "googleapiclient.discovery",
+      "count": 2
+    },
+    {
+      "reference": "google.oauth2.credentials",
+      "count": 2
+    },
+    {
+      "reference": "realai_config",
+      "count": 2
+    },
+    {
+      "reference": "agent_orchestration",
+      "count": 2
+    },
+    {
+      "reference": "agent_contributions",
+      "count": 2
+    },
+    {
+      "reference": "agent_results",
+      "count": 2
+    },
+    {
+      "reference": "agent_assignments",
+      "count": 2
+    },
+    {
+      "reference": "agent_summaries",
+      "count": 2
+    },
+    {
+      "reference": "agent_found",
+      "count": 2
+    },
+    {
+      "reference": "memory_usage",
+      "count": 2
+    },
+    {
+      "reference": "memory_used",
+      "count": 2
+    },
+    {
+      "reference": "memory_file",
+      "count": 2
+    },
+    {
+      "reference": "memory_updated",
+      "count": 2
+    },
+    {
+      "reference": "memory_data",
+      "count": 2
+    },
+    {
+      "reference": "plugin_name",
+      "count": 2
+    }
+  ]
+}

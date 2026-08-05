@@ -1,0 +1,56 @@
+---
+pid: 14500
+cwd: "C:\Users\tsmit\realai"
+command: "cmd.exe /c \"set REALAI_RESTART=1&& cd /d C:\\Users\\tsmit\\realai && py -3.14 -m realai.cli.launcher start --auto-port --production --detach\""
+started_at: 2026-06-04T15:31:05.642Z
+running_for_ms: 5945010  
+---
+[RealAI] Core modules loaded.
+[RealAI] Starting RealAI...
+[RealAI] Runtime bootstrap: active_backend=ollama
+[RealAI] REALAI_RESTART=1 — stopping prior launcher processes and freeing ports...
+[RealAI] Stopped.
+[RealAI] Compute mode=auto
+[RealAI] GPU accelerator (LLM): ollama (local GPU via Ollama)
+[RealAI] Ollama online at http://127.0.0.1:11434 (default model: llama3.2:3b)
+[RealAI] Starting provider on :8001...
+[RealAI] Provider ready.
+[RealAI] Starting production UI (standalone via node) on :3847...
+[RealAI] Still waiting for UI :3847 (10s)...
+[RealAI] Still waiting for UI :3847 (20s)...
+[RealAI] Still waiting for UI :3847 (30s)...
+[RealAI] Still waiting for UI :3847 (40s)...
+[RealAI] Still waiting for UI :3847 (50s)...
+[RealAI] Still waiting for UI :3847 (60s)...
+[RealAI] Still waiting for UI :3847 (70s)...
+[RealAI] Still waiting for UI :3847 (80s)...
+[RealAI] Still waiting for UI :3847 (90s)...
+[RealAI] Still waiting for UI :3847 (100s)...
+[RealAI] Still waiting for UI :3847 (110s)...
+[RealAI] UI health check failed — retrying with next start...
+[RealAI] Last 20 lines of ui.log:
+  | cmd /c C:\Users\tsmit\realai\apps\frontend\node_modules\.bin\next.cmd start -p 3847
+  | ▲ Next.js 16.2.6
+  | - Local:         http://localhost:3847
+  | - Network:       http://192.168.0.19:3847
+  | ✓ Ready in 142ms
+  | ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+  | 
+  | --- spawn detached 2026-06-04 08:28:29 ---
+  | cmd /c C:\Users\tsmit\realai\apps\frontend\node_modules\.bin\next.cmd start -p 3847
+  | ▲ Next.js 16.2.6
+  | - Local:         http://localhost:3847
+  | - Network:       http://192.168.0.19:3847
+  | ✓ Ready in 147ms
+  | ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+  | 
+  | --- spawn detached 2026-06-04 08:30:30 ---
+  | cmd /c C:\Users\tsmit\realai\apps\frontend\node_modules\.bin\next.cmd start -p 3847
+  | 
+  | --- spawn detached 2026-06-04 08:31:16 ---
+  | C:\Program Files\nodejs\node.EXE C:\Users\tsmit\realai\apps\frontend\.next\standalone\apps\frontend\server.js
+[RealAI] Starting production UI (next start (Windows fallback)) on :3847...
+[RealAI] RealAI is running.
+[RealAI]   App:      http://127.0.0.1:3847/
+[RealAI]   Provider: http://127.0.0.1:8001/health/live
+[RealAI]   Install as app: use the banner in the browser (Chrome/Edge → Install RealAI).

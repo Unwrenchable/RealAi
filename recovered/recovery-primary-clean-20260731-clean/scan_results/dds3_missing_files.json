@@ -1,0 +1,5278 @@
+{
+  "meta": {
+    "mode": "operational",
+    "root": "C:\\realai",
+    "started": "2026-07-16T17:49:37.975039+00:00",
+    "finished": "2026-07-16T17:49:41.597372+00:00",
+    "elapsed_seconds": 3.62,
+    "files_scanned": 671,
+    "refs_checked": 2223,
+    "missing_rows": 595,
+    "unique_missing": 205,
+    "include_og": false,
+    "include_archive": true,
+    "include_config": true,
+    "include_tokens": true,
+    "skip_rules_version": 3,
+    "dirs_skipped": {
+      "agent_tools.egg-info": 121,
+      ".vs": 93,
+      ".pytest_cache": 55,
+      "dist": 53,
+      "node_modules": 48,
+      "realai.egg-info": 44,
+      "build": 37,
+      "__pycache__": 36,
+      "realai__dup1.egg-info": 22,
+      "__pycache____dup1": 21,
+      ".next": 20,
+      ".git_disabled": 19,
+      ".cache": 15,
+      ".venv": 12,
+      "Output": 11,
+      "venv": 11,
+      "node_modules.disabled": 8,
+      "site-packages": 5,
+      ".kilo": 4,
+      "chocolatey": 4,
+      "realai_search_temp": 4,
+      "rebase_dryrun": 4,
+      "terminals": 4,
+      ".git": 1
+    },
+    "preservation_note": "READ-ONLY scan. No files deleted. Noise-only skips (venv/node_modules/.next/etc). Top-level archive/ is scanned for accidental-move recovery. OG/training/memory remain on disk. Use --also-archive for full triage."
+  },
+  "missing": [
+    {
+      "reference": "realai/agent_tools_gold",
+      "kind": "path_ref",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agents/agentx",
+      "kind": "path_ref",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai/orchestration_gold",
+      "kind": "path_ref",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai/hierarchical_agent_gold",
+      "kind": "path_ref",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai/training",
+      "kind": "path_ref",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "apps/frontend",
+      "kind": "path_ref",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_agent",
+      "kind": "token",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_ui",
+      "kind": "token",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools_gold",
+      "kind": "token",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_learning",
+      "kind": "token",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_engine",
+      "kind": "token",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "plugin_system",
+      "kind": "token",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_adapters",
+      "kind": "token",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "rag_memory",
+      "kind": "token",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/ability_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "725100f9582183a5e35c195256c106c8e0a49ac500bda7fd5704b195110ddfe9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/agent_runtime.py",
+      "era": "clean_runtime",
+      "file_hash": "97afc20812c186264a3af6313257db30f23e9a9df65f0778f14fa2a404eceac5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_registry",
+      "kind": "token",
+      "from_file": "realai/agent_runtime.py",
+      "era": "clean_runtime",
+      "file_hash": "97afc20812c186264a3af6313257db30f23e9a9df65f0778f14fa2a404eceac5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_input",
+      "kind": "token",
+      "from_file": "realai/agent_runtime.py",
+      "era": "clean_runtime",
+      "file_hash": "97afc20812c186264a3af6313257db30f23e9a9df65f0778f14fa2a404eceac5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_api_key",
+      "kind": "token",
+      "from_file": "realai/api_server.py",
+      "era": "clean_runtime",
+      "file_hash": "73242757e3eef97545e233d691ed2541977af61b972e219a0d0e7517fa2c5715",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_provider",
+      "kind": "token",
+      "from_file": "realai/api_server.py",
+      "era": "clean_runtime",
+      "file_hash": "73242757e3eef97545e233d691ed2541977af61b972e219a0d0e7517fa2c5715",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_model",
+      "kind": "token",
+      "from_file": "realai/api_server.py",
+      "era": "clean_runtime",
+      "file_hash": "73242757e3eef97545e233d691ed2541977af61b972e219a0d0e7517fa2c5715",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_roles",
+      "kind": "token",
+      "from_file": "realai/api_server.py",
+      "era": "clean_runtime",
+      "file_hash": "73242757e3eef97545e233d691ed2541977af61b972e219a0d0e7517fa2c5715",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/api_server.py",
+      "era": "clean_runtime",
+      "file_hash": "73242757e3eef97545e233d691ed2541977af61b972e219a0d0e7517fa2c5715",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "cryptography.hazmat.primitives.ciphers",
+      "kind": "from_import",
+      "from_file": "realai/audit.py",
+      "era": "clean_runtime",
+      "file_hash": "3a20dc0eb923830b7d7bedc9a4c277091fce9675ab2c8da1e5b344d3fae70eb7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "cryptography.hazmat.backends",
+      "kind": "from_import",
+      "from_file": "realai/audit.py",
+      "era": "clean_runtime",
+      "file_hash": "3a20dc0eb923830b7d7bedc9a4c277091fce9675ab2c8da1e5b344d3fae70eb7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai/audit_log.jsonl",
+      "kind": "path_ref",
+      "from_file": "realai/audit.py",
+      "era": "clean_runtime",
+      "file_hash": "3a20dc0eb923830b7d7bedc9a4c277091fce9675ab2c8da1e5b344d3fae70eb7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai/consent_store.json",
+      "kind": "path_ref",
+      "from_file": "realai/audit.py",
+      "era": "clean_runtime",
+      "file_hash": "3a20dc0eb923830b7d7bedc9a4c277091fce9675ab2c8da1e5b344d3fae70eb7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_path",
+      "kind": "token",
+      "from_file": "realai/aura_memory.py",
+      "era": "clean_runtime",
+      "file_hash": "0c3036570a69711f767451dedb4ccde124ad5c433f0d711831a5fb5c01f9dafb",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_model_family",
+      "kind": "token",
+      "from_file": "realai/deepen_cycle.py",
+      "era": "clean_runtime",
+      "file_hash": "52f87d04d696d20b89fb477b2db66cbe626858d729d59b13d8fa5fff30fe5d8c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_program_id",
+      "kind": "token",
+      "from_file": "realai/deepen_cycle.py",
+      "era": "clean_runtime",
+      "file_hash": "52f87d04d696d20b89fb477b2db66cbe626858d729d59b13d8fa5fff30fe5d8c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_model_id_suggestion",
+      "kind": "token",
+      "from_file": "realai/deepen_cycle.py",
+      "era": "clean_runtime",
+      "file_hash": "52f87d04d696d20b89fb477b2db66cbe626858d729d59b13d8fa5fff30fe5d8c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools_gold",
+      "kind": "token",
+      "from_file": "realai/deepen_cycle.py",
+      "era": "clean_runtime",
+      "file_hash": "52f87d04d696d20b89fb477b2db66cbe626858d729d59b13d8fa5fff30fe5d8c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_namespace",
+      "kind": "token",
+      "from_file": "realai/identity.py",
+      "era": "clean_runtime",
+      "file_hash": "9453f0839668c7c6e6e028f25b3076d8c9df1fc362515f76d9d142a443226812",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_engine",
+      "kind": "token",
+      "from_file": "realai/identity.py",
+      "era": "clean_runtime",
+      "file_hash": "9453f0839668c7c6e6e028f25b3076d8c9df1fc362515f76d9d142a443226812",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_model_id_suggestion",
+      "kind": "token",
+      "from_file": "realai/model_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "1434072302005e47f17f13bf2377f58c09188cbee4f88bb9901b38b348c07f5b",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_adapter",
+      "kind": "token",
+      "from_file": "realai/model_catalog.py",
+      "era": "clean_runtime",
+      "file_hash": "1434072302005e47f17f13bf2377f58c09188cbee4f88bb9901b38b348c07f5b",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "plugin_fn",
+      "kind": "token",
+      "from_file": "realai/plugin_marketplace.py",
+      "era": "clean_runtime",
+      "file_hash": "cd672c27ae6abb697a188efd3e5de63ad69f972bdbd7875b7773bb0ce2f92559",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "apps/*",
+      "kind": "path_ref",
+      "from_file": "realai/pnpm-workspace.yaml",
+      "era": "clean_runtime",
+      "file_hash": "c02058a25f1980f47227e81f8a312634eb8ea74302416aaba1b2a561a558a0d1",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "providers/*",
+      "kind": "path_ref",
+      "from_file": "realai/pnpm-workspace.yaml",
+      "era": "clean_runtime",
+      "file_hash": "c02058a25f1980f47227e81f8a312634eb8ea74302416aaba1b2a561a558a0d1",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "tkinter",
+      "kind": "import",
+      "from_file": "realai/realai_gui.py",
+      "era": "clean_runtime",
+      "file_hash": "df982fe25425c6f3dc478a41a05e2825a97b3ea1baa33174e07f630f14c3c93a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "tkinter",
+      "kind": "from_import",
+      "from_file": "realai/realai_gui.py",
+      "era": "clean_runtime",
+      "file_hash": "df982fe25425c6f3dc478a41a05e2825a97b3ea1baa33174e07f630f14c3c93a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_launcher",
+      "kind": "token",
+      "from_file": "realai/realai_gui.py",
+      "era": "clean_runtime",
+      "file_hash": "df982fe25425c6f3dc478a41a05e2825a97b3ea1baa33174e07f630f14c3c93a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_agent_pkg",
+      "kind": "token",
+      "from_file": "realai/recovery_registry.py",
+      "era": "clean_runtime",
+      "file_hash": "065244488cae91bbc426a05c6835c1f24aa413791e95e79c4bbe1b0cc9a16ae4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_agent",
+      "kind": "token",
+      "from_file": "realai/recovery_registry.py",
+      "era": "clean_runtime",
+      "file_hash": "065244488cae91bbc426a05c6835c1f24aa413791e95e79c4bbe1b0cc9a16ae4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_historical_backups",
+      "kind": "token",
+      "from_file": "realai/recovery_registry.py",
+      "era": "clean_runtime",
+      "file_hash": "065244488cae91bbc426a05c6835c1f24aa413791e95e79c4bbe1b0cc9a16ae4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_agent_from_desktop",
+      "kind": "token",
+      "from_file": "realai/recovery_registry.py",
+      "era": "clean_runtime",
+      "file_hash": "065244488cae91bbc426a05c6835c1f24aa413791e95e79c4bbe1b0cc9a16ae4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_src",
+      "kind": "token",
+      "from_file": "realai/recovery_registry.py",
+      "era": "clean_runtime",
+      "file_hash": "065244488cae91bbc426a05c6835c1f24aa413791e95e79c4bbe1b0cc9a16ae4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_dest",
+      "kind": "token",
+      "from_file": "realai/recovery_registry.py",
+      "era": "clean_runtime",
+      "file_hash": "065244488cae91bbc426a05c6835c1f24aa413791e95e79c4bbe1b0cc9a16ae4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_adapter",
+      "kind": "token",
+      "from_file": "realai/recovery_registry.py",
+      "era": "clean_runtime",
+      "file_hash": "065244488cae91bbc426a05c6835c1f24aa413791e95e79c4bbe1b0cc9a16ae4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_root",
+      "kind": "token",
+      "from_file": "realai/recovery_registry.py",
+      "era": "clean_runtime",
+      "file_hash": "065244488cae91bbc426a05c6835c1f24aa413791e95e79c4bbe1b0cc9a16ae4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_adapter_count",
+      "kind": "token",
+      "from_file": "realai/recovery_registry.py",
+      "era": "clean_runtime",
+      "file_hash": "065244488cae91bbc426a05c6835c1f24aa413791e95e79c4bbe1b0cc9a16ae4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_adapters_sample",
+      "kind": "token",
+      "from_file": "realai/recovery_registry.py",
+      "era": "clean_runtime",
+      "file_hash": "065244488cae91bbc426a05c6835c1f24aa413791e95e79c4bbe1b0cc9a16ae4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_path",
+      "kind": "token",
+      "from_file": "realai/recovery_registry.py",
+      "era": "clean_runtime",
+      "file_hash": "065244488cae91bbc426a05c6835c1f24aa413791e95e79c4bbe1b0cc9a16ae4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_adapters",
+      "kind": "token",
+      "from_file": "realai/recovery_registry.py",
+      "era": "clean_runtime",
+      "file_hash": "065244488cae91bbc426a05c6835c1f24aa413791e95e79c4bbe1b0cc9a16ae4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/safety.py",
+      "era": "clean_runtime",
+      "file_hash": "001abbcfe3d27a2b9a0956d23c080216bbcdd3087c867929bc78134fc172df9d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_historical_backups",
+      "kind": "token",
+      "from_file": "realai/self_heal.py",
+      "era": "clean_runtime",
+      "file_hash": "a32cd1a9752d0e35056be3687700d80add4ade1358497341061fe4e16d13e889",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_manifests",
+      "kind": "token",
+      "from_file": "realai/self_heal.py",
+      "era": "clean_runtime",
+      "file_hash": "a32cd1a9752d0e35056be3687700d80add4ade1358497341061fe4e16d13e889",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_engine",
+      "kind": "token",
+      "from_file": "realai/self_improvement.py",
+      "era": "clean_runtime",
+      "file_hash": "a4a3773dfa720485fb6287f7b694ba0fc280cfbc6d1ce8a83b188e75bc403051",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "setuptools",
+      "kind": "from_import",
+      "from_file": "realai/setup.py",
+      "era": "clean_runtime",
+      "file_hash": "4bc041944a09b4f2ddad50a6cc4908167d5a34404a0c994eb0878f9e88f968af",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_core",
+      "kind": "token",
+      "from_file": "realai/setup.py",
+      "era": "clean_runtime",
+      "file_hash": "4bc041944a09b4f2ddad50a6cc4908167d5a34404a0c994eb0878f9e88f968af",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/setup.py",
+      "era": "clean_runtime",
+      "file_hash": "4bc041944a09b4f2ddad50a6cc4908167d5a34404a0c994eb0878f9e88f968af",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "apps/frontend/src/*",
+      "kind": "path_ref",
+      "from_file": "realai/tsconfig.json",
+      "era": "clean_runtime",
+      "file_hash": "8e281591a0294dfa907c240d7783082a9f3b2c8ce8be0b85435d960db984e0af",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "apps/widget/src/*",
+      "kind": "path_ref",
+      "from_file": "realai/tsconfig.json",
+      "era": "clean_runtime",
+      "file_hash": "8e281591a0294dfa907c240d7783082a9f3b2c8ce8be0b85435d960db984e0af",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "apps/dashboard/src/*",
+      "kind": "path_ref",
+      "from_file": "realai/tsconfig.json",
+      "era": "clean_runtime",
+      "file_hash": "8e281591a0294dfa907c240d7783082a9f3b2c8ce8be0b85435d960db984e0af",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "providers/*",
+      "kind": "path_ref",
+      "from_file": "realai/tsconfig.json",
+      "era": "clean_runtime",
+      "file_hash": "8e281591a0294dfa907c240d7783082a9f3b2c8ce8be0b85435d960db984e0af",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_multi_agent",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_agent",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_memory_injected",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_model",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_meta",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_multi_agent_error",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_manifests",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools_status",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools_list_agents",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools_list_profiles",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools_assess",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_not_found",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_snapshots",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_on",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_injected",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_root",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "finetune",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "dataset",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/v3_runtime_bridge.py",
+      "era": "clean_runtime",
+      "file_hash": "4cb7c620bafddff6d4406a8838e2779542721163088ffb803f8a63c9535a6ab8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools_gold",
+      "kind": "token",
+      "from_file": "realai/v3_runtime_bridge.py",
+      "era": "clean_runtime",
+      "file_hash": "4cb7c620bafddff6d4406a8838e2779542721163088ffb803f8a63c9535a6ab8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools_status",
+      "kind": "token",
+      "from_file": "realai/v3_runtime_bridge.py",
+      "era": "clean_runtime",
+      "file_hash": "4cb7c620bafddff6d4406a8838e2779542721163088ffb803f8a63c9535a6ab8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools_bridge",
+      "kind": "token",
+      "from_file": "realai/v3_runtime_bridge.py",
+      "era": "clean_runtime",
+      "file_hash": "4cb7c620bafddff6d4406a8838e2779542721163088ffb803f8a63c9535a6ab8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/v3_runtime_bridge.py",
+      "era": "clean_runtime",
+      "file_hash": "4cb7c620bafddff6d4406a8838e2779542721163088ffb803f8a63c9535a6ab8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_not_found",
+      "kind": "token",
+      "from_file": "realai/v3_runtime_bridge.py",
+      "era": "clean_runtime",
+      "file_hash": "4cb7c620bafddff6d4406a8838e2779542721163088ffb803f8a63c9535a6ab8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools_list_agents",
+      "kind": "token",
+      "from_file": "realai/v3_runtime_bridge.py",
+      "era": "clean_runtime",
+      "file_hash": "4cb7c620bafddff6d4406a8838e2779542721163088ffb803f8a63c9535a6ab8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools_list_profiles",
+      "kind": "token",
+      "from_file": "realai/v3_runtime_bridge.py",
+      "era": "clean_runtime",
+      "file_hash": "4cb7c620bafddff6d4406a8838e2779542721163088ffb803f8a63c9535a6ab8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools_assess",
+      "kind": "token",
+      "from_file": "realai/v3_runtime_bridge.py",
+      "era": "clean_runtime",
+      "file_hash": "4cb7c620bafddff6d4406a8838e2779542721163088ffb803f8a63c9535a6ab8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "resource",
+      "kind": "import",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "pyautogui",
+      "kind": "import",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "pygetwindow",
+      "kind": "import",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "wave",
+      "kind": "import",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "pyttsx3",
+      "kind": "import",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "smtplib",
+      "kind": "import",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "pyaudio",
+      "kind": "import",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "gnupg",
+      "kind": "import",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "vosk",
+      "kind": "from_import",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "bs4",
+      "kind": "from_import",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "googleapiclient.discovery",
+      "kind": "from_import",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "google.oauth2.credentials",
+      "kind": "from_import",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "web3",
+      "kind": "from_import",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_config",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_meta",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_type",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_orchestration",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_registry",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_contributions",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_results",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_assignments",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_summaries",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_found",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_roles",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_learning",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_usage",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_used",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_file",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_updated",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_data",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "plugin_system",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "plugin_name",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "plugin_config",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "dataset",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "../core",
+      "kind": "es_import",
+      "from_file": "realai/agents/devops_agent.ts",
+      "era": "clean_runtime",
+      "file_hash": "96348dd99b8be068bfca5b4db4e2a892c8831815979513a7c2a1e14e215b85c0",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "../core",
+      "kind": "path_ref",
+      "from_file": "realai/agents/devops_agent.ts",
+      "era": "clean_runtime",
+      "file_hash": "96348dd99b8be068bfca5b4db4e2a892c8831815979513a7c2a1e14e215b85c0",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./devops_agent",
+      "kind": "path_ref",
+      "from_file": "realai/agents/index.ts",
+      "era": "clean_runtime",
+      "file_hash": "c7fed558b6e07b6ec3f512eb02084f9e5ff6c8d1612c14de52ec92b900c94f9d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/cli.py",
+      "era": "clean_runtime",
+      "file_hash": "1b3e84c3d75da43ddfde08ab1c9c81c32a01cb4d5248c03e4bcf71d91af20fc6",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/cli.py",
+      "era": "clean_runtime",
+      "file_hash": "1b3e84c3d75da43ddfde08ab1c9c81c32a01cb4d5248c03e4bcf71d91af20fc6",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools.dashboard",
+      "kind": "from_import",
+      "from_file": "realai/agent_tools_gold/dashboard.py",
+      "era": "clean_runtime",
+      "file_hash": "8824ef61dbcde90acb9f3cadd2a38f5691b40d61655b14232e13975f248e3e40",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "socketserver",
+      "kind": "from_import",
+      "from_file": "realai/agent_tools_gold/dashboard.py",
+      "era": "clean_runtime",
+      "file_hash": "8824ef61dbcde90acb9f3cadd2a38f5691b40d61655b14232e13975f248e3e40",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/dashboard.py",
+      "era": "clean_runtime",
+      "file_hash": "8824ef61dbcde90acb9f3cadd2a38f5691b40d61655b14232e13975f248e3e40",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/dashboard.py",
+      "era": "clean_runtime",
+      "file_hash": "8824ef61dbcde90acb9f3cadd2a38f5691b40d61655b14232e13975f248e3e40",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_ids",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/dashboard.py",
+      "era": "clean_runtime",
+      "file_hash": "8824ef61dbcde90acb9f3cadd2a38f5691b40d61655b14232e13975f248e3e40",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_list",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/dashboard.py",
+      "era": "clean_runtime",
+      "file_hash": "8824ef61dbcde90acb9f3cadd2a38f5691b40d61655b14232e13975f248e3e40",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_role",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/dashboard.py",
+      "era": "clean_runtime",
+      "file_hash": "8824ef61dbcde90acb9f3cadd2a38f5691b40d61655b14232e13975f248e3e40",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/executor.py",
+      "era": "clean_runtime",
+      "file_hash": "c0232aa2f01ab9c5fa89bb8babb93f05ab4d04194f6b7177b466a30a31222ca3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_role",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/executor.py",
+      "era": "clean_runtime",
+      "file_hash": "c0232aa2f01ab9c5fa89bb8babb93f05ab4d04194f6b7177b466a30a31222ca3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/importer.py",
+      "era": "clean_runtime",
+      "file_hash": "95163cfbe2fe3683097c70bae82203e770b1a3063f3d0205852f2924cbe88297",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/registry.py",
+      "era": "clean_runtime",
+      "file_hash": "2a621c422d14fe9c8730912abeae13873f35ea2877a5fb97021dccfe02220d63",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/runtime.py",
+      "era": "clean_runtime",
+      "file_hash": "c990c3d46cf28a5b92b7f9d6b635032a359428e757ef6d7a2da7cbc223992d42",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_role",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/runtime.py",
+      "era": "clean_runtime",
+      "file_hash": "c990c3d46cf28a5b92b7f9d6b635032a359428e757ef6d7a2da7cbc223992d42",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/engine/executor.py",
+      "era": "clean_runtime",
+      "file_hash": "273aa3ffcbc469c919f45ca0858307c28cb798e6095d4a8f48bbf46fde8216ff",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/engine/loader.py",
+      "era": "clean_runtime",
+      "file_hash": "4c5ca34a26dd9faf44394ecc697db6dac5b556fa3970d704ba9ffebb94764665",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/engine/logger.py",
+      "era": "clean_runtime",
+      "file_hash": "5be768244705bf72f04c119cafdb45fe0ff03fd431cb7b5a1455c4bedfe729db",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/engine/memory.py",
+      "era": "clean_runtime",
+      "file_hash": "6b5bcb049ea47be1b147c9aaf2f88135795b2d73829d57adfd6dd52a18e87eb9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/engine/router.py",
+      "era": "clean_runtime",
+      "file_hash": "f80440a97de1d2d580d2a7a78e7bff66494b98accd65185cf37844af1cda650d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/engine/test_harness.py",
+      "era": "clean_runtime",
+      "file_hash": "ca48ea44e249e9496225d32c330b13e72cc97eeadd5b01b129039a0a64e5a574",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/engine/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "c114da259c0bf6405f196370312cd19a84a0374c9e6fba8f80dfb08ab58f4bbd",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/providers/anthropic.py",
+      "era": "clean_runtime",
+      "file_hash": "36d28798298cbaf1f7fd3fd1d96fb3990c979e2a2d19fef1de4554c848e88e0b",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/providers/groq.py",
+      "era": "clean_runtime",
+      "file_hash": "1a6a77503a960221068d916f7eb815c2fded88bd1be4ccd4027b499a443eb284",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/providers/local.py",
+      "era": "clean_runtime",
+      "file_hash": "cd77038d193336b5a3d4c7d9e0dd8e9c1cc6f8cac4787cee125cba83c3a2e629",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/providers/openai.py",
+      "era": "clean_runtime",
+      "file_hash": "eef79bf5227ce8deaedceb61d07d5d62b7c25d131c56212483c1eae2279c48d9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/providers/realai.py",
+      "era": "clean_runtime",
+      "file_hash": "93b8cb46e6ffedb11f1dcb999b7fa0ca8becd2919e8ba59bca299c6543791983",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/providers/router.py",
+      "era": "clean_runtime",
+      "file_hash": "b15b799129e18cfb1f7004cb1ee3eb6797046dd441b8660f3bbeb2a6e0498440",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/providers/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "5b3fd32ef11cddf5531ca11dd4e01b2d79ce8525901ad3167fb4094c185103b7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/tooling/crypto.py",
+      "era": "clean_runtime",
+      "file_hash": "9eb6aaf76e55cfb72d234271595d53adc72088babf1fa7a0ec0eb145866f560f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/tooling/filesystem.py",
+      "era": "clean_runtime",
+      "file_hash": "4bc3200490a3188ac2975985e84a32395bbf5c2c9d6c37c961ab44c68bcad3ed",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/tooling/http.py",
+      "era": "clean_runtime",
+      "file_hash": "7157bcca08bd2fa142ab4ffed446af881a602c82d6907f0abf291f953c00556e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/tooling/registry.py",
+      "era": "clean_runtime",
+      "file_hash": "a4e5f6c3131a8bf91b576b832b3acbb2fab0b03e3d792e06aed8fc294e105d93",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/tooling/solana.py",
+      "era": "clean_runtime",
+      "file_hash": "5b572729e8270b43a8a3e3693d2cca0ae526b487c840a896be2999c10c778f63",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "realai/agent_tools_gold/tooling/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "d550566b998dc692cdb974d7cf471ab87efd9a0704df062835ee6296a0a94931",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "prometheus_client",
+      "kind": "from_import",
+      "from_file": "realai/apps/api/routes/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "4fcb373c8bebc91449bab5ffa6c03a9042ef407d68b9050c75596b33dae2005c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "../..",
+      "kind": "path_ref",
+      "from_file": "realai/apps/frontend/next.config.js",
+      "era": "clean_runtime",
+      "file_hash": "e38fe9c218306dbf7fa62f746dc65d51069b8faa07f71f267bfdf73df7fd9f2f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+      "kind": "path_ref",
+      "from_file": "realai/apps/frontend/tailwind.config.js",
+      "era": "clean_runtime",
+      "file_hash": "3c8e2c8f11de599cbbd4dbc3c186ca31b9d7b9f10fdfc37b43228893a3f508fb",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+      "kind": "path_ref",
+      "from_file": "realai/apps/frontend/tailwind.config.js",
+      "era": "clean_runtime",
+      "file_hash": "3c8e2c8f11de599cbbd4dbc3c186ca31b9d7b9f10fdfc37b43228893a3f508fb",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./src/*",
+      "kind": "path_ref",
+      "from_file": "realai/apps/frontend/tsconfig.json",
+      "era": "clean_runtime",
+      "file_hash": "a18800cf70ec7fb302fe00047c274f7ed5674046d29280b501950efdf42f5dcc",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "realai/apps/frontend/src/app/layout.tsx",
+      "era": "clean_runtime",
+      "file_hash": "4a8ce67390253c86833a0b0596ff03f4606b5c80a423d8d54ff4d7a0fe1a3675",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./globals.css",
+      "kind": "es_import",
+      "from_file": "realai/apps/frontend/src/app/layout.tsx",
+      "era": "clean_runtime",
+      "file_hash": "4a8ce67390253c86833a0b0596ff03f4606b5c80a423d8d54ff4d7a0fe1a3675",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./globals.css",
+      "kind": "path_ref",
+      "from_file": "realai/apps/frontend/src/app/layout.tsx",
+      "era": "clean_runtime",
+      "file_hash": "4a8ce67390253c86833a0b0596ff03f4606b5c80a423d8d54ff4d7a0fe1a3675",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "Sidebar",
+      "kind": "import",
+      "from_file": "realai/apps/frontend/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "9c60758290471943897a370e68ffa7a4ee937409b36645a927c1de1a6106da4d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "MessageList",
+      "kind": "import",
+      "from_file": "realai/apps/frontend/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "9c60758290471943897a370e68ffa7a4ee937409b36645a927c1de1a6106da4d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "ChatInput",
+      "kind": "import",
+      "from_file": "realai/apps/frontend/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "9c60758290471943897a370e68ffa7a4ee937409b36645a927c1de1a6106da4d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "SettingsDrawer",
+      "kind": "import",
+      "from_file": "realai/apps/frontend/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "9c60758290471943897a370e68ffa7a4ee937409b36645a927c1de1a6106da4d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "realai/apps/frontend/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "9c60758290471943897a370e68ffa7a4ee937409b36645a927c1de1a6106da4d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "realai/apps/frontend/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "9c60758290471943897a370e68ffa7a4ee937409b36645a927c1de1a6106da4d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "realai/apps/frontend/src/components/ChatInput.tsx",
+      "era": "clean_runtime",
+      "file_hash": "1e5be5486b2ebb5ba19ae17186e4643c8d6bbd1f5bc62a2ec563e16128874a1d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "realai/apps/frontend/src/components/ChatInput.tsx",
+      "era": "clean_runtime",
+      "file_hash": "1e5be5486b2ebb5ba19ae17186e4643c8d6bbd1f5bc62a2ec563e16128874a1d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "ReactMarkdown",
+      "kind": "import",
+      "from_file": "realai/apps/frontend/src/components/MessageList.tsx",
+      "era": "clean_runtime",
+      "file_hash": "beb277941c75a4603c5b389b630fc63e4ac3dddea58c21bf1159ce0d38634230",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "remarkGfm",
+      "kind": "import",
+      "from_file": "realai/apps/frontend/src/components/MessageList.tsx",
+      "era": "clean_runtime",
+      "file_hash": "beb277941c75a4603c5b389b630fc63e4ac3dddea58c21bf1159ce0d38634230",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "realai/apps/frontend/src/components/MessageList.tsx",
+      "era": "clean_runtime",
+      "file_hash": "beb277941c75a4603c5b389b630fc63e4ac3dddea58c21bf1159ce0d38634230",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "react-markdown",
+      "kind": "es_import",
+      "from_file": "realai/apps/frontend/src/components/MessageList.tsx",
+      "era": "clean_runtime",
+      "file_hash": "beb277941c75a4603c5b389b630fc63e4ac3dddea58c21bf1159ce0d38634230",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "remark-gfm",
+      "kind": "es_import",
+      "from_file": "realai/apps/frontend/src/components/MessageList.tsx",
+      "era": "clean_runtime",
+      "file_hash": "beb277941c75a4603c5b389b630fc63e4ac3dddea58c21bf1159ce0d38634230",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "realai/apps/frontend/src/components/MessageList.tsx",
+      "era": "clean_runtime",
+      "file_hash": "beb277941c75a4603c5b389b630fc63e4ac3dddea58c21bf1159ce0d38634230",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "realai/apps/frontend/src/components/SettingsDrawer.tsx",
+      "era": "clean_runtime",
+      "file_hash": "996f6fde07b3e43c5dd0feb2a782bb0dedebb19452e4784e9680f1c4f1fd0df1",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "realai/apps/frontend/src/components/SettingsDrawer.tsx",
+      "era": "clean_runtime",
+      "file_hash": "996f6fde07b3e43c5dd0feb2a782bb0dedebb19452e4784e9680f1c4f1fd0df1",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "realai/apps/frontend/src/components/Sidebar.tsx",
+      "era": "clean_runtime",
+      "file_hash": "e6bdf2948a5b1e9671d4afc303a730496b9267e0b35221b3f0670bbf3b40713f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "realai/apps/frontend/src/components/Sidebar.tsx",
+      "era": "clean_runtime",
+      "file_hash": "e6bdf2948a5b1e9671d4afc303a730496b9267e0b35221b3f0670bbf3b40713f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "realai/apps/frontend/src/lib/realai.ts",
+      "era": "clean_runtime",
+      "file_hash": "d8b7f4344cd2cb9fbdb883b09d5650f4c5651de54e05929c0023652cc6aa4d1f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_roles",
+      "kind": "token",
+      "from_file": "realai/apps/vscode/extension.ts",
+      "era": "clean_runtime",
+      "file_hash": "0057ac1d186e417f48a221998ebe960f9bb4f0034f36b97218716be1c06fca71",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./out/extension.js",
+      "kind": "path_ref",
+      "from_file": "realai/apps/vscode/package.json",
+      "era": "clean_runtime",
+      "file_hash": "ac99d04d48c534ab87ae19e8ad9e1f510b60a0a46d82fc66506b36081ae308b5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_roles",
+      "kind": "token",
+      "from_file": "realai/apps/vscode/out/realaiClient.js",
+      "era": "clean_runtime",
+      "file_hash": "6c519c8ef4a7c2bff3ef3928562ee2a450a7825dd1d05a5213323d3300ce8ee5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_roles",
+      "kind": "token",
+      "from_file": "realai/apps/vscode/src/realaiClient.ts",
+      "era": "clean_runtime",
+      "file_hash": "b06e93809aa40d0655b19639603ce66cc3e7a75485706534d2cecc7cd8135c3f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "reasoning",
+      "kind": "from_import",
+      "from_file": "realai/aura/main.py",
+      "era": "clean_runtime",
+      "file_hash": "b8c6a4c5b19d836d54e24095fcd4a61dd944799d690d61c6114d58c99d45dbbe",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "skills.registry",
+      "kind": "from_import",
+      "from_file": "realai/aura/main.py",
+      "era": "clean_runtime",
+      "file_hash": "b8c6a4c5b19d836d54e24095fcd4a61dd944799d690d61c6114d58c99d45dbbe",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_path",
+      "kind": "token",
+      "from_file": "realai/aura/memory.py",
+      "era": "clean_runtime",
+      "file_hash": "5c7ccf8c4b3b11b0da4ea319895a6c1eed1f34c5830ab78ea9ae927b8e91e123",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_path",
+      "kind": "token",
+      "from_file": "realai/aura_pkg/memory/engine.py",
+      "era": "clean_runtime",
+      "file_hash": "5ebba7128ae6c12e57f81bec8a703f08de07efa351b3a5ba6981b20fec0f8a8c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "DevOpsAgent",
+      "kind": "import",
+      "from_file": "realai/autopilot/autopilot.ts",
+      "era": "clean_runtime",
+      "file_hash": "a4f75f85ecf52290aa60612f6569fe3a8280af26b693b66d631498d895146547",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "../core",
+      "kind": "es_import",
+      "from_file": "realai/autopilot/autopilot.ts",
+      "era": "clean_runtime",
+      "file_hash": "a4f75f85ecf52290aa60612f6569fe3a8280af26b693b66d631498d895146547",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "../core",
+      "kind": "path_ref",
+      "from_file": "realai/autopilot/autopilot.ts",
+      "era": "clean_runtime",
+      "file_hash": "a4f75f85ecf52290aa60612f6569fe3a8280af26b693b66d631498d895146547",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "Autopilot",
+      "kind": "import",
+      "from_file": "realai/autopilot/index.ts",
+      "era": "clean_runtime",
+      "file_hash": "608718eed595f04df2c57ba61e2c13ae21da164579493ef92c22d899022a487a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./autopilot",
+      "kind": "es_import",
+      "from_file": "realai/autopilot/index.ts",
+      "era": "clean_runtime",
+      "file_hash": "608718eed595f04df2c57ba61e2c13ae21da164579493ef92c22d899022a487a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./autopilot",
+      "kind": "path_ref",
+      "from_file": "realai/autopilot/index.ts",
+      "era": "clean_runtime",
+      "file_hash": "608718eed595f04df2c57ba61e2c13ae21da164579493ef92c22d899022a487a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/benchmarks/bench_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "c671d9dadbf0ae40d09f1a5b52003d5902cd0528e965fbf2c12f18dc8d237cdf",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_mb",
+      "kind": "token",
+      "from_file": "realai/config/dev.toml",
+      "era": "clean_runtime",
+      "file_hash": "3bcaf625262b29d429758a3b2b7cae8f17ecc9ad578140b3b7a8bdb6ea9cea6e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "solana_rpc_url",
+      "kind": "token",
+      "from_file": "realai/config/dev.toml",
+      "era": "clean_runtime",
+      "file_hash": "3bcaf625262b29d429758a3b2b7cae8f17ecc9ad578140b3b7a8bdb6ea9cea6e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_mb",
+      "kind": "token",
+      "from_file": "realai/config/gpu.toml",
+      "era": "clean_runtime",
+      "file_hash": "e64cfb0cfb5240122db7660dc770e0505353b5b6936b8dd1f717096ffea88141",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "solana_rpc_url",
+      "kind": "token",
+      "from_file": "realai/config/gpu.toml",
+      "era": "clean_runtime",
+      "file_hash": "e64cfb0cfb5240122db7660dc770e0505353b5b6936b8dd1f717096ffea88141",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_mb",
+      "kind": "token",
+      "from_file": "realai/config/prod.toml",
+      "era": "clean_runtime",
+      "file_hash": "52b729d4c21cd1959d4297d4fd7bdc26265b8399414ea6661411421561cc8ba2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "solana_rpc_url",
+      "kind": "token",
+      "from_file": "realai/config/prod.toml",
+      "era": "clean_runtime",
+      "file_hash": "52b729d4c21cd1959d4297d4fd7bdc26265b8399414ea6661411421561cc8ba2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "prometheus_client",
+      "kind": "from_import",
+      "from_file": "realai/core/metrics/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "0caec5f4d30b6524d9847fa6cc719d532ca2fb1c0784e286c478ab6eb58ebb67",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_core_requests_total",
+      "kind": "token",
+      "from_file": "realai/core/metrics/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "0caec5f4d30b6524d9847fa6cc719d532ca2fb1c0784e286c478ab6eb58ebb67",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_core_request_latency_seconds",
+      "kind": "token",
+      "from_file": "realai/core/metrics/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "0caec5f4d30b6524d9847fa6cc719d532ca2fb1c0784e286c478ab6eb58ebb67",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_agent_steps_total",
+      "kind": "token",
+      "from_file": "realai/core/metrics/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "0caec5f4d30b6524d9847fa6cc719d532ca2fb1c0784e286c478ab6eb58ebb67",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_tool_calls_total",
+      "kind": "token",
+      "from_file": "realai/core/metrics/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "0caec5f4d30b6524d9847fa6cc719d532ca2fb1c0784e286c478ab6eb58ebb67",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "resource",
+      "kind": "import",
+      "from_file": "realai/core/security/python_sandbox.py",
+      "era": "clean_runtime",
+      "file_hash": "8dbbed7fb92293aec43a2629cfa62053c373c7f9b430b7866cba0e538aa3d4f9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_bytes",
+      "kind": "token",
+      "from_file": "realai/core/security/python_sandbox.py",
+      "era": "clean_runtime",
+      "file_hash": "8dbbed7fb92293aec43a2629cfa62053c373c7f9b430b7866cba0e538aa3d4f9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "opentelemetry",
+      "kind": "from_import",
+      "from_file": "realai/core/tracing/tracer.py",
+      "era": "clean_runtime",
+      "file_hash": "f750cf49623262b3eb7e539dcb95dfe02dae3b56d2a0845115dfc2c004cd8946",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "faster_whisper",
+      "kind": "from_import",
+      "from_file": "realai/core/voice/asr_whisper.py",
+      "era": "clean_runtime",
+      "file_hash": "04a39d03811e44cf24bb2eb19d5d771a00d9394420c680e33f55cc750c49414f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "web3",
+      "kind": "from_import",
+      "from_file": "realai/core/web3/evm_backend.py",
+      "era": "clean_runtime",
+      "file_hash": "c510ae3585fad49d607cc0b2a0b69949851eb87392d36994e0aaf2a2b6efd2b4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.prompts",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.runnables",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.messages",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.graph",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.prebuilt",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_type",
+      "kind": "token",
+      "from_file": "realai/hierarchical_agent_gold/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.graph",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/hierarchical_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "63e3b8f461b341cc12eb097596884444ae84337da1b48a58a458563639d2be1e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.messages",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/hierarchical_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "63e3b8f461b341cc12eb097596884444ae84337da1b48a58a458563639d2be1e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./training_output",
+      "kind": "path_ref",
+      "from_file": "realai/hierarchical_agent_gold/main.py",
+      "era": "clean_runtime",
+      "file_hash": "c4f1dbbf3f27e67e60e9c0e2c2fc13794768bd4acf79b9360adb572d3f7a382c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_ultimate",
+      "kind": "token",
+      "from_file": "realai/hierarchical_agent_gold/main.py",
+      "era": "clean_runtime",
+      "file_hash": "c4f1dbbf3f27e67e60e9c0e2c2fc13794768bd4acf79b9360adb572d3f7a382c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_registry",
+      "kind": "token",
+      "from_file": "realai/hierarchical_agent_gold/main.py",
+      "era": "clean_runtime",
+      "file_hash": "c4f1dbbf3f27e67e60e9c0e2c2fc13794768bd4acf79b9360adb572d3f7a382c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/hierarchical_agent_gold/main.py",
+      "era": "clean_runtime",
+      "file_hash": "c4f1dbbf3f27e67e60e9c0e2c2fc13794768bd4acf79b9360adb572d3f7a382c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.prompts",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.runnables",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.messages",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph_supervisor",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.graph",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.prebuilt",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_registry",
+      "kind": "token",
+      "from_file": "realai/hierarchical_agent_gold/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_agent",
+      "kind": "import",
+      "from_file": "realai/hierarchical_agent_gold/test_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "53544baf29d5b4f19855e48ddd691fd02d4c29b4c1f653b4358c925dfa55fe04",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "tools",
+      "kind": "import",
+      "from_file": "realai/hierarchical_agent_gold/test_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "53544baf29d5b4f19855e48ddd691fd02d4c29b4c1f653b4358c925dfa55fe04",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_agent",
+      "kind": "token",
+      "from_file": "realai/hierarchical_agent_gold/test_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "53544baf29d5b4f19855e48ddd691fd02d4c29b4c1f653b4358c925dfa55fe04",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.tools",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/tools.py",
+      "era": "clean_runtime",
+      "file_hash": "52d0ad683d7fc937a0bd2561bcacdccec13b5a0313c65b3e53dcc37b55a36c82",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_type",
+      "kind": "token",
+      "from_file": "realai/hierarchical_agent_gold/tools.py",
+      "era": "clean_runtime",
+      "file_hash": "52d0ad683d7fc937a0bd2561bcacdccec13b5a0313c65b3e53dcc37b55a36c82",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "wandb",
+      "kind": "import",
+      "from_file": "realai/hierarchical_agent_gold/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "unsloth",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "datasets",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "trl",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./realai_training_output",
+      "kind": "path_ref",
+      "from_file": "realai/hierarchical_agent_gold/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_training_output",
+      "kind": "token",
+      "from_file": "realai/hierarchical_agent_gold/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_system",
+      "kind": "token",
+      "from_file": "realai/hierarchical_agent_gold/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_config",
+      "kind": "token",
+      "from_file": "realai/hierarchical_agent_gold/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_alpha",
+      "kind": "token",
+      "from_file": "realai/hierarchical_agent_gold/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_dropout",
+      "kind": "token",
+      "from_file": "realai/hierarchical_agent_gold/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/hierarchical_agent_gold/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_openai",
+      "kind": "from_import",
+      "from_file": "realai/hierarchical_agent_gold/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "32462ff0234bc3106942c44666cf956b565dccd0c25a4b9bad8256c5e0d8fc51",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_ultimate",
+      "kind": "token",
+      "from_file": "realai/hierarchical_agent_gold/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "32462ff0234bc3106942c44666cf956b565dccd0c25a4b9bad8256c5e0d8fc51",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_orchestration",
+      "kind": "token",
+      "from_file": "realai/orchestration_gold/agent.py",
+      "era": "clean_runtime",
+      "file_hash": "1bf7ea0bef30398f5b3ea63c469398ca72e8d650e930f23aae3c047e282796d7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_orchestration.orchestrator",
+      "kind": "from_import",
+      "from_file": "realai/orchestration_gold/orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "b91bd868d9be02e7ef4bb6f3a128b339884b3abae55c394f1b543252c8acc255",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_orchestration",
+      "kind": "token",
+      "from_file": "realai/orchestration_gold/orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "b91bd868d9be02e7ef4bb6f3a128b339884b3abae55c394f1b543252c8acc255",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_names",
+      "kind": "token",
+      "from_file": "realai/orchestration_gold/orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "b91bd868d9be02e7ef4bb6f3a128b339884b3abae55c394f1b543252c8acc255",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_name",
+      "kind": "token",
+      "from_file": "realai/orchestration_gold/orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "b91bd868d9be02e7ef4bb6f3a128b339884b3abae55c394f1b543252c8acc255",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_keys",
+      "kind": "token",
+      "from_file": "realai/orchestration_gold/orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "b91bd868d9be02e7ef4bb6f3a128b339884b3abae55c394f1b543252c8acc255",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_orchestration.pipeline",
+      "kind": "from_import",
+      "from_file": "realai/orchestration_gold/pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "dae95e008939a8d30a030b4ecddf24a6da5ab80f19cd534caf231e3345f21604",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_orchestration",
+      "kind": "token",
+      "from_file": "realai/orchestration_gold/pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "dae95e008939a8d30a030b4ecddf24a6da5ab80f19cd534caf231e3345f21604",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_orchestration",
+      "kind": "from_import",
+      "from_file": "realai/orchestration_gold/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "9d6d322ed591fedf764894c574bca5dbe94d7223450cd7fabc6568525565a6f7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_orchestration",
+      "kind": "token",
+      "from_file": "realai/orchestration_gold/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "9d6d322ed591fedf764894c574bca5dbe94d7223450cd7fabc6568525565a6f7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./registryClient",
+      "kind": "path_ref",
+      "from_file": "realai/packages/sdk-ts/src/index.ts",
+      "era": "clean_runtime",
+      "file_hash": "98f510f6152b0ed67aea558e889ffbdb741d0502662caa7d32e573d617e624a7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./envChatClient",
+      "kind": "path_ref",
+      "from_file": "realai/packages/sdk-ts/src/index.ts",
+      "era": "clean_runtime",
+      "file_hash": "98f510f6152b0ed67aea558e889ffbdb741d0502662caa7d32e573d617e624a7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "torch_directml",
+      "kind": "import",
+      "from_file": "realai/plugins/tools/device_selector.py",
+      "era": "clean_runtime",
+      "file_hash": "cfa813bf72432c1c437ec14e49865625b2fff8950419ab66b78403c3f7f43c58",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./run.ps1",
+      "kind": "path_ref",
+      "from_file": "realai/providers/provider.yaml",
+      "era": "clean_runtime",
+      "file_hash": "7bbfa04c0b4b9fecb44dd0adb3e18f2dc6838cedb627b814ffe9ee4259a6015e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "realai/providers/registry.ts",
+      "era": "clean_runtime",
+      "file_hash": "8b4ca2a1dc254dd6d487206c0a07a0058ff0889ee1eca3b7f7d2c8df345f557c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "OpenAI",
+      "kind": "import",
+      "from_file": "realai/providers/openai/index.ts",
+      "era": "clean_runtime",
+      "file_hash": "7fadb45f138d941056d2b113fc1bfa80cd83e6b057c58cd0fb772b2c149e400c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "realai/providers/openai/index.ts",
+      "era": "clean_runtime",
+      "file_hash": "7fadb45f138d941056d2b113fc1bfa80cd83e6b057c58cd0fb772b2c149e400c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "realai/providers/realai/index.ts",
+      "era": "clean_runtime",
+      "file_hash": "9fb6973006eeb872f8e041c600fd6ffaca4943d84828e21553d5eb845790e049",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/realai/agent_runtime.py",
+      "era": "clean_runtime",
+      "file_hash": "97afc20812c186264a3af6313257db30f23e9a9df65f0778f14fa2a404eceac5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_registry",
+      "kind": "token",
+      "from_file": "realai/realai/agent_runtime.py",
+      "era": "clean_runtime",
+      "file_hash": "97afc20812c186264a3af6313257db30f23e9a9df65f0778f14fa2a404eceac5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_input",
+      "kind": "token",
+      "from_file": "realai/realai/agent_runtime.py",
+      "era": "clean_runtime",
+      "file_hash": "97afc20812c186264a3af6313257db30f23e9a9df65f0778f14fa2a404eceac5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_api_key",
+      "kind": "token",
+      "from_file": "realai/realai/api_server.py",
+      "era": "clean_runtime",
+      "file_hash": "73242757e3eef97545e233d691ed2541977af61b972e219a0d0e7517fa2c5715",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_provider",
+      "kind": "token",
+      "from_file": "realai/realai/api_server.py",
+      "era": "clean_runtime",
+      "file_hash": "73242757e3eef97545e233d691ed2541977af61b972e219a0d0e7517fa2c5715",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_model",
+      "kind": "token",
+      "from_file": "realai/realai/api_server.py",
+      "era": "clean_runtime",
+      "file_hash": "73242757e3eef97545e233d691ed2541977af61b972e219a0d0e7517fa2c5715",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_roles",
+      "kind": "token",
+      "from_file": "realai/realai/api_server.py",
+      "era": "clean_runtime",
+      "file_hash": "73242757e3eef97545e233d691ed2541977af61b972e219a0d0e7517fa2c5715",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/realai/api_server.py",
+      "era": "clean_runtime",
+      "file_hash": "73242757e3eef97545e233d691ed2541977af61b972e219a0d0e7517fa2c5715",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "cryptography.hazmat.primitives.ciphers",
+      "kind": "from_import",
+      "from_file": "realai/realai/audit.py",
+      "era": "clean_runtime",
+      "file_hash": "3a20dc0eb923830b7d7bedc9a4c277091fce9675ab2c8da1e5b344d3fae70eb7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "cryptography.hazmat.backends",
+      "kind": "from_import",
+      "from_file": "realai/realai/audit.py",
+      "era": "clean_runtime",
+      "file_hash": "3a20dc0eb923830b7d7bedc9a4c277091fce9675ab2c8da1e5b344d3fae70eb7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai/audit_log.jsonl",
+      "kind": "path_ref",
+      "from_file": "realai/realai/audit.py",
+      "era": "clean_runtime",
+      "file_hash": "3a20dc0eb923830b7d7bedc9a4c277091fce9675ab2c8da1e5b344d3fae70eb7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai/consent_store.json",
+      "kind": "path_ref",
+      "from_file": "realai/realai/audit.py",
+      "era": "clean_runtime",
+      "file_hash": "3a20dc0eb923830b7d7bedc9a4c277091fce9675ab2c8da1e5b344d3fae70eb7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_namespace",
+      "kind": "token",
+      "from_file": "realai/realai/identity.py",
+      "era": "clean_runtime",
+      "file_hash": "9453f0839668c7c6e6e028f25b3076d8c9df1fc362515f76d9d142a443226812",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_engine",
+      "kind": "token",
+      "from_file": "realai/realai/identity.py",
+      "era": "clean_runtime",
+      "file_hash": "9453f0839668c7c6e6e028f25b3076d8c9df1fc362515f76d9d142a443226812",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "plugin_fn",
+      "kind": "token",
+      "from_file": "realai/realai/plugin_marketplace.py",
+      "era": "clean_runtime",
+      "file_hash": "cd672c27ae6abb697a188efd3e5de63ad69f972bdbd7875b7773bb0ce2f92559",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/realai/safety.py",
+      "era": "clean_runtime",
+      "file_hash": "001abbcfe3d27a2b9a0956d23c080216bbcdd3087c867929bc78134fc172df9d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_engine",
+      "kind": "token",
+      "from_file": "realai/realai/self_improvement.py",
+      "era": "clean_runtime",
+      "file_hash": "fdfc30cf40df4dd1556b8ce860c1296366cb2cbb05948b446132686dbbc5fb6f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_meta",
+      "kind": "token",
+      "from_file": "realai/realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "e6493a18f58330e3586339c24408b2f20dc2c2c68d523750189f6cebe9b701d5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_manifests",
+      "kind": "token",
+      "from_file": "realai/realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "e6493a18f58330e3586339c24408b2f20dc2c2c68d523750189f6cebe9b701d5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "finetune",
+      "kind": "token",
+      "from_file": "realai/realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "e6493a18f58330e3586339c24408b2f20dc2c2c68d523750189f6cebe9b701d5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "dataset",
+      "kind": "token",
+      "from_file": "realai/realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "e6493a18f58330e3586339c24408b2f20dc2c2c68d523750189f6cebe9b701d5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/realai/v3_orchestrator.py",
+      "era": "clean_runtime",
+      "file_hash": "e6493a18f58330e3586339c24408b2f20dc2c2c68d523750189f6cebe9b701d5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "resource",
+      "kind": "import",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "pyautogui",
+      "kind": "import",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "pygetwindow",
+      "kind": "import",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "wave",
+      "kind": "import",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "pyttsx3",
+      "kind": "import",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "smtplib",
+      "kind": "import",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "pyaudio",
+      "kind": "import",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "gnupg",
+      "kind": "import",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "vosk",
+      "kind": "from_import",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "bs4",
+      "kind": "from_import",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "googleapiclient.discovery",
+      "kind": "from_import",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "google.oauth2.credentials",
+      "kind": "from_import",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "web3",
+      "kind": "from_import",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_config",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_meta",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_type",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_orchestration",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_registry",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_contributions",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_results",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_assignments",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_summaries",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_found",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_roles",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_learning",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_usage",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_used",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_file",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_updated",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_data",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "plugin_system",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "plugin_name",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "plugin_config",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "dataset",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/realai/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "553ddb6dcd7d4f4398aa919b7bdde2bb158917661a1fda16d3bb520aec00706f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/realai/sdk/python/realai_client.py",
+      "era": "clean_runtime",
+      "file_hash": "df9928bbe3c5bd45cf45c92f8e8777ebc6f746522252c7d14c784b8a39fbb71c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "wsgiref.simple_server",
+      "kind": "from_import",
+      "from_file": "realai/realai/server/app.py",
+      "era": "clean_runtime",
+      "file_hash": "d6df75f8e21f6017780175fc81fa265d4b9fa7d731be1789eeafa6ae835c6c95",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/realai/server/app.py",
+      "era": "clean_runtime",
+      "file_hash": "d6df75f8e21f6017780175fc81fa265d4b9fa7d731be1789eeafa6ae835c6c95",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_inspect",
+      "kind": "token",
+      "from_file": "realai/realai/server/app.py",
+      "era": "clean_runtime",
+      "file_hash": "d6df75f8e21f6017780175fc81fa265d4b9fa7d731be1789eeafa6ae835c6c95",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_clear",
+      "kind": "token",
+      "from_file": "realai/realai/server/app.py",
+      "era": "clean_runtime",
+      "file_hash": "d6df75f8e21f6017780175fc81fa265d4b9fa7d731be1789eeafa6ae835c6c95",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "vllm",
+      "kind": "import",
+      "from_file": "realai/realai/server/backends.py",
+      "era": "clean_runtime",
+      "file_hash": "d0f7eaaeea6276822fc91f8e2512266bd901be7af5910c796b7a218a0f67f2c6",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "vllm",
+      "kind": "from_import",
+      "from_file": "realai/realai/server/backends.py",
+      "era": "clean_runtime",
+      "file_hash": "d0f7eaaeea6276822fc91f8e2512266bd901be7af5910c796b7a218a0f67f2c6",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/realai/server/memory_store.py",
+      "era": "clean_runtime",
+      "file_hash": "5d5b0d3fcf9e88cda6e24a476faa566b20c32606570b079f066b44ccd51e54d8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_records",
+      "kind": "token",
+      "from_file": "realai/realai/server/memory_store.py",
+      "era": "clean_runtime",
+      "file_hash": "5d5b0d3fcf9e88cda6e24a476faa566b20c32606570b079f066b44ccd51e54d8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "prometheus_client",
+      "kind": "from_import",
+      "from_file": "realai/realai/server/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "6d8274519ced47d04e2dc890f6472b328ed9d2eba8724de8f69183694fb745d3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_requests_total",
+      "kind": "token",
+      "from_file": "realai/realai/server/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "6d8274519ced47d04e2dc890f6472b328ed9d2eba8724de8f69183694fb745d3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_tokens_total",
+      "kind": "token",
+      "from_file": "realai/realai/server/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "6d8274519ced47d04e2dc890f6472b328ed9d2eba8724de8f69183694fb745d3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_request_latency_seconds",
+      "kind": "token",
+      "from_file": "realai/realai/server/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "6d8274519ced47d04e2dc890f6472b328ed9d2eba8724de8f69183694fb745d3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/realai/server/persistence.py",
+      "era": "clean_runtime",
+      "file_hash": "6c650ddbd1ac8acf97949d4e5b2945cca7044c26498d3326f02cc642286feae1",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_records",
+      "kind": "token",
+      "from_file": "realai/realai/server/persistence.py",
+      "era": "clean_runtime",
+      "file_hash": "6c650ddbd1ac8acf97949d4e5b2945cca7044c26498d3326f02cc642286feae1",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/realai/server/router.py",
+      "era": "clean_runtime",
+      "file_hash": "579fc03e8fc48ee731037b6336827c6513e9f964c04e2f2a6f171d1479dc76f8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_context",
+      "kind": "token",
+      "from_file": "realai/realai/server/router.py",
+      "era": "clean_runtime",
+      "file_hash": "579fc03e8fc48ee731037b6336827c6513e9f964c04e2f2a6f171d1479dc76f8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/realai/training/build_datasets.py",
+      "era": "training",
+      "file_hash": "3641a8861e9f347799c1a4deb4905640e91f41b5dac252c7f420618eff7192c3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "dataset",
+      "kind": "token",
+      "from_file": "realai/realai/training/eval.py",
+      "era": "training",
+      "file_hash": "9f98e83691569ef1dcdc3b942a27092821dcd14e2fa9b30b3e28ded200cca793",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "dataset",
+      "kind": "token",
+      "from_file": "realai/realai/training/finetune.py",
+      "era": "training",
+      "file_hash": "7706529eec10dee333f0bfa30cfc71b9e7f471e34ab15ce32d1656bfb1c49258",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/realai/training/finetune.py",
+      "era": "training",
+      "file_hash": "7706529eec10dee333f0bfa30cfc71b9e7f471e34ab15ce32d1656bfb1c49258",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.prompts",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.runnables",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.messages",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.graph",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.prebuilt",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_type",
+      "kind": "token",
+      "from_file": "realai/realai_agent/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.graph",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/hierarchical_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "63e3b8f461b341cc12eb097596884444ae84337da1b48a58a458563639d2be1e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.messages",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/hierarchical_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "63e3b8f461b341cc12eb097596884444ae84337da1b48a58a458563639d2be1e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./training_output",
+      "kind": "path_ref",
+      "from_file": "realai/realai_agent/main.py",
+      "era": "clean_runtime",
+      "file_hash": "c4f1dbbf3f27e67e60e9c0e2c2fc13794768bd4acf79b9360adb572d3f7a382c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_ultimate",
+      "kind": "token",
+      "from_file": "realai/realai_agent/main.py",
+      "era": "clean_runtime",
+      "file_hash": "c4f1dbbf3f27e67e60e9c0e2c2fc13794768bd4acf79b9360adb572d3f7a382c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_registry",
+      "kind": "token",
+      "from_file": "realai/realai_agent/main.py",
+      "era": "clean_runtime",
+      "file_hash": "c4f1dbbf3f27e67e60e9c0e2c2fc13794768bd4acf79b9360adb572d3f7a382c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/realai_agent/main.py",
+      "era": "clean_runtime",
+      "file_hash": "c4f1dbbf3f27e67e60e9c0e2c2fc13794768bd4acf79b9360adb572d3f7a382c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.prompts",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.runnables",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.messages",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph_supervisor",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.graph",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.prebuilt",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_registry",
+      "kind": "token",
+      "from_file": "realai/realai_agent/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_agent",
+      "kind": "import",
+      "from_file": "realai/realai_agent/test_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "53544baf29d5b4f19855e48ddd691fd02d4c29b4c1f653b4358c925dfa55fe04",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "tools",
+      "kind": "import",
+      "from_file": "realai/realai_agent/test_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "53544baf29d5b4f19855e48ddd691fd02d4c29b4c1f653b4358c925dfa55fe04",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_agent",
+      "kind": "token",
+      "from_file": "realai/realai_agent/test_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "53544baf29d5b4f19855e48ddd691fd02d4c29b4c1f653b4358c925dfa55fe04",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.tools",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/tools.py",
+      "era": "clean_runtime",
+      "file_hash": "52d0ad683d7fc937a0bd2561bcacdccec13b5a0313c65b3e53dcc37b55a36c82",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_type",
+      "kind": "token",
+      "from_file": "realai/realai_agent/tools.py",
+      "era": "clean_runtime",
+      "file_hash": "52d0ad683d7fc937a0bd2561bcacdccec13b5a0313c65b3e53dcc37b55a36c82",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "wandb",
+      "kind": "import",
+      "from_file": "realai/realai_agent/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "unsloth",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "datasets",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "trl",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./realai_training_output",
+      "kind": "path_ref",
+      "from_file": "realai/realai_agent/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_training_output",
+      "kind": "token",
+      "from_file": "realai/realai_agent/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_system",
+      "kind": "token",
+      "from_file": "realai/realai_agent/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_config",
+      "kind": "token",
+      "from_file": "realai/realai_agent/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_alpha",
+      "kind": "token",
+      "from_file": "realai/realai_agent/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_dropout",
+      "kind": "token",
+      "from_file": "realai/realai_agent/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/realai_agent/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_openai",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "32462ff0234bc3106942c44666cf956b565dccd0c25a4b9bad8256c5e0d8fc51",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_ultimate",
+      "kind": "token",
+      "from_file": "realai/realai_agent/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "32462ff0234bc3106942c44666cf956b565dccd0c25a4b9bad8256c5e0d8fc51",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.prompts",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.runnables",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.messages",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.graph",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.prebuilt",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_type",
+      "kind": "token",
+      "from_file": "realai/realai_agent_from_desktop/agents.py",
+      "era": "clean_runtime",
+      "file_hash": "4572b23dfb13bd9a6f851e0da594f907a1f3bbd9800441c45aaa867050cc3729",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.graph",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/hierarchical_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "63e3b8f461b341cc12eb097596884444ae84337da1b48a58a458563639d2be1e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.messages",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/hierarchical_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "63e3b8f461b341cc12eb097596884444ae84337da1b48a58a458563639d2be1e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./training_output",
+      "kind": "path_ref",
+      "from_file": "realai/realai_agent_from_desktop/main.py",
+      "era": "clean_runtime",
+      "file_hash": "c4f1dbbf3f27e67e60e9c0e2c2fc13794768bd4acf79b9360adb572d3f7a382c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_ultimate",
+      "kind": "token",
+      "from_file": "realai/realai_agent_from_desktop/main.py",
+      "era": "clean_runtime",
+      "file_hash": "c4f1dbbf3f27e67e60e9c0e2c2fc13794768bd4acf79b9360adb572d3f7a382c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_registry",
+      "kind": "token",
+      "from_file": "realai/realai_agent_from_desktop/main.py",
+      "era": "clean_runtime",
+      "file_hash": "c4f1dbbf3f27e67e60e9c0e2c2fc13794768bd4acf79b9360adb572d3f7a382c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/realai_agent_from_desktop/main.py",
+      "era": "clean_runtime",
+      "file_hash": "c4f1dbbf3f27e67e60e9c0e2c2fc13794768bd4acf79b9360adb572d3f7a382c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.prompts",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.runnables",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.messages",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph_supervisor",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.graph",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langgraph.prebuilt",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_registry",
+      "kind": "token",
+      "from_file": "realai/realai_agent_from_desktop/supervisor.py",
+      "era": "clean_runtime",
+      "file_hash": "e70e1425b5cd771a2fa6e727a4a16703a774c4dd31577229d32ead111058773a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_agent",
+      "kind": "import",
+      "from_file": "realai/realai_agent_from_desktop/test_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "53544baf29d5b4f19855e48ddd691fd02d4c29b4c1f653b4358c925dfa55fe04",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "tools",
+      "kind": "import",
+      "from_file": "realai/realai_agent_from_desktop/test_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "53544baf29d5b4f19855e48ddd691fd02d4c29b4c1f653b4358c925dfa55fe04",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_agent",
+      "kind": "token",
+      "from_file": "realai/realai_agent_from_desktop/test_agent.py",
+      "era": "clean_runtime",
+      "file_hash": "53544baf29d5b4f19855e48ddd691fd02d4c29b4c1f653b4358c925dfa55fe04",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_core.tools",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/tools.py",
+      "era": "clean_runtime",
+      "file_hash": "52d0ad683d7fc937a0bd2561bcacdccec13b5a0313c65b3e53dcc37b55a36c82",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_type",
+      "kind": "token",
+      "from_file": "realai/realai_agent_from_desktop/tools.py",
+      "era": "clean_runtime",
+      "file_hash": "52d0ad683d7fc937a0bd2561bcacdccec13b5a0313c65b3e53dcc37b55a36c82",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "wandb",
+      "kind": "import",
+      "from_file": "realai/realai_agent_from_desktop/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "unsloth",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "datasets",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "trl",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./realai_training_output",
+      "kind": "path_ref",
+      "from_file": "realai/realai_agent_from_desktop/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_training_output",
+      "kind": "token",
+      "from_file": "realai/realai_agent_from_desktop/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_system",
+      "kind": "token",
+      "from_file": "realai/realai_agent_from_desktop/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_config",
+      "kind": "token",
+      "from_file": "realai/realai_agent_from_desktop/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_alpha",
+      "kind": "token",
+      "from_file": "realai/realai_agent_from_desktop/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lora_dropout",
+      "kind": "token",
+      "from_file": "realai/realai_agent_from_desktop/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/realai_agent_from_desktop/training_pipeline.py",
+      "era": "clean_runtime",
+      "file_hash": "5ddbc43a15d519929c05b3c5f1a78fb50e22e1ab6703f604f5faa508f076e004",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "langchain_openai",
+      "kind": "from_import",
+      "from_file": "realai/realai_agent_from_desktop/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "32462ff0234bc3106942c44666cf956b565dccd0c25a4b9bad8256c5e0d8fc51",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_ultimate",
+      "kind": "token",
+      "from_file": "realai/realai_agent_from_desktop/__init__.py",
+      "era": "clean_runtime",
+      "file_hash": "32462ff0234bc3106942c44666cf956b565dccd0c25a4b9bad8256c5e0d8fc51",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/sdk/python/realai_client.py",
+      "era": "clean_runtime",
+      "file_hash": "df9928bbe3c5bd45cf45c92f8e8777ebc6f746522252c7d14c784b8a39fbb71c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "wsgiref.simple_server",
+      "kind": "from_import",
+      "from_file": "realai/server/app.py",
+      "era": "clean_runtime",
+      "file_hash": "d6df75f8e21f6017780175fc81fa265d4b9fa7d731be1789eeafa6ae835c6c95",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/server/app.py",
+      "era": "clean_runtime",
+      "file_hash": "d6df75f8e21f6017780175fc81fa265d4b9fa7d731be1789eeafa6ae835c6c95",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_inspect",
+      "kind": "token",
+      "from_file": "realai/server/app.py",
+      "era": "clean_runtime",
+      "file_hash": "d6df75f8e21f6017780175fc81fa265d4b9fa7d731be1789eeafa6ae835c6c95",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_clear",
+      "kind": "token",
+      "from_file": "realai/server/app.py",
+      "era": "clean_runtime",
+      "file_hash": "d6df75f8e21f6017780175fc81fa265d4b9fa7d731be1789eeafa6ae835c6c95",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "vllm",
+      "kind": "import",
+      "from_file": "realai/server/backends.py",
+      "era": "clean_runtime",
+      "file_hash": "d0f7eaaeea6276822fc91f8e2512266bd901be7af5910c796b7a218a0f67f2c6",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "vllm",
+      "kind": "from_import",
+      "from_file": "realai/server/backends.py",
+      "era": "clean_runtime",
+      "file_hash": "d0f7eaaeea6276822fc91f8e2512266bd901be7af5910c796b7a218a0f67f2c6",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/server/memory_store.py",
+      "era": "clean_runtime",
+      "file_hash": "5d5b0d3fcf9e88cda6e24a476faa566b20c32606570b079f066b44ccd51e54d8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_records",
+      "kind": "token",
+      "from_file": "realai/server/memory_store.py",
+      "era": "clean_runtime",
+      "file_hash": "5d5b0d3fcf9e88cda6e24a476faa566b20c32606570b079f066b44ccd51e54d8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "prometheus_client",
+      "kind": "from_import",
+      "from_file": "realai/server/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "6d8274519ced47d04e2dc890f6472b328ed9d2eba8724de8f69183694fb745d3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_requests_total",
+      "kind": "token",
+      "from_file": "realai/server/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "6d8274519ced47d04e2dc890f6472b328ed9d2eba8724de8f69183694fb745d3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_tokens_total",
+      "kind": "token",
+      "from_file": "realai/server/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "6d8274519ced47d04e2dc890f6472b328ed9d2eba8724de8f69183694fb745d3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_request_latency_seconds",
+      "kind": "token",
+      "from_file": "realai/server/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "6d8274519ced47d04e2dc890f6472b328ed9d2eba8724de8f69183694fb745d3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/server/persistence.py",
+      "era": "clean_runtime",
+      "file_hash": "6c650ddbd1ac8acf97949d4e5b2945cca7044c26498d3326f02cc642286feae1",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_records",
+      "kind": "token",
+      "from_file": "realai/server/persistence.py",
+      "era": "clean_runtime",
+      "file_hash": "6c650ddbd1ac8acf97949d4e5b2945cca7044c26498d3326f02cc642286feae1",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "realai/server/router.py",
+      "era": "clean_runtime",
+      "file_hash": "579fc03e8fc48ee731037b6336827c6513e9f964c04e2f2a6f171d1479dc76f8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_context",
+      "kind": "token",
+      "from_file": "realai/server/router.py",
+      "era": "clean_runtime",
+      "file_hash": "579fc03e8fc48ee731037b6336827c6513e9f964c04e2f2a6f171d1479dc76f8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "LeftSidebar",
+      "kind": "import",
+      "from_file": "realai/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "b1da6988427d77fd60b58b99db278e0cdd120e00284e2036388be9a9b8ebc924",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "TopBar",
+      "kind": "import",
+      "from_file": "realai/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "b1da6988427d77fd60b58b99db278e0cdd120e00284e2036388be9a9b8ebc924",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "ChatArena",
+      "kind": "import",
+      "from_file": "realai/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "b1da6988427d77fd60b58b99db278e0cdd120e00284e2036388be9a9b8ebc924",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "RightPanel",
+      "kind": "import",
+      "from_file": "realai/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "b1da6988427d77fd60b58b99db278e0cdd120e00284e2036388be9a9b8ebc924",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "VoiceFab",
+      "kind": "import",
+      "from_file": "realai/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "b1da6988427d77fd60b58b99db278e0cdd120e00284e2036388be9a9b8ebc924",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "sonner",
+      "kind": "es_import",
+      "from_file": "realai/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "b1da6988427d77fd60b58b99db278e0cdd120e00284e2036388be9a9b8ebc924",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "ReactMarkdown",
+      "kind": "import",
+      "from_file": "realai/src/components/ChatArena.tsx",
+      "era": "clean_runtime",
+      "file_hash": "efdd89a615be81b376cf609ba369200ab1489a67e8f9eb9ea3fac9159bfcf4e4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "react-markdown",
+      "kind": "es_import",
+      "from_file": "realai/src/components/ChatArena.tsx",
+      "era": "clean_runtime",
+      "file_hash": "efdd89a615be81b376cf609ba369200ab1489a67e8f9eb9ea3fac9159bfcf4e4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "framer-motion",
+      "kind": "es_import",
+      "from_file": "realai/src/components/ChatArena.tsx",
+      "era": "clean_runtime",
+      "file_hash": "efdd89a615be81b376cf609ba369200ab1489a67e8f9eb9ea3fac9159bfcf4e4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "realai/src/components/ChatArena.tsx",
+      "era": "clean_runtime",
+      "file_hash": "efdd89a615be81b376cf609ba369200ab1489a67e8f9eb9ea3fac9159bfcf4e4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "realai/src/components/RightPanel.tsx",
+      "era": "clean_runtime",
+      "file_hash": "d004a8ce4c26d62897576cd7d5256fb137ebe75bb9b57f489145cf88dc3f5184",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "realai/src/components/TopBar.tsx",
+      "era": "clean_runtime",
+      "file_hash": "146c77815e7402cf33fdebdc0f4ed78eb3313bffb63ef8143b8f6d153488580b",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "realai/src/components/VoiceFab.tsx",
+      "era": "clean_runtime",
+      "file_hash": "4975d41b15c30228dcf8aab4ce479b7c392fa6ad235429fd989ba493bafd0c94",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/training/build_datasets.py",
+      "era": "training",
+      "file_hash": "3641a8861e9f347799c1a4deb4905640e91f41b5dac252c7f420618eff7192c3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "dataset",
+      "kind": "token",
+      "from_file": "realai/training/eval.py",
+      "era": "training",
+      "file_hash": "9f98e83691569ef1dcdc3b942a27092821dcd14e2fa9b30b3e28ded200cca793",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "dataset",
+      "kind": "token",
+      "from_file": "realai/training/finetune.py",
+      "era": "training",
+      "file_hash": "7706529eec10dee333f0bfa30cfc71b9e7f471e34ab15ce32d1656bfb1c49258",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "train",
+      "kind": "token",
+      "from_file": "realai/training/finetune.py",
+      "era": "training",
+      "file_hash": "7706529eec10dee333f0bfa30cfc71b9e7f471e34ab15ce32d1656bfb1c49258",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "prometheus_client",
+      "kind": "from_import",
+      "from_file": "core/metrics/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "0caec5f4d30b6524d9847fa6cc719d532ca2fb1c0784e286c478ab6eb58ebb67",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_core_requests_total",
+      "kind": "token",
+      "from_file": "core/metrics/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "0caec5f4d30b6524d9847fa6cc719d532ca2fb1c0784e286c478ab6eb58ebb67",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_core_request_latency_seconds",
+      "kind": "token",
+      "from_file": "core/metrics/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "0caec5f4d30b6524d9847fa6cc719d532ca2fb1c0784e286c478ab6eb58ebb67",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_agent_steps_total",
+      "kind": "token",
+      "from_file": "core/metrics/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "0caec5f4d30b6524d9847fa6cc719d532ca2fb1c0784e286c478ab6eb58ebb67",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_tool_calls_total",
+      "kind": "token",
+      "from_file": "core/metrics/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "0caec5f4d30b6524d9847fa6cc719d532ca2fb1c0784e286c478ab6eb58ebb67",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "resource",
+      "kind": "import",
+      "from_file": "core/security/python_sandbox.py",
+      "era": "clean_runtime",
+      "file_hash": "8dbbed7fb92293aec43a2629cfa62053c373c7f9b430b7866cba0e538aa3d4f9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_bytes",
+      "kind": "token",
+      "from_file": "core/security/python_sandbox.py",
+      "era": "clean_runtime",
+      "file_hash": "8dbbed7fb92293aec43a2629cfa62053c373c7f9b430b7866cba0e538aa3d4f9",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "opentelemetry",
+      "kind": "from_import",
+      "from_file": "core/tracing/tracer.py",
+      "era": "clean_runtime",
+      "file_hash": "f750cf49623262b3eb7e539dcb95dfe02dae3b56d2a0845115dfc2c004cd8946",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "faster_whisper",
+      "kind": "from_import",
+      "from_file": "core/voice/asr_whisper.py",
+      "era": "clean_runtime",
+      "file_hash": "04a39d03811e44cf24bb2eb19d5d771a00d9394420c680e33f55cc750c49414f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "web3",
+      "kind": "from_import",
+      "from_file": "core/web3/evm_backend.py",
+      "era": "clean_runtime",
+      "file_hash": "c510ae3585fad49d607cc0b2a0b69949851eb87392d36994e0aaf2a2b6efd2b4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "prometheus_client",
+      "kind": "from_import",
+      "from_file": "apps/api/routes/metrics.py",
+      "era": "clean_runtime",
+      "file_hash": "4fcb373c8bebc91449bab5ffa6c03a9042ef407d68b9050c75596b33dae2005c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "../..",
+      "kind": "path_ref",
+      "from_file": "apps/frontend/next.config.js",
+      "era": "clean_runtime",
+      "file_hash": "ac199d9fda7874348f7b8be0a0724b5f0b10de70efd9d5bf28ccbedf9cb92045",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+      "kind": "path_ref",
+      "from_file": "apps/frontend/tailwind.config.js",
+      "era": "clean_runtime",
+      "file_hash": "3c8e2c8f11de599cbbd4dbc3c186ca31b9d7b9f10fdfc37b43228893a3f508fb",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+      "kind": "path_ref",
+      "from_file": "apps/frontend/tailwind.config.js",
+      "era": "clean_runtime",
+      "file_hash": "3c8e2c8f11de599cbbd4dbc3c186ca31b9d7b9f10fdfc37b43228893a3f508fb",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./src/*",
+      "kind": "path_ref",
+      "from_file": "apps/frontend/tsconfig.json",
+      "era": "clean_runtime",
+      "file_hash": "a18800cf70ec7fb302fe00047c274f7ed5674046d29280b501950efdf42f5dcc",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "apps/frontend/src/app/layout.tsx",
+      "era": "clean_runtime",
+      "file_hash": "4a8ce67390253c86833a0b0596ff03f4606b5c80a423d8d54ff4d7a0fe1a3675",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./globals.css",
+      "kind": "es_import",
+      "from_file": "apps/frontend/src/app/layout.tsx",
+      "era": "clean_runtime",
+      "file_hash": "4a8ce67390253c86833a0b0596ff03f4606b5c80a423d8d54ff4d7a0fe1a3675",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./globals.css",
+      "kind": "path_ref",
+      "from_file": "apps/frontend/src/app/layout.tsx",
+      "era": "clean_runtime",
+      "file_hash": "4a8ce67390253c86833a0b0596ff03f4606b5c80a423d8d54ff4d7a0fe1a3675",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "Sidebar",
+      "kind": "import",
+      "from_file": "apps/frontend/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "9c60758290471943897a370e68ffa7a4ee937409b36645a927c1de1a6106da4d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "MessageList",
+      "kind": "import",
+      "from_file": "apps/frontend/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "9c60758290471943897a370e68ffa7a4ee937409b36645a927c1de1a6106da4d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "ChatInput",
+      "kind": "import",
+      "from_file": "apps/frontend/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "9c60758290471943897a370e68ffa7a4ee937409b36645a927c1de1a6106da4d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "SettingsDrawer",
+      "kind": "import",
+      "from_file": "apps/frontend/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "9c60758290471943897a370e68ffa7a4ee937409b36645a927c1de1a6106da4d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "apps/frontend/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "9c60758290471943897a370e68ffa7a4ee937409b36645a927c1de1a6106da4d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "apps/frontend/src/app/page.tsx",
+      "era": "clean_runtime",
+      "file_hash": "9c60758290471943897a370e68ffa7a4ee937409b36645a927c1de1a6106da4d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "apps/frontend/src/app/api/chat/route.ts",
+      "era": "clean_runtime",
+      "file_hash": "b09fd652ea37a365dd6b7b10ee2a501accdf1ea41ed13b6d5f5ff49f3f71045c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "apps/frontend/src/components/ChatInput.tsx",
+      "era": "clean_runtime",
+      "file_hash": "1e5be5486b2ebb5ba19ae17186e4643c8d6bbd1f5bc62a2ec563e16128874a1d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "apps/frontend/src/components/ChatInput.tsx",
+      "era": "clean_runtime",
+      "file_hash": "1e5be5486b2ebb5ba19ae17186e4643c8d6bbd1f5bc62a2ec563e16128874a1d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "ReactMarkdown",
+      "kind": "import",
+      "from_file": "apps/frontend/src/components/MessageList.tsx",
+      "era": "clean_runtime",
+      "file_hash": "beb277941c75a4603c5b389b630fc63e4ac3dddea58c21bf1159ce0d38634230",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "remarkGfm",
+      "kind": "import",
+      "from_file": "apps/frontend/src/components/MessageList.tsx",
+      "era": "clean_runtime",
+      "file_hash": "beb277941c75a4603c5b389b630fc63e4ac3dddea58c21bf1159ce0d38634230",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "apps/frontend/src/components/MessageList.tsx",
+      "era": "clean_runtime",
+      "file_hash": "beb277941c75a4603c5b389b630fc63e4ac3dddea58c21bf1159ce0d38634230",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "react-markdown",
+      "kind": "es_import",
+      "from_file": "apps/frontend/src/components/MessageList.tsx",
+      "era": "clean_runtime",
+      "file_hash": "beb277941c75a4603c5b389b630fc63e4ac3dddea58c21bf1159ce0d38634230",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "remark-gfm",
+      "kind": "es_import",
+      "from_file": "apps/frontend/src/components/MessageList.tsx",
+      "era": "clean_runtime",
+      "file_hash": "beb277941c75a4603c5b389b630fc63e4ac3dddea58c21bf1159ce0d38634230",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "apps/frontend/src/components/MessageList.tsx",
+      "era": "clean_runtime",
+      "file_hash": "beb277941c75a4603c5b389b630fc63e4ac3dddea58c21bf1159ce0d38634230",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "apps/frontend/src/components/SettingsDrawer.tsx",
+      "era": "clean_runtime",
+      "file_hash": "6318f83f24fe2391f188984a625e563b83a259e0ea1914b02c5421104292418b",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "SystemStatusPanel",
+      "kind": "import",
+      "from_file": "apps/frontend/src/components/SettingsDrawer.tsx",
+      "era": "clean_runtime",
+      "file_hash": "6318f83f24fe2391f188984a625e563b83a259e0ea1914b02c5421104292418b",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "apps/frontend/src/components/SettingsDrawer.tsx",
+      "era": "clean_runtime",
+      "file_hash": "6318f83f24fe2391f188984a625e563b83a259e0ea1914b02c5421104292418b",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "apps/frontend/src/components/Sidebar.tsx",
+      "era": "clean_runtime",
+      "file_hash": "e6bdf2948a5b1e9671d4afc303a730496b9267e0b35221b3f0670bbf3b40713f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "apps/frontend/src/components/Sidebar.tsx",
+      "era": "clean_runtime",
+      "file_hash": "e6bdf2948a5b1e9671d4afc303a730496b9267e0b35221b3f0670bbf3b40713f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "apps/frontend/src/components/SystemStatusPanel.tsx",
+      "era": "clean_runtime",
+      "file_hash": "f6677b2c735e6223998fca95c4cac3c398ef43b0ec3147e8ea55a43538ff7456",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_manifests",
+      "kind": "token",
+      "from_file": "apps/frontend/src/components/SystemStatusPanel.tsx",
+      "era": "clean_runtime",
+      "file_hash": "f6677b2c735e6223998fca95c4cac3c398ef43b0ec3147e8ea55a43538ff7456",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "finetune",
+      "kind": "token",
+      "from_file": "apps/frontend/src/components/SystemStatusPanel.tsx",
+      "era": "clean_runtime",
+      "file_hash": "f6677b2c735e6223998fca95c4cac3c398ef43b0ec3147e8ea55a43538ff7456",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "apps/frontend/src/lib/realai.ts",
+      "era": "clean_runtime",
+      "file_hash": "d8b7f4344cd2cb9fbdb883b09d5650f4c5651de54e05929c0023652cc6aa4d1f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_roles",
+      "kind": "token",
+      "from_file": "apps/vscode/extension.ts",
+      "era": "clean_runtime",
+      "file_hash": "0057ac1d186e417f48a221998ebe960f9bb4f0034f36b97218716be1c06fca71",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./out/extension.js",
+      "kind": "path_ref",
+      "from_file": "apps/vscode/package.json",
+      "era": "clean_runtime",
+      "file_hash": "ac99d04d48c534ab87ae19e8ad9e1f510b60a0a46d82fc66506b36081ae308b5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_roles",
+      "kind": "token",
+      "from_file": "apps/vscode/out/realaiClient.js",
+      "era": "clean_runtime",
+      "file_hash": "6c519c8ef4a7c2bff3ef3928562ee2a450a7825dd1d05a5213323d3300ce8ee5",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_roles",
+      "kind": "token",
+      "from_file": "apps/vscode/src/realaiClient.ts",
+      "era": "clean_runtime",
+      "file_hash": "b06e93809aa40d0655b19639603ce66cc3e7a75485706534d2cecc7cd8135c3f",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "../core",
+      "kind": "es_import",
+      "from_file": "agents/devops_agent.ts",
+      "era": "other",
+      "file_hash": "96348dd99b8be068bfca5b4db4e2a892c8831815979513a7c2a1e14e215b85c0",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "../core",
+      "kind": "path_ref",
+      "from_file": "agents/devops_agent.ts",
+      "era": "other",
+      "file_hash": "96348dd99b8be068bfca5b4db4e2a892c8831815979513a7c2a1e14e215b85c0",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./devops_agent",
+      "kind": "path_ref",
+      "from_file": "agents/index.ts",
+      "era": "other",
+      "file_hash": "c7fed558b6e07b6ec3f512eb02084f9e5ff6c8d1612c14de52ec92b900c94f9d",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./run.ps1",
+      "kind": "path_ref",
+      "from_file": "providers/provider.yaml",
+      "era": "other",
+      "file_hash": "7bbfa04c0b4b9fecb44dd0adb3e18f2dc6838cedb627b814ffe9ee4259a6015e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "providers/registry.ts",
+      "era": "other",
+      "file_hash": "8b4ca2a1dc254dd6d487206c0a07a0058ff0889ee1eca3b7f7d2c8df345f557c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "OpenAI",
+      "kind": "import",
+      "from_file": "providers/openai/index.ts",
+      "era": "other",
+      "file_hash": "7fadb45f138d941056d2b113fc1bfa80cd83e6b057c58cd0fb772b2c149e400c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "providers/openai/index.ts",
+      "era": "other",
+      "file_hash": "7fadb45f138d941056d2b113fc1bfa80cd83e6b057c58cd0fb772b2c149e400c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "providers/realai/index.ts",
+      "era": "other",
+      "file_hash": "9fb6973006eeb872f8e041c600fd6ffaca4943d84828e21553d5eb845790e049",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./registryClient",
+      "kind": "path_ref",
+      "from_file": "packages/sdk-ts/src/index.ts",
+      "era": "other",
+      "file_hash": "98f510f6152b0ed67aea558e889ffbdb741d0502662caa7d32e573d617e624a7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./envChatClient",
+      "kind": "path_ref",
+      "from_file": "packages/sdk-ts/src/index.ts",
+      "era": "other",
+      "file_hash": "98f510f6152b0ed67aea558e889ffbdb741d0502662caa7d32e573d617e624a7",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_mb",
+      "kind": "token",
+      "from_file": "config/dev.toml",
+      "era": "other",
+      "file_hash": "3bcaf625262b29d429758a3b2b7cae8f17ecc9ad578140b3b7a8bdb6ea9cea6e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "solana_rpc_url",
+      "kind": "token",
+      "from_file": "config/dev.toml",
+      "era": "other",
+      "file_hash": "3bcaf625262b29d429758a3b2b7cae8f17ecc9ad578140b3b7a8bdb6ea9cea6e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_mb",
+      "kind": "token",
+      "from_file": "config/gpu.toml",
+      "era": "other",
+      "file_hash": "e64cfb0cfb5240122db7660dc770e0505353b5b6936b8dd1f717096ffea88141",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "solana_rpc_url",
+      "kind": "token",
+      "from_file": "config/gpu.toml",
+      "era": "other",
+      "file_hash": "e64cfb0cfb5240122db7660dc770e0505353b5b6936b8dd1f717096ffea88141",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_mb",
+      "kind": "token",
+      "from_file": "config/prod.toml",
+      "era": "other",
+      "file_hash": "52b729d4c21cd1959d4297d4fd7bdc26265b8399414ea6661411421561cc8ba2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "solana_rpc_url",
+      "kind": "token",
+      "from_file": "config/prod.toml",
+      "era": "other",
+      "file_hash": "52b729d4c21cd1959d4297d4fd7bdc26265b8399414ea6661411421561cc8ba2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./load-module",
+      "kind": "require",
+      "from_file": "plugins/atomic_fizz_realai/dialogue-engine.js",
+      "era": "other",
+      "file_hash": "1ff618f3156fc9e3e478acae94f768b09fc486c9872e168cc757419e082eaad3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./load-module",
+      "kind": "path_ref",
+      "from_file": "plugins/atomic_fizz_realai/dialogue-engine.js",
+      "era": "other",
+      "file_hash": "1ff618f3156fc9e3e478acae94f768b09fc486c9872e168cc757419e082eaad3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./load-module",
+      "kind": "require",
+      "from_file": "plugins/atomic_fizz_realai/dungeon-generator.js",
+      "era": "other",
+      "file_hash": "acc44fb0bd0669d2281e4ec696a05592a0c03443231b7e0f005869bb02c31a3c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./load-module",
+      "kind": "path_ref",
+      "from_file": "plugins/atomic_fizz_realai/dungeon-generator.js",
+      "era": "other",
+      "file_hash": "acc44fb0bd0669d2281e4ec696a05592a0c03443231b7e0f005869bb02c31a3c",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./load-module",
+      "kind": "require",
+      "from_file": "plugins/atomic_fizz_realai/generate-npc.js",
+      "era": "other",
+      "file_hash": "b632ad55b3acded3cd023ad8aa5c299f291a903f205bf18710a87c29a0b5e7e3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./load-module",
+      "kind": "path_ref",
+      "from_file": "plugins/atomic_fizz_realai/generate-npc.js",
+      "era": "other",
+      "file_hash": "b632ad55b3acded3cd023ad8aa5c299f291a903f205bf18710a87c29a0b5e7e3",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./overseer-creator",
+      "kind": "require",
+      "from_file": "plugins/atomic_fizz_realai/npc-repo-enricher.js",
+      "era": "other",
+      "file_hash": "820ceeb5bc68779d31a5363d617572f78cec1c1eb7d3024c1537e8d2c738e1b8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./overseer-creator",
+      "kind": "path_ref",
+      "from_file": "plugins/atomic_fizz_realai/npc-repo-enricher.js",
+      "era": "other",
+      "file_hash": "820ceeb5bc68779d31a5363d617572f78cec1c1eb7d3024c1537e8d2c738e1b8",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "../lib/redis",
+      "kind": "require",
+      "from_file": "plugins/atomic_fizz_realai/overseer-context.js",
+      "era": "other",
+      "file_hash": "c42459d10d74644fcecba76eff2aae4ac4efe43619f99d5ad105a70876ec1525",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "../lib/auth",
+      "kind": "require",
+      "from_file": "plugins/atomic_fizz_realai/overseer-context.js",
+      "era": "other",
+      "file_hash": "c42459d10d74644fcecba76eff2aae4ac4efe43619f99d5ad105a70876ec1525",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "../lib/redis",
+      "kind": "path_ref",
+      "from_file": "plugins/atomic_fizz_realai/overseer-context.js",
+      "era": "other",
+      "file_hash": "c42459d10d74644fcecba76eff2aae4ac4efe43619f99d5ad105a70876ec1525",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "../lib/auth",
+      "kind": "path_ref",
+      "from_file": "plugins/atomic_fizz_realai/overseer-context.js",
+      "era": "other",
+      "file_hash": "c42459d10d74644fcecba76eff2aae4ac4efe43619f99d5ad105a70876ec1525",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./load-module",
+      "kind": "require",
+      "from_file": "plugins/atomic_fizz_realai/quest-generator.js",
+      "era": "other",
+      "file_hash": "4112e8878ec4a5aefb62ba42f31b034d022ecefbfbe7fe2aaaac8593d969819e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./load-module",
+      "kind": "path_ref",
+      "from_file": "plugins/atomic_fizz_realai/quest-generator.js",
+      "era": "other",
+      "file_hash": "4112e8878ec4a5aefb62ba42f31b034d022ecefbfbe7fe2aaaac8593d969819e",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./load-module",
+      "kind": "require",
+      "from_file": "plugins/atomic_fizz_realai/realai-client.js",
+      "era": "other",
+      "file_hash": "ab64c2c8c42fb2e0c65ba872914cd0c6750c399069cf46eb9b3c452eb95a81b2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./load-module",
+      "kind": "path_ref",
+      "from_file": "plugins/atomic_fizz_realai/realai-client.js",
+      "era": "other",
+      "file_hash": "ab64c2c8c42fb2e0c65ba872914cd0c6750c399069cf46eb9b3c452eb95a81b2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_plan_not_json",
+      "kind": "token",
+      "from_file": "plugins/atomic_fizz_realai/survival-reward.js",
+      "era": "other",
+      "file_hash": "1c462edd678917a766f15791941e4a12d6ef0ce39a18d4263339d9e75d8165ec",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_plan_failed",
+      "kind": "token",
+      "from_file": "plugins/atomic_fizz_realai/survival-reward.js",
+      "era": "other",
+      "file_hash": "1c462edd678917a766f15791941e4a12d6ef0ce39a18d4263339d9e75d8165ec",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./load-module",
+      "kind": "require",
+      "from_file": "plugins/atomic_fizz_realai/world-event.js",
+      "era": "other",
+      "file_hash": "740a464c972714bda8a2e6b1d32b03dc53f6ff9498ebab15f941643a9f753a65",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "./load-module",
+      "kind": "path_ref",
+      "from_file": "plugins/atomic_fizz_realai/world-event.js",
+      "era": "other",
+      "file_hash": "740a464c972714bda8a2e6b1d32b03dc53f6ff9498ebab15f941643a9f753a65",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "reasoning",
+      "kind": "from_import",
+      "from_file": "aura/main.py",
+      "era": "other",
+      "file_hash": "b8c6a4c5b19d836d54e24095fcd4a61dd944799d690d61c6114d58c99d45dbbe",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "skills.registry",
+      "kind": "from_import",
+      "from_file": "aura/main.py",
+      "era": "other",
+      "file_hash": "b8c6a4c5b19d836d54e24095fcd4a61dd944799d690d61c6114d58c99d45dbbe",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "memory_path",
+      "kind": "token",
+      "from_file": "aura/memory.py",
+      "era": "other",
+      "file_hash": "5c7ccf8c4b3b11b0da4ea319895a6c1eed1f34c5830ab78ea9ae927b8e91e123",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_id",
+      "kind": "token",
+      "from_file": "benchmarks/bench_agent.py",
+      "era": "other",
+      "file_hash": "c671d9dadbf0ae40d09f1a5b52003d5902cd0528e965fbf2c12f18dc8d237cdf",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "dataset",
+      "kind": "token",
+      "from_file": "training/__init__.py",
+      "era": "training",
+      "file_hash": "f850fbf278feddecdd16922392df91dc3263b23792449fcc293d17ee96c9ed13",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "LeftSidebar",
+      "kind": "import",
+      "from_file": "src/app/page.tsx",
+      "era": "other",
+      "file_hash": "b1da6988427d77fd60b58b99db278e0cdd120e00284e2036388be9a9b8ebc924",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "TopBar",
+      "kind": "import",
+      "from_file": "src/app/page.tsx",
+      "era": "other",
+      "file_hash": "b1da6988427d77fd60b58b99db278e0cdd120e00284e2036388be9a9b8ebc924",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "ChatArena",
+      "kind": "import",
+      "from_file": "src/app/page.tsx",
+      "era": "other",
+      "file_hash": "b1da6988427d77fd60b58b99db278e0cdd120e00284e2036388be9a9b8ebc924",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "RightPanel",
+      "kind": "import",
+      "from_file": "src/app/page.tsx",
+      "era": "other",
+      "file_hash": "b1da6988427d77fd60b58b99db278e0cdd120e00284e2036388be9a9b8ebc924",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "VoiceFab",
+      "kind": "import",
+      "from_file": "src/app/page.tsx",
+      "era": "other",
+      "file_hash": "b1da6988427d77fd60b58b99db278e0cdd120e00284e2036388be9a9b8ebc924",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "sonner",
+      "kind": "es_import",
+      "from_file": "src/app/page.tsx",
+      "era": "other",
+      "file_hash": "b1da6988427d77fd60b58b99db278e0cdd120e00284e2036388be9a9b8ebc924",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "ReactMarkdown",
+      "kind": "import",
+      "from_file": "src/components/ChatArena.tsx",
+      "era": "other",
+      "file_hash": "efdd89a615be81b376cf609ba369200ab1489a67e8f9eb9ea3fac9159bfcf4e4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "react-markdown",
+      "kind": "es_import",
+      "from_file": "src/components/ChatArena.tsx",
+      "era": "other",
+      "file_hash": "efdd89a615be81b376cf609ba369200ab1489a67e8f9eb9ea3fac9159bfcf4e4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "framer-motion",
+      "kind": "es_import",
+      "from_file": "src/components/ChatArena.tsx",
+      "era": "other",
+      "file_hash": "efdd89a615be81b376cf609ba369200ab1489a67e8f9eb9ea3fac9159bfcf4e4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "src/components/ChatArena.tsx",
+      "era": "other",
+      "file_hash": "efdd89a615be81b376cf609ba369200ab1489a67e8f9eb9ea3fac9159bfcf4e4",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "src/components/RightPanel.tsx",
+      "era": "other",
+      "file_hash": "d004a8ce4c26d62897576cd7d5256fb137ebe75bb9b57f489145cf88dc3f5184",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "src/components/TopBar.tsx",
+      "era": "other",
+      "file_hash": "146c77815e7402cf33fdebdc0f4ed78eb3313bffb63ef8143b8f6d153488580b",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "lucide-react",
+      "kind": "es_import",
+      "from_file": "src/components/VoiceFab.tsx",
+      "era": "other",
+      "file_hash": "4975d41b15c30228dcf8aab4ce479b7c392fa6ad235429fd989ba493bafd0c94",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "tkinter",
+      "kind": "import",
+      "from_file": "realai_gui.py",
+      "era": "other",
+      "file_hash": "df982fe25425c6f3dc478a41a05e2825a97b3ea1baa33174e07f630f14c3c93a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "tkinter",
+      "kind": "from_import",
+      "from_file": "realai_gui.py",
+      "era": "other",
+      "file_hash": "df982fe25425c6f3dc478a41a05e2825a97b3ea1baa33174e07f630f14c3c93a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_launcher",
+      "kind": "token",
+      "from_file": "realai_gui.py",
+      "era": "other",
+      "file_hash": "df982fe25425c6f3dc478a41a05e2825a97b3ea1baa33174e07f630f14c3c93a",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "core/agents/",
+      "kind": "path_ref",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "core/inference/",
+      "kind": "path_ref",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "core/api/",
+      "kind": "path_ref",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "core/config/",
+      "kind": "path_ref",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "core/memory/",
+      "kind": "path_ref",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "core/logging/",
+      "kind": "path_ref",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "apps/api/",
+      "kind": "path_ref",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "apps/frontend/",
+      "kind": "path_ref",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "apps/desktop/",
+      "kind": "path_ref",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "apps/vscode/",
+      "kind": "path_ref",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "apps/widget/",
+      "kind": "path_ref",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_historical_backups",
+      "kind": "token",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_repo",
+      "kind": "token",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_sdk",
+      "kind": "token",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_clean_variants",
+      "kind": "token",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "realai_project",
+      "kind": "token",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_tools",
+      "kind": "token",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "agent_frameworks",
+      "kind": "token",
+      "from_file": "manifest.json",
+      "era": "other",
+      "file_hash": "c573f7b5be1e10eb0549eb811bc8503ba05e2ec25df81816dc44dfea105182a2",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "archive/realai-clean__dup1/realai-frontend__dup1/src/lib/realai.ts",
+      "era": "archive",
+      "file_hash": "21ebd1996ca6f82c3f2ff0aa745248772c585222f954f4fe681c74286fc7777b",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "archive/realai_repo/realai-frontend__dup1/src/lib/realai.ts",
+      "era": "archive",
+      "file_hash": "21ebd1996ca6f82c3f2ff0aa745248772c585222f954f4fe681c74286fc7777b",
+      "resolved_candidates": []
+    },
+    {
+      "reference": "type",
+      "kind": "import",
+      "from_file": "archive/realai_sdk/realai-frontend__dup1/src/lib/realai.ts",
+      "era": "archive",
+      "file_hash": "21ebd1996ca6f82c3f2ff0aa745248772c585222f954f4fe681c74286fc7777b",
+      "resolved_candidates": []
+    }
+  ],
+  "summary": {
+    "unique_missing": 205,
+    "by_kind": {
+      "path_ref": 66,
+      "token": 304,
+      "from_import": 96,
+      "import": 85,
+      "es_import": 35,
+      "require": 9
+    },
+    "by_era": {
+      "clean_runtime": 509,
+      "training": 9,
+      "other": 74,
+      "archive": 3
+    },
+    "by_prefix": {
+      "": 54,
+      "agent_tools": 29,
+      "agent_id": 28,
+      "type": 24,
+      "langchain_core": 24,
+      "lucide-react": 19,
+      "train": 15,
+      "langgraph": 15,
+      "apps": 10,
+      "agent_registry": 10,
+      "agent_roles": 10,
+      "realai_agent": 9,
+      "dataset": 9,
+      "realai": 8,
+      "agent_type": 8,
+      "realai_orchestration": 7,
+      "prometheus_client": 6,
+      "memory_mb": 6,
+      "solana_rpc_url": 6,
+      "realai_ultimate": 6,
+      "core": 6,
+      "memory_engine": 5,
+      "cryptography": 4,
+      "memory_path": 4,
+      "tkinter": 4,
+      "agent_manifests": 4,
+      "realai_meta": 4,
+      "resource": 4,
+      "web3": 4,
+      "ReactMarkdown": 4,
+      "react-markdown": 4,
+      "vllm": 4,
+      "memory_records": 4,
+      "agent_tools_gold": 3,
+      "memory_learning": 3,
+      "plugin_system": 3,
+      "realai_model": 3,
+      "realai_historical_backups": 3,
+      "finetune": 3,
+      "agent_role": 3,
+      "langgraph_supervisor": 3,
+      "tools": 3,
+      "wandb": 3,
+      "unsloth": 3,
+      "datasets": 3,
+      "trl": 3,
+      "realai_training_output": 3,
+      "agent_system": 3,
+      "lora_config": 3,
+      "lora_alpha": 3
+    },
+    "top_missing": [
+      {
+        "reference": "agent_tools",
+        "count": 28
+      },
+      {
+        "reference": "agent_id",
+        "count": 28
+      },
+      {
+        "reference": "type",
+        "count": 24
+      },
+      {
+        "reference": "lucide-react",
+        "count": 19
+      },
+      {
+        "reference": "train",
+        "count": 15
+      },
+      {
+        "reference": "./load-module",
+        "count": 12
+      },
+      {
+        "reference": "agent_registry",
+        "count": 10
+      },
+      {
+        "reference": "agent_roles",
+        "count": 10
+      },
+      {
+        "reference": "realai_agent",
+        "count": 9
+      },
+      {
+        "reference": "dataset",
+        "count": 9
+      },
+      {
+        "reference": "langchain_core.messages",
+        "count": 9
+      },
+      {
+        "reference": "langgraph.graph",
+        "count": 9
+      },
+      {
+        "reference": "agent_type",
+        "count": 8
+      },
+      {
+        "reference": "../core",
+        "count": 6
+      },
+      {
+        "reference": "prometheus_client",
+        "count": 6
+      },
+      {
+        "reference": "memory_mb",
+        "count": 6
+      },
+      {
+        "reference": "solana_rpc_url",
+        "count": 6
+      },
+      {
+        "reference": "langchain_core.prompts",
+        "count": 6
+      },
+      {
+        "reference": "langchain_core.runnables",
+        "count": 6
+      },
+      {
+        "reference": "langgraph.prebuilt",
+        "count": 6
+      },
+      {
+        "reference": "realai_ultimate",
+        "count": 6
+      },
+      {
+        "reference": "memory_engine",
+        "count": 5
+      },
+      {
+        "reference": "realai_orchestration",
+        "count": 5
+      },
+      {
+        "reference": "memory_path",
+        "count": 4
+      },
+      {
+        "reference": "tkinter",
+        "count": 4
+      },
+      {
+        "reference": "agent_manifests",
+        "count": 4
+      },
+      {
+        "reference": "realai_meta",
+        "count": 4
+      },
+      {
+        "reference": "resource",
+        "count": 4
+      },
+      {
+        "reference": "web3",
+        "count": 4
+      },
+      {
+        "reference": "./globals.css",
+        "count": 4
+      },
+      {
+        "reference": "ReactMarkdown",
+        "count": 4
+      },
+      {
+        "reference": "react-markdown",
+        "count": 4
+      },
+      {
+        "reference": "vllm",
+        "count": 4
+      },
+      {
+        "reference": "memory_records",
+        "count": 4
+      },
+      {
+        "reference": "agent_tools_gold",
+        "count": 3
+      },
+      {
+        "reference": "memory_learning",
+        "count": 3
+      },
+      {
+        "reference": "plugin_system",
+        "count": 3
+      },
+      {
+        "reference": "realai_model",
+        "count": 3
+      },
+      {
+        "reference": "realai_historical_backups",
+        "count": 3
+      },
+      {
+        "reference": "finetune",
+        "count": 3
+      },
+      {
+        "reference": "agent_role",
+        "count": 3
+      },
+      {
+        "reference": "./training_output",
+        "count": 3
+      },
+      {
+        "reference": "langgraph_supervisor",
+        "count": 3
+      },
+      {
+        "reference": "tools",
+        "count": 3
+      },
+      {
+        "reference": "langchain_core.tools",
+        "count": 3
+      },
+      {
+        "reference": "wandb",
+        "count": 3
+      },
+      {
+        "reference": "unsloth",
+        "count": 3
+      },
+      {
+        "reference": "datasets",
+        "count": 3
+      },
+      {
+        "reference": "trl",
+        "count": 3
+      },
+      {
+        "reference": "./realai_training_output",
+        "count": 3
+      },
+      {
+        "reference": "realai_training_output",
+        "count": 3
+      },
+      {
+        "reference": "agent_system",
+        "count": 3
+      },
+      {
+        "reference": "lora_config",
+        "count": 3
+      },
+      {
+        "reference": "lora_alpha",
+        "count": 3
+      },
+      {
+        "reference": "lora_dropout",
+        "count": 3
+      },
+      {
+        "reference": "langchain_openai",
+        "count": 3
+      },
+      {
+        "reference": "lora_adapters",
+        "count": 2
+      },
+      {
+        "reference": "agent_input",
+        "count": 2
+      },
+      {
+        "reference": "realai_api_key",
+        "count": 2
+      },
+      {
+        "reference": "realai_provider",
+        "count": 2
+      },
+      {
+        "reference": "cryptography.hazmat.primitives.ciphers",
+        "count": 2
+      },
+      {
+        "reference": "cryptography.hazmat.backends",
+        "count": 2
+      },
+      {
+        "reference": "realai/audit_log.jsonl",
+        "count": 2
+      },
+      {
+        "reference": "realai/consent_store.json",
+        "count": 2
+      },
+      {
+        "reference": "realai_model_id_suggestion",
+        "count": 2
+      },
+      {
+        "reference": "memory_namespace",
+        "count": 2
+      },
+      {
+        "reference": "lora_adapter",
+        "count": 2
+      },
+      {
+        "reference": "plugin_fn",
+        "count": 2
+      },
+      {
+        "reference": "providers/*",
+        "count": 2
+      },
+      {
+        "reference": "realai_launcher",
+        "count": 2
+      },
+      {
+        "reference": "lora_root",
+        "count": 2
+      },
+      {
+        "reference": "agent_tools_status",
+        "count": 2
+      },
+      {
+        "reference": "agent_tools_list_agents",
+        "count": 2
+      },
+      {
+        "reference": "agent_tools_list_profiles",
+        "count": 2
+      },
+      {
+        "reference": "agent_tools_assess",
+        "count": 2
+      },
+      {
+        "reference": "agent_not_found",
+        "count": 2
+      },
+      {
+        "reference": "pyautogui",
+        "count": 2
+      },
+      {
+        "reference": "pygetwindow",
+        "count": 2
+      },
+      {
+        "reference": "wave",
+        "count": 2
+      },
+      {
+        "reference": "pyttsx3",
+        "count": 2
+      },
+      {
+        "reference": "smtplib",
+        "count": 2
+      },
+      {
+        "reference": "pyaudio",
+        "count": 2
+      },
+      {
+        "reference": "gnupg",
+        "count": 2
+      },
+      {
+        "reference": "vosk",
+        "count": 2
+      },
+      {
+        "reference": "bs4",
+        "count": 2
+      },
+      {
+        "reference": "googleapiclient.discovery",
+        "count": 2
+      },
+      {
+        "reference": "google.oauth2.credentials",
+        "count": 2
+      },
+      {
+        "reference": "realai_config",
+        "count": 2
+      },
+      {
+        "reference": "agent_orchestration",
+        "count": 2
+      },
+      {
+        "reference": "agent_contributions",
+        "count": 2
+      },
+      {
+        "reference": "agent_results",
+        "count": 2
+      },
+      {
+        "reference": "agent_assignments",
+        "count": 2
+      },
+      {
+        "reference": "agent_summaries",
+        "count": 2
+      },
+      {
+        "reference": "agent_found",
+        "count": 2
+      },
+      {
+        "reference": "memory_usage",
+        "count": 2
+      },
+      {
+        "reference": "memory_used",
+        "count": 2
+      },
+      {
+        "reference": "memory_file",
+        "count": 2
+      },
+      {
+        "reference": "memory_updated",
+        "count": 2
+      },
+      {
+        "reference": "memory_data",
+        "count": 2
+      },
+      {
+        "reference": "plugin_name",
+        "count": 2
+      }
+    ]
+  }
+}

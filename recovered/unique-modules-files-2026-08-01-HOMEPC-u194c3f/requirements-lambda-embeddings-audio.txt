@@ -1,0 +1,4 @@
+# Requirements for Lambda Embeddings & Audio Handler
+# Handles: embeddings, audio transcription, audio speech
+# NOTE: Routes to external APIs only - no heavy local dependencies
+requests>=2.28.0

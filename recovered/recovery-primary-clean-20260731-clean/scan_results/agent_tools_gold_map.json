@@ -1,0 +1,717 @@
+{
+  "roots": [
+    {
+      "path": "C:\\realai\\agents",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "README.md",
+        "agent.md",
+        "agentx",
+        "bootstrap.md",
+        "capability-dev.md",
+        "coder.agent.json",
+        "devops_agent.ts",
+        "fullstack-dev.md",
+        "index.ts",
+        "memory.md",
+        "provider-specialist.md",
+        "runtime",
+        "templates",
+        "tools"
+      ],
+      "has_git": false,
+      "files": 20,
+      "sample": [
+        "agent.md",
+        "bootstrap.md",
+        "capability-dev.md",
+        "coder.agent.json",
+        "devops_agent.ts",
+        "fullstack-dev.md",
+        "index.ts",
+        "memory.md",
+        "provider-specialist.md",
+        "README.md",
+        "agentx/access_profiles.json",
+        "agentx/agency_import.json"
+      ]
+    },
+    {
+      "path": "C:\\realai\\agents\\agentx",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "README.md",
+        "access_profiles.json",
+        "agency_import.json",
+        "agents.json"
+      ],
+      "has_git": false,
+      "files": 4,
+      "sample": [
+        "access_profiles.json",
+        "agency_import.json",
+        "agents.json",
+        "README.md"
+      ]
+    },
+    {
+      "path": "C:\\realai\\realai\\agents",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "README.md",
+        "agent.md",
+        "agentx",
+        "bootstrap.md",
+        "capability-dev.md",
+        "coder.agent.json",
+        "devops_agent.ts",
+        "fullstack-dev.md",
+        "index.ts",
+        "memory.md",
+        "provider-specialist.md",
+        "runtime",
+        "templates",
+        "tools"
+      ],
+      "has_git": false,
+      "files": 20,
+      "sample": [
+        "agent.md",
+        "bootstrap.md",
+        "capability-dev.md",
+        "coder.agent.json",
+        "devops_agent.ts",
+        "fullstack-dev.md",
+        "index.ts",
+        "memory.md",
+        "provider-specialist.md",
+        "README.md",
+        "agentx/access_profiles.json",
+        "agentx/agency_import.json"
+      ]
+    },
+    {
+      "path": "C:\\realai\\agent-tools",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "agent-tools-main"
+      ],
+      "has_git": false,
+      "files": 3,
+      "sample": [
+        "agent-tools-main/.pytest_cache/README.md",
+        "agent-tools-main/registry/package-lock.json",
+        "agent-tools-main/ui/package-lock.json"
+      ]
+    },
+    {
+      "path": "C:\\realai\\agent_tools",
+      "exists": false
+    },
+    {
+      "path": "C:\\realai\\realai\\hierarchical_agent_gold",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "README.md",
+        "__init__.py",
+        "agents.py",
+        "hierarchical_agent.py",
+        "main.py",
+        "rise_system.py",
+        "supervisor.py",
+        "test_agent.py",
+        "tools.py",
+        "training_pipeline.py"
+      ],
+      "has_git": false,
+      "files": 10,
+      "sample": [
+        "agents.py",
+        "hierarchical_agent.py",
+        "main.py",
+        "README.md",
+        "rise_system.py",
+        "supervisor.py",
+        "test_agent.py",
+        "tools.py",
+        "training_pipeline.py",
+        "__init__.py"
+      ]
+    },
+    {
+      "path": "C:\\realai\\recovered\\from_desktop\\realai_agent",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "README.md",
+        "__init__.py",
+        "agents.py",
+        "hierarchical_agent.py",
+        "main.py",
+        "rise_system.py",
+        "supervisor.py",
+        "test_agent.py",
+        "tools.py",
+        "training_pipeline.py"
+      ],
+      "has_git": false,
+      "files": 10,
+      "sample": [
+        "agents.py",
+        "hierarchical_agent.py",
+        "main.py",
+        "README.md",
+        "rise_system.py",
+        "supervisor.py",
+        "test_agent.py",
+        "tools.py",
+        "training_pipeline.py",
+        "__init__.py"
+      ]
+    },
+    {
+      "path": "C:\\realai\\recovered\\from_desktop\\realai-orchestration",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "README.md",
+        "__init__.py",
+        "agent.py",
+        "memory.py",
+        "orchestrator.py",
+        "pipeline.py",
+        "tools.py"
+      ],
+      "has_git": false,
+      "files": 7,
+      "sample": [
+        "agent.py",
+        "memory.py",
+        "orchestrator.py",
+        "pipeline.py",
+        "README.md",
+        "tools.py",
+        "__init__.py"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\agent-tools",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "agent-tools-main"
+      ],
+      "has_git": false,
+      "files": 5,
+      "sample": [
+        "agent-tools-main/.pytest_cache/README.md",
+        "agent-tools-main/.vscode/mcp.json",
+        "agent-tools-main/.vscode/settings.json",
+        "agent-tools-main/registry/package-lock.json",
+        "agent-tools-main/ui/package-lock.json"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\agent-tools\\agent-tools-main",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        ".pytest_cache",
+        ".vscode",
+        "agent_tools.egg-info",
+        "registry",
+        "ui"
+      ],
+      "has_git": false,
+      "files": 5,
+      "sample": [
+        ".pytest_cache/README.md",
+        ".vscode/mcp.json",
+        ".vscode/settings.json",
+        "registry/package-lock.json",
+        "ui/package-lock.json"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\agent-tools-main",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        ".vscode",
+        "agent-tools-main",
+        "registry",
+        "ui"
+      ],
+      "has_git": false,
+      "files": 9,
+      "sample": [
+        ".vscode/mcp.json",
+        ".vscode/settings.json",
+        "agent-tools-main/.pytest_cache/README.md",
+        "agent-tools-main/.vscode/mcp.json",
+        "agent-tools-main/.vscode/settings.json",
+        "agent-tools-main/registry/package-lock.json",
+        "agent-tools-main/ui/package-lock.json",
+        "registry/package-lock.json",
+        "ui/package-lock.json"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\agents",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "README.md",
+        "agent.md",
+        "bootstrap.md",
+        "capability-dev.md",
+        "coder.agent.json",
+        "devops_agent.ts",
+        "fullstack-dev.md",
+        "index.ts",
+        "memory.md",
+        "provider-specialist.md",
+        "runtime",
+        "templates",
+        "tools"
+      ],
+      "has_git": false,
+      "files": 16,
+      "sample": [
+        "agent.md",
+        "bootstrap.md",
+        "capability-dev.md",
+        "coder.agent.json",
+        "devops_agent.ts",
+        "fullstack-dev.md",
+        "index.ts",
+        "memory.md",
+        "provider-specialist.md",
+        "README.md",
+        "runtime/index.ts",
+        "runtime/planner.ts"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\agents\\agentx",
+      "exists": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\realai-core\\agent_tools",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "__init__.py"
+      ],
+      "has_git": false,
+      "files": 1,
+      "sample": [
+        "__init__.py"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\archive\\agent-tools",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "agent-tools-main"
+      ],
+      "has_git": false,
+      "files": 9,
+      "sample": [
+        "agent-tools-main/.agentx/access_profiles.json",
+        "agent-tools-main/.agentx/agency_import.json",
+        "agent-tools-main/.agentx/agents.json",
+        "agent-tools-main/.agentx/README.md",
+        "agent-tools-main/.pytest_cache/README.md",
+        "agent-tools-main/.vscode/mcp.json",
+        "agent-tools-main/.vscode/settings.json",
+        "agent-tools-main/registry/package-lock.json",
+        "agent-tools-main/ui/package-lock.json"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\archive\\agent-tools-main",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        ".agentx",
+        ".vscode",
+        "agent-tools-main",
+        "agent_tools",
+        "registry",
+        "ui"
+      ],
+      "has_git": false,
+      "files": 17,
+      "sample": [
+        ".agentx/access_profiles.json",
+        ".agentx/agency_import.json",
+        ".agentx/agents.json",
+        ".agentx/README.md",
+        ".vscode/mcp.json",
+        ".vscode/settings.json",
+        "agent-tools-main/.agentx/access_profiles.json",
+        "agent-tools-main/.agentx/agency_import.json",
+        "agent-tools-main/.agentx/agents.json",
+        "agent-tools-main/.agentx/README.md",
+        "agent-tools-main/.pytest_cache/README.md",
+        "agent-tools-main/.vscode/mcp.json"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai-clean\\agents",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "README.md",
+        "agent.md",
+        "bootstrap.md",
+        "capability-dev.md",
+        "coder.agent.json",
+        "devops_agent.ts",
+        "fullstack-dev.md",
+        "index.ts",
+        "memory.md",
+        "provider-specialist.md",
+        "runtime",
+        "templates",
+        "tools"
+      ],
+      "has_git": false,
+      "files": 16,
+      "sample": [
+        "agent.md",
+        "bootstrap.md",
+        "capability-dev.md",
+        "coder.agent.json",
+        "devops_agent.ts",
+        "fullstack-dev.md",
+        "index.ts",
+        "memory.md",
+        "provider-specialist.md",
+        "README.md",
+        "runtime/index.ts",
+        "runtime/planner.ts"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\agents",
+      "exists": false
+    },
+    {
+      "path": "C:\\Users\\tsmit\\Documents\\GitHub\\realai",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        ".git",
+        ".github",
+        ".gitignore",
+        ".python-version",
+        "API.md",
+        "CONTRIBUTING.md",
+        "DEPLOYMENT.md",
+        "Dockerfile",
+        "Dockerfile.gpu",
+        "LICENSE",
+        "QUICKSTART.md",
+        "QUICKSTART_LOCAL.md",
+        "README.md",
+        "REALAI_3.0.md",
+        "SETUP_COMPLETE.md",
+        "__init__.py",
+        "api",
+        "api_server.py"
+      ],
+      "has_git": true,
+      "files": "200+",
+      "sample": [
+        "API.md",
+        "api_server.py",
+        "CONTRIBUTING.md",
+        "DEPLOYMENT.md",
+        "docker-compose.yml",
+        "local_models.py",
+        "main.py",
+        "models.yaml",
+        "providers.yaml",
+        "pyproject.toml",
+        "pyrightconfig.json",
+        "QUICKSTART.md"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "agent-tools-main"
+      ],
+      "has_git": false,
+      "files": 2,
+      "sample": [
+        "agent-tools-main/.vscode/mcp.json",
+        "agent-tools-main/.vscode/settings.json"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\backups\\realai-sync-20260508-090605\\realai-main",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        ".github",
+        ".gitignore",
+        ".python-version",
+        "API.md",
+        "CONTRIBUTING.md",
+        "DEPLOYMENT.md",
+        "Dockerfile",
+        "Dockerfile.gpu",
+        "LICENSE",
+        "QUICKSTART.md",
+        "QUICKSTART_LOCAL.md",
+        "README.md",
+        "REALAI_3.0.md",
+        "SETUP_COMPLETE.md",
+        "__init__.py",
+        "__pycache__",
+        "api",
+        "api_server.py"
+      ],
+      "has_git": false,
+      "files": "200+",
+      "sample": [
+        "API.md",
+        "api_server.py",
+        "CONTRIBUTING.md",
+        "DEPLOYMENT.md",
+        "docker-compose.yml",
+        "local_models.py",
+        "main.py",
+        "models.yaml",
+        "providers.yaml",
+        "pyproject.toml",
+        "pyrightconfig.json",
+        "QUICKSTART.md"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "README.md",
+        "__init__.py",
+        "agents.py",
+        "hierarchical_agent.py",
+        "main.py",
+        "rise_system.py",
+        "supervisor.py",
+        "test_agent.py",
+        "tools.py",
+        "training_pipeline.py"
+      ],
+      "has_git": false,
+      "files": 10,
+      "sample": [
+        "agents.py",
+        "hierarchical_agent.py",
+        "main.py",
+        "README.md",
+        "rise_system.py",
+        "supervisor.py",
+        "test_agent.py",
+        "tools.py",
+        "training_pipeline.py",
+        "__init__.py"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-orchestration",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "README.md",
+        "__init__.py",
+        "agent.py",
+        "memory.py",
+        "orchestrator.py",
+        "pipeline.py",
+        "tools.py"
+      ],
+      "has_git": false,
+      "files": 7,
+      "sample": [
+        "agent.py",
+        "memory.py",
+        "orchestrator.py",
+        "pipeline.py",
+        "README.md",
+        "tools.py",
+        "__init__.py"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\.agentx",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "execution_history.jsonl"
+      ],
+      "has_git": false,
+      "files": 0,
+      "sample": []
+    },
+    {
+      "path": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\.agentx",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "README.md",
+        "access_profiles.json",
+        "agency_import.json",
+        "agents.json"
+      ],
+      "has_git": false,
+      "files": 4,
+      "sample": [
+        "access_profiles.json",
+        "agency_import.json",
+        "agents.json",
+        "README.md"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "dialogue-engine.js",
+        "dungeon-generator.js",
+        "generate-npc.js",
+        "load-module.js",
+        "local-overseer.js",
+        "npc-repo-enricher.js",
+        "overseer-context.js",
+        "overseer-creator.js",
+        "quest-generator.js",
+        "realai-client.js",
+        "realai-overseer.js",
+        "survival-reward.js",
+        "world-event.js"
+      ],
+      "has_git": false,
+      "files": 13,
+      "sample": [
+        "dialogue-engine.js",
+        "dungeon-generator.js",
+        "generate-npc.js",
+        "load-module.js",
+        "local-overseer.js",
+        "npc-repo-enricher.js",
+        "overseer-context.js",
+        "overseer-creator.js",
+        "quest-generator.js",
+        "realai-client.js",
+        "realai-overseer.js",
+        "survival-reward.js"
+      ]
+    },
+    {
+      "path": "C:\\Unwrenchable\\agent-tools",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        "AGENTS.md",
+        "docs"
+      ],
+      "has_git": false,
+      "files": 2,
+      "sample": [
+        "AGENTS.md",
+        "docs/knowledge-base/universal-development-principles.md"
+      ]
+    },
+    {
+      "path": "C:\\Unwrenchable\\realai",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        ".sixth"
+      ],
+      "has_git": false,
+      "files": 0,
+      "sample": []
+    },
+    {
+      "path": "C:\\realai\\agent-tools\\agent-tools-main",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        ".pytest_cache",
+        "agent_tools.egg-info",
+        "registry",
+        "ui"
+      ],
+      "has_git": false,
+      "files": 3,
+      "sample": [
+        ".pytest_cache/README.md",
+        "registry/package-lock.json",
+        "ui/package-lock.json"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\agent-tools\\agent-tools-main",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        ".pytest_cache",
+        ".vscode",
+        "agent_tools.egg-info",
+        "registry",
+        "ui"
+      ],
+      "has_git": false,
+      "files": 5,
+      "sample": [
+        ".pytest_cache/README.md",
+        ".vscode/mcp.json",
+        ".vscode/settings.json",
+        "registry/package-lock.json",
+        "ui/package-lock.json"
+      ]
+    },
+    {
+      "path": "C:\\Users\\tsmit\\realai\\archive\\agent-tools\\agent-tools-main",
+      "exists": true,
+      "kind": "dir",
+      "top": [
+        ".agentx",
+        ".pytest_cache",
+        ".vscode",
+        "agent_tools.egg-info",
+        "registry",
+        "ui"
+      ],
+      "has_git": false,
+      "files": 9,
+      "sample": [
+        ".agentx/access_profiles.json",
+        ".agentx/agency_import.json",
+        ".agentx/agents.json",
+        ".agentx/README.md",
+        ".pytest_cache/README.md",
+        ".vscode/mcp.json",
+        ".vscode/settings.json",
+        "registry/package-lock.json",
+        "ui/package-lock.json"
+      ]
+    }
+  ]
+}

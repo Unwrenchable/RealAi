@@ -1,8 +1,4 @@
-"""Adapter registry bootstrap for recovered snapshots.
-
-Each entry maps a recovered snapshot id to its on-disk path so the living
-system can discover unique code without linear-merging histories.
-"""
+"""Adapter registry bootstrap for recovered snapshots + promoted core modules."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -39,3 +35,15 @@ def list_capabilities() -> dict[str, list[str]]:
     for m in load_modules():
         out[str(m.get("id"))] = list(m.get("capabilities") or [])
     return out
+
+
+def living_stack() -> dict[str, Any]:
+    """Status of promoted living modules (not ghosted)."""
+    from adapters.training import training_status
+    from adapters.memory import get_memory_stack
+    from adapters.agents import agents_status
+    return {
+        "training": training_status(),
+        "memory": get_memory_stack(),
+        "agents": agents_status(),
+    }

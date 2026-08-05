@@ -1,0 +1,8 @@
+---
+pid: 7336
+cwd: "C:\Users\tsmit\realai"
+command: "cmd /c \"cd /d C:\\Users\\tsmit\\realai\\apps\\frontend && pnpm exec next start -p 3847\""
+started_at: 2026-06-04T13:29:13.426Z
+running_for_ms: 13435007 
+---
+⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.

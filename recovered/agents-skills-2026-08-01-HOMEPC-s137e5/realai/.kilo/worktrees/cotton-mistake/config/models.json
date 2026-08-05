@@ -1,0 +1,13 @@
+models:
+  - id: realai-local
+    name: "RealAI Local Llama"
+    type: chat
+    provider: local
+    backend: llama
+    path: "C:/Users/tsmit/realai/models/Llama-3.2-1B-Instruct-Q4_K_M.gguf"
+    default_llm: true
+    context_length: 8192
+    capabilities:
+      - chat
+      - reasoning
+      - tools

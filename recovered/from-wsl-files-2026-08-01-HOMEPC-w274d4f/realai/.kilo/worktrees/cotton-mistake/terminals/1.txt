@@ -1,0 +1,37 @@
+---
+pid: 22984
+cwd: "C:\Users\tsmit\realai"
+command: "findstr /s /i /c:\"api connected\" /c:\"no api\" C:\\Users\\tsmit\\realai\\*.py C:\\Users\\tsmit\\realai\\realai\\*.py C:\\Users\\tsmit\\realai\\src\\*.py C:\\Users\\tsmit\\realai\\apps\\*\\*.* 2>nul | Select-Object -First 30"
+started_at: 2026-06-04T09:02:20.437Z
+running_for_ms: 29420010 
+---
+C:\Users\tsmit\realai\.github\agents\bootstrap.md:RealAI falls back to placeholder responses when no API key is configured.
+C:\Users\tsmit\realai\.github\agents\capability-dev.md:- [ ] Not raise an exception when no API key is configured
+C:\Users\tsmit\realai\.github\agents\README.md:1. **Never store secrets.** No API keys, private keys, passwords, RPC
+C:\Users\tsmit\realai\.venv\lib\python3.10\site-packages\numpy\_core\memmap.py:    is no API to close the underlying ``mmap``. It is tricky to ensure the
+C:\Users\tsmit\realai\.venv\lib\python3.10\site-packages\numpy\_core\__pycache__\memmap.cpython-310.pyc:    is no API to close the underlying ``mmap``. It is tricky to ensure the
+C:\Users\tsmit\realai\.venv\lib\python3.10\site-packages\nvidia\cuda_runtime\include\cuda.h: * It is the responsibility of the calling function to ensure that no API
+C:\Users\tsmit\realai\.venv\lib\python3.10\site-packages\torch\distributed\_composable\contract.py:    ``module``, indexed by the API name. If no API has been applied, then this
+C:\Users\tsmit\realai\.venv\lib\python3.10\site-packages\torch\distributed\_composable\__pycache__\contract.cpython-310.pyc:    ``module``, indexed by the API name. If no API has been applied, then this
+C:\Users\tsmit\realai\.venv\lib\python3.10\site-packages\triton\backends\nvidia\include\cuda.h: * It is the responsibility of the calling function to ensure that no API
+C:\Users\tsmit\realai\.venv\lib\python3.14\site-packages\cuda\bindings\driver.cpython-314-x86_64-linux-gnu.so:- There are no API `flags` at this time, so the value passed in should
+C:\Users\tsmit\realai\.venv\lib\python3.14\site-packages\cuda\bindings\driver.cpython-314-x86_64-linux-gnu.so:responsibility of the calling function to ensure that no API call
+C:\Users\tsmit\realai\.venv\lib\python3.14\site-packages\cuda\bindings\runtime.cpython-314-x86_64-linux-gnu.so:responsibility of the caller to ensure that no API call issues using
+C:\Users\tsmit\realai\.venv\lib\python3.14\site-packages\cuda\bindings\runtime.cpython-314-x86_64-linux-gnu.so:- There are no API `flags` at this time, so the value passed in should
+C:\Users\tsmit\realai\.venv\lib\python3.14\site-packages\numpy\_core\memmap.py:    is no API to close the underlying ``mmap``. It is tricky to ensure the
+C:\Users\tsmit\realai\.venv\lib\python3.14\site-packages\numpy\_core\__pycache__\memmap.cpython-314.pyc:is no API to close the underlying ``mmap``. It is tricky to ensure the
+C:\Users\tsmit\realai\.venv\lib\python3.14\site-packages\nvidia\cu13\include\cuda.h: * It is the responsibility of the calling function to ensure that no API
+C:\Users\tsmit\realai\.venv\lib\python3.14\site-packages\torch\distributed\_composable\contract.py:    ``module``, indexed by the API name. If no API has been applied, then this
+C:\Users\tsmit\realai\.venv\lib\python3.14\site-packages\torch\distributed\_composable\__pycache__\contract.cpython-314.pyc:``module``, indexed by the API name. If no API has been applied, then this
+C:\Users\tsmit\realai\.venv\lib\python3.14\site-packages\torch\distributed\_symmetric_memory\__init__.py:            # the underlying kernels, CUDA offers no API to control the
+C:\Users\tsmit\realai\.venv\lib\python3.14\site-packages\triton\backends\nvidia\include\cuda.h: * It is the responsibility of the calling function to ensure that no API
+C:\Users\tsmit\realai\.venv\lib\python3.14\site-packages\triton\backends\nvidia\include\cuda.h: * - There are no API \p flags at this time, so the value passed in should be 0.
+C:\Users\tsmit\realai\.venv\lib\python3.14\site-packages\triton\backends\nvidia\include\cuda_runtime_api.h: * - There are no API \p flags at this time, so the value passed in should be 0.
+C:\Users\tsmit\realai\.venv\lib\python3.14\site-packages\triton\backends\nvidia\include\cuda_runtime_api.h: * to ensure that no API call issues using \p ctx while ::cudaExecutionCtxDestroy() is executing or
+C:\Users\tsmit\realai\.venv\lib64\python3.10\site-packages\numpy\_core\memmap.py:    is no API to close the underlying ``mmap``. It is tricky to ensure the
+C:\Users\tsmit\realai\.venv\lib64\python3.10\site-packages\numpy\_core\__pycache__\memmap.cpython-310.pyc:    is no API to close the underlying ``mmap``. It is tricky to ensure the
+C:\Users\tsmit\realai\.venv\lib64\python3.10\site-packages\nvidia\cuda_runtime\include\cuda.h: * It is the responsibility of the calling function to ensure that no API
+C:\Users\tsmit\realai\.venv\lib64\python3.10\site-packages\torch\distributed\_composable\contract.py:    ``module``, indexed by the API name. If no API has been applied, then this
+C:\Users\tsmit\realai\.venv\lib64\python3.10\site-packages\torch\distributed\_composable\__pycache__\contract.cpython-310.pyc:    ``module``, indexed by the API name. If no API has been applied, then this
+C:\Users\tsmit\realai\.venv\lib64\python3.10\site-packages\triton\backends\nvidia\include\cuda.h: * It is the responsibility of the calling function to ensure that no API
+C:\Users\tsmit\realai\.venv\lib64\python3.14\site-packages\cuda\bindings\driver.cpython-314-x86_64-linux-gnu.so:- There are no API `flags` at this time, so the value passed in should

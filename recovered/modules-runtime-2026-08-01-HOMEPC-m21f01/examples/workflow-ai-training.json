@@ -1,0 +1,22 @@
+{
+  "name": "AI Training Quality Pipeline",
+  "description": "End-to-end pipeline that evaluates model quality, learns from feedback, grounds responses, and sets up observability. Run this after every major model update.",
+  "steps": [
+    {
+      "agent_id": "agent-evals-engineer",
+      "task": "Run evaluation suite on the latest chat quality golden tasks. Score accuracy, latency, and cost. Flag any regressions against the previous baseline."
+    },
+    {
+      "agent_id": "feedback-learning-engineer",
+      "task": "Process the negative signals captured from the last 7 days of production traffic. Cluster failure modes, curate a correction dataset, and emit policy update recommendations."
+    },
+    {
+      "agent_id": "grounding-engineer",
+      "task": "Audit the current retrieval pipeline for hallucination risk. Optimise source ranking, validate citation quality, and check freshness of cached sources."
+    },
+    {
+      "agent_id": "agent-observability-engineer",
+      "task": "Set up structured tracing for the updated pipeline. Configure latency budgets (p50 < 800ms, p99 < 3000ms), cost alerts, and drift detectors. Confirm all trace spans are exported."
+    }
+  ]
+}

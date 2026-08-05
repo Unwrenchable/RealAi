@@ -1,0 +1,121 @@
+[
+  {
+    "id": "mission_20260601_092548_208156",
+    "created_at": "2026-06-01T09:26:20.661779Z",
+    "goal": "Create a 3-step QA checklist for a local AI provider.",
+    "round_count": 1,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260601_094313_725550",
+    "created_at": "2026-06-01T09:43:46.410834Z",
+    "goal": "Create a 3-step QA checklist for a local AI provider.",
+    "round_count": 1,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260601_095559_036383",
+    "created_at": "2026-06-01T09:56:31.636080Z",
+    "goal": "Create a 3-step QA checklist for a local AI provider.",
+    "round_count": 1,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260601_100645_240212",
+    "created_at": "2026-06-01T10:07:17.743680Z",
+    "goal": "Create a 3-step QA checklist for a local AI provider.",
+    "round_count": 1,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260601_101625_352837",
+    "created_at": "2026-06-01T10:16:57.956485Z",
+    "goal": "Create a 3-step QA checklist for a local AI provider.",
+    "round_count": 1,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260601_102311_181918",
+    "created_at": "2026-06-01T10:23:43.651992Z",
+    "goal": "Create a 3-step QA checklist for a local AI provider.",
+    "round_count": 1,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260601_102456_193601",
+    "created_at": "2026-06-01T10:25:28.744607Z",
+    "goal": "Create a 3-step QA checklist for a local AI provider.",
+    "round_count": 1,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260601_104516_634208",
+    "created_at": "2026-06-01T10:45:49.122310Z",
+    "goal": "Create a 3-step QA checklist for a local AI provider.",
+    "round_count": 1,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260601_105526_728442",
+    "created_at": "2026-06-01T10:56:23.725245Z",
+    "goal": "Say hello in one short line.",
+    "round_count": 2,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260601_111039_530257",
+    "created_at": "2026-06-01T11:11:36.646620Z",
+    "goal": "Say hello in one short line.",
+    "round_count": 2,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260601_111253_875961",
+    "created_at": "2026-06-01T11:13:50.867953Z",
+    "goal": "Say hello in one short line.",
+    "round_count": 2,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260601_111419_031913",
+    "created_at": "2026-06-01T11:15:16.085814Z",
+    "goal": "Say hello in one short line.",
+    "round_count": 2,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260601_111832_396239",
+    "created_at": "2026-06-01T11:19:29.829146Z",
+    "goal": "Say hello in one short line.",
+    "round_count": 2,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260601_112142_408331",
+    "created_at": "2026-06-01T11:22:39.606160Z",
+    "goal": "Say hello in one short line.",
+    "round_count": 2,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260604_085551_649940",
+    "created_at": "2026-06-04T08:56:20.370598Z",
+    "goal": "hi",
+    "round_count": 2,
+    "final_preview": "[RealAI] No LLM backend available. Install ollama or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260604_092133_051402",
+    "created_at": "2026-06-04T09:22:30.030078Z",
+    "goal": "system: You are RealAI.\nuser: hi",
+    "round_count": 2,
+    "final_preview": "[RealAI] No LLM backend available. Start the inference server (python -m realai.server.app on port 8000), install Ollama, or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  },
+  {
+    "id": "mission_20260604_095057_440949",
+    "created_at": "2026-06-04T09:51:54.558363Z",
+    "goal": "user: Say hello in one short line.",
+    "round_count": 2,
+    "final_preview": "[RealAI] No LLM backend available. Start the inference server (python -m realai.server.app on port 8000), install Ollama, or set GROQ_API_KEY / OPENROUTER_API_KEY / XAI_API_KEY."
+  }
+]

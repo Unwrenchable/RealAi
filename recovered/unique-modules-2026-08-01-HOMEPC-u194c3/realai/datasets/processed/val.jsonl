@@ -1,0 +1,1 @@
+{"messages": [{"role": "user", "content": "How do I run RealAI locally without API keys?"}, {"role": "assistant", "content": "Start python -m realai.server.app, set REALAI_API_URL, then realai-build or python -m realai.closed_loop."}], "source": "seed"}

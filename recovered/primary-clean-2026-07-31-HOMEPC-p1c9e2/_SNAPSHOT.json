@@ -1,0 +1,11 @@
+{
+  "slug": "primary-clean-2026-07-31-HOMEPC-p1c9e2",
+  "source_sha": "362a55b109ddc7f3df33a50a469f88a3295b20d7",
+  "giants_moved_out": 0,
+  "batch": 2,
+  "file_count": 1200,
+  "imported_at": "2026-08-05T05:50:26.2339806-07:00",
+  "dest": "recovered/primary-clean-2026-07-31-HOMEPC-p1c9e2",
+  "source_ref": "origin/recovery/primary-clean/2026-07-31/HOMEPC/p1c9e2",
+  "source_branch": "recovery/primary-clean/2026-07-31/HOMEPC/p1c9e2"
+}

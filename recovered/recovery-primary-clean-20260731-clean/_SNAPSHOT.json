@@ -1,0 +1,11 @@
+{
+  "slug": "recovery-primary-clean-20260731-clean",
+  "source_sha": "13092f8f6512ae68e48f4f62d5172a1142fb9584",
+  "giants_moved_out": 0,
+  "batch": 2,
+  "file_count": 3729,
+  "imported_at": "2026-08-05T05:50:20.4454620-07:00",
+  "dest": "recovered/recovery-primary-clean-20260731-clean",
+  "source_ref": "origin/local/recovery-primary-clean-20260731-clean",
+  "source_branch": "local/recovery-primary-clean-20260731-clean"
+}

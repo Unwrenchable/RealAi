@@ -1,0 +1,2045 @@
+{
+  "meta": {
+    "generated_at": "2026-07-13T17:15:02.297576+00:00",
+    "root": "C:\\realai",
+    "files_walked_approx": 6234,
+    "note": "Noise dirs skipped; archive/OG/backups included. GGUF <50MB flagged as stub."
+  },
+  "summary": {
+    "weight_files": 104,
+    "by_ext": {
+      ".gguf": 40,
+      ".bin": 64
+    },
+    "by_era": {
+      "og_mess": 52,
+      "backup": 26,
+      "models_tree": 10,
+      "clean_package": 8,
+      "other": 8
+    },
+    "gguf_real_ge_50mb": 0,
+    "gguf_stub_lt_50mb": 40,
+    "safetensors": 0,
+    "large_bins": 0,
+    "config_hits": 115
+  },
+  "real_gguf": [],
+  "stub_gguf": [
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/models/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/models/llama-3.2-1b.gguf",
+      "name": "llama-3.2-1b.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/models/llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/models/qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/models/realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1572864,
+      "size_mb": 1.5,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/models/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "backup",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/models/llama-3.2-1b.gguf",
+      "name": "llama-3.2-1b.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "backup",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/models/llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "backup",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/models/qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "backup",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/models/realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1572864,
+      "size_mb": 1.5,
+      "era": "backup",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/models/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/models/llama-3.2-1b.gguf",
+      "name": "llama-3.2-1b.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/models/llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/models/qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/models/realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1572864,
+      "size_mb": 1.5,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/models/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "backup",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/models/llama-3.2-1b.gguf",
+      "name": "llama-3.2-1b.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "backup",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/models/llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "backup",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/models/qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "backup",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/models/realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1572864,
+      "size_mb": 1.5,
+      "era": "backup",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/models/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/models/llama-3.2-1b.gguf",
+      "name": "llama-3.2-1b.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/models/llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/models/qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/models/realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1572864,
+      "size_mb": 1.5,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "models/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "models_tree",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "models/llama-3.2-1b.gguf",
+      "name": "llama-3.2-1b.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "models_tree",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "models/llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "models_tree",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "models/qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "models_tree",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "models/realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1572864,
+      "size_mb": 1.5,
+      "era": "models_tree",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "realai/models/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "models_tree",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "realai/models/llama-3.2-1b.gguf",
+      "name": "llama-3.2-1b.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "models_tree",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "realai/models/llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "models_tree",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "realai/models/qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "models_tree",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "realai/models/realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1572864,
+      "size_mb": 1.5,
+      "era": "models_tree",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "realai_og_mess/realai/models/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "realai_og_mess/realai/models/llama-3.2-1b.gguf",
+      "name": "llama-3.2-1b.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "realai_og_mess/realai/models/llama-local-1b-Q4_K_M.gguf",
+      "name": "llama-local-1b-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "realai_og_mess/realai/models/qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "ext": ".gguf",
+      "size": 1835008,
+      "size_mb": 1.75,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    },
+    {
+      "path": "realai_og_mess/realai/models/realai-1.0-instruct-Q4_K_M.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "ext": ".gguf",
+      "size": 1572864,
+      "size_mb": 1.5,
+      "era": "og_mess",
+      "kind": "weight",
+      "suspicious_small": true
+    }
+  ],
+  "other_weights": [
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 167600,
+      "size_mb": 0.16,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 167600,
+      "size_mb": 0.16,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 167600,
+      "size_mb": 0.16,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 167600,
+      "size_mb": 0.16,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 167600,
+      "size_mb": 0.16,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": "realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 167600,
+      "size_mb": 0.16,
+      "era": "clean_package",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 167600,
+      "size_mb": 0.16,
+      "era": "other",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 167600,
+      "size_mb": 0.16,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 39600,
+      "size_mb": 0.038,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 39600,
+      "size_mb": 0.038,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 39600,
+      "size_mb": 0.038,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 39600,
+      "size_mb": 0.038,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 39600,
+      "size_mb": 0.038,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": "realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 39600,
+      "size_mb": 0.038,
+      "era": "clean_package",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 39600,
+      "size_mb": 0.038,
+      "era": "other",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/data_level0.bin",
+      "name": "data_level0.bin",
+      "ext": ".bin",
+      "size": 39600,
+      "size_mb": 0.038,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": "realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "clean_package",
+      "kind": "weight"
+    },
+    {
+      "path": "realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "clean_package",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "other",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "other",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/length.bin",
+      "name": "length.bin",
+      "ext": ".bin",
+      "size": 400,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": "realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "clean_package",
+      "kind": "weight"
+    },
+    {
+      "path": "realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "clean_package",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "other",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "other",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/header.bin",
+      "name": "header.bin",
+      "ext": ".bin",
+      "size": 100,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": "realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "clean_package",
+      "kind": "weight"
+    },
+    {
+      "path": "realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "clean_package",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "other",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "other",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_og_mess/realai/realai_memory/7c37cb57-6c85-4909-8f92-e3e903e95a82/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    },
+    {
+      "path": "realai_og_mess/realai/realai_memory/chroma/bb9b30c9-86d2-45ba-934f-cd2170c6ca28/link_lists.bin",
+      "name": "link_lists.bin",
+      "ext": ".bin",
+      "size": 0,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "weight"
+    }
+  ],
+  "configs_sample": [
+    {
+      "path": ".backup/clean_backup_20260708_112400/.continue/config.json",
+      "name": "config.json",
+      "ext": ".json",
+      "size": 370,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/config/models.json",
+      "name": "models.json",
+      "ext": ".json",
+      "size": 299,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/config/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 54,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 4547,
+      "size_mb": 0.004,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 725,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/providers.yaml",
+      "name": "providers.yaml",
+      "ext": ".yaml",
+      "size": 1082,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/.continue/config.json",
+      "name": "config.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/config/models.json",
+      "name": "models.json",
+      "ext": ".json",
+      "size": 312,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/config/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 58,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 762,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/models/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 219,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/models/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 1310,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/models/realai-1.0-instruct/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/models/realai-1.0/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 474,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/models/realai-overseer/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 571,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/models/realai-vision/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 350,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/providers.yaml",
+      "name": "providers.yaml",
+      "ext": ".yaml",
+      "size": 1134,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112400/realai_og_mess/realai/realai/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 939,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/.continue/config.json",
+      "name": "config.json",
+      "ext": ".json",
+      "size": 370,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/config/models.json",
+      "name": "models.json",
+      "ext": ".json",
+      "size": 299,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/config/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 54,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 4547,
+      "size_mb": 0.004,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 725,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/providers.yaml",
+      "name": "providers.yaml",
+      "ext": ".yaml",
+      "size": 1082,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/.continue/config.json",
+      "name": "config.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/config/models.json",
+      "name": "models.json",
+      "ext": ".json",
+      "size": 312,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/config/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 58,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 762,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/models/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 219,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/models/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 1310,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/models/realai-1.0-instruct/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/models/realai-1.0/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 474,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/models/realai-overseer/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 571,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/models/realai-vision/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 350,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/providers.yaml",
+      "name": "providers.yaml",
+      "ext": ".yaml",
+      "size": 1134,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai/realai/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 939,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/.continue/config.json",
+      "name": "config.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/config/models.json",
+      "name": "models.json",
+      "ext": ".json",
+      "size": 312,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/config/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 58,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 762,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/models/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 219,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/models/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 1310,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/models/realai-1.0-instruct/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/models/realai-1.0/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 474,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/models/realai-overseer/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 571,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/models/realai-vision/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 350,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/providers.yaml",
+      "name": "providers.yaml",
+      "ext": ".yaml",
+      "size": 1134,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_112721/realai_og_mess/realai/realai/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 939,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/.continue/config.json",
+      "name": "config.json",
+      "ext": ".json",
+      "size": 370,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/config/models.json",
+      "name": "models.json",
+      "ext": ".json",
+      "size": 299,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/config/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 54,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 4547,
+      "size_mb": 0.004,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 725,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/providers.yaml",
+      "name": "providers.yaml",
+      "ext": ".yaml",
+      "size": 1082,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/.continue/config.json",
+      "name": "config.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/config/models.json",
+      "name": "models.json",
+      "ext": ".json",
+      "size": 312,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/config/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 58,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 762,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/models/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 219,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/models/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 1310,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/models/realai-1.0-instruct/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/models/realai-1.0/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 474,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/models/realai-overseer/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 571,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/models/realai-vision/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 350,
+      "size_mb": 0.0,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/providers.yaml",
+      "name": "providers.yaml",
+      "ext": ".yaml",
+      "size": 1134,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai/realai/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 939,
+      "size_mb": 0.001,
+      "era": "backup",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/.continue/config.json",
+      "name": "config.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/config/models.json",
+      "name": "models.json",
+      "ext": ".json",
+      "size": 312,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/config/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 58,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 762,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/models/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 219,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/models/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 1310,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/models/realai-1.0-instruct/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/models/realai-1.0/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 474,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/models/realai-overseer/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 571,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/models/realai-vision/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 350,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/providers.yaml",
+      "name": "providers.yaml",
+      "ext": ".yaml",
+      "size": 1134,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".backup/clean_backup_20260708_113054/realai_og_mess/realai/realai/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 939,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": ".continue/config.json",
+      "name": "config.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "other",
+      "kind": "config"
+    },
+    {
+      "path": "config/models.json",
+      "name": "models.json",
+      "ext": ".json",
+      "size": 312,
+      "size_mb": 0.0,
+      "era": "other",
+      "kind": "config"
+    },
+    {
+      "path": "config/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 58,
+      "size_mb": 0.0,
+      "era": "other",
+      "kind": "config"
+    },
+    {
+      "path": "manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 4547,
+      "size_mb": 0.004,
+      "era": "other",
+      "kind": "config"
+    },
+    {
+      "path": "models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 762,
+      "size_mb": 0.001,
+      "era": "other",
+      "kind": "config"
+    },
+    {
+      "path": "models/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 219,
+      "size_mb": 0.0,
+      "era": "models_tree",
+      "kind": "config"
+    },
+    {
+      "path": "models/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 1310,
+      "size_mb": 0.001,
+      "era": "models_tree",
+      "kind": "config"
+    },
+    {
+      "path": "models/realai-1.0-instruct/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "models_tree",
+      "kind": "config"
+    },
+    {
+      "path": "models/realai-1.0/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 474,
+      "size_mb": 0.0,
+      "era": "models_tree",
+      "kind": "config"
+    },
+    {
+      "path": "models/realai-overseer/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 571,
+      "size_mb": 0.001,
+      "era": "models_tree",
+      "kind": "config"
+    },
+    {
+      "path": "models/realai-vision/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 350,
+      "size_mb": 0.0,
+      "era": "models_tree",
+      "kind": "config"
+    },
+    {
+      "path": "providers.yaml",
+      "name": "providers.yaml",
+      "ext": ".yaml",
+      "size": 1134,
+      "size_mb": 0.001,
+      "era": "other",
+      "kind": "config"
+    },
+    {
+      "path": "realai/.continue/config.json",
+      "name": "config.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "clean_package",
+      "kind": "config"
+    },
+    {
+      "path": "realai/config/models.json",
+      "name": "models.json",
+      "ext": ".json",
+      "size": 312,
+      "size_mb": 0.0,
+      "era": "clean_package",
+      "kind": "config"
+    },
+    {
+      "path": "realai/config/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 58,
+      "size_mb": 0.0,
+      "era": "clean_package",
+      "kind": "config"
+    },
+    {
+      "path": "realai/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 762,
+      "size_mb": 0.001,
+      "era": "clean_package",
+      "kind": "config"
+    },
+    {
+      "path": "realai/models/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 219,
+      "size_mb": 0.0,
+      "era": "models_tree",
+      "kind": "config"
+    },
+    {
+      "path": "realai/models/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 1310,
+      "size_mb": 0.001,
+      "era": "models_tree",
+      "kind": "config"
+    },
+    {
+      "path": "realai/models/realai-1.0-instruct/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "models_tree",
+      "kind": "config"
+    },
+    {
+      "path": "realai/models/realai-1.0/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 474,
+      "size_mb": 0.0,
+      "era": "models_tree",
+      "kind": "config"
+    },
+    {
+      "path": "realai/models/realai-overseer/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 571,
+      "size_mb": 0.001,
+      "era": "models_tree",
+      "kind": "config"
+    },
+    {
+      "path": "realai/models/realai-vision/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 350,
+      "size_mb": 0.0,
+      "era": "models_tree",
+      "kind": "config"
+    },
+    {
+      "path": "realai/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 939,
+      "size_mb": 0.001,
+      "era": "models_tree",
+      "kind": "config"
+    },
+    {
+      "path": "realai/providers.yaml",
+      "name": "providers.yaml",
+      "ext": ".yaml",
+      "size": 1134,
+      "size_mb": 0.001,
+      "era": "clean_package",
+      "kind": "config"
+    },
+    {
+      "path": "realai/realai/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 939,
+      "size_mb": 0.001,
+      "era": "models_tree",
+      "kind": "config"
+    },
+    {
+      "path": "realai_og_mess/realai/.continue/config.json",
+      "name": "config.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": "realai_og_mess/realai/config/models.json",
+      "name": "models.json",
+      "ext": ".json",
+      "size": 312,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": "realai_og_mess/realai/config/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 58,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": "realai_og_mess/realai/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 762,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": "realai_og_mess/realai/models/models.yaml",
+      "name": "models.yaml",
+      "ext": ".yaml",
+      "size": 219,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": "realai_og_mess/realai/models/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 1310,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": "realai_og_mess/realai/models/realai-1.0-instruct/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 387,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": "realai_og_mess/realai/models/realai-1.0/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 474,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": "realai_og_mess/realai/models/realai-overseer/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 571,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": "realai_og_mess/realai/models/realai-vision/manifest.json",
+      "name": "manifest.json",
+      "ext": ".json",
+      "size": 350,
+      "size_mb": 0.0,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": "realai_og_mess/realai/providers.yaml",
+      "name": "providers.yaml",
+      "ext": ".yaml",
+      "size": 1134,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    },
+    {
+      "path": "realai_og_mess/realai/realai/models/registry.json",
+      "name": "registry.json",
+      "ext": ".json",
+      "size": 939,
+      "size_mb": 0.001,
+      "era": "og_mess",
+      "kind": "config"
+    }
+  ]
+}

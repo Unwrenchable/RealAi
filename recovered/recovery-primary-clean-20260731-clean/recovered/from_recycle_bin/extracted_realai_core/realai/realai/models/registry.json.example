@@ -1,0 +1,133 @@
+{
+  "// README": "Model Registry - Configure your local and remote AI models here",
+  "// INSTRUCTIONS": "1. Add your GGUF model paths below. 2. Set default_chat_model in realai.toml. 3. Start server: python -m realai.server.app",
+
+  "// ==================== LOCAL LLAMA.CPP MODELS ====================": "",
+
+  "llama-3.2-3b": {
+	"type": "chat",
+	"backend": "llama-cli",
+	"path": "C:/Users/YOUR_USERNAME/models/llama-3.2-3b-instruct.Q4_K_M.gguf",
+	"context_length": 8192,
+	"owned_by": "local",
+	"capabilities": ["chat", "completion"],
+	"description": "Fast 3B model, good for quick responses",
+	"temperature": 0.7,
+	"top_p": 0.95,
+	"repetition_penalty": 1.1
+  },
+
+  "llama-3.1-7b": {
+	"type": "chat",
+	"backend": "llama-cli",
+	"path": "C:/Users/YOUR_USERNAME/models/llama-3.1-7b-instruct.Q4_K_M.gguf",
+	"context_length": 32768,
+	"owned_by": "local",
+	"capabilities": ["chat", "completion"],
+	"description": "Higher quality 7B model, better reasoning",
+	"temperature": 0.7,
+	"top_p": 0.95,
+	"repetition_penalty": 1.1
+  },
+
+  "mistral-7b": {
+	"type": "chat",
+	"backend": "llama-cli",
+	"path": "C:/Users/YOUR_USERNAME/models/mistral-7b-instruct-v0.2.Q4_K_M.gguf",
+	"context_length": 32768,
+	"owned_by": "local",
+	"capabilities": ["chat", "completion"],
+	"description": "Mistral 7B, excellent instruction following"
+  },
+
+  "deepseek-coder": {
+	"type": "chat",
+	"backend": "llama-cli",
+	"path": "C:/Users/YOUR_USERNAME/models/deepseek-coder-6.7b-instruct.Q4_K_M.gguf",
+	"context_length": 16384,
+	"owned_by": "local",
+	"capabilities": ["chat", "completion", "code"],
+	"description": "Specialized coding model"
+  },
+
+  "// ==================== ALTERNATIVE BACKENDS ====================": "",
+
+  "llama-cpp-example": {
+	"type": "chat",
+	"backend": "llama.cpp",
+	"path": "C:/Users/YOUR_USERNAME/models/model.gguf",
+	"context_length": 8192,
+	"owned_by": "local",
+	"description": "Uses llama-cpp-python bindings (requires compilation)"
+  },
+
+  "vllm-example": {
+	"type": "chat",
+	"backend": "vllm",
+	"path": "meta-llama/Meta-Llama-3-8B-Instruct",
+	"context_length": 32768,
+	"owned_by": "meta",
+	"description": "GPU-accelerated vLLM backend (requires CUDA)"
+  },
+
+  "// ==================== EMBEDDING MODELS ====================": "",
+
+  "all-minilm-l6-v2": {
+	"type": "embedding",
+	"backend": "hf",
+	"path": "sentence-transformers/all-MiniLM-L6-v2",
+	"embedding_dimensions": 384,
+	"owned_by": "sentence-transformers",
+	"description": "Fast, lightweight embedding model"
+  },
+
+  "bge-large": {
+	"type": "embedding",
+	"backend": "hf",
+	"path": "BAAI/bge-large-en-v1.5",
+	"embedding_dimensions": 1024,
+	"owned_by": "BAAI",
+	"description": "High-quality embedding model for semantic search"
+  },
+
+  "// ==================== PLACEHOLDER MODELS ====================": "",
+
+  "realai-1.0": {
+	"type": "chat",
+	"backend": "vllm",
+	"path": "meta-llama/Meta-Llama-3-8B-Instruct",
+	"context_length": 32768,
+	"description": "Default vLLM model (requires GPU)"
+  },
+
+  "realai-overseer": {
+	"type": "chat",
+	"backend": "vllm",
+	"path": "meta-llama/Meta-Llama-3-8B-Instruct",
+	"context_length": 65536,
+	"description": "Extended context vLLM model"
+  },
+
+  "realai-embed": {
+	"type": "embedding",
+	"backend": "hf",
+	"path": "sentence-transformers/all-MiniLM-L6-v2",
+	"embedding_dimensions": 384,
+	"description": "Default embedding model"
+  },
+
+  "// ==================== DOWNLOAD LINKS ====================": "",
+  "// Llama 3.2 3B": "https://huggingface.co/bartowski/Llama-3.2-3B-Instruct-GGUF",
+  "// Llama 3.1 7B": "https://huggingface.co/bartowski/Meta-Llama-3.1-7B-Instruct-GGUF",
+  "// Mistral 7B": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF",
+  "// DeepSeek Coder": "https://huggingface.co/TheBloke/deepseek-coder-6.7B-instruct-GGUF",
+  "// More models": "https://huggingface.co/models?search=gguf",
+
+  "// ==================== QUANTIZATION GUIDE ====================": "",
+  "// Q2_K": "Smallest, lowest quality, ~2-3 GB",
+  "// Q3_K_M": "Small, decent quality, ~3-4 GB",
+  "// Q4_K_M": "RECOMMENDED - Good balance, ~4-5 GB",
+  "// Q5_K_M": "Higher quality, ~5-6 GB",
+  "// Q6_K": "Very high quality, ~6-7 GB",
+  "// Q8_0": "Highest quality, ~8-9 GB"
+}

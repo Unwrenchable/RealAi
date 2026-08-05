@@ -1,0 +1,11 @@
+{
+  "slug": "modules-runtime-2026-08-01-HOMEPC-m21f01",
+  "source_sha": "764490f9227510bf2d0d52aca37f7d797b02126a",
+  "giants_moved_out": 36,
+  "batch": 2,
+  "file_count": 7150,
+  "imported_at": "2026-08-05T05:53:35.6356078-07:00",
+  "dest": "recovered/modules-runtime-2026-08-01-HOMEPC-m21f01",
+  "source_ref": "origin/recovery/modules-runtime/2026-08-01/HOMEPC/m21f01",
+  "source_branch": "recovery/modules-runtime/2026-08-01/HOMEPC/m21f01"
+}

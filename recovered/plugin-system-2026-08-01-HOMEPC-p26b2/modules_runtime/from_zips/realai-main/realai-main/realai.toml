@@ -1,0 +1,13 @@
+[server]
+host = "0.0.0.0"
+port = 8000
+profile = "default"
+provider = "local"
+default_chat_model = "realai-1.0"
+default_embedding_model = "realai-embed"
+enable_legacy_paths = true
+model_registry_path = "models.yaml"
+
+[paths]
+models = "models.yaml"
+providers = "providers.yaml"

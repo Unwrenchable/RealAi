@@ -1,0 +1,50 @@
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.env
+keys/
+*.key
+*.pem
+hf_token
+GROK_API_KEY
+OPENAI_API_KEY
+HF_TOKEN
+
+# Dependencies
+node_modules/
+**/node_modules/
+dist/
+build/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+env/
+.env/
+
+# OS & Editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Large files
+*.mp4
+*.mov
+*.h5
+*.onnx
+*.bin
+
+# Temporary
+temp/
+tmp/
+cache/
+*.tmp
+apps/frontend/src/lib/
+apps/frontend/src/lib/

@@ -1,0 +1,1129 @@
+.kilo/kilo.jsonc
+2.md
+LOCAL_AI_GUIDE.md
+LOCAL_AI_SUMMARY.md
+RealAI-builder
+RealAIProject/.github
+RealAIProject/API.md
+RealAIProject/CONTRIBUTING.md
+RealAIProject/DEPLOYMENT.md
+RealAIProject/QUICKSTART.md
+RealAIProject/QUICKSTART_LOCAL.md
+RealAIProject/README.md
+RealAIProject/REALAI_3.0.md
+RealAIProject/SETUP_COMPLETE.md
+RealAIProject/__init__.py
+RealAIProject/api
+RealAIProject/apps
+RealAIProject/aura
+RealAIProject/benchmarks
+RealAIProject/core
+RealAIProject/docs
+RealAIProject/examples
+RealAIProject/local_models.py
+RealAIProject/main.py
+RealAIProject/pyrightconfig.json
+RealAIProject/realai-frontend/README.md
+RealAIProject/realai-frontend/package.json
+RealAIProject/realai-frontend/tsconfig.json
+RealAIProject/realai/__init__.py
+RealAIProject/realai/app_framework.py
+RealAIProject/realai/audit.py
+RealAIProject/realai/cli
+RealAIProject/realai/critique.py
+RealAIProject/realai/datasets
+RealAIProject/realai/execution_history.jsonl
+RealAIProject/realai/identity.py
+RealAIProject/realai/knowledge_graph.py
+RealAIProject/realai/local_models.py
+RealAIProject/realai/local_runtime.py
+RealAIProject/realai/models
+RealAIProject/realai/router.py
+RealAIProject/realai/safety.py
+RealAIProject/realai/self_improvement.py
+RealAIProject/realai/server
+RealAIProject/realai_gui.py
+RealAIProject/realai_local_server.py
+RealAIProject/requirements-ci.txt
+RealAIProject/requirements-full.txt
+RealAIProject/requirements-gpu.txt
+RealAIProject/requirements.txt
+RealAIProject/schema
+RealAIProject/scripts
+RealAIProject/setup.py
+RealAIProject/test_local_server.py
+RealAIProject/tests
+RealAIProject/vercel.json
+all_files.txt
+all_files.zip
+apps/frontend/src/components/layout
+apps/frontend/src/components/screens
+apps/vscode/.vscodeignore
+apps/vscode/LICENSE
+apps/vscode/README.md
+apps/vscode/images
+apps/vscode/realai-vscode-0.1.0.vsix
+apps/vscode/realai.vsix
+apps/vscode/scripts
+archive_extracted/RealAIProject
+archive_extracted/migration_plan.json
+archive_extracted/real-fin/realai/realai
+archive_extracted/real-fin/realai/realai - Copy/realai
+archive_extracted/realai-clean
+archive_extracted/realai-clean__dup1
+archive_extracted/realai_good
+archive_extracted/realai_historical_backups
+archive_extracted/realai_repo
+archive_tree.txt
+aura/reasoning
+checkpoints
+checkpoints_lora
+chocolatey/.chocolatey
+chocolatey/CREDITS.json
+chocolatey/CREDITS.pdf
+chocolatey/CREDITS.txt
+chocolatey/LICENSE.txt
+chocolatey/bin
+chocolatey/choco.exe
+chocolatey/choco.exe.ignore
+chocolatey/config
+chocolatey/extensions
+chocolatey/helpers
+chocolatey/lib
+chocolatey/lib-bkp
+chocolatey/redirects
+clean_project_files.txt
+cli
+core/devmode.py
+core/devmode_config.json
+core/inference/local_llama_proxy.py
+core/mcp_server.py
+core/realai_gui.py
+core/realai_server.py
+data/dreams
+data/evolver
+data/narrative.json
+data/value_guardian.json
+datasets__local_backup
+deep_extract_and_patch.py
+docs/COMMANDS_AND_LAYERS.md
+docs/PROJECT_READINESS.md
+docs/QUICKSTART.md
+docs/REALAI_NATIVE_MODEL.md
+docs/SELF_BUILD_LOCAL.md
+entrypoints.txt
+examples/API.md
+examples/BlackBoxAI.md
+examples/CONTRIBUTING.md
+examples/DEPLOYMENT.md
+examples/DEPLOYMENT_FRONTEND_FIX.md
+examples/LAMBDA_DEPLOYMENT.md
+examples/LAMBDA_SIZE_OPTIMIZATION.md
+examples/PROJECT_SUMMARY.md
+examples/QUICKSTART_LOCAL.md
+examples/REALAI_3.0.md
+examples/SETUP_COMPLETE.md
+examples/TODO.md
+examples/VALIDATION_REPORT.md
+examples/examples.py
+examples/examples_limitless.py
+examples/examples_local_ai.py
+examples/examples_ultimate.py
+examples/quick_start_local.py
+examples/workflow-fullstack.json
+explore_dump.py
+find_realai_entrypoints.py
+find_realai_entrypoints_safe.py
+full_repo_scan.json
+full_repo_scan_summary.txt
+fusion-ui/styles.css
+gui/fix_gui.py
+gui/fix_gui2.py
+gui/realai_gui.py
+gui/rebuild_gui.py
+gui/ultimate_gui.py
+installer
+key_files_list.txt
+lambda
+legacy_realai_scripts
+logs_data/LOADING_TRAIN_ONLY_INDEX_PATCH.txt
+logs_data/SECURITY_SUMMARY.txt
+logs_data/can you explore my file.txt
+logs_data/copilot-session-39a9656a-48d7-4b7a-8ad4-aa82a2c153ee.txt
+logs_data/dadaset.jsonl
+logs_data/dataset.code-search.jsonl
+logs_data/dataset.jsonl
+logs_data/execution_history.jsonl
+logs_data/from fastapi import APIRouter, Requ.txt
+logs_data/repo_tree_shallow.txt
+logs_data/requirements-ci.txt
+logs_data/requirements-full.txt
+logs_data/requirements-gpu.txt
+logs_data/requirements-lambda-advanced.txt
+logs_data/requirements-lambda-chat.txt
+logs_data/requirements-lambda-core.txt
+logs_data/requirements-lambda-video.txt
+logs_data/requirements.txt
+logs_data/t.txt
+logs_data/test.txt
+mcp_server.py
+models/llama-local-1b
+models/registry.json
+models/registry.json.bak
+models/worldcore.pt
+payload.json
+project_structure.txt
+prompts
+pytest.ini
+real-fin/realai/API.md
+real-fin/realai/CONTRIBUTING.md
+real-fin/realai/DEPLOYMENT.md
+real-fin/realai/DEPLOYMENT_FRONTEND_FIX.md
+real-fin/realai/LAMBDA_DEPLOYMENT.md
+real-fin/realai/LAMBDA_SIZE_OPTIMIZATION.md
+real-fin/realai/LOCAL_AI_GUIDE.md
+real-fin/realai/LOCAL_AI_SUMMARY.md
+real-fin/realai/PROJECT_SUMMARY.md
+real-fin/realai/QUICKSTART.md
+real-fin/realai/README.md
+real-fin/realai/SECURITY_SUMMARY.txt
+real-fin/realai/VALIDATION_REPORT.md
+real-fin/realai/__init__.py
+real-fin/realai/examples.py
+real-fin/realai/examples_limitless.py
+real-fin/realai/examples_local_ai.py
+real-fin/realai/examples_ultimate.py
+real-fin/realai/lambda_advanced.py
+real-fin/realai/lambda_chat.py
+real-fin/realai/lambda_core.py
+real-fin/realai/lambda_core_shared.py
+real-fin/realai/lambda_image.py
+real-fin/realai/lambda_video.py
+real-fin/realai/local_model_cli.py
+real-fin/realai/local_models.py
+real-fin/realai/main.py
+real-fin/realai/quick_start_local.py
+real-fin/realai/realai - Copy/API.md
+real-fin/realai/realai - Copy/CONTRIBUTING.md
+real-fin/realai/realai - Copy/DEPLOYMENT.md
+real-fin/realai/realai - Copy/DEPLOYMENT_FRONTEND_FIX.md
+real-fin/realai/realai - Copy/LAMBDA_DEPLOYMENT.md
+real-fin/realai/realai - Copy/LAMBDA_SIZE_OPTIMIZATION.md
+real-fin/realai/realai - Copy/LOCAL_AI_GUIDE.md
+real-fin/realai/realai - Copy/LOCAL_AI_SUMMARY.md
+real-fin/realai/realai - Copy/PROJECT_SUMMARY.md
+real-fin/realai/realai - Copy/QUICKSTART.md
+real-fin/realai/realai - Copy/README.md
+real-fin/realai/realai - Copy/SECURITY_SUMMARY.txt
+real-fin/realai/realai - Copy/VALIDATION_REPORT.md
+real-fin/realai/realai - Copy/__init__.py
+real-fin/realai/realai - Copy/examples.py
+real-fin/realai/realai - Copy/examples_limitless.py
+real-fin/realai/realai - Copy/examples_local_ai.py
+real-fin/realai/realai - Copy/examples_ultimate.py
+real-fin/realai/realai - Copy/lambda_advanced.py
+real-fin/realai/realai - Copy/lambda_chat.py
+real-fin/realai/realai - Copy/lambda_core.py
+real-fin/realai/realai - Copy/lambda_core_shared.py
+real-fin/realai/realai - Copy/lambda_image.py
+real-fin/realai/realai - Copy/lambda_video.py
+real-fin/realai/realai - Copy/local_model_cli.py
+real-fin/realai/realai - Copy/local_models.py
+real-fin/realai/realai - Copy/main.py
+real-fin/realai/realai - Copy/quick_start_local.py
+real-fin/realai/realai - Copy/realai/__init__.py
+real-fin/realai/realai - Copy/realai_gui.py
+real-fin/realai/realai - Copy/requirements-ci.txt
+real-fin/realai/realai - Copy/requirements-full.txt
+real-fin/realai/realai - Copy/requirements-lambda-advanced.txt
+real-fin/realai/realai - Copy/requirements-lambda-chat.txt
+real-fin/realai/realai - Copy/requirements-lambda-core.txt
+real-fin/realai/realai - Copy/requirements-lambda-image.txt
+real-fin/realai/realai - Copy/requirements-lambda-video.txt
+real-fin/realai/realai - Copy/requirements.txt
+real-fin/realai/realai - Copy/setup.py
+real-fin/realai/realai - Copy/standalone_ai.py
+real-fin/realai/realai - Copy/vercel.json
+real-fin/realai/realai/__init__.py
+real-fin/realai/realai_gui.py
+real-fin/realai/requirements-ci.txt
+real-fin/realai/requirements-full.txt
+real-fin/realai/requirements-lambda-advanced.txt
+real-fin/realai/requirements-lambda-chat.txt
+real-fin/realai/requirements-lambda-core.txt
+real-fin/realai/requirements-lambda-image.txt
+real-fin/realai/requirements-lambda-video.txt
+real-fin/realai/requirements.txt
+real-fin/realai/setup.py
+real-fin/realai/standalone_ai.py
+real-fin/realai/vercel.json
+realai-backend/package.json
+realai-clean/.github
+realai-clean/API.md
+realai-clean/CONTRIBUTING.md
+realai-clean/DEPLOYMENT.md
+realai-clean/QUICKSTART.md
+realai-clean/QUICKSTART_LOCAL.md
+realai-clean/README.md
+realai-clean/REALAI_3.0.md
+realai-clean/SETUP_COMPLETE.md
+realai-clean/__init__.py
+realai-clean/api
+realai-clean/apps
+realai-clean/aura
+realai-clean/benchmarks
+realai-clean/core
+realai-clean/docs
+realai-clean/examples
+realai-clean/local_models.py
+realai-clean/main.py
+realai-clean/pyrightconfig.json
+realai-clean/realai
+realai-clean/realai-frontend/README.md
+realai-clean/realai-frontend/package.json
+realai-clean/realai-frontend/tsconfig.json
+realai-clean/realai-frontend/vercel.json
+realai-clean/realai_gui.py
+realai-clean/realai_local_server.py
+realai-clean/requirements-ci.txt
+realai-clean/requirements-full.txt
+realai-clean/requirements-gpu.txt
+realai-clean/requirements.txt
+realai-clean/schema
+realai-clean/scripts
+realai-clean/setup.py
+realai-clean/test_local_server.py
+realai-clean/tests
+realai-clean__dup1/.github
+realai-clean__dup1/.github__dup1
+realai-clean__dup1/API.md
+realai-clean__dup1/API__dup1.md
+realai-clean__dup1/CONTRIBUTING.md
+realai-clean__dup1/CONTRIBUTING__dup1.md
+realai-clean__dup1/DEPLOYMENT.md
+realai-clean__dup1/DEPLOYMENT__dup1.md
+realai-clean__dup1/QUICKSTART.md
+realai-clean__dup1/QUICKSTART_LOCAL.md
+realai-clean__dup1/QUICKSTART_LOCAL__dup1.md
+realai-clean__dup1/QUICKSTART__dup1.md
+realai-clean__dup1/README.md
+realai-clean__dup1/README__dup1.md
+realai-clean__dup1/REALAI_3.0.md
+realai-clean__dup1/REALAI_3.0__dup1.md
+realai-clean__dup1/SETUP_COMPLETE.md
+realai-clean__dup1/SETUP_COMPLETE__dup1.md
+realai-clean__dup1/__init__.py
+realai-clean__dup1/__init____dup1.py
+realai-clean__dup1/api
+realai-clean__dup1/api__dup1
+realai-clean__dup1/apps
+realai-clean__dup1/apps__dup1
+realai-clean__dup1/aura
+realai-clean__dup1/aura__dup1
+realai-clean__dup1/benchmarks
+realai-clean__dup1/benchmarks__dup1
+realai-clean__dup1/core
+realai-clean__dup1/core__dup1
+realai-clean__dup1/docs
+realai-clean__dup1/docs__dup1
+realai-clean__dup1/examples
+realai-clean__dup1/examples__dup1
+realai-clean__dup1/local_models.py
+realai-clean__dup1/local_models__dup1.py
+realai-clean__dup1/main.py
+realai-clean__dup1/main__dup1.py
+realai-clean__dup1/pyrightconfig.json
+realai-clean__dup1/pyrightconfig__dup1.json
+realai-clean__dup1/realai
+realai-clean__dup1/realai-frontend/README.md
+realai-clean__dup1/realai-frontend/package.json
+realai-clean__dup1/realai-frontend/tsconfig.json
+realai-clean__dup1/realai-frontend/vercel.json
+realai-clean__dup1/realai-frontend__dup1/README.md
+realai-clean__dup1/realai-frontend__dup1/package.json
+realai-clean__dup1/realai-frontend__dup1/tsconfig.json
+realai-clean__dup1/realai-frontend__dup1/vercel.json
+realai-clean__dup1/realai__dup1
+realai-clean__dup1/realai_gui.py
+realai-clean__dup1/realai_gui__dup1.py
+realai-clean__dup1/realai_local_server.py
+realai-clean__dup1/realai_local_server__dup1.py
+realai-clean__dup1/requirements-ci.txt
+realai-clean__dup1/requirements-ci__dup1.txt
+realai-clean__dup1/requirements-full.txt
+realai-clean__dup1/requirements-full__dup1.txt
+realai-clean__dup1/requirements-gpu.txt
+realai-clean__dup1/requirements-gpu__dup1.txt
+realai-clean__dup1/requirements.txt
+realai-clean__dup1/requirements__dup1.txt
+realai-clean__dup1/schema
+realai-clean__dup1/schema__dup1
+realai-clean__dup1/scripts
+realai-clean__dup1/scripts__dup1
+realai-clean__dup1/setup.py
+realai-clean__dup1/setup__dup1.py
+realai-clean__dup1/test_local_server.py
+realai-clean__dup1/test_local_server__dup1.py
+realai-clean__dup1/test_realai__dup1.py
+realai-clean__dup1/tests
+realai-clean__dup1/tests__dup1
+realai-cli/package.json
+realai-cli/tsconfig.json
+realai-design-system
+realai.http
+realai/DEPLOYMENT_FRONTEND_FIX.md
+realai/LAMBDA_DEPLOYMENT.md
+realai/LAMBDA_SIZE_OPTIMIZATION.md
+realai/LOCAL_AI_GUIDE.md
+realai/LOCAL_AI_SUMMARY.md
+realai/PROJECT_SUMMARY.md
+realai/SECURITY_SUMMARY.txt
+realai/VALIDATION_REPORT.md
+realai/__init__core_path_patch__.py
+realai/build_lambda.sh
+realai/evolver
+realai/examples.py
+realai/examples_limitless.py
+realai/examples_local_ai.py
+realai/examples_ultimate.py
+realai/index.html
+realai/index.ts
+realai/lambda_advanced.py
+realai/lambda_chat.py
+realai/lambda_core.py
+realai/lambda_core_shared.py
+realai/lambda_image.py
+realai/lambda_video.py
+realai/local_model_cli.py
+realai/models/realai
+realai/quick_start_local.py
+realai/realai - Copy/.gitattributes
+realai/realai - Copy/.github
+realai/realai - Copy/.gitignore
+realai/realai - Copy/API.md
+realai/realai - Copy/CONTRIBUTING.md
+realai/realai - Copy/DEPLOYMENT.md
+realai/realai - Copy/DEPLOYMENT_FRONTEND_FIX.md
+realai/realai - Copy/LAMBDA_DEPLOYMENT.md
+realai/realai - Copy/LAMBDA_SIZE_OPTIMIZATION.md
+realai/realai - Copy/LICENSE
+realai/realai - Copy/LOCAL_AI_GUIDE.md
+realai/realai - Copy/LOCAL_AI_SUMMARY.md
+realai/realai - Copy/PROJECT_SUMMARY.md
+realai/realai - Copy/QUICKSTART.md
+realai/realai - Copy/README.md
+realai/realai - Copy/SECURITY_SUMMARY.txt
+realai/realai - Copy/VALIDATION_REPORT.md
+realai/realai - Copy/__init__.py
+realai/realai - Copy/api
+realai/realai - Copy/build_lambda.sh
+realai/realai - Copy/examples.py
+realai/realai - Copy/examples_limitless.py
+realai/realai - Copy/examples_local_ai.py
+realai/realai - Copy/examples_ultimate.py
+realai/realai - Copy/index.html
+realai/realai - Copy/lambda_advanced.py
+realai/realai - Copy/lambda_chat.py
+realai/realai - Copy/lambda_core.py
+realai/realai - Copy/lambda_core_shared.py
+realai/realai - Copy/lambda_image.py
+realai/realai - Copy/lambda_video.py
+realai/realai - Copy/local_model_cli.py
+realai/realai - Copy/local_models.py
+realai/realai - Copy/main.py
+realai/realai - Copy/quick_start_local.py
+realai/realai - Copy/realai-cli
+realai/realai - Copy/realai-design-system
+realai/realai - Copy/realai/__init__.py
+realai/realai - Copy/realai_api
+realai/realai - Copy/realai_gui.py
+realai/realai - Copy/realai_launcher.spec
+realai/realai - Copy/render.yaml
+realai/realai - Copy/requirements-ci.txt
+realai/realai - Copy/requirements-full.txt
+realai/realai - Copy/requirements-lambda-advanced.txt
+realai/realai - Copy/requirements-lambda-chat.txt
+realai/realai - Copy/requirements-lambda-core.txt
+realai/realai - Copy/requirements-lambda-image.txt
+realai/realai - Copy/requirements-lambda-video.txt
+realai/realai - Copy/requirements.txt
+realai/realai - Copy/setup.py
+realai/realai - Copy/standalone_ai.py
+realai/realai - Copy/template.yaml
+realai/realai - Copy/travis smith.lnk
+realai/realai - Copy/vercel.json
+realai/realai-cli
+realai/realai-design-system
+realai/realai_api
+realai/realai_launcher.spec
+realai/requirements-lambda-advanced.txt
+realai/requirements-lambda-chat.txt
+realai/requirements-lambda-core.txt
+realai/requirements-lambda-image.txt
+realai/requirements-lambda-video.txt
+realai/server/client.py
+realai/server/core.py
+realai/server/models
+realai/server/realai
+realai/server/tasks/self_tasks.py
+realai/server/tasks/system_tasks.py
+realai/standalone_ai.py
+realai/template.yaml
+realai/travis smith.lnk
+realai/v3_ui_proxy.py
+realai_api
+realai_good/realai/CONTRIBUTING.md
+realai_good/realai/DEPLOYMENT_FRONTEND_FIX.md
+realai_good/realai/LAMBDA_DEPLOYMENT.md
+realai_good/realai/LAMBDA_SIZE_OPTIMIZATION.md
+realai_good/realai/LOCAL_AI_GUIDE.md
+realai_good/realai/PROJECT_SUMMARY.md
+realai_good/realai/QUICKSTART.md
+realai_good/realai/SECURITY_SUMMARY.txt
+realai_good/realai/VALIDATION_REPORT.md
+realai_good/realai/__init__.py
+realai_good/realai/examples.py
+realai_good/realai/examples_local_ai.py
+realai_good/realai/examples_ultimate.py
+realai_good/realai/lambda_advanced.py
+realai_good/realai/lambda_chat.py
+realai_good/realai/lambda_core.py
+realai_good/realai/lambda_core_shared.py
+realai_good/realai/lambda_image.py
+realai_good/realai/lambda_video.py
+realai_good/realai/local_model_cli.py
+realai_good/realai/main.py
+realai_good/realai/realai/__init__.py
+realai_good/realai/requirements-ci.txt
+realai_good/realai/requirements-full.txt
+realai_good/realai/requirements-lambda-advanced.txt
+realai_good/realai/requirements-lambda-chat.txt
+realai_good/realai/requirements-lambda-core.txt
+realai_good/realai/requirements-lambda-image.txt
+realai_good/realai/requirements-lambda-video.txt
+realai_good/realai/requirements.txt
+realai_good/realai/setup.py
+realai_good/realai/standalone_ai.py
+realai_good/realai/vercel.json
+realai_historical_backups/realai_versions_20260612/RealAIProject/.github
+realai_historical_backups/realai_versions_20260612/RealAIProject/API.md
+realai_historical_backups/realai_versions_20260612/RealAIProject/CONTRIBUTING.md
+realai_historical_backups/realai_versions_20260612/RealAIProject/DEPLOYMENT.md
+realai_historical_backups/realai_versions_20260612/RealAIProject/QUICKSTART.md
+realai_historical_backups/realai_versions_20260612/RealAIProject/QUICKSTART_LOCAL.md
+realai_historical_backups/realai_versions_20260612/RealAIProject/README.md
+realai_historical_backups/realai_versions_20260612/RealAIProject/REALAI_3.0.md
+realai_historical_backups/realai_versions_20260612/RealAIProject/SETUP_COMPLETE.md
+realai_historical_backups/realai_versions_20260612/RealAIProject/__init__.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/api
+realai_historical_backups/realai_versions_20260612/RealAIProject/apps
+realai_historical_backups/realai_versions_20260612/RealAIProject/aura
+realai_historical_backups/realai_versions_20260612/RealAIProject/benchmarks
+realai_historical_backups/realai_versions_20260612/RealAIProject/core
+realai_historical_backups/realai_versions_20260612/RealAIProject/docs
+realai_historical_backups/realai_versions_20260612/RealAIProject/examples
+realai_historical_backups/realai_versions_20260612/RealAIProject/local_models.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/main.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/pyrightconfig.json
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai-frontend/README.md
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai-frontend/package.json
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai-frontend/tsconfig.json
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/__init__.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/app_framework.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/audit.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/cli
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/critique.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/datasets
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/execution_history.jsonl
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/identity.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/knowledge_graph.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/local_models.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/local_runtime.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/models
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/router.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/safety.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/self_improvement.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai/server
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai_gui.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/realai_local_server.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/requirements-ci.txt
+realai_historical_backups/realai_versions_20260612/RealAIProject/requirements-full.txt
+realai_historical_backups/realai_versions_20260612/RealAIProject/requirements-gpu.txt
+realai_historical_backups/realai_versions_20260612/RealAIProject/requirements.txt
+realai_historical_backups/realai_versions_20260612/RealAIProject/setup.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/test_local_server.py
+realai_historical_backups/realai_versions_20260612/RealAIProject/vercel.json
+realai_historical_backups/realai_versions_20260612/real-fin/realai/.github
+realai_historical_backups/realai_versions_20260612/real-fin/realai/API.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/CONTRIBUTING.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/DEPLOYMENT.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/DEPLOYMENT_FRONTEND_FIX.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/LAMBDA_DEPLOYMENT.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/LAMBDA_SIZE_OPTIMIZATION.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/LOCAL_AI_GUIDE.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/LOCAL_AI_SUMMARY.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/PROJECT_SUMMARY.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/QUICKSTART.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/README.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/SECURITY_SUMMARY.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/VALIDATION_REPORT.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/__init__.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/api
+realai_historical_backups/realai_versions_20260612/real-fin/realai/examples.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/examples_limitless.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/examples_local_ai.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/examples_ultimate.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/lambda_advanced.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/lambda_chat.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/lambda_core.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/lambda_core_shared.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/lambda_image.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/lambda_video.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/local_model_cli.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/local_models.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/main.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/quick_start_local.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/.github
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/API.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/CONTRIBUTING.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/DEPLOYMENT.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/DEPLOYMENT_FRONTEND_FIX.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/LAMBDA_DEPLOYMENT.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/LAMBDA_SIZE_OPTIMIZATION.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/LOCAL_AI_GUIDE.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/LOCAL_AI_SUMMARY.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/PROJECT_SUMMARY.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/QUICKSTART.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/README.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/SECURITY_SUMMARY.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/VALIDATION_REPORT.md
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/__init__.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/api
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/examples.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/examples_limitless.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/examples_local_ai.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/examples_ultimate.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/lambda_advanced.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/lambda_chat.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/lambda_core.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/lambda_core_shared.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/lambda_image.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/lambda_video.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/local_model_cli.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/local_models.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/main.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/quick_start_local.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai-cli
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai-design-system
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai/__init__.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai_api
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai_gui.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-ci.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-full.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-lambda-advanced.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-lambda-chat.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-lambda-core.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-lambda-image.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements-lambda-video.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/requirements.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/setup.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/standalone_ai.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/vercel.json
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai-cli
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai-design-system
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai/__init__.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai_api
+realai_historical_backups/realai_versions_20260612/real-fin/realai/realai_gui.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-ci.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-full.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-lambda-advanced.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-lambda-chat.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-lambda-core.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-lambda-image.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements-lambda-video.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/requirements.txt
+realai_historical_backups/realai_versions_20260612/real-fin/realai/setup.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/standalone_ai.py
+realai_historical_backups/realai_versions_20260612/real-fin/realai/vercel.json
+realai_repo/.github
+realai_repo/.github__dup1
+realai_repo/API.md
+realai_repo/API__dup1.md
+realai_repo/CONTRIBUTING.md
+realai_repo/CONTRIBUTING__dup1.md
+realai_repo/DEPLOYMENT.md
+realai_repo/DEPLOYMENT__dup1.md
+realai_repo/QUICKSTART.md
+realai_repo/QUICKSTART_LOCAL.md
+realai_repo/QUICKSTART_LOCAL__dup1.md
+realai_repo/QUICKSTART__dup1.md
+realai_repo/README.md
+realai_repo/README__dup1.md
+realai_repo/REALAI_3.0.md
+realai_repo/REALAI_3.0__dup1.md
+realai_repo/SETUP_COMPLETE.md
+realai_repo/SETUP_COMPLETE__dup1.md
+realai_repo/__init__.py
+realai_repo/__init____dup1.py
+realai_repo/api
+realai_repo/api__dup1
+realai_repo/app
+realai_repo/app__dup1
+realai_repo/aura
+realai_repo/aura__dup1
+realai_repo/benchmarks
+realai_repo/benchmarks__dup1
+realai_repo/core
+realai_repo/core__dup1
+realai_repo/docs
+realai_repo/docs__dup1
+realai_repo/examples
+realai_repo/examples__dup1
+realai_repo/local_models.py
+realai_repo/local_models__dup1.py
+realai_repo/main.py
+realai_repo/main__dup1.py
+realai_repo/pyrightconfig.json
+realai_repo/pyrightconfig__dup1.json
+realai_repo/realai-core/.github
+realai_repo/realai-core/README.md
+realai_repo/realai-core/docs
+realai_repo/realai-core/examples
+realai_repo/realai-core/policy.json
+realai_repo/realai-core/registry/cli
+realai_repo/realai-core/registry/package.json
+realai_repo/realai-core/registry/tsconfig.json
+realai_repo/realai-core/sanity_check.py
+realai_repo/realai-core/schema
+realai_repo/realai-core/scripts
+realai_repo/realai-core/skills
+realai_repo/realai-core/tests
+realai_repo/realai-core/ui/package.json
+realai_repo/realai-core/ui/tsconfig.json
+realai_repo/realai-core/vercel.json
+realai_repo/realai-core/web
+realai_repo/realai-core__dup1/.github
+realai_repo/realai-core__dup1/README.md
+realai_repo/realai-core__dup1/docs
+realai_repo/realai-core__dup1/examples
+realai_repo/realai-core__dup1/policy.json
+realai_repo/realai-core__dup1/registry/cli
+realai_repo/realai-core__dup1/registry/package.json
+realai_repo/realai-core__dup1/registry/tsconfig.json
+realai_repo/realai-core__dup1/sanity_check.py
+realai_repo/realai-core__dup1/schema
+realai_repo/realai-core__dup1/scripts
+realai_repo/realai-core__dup1/skills
+realai_repo/realai-core__dup1/tests
+realai_repo/realai-core__dup1/ui/package.json
+realai_repo/realai-core__dup1/ui/tsconfig.json
+realai_repo/realai-core__dup1/vercel.json
+realai_repo/realai-core__dup1/web
+realai_repo/realai-frontend/README.md
+realai_repo/realai-frontend/package.json
+realai_repo/realai-frontend/tsconfig.json
+realai_repo/realai-frontend/vercel.json
+realai_repo/realai-frontend__dup1/README.md
+realai_repo/realai-frontend__dup1/package.json
+realai_repo/realai-frontend__dup1/tsconfig.json
+realai_repo/realai-frontend__dup1/vercel.json
+realai_repo/realai/__init__.py
+realai_repo/realai/app_framework.py
+realai_repo/realai/audit.py
+realai_repo/realai/cli
+realai_repo/realai/critique.py
+realai_repo/realai/datasets
+realai_repo/realai/execution_history.jsonl
+realai_repo/realai/identity.py
+realai_repo/realai/knowledge_graph.py
+realai_repo/realai/local_models.py
+realai_repo/realai/local_runtime.py
+realai_repo/realai/models
+realai_repo/realai/router.py
+realai_repo/realai/safety.py
+realai_repo/realai/self_improvement.py
+realai_repo/realai/server
+realai_repo/realai__dup1/__init__.py
+realai_repo/realai__dup1/app_framework.py
+realai_repo/realai__dup1/audit.py
+realai_repo/realai__dup1/cli
+realai_repo/realai__dup1/critique.py
+realai_repo/realai__dup1/datasets
+realai_repo/realai__dup1/execution_history.jsonl
+realai_repo/realai__dup1/identity.py
+realai_repo/realai__dup1/knowledge_graph.py
+realai_repo/realai__dup1/local_models.py
+realai_repo/realai__dup1/local_runtime.py
+realai_repo/realai__dup1/models
+realai_repo/realai__dup1/router.py
+realai_repo/realai__dup1/safety.py
+realai_repo/realai__dup1/self_improvement.py
+realai_repo/realai__dup1/server
+realai_repo/realai_gui.py
+realai_repo/realai_gui__dup1.py
+realai_repo/realai_local_server.py
+realai_repo/realai_local_server__dup1.py
+realai_repo/requirements-ci.txt
+realai_repo/requirements-ci__dup1.txt
+realai_repo/requirements-full.txt
+realai_repo/requirements-full__dup1.txt
+realai_repo/requirements-gpu.txt
+realai_repo/requirements-gpu__dup1.txt
+realai_repo/requirements.txt
+realai_repo/requirements__dup1.txt
+realai_repo/schema
+realai_repo/schema__dup1
+realai_repo/scripts
+realai_repo/scripts__dup1
+realai_repo/setup.py
+realai_repo/setup__dup1.py
+realai_repo/test_local_server.py
+realai_repo/test_local_server__dup1.py
+realai_repo/test_realai__dup1.py
+realai_repo/tests
+realai_repo/tests__dup1
+realai_search_temp/.git_disabled
+realai_search_temp/.gitattributes
+realai_search_temp/.github
+realai_search_temp/.gitignore
+realai_search_temp/.python-version
+realai_search_temp/API.md
+realai_search_temp/CONTRIBUTING.md
+realai_search_temp/DEPLOYMENT.md
+realai_search_temp/Dockerfile
+realai_search_temp/Dockerfile.gpu
+realai_search_temp/LICENSE
+realai_search_temp/PAGES
+realai_search_temp/QUICKSTART.md
+realai_search_temp/QUICKSTART_LOCAL.md
+realai_search_temp/README.md
+realai_search_temp/REALAI_3.0.md
+realai_search_temp/SETUP_COMPLETE.md
+realai_search_temp/api
+realai_search_temp/apps/__init__.py
+realai_search_temp/apps/api
+realai_search_temp/apps/dashboard
+realai_search_temp/apps/desktop
+realai_search_temp/apps/frontend/.eslintrc.json
+realai_search_temp/apps/frontend/.gitignore
+realai_search_temp/apps/frontend/README.md
+realai_search_temp/apps/frontend/next.config.js
+realai_search_temp/apps/frontend/package.json
+realai_search_temp/apps/frontend/pnpm-workspace.yaml
+realai_search_temp/apps/frontend/postcss.config.js
+realai_search_temp/apps/frontend/src
+realai_search_temp/apps/frontend/tailwind.config.js
+realai_search_temp/apps/frontend/tsconfig.json
+realai_search_temp/apps/frontend/vercel.json
+realai_search_temp/apps/widget
+realai_search_temp/aura
+realai_search_temp/autopilot
+realai_search_temp/benchmarks
+realai_search_temp/billing
+realai_search_temp/config
+realai_search_temp/core
+realai_search_temp/docker-compose.yml
+realai_search_temp/docs
+realai_search_temp/examples
+realai_search_temp/local_models.py
+realai_search_temp/main.py
+realai_search_temp/marketplace
+realai_search_temp/models
+realai_search_temp/models.yaml
+realai_search_temp/package.json
+realai_search_temp/packages
+realai_search_temp/pnpm-workspace.yaml
+realai_search_temp/pyproject.toml
+realai_search_temp/pyrightconfig.json
+realai_search_temp/realai
+realai_search_temp/realai.toml
+realai_search_temp/realai.toml.example
+realai_search_temp/realai_gui.py
+realai_search_temp/realai_local_server.py
+realai_search_temp/render.yaml
+realai_search_temp/render.yml
+realai_search_temp/requirements-ci.txt
+realai_search_temp/requirements-full.txt
+realai_search_temp/requirements-gpu.txt
+realai_search_temp/requirements.txt
+realai_search_temp/schema
+realai_search_temp/scripts
+realai_search_temp/setup.py
+realai_search_temp/src
+realai_search_temp/start_realai_server.bat
+realai_search_temp/test_local_server.py
+realai_search_temp/tests
+realai_search_temp/traefik.yml
+realai_search_temp/tsconfig.json
+realai_search_temp/vercel.json
+rebase_dryrun/apply_report.txt
+rebase_dryrun/backups
+rebase_dryrun/backups_resolved/README.md
+rebase_dryrun/backups_resolved/main.py
+rebase_dryrun/backups_resolved/models.yaml
+rebase_dryrun/backups_resolved/package.json
+rebase_dryrun/backups_resolved/pyproject.toml
+rebase_dryrun/backups_resolved/realai/__init__.py
+rebase_dryrun/backups_resolved/realai/local_models.py
+rebase_dryrun/backups_resolved/realai/models
+rebase_dryrun/backups_resolved/realai/server
+rebase_dryrun/backups_resolved/setup.py
+rebase_dryrun/backups_resolved/src
+rebase_dryrun/backups_resolved/start-realai.bat
+rebase_dryrun/conflicts.txt
+rebase_dryrun/diffs
+rebase_dryrun/diffs_summary.txt
+rebase_dryrun/merged/README.md.conflict
+rebase_dryrun/merged/main.py.conflict
+rebase_dryrun/merged/models.yaml.conflict
+rebase_dryrun/merged/package.json.conflict
+rebase_dryrun/merged/pyproject.toml.conflict
+rebase_dryrun/merged/realai/.gitattributes
+rebase_dryrun/merged/realai/.github
+rebase_dryrun/merged/realai/.gitignore
+rebase_dryrun/merged/realai/API.md
+rebase_dryrun/merged/realai/CONTRIBUTING.md
+rebase_dryrun/merged/realai/DEPLOYMENT.md
+rebase_dryrun/merged/realai/DEPLOYMENT_FRONTEND_FIX.md
+rebase_dryrun/merged/realai/LAMBDA_DEPLOYMENT.md
+rebase_dryrun/merged/realai/LAMBDA_SIZE_OPTIMIZATION.md
+rebase_dryrun/merged/realai/LICENSE
+rebase_dryrun/merged/realai/LOCAL_AI_GUIDE.md
+rebase_dryrun/merged/realai/LOCAL_AI_SUMMARY.md
+rebase_dryrun/merged/realai/PROJECT_SUMMARY.md
+rebase_dryrun/merged/realai/QUICKSTART.md
+rebase_dryrun/merged/realai/README.md
+rebase_dryrun/merged/realai/SECURITY_SUMMARY.txt
+rebase_dryrun/merged/realai/VALIDATION_REPORT.md
+rebase_dryrun/merged/realai/__init__.py.conflict
+rebase_dryrun/merged/realai/api
+rebase_dryrun/merged/realai/build_lambda.sh
+rebase_dryrun/merged/realai/cli
+rebase_dryrun/merged/realai/config
+rebase_dryrun/merged/realai/datasets
+rebase_dryrun/merged/realai/examples.py
+rebase_dryrun/merged/realai/examples_limitless.py
+rebase_dryrun/merged/realai/examples_local_ai.py
+rebase_dryrun/merged/realai/examples_ultimate.py
+rebase_dryrun/merged/realai/index.html
+rebase_dryrun/merged/realai/index.ts
+rebase_dryrun/merged/realai/lambda_advanced.py
+rebase_dryrun/merged/realai/lambda_chat.py
+rebase_dryrun/merged/realai/lambda_core.py
+rebase_dryrun/merged/realai/lambda_core_shared.py
+rebase_dryrun/merged/realai/lambda_image.py
+rebase_dryrun/merged/realai/lambda_video.py
+rebase_dryrun/merged/realai/local_model_cli.py
+rebase_dryrun/merged/realai/local_models.py.conflict
+rebase_dryrun/merged/realai/main.py
+rebase_dryrun/merged/realai/models/realai-1.0
+rebase_dryrun/merged/realai/models/realai-overseer
+rebase_dryrun/merged/realai/models/registry.json.conflict
+rebase_dryrun/merged/realai/package.json
+rebase_dryrun/merged/realai/quick_start_local.py
+rebase_dryrun/merged/realai/realai - Copy/.gitattributes
+rebase_dryrun/merged/realai/realai - Copy/.github
+rebase_dryrun/merged/realai/realai - Copy/.gitignore
+rebase_dryrun/merged/realai/realai - Copy/API.md
+rebase_dryrun/merged/realai/realai - Copy/CONTRIBUTING.md
+rebase_dryrun/merged/realai/realai - Copy/DEPLOYMENT.md
+rebase_dryrun/merged/realai/realai - Copy/DEPLOYMENT_FRONTEND_FIX.md
+rebase_dryrun/merged/realai/realai - Copy/LAMBDA_DEPLOYMENT.md
+rebase_dryrun/merged/realai/realai - Copy/LAMBDA_SIZE_OPTIMIZATION.md
+rebase_dryrun/merged/realai/realai - Copy/LICENSE
+rebase_dryrun/merged/realai/realai - Copy/LOCAL_AI_GUIDE.md
+rebase_dryrun/merged/realai/realai - Copy/LOCAL_AI_SUMMARY.md
+rebase_dryrun/merged/realai/realai - Copy/PROJECT_SUMMARY.md
+rebase_dryrun/merged/realai/realai - Copy/QUICKSTART.md
+rebase_dryrun/merged/realai/realai - Copy/README.md
+rebase_dryrun/merged/realai/realai - Copy/SECURITY_SUMMARY.txt
+rebase_dryrun/merged/realai/realai - Copy/VALIDATION_REPORT.md
+rebase_dryrun/merged/realai/realai - Copy/__init__.py
+rebase_dryrun/merged/realai/realai - Copy/api
+rebase_dryrun/merged/realai/realai - Copy/build_lambda.sh
+rebase_dryrun/merged/realai/realai - Copy/examples.py
+rebase_dryrun/merged/realai/realai - Copy/examples_limitless.py
+rebase_dryrun/merged/realai/realai - Copy/examples_local_ai.py
+rebase_dryrun/merged/realai/realai - Copy/examples_ultimate.py
+rebase_dryrun/merged/realai/realai - Copy/index.html
+rebase_dryrun/merged/realai/realai - Copy/lambda_advanced.py
+rebase_dryrun/merged/realai/realai - Copy/lambda_chat.py
+rebase_dryrun/merged/realai/realai - Copy/lambda_core.py
+rebase_dryrun/merged/realai/realai - Copy/lambda_core_shared.py
+rebase_dryrun/merged/realai/realai - Copy/lambda_image.py
+rebase_dryrun/merged/realai/realai - Copy/lambda_video.py
+rebase_dryrun/merged/realai/realai - Copy/local_model_cli.py
+rebase_dryrun/merged/realai/realai - Copy/local_models.py
+rebase_dryrun/merged/realai/realai - Copy/main.py
+rebase_dryrun/merged/realai/realai - Copy/quick_start_local.py
+rebase_dryrun/merged/realai/realai - Copy/realai-cli
+rebase_dryrun/merged/realai/realai - Copy/realai-design-system
+rebase_dryrun/merged/realai/realai - Copy/realai/__init__.py
+rebase_dryrun/merged/realai/realai - Copy/realai_api
+rebase_dryrun/merged/realai/realai - Copy/realai_gui.py
+rebase_dryrun/merged/realai/realai - Copy/realai_launcher.spec
+rebase_dryrun/merged/realai/realai - Copy/render.yaml
+rebase_dryrun/merged/realai/realai - Copy/requirements-ci.txt
+rebase_dryrun/merged/realai/realai - Copy/requirements-full.txt
+rebase_dryrun/merged/realai/realai - Copy/requirements-lambda-advanced.txt
+rebase_dryrun/merged/realai/realai - Copy/requirements-lambda-chat.txt
+rebase_dryrun/merged/realai/realai - Copy/requirements-lambda-core.txt
+rebase_dryrun/merged/realai/realai - Copy/requirements-lambda-image.txt
+rebase_dryrun/merged/realai/realai - Copy/requirements-lambda-video.txt
+rebase_dryrun/merged/realai/realai - Copy/requirements.txt
+rebase_dryrun/merged/realai/realai - Copy/setup.py
+rebase_dryrun/merged/realai/realai - Copy/standalone_ai.py
+rebase_dryrun/merged/realai/realai - Copy/template.yaml
+rebase_dryrun/merged/realai/realai - Copy/travis smith.lnk
+rebase_dryrun/merged/realai/realai - Copy/vercel.json
+rebase_dryrun/merged/realai/realai-cli
+rebase_dryrun/merged/realai/realai-design-system
+rebase_dryrun/merged/realai/realai/__init__.py
+rebase_dryrun/merged/realai/realai_api
+rebase_dryrun/merged/realai/realai_gui.py
+rebase_dryrun/merged/realai/realai_launcher.spec
+rebase_dryrun/merged/realai/render.yaml
+rebase_dryrun/merged/realai/requirements-ci.txt
+rebase_dryrun/merged/realai/requirements-full.txt
+rebase_dryrun/merged/realai/requirements-lambda-advanced.txt
+rebase_dryrun/merged/realai/requirements-lambda-chat.txt
+rebase_dryrun/merged/realai/requirements-lambda-core.txt
+rebase_dryrun/merged/realai/requirements-lambda-image.txt
+rebase_dryrun/merged/realai/requirements-lambda-video.txt
+rebase_dryrun/merged/realai/requirements.txt
+rebase_dryrun/merged/realai/server
+rebase_dryrun/merged/realai/setup.py
+rebase_dryrun/merged/realai/standalone_ai.py
+rebase_dryrun/merged/realai/template.yaml
+rebase_dryrun/merged/realai/travis smith.lnk
+rebase_dryrun/merged/realai/vercel.json
+rebase_dryrun/merged/setup.py.conflict
+rebase_dryrun/merged/src
+rebase_dryrun/merged/start-realai.bat.conflict
+rebase_dryrun/resolution_report.txt
+repo_structure.txt
+repo_structure.zip
+root_scripts
+scripts/REALI_NEXT_UI_BASE_URL.bat
+scripts/__init__.py
+scripts/_runner.py
+scripts/add_evolver.py
+scripts/app_framework.py
+scripts/apply_migration.py
+scripts/audit.py
+scripts/auto_fix.py
+scripts/batch_vet_autodiscovered.py
+scripts/chat_qwen_lora_directml.py
+scripts/cleanup_autodiscovered.py
+scripts/config.py
+scripts/critique.py
+scripts/device_utils.py
+scripts/full_repo_scan.py
+scripts/generate_migration_plan.py
+scripts/identity.py
+scripts/improved_code.py
+scripts/improved_llama_endpoint.py
+scripts/knowledge_graph.py
+scripts/local_model_cli.py
+scripts/local_models.py
+scripts/local_runtime.py
+scripts/newmethods.py
+scripts/probe_chat.py
+scripts/python fix_and_test.py
+scripts/realai_broad_search.py
+scripts/realai_full_autonomous.py
+scripts/realai_local_server.py
+scripts/realai_rebuilder.py
+scripts/realai_repo_improver.py
+scripts/realai_v3_server.py
+scripts/rebase_apply.py
+scripts/rebase_dryrun.py
+scripts/rebase_generate_diffs.py
+scripts/rebase_report.py
+scripts/rebase_resolve_conflicts.py
+scripts/reorganize_safe.py
+scripts/router.py
+scripts/run_tests_shortlist.py
+scripts/safety.py
+scripts/scan_autodiscovered.py
+scripts/self_improvement.py
+scripts/stabilize_and_package.py
+scripts/standalone_ai.py
+scripts/start_realai_server.py
+scripts/t.py
+scripts/test_load_whitelist.py
+scripts/verify_adapter_load_and_generate.py
+scripts/vet_autodiscovered.py
+server/__init__.py
+server/app.py
+server/backends.py
+server/config.py
+server/inference.py
+server/llama_cli_backend.py
+server/logging.py
+server/logging_utils.py
+server/metrics.py
+server/profiles
+server/router.py
+servers
+src/app/api
+src/app/globals.css
+src/app/layout.tsx
+src/client.ts
+src/commands
+src/components/Avatar
+src/components/Badge
+src/components/Button
+src/components/Card
+src/components/ChatBubble
+src/components/ChatInput.tsx
+src/components/CodeBlock
+src/components/Dropdown
+src/components/Input
+src/components/MessageList.tsx
+src/components/Modal
+src/components/ModelTag
+src/components/SettingsDrawer.tsx
+src/components/Sidebar.tsx
+src/components/Tabs
+src/components/TextArea
+src/config.ts
+src/data
+src/icons
+src/index.ts
+src/realai/__init__.py
+src/realai/architect
+src/realai/cli
+src/realai/core/__init__.py
+src/realai/core/data
+src/realai/core/realai_engine.py
+src/realai/core/realai_engine_backup.py
+src/realai/core/realai_engine_v3.py
+src/realai/dream
+src/realai/evolver/__init__.py
+src/realai/evolver/recursive_self_evolver.py
+src/realai/gui
+src/realai/init_fix.py
+src/realai/meta_arch
+src/realai/models
+src/realai/narrative
+src/realai/patches
+src/realai/repair
+src/realai/test.txt
+src/realai/value_guardian
+src/realai/world
+src/theme
+src/types.ts
+start-realai.bat
+template.yaml
+tests/test64.py
+tests/test_client.py
+tests/test_extract_sessions.py
+tests/test_import_realai_module.py
+tests/test_llama.py
+tests/test_local_server.py
+tests/test_model_assets.py
+tests/test_self_builder.py
+utilities/blackbox_mcp_settings.json
+utilities/pyrightconfig.json
+vendor

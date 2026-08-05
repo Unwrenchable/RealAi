@@ -1,0 +1,30 @@
+You are operating inside /workspaces/RealAi/apps/vscode.
+
+Your task is PHASE 3: VS CODE EXTENSION ALIGNMENT.
+
+MANDATORY RULES:
+- No questions.
+- No testing.
+- No checkpoints.
+- No pausing.
+- No stopping early.
+
+TASKS:
+1. Read all extension files:
+   - extension.ts
+   - commands
+   - schemas
+   - webview messaging
+   - VSIX packaging
+2. Identify mismatches with unified server API.
+3. Produce:
+   - command alignment plan
+   - schema alignment plan
+   - webview messaging alignment plan
+   - endpoint alignment plan
+   - VSIX build alignment plan
+4. Produce Phase‑4 prerequisites.
+
+Do NOT run tests.
+Do NOT modify files.
+Produce analysis + plans only.

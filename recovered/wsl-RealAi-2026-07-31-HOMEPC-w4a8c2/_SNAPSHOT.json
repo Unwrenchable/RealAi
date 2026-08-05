@@ -1,0 +1,11 @@
+{
+  "slug": "wsl-RealAi-2026-07-31-HOMEPC-w4a8c2",
+  "source_sha": "e5ac331995ce599673721ee4473e03d8ff6774be",
+  "giants_moved_out": 0,
+  "batch": 2,
+  "file_count": 328,
+  "imported_at": "2026-08-05T05:58:25.0097236-07:00",
+  "dest": "recovered/wsl-RealAi-2026-07-31-HOMEPC-w4a8c2",
+  "source_ref": "origin/recovery/wsl-RealAi/2026-07-31/HOMEPC/w4a8c2",
+  "source_branch": "recovery/wsl-RealAi/2026-07-31/HOMEPC/w4a8c2"
+}
