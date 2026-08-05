@@ -1,0 +1,2 @@
+phase: cli-repair
+description: Restore doctor, repo-loop, extract-data, and CLI entrypoints.

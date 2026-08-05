@@ -1,0 +1,36 @@
+{
+  "worktrees": {
+    "wt-1783265989228-1": {
+      "branch": "cotton-mistake",
+      "path": "c:\\Users\\tsmit\\realai\\.kilo\\worktrees\\cotton-mistake",
+      "parentBranch": "main",
+      "createdAt": "2026-07-05T15:39:49.228Z",
+      "remote": "origin",
+      "branchOwned": true
+    }
+  },
+  "sessions": {
+    "ses_0cd106b3dffe3zxs74RKTXCli7": {
+      "worktreeId": "wt-1783265989228-1",
+      "createdAt": "2026-07-05T15:39:49.846Z"
+    },
+    "ses_0cd8e7cb4ffePoPWQ988DV1sCM": {
+      "worktreeId": "wt-1783265989228-1",
+      "createdAt": "2026-07-05T15:40:05.070Z"
+    }
+  },
+  "tabOrder": {
+    "local": [
+      "pending:1",
+      "pending:2"
+    ],
+    "wt-1783265989228-1": [
+      "ses_0cd106b3dffe3zxs74RKTXCli7",
+      "ses_0cd8e7cb4ffePoPWQ988DV1sCM"
+    ]
+  },
+  "worktreeOrder": [
+    "wt-1783265989228-1"
+  ],
+  "sessionsCollapsed": true
+}

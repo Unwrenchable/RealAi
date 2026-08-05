@@ -1,0 +1,4 @@
+[console_scripts]
+realai = realai:main
+realai-cli = realai.cli.realai_cli:main
+realai-server = realai.server.app:main

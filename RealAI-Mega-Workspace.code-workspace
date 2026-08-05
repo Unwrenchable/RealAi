@@ -1,0 +1,88 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../Users/tsmit/projects/realai-clean"
+		},
+		{
+			"path": "../RealAi-unified"
+		},
+		{
+			"path": "../Users/tsmit/realai"
+		},
+		{
+			"path": "../Users/tsmit/realai_historical_backups"
+		},
+		{
+			"path": "../Users/tsmit/realai-clean"
+		},
+		{
+			"path": "../realai_grok_export"
+		},
+		{
+			"path": "../realai_recovery_"
+		},
+		{
+			"path": "../RealAI_Recovery_SAFE"
+		},
+		{
+			"path": "../tools/realai"
+		},
+		{
+			"path": "../Users/tsmit/.grok"
+		},
+		{
+			"path": "../Users/tsmit/.realai"
+		},
+		{
+			"path": "../Users/tsmit/backups/realai-sync-20260508-090605/realai_sdk"
+		},
+		{
+			"path": "../Users/tsmit/backups/realai-sync-20260508-090605/realai-main"
+		},
+		{
+			"path": "../Users/tsmit/OneDrive/Documents/agent-tools-main/agent-tools-main"
+		},
+		{
+			"path": "../Users/tsmit/OneDrive/Desktop/__pycache__"
+		},
+		{
+			"path": "../Users/tsmit/OneDrive/Desktop/api"
+		},
+		{
+			"path": "../Users/tsmit/OneDrive/Desktop/build"
+		},
+		{
+			"path": "../Users/tsmit/OneDrive/Desktop/config"
+		},
+		{
+			"path": "../Users/tsmit/OneDrive/Desktop/realai"
+		},
+		{
+			"path": "../Users/tsmit/OneDrive/Desktop/realai_agent"
+		},
+		{
+			"path": "../Users/tsmit/OneDrive/Desktop/realai_api"
+		},
+		{
+			"path": "../Users/tsmit/OneDrive/Desktop/realai-cli"
+		},
+		{
+			"path": "../Users/tsmit/OneDrive/Desktop/realai-design-system"
+		},
+		{
+			"path": "../Users/tsmit/OneDrive/Desktop/realai-orchestration"
+		},
+		{
+			"path": "../Users/tsmit/OneDrive/Desktop/realai-sdk-js"
+		},
+		{
+			"path": "../Users/tsmit/Documents/repo_locations"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}

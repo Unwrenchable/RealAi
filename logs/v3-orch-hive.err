@@ -1,0 +1,568 @@
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58868)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58870)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58872)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58874)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58876)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58878)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58880)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58882)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58884)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58886)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58888)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58890)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58892)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58894)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58896)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58898)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58900)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58902)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58904)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58906)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58908)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58910)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58912)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58914)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58916)
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 761, in __init__
+    self.handle()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Program Files\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\realai\realai\v3_orchestrator.py", line 442, in do_GET
+    self._json(200 if vulkan_ok else 503, {
+  File "C:\realai\realai\v3_orchestrator.py", line 413, in _json
+    self.wfile.write(data)
+  File "C:\Program Files\Python312\Lib\socketserver.py", line 840, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -
+[v3-orch] 127.0.0.1 - "POST /v1/multi-agent/run HTTP/1.1" 200 -
+[v3-orch] 127.0.0.1 - "GET /health HTTP/1.1" 503 -

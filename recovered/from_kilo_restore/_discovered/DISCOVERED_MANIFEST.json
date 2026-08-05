@@ -1,0 +1,58 @@
+[
+  {
+    "src": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/checkpoints_lora",
+    "files": 662,
+    "mb": 3284.57,
+    "dest": "checkpoints_lora",
+    "action": "pointer+439_code_files"
+  },
+  {
+    "src": "/mnt/c/Users/tsmit/realai/archive/real-fin/realai/realai_agent",
+    "files": 0,
+    "mb": 0.0,
+    "dest": "realai_agent_from_archive",
+    "action": "copied"
+  },
+  {
+    "src": "/mnt/c/realai/recovered/from_desktop/realai_agent",
+    "files": 10,
+    "mb": 0.06,
+    "dest": "realai_agent_from_desktop",
+    "action": "copied"
+  },
+  {
+    "src": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/realai_agent",
+    "files": 19,
+    "mb": 0.13,
+    "dest": "realai2_realai_agent",
+    "action": "copied"
+  },
+  {
+    "src": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/scripts",
+    "files": 4,
+    "mb": 0.02,
+    "dest": "realai2_scripts",
+    "action": "copied"
+  },
+  {
+    "src": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/agents",
+    "files": 16,
+    "mb": 0.05,
+    "dest": "realai2_agents",
+    "action": "copied"
+  },
+  {
+    "src": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/server",
+    "files": 48,
+    "mb": 807.95,
+    "dest": "realai2_server",
+    "action": "pointer+17_code_files"
+  },
+  {
+    "src": "/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/training",
+    "files": 3,
+    "mb": 0.01,
+    "dest": "realai2_training",
+    "action": "copied"
+  }
+]
