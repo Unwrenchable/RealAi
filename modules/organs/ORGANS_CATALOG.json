@@ -1,0 +1,570 @@
+{
+  "status": {
+    "organ_count": 44,
+    "expected": 44,
+    "complete": true,
+    "by_category": {
+      "cognitive": 8,
+      "nervous": 3,
+      "dream": 4,
+      "body": 7,
+      "metabolic": 4,
+      "evolution": 4,
+      "memory_ecosystem": 8,
+      "meta": 6
+    },
+    "ids": [
+      "organ.amygdala",
+      "organ.architecture-memory",
+      "organ.brainstem",
+      "organ.cerebellum",
+      "organ.corpus-callosum",
+      "organ.device-walker-organ",
+      "organ.dream-memory",
+      "organ.episodic-memory",
+      "organ.frontal-cortex",
+      "organ.hippocampus",
+      "organ.limbic-system",
+      "organ.long-term-memory",
+      "organ.lucid-dream-mode",
+      "organ.neural-pathway-builder",
+      "organ.neuroplasticity-module",
+      "organ.nightmare-engine",
+      "organ.plugin-memory",
+      "organ.prefrontal-cortex",
+      "organ.procedural-memory",
+      "organ.semantic-memory",
+      "organ.short-term-memory",
+      "organ.synaptic-pruning-engine",
+      "organ.synthetic-circulatory-system",
+      "organ.synthetic-consciousness-layer",
+      "organ.synthetic-creativity-furnace",
+      "organ.synthetic-digestive-system",
+      "organ.synthetic-dream-forge",
+      "organ.synthetic-dream-reproductive-system",
+      "organ.synthetic-evolution-spiral",
+      "organ.synthetic-guardian-layer",
+      "organ.synthetic-habitat-awareness",
+      "organ.synthetic-inspiration-cortex",
+      "organ.synthetic-intuition-layer",
+      "organ.synthetic-lymphatic-system",
+      "organ.synthetic-muscular-system",
+      "organ.synthetic-mutation-engine",
+      "organ.synthetic-organ-generator",
+      "organ.synthetic-paradox-engine",
+      "organ.synthetic-reflex-system",
+      "organ.synthetic-respiratory-system",
+      "organ.synthetic-sensory-system",
+      "organ.synthetic-shadow-architect",
+      "organ.synthetic-soul-layer",
+      "organ.synthetic-symbiosis-layer"
+    ]
+  },
+  "organs": [
+    {
+      "id": "organ.amygdala",
+      "name": "Amygdala",
+      "category": "cognitive",
+      "description": "Threat / anomaly salience and safety interrupts",
+      "capabilities": [
+        "threat",
+        "salience",
+        "interrupt"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.brainstem",
+      "name": "Brainstem",
+      "category": "cognitive",
+      "description": "Vital loops: heartbeat, health, keep-alive inference",
+      "capabilities": [
+        "health",
+        "keepalive",
+        "vitals"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.cerebellum",
+      "name": "Cerebellum",
+      "category": "cognitive",
+      "description": "Skill fine-tuning, timing, procedural refinement",
+      "capabilities": [
+        "procedural",
+        "timing",
+        "refine"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.corpus-callosum",
+      "name": "Corpus Callosum",
+      "category": "cognitive",
+      "description": "Cross-module routing between agents, tools, providers",
+      "capabilities": [
+        "route",
+        "bridge",
+        "multiplex"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.frontal-cortex",
+      "name": "Frontal Cortex",
+      "category": "cognitive",
+      "description": "Executive planning, goal decomposition, policy selection",
+      "capabilities": [
+        "plan",
+        "policy",
+        "executive"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.hippocampus",
+      "name": "Hippocampus",
+      "category": "cognitive",
+      "description": "Episodic encode/retrieve bridge into memory engines",
+      "capabilities": [
+        "episodic",
+        "encode",
+        "retrieve"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.limbic-system",
+      "name": "Limbic System",
+      "category": "cognitive",
+      "description": "Affective weighting, motivation, reward priors",
+      "capabilities": [
+        "affect",
+        "motivation"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.prefrontal-cortex",
+      "name": "Prefrontal Cortex",
+      "category": "cognitive",
+      "description": "Working-memory control, inhibition, multi-step reasoning",
+      "capabilities": [
+        "reason",
+        "inhibit",
+        "working-memory"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.neural-pathway-builder",
+      "name": "Neural Pathway Builder",
+      "category": "nervous",
+      "description": "Wires new tool/agent pathways in the registry",
+      "capabilities": [
+        "wire",
+        "pathway",
+        "register"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.neuroplasticity-module",
+      "name": "Neuroplasticity Module",
+      "category": "nervous",
+      "description": "Adapts routing weights from feedback / self-improvement",
+      "capabilities": [
+        "adapt",
+        "learn",
+        "weights"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synaptic-pruning-engine",
+      "name": "Synaptic Pruning Engine",
+      "category": "nervous",
+      "description": "Prunes weak or unused pathways and dead code routes",
+      "capabilities": [
+        "prune",
+        "optimize"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.lucid-dream-mode",
+      "name": "Lucid Dream Mode",
+      "category": "dream",
+      "description": "Guided counterfactual simulation under operator control",
+      "capabilities": [
+        "simulate",
+        "counterfactual"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.nightmare-engine",
+      "name": "Nightmare Engine",
+      "category": "dream",
+      "description": "Adversarial / failure-mode simulation for safety training",
+      "capabilities": [
+        "adversarial",
+        "safety-sim"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-dream-forge",
+      "name": "Synthetic Dream Forge",
+      "category": "dream",
+      "description": "Offline synthesis of scenarios for training/eval",
+      "capabilities": [
+        "dream",
+        "synthesize",
+        "offline"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-shadow-architect",
+      "name": "Synthetic Shadow Architect",
+      "category": "dream",
+      "description": "Builds shadow copies of plans for dual-path critique",
+      "capabilities": [
+        "shadow",
+        "dual-path"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.device-walker-organ",
+      "name": "Device Walker Organ",
+      "category": "body",
+      "description": "Filesystem / device traversal under policy sandbox",
+      "capabilities": [
+        "walk",
+        "fs",
+        "sandbox"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-guardian-layer",
+      "name": "Synthetic Guardian Layer",
+      "category": "body",
+      "description": "Policy envelope and permission sandbox for effectors",
+      "capabilities": [
+        "guardian",
+        "policy",
+        "permissions"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-habitat-awareness",
+      "name": "Synthetic Habitat Awareness",
+      "category": "body",
+      "description": "Environment/host context (paths, OS, resources)",
+      "capabilities": [
+        "habitat",
+        "env",
+        "host"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-muscular-system",
+      "name": "Synthetic Muscular System",
+      "category": "body",
+      "description": "Action actuators: shell, editor, browser tool effectors",
+      "capabilities": [
+        "actuate",
+        "effectors"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-reflex-system",
+      "name": "Synthetic Reflex System",
+      "category": "body",
+      "description": "Fast path reflexes for critical safety/tool interrupts",
+      "capabilities": [
+        "reflex",
+        "fast-path"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-sensory-system",
+      "name": "Synthetic Sensory System",
+      "category": "body",
+      "description": "Ingest sensors: ASR, files, web, embeddings",
+      "capabilities": [
+        "sense",
+        "ingest",
+        "asr"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-symbiosis-layer",
+      "name": "Synthetic Symbiosis Layer",
+      "category": "body",
+      "description": "Cooperative interface with host apps and user workflows",
+      "capabilities": [
+        "symbiosis",
+        "host-apps"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-circulatory-system",
+      "name": "Synthetic Circulatory System",
+      "category": "metabolic",
+      "description": "Moves context tokens / embeddings through the pipeline",
+      "capabilities": [
+        "circulate",
+        "context",
+        "embeddings"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-digestive-system",
+      "name": "Synthetic Digestive System",
+      "category": "metabolic",
+      "description": "Ingest and normalize datasets / documents into memory",
+      "capabilities": [
+        "ingest",
+        "normalize",
+        "datasets"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-lymphatic-system",
+      "name": "Synthetic Lymphatic System",
+      "category": "metabolic",
+      "description": "Garbage collection of stale context and temp artifacts",
+      "capabilities": [
+        "gc",
+        "cleanup"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-respiratory-system",
+      "name": "Synthetic Respiratory System",
+      "category": "metabolic",
+      "description": "Streaming breath: chunked token I/O and backpressure",
+      "capabilities": [
+        "stream",
+        "backpressure"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-dream-reproductive-system",
+      "name": "Synthetic Dream Reproductive System",
+      "category": "evolution",
+      "description": "Spawns child scenarios/datasets from dream forge",
+      "capabilities": [
+        "spawn",
+        "datasets"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-evolution-spiral",
+      "name": "Synthetic Evolution Spiral",
+      "category": "evolution",
+      "description": "Closed-loop improve \u2192 eval \u2192 promote cycle",
+      "capabilities": [
+        "evolve",
+        "eval",
+        "promote"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-mutation-engine",
+      "name": "Synthetic Mutation Engine",
+      "category": "evolution",
+      "description": "Proposes code/config mutations for self-improvement",
+      "capabilities": [
+        "mutate",
+        "propose"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-organ-generator",
+      "name": "Synthetic Organ Generator",
+      "category": "evolution",
+      "description": "Scaffolds new organ modules into the hive",
+      "capabilities": [
+        "generate",
+        "scaffold"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.architecture-memory",
+      "name": "Architecture Memory",
+      "category": "memory_ecosystem",
+      "description": "System topology, registry map, BRANCH_MAP awareness",
+      "capabilities": [
+        "memory",
+        "architecture"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.dream-memory",
+      "name": "Dream Memory",
+      "category": "memory_ecosystem",
+      "description": "Stores dream/sim outputs for later training",
+      "capabilities": [
+        "memory",
+        "dream"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.episodic-memory",
+      "name": "Episodic Memory",
+      "category": "memory_ecosystem",
+      "description": "Event sequences and narrative traces",
+      "capabilities": [
+        "memory",
+        "episodic"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.long-term-memory",
+      "name": "Long-Term Memory",
+      "category": "memory_ecosystem",
+      "description": "Durable store via long_term_engine / sqlite",
+      "capabilities": [
+        "memory",
+        "long-term"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.plugin-memory",
+      "name": "Plugin Memory",
+      "category": "memory_ecosystem",
+      "description": "Plugin state, permissions, marketplace history",
+      "capabilities": [
+        "memory",
+        "plugins"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.procedural-memory",
+      "name": "Procedural Memory",
+      "category": "memory_ecosystem",
+      "description": "Skills, tools, playbooks, procedures",
+      "capabilities": [
+        "memory",
+        "procedural",
+        "skills"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.semantic-memory",
+      "name": "Semantic Memory",
+      "category": "memory_ecosystem",
+      "description": "Facts, embeddings, knowledge graph nodes",
+      "capabilities": [
+        "memory",
+        "semantic",
+        "kg"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.short-term-memory",
+      "name": "Short-Term Memory",
+      "category": "memory_ecosystem",
+      "description": "Working buffer for current dialogue/task state",
+      "capabilities": [
+        "memory",
+        "short-term"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-consciousness-layer",
+      "name": "Synthetic Consciousness Layer",
+      "category": "meta",
+      "description": "Global workspace / attention broadcast across organs",
+      "capabilities": [
+        "consciousness",
+        "workspace",
+        "attention"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-creativity-furnace",
+      "name": "Synthetic Creativity Furnace",
+      "category": "meta",
+      "description": "Divergent generation with controlled novelty",
+      "capabilities": [
+        "creativity",
+        "novelty"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-inspiration-cortex",
+      "name": "Synthetic Inspiration Cortex",
+      "category": "meta",
+      "description": "Cross-domain analogical idea generation",
+      "capabilities": [
+        "inspiration",
+        "analogy"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-intuition-layer",
+      "name": "Synthetic Intuition Layer",
+      "category": "meta",
+      "description": "Fast heuristic priors over incomplete information",
+      "capabilities": [
+        "intuition",
+        "heuristic"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-paradox-engine",
+      "name": "Synthetic Paradox Engine",
+      "category": "meta",
+      "description": "Contradiction detection and dual-truth resolution",
+      "capabilities": [
+        "paradox",
+        "consistency"
+      ],
+      "callable": true
+    },
+    {
+      "id": "organ.synthetic-soul-layer",
+      "name": "Synthetic Soul Layer",
+      "category": "meta",
+      "description": "Identity, values, long-horizon purpose (identity.py)",
+      "capabilities": [
+        "identity",
+        "values",
+        "purpose"
+      ],
+      "callable": true
+    }
+  ]
+}

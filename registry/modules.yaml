@@ -267,3 +267,11 @@ modules:
     status: archived
     source_branch: restored-from-history
     source_sha: 66be87fb
+
+  - id: modules-organs-hive
+    path: modules/organs
+    kind: living
+    capabilities: [hive, organs, cognitive, dream, memory, evolution, meta]
+    status: promoted
+    organ_count: 44
+    notes: All 44 synthetic organs first-class under modules/organs + adapters.organs
