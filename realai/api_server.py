@@ -1023,6 +1023,13 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
                     response.setdefault("realai", {})["organs"] = organ_pre
                 self._send_response(200, response)
 
+            elif parsed_path.path in ('/v1/plugins/rackup-coach', '/v1/rackup/coach'):
+                try:
+                    from plugins.rackup_coach import invoke
+                    self._send_response(200, invoke(body))
+                except Exception as e:
+                    self._send_response(500, {"error": str(e)})
+
             elif parsed_path.path == '/v1/organs/invoke':
                 try:
                     from modules.organs import call_organ
@@ -1364,6 +1371,8 @@ def run_server(host: str = "0.0.0.0", port: int = 8000):
     print("  GET  /v1/hive")
     print("  POST /v1/organs/invoke")
     print("  POST /v1/organs/pipeline")
+    print("  POST /v1/plugins/rackup-coach")
+    print("  POST /v1/rackup/coach")
     print("  POST /v1/self-improve/cycle")
     print("\nPass your API key via:  Authorization: Bearer <key>")
     print("Override provider via:  X-Provider: openai|anthropic|grok|gemini|openrouter|mistral|together|deepseek|perplexity")

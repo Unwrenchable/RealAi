@@ -48,6 +48,11 @@ def living_stack() -> dict[str, Any]:
         si = self_improvement_status()
     except Exception as e:
         si = {"error": str(e)}
+    try:
+        from adapters.rackup_coach import rackup_coach_status
+        rc = rackup_coach_status()
+    except Exception as e:
+        rc = {"error": str(e)}
     return {
         "provider": "realai",
         "provider_kind": "local-first OpenAI-compatible full provider (not a wrapper)",
@@ -56,6 +61,7 @@ def living_stack() -> dict[str, Any]:
         "agents": agents_status(),
         "organs_hive": organs_status(),
         "self_improvement": si,
+        "rackup_coach": rc,
         "promoted_unique": {
             "ability_catalog": (ROOT / "realai" / "ability_catalog.py").exists(),
             "agent_protocol": (ROOT / "realai" / "agent_protocol.py").exists(),
@@ -63,5 +69,6 @@ def living_stack() -> dict[str, Any]:
             "hierarchical_agent": (ROOT / "core" / "agents" / "hierarchical_agent.py").exists(),
             "desktop_unique": (ROOT / "modules" / "desktop_unique").exists(),
             "agents_advanced": (ROOT / "modules" / "agents_advanced").exists(),
+            "rackup_coach": (ROOT / "plugins" / "rackup_coach").exists(),
         },
     }

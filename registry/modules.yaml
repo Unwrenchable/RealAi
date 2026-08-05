@@ -332,3 +332,12 @@ modules:
     kind: living
     capabilities: [organs, hive, request-path, api-fusion]
     status: promoted
+
+  - id: plugin-rackup-coach
+    path: plugins/rackup_coach
+    kind: living_plugin
+    plugin_id: rackup-coach
+    capabilities: [coach, shot_of_the_day, moderation, video_analysis, matchmaking, rating, tournament, hall, pool, rackup]
+    status: promoted
+    organ: organ.rackup-coach
+    manifest: plugins/rackup_coach/manifest.yaml

@@ -1,0 +1,91 @@
+# RealAI living plugin — RackUp Coach
+# Provider-level AI capability only (no NestJS / no DB code).
+
+name: rackup-coach
+version: 1.0.0
+author: RealAI / RackUp
+description: >
+  Professional pool (billiards) coaching and platform intelligence for the
+  RackUp app — practice plans, shot of the day, video feedback, moderation,
+  matchmaking, rating intelligence, tournament insights, and hall context.
+  Uses the RealAI synthetic organs hive for cognitive/memory routing.
+
+kind: living_plugin
+provider_level: true
+homepage: https://github.com/Unwrenchable/RealAi
+
+permissions:
+  - none   # pure inference/coaching logic; host supplies player history
+
+entrypoints:
+  register: plugins.rackup_coach:register
+  invoke: plugins.rackup_coach:invoke
+  organ: organ.rackup-coach
+
+capabilities:
+  - professional_coach
+  - shot_of_the_day
+  - video_analysis
+  - chat_moderation
+  - matchmaking_support
+  - rating_intelligence
+  - tournament_insights
+  - hall_session_context
+  - mental_game
+  - practice_plans
+  - pattern_recognition
+  - pre_match_prep
+
+organs_used:
+  - organ.frontal-cortex          # planning practice / match strategy
+  - organ.prefrontal-cortex       # multi-step reasoning, inhibition
+  - organ.amygdala                # threat/toxicity salience (moderation)
+  - organ.cerebellum              # procedural skill refinement / drills
+  - organ.hippocampus             # episodic player history
+  - organ.short-term-memory
+  - organ.long-term-memory
+  - organ.episodic-memory
+  - organ.semantic-memory
+  - organ.procedural-memory
+  - organ.synthetic-creativity-furnace
+  - organ.synthetic-intuition-layer
+  - organ.synthetic-guardian-layer
+  - organ.synthetic-consciousness-layer
+  - organ.limbic-system           # motivation / mental game
+
+rating_bands:
+  beginner: [0, 399]
+  intermediate: [400, 699]
+  advanced: [700, 899]
+  pro: [900, 1200]
+
+abilities:
+  - id: coach
+    module: abilities.coach
+    description: Rating-aware professional coaching (basic → advanced → pro)
+  - id: shot_of_the_day
+    module: abilities.shot_of_the_day
+    description: Useful daily shot recs from weaknesses + history
+  - id: moderation
+    module: abilities.moderation
+    description: Harassment, toxicity, money-match drama, sandbagging signals
+  - id: video_analysis
+    module: abilities.video_analysis
+    description: Structured stroke/stance/break feedback + drills
+  - id: matchmaking
+    module: abilities.matchmaking
+    description: Smart matchup suggestions from rating/style
+  - id: rating_intel
+    module: abilities.rating_intel
+    description: Dynamic rating trajectory and skill-gap analysis
+  - id: tournament
+    module: abilities.tournament
+    description: League/tournament bracket and prep insights
+  - id: hall_context
+    module: abilities.hall_context
+    description: Hall/session context awareness
+
+config_defaults:
+  organs_enabled: true
+  default_discipline: eight_ball   # eight_ball | nine_ball | ten_ball | straight_pool
+  max_history_events: 50
