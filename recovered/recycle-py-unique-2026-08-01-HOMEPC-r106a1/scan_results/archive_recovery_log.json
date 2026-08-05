@@ -1,0 +1,252 @@
+{
+  "generated_at": "2026-07-13T16:52:51.512139+00:00",
+  "policy": "curated_archive_recovery",
+  "actions": [
+    {
+      "action": "copied",
+      "src": "archive/realai-clean/realai-core/ui/lib/registryClient.ts",
+      "dst": "packages/sdk-ts/src/registryClient.ts",
+      "sha256": "4866895826c3e7c82c56e2d8b6480dad082b61484556ece45aef50cf23d3177b",
+      "size": 2539,
+      "reason": "unique_archive_registryClient_not_in_clean"
+    },
+    {
+      "action": "copied",
+      "src": "archive/realai-clean/realai-core/ui/lib/registryClient.ts",
+      "dst": "realai/packages/sdk-ts/src/registryClient.ts",
+      "sha256": "4866895826c3e7c82c56e2d8b6480dad082b61484556ece45aef50cf23d3177b",
+      "size": 2539,
+      "reason": "unique_archive_registryClient_not_in_clean"
+    },
+    {
+      "action": "copied",
+      "src": "archive/realai-clean/realai-core/ui/lib/registryClient.ts",
+      "dst": "recovered/from_archive/ui/registryClient.ts",
+      "sha256": "4866895826c3e7c82c56e2d8b6480dad082b61484556ece45aef50cf23d3177b",
+      "size": 2539,
+      "reason": "unique_archive_registryClient_not_in_clean"
+    },
+    {
+      "action": "copied",
+      "src": "archive/realai-clean/realai-core/ui/lib/realaiClient.ts",
+      "dst": "packages/sdk-ts/src/envChatClient.ts",
+      "sha256": "7f39f33a4cbb3fa148dd84100b1a0f2c43e67fdcc3ff9050faea4417f58ef8f9",
+      "size": 3431,
+      "reason": "archive_env_driven_chat_client_GOLD_contract"
+    },
+    {
+      "action": "copied",
+      "src": "archive/realai-clean/realai-core/ui/lib/realaiClient.ts",
+      "dst": "realai/packages/sdk-ts/src/envChatClient.ts",
+      "sha256": "7f39f33a4cbb3fa148dd84100b1a0f2c43e67fdcc3ff9050faea4417f58ef8f9",
+      "size": 3431,
+      "reason": "archive_env_driven_chat_client_GOLD_contract"
+    },
+    {
+      "action": "copied",
+      "src": "archive/realai-clean/realai-core/ui/lib/realaiClient.ts",
+      "dst": "recovered/from_archive/ui/envChatClient.ts",
+      "sha256": "7f39f33a4cbb3fa148dd84100b1a0f2c43e67fdcc3ff9050faea4417f58ef8f9",
+      "size": 3431,
+      "reason": "archive_env_driven_chat_client_GOLD_contract"
+    },
+    {
+      "action": "copied",
+      "src": "archive/realai-clean__dup1/realai-frontend__dup1/src/lib/realai.ts",
+      "dst": "recovered/from_archive/ui/frontend_realai.historical.ts",
+      "sha256": "21ebd1996ca6f82c3f2ff0aa745248772c585222f954f4fe681c74286fc7777b",
+      "size": 1324,
+      "reason": "historical_frontend_client_clean_is_superset_do_not_overwrite"
+    },
+    {
+      "action": "copied",
+      "src": "archive/realai-clean__dup1/realai-frontend__dup1/src/lib/types.ts",
+      "dst": "recovered/from_archive/ui/frontend_types.historical.ts",
+      "sha256": "7fbbbabda02fbd6f72b8ba87bf5169c775c03784f65ee3a837d2aa1a89caf9b9",
+      "size": 1363,
+      "reason": "historical_frontend_types_review_only"
+    },
+    {
+      "action": "copied",
+      "src": "archive/agent-tools-main/.agentx/agents.json",
+      "dst": "agents/agentx/agents.json",
+      "sha256": "8ab97d5791d321905aa04380ba2f3d2b265a9e422a65345ca2cab239d52054a4",
+      "size": 45754,
+      "reason": "agentx_capability_profiles_from_archive"
+    },
+    {
+      "action": "copied",
+      "src": "archive/agent-tools-main/.agentx/access_profiles.json",
+      "dst": "agents/agentx/access_profiles.json",
+      "sha256": "4847141e0693f896e417ae4cf10e0169bc4a539319c886c5da03c1f62ca5c051",
+      "size": 978,
+      "reason": "agentx_capability_profiles_from_archive"
+    },
+    {
+      "action": "copied",
+      "src": "archive/agent-tools-main/.agentx/agency_import.json",
+      "dst": "agents/agentx/agency_import.json",
+      "sha256": "d1c38f6f26dc2076645f638c293c2d7ee8ce909d75bec0a57351f14246cb7801",
+      "size": 28429,
+      "reason": "agentx_capability_profiles_from_archive"
+    },
+    {
+      "action": "copied",
+      "src": "archive/agent-tools-main/.agentx/README.md",
+      "dst": "agents/agentx/README.md",
+      "sha256": "998fc84c41055c95402f7aac0c1228ddb2f5e8875a87f1472f80626c9b6253da",
+      "size": 455,
+      "reason": "agentx_capability_profiles_from_archive"
+    },
+    {
+      "action": "copied",
+      "src": "archive/agent-tools-main/.agentx/agents.json",
+      "dst": "realai/agents/agentx/agents.json",
+      "sha256": "8ab97d5791d321905aa04380ba2f3d2b265a9e422a65345ca2cab239d52054a4",
+      "size": 45754,
+      "reason": "agentx_capability_profiles_from_archive"
+    },
+    {
+      "action": "copied",
+      "src": "archive/agent-tools-main/.agentx/access_profiles.json",
+      "dst": "realai/agents/agentx/access_profiles.json",
+      "sha256": "4847141e0693f896e417ae4cf10e0169bc4a539319c886c5da03c1f62ca5c051",
+      "size": 978,
+      "reason": "agentx_capability_profiles_from_archive"
+    },
+    {
+      "action": "copied",
+      "src": "archive/agent-tools-main/.agentx/agency_import.json",
+      "dst": "realai/agents/agentx/agency_import.json",
+      "sha256": "d1c38f6f26dc2076645f638c293c2d7ee8ce909d75bec0a57351f14246cb7801",
+      "size": 28429,
+      "reason": "agentx_capability_profiles_from_archive"
+    },
+    {
+      "action": "copied",
+      "src": "archive/agent-tools-main/.agentx/README.md",
+      "dst": "realai/agents/agentx/README.md",
+      "sha256": "998fc84c41055c95402f7aac0c1228ddb2f5e8875a87f1472f80626c9b6253da",
+      "size": 455,
+      "reason": "agentx_capability_profiles_from_archive"
+    },
+    {
+      "action": "copied",
+      "src": "archive/agent-tools-main/.agentx/agents.json",
+      "dst": "recovered/from_archive/agentx/agents.json",
+      "sha256": "8ab97d5791d321905aa04380ba2f3d2b265a9e422a65345ca2cab239d52054a4",
+      "size": 45754,
+      "reason": "agentx_capability_profiles_from_archive"
+    },
+    {
+      "action": "copied",
+      "src": "archive/agent-tools-main/.agentx/access_profiles.json",
+      "dst": "recovered/from_archive/agentx/access_profiles.json",
+      "sha256": "4847141e0693f896e417ae4cf10e0169bc4a539319c886c5da03c1f62ca5c051",
+      "size": 978,
+      "reason": "agentx_capability_profiles_from_archive"
+    },
+    {
+      "action": "copied",
+      "src": "archive/agent-tools-main/.agentx/agency_import.json",
+      "dst": "recovered/from_archive/agentx/agency_import.json",
+      "sha256": "d1c38f6f26dc2076645f638c293c2d7ee8ce909d75bec0a57351f14246cb7801",
+      "size": 28429,
+      "reason": "agentx_capability_profiles_from_archive"
+    },
+    {
+      "action": "copied",
+      "src": "archive/agent-tools-main/.agentx/README.md",
+      "dst": "recovered/from_archive/agentx/README.md",
+      "sha256": "998fc84c41055c95402f7aac0c1228ddb2f5e8875a87f1472f80626c9b6253da",
+      "size": 455,
+      "reason": "agentx_capability_profiles_from_archive"
+    },
+    {
+      "action": "copied",
+      "src": "archive/logs_data/realai_memory.json",
+      "dst": "recovered/from_archive/memory_snapshots/json_interactions_6d542331__6d5423312115.json",
+      "sha256": "6d54233121154b742c2afc8412859b95e59b2ae5b926cdf3903ba5a9926d90b0",
+      "size": 1822,
+      "reason": "unique_memory_snapshot:json_interactions_6d542331"
+    },
+    {
+      "action": "copied",
+      "src": "archive/real-fin/realai/realai/realai_memory.json",
+      "dst": "recovered/from_archive/memory_snapshots/json_0f5d57d1__0f5d57d1fb69.json",
+      "sha256": "0f5d57d1fb69f233fcf0ad8b1e6dc520cb69e21b7020fb4b88d281afb4f95c68",
+      "size": 1676,
+      "reason": "unique_memory_snapshot:json_0f5d57d1"
+    },
+    {
+      "action": "copied",
+      "src": "archive/RealAIProject/realai/realai_memory.json",
+      "dst": "recovered/from_archive/memory_snapshots/json_30f4a985__30f4a985182a.json",
+      "sha256": "30f4a985182ac2c45c92008b4d9e94dab38fc9d8320354c61ab3d802ed936398",
+      "size": 508,
+      "reason": "unique_memory_snapshot:json_30f4a985"
+    },
+    {
+      "action": "copied",
+      "src": "archive/realai_repo/realai/realai_memory.json",
+      "dst": "recovered/from_archive/memory_snapshots/json_ab4dea6e__ab4dea6ed393.json",
+      "sha256": "ab4dea6ed393e7c0cd3a8b5dbe231d00aad85bbb1ea18542b46847008f3a7cb1",
+      "size": 362,
+      "reason": "unique_memory_snapshot:json_ab4dea6e"
+    },
+    {
+      "action": "copied",
+      "src": "archive/real-fin/realai/realai_memory.db",
+      "dst": "recovered/from_archive/memory_snapshots/db_c4a80d2f__c4a80d2fcbf9.db",
+      "sha256": "c4a80d2fcbf90802bdd5a9a96c10dd9f1e0dfcbb780d95b23271eb05734af0a9",
+      "size": 1240,
+      "reason": "unique_memory_snapshot:db_c4a80d2f"
+    },
+    {
+      "action": "copied",
+      "src": "archive/realai-clean/realai_memory.sqlite3",
+      "dst": "recovered/from_archive/memory_snapshots/sqlite_c928866b__c928866b400a.sqlite3",
+      "sha256": "c928866b400ae7e1433a72800d20d599851fb36a4fa121de2e1b50347e87ac64",
+      "size": 12288,
+      "reason": "unique_memory_snapshot:sqlite_c928866b"
+    },
+    {
+      "action": "copied",
+      "src": "archive/RealAIProject/realai_memory.sqlite3",
+      "dst": "recovered/from_archive/memory_snapshots/sqlite_ca7e2000__ca7e2000d7ff.sqlite3",
+      "sha256": "ca7e2000d7ff077641da8691fca0bc0d5ea25069be766944b20fd7da96bc6c72",
+      "size": 12288,
+      "reason": "unique_memory_snapshot:sqlite_ca7e2000"
+    },
+    {
+      "action": "copied",
+      "src": "archive/realai_sdk/realai_memory.sqlite3",
+      "dst": "recovered/from_archive/memory_snapshots/sqlite_bd99ea95__bd99ea959e3b.sqlite3",
+      "sha256": "bd99ea959e3b5b4236ca14a34616571fa3f5b2e9e1ee78de25a28df2b312d56d",
+      "size": 12288,
+      "reason": "unique_memory_snapshot:sqlite_bd99ea95"
+    },
+    {
+      "action": "copied",
+      "src": "archive/utilities/realai_knowledge_store.json",
+      "dst": "recovered/from_archive/memory_snapshots/knowledge_store_208d4db4__208d4db45818.json",
+      "sha256": "208d4db45818b990a36aecd94123804496b96a248d95592849005d409df8528b",
+      "size": 2453,
+      "reason": "unique_memory_snapshot:knowledge_store_208d4db4"
+    },
+    {
+      "action": "patched_sdk_index",
+      "dst": "packages/sdk-ts/src/index.ts"
+    },
+    {
+      "action": "patched_sdk_index",
+      "dst": "realai/packages/sdk-ts/src/index.ts"
+    }
+  ],
+  "summary": {
+    "copied": 29,
+    "skipped_identical": 0,
+    "patched": 2,
+    "memory_snapshots": 9
+  }
+}

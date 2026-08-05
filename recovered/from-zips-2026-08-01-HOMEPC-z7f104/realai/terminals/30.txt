@@ -1,0 +1,12 @@
+---
+pid: 29660
+cwd: "C:\Users\tsmit\realai"
+command: "cd C:\\Users\\tsmit\\realai\\apps\\frontend; $env:PORT='3847'; $env:HOSTNAME='127.0.0.1'; .\\node_modules\\.bin\\next.cmd start -p 3847"
+started_at: 2026-06-04T14:00:05.667Z
+running_for_ms: 11585010 
+---
+▲ Next.js 16.2.6
+⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+- Local:         http://localhost:3847
+- Network:       http://192.168.0.19:3847
+✓ Ready in 147ms

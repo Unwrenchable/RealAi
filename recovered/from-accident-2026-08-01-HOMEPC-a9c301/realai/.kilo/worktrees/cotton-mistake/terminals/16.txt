@@ -1,0 +1,12 @@
+---
+pid: 31472
+cwd: "C:\Users\tsmit\realai"
+command: "cd C:\\Users\\tsmit\\realai\\apps\\frontend; pnpm exec next start -p 3847"
+started_at: 2026-06-04T13:24:23.623Z
+running_for_ms: 13725003 
+---
+ParserError: 
+Line |
+   1 |  . ers\\tsmit\\realai" && cd C:\Users\tsmit\realai\apps\frontend; pnpm e .
+     |                                                                 ~
+     | Missing closing ')' in expression.

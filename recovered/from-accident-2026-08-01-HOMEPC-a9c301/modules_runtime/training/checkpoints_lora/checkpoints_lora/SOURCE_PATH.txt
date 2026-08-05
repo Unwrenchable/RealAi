@@ -1,0 +1,2 @@
+/mnt/c/Users/tsmit/.grok/worktrees/tsmit-realai/realai2/checkpoints_lora
+files=662 mb=3284.6

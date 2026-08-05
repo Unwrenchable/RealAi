@@ -1,0 +1,331 @@
+{
+  "version": 1,
+  "updated_at": "2026-07-17T12:18:39.663276+00:00",
+  "owned_by": "realai",
+  "provider": "realai-v3",
+  "models": [
+    {
+      "id": "realai-default-coder",
+      "gguf_path": "C:\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "gguf_filename": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "family": "qwen",
+      "loaded_now": true
+    },
+    {
+      "id": "realai-1.0-instruct",
+      "gguf_path": "C:\\realai\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+      "gguf_filename": "realai-1.0-instruct-Q4_K_M.gguf",
+      "family": "realai",
+      "loaded_now": false
+    },
+    {
+      "id": "local-llama-3b",
+      "gguf_path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+      "gguf_filename": "Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+      "family": "llama",
+      "loaded_now": false
+    },
+    {
+      "id": "local-llama-1b",
+      "gguf_path": "C:\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "gguf_filename": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "family": "llama",
+      "loaded_now": false
+    },
+    {
+      "id": "local-llama-1b-2",
+      "gguf_path": "C:\\realai\\models\\llama-local-1b-Q4_K_M.gguf",
+      "gguf_filename": "llama-local-1b-Q4_K_M.gguf",
+      "family": "local",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-embeddings",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "embeddings",
+      "loaded_now": true
+    },
+    {
+      "id": "realai-lora-agent-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-agent-evals-engineer-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-agent-observability-engineer-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-agent-tools-documentation-pilot-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-agent-tools-implementation-pilot-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-agent-tools-orchestrator-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-agent-tools-performance-engineer-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-agent-tools-qa-pilot-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-agent-tools-repo-architect-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-agent-tools-security-hardener-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-agents-orchestrator-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-ai-agent-developer-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-ai-expansion-architect-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-ai-incident-responder-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-ai-model-manager-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-ai-orchestrator-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-ai-self-builder-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-analytics-reporter-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-api-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-api-designer-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-api-tester-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-app-store-optimizer-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-architectux-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-backend-architect-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-backend-engineer-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-brand-guardian-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-browser-test-engineer-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-capability-guardian-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-cloud-architect-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-contributing-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-cybersecurity-expert-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-data-analytics-reporter-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-data-scientist-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-database-architect-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-deployment-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-design-visual-storyteller-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-devops-automator-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-devops-engineer-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-devsecops-engineer-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-documentation-specialist-default-run",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    }
+  ],
+  "note": "RealAI public model IDs. backend_filename is what llama-server currently expects when that GGUF is loaded. Only one GGUF is hot on :8080 at a time."
+}

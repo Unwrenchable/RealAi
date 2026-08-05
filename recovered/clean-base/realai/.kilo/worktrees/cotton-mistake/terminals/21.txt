@@ -1,0 +1,29 @@
+---
+pid: 27884
+cwd: "C:\Users\tsmit\realai\apps\frontend\.next\standalone\apps\frontend"
+command: "cmd /c \"set PORT=3847&& set HOSTNAME=127.0.0.1&& node server.js\""
+started_at: 2026-06-04T13:28:48.871Z
+running_for_ms: 13460002 
+---
+node:internal/modules/cjs/loader:692
+      throw e;
+      ^
+
+Error: EPERM: operation not permitted, stat 'C:\Users\tsmit\realai\apps\frontend\.next\standalone\node_modules\.pnpm\next@16.2.6_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\react'
+    at Object.realpathSync (node:fs:2799:17)
+    at toRealPath (node:internal/modules/helpers:62:13)
+    at tryFile (node:internal/modules/cjs/loader:565:10)
+    at finalizeEsmResolution (node:internal/modules/cjs/loader:1478:18)
+    at resolveExports (node:internal/modules/cjs/loader:685:14)
+    at Module._findPath (node:internal/modules/cjs/loader:752:31)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1441:27)
+    at C:\Users\tsmit\realai\apps\frontend\.next\standalone\node_modules\.pnpm\next@16.2.6_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\server\require-hook.js:68:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1066:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1071:22) {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'stat',
+  path: 'C:\\Users\\tsmit\\realai\\apps\\frontend\\.next\\standalone\\node_modules\\.pnpm\\next@16.2.6_react-dom@18.3.1_react@18.3.1__react@18.3.1\\node_modules\\react'
+}
+
+Node.js v24.14.1

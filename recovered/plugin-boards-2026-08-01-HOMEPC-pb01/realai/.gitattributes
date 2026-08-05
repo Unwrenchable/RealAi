@@ -1,0 +1,5 @@
+# Ignore build artifacts in GitHub linguist
+.next/** linguist-vendored
+node_modules/** linguist-vendored
+dist/** linguist-vendored
+build/** linguist-vendored

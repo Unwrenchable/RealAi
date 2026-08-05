@@ -1,0 +1,138 @@
+{
+  "generated_at": "2026-07-15T15:52:09.870998+00:00",
+  "candidates": [
+    {
+      "id": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "path": "C:\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "size_gb": 5.071,
+      "family": "qwen",
+      "role": "gguf_chat",
+      "is_live_default": true,
+      "is_realai_named": false,
+      "incomplete_copy": false,
+      "copies": [
+        "C:\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\llama-vulkan\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\llama-vulkan\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\llama\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\Users\\tsmit\\.ollama\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+        "C:\\Users\\tsmit\\.ollama\\models\\qwen2.5-coder-7b-instruct-q5_k_m__dup1.gguf",
+        "C:\\Users\\tsmit\\Documents\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf"
+      ],
+      "copy_count": 8,
+      "vulkan_cmd": "llama-server.exe -m \"C:\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf\" --host 127.0.0.1 --port 8080 -c 8192 -ngl 99 --jinja",
+      "realai_model_id_suggestion": "realai-default-coder"
+    },
+    {
+      "id": "realai-1.0-instruct-q4_k_m.gguf",
+      "name": "realai-1.0-instruct-Q4_K_M.gguf",
+      "path": "C:\\realai\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+      "size_gb": 0.752,
+      "family": "realai",
+      "role": "gguf_chat",
+      "is_live_default": false,
+      "is_realai_named": true,
+      "incomplete_copy": false,
+      "copies": [
+        "C:\\realai\\models\\llama-3.2-1b.gguf",
+        "C:\\realai\\models\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\realai\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\realai\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\realai\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\llama-local-1b\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0-instruct\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\llama-local-1b\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0-instruct\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama\\models\\Llama-3.2-1B-Instruct-Q4_K_M-GGUF.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\llama-3.2-1b.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hugging-quants--Llama-3.2-1B-Instruct-Q4_K_M-GGUF\\snapshots\\7d1f70022fcab2038000074bd0342e03e1d8b755\\llama-3.2-1b-instruct-q4_k_m.gguf",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--hugging-quants--Llama-3.2-1B-Instruct-Q4_K_M-GGUF\\snapshots\\7d1f70022fcab2038000074bd0342e03e1d8b755\\llama-3.2-1b-instruct-q4_k_m.gguf",
+        "C:\\Users\\tsmit\\.ollama\\models\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\Documents\\models\\Llama-3.2-1B-Instruct-Q4_K_M-GGUF.gguf",
+        "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\llama-3.2-1b.gguf",
+        "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\llama-local-1b-Q4_K_M.gguf",
+        "C:\\llama-vulkan\\models\\realai-overseer\\weights\\realai-1.0-instruct-Q4_K_M.gguf"
+      ],
+      "copy_count": 32,
+      "vulkan_cmd": "llama-server.exe -m \"C:\\realai\\models\\realai-1.0-instruct-Q4_K_M.gguf\" --host 127.0.0.1 --port 8080 -c 8192 -ngl 99 --jinja",
+      "realai_model_id_suggestion": "realai-1.0-instruct"
+    },
+    {
+      "id": "llama-3.2-3b-instruct-q5_k_m.gguf",
+      "name": "Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+      "path": "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+      "size_gb": 2.163,
+      "family": "llama",
+      "role": "gguf_chat",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "incomplete_copy": false,
+      "copies": [
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q5_K_M.gguf",
+        "C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q5_K_M.gguf"
+      ],
+      "copy_count": 2,
+      "vulkan_cmd": "llama-server.exe -m \"C:\\Users\\tsmit\\.cache\\huggingface\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q5_K_M.gguf\" --host 127.0.0.1 --port 8080 -c 8192 -ngl 99 --jinja",
+      "realai_model_id_suggestion": "local-llama"
+    },
+    {
+      "id": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "name": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "path": "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "size_gb": 1.49,
+      "family": "qwen",
+      "role": "gguf_chat",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "incomplete_copy": true,
+      "copies": [
+        "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf"
+      ],
+      "copy_count": 1,
+      "vulkan_cmd": "llama-server.exe -m \"C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\qwen2.5-coder-7b-instruct-q5_k_m.gguf\" --host 127.0.0.1 --port 8080 -c 8192 -ngl 99 --jinja",
+      "realai_model_id_suggestion": "local-qwen"
+    },
+    {
+      "id": "llama-3.2-1b-instruct-q4_k_m.gguf",
+      "name": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "path": "C:\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "size_gb": 0.752,
+      "family": "llama",
+      "role": "gguf_chat",
+      "is_live_default": false,
+      "is_realai_named": false,
+      "incomplete_copy": false,
+      "copies": [
+        "C:\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\realai-clean\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai\\realai\\models\\llama3.2-1b\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai - Copy\\realai\\models\\llama3.2-1b\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "C:\\realai\\recovered\\from_recycle_bin\\extracted_realai_core\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf"
+      ],
+      "copy_count": 5,
+      "vulkan_cmd": "llama-server.exe -m \"C:\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf\" --host 127.0.0.1 --port 8080 -c 8192 -ngl 99 --jinja",
+      "realai_model_id_suggestion": "local-llama"
+    }
+  ],
+  "how_to_connect": {
+    "vulkan": "Point llama-server -m at path",
+    "orchestrator": "Set REALAI_DEFAULT_MODEL and REALAI_VULKAN_BASE",
+    "provider_facade_todo": "Map realai-* ids to these paths in /v1/models"
+  }
+}

@@ -1,0 +1,5709 @@
+{
+  "meta": {
+    "generated_at": "2026-07-16T17:59:22.316900+00:00",
+    "root": "C:\\realai",
+    "era_map_loaded": true,
+    "inputs": {
+      "archive_triage": true,
+      "ability_inventory": true,
+      "deep_gold": true,
+      "missing_summary": true,
+      "deep_models": true
+    },
+    "total_candidates": 343,
+    "by_action": {
+      "promote": 160,
+      "needs_review": 119,
+      "archive_only": 50,
+      "skip_dup": 14
+    },
+    "by_subsystem": {
+      "server_api": 0,
+      "agents_hive": 78,
+      "memory_rag": 13,
+      "tools_mcp": 21,
+      "self_improve_training": 13,
+      "providers_models": 128,
+      "ui_fusion_vscode": 30,
+      "cli_sdk": 2,
+      "world_npc": 17,
+      "web3_solana": 2,
+      "other": 39
+    },
+    "note": "Phase 2 will consume this. Do not apply until user review."
+  },
+  "queue": [
+    {
+      "id": "archive:archive/agent-tools-main/.agentx/access_profiles.json",
+      "path": "archive/agent-tools-main/.agentx/access_profiles.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/access_profiles.json",
+      "reasons": [
+        "dds3_archive_triage:agent_or_manifest_json"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 115,
+      "extra": {
+        "class": "json_data",
+        "size": 978
+      }
+    },
+    {
+      "id": "archive:archive/agent-tools-main/.agentx/agency_import.json",
+      "path": "archive/agent-tools-main/.agentx/agency_import.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/agency_import.json",
+      "reasons": [
+        "dds3_archive_triage:agent_or_manifest_json"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 115,
+      "extra": {
+        "class": "json_data",
+        "size": 28429
+      }
+    },
+    {
+      "id": "archive:archive/agent-tools-main/.agentx/agents.json",
+      "path": "archive/agent-tools-main/.agentx/agents.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/agents.json",
+      "reasons": [
+        "dds3_archive_triage:agent_or_manifest_json"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 115,
+      "extra": {
+        "class": "json_data",
+        "size": 45754
+      }
+    },
+    {
+      "id": "archive:archive/agent-tools-main/agent-tools-main/.agentx/access_profiles.json",
+      "path": "archive/agent-tools-main/agent-tools-main/.agentx/access_profiles.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/access_profiles.json",
+      "reasons": [
+        "dds3_archive_triage:agent_or_manifest_json"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 115,
+      "extra": {
+        "class": "json_data",
+        "size": 978
+      }
+    },
+    {
+      "id": "archive:archive/agent-tools-main/agent-tools-main/.agentx/agency_import.json",
+      "path": "archive/agent-tools-main/agent-tools-main/.agentx/agency_import.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/agency_import.json",
+      "reasons": [
+        "dds3_archive_triage:agent_or_manifest_json"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 115,
+      "extra": {
+        "class": "json_data",
+        "size": 28429
+      }
+    },
+    {
+      "id": "archive:archive/agent-tools-main/agent-tools-main/.agentx/agents.json",
+      "path": "archive/agent-tools-main/agent-tools-main/.agentx/agents.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/agents.json",
+      "reasons": [
+        "dds3_archive_triage:agent_or_manifest_json"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 115,
+      "extra": {
+        "class": "json_data",
+        "size": 45754
+      }
+    },
+    {
+      "id": "archive:archive/agent-tools/agent-tools-main/.agentx/access_profiles.json",
+      "path": "archive/agent-tools/agent-tools-main/.agentx/access_profiles.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/access_profiles.json",
+      "reasons": [
+        "dds3_archive_triage:agent_or_manifest_json"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 115,
+      "extra": {
+        "class": "json_data",
+        "size": 978
+      }
+    },
+    {
+      "id": "archive:archive/agent-tools/agent-tools-main/.agentx/agency_import.json",
+      "path": "archive/agent-tools/agent-tools-main/.agentx/agency_import.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/agency_import.json",
+      "reasons": [
+        "dds3_archive_triage:agent_or_manifest_json"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 115,
+      "extra": {
+        "class": "json_data",
+        "size": 28429
+      }
+    },
+    {
+      "id": "archive:archive/agent-tools/agent-tools-main/.agentx/agents.json",
+      "path": "archive/agent-tools/agent-tools-main/.agentx/agents.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/agents.json",
+      "reasons": [
+        "dds3_archive_triage:agent_or_manifest_json"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 115,
+      "extra": {
+        "class": "json_data",
+        "size": 45754
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd_attach_to_process/winappdbg/search.py",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd_attach_to_process/winappdbg/search.py",
+      "era": "other",
+      "subsystem": "memory_rag",
+      "action": "promote",
+      "target": "realai/memory/search.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:memory_map"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 115,
+      "extra": {
+        "token": "memory_map"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd_attach_to_process/winappdbg/util.py",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd_attach_to_process/winappdbg/util.py",
+      "era": "other",
+      "subsystem": "memory_rag",
+      "action": "promote",
+      "target": "realai/memory/util.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:memory_map"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 115,
+      "extra": {
+        "token": "memory_map"
+      }
+    },
+    {
+      "id": "ability_file:scanners/assemble_gold_index.py",
+      "path": "scanners/assemble_gold_index.py",
+      "era": "other",
+      "subsystem": "memory_rag",
+      "action": "promote",
+      "target": "realai/memory/assemble_gold_index.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:memory_rag"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 115,
+      "extra": {
+        "token": "memory_rag"
+      }
+    },
+    {
+      "id": "ability_file:scanners/dds3_deep_gold_map.py",
+      "path": "scanners/dds3_deep_gold_map.py",
+      "era": "other",
+      "subsystem": "memory_rag",
+      "action": "promote",
+      "target": "realai/memory/dds3_deep_gold_map.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:memory_rag",
+        "dds3_ability_inventory:ability_token:realai_search_temp"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 115,
+      "extra": {
+        "token": "memory_rag"
+      }
+    },
+    {
+      "id": "ability_file:scanners/dds3_missing_files.py",
+      "path": "scanners/dds3_missing_files.py",
+      "era": "other",
+      "subsystem": "memory_rag",
+      "action": "promote",
+      "target": "realai/memory/dds3_missing_files.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:realai_knowledge_store",
+        "dds3_ability_inventory:ability_token:realai_search_temp",
+        "dds3_ability_inventory:ability_token:agent_or_manifest_json",
+        "dds3_ability_inventory:ability_token:memory_or_training_snapshot",
+        "dds3_ability_inventory:ability_token:memory_snaps",
+        "dds3_ability_inventory:ability_token:memory_snapshot"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 115,
+      "extra": {
+        "token": "realai_knowledge_store"
+      }
+    },
+    {
+      "id": "ability_file:scanners/promote_gold.py",
+      "path": "scanners/promote_gold.py",
+      "era": "other",
+      "subsystem": "memory_rag",
+      "action": "promote",
+      "target": "realai/memory/promote_gold.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:realai_knowledge_store",
+        "dds3_ability_inventory:ability_token:lora_scan",
+        "dds3_ability_inventory:ability_token:mcp_scan",
+        "dds3_ability_inventory:ability_token:npc_scan",
+        "dds3_ability_inventory:ability_token:rag_scan",
+        "dds3_ability_inventory:ability_token:realai_alt_cavity_search",
+        "dds3_ability_inventory:ability_token:realai_alt_v2_cavity_search",
+        "dds3_ability_inventory:ability_token:realai_alt_v3_cavity_search",
+        "dds3_ability_inventory:ability_token:realai_full_cavity_search",
+        "dds3_ability_inventory:ability_token:realai_full_module_scan",
+        "dds3_ability_inventory:ability_token:realai_full_spectrum_scan",
+        "dds3_ability_inventory:ability_token:realai_tri_cavity_search"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 115,
+      "extra": {
+        "token": "realai_knowledge_store"
+      }
+    },
+    {
+      "id": "archive:archive/RealAIProject/realai/realai_memory.json",
+      "path": "archive/RealAIProject/realai/realai_memory.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.json",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 508
+      }
+    },
+    {
+      "id": "archive:archive/RealAIProject/realai_memory.sqlite3",
+      "path": "archive/RealAIProject/realai_memory.sqlite3",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.sqlite3",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 12288
+      }
+    },
+    {
+      "id": "archive:archive/logs_data/realai_memory.json",
+      "path": "archive/logs_data/realai_memory.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.json",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 1822
+      }
+    },
+    {
+      "id": "archive:archive/real-fin/realai/realai - Copy/realai_memory.db",
+      "path": "archive/real-fin/realai/realai - Copy/realai_memory.db",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.db",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 1240
+      }
+    },
+    {
+      "id": "archive:archive/real-fin/realai/realai - Copy/realai_memory.json",
+      "path": "archive/real-fin/realai/realai - Copy/realai_memory.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.json",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 1822
+      }
+    },
+    {
+      "id": "archive:archive/real-fin/realai/realai/realai_memory.json",
+      "path": "archive/real-fin/realai/realai/realai_memory.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.json",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 1676
+      }
+    },
+    {
+      "id": "archive:archive/real-fin/realai/realai_memory.db",
+      "path": "archive/real-fin/realai/realai_memory.db",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.db",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 1240
+      }
+    },
+    {
+      "id": "archive:archive/real-fin/realai/realai_memory.json",
+      "path": "archive/real-fin/realai/realai_memory.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.json",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 1822
+      }
+    },
+    {
+      "id": "archive:archive/realai-clean/realai_memory.sqlite3",
+      "path": "archive/realai-clean/realai_memory.sqlite3",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.sqlite3",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 12288
+      }
+    },
+    {
+      "id": "archive:archive/realai-clean__dup1/realai_memory.sqlite3",
+      "path": "archive/realai-clean__dup1/realai_memory.sqlite3",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.sqlite3",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 12288
+      }
+    },
+    {
+      "id": "archive:archive/realai-clean__dup1/realai_memory__dup1.sqlite3",
+      "path": "archive/realai-clean__dup1/realai_memory__dup1.sqlite3",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory__dup1.sqlite3",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 12288
+      }
+    },
+    {
+      "id": "archive:archive/realai_good/realai/realai/realai_memory.json",
+      "path": "archive/realai_good/realai/realai/realai_memory.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.json",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 1676
+      }
+    },
+    {
+      "id": "archive:archive/realai_good/realai/realai_memory.db",
+      "path": "archive/realai_good/realai/realai_memory.db",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.db",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 1240
+      }
+    },
+    {
+      "id": "archive:archive/realai_good/realai/realai_memory.json",
+      "path": "archive/realai_good/realai/realai_memory.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.json",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 1822
+      }
+    },
+    {
+      "id": "archive:archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai_memory.sqlite3",
+      "path": "archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai_memory.sqlite3",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.sqlite3",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 12288
+      }
+    },
+    {
+      "id": "archive:archive/realai_repo/realai/realai_memory.json",
+      "path": "archive/realai_repo/realai/realai_memory.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.json",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 362
+      }
+    },
+    {
+      "id": "archive:archive/realai_repo/realai__dup1/realai_memory.json",
+      "path": "archive/realai_repo/realai__dup1/realai_memory.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.json",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 362
+      }
+    },
+    {
+      "id": "archive:archive/realai_repo/realai_memory.sqlite3",
+      "path": "archive/realai_repo/realai_memory.sqlite3",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.sqlite3",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 12288
+      }
+    },
+    {
+      "id": "archive:archive/realai_repo/realai_memory__dup1.sqlite3",
+      "path": "archive/realai_repo/realai_memory__dup1.sqlite3",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory__dup1.sqlite3",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 12288
+      }
+    },
+    {
+      "id": "archive:archive/realai_sdk/realai/realai_memory.json",
+      "path": "archive/realai_sdk/realai/realai_memory.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.json",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 362
+      }
+    },
+    {
+      "id": "archive:archive/realai_sdk/realai__dup1/realai_memory.json",
+      "path": "archive/realai_sdk/realai__dup1/realai_memory.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.json",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 362
+      }
+    },
+    {
+      "id": "archive:archive/realai_sdk/realai_memory.sqlite3",
+      "path": "archive/realai_sdk/realai_memory.sqlite3",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory.sqlite3",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 12288
+      }
+    },
+    {
+      "id": "archive:archive/realai_sdk/realai_memory__dup1.sqlite3",
+      "path": "archive/realai_sdk/realai_memory__dup1.sqlite3",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_memory__dup1.sqlite3",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 12288
+      }
+    },
+    {
+      "id": "archive:archive/utilities/realai_knowledge_store.json",
+      "path": "archive/utilities/realai_knowledge_store.json",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai_knowledge_store.json",
+      "reasons": [
+        "dds3_archive_triage:memory_or_training_snapshot"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 110,
+      "extra": {
+        "class": "memory_snapshot",
+        "size": 2453
+      }
+    },
+    {
+      "id": "missing_ref:agent_id",
+      "path": "missing:agent_id",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_id",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=28"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 28
+      }
+    },
+    {
+      "id": "missing_ref:agent_input",
+      "path": "missing:agent_input",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_input",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:agent_manifests",
+      "path": "missing:agent_manifests",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_manifests",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=4"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 4
+      }
+    },
+    {
+      "id": "missing_ref:agent_not_found",
+      "path": "missing:agent_not_found",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_not_found",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:agent_registry",
+      "path": "missing:agent_registry",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_registry",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=10"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 10
+      }
+    },
+    {
+      "id": "missing_ref:agent_role",
+      "path": "missing:agent_role",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_role",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:agent_roles",
+      "path": "missing:agent_roles",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_roles",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=10"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 10
+      }
+    },
+    {
+      "id": "missing_ref:agent_system",
+      "path": "missing:agent_system",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_system",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:agent_tools",
+      "path": "missing:agent_tools",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_tools",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=28"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 28
+      }
+    },
+    {
+      "id": "missing_ref:agent_tools_assess",
+      "path": "missing:agent_tools_assess",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_tools_assess",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:agent_tools_gold",
+      "path": "missing:agent_tools_gold",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_tools_gold",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:agent_tools_list_agents",
+      "path": "missing:agent_tools_list_agents",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_tools_list_agents",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:agent_tools_list_profiles",
+      "path": "missing:agent_tools_list_profiles",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_tools_list_profiles",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:agent_tools_status",
+      "path": "missing:agent_tools_status",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_tools_status",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:agent_type",
+      "path": "missing:agent_type",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:agent_type",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=8"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 8
+      }
+    },
+    {
+      "id": "missing_ref:realai_agent",
+      "path": "missing:realai_agent",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:realai_agent",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=9"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 9
+      }
+    },
+    {
+      "id": "missing_ref:realai_orchestration",
+      "path": "missing:realai_orchestration",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/missing:realai_orchestration",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=5"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 5
+      }
+    },
+    {
+      "id": "missing_ref:memory_engine",
+      "path": "missing:memory_engine",
+      "era": "other",
+      "subsystem": "memory_rag",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:memory_engine",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=5"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 5
+      }
+    },
+    {
+      "id": "missing_ref:memory_learning",
+      "path": "missing:memory_learning",
+      "era": "other",
+      "subsystem": "memory_rag",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:memory_learning",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:memory_mb",
+      "path": "missing:memory_mb",
+      "era": "other",
+      "subsystem": "memory_rag",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:memory_mb",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=6"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 6
+      }
+    },
+    {
+      "id": "missing_ref:memory_namespace",
+      "path": "missing:memory_namespace",
+      "era": "other",
+      "subsystem": "memory_rag",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:memory_namespace",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:memory_path",
+      "path": "missing:memory_path",
+      "era": "other",
+      "subsystem": "memory_rag",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:memory_path",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=4"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 4
+      }
+    },
+    {
+      "id": "missing_ref:memory_records",
+      "path": "missing:memory_records",
+      "era": "other",
+      "subsystem": "memory_rag",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:memory_records",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=4"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 4
+      }
+    },
+    {
+      "id": "missing_ref:./realai_training_output",
+      "path": "missing:./realai_training_output",
+      "era": "other",
+      "subsystem": "self_improve_training",
+      "action": "needs_review",
+      "target": "training/realai_training_output",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:./training_output",
+      "path": "missing:./training_output",
+      "era": "other",
+      "subsystem": "self_improve_training",
+      "action": "needs_review",
+      "target": "training/training_output",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:finetune",
+      "path": "missing:finetune",
+      "era": "other",
+      "subsystem": "self_improve_training",
+      "action": "needs_review",
+      "target": "training/missing:finetune",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:lora_adapter",
+      "path": "missing:lora_adapter",
+      "era": "other",
+      "subsystem": "self_improve_training",
+      "action": "needs_review",
+      "target": "training/missing:lora_adapter",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:lora_adapters",
+      "path": "missing:lora_adapters",
+      "era": "other",
+      "subsystem": "self_improve_training",
+      "action": "needs_review",
+      "target": "training/missing:lora_adapters",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:lora_alpha",
+      "path": "missing:lora_alpha",
+      "era": "other",
+      "subsystem": "self_improve_training",
+      "action": "needs_review",
+      "target": "training/missing:lora_alpha",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:lora_config",
+      "path": "missing:lora_config",
+      "era": "other",
+      "subsystem": "self_improve_training",
+      "action": "needs_review",
+      "target": "training/missing:lora_config",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:lora_dropout",
+      "path": "missing:lora_dropout",
+      "era": "other",
+      "subsystem": "self_improve_training",
+      "action": "needs_review",
+      "target": "training/missing:lora_dropout",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:lora_root",
+      "path": "missing:lora_root",
+      "era": "other",
+      "subsystem": "self_improve_training",
+      "action": "needs_review",
+      "target": "training/missing:lora_root",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:realai_training_output",
+      "path": "missing:realai_training_output",
+      "era": "other",
+      "subsystem": "self_improve_training",
+      "action": "needs_review",
+      "target": "training/missing:realai_training_output",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 110,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/tests/playtest-agent.cjs",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/tests/playtest-agent.cjs",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/playtest-agent.cjs",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_id",
+        "dds3_ability_inventory:ability_token:npc_context_",
+        "dds3_ability_inventory:ability_token:quest_id"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 105,
+      "extra": {
+        "token": "npc_id"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/tests/playtest-agent.cjs",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/tests/playtest-agent.cjs",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/playtest-agent.cjs",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_context_",
+        "dds3_ability_inventory:ability_token:quest_id"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 105,
+      "extra": {
+        "token": "npc_context_"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/tests/playtest-agent.cjs",
+      "path": "C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/tests/playtest-agent.cjs",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/playtest-agent.cjs",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_context_",
+        "dds3_ability_inventory:ability_token:quest_id"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 105,
+      "extra": {
+        "token": "npc_context_"
+      }
+    },
+    {
+      "id": "ability_file:scanners/dds1_dependency_doc_scan.py",
+      "path": "scanners/dds1_dependency_doc_scan.py",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/dds1_dependency_doc_scan.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:realai_hivemind",
+        "dds3_ability_inventory:ability_token:realai_lora",
+        "dds3_ability_inventory:ability_token:realai_mcp",
+        "dds3_ability_inventory:ability_token:realai_plugin",
+        "dds3_ability_inventory:ability_token:realai_solana",
+        "dds3_ability_inventory:ability_token:realai_worldmodel"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 105,
+      "extra": {
+        "token": "realai_hivemind"
+      }
+    },
+    {
+      "id": "ability_file:scanners/fs1_full_spectrum_scan.py",
+      "path": "scanners/fs1_full_spectrum_scan.py",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/fs1_full_spectrum_scan.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:realai_hivemind",
+        "dds3_ability_inventory:ability_token:realai_lora",
+        "dds3_ability_inventory:ability_token:realai_mcp",
+        "dds3_ability_inventory:ability_token:realai_plugin",
+        "dds3_ability_inventory:ability_token:realai_solana",
+        "dds3_ability_inventory:ability_token:realai_worldmodel",
+        "dds3_ability_inventory:ability_token:realai_ollama",
+        "dds3_ability_inventory:ability_token:realai_vscode"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 105,
+      "extra": {
+        "token": "realai_hivemind"
+      }
+    },
+    {
+      "id": "ability_file:scanners/recover_archive_gold.py",
+      "path": "scanners/recover_archive_gold.py",
+      "era": "other",
+      "subsystem": "agents_hive",
+      "action": "promote",
+      "target": "agents/recover_archive_gold.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:realai_knowledge_store"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 105,
+      "extra": {
+        "token": "realai_knowledge_store"
+      }
+    },
+    {
+      "id": "ability_file:scanners/rag_scan.py",
+      "path": "scanners/rag_scan.py",
+      "era": "other",
+      "subsystem": "memory_rag",
+      "action": "promote",
+      "target": "realai/memory/rag_scan.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:rag_manifest"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 105,
+      "extra": {
+        "token": "rag_manifest"
+      }
+    },
+    {
+      "id": "known:C:/Users/tsmit/Downloads/agent_manifests_for_finetuning.json",
+      "path": "C:/Users/tsmit/Downloads/agent_manifests_for_finetuning.json",
+      "era": "secondary_gold",
+      "subsystem": "self_improve_training",
+      "action": "promote",
+      "target": "training/data/agent_manifests_for_finetuning.json",
+      "reasons": [
+        "known_gold:import_finetune_manifests"
+      ],
+      "sources": [
+        "known_gold"
+      ],
+      "priority": 105,
+      "extra": {}
+    },
+    {
+      "id": "known:C:/Users/tsmit/Downloads/realai_finetune_dataset.jsonl",
+      "path": "C:/Users/tsmit/Downloads/realai_finetune_dataset.jsonl",
+      "era": "secondary_gold",
+      "subsystem": "self_improve_training",
+      "action": "promote",
+      "target": "training/data/realai_finetune_dataset.jsonl",
+      "reasons": [
+        "known_gold:import_training_dataset"
+      ],
+      "sources": [
+        "known_gold"
+      ],
+      "priority": 105,
+      "extra": {}
+    },
+    {
+      "id": "ability_file:realai_alt_cavity_search.py",
+      "path": "realai_alt_cavity_search.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/realai_alt_cavity_search.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:realai_alt_cavity_manifest",
+        "dds3_ability_inventory:ability_token:realai_alt_cavity_summary",
+        "dds3_ability_inventory:ability_token:agent_instructions",
+        "dds3_ability_inventory:ability_token:plugin_architecture"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 105,
+      "extra": {
+        "token": "realai_alt_cavity_manifest"
+      }
+    },
+    {
+      "id": "archive:archive/RealAIProject/realai-core/ui/lib/realaiClient.ts",
+      "path": "archive/RealAIProject/realai-core/ui/lib/realaiClient.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realaiClient.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 3431
+      }
+    },
+    {
+      "id": "archive:archive/realai-clean/realai-core/ui/lib/realaiClient.ts",
+      "path": "archive/realai-clean/realai-core/ui/lib/realaiClient.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realaiClient.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 3431
+      }
+    },
+    {
+      "id": "archive:archive/realai-clean__dup1/realai-core/ui/lib/realaiClient.ts",
+      "path": "archive/realai-clean__dup1/realai-core/ui/lib/realaiClient.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realaiClient.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 3431
+      }
+    },
+    {
+      "id": "archive:archive/realai-clean__dup1/realai-core__dup1/ui/lib/realaiClient.ts",
+      "path": "archive/realai-clean__dup1/realai-core__dup1/ui/lib/realaiClient.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realaiClient.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 3431
+      }
+    },
+    {
+      "id": "archive:archive/realai-clean__dup1/realai-frontend__dup1/src/lib/realai.ts",
+      "path": "archive/realai-clean__dup1/realai-frontend__dup1/src/lib/realai.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 1324
+      }
+    },
+    {
+      "id": "archive:archive/realai-clean__dup1/realai-frontend__dup1/src/lib/types.ts",
+      "path": "archive/realai-clean__dup1/realai-frontend__dup1/src/lib/types.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/types.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 1363
+      }
+    },
+    {
+      "id": "archive:archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-core/ui/lib/realaiClient.ts",
+      "path": "archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-core/ui/lib/realaiClient.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realaiClient.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 3431
+      }
+    },
+    {
+      "id": "archive:archive/realai_repo/realai-core/ui/lib/realaiClient.ts",
+      "path": "archive/realai_repo/realai-core/ui/lib/realaiClient.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realaiClient.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 3431
+      }
+    },
+    {
+      "id": "archive:archive/realai_repo/realai-core__dup1/ui/lib/realaiClient.ts",
+      "path": "archive/realai_repo/realai-core__dup1/ui/lib/realaiClient.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realaiClient.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 3431
+      }
+    },
+    {
+      "id": "archive:archive/realai_repo/realai-frontend__dup1/src/lib/realai.ts",
+      "path": "archive/realai_repo/realai-frontend__dup1/src/lib/realai.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 1324
+      }
+    },
+    {
+      "id": "archive:archive/realai_repo/realai-frontend__dup1/src/lib/types.ts",
+      "path": "archive/realai_repo/realai-frontend__dup1/src/lib/types.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/types.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 1363
+      }
+    },
+    {
+      "id": "archive:archive/realai_sdk/realai-core/ui/lib/realaiClient.ts",
+      "path": "archive/realai_sdk/realai-core/ui/lib/realaiClient.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realaiClient.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 3431
+      }
+    },
+    {
+      "id": "archive:archive/realai_sdk/realai-core__dup1/ui/lib/realaiClient.ts",
+      "path": "archive/realai_sdk/realai-core__dup1/ui/lib/realaiClient.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realaiClient.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 3431
+      }
+    },
+    {
+      "id": "archive:archive/realai_sdk/realai-frontend__dup1/src/lib/realai.ts",
+      "path": "archive/realai_sdk/realai-frontend__dup1/src/lib/realai.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/realai.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 1324
+      }
+    },
+    {
+      "id": "archive:archive/realai_sdk/realai-frontend__dup1/src/lib/types.ts",
+      "path": "archive/realai_sdk/realai-frontend__dup1/src/lib/types.ts",
+      "era": "archive",
+      "subsystem": "agents_hive",
+      "action": "needs_review",
+      "target": "agents/types.ts",
+      "reasons": [
+        "dds3_archive_triage:same_name_different_hash_review"
+      ],
+      "sources": [
+        "dds3_archive_triage"
+      ],
+      "priority": 100,
+      "extra": {
+        "class": "source_code",
+        "size": 1363
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112400/realai_og_mess/realai/docs/architecture.md",
+      "path": "backup/clean_backup_20260708_112400/realai_og_mess/realai/docs/architecture.md",
+      "era": "og_mess",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/architecture.md",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=54"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 100,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "missing_broken"
+        ],
+        "hit_count": 54
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112400/realai_og_mess/realai/realai/__init__.py",
+      "path": "backup/clean_backup_20260708_112400/realai_og_mess/realai/realai/__init__.py",
+      "era": "og_mess",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/__init__.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=69"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 100,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 69
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112400/realai_og_mess/realai/realai/api_server.py",
+      "path": "backup/clean_backup_20260708_112400/realai_og_mess/realai/realai/api_server.py",
+      "era": "og_mess",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 100,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112721/realai_og_mess/realai/docs/architecture.md",
+      "path": "backup/clean_backup_20260708_112721/realai_og_mess/realai/docs/architecture.md",
+      "era": "og_mess",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/architecture.md",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=54"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 100,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "missing_broken"
+        ],
+        "hit_count": 54
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112721/realai_og_mess/realai/realai/__init__.py",
+      "path": "backup/clean_backup_20260708_112721/realai_og_mess/realai/realai/__init__.py",
+      "era": "og_mess",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/__init__.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=69"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 100,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 69
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112721/realai_og_mess/realai/realai/api_server.py",
+      "path": "backup/clean_backup_20260708_112721/realai_og_mess/realai/realai/api_server.py",
+      "era": "og_mess",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 100,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_113054/realai_og_mess/realai/docs/architecture.md",
+      "path": "backup/clean_backup_20260708_113054/realai_og_mess/realai/docs/architecture.md",
+      "era": "og_mess",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/architecture.md",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=54"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 100,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "missing_broken"
+        ],
+        "hit_count": 54
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_113054/realai_og_mess/realai/realai/__init__.py",
+      "path": "backup/clean_backup_20260708_113054/realai_og_mess/realai/realai/__init__.py",
+      "era": "og_mess",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/__init__.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=69"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 100,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 69
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_113054/realai_og_mess/realai/realai/api_server.py",
+      "path": "backup/clean_backup_20260708_113054/realai_og_mess/realai/realai/api_server.py",
+      "era": "og_mess",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 100,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:realai_og_mess/realai/docs/architecture.md",
+      "path": "realai_og_mess/realai/docs/architecture.md",
+      "era": "og_mess",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/architecture.md",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=54"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 100,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "missing_broken"
+        ],
+        "hit_count": 54
+      }
+    },
+    {
+      "id": "deep:realai_og_mess/realai/realai/__init__.py",
+      "path": "realai_og_mess/realai/realai/__init__.py",
+      "era": "og_mess",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/__init__.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=69"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 100,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 69
+      }
+    },
+    {
+      "id": "deep:realai_og_mess/realai/realai/api_server.py",
+      "path": "realai_og_mess/realai/realai/api_server.py",
+      "era": "og_mess",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 100,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "missing_ref:../core",
+      "path": "missing:../core",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/core",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=6"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 6
+      }
+    },
+    {
+      "id": "missing_ref:./globals.css",
+      "path": "missing:./globals.css",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/globals.css",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=4"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 4
+      }
+    },
+    {
+      "id": "missing_ref:./load-module",
+      "path": "missing:./load-module",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/load-module",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=12"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 12
+      }
+    },
+    {
+      "id": "missing_ref:ReactMarkdown",
+      "path": "missing:ReactMarkdown",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:ReactMarkdown",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=4"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 4
+      }
+    },
+    {
+      "id": "missing_ref:cryptography.hazmat.primitives.ciphers",
+      "path": "missing:cryptography.hazmat.primitives.ciphers",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:cryptography.hazmat.primitives.ciphers",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:datasets",
+      "path": "missing:datasets",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:datasets",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:langchain_core.messages",
+      "path": "missing:langchain_core.messages",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:langchain_core.messages",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=9"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 9
+      }
+    },
+    {
+      "id": "missing_ref:langchain_core.prompts",
+      "path": "missing:langchain_core.prompts",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:langchain_core.prompts",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=6"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 6
+      }
+    },
+    {
+      "id": "missing_ref:langchain_core.runnables",
+      "path": "missing:langchain_core.runnables",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:langchain_core.runnables",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=6"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 6
+      }
+    },
+    {
+      "id": "missing_ref:langchain_openai",
+      "path": "missing:langchain_openai",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:langchain_openai",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:langgraph.graph",
+      "path": "missing:langgraph.graph",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:langgraph.graph",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=9"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 9
+      }
+    },
+    {
+      "id": "missing_ref:langgraph.prebuilt",
+      "path": "missing:langgraph.prebuilt",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:langgraph.prebuilt",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=6"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 6
+      }
+    },
+    {
+      "id": "missing_ref:langgraph_supervisor",
+      "path": "missing:langgraph_supervisor",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:langgraph_supervisor",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:lucide-react",
+      "path": "missing:lucide-react",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:lucide-react",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=19"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 19
+      }
+    },
+    {
+      "id": "missing_ref:prometheus_client",
+      "path": "missing:prometheus_client",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:prometheus_client",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=6"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 6
+      }
+    },
+    {
+      "id": "missing_ref:pyautogui",
+      "path": "missing:pyautogui",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:pyautogui",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:pygetwindow",
+      "path": "missing:pygetwindow",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:pygetwindow",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:pyttsx3",
+      "path": "missing:pyttsx3",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:pyttsx3",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:react-markdown",
+      "path": "missing:react-markdown",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:react-markdown",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=4"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 4
+      }
+    },
+    {
+      "id": "missing_ref:realai/audit_log.jsonl",
+      "path": "missing:realai/audit_log.jsonl",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/audit_log.jsonl",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:realai/consent_store.json",
+      "path": "missing:realai/consent_store.json",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/consent_store.json",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:realai_api_key",
+      "path": "missing:realai_api_key",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:realai_api_key",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:realai_historical_backups",
+      "path": "missing:realai_historical_backups",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:realai_historical_backups",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:realai_launcher",
+      "path": "missing:realai_launcher",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:realai_launcher",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:realai_meta",
+      "path": "missing:realai_meta",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:realai_meta",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=4"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 4
+      }
+    },
+    {
+      "id": "missing_ref:realai_model",
+      "path": "missing:realai_model",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:realai_model",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:realai_model_id_suggestion",
+      "path": "missing:realai_model_id_suggestion",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:realai_model_id_suggestion",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:realai_ultimate",
+      "path": "missing:realai_ultimate",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:realai_ultimate",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=6"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 6
+      }
+    },
+    {
+      "id": "missing_ref:resource",
+      "path": "missing:resource",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:resource",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=4"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 4
+      }
+    },
+    {
+      "id": "missing_ref:tkinter",
+      "path": "missing:tkinter",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:tkinter",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=4"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 4
+      }
+    },
+    {
+      "id": "missing_ref:trl",
+      "path": "missing:trl",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:trl",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:unsloth",
+      "path": "missing:unsloth",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:unsloth",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:vllm",
+      "path": "missing:vllm",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:vllm",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=4"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 4
+      }
+    },
+    {
+      "id": "missing_ref:wandb",
+      "path": "missing:wandb",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:wandb",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:wave",
+      "path": "missing:wave",
+      "era": "other",
+      "subsystem": "other",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:wave",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112400/docs/architecture.md",
+      "path": "backup/clean_backup_20260708_112400/docs/architecture.md",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/architecture.md",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=54"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "missing_broken"
+        ],
+        "hit_count": 54
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112400/realai/__init__.py",
+      "path": "backup/clean_backup_20260708_112400/realai/__init__.py",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/__init__.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=69"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 69
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112721/docs/architecture.md",
+      "path": "backup/clean_backup_20260708_112721/docs/architecture.md",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/architecture.md",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=54"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "missing_broken"
+        ],
+        "hit_count": 54
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112721/realai/__init__.py",
+      "path": "backup/clean_backup_20260708_112721/realai/__init__.py",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/__init__.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=69"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 69
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112721/realai/docs/architecture.md",
+      "path": "backup/clean_backup_20260708_112721/realai/docs/architecture.md",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/architecture.md",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=54"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "missing_broken"
+        ],
+        "hit_count": 54
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112721/realai/realai/__init__.py",
+      "path": "backup/clean_backup_20260708_112721/realai/realai/__init__.py",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/__init__.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=69"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 69
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112721/realai/realai/api_server.py",
+      "path": "backup/clean_backup_20260708_112721/realai/realai/api_server.py",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_113054/docs/architecture.md",
+      "path": "backup/clean_backup_20260708_113054/docs/architecture.md",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/architecture.md",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=54"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "missing_broken"
+        ],
+        "hit_count": 54
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_113054/realai/__init__.py",
+      "path": "backup/clean_backup_20260708_113054/realai/__init__.py",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/__init__.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=69"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 69
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_113054/realai/docs/architecture.md",
+      "path": "backup/clean_backup_20260708_113054/realai/docs/architecture.md",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/architecture.md",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=54"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "missing_broken"
+        ],
+        "hit_count": 54
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_113054/realai/realai/__init__.py",
+      "path": "backup/clean_backup_20260708_113054/realai/realai/__init__.py",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/__init__.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=69"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 69
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_113054/realai/realai/api_server.py",
+      "path": "backup/clean_backup_20260708_113054/realai/realai/api_server.py",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "missing_ref:cryptography.hazmat.backends",
+      "path": "missing:cryptography.hazmat.backends",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "needs_review",
+      "target": "realai/missing:cryptography.hazmat.backends",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:providers/*",
+      "path": "missing:providers/*",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "needs_review",
+      "target": "realai/*",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:realai_provider",
+      "path": "missing:realai_provider",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "needs_review",
+      "target": "realai/missing:realai_provider",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "deep:recovered/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_realai_historical_backups_realai_versions_20260612_RealAIProject_realai_api_server.py",
+      "path": "recovered/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_realai_historical_backups_realai_versions_20260612_RealAIProject_realai_api_server.py",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_realai_historical_backups_realai_versions_20260612_RealAIProject_realai_api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=54"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 54
+      }
+    },
+    {
+      "id": "deep:recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/RealAIProject/api_server.py",
+      "path": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/RealAIProject/api_server.py",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/api_server.py",
+      "path": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/RealAIProject/realai/api_server.py",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/api_server.py",
+      "path": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/api_server.py",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/api_server.py",
+      "path": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/api_server.py",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai/api_server.py",
+      "path": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai - Copy/realai/api_server.py",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai/api_server.py",
+      "path": "recovered/from_kilo_restore/realai_historical_backups/realai_versions_20260612/real-fin/realai/realai/api_server.py",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 95,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "missing_ref:langchain_core.tools",
+      "path": "missing:langchain_core.tools",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "needs_review",
+      "target": "plugins/missing:langchain_core.tools",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:plugin_fn",
+      "path": "missing:plugin_fn",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "needs_review",
+      "target": "plugins/missing:plugin_fn",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=2"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 2
+      }
+    },
+    {
+      "id": "missing_ref:plugin_system",
+      "path": "missing:plugin_system",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "needs_review",
+      "target": "plugins/missing:plugin_system",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:tools",
+      "path": "missing:tools",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "needs_review",
+      "target": "plugins/missing:tools",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=3"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 3
+      }
+    },
+    {
+      "id": "missing_ref:solana_rpc_url",
+      "path": "missing:solana_rpc_url",
+      "era": "other",
+      "subsystem": "web3_solana",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:solana_rpc_url",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=6"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 6
+      }
+    },
+    {
+      "id": "missing_ref:web3",
+      "path": "missing:web3",
+      "era": "other",
+      "subsystem": "web3_solana",
+      "action": "needs_review",
+      "target": "recovered/from_gold/missing:web3",
+      "reasons": [
+        "dds3_missing_files_summary:dds3_unique_missing count=4"
+      ],
+      "sources": [
+        "dds3_missing_files_summary"
+      ],
+      "priority": 95,
+      "extra": {
+        "count": 4
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RXL114I.0-win32-x64/python_files/lib/jedilsp/typing_extensions.py",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RXL114I.0-win32-x64/python_files/lib/jedilsp/typing_extensions.py",
+      "era": "other",
+      "subsystem": "other",
+      "action": "promote",
+      "target": "recovered/from_gold/typing_extensions.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:CustomerModel"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "CustomerModel"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RXL114I.0-win32-x64/python_files/lib/python/typing_extensions.py",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RXL114I.0-win32-x64/python_files/lib/python/typing_extensions.py",
+      "era": "other",
+      "subsystem": "other",
+      "action": "promote",
+      "target": "recovered/from_gold/typing_extensions.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:CustomerModel"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "CustomerModel"
+      }
+    },
+    {
+      "id": "ability_file:dry_run_scaffold.py",
+      "path": "dry_run_scaffold.py",
+      "era": "other",
+      "subsystem": "other",
+      "action": "promote",
+      "target": "recovered/from_gold/dry_run_scaffold.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:realai_og"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "realai_og"
+      }
+    },
+    {
+      "id": "ability_file:scanners/scan_model_weights.py",
+      "path": "scanners/scan_model_weights.py",
+      "era": "other",
+      "subsystem": "other",
+      "action": "promote",
+      "target": "recovered/from_gold/scan_model_weights.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:realai_family"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "realai_family"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_extension_api.py",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_extension_api.py",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/pydevd_extension_api.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:StrPresentationProvider",
+        "dds3_ability_inventory:ability_token:TypeResolveProvider",
+        "dds3_ability_inventory:ability_token:_AbstractProvider"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "StrPresentationProvider"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_xml.py",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_xml.py",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/pydevd_xml.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:StrPresentationProvider",
+        "dds3_ability_inventory:ability_token:TypeResolveProvider"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "StrPresentationProvider"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RIO9UXU.1/src/ChatSidebarProvider.js",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RIO9UXU.1/src/ChatSidebarProvider.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/ChatSidebarProvider.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:ChatSidebarProvider"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "ChatSidebarProvider"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RIO9UXU.1/src/CodeGPTCopilotProvider.js",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RIO9UXU.1/src/CodeGPTCopilotProvider.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/CodeGPTCopilotProvider.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:CodeGPTCopilotProvider"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "CodeGPTCopilotProvider"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RIO9UXU.1/src/commands/code-actions.js",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RIO9UXU.1/src/commands/code-actions.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/code-actions.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:ChatSidebarProvider"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "ChatSidebarProvider"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RIO9UXU.1/src/commands/inline-diff.js",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RIO9UXU.1/src/commands/inline-diff.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/inline-diff.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:DiffCodeLensProvider"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "DiffCodeLensProvider"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RIO9UXU.1/src/driver/index.js",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RIO9UXU.1/src/driver/index.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/index.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:ChatSidebarProvider"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "ChatSidebarProvider"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RIO9UXU.1/src/extension.js",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RIO9UXU.1/src/extension.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/extension.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:CodeGPTCopilotProvider"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "CodeGPTCopilotProvider"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/api/location-claim.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/api/location-claim.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/location-claim.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:frontend UI"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "frontend UI"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/api/npc-context.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/api/npc-context.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/npc-context.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_id"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_id"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/api/npc-video.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/api/npc-video.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/npc-video.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_video"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_video"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/api/quests-store.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/api/quests-store.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/quests-store.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_vault77_open",
+        "dds3_ability_inventory:ability_token:quest_lost_signal"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_vault77_open"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/api/quests.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/api/quests.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/quests.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_reward"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_reward"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/lib/grok.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/lib/grok.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/grok.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_giver"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_giver"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/lib/npc-xai-context.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/lib/npc-xai-context.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/npc-xai-context.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_id"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_id"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/server.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/backend/server.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/server.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:solana_rpc"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "solana_rpc"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/api/location-claim.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/api/location-claim.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/location-claim.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:frontend UI"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "frontend UI"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/api/npc-video.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/api/npc-video.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/npc-video.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_video"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_video"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/api/quests-store.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/api/quests-store.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/quests-store.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_lost_signal"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_lost_signal"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/api/quests.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/api/quests.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/quests.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_reward"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_reward"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/lib/grok.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/lib/grok.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/grok.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_giver"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_giver"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/server.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/server.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/server.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:solana_rpc"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "solana_rpc"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/api/location-claim.js",
+      "path": "C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/api/location-claim.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/location-claim.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:frontend UI"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "frontend UI"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/api/npc-video.js",
+      "path": "C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/api/npc-video.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/npc-video.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_video"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_video"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/api/quests.js",
+      "path": "C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/api/quests.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/quests.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_reward"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_reward"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/lib/grok.js",
+      "path": "C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/lib/grok.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/grok.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_giver"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_giver"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/server.js",
+      "path": "C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/backend/server.js",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/server.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:solana_rpc"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "solana_rpc"
+      }
+    },
+    {
+      "id": "deep:docs/architecture.md",
+      "path": "docs/architecture.md",
+      "era": "docs",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/architecture.md",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=54"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 90,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "missing_broken"
+        ],
+        "hit_count": 54
+      }
+    },
+    {
+      "id": "ability_file:recovered/from_desktop_missing/fizzRecovery/backend/overseer/overseer.py",
+      "path": "recovered/from_desktop_missing/fizzRecovery/backend/overseer/overseer.py",
+      "era": "recovered",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/overseer.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:realai_chat"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "realai_chat"
+      }
+    },
+    {
+      "id": "deep:recovered/from_kilo_restore/real-fin/realai/realai - Copy/api_server.py",
+      "path": "recovered/from_kilo_restore/real-fin/realai/realai - Copy/api_server.py",
+      "era": "duplicate",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 90,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:recovered/from_kilo_restore/real-fin/realai/realai - Copy/realai/api_server.py",
+      "path": "recovered/from_kilo_restore/real-fin/realai/realai - Copy/realai/api_server.py",
+      "era": "duplicate",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 90,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:recovered/from_kilo_restore/realai-clean__dup1/api_server.py",
+      "path": "recovered/from_kilo_restore/realai-clean__dup1/api_server.py",
+      "era": "duplicate",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 90,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:recovered/from_kilo_restore/realai/realai - Copy/api_server.py",
+      "path": "recovered/from_kilo_restore/realai/realai - Copy/api_server.py",
+      "era": "duplicate",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 90,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:recovered/from_kilo_restore/realai/realai - Copy/realai/api_server.py",
+      "path": "recovered/from_kilo_restore/realai/realai - Copy/realai/api_server.py",
+      "era": "duplicate",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 90,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:recovered/from_kilo_restore/realai_repo/realai__dup1/api_server.py",
+      "path": "recovered/from_kilo_restore/realai_repo/realai__dup1/api_server.py",
+      "era": "duplicate",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 90,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:recovered/from_kilo_restore/realai_sdk/realai__dup1/api_server.py",
+      "path": "recovered/from_kilo_restore/realai_sdk/realai__dup1/api_server.py",
+      "era": "duplicate",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 90,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:recovered/from_kilo_restore/realai_sdk/realai_sdk__dup1/api_server.py",
+      "path": "recovered/from_kilo_restore/realai_sdk/realai_sdk__dup1/api_server.py",
+      "era": "duplicate",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/api_server.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=58"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 90,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 58
+      }
+    },
+    {
+      "id": "deep:scanners/PUZZLE_MAP.md",
+      "path": "scanners/PUZZLE_MAP.md",
+      "era": "docs",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/PUZZLE_MAP.md",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=45"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 90,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 45
+      }
+    },
+    {
+      "id": "deep:scanners/assemble_gold_index.py",
+      "path": "scanners/assemble_gold_index.py",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/assemble_gold_index.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=48"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 90,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 48
+      }
+    },
+    {
+      "id": "deep:scanners/dds3_missing_files.py",
+      "path": "scanners/dds3_missing_files.py",
+      "era": "other",
+      "subsystem": "providers_models",
+      "action": "promote",
+      "target": "realai/dds3_missing_files.py",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=49"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 90,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "agents_orchestrate",
+          "memory_rag",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "self_improve_training",
+          "world_npc_game",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 49
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/_pydev_sys_patch.py",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/_pydev_sys_patch.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/_pydev_sys_patch.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:plugin_import"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "plugin_import"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_frame.py",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_frame.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/pydevd_frame.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:plugin_manager",
+        "dds3_ability_inventory:ability_token:plugin_stop"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "plugin_manager"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_plugin_utils.py",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_plugin_utils.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/pydevd_plugin_utils.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:plugin_stop"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "plugin_stop"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_sys_monitoring/_pydevd_sys_monitoring.py",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_sys_monitoring/_pydevd_sys_monitoring.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/_pydevd_sys_monitoring.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:plugin_manager",
+        "dds3_ability_inventory:ability_token:plugin_stop",
+        "dds3_ability_inventory:ability_token:plugin_call_breakpoint_found",
+        "dds3_ability_inventory:ability_token:plugin_call_stepping",
+        "dds3_ability_inventory:ability_token:plugin_line_breakpoint_found",
+        "dds3_ability_inventory:ability_token:plugin_line_stepping",
+        "dds3_ability_inventory:ability_token:plugin_return_stepping"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "plugin_manager"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd_plugins/extensions/types/pydevd_plugin_numpy_types.py",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd_plugins/extensions/types/pydevd_plugin_numpy_types.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/pydevd_plugin_numpy_types.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:TypeResolveProvider",
+        "dds3_ability_inventory:ability_token:NDArrayTypeResolveProvider"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "TypeResolveProvider"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd_plugins/extensions/types/pydevd_plugin_pandas_types.py",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$R94FSVO.0-win32-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd_plugins/extensions/types/pydevd_plugin_pandas_types.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/pydevd_plugin_pandas_types.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:StrPresentationProvider",
+        "dds3_ability_inventory:ability_token:PandasDataFrameTypeResolveProvider",
+        "dds3_ability_inventory:ability_token:PandasSeriesTypeResolveProvider",
+        "dds3_ability_inventory:ability_token:PandasStylerTypeResolveProvider"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "StrPresentationProvider"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RXL114I.0-win32-x64/python_files/lib/jedilsp/jedi/api/completion.py",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RXL114I.0-win32-x64/python_files/lib/jedilsp/jedi/api/completion.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/completion.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:plugin_manager"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "plugin_manager"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/.grok/config.toml",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/.grok/config.toml",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "plugins/config.toml",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:mcp_servers"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "mcp_servers"
+      }
+    },
+    {
+      "id": "ability_file:realai_full_cavity_search.py",
+      "path": "realai_full_cavity_search.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/realai_full_cavity_search.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:realai_full_cavity_manifest",
+        "dds3_ability_inventory:ability_token:realai_full_cavity_summary",
+        "dds3_ability_inventory:ability_token:realai_full_cavity_"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "realai_full_cavity_manifest"
+      }
+    },
+    {
+      "id": "ability_file:scanners/lora_scan.py",
+      "path": "scanners/lora_scan.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/lora_scan.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:lora_manifest"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "lora_manifest"
+      }
+    },
+    {
+      "id": "ability_file:scanners/mcp_scan.py",
+      "path": "scanners/mcp_scan.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/mcp_scan.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:mcp_manifest"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "mcp_manifest"
+      }
+    },
+    {
+      "id": "ability_file:scanners/npc_scan.py",
+      "path": "scanners/npc_scan.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/npc_scan.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_manifest"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_manifest"
+      }
+    },
+    {
+      "id": "ability_file:scanners/scan_desktop_missing_gold.py",
+      "path": "scanners/scan_desktop_missing_gold.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/scan_desktop_missing_gold.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:mcp_server"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "mcp_server"
+      }
+    },
+    {
+      "id": "ability_file:scanners/scan_local_keyword_gold.py",
+      "path": "scanners/scan_local_keyword_gold.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/scan_local_keyword_gold.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:mcp_server"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "mcp_server"
+      }
+    },
+    {
+      "id": "ability_file:scanners/solana_scan.py",
+      "path": "scanners/solana_scan.py",
+      "era": "other",
+      "subsystem": "tools_mcp",
+      "action": "promote",
+      "target": "realai/tools/solana_scan.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:solana_manifest"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "solana_manifest"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/game.overseer-bridge.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/game.overseer-bridge.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/game.overseer-bridge.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_log"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_log"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/map/poi-markers.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/map/poi-markers.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/poi-markers.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_marker"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_marker"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/fo4-dialogue.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/fo4-dialogue.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/fo4-dialogue.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_nodes"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_nodes"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/inventory-loader.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/inventory-loader.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/inventory-loader.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_items"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_items"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/narrative.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/narrative.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/narrative.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_nodes",
+        "dds3_ability_inventory:ability_token:npc_signal_runner"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_nodes"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/npcEncounter.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/npcEncounter.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/npcEncounter.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_conversation_complete"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_conversation_complete"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/npc_signal_runner.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/npc_signal_runner.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/npc_signal_runner.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_conversation_complete",
+        "dds3_ability_inventory:ability_token:npc_signal_runner",
+        "dds3_ability_inventory:ability_token:npc_conversation_end",
+        "dds3_ability_inventory:ability_token:npc_line"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_conversation_complete"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/quests.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/quests.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/quests.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_vault77_open",
+        "dds3_ability_inventory:ability_token:quest_lost_signal",
+        "dds3_ability_inventory:ability_token:quest_caps_daddy",
+        "dds3_ability_inventory:ability_token:quest_iron_curtain",
+        "dds3_ability_inventory:ability_token:quest_little_ember",
+        "dds3_ability_inventory:ability_token:quest_red_signals",
+        "dds3_ability_inventory:ability_token:quest_the_door",
+        "dds3_ability_inventory:ability_token:quest_the_loop",
+        "dds3_ability_inventory:ability_token:quest_the_loop_complete",
+        "dds3_ability_inventory:ability_token:quest_tomorrows_wasteland",
+        "dds3_ability_inventory:ability_token:quest_vault_zero"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_vault77_open"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/struggle-quips.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/struggle-quips.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/struggle-quips.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_stuck_quips"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_stuck_quips"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/worldmap.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/modules/worldmap.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/worldmap.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_marker"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_marker"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/overseer/core.quest_mapintel.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/overseer/core.quest_mapintel.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/core.quest_mapintel.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_mapintel"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_mapintel"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/overseer/index.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/overseer/index.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/index.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_mapintel"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_mapintel"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/overseer/overseer.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/overseer/overseer.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/overseer.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_update"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_update"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/quests.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/quests.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/quests.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_vault77_open"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_vault77_open"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/world/microquests.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/world/microquests.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/microquests.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_update"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_update"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/world/npc_traits.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/js/world/npc_traits.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/npc_traits.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_traits"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_traits"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/sw.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/frontend/sw.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/sw.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_traits"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_traits"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/game.overseer-bridge.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/game.overseer-bridge.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/game.overseer-bridge.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_log"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_log"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/map/poi-markers.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/map/poi-markers.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/poi-markers.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_marker"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_marker"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/modules/inventory-loader.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/modules/inventory-loader.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/inventory-loader.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_items"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_items"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/modules/narrative.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/modules/narrative.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/narrative.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_signal_runner"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_signal_runner"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/modules/npcEncounter.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/modules/npcEncounter.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/npcEncounter.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_conversation_complete"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_conversation_complete"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/modules/npc_signal_runner.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/modules/npc_signal_runner.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/npc_signal_runner.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_conversation_end",
+        "dds3_ability_inventory:ability_token:npc_line"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_conversation_end"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/modules/quests.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/modules/quests.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/quests.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_caps_daddy",
+        "dds3_ability_inventory:ability_token:quest_iron_curtain",
+        "dds3_ability_inventory:ability_token:quest_little_ember",
+        "dds3_ability_inventory:ability_token:quest_red_signals",
+        "dds3_ability_inventory:ability_token:quest_the_door",
+        "dds3_ability_inventory:ability_token:quest_the_loop",
+        "dds3_ability_inventory:ability_token:quest_the_loop_complete",
+        "dds3_ability_inventory:ability_token:quest_tomorrows_wasteland",
+        "dds3_ability_inventory:ability_token:quest_vault_zero"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_caps_daddy"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/modules/struggle-quips.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/modules/struggle-quips.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/struggle-quips.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_stuck_quips"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_stuck_quips"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/overseer/core.quest_mapintel.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/overseer/core.quest_mapintel.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/core.quest_mapintel.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_mapintel"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_mapintel"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/overseer/overseer.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/overseer/overseer.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/overseer.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_update"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_update"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/world/npc_traits.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/frontend/js/world/npc_traits.js",
+      "era": "other",
+      "subsystem": "ui_fusion_vscode",
+      "action": "promote",
+      "target": "apps/vscode/src/npc_traits.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_traits"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_traits"
+      }
+    },
+    {
+      "id": "ability_file:C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RVP6BKD/overseer_bot.py",
+      "path": "C:/$Recycle.Bin/S-1-5-21-977125084-3994612347-3193991490-1001/$RVP6BKD/overseer_bot.py",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/overseer_bot.py",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:solana_client",
+        "dds3_ability_inventory:ability_token:solana_keypair"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "solana_client"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/scripts/prebake_npc_videos.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/scripts/prebake_npc_videos.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/prebake_npc_videos.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_nodes",
+        "dds3_ability_inventory:ability_token:npc_video_lore_overrides"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_nodes"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/tests/concurrent-load-test.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/tests/concurrent-load-test.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/concurrent-load-test.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_video_lore_overrides",
+        "dds3_ability_inventory:ability_token:npc_context_missing_"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_video_lore_overrides"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/generate_npcs.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/generate_npcs.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/generate_npcs.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_generator",
+        "dds3_ability_inventory:ability_token:npc_generator_rules",
+        "dds3_ability_inventory:ability_token:npc_generator_template"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_generator"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/generate_sidequest_npcs.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-OLD/generate_sidequest_npcs.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/generate_sidequest_npcs.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_sidequest_",
+        "dds3_ability_inventory:ability_token:quest_seeker"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_sidequest_"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/generate_npcs.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/generate_npcs.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/generate_npcs.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_generator",
+        "dds3_ability_inventory:ability_token:npc_generator_rules",
+        "dds3_ability_inventory:ability_token:npc_generator_template"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_generator"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/generate_sidequest_npcs.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/generate_sidequest_npcs.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/generate_sidequest_npcs.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_sidequest_",
+        "dds3_ability_inventory:ability_token:quest_seeker"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_sidequest_"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/scripts/prebake_npc_videos.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/scripts/prebake_npc_videos.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/prebake_npc_videos.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_video_lore_overrides"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_video_lore_overrides"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/tests/concurrent-load-test.js",
+      "path": "C:/Users/tsmit/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/tests/concurrent-load-test.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/concurrent-load-test.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_context_missing_"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_context_missing_"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/generate_npcs.js",
+      "path": "C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/generate_npcs.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/generate_npcs.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_generator",
+        "dds3_ability_inventory:ability_token:npc_generator_rules",
+        "dds3_ability_inventory:ability_token:npc_generator_template"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_generator"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/generate_sidequest_npcs.js",
+      "path": "C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/generate_sidequest_npcs.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/generate_sidequest_npcs.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_sidequest_",
+        "dds3_ability_inventory:ability_token:quest_seeker"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_sidequest_"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/public/js/game.overseer-bridge.js",
+      "path": "C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/public/js/game.overseer-bridge.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/game.overseer-bridge.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_log"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_log"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/tests/concurrent-load-test.js",
+      "path": "C:/Users/tsmit/Documents/GitHub/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/tests/concurrent-load-test.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/concurrent-load-test.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_context_missing_"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_context_missing_"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/atomic-fizz-backup-2026-05-30/public/js/modules/inventory-loader.js",
+      "path": "C:/Users/tsmit/atomic-fizz-backup-2026-05-30/public/js/modules/inventory-loader.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/inventory-loader.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_items"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_items"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/atomic-fizz-backup-2026-05-30/public/js/modules/npc_signal_runner.js",
+      "path": "C:/Users/tsmit/atomic-fizz-backup-2026-05-30/public/js/modules/npc_signal_runner.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/npc_signal_runner.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:npc_conversation_end",
+        "dds3_ability_inventory:ability_token:npc_line"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "npc_conversation_end"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/atomic-fizz-backup-2026-05-30/public/js/modules/quests.js",
+      "path": "C:/Users/tsmit/atomic-fizz-backup-2026-05-30/public/js/modules/quests.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/quests.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_caps_daddy",
+        "dds3_ability_inventory:ability_token:quest_iron_curtain",
+        "dds3_ability_inventory:ability_token:quest_little_ember",
+        "dds3_ability_inventory:ability_token:quest_red_signals",
+        "dds3_ability_inventory:ability_token:quest_the_door",
+        "dds3_ability_inventory:ability_token:quest_the_loop",
+        "dds3_ability_inventory:ability_token:quest_the_loop_complete",
+        "dds3_ability_inventory:ability_token:quest_tomorrows_wasteland",
+        "dds3_ability_inventory:ability_token:quest_vault_zero"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_caps_daddy"
+      }
+    },
+    {
+      "id": "ability_file:C:/Users/tsmit/atomic-fizz-backup-2026-05-30/public/js/modules/struggle-quips.js",
+      "path": "C:/Users/tsmit/atomic-fizz-backup-2026-05-30/public/js/modules/struggle-quips.js",
+      "era": "other",
+      "subsystem": "world_npc",
+      "action": "promote",
+      "target": "realai/struggle-quips.js",
+      "reasons": [
+        "dds3_ability_inventory:ability_token:quest_stuck_quips"
+      ],
+      "sources": [
+        "dds3_ability_inventory"
+      ],
+      "priority": 90,
+      "extra": {
+        "token": "quest_stuck_quips"
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112400/realai_og_mess/realai/agents/agent.md",
+      "path": "backup/clean_backup_20260708_112400/realai_og_mess/realai/agents/agent.md",
+      "era": "og_mess",
+      "subsystem": "providers_models",
+      "action": "needs_review",
+      "target": "realai/agent.md",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=43"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 85,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 43
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112400/agents/agent.md",
+      "path": "backup/clean_backup_20260708_112400/agents/agent.md",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "needs_review",
+      "target": "realai/agent.md",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=43"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 80,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 43
+      }
+    },
+    {
+      "id": "deep:backup/clean_backup_20260708_112721/agents/agent.md",
+      "path": "backup/clean_backup_20260708_112721/agents/agent.md",
+      "era": "backup",
+      "subsystem": "providers_models",
+      "action": "needs_review",
+      "target": "realai/agent.md",
+      "reasons": [
+        "dds3_deep_gold_map:deep_gold_outside_clean hits=43"
+      ],
+      "sources": [
+        "dds3_deep_gold_map"
+      ],
+      "priority": 80,
+      "extra": {
+        "groups": [
+          "models_inference",
+          "tools_mcp_plugins",
+          "server_api_ui",
+          "web3_solana",
+          "v2_v3_migration",
+          "missing_broken"
+        ],
+        "hit_count": 43
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+models:
+  - id: realai-default
+    type: chat
+    backend: stub
+
+  - id: realai-embed-default
+    type: embeddings
+    backend: stub

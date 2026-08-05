@@ -1,0 +1,23 @@
+# RealAI Server Configuration
+[server]
+profile = "default"
+provider = "local"
+default_chat_model = "realai-2.0"
+default_embedding_model = "realai-embed"
+
+# Force Fusion UI
+ui_path = "fusion-ui"
+default_ui = "fusion"
+
+[server.http]
+host = "127.0.0.1"
+port = 8000
+enable_cors = true
+
+[server.logging]
+level = "INFO"
+log_file = "logs/realai-server.log"
+
+[backends.llama-cpp]
+gpu_layers = 0
+n_ctx = 8192

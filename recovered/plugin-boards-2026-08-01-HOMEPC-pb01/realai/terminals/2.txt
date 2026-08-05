@@ -1,0 +1,7 @@
+---
+pid: 19892
+cwd: "C:\Users\tsmit\realai"
+command: "cd C:\\Users\\tsmit\\realai; py -3.14 realai_src_ui_entry.py"
+started_at: 2026-06-04T09:04:47.313Z
+running_for_ms: 29260002 
+---

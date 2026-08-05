@@ -1,0 +1,334 @@
+{
+  "started": "2026-07-14T15:36:35.266330+00:00",
+  "decompiles": [
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\__init__.cpython-314.pyc",
+      "ok": false,
+      "error": "string index out of range"
+    },
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\cli.cpython-314.pyc",
+      "ok": false,
+      "error": "string index out of range"
+    },
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\dashboard.cpython-314.pyc",
+      "ok": false,
+      "error": "string index out of range"
+    },
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\executor.cpython-314.pyc",
+      "ok": false,
+      "error": "string index out of range"
+    },
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\importer.cpython-314.pyc",
+      "ok": false,
+      "error": "string index out of range"
+    },
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\models.cpython-314.pyc",
+      "ok": false,
+      "error": "string index out of range"
+    },
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\registry.cpython-314.pyc",
+      "ok": false,
+      "error": "string index out of range"
+    },
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\runtime.cpython-314.pyc",
+      "ok": false,
+      "error": "string index out of range"
+    }
+  ],
+  "scaffolds": [
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\__init__.py",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\cli.py",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\dashboard.py",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\executor.py",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\importer.py",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\models.py",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\registry.py",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\runtime.py",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\engine\\__init__.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\engine\\executor.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\engine\\loader.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\engine\\logger.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\engine\\memory.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\engine\\router.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\engine\\test_harness.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\providers\\__init__.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\providers\\anthropic.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\providers\\groq.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\providers\\local.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\providers\\openai.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\providers\\realai.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\providers\\router.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\tooling\\__init__.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\tooling\\crypto.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\tooling\\filesystem.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\tooling\\http.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\tooling\\registry.py (placeholder)",
+    "C:\\realai\\recovered\\from_agent_tools\\agent_tools\\tooling\\solana.py (placeholder)"
+  ],
+  "errors": [
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\cli.cpython-314.pyc",
+      "error": "cannot unmarshal C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\cli.cpython-314.pyc"
+    },
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\dashboard.cpython-314.pyc",
+      "error": "tuple index out of range"
+    },
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\executor.cpython-314.pyc",
+      "error": "cannot unmarshal C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\executor.cpython-314.pyc"
+    },
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\importer.cpython-314.pyc",
+      "error": "cannot unmarshal C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\importer.cpython-314.pyc"
+    },
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\models.cpython-314.pyc",
+      "error": "tuple index out of range"
+    },
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\registry.cpython-314.pyc",
+      "error": "tuple index out of range"
+    },
+    {
+      "pyc": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\runtime.cpython-314.pyc",
+      "error": "tuple index out of range"
+    }
+  ],
+  "modules": [
+    {
+      "module": "__init__",
+      "decompiled": false,
+      "meta": {
+        "file": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\__init__.cpython-314.pyc",
+        "names": [
+          "__doc__",
+          "__all__",
+          "__version__"
+        ],
+        "consts_str": [
+          "Agent toolkit package.",
+          "__version__",
+          "0.1.0"
+        ],
+        "co_filename": "C:\\Users\\tsmit\\OneDrive\\Documents\\agent-tools-main\\agent-tools-main\\agent_tools\\__init__.py"
+      }
+    },
+    {
+      "module": "cli",
+      "decompiled": false,
+      "meta": {
+        "file": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\cli.cpython-314.pyc",
+        "names": [],
+        "consts_str": [],
+        "co_filename": null,
+        "error": "cannot unmarshal C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\cli.cpython-314.pyc"
+      }
+    },
+    {
+      "module": "dashboard",
+      "decompiled": false,
+      "meta": {
+        "file": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\dashboard.cpython-314.pyc",
+        "names": [
+          "__conditional_annotations__",
+          "__doc__",
+          "__future__",
+          "annotations",
+          "json",
+          "queue",
+          "random",
+          "threading",
+          "time",
+          "http.server",
+          "BaseHTTPRequestHandler",
+          "HTTPServer",
+          "socketserver",
+          "ThreadingMixIn",
+          "urllib.parse",
+          "urlparse",
+          "registry",
+          "load_agents",
+          "load_profiles",
+          "runtime",
+          "ExecutionEvent",
+          "get_runtime",
+          "_TASK_DESCRIPTIONS",
+          "__annotations__",
+          "_EventBus",
+          "_bus",
+          "_simulation_enabled",
+          "_MIN_DISPATCH_INTERVAL",
+          "_MAX_DISPATCH_INTERVAL",
+          "_MIN_TASK_DURATION",
+          "_MAX_TASK_DURATION",
+          "_runtime_event_handler",
+          "_simulation_loop",
+          "_WORKFLOWS",
+          "build_graph_data",
+          "_ThreadingHTTPServer",
+          "DashboardHandler",
+          "serve",
+          "_HTML"
+        ],
+        "consts_str": [
+          "list[str]",
+          "_TASK_DESCRIPTIONS",
+          "_EventBus",
+          "float",
+          "_MIN_DISPATCH_INTERVAL",
+          "_MAX_DISPATCH_INTERVAL",
+          "_MIN_TASK_DURATION",
+          "_MAX_TASK_DURATION",
+          "name",
+          "Feature Development",
+          "color",
+          "#58a6ff",
+          "steps",
+          "Security Review",
+          "#f85149",
+          "DevOps Pipeline",
+          "#3fb950",
+          "Data Layer",
+          "#d29922",
+          "Game Production",
+          "#bc8cff",
+          "list[dict]",
+          "_WORKFLOWS",
+          "_ThreadingHTTPServer",
+          "DashboardHandler"
+        ],
+        "co_filename": "C:\\Users\\tsmit\\OneDrive\\Documents\\agent-tools-main\\agent-tools-main\\agent_tools\\dashboard.py",
+        "error": "tuple index out of range"
+      }
+    },
+    {
+      "module": "executor",
+      "decompiled": false,
+      "meta": {
+        "file": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\executor.cpython-314.pyc",
+        "names": [],
+        "consts_str": [],
+        "co_filename": null,
+        "error": "cannot unmarshal C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\executor.cpython-314.pyc"
+      }
+    },
+    {
+      "module": "importer",
+      "decompiled": false,
+      "meta": {
+        "file": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\importer.cpython-314.pyc",
+        "names": [],
+        "consts_str": [],
+        "co_filename": null,
+        "error": "cannot unmarshal C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\importer.cpython-314.pyc"
+      }
+    },
+    {
+      "module": "models",
+      "decompiled": false,
+      "meta": {
+        "file": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\models.cpython-314.pyc",
+        "names": [
+          "dataclasses",
+          "dataclass",
+          "field",
+          "typing",
+          "Any",
+          "AccessProfile",
+          "AgentDefinition"
+        ],
+        "consts_str": [
+          "AccessProfile",
+          "AgentDefinition"
+        ],
+        "co_filename": "C:\\Users\\tsmit\\OneDrive\\Documents\\agent-tools-main\\agent-tools-main\\agent_tools\\models.py",
+        "error": "tuple index out of range"
+      }
+    },
+    {
+      "module": "registry",
+      "decompiled": false,
+      "meta": {
+        "file": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\registry.cpython-314.pyc",
+        "names": [
+          "__future__",
+          "annotations",
+          "json",
+          "importlib.resources",
+          "files",
+          "pathlib",
+          "Path",
+          "typing",
+          "Iterable",
+          "models",
+          "AccessProfile",
+          "AgentDefinition",
+          "_find_agentx_override",
+          "_merge_json_lists",
+          "_load_json_resource",
+          "load_profiles",
+          "load_agents",
+          "find_agents",
+          "assess_agent_access",
+          "recommend_profile"
+        ],
+        "consts_str": [],
+        "co_filename": "C:\\Users\\tsmit\\OneDrive\\Documents\\agent-tools-main\\agent-tools-main\\agent_tools\\registry.py",
+        "error": "tuple index out of range"
+      }
+    },
+    {
+      "module": "runtime",
+      "decompiled": false,
+      "meta": {
+        "file": "C:\\Users\\tsmit\\realai_historical_backups\\realai_versions_20260612\\agent-tools-main\\agent-tools-main\\agent_tools\\__pycache__\\runtime.cpython-314.pyc",
+        "names": [
+          "__doc__",
+          "__future__",
+          "annotations",
+          "json",
+          "threading",
+          "time",
+          "dataclasses",
+          "dataclass",
+          "field",
+          "datetime",
+          "enum",
+          "Enum",
+          "pathlib",
+          "Path",
+          "typing",
+          "Any",
+          "Callable",
+          "uuid",
+          "uuid4",
+          "ExecutionStatus",
+          "ExecutionEvent",
+          "AgentExecution",
+          "ExecutionRuntime",
+          "_runtime",
+          "get_runtime"
+        ],
+        "consts_str": [
+          "ExecutionStatus",
+          "ExecutionEvent",
+          "AgentExecution",
+          "ExecutionRuntime"
+        ],
+        "co_filename": "C:\\Users\\tsmit\\OneDrive\\Documents\\agent-tools-main\\agent-tools-main\\agent_tools\\runtime.py",
+        "error": "tuple index out of range"
+      }
+    }
+  ],
+  "discoverable": "C:\\realai\\realai\\agent_tools_gold",
+  "finished": "2026-07-14T15:36:36.635782+00:00",
+  "sources_count": 42
+}

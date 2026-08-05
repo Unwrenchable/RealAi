@@ -1,0 +1,55 @@
+---
+pid: 14128
+cwd: "C:\Users\tsmit\realai"
+command: "py -3.14 -m realai.cli.launcher start --auto-port --production --detach --no-browser"
+started_at: 2026-06-04T13:07:47.771Z
+running_for_ms: 14544997 
+---
+[RealAI] Core modules loaded.
+[RealAI] Discovering plugins in realai/plugins...
+[RealAI] Plugin system initialized.
+[RealAI] Loaded plugin: advanced_rag
+[RealAI] Loaded plugin: computer_mode
+[RealAI] Loaded plugin: game_world_engine
+[RealAI] Loaded plugin: git_repo_intel
+[RealAI] Loaded plugin: gpu_balancer
+[RealAI] Loaded plugin: image_gen
+[RealAI] Loaded plugin: knowledge_rag
+[RealAI] Loaded plugin: llm_chat
+[RealAI] Loaded plugin: lora_loader
+[RealAI] Loaded plugin: memory_faiss
+[RealAI] Loaded plugin: memory_sqlite
+[RealAI] Loaded plugin: model_manager
+[RealAI] Loaded plugin: multi_agent_system
+[RealAI] Loaded plugin: npc_personality
+[RealAI] Loaded plugin: ocr
+[RealAI] Loaded plugin: quest_generator
+[RealAI] Loaded plugin: rag_memory
+[RealAI] Loaded plugin: scheduler_switcher
+[RealAI] Loaded plugin: self_evolution_loop
+[RealAI] Loaded plugin: self_improvement
+[RealAI] Loaded plugin: self_reflection
+[RealAI] Loaded plugin: social_autoposter
+[RealAI] Loaded plugin: solana_tx
+[RealAI] Loaded plugin: synthetic_data
+[RealAI] Loaded plugin: tool_use_framework
+[RealAI Plugin] Twitter credentials not found in environment variables.
+[RealAI] Loaded plugin: twitter
+[RealAI] Loaded plugin: voice_audio
+[RealAI] Loaded plugin: web_research
+[RealAI] Loaded 28 plugins.
+[RealAI] Runtime bootstrap: active_backend=ollama
+[RealAI] Compute mode=auto (GPU detected=False, recommended=hybrid)
+[RealAI] GPU accelerator (LLM): ollama — AMD GPU: Ollama uses the GPU without CUDA PyTorch.
+[RealAI] Ollama online at http://localhost:11434 (default model: kimi-k2.6:cloud)
+[RealAI] Starting provider on :8001...
+[RealAI] Still waiting for provider :8001 (10s)...
+[RealAI] Still waiting for provider :8001 (20s)...
+[RealAI] Still waiting for provider :8001 (30s)...
+[RealAI] Still waiting for provider :8001 (40s)...
+[RealAI] Still waiting for provider :8001 (50s)...
+[RealAI] Still waiting for provider :8001 (60s)...
+[RealAI] Still waiting for provider :8001 (70s)...
+[RealAI] Still waiting for provider :8001 (80s)...
+[RealAI] ERROR: Provider failed health check at http://127.0.0.1:8001/health/live
+[RealAI] No launcher-managed processes recorded.

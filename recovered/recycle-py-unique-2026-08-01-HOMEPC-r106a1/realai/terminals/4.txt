@@ -1,0 +1,47 @@
+---
+pid: 22344
+cwd: "C:\Users\tsmit\realai"
+command: "cd \"C:\\Users\\tsmit\\realai\" && py -3.14 -m realai.cli.launcher start --auto-port --detach --no-browser 2>&1"
+started_at: 2026-06-04T11:07:35.801Z
+running_for_ms: 21754995 
+---
+[RealAI] Core modules loaded.
+[RealAI] Discovering plugins in realai/plugins...
+[RealAI] Plugin system initialized.
+[RealAI] Loaded plugin: advanced_rag
+[RealAI] Loaded plugin: computer_mode
+[RealAI] Loaded plugin: game_world_engine
+[RealAI] Loaded plugin: git_repo_intel
+[RealAI] Loaded plugin: gpu_balancer
+[RealAI] Loaded plugin: image_gen
+[RealAI] Loaded plugin: knowledge_rag
+[RealAI] Loaded plugin: llm_chat
+[RealAI] Loaded plugin: lora_loader
+[RealAI] Loaded plugin: memory_faiss
+[RealAI] Loaded plugin: memory_sqlite
+[RealAI] Loaded plugin: model_manager
+[RealAI] Loaded plugin: multi_agent_system
+[RealAI] Loaded plugin: npc_personality
+[RealAI] Loaded plugin: ocr
+[RealAI] Loaded plugin: quest_generator
+[RealAI] Loaded plugin: rag_memory
+[RealAI] Loaded plugin: scheduler_switcher
+[RealAI] Loaded plugin: self_evolution_loop
+[RealAI] Loaded plugin: self_improvement
+[RealAI] Loaded plugin: self_reflection
+[RealAI] Loaded plugin: social_autoposter
+[RealAI] Loaded plugin: solana_tx
+[RealAI] Loaded plugin: synthetic_data
+[RealAI] Loaded plugin: tool_use_framework
+[RealAI Plugin] Twitter credentials not found in environment variables.
+[RealAI] Loaded plugin: twitter
+[RealAI] Loaded plugin: voice_audio
+[RealAI] Loaded plugin: web_research
+[RealAI] Loaded 28 plugins.
+[RealAI] Starting provider on :8001...
+[RealAI] Provider ready.
+[RealAI] Starting dev UI on :3847...
+[RealAI] RealAI is running.
+[RealAI]   App:      http://127.0.0.1:3847/
+[RealAI]   Provider: http://127.0.0.1:8001/health
+[RealAI]   Install as app: use the banner in the browser (Chrome/Edge → Install RealAI).

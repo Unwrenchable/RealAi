@@ -1,0 +1,12 @@
+id: llama_cpp
+name: "Llama.cpp Local"
+type: "local"
+entry: "./run.ps1"
+
+models:
+  - id: llama-3.2-1b
+    name: "Llama 3.2 1B Instruct (GGUF)"
+    path: "C:/Users/tsmit/OneDrive/Apps/realai/models/llama3.2-1b/Llama-3.2-1B-Instruct-Q4_K_M.gguf"
+    format: "gguf"
+    context: 4096
+    template: "llama3"

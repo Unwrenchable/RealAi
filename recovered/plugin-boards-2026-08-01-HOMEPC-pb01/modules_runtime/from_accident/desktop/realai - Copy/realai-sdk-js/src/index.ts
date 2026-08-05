@@ -1,0 +1,27 @@
+export { RealAIClient, RealAIError } from "./client";
+export { PROVIDER_CONFIGS, getProviderConfig, detectProviderFromKey } from "./providers";
+export type {
+  RealAIClientConfig,
+  Message,
+  MessageRole,
+  ChatOptions,
+  ChatResponse,
+  ChatChoice,
+  ChatUsage,
+  ImageOptions,
+  ImageResponse,
+  ImageData,
+  ImageAnalysisOptions,
+  ImageAnalysisResponse,
+  CodeOptions,
+  CodeResponse,
+  EmbeddingsOptions,
+  EmbeddingsResponse,
+  EmbeddingData,
+  TranslationOptions,
+  TranslationResponse,
+  WebResearchOptions,
+  WebResearchResponse,
+  WebResearchResult,
+  RealAIErrorData,
+} from "./types";

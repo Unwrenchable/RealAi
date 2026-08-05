@@ -1,0 +1,1088 @@
+{
+  "meta": {
+    "mode": "archive_triage",
+    "root": "C:\\realai",
+    "archive_root": "C:\\realai\\archive",
+    "started": "2026-07-16T17:49:41.597372+00:00",
+    "finished": "2026-07-16T17:49:41.706094+00:00",
+    "elapsed_seconds": 0.11,
+    "files_classified": 179,
+    "skip_rules_version": 3,
+    "dirs_skipped": {
+      "agent_tools.egg-info": 64,
+      ".vs": 50,
+      ".pytest_cache": 30,
+      "dist": 28,
+      "realai.egg-info": 24,
+      "__pycache__": 20,
+      "build": 18,
+      "__pycache____dup1": 12,
+      "realai__dup1.egg-info": 12,
+      ".next": 10,
+      ".git_disabled": 10,
+      "Output": 6,
+      "venv": 6,
+      "node_modules.disabled": 4,
+      ".cache": 4,
+      ".kilo": 2,
+      "chocolatey": 2,
+      "realai_search_temp": 2,
+      "rebase_dryrun": 2,
+      "terminals": 2,
+      "node_modules": 2
+    },
+    "preservation_note": "READ-ONLY archive triage. archive/ is NOT treated as disposable. Source/docs/config/memory that are unique or differ from clean runtime are listed as recover_candidates. Noise (venv/node_modules/.next/dist) pruned. Nothing is deleted or moved by this scan."
+  },
+  "counts": {
+    "files_classified": 179,
+    "by_class": {
+      "json_data": 10,
+      "docs": 6,
+      "noise_lockfile": 37,
+      "other": 39,
+      "memory_snapshot": 24,
+      "source_code": 24,
+      "noise_build": 18,
+      "noise_binary": 21
+    },
+    "by_subtree": {
+      "realai_repo": 54,
+      "RealAIProject": 30,
+      "realai_sdk": 21,
+      "realai-clean__dup1": 14,
+      "agent-tools-main": 12,
+      "logs_data": 7,
+      "realai_historical_backups": 7,
+      "agent-tools": 6,
+      "realai-clean": 6,
+      "real-fin": 5,
+      "realai_good": 3,
+      "realai_memory": 3,
+      "utilities": 3,
+      "logs": 2,
+      "realai-core": 2,
+      "realai-frontend": 2,
+      "realai-backend": 1,
+      "realai-cli": 1
+    },
+    "recover_candidates": 54,
+    "only_in_archive": 6,
+    "duplicate_of_clean": 9,
+    "memory_snapshots": 24
+  },
+  "recover_candidates": [
+    {
+      "file": "archive/RealAIProject/realai-frontend/out/index.txt",
+      "class": "docs",
+      "subtree": "RealAIProject",
+      "size": 3765,
+      "basename": "index.txt",
+      "also_in_clean_as": [],
+      "file_hash": "97f5fc75720e0f41103a2cec672ca5ee2bb2d5d38f7370161419f466072aff70",
+      "reason": "basename_not_in_clean_runtime"
+    },
+    {
+      "file": "archive/agent-tools-main/.agentx/README.md",
+      "class": "docs",
+      "subtree": "agent-tools-main",
+      "size": 455,
+      "basename": "README.md",
+      "also_in_clean_as": [],
+      "file_hash": "998fc84c41055c95402f7aac0c1228ddb2f5e8875a87f1472f80626c9b6253da",
+      "reason": "basename_not_in_clean_runtime"
+    },
+    {
+      "file": "archive/agent-tools-main/agent-tools-main/.agentx/README.md",
+      "class": "docs",
+      "subtree": "agent-tools-main",
+      "size": 455,
+      "basename": "README.md",
+      "also_in_clean_as": [],
+      "file_hash": "998fc84c41055c95402f7aac0c1228ddb2f5e8875a87f1472f80626c9b6253da",
+      "reason": "basename_not_in_clean_runtime"
+    },
+    {
+      "file": "archive/agent-tools/agent-tools-main/.agentx/README.md",
+      "class": "docs",
+      "subtree": "agent-tools",
+      "size": 455,
+      "basename": "README.md",
+      "also_in_clean_as": [],
+      "file_hash": "998fc84c41055c95402f7aac0c1228ddb2f5e8875a87f1472f80626c9b6253da",
+      "reason": "basename_not_in_clean_runtime"
+    },
+    {
+      "file": "archive/realai_repo/.pytest_cache__dup1/README.md",
+      "class": "docs",
+      "subtree": "realai_repo",
+      "size": 310,
+      "basename": "README.md",
+      "also_in_clean_as": [],
+      "file_hash": "420e808d79a6c25d3cda0af33bc4782314a14949866682c68ce8149e89b66b70",
+      "reason": "basename_not_in_clean_runtime"
+    },
+    {
+      "file": "archive/realai_sdk/.pytest_cache__dup1/README.md",
+      "class": "docs",
+      "subtree": "realai_sdk",
+      "size": 310,
+      "basename": "README.md",
+      "also_in_clean_as": [],
+      "file_hash": "420e808d79a6c25d3cda0af33bc4782314a14949866682c68ce8149e89b66b70",
+      "reason": "basename_not_in_clean_runtime"
+    },
+    {
+      "file": "archive/RealAIProject/realai-core/ui/lib/realaiClient.ts",
+      "class": "source_code",
+      "subtree": "RealAIProject",
+      "size": 3431,
+      "basename": "realaiClient.ts",
+      "also_in_clean_as": [
+        "realai/apps/vscode/src/realaiClient.ts",
+        "apps/vscode/src/realaiClient.ts"
+      ],
+      "file_hash": "7f39f33a4cbb3fa148dd84100b1a0f2c43e67fdcc3ff9050faea4417f58ef8f9",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "b06e93809aa40d0655b19639603ce66cc3e7a75485706534d2cecc7cd8135c3f"
+    },
+    {
+      "file": "archive/realai-clean/realai-core/ui/lib/realaiClient.ts",
+      "class": "source_code",
+      "subtree": "realai-clean",
+      "size": 3431,
+      "basename": "realaiClient.ts",
+      "also_in_clean_as": [
+        "realai/apps/vscode/src/realaiClient.ts",
+        "apps/vscode/src/realaiClient.ts"
+      ],
+      "file_hash": "7f39f33a4cbb3fa148dd84100b1a0f2c43e67fdcc3ff9050faea4417f58ef8f9",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "b06e93809aa40d0655b19639603ce66cc3e7a75485706534d2cecc7cd8135c3f"
+    },
+    {
+      "file": "archive/realai-clean__dup1/realai-core/ui/lib/realaiClient.ts",
+      "class": "source_code",
+      "subtree": "realai-clean__dup1",
+      "size": 3431,
+      "basename": "realaiClient.ts",
+      "also_in_clean_as": [
+        "realai/apps/vscode/src/realaiClient.ts",
+        "apps/vscode/src/realaiClient.ts"
+      ],
+      "file_hash": "7f39f33a4cbb3fa148dd84100b1a0f2c43e67fdcc3ff9050faea4417f58ef8f9",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "b06e93809aa40d0655b19639603ce66cc3e7a75485706534d2cecc7cd8135c3f"
+    },
+    {
+      "file": "archive/realai-clean__dup1/realai-core__dup1/ui/lib/realaiClient.ts",
+      "class": "source_code",
+      "subtree": "realai-clean__dup1",
+      "size": 3431,
+      "basename": "realaiClient.ts",
+      "also_in_clean_as": [
+        "realai/apps/vscode/src/realaiClient.ts",
+        "apps/vscode/src/realaiClient.ts"
+      ],
+      "file_hash": "7f39f33a4cbb3fa148dd84100b1a0f2c43e67fdcc3ff9050faea4417f58ef8f9",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "b06e93809aa40d0655b19639603ce66cc3e7a75485706534d2cecc7cd8135c3f"
+    },
+    {
+      "file": "archive/realai-clean__dup1/realai-frontend__dup1/src/lib/realai.ts",
+      "class": "source_code",
+      "subtree": "realai-clean__dup1",
+      "size": 1324,
+      "basename": "realai.ts",
+      "also_in_clean_as": [
+        "realai/apps/frontend/src/lib/realai.ts",
+        "apps/frontend/src/lib/realai.ts"
+      ],
+      "file_hash": "21ebd1996ca6f82c3f2ff0aa745248772c585222f954f4fe681c74286fc7777b",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "d8b7f4344cd2cb9fbdb883b09d5650f4c5651de54e05929c0023652cc6aa4d1f"
+    },
+    {
+      "file": "archive/realai-clean__dup1/realai-frontend__dup1/src/lib/types.ts",
+      "class": "source_code",
+      "subtree": "realai-clean__dup1",
+      "size": 1363,
+      "basename": "types.ts",
+      "also_in_clean_as": [
+        "realai/apps/frontend/src/lib/types.ts",
+        "realai/providers/types.ts",
+        "apps/frontend/src/lib/types.ts",
+        "providers/types.ts"
+      ],
+      "file_hash": "7fbbbabda02fbd6f72b8ba87bf5169c775c03784f65ee3a837d2aa1a89caf9b9",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "d70f123bf23855a5178d8e20b15ee4e77ceb710b4b273a36b69dad2ac23ea9f2"
+    },
+    {
+      "file": "archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-core/ui/lib/realaiClient.ts",
+      "class": "source_code",
+      "subtree": "realai_historical_backups",
+      "size": 3431,
+      "basename": "realaiClient.ts",
+      "also_in_clean_as": [
+        "realai/apps/vscode/src/realaiClient.ts",
+        "apps/vscode/src/realaiClient.ts"
+      ],
+      "file_hash": "7f39f33a4cbb3fa148dd84100b1a0f2c43e67fdcc3ff9050faea4417f58ef8f9",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "b06e93809aa40d0655b19639603ce66cc3e7a75485706534d2cecc7cd8135c3f"
+    },
+    {
+      "file": "archive/realai_repo/realai-core/ui/lib/realaiClient.ts",
+      "class": "source_code",
+      "subtree": "realai_repo",
+      "size": 3431,
+      "basename": "realaiClient.ts",
+      "also_in_clean_as": [
+        "realai/apps/vscode/src/realaiClient.ts",
+        "apps/vscode/src/realaiClient.ts"
+      ],
+      "file_hash": "7f39f33a4cbb3fa148dd84100b1a0f2c43e67fdcc3ff9050faea4417f58ef8f9",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "b06e93809aa40d0655b19639603ce66cc3e7a75485706534d2cecc7cd8135c3f"
+    },
+    {
+      "file": "archive/realai_repo/realai-core__dup1/ui/lib/realaiClient.ts",
+      "class": "source_code",
+      "subtree": "realai_repo",
+      "size": 3431,
+      "basename": "realaiClient.ts",
+      "also_in_clean_as": [
+        "realai/apps/vscode/src/realaiClient.ts",
+        "apps/vscode/src/realaiClient.ts"
+      ],
+      "file_hash": "7f39f33a4cbb3fa148dd84100b1a0f2c43e67fdcc3ff9050faea4417f58ef8f9",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "b06e93809aa40d0655b19639603ce66cc3e7a75485706534d2cecc7cd8135c3f"
+    },
+    {
+      "file": "archive/realai_repo/realai-frontend__dup1/src/lib/realai.ts",
+      "class": "source_code",
+      "subtree": "realai_repo",
+      "size": 1324,
+      "basename": "realai.ts",
+      "also_in_clean_as": [
+        "realai/apps/frontend/src/lib/realai.ts",
+        "apps/frontend/src/lib/realai.ts"
+      ],
+      "file_hash": "21ebd1996ca6f82c3f2ff0aa745248772c585222f954f4fe681c74286fc7777b",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "d8b7f4344cd2cb9fbdb883b09d5650f4c5651de54e05929c0023652cc6aa4d1f"
+    },
+    {
+      "file": "archive/realai_repo/realai-frontend__dup1/src/lib/types.ts",
+      "class": "source_code",
+      "subtree": "realai_repo",
+      "size": 1363,
+      "basename": "types.ts",
+      "also_in_clean_as": [
+        "realai/apps/frontend/src/lib/types.ts",
+        "realai/providers/types.ts",
+        "apps/frontend/src/lib/types.ts",
+        "providers/types.ts"
+      ],
+      "file_hash": "7fbbbabda02fbd6f72b8ba87bf5169c775c03784f65ee3a837d2aa1a89caf9b9",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "d70f123bf23855a5178d8e20b15ee4e77ceb710b4b273a36b69dad2ac23ea9f2"
+    },
+    {
+      "file": "archive/realai_sdk/realai-core/ui/lib/realaiClient.ts",
+      "class": "source_code",
+      "subtree": "realai_sdk",
+      "size": 3431,
+      "basename": "realaiClient.ts",
+      "also_in_clean_as": [
+        "realai/apps/vscode/src/realaiClient.ts",
+        "apps/vscode/src/realaiClient.ts"
+      ],
+      "file_hash": "7f39f33a4cbb3fa148dd84100b1a0f2c43e67fdcc3ff9050faea4417f58ef8f9",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "b06e93809aa40d0655b19639603ce66cc3e7a75485706534d2cecc7cd8135c3f"
+    },
+    {
+      "file": "archive/realai_sdk/realai-core__dup1/ui/lib/realaiClient.ts",
+      "class": "source_code",
+      "subtree": "realai_sdk",
+      "size": 3431,
+      "basename": "realaiClient.ts",
+      "also_in_clean_as": [
+        "realai/apps/vscode/src/realaiClient.ts",
+        "apps/vscode/src/realaiClient.ts"
+      ],
+      "file_hash": "7f39f33a4cbb3fa148dd84100b1a0f2c43e67fdcc3ff9050faea4417f58ef8f9",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "b06e93809aa40d0655b19639603ce66cc3e7a75485706534d2cecc7cd8135c3f"
+    },
+    {
+      "file": "archive/realai_sdk/realai-frontend__dup1/src/lib/realai.ts",
+      "class": "source_code",
+      "subtree": "realai_sdk",
+      "size": 1324,
+      "basename": "realai.ts",
+      "also_in_clean_as": [
+        "realai/apps/frontend/src/lib/realai.ts",
+        "apps/frontend/src/lib/realai.ts"
+      ],
+      "file_hash": "21ebd1996ca6f82c3f2ff0aa745248772c585222f954f4fe681c74286fc7777b",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "d8b7f4344cd2cb9fbdb883b09d5650f4c5651de54e05929c0023652cc6aa4d1f"
+    },
+    {
+      "file": "archive/realai_sdk/realai-frontend__dup1/src/lib/types.ts",
+      "class": "source_code",
+      "subtree": "realai_sdk",
+      "size": 1363,
+      "basename": "types.ts",
+      "also_in_clean_as": [
+        "realai/apps/frontend/src/lib/types.ts",
+        "realai/providers/types.ts",
+        "apps/frontend/src/lib/types.ts",
+        "providers/types.ts"
+      ],
+      "file_hash": "7fbbbabda02fbd6f72b8ba87bf5169c775c03784f65ee3a837d2aa1a89caf9b9",
+      "reason": "same_name_different_hash_review",
+      "clean_hash": "d70f123bf23855a5178d8e20b15ee4e77ceb710b4b273a36b69dad2ac23ea9f2"
+    },
+    {
+      "file": "archive/RealAIProject/realai/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "RealAIProject",
+      "size": 508,
+      "basename": "realai_memory.json",
+      "file_hash": "30f4a985182ac2c45c92008b4d9e94dab38fc9d8320354c61ab3d802ed936398",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/RealAIProject/realai_memory.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "RealAIProject",
+      "size": 12288,
+      "basename": "realai_memory.sqlite3",
+      "file_hash": "ca7e2000d7ff077641da8691fca0bc0d5ea25069be766944b20fd7da96bc6c72",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/logs_data/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "logs_data",
+      "size": 1822,
+      "basename": "realai_memory.json",
+      "file_hash": "6d54233121154b742c2afc8412859b95e59b2ae5b926cdf3903ba5a9926d90b0",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/real-fin/realai/realai - Copy/realai_memory.db",
+      "class": "memory_snapshot",
+      "subtree": "real-fin",
+      "size": 1240,
+      "basename": "realai_memory.db",
+      "file_hash": "c4a80d2fcbf90802bdd5a9a96c10dd9f1e0dfcbb780d95b23271eb05734af0a9",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/real-fin/realai/realai - Copy/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "real-fin",
+      "size": 1822,
+      "basename": "realai_memory.json",
+      "file_hash": "6d54233121154b742c2afc8412859b95e59b2ae5b926cdf3903ba5a9926d90b0",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/real-fin/realai/realai/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "real-fin",
+      "size": 1676,
+      "basename": "realai_memory.json",
+      "file_hash": "0f5d57d1fb69f233fcf0ad8b1e6dc520cb69e21b7020fb4b88d281afb4f95c68",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/real-fin/realai/realai_memory.db",
+      "class": "memory_snapshot",
+      "subtree": "real-fin",
+      "size": 1240,
+      "basename": "realai_memory.db",
+      "file_hash": "c4a80d2fcbf90802bdd5a9a96c10dd9f1e0dfcbb780d95b23271eb05734af0a9",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/real-fin/realai/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "real-fin",
+      "size": 1822,
+      "basename": "realai_memory.json",
+      "file_hash": "6d54233121154b742c2afc8412859b95e59b2ae5b926cdf3903ba5a9926d90b0",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai-clean/realai_memory.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai-clean",
+      "size": 12288,
+      "basename": "realai_memory.sqlite3",
+      "file_hash": "c928866b400ae7e1433a72800d20d599851fb36a4fa121de2e1b50347e87ac64",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai-clean__dup1/realai_memory.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai-clean__dup1",
+      "size": 12288,
+      "basename": "realai_memory.sqlite3",
+      "file_hash": "c928866b400ae7e1433a72800d20d599851fb36a4fa121de2e1b50347e87ac64",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai-clean__dup1/realai_memory__dup1.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai-clean__dup1",
+      "size": 12288,
+      "basename": "realai_memory__dup1.sqlite3",
+      "file_hash": "c928866b400ae7e1433a72800d20d599851fb36a4fa121de2e1b50347e87ac64",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai_good/realai/realai/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "realai_good",
+      "size": 1676,
+      "basename": "realai_memory.json",
+      "file_hash": "0f5d57d1fb69f233fcf0ad8b1e6dc520cb69e21b7020fb4b88d281afb4f95c68",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai_good/realai/realai_memory.db",
+      "class": "memory_snapshot",
+      "subtree": "realai_good",
+      "size": 1240,
+      "basename": "realai_memory.db",
+      "file_hash": "c4a80d2fcbf90802bdd5a9a96c10dd9f1e0dfcbb780d95b23271eb05734af0a9",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai_good/realai/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "realai_good",
+      "size": 1822,
+      "basename": "realai_memory.json",
+      "file_hash": "6d54233121154b742c2afc8412859b95e59b2ae5b926cdf3903ba5a9926d90b0",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai_memory.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai_historical_backups",
+      "size": 12288,
+      "basename": "realai_memory.sqlite3",
+      "file_hash": "ca7e2000d7ff077641da8691fca0bc0d5ea25069be766944b20fd7da96bc6c72",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai_repo/realai/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "realai_repo",
+      "size": 362,
+      "basename": "realai_memory.json",
+      "file_hash": "ab4dea6ed393e7c0cd3a8b5dbe231d00aad85bbb1ea18542b46847008f3a7cb1",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai_repo/realai__dup1/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "realai_repo",
+      "size": 362,
+      "basename": "realai_memory.json",
+      "file_hash": "ab4dea6ed393e7c0cd3a8b5dbe231d00aad85bbb1ea18542b46847008f3a7cb1",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai_repo/realai_memory.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai_repo",
+      "size": 12288,
+      "basename": "realai_memory.sqlite3",
+      "file_hash": "c928866b400ae7e1433a72800d20d599851fb36a4fa121de2e1b50347e87ac64",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai_repo/realai_memory__dup1.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai_repo",
+      "size": 12288,
+      "basename": "realai_memory__dup1.sqlite3",
+      "file_hash": "c928866b400ae7e1433a72800d20d599851fb36a4fa121de2e1b50347e87ac64",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai_sdk/realai/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "realai_sdk",
+      "size": 362,
+      "basename": "realai_memory.json",
+      "file_hash": "ab4dea6ed393e7c0cd3a8b5dbe231d00aad85bbb1ea18542b46847008f3a7cb1",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai_sdk/realai__dup1/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "realai_sdk",
+      "size": 362,
+      "basename": "realai_memory.json",
+      "file_hash": "ab4dea6ed393e7c0cd3a8b5dbe231d00aad85bbb1ea18542b46847008f3a7cb1",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai_sdk/realai_memory.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai_sdk",
+      "size": 12288,
+      "basename": "realai_memory.sqlite3",
+      "file_hash": "bd99ea959e3b5b4236ca14a34616571fa3f5b2e9e1ee78de25a28df2b312d56d",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/realai_sdk/realai_memory__dup1.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai_sdk",
+      "size": 12288,
+      "basename": "realai_memory__dup1.sqlite3",
+      "file_hash": "bd99ea959e3b5b4236ca14a34616571fa3f5b2e9e1ee78de25a28df2b312d56d",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/utilities/realai_knowledge_store.json",
+      "class": "memory_snapshot",
+      "subtree": "utilities",
+      "size": 2453,
+      "basename": "realai_knowledge_store.json",
+      "file_hash": "208d4db45818b990a36aecd94123804496b96a248d95592849005d409df8528b",
+      "reason": "memory_or_training_snapshot"
+    },
+    {
+      "file": "archive/agent-tools-main/.agentx/access_profiles.json",
+      "class": "json_data",
+      "subtree": "agent-tools-main",
+      "size": 978,
+      "basename": "access_profiles.json",
+      "reason": "agent_or_manifest_json"
+    },
+    {
+      "file": "archive/agent-tools-main/.agentx/agency_import.json",
+      "class": "json_data",
+      "subtree": "agent-tools-main",
+      "size": 28429,
+      "basename": "agency_import.json",
+      "reason": "agent_or_manifest_json"
+    },
+    {
+      "file": "archive/agent-tools-main/.agentx/agents.json",
+      "class": "json_data",
+      "subtree": "agent-tools-main",
+      "size": 45754,
+      "basename": "agents.json",
+      "reason": "agent_or_manifest_json"
+    },
+    {
+      "file": "archive/agent-tools-main/agent-tools-main/.agentx/access_profiles.json",
+      "class": "json_data",
+      "subtree": "agent-tools-main",
+      "size": 978,
+      "basename": "access_profiles.json",
+      "reason": "agent_or_manifest_json"
+    },
+    {
+      "file": "archive/agent-tools-main/agent-tools-main/.agentx/agency_import.json",
+      "class": "json_data",
+      "subtree": "agent-tools-main",
+      "size": 28429,
+      "basename": "agency_import.json",
+      "reason": "agent_or_manifest_json"
+    },
+    {
+      "file": "archive/agent-tools-main/agent-tools-main/.agentx/agents.json",
+      "class": "json_data",
+      "subtree": "agent-tools-main",
+      "size": 45754,
+      "basename": "agents.json",
+      "reason": "agent_or_manifest_json"
+    },
+    {
+      "file": "archive/agent-tools/agent-tools-main/.agentx/access_profiles.json",
+      "class": "json_data",
+      "subtree": "agent-tools",
+      "size": 978,
+      "basename": "access_profiles.json",
+      "reason": "agent_or_manifest_json"
+    },
+    {
+      "file": "archive/agent-tools/agent-tools-main/.agentx/agency_import.json",
+      "class": "json_data",
+      "subtree": "agent-tools",
+      "size": 28429,
+      "basename": "agency_import.json",
+      "reason": "agent_or_manifest_json"
+    },
+    {
+      "file": "archive/agent-tools/agent-tools-main/.agentx/agents.json",
+      "class": "json_data",
+      "subtree": "agent-tools",
+      "size": 45754,
+      "basename": "agents.json",
+      "reason": "agent_or_manifest_json"
+    }
+  ],
+  "only_in_archive": [
+    {
+      "file": "archive/RealAIProject/realai-frontend/out/index.txt",
+      "class": "docs",
+      "subtree": "RealAIProject",
+      "size": 3765,
+      "basename": "index.txt",
+      "also_in_clean_as": [],
+      "file_hash": "97f5fc75720e0f41103a2cec672ca5ee2bb2d5d38f7370161419f466072aff70",
+      "reason": "basename_not_in_clean_runtime"
+    },
+    {
+      "file": "archive/agent-tools-main/.agentx/README.md",
+      "class": "docs",
+      "subtree": "agent-tools-main",
+      "size": 455,
+      "basename": "README.md",
+      "also_in_clean_as": [],
+      "file_hash": "998fc84c41055c95402f7aac0c1228ddb2f5e8875a87f1472f80626c9b6253da",
+      "reason": "basename_not_in_clean_runtime"
+    },
+    {
+      "file": "archive/agent-tools-main/agent-tools-main/.agentx/README.md",
+      "class": "docs",
+      "subtree": "agent-tools-main",
+      "size": 455,
+      "basename": "README.md",
+      "also_in_clean_as": [],
+      "file_hash": "998fc84c41055c95402f7aac0c1228ddb2f5e8875a87f1472f80626c9b6253da",
+      "reason": "basename_not_in_clean_runtime"
+    },
+    {
+      "file": "archive/agent-tools/agent-tools-main/.agentx/README.md",
+      "class": "docs",
+      "subtree": "agent-tools",
+      "size": 455,
+      "basename": "README.md",
+      "also_in_clean_as": [],
+      "file_hash": "998fc84c41055c95402f7aac0c1228ddb2f5e8875a87f1472f80626c9b6253da",
+      "reason": "basename_not_in_clean_runtime"
+    },
+    {
+      "file": "archive/realai_repo/.pytest_cache__dup1/README.md",
+      "class": "docs",
+      "subtree": "realai_repo",
+      "size": 310,
+      "basename": "README.md",
+      "also_in_clean_as": [],
+      "file_hash": "420e808d79a6c25d3cda0af33bc4782314a14949866682c68ce8149e89b66b70",
+      "reason": "basename_not_in_clean_runtime"
+    },
+    {
+      "file": "archive/realai_sdk/.pytest_cache__dup1/README.md",
+      "class": "docs",
+      "subtree": "realai_sdk",
+      "size": 310,
+      "basename": "README.md",
+      "also_in_clean_as": [],
+      "file_hash": "420e808d79a6c25d3cda0af33bc4782314a14949866682c68ce8149e89b66b70",
+      "reason": "basename_not_in_clean_runtime"
+    }
+  ],
+  "memory_snapshots": [
+    {
+      "file": "archive/logs_data/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "logs_data",
+      "size": 1822,
+      "basename": "realai_memory.json",
+      "file_hash": "6d54233121154b742c2afc8412859b95e59b2ae5b926cdf3903ba5a9926d90b0"
+    },
+    {
+      "file": "archive/real-fin/realai/realai_memory.db",
+      "class": "memory_snapshot",
+      "subtree": "real-fin",
+      "size": 1240,
+      "basename": "realai_memory.db",
+      "file_hash": "c4a80d2fcbf90802bdd5a9a96c10dd9f1e0dfcbb780d95b23271eb05734af0a9"
+    },
+    {
+      "file": "archive/real-fin/realai/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "real-fin",
+      "size": 1822,
+      "basename": "realai_memory.json",
+      "file_hash": "6d54233121154b742c2afc8412859b95e59b2ae5b926cdf3903ba5a9926d90b0"
+    },
+    {
+      "file": "archive/real-fin/realai/realai/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "real-fin",
+      "size": 1676,
+      "basename": "realai_memory.json",
+      "file_hash": "0f5d57d1fb69f233fcf0ad8b1e6dc520cb69e21b7020fb4b88d281afb4f95c68"
+    },
+    {
+      "file": "archive/real-fin/realai/realai - Copy/realai_memory.db",
+      "class": "memory_snapshot",
+      "subtree": "real-fin",
+      "size": 1240,
+      "basename": "realai_memory.db",
+      "file_hash": "c4a80d2fcbf90802bdd5a9a96c10dd9f1e0dfcbb780d95b23271eb05734af0a9"
+    },
+    {
+      "file": "archive/real-fin/realai/realai - Copy/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "real-fin",
+      "size": 1822,
+      "basename": "realai_memory.json",
+      "file_hash": "6d54233121154b742c2afc8412859b95e59b2ae5b926cdf3903ba5a9926d90b0"
+    },
+    {
+      "file": "archive/realai-clean/realai_memory.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai-clean",
+      "size": 12288,
+      "basename": "realai_memory.sqlite3",
+      "file_hash": "c928866b400ae7e1433a72800d20d599851fb36a4fa121de2e1b50347e87ac64"
+    },
+    {
+      "file": "archive/realai-clean__dup1/realai_memory.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai-clean__dup1",
+      "size": 12288,
+      "basename": "realai_memory.sqlite3",
+      "file_hash": "c928866b400ae7e1433a72800d20d599851fb36a4fa121de2e1b50347e87ac64"
+    },
+    {
+      "file": "archive/realai-clean__dup1/realai_memory__dup1.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai-clean__dup1",
+      "size": 12288,
+      "basename": "realai_memory__dup1.sqlite3",
+      "file_hash": "c928866b400ae7e1433a72800d20d599851fb36a4fa121de2e1b50347e87ac64"
+    },
+    {
+      "file": "archive/RealAIProject/realai_memory.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "RealAIProject",
+      "size": 12288,
+      "basename": "realai_memory.sqlite3",
+      "file_hash": "ca7e2000d7ff077641da8691fca0bc0d5ea25069be766944b20fd7da96bc6c72"
+    },
+    {
+      "file": "archive/RealAIProject/realai/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "RealAIProject",
+      "size": 508,
+      "basename": "realai_memory.json",
+      "file_hash": "30f4a985182ac2c45c92008b4d9e94dab38fc9d8320354c61ab3d802ed936398"
+    },
+    {
+      "file": "archive/realai_good/realai/realai_memory.db",
+      "class": "memory_snapshot",
+      "subtree": "realai_good",
+      "size": 1240,
+      "basename": "realai_memory.db",
+      "file_hash": "c4a80d2fcbf90802bdd5a9a96c10dd9f1e0dfcbb780d95b23271eb05734af0a9"
+    },
+    {
+      "file": "archive/realai_good/realai/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "realai_good",
+      "size": 1822,
+      "basename": "realai_memory.json",
+      "file_hash": "6d54233121154b742c2afc8412859b95e59b2ae5b926cdf3903ba5a9926d90b0"
+    },
+    {
+      "file": "archive/realai_good/realai/realai/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "realai_good",
+      "size": 1676,
+      "basename": "realai_memory.json",
+      "file_hash": "0f5d57d1fb69f233fcf0ad8b1e6dc520cb69e21b7020fb4b88d281afb4f95c68"
+    },
+    {
+      "file": "archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai_memory.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai_historical_backups",
+      "size": 12288,
+      "basename": "realai_memory.sqlite3",
+      "file_hash": "ca7e2000d7ff077641da8691fca0bc0d5ea25069be766944b20fd7da96bc6c72"
+    },
+    {
+      "file": "archive/realai_repo/realai_memory.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai_repo",
+      "size": 12288,
+      "basename": "realai_memory.sqlite3",
+      "file_hash": "c928866b400ae7e1433a72800d20d599851fb36a4fa121de2e1b50347e87ac64"
+    },
+    {
+      "file": "archive/realai_repo/realai_memory__dup1.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai_repo",
+      "size": 12288,
+      "basename": "realai_memory__dup1.sqlite3",
+      "file_hash": "c928866b400ae7e1433a72800d20d599851fb36a4fa121de2e1b50347e87ac64"
+    },
+    {
+      "file": "archive/realai_repo/realai/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "realai_repo",
+      "size": 362,
+      "basename": "realai_memory.json",
+      "file_hash": "ab4dea6ed393e7c0cd3a8b5dbe231d00aad85bbb1ea18542b46847008f3a7cb1"
+    },
+    {
+      "file": "archive/realai_repo/realai__dup1/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "realai_repo",
+      "size": 362,
+      "basename": "realai_memory.json",
+      "file_hash": "ab4dea6ed393e7c0cd3a8b5dbe231d00aad85bbb1ea18542b46847008f3a7cb1"
+    },
+    {
+      "file": "archive/realai_sdk/realai_memory.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai_sdk",
+      "size": 12288,
+      "basename": "realai_memory.sqlite3",
+      "file_hash": "bd99ea959e3b5b4236ca14a34616571fa3f5b2e9e1ee78de25a28df2b312d56d"
+    },
+    {
+      "file": "archive/realai_sdk/realai_memory__dup1.sqlite3",
+      "class": "memory_snapshot",
+      "subtree": "realai_sdk",
+      "size": 12288,
+      "basename": "realai_memory__dup1.sqlite3",
+      "file_hash": "bd99ea959e3b5b4236ca14a34616571fa3f5b2e9e1ee78de25a28df2b312d56d"
+    },
+    {
+      "file": "archive/realai_sdk/realai/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "realai_sdk",
+      "size": 362,
+      "basename": "realai_memory.json",
+      "file_hash": "ab4dea6ed393e7c0cd3a8b5dbe231d00aad85bbb1ea18542b46847008f3a7cb1"
+    },
+    {
+      "file": "archive/realai_sdk/realai__dup1/realai_memory.json",
+      "class": "memory_snapshot",
+      "subtree": "realai_sdk",
+      "size": 362,
+      "basename": "realai_memory.json",
+      "file_hash": "ab4dea6ed393e7c0cd3a8b5dbe231d00aad85bbb1ea18542b46847008f3a7cb1"
+    },
+    {
+      "file": "archive/utilities/realai_knowledge_store.json",
+      "class": "memory_snapshot",
+      "subtree": "utilities",
+      "size": 2453,
+      "basename": "realai_knowledge_store.json",
+      "file_hash": "208d4db45818b990a36aecd94123804496b96a248d95592849005d409df8528b"
+    }
+  ],
+  "duplicate_of_clean_sample": [
+    {
+      "file": "archive/realai-clean/realai-core/ui/lib/registryClient.ts",
+      "class": "source_code",
+      "subtree": "realai-clean",
+      "size": 2539,
+      "basename": "registryClient.ts",
+      "also_in_clean_as": [
+        "realai/packages/sdk-ts/src/registryClient.ts",
+        "packages/sdk-ts/src/registryClient.ts"
+      ],
+      "file_hash": "4866895826c3e7c82c56e2d8b6480dad082b61484556ece45aef50cf23d3177b",
+      "reason": "duplicate_of_clean"
+    },
+    {
+      "file": "archive/realai-clean__dup1/realai-core/ui/lib/registryClient.ts",
+      "class": "source_code",
+      "subtree": "realai-clean__dup1",
+      "size": 2539,
+      "basename": "registryClient.ts",
+      "also_in_clean_as": [
+        "realai/packages/sdk-ts/src/registryClient.ts",
+        "packages/sdk-ts/src/registryClient.ts"
+      ],
+      "file_hash": "4866895826c3e7c82c56e2d8b6480dad082b61484556ece45aef50cf23d3177b",
+      "reason": "duplicate_of_clean"
+    },
+    {
+      "file": "archive/realai-clean__dup1/realai-core__dup1/ui/lib/registryClient.ts",
+      "class": "source_code",
+      "subtree": "realai-clean__dup1",
+      "size": 2539,
+      "basename": "registryClient.ts",
+      "also_in_clean_as": [
+        "realai/packages/sdk-ts/src/registryClient.ts",
+        "packages/sdk-ts/src/registryClient.ts"
+      ],
+      "file_hash": "4866895826c3e7c82c56e2d8b6480dad082b61484556ece45aef50cf23d3177b",
+      "reason": "duplicate_of_clean"
+    },
+    {
+      "file": "archive/RealAIProject/realai-core/ui/lib/registryClient.ts",
+      "class": "source_code",
+      "subtree": "RealAIProject",
+      "size": 2539,
+      "basename": "registryClient.ts",
+      "also_in_clean_as": [
+        "realai/packages/sdk-ts/src/registryClient.ts",
+        "packages/sdk-ts/src/registryClient.ts"
+      ],
+      "file_hash": "4866895826c3e7c82c56e2d8b6480dad082b61484556ece45aef50cf23d3177b",
+      "reason": "duplicate_of_clean"
+    },
+    {
+      "file": "archive/realai_historical_backups/realai_versions_20260612/RealAIProject/realai-core/ui/lib/registryClient.ts",
+      "class": "source_code",
+      "subtree": "realai_historical_backups",
+      "size": 2539,
+      "basename": "registryClient.ts",
+      "also_in_clean_as": [
+        "realai/packages/sdk-ts/src/registryClient.ts",
+        "packages/sdk-ts/src/registryClient.ts"
+      ],
+      "file_hash": "4866895826c3e7c82c56e2d8b6480dad082b61484556ece45aef50cf23d3177b",
+      "reason": "duplicate_of_clean"
+    },
+    {
+      "file": "archive/realai_repo/realai-core/ui/lib/registryClient.ts",
+      "class": "source_code",
+      "subtree": "realai_repo",
+      "size": 2539,
+      "basename": "registryClient.ts",
+      "also_in_clean_as": [
+        "realai/packages/sdk-ts/src/registryClient.ts",
+        "packages/sdk-ts/src/registryClient.ts"
+      ],
+      "file_hash": "4866895826c3e7c82c56e2d8b6480dad082b61484556ece45aef50cf23d3177b",
+      "reason": "duplicate_of_clean"
+    },
+    {
+      "file": "archive/realai_repo/realai-core__dup1/ui/lib/registryClient.ts",
+      "class": "source_code",
+      "subtree": "realai_repo",
+      "size": 2539,
+      "basename": "registryClient.ts",
+      "also_in_clean_as": [
+        "realai/packages/sdk-ts/src/registryClient.ts",
+        "packages/sdk-ts/src/registryClient.ts"
+      ],
+      "file_hash": "4866895826c3e7c82c56e2d8b6480dad082b61484556ece45aef50cf23d3177b",
+      "reason": "duplicate_of_clean"
+    },
+    {
+      "file": "archive/realai_sdk/realai-core/ui/lib/registryClient.ts",
+      "class": "source_code",
+      "subtree": "realai_sdk",
+      "size": 2539,
+      "basename": "registryClient.ts",
+      "also_in_clean_as": [
+        "realai/packages/sdk-ts/src/registryClient.ts",
+        "packages/sdk-ts/src/registryClient.ts"
+      ],
+      "file_hash": "4866895826c3e7c82c56e2d8b6480dad082b61484556ece45aef50cf23d3177b",
+      "reason": "duplicate_of_clean"
+    },
+    {
+      "file": "archive/realai_sdk/realai-core__dup1/ui/lib/registryClient.ts",
+      "class": "source_code",
+      "subtree": "realai_sdk",
+      "size": 2539,
+      "basename": "registryClient.ts",
+      "also_in_clean_as": [
+        "realai/packages/sdk-ts/src/registryClient.ts",
+        "packages/sdk-ts/src/registryClient.ts"
+      ],
+      "file_hash": "4866895826c3e7c82c56e2d8b6480dad082b61484556ece45aef50cf23d3177b",
+      "reason": "duplicate_of_clean"
+    }
+  ],
+  "subtrees": [
+    {
+      "name": "realai_repo",
+      "files": 54
+    },
+    {
+      "name": "RealAIProject",
+      "files": 30
+    },
+    {
+      "name": "realai_sdk",
+      "files": 21
+    },
+    {
+      "name": "realai-clean__dup1",
+      "files": 14
+    },
+    {
+      "name": "agent-tools-main",
+      "files": 12
+    },
+    {
+      "name": "logs_data",
+      "files": 7
+    },
+    {
+      "name": "realai_historical_backups",
+      "files": 7
+    },
+    {
+      "name": "agent-tools",
+      "files": 6
+    },
+    {
+      "name": "realai-clean",
+      "files": 6
+    },
+    {
+      "name": "real-fin",
+      "files": 5
+    },
+    {
+      "name": "realai_good",
+      "files": 3
+    },
+    {
+      "name": "realai_memory",
+      "files": 3
+    },
+    {
+      "name": "utilities",
+      "files": 3
+    },
+    {
+      "name": "logs",
+      "files": 2
+    },
+    {
+      "name": "realai-core",
+      "files": 2
+    },
+    {
+      "name": "realai-frontend",
+      "files": 2
+    },
+    {
+      "name": "realai-backend",
+      "files": 1
+    },
+    {
+      "name": "realai-cli",
+      "files": 1
+    }
+  ]
+}

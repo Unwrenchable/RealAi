@@ -1,0 +1,225 @@
+{
+  "generated_at": "2026-07-16T17:49:41.848152+00:00",
+  "duration_sec": 0.1,
+  "mission": "self-heal desktop + local missing-file gold hunt",
+  "roots": [],
+  "hit_count": 0,
+  "by_root": [],
+  "p0_found_on_desktop_scan": [],
+  "p0_still_not_found_anywhere_scanned": [
+    "ability_catalog.py",
+    "access_profiles.json",
+    "agent_manifests_for_finetuning.json",
+    "agent_runtime.py",
+    "agents.json",
+    "api_server.py",
+    "aura_memory.py",
+    "deepen_cycle.py",
+    "device_selector.py",
+    "embeddings.py",
+    "embeddings_backend.py",
+    "find_realai_bootstrap.py",
+    "lambda_embeddings_audio.py",
+    "local_llama.py",
+    "local_models.py",
+    "mcp_server.py",
+    "memory_store.py",
+    "model_catalog.py",
+    "orchestration.py",
+    "policy.json",
+    "realai_server.py",
+    "sanity_check.py",
+    "self_extend_tool.py",
+    "self_improvement.py",
+    "self_repair_tool.py",
+    "system_scan_tool.py",
+    "tools_runtime.py",
+    "v3_orchestrator.py",
+    "world_model.json",
+    "world_model.py"
+  ],
+  "p0_missing_from_live_realai_pkg": [
+    "agent_manifests_for_finetuning.json",
+    "find_realai_bootstrap.py",
+    "mcp_server.py",
+    "policy.json",
+    "sanity_check.py",
+    "world_model.json"
+  ],
+  "p0_present_in_live_realai_pkg": [
+    {
+      "name": "ability_catalog.py",
+      "paths": [
+        "C:\\realai\\realai\\ability_catalog.py"
+      ]
+    },
+    {
+      "name": "access_profiles.json",
+      "paths": [
+        "C:\\realai\\realai\\agents\\agentx\\access_profiles.json",
+        "C:\\realai\\realai\\agent_tools_gold\\data\\access_profiles.json",
+        "C:\\realai\\realai\\archive\\agent-tools\\agent-tools-main\\.agentx\\access_profiles.json"
+      ]
+    },
+    {
+      "name": "agent_runtime.py",
+      "paths": [
+        "C:\\realai\\realai\\agent_runtime.py",
+        "C:\\realai\\realai\\.kilo\\worktrees\\cotton-mistake\\realai\\agent_runtime.py",
+        "C:\\realai\\realai\\realai\\agent_runtime.py"
+      ]
+    },
+    {
+      "name": "agents.json",
+      "paths": [
+        "C:\\realai\\realai\\agents\\agentx\\agents.json",
+        "C:\\realai\\realai\\agent_tools_gold\\data\\agents.json",
+        "C:\\realai\\realai\\archive\\agent-tools\\agent-tools-main\\.agentx\\agents.json"
+      ]
+    },
+    {
+      "name": "api_server.py",
+      "paths": [
+        "C:\\realai\\realai\\api_server.py",
+        "C:\\realai\\realai\\.kilo\\worktrees\\cotton-mistake\\api_server.py",
+        "C:\\realai\\realai\\.kilo\\worktrees\\cotton-mistake\\realai\\api_server.py"
+      ]
+    },
+    {
+      "name": "aura_memory.py",
+      "paths": [
+        "C:\\realai\\realai\\aura_memory.py"
+      ]
+    },
+    {
+      "name": "deepen_cycle.py",
+      "paths": [
+        "C:\\realai\\realai\\deepen_cycle.py"
+      ]
+    },
+    {
+      "name": "device_selector.py",
+      "paths": [
+        "C:\\realai\\realai\\plugins\\tools\\device_selector.py"
+      ]
+    },
+    {
+      "name": "embeddings.py",
+      "paths": [
+        "C:\\realai\\realai\\.kilo\\worktrees\\cotton-mistake\\apps\\api\\routes\\embeddings.py",
+        "C:\\realai\\realai\\.kilo\\worktrees\\cotton-mistake\\core\\api\\schemas\\embeddings.py",
+        "C:\\realai\\realai\\.kilo\\worktrees\\cotton-mistake\\realai\\server\\embeddings.py"
+      ]
+    },
+    {
+      "name": "embeddings_backend.py",
+      "paths": [
+        "C:\\realai\\realai\\.kilo\\worktrees\\cotton-mistake\\realai\\server\\embeddings_backend.py",
+        "C:\\realai\\realai\\realai\\server\\embeddings_backend.py",
+        "C:\\realai\\realai\\server\\embeddings_backend.py"
+      ]
+    },
+    {
+      "name": "lambda_embeddings_audio.py",
+      "paths": [
+        "C:\\realai\\realai\\lambda_embeddings_audio.py"
+      ]
+    },
+    {
+      "name": "local_llama.py",
+      "paths": [
+        "C:\\realai\\realai\\providers\\local_llama.py"
+      ]
+    },
+    {
+      "name": "local_models.py",
+      "paths": [
+        "C:\\realai\\realai\\local_models.py",
+        "C:\\realai\\realai\\.kilo\\worktrees\\cotton-mistake\\local_models.py",
+        "C:\\realai\\realai\\.kilo\\worktrees\\cotton-mistake\\realai\\local_models.py"
+      ]
+    },
+    {
+      "name": "memory_store.py",
+      "paths": [
+        "C:\\realai\\realai\\.kilo\\worktrees\\cotton-mistake\\realai\\server\\memory_store.py",
+        "C:\\realai\\realai\\realai\\server\\memory_store.py",
+        "C:\\realai\\realai\\server\\memory_store.py"
+      ]
+    },
+    {
+      "name": "model_catalog.py",
+      "paths": [
+        "C:\\realai\\realai\\model_catalog.py"
+      ]
+    },
+    {
+      "name": "orchestration.py",
+      "paths": [
+        "C:\\realai\\realai\\.kilo\\worktrees\\cotton-mistake\\realai\\server\\orchestration.py",
+        "C:\\realai\\realai\\realai\\server\\orchestration.py",
+        "C:\\realai\\realai\\server\\orchestration.py"
+      ]
+    },
+    {
+      "name": "realai_server.py",
+      "paths": [
+        "C:\\realai\\realai\\realai_server.py"
+      ]
+    },
+    {
+      "name": "self_extend_tool.py",
+      "paths": [
+        "C:\\realai\\realai\\server\\tools\\self_extend_tool.py"
+      ]
+    },
+    {
+      "name": "self_improvement.py",
+      "paths": [
+        "C:\\realai\\realai\\self_improvement.py",
+        "C:\\realai\\realai\\.kilo\\worktrees\\cotton-mistake\\realai\\self_improvement.py",
+        "C:\\realai\\realai\\realai\\self_improvement.py"
+      ]
+    },
+    {
+      "name": "self_repair_tool.py",
+      "paths": [
+        "C:\\realai\\realai\\server\\tools\\self_repair_tool.py"
+      ]
+    },
+    {
+      "name": "system_scan_tool.py",
+      "paths": [
+        "C:\\realai\\realai\\server\\tools\\system_scan_tool.py"
+      ]
+    },
+    {
+      "name": "tools_runtime.py",
+      "paths": [
+        "C:\\realai\\realai\\.kilo\\worktrees\\cotton-mistake\\realai\\server\\tools_runtime.py",
+        "C:\\realai\\realai\\realai\\server\\tools_runtime.py",
+        "C:\\realai\\realai\\server\\tools_runtime.py"
+      ]
+    },
+    {
+      "name": "v3_orchestrator.py",
+      "paths": [
+        "C:\\realai\\realai\\v3_orchestrator.py",
+        "C:\\realai\\realai\\realai\\v3_orchestrator.py"
+      ]
+    },
+    {
+      "name": "world_model.py",
+      "paths": [
+        "C:\\realai\\realai\\world_model.py",
+        "C:\\realai\\realai\\.kilo\\worktrees\\cotton-mistake\\realai\\world_model.py",
+        "C:\\realai\\realai\\realai\\world_model.py"
+      ]
+    }
+  ],
+  "top_hits": [],
+  "staged_count": 0,
+  "staged_sample": [],
+  "stage_dir": "C:\\realai\\recovered\\from_desktop_missing",
+  "onedrive_desktop_note": "C:\\Users\\tsmit\\OneDrive\\Desktop contains a full RealAI-era tree (realai/, realai - Copy/, realai_agent, plugins, providers, fizzRecovery, .agentx)."
+}
