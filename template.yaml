@@ -1,0 +1,234 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: RealAI - Split Lambda Functions Architecture
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 512
+    Runtime: python3.11
+    Architectures:
+      - x86_64
+    Environment:
+      Variables:
+        PYTHONPATH: /var/task
+
+Resources:
+  # API Gateway
+  RealAIApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      Cors:
+        AllowMethods: "'GET,POST,OPTIONS'"
+        AllowHeaders: "'Content-Type,Authorization,X-Provider,X-Base-URL'"
+        AllowOrigin: "'*'"
+
+  # Lambda Layer for shared dependencies
+  SharedDependenciesLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: realai-shared-dependencies
+      Description: Shared dependencies for RealAI Lambda functions
+      ContentUri: ./layer/
+      CompatibleRuntimes:
+        - python3.11
+    Metadata:
+      BuildMethod: python3.11
+
+  # Lambda Function: Core API
+  CoreFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: realai-core
+      CodeUri: ./
+      Handler: lambda_core.handler
+      Description: Core API endpoints (health, models, capabilities)
+      Layers:
+        - !Ref SharedDependenciesLayer
+      Events:
+        RootEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /
+            Method: GET
+        HealthEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /health
+            Method: GET
+        ModelsEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/models
+            Method: GET
+        ModelDetailEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/models/{model_id}
+            Method: GET
+        CapabilitiesEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/capabilities
+            Method: GET
+        ProviderCapabilitiesEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/providers/capabilities
+            Method: GET
+
+  # Lambda Function: Chat & Completions
+  ChatFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: realai-chat
+      CodeUri: ./
+      Handler: lambda_chat.handler
+      Description: Chat and text completions
+      Layers:
+        - !Ref SharedDependenciesLayer
+      Events:
+        ChatCompletionsEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/chat/completions
+            Method: POST
+        CompletionsEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/completions
+            Method: POST
+
+  # Lambda Function: Image Generation
+  ImageFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: realai-image
+      CodeUri: ./
+      Handler: lambda_image.handler
+      Description: Image generation
+      Layers:
+        - !Ref SharedDependenciesLayer
+      Events:
+        ImageGenerationEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/images/generations
+            Method: POST
+
+  # Lambda Function: Video Generation
+  VideoFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: realai-video
+      CodeUri: ./
+      Handler: lambda_video.handler
+      Description: Video generation
+      Layers:
+        - !Ref SharedDependenciesLayer
+      Events:
+        VideoGenerationEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/videos/generations
+            Method: POST
+
+  # Lambda Function: Embeddings & Audio
+  EmbeddingsAudioFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: realai-embeddings-audio
+      CodeUri: ./
+      Handler: lambda_embeddings_audio.handler
+      Description: Embeddings and audio processing (routes to external APIs)
+      Layers:
+        - !Ref SharedDependenciesLayer
+      Events:
+        EmbeddingsEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/embeddings
+            Method: POST
+        AudioTranscriptionEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/audio/transcriptions
+            Method: POST
+        AudioSpeechEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/audio/speech
+            Method: POST
+
+  # Lambda Function: Advanced Capabilities
+  AdvancedFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: realai-advanced
+      CodeUri: ./
+      Handler: lambda_advanced.handler
+      Description: Advanced AI capabilities (reasoning, synthesis, reflection, agents)
+      Layers:
+        - !Ref SharedDependenciesLayer
+      Events:
+        ReasoningChainEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/reasoning/chain
+            Method: POST
+        SynthesisKnowledgeEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/synthesis/knowledge
+            Method: POST
+        ReflectionAnalyzeEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/reflection/analyze
+            Method: POST
+        AgentsOrchestrateEndpoint:
+          Type: Api
+          Properties:
+            RestApiId: !Ref RealAIApi
+            Path: /v1/agents/orchestrate
+            Method: POST
+
+Outputs:
+  RealAIApiUrl:
+    Description: API Gateway endpoint URL for RealAI
+    Value: !Sub "https://${RealAIApi}.execute-api.${AWS::Region}.amazonaws.com/prod/"
+  CoreFunctionArn:
+    Description: Core Function ARN
+    Value: !GetAtt CoreFunction.Arn
+  ChatFunctionArn:
+    Description: Chat Function ARN
+    Value: !GetAtt ChatFunction.Arn
+  ImageFunctionArn:
+    Description: Image Function ARN
+    Value: !GetAtt ImageFunction.Arn
+  VideoFunctionArn:
+    Description: Video Function ARN
+    Value: !GetAtt VideoFunction.Arn
+  EmbeddingsAudioFunctionArn:
+    Description: Embeddings & Audio Function ARN
+    Value: !GetAtt EmbeddingsAudioFunction.Arn
+  AdvancedFunctionArn:
+    Description: Advanced Function ARN
+    Value: !GetAtt AdvancedFunction.Arn
