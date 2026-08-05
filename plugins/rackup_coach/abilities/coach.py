@@ -1,8 +1,13 @@
-"""Professional coach — basic through pro, rating-aware."""
+"""Professional coach — basic through pro, rating-aware + RackUp Pyramid."""
 from __future__ import annotations
 
 from typing import Any
 
+from plugins.rackup_coach.pyramid import (
+    classical_mindset_tips,
+    race_context,
+    resolve_pyramid,
+)
 from plugins.rackup_coach.types import PlayerProfile, RatingBand
 
 
@@ -134,6 +139,90 @@ def _pattern_notes(player: PlayerProfile) -> list[str]:
     return notes
 
 
+def _pyramid_practice(player: PlayerProfile, cfg, minutes: int | None = None) -> dict[str, Any]:
+    """Practice plan scaled for 10-ball vs 15-ball Pyramid + skill targets."""
+    mins = int(minutes or (50 if cfg.skill_level == "beginner" else 70))
+    blocks = [
+        {
+            "order": 1,
+            "skill": "point_counting",
+            "minutes": max(8, mins // 6),
+            "drill": (
+                f"Announce points-needed to {cfg.points_to_win} before every shot; "
+                f"1-ball = 11. Rack size {cfg.rack_size}."
+            ),
+        },
+        {
+            "order": 2,
+            "skill": "cue_ball_control",
+            "minutes": max(10, mins // 5),
+            "drill": (
+                "Stop / soft-follow ladder on American cloth — classical CB discipline."
+                if cfg.rack_size == 10
+                else "Long-table stun + soft follow zones for multi-ball shape (15-ball depth)."
+            ),
+        },
+        {
+            "order": 3,
+            "skill": "value_selection",
+            "minutes": max(10, mins // 5),
+            "drill": (
+                "10-ball: route two highest available values without losing CB."
+                if cfg.rack_size == 10
+                else "15-ball: open traffic then isolate 1-ball (11) and a top number."
+            ),
+        },
+        {
+            "order": 4,
+            "skill": "safety_classical",
+            "minutes": max(8, mins // 6),
+            "drill": "Two-way safety when out is <60% — count race before gambling.",
+        },
+    ]
+    if cfg.call_shot in ("optional", "yes"):
+        blocks.append(
+            {
+                "order": 5,
+                "skill": "call_shot",
+                "minutes": max(8, mins // 6),
+                "drill": (
+                    "Call ball+pocket every pot (required for pro; optional advanced). "
+                    "No call → safety."
+                ),
+            }
+        )
+    else:
+        blocks.append(
+            {
+                "order": 5,
+                "skill": "intentional_pocket",
+                "minutes": max(8, mins // 6),
+                "drill": "No call-shot rule — still pick pocket mentally; log accidental slop.",
+            }
+        )
+    # Weakness block
+    weak = (player.weaknesses or ["position_play"])[:1]
+    blocks.append(
+        {
+            "order": 6,
+            "skill": weak[0],
+            "minutes": max(10, mins - sum(b["minutes"] for b in blocks)),
+            "drill": _drill_for_skill(weak[0], player.band),
+        }
+    )
+    return {
+        "duration_minutes": mins,
+        "intensity": f"pyramid_{cfg.skill_level}",
+        "band_message": (
+            f"Pyramid {cfg.table_size}/{cfg.rack_size}-ball · first to {cfg.points_to_win} · "
+            f"rating weight {cfg.rating_weight}× · classical scoring on American table"
+        ),
+        "blocks": blocks,
+        "cooldown": "Journal: points left, 1-ball decisions, CB errors (3 bullets)",
+        "pyramid": cfg.to_dict(),
+    }
+
+
 def coach(
     player: PlayerProfile,
     *,
@@ -142,11 +231,17 @@ def coach(
     payload: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """
-    mode: session | practice_plan | pre_match | mental | quick_tip | full
+    mode: session | practice_plan | pre_match | mental | quick_tip | full | pyramid
     """
     payload = payload or {}
     mode = (mode or payload.get("mode") or "session").lower()
     band = player.band
+    cfg = resolve_pyramid(player=player, payload=payload)
+    is_pyramid = (
+        mode == "pyramid"
+        or (player.discipline or "").lower() == "pyramid"
+        or bool(payload.get("pyramid") or payload.get("game") == "pyramid")
+    )
 
     result: dict[str, Any] = {
         "player_id": player.player_id,
@@ -157,40 +252,86 @@ def coach(
         "mode": mode,
         "goal": goal,
         "band_curriculum": _BAND_CURRICULUM[band],
+        "pyramid": cfg.to_dict() if is_pyramid or mode in ("full", "session", "pyramid") else None,
     }
 
-    if mode in ("session", "full", "practice_plan", "practice"):
-        result["practice_plan"] = _practice_plan(
-            player, minutes=payload.get("minutes")
+    if is_pyramid or mode == "pyramid":
+        result["classical_mindset"] = classical_mindset_tips(cfg)
+        result["race"] = race_context(
+            cfg,
+            my_score=int(payload.get("my_score", player.pyramid_score) or 0),
+            opp_score=int(payload.get("opp_score", player.pyramid_opp_score) or 0),
         )
-    if mode in ("session", "full", "pre_match", "prematch"):
-        result["pre_match"] = _pre_match(player)
-    if mode in ("session", "full", "mental", "mental_game"):
+
+    if mode in ("session", "full", "practice_plan", "practice", "pyramid"):
+        if is_pyramid or mode == "pyramid":
+            result["practice_plan"] = _pyramid_practice(
+                player, cfg, minutes=payload.get("minutes")
+            )
+        else:
+            result["practice_plan"] = _practice_plan(
+                player, minutes=payload.get("minutes")
+            )
+    if mode in ("session", "full", "pre_match", "prematch", "pyramid"):
+        pm = _pre_match(player)
+        if is_pyramid:
+            pm["pyramid"] = {
+                "target": cfg.points_to_win,
+                "rack_size": cfg.rack_size,
+                "table_size": cfg.table_size,
+                "call_shot": cfg.call_shot,
+                "open_plan": (
+                    "Control break; prioritize table count; never gift the 1-ball (11)."
+                ),
+            }
+            pm["warmup"] = [
+                "10 stop-shots (classical CB)",
+                f"5 value-routes on {cfg.rack_size}-ball layout",
+                "3 safety exchanges scoring leave quality",
+                f"Visualize first-to-{cfg.points_to_win} endgame count",
+            ]
+        result["pre_match"] = pm
+    if mode in ("session", "full", "mental", "mental_game", "pyramid"):
+        cues = _mental_cues(band)
+        if is_pyramid:
+            cues = [
+                f"Need {cfg.points_to_win - int(payload.get('my_score', player.pyramid_score) or 0)} "
+                f"more points — count every ball value (1=11).",
+                "American table, classical brain: percentage over highlight pots.",
+            ] + cues
         result["mental_game"] = {
-            "cues": _mental_cues(band),
+            "cues": cues,
             "pressure_protocol": [
                 "Box breathe 4-4-4 between games",
                 "After miss: chalk + full PSR — never rush the next tip",
                 "Between racks: one tactical note only, then reset",
+                "Re-state points-needed before breaking",
             ],
         }
-    if mode in ("session", "full", "pattern", "quick_tip"):
-        result["pattern_recognition"] = _pattern_notes(player)
+    if mode in ("session", "full", "pattern", "quick_tip", "pyramid"):
+        notes = _pattern_notes(player)
+        if is_pyramid:
+            notes = [
+                f"{cfg.table_size} → {cfg.rack_size}-ball rack; target {cfg.points_to_win}.",
+                "Value density: protect 1-ball (11) and high numbers in traffic.",
+            ] + notes
+        result["pattern_recognition"] = notes
 
-    # Strength / weakness coaching
     result["individualization"] = {
         "train_now": (player.weaknesses or [])[:4] or _BAND_CURRICULUM[band]["focus"][:3],
         "protect": (player.strengths or [])[:3],
         "recent_form": _form_summary(player),
+        "pyramid_skill": cfg.skill_level,
+        "rating_weight": cfg.rating_weight,
     }
 
     if goal:
-        result["goal_response"] = _answer_goal(player, goal)
+        result["goal_response"] = _answer_goal(player, goal, cfg=cfg if is_pyramid else None)
 
     result["next_actions"] = [
         f"Run today's practice plan ({result.get('practice_plan', {}).get('duration_minutes', 45)} min)",
         "Log 3 weaknesses observed after the session",
-        "Request shot_of_the_day with updated weaknesses",
+        "Request shot_of_the_day with discipline=pyramid + table_size",
     ]
     return result
 
@@ -204,8 +345,14 @@ def _form_summary(player: PlayerProfile) -> str:
     return f"Last {n} scored sessions: {wins}-{n - wins}. Adjust aggression accordingly."
 
 
-def _answer_goal(player: PlayerProfile, goal: str) -> str:
+def _answer_goal(player: PlayerProfile, goal: str, cfg=None) -> str:
     g = goal.lower()
+    if cfg and ("pyramid" in g or "points" in g or "1-ball" in g or "one ball" in g):
+        return (
+            f"Pyramid {cfg.table_size}/{cfg.rack_size}-ball: first to {cfg.points_to_win}. "
+            f"1-ball=11; call_shot={cfg.call_shot}; weight={cfg.rating_weight}×. "
+            "Count before every stroke."
+        )
     if "break" in g:
         return "Focus break box control before adding power; film one set of 10 breaks."
     if "nervous" in g or "pressure" in g or "tilt" in g:
@@ -222,9 +369,12 @@ def _answer_goal(player: PlayerProfile, goal: str) -> str:
 
 def run(player: PlayerProfile, payload: dict[str, Any] | None = None, goal: str = "") -> dict[str, Any]:
     payload = payload or {}
+    mode = str(payload.get("mode") or "full")
+    if (player.discipline or "").lower() == "pyramid" and mode == "full":
+        mode = "pyramid"
     return coach(
         player,
-        mode=str(payload.get("mode") or "full"),
+        mode=mode,
         goal=goal or str(payload.get("goal") or ""),
         payload=payload,
     )

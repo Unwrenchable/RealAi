@@ -23,13 +23,23 @@ class RackUpCoachAgent:
         payload = dict(request.payload or {})
         if request.goal and "goal" not in payload:
             payload["goal"] = request.goal
+        # Auto-tag Pyramid when discipline/table implies it
+        if (player.discipline or "").lower() == "pyramid" or payload.get("game") == "pyramid":
+            payload.setdefault("game", "pyramid")
+            if ability in ("coach", "professional_coach", "session"):
+                ability = "pyramid" if ability != "pyramid_rules" else ability
 
         # 1) Organs first — cognitive/memory stack for this ability
         goal = request.goal or f"{ability} for {player.display_name or player.player_id}"
+        try:
+            pyr = player.pyramid_config(payload).to_dict()
+        except Exception:
+            pyr = {}
         organ_payload = {
             "player": player.to_dict(),
             "ability": ability,
             "plugin": "rackup-coach",
+            "pyramid": pyr,
         }
         organ_trace = run_organs_for_ability(
             ability,

@@ -20,6 +20,15 @@ class Discipline(str, Enum):
     STRAIGHT_POOL = "straight_pool"
     ONE_POCKET = "one_pocket"
     BANKS = "banks"
+    PYRAMID = "pyramid"  # RackUp Pyramid (classical points on American tables)
+
+
+# Pyramid skill aliases (may differ from rating-band labels only by source)
+class PyramidSkillLevel(str, Enum):
+    BEGINNER = "beginner"
+    INTERMEDIATE = "intermediate"
+    ADVANCED = "advanced"
+    PRO = "pro"
 
 
 # Common pool skill tags (weakness / strength keys)
@@ -78,14 +87,35 @@ class PlayerProfile:
     hall_name: str = ""
     table_speed: str = "medium"  # slow | medium | fast
     locale: str = "en"
+    # --- RackUp Pyramid ---
+    table_size: str = "9ft"  # 7ft → 10-ball rack | 9ft → 15-ball rack
+    pyramid_skill: str = ""  # beginner|intermediate|advanced|pro (empty → infer from rating)
+    skill_level: str = ""  # alias for pyramid_skill
+    pyramid_score: int = 0  # current match score if mid-game
+    pyramid_opp_score: int = 0
 
     @property
     def band(self) -> RatingBand:
         return rating_band(self.rating)
 
+    def effective_pyramid_skill(self) -> str:
+        from plugins.rackup_coach.pyramid import normalize_skill
+
+        return normalize_skill(self.pyramid_skill or self.skill_level, rating=self.rating)
+
+    def pyramid_config(self, payload: dict[str, Any] | None = None):
+        from plugins.rackup_coach.pyramid import resolve_pyramid
+
+        return resolve_pyramid(player=self, payload=payload)
+
     def to_dict(self) -> dict[str, Any]:
         d = asdict(self)
         d["band"] = self.band.value
+        d["effective_pyramid_skill"] = self.effective_pyramid_skill()
+        try:
+            d["pyramid"] = self.pyramid_config().to_dict()
+        except Exception:
+            pass
         return d
 
     @classmethod

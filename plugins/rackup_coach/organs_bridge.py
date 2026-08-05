@@ -72,6 +72,21 @@ ABILITY_ORGANS: dict[str, tuple[str, ...]] = {
         "organ.procedural-memory",
         "organ.synthetic-evolution-spiral",
     ),
+    "pyramid": (
+        "organ.frontal-cortex",
+        "organ.prefrontal-cortex",
+        "organ.cerebellum",
+        "organ.semantic-memory",
+        "organ.procedural-memory",
+        "organ.synthetic-intuition-layer",
+        "organ.architecture-memory",
+    ),
+    "pyramid_rules": (
+        "organ.frontal-cortex",
+        "organ.semantic-memory",
+        "organ.architecture-memory",
+        "organ.prefrontal-cortex",
+    ),
 }
 
 

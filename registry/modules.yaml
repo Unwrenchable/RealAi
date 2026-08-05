@@ -341,3 +341,10 @@ modules:
     status: promoted
     organ: organ.rackup-coach
     manifest: plugins/rackup_coach/manifest.yaml
+
+  - id: plugin-rackup-coach-pyramid
+    path: plugins/rackup_coach/pyramid.py
+    kind: living
+    capabilities: [pyramid, classical_scoring, rackup]
+    status: promoted
+    parent: plugin-rackup-coach

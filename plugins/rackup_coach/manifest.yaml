@@ -2,12 +2,14 @@
 # Provider-level AI capability only (no NestJS / no DB code).
 
 name: rackup-coach
-version: 1.0.0
+version: 1.1.0
 author: RealAI / RackUp
 description: >
   Professional pool (billiards) coaching and platform intelligence for the
   RackUp app — practice plans, shot of the day, video feedback, moderation,
-  matchmaking, rating intelligence, tournament insights, and hall context.
+  matchmaking, rating intelligence, tournament insights, hall context, and
+  full RackUp Pyramid support (7ft/10-ball vs 9ft/15-ball, skill targets,
+  classical scoring, call-shot policy, rating weights).
   Uses the RealAI synthetic organs hive for cognitive/memory routing.
 
 kind: living_plugin
@@ -35,6 +37,25 @@ capabilities:
   - practice_plans
   - pattern_recognition
   - pre_match_prep
+  - rackup_pyramid
+  - pyramid_rules
+  - classical_scoring
+
+# Locked RackUp Pyramid rules (see pyramid.py)
+pyramid:
+  table_to_rack:
+    7ft: 10
+    9ft: 15
+  skill_matrix:
+    beginner: { points_7ft: 25, points_9ft: 40, call_shot: no, rating_weight: 0.7 }
+    intermediate: { points_7ft: 35, points_9ft: 55, call_shot: no, rating_weight: 0.85 }
+    advanced: { points_7ft: 45, points_9ft: 71, call_shot: optional, rating_weight: 1.0 }
+    pro: { points_7ft: 50, points_9ft: 71, call_shot: yes, rating_weight: 1.15 }
+  scoring:
+    type: classical
+    ball_1: 11
+    cue_ball: designated_only
+    win: first_to_target
 
 organs_used:
   - organ.frontal-cortex          # planning practice / match strategy
@@ -84,8 +105,15 @@ abilities:
   - id: hall_context
     module: abilities.hall_context
     description: Hall/session context awareness
+  - id: pyramid_rules
+    module: abilities.pyramid_rules
+    description: Locked Pyramid matrix + race/context helpers
+  - id: pyramid
+    module: abilities.coach
+    description: Full Pyramid coaching mode (all skill levels × table sizes)
 
 config_defaults:
   organs_enabled: true
-  default_discipline: eight_ball   # eight_ball | nine_ball | ten_ball | straight_pool
+  default_discipline: pyramid   # pyramid | eight_ball | nine_ball | ten_ball | straight_pool
+  default_table_size: 9ft       # 7ft → 10-ball rack | 9ft → 15-ball rack
   max_history_events: 50
