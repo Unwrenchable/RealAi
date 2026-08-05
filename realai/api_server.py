@@ -758,6 +758,35 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
             except Exception as e:
                 self._send_response(500, {"error": str(e)})
 
+        elif parsed_path.path == '/v1/organs':
+            # Full synthetic organs hive — first-class provider surface
+            try:
+                from modules.organs import hive_status, list_organs
+                self._send_response(200, {
+                    "status": hive_status(),
+                    "organs": list_organs(),
+                })
+            except Exception as e:
+                self._send_response(500, {"error": str(e)})
+
+        elif parsed_path.path == '/v1/organs/status':
+            try:
+                from modules.organs.request_path import living_stack_status
+                self._send_response(200, living_stack_status())
+            except Exception as e:
+                self._send_response(500, {"error": str(e)})
+
+        elif parsed_path.path == '/v1/hive':
+            try:
+                from modules.organs.request_path import living_stack_status
+                from modules.organs import hive_status
+                self._send_response(200, {
+                    "hive": hive_status(),
+                    "living_stack": living_stack_status(),
+                })
+            except Exception as e:
+                self._send_response(500, {"error": str(e)})
+
         elif parsed_path.path == '/v1/plugins':
             try:
                 from realai.plugin_marketplace import PluginDiscovery
@@ -876,12 +905,30 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
             model = self._get_model(model_name=model_name)
 
             if parsed_path.path == '/v1/chat/completions':
+                messages = body.get('messages', [])
+                organ_trace = None
+                # Deep organ fusion on live chat path (local provider, not external wrapper)
+                try:
+                    use_organs = body.get("organs", True)
+                    if self.headers.get("X-RealAI-Organs", "").lower() in ("0", "false", "off"):
+                        use_organs = False
+                    if use_organs:
+                        from modules.organs.request_path import enrich_chat_messages
+                        organ_ids = body.get("organ_ids")
+                        messages, organ_trace = enrich_chat_messages(
+                            messages,
+                            organ_ids=organ_ids if isinstance(organ_ids, list) else None,
+                        )
+                except Exception as _org_err:
+                    organ_trace = {"enabled": False, "error": str(_org_err)}
                 response = model.chat_completion(
-                    messages=body.get('messages', []),
+                    messages=messages,
                     temperature=body.get('temperature', 0.7),
                     max_tokens=body.get('max_tokens'),
                     stream=body.get('stream', False)
                 )
+                if isinstance(response, dict) and organ_trace is not None:
+                    response.setdefault("realai", {})["organs"] = organ_trace
                 self._send_response(200, response)
 
             elif parsed_path.path == '/v1/completions':
@@ -959,11 +1006,52 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
                 self._send_response(200, response)
 
             elif parsed_path.path == '/v1/agents/orchestrate':
+                organ_pre = None
+                try:
+                    from modules.organs.request_path import orchestrate_with_organs
+                    organ_pre = orchestrate_with_organs(
+                        body.get('task', ''),
+                        agent_roles=body.get('agent_roles'),
+                    )
+                except Exception as _oe:
+                    organ_pre = {"enabled": False, "error": str(_oe)}
                 response = model.orchestrate_agents(
                     task=body.get('task', ''),
                     agent_roles=body.get('agent_roles')
                 )
+                if isinstance(response, dict) and organ_pre is not None:
+                    response.setdefault("realai", {})["organs"] = organ_pre
                 self._send_response(200, response)
+
+            elif parsed_path.path == '/v1/organs/invoke':
+                try:
+                    from modules.organs import call_organ
+                    organ_id = body.get("organ_id") or body.get("id") or ""
+                    goal = body.get("goal") or body.get("task") or ""
+                    payload = body.get("payload") or {}
+                    if not isinstance(payload, dict):
+                        payload = {"value": payload}
+                    r = call_organ(organ_id, goal=goal, payload=payload)
+                    self._send_response(200, {
+                        "organ_id": r.organ_id,
+                        "ok": r.ok,
+                        "output": r.output,
+                        "notes": r.notes,
+                        "metrics": r.metrics,
+                    })
+                except Exception as e:
+                    self._send_response(500, {"error": str(e)})
+
+            elif parsed_path.path == '/v1/organs/pipeline':
+                try:
+                    from modules.organs.request_path import run_organ_pipeline
+                    ids = body.get("organ_ids") or body.get("organs") or []
+                    goal = body.get("goal") or body.get("task") or ""
+                    payload = body.get("payload") or {}
+                    results = run_organ_pipeline(ids, goal=goal, payload=payload if isinstance(payload, dict) else {})
+                    self._send_response(200, {"results": results, "count": len(results)})
+                except Exception as e:
+                    self._send_response(500, {"error": str(e)})
 
             elif parsed_path.path == '/v1/tools/validate':
                 try:
@@ -1028,6 +1116,25 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
                     registry = AgentRegistry()
                     result = graph.execute(body.get("input", ""), registry)
                     self._send_response(200, result)
+                except Exception as e:
+                    self._send_response(500, {"error": str(e)})
+
+            elif parsed_path.path == '/v1/self-improve/cycle':
+                try:
+                    from modules.organs.request_path import self_improve_with_organs
+                    organ_pre = self_improve_with_organs(body.get("focus", "general"))
+                    improve_result = {"organs": organ_pre}
+                    try:
+                        from modules.self_improvement.closed_loop import ClosedLoop  # type: ignore
+                        improve_result["closed_loop"] = "available"
+                    except Exception:
+                        try:
+                            from realai import self_improvement as si
+                            improve_result["self_improvement"] = "available"
+                            improve_result["module"] = getattr(si, "__name__", "realai.self_improvement")
+                        except Exception as ie:
+                            improve_result["self_improvement_error"] = str(ie)
+                    self._send_response(200, improve_result)
                 except Exception as e:
                     self._send_response(500, {"error": str(e)})
 
@@ -1252,6 +1359,12 @@ def run_server(host: str = "0.0.0.0", port: int = 8000):
     print("  POST /v1/synthesis/knowledge")
     print("  POST /v1/reflection/analyze")
     print("  POST /v1/agents/orchestrate")
+    print("  GET  /v1/organs")
+    print("  GET  /v1/organs/status")
+    print("  GET  /v1/hive")
+    print("  POST /v1/organs/invoke")
+    print("  POST /v1/organs/pipeline")
+    print("  POST /v1/self-improve/cycle")
     print("\nPass your API key via:  Authorization: Bearer <key>")
     print("Override provider via:  X-Provider: openai|anthropic|grok|gemini|openrouter|mistral|together|deepseek|perplexity")
     print("Override base URL via:  X-Base-URL: https://...")

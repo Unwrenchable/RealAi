@@ -497,6 +497,15 @@ class MultiAgentPipeline:
         started = _time.time()
         stage_outputs: Dict[str, str] = {}
         prior_context = task
+        organ_trace: Optional[Dict[str, Any]] = None
+
+        # Deep organ fusion: cognitive + orchestration organs before hierarchical stages
+        try:
+            from modules.organs.request_path import orchestrate_with_organs
+
+            organ_trace = orchestrate_with_organs(task, agent_roles=list(self.STAGES))
+        except Exception as e:
+            organ_trace = {"enabled": False, "error": str(e)}
 
         if context:
             prior_context = "Task: {task}\nContext: {ctx}".format(
@@ -528,12 +537,41 @@ class MultiAgentPipeline:
             "final_synthesis": final_synthesis,
             "duration_ms": duration_ms,
         }
+        if organ_trace is not None:
+            result["organs"] = organ_trace
 
         # Indicate stub mode when no real model is attached
         if self._model_instance is None:
             result["note"] = "Running in stub mode — attach a RealAI instance for real AI responses."
 
         return result
+
+
+def run_with_organs(
+    task: str,
+    *,
+    organ_ids: Optional[List[str]] = None,
+    context: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    """Convenience entry: organ pipeline + hierarchical agent stages.
+
+    Used by API and tools so unique agent/organs code is on the live path.
+    """
+    organ_results: List[Dict[str, Any]] = []
+    try:
+        from modules.organs.request_path import run_organ_pipeline, orchestrate_with_organs
+
+        if organ_ids:
+            organ_results = run_organ_pipeline(organ_ids, goal=task, payload=context or {})
+        else:
+            organ_results = orchestrate_with_organs(task).get("results") or []
+    except Exception as e:
+        organ_results = [{"ok": False, "notes": str(e)}]
+
+    pipeline = MultiAgentPipeline()
+    result = pipeline.run(task, context=context)
+    result["organ_pipeline"] = organ_results
+    return result
 
 
 # ---------------------------------------------------------------------------
