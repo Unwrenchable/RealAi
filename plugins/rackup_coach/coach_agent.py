@@ -9,10 +9,10 @@ from plugins.rackup_coach.types import CoachRequest, CoachResponse, PlayerProfil
 
 
 class RackUpCoachAgent:
-    """Professional pool coach agent (provider-level)."""
+    """Professional pool coach agent (provider-level) — ROC-aware."""
 
     name = "rackup-coach"
-    version = "1.0.0"
+    version = "1.6.0"
 
     def handle(self, request: CoachRequest | dict[str, Any]) -> CoachResponse:
         if isinstance(request, dict):
@@ -23,8 +23,19 @@ class RackUpCoachAgent:
         payload = dict(request.payload or {})
         if request.goal and "goal" not in payload:
             payload["goal"] = request.goal
+        # Map game_style → discipline for ROC hosts
+        if payload.get("game_style") and not payload.get("discipline") and not payload.get("game"):
+            payload["game"] = payload["game_style"]
+        if player.game_style and (not player.discipline or player.discipline == "eight_ball"):
+            # leave player as-is; abilities read game_style
+            pass
         # Auto-tag Pyramid when discipline/table implies it
-        if (player.discipline or "").lower() == "pyramid" or payload.get("game") == "pyramid":
+        disc_hint = (
+            (player.discipline or "")
+            or (player.game_style or "")
+            or str(payload.get("game") or payload.get("game_style") or "")
+        ).lower()
+        if disc_hint == "pyramid" or "pyramid" in disc_hint:
             payload.setdefault("game", "pyramid")
             if ability in ("coach", "professional_coach", "session"):
                 ability = "pyramid" if ability != "pyramid_rules" else ability
@@ -35,11 +46,18 @@ class RackUpCoachAgent:
             pyr = player.pyramid_config(payload).to_dict()
         except Exception:
             pyr = {}
+        try:
+            from plugins.rackup_coach.roc import extract_roc_context
+
+            roc_ctx = extract_roc_context(player, payload)
+        except Exception:
+            roc_ctx = {}
         organ_payload = {
             "player": player.to_dict(),
             "ability": ability,
             "plugin": "rackup-coach",
             "pyramid": pyr,
+            "roc": roc_ctx,
         }
         organ_trace = run_organs_for_ability(
             ability,
@@ -59,12 +77,17 @@ class RackUpCoachAgent:
                     organ_trace=organ_trace,
                     error=str(result.get("error")),
                 )
+            chip = getattr(player, "rating_chip", None) or f"rating={player.rating}"
+            fmt = (roc_ctx or {}).get("format") or ""
+            notes = f"chip={chip} band={player.band.value}"
+            if fmt:
+                notes += f" format={fmt}"
             return CoachResponse(
                 ok=True,
                 ability=ability,
                 result=result if isinstance(result, dict) else {"value": result},
                 organ_trace=organ_trace,
-                notes=f"band={player.band.value} rating={player.rating}",
+                notes=notes,
             )
         except Exception as e:
             return CoachResponse(

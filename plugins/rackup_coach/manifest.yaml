@@ -2,15 +2,17 @@
 # Provider-level AI capability only (no NestJS / no DB code).
 
 name: rackup-coach
-version: 1.1.0
+version: 1.4.0
 author: RealAI / RackUp
 description: >
   Professional pool (billiards) coaching and platform intelligence for the
-  RackUp app — practice plans, shot of the day, video feedback, moderation,
-  matchmaking, rating intelligence, tournament insights, hall context, and
-  full RackUp Pyramid support (7ft/10-ball vs 9ft/15-ball, skill targets,
+  RackUp app and ROC (Rack of Champions) — practice plans, shot of the day,
+  video feedback, moderation, matchmaking, continuous BCA-style rating,
+  cross-league convert (APA/BCA/Fargo/TAP/VNEA), league_validate, tournament
+  insights, hall/ROC session context, formats (Singles→Scotch→JJ→Teams of 5),
+  and full RackUp Pyramid support (7ft/10-ball vs 9ft/15-ball, skill targets,
   classical scoring, call-shot policy, rating weights).
-  Uses the RealAI synthetic organs hive for cognitive/memory routing.
+  Pure provider: no ledger/UI ownership. Uses RealAI synthetic organs hive.
 
 kind: living_plugin
 provider_level: true
@@ -74,11 +76,26 @@ organs_used:
   - organ.synthetic-consciousness-layer
   - organ.limbic-system           # motivation / mental game
 
+# Coach curriculum bands (content selection) on continuous ROC ladder
 rating_bands:
   beginner: [0, 399]
-  intermediate: [400, 699]
-  advanced: [700, 899]
-  pro: [900, 1200]
+  intermediate: [400, 549]
+  advanced: [550, 699]
+  pro: [700, 1200]
+
+# ROC display bands (UI chips only — never matchmaking inputs)
+roc_display_bands:
+  Novice: "<400"
+  Intermediate: "400-499"
+  Advanced: "500-599"
+  Expert: "600-699"
+  Elite: "700+"
+
+roc_formats:
+  - SINGLES
+  - SCOTCH_DOUBLES
+  - SCOTCH_JJ
+  - TEAMS_5
 
 abilities:
   - id: coach

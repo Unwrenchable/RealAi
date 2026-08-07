@@ -1,0 +1,15 @@
+{
+  "model_id": "realai-1.0-instruct",
+  "published_at": "2026-06-17T09:45:00.158144+00:00",
+  "gguf": "realai-1.0-instruct-Q4_K_M.gguf",
+  "paths": [
+    "C:\\Users\\tsmit\\realai\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+    "C:\\Users\\tsmit\\realai\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+    "C:\\Users\\tsmit\\realai\\models\\realai-overseer\\weights\\realai-1.0-instruct-Q4_K_M.gguf"
+  ],
+  "quant": "Q4_K_M",
+  "source": "C:\\Users\\tsmit\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+  "bootstrap": true,
+  "bootstrap_source": "C:\\Users\\tsmit\\realai\\models\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+  "note": "Dev bootstrap from existing GGUF; replace with fine-tuned RealAI weights when ready."
+}

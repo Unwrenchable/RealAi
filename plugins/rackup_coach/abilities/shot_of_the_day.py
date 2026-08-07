@@ -7,7 +7,9 @@ from __future__ import annotations
 from typing import Any
 
 from plugins.rackup_coach.games import game_knowledge, normalize_discipline
+from plugins.rackup_coach.leagues import display_band, format_rating_chip
 from plugins.rackup_coach.pyramid import classical_mindset_tips, resolve_pyramid
+from plugins.rackup_coach.roc import extract_roc_context
 from plugins.rackup_coach.types import PlayerProfile, RatingBand
 
 
@@ -362,10 +364,16 @@ def recommend_shot_of_the_day(
 ) -> dict[str, Any]:
     """Return 1+ practical shots ranked for this player (Pyramid-aware)."""
     payload = payload or {}
+    roc = extract_roc_context(player, payload)
     cfg = resolve_pyramid(player=player, payload=payload)
     pyr = cfg.to_dict()
     disc = normalize_discipline(
-        payload.get("discipline") or payload.get("game") or player.discipline
+        payload.get("discipline")
+        or payload.get("game")
+        or payload.get("game_style")
+        or roc.get("game_style")
+        or player.game_style
+        or player.discipline
     )
     gk = game_knowledge(disc)
     is_pyramid = disc == "pyramid" or bool(
@@ -464,13 +472,24 @@ def recommend_shot_of_the_day(
         "date_role": "shot_of_the_day",
         "player_id": player.player_id,
         "rating": player.rating,
+        "rating_chip": format_rating_chip(player.rating),
         "band": band,
+        "band_label": display_band(player.rating),
         "discipline": disc,
+        "game_style": disc,
         "discipline_display": gk.get("display"),
         "coaching_line": coaching_line,
         "game_focus": gk.get("sotd_focus"),
         "pyramid": pyr if is_pyramid else None,
         "classical_mindset": classical_mindset_tips(cfg) if is_pyramid else [],
+        "roc": {
+            "is_roc": bool(roc.get("is_roc")),
+            "roc_league_id": roc.get("roc_league_id"),
+            "session_id": roc.get("session_id"),
+            "format": roc.get("format"),
+            "game_style": disc,
+            "note": "SOTD uses continuous rating band for copy only; variety via shown_shot_ids",
+        },
         "primary": primary_out,
         "alternates": [
             {
