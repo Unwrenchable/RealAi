@@ -118,6 +118,22 @@ def moderate_message(
             "Suggest in-app escrow / official money-match channel; freeze public thread."
         )
 
+    channel = str(context.get("channel") or "")
+    is_roc_chat = channel.lower().startswith("roc") or bool(
+        context.get("roc_league_id") or context.get("session_id")
+    )
+    # Money language: escalate prize/ledger drama inside ROC sessions
+    if is_roc_chat and active.get("money_match_drama"):
+        severity = max(severity, 4)
+        if severity >= 5:
+            action = "block_and_escalate"
+        elif severity == 4:
+            action = "hold_for_review"
+        coach_redirect = (
+            coach_redirect
+            or "ROC money disputes: freeze thread; operator + ledger history — never public accusations."
+        )
+
     return {
         "text_preview": raw[:200],
         "player_id": player.player_id if player else context.get("player_id"),
@@ -131,10 +147,22 @@ def moderate_message(
         "coach_redirect": coach_redirect,
         "organs_hint": ["amygdala", "guardian", "prefrontal"],
         "policy_tags": list(active.keys()),
+        "roc": {
+            "is_roc": is_roc_chat,
+            "roc_league_id": context.get("roc_league_id"),
+            "session_id": context.get("session_id"),
+            "channel": channel or None,
+            "note": "All ROC chat paths should run moderation before fan-out",
+        },
     }
 
 
 def run(player: PlayerProfile, payload: dict[str, Any] | None = None) -> dict[str, Any]:
     payload = payload or {}
     text = str(payload.get("text") or payload.get("message") or payload.get("content") or "")
-    return moderate_message(text, player=player, context=payload.get("context") or payload)
+    ctx = dict(payload.get("context") or {})
+    # Flatten ROC ids into moderation context
+    for k in ("roc_league_id", "session_id", "season_id", "channel", "match_id", "format"):
+        if payload.get(k) and k not in ctx:
+            ctx[k] = payload[k]
+    return moderate_message(text, player=player, context=ctx or payload)

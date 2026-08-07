@@ -115,6 +115,33 @@ ABILITY_ORGANS: dict[str, tuple[str, ...]] = {
         "organ.architecture-memory",
         "organ.procedural-memory",
     ),
+    "roc_info": (
+        "organ.semantic-memory",
+        "organ.architecture-memory",
+        "organ.prefrontal-cortex",
+    ),
+    "roc": (
+        "organ.semantic-memory",
+        "organ.architecture-memory",
+        "organ.prefrontal-cortex",
+    ),
+    "ledger_audit": (
+        "organ.synthetic-guardian-layer",
+        "organ.prefrontal-cortex",
+        "organ.architecture-memory",
+        "organ.semantic-memory",
+    ),
+    "payout_sanity": (
+        "organ.synthetic-guardian-layer",
+        "organ.prefrontal-cortex",
+        "organ.architecture-memory",
+    ),
+    "money_anomaly": (
+        "organ.synthetic-guardian-layer",
+        "organ.amygdala",
+        "organ.prefrontal-cortex",
+        "organ.long-term-memory",
+    ),
 }
 
 

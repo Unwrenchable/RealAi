@@ -1,0 +1,3 @@
+[console_scripts]
+agent-tools = agent_tools.cli:main
+agentx = agent_tools.cli:main

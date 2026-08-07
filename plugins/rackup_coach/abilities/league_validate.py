@@ -1,4 +1,9 @@
-"""League scorekeeping logic + submission validation (provider-side)."""
+"""League / ROC scorekeeping validation (provider-side).
+
+Canonical finalize order (ROC §7.3.1):
+  league_validate → (if valid) RackUp persists → rating_update per player.
+RealAI never writes standings, ledger, or ratings.
+"""
 from __future__ import annotations
 
 from typing import Any
@@ -9,6 +14,13 @@ from plugins.rackup_coach.pyramid import (
     resolve_pyramid,
     score_from_balls,
 )
+from plugins.rackup_coach.roc import (
+    extract_roc_context,
+    format_config,
+    rating_subjects_for_match,
+    scotch_rules_checks,
+    teams5_rules_checks,
+)
 from plugins.rackup_coach.types import PlayerProfile
 
 
@@ -17,17 +29,26 @@ def validate_league_submission(
     payload: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """
-    Validate a league / Pyramid / race score submission before RackUp persists it.
+    Validate a ROC / league / Pyramid / race score before RackUp persists it.
 
     Payload:
-      game: pyramid | eight_ball | nine_ball | ten_ball | one_pocket
-      table_size, skill_level
+      game | game_style | discipline: eight_ball|nine_ball|ten_ball|one_pocket|pyramid
+      format: SINGLES|SCOTCH_DOUBLES|SCOTCH_JJ|TEAMS_5
+      roc_league_id, season_id, session_id, match_id
+      table_size, skill_level (Pyramid)
       my_score, opp_score  (final scores or games won)
-      race_to, pocketed_balls, call_shot_logs, forfeit, opponent_id, match_id
+      race_to, pocketed_balls, call_shot_logs, forfeit, opponent_id
+      player_ids_json (flattened users for rating subjects)
     """
     payload = payload or {}
+    roc = extract_roc_context(player, payload)
     disc = normalize_discipline(
-        payload.get("game") or payload.get("discipline") or player.discipline
+        payload.get("game")
+        or payload.get("game_style")
+        or payload.get("discipline")
+        or roc.get("game_style")
+        or player.game_style
+        or player.discipline
     )
     gk = game_knowledge(disc)
     cfg = resolve_pyramid(player=player, payload=payload)
@@ -121,6 +142,12 @@ def validate_league_submission(
         if not payload.get("ghost") and not payload.get("solo_drill"):
             warnings.append("opponent_id missing or self")
 
+    # ROC format soft checks (expand, do not hard-block Singles)
+    for w in scotch_rules_checks({**payload, "format": roc.get("format")}):
+        warnings.append(w)
+    for w in teams5_rules_checks({**payload, "format": roc.get("format")}):
+        warnings.append(w)
+
     valid = len(errors) == 0
     winner = None
     if valid and not payload.get("forfeit"):
@@ -156,16 +183,47 @@ def validate_league_submission(
         }
     )
 
+    fmt = roc.get("format")
+    fcfg = format_config(fmt) if fmt else None
+    subjects = rating_subjects_for_match(
+        fmt,
+        player_ids=list(
+            payload.get("player_ids_json")
+            or payload.get("player_ids")
+            or roc.get("player_ids_json")
+            or []
+        ),
+        board_player_ids=list(payload.get("board_player_ids") or []),
+    )
+
     return {
         "valid": valid,
         "errors": errors,
         "warnings": warnings,
         "discipline": disc,
+        "game_style": disc,
         "game_knowledge": {
             "display": gk.get("display"),
             "objective": gk.get("objective"),
         },
         "pyramid": cfg.to_dict() if is_pyramid else None,
+        "roc": {
+            "is_roc": bool(roc.get("is_roc") or fmt),
+            "roc_league_id": roc.get("roc_league_id"),
+            "season_id": roc.get("season_id"),
+            "session_id": roc.get("session_id"),
+            "match_id": roc.get("match_id") or payload.get("match_id"),
+            "format": fmt,
+            "format_display": roc.get("format_display"),
+            "format_config": fcfg,
+            "rating_subjects": subjects,
+            "finalize_order": [
+                "league_validate",
+                "persist_if_valid",
+                "rating_update_per_subject",
+            ],
+            "owns_ledger": False,
+        },
         "normalized": {
             "my_score": my_i,
             "opp_score": opp_i,
@@ -178,12 +236,15 @@ def validate_league_submission(
             "winner": winner,
             "one_ball_value": 11 if is_pyramid else None,
             "discipline": disc,
+            "format": fmt,
         },
         "scorekeeping": scorekeeping,
         "persist_hint": {
             "accept": valid,
             "owner": "RackUp DB writes only if valid==true",
-            "next_call": "rating_update after accept",
+            "next_call": "rating_update after accept (per player in player_ids_json)",
+            "stop_if_invalid": True,
+            "note": "Never reverse league_validate → persist → rating_update",
         },
     }
 

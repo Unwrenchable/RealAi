@@ -1,9 +1,10 @@
-"""Hall / session context awareness (Pyramid table size aware)."""
+"""Hall / ROC session context awareness (Pyramid table size aware)."""
 from __future__ import annotations
 
 from typing import Any
 
 from plugins.rackup_coach.pyramid import resolve_pyramid
+from plugins.rackup_coach.roc import extract_roc_context, format_coaching_notes
 from plugins.rackup_coach.types import PlayerProfile
 
 
@@ -14,9 +15,11 @@ def hall_session_context(
     """
     Host may send:
       hall: {id, name, tables, noise_level, cloth, pockets, table_size}
-      session: {started_at, games_played, fatigue?, lighting?, game?}
+      session: {started_at, games_played, fatigue?, lighting?, game?, roc session ids}
+      roc / format / roc_league_id for ROC nights
     """
     payload = payload or {}
+    roc = extract_roc_context(player, payload)
     hall = dict(payload.get("hall") or {})
     session = dict(payload.get("session") or {})
 
@@ -56,6 +59,14 @@ def hall_session_context(
     else:
         adaptations.append("9ft full table: use pattern depth; isolate premium numbers.")
 
+    if roc.get("is_roc") or roc.get("format"):
+        adaptations.append(
+            f"ROC session: format={roc.get('format_display') or roc.get('format') or 'unknown'} "
+            f"— continuous rating ladder; ledger/payouts owned by RackUp."
+        )
+        for tip in format_coaching_notes(roc.get("format"), roc.get("game_style")):
+            adaptations.append(tip)
+
     return {
         "player_id": player.player_id,
         "hall_id": hall_id,
@@ -64,6 +75,16 @@ def hall_session_context(
         "noise_level": noise,
         "session": session,
         "pyramid": cfg.to_dict(),
+        "roc": {
+            "is_roc": bool(roc.get("is_roc") or roc.get("format")),
+            "roc_league_id": roc.get("roc_league_id") or session.get("roc_league_id"),
+            "season_id": roc.get("season_id") or session.get("season_id"),
+            "session_id": roc.get("session_id") or session.get("id") or session.get("session_id"),
+            "format": roc.get("format") or session.get("format"),
+            "format_display": roc.get("format_display"),
+            "format_config": roc.get("format_config"),
+            "game_style": roc.get("game_style"),
+        },
         "adaptations": adaptations,
         "equipment_check": [
             "Tip chalked and shaped",

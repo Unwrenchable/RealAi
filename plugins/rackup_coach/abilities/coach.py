@@ -9,11 +9,13 @@ from plugins.rackup_coach.games import (
     normalize_discipline,
     skill_band_from_rating,
 )
+from plugins.rackup_coach.leagues import display_band, format_rating_chip
 from plugins.rackup_coach.pyramid import (
     classical_mindset_tips,
     race_context,
     resolve_pyramid,
 )
+from plugins.rackup_coach.roc import extract_roc_context, format_coaching_notes
 from plugins.rackup_coach.types import PlayerProfile, RatingBand
 
 
@@ -242,8 +244,14 @@ def coach(
     payload = payload or {}
     mode = (mode or payload.get("mode") or "session").lower()
     band = player.band
+    roc = extract_roc_context(player, payload)
     disc = normalize_discipline(
-        payload.get("discipline") or payload.get("game") or player.discipline
+        payload.get("discipline")
+        or payload.get("game")
+        or payload.get("game_style")
+        or roc.get("game_style")
+        or player.game_style
+        or player.discipline
     )
     gk = game_knowledge(disc)
     cfg = resolve_pyramid(player=player, payload=payload)
@@ -253,14 +261,18 @@ def coach(
         )
     )
     continuum_band = skill_band_from_rating(player.rating)
+    fmt = roc.get("format")
 
     result: dict[str, Any] = {
         "player_id": player.player_id,
         "display_name": player.display_name,
         "rating": player.rating,
+        "rating_chip": format_rating_chip(player.rating),
         "band": band.value,
+        "band_label": display_band(player.rating),
         "continuum_band": continuum_band,
         "discipline": disc,
+        "game_style": disc,
         "discipline_display": gk.get("display"),
         "mode": mode,
         "goal": goal,
@@ -276,6 +288,16 @@ def coach(
         },
         "pyramid": cfg.to_dict() if is_pyramid else None,
         "ruleset": player.ruleset or payload.get("ruleset") or "",
+        "roc": {
+            "is_roc": bool(roc.get("is_roc") or fmt),
+            "roc_league_id": roc.get("roc_league_id"),
+            "season_id": roc.get("season_id"),
+            "session_id": roc.get("session_id"),
+            "format": fmt,
+            "format_display": roc.get("format_display"),
+            "format_config": roc.get("format_config"),
+        },
+        "format_coaching_notes": format_coaching_notes(fmt, disc),
     }
 
     if is_pyramid or mode == "pyramid":

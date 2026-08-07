@@ -83,13 +83,16 @@ def default_rating_weight(discipline: str, *, skill_level: str = "", table_size:
 
 
 def skill_band_from_rating(rating: float) -> str:
-    """Bands from knowledge doc continuum (not only 400-step internal)."""
+    """
+    Continuum skill slug on the locked ROC continuous ladder
+    (Fargo-like; display chips use leagues.display_band).
+    """
     r = float(rating or 500)
-    if r < 900:
+    if r < 400:
         return "novice"
-    if r < 1500:
+    if r < 550:
         return "intermediate"
-    if r < 2100:
+    if r < 700:
         return "advanced"
     return "pro"
 

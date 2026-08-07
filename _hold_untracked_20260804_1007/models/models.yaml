@@ -1,0 +1,47 @@
+qwen-coder-7b:
+  type: chat
+  backend: llama-cpp-python
+  path: C:/realai/models/qwen2.5-coder-7b-instruct-q5_k_m.gguf
+  context_length: 16384
+  owned_by: local
+  default: true
+  capabilities:
+    - chat
+    - completion
+    - coding
+
+realai-1.0:
+  type: chat
+  backend: llama-cpp-python
+  path: C:/llama-vulkan/models/realai-1.0/weights/realai-1.0-instruct-Q4_K_M.gguf
+  context_length: 8192
+  owned_by: travis
+  capabilities:
+    - chat
+    - completion
+
+realai-1.0-instruct:
+  type: chat
+  backend: llama-cpp-python
+  path: C:/llama-vulkan/models/realai-1.0-instruct/weights/realai-1.0-instruct-Q4_K_M.gguf
+  context_length: 8192
+  owned_by: travis
+  capabilities:
+    - chat
+    - completion
+
+llama-local:
+  type: chat
+  backend: llama-cpp-python
+  path: C:/realai/models/llama-local-1b-Q4_K_M.gguf
+  context_length: 8192
+  owned_by: local
+  capabilities:
+    - chat
+    - completion
+
+realai-embed:
+  type: embedding
+  backend: hf
+  path: sentence-transformers/all-MiniLM-L6-v2
+  owned_by: local
