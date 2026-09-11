@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealAI — Fusion Interface</title>
+
+    <style>
+        :root {
+            --bg: #0b0b16;
+            --panel: #141428;
+            --accent: #7c5cfc;
+            --accent-glow: rgba(124, 92, 252, 0.45);
+            --text: #e4e4ff;
+            --text-soft: #9fa7d9;
+            --border: #2f2f5f;
+            --ok: #3ddc97;
+            --err: #ff7b7b;
+        }
+
+        body.theme-fusion {
+            --bg: #0b0b16;
+            --panel: #141428;
+            --accent: #7c5cfc;
+            --accent-glow: rgba(124, 92, 252, 0.45);
+            --text: #e4e4ff;
+            --text-soft: #9fa7d9;
+            --border: #2f2f5f;
+        }
+
+        body.theme-neon {
+            --bg: #050510;
+            --panel: #12081f;
+            --accent: #ff2bd6;
+            --accent-glow: rgba(255, 43, 214, 0.5);
+            --text: #f5e9ff;
+            --text-soft: #c79bff;
+            --border: #5a1f6e;
+        }
+
+        body.theme-pipboy {
+            --bg: #021a0a;
+            --panel: #0a2412;
+            --accent: #39ff14;
+            --accent-glow: rgba(57, 255, 20, 0.4);
+            --text: #b6ffb0;
+            --text-soft: #6fbf66;
+            --border: #1f5a28;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, sans-serif;
+            margin: 0;
+            padding: 24px;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: var(--accent);
+            font-size: 28px;
+            margin: 0 0 6px;
+            text-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        p.subtitle {
+            font-size: 14px;
+            color: var(--text-soft);
+            margin: 0 0 16px;
+        }
+
+        .top-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .mode-switcher {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .mode-switcher button {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--panel);
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .mode-switcher button:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(90px, 1fr));
+            gap: 8px;
+            margin: 12px 0 16px;
+        }
+
+        .metric {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 12px;
+        }
+
+        .metric .label {
+            display: block;
+            color: var(--text-soft);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .metric .value {
+            font-family: Consolas, monospace;
+            color: var(--accent);
+            font-size: 16px;
+        }
+
+        #backend-error-banner {
+            margin: 12px 0;
+            padding: 12px 16px;
+            border: 1px solid var(--accent-glow);
+            border-radius: 8px;
+            background: var(--panel);
+            font-family: Consolas, monospace;
+            font-size: 13px;
+        }
+
+        #health-indicator {
+            margin: 8px 0 16px;
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 900px) {
+            .layout { grid-template-columns: 1fr; }
+            .metrics { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel h2 {
+            margin: 0 0 10px;
+            font-size: 15px;
+            color: var(--accent);
+        }
+
+        #chat-log,
+        #overseer-log,
+        #console-log {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 280px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .chat-message {
+            margin: 0 0 8px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border);
+        }
+
+        .chat-message.user { border-color: var(--accent); }
+        .chat-message.assistant,
+        .chat-message.ai { opacity: 0.95; }
+
+        #chat-form,
+        #console-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        #chat-input,
+        #console-input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: #0f0f20;
+            color: var(--text);
+            font-size: 15px;
+        }
+
+        body.theme-pipboy #chat-input,
+        body.theme-pipboy #console-input {
+            background: #03150a;
+        }
+
+        #chat-input:focus,
+        #console-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        button[type="submit"] {
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: none;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            filter: brightness(1.08);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        #request-viewer {
+            margin-top: 16px;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: #0a0a14;
+            color: var(--text-soft);
+            white-space: pre-wrap;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+            min-height: 64px;
+        }
+    </style>
+</head>
+
+<body class="theme-fusion">
+    <div class="top-bar">
+        <div>
+            <h1>⚡ RealAI Fusion Interface</h1>
+            <p class="subtitle">Fusion UI loaded. Chat, console, and overseer panels are wired to script.js.</p>
+        </div>
+        <div class="mode-switcher">
+            <button type="button" data-theme="theme-fusion">Fusion</button>
+            <button type="button" data-theme="theme-neon">Neon Reactor</button>
+            <button type="button" data-theme="theme-pipboy">Pip-Boy Retro</button>
+        </div>
+    </div>
+
+    <div class="metrics">
+        <div class="metric">
+            <span class="label">GPU</span>
+            <span class="value" id="gpu-load">—</span>
+        </div>
+        <div class="metric">
+            <span class="label">CPU</span>
+            <span class="value" id="cpu-load">—</span>
+        </div>
+        <div class="metric">
+            <span class="label">VRAM</span>
+            <span class="value" id="vram-usage">—</span>
+        </div>
+        <div class="metric">
+            <span class="label">Threads</span>
+            <span class="value" id="thread-count">—</span>
+        </div>
+    </div>
+
+    <div id="backend-error-banner">Initializing backend status...</div>
+    <div id="health-indicator">Health: checking...</div>
+
+    <div class="layout">
+        <section class="panel" id="panel-chat">
+            <h2>Chat</h2>
+            <div id="chat-log"></div>
+            <form id="chat-form">
+                <input id="chat-input" type="text" placeholder="Type a message..." autocomplete="off" />
+                <button type="submit">Send</button>
+            </form>
+        </section>
+
+        <section class="panel" id="panel-overseer">
+            <h2>Overseer</h2>
+            <div id="overseer-log"></div>
+        </section>
+
+        <section class="panel" id="panel-console">
+            <h2>Console</h2>
+            <div id="console-log"></div>
+            <form id="console-form">
+                <input id="console-input" type="text" placeholder="Commands: /reload /switch /inspect" autocomplete="off" />
+                <button type="submit">Run</button>
+            </form>
+        </section>
+
+        <section class="panel" id="panel-request">
+            <h2>Last Request</h2>
+            <pre id="request-viewer">No request yet.</pre>
+        </section>
+    </div>
+
+    <!-- Windows-safe script loading: config.js first (env-aligned), then app -->
+    <script src="./config.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>

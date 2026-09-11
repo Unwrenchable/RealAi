@@ -1,0 +1,89 @@
+import json
+import logging
+import os
+from typing import Any, Dict, Optional
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+class ConfigLoader:
+    def __init__(self, base_path: str = "config"):
+        """Initialize loader with a base directory and empty cache."""
+        self.base_path = base_path
+        self._cache: Dict[str, Any] = {}
+
+    def _load_json(self, filename: str) -> Dict[str, Any]:
+        """Generic JSON loader with error handling."""
+        path = os.path.join(self.base_path, filename)
+        try:
+            with open(path, "r", encoding="utf-8") as file:
+                data = json.load(file)
+                logger.info(f"Loaded {filename} successfully.")
+                return data
+        except FileNotFoundError:
+            logger.warning(f"File not found: {path}")
+        except json.JSONDecodeError:
+            logger.error(f"Failed to decode JSON: {path}")
+        return {}
+
+    def _load_all(self) -> None:
+        """Load all configuration files into cache."""
+        self._cache["classifications"] = self._load_json("classifications.json")
+        self._cache["rules"] = self._load_json("rules.json")
+        self._cache["patterns"] = self._load_json("patterns.json")
+        self._cache["recipes"] = self._load_json("recipes.json")
+        self._cache["translations"] = self._load_json("translations.json")
+
+    def refresh(self, key: Optional[str] = None) -> None:
+        """Reload one or all cached configurations."""
+        if key:
+            filename = f"{key}.json"
+            self._cache[key] = self._load_json(filename)
+            logger.info(f"Refreshed cache for {key}.")
+        else:
+            self._load_all()
+            logger.info("Refreshed all cached configurations.")
+
+    def _get_or_load(self, key: str) -> Dict[str, Any]:
+        """Lazy load a configuration if not already cached."""
+        if key not in self._cache:
+            logger.info(f"Lazy loading {key}...")
+            self._cache[key] = self._load_json(f"{key}.json")
+        return self._cache[key]
+
+    def load_classifications(self) -> Dict[str, Any]:
+        """Return classifications data."""
+        return self._get_or_load("classifications")
+
+    def parse_rule(self, path: Optional[str] = None) -> Dict[str, Any]:
+        """Return rules data, optionally reloading from a custom path."""
+        if path:
+            self._cache["rules"] = self._load_json(os.path.basename(path))
+        return self._get_or_load("rules")
+
+    def parse_pattern(self, path: Optional[str] = None) -> Dict[str, Any]:
+        """Return patterns data, optionally reloading from a custom path."""
+        if path:
+            self._cache["patterns"] = self._load_json(os.path.basename(path))
+        return self._get_or_load("patterns")
+
+    def parse_recipe(self, path: Optional[str] = None) -> Dict[str, Any]:
+        """Return recipes data, optionally reloading from a custom path."""
+        if path:
+            self._cache["recipes"] = self._load_json(os.path.basename(path))
+        return self._get_or_load("recipes")
+
+    def parse_translation(self, path: Optional[str] = None) -> Dict[str, Any]:
+        """Return translations data, optionally reloading from a custom path."""
+        if path:
+            self._cache["translations"] = self._load_json(os.path.basename(path))
+        return self._get_or_load("translations")
+
+
+if __name__ == "__main__":
+    loader = ConfigLoader(base_path="C:/RealAI-clean/config")
+    classifications = loader.load_classifications()
+    rules = loader.parse_rule()
+    patterns = loader.parse_pattern()
+    recipes = loader.parse_recipe()
+    translations = loader.parse_translation()

@@ -1,0 +1,14 @@
+{
+  "base_model": "Qwen2.5-Coder-1.5B-Instruct",
+  "adapter_rank_default": 64,
+  "target_modules_default": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj"
+  ],
+  "dataset_path": "C:\\RealAI-clean\\normalized_datasets\\train_combined.jsonl",
+  "output_dir": "C:\\RealAI-clean\\finetune_outputs",
+  "framework": "axolotl-or-unsloth",
+  "notes": "This is a stub config; plug into Axolotl/Unsloth/LLaMA-Factory."
+}

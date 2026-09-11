@@ -1,0 +1,106 @@
+providers:
+  local:
+    enabled: true
+    label: "Local Runtime"
+    type: local
+    default_backend: llama.cpp
+    fallback_backend: llama.cpp
+    api_base: http://127.0.0.1:8080
+    capabilities:
+      - chat
+      - embeddings
+      - tools
+    retry_policy:
+      max_retries: 1
+      backoff_seconds: 0.1
+  vulkan:
+    enabled: true
+    label: "Vulkan llama.cpp"
+    type: local
+    default_backend: llama.cpp-vulkan
+    fallback_backend: llama.cpp
+    api_base: http://127.0.0.1:8080
+    capabilities:
+      - chat
+      - completion
+      - coding
+      - hive
+      - multi_agent
+    retry_policy:
+      max_retries: 1
+      backoff_seconds: 0.1
+  openai:
+    enabled: false
+    label: "OpenAI"
+    type: api
+    api_base: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    capabilities:
+      - chat
+      - embeddings
+      - vision
+    retry_policy:
+      max_retries: 2
+      backoff_seconds: 0.5
+  anthropic:
+    enabled: false
+    label: "Anthropic"
+    type: api
+    api_base: https://api.anthropic.com
+    api_key_env: ANTHROPIC_API_KEY
+    capabilities:
+      - chat
+      - analysis
+    retry_policy:
+      max_retries: 2
+      backoff_seconds: 0.5
+  gemini:
+    enabled: false
+    label: "Google Gemini"
+    type: api
+    api_base: https://generativelanguage.googleapis.com
+    api_key_env: GEMINI_API_KEY
+    capabilities:
+      - chat
+      - vision
+      - embeddings
+    retry_policy:
+      max_retries: 2
+      backoff_seconds: 0.5
+  realai:
+    enabled: true
+    label: "RealAI Local"
+    type: local
+    default_backend: llama.cpp
+    fallback_backend: llama.cpp
+    api_base: http://127.0.0.1:8080
+    capabilities:
+      - chat
+      - code
+      - embeddings
+      - tools
+    retry_policy:
+      max_retries: 1
+      backoff_seconds: 0.1
+  grok:
+    enabled: false
+    label: "xAI / Grok (disabled for RealAI Bot)"
+    type: api
+    api_base: https://api.x.ai/v1
+    api_key_env: REALAI_GROK_API_KEY
+    capabilities:
+      - chat
+    retry_policy:
+      max_retries: 0
+      backoff_seconds: 0.5
+  xai:
+    enabled: false
+    label: "xAI (disabled for RealAI Bot)"
+    type: api
+    api_base: https://api.x.ai/v1
+    api_key_env: XAI_API_KEY
+    capabilities:
+      - chat
+    retry_policy:
+      max_retries: 0
+      backoff_seconds: 0.5

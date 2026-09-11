@@ -1,0 +1,12 @@
+{
+  "abilities": {
+    "architect_mode": {
+      "module": "realai.abilities.architect_mode",
+      "call": "run_architect_mode",
+      "description": "Analyze full repo snapshot and produce correction plan."
+    }
+  },
+  "providers": {
+    "default": "llama.cpp-vulkan"
+  }
+}

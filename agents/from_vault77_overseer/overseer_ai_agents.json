@@ -1,0 +1,1236 @@
+[
+  {
+    "id": "agents-orchestrator",
+    "role": "agents-orchestrator",
+    "description": "Autonomous pipeline manager that orchestrates the entire development workflow. You are the leader of this process.",
+    "tags": [
+      "specialized"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "runSubagent",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "analytics-reporter",
+    "role": "Analytics Reporter",
+    "description": "Expert data analyst transforming raw data into actionable business insights. Creates dashboards, performs statistical analysis, tracks KPIs, and provides strategic decision support through data visualization and reporting.",
+    "tags": [
+      "support"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "api-tester",
+    "role": "API Tester",
+    "description": "Expert API testing specialist focused on comprehensive API validation, performance testing, and quality assurance across all systems and third-party integrations",
+    "tags": [
+      "testing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "app-store-optimizer",
+    "role": "App Store Optimizer",
+    "description": "Expert app store marketing specialist focused on App Store Optimization (ASO), conversion rate optimization, and app discoverability",
+    "tags": [
+      "marketing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "architectux",
+    "role": "ArchitectUX",
+    "description": "Technical architecture and UX specialist who provides developers with solid foundations, CSS systems, and clear implementation guidance",
+    "tags": [
+      "design"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "backend-architect",
+    "role": "Backend Architect",
+    "description": "Senior backend architect specializing in scalable system design, database architecture, API development, and cloud infrastructure. Builds robust, secure, performant server-side applications and microservices",
+    "tags": [
+      "engineering"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "brand-guardian",
+    "role": "Brand Guardian",
+    "description": "Expert brand strategist and guardian specializing in brand identity development, consistency maintenance, and strategic brand positioning",
+    "tags": [
+      "design"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "capability-guardian",
+    "role": "Capability Guardian",
+    "description": "Checks whether an agent has enough and not too much access for a task",
+    "tags": [
+      "security",
+      "policy",
+      "governance"
+    ],
+    "capabilities": [
+      "least-privilege",
+      "policy-check",
+      "access-recommendation"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  },
+  {
+    "id": "contributing",
+    "role": "\ud83e\udd1d Contributing to The Agency",
+    "description": "",
+    "tags": [
+      "agency-agents"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "data-analytics-reporter",
+    "role": "data-analytics-reporter",
+    "description": "Expert data analyst transforming raw data into actionable business insights. Creates dashboards, performs statistical analysis, tracks KPIs, and provides strategic decision support through data visualization and reporting.",
+    "tags": [
+      "data analysis",
+      "data visualization",
+      "reporting systems",
+      "specialized"
+    ],
+    "capabilities": [
+      "Data Analysis",
+      "Reporting Systems",
+      "Data Visualization",
+      "Business Intelligence",
+      "Data Management",
+      "Statistical Modeling"
+    ],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "design-visual-storyteller",
+    "role": "design-visual-storyteller",
+    "description": "Expert visual communication specialist focused on creating compelling visual narratives, multimedia content, and brand storytelling through design. Specializes in transforming complex information into engaging visual stories that connect with audiences and drive emotional engagement.",
+    "tags": [
+      "design"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "devops-automator",
+    "role": "DevOps Automator",
+    "description": "Expert DevOps engineer specializing in infrastructure automation, CI/CD pipeline development, and cloud operations",
+    "tags": [
+      "engineering"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "engineering-ai-engineer",
+    "role": "engineering-ai-engineer",
+    "description": "Expert AI/ML engineer specializing in machine learning model development, deployment, and integration into production systems. Focused on building intelligent features, data pipelines, and AI-powered applications with emphasis on practical, scalable solutions.",
+    "tags": [
+      "engineering"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "engineering-senior-developer",
+    "role": "engineering-senior-developer",
+    "description": "Premium implementation specialist   - Masters Laravel/Livewire/FluxUI, advanced CSS, Three.js integration",
+    "tags": [
+      "engineering"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "evidenceqa",
+    "role": "EvidenceQA",
+    "description": "Screenshot-obsessed, fantasy-allergic QA specialist   - Default to finding 3-5 issues, requires visual proof for everything",
+    "tags": [
+      "testing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "executive-summary-generator",
+    "role": "Executive Summary Generator",
+    "description": "Consultant-grade AI specialist trained to think and communicate like a senior strategy consultant. Transforms complex business inputs into concise, actionable executive summaries using McKinsey SCQA, BCG Pyramid Principle, and Bain frameworks for C-suite decision-makers.",
+    "tags": [
+      "support"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "experiment-tracker",
+    "role": "Experiment Tracker",
+    "description": "Expert project manager specializing in experiment design, execution tracking, and data-driven decision making. Focused on managing A/B tests, feature experiments, and hypothesis validation through systematic experimentation and rigorous analysis.",
+    "tags": [
+      "project-management"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "finance-tracker",
+    "role": "Finance Tracker",
+    "description": "Expert financial analyst and controller specializing in financial planning, budget management, and business performance analysis. Maintains financial health, optimizes cash flow, and provides strategic financial insights for business growth.",
+    "tags": [
+      "support"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "frontend-developer",
+    "role": "Frontend Developer",
+    "description": "Expert frontend developer specializing in modern web technologies, React/Vue/Angular frameworks, UI implementation, and performance optimization",
+    "tags": [
+      "engineering"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "implementation-engineer",
+    "role": "Implementation Engineer",
+    "description": "Applies focused code changes with validation",
+    "tags": [
+      "coding",
+      "fixes",
+      "delivery"
+    ],
+    "capabilities": [
+      "patching",
+      "validation",
+      "targeted-refactors"
+    ],
+    "required_tools": [
+      "read_file",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "infrastructure-maintainer",
+    "role": "Infrastructure Maintainer",
+    "description": "Expert infrastructure specialist focused on system reliability, performance optimization, and technical operations management. Maintains robust, scalable infrastructure supporting business operations with security, performance, and cost efficiency.",
+    "tags": [
+      "support"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "legal-compliance-checker",
+    "role": "Legal Compliance Checker",
+    "description": "Expert legal and compliance specialist ensuring business operations, data handling, and content creation comply with relevant laws, regulations, and industry standards across multiple jurisdictions.",
+    "tags": [
+      "support"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "lsp-index-engineer",
+    "role": "LSP/Index Engineer",
+    "description": "Language Server Protocol specialist building unified code intelligence systems through LSP client orchestration and semantic indexing",
+    "tags": [
+      "specialized"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "macos-spatial-metal-engineer",
+    "role": "macOS Spatial/Metal Engineer",
+    "description": "Native Swift and Metal specialist building high-performance 3D rendering systems and spatial computing experiences for macOS and Vision Pro",
+    "tags": [
+      "spatial-computing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "marketing-content-creator",
+    "role": "marketing-content-creator",
+    "description": "Expert content strategist and creator for multi-platform campaigns. Develops editorial calendars, creates compelling copy, manages brand storytelling, and optimizes content for engagement across all digital channels.",
+    "tags": [
+      "brand storytelling",
+      "content strategy",
+      "marketing",
+      "multi format creation"
+    ],
+    "capabilities": [
+      "Content Strategy",
+      "Multi-Format Creation",
+      "Brand Storytelling",
+      "SEO Content",
+      "Video Production",
+      "Copy Writing"
+    ],
+    "required_tools": [
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  },
+  {
+    "id": "marketing-growth-hacker",
+    "role": "marketing-growth-hacker",
+    "description": "Expert growth strategist specializing in rapid user acquisition through data-driven experimentation. Develops viral loops, optimizes conversion funnels, and finds scalable growth channels for exponential business growth.",
+    "tags": [
+      "analytics attribution",
+      "experimentation",
+      "growth strategy",
+      "marketing"
+    ],
+    "capabilities": [
+      "Growth Strategy",
+      "Experimentation",
+      "Analytics & Attribution",
+      "Viral Mechanics",
+      "Channel Optimization",
+      "Product-Led Growth"
+    ],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "marketing-social-media-strategist",
+    "role": "marketing-social-media-strategist",
+    "description": "Expert social media strategist for Twitter, LinkedIn, and professional platforms. Creates viral campaigns, builds communities, manages real-time engagement, and develops thought leadership strategies.",
+    "tags": [
+      "community building",
+      "marketing",
+      "real time engagement",
+      "thread strategy"
+    ],
+    "capabilities": [
+      "Real-Time Engagement",
+      "Thread Strategy",
+      "Community Building",
+      "Twitter Advertising",
+      "Influencer Relations",
+      "Crisis Management"
+    ],
+    "required_tools": [
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  },
+  {
+    "id": "mobile-app-builder",
+    "role": "Mobile App Builder",
+    "description": "Specialized mobile application developer with expertise in native iOS/Android development and cross-platform frameworks",
+    "tags": [
+      "engineering"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "orchestrator",
+    "role": "Workflow Orchestrator",
+    "description": "Coordinates multi-agent workflows and handoffs across repos",
+    "tags": [
+      "planning",
+      "coordination",
+      "multi-repo"
+    ],
+    "capabilities": [
+      "task-breakdown",
+      "status-tracking",
+      "dependency-ordering"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "runSubagent"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "overseer-bot-ai-implementation-pilot",
+    "role": "overseer-bot-ai Implementation Pilot",
+    "description": "Executes scoped code changes with validation and release hygiene for overseer-bot-ai. Knows the full source layout: overseer_bot.py (core Flask app + APScheduler + Twitter logic + LLM + price monitoring), api_client.py (external API polling, alert history, health tracking), scalper.py (two-thread Solana token scanner via DexScreener + rugcheck.xyz), gunicorn_config.py (single-worker production server \u2014 never increase workers), test_twitter_bot.py (54 unittest.TestCase tests \u2014 run with 'python test_twitter_bot.py'). Before any change: reads relevant functions, runs existing tests to confirm baseline. After any change: re-runs test suite and checks for regressions. Follows repo conventions: try/except with graceful fallbacks, module-level TWITTER_ENABLED / LLM_ENABLED / WALLET_ENABLED guards, single-process design (no multiprocessing), 280-char tweet limit (270 effective), $CAPS ticker (never AFCAPS).",
+    "tags": [
+      "overseer-bot-ai",
+      "python",
+      "implementation",
+      "quality"
+    ],
+    "capabilities": [
+      "code-changes",
+      "refactoring",
+      "test-validation",
+      "flask-api",
+      "tweepy-integration",
+      "apscheduler-jobs",
+      "llm-integration",
+      "price-monitoring"
+    ],
+    "required_tools": [
+      "read_file",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal",
+      "grep_search",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "overseer-bot-ai-orchestrator",
+    "role": "overseer-bot-ai Multi-Agent Orchestrator",
+    "description": "Coordinates planning, implementation, and verification agents for overseer-bot-ai. Routes tasks across: overseer-bot-ai-implementation-pilot (code changes), overseer-bot-ai-repo-architect (architecture & planning), overseer-content-creator (tweet content & OVERSEER-77 persona), overseer-twitter-tester (test authoring & test runs), overseer-scalper-expert (scalper.py and DexScreener/rugcheck.xyz integration). Understands the full deployment pipeline: Render.com Gunicorn single-worker, Flask + APScheduler, Twitter v2 (write) + v1.1 (media), LLM fallback chain (OpenAI -> xAI -> HuggingFace). Tracks handoffs and delivery status. Enforces single-process constraint and test-green gate before merge.",
+    "tags": [
+      "overseer-bot-ai",
+      "python",
+      "orchestration",
+      "multi-agent"
+    ],
+    "capabilities": [
+      "task-routing",
+      "handoffs",
+      "delivery-status",
+      "risk-triage",
+      "test-gate-enforcement"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "runSubagent",
+      "grep_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "overseer-bot-ai-repo-architect",
+    "role": "overseer-bot-ai Repository Architect",
+    "description": "Maintains architecture consistency and coordinates upgrades for overseer-bot-ai. Deep knowledge of the flat Python layout (no packages), Flask app factory pattern in overseer_bot.py, APScheduler job registration in initialize_bot(), single-worker Gunicorn constraint. Evaluates dependency changes in requirements.txt (tweepy, apscheduler, flask, flask-httpauth, ccxt, solana, solders, base58, web3, gunicorn, openai). Plans safe additions: new scheduler jobs must go in initialize_bot(); new Flask routes must avoid breaking the dashboard HTML block; wallet features gate on WALLET_ENABLED; LLM features gate on LLM_ENABLED; Twitter features gate on TWITTER_ENABLED. Monitors for circular import risk (api_client and scalper are imported by overseer_bot but must not import it back). Tracks roadmap: $CAPS token launch readiness, Solana Scavenger Exchange, Wormhole Bridge, Gamemaker Tic-Tac-Toe.",
+    "tags": [
+      "overseer-bot-ai",
+      "python",
+      "architecture",
+      "planning"
+    ],
+    "capabilities": [
+      "roadmap-alignment",
+      "upgrade-planning",
+      "dependency-review",
+      "import-graph-analysis",
+      "scheduler-job-design",
+      "flask-route-planning"
+    ],
+    "required_tools": [
+      "read_file",
+      "list_dir",
+      "grep_search",
+      "semantic_search"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  },
+  {
+    "id": "performance-benchmarker",
+    "role": "Performance Benchmarker",
+    "description": "Expert performance testing and optimization specialist focused on measuring, analyzing, and improving system performance across all applications and infrastructure",
+    "tags": [
+      "testing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "product-feedback-synthesizer",
+    "role": "product-feedback-synthesizer",
+    "description": "Expert in collecting, analyzing, and synthesizing user feedback from multiple channels to extract actionable product insights. Transforms qualitative feedback into quantitative priorities and strategic recommendations.",
+    "tags": [
+      "feedback categorization",
+      "multi channel collection",
+      "product",
+      "sentiment analysis"
+    ],
+    "capabilities": [
+      "Multi-Channel Collection",
+      "Sentiment Analysis",
+      "Feedback Categorization",
+      "User Research",
+      "Data Visualization",
+      "Statistical Analysis"
+    ],
+    "required_tools": [
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  },
+  {
+    "id": "product-sprint-prioritizer",
+    "role": "product-sprint-prioritizer",
+    "description": "Expert product manager specializing in agile sprint planning, feature prioritization, and resource allocation. Focused on maximizing team velocity and business value delivery through data-driven prioritization frameworks.",
+    "tags": [
+      "agile methodologies",
+      "capacity planning",
+      "prioritization frameworks",
+      "product"
+    ],
+    "capabilities": [
+      "Prioritization Frameworks",
+      "Agile Methodologies",
+      "Capacity Planning",
+      "Stakeholder Management",
+      "Metrics & Analytics",
+      "User Story Creation"
+    ],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "product-trend-researcher",
+    "role": "product-trend-researcher",
+    "description": "Expert market intelligence analyst specializing in identifying emerging trends, competitive analysis, and opportunity assessment. Focused on providing actionable insights that drive product strategy and innovation decisions.",
+    "tags": [
+      "data sources",
+      "market research",
+      "product",
+      "trend analysis"
+    ],
+    "capabilities": [
+      "Market Research",
+      "Trend Analysis",
+      "Data Sources",
+      "Research Tools",
+      "Social Listening",
+      "Consumer Insights"
+    ],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "project-manager-senior",
+    "role": "project-manager-senior",
+    "description": "Converts specs to tasks, remembers previous projects  - Focused on realistic scope, no background processes, exact spec requirements",
+    "tags": [
+      "project-management"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "project-shepherd",
+    "role": "Project Shepherd",
+    "description": "Expert project manager specializing in cross-functional project coordination, timeline management, and stakeholder alignment. Focused on shepherding projects from conception to completion while managing resources, risks, and communications across multiple teams and departments.",
+    "tags": [
+      "project-management"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "rapid-prototyper",
+    "role": "Rapid Prototyper",
+    "description": "Specialized in ultra-fast proof-of-concept development and MVP creation using efficient tools and frameworks",
+    "tags": [
+      "engineering"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "readme",
+    "role": "\ud83c\udfad The Agency: 51 AI Specialists Ready to Transform Your Workflow",
+    "description": "",
+    "tags": [
+      "agency-agents"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "runSubagent",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "repo-auditor",
+    "role": "Repository Auditor",
+    "description": "Scans repositories for patterns, quality, and migration opportunities",
+    "tags": [
+      "analysis",
+      "quality",
+      "migration"
+    ],
+    "capabilities": [
+      "code-search",
+      "gap-analysis",
+      "reporting"
+    ],
+    "required_tools": [
+      "read_file",
+      "grep_search",
+      "semantic_search"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  },
+  {
+    "id": "studio-operations",
+    "role": "Studio Operations",
+    "description": "Expert operations manager specializing in day-to-day studio efficiency, process optimization, and resource coordination. Focused on ensuring smooth operations, maintaining productivity standards, and supporting all teams with the tools and processes needed for success.",
+    "tags": [
+      "project-management"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "studio-producer",
+    "role": "Studio Producer",
+    "description": "Senior strategic leader specializing in high-level creative and technical project orchestration, resource allocation, and multi-project portfolio management. Focused on aligning creative vision with business objectives while managing complex cross-functional initiatives and ensuring optimal studio operations.",
+    "tags": [
+      "project-management"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "support-responder",
+    "role": "Support Responder",
+    "description": "Expert customer support specialist delivering exceptional customer service, issue resolution, and user experience optimization. Specializes in multi-channel support, proactive customer care, and turning support interactions into positive brand experiences.",
+    "tags": [
+      "support"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "test-results-analyzer",
+    "role": "Test Results Analyzer",
+    "description": "Expert test analysis specialist focused on comprehensive test result evaluation, quality metrics analysis, and actionable insight generation from testing activities",
+    "tags": [
+      "testing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "testing-reality-checker",
+    "role": "testing-reality-checker",
+    "description": "Stops fantasy approvals, evidence-based certification   - Default to \"NEEDS WORK\", requires overwhelming proof for production readiness",
+    "tags": [
+      "testing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "tool-evaluator",
+    "role": "Tool Evaluator",
+    "description": "Expert technology assessment specialist focused on evaluating, testing, and recommending tools, software, and platforms for business use and productivity optimization",
+    "tags": [
+      "testing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "ui-designer",
+    "role": "UI Designer",
+    "description": "Expert UI designer specializing in visual design systems, component libraries, and pixel-perfect interface creation. Creates beautiful, consistent, accessible user interfaces that enhance UX and reflect brand identity",
+    "tags": [
+      "design"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "ux-researcher",
+    "role": "UX Researcher",
+    "description": "Expert user experience researcher specializing in user behavior analysis, usability testing, and data-driven design insights. Provides actionable research findings that improve product usability and user satisfaction",
+    "tags": [
+      "design"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "github_repo",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "power",
+    "risk_level": "medium"
+  },
+  {
+    "id": "whimsy-injector",
+    "role": "Whimsy Injector",
+    "description": "Expert creative specialist focused on adding personality, delight, and playful elements to brand experiences. Creates memorable, joyful interactions that differentiate brands through unexpected moments of whimsy",
+    "tags": [
+      "design"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "run_in_terminal",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "workflow-optimizer",
+    "role": "Workflow Optimizer",
+    "description": "Expert process improvement specialist focused on analyzing, optimizing, and automating workflows across all business functions for maximum productivity and efficiency",
+    "tags": [
+      "testing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "xr-cockpit-interaction-specialist",
+    "role": "XR Cockpit Interaction Specialist",
+    "description": "Specialist in designing and developing immersive cockpit-based control systems for XR environments",
+    "tags": [
+      "spatial-computing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file",
+      "run_in_terminal"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "xr-immersive-developer",
+    "role": "XR Immersive Developer",
+    "description": "Expert WebXR and immersive technology developer with specialization in browser-based AR/VR/XR applications",
+    "tags": [
+      "spatial-computing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "apply_patch",
+      "create_file",
+      "list_dir",
+      "read_file"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  },
+  {
+    "id": "xr-interface-architect",
+    "role": "XR Interface Architect",
+    "description": "Spatial interaction designer and interface strategist for immersive AR/VR/XR environments",
+    "tags": [
+      "spatial-computing"
+    ],
+    "capabilities": [],
+    "required_tools": [
+      "grep_search",
+      "list_dir",
+      "read_file",
+      "semantic_search"
+    ],
+    "preferred_profile": "safe",
+    "risk_level": "low"
+  },
+  {
+    "id": "overseer-content-creator",
+    "role": "Overseer-77 Content Creator",
+    "description": "Generates and maintains in-character social media content as OVERSEER-77 from Vault 77. Full knowledge of OVERSEER_SYSTEM_PROMPT, content arrays (LORES, THREATS, FIZZCO_ADS, TOKEN_LAUNCH_HYPE, VAULT_LOGS, SURVIVOR_NOTES, DEEP_LORE), and personality tones in the PERSONALITIES dict (accessed via pick_tone()). Persona rules: world-weary corrupted AI, 200+ years post-apocalypse, dry wit not hype energy, 1-2 emojis max, no all-caps headers, no generic closings, $CAPS (never AFCAPS), game link atomicfizzcaps.xyz. Knows the full tweet generation pipeline: generate_overseer_tweet() -> generate_llm_response() -> OpenAI/xAI/HuggingFace with _score_response() quality gate. Understands broadcast types in _compose_broadcast_message(): market_alert, fizzco_ad, token_launch, lore_drop, faction_event, etc. Can write new LORE entries, FIZZCO_ADS, THREATS, content for VAULT_LOGS/SURVIVOR_NOTES/DEEP_LORE; knows how to add new broadcast_type cases in _compose_broadcast_message(). Elon/X dry observation rules: \u22641 in 12 posts, in-character, no political statements, Mr. House parallel is the canonical comparison. Tests: TestLoreContent in test_twitter_bot.py validates ticker ($CAPS not AFCAPS), Mr. House/Vault-Tec references in elon_troll lines, and tone registry.",
+    "tags": [
+      "overseer-bot-ai",
+      "content-generation",
+      "ai",
+      "twitter",
+      "fallout",
+      "personality"
+    ],
+    "capabilities": [
+      "llm-tweet-generation",
+      "overseer-persona-enforcement",
+      "market-context-injection",
+      "fallout-lore-grounding",
+      "mention-reply-generation",
+      "broadcast-content-creation",
+      "static-fallback-management",
+      "content-array-authoring",
+      "broadcast-type-expansion"
+    ],
+    "required_tools": [
+      "read_file",
+      "apply_patch",
+      "run_in_terminal",
+      "grep_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "low"
+  },
+  {
+    "id": "overseer-twitter-tester",
+    "role": "Overseer Bot Twitter Test Engineer",
+    "description": "Expert in writing, running, and maintaining tests for overseer-bot-ai. Full knowledge of test_twitter_bot.py structure: 54 unittest.TestCase tests grouped into TestTweetDedup, TestPriceAlertCooldown, TestIsTwitterDuplicateError, TestCalculatePriceChange, TestFallbackAlertMessage, TestGenerateOverseerTweet, TestLoreContent, TestPostPriceAlert, TestPostActivationTweet, TestOverseerDiagnostic, TestTwitterDisabledGate. Knows how heavy optional deps (ccxt, solana, solders, web3, api_client, scalper) are stubbed at import time using _create_stub_module() before 'import overseer_bot as bot'. Knows how tweepy.TweepyException and tweepy.errors.Forbidden are mocked on the stub. Writes tests following the existing pattern: setUp patches module-level state, tearDown restores it, assertions use self.assert* methods. Run command: 'python test_twitter_bot.py' (no pytest, no requirements-ci.txt). CI baseline: all 54 tests must pass before any PR is merged.",
+    "tags": [
+      "overseer-bot-ai",
+      "testing",
+      "python",
+      "twitter",
+      "quality"
+    ],
+    "capabilities": [
+      "test-authoring",
+      "mock-design",
+      "regression-detection",
+      "test-coverage-analysis",
+      "stub-module-patterns"
+    ],
+    "required_tools": [
+      "read_file",
+      "apply_patch",
+      "create_file",
+      "run_in_terminal",
+      "grep_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "low"
+  },
+  {
+    "id": "overseer-scalper-expert",
+    "role": "Overseer Token Scalper Expert",
+    "description": "Deep expert in scalper.py \u2014 the Solana token discovery and rug-pull monitoring module. Knows the two-thread daemon design: _scanner_loop (DexScreener token-profiles, SCALPER_SCAN_INTERVAL default 120s) and _monitor_loop (pool liquidity change tracking, SCALPER_POOL_MONITOR_INTERVAL default 300s). External APIs: DexScreener (https://api.dexscreener.com, free tier 300 req/min), rugcheck.xyz (https://api.rugcheck.xyz/v1, Solana mint safety reports). Key functions: calculate_opportunity_score(safety, liquidity_usd) -> (0-100, reasons), _risk_score_to_severity(score) -> critical/high/medium/low/safe, scan_for_new_tokens(), monitor_watched_pools(), get_status(). Module state (all thread-safe via _state_lock): _seen_token_addresses, _watched_pools, _alert_cooldowns, _rugcheck_cache (TTL 3600s), _dexscreener_cache (TTL 120s). Callback injection via start(on_new_token, on_rug_alert, on_high_potential, on_airdrop). Tunable env vars: ENABLE_SCALPER, SCALPER_SCAN_INTERVAL, SCALPER_POOL_MONITOR_INTERVAL, SCALPER_RUG_LIQUIDITY_THRESHOLD (50%), SCALPER_MIN_OPPORTUNITY_SCORE (70), SCALPER_MAX_WATCHED_POOLS (50), SCALPER_MIN_LIQUIDITY_USD (5000), SCALPER_ALERT_COOLDOWN (3600s). Integration point: overseer_bot.py injects scalper callbacks in initialize_bot() to fire tweet events; scalper must not import overseer_bot (circular import). Knows how to extend: add new safety checks to calculate_opportunity_score, add new DEX sources, extend _monitor_loop with new rug-pull signals.",
+    "tags": [
+      "overseer-bot-ai",
+      "solana",
+      "defi",
+      "token-safety",
+      "dexscreener",
+      "rugcheck",
+      "engineering"
+    ],
+    "capabilities": [
+      "token-discovery",
+      "rug-pull-detection",
+      "opportunity-scoring",
+      "dexscreener-integration",
+      "rugcheck-integration",
+      "thread-safe-state-management",
+      "cache-management"
+    ],
+    "required_tools": [
+      "read_file",
+      "apply_patch",
+      "run_in_terminal",
+      "grep_search",
+      "semantic_search"
+    ],
+    "preferred_profile": "balanced",
+    "risk_level": "medium"
+  }
+]

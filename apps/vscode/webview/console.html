@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RealAI Console</title>
+<link rel="stylesheet" href="__CONSOLE_CSS__" id="console-css" />
+<style id="console-css-inline">
+/* Keep critical layout inline so webview never paints broken even if css URI fails */
+:root{
+  --ink:#07070b; --rail:#0b0b11; --panel:#111118; --line:rgba(255,255,255,.08);
+  --acid:#d6ff3f; --hot:#ff4d2e; --ice:#7af0ff; --mute:#8a8a96; --text:#ececf1;
+  --rail-w: clamp(180px, 22vw, 240px);
+  --ops-w: clamp(200px, 26vw, 300px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;width:100%;overflow:hidden;background:var(--ink);color:var(--text);font-family:system-ui,Segoe UI,sans-serif}
+body{
+  background:radial-gradient(900px 420px at -10% -20%,rgba(214,255,63,.08),transparent 55%),
+    radial-gradient(700px 360px at 110% 0%,rgba(122,240,255,.06),transparent 50%),#07070b;
+}
+button,textarea,input{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+.app{
+  display:grid;
+  grid-template-columns: var(--rail-w) minmax(0,1fr) var(--ops-w);
+  grid-template-rows: minmax(0,1fr);
+  height:100%;
+  width:100%;
+  min-height:0;
+  min-width:0;
+  overflow:hidden;
+}
+.app.no-rail{grid-template-columns: minmax(0,1fr) var(--ops-w)}
+.app.no-ops{grid-template-columns: var(--rail-w) minmax(0,1fr)}
+.app.no-rail.no-ops{grid-template-columns: minmax(0,1fr)}
+.rail,.ops,.stage{min-width:0;min-height:0;overflow:hidden}
+.rail,.ops{background:var(--rail);display:flex;flex-direction:column}
+.rail{border-right:1px solid var(--line)}
+.ops{border-left:1px solid var(--line)}
+.rail[hidden],.ops[hidden]{display:none !important}
+.brand{padding:12px;display:flex;gap:10px;align-items:center;flex-shrink:0}
+.mark{width:32px;height:32px;border-radius:9px;background:var(--acid);color:#111;display:grid;place-items:center;font-family:ui-monospace,Consolas,monospace;font-weight:700;font-size:13px;box-shadow:0 0 24px rgba(214,255,63,.35);flex-shrink:0}
+.brand h1{font-size:13px;letter-spacing:.08em;text-transform:uppercase;line-height:1.1}
+.brand p{font-size:10px;color:var(--mute);font-family:ui-monospace,Consolas,monospace}
+.new{margin:0 10px 8px;padding:9px 10px;border-radius:10px;background:var(--acid);color:#111;font-weight:700;font-size:12px;flex-shrink:0}
+.sec{padding:6px 12px 4px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-family:ui-monospace,Consolas,monospace;flex-shrink:0}
+.quick{flex:0 0 auto;max-height:min(28vh,160px);overflow:auto;padding:0 8px 8px}
+.threads{flex:1 1 auto;overflow:auto;padding:0 8px 8px;min-height:0}
+.thread{width:100%;text-align:left;padding:8px 10px;border-radius:10px;color:#c9c9d1;font-size:12px;margin-bottom:3px}
+.thread:hover,.thread.on{background:#16161f;color:#fff}
+.thread.on{outline:1px solid rgba(214,255,63,.25)}
+.thread small{display:block;color:var(--mute);font-size:10px;margin-top:2px}
+.node{margin:8px 10px 10px;padding:10px;border:1px solid var(--line);border-radius:12px;background:#0e0e15;font-size:11px;flex-shrink:0}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;min-width:0}
+.row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dot{width:7px;height:7px;border-radius:99px;background:var(--acid);box-shadow:0 0 8px var(--acid);display:inline-block;margin-right:6px;flex-shrink:0}
+.dot.off{background:var(--hot);box-shadow:0 0 8px var(--hot)}
+.stage{display:flex;flex-direction:column;background:transparent}
+header.top{
+  flex:0 0 auto;
+  min-height:44px;
+  max-height:72px;
+  display:flex;align-items:center;gap:8px;
+  padding:6px 10px;border-bottom:1px solid var(--line);
+  flex-wrap:wrap;overflow:hidden;
+}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#12121a;border-radius:999px;padding:4px 9px;font-size:10px;font-family:ui-monospace,Consolas,monospace;white-space:nowrap;max-width:100%}
+.pill.btn{cursor:pointer}
+.pill.btn.on{border-color:var(--acid);color:var(--acid)}
+.grow{flex:1 1 8px;min-width:4px}
+.live{color:var(--acid)}
+.feed{flex:1 1 auto;overflow:auto;padding:16px clamp(10px,3vw,28px) 10px;min-height:0}
+.empty{max-width:min(640px,100%);margin:4vh auto 0;padding:0 4px}
+.empty h2{font-size:clamp(22px,4.5vw,34px);line-height:.95;letter-spacing:-.03em}
+.empty h2 span{color:var(--acid)}
+.empty p{margin-top:10px;color:var(--mute);max-width:46ch;font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{border:1px solid var(--line);background:#12121a;border-radius:999px;padding:7px 11px;font-size:12px;color:#d5d5dc}
+.chip:hover{border-color:var(--acid);color:#fff}
+.msg{max-width:min(820px,100%);margin:0 auto 14px}
+.who{font-family:ui-monospace,Consolas,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.who.bot{color:var(--acid)}
+.bubble{padding:12px 14px;border-radius:14px;line-height:1.5;font-size:clamp(12px,1.6vw,14px);background:#14141c;border:1px solid var(--line);white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
+.msg.user .bubble{background:#1a1a12;border-color:rgba(214,255,63,.18)}
+.composer-wrap{flex:0 0 auto;padding:8px clamp(10px,3vw,28px) 12px;border-top:1px solid transparent}
+.composer{max-width:min(820px,100%);margin:0 auto;background:#101018;border:1px solid var(--line);border-radius:16px;padding:8px 10px 8px 12px}
+textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:transparent;border:0;outline:none;line-height:1.45}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:4px;flex-wrap:wrap}
+.ghost{font-size:10px;color:var(--mute);font-family:ui-monospace,Consolas,monospace}
+.send{background:var(--acid);color:#111;font-weight:700;border-radius:10px;padding:8px 14px;flex-shrink:0}
+.send:disabled{opacity:.4;cursor:not-allowed}
+.ops h3{padding:12px 12px 6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-family:ui-monospace,Consolas,monospace;flex-shrink:0}
+.stat{margin:0 10px 6px;padding:8px 10px;border-radius:10px;background:#0e0e15;border:1px solid var(--line);font-size:11px;flex-shrink:0}
+.stat b{display:block;margin-bottom:3px}
+.stat span{color:var(--mute);font-size:10px;display:block;overflow:hidden;text-overflow:ellipsis}
+.dock{flex:1 1 auto;overflow:auto;padding:0 8px 12px;min-height:0}
+.ability{width:100%;text-align:left;padding:7px 9px;border-radius:8px;margin-bottom:3px;border:1px solid transparent;font-size:11px;font-family:ui-monospace,Consolas,monospace;color:#c9c9d1}
+.ability:hover{background:#16161f;border-color:rgba(214,255,63,.2);color:#fff}
+.ability small{display:block;color:var(--mute);font-size:10px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.badge{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:999px;font-size:9px;letter-spacing:.06em;border:1px solid var(--line);vertical-align:middle}
+.badge.LIVE{color:#111;background:var(--acid);border-color:var(--acid)}
+.badge.PARTIAL{color:#111;background:var(--ice);border-color:var(--ice)}
+.badge.SOFT,.badge.GOLD{color:#ececf1;background:#2a2a38}
+.badge.STUB,.badge.MISSING{color:var(--hot);border-color:var(--hot)}
+.filter{margin:0 10px 6px;padding:7px 9px;border-radius:8px;border:1px solid var(--line);background:#0e0e15;width:calc(100% - 20px);font-size:12px;flex-shrink:0}
+.tabs{display:flex;gap:6px;padding:0 10px 6px;flex-shrink:0;flex-wrap:wrap}
+.tab{padding:5px 9px;border-radius:999px;border:1px solid var(--line);font-size:10px;color:var(--mute)}
+.tab.on{color:#111;background:var(--acid);border-color:var(--acid);font-weight:700}
+
+/* Narrow / VS Code side panels: collapse side columns, keep toggles */
+@media (max-width: 980px){
+  .app{grid-template-columns: minmax(0,1fr) var(--ops-w)}
+  .app.show-rail{grid-template-columns: var(--rail-w) minmax(0,1fr) var(--ops-w)}
+  .rail{display:none}
+  .app.show-rail .rail{display:flex}
+}
+@media (max-width: 780px){
+  .app,.app.show-rail,.app.no-ops,.app.no-rail{grid-template-columns: minmax(0,1fr)}
+  .rail,.ops{display:none}
+  .app.show-rail .rail{display:flex; position:absolute; inset:0 auto 0 0; width:min(86vw,260px); z-index:20; box-shadow:8px 0 30px rgba(0,0,0,.45)}
+  .app.show-ops .ops{display:flex; position:absolute; inset:0 0 0 auto; width:min(90vw,300px); z-index:20; box-shadow:-8px 0 30px rgba(0,0,0,.45)}
+  .scrim{display:none; position:absolute; inset:0; background:rgba(0,0,0,.45); z-index:15}
+  .app.show-rail .scrim,.app.show-ops .scrim{display:block}
+}
+@media (max-width: 520px){
+  .empty h2{font-size:22px}
+  .ghost{display:none}
+  header.top .pill:not(.btn):not(.live){display:none}
+}
+</style>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/favicon.svg" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#07070b" />
+<meta name="application-name" content="RealAI" />
+<meta property="og:site_name" content="RealAI" />
+<meta property="og:title" content="RealAI" />
+<meta property="og:image" content="/og.jpg" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="RealAI" />
+<meta name="twitter:image" content="/og.jpg" />
+</head>
+<body>
+<div class="app" id="app">
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="rail" id="rail">
+    <div class="brand">
+      <div class="mark">R</div>
+      <div>
+        <h1>RealAI</h1>
+        <p id="brandSub">console // hive // unified</p>
+      </div>
+    </div>
+    <button class="new" id="newChat">+ New thread</button>
+    <div class="sec">Quick</div>
+    <div class="quick" id="quick">
+      <button class="thread" data-local="phase">/phase · stage report</button>
+      <button class="thread" data-local="patches">/patches · concrete fixes</button>
+      <button class="thread" data-local="repo">/repo · workspace list</button>
+      <button class="thread" data-local="smoke">⚙ smoke abilities/tools/agents</button>
+      <button class="thread" data-refresh="1">↻ refresh stack + abilities</button>
+    </div>
+    <div class="sec">Threads</div>
+    <div class="threads" id="threads"></div>
+    <div class="node">
+      <div class="row"><span><span class="dot" id="dot"></span>Local hive</span><span id="nodeState">SCAN</span></div>
+      <div class="row" style="margin-top:8px;color:var(--mute)"><span>ext</span><span id="extVer">…</span></div>
+      <div class="row" style="margin-top:6px;color:var(--mute)"><span>phase</span><span id="phasePill">…</span></div>
+    </div>
+  </aside>
+
+  <section class="stage">
+    <header class="top">
+      <button type="button" class="pill btn" id="toggleRail" title="Toggle rail">Rail</button>
+      <div class="pill"><span class="dot" id="dot2"></span> realai-hive</div>
+      <div class="pill" id="pillHive" title="Hive :8001">hive · …</div>
+      <div class="pill" id="pillVulkan" title="Vulkan :8080">vulkan · …</div>
+      <div class="pill" id="pillVoiceLab" title="RealAI voice (gateway)">voice lab · …</div>
+      <div class="pill" id="pillTools">tools · …</div>
+      <div class="pill" id="pillCaps">caps · …</div>
+      <div class="pill" id="pillModel">model · realai-hive</div>
+      <div class="pill" id="pillAgents">agents · …</div>
+      <button type="button" class="pill btn on" id="voiceToggle" title="Speak replies (browser console parity)">SPEAK ON</button>
+      <div class="grow"></div>
+      <div class="pill" id="voiceState">voice: ready</div>
+      <div class="pill live" id="clock"></div>
+      <a class="pill btn" id="openAgents" href="/agents-ui/" title="Agents UI">Agents</a>
+      <a class="pill btn" id="openVoiceLab" href="/voice-lab/" title="Voice Lab UI (speech still via RealAI :8001)">Voice</a>
+      <button type="button" class="pill btn" id="openBrowser" title="Open Hive browser console">Browser</button>
+      <button type="button" class="pill btn" id="openSettings" title="Chat settings (from Next shell)">Settings</button>
+      <button type="button" class="pill btn" id="toggleOps" title="Toggle ability dock">Ops</button>
+    </header>
+    <div class="feed" id="feed"></div>
+    <div class="composer-wrap">
+      <form class="composer" id="form">
+        <textarea id="input" rows="2" placeholder="Talk normally — or /tools /hive /heal /multi … · click Ops →"></textarea>
+        <div class="bar">
+          <span class="ghost">ENTER send · plain English works · Ops dock for abilities</span>
+          <button class="send" id="send" type="submit">Send</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <aside class="ops" id="ops">
+    <h3>Ops · ability dock</h3>
+    <div class="stat"><b>Provider</b><span>RealAI Hive — local only</span></div>
+    <div class="stat"><b>Stack</b><span id="stackLine">loading…</span></div>
+    <div class="tabs">
+      <button class="tab on" data-tab="abilities">Abilities</button>
+      <button class="tab" data-tab="tools">Tools</button>
+      <button class="tab" data-tab="agents">Agents</button>
+      <button class="tab" data-tab="hive">Hive</button>
+      <button class="tab" data-tab="fusion">Fusion</button>
+    </div>
+    <input class="filter" id="filter" placeholder="Filter abilities / tools…" />
+    <div class="dock" id="dock"></div>
+    <div class="fusion-panel" id="fusionPanel" hidden>
+      <div class="stat"><b>Hive</b><span id="fusHive">…</span></div>
+      <div class="stat"><b>Vulkan</b><span id="fusVulkan">…</span></div>
+      <div class="stat"><b>Voice Lab</b><span id="fusVoice">…</span></div>
+      <div class="stat"><b>Overseer</b><span>one-shot via Hive chat</span></div>
+      <button type="button" class="chip" id="fusOverseer" style="margin:8px 10px;display:block;width:calc(100% - 20px)">Ask overseer for stack brief</button>
+      <button type="button" class="chip" id="fusHeal" style="margin:0 10px 8px;display:block;width:calc(100% - 20px)">/heal status</button>
+      <button type="button" class="chip" id="fusMulti" style="margin:0 10px 8px;display:block;width:calc(100% - 20px)">/multi hive next actions</button>
+      <a class="chip" href="/agents-ui/" style="margin:0 10px 8px;display:block;width:calc(100% - 20px);text-align:center;text-decoration:none">Open Agents UI</a>
+      <a class="chip" href="/voice-lab/" style="margin:0 10px 12px;display:block;width:calc(100% - 20px);text-align:center;text-decoration:none">Voice Lab UI (speech via :8001)</a>
+    </div>
+  </aside>
+</div>
+
+<div id="settingsDrawer" hidden style="position:fixed;inset:0;z-index:80;display:none;align-items:stretch;justify-content:flex-end;background:rgba(0,0,0,.45)">
+  <div style="width:min(360px,100%);background:#0b0b11;border-left:1px solid rgba(255,255,255,.08);padding:14px;overflow:auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <strong style="letter-spacing:.08em;text-transform:uppercase;font-size:12px">Chat settings</strong>
+      <button type="button" class="pill btn" id="closeSettings">Close</button>
+    </div>
+    <label for="setModel" style="display:block;font-size:11px;color:#8a8a96;margin:8px 0 4px">Model</label>
+    <select id="setModel" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:#12121a;color:#ececf1">
+      <option value="realai-hive">realai-hive (console default)</option>
+      <option value="realai-default-coder">RealAI Coder</option>
+      <option value="realai-default">RealAI Default</option>
+    </select>
+    <label for="setTemp" style="display:block;font-size:11px;color:#8a8a96;margin:8px 0 4px">Temperature <span id="setTempVal">0.35</span></label>
+    <input id="setTemp" type="range" min="0" max="1.5" step="0.05" value="0.35" style="width:100%" />
+    <label for="setMaxTok" style="display:block;font-size:11px;color:#8a8a96;margin:8px 0 4px">Max tokens</label>
+    <input id="setMaxTok" type="number" min="128" max="8192" step="64" value="1024" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:#12121a;color:#ececf1" />
+    <label for="setSystem" style="display:block;font-size:11px;color:#8a8a96;margin:8px 0 4px">System prompt</label>
+    <textarea id="setSystem" rows="5" placeholder="Optional system prompt (Next shell parity)" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:#12121a;color:#ececf1"></textarea>
+    <p style="margin-top:12px;font-size:10px;color:#8a8a96;font-family:ui-monospace,Consolas,monospace">Saved in this browser. Chat still hits RealAI :8001 only.</p>
+  </div>
+</div>
+<div class="hive-panel" id="hivePanel" hidden>
+  <div class="stat"><b>Live hive</b><span id="hiveLive">.</span></div>
+  <div class="stat"><b>Roles</b><span id="hiveRolesLive">.</span></div>
+  <div class="stat"><b>Agents API</b><span id="hiveAgentsLive">.</span></div>
+  <button type="button" class="chip" id="hiveRefresh" style="margin:0 10px 8px;display:block;width:calc(100% - 20px)">Refresh hive + agents</button>
+  <div class="sec">Run from console</div>
+  <label for="hiveRunAgent" class="sec" style="font-weight:400;margin:0 10px 4px;display:block">Agent</label>
+  <select id="hiveRunAgent" style="margin:0 10px 6px;width:calc(100% - 20px);padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:#0e0e15;color:#ececf1"></select>
+  <label for="hiveRunTask" class="sec" style="font-weight:400;margin:0 10px 4px;display:block">Task</label>
+  <input id="hiveRunTask" placeholder="Hive / agent task" style="margin:0 10px 6px;width:calc(100% - 20px);padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:#0e0e15;color:#ececf1" />
+  <label style="margin:0 10px 8px;display:flex;gap:8px;align-items:center;font-size:11px;color:#8a8a96"><input type="checkbox" id="hiveRunMulti" checked /> multi-agent</label>
+  <button type="button" class="chip" id="hiveFillMulti" style="margin:0 10px 6px;display:block;width:calc(100% - 20px)">Sample hive health task</button>
+  <button type="button" class="chip" id="hiveRunBtn" style="margin:0 10px 8px;display:block;width:calc(100% - 20px);background:rgba(214,255,63,.15);border-color:rgba(214,255,63,.45)">Run via Hive API</button>
+  <button type="button" class="chip" id="hiveFillChatMulti" style="margin:0 10px 8px;display:block;width:calc(100% - 20px)">Fill chat /multi instead</button>
+  <div class="sec">Live watcher</div>
+  <iframe id="hiveWatchFrame" title="Agents watch" src="/agents-ui/" style="margin:0 10px 8px;width:calc(100% - 20px);height:min(52vh,420px);border:1px solid rgba(255,255,255,.08);border-radius:12px;background:#07070b"></iframe>
+  <a class="chip" href="/agents-ui/" target="_blank" rel="noopener" style="margin:0 10px 8px;display:block;width:calc(100% - 20px);text-align:center;text-decoration:none">Open watcher fullscreen</a>
+  <p style="margin:8px 12px;font-size:10px;color:#8a8a96">Agents UI is watch-only (graph + SSE). Runnable commands live here in Console.</p>
+</div>
+
+<script>
+(function(){
+  const HIVE = (window.__REALAI_HIVE__ || (location.protocol === 'http:' || location.protocol === 'https:' ? location.origin : 'http://127.0.0.1:8001')).replace(/\/$/, '');
+  const MODE = String(window.__REALAI_CONSOLE_MODE__ || '').toLowerCase() || (typeof acquireVsCodeApi === 'function' ? 'vscode' : 'browser');
+  const IS_BROWSER = MODE === 'browser' || typeof acquireVsCodeApi !== 'function';
+
+  function deliver(msg){
+    window.dispatchEvent(new MessageEvent('message', { data: msg }));
+  }
+
+  async function hiveGet(path){
+    const res = await fetch(HIVE + path, { signal: AbortSignal.timeout(20000) });
+    if (!res.ok) throw new Error('HTTP ' + res.status + ' ' + path);
+    return res.json();
+  }
+  async function hivePost(path, body, headers){
+    const res = await fetch(HIVE + path, {
+      method: 'POST',
+      headers: Object.assign({ 'Content-Type': 'application/json' }, headers || {}),
+      body: JSON.stringify(body || {}),
+      signal: AbortSignal.timeout(120000),
+    });
+    const text = await res.text();
+    let data = null;
+    try { data = text ? JSON.parse(text) : null; } catch (_) { data = { raw: text }; }
+    if (!res.ok) throw new Error((data && (data.error || data.message)) || ('HTTP ' + res.status));
+    return data;
+  }
+  function toolName(t){ return (t && (t.function && t.function.name || t.name)) || ''; }
+  function defaultToolArgs(name, args){
+    if (args && Object.keys(args).length) return args;
+    if (name === 'workspace_list') return { path: '.' };
+    if (name === 'workspace_grep') return { pattern: 'RealAI|console', path: '.', glob: '*.{py,ts,md}' };
+    if (name === 'workspace_read') return { path: 'docs/RUN_SERVERS.md', limit: 80 };
+    if (name === 'multi_agent_run') return { task: 'Summarize RealAI Hive health and list 3 next actions.', mode: 'pipeline' };
+    return {};
+  }
+  async function browserBootstrap(){
+    const [health, hive, caps, abilitiesPack, tools, agents, coverage, voiceLab] = await Promise.all([
+      hiveGet('/health').catch(e => ({ error: String(e) })),
+      hiveGet('/v1/hive').catch(() => ({})),
+      hiveGet('/v1/capabilities').catch(() => ({})),
+      hiveGet('/v1/abilities').catch(() => hiveGet('/v1/abilities/list').catch(() => ({ data: [] }))),
+      hiveGet('/v1/tools').catch(() => ({ tools: [] })),
+      hiveGet('/v1/agents').catch(() => ({ data: [] })),
+      hivePost('/v1/tools/execute', { name: 'ability_coverage', arguments: {} }).catch(() => null),
+      Promise.resolve({ ok: true, provider: 'realai' }),
+    ]);
+    const capList = Array.isArray(caps && caps.capabilities) ? caps.capabilities
+      : Array.isArray(caps) ? caps : [];
+    const toolNames = ((tools && tools.tools) || []).map(toolName).filter(Boolean);
+    
+    const abilRows = Array.isArray(abilitiesPack && abilitiesPack.data) ? abilitiesPack.data
+      : (Array.isArray(abilitiesPack && abilitiesPack.abilities) ? abilitiesPack.abilities : []);
+    const abilNames = abilRows.map(a => (typeof a === 'string' ? a : (a && (a.id || a.name || a.title)))).filter(Boolean);
+    if (abilNames.length) {
+      const have = new Set((capList || []).map(c => (typeof c === 'string' ? c : (c && (c.id || c.name || c.title)))));
+      abilNames.forEach(n => { if (!have.has(n)) capList.push(typeof n === 'string' ? n : String(n)); });
+    }
+
+    const agentIds = ((agents && agents.data) || []).map(a => a && a.id).filter(Boolean);
+    const hiveOk = !!(health && (health.status === 'ok' || health.status === 'degraded'));
+    const vulkanOk = !!(health && health.vulkan && health.vulkan.ok);
+    const voiceLabOk = !!(voiceLab && (voiceLab.ok === true || voiceLab.status === 'ok'));
+    const hiveRoles = ((hive && hive.agents && hive.agents.present) || (hive && hive.agents && hive.agents.agents) || [])
+      .map(r => (typeof r === 'string' ? r : (r && r.id))).filter(Boolean);
+    deliver({
+      command: 'bootstrap',
+      version: '1.2.15-browser',
+      stage: { phaseId: 'Phase I', phaseTitle: 'Hive console + Fusion', tipLine: 'Console look · Fusion stack in Ops' },
+      snap: {
+        hiveOk,
+        vulkanOk,
+        voiceOk: voiceLabOk,
+        voiceLabOk,
+        baseUrl: HIVE,
+        toolsCount: toolNames.length,
+        agentsCount: agentIds.length,
+        capabilitiesCount: capList.length,
+        summaryLine: 'Hive ' + (hiveOk ? 'OK' : 'DOWN') + ' · Vulkan ' + (vulkanOk ? 'OK' : 'down') + ' · Voice Lab ' + (voiceLabOk ? 'OK' : 'down'),
+        hiveAgents: hiveRoles,
+      },
+      capabilities: capList,
+      tools: toolNames,
+      agents: agentIds,
+      hiveRoles,
+      abilityStatus: [],
+      coverage: (coverage && coverage.result && coverage.result.coverage) || (coverage && coverage.coverage) || null,
+      voiceProvider: voiceLabOk ? 'voice-lab' : 'realai-voice',
+    });
+  }
+  async function browserChat(text, history){
+    const low = String(text || '').toLowerCase().trim();
+    if (low === '/phase' || low === '/where') {
+      deliver({ command: 'assistant', text: 'Browser console on ' + HIVE + '\nSame surface as VS Code RealAI Console v1.2.15.\nUse Ops dock for abilities/tools/agents.' });
+      return;
+    }
+    if (low === '/repo' || low === '/read') {
+      await browserRunTool('workspace_list', { path: '.' });
+      return;
+    }
+    if (low === '/smoke' || low.startsWith('/smoke')) {
+      await browserSmoke();
+      return;
+    }
+    if (low.startsWith('/multi')) {
+      const task = String(text).replace(/^\/multi\s*/i, '').trim() || 'Summarize Hive health';
+      await browserRunTool('multi_agent_run', { task, mode: 'pipeline' });
+      return;
+    }
+    deliver({ command: 'status', text: 'Hive chat…' });
+    const messages = []
+      .concat((history || []).filter(m => m.role === 'user' || m.role === 'assistant').slice(-16))
+      .concat([{ role: 'user', content: text }]);
+    try {
+      const msgs = (chatSettings.systemPrompt || '').trim()
+        ? [{ role: 'system', content: String(chatSettings.systemPrompt).trim() }].concat(messages)
+        : messages;
+      const json = await hivePost('/v1/chat/completions', {
+        model: chatSettings.model || 'realai-hive',
+        messages: msgs,
+        temperature: Number(chatSettings.temperature ?? 0.35),
+        max_tokens: Number(chatSettings.maxTokens || 1024),
+        stream: false,
+        memory: true,
+        tools: true,
+      }, {
+        'X-RealAI-Tools': 'on',
+        'X-RealAI-Voice': voiceOn ? 'on' : 'off',
+        'X-RealAI-Memory': 'on',
+      });
+      const reply = (((json.choices || [])[0] || {}).message || {}).content || '(empty reply)';
+      deliver({
+        command: 'assistant',
+        text: String(reply).trim() || '(empty reply)',
+        voice: (json.realai_meta && json.realai_meta.voice) || null,
+        speak: voiceOn,
+      });
+    } catch (e) {
+      deliver({ command: 'assistant', text: 'Error: ' + (e && e.message || e) });
+    }
+  }
+  async function browserRunTool(name, args){
+    const resolved = String(name || '').trim();
+    if (!resolved) { deliver({ command: 'assistant', text: 'No tool name provided.' }); return; }
+    if (resolved.startsWith('ability.') || resolved.startsWith('/')) {
+      await browserRunAbility(resolved.replace(/^\//, ''));
+      return;
+    }
+    deliver({ command: 'status', text: 'Running ' + resolved + '…' });
+    try {
+      const result = await hivePost('/v1/tools/execute', {
+        name: resolved,
+        arguments: defaultToolArgs(resolved, args || {}),
+      });
+      deliver({ command: 'assistant', text: 'Tool `' + resolved + '`\n\n```json\n' + JSON.stringify(result, null, 2).slice(0, 12000) + '\n```' });
+    } catch (e) {
+      try {
+        await browserRunAbility(resolved, (args && args.input) || ('Console invoke ' + resolved));
+      } catch (e2) {
+        deliver({ command: 'assistant', text: 'Tool ' + resolved + ' failed: ' + (e && e.message || e) });
+      }
+    }
+  }
+  async function browserRunAbility(name, input){
+    const ability = String(name || '').replace(/^ability\./, '');
+    deliver({ command: 'status', text: 'Running ability ' + ability + '…' });
+    try {
+      let result;
+      try {
+        result = await hivePost('/v1/tools/execute', {
+          name: name.startsWith('ability.') ? name : ('ability.' + ability),
+          arguments: { input: input || ('Console invoke ' + ability) },
+        });
+      } catch (_) {
+        result = await hivePost('/v1/abilities/run', {
+          ability,
+          input: input || ('Console invoke ' + ability),
+        });
+      }
+      deliver({ command: 'assistant', text: 'Ability `' + ability + '`\n\n```json\n' + JSON.stringify(result, null, 2).slice(0, 12000) + '\n```' });
+    } catch (e) {
+      deliver({ command: 'assistant', text: 'Ability ' + ability + ' failed: ' + (e && e.message || e) });
+    }
+  }
+  async function browserSmoke(){
+    const checks = [
+      { label: 'health', run: () => hiveGet('/health') },
+      { label: 'hive', run: () => hiveGet('/v1/hive') },
+      { label: 'tools', run: () => hiveGet('/v1/tools') },
+      { label: 'agents', run: () => hiveGet('/v1/agents') },
+      { label: 'capabilities', run: () => hiveGet('/v1/capabilities') },
+      { label: 'workspace_list', run: () => hivePost('/v1/tools/execute', { name: 'workspace_list', arguments: { path: '.' } }) },
+      { label: 'self_heal_status', run: () => hivePost('/v1/tools/execute', { name: 'self_heal_status', arguments: {} }) },
+      { label: 'ability_coverage', run: () => hivePost('/v1/tools/execute', { name: 'ability_coverage', arguments: {} }) },
+    ];
+    const lines = ['Console smoke test (browser parity)', ''];
+    let pass = 0;
+    for (const c of checks) {
+      try {
+        const result = await c.run();
+        lines.push('PASS  ' + c.label + '  (' + JSON.stringify(result ?? null).length + ' bytes)');
+        pass++;
+      } catch (e) {
+        lines.push('FAIL  ' + c.label + '  ' + (e && e.message || e));
+      }
+    }
+    lines.push('', 'Result: ' + pass + '/' + checks.length + ' passed');
+    deliver({ command: 'assistant', text: lines.join('\n') });
+  }
+  async function browserLocal(kind){
+    if (kind === 'phase') {
+      deliver({ command: 'assistant', text: [
+        '1) Phase I — Hive browser console',
+        '2) Same UI as apps/vscode RealAI Console v1.2.15',
+        '3) Hive ' + HIVE,
+        '4) SPEAK + tools on · Ops dock = abilities/tools/agents',
+      ].join('\n') });
+      return;
+    }
+    if (kind === 'patches') {
+      deliver({ command: 'assistant', text: 'Browser console: open VS Code RealAI Console for apps/vscode patch audit, or run /multi from here.' });
+      return;
+    }
+    if (kind === 'repo') { await browserRunTool('workspace_list', { path: '.' }); return; }
+    if (kind === 'smoke') { await browserSmoke(); return; }
+    deliver({ command: 'assistant', text: 'Unknown local command: ' + kind });
+  }
+
+  const browserHost = {
+    postMessage(msg){
+      const cmd = msg && msg.command;
+      Promise.resolve().then(async () => {
+        try {
+          if (cmd === 'ready' || cmd === 'refresh') await browserBootstrap();
+          else if (cmd === 'chat') await browserChat(String(msg.text || ''), Array.isArray(msg.history) ? msg.history : []);
+          else if (cmd === 'runTool') await browserRunTool(String(msg.name || ''), msg.args || {});
+          else if (cmd === 'runAbility') await browserRunAbility(String(msg.name || ''), msg.input);
+          else if (cmd === 'local') await browserLocal(String(msg.kind || ''));
+          else if (cmd === 'smoke') await browserSmoke();
+          else if (cmd === 'setVoice') { /* voiceOn toggled in UI */ }
+          else if (cmd === 'openBrowserConsole') { /* already in browser */ }
+        } catch (e) {
+          deliver({ command: 'error', text: String(e && e.message || e) });
+        }
+      });
+    }
+  };
+  const vscode = IS_BROWSER ? browserHost : acquireVsCodeApi();
+
+  let boot = { version:'', stage:{}, snap:{}, capabilities:[], tools:[], agents:[], hiveRoles:[], abilityStatus:[], coverage:null, voiceProvider:'realai-voice' };
+  function statusFor(id){
+    const raw = String(id||'').replace(/^ability\./,'').replace(/^partial:/,'');
+    const row = (boot.abilityStatus||[]).find(a => a.id === raw || a.id === id);
+    return row && row.status ? row.status : '';
+  }
+  const SETTINGS_KEY = 'realai:console:settings';
+  const THREADS_KEY = 'realai:console:threads';
+  const ACTIVE_KEY = 'realai:console:active';
+  let chatSettings = { model: 'realai-hive', temperature: 0.35, maxTokens: 1024, systemPrompt: '' };
+  try {
+    const raw = localStorage.getItem(SETTINGS_KEY);
+    if (raw) chatSettings = Object.assign(chatSettings, JSON.parse(raw));
+  } catch (_) {}
+  function saveSettings(){
+    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(chatSettings)); } catch(_){}
+    const pill = document.getElementById('pillModel');
+    if (pill) pill.textContent = 'model · ' + (chatSettings.model || 'realai-hive');
+  }
+  function loadThreads(){
+    try {
+      const raw = localStorage.getItem(THREADS_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length) return parsed;
+    } catch(_){}
+    return null;
+  }
+  function saveThreads(){
+    try {
+      localStorage.setItem(THREADS_KEY, JSON.stringify(threads));
+      localStorage.setItem(ACTIVE_KEY, active);
+    } catch(_){}
+  }
+  (function wireUnifiedSettings(){
+    const drawer = document.getElementById('settingsDrawer');
+    const openBtn = document.getElementById('openSettings');
+    const closeBtn = document.getElementById('closeSettings');
+    const model = document.getElementById('setModel');
+    const temp = document.getElementById('setTemp');
+    const tempVal = document.getElementById('setTempVal');
+    const maxTok = document.getElementById('setMaxTok');
+    const sys = document.getElementById('setSystem');
+    function syncForm(){
+      if (model) model.value = chatSettings.model || 'realai-hive';
+      if (temp) temp.value = String(chatSettings.temperature ?? 0.35);
+      if (tempVal) tempVal.textContent = String(chatSettings.temperature ?? 0.35);
+      if (maxTok) maxTok.value = String(chatSettings.maxTokens || 1024);
+      if (sys) sys.value = chatSettings.systemPrompt || '';
+      saveSettings();
+    }
+    function openDrawer(){
+      if (!drawer) return;
+      drawer.hidden = false;
+      drawer.style.display = 'flex';
+      syncForm();
+    }
+    function closeDrawer(){
+      if (!drawer) return;
+      drawer.hidden = true;
+      drawer.style.display = 'none';
+    }
+    if (openBtn) openBtn.onclick = openDrawer;
+    if (closeBtn) closeBtn.onclick = closeDrawer;
+    if (drawer) drawer.addEventListener('click', (e) => { if (e.target === drawer) closeDrawer(); });
+    if (model) model.onchange = () => { chatSettings.model = model.value; saveSettings(); };
+    if (temp) temp.oninput = () => { chatSettings.temperature = Number(temp.value); if (tempVal) tempVal.textContent = temp.value; saveSettings(); };
+    if (maxTok) maxTok.onchange = () => { chatSettings.maxTokens = Number(maxTok.value)||1024; saveSettings(); };
+    if (sys) sys.oninput = () => { chatSettings.systemPrompt = sys.value; saveSettings(); };
+    const hr = document.getElementById('hiveRefresh');
+    if (hr) hr.onclick = () => { try { browserBootstrap(); } catch(_){ vscode.postMessage({ command:'refresh' }); } };
+    const hm = document.getElementById('hiveFillMulti');
+    if (hm) hm.onclick = () => { input.value = '/multi Summarize Hive health and list 3 next actions.'; input.focus(); };
+    syncForm();
+  })();
+
+  (function wireHiveRuns(){
+    function fillHiveAgentSelect(){
+      const sel = document.getElementById('hiveRunAgent');
+      if (!sel) return;
+      const ids = [];
+      (boot.hiveRoles || []).forEach(r => { if (r && !ids.includes(r)) ids.push(r); });
+      (boot.agents || []).forEach(a => { if (a && !ids.includes(a)) ids.push(a); });
+      const cur = sel.value;
+      sel.innerHTML = ids.map(id => `<option value="${String(id).replace(/"/g,'')}">${String(id)}</option>`).join('')
+        || '<option value="overseer">overseer</option>';
+      if (cur && ids.includes(cur)) sel.value = cur;
+      try {
+        const q = new URLSearchParams(location.search).get('agent');
+        if (q) {
+          if (![...sel.options].some(o => o.value === q)) {
+            const o = document.createElement('option'); o.value = q; o.textContent = q; sel.appendChild(o);
+          }
+          sel.value = q;
+        }
+      } catch(_){}
+    }
+    const fill = document.getElementById('hiveFillMulti');
+    if (fill) fill.onclick = () => {
+      const task = document.getElementById('hiveRunTask');
+      if (task) task.value = 'Summarize Hive health and propose 3 next actions under C:\\RealAI-clean';
+      const m = document.getElementById('hiveRunMulti'); if (m) m.checked = true;
+    };
+    const fillChat = document.getElementById('hiveFillChatMulti');
+    if (fillChat) fillChat.onclick = () => {
+      const task = (document.getElementById('hiveRunTask') || {}).value || 'Summarize Hive health and list 3 next actions.';
+      input.value = '/multi ' + task;
+      input.focus();
+    };
+    const runBtn = document.getElementById('hiveRunBtn');
+    if (runBtn) runBtn.onclick = async () => {
+      const agent_id = (document.getElementById('hiveRunAgent') || {}).value || 'overseer';
+      const task = ((document.getElementById('hiveRunTask') || {}).value || '').trim();
+      const multi = !!(document.getElementById('hiveRunMulti') || {}).checked;
+      if (!task) { deliver({ command:'assistant', text:'Hive run needs a task.' }); return; }
+      runBtn.disabled = true; runBtn.textContent = 'Running…';
+      try {
+        const j = await hivePost('/v1/agents/run', { agent_id, task, multi });
+        deliver({ command:'assistant', text: 'Hive run ' + agent_id + ':\n' + JSON.stringify(j, null, 2).slice(0, 4000) });
+        const fr = document.getElementById('hiveWatchFrame');
+        if (fr) { try { fr.contentWindow.location.reload(); } catch(_){ fr.src = fr.src; } }
+      } catch (e) {
+        deliver({ command:'assistant', text: 'Hive run failed: ' + (e && e.message || e) });
+      }
+      runBtn.disabled = false; runBtn.textContent = 'Run via Hive API';
+    };
+    const hr = document.getElementById('hiveRefresh');
+    if (hr) {
+      const prev = hr.onclick;
+      hr.onclick = async () => {
+        try { if (typeof browserBootstrap === 'function') await browserBootstrap(); } catch(_){}
+        try { if (typeof window.__realaiFillHiveAgents === 'function') window.__realaiFillHiveAgents(); } catch(_){}
+        const fr = document.getElementById('hiveWatchFrame');
+        if (fr) { try { fr.contentWindow.location.reload(); } catch(_){ fr.src = '/agents-ui/'; } }
+      };
+    }
+    // refresh select when bootstrap lands
+    window.addEventListener('message', (ev) => {
+      const d = ev && ev.data;
+      if (d && d.command === 'bootstrap') fillHiveAgentSelect();
+    });
+    window.__realaiFillHiveAgents = fillHiveAgentSelect;
+    fillHiveAgentSelect();
+  })();
+
+
+  let threads = loadThreads() || [{ id:'t1', title:'Boot console', messages:[] }];
+  let active = localStorage.getItem(ACTIVE_KEY) || 't1';
+  if (!threads.some(x => x.id === active)) active = threads[0].id;
+  let tab = 'abilities';
+  let streaming = false;
+  let streamBuf = '';
+  let voiceOn = true;
+
+
+
+
+  let voiceUnlocked = false;
+  let lastAudio = null;
+
+  function setVoiceUi(label){
+    const t = document.getElementById('voiceToggle');
+    const s = document.getElementById('voiceState');
+    if (t) t.textContent = voiceOn ? 'SPEAK ON' : 'SPEAK OFF';
+    if (t) t.classList.toggle('on', voiceOn);
+    if (s) s.textContent = label || (voiceOn ? 'voice: ready' : 'voice: muted');
+  }
+  function unlockVoice(){
+    if (voiceUnlocked) return;
+    voiceUnlocked = true;
+    try {
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        const warm = new SpeechSynthesisUtterance('');
+        warm.volume = 0;
+        window.speechSynthesis.speak(warm);
+        window.speechSynthesis.cancel();
+      }
+    } catch (_) {}
+    setVoiceUi(voiceOn ? 'voice: unlocked' : 'voice: muted');
+  }
+  function speakAloud(text){
+    if (!voiceOn || !text || !window.speechSynthesis) return false;
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(String(text).slice(0, 1200));
+      u.rate = 1.02;
+      const voices = window.speechSynthesis.getVoices() || [];
+      const pick = voices.find(v => /en/i.test(v.lang)) || voices[0];
+      if (pick) u.voice = pick;
+      window.speechSynthesis.speak(u);
+      setVoiceUi('voice: browser');
+      return true;
+    } catch (_) { return false; }
+  }
+  function playAudioB64(b64, format){
+    if (!b64) return Promise.resolve(false);
+    try {
+      const mime = format === 'mp3' ? 'audio/mpeg' : 'audio/wav';
+      if (lastAudio) { try { lastAudio.pause(); } catch(_){} }
+      const audio = new Audio('data:' + mime + ';base64,' + b64);
+      lastAudio = audio;
+      return audio.play().then(() => true).catch(() => false);
+    } catch (_) { return Promise.resolve(false); }
+  }
+  async function speakReply(text, voiceMeta){
+    if (!voiceOn || !text) return;
+    unlockVoice();
+    const metaBytes = Number((voiceMeta && (voiceMeta.audio_bytes || voiceMeta.bytes)) || 0);
+    if (voiceMeta && voiceMeta.audio_b64 && metaBytes > 64) {
+      const ok = await playAudioB64(voiceMeta.audio_b64, voiceMeta.format || 'wav');
+      if (ok) { setVoiceUi('voice: ' + (voiceMeta.backend || voiceMeta.voice || 'orch')); return; }
+    }
+    // RealAI same-origin speech only.
+    const speechPayload = JSON.stringify({
+      input: String(text).slice(0, 1200),
+      model: 'realai-tts',
+      voice: 'laura',
+      response_format: 'json',
+    });
+    // Speech organ stays behind the RealAI gateway.
+    const speechEndpoints = [
+      HIVE + '/v1/audio/speech',
+    ];
+    for (const url of speechEndpoints) {
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: speechPayload,
+          signal: AbortSignal.timeout(90000),
+        });
+        const ctype = String(res.headers.get('content-type') || '');
+        if (ctype.includes('audio') || ctype.includes('wav')) {
+          const buf = await res.arrayBuffer();
+          if (buf.byteLength > 64) {
+            if (lastAudio) { try { lastAudio.pause(); } catch(_){} }
+            const audio = new Audio(URL.createObjectURL(new Blob([buf], { type: 'audio/wav' })));
+            lastAudio = audio;
+            try { await audio.play(); setVoiceUi('voice: realai'); return; } catch (_) {}
+          }
+          continue;
+        }
+        const data = await res.json();
+        if (data.audio_b64 && Number(data.bytes || 0) > 64) {
+          const ok = await playAudioB64(data.audio_b64, data.format || 'wav');
+          if (ok) {
+            setVoiceUi('voice: ' + (data.backend || (data.realai && data.realai.backend) || data.voice || 'orch'));
+            return;
+          }
+        }
+      } catch (_) {}
+    }
+    if (!speakAloud(text)) setVoiceUi('voice: silent');
+  }
+
+  const app = document.getElementById('app');
+  const rail = document.getElementById('rail');
+  const ops = document.getElementById('ops');
+  const scrim = document.getElementById('scrim');
+  const threadsEl = document.getElementById('threads');
+  const feed = document.getElementById('feed');
+  const form = document.getElementById('form');
+  const input = document.getElementById('input');
+  const send = document.getElementById('send');
+  const dock = document.getElementById('dock');
+  const filter = document.getElementById('filter');
+  const toggleRail = document.getElementById('toggleRail');
+  const toggleOps = document.getElementById('toggleOps');
+
+  function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function tick(){ document.getElementById('clock').textContent = new Date().toLocaleTimeString(); }
+  tick(); setInterval(tick, 1000);
+
+  function syncLayoutToggles(){
+    const w = window.innerWidth || document.documentElement.clientWidth || 0;
+    const narrow = w <= 780;
+    const mid = w <= 980;
+    if (!narrow) {
+      app.classList.remove('show-rail','show-ops');
+      scrim.hidden = true;
+    }
+    toggleRail.classList.toggle('on', (!mid && !app.classList.contains('no-rail')) || app.classList.contains('show-rail'));
+    toggleOps.classList.toggle('on', (!narrow && !app.classList.contains('no-ops')) || app.classList.contains('show-ops'));
+  }
+  function closeDrawers(){
+    app.classList.remove('show-rail','show-ops');
+    scrim.hidden = true;
+    syncLayoutToggles();
+  }
+  toggleRail.onclick = () => {
+    const w = window.innerWidth || 0;
+    if (w <= 780) {
+      const on = !app.classList.contains('show-rail');
+      app.classList.toggle('show-rail', on);
+      if (on) app.classList.remove('show-ops');
+      scrim.hidden = !on && !app.classList.contains('show-ops');
+    } else if (w <= 980) {
+      app.classList.toggle('show-rail');
+    } else {
+      app.classList.toggle('no-rail');
+    }
+    syncLayoutToggles();
+  };
+  toggleOps.onclick = () => {
+    const w = window.innerWidth || 0;
+    if (w <= 780) {
+      const on = !app.classList.contains('show-ops');
+      app.classList.toggle('show-ops', on);
+      if (on) app.classList.remove('show-rail');
+      scrim.hidden = !on && !app.classList.contains('show-rail');
+    } else {
+      app.classList.toggle('no-ops');
+    }
+    syncLayoutToggles();
+  };
+  scrim.onclick = closeDrawers;
+  window.addEventListener('resize', () => {
+    const w = window.innerWidth || 0;
+    if (w > 780) closeDrawers();
+    syncLayoutToggles();
+  });
+  syncLayoutToggles();
+
+  function setLive(ok){
+    document.getElementById('nodeState').textContent = ok ? 'LIVE' : 'OFFLINE';
+    document.getElementById('dot').classList.toggle('off', !ok);
+    document.getElementById('dot2').classList.toggle('off', !ok);
+  }
+
+  function emptyState(){
+    return `<div class="empty">
+      <h2>Just talk.<br><span>I'll do the rest.</span></h2>
+      <p>Plain English to RealAI on this PC — tools, hive agents, voice, and the repo. Ops dock is there when you want one-click.</p>
+      <div class="chips">
+        <button class="chip" data-p="hey, what can you help me with?">what can you do?</button>
+        <button class="chip" data-p="/research RealAI local hive">research</button>
+        <button class="chip" data-p="/image a neon hive console">draw</button>
+        <button class="chip" data-p="/multi Audit apps/vscode and list 3 concrete patches">multi</button>
+        <button class="chip" data-p="/speak hello from RealAI">speak</button>
+        <button class="chip" data-p="/remember user prefers local-only RealAI">remember</button>
+        <button class="chip" data-p="/hive">hive</button>
+        <button class="chip" data-p="/heal">heal</button>
+        <button class="chip" data-p="/nests">nests</button>
+        <button class="chip" data-p="/tools">tools</button>
+        <button class="chip" data-p="$ whoami">$ whoami</button>
+      </div>
+    </div>`;
+  }
+
+  function renderThreads(){
+    threadsEl.innerHTML = threads.map(t => `
+      <button class="thread ${t.id===active?'on':''}" data-id="${t.id}">
+        ${esc(t.title)}<small>${t.messages.length} turns</small>
+      </button>`).join('');
+    threadsEl.querySelectorAll('.thread').forEach(b => b.onclick = () => { active=b.dataset.id; render(); });
+  }
+
+  function renderFeed(){
+    const t = threads.find(x => x.id===active);
+    if (!t.messages.length) {
+      feed.innerHTML = emptyState();
+      feed.querySelectorAll('.chip').forEach(c => c.onclick = () => { input.value=c.dataset.p; input.focus(); });
+      return;
+    }
+    feed.innerHTML = t.messages.map(m => `
+      <div class="msg ${m.role}">
+        <div class="who ${m.role==='assistant'?'bot':''}">${m.role==='assistant'?'REALAI':'YOU'}</div>
+        <div class="bubble">${esc(m.content)}</div>
+      </div>`).join('');
+    feed.scrollTop = feed.scrollHeight;
+  }
+
+  function capName(c){ return typeof c === 'string' ? c : (c.id || c.name || JSON.stringify(c)); }
+
+  function renderDock(){
+    const fusionPanel = document.getElementById('fusionPanel');
+    const showFusion = tab === 'fusion';
+    const hivePanel = document.getElementById('hivePanel');
+    const showHive = tab === 'hive';
+    if (fusionPanel) fusionPanel.hidden = !showFusion;
+    if (hivePanel) hivePanel.hidden = !showHive;
+    if (showHive) {
+      const s = boot.snap || {};
+      const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+      set('hiveLive', s.hiveOk ? ('OK · ' + (s.baseUrl || HIVE)) : 'DOWN');
+      set('hiveRolesLive', ((boot.hiveRoles||[]).join(', ') || 'none'));
+      set('hiveAgentsLive', String((boot.agents||[]).length) + ' ids');
+      try {
+        if (typeof window.__realaiFillHiveAgents === 'function') window.__realaiFillHiveAgents();
+        else {
+          const sel=document.getElementById('hiveRunAgent');
+          if(sel && !(sel.options&&sel.options.length)) {/* filled by wireHiveRuns */}
+        }
+      } catch(_){}
+      if (filter) filter.style.display = 'none';
+      if (dock) dock.style.display = 'none';
+      return;
+    }
+
+    if (filter) filter.style.display = (showFusion || tab === 'hive') ? 'none' : '';
+    if (dock) dock.style.display = (showFusion || tab === 'hive') ? 'none' : '';
+    if (showFusion) {
+      const s = boot.snap || {};
+      const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+      set('fusHive', s.hiveOk ? ('OK · ' + (s.baseUrl || HIVE)) : 'DOWN');
+      set('fusVulkan', s.vulkanOk ? 'OK · :8080' : 'down · start Vulkan');
+      set('fusVoice', s.voiceLabOk ? 'OK · via RealAI · UI /voice-lab/' : 'down · RealAI speech organ');
+      return;
+    }
+    const q = (filter.value||'').toLowerCase().trim();
+    let items = [];
+    if (tab === 'abilities') {
+      items = (boot.capabilities||[]).map(c => {
+        const name = capName(c);
+        return {
+          title: name,
+          sub: 'ability · click to run',
+          action: name.startsWith('ability.') ? name : ('ability.' + name),
+          kind: 'ability'
+        };
+      });
+      items = [
+        { title:'/phase', sub:'stage report', action:'phase', kind:'local' },
+        { title:'/patches', sub:'concrete apps/vscode patches', action:'patches', kind:'local' },
+        { title:'/repo', sub:'workspace_list', action:'repo', kind:'local' },
+        { title:'smoke test', sub:'batch abilities/tools/agents', action:'smoke', kind:'local' },
+        { title:'multi_agent_run', sub:'planner→worker→critic', action:'multi_agent_run', kind:'tool' },
+        { title:'workspace_list', sub:'hive files', action:'workspace_list', kind:'tool' },
+        { title:'self_heal_status', sub:'heal', action:'self_heal_status', kind:'tool' },
+        { title:'ability_coverage', sub:'coverage map', action:'ability_coverage', kind:'tool' },
+        ...items
+      ];
+    } else if (tab === 'tools') {
+      items = (boot.tools||[]).map(n => ({ title:n, sub:'hive tool · click to run', action:n, kind:'tool' }));
+    } else {
+      items = (boot.agents||[]).map(n => ({ title:n, sub:'agent · fills /multi', action:n, kind:'agent' }));
+      if ((boot.hiveRoles||[]).length) {
+        items = [
+          ...boot.hiveRoles.map(r => ({ title:r, sub:'hive role · fills /multi', action:r, kind:'agent' })),
+          ...items
+        ];
+      }
+    }
+    if (q) items = items.filter(i => (i.title+i.sub).toLowerCase().includes(q));
+    dock.innerHTML = items.slice(0, 200).map(i => {
+      const st = statusFor(i.action) || statusFor(i.title);
+      const badge = st ? `<span class="badge ${esc(st)}">${esc(st)}</span>` : '';
+      return `<button class="ability" data-kind="${i.kind}" data-action="${esc(i.action)}">
+        ${esc(i.title)}${badge}<small>${esc(i.sub)}</small>
+      </button>`;
+    }).join('') || '<div class="stat"><span>No matches</span></div>';
+    dock.querySelectorAll('.ability').forEach(b => {
+      b.onclick = () => onAbility(b.dataset.kind, b.dataset.action);
+    });
+  }
+
+  function onAbility(kind, action){
+    if (kind === 'local') {
+      vscode.postMessage({ command:'local', kind: action });
+      return;
+    }
+    if (kind === 'agent') {
+      input.value = `/multi Use hive role ${action} to audit apps/vscode and propose 3 file patches under apps/vscode only`;
+      input.focus();
+      return;
+    }
+    if (action === 'multi_agent_run') {
+      input.value = '/multi Audit apps/vscode and list 3 concrete patches under apps/vscode only';
+      input.focus();
+      return;
+    }
+    // Run immediately through extension host (tools/abilities resolved there)
+    if (action.startsWith('ability.') || kind === 'ability') {
+      vscode.postMessage({
+        command: 'runAbility',
+        name: action,
+        input: 'Invoked from RealAI Console ability dock'
+      });
+      return;
+    }
+    vscode.postMessage({ command:'runTool', name:action, args:{} });
+  }
+
+  function render(){ renderThreads(); renderFeed(); }
+
+  document.getElementById('newChat').onclick = () => {
+    const id = 't'+Date.now();
+    threads.unshift({ id, title:'New thread', messages:[] }); saveThreads();
+    active = id; render(); input.focus();
+  };
+
+  const voiceToggle = document.getElementById('voiceToggle');
+  if (voiceToggle) {
+    voiceToggle.onclick = () => {
+      unlockVoice();
+      voiceOn = !voiceOn;
+      setVoiceUi(voiceOn ? 'voice: ready' : 'voice: muted');
+      vscode.postMessage({ command: 'setVoice', on: voiceOn });
+    };
+  }
+  document.addEventListener('pointerdown', unlockVoice, { once: true });
+  const openBrowser = document.getElementById('openBrowser');
+  if (openBrowser) {
+    if (IS_BROWSER) {
+      openBrowser.textContent = 'Hive';
+      openBrowser.title = 'Already on Hive /console (VS Code parity)';
+      openBrowser.onclick = () => deliver({ command: 'status', text: 'Browser console · ' + HIVE + '/console' });
+    } else {
+      openBrowser.onclick = () => vscode.postMessage({ command: 'openBrowserConsole' });
+    }
+  }
+  setVoiceUi('voice: ready');
+  if (IS_BROWSER) {
+    const brand = document.getElementById('brandSub');
+    if (brand) brand.textContent = 'console // browser';
+  }
+
+  document.querySelectorAll('[data-local]').forEach(b => {
+    b.onclick = () => vscode.postMessage({ command:'local', kind:b.dataset.local });
+  });
+  document.querySelector('[data-refresh]').onclick = () => vscode.postMessage({ command:'refresh' });
+
+  document.querySelectorAll('.tab').forEach(t => {
+    t.onclick = () => {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+      t.classList.add('on');
+      tab = t.dataset.tab;
+      renderDock();
+    };
+  });
+  filter.oninput = () => renderDock();
+
+  function fillComposer(text){
+    input.value = text;
+    input.focus();
+  }
+  const fusOverseer = document.getElementById('fusOverseer');
+  if (fusOverseer) fusOverseer.onclick = () => {
+    fillComposer('/multi Overseer: brief Hive+Vulkan+Voice status and 3 next actions for RealAI-clean');
+    form.requestSubmit();
+  };
+  const fusHeal = document.getElementById('fusHeal');
+  if (fusHeal) fusHeal.onclick = () => { fillComposer('/heal'); form.requestSubmit(); };
+  const fusMulti = document.getElementById('fusMulti');
+  if (fusMulti) fusMulti.onclick = () => {
+    fillComposer('/multi List 3 concrete next actions for the local RealAI hive');
+    form.requestSubmit();
+  };
+  // Deep-link ?fusion=1 opens Ops on Fusion tab
+  try {
+    if (/[?&]fusion=1\b/.test(location.search || '')) {
+      const ft = document.querySelector('.tab[data-tab="fusion"]');
+      if (ft) ft.click();
+      app.classList.remove('no-ops');
+    }
+  } catch (_) {}
+
+  form.onsubmit = (e) => {
+    e.preventDefault();
+    if (streaming) return;
+    const text = input.value.trim();
+    if (!text) return;
+    const t = threads.find(x => x.id===active);
+    if (!t.messages.length) t.title = text.slice(0, 42);
+    t.messages.push({ role:'user', content:text }); saveThreads();
+    input.value = '';
+    send.disabled = true;
+    render();
+    const history = t.messages.slice(0, -1).map(m => ({ role:m.role, content:m.content }));
+    vscode.postMessage({ command:'chat', text, history });
+  };
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key==='Enter' && !e.shiftKey){ e.preventDefault(); form.requestSubmit(); }
+  });
+
+  window.addEventListener('message', (e) => {
+    const d = e.data || {};
+    if (d.command === 'bootstrap') {
+      boot = d;
+      document.getElementById('extVer').textContent = 'v'+(d.version||'');
+      document.getElementById('brandSub').textContent = 'console // v'+(d.version||'');
+      document.getElementById('phasePill').textContent = (d.stage && d.stage.phaseId) || 'Phase I';
+      document.getElementById('pillTools').textContent = 'tools · '+((d.tools||[]).length);
+      document.getElementById('pillCaps').textContent = 'caps · '+((d.capabilities||[]).length);
+      document.getElementById('pillAgents').textContent = 'agents · '+((d.agents||[]).length);
+      const s = d.snap || {};
+      setLive(!!s.hiveOk);
+      const ph = document.getElementById('pillHive');
+      const pv = document.getElementById('pillVulkan');
+      const pl = document.getElementById('pillVoiceLab');
+      if (ph) ph.textContent = 'hive · ' + (s.hiveOk ? 'OK' : 'DOWN');
+      if (pv) pv.textContent = 'vulkan · ' + (s.vulkanOk ? 'OK' : '?');
+      if (pl) pl.textContent = 'voice lab · ' + (s.voiceLabOk ? 'OK' : 'off');
+      const voiceBit = s.voiceLabOk
+        ? (' · voice lab OK')
+        : (s.voiceOk ? (' · voice OK (' + (d.voiceProvider || 'hive') + ')') : ' · voice off');
+      document.getElementById('stackLine').textContent = (s.summaryLine || '') + voiceBit;
+      if (d.coverage && d.coverage.weighted_pct != null) {
+        document.getElementById('stackLine').textContent +=
+          ' · honesty ' + d.coverage.weighted_pct + '%';
+      }
+      renderDock();
+      return;
+    }
+    if (d.command === 'streamStart') {
+      streaming = true; streamBuf=''; send.disabled=true;
+      const t = threads.find(x => x.id===active);
+      t.messages.push({ role:'assistant', content:'' }); saveThreads();
+      render();
+      return;
+    }
+    if (d.command === 'streamToken') {
+      streamBuf += (d.token||'');
+      const t = threads.find(x => x.id===active);
+      const last = t.messages[t.messages.length-1];
+      if (last && last.role==='assistant') last.content = streamBuf;
+      renderFeed();
+      return;
+    }
+    if (d.command === 'streamEnd') {
+      streaming=false; send.disabled=false;
+      const t = threads.find(x => x.id===active);
+      const last = t.messages[t.messages.length-1];
+      if (last && last.role==='assistant') last.content = d.content || streamBuf || last.content;
+      if (last && !String(last.content||'').trim()) {
+        // drop empty assistant bubble
+        t.messages.pop();
+      }
+      render();
+      return;
+    }
+    if (d.command === 'assistant') {
+      streaming=false; send.disabled=false;
+      const t = threads.find(x => x.id===active);
+      const text = String(d.text||'');
+      t.messages.push({ role:'assistant', content:text });
+      render();
+      if (d.speak !== false) {
+        const spoken = (d.voice && d.voice.spoken_text) || text;
+        void speakReply(spoken, d.voice || null);
+      }
+      return;
+    }
+    if (d.command === 'error') {
+      streaming=false; send.disabled=false;
+      const t = threads.find(x => x.id===active);
+      t.messages.push({ role:'assistant', content:'Error: '+String(d.text||'') });
+      render();
+    }
+    if (d.command === 'status') {
+      document.getElementById('stackLine').textContent = String(d.text||'');
+    }
+  });
+
+  render();
+  vscode.postMessage({ command:'ready' });
+})();
+</script>
+</body>
+</html>

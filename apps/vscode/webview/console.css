@@ -1,0 +1,122 @@
+/* Keep critical layout inline so webview never paints broken even if css URI fails */
+:root{
+  --ink:#07070b; --rail:#0b0b11; --panel:#111118; --line:rgba(255,255,255,.08);
+  --acid:#d6ff3f; --hot:#ff4d2e; --ice:#7af0ff; --mute:#8a8a96; --text:#ececf1;
+  --rail-w: clamp(180px, 22vw, 240px);
+  --ops-w: clamp(200px, 26vw, 300px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;width:100%;overflow:hidden;background:var(--ink);color:var(--text);font-family:system-ui,Segoe UI,sans-serif}
+body{
+  background:radial-gradient(900px 420px at -10% -20%,rgba(214,255,63,.08),transparent 55%),
+    radial-gradient(700px 360px at 110% 0%,rgba(122,240,255,.06),transparent 50%),#07070b;
+}
+button,textarea,input{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+.app{
+  display:grid;
+  grid-template-columns: var(--rail-w) minmax(0,1fr) var(--ops-w);
+  grid-template-rows: minmax(0,1fr);
+  height:100%;
+  width:100%;
+  min-height:0;
+  min-width:0;
+  overflow:hidden;
+}
+.app.no-rail{grid-template-columns: minmax(0,1fr) var(--ops-w)}
+.app.no-ops{grid-template-columns: var(--rail-w) minmax(0,1fr)}
+.app.no-rail.no-ops{grid-template-columns: minmax(0,1fr)}
+.rail,.ops,.stage{min-width:0;min-height:0;overflow:hidden}
+.rail,.ops{background:var(--rail);display:flex;flex-direction:column}
+.rail{border-right:1px solid var(--line)}
+.ops{border-left:1px solid var(--line)}
+.rail[hidden],.ops[hidden]{display:none !important}
+.brand{padding:12px;display:flex;gap:10px;align-items:center;flex-shrink:0}
+.mark{width:32px;height:32px;border-radius:9px;background:var(--acid);color:#111;display:grid;place-items:center;font-family:ui-monospace,Consolas,monospace;font-weight:700;font-size:13px;box-shadow:0 0 24px rgba(214,255,63,.35);flex-shrink:0}
+.brand h1{font-size:13px;letter-spacing:.08em;text-transform:uppercase;line-height:1.1}
+.brand p{font-size:10px;color:var(--mute);font-family:ui-monospace,Consolas,monospace}
+.new{margin:0 10px 8px;padding:9px 10px;border-radius:10px;background:var(--acid);color:#111;font-weight:700;font-size:12px;flex-shrink:0}
+.sec{padding:6px 12px 4px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-family:ui-monospace,Consolas,monospace;flex-shrink:0}
+.quick{flex:0 0 auto;max-height:min(28vh,160px);overflow:auto;padding:0 8px 8px}
+.threads{flex:1 1 auto;overflow:auto;padding:0 8px 8px;min-height:0}
+.thread{width:100%;text-align:left;padding:8px 10px;border-radius:10px;color:#c9c9d1;font-size:12px;margin-bottom:3px}
+.thread:hover,.thread.on{background:#16161f;color:#fff}
+.thread.on{outline:1px solid rgba(214,255,63,.25)}
+.thread small{display:block;color:var(--mute);font-size:10px;margin-top:2px}
+.node{margin:8px 10px 10px;padding:10px;border:1px solid var(--line);border-radius:12px;background:#0e0e15;font-size:11px;flex-shrink:0}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;min-width:0}
+.row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dot{width:7px;height:7px;border-radius:99px;background:var(--acid);box-shadow:0 0 8px var(--acid);display:inline-block;margin-right:6px;flex-shrink:0}
+.dot.off{background:var(--hot);box-shadow:0 0 8px var(--hot)}
+.stage{display:flex;flex-direction:column;background:transparent}
+header.top{
+  flex:0 0 auto;
+  min-height:44px;
+  max-height:72px;
+  display:flex;align-items:center;gap:8px;
+  padding:6px 10px;border-bottom:1px solid var(--line);
+  flex-wrap:wrap;overflow:hidden;
+}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#12121a;border-radius:999px;padding:4px 9px;font-size:10px;font-family:ui-monospace,Consolas,monospace;white-space:nowrap;max-width:100%}
+.pill.btn{cursor:pointer}
+.pill.btn.on{border-color:var(--acid);color:var(--acid)}
+.grow{flex:1 1 8px;min-width:4px}
+.live{color:var(--acid)}
+.feed{flex:1 1 auto;overflow:auto;padding:16px clamp(10px,3vw,28px) 10px;min-height:0}
+.empty{max-width:min(640px,100%);margin:4vh auto 0;padding:0 4px}
+.empty h2{font-size:clamp(22px,4.5vw,34px);line-height:.95;letter-spacing:-.03em}
+.empty h2 span{color:var(--acid)}
+.empty p{margin-top:10px;color:var(--mute);max-width:46ch;font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{border:1px solid var(--line);background:#12121a;border-radius:999px;padding:7px 11px;font-size:12px;color:#d5d5dc}
+.chip:hover{border-color:var(--acid);color:#fff}
+.msg{max-width:min(820px,100%);margin:0 auto 14px}
+.who{font-family:ui-monospace,Consolas,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.who.bot{color:var(--acid)}
+.bubble{padding:12px 14px;border-radius:14px;line-height:1.5;font-size:clamp(12px,1.6vw,14px);background:#14141c;border:1px solid var(--line);white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
+.msg.user .bubble{background:#1a1a12;border-color:rgba(214,255,63,.18)}
+.composer-wrap{flex:0 0 auto;padding:8px clamp(10px,3vw,28px) 12px;border-top:1px solid transparent}
+.composer{max-width:min(820px,100%);margin:0 auto;background:#101018;border:1px solid var(--line);border-radius:16px;padding:8px 10px 8px 12px}
+textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:transparent;border:0;outline:none;line-height:1.45}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:4px;flex-wrap:wrap}
+.ghost{font-size:10px;color:var(--mute);font-family:ui-monospace,Consolas,monospace}
+.send{background:var(--acid);color:#111;font-weight:700;border-radius:10px;padding:8px 14px;flex-shrink:0}
+.send:disabled{opacity:.4;cursor:not-allowed}
+.ops h3{padding:12px 12px 6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-family:ui-monospace,Consolas,monospace;flex-shrink:0}
+.stat{margin:0 10px 6px;padding:8px 10px;border-radius:10px;background:#0e0e15;border:1px solid var(--line);font-size:11px;flex-shrink:0}
+.stat b{display:block;margin-bottom:3px}
+.stat span{color:var(--mute);font-size:10px;display:block;overflow:hidden;text-overflow:ellipsis}
+.dock{flex:1 1 auto;overflow:auto;padding:0 8px 12px;min-height:0}
+.ability{width:100%;text-align:left;padding:7px 9px;border-radius:8px;margin-bottom:3px;border:1px solid transparent;font-size:11px;font-family:ui-monospace,Consolas,monospace;color:#c9c9d1}
+.ability:hover{background:#16161f;border-color:rgba(214,255,63,.2);color:#fff}
+.ability small{display:block;color:var(--mute);font-size:10px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.badge{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:999px;font-size:9px;letter-spacing:.06em;border:1px solid var(--line);vertical-align:middle}
+.badge.LIVE{color:#111;background:var(--acid);border-color:var(--acid)}
+.badge.PARTIAL{color:#111;background:var(--ice);border-color:var(--ice)}
+.badge.SOFT,.badge.GOLD{color:#ececf1;background:#2a2a38}
+.badge.STUB,.badge.MISSING{color:var(--hot);border-color:var(--hot)}
+.filter{margin:0 10px 6px;padding:7px 9px;border-radius:8px;border:1px solid var(--line);background:#0e0e15;width:calc(100% - 20px);font-size:12px;flex-shrink:0}
+.tabs{display:flex;gap:6px;padding:0 10px 6px;flex-shrink:0;flex-wrap:wrap}
+.tab{padding:5px 9px;border-radius:999px;border:1px solid var(--line);font-size:10px;color:var(--mute)}
+.tab.on{color:#111;background:var(--acid);border-color:var(--acid);font-weight:700}
+
+/* Narrow / VS Code side panels: collapse side columns, keep toggles */
+@media (max-width: 980px){
+  .app{grid-template-columns: minmax(0,1fr) var(--ops-w)}
+  .app.show-rail{grid-template-columns: var(--rail-w) minmax(0,1fr) var(--ops-w)}
+  .rail{display:none}
+  .app.show-rail .rail{display:flex}
+}
+@media (max-width: 780px){
+  .app,.app.show-rail,.app.no-ops,.app.no-rail{grid-template-columns: minmax(0,1fr)}
+  .rail,.ops{display:none}
+  .app.show-rail .rail{display:flex; position:absolute; inset:0 auto 0 0; width:min(86vw,260px); z-index:20; box-shadow:8px 0 30px rgba(0,0,0,.45)}
+  .app.show-ops .ops{display:flex; position:absolute; inset:0 0 0 auto; width:min(90vw,300px); z-index:20; box-shadow:-8px 0 30px rgba(0,0,0,.45)}
+  .scrim{display:none; position:absolute; inset:0; background:rgba(0,0,0,.45); z-index:15}
+  .app.show-rail .scrim,.app.show-ops .scrim{display:block}
+}
+@media (max-width: 520px){
+  .empty h2{font-size:22px}
+  .ghost{display:none}
+  header.top .pill:not(.btn):not(.live){display:none}
+}

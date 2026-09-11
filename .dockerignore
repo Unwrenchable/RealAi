@@ -1,0 +1,53 @@
+# Keep image builds small — do not ship archives into the container
+.git
+.github
+**/.git
+**/node_modules
+**/__pycache__
+**/.venv
+**/venv
+**/.tox
+**/.mypy_cache
+**/.pytest_cache
+**/.next
+**/dist
+**/build
+**/*.pyc
+**/*.pyo
+**/*.gguf
+**/*.safetensors
+**/*.pt
+**/*.pth
+**/*.bin
+**/*.onnx
+**/checkpoints_lora
+
+# Archive / forage trees (MOVE_TO_D / ARCHIVE_ONLY)
+recovered
+temp_repos
+_hold_untracked_20260804_1007
+imports/external
+D_RealAI-archive
+scan_results/_wide_hunt_raw.json
+scan_results/robocopy_*.log
+
+# Nested junk inside realai
+realai/realai
+realai/RealAI_Recovery_SAFE
+realai/**/C__*
+realai/**/node_modules
+
+# Local noise
+*.log
+training_report.txt
+pnpm-lock.yaml
+package-lock.json
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Docs/maps not needed at runtime
+docs
+scan_results/*.md
+!**/.gitkeep

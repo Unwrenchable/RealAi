@@ -1,0 +1,91 @@
+{
+  "product": {
+    "name": "RealAI Bot",
+    "provider": "RealAI",
+    "speaker": "RealAI"
+  },
+  "persona_id": "realai-bot-default",
+  "memory_namespace": "persona_realai_bot",
+  "routing": {
+    "default": "local",
+    "only_providers": [
+      "local",
+      "realai"
+    ],
+    "local_model": "realai-default-coder",
+    "models_dir": "C:\\models\\checkpoints_lora",
+    "fallback_backend": "llama.cpp",
+    "escalate_to_cloud": false,
+    "disable_providers": [
+      "grok",
+      "xai",
+      "openai",
+      "anthropic",
+      "gemini"
+    ]
+  },
+  "tools": {
+    "enabled": true,
+    "surfaces": [
+      "craft",
+      "hive",
+      "chat",
+      "abilities",
+      "multi_agent",
+      "self_heal",
+      "agent_tools"
+    ],
+    "chat_slash": [
+      "/craft",
+      "/hive",
+      "/ability",
+      "/multi",
+      "/heal",
+      "/doctor",
+      "/tools",
+      "/catalog",
+      "/agents"
+    ],
+    "note": "REALAI_BOT_TOOLS=1 (default). Operator intents run via orch without GGUF tool_calls."
+  },
+  "voice": {
+    "enabled": true,
+    "provider": "realai.voice.provider",
+    "engine": "realai.voice.tts_engine",
+    "persona": "realai-voice-engine",
+    "models_dir": "C:\\\\models\\\\checkpoints_lora",
+    "lab_port": 8890,
+    "backends": [
+      "kokoro",
+      "fish",
+      "xtts",
+      "windows_sapi",
+      "piper"
+    ],
+    "default_backend": "xtts",
+    "kokoro_dir": "C:\\\\models\\\\checkpoints_lora\\\\Kokoro",
+    "fish_dir": "C:\\\\models\\\\checkpoints_lora\\\\fish_speech_s1",
+    "xtts_dir": "C:\\\\models\\\\checkpoints_lora\\\\xtts_v2",
+    "xtts_model": "C:\\\\models\\\\checkpoints_lora\\\\xtts_v2\\\\model.pth",
+    "xtts_speaker": "C:\\\\models\\\\checkpoints_lora\\\\voices\\\\unwrenchable.wav",
+    "stack": {
+      "vulkan_dir": "C:\\\\llama-vulkan",
+      "llama_dir": "C:\\\\llama",
+      "directml_dir": "C:\\\\DirectML",
+      "vulkan_base": "http://127.0.0.1:8080",
+      "hive": "http://127.0.0.1:8001",
+      "voice_lab": "http://127.0.0.1:8890"
+    },
+    "note": "REALAI_BOT_VOICE=1 · default XTTS with voices/unwrenchable.wav (cloned from datasets/unwrenchable_voice.wav)."
+  },
+  "amd_inference": {
+    "backend": "vulkan-llama",
+    "host": "127.0.0.1",
+    "port": 8080,
+    "vulkan_dir": "C:\\\\llama-vulkan",
+    "llama_dir": "C:\\\\llama",
+    "directml_dir": "C:\\\\DirectML",
+    "models_dir": "C:\\\\models\\\\checkpoints_lora",
+    "gguf": "C:\\\\models\\\\checkpoints_lora\\\\qwen2.5-coder-7b-instruct-q5_k_m.gguf"
+  }
+}

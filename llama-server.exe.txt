@@ -1,0 +1,71 @@
+llama-server.exe `
+  -m "C:\path\to\your-model.gguf" `
+  --host 127.0.0.1 `
+  --port 8080 `
+  -c 65536 `
+  -ngl 99 `
+  --alias "local-llama"
+
+Key flags:
+
+┌─────────────────┬──────────────────────────────────┐
+│ Flag            │ Why                              │
+├─────────────────┼──────────────────────────────────┤
+│ -c 65536        │ Context window (this is what     │
+│                 │ failed at 4096)                  │
+├─────────────────┼──────────────────────────────────┤
+│ -ngl 99         │ Offload layers to Vulkan GPU     │
+├─────────────────┼──────────────────────────────────┤
+│ --alias "local- │ Stable model id for Copilot’s    │
+│ llama"          │ picker                           │
+├─────────────────┼──────────────────────────────────┤
+│ --port 8080     │ Match whatever you put in VS     │
+│                 │ Code                             │
+└─────────────────┴──────────────────────────────────┘
+
+For Copilot Chat / Agent mode, 64k is a practical minimum. If VRAM allows, try 131072.
+
+If you want the model’s full trained context:
+
+llama-server.exe -m "C:\path\to\your-model.gguf" -c 0 -ngl 99 --port 8080
+
+(-c 0 = use the model’s native max — only if your GPU/RAM can hold the KV cache.)
+
+Then point Copilot at it
+
+In VS Code:
+
+1. Chat model picker → Manage Language Models / Add Models
+2. Choose OpenAI Compatible / custom endpoint
+3. Base URL: http://127.0.0.1:8080/v1
+   (some UIs want http://127.0.0.1:8080 without /v1 — try the one your build expects)
+4. Model ID: whatever --alias you set (or the id from GET /v1/models)
+5. Set context in the model entry to match the server, e.g. maxInputTokens: 60000, maxOutputTokens: 4096
+
+Why it still OOMs after raising context
+
+KV cache grows with -c. If Vulkan runs out of memory:
+
+1. Drop to -c 32768
+2. Use a smaller quant (Q4_K_M / Q5_K_M)
+3. Keep -np 1 (one slot only — default parallel slots can multiply memory)
+
+Example safer start:
+
+llama-server.exe -m "C:\path\to\model.gguf" -c 32768 -np 1 -ngl 99 --port 8080 --alias "local-llama"
+
+Copilot-side tips while testing
+
+• New chat each try
+• Avoid #codebase / huge folders at first
+• Prefer Ask mode until 64k+ is stable; Agent mode adds a lot of tool schema
+
+Sanity check
+
+After restart, open:
+
+http://127.0.0.1:8080/v1/models
+
+Then send a short Copilot message. If it still says n_ctx: 4096, the old server process is still running — kill it in Task Manager / close the old terminal, then relaunch with -c 65536.
+
+If you paste your current llama-server command line (redact the model path if you want), I can rewrite it with the right context and GPU flags

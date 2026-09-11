@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  :root {
+    --bg: var(--vscode-sideBar-background);
+    --fg: var(--vscode-sideBar-foreground);
+    --muted: var(--vscode-descriptionForeground);
+    --border: var(--vscode-panel-border, #333);
+    --accent: #7c5cfc;
+    --ok: #3dd68c;
+    --bad: #f07178;
+    --card: color-mix(in srgb, var(--fg) 6%, transparent);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 10px;
+    font: 12px/1.45 var(--vscode-font-family);
+    color: var(--fg);
+    background: transparent;
+  }
+  h1 { font-size: 13px; margin: 0 0 8px; }
+  .sub { color: var(--muted); margin-bottom: 10px; font-size: 11px; }
+  .row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .chip {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-size: 11px;
+    background: var(--card);
+  }
+  .chip.ok { border-color: var(--ok); color: var(--ok); }
+  .chip.bad { border-color: var(--bad); color: var(--bad); }
+  .chip.accent { border-color: var(--accent); color: #cfc4ff; }
+  .card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 10px;
+    background: var(--card);
+  }
+  .card h2 { margin: 0 0 6px; font-size: 12px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  button {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--vscode-button-secondaryBackground, #2a2a3e);
+    color: var(--vscode-button-secondaryForeground, #eee);
+    border-radius: 6px;
+    padding: 7px 8px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 11px;
+  }
+  button.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 600;
+  }
+  button:hover { filter: brightness(1.08); }
+  ul { margin: 0; padding-left: 16px; color: var(--muted); }
+  li { margin: 2px 0; }
+  .mono { font-family: var(--vscode-editor-font-family, monospace); font-size: 10px; color: var(--muted); white-space: pre-wrap; }
+  .actions { display: grid; gap: 6px; }
+</style>
+</head>
+<body>
+  <h1>RealAI Ultimate Hub <span id="ver"></span></h1>
+  <div class="sub" id="phase">Loading stage…</div>
+  <div class="row" id="chips"></div>
+
+  <div class="card">
+    <h2>Stack</h2>
+    <div class="mono" id="stack">Collecting…</div>
+  </div>
+
+  <div class="card">
+    <h2>Quick actions</h2>
+    <div class="actions">
+      <button class="primary" data-cmd="realai.openChat">Open Console</button>
+      <button data-cmd="realai.whereAreWe">Where are we?</button>
+      <button data-cmd="realai.readRepo">Read repo snapshot</button>
+      <button data-cmd="realai.extensionAudit">3 concrete patches</button>
+      <button data-cmd="realai.multiAgent">Multi-agent task…</button>
+      <button data-cmd="realai.runTool">Run Hive tool…</button>
+      <button data-cmd="realai.showSelfHeal">Self-heal status</button>
+      <button data-cmd="realai.showCapabilities">Capabilities</button>
+      <button data-cmd="realai.listTools">List tools</button>
+      <button data-cmd="realai.listAgents">List agents</button>
+      <button data-cmd="realai.showLora">LoRA inventory</button>
+      <button data-cmd="realai.showRecovery">Recovery inventory</button>
+      <button data-cmd="realai.refreshHub">Refresh hub</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Rolled-up abilities</h2>
+    <ul id="abilities"></ul>
+  </div>
+
+<script>
+  const vscode = acquireVsCodeApi();
+  document.querySelectorAll('button[data-cmd]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      vscode.postMessage({ command: 'run', id: btn.getAttribute('data-cmd') });
+    });
+  });
+  window.addEventListener('message', (e) => {
+    const d = e.data || {};
+    if (d.command !== 'snapshot') return;
+    const s = d.snapshot;
+    document.getElementById('ver').textContent = 'v' + (s.stage?.extensionVersion || '');
+    document.getElementById('phase').textContent =
+      (s.stage?.phaseId || '') + ' — ' + (s.stage?.phaseTitle || '') +
+      (s.stage?.tipLine ? ' · ' + s.stage.tipLine : '');
+    const chips = document.getElementById('chips');
+    chips.innerHTML = '';
+    function chip(text, cls) {
+      const el = document.createElement('span');
+      el.className = 'chip ' + (cls || '');
+      el.textContent = text;
+      chips.appendChild(el);
+    }
+    chip(s.hiveOk ? 'Hive OK' : 'Hive DOWN', s.hiveOk ? 'ok' : 'bad');
+    chip(s.vulkanOk ? 'Vulkan OK' : 'Vulkan ?', s.vulkanOk ? 'ok' : 'bad');
+    chip(
+      s.voiceOk
+        ? ('Voice OK' + (s.voiceBackend ? ' · ' + s.voiceBackend : ''))
+        : 'Voice off',
+      s.voiceOk ? 'ok' : ''
+    );
+    chip('tools ' + (s.toolsCount || 0), 'accent');
+    chip('agents ' + (s.agentsCount || 0), 'accent');
+    chip('caps ' + (s.capabilitiesCount || 0), 'accent');
+    if (s.abilityCount != null) chip('abilities ' + s.abilityCount);
+    if (s.loraCount != null) chip('lora ' + s.loraCount);
+    if (s.promoteActionable != null) chip('promote ' + s.promoteActionable);
+
+    document.getElementById('stack').textContent = [
+      'API: ' + s.baseUrl,
+      'service: ' + (s.service || 'n/a'),
+      'hive agents (' + (s.hiveAgentCount || 0) + '): ' + ((s.hiveAgents || []).join(', ') || 'n/a'),
+      'self-heal: ' + (s.selfHealEnabled ? 'on' : 'off'),
+      'voice: ' + s.voiceUrl + (s.voiceOk ? ' (up)' : ' (down)'),
+      'ext: realai-vscode@' + (s.stage?.extensionVersion || '?'),
+      'updated: ' + s.collectedAt,
+      (s.errors && s.errors.length ? ('errors: ' + s.errors.join(' | ')) : '')
+    ].filter(Boolean).join('\n');
+
+    const ul = document.getElementById('abilities');
+    ul.innerHTML = '';
+    (s.stage?.abilityRollup || []).forEach((a) => {
+      const li = document.createElement('li');
+      li.textContent = a;
+      ul.appendChild(li);
+    });
+  });
+  vscode.postMessage({ command: 'ready' });
+</script>
+</body>
+</html>

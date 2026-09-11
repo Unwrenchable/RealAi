@@ -1,0 +1,13 @@
+C:\RealAI-clean\models\Llama-3.2-1B-Instruct-Q4_K_M.gguf
+C:\RealAI-clean\models\llama-3.2-1b.gguf
+C:\RealAI-clean\models\llama-local-1b-Q4_K_M.gguf
+C:\RealAI-clean\models\qwen2.5-coder-1.5b-instruct-q2_k.gguf
+C:\RealAI-clean\models\qwen2.5-coder-1.5b-instruct-q3_k_m.gguf
+C:\RealAI-clean\models\qwen2.5-coder-1.5b-instruct-q5_k_m.gguf
+C:\RealAI-clean\models\qwen2.5-coder-1.5b-instruct-q6_k.gguf
+C:\RealAI-clean\models\qwen2.5-coder-7b-instruct-q5_k_m.gguf
+C:\RealAI-clean\models\realai-1.0-instruct-Q4_K_M.gguf
+C:\RealAI-clean\models\realai-1.0\weights\realai-1.0-instruct-Q4_K_M.gguf
+C:\RealAI-clean\models\realai-1.0-instruct\realai-1.0-instruct-Q4_K_M.gguf
+C:\RealAI-clean\models\realai-1.0-instruct\weights\realai-1.0-instruct-Q4_K_M.gguf
+C:\RealAI-clean\temp_repos\realai_recovery_\local_only\extracted_zips\realai\realai\realai\models\llama3.2-1b\Llama-3.2-1B-Instruct-Q4_K_M.gguf

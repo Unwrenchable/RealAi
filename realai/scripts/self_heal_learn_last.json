@@ -1,0 +1,129 @@
+{
+  "ok": true,
+  "learned": {
+    "total_count": 248,
+    "added_count": 0,
+    "added_sample": [],
+    "sources": [
+      "C:\\tools\\realai",
+      "era_map_external_roots",
+      "technical_rundown"
+    ]
+  },
+  "catalog_path": "C:\\RealAI-clean\\scan_results\\ability_catalog.json",
+  "training": {
+    "ok": true,
+    "path": "C:\\RealAI-clean\\training\\data\\ability_surface.jsonl",
+    "samples": 60,
+    "coverage_pct": 47.2
+  },
+  "status_after": {
+    "service": "realai-self-heal",
+    "enabled": true,
+    "env": "REALAI_SELF_IMPROVE",
+    "root": "C:\\RealAI-clean",
+    "loop": [
+      "1. discover (desktop missing-gold + keyword learn; dds3 optional/never full)",
+      "2. learn-keywords + ability catalog (technical rundown coverage)",
+      "3. assemble (gold_index + promote_queue)",
+      "4. promote curated uniques (+ optional promote_gold queue)",
+      "5. verify stack (orchestrator routes + vulkan + ui)",
+      "6. self_improve evaluate / ability_surface training samples"
+    ],
+    "desktop_roots": [
+      "C:\\Users\\tsmit\\OneDrive\\Desktop",
+      "C:\\Users\\tsmit\\Desktop",
+      "C:\\Users\\tsmit\\Documents",
+      "C:\\Users\\tsmit\\Downloads",
+      "C:\\RealAI-clean",
+      "C:\\Users\\tsmit\\realai-clean",
+      "C:\\Users\\tsmit\\realai",
+      "C:\\Users\\tsmit\\realai_historical_backups",
+      "C:\\Users\\tsmit\\backups",
+      "C:\\Users\\tsmit\\Documents\\GitHub\\realai"
+    ],
+    "artifacts": {
+      "era_map": false,
+      "gold_index": true,
+      "promote_queue": true,
+      "gold_index_md": true,
+      "dds3_missing_summary": false,
+      "dds3_deep_gold_summary": false,
+      "dds3_ability_inventory": false,
+      "dds3_archive_triage": false,
+      "ability_catalog": true,
+      "ability_keywords_learned": true,
+      "ability_surface_training": true,
+      "phase2_report": true,
+      "phase3_report": false,
+      "training_dataset": true,
+      "agent_manifests": true,
+      "self_improvement_module": true,
+      "ability_catalog_module": true,
+      "assemble_script": true,
+      "promote_script": true,
+      "dds3_script": false,
+      "deep_gold_script": true,
+      "desktop_scan_script": true,
+      "desktop_missing_gold_map": true,
+      "local_keyword_gold_map": false
+    },
+    "promote_queue_items": 2,
+    "promote_actionable": 2,
+    "ability_coverage": {
+      "coverage": {
+        "ability_count": 58,
+        "by_status": {
+          "LIVE": 17,
+          "STUB": 5,
+          "CODE": 28,
+          "SOFT": 3,
+          "MISSING": 1,
+          "PARTIAL": 3,
+          "GOLD": 1
+        },
+        "weighted_score": 0.4716,
+        "weighted_pct": 47.2,
+        "live_count": 17,
+        "partial_count": 3,
+        "code_or_gold": 34,
+        "missing_count": 4,
+        "note": "weighted_pct is honesty score vs technical rundown, NOT verify_matrix pass counts (stack health only)"
+      },
+      "ability_count": 58,
+      "external_roots_exist": 0,
+      "external_roots_total": 0,
+      "tools_cli": {
+        "path": "C:\\tools\\realai",
+        "exists": true,
+        "commands": [
+          "chat",
+          "help",
+          "image",
+          "research",
+          "system",
+          "video",
+          "web3"
+        ],
+        "plugins": [
+          "overseer",
+          "render",
+          "solana",
+          "trading"
+        ]
+      },
+      "generated_at": "2026-08-27T15:23:46.461554+00:00"
+    },
+    "abilities": {
+      "scan_messy_repo": true,
+      "assemble_gold": true,
+      "promote_gold": true,
+      "training_data": true,
+      "self_improvement": true,
+      "ability_catalog": true,
+      "keyword_learning": true
+    },
+    "route_probe": null,
+    "generated_at": "2026-08-27T15:23:46.461554+00:00"
+  }
+}

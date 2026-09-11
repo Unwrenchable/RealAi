@@ -1,0 +1,430 @@
+{
+  "version": 1,
+  "scanned_at": "2026-08-31T18:08:55.370539+00:00",
+  "root": "C:\\RealAI-clean",
+  "total_py_files_approx": 8182,
+  "present_roots": [
+    "abilities",
+    "adapters",
+    "agent_tools",
+    "agents",
+    "aura",
+    "modules",
+    "plugins",
+    "realai",
+    "scripts",
+    "tools",
+    "training",
+    "packages",
+    "scanners",
+    "_quarantine",
+    "imports/external/unique-modules",
+    "imports/external/agent_tools_gold",
+    "imports/external/C_realai_modules",
+    "imports/external/C_realai_plugins",
+    "imports/external/C_realai_server",
+    "imports/external/grok_export_realai",
+    "imports/external/recovery_plugins"
+  ],
+  "roots": [
+    {
+      "rel": "abilities",
+      "exists": true,
+      "py_files": 81,
+      "sample": [
+        "abilities/ability_catalog.py",
+        "abilities/agents_surface.py",
+        "abilities/agent_tools_surface.py",
+        "abilities/approval_store.py",
+        "abilities/approval_ui.py",
+        "abilities/architect_mode.py",
+        "abilities/assemble_gold_index.py",
+        "abilities/audio_speech.py",
+        "abilities/audio_transcription.py",
+        "abilities/auto_wire.py",
+        "abilities/cli_surface.py",
+        "abilities/code_engineer_agent.py"
+      ]
+    },
+    {
+      "rel": "adapters",
+      "exists": true,
+      "py_files": 7,
+      "sample": [
+        "adapters/agents.py",
+        "adapters/memory.py",
+        "adapters/organs.py",
+        "adapters/rackup_coach.py",
+        "adapters/self_improvement.py",
+        "adapters/training.py",
+        "adapters/__init__.py"
+      ]
+    },
+    {
+      "rel": "agent_tools",
+      "exists": true,
+      "py_files": 58,
+      "sample": [
+        "agent_tools/amd_inference.py",
+        "agent_tools/anthropic.py",
+        "agent_tools/cli.py",
+        "agent_tools/crypto.py",
+        "agent_tools/dashboard.py",
+        "agent_tools/executor.py",
+        "agent_tools/extract_from_agent_tools.py",
+        "agent_tools/filesystem.py",
+        "agent_tools/groq.py",
+        "agent_tools/http.py",
+        "agent_tools/importer.py",
+        "agent_tools/loader.py"
+      ]
+    },
+    {
+      "rel": "agents",
+      "exists": true,
+      "py_files": 37,
+      "sample": [
+        "agents/agent.py",
+        "agents/agents.py",
+        "agents/agent_protocol.py",
+        "agents/agent_runtime.py",
+        "agents/base.py",
+        "agents/coding_agent.py",
+        "agents/critic.py",
+        "agents/executor.py",
+        "agents/hierarchical_agent.py",
+        "agents/hive_orchestrator.py",
+        "agents/planner.py",
+        "agents/queues.py"
+      ]
+    },
+    {
+      "rel": "aura",
+      "exists": true,
+      "py_files": 4,
+      "sample": [
+        "aura/main.py",
+        "aura/memory.py",
+        "aura/reasoning.py",
+        "aura/__init__.py"
+      ]
+    },
+    {
+      "rel": "core",
+      "exists": false,
+      "py_files": 0,
+      "sample": []
+    },
+    {
+      "rel": "modules",
+      "exists": true,
+      "py_files": 114,
+      "sample": [
+        "modules/__init__.py",
+        "modules/agents_advanced/code_engineer_agent.py",
+        "modules/agents_advanced/overmind_runner.py",
+        "modules/agents_advanced/__init__.py",
+        "modules/agents_skills/coding_agent.py",
+        "modules/agents_skills/realai__coding_agent.py",
+        "modules/agents_skills/realai__self_heal.py",
+        "modules/agents_skills/self_heal.py",
+        "modules/desktop_unique/examples.py",
+        "modules/desktop_unique/examples_local_ai.py",
+        "modules/desktop_unique/examples_ultimate.py",
+        "modules/desktop_unique/lambda_advanced.py"
+      ]
+    },
+    {
+      "rel": "plugins",
+      "exists": true,
+      "py_files": 1,
+      "sample": [
+        "plugins/__init__.py"
+      ]
+    },
+    {
+      "rel": "realai",
+      "exists": true,
+      "py_files": 2362,
+      "sample": [
+        "realai/ability_catalog.py",
+        "realai/agent_protocol.py",
+        "realai/api_server.py",
+        "realai/app_framework.py",
+        "realai/audit.py",
+        "realai/aura_memory.py",
+        "realai/closed_loop.py",
+        "realai/coding_agent.py",
+        "realai/critique.py",
+        "realai/deepen_cycle.py",
+        "realai/doctor.py",
+        "realai/engine.py"
+      ]
+    },
+    {
+      "rel": "scripts",
+      "exists": true,
+      "py_files": 114,
+      "sample": [
+        "scripts/ability_inventory.py",
+        "scripts/amd_stack_status.py",
+        "scripts/apply_unification_results.py",
+        "scripts/archive_triage.py",
+        "scripts/assemble_gold.py",
+        "scripts/assemble_gold_index.py",
+        "scripts/auto_update_pipeline.py",
+        "scripts/bring_back_from.py",
+        "scripts/catalog_good_code_roots.py",
+        "scripts/cold_archive_recovered.py",
+        "scripts/curated_promote.py",
+        "scripts/dds3.py"
+      ]
+    },
+    {
+      "rel": "tools",
+      "exists": true,
+      "py_files": 1,
+      "sample": [
+        "tools/__init__.py"
+      ]
+    },
+    {
+      "rel": "training",
+      "exists": true,
+      "py_files": 5,
+      "sample": [
+        "training/build_datasets.py",
+        "training/eval.py",
+        "training/extract_from_agent_tools.py",
+        "training/finetune.py",
+        "training/__init__.py"
+      ]
+    },
+    {
+      "rel": "packages",
+      "exists": true,
+      "py_files": 3,
+      "sample": [
+        "packages/sdk-py/__init__.py",
+        "packages/sdk-py/realai/realai_client.py",
+        "packages/sdk-py/realai/__init__.py"
+      ]
+    },
+    {
+      "rel": "registry",
+      "exists": true,
+      "py_files": 0,
+      "sample": []
+    },
+    {
+      "rel": "scanners",
+      "exists": true,
+      "py_files": 46,
+      "sample": [
+        "scanners/ability_inventory.py",
+        "scanners/ability_matrix.py",
+        "scanners/alt_v4_autonomy_scan.py",
+        "scanners/archive_triage.py",
+        "scanners/assemble_gold.py",
+        "scanners/assemble_gold_index.py",
+        "scanners/backend_scan.py",
+        "scanners/build_puzzle_map.py",
+        "scanners/dds10_merge_plan_validator.py",
+        "scanners/dds1_dependency_doc_scan.py",
+        "scanners/dds2_dependency_crosscheck.py",
+        "scanners/dds3.py"
+      ]
+    },
+    {
+      "rel": "server",
+      "exists": true,
+      "py_files": 0,
+      "sample": []
+    },
+    {
+      "rel": "_quarantine",
+      "exists": true,
+      "py_files": 5000,
+      "sample": [
+        "_quarantine/ability_catalog.py",
+        "_quarantine/agent_protocol.py",
+        "_quarantine/agent_runtime.py",
+        "_quarantine/api_server (2).py",
+        "_quarantine/api_server.py",
+        "_quarantine/app_framework.py",
+        "_quarantine/audit.py",
+        "_quarantine/aura_memory.py",
+        "_quarantine/bootstrap.py",
+        "_quarantine/closed_loop.py",
+        "_quarantine/coding_agent.py",
+        "_quarantine/critique.py"
+      ]
+    },
+    {
+      "rel": "imports/external/unique-modules",
+      "exists": true,
+      "py_files": 122,
+      "sample": [
+        "imports/external/unique-modules/agent-tools-main/sanity_check.py",
+        "imports/external/unique-modules/agents/coding_agent.py",
+        "imports/external/unique-modules/agents/realai__coding_agent.py",
+        "imports/external/unique-modules/agents/realai__self_heal.py",
+        "imports/external/unique-modules/agents/self_heal.py",
+        "imports/external/unique-modules/agent_tools_gold/cli.py",
+        "imports/external/unique-modules/agent_tools_gold/dashboard.py",
+        "imports/external/unique-modules/agent_tools_gold/executor.py",
+        "imports/external/unique-modules/agent_tools_gold/importer.py",
+        "imports/external/unique-modules/agent_tools_gold/models.py",
+        "imports/external/unique-modules/agent_tools_gold/registry.py",
+        "imports/external/unique-modules/agent_tools_gold/runtime.py"
+      ]
+    },
+    {
+      "rel": "imports/external/agent_tools_gold",
+      "exists": true,
+      "py_files": 29,
+      "sample": [
+        "imports/external/agent_tools_gold/cli.py",
+        "imports/external/agent_tools_gold/dashboard.py",
+        "imports/external/agent_tools_gold/executor.py",
+        "imports/external/agent_tools_gold/importer.py",
+        "imports/external/agent_tools_gold/models.py",
+        "imports/external/agent_tools_gold/registry.py",
+        "imports/external/agent_tools_gold/runtime.py",
+        "imports/external/agent_tools_gold/__init__.py",
+        "imports/external/agent_tools_gold/engine/executor.py",
+        "imports/external/agent_tools_gold/engine/loader.py",
+        "imports/external/agent_tools_gold/engine/logger.py",
+        "imports/external/agent_tools_gold/engine/memory.py"
+      ]
+    },
+    {
+      "rel": "imports/external/C_realai_modules",
+      "exists": true,
+      "py_files": 87,
+      "sample": [
+        "imports/external/C_realai_modules/agents_advanced/code_engineer_agent.py",
+        "imports/external/C_realai_modules/agents_advanced/overmind_runner.py",
+        "imports/external/C_realai_modules/agents_advanced/__init__.py",
+        "imports/external/C_realai_modules/agents_skills/coding_agent.py",
+        "imports/external/C_realai_modules/agents_skills/realai__coding_agent.py",
+        "imports/external/C_realai_modules/agents_skills/realai__self_heal.py",
+        "imports/external/C_realai_modules/agents_skills/self_heal.py",
+        "imports/external/C_realai_modules/desktop_unique/examples.py",
+        "imports/external/C_realai_modules/desktop_unique/examples_local_ai.py",
+        "imports/external/C_realai_modules/desktop_unique/examples_ultimate.py",
+        "imports/external/C_realai_modules/desktop_unique/lambda_advanced.py",
+        "imports/external/C_realai_modules/desktop_unique/lambda_chat.py"
+      ]
+    },
+    {
+      "rel": "imports/external/C_realai_plugins",
+      "exists": true,
+      "py_files": 30,
+      "sample": [
+        "imports/external/C_realai_plugins/sample_plugin.py",
+        "imports/external/C_realai_plugins/__init__.py",
+        "imports/external/C_realai_plugins/rackup_coach/coach_agent.py",
+        "imports/external/C_realai_plugins/rackup_coach/games.py",
+        "imports/external/C_realai_plugins/rackup_coach/glicko2.py",
+        "imports/external/C_realai_plugins/rackup_coach/leagues.py",
+        "imports/external/C_realai_plugins/rackup_coach/money_audit.py",
+        "imports/external/C_realai_plugins/rackup_coach/organs_bridge.py",
+        "imports/external/C_realai_plugins/rackup_coach/pyramid.py",
+        "imports/external/C_realai_plugins/rackup_coach/roc.py",
+        "imports/external/C_realai_plugins/rackup_coach/sotd_library.py",
+        "imports/external/C_realai_plugins/rackup_coach/types.py"
+      ]
+    },
+    {
+      "rel": "imports/external/C_realai_server",
+      "exists": true,
+      "py_files": 17,
+      "sample": [
+        "imports/external/C_realai_server/app.py",
+        "imports/external/C_realai_server/backends.py",
+        "imports/external/C_realai_server/config.py",
+        "imports/external/C_realai_server/embeddings.py",
+        "imports/external/C_realai_server/embeddings_backend.py",
+        "imports/external/C_realai_server/inference.py",
+        "imports/external/C_realai_server/llama_cli_backend.py",
+        "imports/external/C_realai_server/logging.py",
+        "imports/external/C_realai_server/logging_utils.py",
+        "imports/external/C_realai_server/memory_store.py",
+        "imports/external/C_realai_server/metrics.py",
+        "imports/external/C_realai_server/orchestration.py"
+      ]
+    },
+    {
+      "rel": "imports/external/orchestrators",
+      "exists": false,
+      "py_files": 0,
+      "sample": []
+    },
+    {
+      "rel": "imports/external/self_improvement",
+      "exists": false,
+      "py_files": 0,
+      "sample": []
+    },
+    {
+      "rel": "imports/external/organs",
+      "exists": false,
+      "py_files": 0,
+      "sample": []
+    },
+    {
+      "rel": "imports/external/agents_advanced",
+      "exists": false,
+      "py_files": 0,
+      "sample": []
+    },
+    {
+      "rel": "imports/external/agents_skills",
+      "exists": false,
+      "py_files": 0,
+      "sample": []
+    },
+    {
+      "rel": "imports/external/desktop_unique",
+      "exists": false,
+      "py_files": 0,
+      "sample": []
+    },
+    {
+      "rel": "imports/external/grok_export_realai",
+      "exists": true,
+      "py_files": 60,
+      "sample": [
+        "imports/external/grok_export_realai/agent_protocol.py",
+        "imports/external/grok_export_realai/agent_runtime.py",
+        "imports/external/grok_export_realai/api_server.py",
+        "imports/external/grok_export_realai/app_framework.py",
+        "imports/external/grok_export_realai/audit.py",
+        "imports/external/grok_export_realai/closed_loop.py",
+        "imports/external/grok_export_realai/coding_agent.py",
+        "imports/external/grok_export_realai/critique.py",
+        "imports/external/grok_export_realai/identity.py",
+        "imports/external/grok_export_realai/knowledge_graph.py",
+        "imports/external/grok_export_realai/local_models.py",
+        "imports/external/grok_export_realai/local_runtime.py"
+      ]
+    },
+    {
+      "rel": "imports/external/recovery_plugins",
+      "exists": true,
+      "py_files": 4,
+      "sample": [
+        "imports/external/recovery_plugins/sample_plugin.py",
+        "imports/external/recovery_plugins/__init__.py",
+        "imports/external/recovery_plugins/core/local_models.py",
+        "imports/external/recovery_plugins/tools/device_selector.py"
+      ]
+    }
+  ],
+  "notes": [
+    "Prefer present_roots for scan/promote/dispatch.",
+    "Avoid recovered/ bulk dumps; use imports/external/* gold packages.",
+    "abilities/, core/, modules/, agent_tools/ are primary live product trees."
+  ]
+}

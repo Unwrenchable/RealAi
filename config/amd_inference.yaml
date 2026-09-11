@@ -1,0 +1,39 @@
+# AMD-optimized RealAI inference (Vulkan llama.cpp).
+# Live GPU path: local_llama.py + llama-server on :8080.
+# Do not enable CUDA on this box.
+
+backend: vulkan-llama
+device: amd
+gpu_api: vulkan
+cuda: false
+rocm: false
+
+server:
+  host: 127.0.0.1
+  port: 8080
+  default_chat_model: realai-hive
+  default_embed_model: realai-embed
+  gguf: C:\models\checkpoints_lora\qwen2.5-coder-7b-instruct-q5_k_m.gguf
+
+llama:
+  n_gpu_layers: -1
+  n_ctx: 8192
+  n_batch: 512
+  n_threads: 0
+  n_predict: 512
+  temperature: 0.7
+  top_p: 0.9
+  flash_attn: false
+  mlock: false
+  mmap: true
+  offload_kqv: true
+
+voice:
+  engine: realai.voice.tts_engine
+  persona: realai-voice-engine
+  backends:
+    - kokoro
+    - fish
+    - xtts
+    - piper
+  default_backend: kokoro

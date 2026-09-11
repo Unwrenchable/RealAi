@@ -1,0 +1,80 @@
+models:
+  - id: realai-default-coder
+    name: "RealAI Default Coder"
+    type: chat
+    provider: local
+    backend: llama.cpp-vulkan
+    path: models/qwen2.5-coder-7b-instruct-q5_k_m.gguf
+    owned_by: realai
+    context_length: 64000
+    capabilities:
+      - chat
+      - completion
+      - coding
+
+  - id: realai-1.0-instruct
+    name: "RealAI 1.0 Instruct"
+    type: chat
+    provider: local
+    backend: llama.cpp-vulkan
+    path: models/realai-1.0-instruct-Q4_K_M.gguf
+    owned_by: realai
+    context_length: 64000
+    capabilities:
+      - chat
+      - reasoning
+      - tools
+
+  - id: realai-1.0
+    name: "RealAI 1.0"
+    type: chat
+    provider: local
+    backend: realai-fallback
+    path: realai-2.0
+    owned_by: realai
+    context_length: 64000
+    capabilities:
+      - chat
+      - reasoning
+      - tools
+
+  - id: realai-overseer
+    name: "RealAI Overseer"
+    type: chat
+    provider: local
+    backend: realai-fallback
+    path: realai-overseer
+    owned_by: realai
+    context_length: 64000
+    capabilities:
+      - analysis
+      - planning
+      - critique
+
+  - id: local-llama-1b
+    name: "Local Llama 3.2 1B"
+    type: chat
+    provider: local
+    backend: llama.cpp-vulkan
+    path: models/Llama-3.2-1B-Instruct-Q4_K_M.gguf
+    owned_by: local
+    context_length: 64000
+    capabilities:
+      - chat
+      - completion
+
+  - id: realai-embed
+    name: "RealAI Embed"
+    type: embedding
+    provider: local
+    backend: deterministic
+    path: realai-embed
+    owned_by: realai
+    embedding_dimensions: 64
+    capabilities:
+      - embedding
+
+providers:
+  - llama_cpp
+
+default_model: realai-default-coder

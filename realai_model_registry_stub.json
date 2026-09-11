@@ -1,0 +1,8 @@
+{
+  "model_root": "C:\\RealAI-clean",
+  "lora_adapters_list": "C:\\RealAI-clean\\peft_merge_list.txt",
+  "gguf_merge_list": "C:\\RealAI-clean\\gguf_merge_list.txt",
+  "normalized_dataset": "C:\\RealAI-clean\\normalized_datasets\\train_combined.jsonl",
+  "finetune_pipeline": "C:\\RealAI-clean\\finetune_pipeline.json",
+  "status": "ready_for_manual_wiring"
+}

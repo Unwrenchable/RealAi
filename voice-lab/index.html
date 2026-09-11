@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RealAI — Voice Lab</title>
+<style>
+:root{--ink:#07070b;--acid:#d6ff3f;--ice:#7af0ff;--mute:#8a8a96;--text:#ececf1;--line:rgba(255,255,255,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:radial-gradient(900px 420px at -10% -20%,rgba(214,255,63,.07),transparent 55%),#07070b;color:var(--text);font-family:system-ui,Segoe UI,sans-serif;display:grid;place-items:center;padding:24px}
+.box{max-width:34rem;width:100%;background:#111118;border:1px solid var(--line);border-radius:16px;padding:22px}
+.mark{width:34px;height:34px;border-radius:9px;background:var(--acid);color:#111;display:grid;place-items:center;font-weight:800;font-family:ui-monospace,Consolas,monospace;margin-bottom:12px}
+h1{font-size:15px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+p{color:var(--mute);font-size:13px;line-height:1.45;margin-bottom:10px}
+a.btn{display:block;text-align:center;text-decoration:none;background:var(--acid);color:#111;font-weight:800;border-radius:10px;padding:12px;margin-top:10px}
+a.ghost{display:block;text-align:center;text-decoration:none;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px;margin-top:8px;font-size:13px}
+.meta{font-size:11px;color:var(--mute);font-family:ui-monospace,Consolas,monospace;margin-top:14px}
+</style>
+<script>
+(function(){
+  var studio = 'http://127.0.0.1:8787/';
+  // Auto-jump to full Studio when it's up (model pick + record/train).
+  fetch(studio, { mode: 'no-cors', signal: AbortSignal.timeout(1500) })
+    .then(function(){ location.replace(studio); })
+    .catch(function(){ /* stay — show links */ });
+})();
+</script>
+</head>
+<body>
+  <div class="box">
+    <div class="mark">R</div>
+    <h1>Voice Lab</h1>
+    <p>Full Studio (Speak · Clone · Pipeline / train) runs on <b>:8787</b>. Simple speak stays on Hive <b>:8001</b>.</p>
+    <a class="btn" href="http://127.0.0.1:8787/">Open full Studio (:8787)</a>
+    <a class="ghost" href="/voice-lab/speak.html">Simple speak (this port)</a>
+    <a class="ghost" href="/console">Console</a>
+    <div class="meta">
+      If Studio won’t open, run:<br/>
+      cd C:\RealAI-clean<br/>
+      .\realai\voice\start_voice_lab.ps1
+    </div>
+  </div>
+</body>
+</html>

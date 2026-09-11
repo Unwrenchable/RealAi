@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #07070b;
+  --rail: #0b0b11;
+  --panel: #101018;
+  --line: rgba(255, 255, 255, 0.08);
+  --acid: #d6ff3f;
+  --hot: #ff4d2e;
+  --ice: #7af0ff;
+  --mute: #8b8b97;
+  --text: #ececf1;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--ink);
+  color: var(--text);
+  font-family: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background-image:
+    radial-gradient(1200px 600px at 10% -10%, rgba(214, 255, 63, 0.07), transparent 50%),
+    radial-gradient(900px 500px at 100% 0%, rgba(122, 240, 255, 0.05), transparent 45%),
+    linear-gradient(180deg, #07070b 0%, #050508 100%);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a33 transparent;
+}
+
+::selection {
+  background: var(--acid);
+  color: #111;
+}
+
+.font-mono-ui {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+/* Restyle the existing slate shell toward the console */
+.bg-slate-950 {
+  background-color: var(--ink) !important;
+}
+.border-slate-800 {
+  border-color: var(--line) !important;
+}
+.bg-slate-800 {
+  background-color: #16161f !important;
+}
+.border-slate-700 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+header {
+  backdrop-filter: blur(16px);
+  background: rgba(7, 7, 11, 0.72) !important;
+}
+
+.bg-emerald-400 {
+  background-color: var(--acid) !important;
+  box-shadow: 0 0 10px var(--acid);
+}

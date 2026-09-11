@@ -1,0 +1,374 @@
+[
+  {
+    "id": "chat_completion",
+    "status": "LIVE",
+    "name": "Chat completion",
+    "live_path": "POST /v1/chat/completions"
+  },
+  {
+    "id": "text_generation",
+    "status": "LIVE",
+    "name": "Text generation",
+    "live_path": "POST /v1/chat/completions"
+  },
+  {
+    "id": "image_generation",
+    "status": "LIVE",
+    "name": "Image generation",
+    "live_path": "POST /v1/tools/execute ability.image_generation (local Pillow PNG; no API key)"
+  },
+  {
+    "id": "video_generation",
+    "status": "LIVE",
+    "name": "Video generation",
+    "live_path": "POST /v1/tools/execute ability.video_generation (local animated GIF; no API key)"
+  },
+  {
+    "id": "image_analysis",
+    "status": "LIVE",
+    "name": "Image analysis (vision)",
+    "live_path": "POST /v1/tools/execute ability.image_analysis (local Pillow; no API key)"
+  },
+  {
+    "id": "code_generation",
+    "status": "LIVE",
+    "name": "Code generation",
+    "live_path": "POST /v1/chat/completions (model)"
+  },
+  {
+    "id": "code_execution",
+    "status": "LIVE",
+    "name": "Code execution",
+    "live_path": "POST /v1/tools/execute (execute_code sandbox)"
+  },
+  {
+    "id": "embeddings",
+    "status": "LIVE",
+    "name": "Embeddings",
+    "live_path": "POST /v1/embeddings"
+  },
+  {
+    "id": "audio_transcription",
+    "status": "LIVE",
+    "name": "Audio transcription (ASR)",
+    "live_path": "POST /v1/audio/transcriptions + ability.audio_transcription (local Vosk)"
+  },
+  {
+    "id": "audio_speech",
+    "status": "LIVE",
+    "name": "Audio speech (TTS)",
+    "live_path": "POST /v1/audio/speech + ability.audio_speech (realai.voice / Windows SAPI / Kokoro)"
+  },
+  {
+    "id": "translation",
+    "status": "LIVE",
+    "name": "Translation",
+    "live_path": "POST /v1/tools/execute ability.translation \u2192 local Hive chat"
+  },
+  {
+    "id": "web_research",
+    "status": "LIVE",
+    "name": "Web research & scraping",
+    "live_path": "POST /v1/tools/execute web_research"
+  },
+  {
+    "id": "task_automation",
+    "status": "LIVE",
+    "name": "Task automation & infra ops",
+    "live_path": "POST /v1/self-heal/* + tools self_heal_*"
+  },
+  {
+    "id": "voice_streaming",
+    "status": "LIVE",
+    "name": "Voice interaction (streaming)",
+    "live_path": "ability.voice_streaming oneshot (local TTS\u2194Hive chat) + optional WS"
+  },
+  {
+    "id": "business_planning",
+    "status": "LIVE",
+    "name": "Business planning",
+    "live_path": "POST /v1/tools/execute ability.business_planning \u2192 local Hive chat"
+  },
+  {
+    "id": "therapy_counseling",
+    "status": "LIVE",
+    "name": "Therapy & counseling",
+    "live_path": "POST /v1/tools/execute ability.therapy_counseling \u2192 local Hive chat"
+  },
+  {
+    "id": "web3_integration",
+    "status": "LIVE",
+    "name": "Web3 integration",
+    "live_path": "POST /v1/tools/execute ability.web3_integration + core.tools.web3"
+  },
+  {
+    "id": "coach",
+    "status": "LIVE",
+    "name": "RackUp professional coach",
+    "live_path": "POST /v1/tools/execute ability.coach + rackup_invoke"
+  },
+  {
+    "id": "shot_of_the_day",
+    "status": "LIVE",
+    "name": "Shot of the Day",
+    "live_path": "POST /v1/tools/execute ability.shot_of_the_day + rackup_invoke"
+  },
+  {
+    "id": "rating_update",
+    "status": "LIVE",
+    "name": "Post-match rating update",
+    "live_path": "POST /v1/tools/execute ability.rating_update + rackup_invoke"
+  },
+  {
+    "id": "tournament",
+    "status": "LIVE",
+    "name": "Tournament / league insights",
+    "live_path": "POST /v1/tools/execute ability.tournament + rackup_invoke"
+  },
+  {
+    "id": "ledger_audit",
+    "status": "LIVE",
+    "name": "ROC ledger audit",
+    "live_path": "POST /v1/tools/execute ability.ledger_audit + rackup_invoke"
+  },
+  {
+    "id": "matchmaking",
+    "status": "LIVE",
+    "name": "Matchmaking advice",
+    "live_path": "POST /v1/tools/execute ability.matchmaking + rackup_invoke"
+  },
+  {
+    "id": "hall_context",
+    "status": "LIVE",
+    "name": "hall context",
+    "live_path": "POST /v1/tools/execute ability.hall_context + rackup_invoke"
+  },
+  {
+    "id": "league_validate",
+    "status": "LIVE",
+    "name": "league validate",
+    "live_path": "POST /v1/tools/execute ability.league_validate + rackup_invoke"
+  },
+  {
+    "id": "moderation",
+    "status": "LIVE",
+    "name": "moderation",
+    "live_path": "POST /v1/tools/execute ability.moderation + rackup_invoke"
+  },
+  {
+    "id": "money_anomaly",
+    "status": "LIVE",
+    "name": "money anomaly",
+    "live_path": "POST /v1/tools/execute ability.money_anomaly + rackup_invoke"
+  },
+  {
+    "id": "payout_sanity",
+    "status": "LIVE",
+    "name": "payout sanity",
+    "live_path": "POST /v1/tools/execute ability.payout_sanity + rackup_invoke"
+  },
+  {
+    "id": "pyramid_rules",
+    "status": "LIVE",
+    "name": "pyramid rules",
+    "live_path": "POST /v1/tools/execute ability.pyramid_rules + rackup_invoke"
+  },
+  {
+    "id": "rating_convert",
+    "status": "LIVE",
+    "name": "rating convert",
+    "live_path": "POST /v1/tools/execute ability.rating_convert + rackup_invoke"
+  },
+  {
+    "id": "rating_intel",
+    "status": "LIVE",
+    "name": "rating intel",
+    "live_path": "POST /v1/tools/execute ability.rating_intel + rackup_invoke"
+  },
+  {
+    "id": "sotd_contribute",
+    "status": "LIVE",
+    "name": "sotd contribute",
+    "live_path": "POST /v1/tools/execute ability.sotd_contribute + rackup_invoke"
+  },
+  {
+    "id": "video_analysis",
+    "status": "LIVE",
+    "name": "video analysis",
+    "live_path": "POST /v1/tools/execute ability.video_analysis + rackup_invoke"
+  },
+  {
+    "id": "desktop_lambda_chat",
+    "status": "LIVE",
+    "name": "desktop lambda chat",
+    "live_path": "POST /v1/tools/execute ability.desktop_lambda_chat"
+  },
+  {
+    "id": "desktop_lambda_image",
+    "status": "LIVE",
+    "name": "desktop lambda image",
+    "live_path": "POST /v1/tools/execute ability.desktop_lambda_image"
+  },
+  {
+    "id": "desktop_lambda_video",
+    "status": "LIVE",
+    "name": "desktop lambda video",
+    "live_path": "POST /v1/tools/execute ability.desktop_lambda_video"
+  },
+  {
+    "id": "desktop_lambda_advanced",
+    "status": "LIVE",
+    "name": "desktop lambda advanced",
+    "live_path": "POST /v1/tools/execute ability.desktop_lambda_advanced"
+  },
+  {
+    "id": "overmind_runner",
+    "status": "LIVE",
+    "name": "overmind runner",
+    "live_path": "POST /v1/tools/execute ability.overmind_runner"
+  },
+  {
+    "id": "code_engineer_agent",
+    "status": "LIVE",
+    "name": "code engineer agent",
+    "live_path": "POST /v1/tools/execute ability.code_engineer_agent"
+  },
+  {
+    "id": "deep_promote",
+    "status": "LIVE",
+    "name": "Deep promote (named roots + nests)",
+    "live_path": "abilities/deep_promote.py + craft /promote"
+  },
+  {
+    "id": "hierarchical_specialists",
+    "status": "LIVE",
+    "name": "hierarchical_specialists",
+    "live_path": "POST /v1/tools/execute ability.hierarchical_specialists"
+  },
+  {
+    "id": "approval_store",
+    "status": "LIVE",
+    "name": "approval_store",
+    "live_path": "POST /v1/tools/execute ability.approval_store"
+  },
+  {
+    "id": "device_selector",
+    "status": "LIVE",
+    "name": "device_selector",
+    "live_path": "POST /v1/tools/execute device_selector + ability.device_selector"
+  },
+  {
+    "id": "code_engineer_cli",
+    "status": "LIVE",
+    "name": "Code Engineer CLI",
+    "live_path": "abilities/code_engineer_cli.py + realai.plugins.tools.code_engineer_cli"
+  },
+  {
+    "id": "harden_repos",
+    "status": "LIVE",
+    "name": "Harden repos",
+    "live_path": "abilities/harden_repos.py + realai.plugins.tools.harden_repos"
+  },
+  {
+    "id": "rollout_all_repos",
+    "status": "LIVE",
+    "name": "Rollout all repos",
+    "live_path": "abilities/rollout_all_repos.py + realai.plugins.tools.rollout_all_repos"
+  },
+  {
+    "id": "quarantine_reconstruct",
+    "status": "LIVE",
+    "name": "Quarantine reconstruct",
+    "live_path": "abilities/quarantine_reconstruct.py"
+  },
+  {
+    "id": "plugin_system",
+    "status": "LIVE",
+    "name": "Plugin system",
+    "live_path": "plugins/rackup_coach + POST tools rackup_invoke"
+  },
+  {
+    "id": "memory_learning",
+    "status": "LIVE",
+    "name": "Memory & persistent learning",
+    "live_path": "POST /v1/tools/execute ability.memory_learning + aura_memory + hive_memory + chat inject"
+  },
+  {
+    "id": "self_reflection",
+    "status": "LIVE",
+    "name": "Chain-of-thought + self-reflection",
+    "live_path": "POST /v1/self-improve/evaluate"
+  },
+  {
+    "id": "knowledge_synthesis",
+    "status": "LIVE",
+    "name": "Knowledge synthesis",
+    "live_path": "POST /v1/tools/execute ability.knowledge_synthesis + knowledge_graph + world_model"
+  },
+  {
+    "id": "multi_agent",
+    "status": "LIVE",
+    "name": "Multi-agent orchestration",
+    "live_path": "POST /v1/multi-agent/run + chat multi_agent=true + GET /v1/agents"
+  },
+  {
+    "id": "game_world",
+    "status": "LIVE",
+    "name": "Game-world integration (Atomic Fizz)",
+    "live_path": "POST tools game_world|omnibrain|world_brain + MCP vault77"
+  },
+  {
+    "id": "organs_hive",
+    "status": "LIVE",
+    "name": "Synthetic organs hive",
+    "live_path": "POST tools organs_task + abilities/organs_hive.py"
+  },
+  {
+    "id": "observability_self_improve",
+    "status": "LIVE",
+    "name": "Observability, auditing, self-improvement",
+    "live_path": "POST /v1/tools/execute ability.observability_self_improve + /v1/self-heal/* + /v1/self-improve/*"
+  },
+  {
+    "id": "local_inference",
+    "status": "LIVE",
+    "name": "Local inference (Vulkan / GGUF)",
+    "live_path": "http://127.0.0.1:8080 via orchestrator"
+  },
+  {
+    "id": "training_pipeline",
+    "status": "LIVE",
+    "name": "Training + fine-tune pipeline",
+    "live_path": "GET /v1/training/* GET /v1/lora"
+  },
+  {
+    "id": "lora_adapters",
+    "status": "LIVE",
+    "name": "Recovered PEFT LoRA adapters",
+    "live_path": "GET /v1/lora"
+  },
+  {
+    "id": "kilo_recovery",
+    "status": "LIVE",
+    "name": "Kilo-era gold recovery wiring",
+    "live_path": "GET /v1/recovery"
+  },
+  {
+    "id": "frontend_ui",
+    "status": "LIVE",
+    "name": "Next.js operator UI",
+    "live_path": "http://127.0.0.1:3000"
+  },
+  {
+    "id": "cli_surface",
+    "status": "LIVE",
+    "name": "CLI surface (tools install)",
+    "live_path": "bin/realai*.cmd + realai.cli.craft (in-tree; not C:\\tools\\realai husk)"
+  },
+  {
+    "id": "hive_governance",
+    "status": "LIVE",
+    "name": "Hive governance",
+    "live_path": "POST /v1/tools/execute ability.hive_governance (local agents + coverage)"
+  }
+]

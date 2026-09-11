@@ -1,0 +1,17 @@
+{
+  "name": "RealAI",
+  "short_name": "RealAI",
+  "description": "Local-first Hive AI — console, agents, and voice on your machine.",
+  "start_url": "/console",
+  "display": "standalone",
+  "background_color": "#07070b",
+  "theme_color": "#07070b",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

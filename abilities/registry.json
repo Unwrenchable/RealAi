@@ -1,0 +1,30 @@
+{
+  "abilities": [
+    {
+      "name": "AbilityName",
+      "source": "abilities\\auto_wire.py",
+      "type": "class",
+      "capabilities": []
+    },
+    {
+      "name": "ability_entry",
+      "source": "abilities\\delta_extractor.py",
+      "type": "function",
+      "capabilities": []
+    },
+    {
+      "name": "ability_entries",
+      "source": "realai\\scripts\\live_gap_agent.py",
+      "type": "function",
+      "capabilities": []
+    },
+    {
+      "name": "ability_group",
+      "source": "realai\\cli\\hive\\commands\\abilities.py",
+      "type": "function",
+      "capabilities": []
+    }
+  ],
+  "tools": [],
+  "tasks": []
+}

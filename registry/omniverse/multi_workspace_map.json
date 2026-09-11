@@ -1,0 +1,18 @@
+{
+  "ts": "2026-08-25T17:34:35.463182+00:00",
+  "multi_ws": 2,
+  "worlds": [
+    {
+      "id": "world.realai_home",
+      "path": "C:\\RealAI-clean",
+      "role": "engine",
+      "dimension": "realai-product"
+    },
+    {
+      "id": "world.vault77_gps",
+      "path": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+      "role": "project",
+      "dimension": "node-solana-game"
+    }
+  ]
+}

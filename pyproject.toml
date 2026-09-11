@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "realai"
+version = "2.0.0"
+description = "RealAI Hive — unified orchestrator, agents, abilities, GPU stack"
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+
+[project.scripts]
+realai = "realai.cli.hive.app:main"
+realai-cli = "realai.cli.hive.app:main"
+realai-craft = "realai.cli.craft:main"
+realai-server = "realai.server.app:main"
+realai-worker = "modules.orchestrators.orchestration_worker:main_loop"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+  "realai*",
+  "abilities*",
+  "modules*",
+  "agent_tools*",
+  "agents*",
+]
+exclude = [
+  "_quarantine*",
+  "node_modules*",
+  "archive*",
+  "imports*",
+  "recovered*",
+  "apps*",
+  "frontend*",
+]
+
+[tool.setuptools.package-data]
+"*" = ["*.json", "*.md", "*.yaml", "*.yml", "*.toml"]
+
+[tool.pytest.ini_options]
+testpaths = [
+  "tests",
+]
+python_files = [
+  "test_*.py",
+]
+norecursedirs = [
+  "_quarantine",
+  "recovered",
+  "archive",
+  "imports",
+  "node_modules",
+  ".git",
+  ".venv",
+  "dist",
+  "build",
+  "venv",
+  "apps",
+  "frontend",
+  "realai",
+]

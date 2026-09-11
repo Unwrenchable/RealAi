@@ -1,0 +1,59 @@
+How to run RealAI
+=================
+
+Work in:  C:\RealAI-clean
+(Not C:\Users\tsmit\realai — that is an old git clone.)
+
+Nested folder C:\RealAI-clean\realai\ is the PYTHON PACKAGE (import realai).
+It is NOT a second product and NOT a nested git repo.
+
+Full map:  docs\RUN_SERVERS.md
+Menu:      START_HERE.bat
+
+
+1. Start the stack (Vulkan + Hive)
+----------------------------------
+
+  cd /d C:\RealAI-clean
+  START_HERE.bat          (pick 1)
+  -or-
+  start_all.bat
+  -or-
+  realai-stack
+  -or-
+  python -m realai stack
+
+Starts:
+  Vulkan model   http://127.0.0.1:8080
+  Hive API       http://127.0.0.1:8001
+
+Check:
+  realai-health
+  curl http://127.0.0.1:8001/health
+
+Stop:
+  realai-stop
+
+
+2. Open UIs (same Hive process)
+-------------------------------
+
+  Console    http://127.0.0.1:8001/console
+  Fusion UI  http://127.0.0.1:8001/fusion-ui/
+  Agents UI  http://127.0.0.1:8001/agents-ui/
+
+
+3. Optional pieces
+------------------
+
+  Voice Lab   realai\voice\start_voice_lab.bat     (:8890)
+  Hive UI     start_ui.bat                         (:5173)
+  Vulkan only start_realai_server.bat              (:8080)
+  Hive only   start_orchestrator.bat               (:8001)
+
+
+4. Talk from terminal
+---------------------
+
+  realai
+  realai chat "status check"

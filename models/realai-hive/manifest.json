@@ -1,0 +1,22 @@
+{
+  "id": "realai-hive",
+  "display_name": "RealAI Hive",
+  "owned_by": "realai",
+  "family": "hive",
+  "gguf": "C:\\models\\checkpoints_lora\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+  "gguf_filename": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+  "backend": "llama.cpp-vulkan",
+  "capabilities": [
+    "chat",
+    "completion",
+    "coding",
+    "hive",
+    "organs"
+  ],
+  "updated_at": "2026-08-25T12:22:48.801877+00:00",
+  "notes": [
+    "Flagship branded id for craft /model RealAI Hive",
+    "Vulkan serves one GGUF at a time \u2014 restart llama-server with this path to hot-load",
+    "Organs/hive abilities use the same chat backend via orchestrator"
+  ]
+}

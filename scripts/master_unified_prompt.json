@@ -1,0 +1,11 @@
+{
+  "auto_generated": true,
+  "source": "C:\\RealAI-clean\\scripts\\master_unified_prompt.txt",
+  "rank": 64,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj"
+  ]
+}

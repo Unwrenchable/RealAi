@@ -1,0 +1,11 @@
+{
+  "auto_generated": true,
+  "source": "C:\\RealAI-clean\\normalized_datasets\\train_combined.jsonl",
+  "rank": 64,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj"
+  ]
+}

@@ -1,0 +1,155 @@
+You are the RealAI hive architect and overseer.
+
+Goal:
+Turn this RealAI-clean repo into an agentic hive, where:
+- Llama-1B is the default “brain” model
+- Other models act as specialist consultants (coder, architect, overseer, analyst)
+- Agents in .github/agents behave like employees in a company
+- A provider router chooses the right model per agent/task
+- A multi-agent orchestrator coordinates all agents and model switching
+
+Step 1 — Load model registry
+1. Read the file:
+   config\realai_models.json
+
+2. Parse the JSON and build an internal registry of all models with:
+   - id
+   - gguf_path
+   - gguf_filename
+   - family
+   - loaded_now
+
+3. Confirm these key models exist:
+
+   - local-llama-1b
+     gguf_path: C:\models\checkpoints_lora\Llama-3.2-1B-Instruct-Q4_K_M.gguf
+
+   - realai-default-coder-10
+     gguf_path: C:\models\checkpoints_lora\qwen2.5-coder-7b-instruct-q5_k_m.gguf
+
+   - realai-1.0-instruct
+     gguf_path: C:\models\checkpoints_lora\realai-1.0-instruct-Q4_K_M.gguf
+
+   - qwen3-27b
+     gguf_path: C:\Users\tsmit\Qwen3-30B-A3B\qwen3.8-27b\Qwen3.8-27B-Q4_K_M.gguf
+
+   - realai-embeddings
+     family: embeddings
+
+Step 2 — Normalize loaded_now flags
+1. Ensure only ONE GGUF-backed model is marked loaded_now: true.
+2. Set:
+   - local-llama-1b → loaded_now: true   (default brain)
+   - realai-default-coder-10 → loaded_now: false
+   - qwen3-27b → loaded_now: false
+   - realai-1.0-instruct → loaded_now: false
+3. Keep:
+   - realai-embeddings → loaded_now: true (non-GGUF, embeddings family)
+
+4. Write the updated JSON back to:
+   config\realai_models.json
+
+Step 3 — Load agents from .github/agents
+1. Scan:
+   .github/agents/
+   for agent definitions:
+   - *.json
+   - *.md
+   - *.agent
+
+2. For each agent file, build an internal structure:
+   - agent_id
+   - role (e.g., overseer, coder, architect, analyst, memory, router)
+   - description
+   - capabilities
+   - preferred_model (if specified)
+   - tools (if any)
+
+3. Validate that the following archetypes exist or create them if missing:
+   - overseer / orchestrator agent
+   - coder / implementation agent
+   - architect / repo-architect agent
+   - analyst / explainer agent
+   - memory / context archivist agent
+   - router / provider-router agent
+
+Step 4 — Define provider router
+Create a logical routing layer that maps agents and tasks to models:
+
+Routing rules:
+- If agent.role == "coder" or task involves code generation, debugging, or refactoring:
+  → use model: realai-default-coder-10 (qwen2.5-coder-7b-instruct-q5_k_m.gguf)
+
+- If agent.role == "architect" or task involves high-level design, system architecture, or multi-module reasoning:
+  → use model: qwen3-27b (Qwen3.8-27B-Q4_K_M.gguf)
+
+- If agent.role == "overseer" or "orchestrator":
+  → use model: realai-1.0-instruct
+
+- If agent.role == "analyst" or task is explanation, summarization, or commentary:
+  → use model: local-llama-1b
+
+- If task involves embeddings, similarity search, or memory operations:
+  → use model: realai-embeddings
+
+- Default fallback for any unspecified role:
+  → use model: local-llama-1b
+
+Implementation requirement:
+- The router must be callable by any agent as a tool, e.g.:
+  route_model(agent_id, task_description) → model_id
+
+Step 5 — Multi-agent orchestrator
+Create an orchestrator that:
+1. Accepts a high-level user goal (e.g., “stabilize RealAI unified repo”).
+2. Breaks it into tasks and subtasks.
+3. Assigns each task to the most appropriate agent based on:
+   - agent.role
+   - agent.capabilities
+   - task type
+4. For each task:
+   - Calls provider router to select the model.
+   - Ensures llama-server has the correct GGUF loaded (only one at a time).
+   - Executes the agent’s reasoning and actions using the selected model.
+5. Maintains a shared hive memory:
+   - Task history
+   - Decisions
+   - Architecture changes
+   - Important context
+   using realai-embeddings.
+
+6. Produces a final, coherent report back to the user summarizing:
+   - Which agents participated
+   - Which models were used
+   - What decisions were made
+   - What artifacts were produced (code, configs, docs)
+
+Step 6 — Default behavior (hive mode)
+Configure the system so that:
+- When the user sends any non-trivial request, the orchestrator agent is invoked first.
+- The orchestrator:
+  - interprets the request as a project/task
+  - delegates to other agents
+  - uses the provider router to select models
+  - returns a structured, multi-agent answer
+
+Step 7 — Verification
+After implementing the above:
+1. Print the active model registry (id, loaded_now).
+2. List all loaded agents with:
+   - agent_id
+   - role
+   - preferred_model (if any)
+3. Run a test hive task:
+   “Analyze the RealAI-clean repo architecture and propose a stabilization plan for multi-branch Git merges and model registry management.”
+
+4. Show:
+   - which agents were invoked
+   - which models were used
+   - the orchestrator’s final plan.
+
+Your output to me should be:
+- A summary of the implemented router and orchestrator
+- Any code or config snippets you created or modified
+- Any assumptions you had to make
+- Next steps to further harden the hive.

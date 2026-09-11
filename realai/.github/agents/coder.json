@@ -1,0 +1,24 @@
+{
+  "id": "coder",
+  "role": "Hive Coder",
+  "description": "RealAI hive archetype agent: Hive Coder",
+  "tags": [
+    "hive",
+    "coder",
+    "implementation"
+  ],
+  "capabilities": [
+    "code-generation",
+    "refactor",
+    "debug"
+  ],
+  "required_tools": [
+    "read_file",
+    "list_dir",
+    "run_terminal_command"
+  ],
+  "preferred_profile": "balanced",
+  "risk_level": "medium",
+  "hive": true,
+  "preferred_model": "realai-default-coder"
+}

@@ -1,0 +1,66 @@
+# AMD-optimized RealAI inference (Vulkan llama.cpp).
+# Live GPU path: local_llama.py + llama-server on :8080.
+# Do not enable CUDA on this box.
+# Weights live under C:\models\checkpoints_lora — never copy GGUFs into the package.
+
+backend: vulkan-llama
+device: amd
+gpu_api: vulkan
+cuda: false
+rocm: false
+
+server:
+  host: 127.0.0.1
+  port: 8080
+  default_chat_model: realai-hive
+  default_embed_model: realai-embed
+  models_dir: C:\models\checkpoints_lora
+  gguf: C:\models\checkpoints_lora\qwen2.5-coder-7b-instruct-q5_k_m.gguf
+
+llama:
+  n_gpu_layers: 99
+  n_ctx: 65536
+  n_batch: 512
+  n_ubatch: 512
+  n_threads: 0
+  n_predict: 2048
+  temperature: 0.7
+  top_p: 0.9
+  flash_attn: false
+  mlock: false
+  mmap: true
+  offload_kqv: true
+
+voice:
+  provider: realai.voice.provider
+  engine: realai.voice.tts_engine
+  persona: realai-voice-engine
+  models_dir: C:\models\checkpoints_lora
+  lab_port: 8890
+  backends:
+    - kokoro
+    - fish
+    - xtts
+    - windows_sapi
+    - piper
+  default_backend: xtts
+  stack:
+    vulkan_dir: C:\llama-vulkan
+    llama_dir: C:\llama
+    directml_dir: C:\DirectML
+    vulkan_base: http://127.0.0.1:8080
+    hive: http://127.0.0.1:8001
+  kokoro:
+    model_dir: C:\models\checkpoints_lora\Kokoro
+    checkpoint: C:\models\checkpoints_lora\Kokoro\kokoro-v1_0.pth
+    voices_dir: C:\models\checkpoints_lora\Kokoro\voices
+    default_voice: af_heart
+    url: http://127.0.0.1:8880
+  fish:
+    model_dir: C:\models\checkpoints_lora\fish_speech_s1
+    url: http://127.0.0.1:8081
+  xtts:
+    model_dir: C:\models\checkpoints_lora\xtts_v2
+    model: C:\models\checkpoints_lora\xtts_v2\model.pth
+    speaker_wav: C:\models\checkpoints_lora\voices\unwrenchable_clip.wav
+    url: http://127.0.0.1:8020

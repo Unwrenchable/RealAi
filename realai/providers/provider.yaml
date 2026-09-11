@@ -1,0 +1,19 @@
+id: llama_cpp
+name: "Llama.cpp Local"
+type: "local"
+entry: "./run.ps1"
+models:
+  - id: realai-hive
+    name: "RealAI Hive (Qwen2.5-Coder-7B Q5_K_M GGUF)"
+    path: "C:/models/checkpoints_lora/qwen2.5-coder-7b-instruct-q5_k_m.gguf"
+    format: "gguf"
+    context: 65536
+    gpu_layers: 99
+    template: "qwen"
+  - id: qwen-1.5b
+    name: "Qwen2.5-Coder-1.5B-Instruct (GGUF)"
+    path: "C:/models/checkpoints_lora/qwen2.5-coder-1.5b-instruct-q5_k_m.gguf"
+    format: "gguf"
+    context: 65536
+    gpu_layers: 99
+    template: "qwen"

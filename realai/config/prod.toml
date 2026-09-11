@@ -1,0 +1,18 @@
+[server]
+host = "0.0.0.0"
+port = 8000
+provider = "local"
+default_chat_model = "realai-1.0"
+default_embedding_model = "realai-embed"
+log_level = "info"
+
+[limits]
+memory_mb = 2048
+
+[permissions]
+tools = ["network", "filesystem", "code_exec", "web3"]
+
+[web3]
+solana_rpc_url = "https://api.mainnet-beta.solana.com"
+evm_rpc_url = ""
+

@@ -1,0 +1,25 @@
+{
+  "id": "governor",
+  "role": "Hive Governor",
+  "description": "RealAI hive archetype agent: Hive Governor",
+  "tags": [
+    "hive",
+    "governor",
+    "guardian",
+    "safety"
+  ],
+  "capabilities": [
+    "policy",
+    "safety",
+    "approval"
+  ],
+  "required_tools": [
+    "read_file",
+    "list_dir",
+    "run_terminal_command"
+  ],
+  "preferred_profile": "balanced",
+  "risk_level": "low",
+  "hive": true,
+  "preferred_model": "realai-default-coder"
+}

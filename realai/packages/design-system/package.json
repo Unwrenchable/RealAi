@@ -1,0 +1,31 @@
+{
+  "name": "@realai/design-system",
+  "version": "0.1.0",
+  "description": "RealAI UI tokens + React components (ChatBubble, Button, Card, …)",
+  "private": true,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./tokens": "./tokens.cjs",
+    "./dist/*": "./dist/*"
+  },
+  "files": [
+    "dist",
+    "tokens.cjs",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "scripts": {
+    "build": "node -e \"console.log('prebuilt dist')\"",
+    "typecheck": "node -e \"console.log('prebuilt types in dist')\""
+  }
+}

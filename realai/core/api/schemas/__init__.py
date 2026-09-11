@@ -1,0 +1,2 @@
+"""Core API schema definitions."""
+

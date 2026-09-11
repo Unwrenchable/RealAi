@@ -1,0 +1,16 @@
+[
+  {
+    "source": "realai\\plugins\\plugin_manifest.json",
+    "name": "atomic_fizz_realai",
+    "version": "0.1.0-gold",
+    "capabilities": [
+      "npc_generation",
+      "quest_generation",
+      "dungeon_generation",
+      "overseer",
+      "dialogue",
+      "world_events",
+      "survival_rewards"
+    ]
+  }
+]

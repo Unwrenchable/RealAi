@@ -1,0 +1,22 @@
+{
+  "name": "atomic_fizz_realai",
+  "version": "0.1.0-gold",
+  "description": "Atomic Fizz NPC/Overseer engines recovered from vault backend/realai",
+  "capabilities": [
+    "npc_generation",
+    "quest_generation",
+    "dungeon_generation",
+    "overseer",
+    "dialogue",
+    "world_events",
+    "survival_rewards"
+  ],
+  "source": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai",
+  "status": "GOLD",
+  "entrypoints": {
+    "overseer": "realai-overseer.js",
+    "local_overseer": "local-overseer.js",
+    "generate_npc": "generate-npc.js",
+    "quest": "quest-generator.js"
+  }
+}

@@ -1,0 +1,1 @@
+C:\models\checkpoints_lora\qwen2.5-coder-7b-instruct-q5_k_m.gguf

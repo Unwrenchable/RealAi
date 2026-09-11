@@ -1,0 +1,41 @@
+{
+  "ts": "2026-08-25T17:25:59.331541+00:00",
+  "recipes": [
+    {
+      "id": "stub-fill-or-delete",
+      "action": "Inspect zero-byte files; restore from git history or delete if obsolete",
+      "safe": true,
+      "auto_apply": false
+    },
+    {
+      "id": "move-secrets-to-env",
+      "action": "Replace literal secrets with process.env / dotenv; scrub git history if needed",
+      "safe": true,
+      "auto_apply": false
+    },
+    {
+      "id": "sanitize-or-textcontent",
+      "action": "Prefer textContent/DOM APIs; sanitize any required HTML sinks",
+      "safe": true,
+      "auto_apply": false
+    },
+    {
+      "id": "wrap-timeout-validate-args",
+      "action": "Validate args, set timeouts, avoid shell=True; log failures",
+      "safe": true,
+      "auto_apply": false
+    },
+    {
+      "id": "map-nests-before-rewrite",
+      "action": "Build import graph before moving nested modules",
+      "safe": true,
+      "auto_apply": false
+    },
+    {
+      "id": "game-stack-doctor",
+      "action": "Verify backend health, MCP vault77-game, RealAI provider, Solana programs",
+      "safe": true,
+      "auto_apply": false
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "model_id": "realai-1.0-instruct",
+  "published_at": "2026-08-15T19:32:13.525638+00:00",
+  "gguf": "realai-1.0-instruct-Q4_K_M.gguf",
+  "paths": [
+    "C:\\RealAI-clean\\models\\realai-1.0-instruct\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+    "C:\\RealAI-clean\\models\\realai-1.0\\weights\\realai-1.0-instruct-Q4_K_M.gguf"
+  ],
+  "quant": "Q4_K_M",
+  "source": "C:\\RealAI-clean\\models\\qwen2.5-coder-1.5b-instruct-q2_k.gguf",
+  "bootstrap": true,
+  "bootstrap_source": "C:\\RealAI-clean\\models\\qwen2.5-coder-1.5b-instruct-q2_k.gguf",
+  "note": "Dev bootstrap from existing GGUF; replace with fine-tuned RealAI weights when ready."
+}

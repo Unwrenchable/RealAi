@@ -1,0 +1,98 @@
+{
+  "qwen2-5-coder-1-5b-instruct-q2-k": {
+    "type": "chat",
+    "backend": "llama.cpp-vulkan",
+    "path": "C:\\models\\checkpoints_lora\\qwen2.5-coder-1.5b-instruct-q2_k.gguf",
+    "context_length": 16384,
+    "owned_by": "realai",
+    "capabilities": [
+      "chat",
+      "completion",
+      "coding"
+    ]
+  },
+  "qwen2-5-coder-1-5b-instruct-q3-k-m": {
+    "type": "chat",
+    "backend": "llama.cpp-vulkan",
+    "path": "C:\\models\\checkpoints_lora\\qwen2.5-coder-1.5b-instruct-q3_k_m.gguf",
+    "context_length": 16384,
+    "owned_by": "realai",
+    "capabilities": [
+      "chat",
+      "completion",
+      "coding"
+    ]
+  },
+  "qwen2-5-coder-1-5b-instruct-q4-0": {
+    "type": "chat",
+    "backend": "llama.cpp-vulkan",
+    "path": "C:\\models\\checkpoints_lora\\qwen2.5-coder-1.5b-instruct-q4_0.gguf",
+    "context_length": 16384,
+    "owned_by": "realai",
+    "capabilities": [
+      "chat",
+      "completion",
+      "coding"
+    ]
+  },
+  "qwen2-5-coder-1-5b-instruct-q4-k-m": {
+    "type": "chat",
+    "backend": "llama.cpp-vulkan",
+    "path": "C:\\models\\checkpoints_lora\\qwen2.5-coder-1.5b-instruct-q4_k_m.gguf",
+    "context_length": 16384,
+    "owned_by": "realai",
+    "capabilities": [
+      "chat",
+      "completion",
+      "coding"
+    ]
+  },
+  "qwen2-5-coder-1-5b-instruct-q5-0": {
+    "type": "chat",
+    "backend": "llama.cpp-vulkan",
+    "path": "C:\\models\\checkpoints_lora\\qwen2.5-coder-1.5b-instruct-q5_0.gguf",
+    "context_length": 16384,
+    "owned_by": "realai",
+    "capabilities": [
+      "chat",
+      "completion",
+      "coding"
+    ]
+  },
+  "qwen2-5-coder-1-5b-instruct-q5-k-m": {
+    "type": "chat",
+    "backend": "llama.cpp-vulkan",
+    "path": "C:\\models\\checkpoints_lora\\qwen2.5-coder-1.5b-instruct-q5_k_m.gguf",
+    "context_length": 16384,
+    "owned_by": "realai",
+    "capabilities": [
+      "chat",
+      "completion",
+      "coding"
+    ]
+  },
+  "qwen2-5-coder-1-5b-instruct-q6-k": {
+    "type": "chat",
+    "backend": "llama.cpp-vulkan",
+    "path": "C:\\models\\checkpoints_lora\\qwen2.5-coder-1.5b-instruct-q6_k.gguf",
+    "context_length": 16384,
+    "owned_by": "realai",
+    "capabilities": [
+      "chat",
+      "completion",
+      "coding"
+    ]
+  },
+  "qwen2-5-coder-1-5b-instruct-q8-0": {
+    "type": "chat",
+    "backend": "llama.cpp-vulkan",
+    "path": "C:\\models\\checkpoints_lora\\qwen2.5-coder-1.5b-instruct-q8_0.gguf",
+    "context_length": 16384,
+    "owned_by": "realai",
+    "capabilities": [
+      "chat",
+      "completion",
+      "coding"
+    ]
+  }
+}

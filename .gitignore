@@ -1,0 +1,120 @@
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.env
+keys/
+*.key
+*.pem
+hf_token
+GROK_API_KEY
+OPENAI_API_KEY
+HF_TOKEN
+
+# Dependencies
+node_modules/
+**/node_modules/
+dist/
+build/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+env/
+.env/
+
+# OS & Editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Large files
+*.mp4
+*.mov
+*.h5
+*.onnx
+*.bin
+
+# Temporary
+temp/
+tmp/
+cache/
+*.tmp
+logs/
+
+# Recovery dumps (optional cold archive outside repo)
+recovered/**
+!recovered/inbox/
+!recovered/inbox/.gitkeep
+
+# Local GGUF weights (present on disk; do not force-commit huge files)
+models/*.gguf
+
+# --- live main: do not commit local runtimes / archives / weights ---
+.venv-xtts/
+.venv*/
+**/__pycache__/
+*.egg-info/
+realai.egg-info/
+realai_memory.sqlite3
+*.sqlite3
+*.db
+_quarantine/
+archive/
+scan_results/
+artifacts/
+results/
+normalized_datasets/
+datasets/**/*.jsonl
+models/**/*.gguf
+models/**/*.safetensors
+models/**/*.pt
+models/**/*.pth
+models/checkpoints*/
+.hive/
+.kilo/
+.agentx/
+.grok/
+.vercel/
+voice-lab/.cache/
+**/out/
+apps/vscode/*.vsix
+*.vsix
+
+
+# Recovery nests / flattened dumps — keep on disk for learning; not on live main
+apps/vscode/RealAI_Recovery_SAFE/
+**/RealAI_Recovery_SAFE/
+**/C__realai*/
+**/C__Users_tsmit_realai*/
+**/recovered_from_recycle_bin*/
+**/quarantine_nested*/
+**/_parked*/
+**/og_mess*/
+**/site-packages/
+**/Lib/site-packages/
+attachments/
+screenshots/
+frontend/.next/
+**/.next/
+**/coverage/
+pnpm-lock.yaml
+package-lock.json
+
+
+# Flattened recovery filename dumps (files, not dirs)
+**/C__realai*
+**/C__Users*
+**/from_recycle_bin/
+apps/vscode/from_recycle_bin/
+apps/vscode/vscode/
+imports/external/**/site-packages/
+**/archive_venv/**
+**/og_mess/**
+

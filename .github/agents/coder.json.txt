@@ -1,0 +1,8 @@
+{
+  "id": "coder",
+  "role": "coder",
+  "preferred_model": "realai-default-coder-10",
+  "description": "Writes, fixes, and optimizes code.",
+  "capabilities": ["coding", "debugging", "refactoring"],
+  "script_path": "agents/coder.py"
+}

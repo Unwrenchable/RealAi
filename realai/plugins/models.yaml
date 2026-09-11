@@ -1,0 +1,74 @@
+models:
+  - id: realai-1.0
+    name: "RealAI 1.0"
+    type: chat
+    provider: local
+    backend: realai-gguf
+    path: realai-1.0
+    owned_by: realai
+    context_length: 8192
+    capabilities:
+      - chat
+      - reasoning
+      - tools
+
+  - id: realai-1.0-instruct
+    name: "RealAI 1.0 Instruct"
+    type: chat
+    provider: local
+    backend: realai-gguf
+    path: realai-1.0-instruct
+    owned_by: realai
+    context_length: 32768
+    capabilities:
+      - chat
+      - tool-calling
+      - local
+
+  - id: realai-overseer
+    name: "RealAI Overseer"
+    type: chat
+    provider: local
+    backend: realai-gguf
+    path: realai-overseer
+    owned_by: realai
+    context_length: 65536
+    capabilities:
+      - analysis
+      - planning
+      - critique
+
+  - id: realai-embed
+    name: "RealAI Embed"
+    type: embedding
+    provider: local
+    backend: deterministic
+    path: realai-embed
+    owned_by: realai
+    embedding_dimensions: 64
+    capabilities:
+      - embedding
+
+  - id: llama-local-1b
+    name: "Local Llama 3.2 1B (dev)"
+    type: chat
+    provider: local
+    backend: llama-cli
+    path: models/Llama-3.2-1B-Instruct-Q4_K_M.gguf
+    owned_by: local
+    context_length: 4096
+    capabilities:
+      - chat
+      - completion
+
+  - id: qwen-coder-7b
+    name: "Qwen Coder 7B (dev reference)"
+    type: chat
+    provider: local
+    backend: llama-cli
+    path: models/qwen2.5-coder-7b-instruct-q5_k_m.gguf
+    owned_by: reference
+    context_length: 8192
+    capabilities:
+      - chat
+      - code

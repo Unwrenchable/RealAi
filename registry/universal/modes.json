@@ -1,0 +1,85 @@
+{
+  "ts": "2026-08-25T17:25:59.331541+00:00",
+  "os": {
+    "init": true,
+    "home": "C:\\RealAI-clean",
+    "workspace": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+    "agents": [
+      "doctor",
+      "architect",
+      "creator",
+      "learner",
+      "hardener",
+      "worldbuilder"
+    ],
+    "providers": [
+      "vulkan:8080",
+      "orchestrator:8001",
+      "realai_mcp",
+      "vault77-game"
+    ],
+    "tools": [
+      "system_scan",
+      "workspace_*",
+      "multi_agent_run",
+      "self_heal_*",
+      "harden_scan"
+    ],
+    "memory": "C:\\RealAI-clean\\memory\\hive",
+    "world": "project-bound",
+    "build": "realai-stack + npm run dev (workspace)",
+    "package": "realai.egg + workspace package.json",
+    "release": "gated",
+    "evolve": "patterns+recipes logs"
+  },
+  "kernel": {
+    "init": true,
+    "unify": "REALAI_HOME + REALAI_WORKSPACE",
+    "promote": "curated product-side only",
+    "agents": "agentx + craft slash tools",
+    "providers": "local llama + optional cloud",
+    "tools": "TOOL_REGISTRY + ability.*",
+    "memory": "aura + hive sqlite",
+    "world": "cwd universe",
+    "evolve": "learn_keywords + pattern store",
+    "doctor": "realai-doctor READY"
+  },
+  "hypervisor": {
+    "init": true,
+    "multi_ws": 2,
+    "realms": [
+      {
+        "id": "home",
+        "path": "C:\\RealAI-clean",
+        "role": "engine"
+      },
+      {
+        "id": "workspace",
+        "path": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+        "role": "project"
+      }
+    ],
+    "extra_read": 2,
+    "extra_write": 2,
+    "promote_policy": "no auto-write to workspace unless explicit /fix|/heal|/harden apply",
+    "evolve": "cross-realm pattern reuse",
+    "doctor": "dual-realm health"
+  },
+  "capabilities": [
+    "read_file",
+    "write_file",
+    "fix",
+    "heal",
+    "harden",
+    "generate",
+    "map",
+    "evolve",
+    "learn",
+    "creative",
+    "diagnose",
+    "secure",
+    "orchestrate"
+  ],
+  "patterns_count": 5,
+  "recipes_count": 6
+}

@@ -1,0 +1,2038 @@
+{
+  "PlugInConfiguration": {
+    "source": "D:\\recovered \\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\CustomDataSources\\XPerf\\PlugInConfiguration.json",
+    "name": "PlugInConfiguration",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "atomic_fizz_realai": {
+    "source": "D:\\realai_archives\\main-realai\\plugins\\atomic_fizz_realai\\plugin_manifest.json",
+    "name": "atomic_fizz_realai",
+    "version": "0.1.0-gold",
+    "capabilities": [
+      "npc_generation",
+      "quest_generation",
+      "dungeon_generation",
+      "overseer",
+      "dialogue",
+      "world_events",
+      "survival_rewards"
+    ]
+  },
+  "plugin-bugfixes": {
+    "source": "D:\\supreme-goggles\\node_modules\\@babel\\compat-data\\data\\plugin-bugfixes.json",
+    "name": "plugin-bugfixes",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "plugins": {
+    "source": "D:\\supreme-goggles\\node_modules\\@babel\\compat-data\\data\\plugins.json",
+    "name": "plugins",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "asana": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\asana\\.claude-plugin\\plugin.json",
+    "name": "asana",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "context7": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\context7\\.claude-plugin\\plugin.json",
+    "name": "context7",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "discord": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\discord\\.claude-plugin\\plugin.json",
+    "name": "discord",
+    "version": "0.0.4",
+    "capabilities": []
+  },
+  "fakechat": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\fakechat\\.claude-plugin\\plugin.json",
+    "name": "fakechat",
+    "version": "0.0.1",
+    "capabilities": []
+  },
+  "firebase": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\firebase\\.claude-plugin\\plugin.json",
+    "name": "firebase",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "github": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\github\\.claude-plugin\\plugin.json",
+    "name": "github",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "gitlab": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\gitlab\\.claude-plugin\\plugin.json",
+    "name": "gitlab",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "greptile": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\greptile\\.claude-plugin\\plugin.json",
+    "name": "greptile",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "imessage": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\imessage\\.claude-plugin\\plugin.json",
+    "name": "imessage",
+    "version": "0.1.0",
+    "capabilities": []
+  },
+  "laravel-boost": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\laravel-boost\\.claude-plugin\\plugin.json",
+    "name": "laravel-boost",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "linear": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\linear\\.claude-plugin\\plugin.json",
+    "name": "linear",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "playwright": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\playwright\\.claude-plugin\\plugin.json",
+    "name": "playwright",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "serena": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\serena\\.claude-plugin\\plugin.json",
+    "name": "serena",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "telegram": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\telegram\\.claude-plugin\\plugin.json",
+    "name": "telegram",
+    "version": "0.0.6",
+    "capabilities": []
+  },
+  "terraform": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\external_plugins\\terraform\\.claude-plugin\\plugin.json",
+    "name": "terraform",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "agent-sdk-dev": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\agent-sdk-dev\\.claude-plugin\\plugin.json",
+    "name": "agent-sdk-dev",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "claude-code-setup": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\claude-code-setup\\.claude-plugin\\plugin.json",
+    "name": "claude-code-setup",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "claude-md-management": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\claude-md-management\\.claude-plugin\\plugin.json",
+    "name": "claude-md-management",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "code-modernization": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\code-modernization\\.claude-plugin\\plugin.json",
+    "name": "code-modernization",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "code-review": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\code-review\\.claude-plugin\\plugin.json",
+    "name": "code-review",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "code-simplifier": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\code-simplifier\\.claude-plugin\\plugin.json",
+    "name": "code-simplifier",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "commit-commands": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\commit-commands\\.claude-plugin\\plugin.json",
+    "name": "commit-commands",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "cwc-makers": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\cwc-makers\\.claude-plugin\\plugin.json",
+    "name": "cwc-makers",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "example-plugin": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\example-plugin\\.claude-plugin\\plugin.json",
+    "name": "example-plugin",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "explanatory-output-style": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\explanatory-output-style\\.claude-plugin\\plugin.json",
+    "name": "explanatory-output-style",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "feature-dev": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\feature-dev\\.claude-plugin\\plugin.json",
+    "name": "feature-dev",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "frontend-design": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\frontend-design\\.claude-plugin\\plugin.json",
+    "name": "frontend-design",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "hookify": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\hookify\\.claude-plugin\\plugin.json",
+    "name": "hookify",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "learning-output-style": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\learning-output-style\\.claude-plugin\\plugin.json",
+    "name": "learning-output-style",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "math-olympiad": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\math-olympiad\\.claude-plugin\\plugin.json",
+    "name": "math-olympiad",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "mcp-server-dev": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\mcp-server-dev\\.claude-plugin\\plugin.json",
+    "name": "mcp-server-dev",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "mcp-tunnels": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\mcp-tunnels\\.claude-plugin\\plugin.json",
+    "name": "mcp-tunnels",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "playground": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\playground\\.claude-plugin\\plugin.json",
+    "name": "playground",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "plugin-dev": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\plugin-dev\\.claude-plugin\\plugin.json",
+    "name": "plugin-dev",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "pr-review-toolkit": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\pr-review-toolkit\\.claude-plugin\\plugin.json",
+    "name": "pr-review-toolkit",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "ralph-loop": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\ralph-loop\\.claude-plugin\\plugin.json",
+    "name": "ralph-loop",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "security-guidance": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\security-guidance\\.claude-plugin\\plugin.json",
+    "name": "security-guidance",
+    "version": "2.0.6",
+    "capabilities": []
+  },
+  "skill-creator": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\skill-creator\\.claude-plugin\\plugin.json",
+    "name": "skill-creator",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "browser": {
+    "source": "C:\\Users\\tsmit\\.codex\\plugins\\cache\\openai-bundled\\browser\\26.616.32156\\.codex-plugin\\plugin.json",
+    "name": "browser",
+    "version": "26.616.32156",
+    "capabilities": []
+  },
+  "chrome": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\bundled-marketplaces\\openai-bundled\\plugins\\chrome\\.codex-plugin\\plugin.json",
+    "name": "chrome",
+    "version": "26.616.32156",
+    "capabilities": []
+  },
+  "computer-use": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\bundled-marketplaces\\openai-bundled\\plugins\\computer-use\\.codex-plugin\\plugin.json",
+    "name": "computer-use",
+    "version": "26.616.32156",
+    "capabilities": []
+  },
+  "latex": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\bundled-marketplaces\\openai-bundled\\plugins\\latex\\.codex-plugin\\plugin.json",
+    "name": "latex",
+    "version": "0.2.3",
+    "capabilities": []
+  },
+  "plugin.lock": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\test-android-apps\\plugin.lock.json",
+    "name": "plugin.lock",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "actively": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\actively\\.codex-plugin\\plugin.json",
+    "name": "actively",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "aiera": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\aiera\\.codex-plugin\\plugin.json",
+    "name": "aiera",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "airtable": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\airtable\\.codex-plugin\\plugin.json",
+    "name": "airtable",
+    "version": "0.1.3",
+    "capabilities": []
+  },
+  "alation": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\alation\\.codex-plugin\\plugin.json",
+    "name": "alation",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "alpaca": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\alpaca\\.codex-plugin\\plugin.json",
+    "name": "alpaca",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "amplitude": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\amplitude\\.codex-plugin\\plugin.json",
+    "name": "amplitude",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "apollo": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\apollo\\.codex-plugin\\plugin.json",
+    "name": "apollo",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "atlassian-rovo": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\atlassian-rovo\\.codex-plugin\\plugin.json",
+    "name": "atlassian-rovo",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "attio": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\attio\\.codex-plugin\\plugin.json",
+    "name": "attio",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "base44": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\base44\\.codex-plugin\\plugin.json",
+    "name": "base44",
+    "version": "1.0.3-beta.1",
+    "capabilities": []
+  },
+  "binance": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\binance\\.codex-plugin\\plugin.json",
+    "name": "binance",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "biorender": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\biorender\\.codex-plugin\\plugin.json",
+    "name": "biorender",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "boltz-api-cli": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\boltz-api-cli\\.codex-plugin\\plugin.json",
+    "name": "boltz-api-cli",
+    "version": "0.1.1",
+    "capabilities": []
+  },
+  "box": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\box\\.codex-plugin\\plugin.json",
+    "name": "box",
+    "version": "0.0.3",
+    "capabilities": []
+  },
+  "brand24": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\brand24\\.codex-plugin\\plugin.json",
+    "name": "brand24",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "brex": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\brex\\.codex-plugin\\plugin.json",
+    "name": "brex",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "brighthire": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\brighthire\\.codex-plugin\\plugin.json",
+    "name": "brighthire",
+    "version": "0.1.1",
+    "capabilities": []
+  },
+  "build-ios-apps": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\build-ios-apps\\.codex-plugin\\plugin.json",
+    "name": "build-ios-apps",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "build-macos-apps": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\build-macos-apps\\.codex-plugin\\plugin.json",
+    "name": "build-macos-apps",
+    "version": "0.1.4",
+    "capabilities": []
+  },
+  "build-web-apps": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\build-web-apps\\.codex-plugin\\plugin.json",
+    "name": "build-web-apps",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "build-web-data-visualization": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\build-web-data-visualization\\.codex-plugin\\plugin.json",
+    "name": "build-web-data-visualization",
+    "version": "0.1.21",
+    "capabilities": []
+  },
+  "calendly": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\calendly\\.codex-plugin\\plugin.json",
+    "name": "calendly",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "canva": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\canva\\.codex-plugin\\plugin.json",
+    "name": "canva",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "carta-crm": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\carta-crm\\.codex-plugin\\plugin.json",
+    "name": "carta-crm",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "catalyst-by-zoho": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\catalyst-by-zoho\\.codex-plugin\\plugin.json",
+    "name": "catalyst-by-zoho",
+    "version": "1.0.1",
+    "capabilities": []
+  },
+  "cb-insights": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\cb-insights\\.codex-plugin\\plugin.json",
+    "name": "cb-insights",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "channel99": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\channel99\\.codex-plugin\\plugin.json",
+    "name": "channel99",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "chronograph-gp": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\chronograph-gp\\.codex-plugin\\plugin.json",
+    "name": "chronograph-gp",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "chronograph-lp": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\chronograph-lp\\.codex-plugin\\plugin.json",
+    "name": "chronograph-lp",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "circleback": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\circleback\\.codex-plugin\\plugin.json",
+    "name": "circleback",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "circleci": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\circleci\\.codex-plugin\\plugin.json",
+    "name": "circleci",
+    "version": "1.0.4",
+    "capabilities": []
+  },
+  "clay": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\clay\\.codex-plugin\\plugin.json",
+    "name": "clay",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "clickup": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\clickup\\.codex-plugin\\plugin.json",
+    "name": "clickup",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "close": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\close\\.codex-plugin\\plugin.json",
+    "name": "close",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "cloudflare": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\cloudflare\\.codex-plugin\\plugin.json",
+    "name": "cloudflare",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "cloudinary": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\cloudinary\\.codex-plugin\\plugin.json",
+    "name": "cloudinary",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "coderabbit": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\coderabbit\\.codex-plugin\\plugin.json",
+    "name": "coderabbit",
+    "version": "1.1.4",
+    "capabilities": []
+  },
+  "codex-security": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\codex-security\\.codex-plugin\\plugin.json",
+    "name": "codex-security",
+    "version": "0.1.10",
+    "capabilities": []
+  },
+  "cogedim": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\cogedim\\.codex-plugin\\plugin.json",
+    "name": "cogedim",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "common-room": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\common-room\\.codex-plugin\\plugin.json",
+    "name": "common-room",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "conductor": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\conductor\\.codex-plugin\\plugin.json",
+    "name": "conductor",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "convex": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\convex\\.codex-plugin\\plugin.json",
+    "name": "convex",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "coupler-io": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\coupler-io\\.codex-plugin\\plugin.json",
+    "name": "coupler-io",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "coveo": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\coveo\\.codex-plugin\\plugin.json",
+    "name": "coveo",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "cube": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\cube\\.codex-plugin\\plugin.json",
+    "name": "cube",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "daloopa": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\daloopa\\.codex-plugin\\plugin.json",
+    "name": "daloopa",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "datadog": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\datadog\\.codex-plugin\\plugin.json",
+    "name": "datadog",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "datasite": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\datasite\\.codex-plugin\\plugin.json",
+    "name": "datasite",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "deepnote": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\deepnote\\.codex-plugin\\plugin.json",
+    "name": "deepnote",
+    "version": "0.1.5",
+    "capabilities": []
+  },
+  "demandbase": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\demandbase\\.codex-plugin\\plugin.json",
+    "name": "demandbase",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "digitalocean": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\digitalocean\\.codex-plugin\\plugin.json",
+    "name": "digitalocean",
+    "version": "0.2.2",
+    "capabilities": []
+  },
+  "dnb-finance-analytics": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\dnb-finance-analytics\\.codex-plugin\\plugin.json",
+    "name": "dnb-finance-analytics",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "docket": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\docket\\.codex-plugin\\plugin.json",
+    "name": "docket",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "docusign": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\docusign\\.codex-plugin\\plugin.json",
+    "name": "docusign",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "domotz-preview": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\domotz-preview\\.codex-plugin\\plugin.json",
+    "name": "domotz-preview",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "dovetail": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\dovetail\\.codex-plugin\\plugin.json",
+    "name": "dovetail",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "dow-jones-factiva": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\dow-jones-factiva\\.codex-plugin\\plugin.json",
+    "name": "dow-jones-factiva",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "egnyte": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\egnyte\\.codex-plugin\\plugin.json",
+    "name": "egnyte",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "expo": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\expo\\.codex-plugin\\plugin.json",
+    "name": "expo",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "factset": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\factset\\.codex-plugin\\plugin.json",
+    "name": "factset",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "fal": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\fal\\.codex-plugin\\plugin.json",
+    "name": "fal",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "figma": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\figma\\.codex-plugin\\plugin.json",
+    "name": "figma",
+    "version": "2.0.12",
+    "capabilities": []
+  },
+  "finn": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\finn\\.codex-plugin\\plugin.json",
+    "name": "finn",
+    "version": "1.0.4",
+    "capabilities": []
+  },
+  "fireflies": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\fireflies\\.codex-plugin\\plugin.json",
+    "name": "fireflies",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "fiscal-ai": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\fiscal-ai\\.codex-plugin\\plugin.json",
+    "name": "fiscal-ai",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "fyxer": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\fyxer\\.codex-plugin\\plugin.json",
+    "name": "fyxer",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "game-studio": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\game-studio\\.codex-plugin\\plugin.json",
+    "name": "game-studio",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "glean": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\glean\\.codex-plugin\\plugin.json",
+    "name": "glean",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "gmail": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\gmail\\.codex-plugin\\plugin.json",
+    "name": "gmail",
+    "version": "0.1.3",
+    "capabilities": []
+  },
+  "google-calendar": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\google-calendar\\.codex-plugin\\plugin.json",
+    "name": "google-calendar",
+    "version": "1.2.3",
+    "capabilities": []
+  },
+  "google-drive": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\google-drive\\.codex-plugin\\plugin.json",
+    "name": "google-drive",
+    "version": "0.1.7",
+    "capabilities": []
+  },
+  "govtribe": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\govtribe\\.codex-plugin\\plugin.json",
+    "name": "govtribe",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "granola": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\granola\\.codex-plugin\\plugin.json",
+    "name": "granola",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "happenstance": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\happenstance\\.codex-plugin\\plugin.json",
+    "name": "happenstance",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "hebbia": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\hebbia\\.codex-plugin\\plugin.json",
+    "name": "hebbia",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "help-scout": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\help-scout\\.codex-plugin\\plugin.json",
+    "name": "help-scout",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "hex": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\hex\\.codex-plugin\\plugin.json",
+    "name": "hex",
+    "version": "0.1.0",
+    "capabilities": []
+  },
+  "heygen": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\heygen\\.codex-plugin\\plugin.json",
+    "name": "heygen",
+    "version": "2.2.4",
+    "capabilities": []
+  },
+  "hg-insights": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\hg-insights\\.codex-plugin\\plugin.json",
+    "name": "hg-insights",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "highlevel": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\highlevel\\.codex-plugin\\plugin.json",
+    "name": "highlevel",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "hostinger": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\hostinger\\.codex-plugin\\plugin.json",
+    "name": "hostinger",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "hubspot": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\hubspot\\.codex-plugin\\plugin.json",
+    "name": "hubspot",
+    "version": "2.0.3",
+    "capabilities": []
+  },
+  "hugging-face": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\hugging-face\\.codex-plugin\\plugin.json",
+    "name": "hugging-face",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "hyperframes": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\hyperframes\\.codex-plugin\\plugin.json",
+    "name": "hyperframes",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "intercom": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\intercom\\.codex-plugin\\plugin.json",
+    "name": "intercom",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "jam": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\jam\\.codex-plugin\\plugin.json",
+    "name": "jam",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "keybid-puls": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\keybid-puls\\.codex-plugin\\plugin.json",
+    "name": "keybid-puls",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "life-science-research": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\life-science-research\\.codex-plugin\\plugin.json",
+    "name": "life-science-research",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "lovable": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\lovable\\.codex-plugin\\plugin.json",
+    "name": "lovable",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "lseg": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\lseg\\.codex-plugin\\plugin.json",
+    "name": "lseg",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "magicpath": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\magicpath\\.codex-plugin\\plugin.json",
+    "name": "magicpath",
+    "version": "0.1.1",
+    "capabilities": []
+  },
+  "marcopolo": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\marcopolo\\.codex-plugin\\plugin.json",
+    "name": "marcopolo",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "mem": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\mem\\.codex-plugin\\plugin.json",
+    "name": "mem",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "meticulate": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\meticulate\\.codex-plugin\\plugin.json",
+    "name": "meticulate",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "midpage": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\midpage\\.codex-plugin\\plugin.json",
+    "name": "midpage",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "mixpanel": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\mixpanel\\.codex-plugin\\plugin.json",
+    "name": "mixpanel",
+    "version": "2.0.3",
+    "capabilities": []
+  },
+  "mixpanel-headless": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\mixpanel-headless\\.codex-plugin\\plugin.json",
+    "name": "mixpanel-headless",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "monday-com": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\monday-com\\.codex-plugin\\plugin.json",
+    "name": "monday-com",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "moody-s": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\moody-s\\.codex-plugin\\plugin.json",
+    "name": "moody-s",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "morningstar": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\morningstar\\.codex-plugin\\plugin.json",
+    "name": "morningstar",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "motherduck": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\motherduck\\.codex-plugin\\plugin.json",
+    "name": "motherduck",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "mt-newswires": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\mt-newswires\\.codex-plugin\\plugin.json",
+    "name": "mt-newswires",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "myregistry-com": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\myregistry-com\\.codex-plugin\\plugin.json",
+    "name": "myregistry-com",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "neon-postgres": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\neon-postgres\\.codex-plugin\\plugin.json",
+    "name": "neon-postgres",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "netlify": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\netlify\\.codex-plugin\\plugin.json",
+    "name": "netlify",
+    "version": "1.1.2",
+    "capabilities": []
+  },
+  "network-solutions": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\network-solutions\\.codex-plugin\\plugin.json",
+    "name": "network-solutions",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "ngs-analysis": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\ngs-analysis\\.codex-plugin\\plugin.json",
+    "name": "ngs-analysis",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "notion": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\notion\\.codex-plugin\\plugin.json",
+    "name": "notion",
+    "version": "0.1.5",
+    "capabilities": []
+  },
+  "nvidia": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\nvidia\\.codex-plugin\\plugin.json",
+    "name": "nvidia",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "omni-analytics": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\omni-analytics\\.codex-plugin\\plugin.json",
+    "name": "omni-analytics",
+    "version": "1.0.4",
+    "capabilities": []
+  },
+  "openai-ads-conversions": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\openai-ads-conversions\\.codex-plugin\\plugin.json",
+    "name": "openai-ads-conversions",
+    "version": "0.1.0",
+    "capabilities": []
+  },
+  "openai-developers": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\openai-developers\\.codex-plugin\\plugin.json",
+    "name": "openai-developers",
+    "version": "1.2.3",
+    "capabilities": []
+  },
+  "otter-ai": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\otter-ai\\.codex-plugin\\plugin.json",
+    "name": "otter-ai",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "outlook-calendar": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\outlook-calendar\\.codex-plugin\\plugin.json",
+    "name": "outlook-calendar",
+    "version": "0.1.3",
+    "capabilities": []
+  },
+  "outlook-email": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\outlook-email\\.codex-plugin\\plugin.json",
+    "name": "outlook-email",
+    "version": "0.1.3",
+    "capabilities": []
+  },
+  "outreach": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\outreach\\.codex-plugin\\plugin.json",
+    "name": "outreach",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "particl-market-research": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\particl-market-research\\.codex-plugin\\plugin.json",
+    "name": "particl-market-research",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "picsart": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\picsart\\.codex-plugin\\plugin.json",
+    "name": "picsart",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "pipedrive": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\pipedrive\\.codex-plugin\\plugin.json",
+    "name": "pipedrive",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "pitchbook": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\pitchbook\\.codex-plugin\\plugin.json",
+    "name": "pitchbook",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "plugin-eval": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\plugin-eval\\.codex-plugin\\plugin.json",
+    "name": "plugin-eval",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "minimal-plugin": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\plugin-eval\\fixtures\\minimal-plugin\\.codex-plugin\\plugin.json",
+    "name": "minimal-plugin",
+    "version": "0.1.0",
+    "capabilities": []
+  },
+  "multi-skill-plugin": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\plugin-eval\\fixtures\\multi-skill-plugin\\.codex-plugin\\plugin.json",
+    "name": "multi-skill-plugin",
+    "version": "0.1.0",
+    "capabilities": []
+  },
+  "policynote": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\policynote\\.codex-plugin\\plugin.json",
+    "name": "policynote",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "posthog": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\posthog\\.codex-plugin\\plugin.json",
+    "name": "posthog",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "pylon": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\pylon\\.codex-plugin\\plugin.json",
+    "name": "pylon",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "quartr": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\quartr\\.codex-plugin\\plugin.json",
+    "name": "quartr",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "quickbooks": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\quickbooks\\.codex-plugin\\plugin.json",
+    "name": "quickbooks",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "quicknode": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\quicknode\\.codex-plugin\\plugin.json",
+    "name": "quicknode",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "ranked-ai": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\ranked-ai\\.codex-plugin\\plugin.json",
+    "name": "ranked-ai",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "razorpay": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\razorpay\\.codex-plugin\\plugin.json",
+    "name": "razorpay",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "read-ai": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\read-ai\\.codex-plugin\\plugin.json",
+    "name": "read-ai",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "readwise": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\readwise\\.codex-plugin\\plugin.json",
+    "name": "readwise",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "remotion": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\remotion\\.codex-plugin\\plugin.json",
+    "name": "remotion",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "render": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\render\\.codex-plugin\\plugin.json",
+    "name": "render",
+    "version": "0.1.3",
+    "capabilities": []
+  },
+  "replayio": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\replayio\\.codex-plugin\\plugin.json",
+    "name": "replayio",
+    "version": "0.1.0",
+    "capabilities": []
+  },
+  "replit": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\replit\\.codex-plugin\\plugin.json",
+    "name": "replit",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "responsive": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\responsive\\.codex-plugin\\plugin.json",
+    "name": "responsive",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "rox": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\rox\\.codex-plugin\\plugin.json",
+    "name": "rox",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "s-p": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\s-p\\.codex-plugin\\plugin.json",
+    "name": "s-p",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "scite": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\scite\\.codex-plugin\\plugin.json",
+    "name": "scite",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "semrush": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\semrush\\.codex-plugin\\plugin.json",
+    "name": "semrush",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "sendgrid": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\sendgrid\\.codex-plugin\\plugin.json",
+    "name": "sendgrid",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "sentry": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\sentry\\.codex-plugin\\plugin.json",
+    "name": "sentry",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "setu-bharat-connect-billpay": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\setu-bharat-connect-billpay\\.codex-plugin\\plugin.json",
+    "name": "setu-bharat-connect-billpay",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "sharepoint": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\sharepoint\\.codex-plugin\\plugin.json",
+    "name": "sharepoint",
+    "version": "0.1.3",
+    "capabilities": []
+  },
+  "shopify": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\shopify\\.codex-plugin\\plugin.json",
+    "name": "shopify",
+    "version": "1.3.3",
+    "capabilities": []
+  },
+  "shutterstock": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\shutterstock\\.codex-plugin\\plugin.json",
+    "name": "shutterstock",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "signnow": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\signnow\\.codex-plugin\\plugin.json",
+    "name": "signnow",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "similarweb": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\similarweb\\.codex-plugin\\plugin.json",
+    "name": "similarweb",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "skywatch": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\skywatch\\.codex-plugin\\plugin.json",
+    "name": "skywatch",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "slack": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\slack\\.codex-plugin\\plugin.json",
+    "name": "slack",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "statsig": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\statsig\\.codex-plugin\\plugin.json",
+    "name": "statsig",
+    "version": "2.0.3",
+    "capabilities": []
+  },
+  "streak": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\streak\\.codex-plugin\\plugin.json",
+    "name": "streak",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "stripe": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\stripe\\.codex-plugin\\plugin.json",
+    "name": "stripe",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "supabase": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\supabase\\.codex-plugin\\plugin.json",
+    "name": "supabase",
+    "version": "0.1.10",
+    "capabilities": []
+  },
+  "superhuman": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\superhuman\\.codex-plugin\\plugin.json",
+    "name": "superhuman",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "superpowers": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\superpowers\\.codex-plugin\\plugin.json",
+    "name": "superpowers",
+    "version": "5.1.3",
+    "capabilities": []
+  },
+  "taxdown": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\taxdown\\.codex-plugin\\plugin.json",
+    "name": "taxdown",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "teams": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\teams\\.codex-plugin\\plugin.json",
+    "name": "teams",
+    "version": "0.1.3",
+    "capabilities": []
+  },
+  "teamwork-com": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\teamwork-com\\.codex-plugin\\plugin.json",
+    "name": "teamwork-com",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "temporal": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\temporal\\.codex-plugin\\plugin.json",
+    "name": "temporal",
+    "version": "0.2.2",
+    "capabilities": []
+  },
+  "test-android-apps": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\test-android-apps\\.codex-plugin\\plugin.json",
+    "name": "test-android-apps",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "third-bridge": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\third-bridge\\.codex-plugin\\plugin.json",
+    "name": "third-bridge",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "thoughtspot": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\thoughtspot\\.codex-plugin\\plugin.json",
+    "name": "thoughtspot",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "tinman-ai": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\tinman-ai\\.codex-plugin\\plugin.json",
+    "name": "tinman-ai",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "twilio-developer-kit": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\twilio-developer-kit\\.codex-plugin\\plugin.json",
+    "name": "twilio-developer-kit",
+    "version": "0.2.2",
+    "capabilities": []
+  },
+  "united-rentals": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\united-rentals\\.codex-plugin\\plugin.json",
+    "name": "united-rentals",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "vantage": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\vantage\\.codex-plugin\\plugin.json",
+    "name": "vantage",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "vercel": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\vercel\\.codex-plugin\\plugin.json",
+    "name": "vercel",
+    "version": "0.21.3",
+    "capabilities": []
+  },
+  "waldo": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\waldo\\.codex-plugin\\plugin.json",
+    "name": "waldo",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "weatherpromise": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\weatherpromise\\.codex-plugin\\plugin.json",
+    "name": "weatherpromise",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "windsor-ai": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\windsor-ai\\.codex-plugin\\plugin.json",
+    "name": "windsor-ai",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "wix": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\wix\\.codex-plugin\\plugin.json",
+    "name": "wix",
+    "version": "1.1.2",
+    "capabilities": []
+  },
+  "yepcode": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\yepcode\\.codex-plugin\\plugin.json",
+    "name": "yepcode",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "zoho": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\zoho\\.codex-plugin\\plugin.json",
+    "name": "zoho",
+    "version": "1.0.3",
+    "capabilities": []
+  },
+  "zoom": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\zoom\\.codex-plugin\\plugin.json",
+    "name": "zoom",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "zoominfo": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\zoominfo\\.codex-plugin\\plugin.json",
+    "name": "zoominfo",
+    "version": "1.0.2",
+    "capabilities": []
+  },
+  "zotero": {
+    "source": "C:\\Users\\tsmit\\.codex\\.tmp\\plugins\\plugins\\zotero\\.codex-plugin\\plugin.json",
+    "name": "zotero",
+    "version": "0.1.2",
+    "capabilities": []
+  },
+  "documents": {
+    "source": "C:\\Users\\tsmit\\.codex\\plugins\\cache\\openai-primary-runtime\\documents\\26.619.11828\\.codex-plugin\\plugin.json",
+    "name": "documents",
+    "version": "26.619.11828",
+    "capabilities": []
+  },
+  "pdf": {
+    "source": "C:\\Users\\tsmit\\.codex\\plugins\\cache\\openai-primary-runtime\\pdf\\26.619.11828\\.codex-plugin\\plugin.json",
+    "name": "pdf",
+    "version": "26.619.11828",
+    "capabilities": []
+  },
+  "presentations": {
+    "source": "C:\\Users\\tsmit\\.codex\\plugins\\cache\\openai-primary-runtime\\presentations\\26.619.11828\\.codex-plugin\\plugin.json",
+    "name": "presentations",
+    "version": "26.619.11828",
+    "capabilities": []
+  },
+  "spreadsheets": {
+    "source": "C:\\Users\\tsmit\\.codex\\plugins\\cache\\openai-primary-runtime\\spreadsheets\\26.619.11828\\.codex-plugin\\plugin.json",
+    "name": "spreadsheets",
+    "version": "26.619.11828",
+    "capabilities": []
+  },
+  "claude-security": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\claude-security\\.claude-plugin\\plugin.json",
+    "name": "claude-security",
+    "version": "0.10.0",
+    "capabilities": []
+  },
+  "project-artifact": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\783232b622f8182e\\plugins\\project-artifact\\.claude-plugin\\plugin.json",
+    "name": "project-artifact",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "plugin-index": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\c6b314fa671daf8c\\.grok-plugin\\plugin-index.json",
+    "name": "plugin-index",
+    "version": 1,
+    "capabilities": []
+  },
+  "neon": {
+    "source": "C:\\Users\\tsmit\\.grok\\marketplace-cache\\c6b314fa671daf8c\\external_plugins\\neon\\.grok-plugin\\plugin.json",
+    "name": "neon",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "arize-ax": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\arize-ax\\.github\\plugin\\plugin.json",
+    "name": "arize-ax",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "automate-this": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\automate-this\\.github\\plugin\\plugin.json",
+    "name": "automate-this",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "awesome-copilot": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\awesome-copilot\\.github\\plugin\\plugin.json",
+    "name": "awesome-copilot",
+    "version": "1.1.0",
+    "capabilities": []
+  },
+  "azure-cloud-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\azure-cloud-development\\.github\\plugin\\plugin.json",
+    "name": "azure-cloud-development",
+    "version": "1.0.1",
+    "capabilities": []
+  },
+  "cast-imaging": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\cast-imaging\\.github\\plugin\\plugin.json",
+    "name": "cast-imaging",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "clojure-interactive-programming": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\clojure-interactive-programming\\.github\\plugin\\plugin.json",
+    "name": "clojure-interactive-programming",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "context-engineering": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\context-engineering\\.github\\plugin\\plugin.json",
+    "name": "context-engineering",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "context-matic": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\context-matic\\.github\\plugin\\plugin.json",
+    "name": "context-matic",
+    "version": "0.1.0",
+    "capabilities": []
+  },
+  "copilot-sdk": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\copilot-sdk\\.github\\plugin\\plugin.json",
+    "name": "copilot-sdk",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "csharp-dotnet-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\csharp-dotnet-development\\.github\\plugin\\plugin.json",
+    "name": "csharp-dotnet-development",
+    "version": "1.1.0",
+    "capabilities": []
+  },
+  "csharp-mcp-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\plugins\\csharp-mcp-development\\.github\\plugin\\plugin.json",
+    "name": "csharp-mcp-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "database-data-management": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\database-data-management\\.github\\plugin\\plugin.json",
+    "name": "database-data-management",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "dataverse-sdk-for-python": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\dataverse-sdk-for-python\\.github\\plugin\\plugin.json",
+    "name": "dataverse-sdk-for-python",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "devops-oncall": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\devops-oncall\\.github\\plugin\\plugin.json",
+    "name": "devops-oncall",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "doublecheck": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\doublecheck\\.github\\plugin\\plugin.json",
+    "name": "doublecheck",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "edge-ai-tasks": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\edge-ai-tasks\\.github\\plugin\\plugin.json",
+    "name": "edge-ai-tasks",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "ember": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\ember\\.github\\plugin\\plugin.json",
+    "name": "ember",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "fastah-ip-geo-tools": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\fastah-ip-geo-tools\\.github\\plugin\\plugin.json",
+    "name": "fastah-ip-geo-tools",
+    "version": "0.0.9",
+    "capabilities": []
+  },
+  "flowstudio-power-automate": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\flowstudio-power-automate\\.github\\plugin\\plugin.json",
+    "name": "flowstudio-power-automate",
+    "version": "2.0.0",
+    "capabilities": []
+  },
+  "frontend-web-dev": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\frontend-web-dev\\.github\\plugin\\plugin.json",
+    "name": "frontend-web-dev",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "gem-team": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\gem-team\\.github\\plugin\\plugin.json",
+    "name": "gem-team",
+    "version": "1.66.0",
+    "capabilities": []
+  },
+  "go-mcp-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\go-mcp-development\\.github\\plugin\\plugin.json",
+    "name": "go-mcp-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "java-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\java-development\\.github\\plugin\\plugin.json",
+    "name": "java-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "java-mcp-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\java-mcp-development\\.github\\plugin\\plugin.json",
+    "name": "java-mcp-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "kotlin-mcp-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\kotlin-mcp-development\\.github\\plugin\\plugin.json",
+    "name": "kotlin-mcp-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "mcp-m365-copilot": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\mcp-m365-copilot\\.github\\plugin\\plugin.json",
+    "name": "mcp-m365-copilot",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "napkin": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\napkin\\.github\\plugin\\plugin.json",
+    "name": "napkin",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "noob-mode": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\noob-mode\\.github\\plugin\\plugin.json",
+    "name": "noob-mode",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "openapi-to-application-csharp-dotnet": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\openapi-to-application-csharp-dotnet\\.github\\plugin\\plugin.json",
+    "name": "openapi-to-application-csharp-dotnet",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "openapi-to-application-go": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\openapi-to-application-go\\.github\\plugin\\plugin.json",
+    "name": "openapi-to-application-go",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "openapi-to-application-java-spring-boot": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\openapi-to-application-java-spring-boot\\.github\\plugin\\plugin.json",
+    "name": "openapi-to-application-java-spring-boot",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "openapi-to-application-nodejs-nestjs": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\openapi-to-application-nodejs-nestjs\\.github\\plugin\\plugin.json",
+    "name": "openapi-to-application-nodejs-nestjs",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "openapi-to-application-python-fastapi": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\openapi-to-application-python-fastapi\\.github\\plugin\\plugin.json",
+    "name": "openapi-to-application-python-fastapi",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "oracle-to-postgres-migration-expert": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\oracle-to-postgres-migration-expert\\.github\\plugin\\plugin.json",
+    "name": "oracle-to-postgres-migration-expert",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "ospo-sponsorship": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\ospo-sponsorship\\.github\\plugin\\plugin.json",
+    "name": "ospo-sponsorship",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "partners": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\partners\\.github\\plugin\\plugin.json",
+    "name": "partners",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "pcf-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\pcf-development\\.github\\plugin\\plugin.json",
+    "name": "pcf-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "phoenix": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\phoenix\\.github\\plugin\\plugin.json",
+    "name": "phoenix",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "php-mcp-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\php-mcp-development\\.github\\plugin\\plugin.json",
+    "name": "php-mcp-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "polyglot-test-agent": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\plugins\\polyglot-test-agent\\.github\\plugin\\plugin.json",
+    "name": "polyglot-test-agent",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "power-apps-code-apps": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\power-apps-code-apps\\.github\\plugin\\plugin.json",
+    "name": "power-apps-code-apps",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "power-bi-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\power-bi-development\\.github\\plugin\\plugin.json",
+    "name": "power-bi-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "power-platform-mcp-connector-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\power-platform-mcp-connector-development\\.github\\plugin\\plugin.json",
+    "name": "power-platform-mcp-connector-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "project-planning": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\project-planning\\.github\\plugin\\plugin.json",
+    "name": "project-planning",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "python-mcp-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\python-mcp-development\\.github\\plugin\\plugin.json",
+    "name": "python-mcp-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "react18-upgrade": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\react18-upgrade\\.github\\plugin\\plugin.json",
+    "name": "react18-upgrade",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "react19-upgrade": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\react19-upgrade\\.github\\plugin\\plugin.json",
+    "name": "react19-upgrade",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "roundup": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\roundup\\.github\\plugin\\plugin.json",
+    "name": "roundup",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "ruby-mcp-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\ruby-mcp-development\\.github\\plugin\\plugin.json",
+    "name": "ruby-mcp-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "rug-agentic-workflow": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\rug-agentic-workflow\\.github\\plugin\\plugin.json",
+    "name": "rug-agentic-workflow",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "rust-mcp-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\rust-mcp-development\\.github\\plugin\\plugin.json",
+    "name": "rust-mcp-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "salesforce-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\salesforce-development\\.github\\plugin\\plugin.json",
+    "name": "salesforce-development",
+    "version": "1.1.0",
+    "capabilities": []
+  },
+  "security-best-practices": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\security-best-practices\\.github\\plugin\\plugin.json",
+    "name": "security-best-practices",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "software-engineering-team": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\software-engineering-team\\.github\\plugin\\plugin.json",
+    "name": "software-engineering-team",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "structured-autonomy": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\structured-autonomy\\.github\\plugin\\plugin.json",
+    "name": "structured-autonomy",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "swift-mcp-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\swift-mcp-development\\.github\\plugin\\plugin.json",
+    "name": "swift-mcp-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "technical-spike": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\technical-spike\\.github\\plugin\\plugin.json",
+    "name": "technical-spike",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "testing-automation": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\testing-automation\\.github\\plugin\\plugin.json",
+    "name": "testing-automation",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "typescript-mcp-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\typescript-mcp-development\\.github\\plugin\\plugin.json",
+    "name": "typescript-mcp-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "typespec-m365-copilot": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\typespec-m365-copilot\\.github\\plugin\\plugin.json",
+    "name": "typespec-m365-copilot",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "winui3-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\plugins\\winui3-development\\.github\\plugin\\plugin.json",
+    "name": "winui3-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "accessibility-kanban": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\extensions\\accessibility-kanban\\.github\\plugin\\plugin.json",
+    "name": "accessibility-kanban",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "arcade-canvas": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\extensions\\arcade-canvas\\.github\\plugin\\plugin.json",
+    "name": "arcade-canvas",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "backlog-swipe-triage": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\extensions\\backlog-swipe-triage\\.github\\plugin\\plugin.json",
+    "name": "backlog-swipe-triage",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "chromium-control-canvas": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\extensions\\chromium-control-canvas\\.github\\plugin\\plugin.json",
+    "name": "chromium-control-canvas",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "color-orb": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\extensions\\color-orb\\.github\\plugin\\plugin.json",
+    "name": "color-orb",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "diagram-viewer": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\extensions\\diagram-viewer\\.github\\plugin\\plugin.json",
+    "name": "diagram-viewer",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "feedback-themes": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\extensions\\feedback-themes\\.github\\plugin\\plugin.json",
+    "name": "feedback-themes",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "gesture-review": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\extensions\\gesture-review\\.github\\plugin\\plugin.json",
+    "name": "gesture-review",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "java-modernization-studio": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\extensions\\java-modernization-studio\\.github\\plugin\\plugin.json",
+    "name": "java-modernization-studio",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "release-notes-showcase": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\extensions\\release-notes-showcase\\.github\\plugin\\plugin.json",
+    "name": "release-notes-showcase",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "site-studio": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\extensions\\site-studio\\.github\\plugin\\plugin.json",
+    "name": "site-studio",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "token-pacman": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\extensions\\token-pacman\\.github\\plugin\\plugin.json",
+    "name": "token-pacman",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "where-was-i": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\extensions\\where-was-i\\.github\\plugin\\plugin.json",
+    "name": "where-was-i",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "acreadiness-cockpit": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\acreadiness-cockpit\\.github\\plugin\\plugin.json",
+    "name": "acreadiness-cockpit",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "ai-team-orchestration": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\ai-team-orchestration\\.github\\plugin\\plugin.json",
+    "name": "ai-team-orchestration",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "aws-cloud-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\aws-cloud-development\\.github\\plugin\\plugin.json",
+    "name": "aws-cloud-development",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "cms-development": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\cms-development\\.github\\plugin\\plugin.json",
+    "name": "cms-development",
+    "version": "1.1.0",
+    "capabilities": []
+  },
+  "eyeball": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\eyeball\\.github\\plugin\\plugin.json",
+    "name": "eyeball",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "power-platform-architect": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\power-platform-architect\\.github\\plugin\\plugin.json",
+    "name": "power-platform-architect",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "project-documenter": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\project-documenter\\.github\\plugin\\plugin.json",
+    "name": "project-documenter",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "skill-image-gen": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\skill-image-gen\\.github\\plugin\\plugin.json",
+    "name": "skill-image-gen",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "visual-pr": {
+    "source": "C:\\Users\\tsmit\\.vscode\\agent-plugins\\github.com\\github\\awesome-copilot\\ref_marketplace\\plugins\\visual-pr\\.github\\plugin\\plugin.json",
+    "name": "visual-pr",
+    "version": "1.0.0",
+    "capabilities": []
+  },
+  "aimock": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\nvm\\v22.22.2\\node_modules\\openclaw\\node_modules\\@copilotkit\\aimock\\.claude-plugin\\plugin.json",
+    "name": "aimock",
+    "version": "1.13.0",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-async-generators": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-async-generators.json",
+    "name": "@babel/plugin-syntax-async-generators",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-bigint": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-bigint.json",
+    "name": "@babel/plugin-syntax-bigint",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-class-properties": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-class-properties.json",
+    "name": "@babel/plugin-syntax-class-properties",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-class-static-block": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-class-static-block.json",
+    "name": "@babel/plugin-syntax-class-static-block",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-import-attributes": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-import-attributes.json",
+    "name": "@babel/plugin-syntax-import-attributes",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-import-meta": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-import-meta.json",
+    "name": "@babel/plugin-syntax-import-meta",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-json-strings": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-json-strings.json",
+    "name": "@babel/plugin-syntax-json-strings",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-logical-assignment-operators": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-logical-assignment-operators.json",
+    "name": "@babel/plugin-syntax-logical-assignment-operators",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-nullish-coalescing-operator": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-nullish-coalescing-operator.json",
+    "name": "@babel/plugin-syntax-nullish-coalescing-operator",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-numeric-separator": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-numeric-separator.json",
+    "name": "@babel/plugin-syntax-numeric-separator",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-object-rest-spread": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-object-rest-spread.json",
+    "name": "@babel/plugin-syntax-object-rest-spread",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-optional-catch-binding": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-optional-catch-binding.json",
+    "name": "@babel/plugin-syntax-optional-catch-binding",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-optional-chaining": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-optional-chaining.json",
+    "name": "@babel/plugin-syntax-optional-chaining",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-private-property-in-object": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-private-property-in-object.json",
+    "name": "@babel/plugin-syntax-private-property-in-object",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@babel/plugin-syntax-top-level-await": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@babel\\plugin-syntax-top-level-await.json",
+    "name": "@babel/plugin-syntax-top-level-await",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@eslint/plugin-kit": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@eslint\\plugin-kit.json",
+    "name": "@eslint/plugin-kit",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@solana/plugin-core": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@solana\\plugin-core.json",
+    "name": "@solana/plugin-core",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "@solana/plugin-interfaces": {
+    "source": "C:\\Users\\tsmit\\AppData\\Local\\pnpm-cache\\metadata-v1.3\\registry.npmjs.org\\@solana\\plugin-interfaces.json",
+    "name": "@solana/plugin-interfaces",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "plugin-options": {
+    "source": "C:\\Users\\tsmit\\Rack_em_up\\rackup-backend\\node_modules\\fork-ts-checker-webpack-plugin\\lib\\plugin-options.json",
+    "name": "plugin-options",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "plugInfo": {
+    "source": "D:\\recovered \\Program Files\\Blender Foundation\\Blender 3.0\\3.0\\datafiles\\usd\\usd\\resources\\codegenTemplates\\plugInfo.json",
+    "name": "plugInfo",
+    "version": "unknown",
+    "capabilities": []
+  }
+}

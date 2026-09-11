@@ -1,0 +1,435 @@
+{
+  "name": "realai-vscode",
+  "displayName": "RealAI Console",
+  "description": "RealAI Console in VS Code \u2014 hive chat UI + full ability/tool dock (local Hive stack).",
+  "version": "1.2.15",
+  "publisher": "Unwrenchable",
+  "engines": {
+    "vscode": "^1.104.0"
+  },
+  "categories": [
+    "AI",
+    "Chat",
+    "Other"
+  ],
+  "keywords": [
+    "realai",
+    "ai",
+    "chat",
+    "llm",
+    "local",
+    "hive",
+    "console",
+    "copilot",
+    "agent"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languageModelChatProviders": [
+      {
+        "vendor": "realai",
+        "displayName": "RealAI Hive"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "realai",
+          "title": "RealAI",
+          "icon": "media/realai.svg"
+        }
+      ]
+    },
+    "views": {
+      "realai": [
+        {
+          "type": "webview",
+          "id": "realai.hub",
+          "name": "Ultimate Hub",
+          "icon": "media/realai.svg"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "realai.openChat",
+        "title": "RealAI: Open Console",
+        "icon": "$(terminal)"
+      },
+      {
+        "command": "realai.openBrowserConsole",
+        "title": "RealAI: Open Browser Console (Hive /console)"
+      },
+      {
+        "command": "realai.openLegacyChat",
+        "title": "RealAI: Open Legacy Chat Panel"
+      },
+      {
+        "command": "realai.refreshHub",
+        "title": "RealAI: Refresh Hub",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "realai.showPhase",
+        "title": "RealAI: Show Development Phase"
+      },
+      {
+        "command": "realai.whereAreWe",
+        "title": "RealAI: Where Are We in Development?"
+      },
+      {
+        "command": "realai.readRepo",
+        "title": "RealAI: Read Repo Snapshot"
+      },
+      {
+        "command": "realai.extensionAudit",
+        "title": "RealAI: Extension Audit (3 concrete patches)"
+      },
+      {
+        "command": "realai.consoleSmoke",
+        "title": "RealAI: Console Smoke (abilities/tools/agents)"
+      },
+      {
+        "command": "realai.multiAgent",
+        "title": "RealAI: Multi-Agent Task\u2026"
+      },
+      {
+        "command": "realai.runTool",
+        "title": "RealAI: Run Hive Tool\u2026"
+      },
+      {
+        "command": "realai.refreshContext",
+        "title": "RealAI: Refresh Editor Context"
+      },
+      {
+        "command": "realai.explainCode",
+        "title": "RealAI: Explain Selection"
+      },
+      {
+        "command": "realai.refactorCode",
+        "title": "RealAI: Refactor Selection"
+      },
+      {
+        "command": "realai.generateTests",
+        "title": "RealAI: Generate Tests"
+      },
+      {
+        "command": "realai.generateDocs",
+        "title": "RealAI: Generate Docs"
+      },
+      {
+        "command": "realai.fixBug",
+        "title": "RealAI: Find Bugs"
+      },
+      {
+        "command": "realai.optimizeCode",
+        "title": "RealAI: Optimize Selection"
+      },
+      {
+        "command": "realai.insertResponse",
+        "title": "RealAI: Insert Last Response"
+      },
+      {
+        "command": "realai.clearChat",
+        "title": "RealAI: Clear Chat"
+      },
+      {
+        "command": "realai.checkHealth",
+        "title": "RealAI: Check Health"
+      },
+      {
+        "command": "realai.showStatus",
+        "title": "RealAI: Show Stack Status"
+      },
+      {
+        "command": "realai.selectModel",
+        "title": "RealAI: Select Model"
+      },
+      {
+        "command": "realai.showCapabilities",
+        "title": "RealAI: Show Capabilities"
+      },
+      {
+        "command": "realai.listTools",
+        "title": "RealAI: List Tools"
+      },
+      {
+        "command": "realai.listAgents",
+        "title": "RealAI: List Agents"
+      },
+      {
+        "command": "realai.showSelfHeal",
+        "title": "RealAI: Self-Heal Status"
+      },
+      {
+        "command": "realai.showLora",
+        "title": "RealAI: LoRA Inventory"
+      },
+      {
+        "command": "realai.showRecovery",
+        "title": "RealAI: Recovery Inventory"
+      },
+      {
+        "command": "realai.orchestrateAgents",
+        "title": "RealAI: Orchestrate Agents"
+      },
+      {
+        "command": "realai.refreshAbilities",
+        "title": "RealAI: Refresh Abilities from Hive",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "realai.openTerminal",
+        "title": "RealAI: Open Terminal (workspace)",
+        "icon": "$(terminal)"
+      },
+      {
+        "command": "realai.terminalChat",
+        "title": "RealAI: Terminal Chat (realai)"
+      },
+      {
+        "command": "realai.terminalCode",
+        "title": "RealAI: Terminal Code (realai-code)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "realai.openChat",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a"
+      },
+      {
+        "command": "realai.whereAreWe",
+        "key": "ctrl+shift+alt+a",
+        "mac": "cmd+shift+alt+a"
+      },
+      {
+        "command": "realai.insertResponse",
+        "key": "ctrl+shift+i",
+        "mac": "cmd+shift+i",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "realai.submenu",
+          "group": "realai@1",
+          "when": "editorHasSelection"
+        }
+      ],
+      "realai.submenu": [
+        {
+          "command": "realai.explainCode",
+          "group": "1_main@1"
+        },
+        {
+          "command": "realai.refactorCode",
+          "group": "1_main@2"
+        },
+        {
+          "command": "realai.generateTests",
+          "group": "1_main@3"
+        },
+        {
+          "command": "realai.generateDocs",
+          "group": "1_main@4"
+        },
+        {
+          "command": "realai.fixBug",
+          "group": "1_main@5"
+        },
+        {
+          "command": "realai.optimizeCode",
+          "group": "1_main@6"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "realai.refreshHub",
+          "when": "view == realai.hub",
+          "group": "navigation"
+        },
+        {
+          "command": "realai.openChat",
+          "when": "view == realai.hub",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "realai.openChat"
+        },
+        {
+          "command": "realai.refreshHub"
+        },
+        {
+          "command": "realai.showPhase"
+        },
+        {
+          "command": "realai.whereAreWe"
+        },
+        {
+          "command": "realai.readRepo"
+        },
+        {
+          "command": "realai.extensionAudit"
+        },
+        {
+          "command": "realai.multiAgent"
+        },
+        {
+          "command": "realai.runTool"
+        },
+        {
+          "command": "realai.checkHealth"
+        },
+        {
+          "command": "realai.showStatus"
+        },
+        {
+          "command": "realai.showSelfHeal"
+        },
+        {
+          "command": "realai.showCapabilities"
+        },
+        {
+          "command": "realai.refreshAbilities"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "realai.submenu",
+        "label": "RealAI"
+      }
+    ],
+    "configuration": {
+      "title": "RealAI",
+      "properties": {
+        "realai.baseUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8001",
+          "description": "RealAI Hive API base URL."
+        },
+        "realai.model": {
+          "type": "string",
+          "default": "realai-hive",
+          "description": "Default model id for chat/completions."
+        },
+        "realai.voiceUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8890",
+          "description": "Optional RealAI Voice Lab base URL."
+        },
+        "realai.agentId": {
+          "type": "string",
+          "default": "",
+          "description": "Optional Hive agent id (leave empty for normal IDE chat)."
+        },
+        "realai.memory": {
+          "type": "boolean",
+          "default": true,
+          "description": "Inject RealAI memory into chat requests."
+        },
+        "realai.tools": {
+          "type": "boolean",
+          "default": true,
+          "description": "Match browser console: send X-RealAI-Tools on (Hive tools)."
+        },
+        "realai.voiceSpeak": {
+          "type": "boolean",
+          "default": true,
+          "description": "Match browser console: speak replies (X-RealAI-Voice + browser TTS fallback)."
+        },
+        "realai.contextTokens": {
+          "type": "integer",
+          "minimum": 1024,
+          "default": 65536,
+          "description": "Maximum prompt context sent to the local model. Match llama-server -c/--ctx-size (default 65536)."
+        },
+        "realai.showAgentsInChatModelPicker": {
+          "type": "boolean",
+          "default": true,
+          "description": "List Hive agents under the standalone RealAI Chat model picker."
+        },
+        "realai.productHome": {
+          "type": "string",
+          "default": "C:\\RealAI-clean",
+          "description": "RealAI product home (Hive install). Used for REALAI_HOME in terminals and foreign-repo context."
+        },
+        "realai.chatDispatchAgents": {
+          "type": "boolean",
+          "default": true,
+          "description": "When using RealAI Chat coder/agent picks, POST /v1/agents/run so Agents UI shows live work"
+        }
+      }
+    },
+    "commandPalette": [
+      {
+        "command": "realai.openTerminal"
+      },
+      {
+        "command": "realai.terminalChat"
+      },
+      {
+        "command": "realai.terminalCode"
+      },
+      {
+        "command": "realai.refreshAbilities"
+      }
+    ],
+    "terminal": {
+      "profiles": {
+        "windows": [
+          {
+            "id": "realai.terminalProfile",
+            "title": "RealAI",
+            "path": "powershell.exe",
+            "env": {
+              "REALAI_HOME": "C:\\RealAI-clean",
+              "REALAI_WORKSPACE": "${workspaceFolder}"
+            }
+          }
+        ],
+        "linux": [
+          {
+            "id": "realai.terminalProfile",
+            "title": "RealAI",
+            "path": "bash",
+            "env": {
+              "REALAI_HOME": "C:\\RealAI-clean",
+              "REALAI_WORKSPACE": "${workspaceFolder}"
+            }
+          }
+        ],
+        "osx": [
+          {
+            "id": "realai.terminalProfile",
+            "title": "RealAI",
+            "path": "zsh",
+            "env": {
+              "REALAI_HOME": "C:\\RealAI-clean",
+              "REALAI_WORKSPACE": "${workspaceFolder}"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "scripts": {
+    "sync-webview": "node ./scripts/sync-webview.js",
+    "compile": "npm run sync-webview && tsc -p ./",
+    "watch": "npm run sync-webview && tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile",
+    "package": "npx @vscode/vsce package --no-dependencies --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.0.0"
+  }
+}

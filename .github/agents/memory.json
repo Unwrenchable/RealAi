@@ -1,0 +1,24 @@
+{
+  "id": "memory",
+  "role": "Hive Memory",
+  "description": "RealAI hive archetype agent: Hive Memory",
+  "tags": [
+    "hive",
+    "memory",
+    "world-model"
+  ],
+  "capabilities": [
+    "recall",
+    "remember",
+    "knowledge-graph"
+  ],
+  "required_tools": [
+    "read_file",
+    "list_dir",
+    "run_terminal_command"
+  ],
+  "preferred_profile": "balanced",
+  "risk_level": "low",
+  "hive": true,
+  "preferred_model": "realai-default-coder"
+}

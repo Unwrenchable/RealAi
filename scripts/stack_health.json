@@ -1,0 +1,34 @@
+{
+  "canonical": "stack_health",
+  "status": "reconstructed_static",
+  "recovered_from": null,
+  "executed_runtime": false,
+  "generated_at": "2026-08-30T07:06:00-07:00",
+  "root": "C:\\RealAI-clean",
+  "pkg": "C:\\RealAI-clean\\realai",
+  "present": [
+    "realai/__init__.py",
+    "realai/world_model.py",
+    "realai/world_model.json",
+    "realai/local_models.py",
+    "realai/memory/engine.py",
+    "realai/plugins/plugin_registry.py",
+    "realai/scanners/assemble_gold_index.py",
+    "realai/scanners/promote_gold.py",
+    "realai/scanners/dds3_missing_files.py",
+    "realai/scanners/ingest_realai_roots.py",
+    "benchmarks/base.py",
+    "benchmarks/runner.py",
+    "benchmarks/bench_world_model.py",
+    "benchmarks/bench_stack_health.py",
+    "scan_results/era_map.json",
+    "agents",
+    "abilities"
+  ],
+  "missing": [],
+  "healthy": true,
+  "notes": [
+    "No original stack_health.json was recovered from any scanned tree.",
+    "This artifact is a static path-presence snapshot. It does not start servers or import RealAI."
+  ]
+}

@@ -1,0 +1,178 @@
+[
+  {
+    "Branch": "local/recovery-primary-clean-20260731-clean",
+    "Slug": "recovery-primary-clean-20260731-clean",
+    "Status": "ok",
+    "Files": 3729,
+    "Sha": "13092f8f",
+    "Giants": 0
+  },
+  {
+    "Branch": "recovery/primary-clean/2026-07-31/HOMEPC/p1c9e2",
+    "Slug": "primary-clean-2026-07-31-HOMEPC-p1c9e2",
+    "Status": "ok",
+    "Files": 1200,
+    "Sha": "362a55b1",
+    "Giants": 0
+  },
+  {
+    "Branch": "recovery/og-mess-clean/2026-07-26/HOMEPC/9c2d11",
+    "Slug": "og-mess-clean-2026-07-26-HOMEPC-9c2d11",
+    "Status": "ok",
+    "Files": 276,
+    "Sha": "7ac91b32",
+    "Giants": 0
+  },
+  {
+    "Branch": "recovery/unique-modules/2026-08-01/HOMEPC/u194c3",
+    "Slug": "unique-modules-2026-08-01-HOMEPC-u194c3",
+    "Status": "ok",
+    "Files": 8053,
+    "Sha": "f9dc7409",
+    "Giants": 36
+  },
+  {
+    "Branch": "recovery/unique-modules-files/2026-08-01/HOMEPC/u194c3f",
+    "Slug": "unique-modules-files-2026-08-01-HOMEPC-u194c3f",
+    "Status": "ok",
+    "Files": 8739,
+    "Sha": "053cb310",
+    "Giants": 36
+  },
+  {
+    "Branch": "recovery/modules-runtime/2026-08-01/HOMEPC/m21f01",
+    "Slug": "modules-runtime-2026-08-01-HOMEPC-m21f01",
+    "Status": "ok",
+    "Files": 7150,
+    "Sha": "764490f9",
+    "Giants": 36
+  },
+  {
+    "Branch": "recovery/plugin-system/2026-08-01/HOMEPC/p26b2",
+    "Slug": "plugin-system-2026-08-01-HOMEPC-p26b2",
+    "Status": "ok",
+    "Files": 8053,
+    "Sha": "c90b7944",
+    "Giants": 36
+  },
+  {
+    "Branch": "recovery/agents-skills/2026-08-01/HOMEPC/s137e5",
+    "Slug": "agents-skills-2026-08-01-HOMEPC-s137e5",
+    "Status": "ok",
+    "Files": 8198,
+    "Sha": "60b9818e",
+    "Giants": 36
+  },
+  {
+    "Branch": "recovery/unique-plugins-orchestrators-agenttools/2026-07-31/HOMEPC/u9f2a1",
+    "Slug": "unique-plugins-orchestrators-agenttools-2026-07-31-HOMEPC-u9f2a1",
+    "Status": "ok",
+    "Files": 228,
+    "Sha": "232927ad",
+    "Giants": 0
+  },
+  {
+    "Branch": "local/realai-clean-20260726-source-only",
+    "Slug": "realai-clean-20260726-source-only",
+    "Status": "ok",
+    "Files": 1221,
+    "Sha": "516a59a4",
+    "Giants": 104
+  },
+  {
+    "Branch": "recovery/from-wsl/2026-08-01/HOMEPC/w274d4",
+    "Slug": "from-wsl-2026-08-01-HOMEPC-w274d4",
+    "Status": "ok",
+    "Files": 8053,
+    "Sha": "d8e4cebb",
+    "Giants": 36
+  },
+  {
+    "Branch": "recovery/from-wsl-files/2026-08-01/HOMEPC/w274d4f",
+    "Slug": "from-wsl-files-2026-08-01-HOMEPC-w274d4f",
+    "Status": "ok",
+    "Files": 8739,
+    "Sha": "053cb310",
+    "Giants": 36
+  },
+  {
+    "Branch": "recovery/wsl-RealAi/2026-07-31/HOMEPC/w4a8c2",
+    "Slug": "wsl-RealAi-2026-07-31-HOMEPC-w4a8c2",
+    "Status": "ok",
+    "Files": 328,
+    "Sha": "e5ac3319",
+    "Giants": 0
+  },
+  {
+    "Branch": "recovery/grok-realai2-clean/2026-07-31/HOMEPC/e5c023",
+    "Slug": "grok-realai2-clean-2026-07-31-HOMEPC-e5c023",
+    "Status": "ok",
+    "Files": 433,
+    "Sha": "1a5ea9c9",
+    "Giants": 0
+  },
+  {
+    "Branch": "recovery/grok-export/2026-07-31/HOMEPC/e1a2b3",
+    "Slug": "grok-export-2026-07-31-HOMEPC-e1a2b3",
+    "Status": "ok",
+    "Files": 550,
+    "Sha": "70aec7e9",
+    "Giants": 0
+  },
+  {
+    "Branch": "recovery/essentials/2026-07-26/HOMEPC/snapshot1",
+    "Slug": "essentials-2026-07-26-HOMEPC-snapshot1",
+    "Status": "ok",
+    "Files": 4720,
+    "Sha": "66f21544",
+    "Giants": 0
+  },
+  {
+    "Branch": "recovery/users-tsmit-realai-clean/2026-07-31/HOMEPC/d4b912",
+    "Slug": "users-tsmit-realai-clean-2026-07-31-HOMEPC-d4b912",
+    "Status": "ok",
+    "Files": 290,
+    "Sha": "1c454524",
+    "Giants": 0
+  },
+  {
+    "Branch": "recovery/users-tsmit-realai/2026-07-31/HOMEPC/c3a801",
+    "Slug": "users-tsmit-realai-2026-07-31-HOMEPC-c3a801",
+    "Status": "ok",
+    "Files": 316,
+    "Sha": "04cc07cf",
+    "Giants": 0
+  },
+  {
+    "Branch": "realai-3.0-update",
+    "Slug": "realai-3.0-update",
+    "Status": "ok",
+    "Files": 328,
+    "Sha": "66be87fb",
+    "Giants": 0
+  },
+  {
+    "Branch": "realai-3.0-clean",
+    "Slug": "realai-3.0-clean",
+    "Status": "ok",
+    "Files": 420,
+    "Sha": "255042ad",
+    "Giants": 0
+  },
+  {
+    "Branch": "grok_snapshot",
+    "Slug": "grok_snapshot",
+    "Status": "ok",
+    "Files": 550,
+    "Sha": "70aec7e9",
+    "Giants": 0
+  },
+  {
+    "Branch": "restored-from-history",
+    "Slug": "restored-from-history",
+    "Status": "ok",
+    "Files": 328,
+    "Sha": "66be87fb",
+    "Giants": 0
+  }
+]

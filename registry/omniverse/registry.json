@@ -1,0 +1,82 @@
+{
+  "ts": "2026-08-25T17:34:35.463182+00:00",
+  "mode": "omniverse",
+  "layers": {
+    "universe": {
+      "description": "All workspaces as worlds sharing patterns/recipes/logs",
+      "worlds": [
+        {
+          "id": "world.realai_home",
+          "path": "C:\\RealAI-clean",
+          "role": "engine",
+          "dimension": "realai-product"
+        },
+        {
+          "id": "world.vault77_gps",
+          "path": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+          "role": "project",
+          "dimension": "node-solana-game"
+        }
+      ],
+      "universal_registry": "C:\\RealAI-clean\\registry\\omniverse\\registry.json",
+      "multi_workspace_map": "C:\\RealAI-clean\\registry\\omniverse\\multi_workspace_map.json"
+    },
+    "dimensional_runtime": {
+      "description": "Per-repo rules and adapters",
+      "classifier": "package.json+Anchor.toml+pyproject -> dimension",
+      "dimensions": {
+        "realai-product": {
+          "rules": [
+            "promote curated only",
+            "logs under home"
+          ],
+          "recipes_ns": "realai"
+        },
+        "node-solana-game": {
+          "rules": [
+            "Vault-Tec tone",
+            "frontend/data canonical",
+            "MCP vault77"
+          ],
+          "recipes_ns": "vault77"
+        }
+      }
+    },
+    "multi_singularity_federation": {
+      "description": "Shared stores across RealAI instances",
+      "shared_pattern_store": "C:\\RealAI-clean\\registry\\universal\\patterns.json",
+      "shared_recipe_store": "C:\\RealAI-clean\\registry\\universal\\recipes.json",
+      "shared_log_store": "C:\\RealAI-clean\\logs\\state",
+      "protocol": "file-backed-v1"
+    },
+    "quantum_layer": {
+      "description": "Multiple candidate fixes ranked by confidence",
+      "decision_policy": "highest confidence_score with false_positive triage"
+    },
+    "temporal_engine": {
+      "status": "registry-stub",
+      "note": "learn from past universal_engine_run.json"
+    },
+    "adaptive_kernel": {
+      "status": "registry-stub"
+    },
+    "autonomous_architect": {
+      "status": "registry-stub"
+    },
+    "synthetic_worldbuilder": {
+      "status": "partial",
+      "bound_to": "vault77 creative packs"
+    },
+    "meta_learner": {
+      "status": "registry-stub"
+    },
+    "self_harden_engine": {
+      "status": "partial",
+      "via": "harden_scan recipes"
+    },
+    "self_evolution_engine": {
+      "status": "partial",
+      "via": "patterns+recipes promote"
+    }
+  }
+}

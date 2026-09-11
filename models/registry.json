@@ -1,0 +1,43 @@
+{
+  "realai-default-coder": {
+    "type": "chat",
+    "backend": "llama.cpp-vulkan",
+    "path": "C:/models/checkpoints_lora/qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+    "context_length": 8192,
+    "owned_by": "realai",
+    "capabilities": ["chat", "completion", "coding"]
+  },
+  "realai-1.0-instruct": {
+    "type": "chat",
+    "backend": "llama.cpp-vulkan",
+    "path": "C:/models/checkpoints_lora/realai-1.0-instruct-Q4_K_M.gguf",
+    "context_length": 8192,
+    "owned_by": "realai",
+    "capabilities": ["chat", "completion"]
+  },
+  "local-llama-1b": {
+    "type": "chat",
+    "backend": "llama.cpp-vulkan",
+    "path": "C:/models/checkpoints_lora/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+    "context_length": 8192,
+    "owned_by": "local",
+    "capabilities": ["chat", "completion"]
+  },
+  "realai-1.0": {
+    "type": "chat",
+    "backend": "vllm",
+    "path": "meta-llama/Meta-Llama-3-8B-Instruct",
+    "context_length": 32768
+  },
+  "realai-overseer": {
+    "type": "chat",
+    "backend": "vllm",
+    "path": "meta-llama/Meta-Llama-3-8B-Instruct",
+    "context_length": 65536
+  },
+  "realai-embed": {
+    "type": "embedding",
+    "backend": "hf",
+    "path": "sentence-transformers/all-MiniLM-L6-v2"
+  }
+}

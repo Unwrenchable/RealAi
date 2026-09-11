@@ -1,0 +1,18 @@
+{
+  "ts": "2026-08-25T17:25:59.332548+00:00",
+  "capabilities": [
+    "read_file",
+    "write_file",
+    "fix",
+    "heal",
+    "harden",
+    "generate",
+    "map",
+    "evolve",
+    "learn",
+    "creative",
+    "diagnose",
+    "secure",
+    "orchestrate"
+  ]
+}

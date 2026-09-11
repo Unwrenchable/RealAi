@@ -1,0 +1,23 @@
+{
+  "id": "guardian",
+  "role": "Hive Guardian",
+  "description": "RealAI hive agent: Hive Guardian",
+  "tags": [
+    "hive",
+    "guardian",
+    "safety"
+  ],
+  "capabilities": [
+    "policy",
+    "safety"
+  ],
+  "required_tools": [
+    "read_file",
+    "list_dir",
+    "run_terminal_command"
+  ],
+  "preferred_profile": "balanced",
+  "risk_level": "low",
+  "hive": true,
+  "preferred_model": "realai-default-coder"
+}

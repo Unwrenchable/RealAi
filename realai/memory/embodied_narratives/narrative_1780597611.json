@@ -1,0 +1,1 @@
+{"id": "narrative_1780597611", "agent_id": "tower_npc", "video": {"video_sequence": "simulated_vid_with_provenance", "world_context_used": true}, "replayable": true, "world_context": true, "created": 1780597611.2354903, "use": "Load into agent memory or NPC behavior tree for consistent lore replay."}

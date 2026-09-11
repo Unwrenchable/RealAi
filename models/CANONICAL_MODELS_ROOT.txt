@@ -1,0 +1,10 @@
+﻿Canonical RealAI weights + LoRA adapters live at:
+
+  C:\models\checkpoints_lora
+
+Set in repo .env:
+  REALAI_MODELS_DIR=C:\models\checkpoints_lora
+  REALAI_LORA_ROOT=C:\models\checkpoints_lora
+
+This folder (C:\RealAI-clean\models) is manifests / model cards only.
+Do not train/load from here as the primary root.

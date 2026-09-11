@@ -1,0 +1,73 @@
+{
+ "format_version": 1,
+ "files": {
+  ".gitattributes": {
+   "size": 1561,
+   "blob_id": "e79ce6a89353fed9e05c6bd0e566fbd82c8d6d5f"
+  },
+  "LICENSE": {
+   "size": 11343,
+   "blob_id": "6634c8cc3133b3848ec74b9f275acaaa1ea618ab"
+  },
+  "README.md": {
+   "size": 4992,
+   "blob_id": "cdb8668979578511d37ce7bcdd8823feb033806a"
+  },
+  "qwen2.5-coder-1.5b-instruct-q2_k.gguf": {
+   "size": 752880192,
+   "blob_id": "caa583197433346c208b9cfdb8b137fbd04a31d7",
+   "lfs_sha256": "3ec56d48cc5acdb93c4323f0d01a3b5db0c73c54fe71831199223720d37f6fcd",
+   "lfs_size": 752880192,
+   "xet_hash": "9f567d7492acebcf1f0c49d43f3dcbd365120793ed011d5bdac0f118f0e20d68"
+  },
+  "qwen2.5-coder-1.5b-instruct-q3_k_m.gguf": {
+   "size": 924456000,
+   "blob_id": "46dae7afcef0dab1e7fce18ea3c254ed715bdf7b",
+   "lfs_sha256": "d281a3a0010df03c8a0e3ffebd7f9444a95244fb518f132c5475e4b48d9adb5e",
+   "lfs_size": 924456000,
+   "xet_hash": "4f702434fbcfc1d5750c3d4e8aab85a2577c307ca8741bd9086ae34d305b3cb8"
+  },
+  "qwen2.5-coder-1.5b-instruct-q4_0.gguf": {
+   "size": 1066227264,
+   "blob_id": "c2720b6b92f47f4f8ee46ca0753f863bcfda5142",
+   "lfs_sha256": "aa8353e0d0fca3a0041828701e90db7635197400f040676d11d7798665fa316e",
+   "lfs_size": 1066227264,
+   "xet_hash": "9ba342f5dfa96183ca0ded8c586d1221349f7ab669c3b0b3f95751f915a7d322"
+  },
+  "qwen2.5-coder-1.5b-instruct-q4_k_m.gguf": {
+   "size": 1117320768,
+   "blob_id": "fd69246985bc9ee8451624c55d3118e9f5251a1c",
+   "lfs_sha256": "cc324af070c2ecbfd324a30884d2f951a7ff756aba85cb811a6ec436933bb046",
+   "lfs_size": 1117320768,
+   "xet_hash": "eaf7c99d99dcc2e20f1c1f1b114249fa090354dfed87131397b265a221f4d9c8"
+  },
+  "qwen2.5-coder-1.5b-instruct-q5_0.gguf": {
+   "size": 1259173440,
+   "blob_id": "fc4ff6299848fadf9d80f5ddac78208aadfdb611",
+   "lfs_sha256": "5ce1b3d37dc2bd8a75c335c59bebfa1d28a58cab14454369c3dba71b10abe3f5",
+   "lfs_size": 1259173440,
+   "xet_hash": "18cebcd9c9442c78b40992f3545e76a2ce20de459c7db58bd071fcede29289d3"
+  },
+  "qwen2.5-coder-1.5b-instruct-q5_k_m.gguf": {
+   "size": 1285494336,
+   "blob_id": "b1c22cee9517936ac5e674f13994048e5c756c6a",
+   "lfs_sha256": "f15d02e8e51a5c6f9448b972819acfa66aee4d8bb7d881a8b8ba3d90da08ef09",
+   "lfs_size": 1285494336,
+   "xet_hash": "67f3dd948073d25da93cceff88563e6af65b91e8b31dbd59766666f5481c448f"
+  },
+  "qwen2.5-coder-1.5b-instruct-q6_k.gguf": {
+   "size": 1464178752,
+   "blob_id": "a5e36c78e1eef47a2a8433c1c7ec1e4111c85c86",
+   "lfs_sha256": "9b05dce8089197c866b9f76e1db45de8617cda98d9d06059958cb8ad32c56dfa",
+   "lfs_size": 1464178752,
+   "xet_hash": "27be89dd286955e259d26b5e648796aa27836634a9b69e89e8dd88cfcd0271e2"
+  },
+  "qwen2.5-coder-1.5b-instruct-q8_0.gguf": {
+   "size": 1894532160,
+   "blob_id": "4b0553265a9c7c6d1554ec944c109b3802bcf91b",
+   "lfs_sha256": "507de59046601282ba768a9789900e6ccf60ed93ddf346730b7c68eb0715bc47",
+   "lfs_size": 1894532160,
+   "xet_hash": "00e69e203e0f583dbe9c19e6fed9fbf388912f9fc1726e62cf8151f7043a48af"
+  }
+ }
+}

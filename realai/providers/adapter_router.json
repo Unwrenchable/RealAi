@@ -1,0 +1,11 @@
+{
+  "auto_generated": true,
+  "source": "C:\\RealAI-clean\\realai\\providers\\adapter_router.py",
+  "rank": 64,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj"
+  ]
+}

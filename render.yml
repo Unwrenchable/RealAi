@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: realai-api
+    runtime: python
+    pythonVersion: 3.11
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m realai.api_server
+    envVars:
+      - key: WEB_CONCURRENCY
+        value: "1"
+      - key: OPENAI_API_KEY
+        scope: project
+      - key: REALAI_MODEL
+        value: realai-1.0
+      - key: ENV
+        value: production
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://realai.vercel.app,https://your-custom-domain.com"
+    healthCheckPath: /health
+    healthCheckTimeout: 1000
+    healthCheckFailureThreshold: 3
+    healthCheckSuccessThreshold: 1

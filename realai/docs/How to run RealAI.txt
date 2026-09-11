@@ -1,0 +1,84 @@
+How to run RealAI
+
+1. Start the stack (Vulkan + Hive)
+
+From C:\RealAI-clean:
+
+realai-stack
+
+Or:
+
+cd C:\RealAI-clean
+python -m realai stack
+
+That starts:
+• Vulkan model on http://127.0.0.1:8080
+• Hive API on http://127.0.0.1:8001
+
+Check:
+
+realai-health
+
+Stop:
+
+realai-stop
+
+───
+
+2. Talk to it
+
+Terminal chat:
+
+realai
+or:
+
+realai chat "status check"
+
+API (OpenAI-style):
+
+curl http://127.0.0.1:8001/v1/chat/completions -H "Content-Type: application/json" -d "{\"messages\":[{\"role\":\"user\",\"content\":\"hello\"}]}"
+
+Browser UI (if you start it with the stack / frontend):
+• Chat UI: http://127.0.0.1:3000
+• Fusion UI: http://127.0.0.1:8001/fusion-ui/
+
+───
+
+3. Run game / ability tools
+
+Hive tool execute:
+
+curl http://127.0.0.1:8001/v1/tools/execute -H "Content-Type: application/json" -d "{\"name\":\"omnibrain\",\"arguments\":{\"llm\":false,\"region\":\"Vault 77\",\"ar_mode\":true}}"
+
+Useful tool names:
+• omnibrain — encounter decide
+• world_brain — region / prompt
+• overseer — Overseer-77 persona ({"action":"chat","text":"..."} or {"action":"prompt"})
+• ability.game_world — Atomic Fizz plugin inventory
+• ability.image_generation — needs XAI_API_KEY
+
+───
+
+4. Optional: MCP in Grok
+
+Hive MCP (talk to RealAI from this chat):
+
+grok mcp add realai -- python -u C:\RealAI-clean\realai\mcp_server.py
+grok mcp doctor realai
+
+Vault-77 game MCP (Atomic Fizz live API):
+
+grok mcp add vault77 -- python -u C:\RealAI-clean\realai\mcp_vault77.py
+grok mcp doctor vault77
+
+───
+
+5. Image / video (optional)
+
+set XAI_API_KEY=xai-your-key-here
+
+Then restart stack / use ability.image_generation / ability.video_generation.
+
+───
+
+Minimal path: realai-stack → wait until health is OK → realai to chat.

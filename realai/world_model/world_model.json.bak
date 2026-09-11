@@ -1,0 +1,1297 @@
+{
+  "realai-1.0": {
+    "type": "chat",
+    "backend": "vllm",
+    "path": "meta-llama/Meta-Llama-3-8B-Instruct",
+    "context_length": 32768
+  },
+  "realai-embed": {
+    "type": "embedding",
+    "backend": "hf",
+    "path": "sentence-transformers/all-MiniLM-L6-v2"
+  },
+  "realai-overseer": {
+    "type": "chat",
+    "backend": "vllm",
+    "path": "meta-llama/Meta-Llama-3-8B-Instruct",
+    "context_length": 65536
+  },
+  "llama-local": {
+    "type": "chat",
+    "backend": "llama-cli",
+    "path": "C:/Users/tsmit/models/llama-3.2-3b-instruct.Q4_K_M.gguf",
+    "context_length": 8192,
+    "owned_by": "local",
+    "capabilities": [
+      "chat",
+      "completion"
+    ]
+  },
+  "llama-local-7b": {
+    "type": "chat",
+    "backend": "llama-cli",
+    "path": "C:/Users/tsmit/models/llama-3.1-7b-instruct.Q4_K_M.gguf",
+    "context_length": 32768,
+    "owned_by": "local",
+    "capabilities": [
+      "chat",
+      "completion"
+    ]
+  },
+  "realai-default-coder": {
+    "type": "chat",
+    "backend": "llama.cpp-vulkan",
+    "path": "C:/RealAI-clean/models/qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+    "context_length": 8192,
+    "owned_by": "realai",
+    "capabilities": [
+      "chat",
+      "completion",
+      "coding"
+    ]
+  },
+  "realai-1.0-instruct": {
+    "type": "chat",
+    "backend": "realai-gguf",
+    "path": "realai-1.0-instruct",
+    "context_length": 32768,
+    "owned_by": "realai",
+    "capabilities": [
+      "chat",
+      "tool-calling",
+      "local"
+    ]
+  },
+  "local-llama-1b": {
+    "type": "chat",
+    "backend": "llama.cpp-vulkan",
+    "path": "C:/RealAI-clean/models/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+    "context_length": 8192,
+    "owned_by": "local",
+    "capabilities": [
+      "chat",
+      "completion"
+    ]
+  },
+  "atomic_fizz_realai": {
+    "source": "realai\\plugins\\plugin_manifest.json",
+    "name": "atomic_fizz_realai",
+    "version": "0.1.0-gold",
+    "capabilities": [
+      "npc_generation",
+      "quest_generation",
+      "dungeon_generation",
+      "overseer",
+      "dialogue",
+      "world_events",
+      "survival_rewards"
+    ]
+  },
+  "ability_catalog": {
+    "source": "recovered\\recovery-primary-clean-20260731-clean\\scan_results\\ability_catalog.json",
+    "name": "ability_catalog",
+    "version": "unknown",
+    "capabilities": [
+      {
+        "id": "chat_completion",
+        "name": "Chat completion",
+        "pillar": "core_ai",
+        "keywords": [
+          "chat",
+          "chat/completions",
+          "completions",
+          "messages"
+        ],
+        "status": "LIVE",
+        "live_path": "POST /v1/chat/completions",
+        "modules": [
+          "realai/v3_orchestrator.py"
+        ],
+        "modules_found": [
+          "realai/v3_orchestrator.py"
+        ],
+        "gold_found": [],
+        "inventory_tokens": [
+          "Chat Completion",
+          "Chat completion",
+          "ChatModel",
+          "ChatSidebarProvider",
+          "chat",
+          "chat UI",
+          "chat completion",
+          "chat ui",
+          "chat/completions",
+          "completion",
+          "completions",
+          "messages",
+          "realai_chat"
+        ],
+        "inventory_hit_count": 13
+      },
+      {
+        "id": "text_generation",
+        "name": "Text generation",
+        "pillar": "core_ai",
+        "keywords": [
+          "text generation",
+          "generate",
+          "completion"
+        ],
+        "status": "LIVE",
+        "live_path": "POST /v1/chat/completions",
+        "modules": [
+          "realai/v3_orchestrator.py"
+        ],
+        "modules_found": [
+          "realai/v3_orchestrator.py"
+        ],
+        "gold_found": [],
+        "inventory_tokens": [
+          "Chat Completion",
+          "Chat completion",
+          "chat completion",
+          "chat/completions",
+          "completion",
+          "completions",
+          "generate"
+        ],
+        "inventory_hit_count": 7
+      },
+      {
+        "id": "image_generation",
+        "name": "Image generation",
+        "pillar": "core_ai",
+        "keywords": [
+          "image",
+          "images/generations",
+          "dall-e",
+          "image gen"
+        ],
+        "status": "STUB",
+        "live_path": null,
+        "modules": [],
+        "gold_paths": [
+          "C:\\tools\\realai\\commands\\image.js"
+        ],
+        "modules_found": [],
+        "gold_found": [
+          "C:\\tools\\realai\\commands\\image.js"
+        ],
+        "status_note": "CLI/gold scaffold present (may be empty stub files)",
+        "inventory_tokens": [
+          "Image Analysis",
+          "Image Gen",
+          "Image Generation",
+          "Image analysis",
+          "Image gen",
+          "Image generation",
+          "ImageModel",
+          "image",
+          "image analysis",
+          "image gen",
+          "image generation",
+          "image_url",
+          "images/generations"
+        ],
+        "inventory_hit_count": 13
+      },
+      {
+        "id": "video_generation",
+        "name": "Video generation",
+        "pillar": "core_ai",
+        "keywords": [
+          "video",
+          "video generation",
+          "video.js"
+        ],
+        "status": "STUB",
+        "live_path": null,
+        "modules": [],
+        "gold_paths": [
+          "C:\\tools\\realai\\commands\\video.js"
+        ],
+        "modules_found": [],
+        "gold_found": [
+          "C:\\tools\\realai\\commands\\video.js"
+        ],
+        "status_note": "CLI/gold scaffold present (may be empty stub files)",
+        "inventory_tokens": [
+          "npc_video",
+          "npc_video_lore_overrides"
+        ],
+        "inventory_hit_count": 2
+      },
+      {
+        "id": "image_analysis",
+        "name": "Image analysis (vision)",
+        "pillar": "core_ai",
+        "keywords": [
+          "vision",
+          "image analysis",
+          "multimodal",
+          "image_url"
+        ],
+        "status": "CODE",
+        "live_path": null,
+        "modules": [],
+        "modules_found": [],
+        "gold_found": [],
+        "inventory_tokens": [
+          "Image Analysis",
+          "Image analysis",
+          "image",
+          "image analysis",
+          "image_url",
+          "multimodal"
+        ],
+        "inventory_hit_count": 6
+      },
+      {
+        "id": "code_generation",
+        "name": "Code generation",
+        "pillar": "core_ai",
+        "keywords": [
+          "code generation",
+          "coding",
+          "qwen2.5-coder"
+        ],
+        "status": "LIVE",
+        "live_path": "POST /v1/chat/completions (model)",
+        "modules": [
+          "realai/v3_orchestrator.py",
+          "realai/coding_agent.py"
+        ],
+        "modules_found": [
+          "realai/v3_orchestrator.py",
+          "realai/coding_agent.py"
+        ],
+        "gold_found": [],
+        "inventory_tokens": [
+          "Code Generation",
+          "Code generation",
+          "CodingAgent",
+          "code generation",
+          "coding",
+          "qwen"
+        ],
+        "inventory_hit_count": 6
+      },
+      {
+        "id": "code_execution",
+        "name": "Code execution",
+        "pillar": "core_ai",
+        "keywords": [
+          "code execution",
+          "sandbox",
+          "exec",
+          "tool_calls",
+          "agent_tools",
+          "executor"
+        ],
+        "status": "PARTIAL",
+        "live_path": "POST /v1/tools/execute",
+        "modules": [
+          "realai/v3_orchestrator.py",
+          "realai/tools.py",
+          "realai/agent_tools_gold",
+          "realai-core/agent_tools",
+          "recovered/from_agent_tools/agent_tools"
+        ],
+        "gold_paths": [
+          "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools",
+          "C:\\Users\\tsmit\\realai\\agent-tools\\agent-tools-main"
+        ],
+        "modules_found": [
+          "realai/v3_orchestrator.py",
+          "realai/tools.py",
+          "realai/agent_tools_gold",
+          "realai-core/agent_tools",
+          "recovered/from_agent_tools/agent_tools"
+        ],
+        "gold_found": [
+          "C:\\Users\\tsmit\\Documents\\GitHub\\realai\\realai-core\\agent_tools",
+          "C:\\Users\\tsmit\\realai\\agent-tools\\agent-tools-main"
+        ],
+        "inventory_tokens": [
+          "Agent",
+          "Code Execution",
+          "Code execution",
+          "CodeExecutionTool",
+          "ExecutionAgent",
+          "Tool",
+          "agent_tools",
+          "agent_tools_assess",
+          "agent_tools_bridge",
+          "agent_tools_gold",
+          "agent_tools_list_agents",
+          "agent_tools_list_profiles",
+          "agent_tools_status",
+          "code execution",
+          "exec",
+          "executor",
+          "realai_tool_calls_total",
+          "sandbox"
+        ],
+        "inventory_hit_count": 18
+      },
+      {
+        "id": "embeddings",
+        "name": "Embeddings",
+        "pillar": "core_ai",
+        "keywords": [
+          "embeddings",
+          "embedding",
+          "vector",
+          "realai-embed"
+        ],
+        "status": "LIVE",
+        "live_path": "POST /v1/embeddings",
+        "modules": [
+          "realai/lambda_embeddings_audio.py",
+          "realai/server/embeddings_backend.py",
+          "realai/v3_orchestrator.py"
+        ],
+        "modules_found": [
+          "realai/lambda_embeddings_audio.py",
+          "realai/server/embeddings_backend.py",
+          "realai/v3_orchestrator.py"
+        ],
+        "gold_found": [],
+        "inventory_tokens": [
+          "embedding",
+          "embeddings",
+          "realai",
+          "realai_embeddings"
+        ],
+        "inventory_hit_count": 4
+      },
+      {
+        "id": "audio_transcription",
+        "name": "Audio transcription (ASR)",
+        "pillar": "core_ai",
+        "keywords": [
+          "transcription",
+          "asr",
+          "whisper",
+          "speech-to-text",
+          "audio/transcriptions"
+        ],
+        "status": "STUB",
+        "live_path": "POST /v1/audio/transcriptions",
+        "modules": [
+          "realai/lambda_embeddings_audio.py",
+          "realai/v3_orchestrator.py"
+        ],
+        "modules_found": [
+          "realai/lambda_embeddings_audio.py",
+          "realai/v3_orchestrator.py"
+        ],
+        "gold_found": [],
+        "inventory_tokens": [
+          "Audio Transcription",
+          "Audio transcription",
+          "asr",
+          "audio transcription",
+          "audio/transcriptions"
+        ],
+        "inventory_hit_count": 5
+      },
+      {
+        "id": "audio_speech",
+        "name": "Audio speech (TTS)",
+        "pillar": "core_ai",
+        "keywords": [
+          "tts",
+          "text-to-speech",
+          "audio/speech",
+          "speech synthesis"
+        ],
+        "status": "STUB",
+        "live_path": "POST /v1/audio/speech",
+        "modules": [
+          "realai/lambda_embeddings_audio.py",
+          "realai/v3_orchestrator.py"
+        ],
+        "modules_found": [
+          "realai/lambda_embeddings_audio.py",
+          "realai/v3_orchestrator.py"
+        ],
+        "gold_found": [],
+        "inventory_tokens": [
+          "audio/speech"
+        ],
+        "inventory_hit_count": 1
+      },
+      {
+        "id": "translation",
+        "name": "Translation",
+        "pillar": "core_ai",
+        "keywords": [
+          "translation",
+          "translate",
+          "multilingual"
+        ],
+        "status": "SOFT",
+        "live_path": "POST /v1/chat/completions (model)",
+        "modules": [],
+        "modules_found": [],
+        "gold_found": [],
+        "inventory_tokens": [
+          "multilingual"
+        ],
+        "inventory_hit_count": 1
+      },
+      {
+        "id": "web_research",
+        "name": "Web research & scraping",
+        "pillar": "advanced",
+        "keywords": [
+          "web research",
+          "scraping",
+          "research",
+          "web_search"
+        ],
+        "status": "GOLD",
+        "live_path": null,
+        "modules": [],
+        "gold_paths": [
+          "C:\\tools\\realai\\commands\\research.js"
+        ],
+        "modules_found": [],
+        "gold_found": [
+          "C:\\tools\\realai\\commands\\research.js"
+        ],
+        "status_note": "modules not on authority path; gold/external surface present",
+        "inventory_tokens": [
+          "ResearchAgent",
+          "research",
+          "scraping"
+        ],
+        "inventory_hit_count": 3
+      },
+      {
+        "id": "task_automation",
+        "name": "Task automation & infra ops",
+        "pillar": "advanced",
+        "keywords": [
+          "automation",
+          "infra",
+          "self-heal",
+          "self_heal",
+          "task"
+        ],
+        "status": "PARTIAL",
+        "live_path": "POST /v1/self-heal/*",
+        "modules": [
+          "realai/self_heal.py"
+        ],
+        "modules_found": [
+          "realai/self_heal.py"
+        ],
+        "gold_found": [],
+        "inventory_tokens": [
+          "automation",
+          "infra",
+          "self_heal"
+        ],
+        "inventory_hit_count": 3
+      },
+      {
+        "id": "voice_streaming",
+        "name": "Voice interaction (streaming)",
+        "pillar": "advanced",
+        "keywords": [
+          "voice",
+          "streaming voice",
+          "asr",
+          "tts conversation"
+        ],
+        "status": "MISSING",
+        "live_path": null,
+        "modules": [],
+        "modules_found": [],
+        "gold_found": [],
+        "inventory_tokens": [
+          "asr"
+        ],
+        "inventory_hit_count": 1
+      },
+      {
+        "id": "business_planning",
+        "name": "Business planning",
+        "pillar": "advanced",
+        "keywords": [
+          "business planning",
+          "business plan"
+        ],
+        "status": "SOFT",
+        "live_path": null,
+        "modules": [],
+        "modules_found": [],
+        "gold_found": [],
+        "inventory_tokens": [
+          "Business Plan",
+          "Business Planning",
+          "Business plan",
+          "Business planning",
+          "business plan",
+          "business planning"
+        ],
+        "inventory_hit_count": 6
+      },
+      {
+        "id": "therapy_counseling",
+        "name": "Therapy & counseling",
+        "pillar": "advanced",
+        "keywords": [
+          "therapy",
+          "counseling",
+          "counsellor"
+        ],
+        "status": "SOFT",
+        "live_path": null,
+        "modules": [],
+        "modules_found": [],
+        "gold_found": [],
+        "inventory_tokens": [
+          "counseling",
+          "counsellor"
+        ],
+        "inventory_hit_count": 2
+      },
+      {
+        "id": "web3_integration",
+        "name": "Web3 integration",
+        "pillar": "advanced",
+        "keywords": [
+          "web3",
+          "solana",
+          "evm",
+          "wallet",
+          "defi",
+          "nft",
+          "smart contract"
+        ],
+        "status": "GOLD",
+        "live_path": null,
+        "modules": [],
+        "gold_paths": [
+          "C:\\tools\\realai\\commands\\web3.js",
+          "C:\\tools\\realai\\plugins\\solana.js",
+          "C:\\tools\\realai\\plugins\\trading.js"
+        ],
+        "modules_found": [],
+        "gold_found": [
+          "C:\\tools\\realai\\commands\\web3.js",
+          "C:\\tools\\realai\\plugins\\solana.js",
+          "C:\\tools\\realai\\plugins\\trading.js"
+        ],
+        "status_note": "modules not on authority path; gold/external surface present",
+        "inventory_tokens": [
+          "Web3Tool",
+          "defi",
+          "evm",
+          "nft",
+          "realai_solana",
+          "solana_backend",
+          "solana_client",
+          "solana_keypair",
+          "solana_manifest",
+          "solana_rpc",
+          "solana_rpc_url",
+          "solana_scan"
+        ],
+        "inventory_hit_count": 12
+      },
+      {
+        "id": "plugin_system",
+        "name": "Plugin system",
+        "pillar": "advanced",
+        "keywords": [
+          "plugin",
+          "plugin_marketplace",
+          "PluginManifest",
+          "PluginDiscovery"
+        ],
+        "status": "CODE",
+        "live_path": null,
+        "modules": [
+          "realai/plugin_marketplace.py"
+        ],
+        "gold_paths": [
+          "C:\\tools\\realai\\core\\plugins.js",
+          "C:\\tools\\realai\\plugins"
+        ],
+        "modules_found": [
+          "realai/plugin_marketplace.py"
+        ],
+        "gold_found": [
+          "C:\\tools\\realai\\core\\plugins.js",
+          "C:\\tools\\realai\\plugins"
+        ],
+        "inventory_tokens": [
+          "Plugin System",
+          "Plugin system",
+          "plugin",
+          "plugin system",
+          "plugin_architecture",
+          "plugin_call_breakpoint_found",
+          "plugin_call_stepping",
+          "plugin_config",
+          "plugin_fn",
+          "plugin_import",
+          "plugin_line_breakpoint_found",
+          "plugin_line_stepping",
+          "plugin_manager",
+          "plugin_marketplace",
+          "plugin_name",
+          "plugin_return_stepping",
+          "plugin_stop",
+          "plugin_system",
+          "realai_plugin"
+        ],
+        "inventory_hit_count": 19
+      },
+      {
+        "id": "memory_learning",
+        "name": "Memory & persistent learning",
+        "pillar": "advanced",
+        "keywords": [
+          "memory",
+          "memory_engine",
+          "vector memory",
+          "persistent learning",
+          "chroma"
+        ],
+        "status": "PARTIAL",
+        "live_path": "chat memory inject (REALAI_MEMORY_INJECT)",
+        "modules": [
+          "realai/v3_orchestrator.py"
+        ],
+        "gold_paths": [
+          "C:\\Users\\tsmit\\realai\\realai_memory",
+          "C:\\Users\\tsmit\\.realai\\conversations.db"
+        ],
+        "modules_found": [
+          "realai/v3_orchestrator.py"
+        ],
+        "gold_found": [
+          "C:\\Users\\tsmit\\realai\\realai_memory",
+          "C:\\Users\\tsmit\\.realai\\conversations.db"
+        ],
+        "inventory_tokens": [
+          "AuraMemory",
+          "EpisodicMemory",
+          "LongTermMemory",
+          "Memory learning",
+          "MemorySummarizerAgent",
+          "SemanticMemory",
+          "SharedMemory",
+          "ShortTermMemory",
+          "SymbolicMemory",
+          "WorkingMemory",
+          "chroma",
+          "memory",
+          "memory learning",
+          "memory_adapter",
+          "memory_bytes",
+          "memory_clear",
+          "memory_context",
+          "memory_data",
+          "memory_engine",
+          "memory_file",
+          "memory_injected",
+          "memory_inspect",
+          "memory_keys",
+          "memory_learning",
+          "memory_map",
+          "memory_mb",
+          "memory_namespace",
+          "memory_on",
+          "memory_or_training_snapshot",
+          "memory_path",
+          "memory_policy",
+          "memory_rag",
+          "memory_records",
+          "memory_snaps",
+          "memory_snapshot",
+          "memory_snapshots",
+          "memory_staging",
+          "memory_storage",
+          "memory_store",
+          "memory_summarizer"
+        ],
+        "inventory_hit_count": 49
+      },
+      {
+        "id": "self_reflection",
+        "name": "Chain-of-thought + self-reflection",
+        "pillar": "advanced",
+        "keywords": [
+          "self_reflect",
+          "critique",
+          "self-reflection",
+          "chain-of-thought"
+        ],
+        "status": "PARTIAL",
+        "live_path": "POST /v1/self-improve/evaluate",
+        "modules": [
+          "realai/self_improvement.py",
+          "realai/critique.py"
+        ],
+        "modules_found": [
+          "realai/self_improvement.py",
+          "realai/critique.py"
+        ],
+        "gold_found": [],
+        "inventory_tokens": [
+          "critique",
+          "self_reflection"
+        ],
+        "inventory_hit_count": 2
+      },
+      {
+        "id": "knowledge_synthesis",
+        "name": "Knowledge synthesis",
+        "pillar": "advanced",
+        "keywords": [
+          "knowledge graph",
+          "knowledge_graph",
+          "world_model",
+          "synthesis"
+        ],
+        "status": "PARTIAL",
+        "live_path": null,
+        "modules": [
+          "realai/knowledge_graph.py",
+          "realai/world_model.py"
+        ],
+        "modules_found": [
+          "realai/knowledge_graph.py",
+          "realai/world_model.py"
+        ],
+        "gold_found": [],
+        "inventory_tokens": [
+          "Knowledge Graph",
+          "Knowledge Synthesis",
+          "Knowledge graph",
+          "Knowledge synthesis",
+          "Model",
+          "knowledge graph",
+          "knowledge synthesis",
+          "knowledge_graph"
+        ],
+        "inventory_hit_count": 8
+      },
+      {
+        "id": "multi_agent",
+        "name": "Multi-agent orchestration",
+        "pillar": "advanced",
+        "keywords": [
+          "multi-agent",
+          "planner",
+          "worker",
+          "critic",
+          "synthesizer",
+          "agentx",
+          "agent_id",
+          "hierarchical_agent",
+          "orchestrator",
+          "shared memory",
+          "rise_system"
+        ],
+        "status": "PARTIAL",
+        "live_path": "POST /v1/multi-agent/run + chat multi_agent=true + GET /v1/agents",
+        "modules": [
+          "realai/agent_runtime.py",
+          "agents/agentx",
+          "realai/orchestration_gold",
+          "realai/hierarchical_agent_gold",
+          "realai/v3_runtime_bridge.py"
+        ],
+        "gold_paths": [
+          "C:\\Users\\tsmit\\.agentx",
+          "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-orchestration",
+          "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent",
+          "C:\\realai\\recovered\\from_desktop\\realai-orchestration",
+          "C:\\realai\\recovered\\from_desktop\\realai_agent"
+        ],
+        "modules_found": [
+          "realai/agent_runtime.py",
+          "agents/agentx",
+          "realai/orchestration_gold",
+          "realai/hierarchical_agent_gold",
+          "realai/v3_runtime_bridge.py"
+        ],
+        "gold_found": [
+          "C:\\Users\\tsmit\\.agentx",
+          "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai-orchestration",
+          "C:\\Users\\tsmit\\OneDrive\\Desktop\\realai_agent",
+          "C:\\realai\\recovered\\from_desktop\\realai-orchestration",
+          "C:\\realai\\recovered\\from_desktop\\realai_agent"
+        ],
+        "inventory_tokens": [
+          "Agent",
+          "CriticAgent",
+          "PlannerAgent",
+          "SynthesizerAgent",
+          "WorkerAgent",
+          "agent_id",
+          "agent_ids",
+          "agentx",
+          "critic",
+          "hierarchical_agent",
+          "memory",
+          "orchestrator",
+          "planner",
+          "rise_system"
+        ],
+        "inventory_hit_count": 14
+      },
+      {
+        "id": "game_world",
+        "name": "Game-world integration (Atomic Fizz)",
+        "pillar": "advanced",
+        "keywords": [
+          "atomic fizz",
+          "npc",
+          "quest",
+          "overseer",
+          "pip-boy",
+          "game world",
+          "wasteland",
+          "dialogue-engine",
+          "dungeon-generator",
+          "local-overseer",
+          "world-event"
+        ],
+        "status": "GOLD",
+        "live_path": null,
+        "modules": [
+          "plugins/atomic_fizz_realai"
+        ],
+        "gold_paths": [
+          "C:\\tools\\realai\\plugins\\overseer.js",
+          "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+          "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-OLD",
+          "C:\\Users\\tsmit\\atomic-fizz-backup-2026-05-30",
+          "C:\\Unwrenchable",
+          "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai",
+          "C:\\realai\\plugins\\atomic_fizz_realai"
+        ],
+        "modules_found": [
+          "plugins/atomic_fizz_realai"
+        ],
+        "gold_found": [
+          "C:\\tools\\realai\\plugins\\overseer.js",
+          "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+          "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-OLD",
+          "C:\\Users\\tsmit\\atomic-fizz-backup-2026-05-30",
+          "C:\\Unwrenchable",
+          "C:\\realai\\recovered\\from_atomic_fizz\\backend_realai",
+          "C:\\realai\\plugins\\atomic_fizz_realai"
+        ],
+        "inventory_tokens": [
+          "ATOMIC FIZZ",
+          "Atomic Fizz",
+          "atomic fizz",
+          "game world",
+          "npc",
+          "npc_context_",
+          "npc_context_missing_",
+          "npc_conversation_complete",
+          "npc_conversation_end",
+          "npc_generator",
+          "npc_generator_rules",
+          "npc_generator_template",
+          "npc_id",
+          "npc_intel",
+          "npc_line",
+          "npc_manifest",
+          "npc_scan",
+          "npc_sidequest_",
+          "npc_signal_runner",
+          "npc_traits",
+          "npc_video",
+          "npc_video_lore_overrides",
+          "overseer",
+          "quest",
+          "quest_caps_daddy",
+          "quest_giver",
+          "quest_id",
+          "quest_iron_curtain",
+          "quest_items",
+          "quest_little_ember",
+          "quest_log",
+          "quest_lost_signal",
+          "quest_mapintel",
+          "quest_marker",
+          "quest_nodes",
+          "quest_red_signals",
+          "quest_reward",
+          "quest_seeker",
+          "quest_stuck_quips",
+          "quest_the_door"
+        ],
+        "inventory_hit_count": 50
+      },
+      {
+        "id": "observability_self_improve",
+        "name": "Observability, auditing, self-improvement",
+        "pillar": "advanced",
+        "keywords": [
+          "observability",
+          "audit",
+          "self_improvement",
+          "self-improve",
+          "self_heal"
+        ],
+        "status": "PARTIAL",
+        "live_path": "/v1/self-improve/* /v1/self-heal/*",
+        "modules": [
+          "realai/self_improvement.py",
+          "realai/self_heal.py",
+          "realai/audit.py"
+        ],
+        "modules_found": [
+          "realai/self_improvement.py",
+          "realai/self_heal.py",
+          "realai/audit.py"
+        ],
+        "gold_found": [],
+        "inventory_tokens": [
+          "audit",
+          "observability",
+          "self_heal",
+          "self_improve"
+        ],
+        "inventory_hit_count": 4
+      },
+      {
+        "id": "local_inference",
+        "name": "Local inference (Vulkan / GGUF)",
+        "pillar": "local_intelligence",
+        "keywords": [
+          "vulkan",
+          "gguf",
+          "llama-server",
+          "qwen",
+          "local model"
+        ],
+        "status": "LIVE",
+        "live_path": "http://127.0.0.1:8080 via orchestrator",
+        "modules": [
+          "realai/v3_orchestrator.py"
+        ],
+        "gold_paths": [
+          "C:\\llama-vulkan",
+          "C:\\llama",
+          "C:\\Users\\tsmit\\.realai\\models"
+        ],
+        "modules_found": [
+          "realai/v3_orchestrator.py"
+        ],
+        "gold_found": [
+          "C:\\llama-vulkan",
+          "C:\\llama",
+          "C:\\Users\\tsmit\\.realai\\models"
+        ],
+        "inventory_tokens": [
+          "Local Model",
+          "Local model",
+          "Model",
+          "gguf",
+          "llama",
+          "local model",
+          "qwen"
+        ],
+        "inventory_hit_count": 7
+      },
+      {
+        "id": "training_pipeline",
+        "name": "Training + fine-tune pipeline",
+        "pillar": "model_family",
+        "keywords": [
+          "finetune",
+          "training",
+          "dataset",
+          "lora",
+          "realai-1.0"
+        ],
+        "status": "PARTIAL",
+        "live_path": "GET /v1/training/* GET /v1/lora",
+        "modules": [
+          "realai/training",
+          "training/data",
+          "realai/recovery_registry.py"
+        ],
+        "gold_paths": [
+          "C:\\Users\\tsmit\\Downloads\\realai_finetune_dataset.jsonl",
+          "C:\\Users\\tsmit\\.grok\\worktrees\\tsmit-realai\\realai2\\checkpoints_lora"
+        ],
+        "modules_found": [
+          "realai/training",
+          "training/data",
+          "realai/recovery_registry.py"
+        ],
+        "gold_found": [
+          "C:\\Users\\tsmit\\Downloads\\realai_finetune_dataset.jsonl",
+          "C:\\Users\\tsmit\\.grok\\worktrees\\tsmit-realai\\realai2\\checkpoints_lora"
+        ],
+        "inventory_tokens": [
+          "LoRA adapters",
+          "TRAINING",
+          "checkpoints_lora",
+          "dataset",
+          "finetune",
+          "finetune adapter",
+          "lora",
+          "lora_adapter",
+          "lora_adapter_count",
+          "lora_adapters",
+          "lora_adapters_sample",
+          "lora_alpha",
+          "lora_config",
+          "lora_dropout",
+          "lora_manifest",
+          "lora_path",
+          "lora_root",
+          "lora_scan",
+          "memory_or_training_snapshot",
+          "realai",
+          "realai_finetune_dataset",
+          "realai_lora",
+          "realai_training_output",
+          "train",
+          "training"
+        ],
+        "inventory_hit_count": 25
+      },
+      {
+        "id": "lora_adapters",
+        "name": "Recovered PEFT LoRA adapters",
+        "pillar": "model_family",
+        "keywords": [
+          "lora",
+          "peft",
+          "adapter",
+          "checkpoints_lora",
+          "finetune adapter"
+        ],
+        "status": "GOLD",
+        "live_path": "GET /v1/lora",
+        "modules": [
+          "realai/recovery_registry.py",
+          "realai/model_catalog.py"
+        ],
+        "gold_paths": [
+          "C:\\Users\\tsmit\\.grok\\worktrees\\tsmit-realai\\realai2\\checkpoints_lora",
+          "recovered/from_kilo_restore/_discovered/checkpoints_lora"
+        ],
+        "modules_found": [
+          "realai/recovery_registry.py",
+          "realai/model_catalog.py"
+        ],
+        "gold_found": [
+          "C:\\Users\\tsmit\\.grok\\worktrees\\tsmit-realai\\realai2\\checkpoints_lora",
+          "recovered/from_kilo_restore/_discovered/checkpoints_lora"
+        ],
+        "inventory_tokens": [
+          "LoRA adapters",
+          "adapter",
+          "checkpoints_lora",
+          "finetune",
+          "finetune adapter",
+          "lora",
+          "lora_adapter",
+          "lora_adapter_count",
+          "lora_adapters",
+          "lora_adapters_sample",
+          "lora_alpha",
+          "lora_config",
+          "lora_dropout",
+          "lora_manifest",
+          "lora_path",
+          "lora_root",
+          "lora_scan",
+          "memory_adapter",
+          "peft",
+          "realai_lora"
+        ],
+        "inventory_hit_count": 20
+      },
+      {
+        "id": "kilo_recovery",
+        "name": "Kilo-era gold recovery wiring",
+        "pillar": "ops",
+        "keywords": [
+          "kilo",
+          "recovery",
+          "git clean",
+          "realai2",
+          "checkpoints_lora"
+        ],
+        "status": "LIVE",
+        "live_path": "GET /v1/recovery",
+        "modules": [
+          "realai/recovery_registry.py",
+          "realai/v3_orchestrator.py"
+        ],
+        "modules_found": [
+          "realai/recovery_registry.py",
+          "realai/v3_orchestrator.py"
+        ],
+        "gold_found": [],
+        "inventory_tokens": [
+          "checkpoints_lora",
+          "git clean",
+          "kilo",
+          "lora",
+          "realai",
+          "realai2",
+          "recovery"
+        ],
+        "inventory_hit_count": 7
+      },
+      {
+        "id": "frontend_ui",
+        "name": "Next.js operator UI",
+        "pillar": "product",
+        "keywords": [
+          "frontend",
+          "next.js",
+          "chat ui",
+          "settings drawer"
+        ],
+        "status": "LIVE",
+        "live_path": "http://127.0.0.1:3000",
+        "modules": [
+          "apps/frontend"
+        ],
+        "gold_paths": [
+          "C:\\temp\\realai_ui.html"
+        ],
+        "modules_found": [
+          "apps/frontend"
+        ],
+        "gold_found": [
+          "C:\\temp\\realai_ui.html"
+        ],
+        "inventory_tokens": [
+          "chat",
+          "chat UI",
+          "chat ui",
+          "frontend",
+          "frontend UI"
+        ],
+        "inventory_hit_count": 5
+      },
+      {
+        "id": "cli_surface",
+        "name": "CLI surface (tools install)",
+        "pillar": "product",
+        "keywords": [
+          "cli",
+          "realai.cmd",
+          "commands",
+          "realai help"
+        ],
+        "status": "GOLD",
+        "live_path": null,
+        "modules": [],
+        "gold_paths": [
+          "C:\\tools\\realai"
+        ],
+        "modules_found": [],
+        "gold_found": [
+          "C:\\tools\\realai"
+        ],
+        "inventory_tokens": [
+          "CLI surface",
+          "cli",
+          "commands",
+          "help",
+          "realai",
+          "realai help",
+          "realai_cli",
+          "realai_cli_help",
+          "realai_client",
+          "solana_client"
+        ],
+        "inventory_hit_count": 10
+      },
+      {
+        "id": "hominis_enterprise",
+        "name": "Hominis enterprise stack",
+        "pillar": "enterprise",
+        "keywords": [
+          "hominis",
+          "governance",
+          "enterprise",
+          "agentic os"
+        ],
+        "status": "GOLD",
+        "live_path": null,
+        "modules": [],
+        "modules_found": [],
+        "gold_found": [],
+        "inventory_tokens": [
+          "Agent",
+          "Hominis enterprise",
+          "agentic os",
+          "enterprise",
+          "governance",
+          "hominis"
+        ],
+        "inventory_hit_count": 6
+      }
+    ]
+  },
+  "ability_keywords_learned": {
+    "source": "recovered\\recovery-primary-clean-20260731-clean\\scan_results\\ability_keywords_learned.json",
+    "name": "ability_keywords_learned",
+    "version": 11,
+    "capabilities": []
+  },
+  "dds3_ability_inventory": {
+    "source": "recovered\\recovery-primary-clean-20260731-clean\\scan_results\\dds3_ability_inventory.json",
+    "name": "dds3_ability_inventory",
+    "version": "unknown",
+    "capabilities": []
+  },
+  "llama-local-1b": {
+    "type": "chat",
+    "backend": "llama-cli",
+    "path": "models/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+    "context_length": 4096,
+    "owned_by": "local",
+    "capabilities": [
+      "chat",
+      "completion"
+    ]
+  },
+  "qwen-coder-7b": {
+    "type": "chat",
+    "backend": "llama-cli",
+    "path": "models/qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+    "context_length": 8192,
+    "owned_by": "reference",
+    "capabilities": [
+      "chat",
+      "code"
+    ]
+  },
+  "abilities": [],
+  "tools": [],
+  "tasks": [],
+  "rackup_coach": {
+    "source": "plugins\\rackup-coach",
+    "name": "rackup_coach",
+    "version": "in-tree",
+    "capabilities": [
+      "league",
+      "rating",
+      "coach"
+    ]
+  }
+}

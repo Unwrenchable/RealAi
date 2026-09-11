@@ -1,0 +1,56 @@
+{
+  "ts": "2026-08-25T17:25:59.330539+00:00",
+  "workspace": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+  "patterns": [
+    {
+      "id": "empty-root-stubs",
+      "kind": "structure",
+      "severity": "repo_root",
+      "observation": "Zero-byte stub files at repo root",
+      "files": [
+        "battle.js",
+        "install_solana.sh",
+        "repo-tree.txt"
+      ],
+      "recipe": "stub-fill-or-delete",
+      "severity_score": 0.9
+    },
+    {
+      "id": "secret-assign-literals",
+      "kind": "harden",
+      "observation": "Possible hardcoded secret assignments",
+      "count": 2,
+      "recipe": "move-secrets-to-env",
+      "confidence_score": 0.85
+    },
+    {
+      "id": "innerhtml-sinks",
+      "kind": "harden",
+      "observation": "innerHTML assignments present (XSS surface)",
+      "count": 157,
+      "recipe": "sanitize-or-textcontent",
+      "confidence_score": 0.7
+    },
+    {
+      "id": "child-process-usage",
+      "kind": "harden",
+      "observation": "child_process / exec usage detected",
+      "count": 24,
+      "recipe": "wrap-timeout-validate-args",
+      "confidence_score": 0.8
+    },
+    {
+      "id": "repo-shape-wasteland-gps",
+      "kind": "structure",
+      "observation": "Atomic Fizz Caps / Vault-77 shape",
+      "markers": {
+        "solana_anchor": true,
+        "node_backend": true,
+        "leaflet_frontend": true,
+        "mcp": true
+      },
+      "recipe": "game-stack-doctor",
+      "confidence_score": 0.95
+    }
+  ]
+}

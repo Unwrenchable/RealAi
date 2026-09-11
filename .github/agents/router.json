@@ -1,0 +1,23 @@
+{
+  "id": "router",
+  "role": "Hive Router",
+  "description": "RealAI hive archetype agent: Hive Router",
+  "tags": [
+    "hive",
+    "router",
+    "dispatch"
+  ],
+  "capabilities": [
+    "task-routing",
+    "backend-select"
+  ],
+  "required_tools": [
+    "read_file",
+    "list_dir",
+    "run_terminal_command"
+  ],
+  "preferred_profile": "balanced",
+  "risk_level": "low",
+  "hive": true,
+  "preferred_model": "realai-default-coder"
+}

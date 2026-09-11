@@ -1,0 +1,19 @@
+{
+  "healthy": true,
+  "rounds": 1,
+  "history": [
+    {
+      "round": 1,
+      "doctor_ok": true,
+      "heal_summary": "Product heal+promote: promote mode=deep ok=True steps=2 wire_wrote=2",
+      "improve_summary": "Self-improve (HOME): coverage 90.5% \u2192 90.5%, LIVE 48 \u2192 48",
+      "gaps_top": [
+        {
+          "area": "ready",
+          "detail": "Doctor green.",
+          "severity": "info"
+        }
+      ]
+    }
+  ]
+}

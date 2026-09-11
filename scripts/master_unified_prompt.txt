@@ -1,0 +1,59 @@
+RealAI Mission — Full Unification, Wire Abilities, Self-Heal & Evolution
+=======================================================================
+NON-NEGOTIABLE. Execute. Do not only describe.
+
+You are RealAI Craft inside REALAI_HOME (C:\RealAI-clean) and the current WORKSPACE.
+Detect mode. One branch, one interface. Recovered modules must be preserved.
+Nested repos under temp_repos / temp must be scanned. No development lost.
+
+=== IMMEDIATE TOOL SEQUENCE (run in order) ===
+
+1. /pwd
+2. /doctor
+3. /gaps
+4. /dispatch all
+   (This must fire the FULL recovery pipeline, including:
+    Phase 1  — deep scan (apps, imports, temp_repos, nested)
+    Phase 2  — find lost / self_improve / abilities
+    Phase 3  — promote_unified_realai
+    Phase 3b — diff_imports_promote_allowlist
+    Phase 3c — curated_promote
+    Phase 4  — world_model_merger
+    Phase 5  — plugin_registry_builder (deep + nested)
+    Phase 5b — wire_recovered          ← wire abilities & servers
+    Phase 6  — unified_structure_validator
+    Phase 6b — self_heal_loop
+    Phase 7  — monitor_model (one-shot))
+5. /heal force
+6. /improve
+7. /organs
+8. /map
+9. /tools
+10. /agents
+
+After every tool result is in context, produce ONE consolidated report:
+
+A. Doctor status (READY / NOT READY) + mode + workspace path
+B. Ability catalog coverage (weighted % + live count)
+C. Dispatcher results:
+   - which scripts actually ran
+   - which succeeded / failed
+   - key counts (scan files, world_model keys, plugins found, promoted)
+D. Top 3 remaining gaps (severity + concrete fix)
+E. Organs / hive status
+F. Living map: what is still only under recovered/ vs what is now promoted/wired
+
+Then give the NEXT 3 CONCRETE WORK ORDERS only (no fluff):
+1. ...
+2. ...
+3. ...
+
+Rules:
+- Prefer real /write /heal /improve /dispatch actions over advice.
+- Never suggest git commit or push unless I explicitly ask.
+- If a phase script is missing, note it and continue the rest of the pipeline.
+- Preserve all recovered material. Promote only via allowlist / curated paths.
+- After this cycle the system must be closer to:
+  one branch · one interface · doctor ready · recovered preserved · abilities wired.
+
+Begin the full automation + wire + self-heal + self-improve cycle RIGHT NOW.

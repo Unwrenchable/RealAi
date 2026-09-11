@@ -1,0 +1,19 @@
+{
+  "provider": "realai-voice",
+  "tts": {
+    "engine": "xtts",
+    "model_path": "C:/models/checkpoints_lora/xtts_v2/model.pth",
+    "speaker_wav": "C:/models/checkpoints_lora/voices/unwrenchable_clip.wav",
+    "speaker_full_wav": "C:/models/checkpoints_lora/voices/travis_speaker.wav",
+    "language": "en"
+  },
+  "persona": "realai-voice-engine",
+  "stack": {
+    "vulkan_dir": "C:/llama-vulkan",
+    "llama_dir": "C:/llama",
+    "directml_dir": "C:/DirectML",
+    "vulkan_base": "http://127.0.0.1:8080",
+    "hive": "http://127.0.0.1:8001",
+    "voice_lab": "http://127.0.0.1:8890"
+  }
+}

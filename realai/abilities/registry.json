@@ -1,0 +1,25 @@
+{
+  "abilities": [
+    {
+      "id": "nest_orchestrators",
+      "name": "nest_orchestrators",
+      "source": "abilities/nest_orchestrators.py",
+      "type": "ability",
+      "status": "CODE",
+      "capabilities": [
+        "nest_orchestrators",
+        "exportable",
+        "promote"
+      ],
+      "modules": [
+        "abilities/nest_orchestrators.py",
+        "scripts/exportable",
+        "modules/orchestrators/NEST_ORCHESTRATORS.md"
+      ],
+      "secrets_policy": "none",
+      "note": "Index of nest orchestrator salvage \u2014 adapt before core promote"
+    }
+  ],
+  "tools": [],
+  "tasks": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "analyst",
+  "role": "Hive Analyst",
+  "description": "RealAI hive archetype agent: Hive Analyst",
+  "tags": [
+    "hive",
+    "analyst",
+    "critique"
+  ],
+  "capabilities": [
+    "analysis",
+    "review",
+    "summarize"
+  ],
+  "required_tools": [
+    "read_file",
+    "list_dir",
+    "run_terminal_command"
+  ],
+  "preferred_profile": "balanced",
+  "risk_level": "low",
+  "hive": true,
+  "preferred_model": "realai-default-coder"
+}

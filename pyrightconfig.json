@@ -1,0 +1,46 @@
+{
+  "include": [
+    "core",
+    "realai",
+    "realai-core",
+    "api",
+    "plugins",
+    "apps",
+    "aura",
+    "src",
+    "scripts",
+    "tests",
+    "examples"
+  ],
+  "exclude": [
+    "**/__pycache__",
+    "**/node_modules",
+    "**/.git",
+    "**/.vs",
+    "**/.pytest_cache",
+    "realai-frontend/.next",
+    "realai-frontend/node_modules",
+    "env",
+    "venv",
+    ".venv"
+  ],
+  "venvPath": ".",
+  "venv": "env",
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "basic",
+  "reportMissingImports": true,
+  "reportMissingModuleSource": true,
+  "executionEnvironments": [
+    {
+      "root": ".",
+      "extraPaths": [
+        "core",
+        "realai",
+        "realai-core",
+        "api",
+        "plugins",
+        "src"
+      ]
+    }
+  ]
+}

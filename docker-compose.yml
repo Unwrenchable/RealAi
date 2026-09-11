@@ -1,0 +1,62 @@
+# RealAI docker stack
+# - Does NOT bind host :8001 (live v3 hive stays there)
+# - App published on :8002
+# - Postgres on host :5433 (avoids conflict with existing :5432)
+# - Traefik omitted: Docker Desktop socket provider was failing on Windows
+services:
+  realai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: realai
+    ports:
+      - "8002:8000"
+    environment:
+      REALAI_PORT: "8000"
+      VULKAN_URL: http://host.docker.internal:8080
+      REALAI_VULKAN_BASE: http://host.docker.internal:8080
+      REDIS_URL: redis://redis:6379/0
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: realai_core
+      POSTGRES_USER: realai
+      POSTGRES_PASSWORD: realai_pass
+      REALAI_HEALTH_PROBE_LOCAL: "0"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - redis
+      - postgres
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8000/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    restart: unless-stopped
+
+  redis:
+    image: redis:7
+    container_name: realai-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - realai_redis_data:/data
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15
+    container_name: realai-postgres
+    environment:
+      POSTGRES_USER: realai
+      POSTGRES_PASSWORD: realai_pass
+      POSTGRES_DB: realai_core
+    ports:
+      - "5433:5432"
+    volumes:
+      - realai_db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  realai_redis_data:
+  realai_db_data:

@@ -1,0 +1,18 @@
+{
+  "workspace": "C:\\RealAI-clean",
+  "repo_paths": [
+    "C:\\realai",
+    "C:\\RealAI-unified",
+    "C:\\realai_giant_hold",
+    "C:\\realai_grok_export",
+    "C:\\realai_recovery_",
+    "C:\\RealAI_Recovery_SAFE",
+    "C:\\Users\\tsmit\\realai_historical_backups",
+    "C:\\Users\\tsmit\\realai_good"
+  ],
+  "allow_external_read": true,
+  "self_improve": true,
+  "cross_repo": true,
+  "world_model_deep": true,
+  "memory_expansion": true
+}

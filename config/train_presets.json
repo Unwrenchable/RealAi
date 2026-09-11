@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "notes": [
+    "Chat/inference = Vulkan llama-server (C:\\llama-vulkan) + orchestrator :8001",
+    "LoRA train = DirectML on AMD (or CUDA/CPU). Adapters do not auto-load into llama-server until merged/exported to GGUF.",
+    "dataset defaults to wired realai_lora_ready.jsonl"
+  ],
+  "inference": {
+    "llama_server": "C:\\llama-vulkan\\llama-server.exe",
+    "vulkan_base": "http://127.0.0.1:8080",
+    "orchestrator": "http://127.0.0.1:8001",
+    "start_chat": "powershell -ExecutionPolicy Bypass -File C:\\RealAI-clean\\scripts\\run_local_chat.ps1"
+  },
+  "presets": {
+    "qwen-0.5b": {
+      "hf_model": "Qwen/Qwen2.5-0.5B-Instruct",
+      "adapter_subdir": "qwen2.5-0.5b-lora-realai",
+      "recommend_device": "directml",
+      "max_steps_default": 100,
+      "max_length": 256,
+      "lora_r": 16,
+      "chat_gguf": null,
+      "notes": "Fast DirectML smoke / light adapter"
+    },
+    "qwen-1.5b": {
+      "hf_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "adapter_subdir": "qwen2.5-1.5b-lora-realai",
+      "recommend_device": "directml",
+      "max_steps_default": 50,
+      "max_length": 128,
+      "lora_r": 8,
+      "chat_gguf": "C:\\models\\checkpoints_lora\\qwen2.5-coder-1.5b-instruct-q5_k_m.gguf",
+      "notes": "Recommended on RX 6700 XT: pause Vulkan first (script does this). Already HF-cached if you started a prior run."
+    },
+    "qwen-coder-1.5b": {
+      "hf_model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "adapter_subdir": "qwen2.5-coder-1.5b-lora-realai",
+      "recommend_device": "directml",
+      "max_steps_default": 50,
+      "max_length": 128,
+      "lora_r": 8,
+      "chat_gguf": "C:\\models\\checkpoints_lora\\qwen2.5-coder-1.5b-instruct-q5_k_m.gguf",
+      "existing_adapter": "C:\\models\\checkpoints_lora\\qwen2.5-1.5b-lora",
+      "notes": "Needs ~3GB HF download once. Pause Vulkan chat. Prefer qwen-1.5b if Instruct weights already cached."
+    },
+    "qwen-coder-7b": {
+      "hf_model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "adapter_subdir": "qwen2.5-coder-7b-lora-realai",
+      "recommend_device": "directml",
+      "max_steps_default": 30,
+      "max_length": 64,
+      "lora_r": 4,
+      "chat_gguf": "C:\\models\\checkpoints_lora\\qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "notes": "Must pause Vulkan. Still tight on 12GB; 1.5B is the practical daily trainer. Large HF download (~15GB)."
+    },
+    "llama-3.2-1b": {
+      "hf_model": "meta-llama/Llama-3.2-1B-Instruct",
+      "adapter_subdir": "llama-3.2-1b-lora-realai",
+      "recommend_device": "directml",
+      "max_steps_default": 50,
+      "max_length": 128,
+      "lora_r": 8,
+      "chat_gguf": "C:\\models\\checkpoints_lora\\Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "notes": "HF may be gated (HF_TOKEN). Pause Vulkan. Prefer Qwen presets if download is slow/gated."
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "GitHub.copilot",
+    "GitHub.vscode-pull-request-github",
+    "ms-python.python",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.cpptools",
+    "ms-vscode.powershell",
+    "ms-vscode.remote-ssh",
+    "ms-vscode.remote-wsl",
+    "ms-vscode.remote-containers",
+    "ms-vscode.js-debug-nightly"
+  ]
+}
