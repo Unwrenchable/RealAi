@@ -3,3 +3,4 @@ packages:
   - "packages/*"
   - "providers/*"
   - "models/*"
+  - "frontend"

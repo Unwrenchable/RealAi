@@ -1,12 +1,17 @@
 {
   "version": 2,
-  "buildCommand": "pnpm --filter realai-frontend build",
-  "installCommand": "pnpm install",
-  "outputDirectory": "apps/frontend/.next",
   "framework": "nextjs",
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm --filter realai-frontend build",
+  "outputDirectory": "frontend/.next",
+  "regions": ["iad1"],
   "functions": {
-    "apps/frontend/src/app/api/chat/route.ts": {
+    "frontend/app/api/chat/route.ts": {
       "maxDuration": 30,
+      "memory": 1024
+    },
+    "frontend/app/api/models/route.ts": {
+      "maxDuration": 15,
       "memory": 1024
     }
   }

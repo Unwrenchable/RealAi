@@ -104,7 +104,6 @@ screenshots/
 frontend/.next/
 **/.next/
 **/coverage/
-pnpm-lock.yaml
 package-lock.json
 
 
@@ -117,4 +116,6 @@ apps/vscode/vscode/
 imports/external/**/site-packages/
 **/archive_venv/**
 **/og_mess/**
+
+
 

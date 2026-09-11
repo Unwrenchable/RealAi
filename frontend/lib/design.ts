@@ -27,7 +27,6 @@ export const semantic = {
 /** Lazy re-export of package tokens when the package is linked */
 export function loadDesignTokens(): Record<string, unknown> | null {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
     return require("@realai/design-system/tokens") as Record<string, unknown>;
   } catch {
     return null;
