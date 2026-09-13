@@ -120,6 +120,8 @@ Copy from `.env.example` and `frontend/.env.example`. Prefer dashboard secrets o
 | `PORT` | Provided by host |
 | `REALAI_DB_PATH` | SQLite file path |
 | `REALAI_DATA_DIR` | Parent dir for default DB (`~/.realai`) |
+| `REALAI_VULKAN_BASE` | Local llama-server base (default `http://127.0.0.1:8080`) |
+| `REALAI_VULKAN_FORWARD` | `auto` (default) / `off` — proxy chat to Vulkan when healthy |
 
 Provider keys can also be sent per-request as `Authorization: Bearer ...` (prefix auto-detect) or `X-Provider` / `X-Base-URL` overrides — see `realai/api_server.py`.
 

@@ -22,6 +22,56 @@ import sqlite3
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 from urllib.parse import urlparse, parse_qs, unquote
+from urllib import request as urlrequest
+
+# Optional local Vulkan llama-server (same box as Hive). Used when healthy so
+# /v1/chat/completions does not fall through to the "no default_llm" placeholder.
+def _vulkan_base() -> str:
+    return (os.environ.get("REALAI_VULKAN_BASE") or "http://127.0.0.1:8080").rstrip("/")
+
+
+def _vulkan_forward_enabled() -> bool:
+    flag = (os.environ.get("REALAI_VULKAN_FORWARD") or "auto").strip().lower()
+    return flag not in ("0", "false", "off", "no")
+
+
+def _vulkan_healthy(timeout: float = 0.6) -> bool:
+    if not _vulkan_forward_enabled():
+        return False
+    try:
+        req = urlrequest.Request(_vulkan_base() + "/health", method="GET")
+        with urlrequest.urlopen(req, timeout=timeout) as resp:
+            return 200 <= getattr(resp, "status", 200) < 300
+    except Exception:
+        return False
+
+
+def _vulkan_chat(body: dict, timeout: float = 120.0) -> dict:
+    """Proxy OpenAI-style chat body to local llama-server."""
+    data = json.dumps(body).encode("utf-8")
+    req = urlrequest.Request(
+        _vulkan_base() + "/v1/chat/completions",
+        data=data,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    with urlrequest.urlopen(req, timeout=timeout) as resp:
+        raw = resp.read().decode("utf-8", errors="replace")
+    return json.loads(raw) if raw else {}
+
+
+def _looks_like_local_placeholder(response: dict) -> bool:
+    try:
+        content = (
+            ((response.get("choices") or [{}])[0].get("message") or {}).get("content")
+            or ""
+        )
+    except Exception:
+        content = ""
+    if not isinstance(content, str):
+        return False
+    return "no local model is configured/loaded" in content.lower()
+
 from . import RealAI, PROVIDER_CONFIGS, PROVIDER_ENV_VARS, _KEY_PREFIX_TO_PROVIDER
 from .model_registry import MODEL_REGISTRY, get_model_metadata
 from .server_settings import settings
@@ -1041,14 +1091,57 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
                         )
                 except Exception as _org_err:
                     organ_trace = {"enabled": False, "error": str(_org_err)}
-                response = model.chat_completion(
-                    messages=messages,
-                    temperature=body.get('temperature', 0.7),
-                    max_tokens=body.get('max_tokens'),
-                    stream=body.get('stream', False)
+
+                # Prefer local Vulkan llama-server when healthy (era salvage).
+                x_provider = (self.headers.get("X-Provider") or "").strip().lower()
+                force_cloud = x_provider in (
+                    "openai", "anthropic", "grok", "gemini", "openrouter",
+                    "mistral", "together", "deepseek", "perplexity",
                 )
-                if isinstance(response, dict) and organ_trace is not None:
-                    response.setdefault("realai", {})["organs"] = organ_trace
+                used_vulkan = False
+                response = None
+                if not force_cloud and not body.get("stream") and _vulkan_healthy():
+                    try:
+                        vbody = dict(body)
+                        vbody["messages"] = messages
+                        response = _vulkan_chat(vbody)
+                        used_vulkan = True
+                    except Exception as _v_err:
+                        response = None
+                        if isinstance(organ_trace, dict):
+                            organ_trace = dict(organ_trace)
+                            organ_trace["vulkan_forward_error"] = str(_v_err)
+
+                if response is None:
+                    response = model.chat_completion(
+                        messages=messages,
+                        temperature=body.get('temperature', 0.7),
+                        max_tokens=body.get('max_tokens'),
+                        stream=body.get('stream', False)
+                    )
+                    if (
+                        isinstance(response, dict)
+                        and _looks_like_local_placeholder(response)
+                        and not force_cloud
+                        and not body.get("stream")
+                        and _vulkan_healthy()
+                    ):
+                        try:
+                            vbody = dict(body)
+                            vbody["messages"] = messages
+                            response = _vulkan_chat(vbody)
+                            used_vulkan = True
+                        except Exception:
+                            pass
+
+                if isinstance(response, dict):
+                    if organ_trace is not None:
+                        response.setdefault("realai", {})["organs"] = organ_trace
+                    if used_vulkan:
+                        response.setdefault("realai", {})["inference"] = {
+                            "backend": "vulkan-llama",
+                            "base": _vulkan_base(),
+                        }
                 self._send_response(200, response)
 
             elif parsed_path.path == '/v1/completions':
