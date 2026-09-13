@@ -1,707 +1,367 @@
-# RealAI Deployment Guide
+# RealAI deployment guide
 
-This guide covers all deployment options for RealAI, from local development to production cloud deployments.
+How to run and ship **frontend**, **backend**, **model providers**, and the **database**.
 
-## Table of Contents
+Canonical tree: `C:\RealAI-clean`  
+Live branch: `live/realai-clean-20260911`
 
-1. [Prerequisites](#prerequisites)
-2. [Local Development](#local-development)
-3. [Desktop Application (Windows .exe)](#desktop-application-windows-exe)
-4. [API Server Deployment](#api-server-deployment)
-   - [Local/Development Server](#localdevelopment-server)
-   - [Production Server](#production-server)
-5. [AWS Lambda Deployment](#aws-lambda-deployment)
-6. [Environment Variables](#environment-variables)
-7. [Testing Your Deployment](#testing-your-deployment)
-8. [Troubleshooting](#troubleshooting)
+There are **two backends**:
+
+1. **Hive gateway (full product)** — `python -m realai.v3_orchestrator` on `:8001`  
+   Needs local Vulkan (`:8080`) for GPU coding hive. **Not** suitable for Vercel. Best on your Windows GPU box (or a fat GPU VM).
+2. **Cloud API** — `python -m realai.api_server`  
+   OpenAI-compatible HTTP + SQLite history. Fits **Render** / any Python host. Uses **cloud provider keys** (OpenAI, Anthropic, Grok, ...) and/or whatever local backends you wire.
+
+Frontend:
+
+3. **Next UI** — `frontend/` on **Vercel** (or `next dev` locally)  
+4. **Console** — `http://127.0.0.1:8001/console` when Hive is up (preferred local UX)
+
+---
+
+## Table of contents
+
+1. [Architecture](#architecture)
+2. [Prerequisites](#prerequisites)
+3. [Environment variables](#environment-variables)
+4. [Providers (model keys)](#providers-model-keys)
+5. [Database (SQLite)](#database-sqlite)
+6. [Local full stack (GPU hive)](#local-full-stack-gpu-hive)
+7. [Frontend on Vercel](#frontend-on-vercel)
+8. [Backend on Render](#backend-on-render)
+9. [Wire Vercel to Render](#wire-vercel-to-render)
+10. [VS Code / Cursor extension](#vs-code--cursor-extension)
+11. [Smoke checks](#smoke-checks)
+12. [Troubleshooting](#troubleshooting)
+
+---
+
+## Architecture
+
+```
+Browser / VS Code Chat
+        |
+        +--(local)--> :8001  v3_orchestrator --> :8080 Vulkan GGUF
+        |                    +-- /console, /v1/*, voice proxy
+        |
+        +--(cloud)--> Vercel (frontend/)
+                           |
+                           +-- NEXT_PUBLIC_API_URL
+                                 |
+                                 +--> Render realai.api_server
+                                        +-- SQLite conversations.db
+                                        +-- Provider APIs (OpenAI, ...)
+```
+
+**Do not** expect Vercel to run Vulkan, XTTS, or the full multi-agent hive. Deploy UI to Vercel; keep GPU hive on the PC (or deploy only the lighter `api_server` to Render).
 
 ---
 
 ## Prerequisites
 
-### Required
-- **Python 3.7+** (Python 3.11 recommended for Lambda)
-- **pip** package manager
+### Local GPU hive (Windows)
 
-### For AWS Lambda Deployment
-- **AWS Account** with appropriate permissions
-- **AWS CLI** configured with credentials
-- **AWS SAM CLI** for serverless deployment
+- Python **3.11+**
+- `C:\RealAI-clean` on `PYTHONPATH`
+- Vulkan `llama-server` (e.g. `C:\llama-vulkan\llama-server.exe`)
+- GGUF weights under `C:\models\checkpoints_lora\` (default 7B coder Q5)
+- Node 20+ / npm (frontend + extension builds)
+- Optional: pnpm (Vercel install uses pnpm from lockfile)
 
-### For Windows .exe Build
-- **PyInstaller** (`pip install pyinstaller`)
-- **tkinter** (included with Python from python.org)
+### Cloud
 
----
-
-## Local Development
-
-Perfect for development, testing, or personal use.
-
-### 1. Clone and Install
-
-```bash
-# Clone the repository
-git clone https://github.com/Unwrenchable/realai.git
-cd realai
-
-# Install in editable mode
-pip install -e .
-```
-
-### 2. Set Up API Keys
-
-You need at least one AI provider API key. Choose one or more:
-
-```bash
-# OpenAI (recommended for getting started)
-export REALAI_OPENAI_API_KEY=sk-...
-
-# Anthropic Claude
-export REALAI_ANTHROPIC_API_KEY=sk-ant-...
-
-# xAI / Grok
-export REALAI_GROK_API_KEY=xai-...
-
-# Google Gemini
-export REALAI_GEMINI_API_KEY=AIza...
-
-# OpenRouter (access to 200+ models with one key)
-export REALAI_OPENROUTER_API_KEY=sk-or-v1-...
-
-# Mistral AI
-export REALAI_MISTRAL_API_KEY=...
-
-# Together AI
-export REALAI_TOGETHER_API_KEY=...
-
-# DeepSeek
-export REALAI_DEEPSEEK_API_KEY=...
-
-# Perplexity AI
-export REALAI_PERPLEXITY_API_KEY=pplx-...
-```
-
-**Windows users:** Use `set` instead of `export`:
-```cmd
-set REALAI_OPENAI_API_KEY=sk-...
-```
-
-### 3. Run the Examples
-
-```bash
-# Test the installation
-python examples.py
-
-# Run tests
-python test_realai.py
-```
-
-### 4. Use in Your Code
-
-```python
-from realai import RealAIClient
-
-client = RealAIClient()
-response = client.chat.create(
-    messages=[{"role": "user", "content": "Hello!"}]
-)
-print(response['choices'][0]['message']['content'])
-```
+- GitHub repo access: `Unwrenchable/RealAi`
+- Vercel account
+- Render account (or any host that runs Python 3.11 + `requirements.txt`)
+- At least one provider API key if you are not using local Vulkan behind a tunnel
 
 ---
 
-## Desktop Application (Windows .exe)
+## Environment variables
 
-Build a standalone Windows executable with GUI, API server, and built-in chat.
+Copy from `.env.example` and `frontend/.env.example`. Prefer dashboard secrets over committing `.env`.
 
-### Run Without Building
+### Frontend (Vercel / Next)
 
-```bash
-python realai_gui.py
-```
+| Variable | Required | Meaning |
+|----------|----------|---------|
+| `NEXT_PUBLIC_API_URL` | **Yes (prod)** | Public API base, e.g. `https://realai-api.onrender.com` — **never** `127.0.0.1` on Vercel |
+| `REALAI_API_BASE` | optional | Same as above for server-side routes |
+| `REALAI_API_KEY` | optional | If API expects a bearer |
 
-### Build Standalone .exe
+### Hive / local orchestrator
 
-```bash
-# Install PyInstaller (one-time)
-pip install pyinstaller
+| Variable | Default / example | Meaning |
+|----------|-------------------|---------|
+| `PYTHONPATH` | `C:\RealAI-clean;C:\RealAI-clean\realai` | Import `realai` |
+| `REALAI_VULKAN_BASE` | `http://127.0.0.1:8080` | llama-server |
+| `REALAI_HOME` | `C:\RealAI-clean` | Product home |
+| `REALAI_WORKSPACE` | cwd | Foreign-repo workspace |
+| `REALAI_MODELS_DIR` | `C:\models\checkpoints_lora` | Weights root |
+| `PORT` | `8001` | Gateway bind |
 
-# Build the executable
-pyinstaller realai_launcher.spec
+### Cloud API (`realai.api_server`) / Render
 
-# Output: dist\RealAI.exe
-```
+| Variable | Meaning |
+|----------|---------|
+| `OPENAI_API_KEY` / `REALAI_OPENAI_API_KEY` | OpenAI |
+| `REALAI_ANTHROPIC_API_KEY` | Anthropic |
+| `REALAI_GROK_API_KEY` | xAI Grok |
+| `REALAI_GEMINI_API_KEY` | Gemini |
+| `REALAI_OPENROUTER_API_KEY` | OpenRouter |
+| `REALAI_MISTRAL_API_KEY` | Mistral |
+| `REALAI_TOGETHER_API_KEY` | Together |
+| `REALAI_DEEPSEEK_API_KEY` | DeepSeek |
+| `REALAI_PERPLEXITY_API_KEY` | Perplexity |
+| `REALAI_MODEL` | Default model id (e.g. `realai-1.0`) |
+| `CORS_ALLOWED_ORIGINS` | Comma list incl. your `*.vercel.app` |
+| `ENV` | `production` |
+| `WEB_CONCURRENCY` | `1` recommended on free tiers |
+| `PORT` | Provided by host |
+| `REALAI_DB_PATH` | SQLite file path |
+| `REALAI_DATA_DIR` | Parent dir for default DB (`~/.realai`) |
 
-### Using the Desktop App
-
-1. **Launch** `RealAI.exe`
-2. **Configure API Keys**
-   - Enter your API key(s) in the setup panel
-   - Click **Save Keys** (stored locally in `~/.realai/config.json`)
-3. **Start the Server**
-   - Click **🚀 Start API Server**
-   - Server runs at `http://localhost:8000`
-4. **Use Built-in Chat**
-   - Type messages in the chat panel at the bottom
-   - Press Enter or click **➤ Send**
-
-### Distribution
-
-The `RealAI.exe` file is fully self-contained:
-- ✅ No Python installation required on target machine
-- ✅ Includes GUI, API server, and core RealAI module
-- ✅ All dependencies bundled
-- ✅ Single file distribution
+Provider keys can also be sent per-request as `Authorization: Bearer ...` (prefix auto-detect) or `X-Provider` / `X-Base-URL` overrides — see `realai/api_server.py`.
 
 ---
 
-## API Server Deployment
+## Providers (model keys)
 
-### Local/Development Server
+### Local (GPU hive)
 
-Quick setup for local development or testing.
+Configured in `config/amd_inference.yaml` + env:
 
-#### Option A: Using the GUI (Recommended)
+- Backend: **Vulkan llama.cpp** (not CUDA on the AMD box)
+- Default GGUF: `qwen2.5-coder-7b-instruct-q5_k_m.gguf`
+- Context: use `-c 65536` on llama-server for long Chat sessions
+- VS Code setting: `realai.contextTokens` default **65536**
 
-1. Launch `RealAI.exe` or `python realai_gui.py`
-2. Enter API key(s) and click **Save Keys**
-3. Click **🚀 Start API Server**
-4. Server available at `http://localhost:8000`
+`providers.yaml` also lists cloud providers (`openai`, `anthropic`, ...) — enable + set `*_API_KEY` env when you want cloud fallbacks.
 
-#### Option B: Command Line
+### Cloud API path
 
-```bash
-# Set API key
-export REALAI_OPENAI_API_KEY=sk-...
+Set one or more `REALAI_*_API_KEY` / `OPENAI_API_KEY` on Render.  
+Clients call the same OpenAI-style `/v1/chat/completions` surface.
 
-# Start the server (default port 8000)
-python api_server.py
-# or using the module (also works)
+---
+
+## Database (SQLite)
+
+`realai.api_server` uses **SQLite** (no Postgres required for default deploy).
+
+**Default path:** `%USERPROFILE%\.realai\conversations.db`  
+(or `$REALAI_DATA_DIR/conversations.db`)
+
+**Override:**
+
+```powershell
+$env:REALAI_DB_PATH = "D:\data\realai\conversations.db"
+```
+
+**Schema (auto-created on boot):**
+
+```sql
+users (
+  id INTEGER PRIMARY KEY,
+  external_id TEXT UNIQUE NOT NULL,  -- key:<hash> or anon:<ip>
+  created_at INTEGER
+);
+
+chat_messages (
+  id INTEGER PRIMARY KEY,
+  user_external_id TEXT NOT NULL,
+  role TEXT NOT NULL,
+  content TEXT NOT NULL,
+  created_at INTEGER
+);
+```
+
+**Render note:** free/ephemeral disks lose SQLite on restart. For durable chat history either:
+
+- Attach a **persistent disk** and set `REALAI_DB_PATH` onto it, or
+- Accept ephemeral history, or
+- Later wire Postgres (not required for first deploy)
+
+Hive orchestrator memory/tools may use additional local stores under the product tree; treat GPU hive state as **machine-local** unless you deliberately back it up.
+
+---
+
+## Local full stack (GPU hive)
+
+### 1. Vulkan
+
+```powershell
+C:\llama-vulkan\llama-server.exe `
+  -m "C:\models\checkpoints_lora\qwen2.5-coder-7b-instruct-q5_k_m.gguf" `
+  --host 127.0.0.1 --port 8080 -ngl 99 -c 65536
+```
+
+### 2. Orchestrator
+
+```powershell
+cd C:\RealAI-clean
+$env:PYTHONPATH = "C:\RealAI-clean;C:\RealAI-clean\realai"
+$env:REALAI_VULKAN_BASE = "http://127.0.0.1:8080"
+python -m realai.v3_orchestrator --host 127.0.0.1 --port 8001
+```
+
+### 3. Open console
+
+http://127.0.0.1:8001/console
+
+### 4. Optional Next UI against local Hive
+
+```powershell
+cd C:\RealAI-clean\frontend
+$env:NEXT_PUBLIC_API_URL = "http://127.0.0.1:8001"
+npm install
+npm run dev
+```
+
+### 5. Optional cloud-style API locally
+
+```powershell
+cd C:\RealAI-clean
+$env:PYTHONPATH = "C:\RealAI-clean;C:\RealAI-clean\realai"
 python -m realai.api_server
-
-# Custom port (use PORT env var)
-PORT=8080 python api_server.py
-```
-
-### Production Server
-
-For deploying the API server on a VPS, cloud instance, or on-premises server.
-
-#### 1. Install Dependencies
-
-```bash
-# Clone the repository
-git clone https://github.com/Unwrenchable/realai.git
-cd realai
-
-# Install full dependencies
-pip install -r requirements-full.txt
-```
-
-#### 2. Configure Environment
-
-Create a `.env` file or set environment variables:
-
-```bash
-# Required: At least one provider API key
-REALAI_OPENAI_API_KEY=sk-...
-REALAI_ANTHROPIC_API_KEY=sk-ant-...
-
-# Optional: Server configuration
-API_PORT=8000
-API_HOST=0.0.0.0
-```
-
-#### 3. Run with Production Server
-
-Using **Gunicorn** (recommended for production):
-
-```bash
-# Install Gunicorn
-pip install gunicorn
-
-# Run with 4 workers
-gunicorn api_server:app \
-    --bind 0.0.0.0:8000 \
-    --workers 4 \
-    --timeout 120 \
-    --access-logfile - \
-    --error-logfile -
-```
-
-Using **systemd** service (Linux):
-
-Create `/etc/systemd/system/realai.service`:
-
-```ini
-[Unit]
-Description=RealAI API Server
-After=network.target
-
-[Service]
-Type=simple
-User=www-data
-WorkingDirectory=/opt/realai
-Environment="REALAI_OPENAI_API_KEY=sk-..."
-Environment="REALAI_ANTHROPIC_API_KEY=sk-ant-..."
-ExecStart=/usr/bin/python3 /opt/realai/api_server.py
-Restart=always
-RestartSec=10
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Enable and start:
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable realai
-sudo systemctl start realai
-sudo systemctl status realai
-```
-
-#### 4. Reverse Proxy (Optional)
-
-Using **nginx** for SSL/TLS and domain routing:
-
-```nginx
-server {
-    listen 80;
-    server_name api.yourdomain.com;
-
-    location / {
-        proxy_pass http://localhost:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_read_timeout 300;
-    }
-}
-```
-
-For HTTPS, use **Certbot**:
-
-```bash
-sudo certbot --nginx -d api.yourdomain.com
 ```
 
 ---
 
-## Render Deployment
+## Frontend on Vercel
 
-Deploy the backend API server as a Render Web Service.
+Config is already fixed for `frontend/` (not `apps/frontend`):
 
-### Configuration
+- Root `vercel.json` — `pnpm --filter realai-frontend build`, output `frontend/.next`
+- `pnpm-workspace.yaml` includes `frontend`
+- `frontend/vercel.json` for Root Directory = `frontend`
 
-The `render.yaml` in this repository is pre-configured for Render:
+### Dashboard steps
 
-```yaml
-startCommand: python api_server.py
+1. Import **Unwrenchable/RealAi**
+2. Branch: **`live/realai-clean-20260911`**
+3. Root Directory: **repo root** (recommended) *or* `frontend`
+4. Framework: Next.js (detected)
+5. Env → Production:
+   - `NEXT_PUBLIC_API_URL` = your Render URL (https)
+6. Deploy
+
+### CLI steps
+
+```powershell
+cd C:\RealAI-clean
+npm i -g vercel   # once
+vercel login
+vercel            # preview
+vercel --prod     # production
 ```
 
-**Important notes:**
-- **Do not set `PORT`** in `render.yaml` or the Render dashboard. Render automatically injects the `PORT` environment variable; hardcoding it can cause a mismatch and the port scan will fail.
-- The server reads `PORT` from the environment and binds to `0.0.0.0:$PORT`, which is what Render requires.
-- Health checks are configured at `/health`.
+### Build smoke (local)
 
-### Steps
-
-1. Connect your GitHub repository to Render.
-2. Create a **Web Service** and point it at the repo root.
-3. Render will use `render.yaml` automatically, or configure manually:
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `python api_server.py`
-   - **Environment Variable**: `PYTHON_VERSION=3.11`
-4. Add any required provider API keys (e.g. `REALAI_OPENAI_API_KEY`) as environment variables in the Render dashboard.
-5. Deploy. The service will bind to Render's assigned port and the `/health` endpoint will confirm it is running.
-
----
-
-
-
-Serverless deployment using AWS Lambda with optimized, split architecture.
-
-### Architecture Overview
-
-RealAI uses a **split Lambda architecture** with 6 separate functions:
-
-1. **lambda-core** - Core API endpoints (~5 MB)
-   - `/health`, `/v1/models`, `/v1/capabilities`
-2. **lambda-chat** - Chat and completions (~10 MB)
-   - `/v1/chat/completions`, `/v1/completions`
-3. **lambda-image** - Image generation (~5 MB)
-   - `/v1/images/generations`
-4. **lambda-video** - Video generation (~5 MB)
-   - `/v1/videos/generations`
-5. **lambda-embeddings-audio** - Embeddings and audio (~5 MB)
-   - `/v1/embeddings`, `/v1/audio/transcriptions`, `/v1/audio/speech`
-6. **lambda-advanced** - Advanced AI capabilities (~10 MB)
-   - `/v1/reasoning/chain`, `/v1/synthesis/knowledge`, `/v1/reflection/analyze`, `/v1/agents/orchestrate`
-
-All functions are **under 50 MB** (well within AWS limits).
-
-### Prerequisites
-
-```bash
-# Install AWS CLI
-pip install awscli
-
-# Install AWS SAM CLI
-pip install aws-sam-cli
-
-# Configure AWS credentials
-aws configure
-```
-
-You'll need:
-- AWS Access Key ID
-- AWS Secret Access Key
-- Default region (e.g., `us-east-1`)
-
-### Deployment Steps
-
-#### 1. Build Lambda Functions
-
-```bash
-# Build all functions
-sam build
-
-# Or build manually
-./build_lambda.sh
-```
-
-#### 2. Deploy to AWS
-
-**Guided deployment (first time):**
-
-```bash
-sam deploy --guided
-```
-
-Follow the prompts:
-- **Stack name**: `realai-lambda` (or your preferred name)
-- **AWS Region**: `us-east-1` (or your preferred region)
-- **Confirm changes before deploy**: `Y`
-- **Allow SAM CLI IAM role creation**: `Y`
-- **Save arguments to configuration file**: `Y`
-
-**Subsequent deployments:**
-
-```bash
-sam deploy
-```
-
-#### 3. Set Environment Variables
-
-After deployment, add API keys in AWS Console:
-
-1. Go to **Lambda** → **Functions**
-2. Select each function (e.g., `realai-chat`)
-3. **Configuration** → **Environment variables** → **Edit**
-4. Add:
-   - `REALAI_OPENAI_API_KEY`: `sk-...`
-   - `REALAI_ANTHROPIC_API_KEY`: `sk-ant-...`
-   - (any other provider keys you need)
-
-Or set during deployment:
-
-```bash
-sam deploy --parameter-overrides \
-  REALAI_OPENAI_API_KEY=sk-... \
-  REALAI_ANTHROPIC_API_KEY=sk-ant-...
-```
-
-#### 4. Get Your API URL
-
-After deployment completes, look for the output:
-
-```
-Outputs:
-  RealAIApiUrl: https://xxxxx.execute-api.us-east-1.amazonaws.com/prod/
-```
-
-This is your base URL for API calls.
-
-### Testing Lambda Locally
-
-Test before deploying:
-
-```bash
-# Start local API
-sam local start-api
-
-# Test endpoints
-curl http://127.0.0.1:3000/health
-
-curl -X POST http://127.0.0.1:3000/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{"messages":[{"role":"user","content":"Hello"}]}'
-```
-
-### Monitoring
-
-View logs using CloudWatch:
-
-```bash
-# Tail logs for a specific function
-sam logs -n CoreFunction --stack-name realai-lambda --tail
-
-# View logs for the last 10 minutes
-sam logs -n ChatFunction --stack-name realai-lambda --start-time '10min ago'
-```
-
-Or use AWS Console:
-- **CloudWatch** → **Log groups** → `/aws/lambda/realai-*`
-
-### Cleanup
-
-To delete all Lambda resources:
-
-```bash
-sam delete
-```
-
-Or via AWS Console:
-- **CloudFormation** → **Stacks** → Select `realai-lambda` → **Delete**
-
-### Cost Optimization
-
-Lambda pricing is based on:
-- **Requests**: $0.20 per 1M requests
-- **Compute time**: $0.0000166667 per GB-second
-
-With the split architecture:
-- Each function is optimized for fast cold starts
-- Pay only for actual compute time
-- No charges when idle
-
-**Example monthly costs** (approximate):
-- 100K requests/month: ~$0.20
-- 1M requests/month: ~$2-5
-- 10M requests/month: ~$20-50
-
----
-
-## Environment Variables
-
-### Provider API Keys
-
-At least one provider key is required:
-
-| Provider | Environment Variable | Key Prefix | Get Your Key |
-|----------|---------------------|------------|--------------|
-| OpenAI | `REALAI_OPENAI_API_KEY` | `sk-...` | https://platform.openai.com/api-keys |
-| Anthropic | `REALAI_ANTHROPIC_API_KEY` | `sk-ant-...` | https://console.anthropic.com/ |
-| xAI/Grok | `REALAI_GROK_API_KEY` | `xai-...` | https://console.x.ai/ |
-| Google Gemini | `REALAI_GEMINI_API_KEY` | `AIza...` | https://aistudio.google.com/app/apikey |
-| OpenRouter | `REALAI_OPENROUTER_API_KEY` | `sk-or-v1-...` | https://openrouter.ai/keys |
-| Mistral AI | `REALAI_MISTRAL_API_KEY` | — | https://console.mistral.ai/api-keys |
-| Together AI | `REALAI_TOGETHER_API_KEY` | — | https://api.together.xyz/settings/api-keys |
-| DeepSeek | `REALAI_DEEPSEEK_API_KEY` | — | https://platform.deepseek.com/api_keys |
-| Perplexity | `REALAI_PERPLEXITY_API_KEY` | `pplx-...` | https://www.perplexity.ai/settings/api |
-
-### Server Configuration (Optional)
-
-```bash
-API_HOST=0.0.0.0          # Server host
-API_PORT=8000             # Server port
+```powershell
+cd C:\RealAI-clean\frontend
+npm run build
 ```
 
 ---
 
-## Testing Your Deployment
+## Backend on Render
 
-### Health Check
+`render.yml` / `render.yaml` define service **realai-api**:
 
-```bash
-curl http://localhost:8000/health
+- Build: `pip install -r requirements.txt`
+- Start: `python -m realai.api_server`
+- Health: `/health`
 
-# Or for Lambda
-curl https://xxxxx.execute-api.us-east-1.amazonaws.com/prod/health
+### Dashboard steps
+
+1. New → Web Service → connect `Unwrenchable/RealAi`
+2. Branch: `live/realai-clean-20260911`
+3. Runtime: Python 3.11
+4. Build / start as above (or Blueprint from `render.yml`)
+5. Set env:
+   - `OPENAI_API_KEY` (or other provider keys)
+   - `REALAI_MODEL`
+   - `CORS_ALLOWED_ORIGINS=https://<your-app>.vercel.app,https://your.domain`
+   - `ENV=production`
+   - `WEB_CONCURRENCY=1`
+   - Optional: `REALAI_DB_PATH` on a persistent disk
+6. Health check path: `/health`
+7. Deploy
+
+### CORS
+
+Your Vercel origin **must** appear in `CORS_ALLOWED_ORIGINS` or browser chat will fail.
+
+---
+
+## Wire Vercel to Render
+
+1. Note Render URL: `https://realai-api.onrender.com` (example)
+2. Vercel env: `NEXT_PUBLIC_API_URL=https://realai-api.onrender.com`
+3. Redeploy frontend
+4. Confirm browser Network tab calls that host (not `:8890` / not localhost)
+
+For **full Hive** from a hosted UI you need a public tunnel or GPU VM exposing `:8001` (Tailscale, Cloudflare Tunnel, etc.) — Render's `api_server` is the supported lightweight cloud API.
+
+---
+
+## VS Code / Cursor extension
+
+```powershell
+cd C:\RealAI-clean\apps\vscode
+# after compile/package:
+# realai-vscode-1.2.15.vsix (or newer)
 ```
 
-Expected response:
-```json
-{
-  "status": "healthy",
-  "version": "2.1.0"
-}
+Install the VSIX into **both** VS Code and Cursor if you use both hosts.  
+Settings of note:
+
+- `realai.contextTokens` → match llama `-c` (65536)
+- `realai.productHome` → `C:\RealAI-clean`
+- `realai.chatDispatchAgents` → coder/agent Chat posts `/v1/agents/run`
+
+Foreign repo: open another folder; `/phase` should report `host foreign` without Hive health-fluff multi.
+
+---
+
+## Smoke checks
+
+```powershell
+# Local hive
+curl http://127.0.0.1:8080/health
+curl http://127.0.0.1:8001/health
+curl http://127.0.0.1:8001/v1/tools
+# Console
+start http://127.0.0.1:8001/console
+
+# Cloud API (after Render)
+curl https://YOUR-API.onrender.com/health
 ```
 
-### List Models
-
-```bash
-curl http://localhost:8000/v1/models
-```
-
-### Chat Completion
-
-```bash
-curl -X POST http://localhost:8000/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{
-    "messages": [
-      {"role": "user", "content": "Hello, how are you?"}
-    ]
-  }'
-```
-
-### Using with OpenAI SDK
-
-```python
-from openai import OpenAI
-
-# Point to your RealAI server
-client = OpenAI(
-    base_url="http://localhost:8000/v1",
-    api_key="any-string-works"  # RealAI uses env vars for actual keys
-)
-
-response = client.chat.completions.create(
-    model="realai-2.0",
-    messages=[
-        {"role": "user", "content": "Hello!"}
-    ]
-)
-
-print(response.choices[0].message.content)
-```
-
-### Connect Third-Party UIs
-
-Any OpenAI-compatible UI can connect to RealAI:
-
-**Examples:**
-- [Open WebUI](https://github.com/open-webui/open-webui)
-- [ChatBot UI](https://github.com/mckaywrigley/chatbot-ui)
-- [LibreChat](https://github.com/danny-avila/LibreChat)
-
-**Configuration:**
-- **API Base URL**: `http://localhost:8000/v1` (or your Lambda URL)
-- **API Key**: Your provider key (or any string if already set via env vars)
-- **Model**: `realai-2.0`
+Frontend: open the Vercel URL → chat once → DevTools Network should show `NEXT_PUBLIC_API_URL` host only.
 
 ---
 
 ## Troubleshooting
 
-### Common Issues
-
-#### "No API key found"
-
-**Problem:** RealAI can't find any provider API keys.
-
-**Solution:**
-1. Set at least one provider API key as an environment variable
-2. Verify it's set: `echo $REALAI_OPENAI_API_KEY`
-3. Restart the server after setting env vars
-
-#### "Connection refused" on localhost:8000
-
-**Problem:** Server not running or port in use.
-
-**Solution:**
-```bash
-# Check if port is in use
-lsof -i :8000  # Linux/Mac
-netstat -ano | findstr :8000  # Windows
-
-# Kill process or use different port (use PORT env var)
-PORT=8080 python api_server.py
-```
-
-#### Render: "Port scan timeout, no open ports detected"
-
-**Problem:** Render web service exits early or never binds to a port.
-
-**Solution:**
-- Ensure the start command is `python api_server.py` (not `python -m realai.api_server`).
-- Do **not** set `PORT` as an environment variable in `render.yaml` or the Render dashboard. Render injects `PORT` automatically; hardcoding it can cause a mismatch.
-- Check Render deploy logs for a Python traceback immediately after `==> Application exited early`.
-
-#### Lambda deployment fails
-
-**Problem:** AWS credentials not configured or insufficient permissions.
-
-**Solution:**
-```bash
-# Reconfigure AWS
-aws configure
-
-# Check credentials
-aws sts get-caller-identity
-
-# Ensure you have Lambda and API Gateway permissions
-```
-
-#### Lambda function too large
-
-**Problem:** Function package exceeds 50 MB limit.
-
-**Solution:** The split architecture should prevent this, but if it happens:
-1. Check `requirements-lambda-*.txt` files
-2. Remove unnecessary dependencies
-3. Ensure heavy libraries (sentence-transformers, vosk) are not included
-4. Rebuild: `sam build --use-container`
-
-#### Desktop app won't start on Windows
-
-**Problem:** Missing tkinter or dependencies.
-
-**Solution:**
-1. Reinstall Python from python.org (not Microsoft Store)
-2. During installation, check "tcl/tk and IDLE"
-3. Rebuild: `pyinstaller realai_launcher.spec`
-
-#### 502 Bad Gateway from Lambda
-
-**Problem:** Lambda function error or timeout.
-
-**Solution:**
-```bash
-# Check CloudWatch logs
-sam logs -n ChatFunction --stack-name realai-lambda --tail
-
-# Common causes:
-# - Missing environment variables
-# - Timeout (increase in template.yaml)
-# - Cold start issues (first request takes longer)
-```
-
-### Getting Help
-
-- **Documentation**: See [README.md](README.md), [API.md](API.md), [QUICKSTART.md](QUICKSTART.md)
-- **Lambda Details**: See [LAMBDA_DEPLOYMENT.md](LAMBDA_DEPLOYMENT.md)
-- **Issues**: Open an issue on [GitHub](https://github.com/Unwrenchable/realai/issues)
+| Symptom | Fix |
+|---------|-----|
+| Vercel build looks for `apps/frontend` | Use latest `live/realai-clean-20260911` (path fix landed) |
+| Chat on Vercel hits localhost | Set `NEXT_PUBLIC_API_URL` to https API and redeploy |
+| CORS errors | Add Vercel origin to Render `CORS_ALLOWED_ORIGINS` |
+| SQLite empty after Render restart | Ephemeral disk — add persistent disk + `REALAI_DB_PATH` |
+| Hive chat is health fluff in foreign repo | Update extension ≥ 1.2.15; use `/phase` local slash |
+| SPEAK calls `:8890` in browser | Use console via `:8001` proxy only |
+| Vulkan OOM / token faults | 7B GGUF + `-ngl 99` + high `-c`; prefer XTTS over fighting LLM VRAM |
+| `pnpm` missing locally | `npx pnpm@9 install` — Vercel still uses lockfile |
 
 ---
 
-## Next Steps
+## Related docs
 
-After deployment:
-
-1. **Explore the API**
-   - Review [API.md](API.md) for all available endpoints
-   - Try the examples in [examples.py](examples.py)
-
-2. **Build Applications**
-   - Use RealAI in your Python projects
-   - Connect third-party UIs
-   - Build custom integrations
-
-3. **Scale Your Deployment**
-   - Monitor usage and performance
-   - Add more provider API keys for redundancy
-   - Configure rate limiting and caching
-
-4. **Stay Updated**
-   - Watch the [GitHub repository](https://github.com/Unwrenchable/realai)
-   - Check for new features and capabilities
-   - Contribute improvements
-
----
-
-**RealAI** - The limitless AI that can truly do anything. Deploy anywhere, from local development to global cloud infrastructure. 🚀
+- [README.md](./README.md) — product overview + abilities
+- [ABILITIES.md](./ABILITIES.md) — tools / abilities map
+- [ANY_REPO.md](./ANY_REPO.md) — portable CLI
+- [frontend/.env.example](./frontend/.env.example)
+- [.env.example](./.env.example)

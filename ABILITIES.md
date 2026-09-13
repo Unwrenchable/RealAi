@@ -8,7 +8,7 @@ Everything below lives **inside** `C:\RealAI-clean`. No runtime dependency on `C
 realai / UI (@realai/design-system tokens + components)
     -> orchestrator :8001
          tools catalog (v3_runtime_bridge)
-         agents/agentx (68)
+         agents / Hive roster (hundreds in catalog; cast varies by UI)
          multi-agent pipeline
          plugins/rackup_coach
          modules/organs
@@ -24,8 +24,8 @@ realai / UI (@realai/design-system tokens + components)
 |------|------|
 | `packages/design-system/` | Prebuilt UI kit + `tokens.cjs` |
 | `packages/ui/` | Facade re-export |
-| `apps/frontend/tailwind.config.js` | Merges design tokens into Tailwind |
-| `apps/frontend/src/lib/design.ts` | Brand colors for TS components |
+| `frontend/tailwind.config.js (and/or apps/frontend legacy)` | Merges design tokens into Tailwind |
+| `frontend/lib/design.ts` | Brand colors for TS components |
 
 ```tsx
 import { Button, ChatBubble } from "@realai/design-system";
