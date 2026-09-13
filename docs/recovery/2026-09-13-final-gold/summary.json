@@ -1,0 +1,158 @@
+{
+  "live_files": 3506,
+  "live_unique_hashes": 1875,
+  "scanned": 111786,
+  "dup_of_live": 76511,
+  "unique_hashes": 6623,
+  "dest_empty": 1781,
+  "orphans": 4842,
+  "copied": 5249,
+  "copied_bytes": 570731925,
+  "orphan_py_copied": 3489,
+  "copy_stopped_cap": false,
+  "errors": 0,
+  "top20": [
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules\\organs\\hive.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 2541,
+      "live_rel": "realai\\modules\\organs\\hive.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules\\organs\\base.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 1224,
+      "live_rel": "realai\\modules\\organs\\base.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules\\organs\\__init__.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 289,
+      "live_rel": "realai\\modules\\organs\\__init__.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules\\self_improvement\\self_builder.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 13565,
+      "live_rel": "realai\\modules\\self_improvement\\self_builder.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\agents\\realai\\modules\\agents_advanced\\code_engineer_agent.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 15708,
+      "live_rel": "agents\\realai\\modules\\agents_advanced\\code_engineer_agent.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\agents\\realai\\modules\\agents_advanced\\__init__.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 68,
+      "live_rel": "agents\\realai\\modules\\agents_advanced\\__init__.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules\\desktop_unique\\examples.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 4946,
+      "live_rel": "realai\\modules\\desktop_unique\\examples.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules\\desktop_unique\\examples_local_ai.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 8838,
+      "live_rel": "realai\\modules\\desktop_unique\\examples_local_ai.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules\\desktop_unique\\examples_ultimate.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 5522,
+      "live_rel": "realai\\modules\\desktop_unique\\examples_ultimate.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules\\desktop_unique\\lambda_advanced.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 3379,
+      "live_rel": "realai\\modules\\desktop_unique\\lambda_advanced.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules\\desktop_unique\\standalone_ai.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 242,
+      "live_rel": "realai\\modules\\desktop_unique\\standalone_ai.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules\\desktop_unique\\__init__.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 71,
+      "live_rel": "realai\\modules\\desktop_unique\\__init__.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules\\self_improvement\\closed_loop.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 6784,
+      "live_rel": "realai\\modules\\self_improvement\\closed_loop.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\agents\\realai\\modules\\agents_skills\\coding_agent.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 1275,
+      "live_rel": "agents\\realai\\modules\\agents_skills\\coding_agent.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules\\organs\\request_path.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 7907,
+      "live_rel": "realai\\modules\\organs\\request_path.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules\\self_improvement\\__init__.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 116,
+      "live_rel": "realai\\modules\\self_improvement\\__init__.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules_unify_20260830\\torch_qat_stubs\\conv.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 600,
+      "live_rel": "realai\\modules_unify_20260830\\torch_qat_stubs\\conv.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules_unify_20260830\\torch_qat_stubs\\fused.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 596,
+      "live_rel": "realai\\modules_unify_20260830\\torch_qat_stubs\\fused.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules_unify_20260830\\torch_qat_stubs\\activation.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 548,
+      "live_rel": "realai\\modules_unify_20260830\\torch_qat_stubs\\activation.py"
+    },
+    {
+      "path": "D:\\RealAI-archive\\recovered\\delta_candidates\\unknown\\realai\\modules_unify_20260830\\torch_qat_stubs\\bn_relu.py",
+      "class": "dest_empty_unique",
+      "ext": ".py",
+      "size": 118,
+      "live_rel": "realai\\modules_unify_20260830\\torch_qat_stubs\\bn_relu.py"
+    }
+  ],
+  "manifest": "C:\\RealAI-clean\\docs\\recovery\\2026-09-13-final-gold\\MANIFEST.md",
+  "gold": "C:\\RealAI-gold"
+}
