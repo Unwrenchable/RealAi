@@ -354,6 +354,8 @@ Frontend: open the Vercel URL → chat once → DevTools Network should show `NE
 | Hive chat is health fluff in foreign repo | Update extension ≥ 1.2.15; use `/phase` local slash |
 | SPEAK calls `:8890` in browser | Use console via `:8001` proxy only |
 | Vulkan OOM / token faults | 7B GGUF + `-ngl 99` + high `-c`; prefer XTTS over fighting LLM VRAM |
+| Vercel opens `http://127.0.0.1:8001/console` | Fixed on live branch: `frontend/app/page.tsx` must not hard-redirect; set `NEXT_PUBLIC_API_URL` on Vercel |
+| Render shows old chat dashboard at `/` | Set `REALAI_PUBLIC_UI_URL=https://realaiui.vercel.app` and redeploy; old UI at `/legacy-ui` |
 | `pnpm` missing locally | `npx pnpm@9 install` — Vercel still uses lockfile |
 
 ---
@@ -365,3 +367,4 @@ Frontend: open the Vercel URL → chat once → DevTools Network should show `NE
 - [ANY_REPO.md](./ANY_REPO.md) — portable CLI
 - [frontend/.env.example](./frontend/.env.example)
 - [.env.example](./.env.example)
+

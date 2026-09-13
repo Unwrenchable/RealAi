@@ -804,6 +804,33 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
             return
 
         elif parsed_path.path in ('/', '/ui'):
+            # Prefer hosted Next UI; keep old dashboard at /legacy-ui
+            public_ui = (os.environ.get('REALAI_PUBLIC_UI_URL') or '').strip().rstrip('/')
+            if public_ui:
+                self.send_response(302)
+                self.send_header('Location', public_ui + '/')
+                self.send_header('Cache-Control', 'no-store')
+                self.end_headers()
+            elif parsed_path.path == '/ui':
+                self._send_html_response(200, _WEB_UI_HTML)
+            else:
+                body = (
+                    '<!DOCTYPE html><html><head><meta charset="utf-8">'
+                    '<title>RealAI API</title>'
+                    '<style>body{font-family:system-ui;background:#07070b;color:#e2e8f0;padding:2rem}'
+                    'a{color:#d6ff3f}code{color:#7af0ff}</style></head><body>'
+                    '<h1>RealAI API</h1>'
+                    '<p>This host is the <strong>API</strong> (<code>realai.api_server</code>), not the product console.</p>'
+                    '<ul>'
+                    '<li>Health: <a href="/health">/health</a></li>'
+                    '<li>Models: <a href="/v1/models">/v1/models</a></li>'
+                    '<li>Legacy embedded chat: <a href="/legacy-ui">/legacy-ui</a></li>'
+                    '<li>Cloud UI: set <code>REALAI_PUBLIC_UI_URL</code> (e.g. https://realaiui.vercel.app)</li>'
+                    '<li>Local Hive console: <code>http://127.0.0.1:8001/console</code></li>'
+                    '</ul></body></html>'
+                )
+                self._send_html_response(200, body)
+        elif parsed_path.path in ('/legacy-ui', '/legacy-ui/'):
             self._send_html_response(200, _WEB_UI_HTML)
 
         elif parsed_path.path == '/ui/providers':
