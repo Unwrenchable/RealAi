@@ -1,136 +1,110 @@
-# RackUp Jump Path Spec
+# Jump path representation - RackUp SOTD catalogue
 
-**Document version:** 1.0.0  
-**Date:** 2026-09-14  
-**Status:** LOCKED — Shot Map / SOTD jump hop rendering  
-**Audience:** RealAI orch (map authors) + RackUp Nest / web (geometry + SVG)  
-**Related:** `REALAI_RACKUP_WIRING_CONTRACT.md` (ability envelopes), `RACKUP_GAME_KNOWLEDGE_AND_AI_CONTRACT.md` (`shot_of_the_day`)  
-**Implemented in RackUp:** [PR #35](https://github.com/Unwrenchable/Rack_em_up/pull/35)
+**Date:** 2026-09-13  
+**For:** roc / Rack_em_up cloud agent  
+**Primary bug:** sotd-15 Jump Over the Troublemaker draws as solid 90° zigzag (reads as massé)
 
----
+## Root cause
 
-## 0. Rule (non-negotiable)
+1. `SotdPathSegment` is only `{ from, to }` - no `style` / `kind`.
+2. Jump drills encode the hop as an in-plane kink through `(45, 32)` on an otherwise straight CB→OB line.
+3. `ShotMapDiagram` draws **CB→OB as always solid**; only CB-after is dashed. So even a hop apex, if rendered, looks like massé/swerve - not airborne.
 
-Jump hops **must** render as **dashed airborne cue arcs** over the blocker.
+## Required semantics
 
-A **solid cloth zigzag** through a blocker at mid-air height is **wrong**. That read is a massé, not a jump.
+| Segment | style | kind | Meaning |
+|---------|-------|------|---------|
+| CB → takeoff | solid | ground | rolling approach |
+| takeoff → landing (via optional apex) | **dashed** | **airborne** | jump over blocker |
+| landing → OB contact | solid | ground | land then roll into OB |
+| OB → pocket | solid | object | object path |
+| CB after contact | dashed | cue_after | (existing) |
 
-```
-WRONG  solid polyline CB → (blocker.x, cue.y+~7) → object   (massé zigzag)
-RIGHT  solid ground to takeoff → dashed arc over blocker → solid landing → object
-```
+**Rule:** `category === "jump"` must never use a solid polyline that arcs around a blocker in table Y. That shape is reserved for `masse` / swerve.
 
----
-
-## 1. Path segment contract
-
-`intended_path` is an array of segments. Optional fields replace the old `airborne?: boolean`.
-
-| Field | Type | Default / meaning |
-|-------|------|-------------------|
-| `from`, `to` | `{ x, y }` | Cloth coords (`x` 0–100, `y` 0–50) |
-| `style` | `solid` \| `dashed` | omit = `solid` |
-| `kind` | `ground` \| `airborne` \| `object` \| `cue_after` | omit = `ground` |
+## Schema patch (types + maps)
 
 ```ts
-type SotdPathStyle = 'solid' | 'dashed';
-type SotdPathKind = 'ground' | 'airborne' | 'object' | 'cue_after';
-
-type SotdPathSegment = {
-  from: { x: number; y: number };
-  to: { x: number; y: number };
-  style?: SotdPathStyle;
-  kind?: SotdPathKind;
+export type SotdPathSegment = {
+  from: SotdPoint;
+  to: SotdPoint;
+  style?: 'solid' | 'dashed'; // default 'solid'
+  kind?: 'ground' | 'airborne' | 'object' | 'cue_after';
 };
 ```
 
-**Airborne test (either is enough):** `kind === 'airborne' || style === 'dashed'`.
+Mirror in:
+- `rackup-backend/src/realai/v2/sotd-shot-maps.ts`
+- `rackup-web/src/lib/types.ts`
 
-| `kind` | Stroke | Role |
-|--------|--------|------|
-| `ground` | solid | Cloth run (CB → takeoff, landing → object) |
-| `airborne` | **dashed** | Hop over blocker (takeoff → apex → landing) |
-| `object` | solid | Object ball → pocket (or next combo ball) |
-| `cue_after` | solid | Cue after impact |
+## Geometry derive (`shot-map-geometry.ts`)
 
----
+Extend `DerivedShotGeometry`:
 
-## 2. Geometry (Nest + web must derive)
-
-Owners: `sotd-shot-maps.ts` (catalogue), `shot-map-geometry.ts` / `sotd-shot-map-geometry.ts` (derive), `ShotMapDiagram.tsx` (SVG).
-
-From `intended_path`, derive — **do not** chord takeoff → landing as one solid line through the blocker:
-
-| Field | Contents |
-|-------|----------|
-| `cueApproach` | **Ground-only** CB → takeoff |
-| `cueAirborne` | **Dashed** takeoff → apex → landing (empty if no hop) |
-| `cueApproachAfter` | Solid cloth landing → object (empty if no split) |
-| `objectPath` | Pocketing ball → pocket |
-| `cueAfter` | CB after impact |
-
-Renderer: `cueAirborne` with `solid={false}` (dashed). Never draw a solid polyline that includes the airborne apex.
-
-**Clone pattern** (when only cue + blocker are known):
-
-| Vertex | Formula |
-|--------|---------|
-| takeoff | `(blocker.x - 6, cloth y)` |
-| apex | `(blocker.x, cue.y + 5)` |
-| landing | `(blocker.x + 6, cloth y)` |
-
-Path: solid takeoff run → **dashed** takeoff → apex → landing → solid to object → solid object to pocket.
-
----
-
-## 3. Canonical hop — Jump Over the Troublemaker (`sotd-15`)
-
-| Ball | Role | Coord |
-|------|------|-------|
-| CB | cue | `24, 25.5` |
-| #7 | blocker | `45, 25.2` |
-| #1 | object | `70, 25.2` |
-| pocket | target | `100, 25` |
-
-```
-solid  ground    (24, 25.5) → (39, 25.4)
-dashed airborne  (39, 25.4) → (45, 30.5) → (51, 25.4)
-solid  ground    (51, 25.4) → (70, 25.2)
-solid  object    (70, 25.2) → (100, 25)
+```ts
+cueApproach: SotdPoint[];   // solid ground only (CB→takeoff, landing→contact)
+cueAirborne: SotdPoint[];   // dashed hop (takeoff→apex→landing); [] if not jump
 ```
 
-Sibling maps (`sotd-32`, `sotd-45`, `sotd-50`) use the same takeoff / apex / landing clone.
+For `category === 'jump'`:
+- Build `cueAirborne` from segments with `kind==='airborne'` OR `style==='dashed'` before contact.
+- Keep `cueApproach` as solid ground pieces only (do not include airborne midpoints in the solid path).
+- Fallback if maps not yet tagged: detect blocker on CB-OB line and synthesize takeoff/apex/landing (same coords as below).
 
----
+## Diagram (`ShotMapDiagram.tsx`)
 
-## 4. Validator (Nest client)
+After drawing solid `cueApproach`, draw `cueAirborne` with `solid={false}` (existing dash pattern). Do not draw airborne as part of the solid approach.
 
-| Code | Fail when |
-|------|-----------|
-| `jump_needs_airborne` | Jump category and no segment with `kind === 'airborne'` or `style === 'dashed'` |
-| `jump_zigzag` | Ground (non-airborne) vertices bend through a blocker like a massé. **Ignore airborne vertices** — the apex bend *is* the hop |
+## sotd-15 - Jump Over the Troublemaker (REPLACE intended_path)
 
-Jump maps **may** target a cloth-edge rail (e.g. `100,25` on sotd-15). Non-jump mid-rail pockets still fail.
+Keep balls:
+- CB `(24, 25.5)`
+- blocker #7 `(45, 25.2)`
+- OB #1 `(70, 25.2)`
+- pocket `(100, 25)`
 
-Older maps without `style`/`kind`: if `category === 'jump'` and a cloth segment passes within ~3.6 of a `role: 'blocker'`, annotate that segment `style: 'dashed'`, `kind: 'airborne'`.
+**Current (broken) path:**
+```
+(24,25.5)→(45,32)→(70,25)→(100,25)   // all implicit solid → massé zigzag
+```
 
----
+**Corrected intended_path:**
+```json
+[
+  { "from": { "x": 24, "y": 25.5 }, "to": { "x": 39, "y": 25.4 }, "style": "solid", "kind": "ground" },
+  { "from": { "x": 39, "y": 25.4 }, "to": { "x": 45, "y": 30.5 }, "style": "dashed", "kind": "airborne" },
+  { "from": { "x": 45, "y": 30.5 }, "to": { "x": 51, "y": 25.4 }, "style": "dashed", "kind": "airborne" },
+  { "from": { "x": 51, "y": 25.4 }, "to": { "x": 70, "y": 25.2 }, "style": "solid", "kind": "ground" },
+  { "from": { "x": 70, "y": 25.2 }, "to": { "x": 100, "y": 25 }, "style": "solid", "kind": "object" }
+]
+```
 
-## 5. Nest / RealAI expectations
+ASCII intent: solid to just before X, **dashed hop over X**, solid into 1, solid to pocket.
 
-- Catalogue + Coach diagrams consume this shape from local maps **or** RealAI `shot_of_the_day` payloads that include `intended_path`.
-- Ability envelopes stay in `REALAI_RACKUP_WIRING_CONTRACT.md`. This file only locks **path stroke + hop geometry**.
-- Do not emit a single solid polyline CB → mid-air apex → object.
+## Sibling Jump maps - same massé-shaped clone (FLAG + PATCH)
 
----
+All four use apex `(45, 32)` solid kink:
 
-## 6. RackUp file map (PR #35)
+| id | name | cue | blocker | OB | same bug |
+|----|------|-----|---------|-----|----------|
+| sotd-15 | Jump Over the Troublemaker | (24,25.5) | #7 (45,25.2) | #1 (70,25.2) | YES - fix first |
+| sotd-32 | Jump-Draw Hybrid Tease | (23,25) | #7 (46.2,25) | #1 (71.2,25) | YES - same pattern |
+| sotd-45 | Elevator Jump Over the Rack Ghost | (24,25.5) | #7 (45,25.6) | #1 (70,25.6) | YES |
+| sotd-50 | Venom-Style Jump-Curve Tease | (26,25) | #7 (45,25.4) | #1 (70,25.4) | YES - if truly jump+curve, airborne still dashed; curve after landing only |
 
-| File | Owns |
-|------|------|
-| `rackup-backend/src/realai/v2/sotd-shot-maps.ts` | Catalogue paths (sotd-15 / 32 / 45 / 50) |
-| `rackup-backend/src/realai/v2/sotd-shot-map-geometry.ts` | Server-side derive + validator |
-| `rackup-backend/src/realai/v2/dto/sotd-map.dto.ts` | Segment DTO (`style`, `kind`) |
-| `rackup-web/src/lib/shot-map-geometry.ts` | Client derive (`cueAirborne`) |
-| `rackup-web/src/components/ShotMapDiagram.tsx` | Dashed airborne stroke |
-| `rackup-web/src/lib/types.ts` | `SotdPathSegment` |
+Template for siblings (scale takeoff/landing to each blocker.x):
+- takeoff.x = blocker.x - 6
+- apex = (blocker.x, cue.y + 5)
+- landing.x = blocker.x + 6
+- y on ground ≈ cue.y / ball line
+
+## QA flags (catalogue)
+
+1. `category==jump` && any solid segment midpoint with `|y - cue.y| >= 4` while x between CB and OB → **massé-shaped jump** (fail).
+2. `category==jump` && no `kind:airborne` / `style:dashed` segment crossing blocker.x → **missing airborne** (fail).
+3. Combo drills: path must not pass through intervening object balls without contact segment (separate open QA).
+4. Diagram remount: key ShotMap by `shot.id` so layers don't stack when switching drills.
+
+## Out of scope for RealAI
+
+Live catalogue draw stays RackUp local maps (`sotd-shot-maps.ts`). RealAI does not draw SOTD at request time.
