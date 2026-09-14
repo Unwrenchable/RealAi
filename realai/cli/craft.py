@@ -519,7 +519,16 @@ def tool_grep(pattern: str, path: str = ".", glob: str = "*", max_hits: int = 40
         rx = re.compile(pattern, re.I)
     except re.error as e:
         return {"error": f"bad pattern: {e}"}
-    hits = []
+    source_ext = {
+        ".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".py", ".go", ".rs",
+        ".java", ".kt", ".swift", ".vue", ".svelte", ".css", ".scss", ".sql",
+        ".prisma", ".json", ".yml", ".yaml", ".toml",
+    }
+    skip_name_sub = (
+        "megastatus", "mega_status", "current_status", "status_report",
+        "changelog", "license",
+    )
+    raw_hits: list[dict[str, Any]] = []
     if root.is_file():
         walk_root = root.parent
         only = {root.name}
@@ -546,10 +555,35 @@ def tool_grep(pattern: str, path: str = ".", glob: str = "*", max_hits: int = 40
                         rel = str(fp.relative_to(_ws())).replace("\\", "/")
                     except ValueError:
                         rel = str(fp)
-                    hits.append({"file": rel, "line": i, "text": line.strip()[:200]})
-                    if len(hits) >= max_hits:
-                        return {"pattern": pattern, "hits": hits, "truncated": True}
-    return {"pattern": pattern, "hits": hits, "truncated": False, "workspace": str(_ws())}
+                    rel_l = rel.lower().replace("\\", "/")
+                    ext = fp.suffix.lower()
+                    score = 0
+                    if ext in source_ext:
+                        score += 50
+                    if any(x in rel_l for x in ("/src/", "rackup-", "apps/", "backend", "frontend", "lib/")):
+                        score += 30
+                    if ext == ".md":
+                        score -= 40
+                    if any(s in rel_l for s in skip_name_sub):
+                        score -= 80
+                    raw_hits.append(
+                        {"file": rel, "line": i, "text": line.strip()[:200], "score": score}
+                    )
+                    if len(raw_hits) >= max_hits * 8:
+                        break
+            if len(raw_hits) >= max_hits * 8:
+                break
+        if len(raw_hits) >= max_hits * 8:
+            break
+    raw_hits.sort(key=lambda h: (-int(h.get("score") or 0), h.get("file") or ""))
+    hits = [{"file": h["file"], "line": h["line"], "text": h["text"]} for h in raw_hits[:max_hits]]
+    return {
+        "pattern": pattern,
+        "hits": hits,
+        "truncated": len(raw_hits) > max_hits,
+        "workspace": str(_ws()),
+        "ranked": True,
+    }
 
 
 def tool_model(name: str = "RealAI Hive") -> dict[str, Any]:
@@ -1021,12 +1055,15 @@ def tool_git_status() -> dict[str, Any]:
 
 
 def tool_pwd() -> dict[str, Any]:
+    fp = fingerprint_stack()
     return {
         "home": str(_home()),
         "workspace": str(_ws()),
-        "mode": "product" if is_realai_product_tree() else "project",
+        "mode": fp.get("mode") or ("product" if is_realai_product_tree() else "project"),
         "banner": workspace_banner(),
         "gguf": str(default_gguf()),
+        "stack": fp.get("stack") or [],
+        "stack_fingerprint": fp,
     }
 
 
@@ -1478,6 +1515,121 @@ _MISSION_ECHO = re.compile(
 )
 
 
+
+def fingerprint_stack(ws: Path | None = None) -> dict[str, Any]:
+    """Detect project stack from WORKSPACE markers (foreign-repo aware)."""
+    root = Path(ws) if ws is not None else _ws()
+    markers: list[str] = []
+    checks = [
+        ("package.json", "node"),
+        ("pnpm-lock.yaml", "pnpm"),
+        ("yarn.lock", "yarn"),
+        ("nest-cli.json", "nestjs"),
+        ("next.config.js", "nextjs"),
+        ("next.config.mjs", "nextjs"),
+        ("next.config.ts", "nextjs"),
+        ("prisma/schema.prisma", "prisma"),
+        ("Cargo.toml", "rust"),
+        ("go.mod", "go"),
+        ("pyproject.toml", "python"),
+        ("requirements.txt", "python"),
+        ("Gemfile", "ruby"),
+        ("composer.json", "php"),
+        ("Rackfile", "rack"),
+    ]
+    for rel, label in checks:
+        if (root / rel).exists() and label not in markers:
+            markers.append(label)
+    # RackUp / pool hall heuristics
+    if (root / "rackup-backend").is_dir() or (root / "rackup-web").is_dir():
+        if "rackup" not in markers:
+            markers.append("rackup")
+        if "nestjs" not in markers and (root / "rackup-backend").is_dir():
+            markers.append("nestjs")
+    name = root.name
+    return {
+        "workspace": str(root),
+        "name": name,
+        "stack": markers,
+        "mode": "product" if is_realai_product_tree(root) else "project",
+        "forbid_generic_scaffolds": bool(markers) and "python" not in markers,
+    }
+
+
+def _keyword_grep_pattern(user_text: str) -> str:
+    """Build a useful grep pattern from a free-text ask."""
+    low = user_text.lower()
+    keys: list[str] = []
+    lexicon = [
+        ("sotd", "sotd-shot-maps|ShotMapDiagram|shot-map-geometry|shot.of.the.day"),
+        ("shot of the day", "sotd-shot-maps|ShotMap|shot-map|catalogue"),
+        ("shot", "sotd-shot-maps|ShotMapDiagram|shot-catalog|catalogue"),
+        ("hall", "halls|Hall|check-in|lat|lng|mapbox|leaflet|geo"),
+        ("map", "mapbox|leaflet|geojson|coordinates|hall.*map|MapView"),
+        ("jump", "jump|airborne|troublemaker|dashed"),
+        ("rackup", "rackup|RackUp"),
+        ("coach", "coach|rackup-coach|video_analysis"),
+        ("play", "play|render|404|rewrite"),
+    ]
+    for needle, pat in lexicon:
+        if needle in low:
+            keys.append(pat)
+    # Also pull CamelCase / path-ish tokens
+    for tok in re.findall(r"[A-Za-z][A-Za-z0-9_-]{3,}", user_text):
+        tl = tok.lower()
+        if tl in {"check", "report", "findings", "recommend", "better", "site", "make", "needs", "work", "please", "this", "that", "with", "from", "into", "about"}:
+            continue
+        if len(keys) >= 6:
+            break
+        if tok[0].isupper() or "_" in tok or "-" in tok:
+            keys.append(re.escape(tok))
+    if not keys:
+        keys.append("README|package.json|src")
+    # de-dupe preserve order
+    seen: set[str] = set()
+    out: list[str] = []
+    for k in keys:
+        if k not in seen:
+            seen.add(k)
+            out.append(k)
+    return "|".join(out[:8])
+
+
+def _should_auto_inspect(user_text: str) -> bool:
+    """True when free-text ask needs repo inspection before answering."""
+    if is_realai_product_tree():
+        return False
+    low = user_text.lower().strip()
+    if not low or low.startswith("/"):
+        return False
+    triggers = (
+        "check", "look", "inspect", "review", "audit", "report", "findings",
+        "fix", "improve", "recommend", "better", "broken", "bug", "issue",
+        "hall", "shot", "sotd", "map", "rack", "site", "repo", "project",
+        "where", "how", "what", "why", "implement", "wire", "update",
+    )
+    return any(k in low for k in triggers)
+
+
+def auto_inspect_plans(user_text: str) -> list[tuple[str, dict[str, Any]]]:
+    """pwd + list + targeted grep for foreign project asks."""
+    pat = _keyword_grep_pattern(user_text)
+    plans: list[tuple[str, dict[str, Any]]] = [
+        ("pwd", {}),
+        ("list", {"path": "."}),
+        ("grep", {"pattern": pat, "max_hits": 40}),
+    ]
+    # Hint model via second pass on common app roots when present
+    ws = _ws()
+    for sub in ("rackup-web/src", "rackup-backend/src", "src", "apps"):
+        if (ws / sub).exists():
+            plans.append(("list", {"path": sub}))
+            plans.append(("grep", {"pattern": pat, "path": sub, "max_hits": 30}))
+            break
+    return plans
+
+
+
 def plan_tools(user_text: str) -> list[tuple[str, dict[str, Any]]]:
     t = user_text.strip()
     low = t.lower().strip()
@@ -1525,6 +1677,11 @@ def plan_tools(user_text: str) -> list[tuple[str, dict[str, Any]]]:
             "unify-deep": "deep-unify",
         }
         cmd = aliases.get(cmd, cmd)
+        if cmd == "work":
+            goal = rest.strip() or "inspect and improve this workspace"
+            plans = auto_inspect_plans(goal)
+            # Prefer reading stack fingerprints via pwd (includes fingerprint once patched)
+            return plans
         if cmd in TOOLS:
             if cmd == "read" and rest:
                 return [("read", {"path": rest.split()[0]})]
@@ -1947,6 +2104,17 @@ def plan_tools(user_text: str) -> list[tuple[str, dict[str, Any]]]:
         # Avoid double-firing pure "map"/"validate" on every casual use;
         # those still match if other stronger keywords are present, or use /dispatch
         plans.append(("dispatch", {"prompt": t, "run_all": run_all}))
+
+    # Phase 1: foreign project — tools before talk (no Flask hallucinations)
+    if not plans and _should_auto_inspect(t):
+        plans.extend(auto_inspect_plans(t))
+    elif _should_auto_inspect(t):
+        # Already have some tools; still ensure pwd+grep when inspecting foreign trees
+        names = {n for n, _ in plans}
+        if "pwd" not in names:
+            plans.insert(0, ("pwd", {}))
+        if "grep" not in names:
+            plans.append(("grep", {"pattern": _keyword_grep_pattern(t), "max_hits": 40}))
 
     return plans
 
@@ -2441,6 +2609,7 @@ def build_messages(
         f"WORKSPACE (edit here): {ws}\n"
         f"REALAI_HOME (models/install): {home}\n"
         f"Mode: {mode}\n"
+        f"Stack: {fingerprint_stack(ws)}\n"
         "Rules:\n"
         "- Answer the user's LATEST message about THIS workspace.\n"
         "- Prefer concrete code: show full files or clear patches they can apply.\n"
@@ -2546,6 +2715,7 @@ RealAI Craft — full abilities inside RealAI-clean (any project workspace).
 Slash commands:
   /help /pwd /heal /doctor /gpu /improve /gaps /extend /repair
   /list /read /grep /write path|||content /scan
+  /work <goal>                 # foreign-repo: pwd+list+grep then answer
   /tools /agents [query] /multi <task> /exec <tool> {json}
   /agents                         # hive first: overseer coder architect analyst memory governor router
   /task /organs /rackup /catalog /git /map /quit
