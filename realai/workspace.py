@@ -135,11 +135,16 @@ def realai_home() -> Path:
 
 def realai_workspace(explicit: Optional[str] = None) -> Path:
     """
-    Always return the canonical workspace root C:\\RealAI-clean.
+    Resolve the project workspace root.
 
-    - Never uses Path.cwd().
-    - Clamps nested product paths (including REALAI_HOME / …\\realai) up to root.
-    - Ignores REALAI_ALLOW_CWD_WORKSPACE for paths inside the product tree.
+    Priority:
+      1. explicit path (CLI `-C` / `--workspace`)
+      2. `REALAI_WORKSPACE` env
+      3. `Path.cwd()` when outside the RealAI product tree (foreign repo)
+      4. canonical product root `C:\\RealAI-clean`
+
+    Nested paths *inside* the product tree always clamp up to the product root.
+    `REALAI_HOME` stays the install package; only WORKSPACE moves for foreign repos.
     """
     if explicit:
         return clamp_to_product_root(Path(explicit))
@@ -148,7 +153,19 @@ def realai_workspace(explicit: Optional[str] = None) -> Path:
     if env:
         return clamp_to_product_root(Path(env))
 
-    # Hard default — never cwd.
+    # Foreign repo: shell cwd outside RealAI-clean becomes the workspace.
+    try:
+        cwd = Path.cwd().resolve()
+    except OSError:
+        cwd = None
+    if cwd is not None:
+        clamped = clamp_to_product_root(cwd)
+        if clamped != _PRODUCT_ROOT:
+            return clamped
+        # cwd is inside product tree → keep product root (never nest)
+        if _is_under(cwd, _PRODUCT_ROOT) or cwd == _PRODUCT_ROOT:
+            return _CANONICAL_WORKSPACE
+
     return _CANONICAL_WORKSPACE
 
 

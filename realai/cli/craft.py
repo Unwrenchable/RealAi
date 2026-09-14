@@ -70,10 +70,11 @@ def _home() -> Path:
 
 def _ws() -> Path:
     """
-    Canonical workspace root for craft / agents / multi / promote / file tools.
+    Project workspace for craft file tools / git.
 
-    Always C:\\RealAI-clean. Nested cwd such as C:\\RealAI-clean\\realai is
-    clamped by realai.workspace.realai_workspace() — never becomes workspace.
+    Foreign repos: cwd or REALAI_WORKSPACE outside the product root.
+    Inside the product tree: always clamps to the product root (never nested).
+    REALAI_HOME stays the install package for models/Vulkan.
     """
     apply_workspace()
     return realai_workspace()
@@ -2425,8 +2426,18 @@ def build_messages(
     ws = _ws()
     home = _home()
     mode = "product" if is_realai_product_tree(ws) else "project"
+    foreign = mode == "project"
+    foreign_rules = ""
+    if foreign:
+        foreign_rules = (
+            "- FOREIGN PROJECT MODE: WORKSPACE is not RealAI-clean. Inspect THIS repo with tools before advising.\n"
+            "- Do NOT invent Flask/Django/generic Python scaffolds. Match the stack you find "
+            "(NestJS/TypeScript for Rack_em_up, etc.).\n"
+            "- First actions: /pwd, /list ., /grep for the feature the user named (shots, halls, map, sotd).\n"
+            "- Only recommend changes grounded in files you read; cite real paths.\n"
+        )
     system = (
-        f"You are RealAI Craft — a coding assistant working inside a user project.\n"
+        f"You are RealAI Craft - a coding assistant working inside a user project.\n"
         f"WORKSPACE (edit here): {ws}\n"
         f"REALAI_HOME (models/install): {home}\n"
         f"Mode: {mode}\n"
@@ -2437,6 +2448,7 @@ def build_messages(
         "- NEVER suggest git commit/push unless they explicitly ask.\n"
         "- Be concise. Stream naturally.\n"
         "- You can suggest /read /write /grep /heal for next steps.\n"
+        f"{foreign_rules}"
     )
     msgs: list[dict[str, str]] = [{"role": "system", "content": system}]
     for h in history[-8:]:
@@ -2704,12 +2716,37 @@ def run_repl(one_shot: str | None = None) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
-    apply_workspace()
-    argv = list(argv or [])
-    if argv and argv[0] in ("-h", "--help"):
-        print(HELP)
-        return 0
-    one = " ".join(argv).strip() if argv else None
+    argv = list(argv or sys.argv[1:])
+    # Parse -C/--workspace before bind so foreign repos work from any cwd.
+    ws_arg = None
+    home_arg = None
+    cleaned: list[str] = []
+    i = 0
+    while i < len(argv):
+        a = argv[i]
+        if a in ("-C", "--workspace") and i + 1 < len(argv):
+            ws_arg = argv[i + 1]
+            i += 2
+            continue
+        if a.startswith("--workspace="):
+            ws_arg = a.split("=", 1)[1]
+            i += 1
+            continue
+        if a in ("--home",) and i + 1 < len(argv):
+            home_arg = argv[i + 1]
+            i += 2
+            continue
+        if a in ("-h", "--help"):
+            print(HELP)
+            print()
+            print("Foreign repo:")
+            print("  realai-craft -C <path-to-other-repo>")
+            print("  cd that-repo; realai-craft   # cwd becomes WORKSPACE")
+            return 0
+        cleaned.append(a)
+        i += 1
+    apply_workspace(ws_arg, home=home_arg)
+    one = " ".join(cleaned).strip() if cleaned else None
     return run_repl(one_shot=one or None)
 
 # ============================================================
