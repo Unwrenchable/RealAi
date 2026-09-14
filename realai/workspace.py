@@ -138,33 +138,46 @@ def realai_workspace(explicit: Optional[str] = None) -> Path:
     Resolve the project workspace root.
 
     Priority:
-      1. explicit path (CLI `-C` / `--workspace`)
-      2. `REALAI_WORKSPACE` env
-      3. `Path.cwd()` when outside the RealAI product tree (foreign repo)
-      4. canonical product root `C:\\RealAI-clean`
+      1. explicit path (CLI ``-C`` / ``--workspace``)
+      2. foreign ``Path.cwd()`` (outside the product tree) — beats a
+         product-pinned ``REALAI_WORKSPACE`` (common Windows User env)
+      3. ``REALAI_WORKSPACE`` when it points at a foreign/peer project
+      4. ``REALAI_WORKSPACE`` / canonical product root when cwd is inside product
 
     Nested paths *inside* the product tree always clamp up to the product root.
-    `REALAI_HOME` stays the install package; only WORKSPACE moves for foreign repos.
+    ``REALAI_HOME`` stays the install package; only WORKSPACE moves for foreign repos.
     """
     if explicit:
         return clamp_to_product_root(Path(explicit))
 
-    env = (os.environ.get("REALAI_WORKSPACE") or "").strip()
-    if env:
-        return clamp_to_product_root(Path(env))
-
-    # Foreign repo: shell cwd outside RealAI-clean becomes the workspace.
     try:
         cwd = Path.cwd().resolve()
     except OSError:
         cwd = None
-    if cwd is not None:
-        clamped = clamp_to_product_root(cwd)
-        if clamped != _PRODUCT_ROOT:
-            return clamped
-        # cwd is inside product tree → keep product root (never nest)
-        if _is_under(cwd, _PRODUCT_ROOT) or cwd == _PRODUCT_ROOT:
-            return _CANONICAL_WORKSPACE
+
+    env_raw = (os.environ.get("REALAI_WORKSPACE") or "").strip()
+    env_ws = clamp_to_product_root(Path(env_raw)) if env_raw else None
+
+    def _is_foreign(path: Path) -> bool:
+        """True when path is outside the RealAI product tree."""
+        try:
+            p = path.resolve()
+        except OSError:
+            return False
+        if p == _PRODUCT_ROOT or _is_under(p, _PRODUCT_ROOT):
+            return False
+        return True
+
+    # Foreign shell cwd wins over sticky User env REALAI_WORKSPACE=C:\RealAI-clean
+    if cwd is not None and _is_foreign(cwd):
+        if env_ws is not None and _is_foreign(env_ws):
+            return env_ws
+        return cwd
+
+    if env_ws is not None:
+        return env_ws
+
+    return _CANONICAL_WORKSPACE
 
     return _CANONICAL_WORKSPACE
 
