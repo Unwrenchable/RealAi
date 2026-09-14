@@ -553,6 +553,10 @@ def tool_grep(pattern: str, path: str = ".", glob: str = "*", max_hits: int = 40
                 "cargo.lock",
             }:
                 continue
+            # Manifest noise: "platform" matches short geo tokens like lat/map.
+            # Skip repo-wide walks; still grep when the user pointed at this file.
+            if fn_l == "package.json" and only is None:
+                continue
             if fn_l.endswith(".map") and "shot-map" not in fn_l:
                 continue
             if glob and glob != "*" and not fnmatch.fnmatch(fn, glob):
@@ -1579,8 +1583,8 @@ def _keyword_grep_pattern(user_text: str) -> str:
         ("sotd", "sotd-shot-maps|ShotMapDiagram|shot-map-geometry|shot.of.the.day"),
         ("shot of the day", "sotd-shot-maps|ShotMap|shot-map|catalogue"),
         ("shot", "sotd-shot-maps|ShotMapDiagram|shot-catalog|catalogue"),
-        ("hall", "halls|Hall|check-in|lat|lng|mapbox|leaflet|geo"),
-        ("map", "mapbox|leaflet|geojson|coordinates|hall.*map|MapView"),
+        ("hall", r"halls|Hall|check-in|\blat\b|\blng\b|mapbox|leaflet|geojson"),
+        ("map", r"mapbox|leaflet|geojson|coordinates|hall.*map|MapView"),
         ("jump", "jump|airborne|troublemaker|dashed"),
         ("rackup", "rackup|RackUp"),
         ("coach", "coach|rackup-coach|video_analysis"),
@@ -1626,6 +1630,69 @@ def _should_auto_inspect(user_text: str) -> bool:
     return any(k in low for k in triggers)
 
 
+def _norm_rel(path: str) -> str:
+    return str(path or "").replace("\\", "/").strip().lower()
+
+
+def _work_seed_paths(user_text: str) -> list[str]:
+    """High-value RackUp / SOTD / halls files to read once per /work."""
+    gl = (user_text or "").lower()
+    seeds: list[str] = []
+    if any(k in gl for k in ("sotd", "shot", "diagram", "jump", "troublemaker")):
+        seeds += [
+            "rackup-backend/src/realai/v2/sotd-shot-maps.ts",
+            "rackup-web/src/components/ShotMapDiagram.tsx",
+            "rackup-web/src/lib/shot-map-geometry.ts",
+            "rackup-backend/src/shots/shot-catalog.ts",
+        ]
+    if any(k in gl for k in ("hall", "map", "leaflet", "geo", "location")):
+        seeds += [
+            "rackup-web/src/components/HallsMap.tsx",
+            "rackup-web/src/pages/HallsPage.tsx",
+        ]
+    seen: set[str] = set()
+    out: list[str] = []
+    for rel in seeds:
+        key = _norm_rel(rel)
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        out.append(rel.replace("\\", "/"))
+    return out
+
+
+def _plan_key(name: str, kwargs: dict[str, Any]) -> tuple[Any, ...]:
+    kw = kwargs or {}
+    if name == "read":
+        return (name, _norm_rel(str(kw.get("path") or "")))
+    if name == "list":
+        return (name, _norm_rel(str(kw.get("path") or ".")) or ".")
+    if name == "grep":
+        return (
+            name,
+            str(kw.get("pattern") or ""),
+            _norm_rel(str(kw.get("path") or ".")) or ".",
+        )
+    try:
+        blob = json.dumps(kw, sort_keys=True, default=str)
+    except Exception:
+        blob = str(kw)
+    return (name, blob)
+
+
+def dedupe_plans(plans: list[tuple[str, dict[str, Any]]]) -> list[tuple[str, dict[str, Any]]]:
+    """Drop duplicate tool calls (same read path, same grep, …) preserving order."""
+    seen: set[tuple[Any, ...]] = set()
+    out: list[tuple[str, dict[str, Any]]] = []
+    for name, kwargs in plans:
+        key = _plan_key(name, kwargs)
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append((name, kwargs))
+    return out
+
+
 def auto_inspect_plans(user_text: str) -> list[tuple[str, dict[str, Any]]]:
     """pwd + list + targeted grep for foreign project asks."""
     pat = _keyword_grep_pattern(user_text)
@@ -1641,23 +1708,10 @@ def auto_inspect_plans(user_text: str) -> list[tuple[str, dict[str, Any]]]:
             plans.append(("list", {"path": sub}))
             plans.append(("grep", {"pattern": pat, "path": sub, "max_hits": 30}))
             break
-    gl = user_text.lower()
-    seeds: list[str] = []
-    if any(k in gl for k in ("sotd", "shot", "diagram", "jump", "troublemaker")):
-        seeds += [
-            "rackup-backend/src/realai/v2/sotd-shot-maps.ts",
-            "rackup-web/src/components/ShotMapDiagram.tsx",
-            "rackup-web/src/lib/shot-map-geometry.ts",
-        ]
-    if any(k in gl for k in ("hall", "map", "leaflet", "geo", "location")):
-        seeds += [
-            "rackup-web/src/components/HallsMap.tsx",
-            "rackup-web/src/pages/HallsPage.tsx",
-        ]
-    for rel in seeds:
+    for rel in _work_seed_paths(user_text):
         if (ws / rel).is_file():
             plans.append(("read", {"path": rel}))
-    return plans
+    return dedupe_plans(plans)
 
 
 
@@ -1719,27 +1773,7 @@ def plan_tools(user_text: str) -> list[tuple[str, dict[str, Any]]]:
         cmd = aliases.get(cmd, cmd)
         if cmd == "work":
             goal = rest.strip() or "inspect and improve this workspace"
-            plans = auto_inspect_plans(goal)
-            # Seed high-value reads for known RackUp / SOTD / halls asks
-            gl = goal.lower()
-            ws = _ws()
-            seeds: list[str] = []
-            if any(k in gl for k in ("sotd", "shot", "diagram", "jump", "troublemaker")):
-                seeds += [
-                    "rackup-backend/src/realai/v2/sotd-shot-maps.ts",
-                    "rackup-web/src/components/ShotMapDiagram.tsx",
-                    "rackup-web/src/lib/shot-map-geometry.ts",
-                    "rackup-backend/src/shots/shot-catalog.ts",
-                ]
-            if any(k in gl for k in ("hall", "map", "leaflet", "geo", "location")):
-                seeds += [
-                    "rackup-web/src/components/HallsMap.tsx",
-                    "rackup-web/src/pages/HallsPage.tsx",
-                ]
-            for rel in seeds:
-                if (ws / rel).is_file():
-                    plans.append(("read", {"path": rel}))
-            return plans
+            return auto_inspect_plans(goal)
         if cmd in TOOLS:
             if cmd == "read" and rest:
                 return [("read", {"path": rest.split()[0]})]
@@ -2179,7 +2213,7 @@ def plan_tools(user_text: str) -> list[tuple[str, dict[str, Any]]]:
 
 def run_tools(plans: list[tuple[str, dict[str, Any]]]) -> list[dict[str, Any]]:
     out = []
-    for name, kwargs in plans:
+    for name, kwargs in dedupe_plans(plans):
         fn = TOOLS.get(name)
         if not fn:
             out.append({"tool": name, "error": "unknown tool"})
@@ -2362,6 +2396,7 @@ def stream_chat(
     messages: list[dict[str, str]],
     temperature: float = 0.5,
     max_tokens: int = 1200,
+    agent_id: str | None = None,
 ) -> Generator[str, None, str]:
     base = _active_base()
     if not base:
@@ -2380,24 +2415,30 @@ def stream_chat(
     if ":8080" in base:
         model = os.environ.get("REALAI_GPU_MODEL") or default_gguf().name
 
-    body = json.dumps(
-        {
-            "model": model,
-            "messages": messages,
-            "temperature": temperature,
-            "max_tokens": max_tokens,
-            "stream": True,
-        }
-    ).encode("utf-8")
+    payload: dict[str, Any] = {
+        "model": model,
+        "messages": messages,
+        "temperature": temperature,
+        "max_tokens": max_tokens,
+        "stream": True,
+    }
+    aid = (agent_id or "").strip()
+    if aid and aid not in {"raw-model", "?"}:
+        payload["agent_id"] = aid
+        payload["agentId"] = aid
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + (os.environ.get("REALAI_API_KEY") or os.environ.get("OPENAI_API_KEY") or "local"),
+        "Accept": "text/event-stream",
+    }
+    if aid and aid not in {"raw-model", "?"}:
+        headers["X-RealAI-Agent-Id"] = aid
+    body = json.dumps(payload).encode("utf-8")
     url = base.rstrip("/") + "/chat/completions"
     req = urllib.request.Request(
         url,
         data=body,
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + (os.environ.get("REALAI_API_KEY") or os.environ.get("OPENAI_API_KEY") or "local"),
-            "Accept": "text/event-stream",
-        },
+        headers=headers,
         method="POST",
     )
     full: list[str] = []
@@ -2430,21 +2471,16 @@ def stream_chat(
                         yield piece
     except Exception as e1:
         try:
-            body2 = json.dumps(
-                {
-                    "model": model,
-                    "messages": messages,
-                    "temperature": temperature,
-                    "max_tokens": max_tokens,
-                    "stream": False,
-                }
-            ).encode("utf-8")
+            payload2 = dict(payload)
+            payload2["stream"] = False
+            body2 = json.dumps(payload2).encode("utf-8")
             req2 = urllib.request.Request(
                 url,
                 data=body2,
                 headers={
                     "Content-Type": "application/json",
                     "Authorization": "Bearer local",
+                    **({"X-RealAI-Agent-Id": aid} if aid and aid not in {"raw-model", "?"} else {}),
                 },
                 method="POST",
             )
@@ -2660,6 +2696,8 @@ def build_messages(
             "- Do NOT invent Flask/Django/generic Python scaffolds. Match the stack you find "
             "(NestJS/TypeScript for Rack_em_up, etc.).\n"
             "- First actions: /pwd, /list ., /grep for the feature the user named (shots, halls, map, sotd).\n"
+            "- After tool results: short diagnosis + concrete file patches. Do not paste raw tool dumps as the answer.\n"
+            "- Prefer applying edits via `/write relative/path|||<full file contents>` when you are sure.\n"
             "- Only recommend changes grounded in files you read; cite real paths.\n"
         )
     system = (
@@ -2675,6 +2713,7 @@ def build_messages(
         "- NEVER suggest git commit/push unless they explicitly ask.\n"
         "- Be concise. Stream naturally.\n"
         "- You can suggest /read /write /grep /heal for next steps.\n"
+        "- When tools already ran, synthesize findings and emit /write patches instead of echoing tool output.\n"
         f"{foreign_rules}"
     )
     msgs: list[dict[str, str]] = [{"role": "system", "content": system}]
@@ -2682,10 +2721,20 @@ def build_messages(
         msgs.append(h)
     if tool_results:
         tools_txt = _format_tools(tool_results)
+        if foreign:
+            follow = (
+                "Synthesize a short diagnosis from the tool results, then propose concrete file patches.\n"
+                "Do NOT dump raw tool output as the answer.\n"
+                "When sure, emit one or more apply blocks exactly as:\n"
+                "/write relative/path|||<full file contents>\n"
+                "Put only file contents after ||| (Craft will apply /write). Cite real paths you read."
+            )
+        else:
+            follow = "Reply for this project workspace."
         msgs.append(
             {
                 "role": "user",
-                "content": f"{user}\n\n{tools_txt}\n\nReply for this project workspace.",
+                "content": f"{user}\n\n{tools_txt}\n\n{follow}",
             }
         )
     else:
@@ -2693,10 +2742,94 @@ def build_messages(
     return msgs
 
 
+_WRITE_BLOCK_RE = re.compile(
+    r"(?:^|\n)/write\s+(\S+)\s*\|\|\|\s*(.*?)(?=(?:\n/write\s)|\Z)",
+    re.I | re.S,
+)
+_INSPECT_TOOLS = {"pwd", "here", "list", "grep", "read"}
+
+
+def extract_write_commands(text: str) -> list[tuple[str, str]]:
+    """Parse `/write path|||content` blocks from a model reply."""
+    if not text:
+        return []
+    out: list[tuple[str, str]] = []
+    for m in _WRITE_BLOCK_RE.finditer("\n" + text):
+        path = (m.group(1) or "").strip()
+        content = (m.group(2) or "").strip("\n")
+        if path.startswith("<") or "relative/path" in path:
+            continue
+        if path and content.strip():
+            out.append((path, content))
+    return out
+
+
+def apply_suggested_writes(reply: str, *, max_files: int = 8) -> list[dict[str, Any]]:
+    """Apply `/write` blocks from the coder reply via the existing write tool."""
+    applied: list[dict[str, Any]] = []
+    blocks = extract_write_commands(reply)[: max(0, int(max_files))]
+    for path, content in blocks:
+        if len(content.encode("utf-8")) > 500_000:
+            applied.append({"tool": "write", "args": {"path": path}, "error": "too large"})
+            print(f"[write] skip {path} (too large)", flush=True)
+            continue
+        result = tool_write(path, content)
+        applied.append({"tool": "write", "args": {"path": path}, "result": result})
+        ok = result.get("ok") if isinstance(result, dict) else False
+        nbytes = result.get("bytes") if isinstance(result, dict) else "?"
+        err = result.get("error") if isinstance(result, dict) else None
+        if err:
+            print(f"[write] {path} error={err}", flush=True)
+        else:
+            print(f"[write] applied {path} ok={ok} bytes={nbytes}", flush=True)
+    return applied
+
+
+def _is_inspect_pass(tool_results: list[dict[str, Any]]) -> bool:
+    names = {tr.get("tool") for tr in (tool_results or [])}
+    names.discard(None)
+    if not names:
+        return False
+    return names <= _INSPECT_TOOLS
+
+
+def _inspect_brief(tool_results: list[dict[str, Any]]) -> str:
+    """User-facing fallback: diagnosis skeleton, not a raw tool dump."""
+    lines = [
+        "Inspect complete. Synthesize a short diagnosis and emit `/write path|||content` patches.",
+        "Do not treat the tool dump as the answer.",
+    ]
+    read_paths: list[str] = []
+    grep_files: list[str] = []
+    for tr in tool_results or []:
+        name = tr.get("tool")
+        r = tr.get("result") if isinstance(tr.get("result"), dict) else {}
+        if name in ("pwd", "here"):
+            lines.append(f"- workspace: {r.get('banner') or r.get('workspace')}")
+        elif name == "read":
+            p = r.get("path")
+            if p:
+                read_paths.append(str(p))
+        elif name == "grep":
+            for h in (r.get("hits") or [])[:10]:
+                if isinstance(h, dict) and h.get("file"):
+                    grep_files.append(str(h.get("file")))
+        elif name == "list":
+            lines.append(f"- listed `{r.get('path')}`")
+    if read_paths:
+        uniq = list(dict.fromkeys(read_paths))
+        lines.append("- files read: " + ", ".join(f"`{p}`" for p in uniq))
+    if grep_files:
+        uniq = list(dict.fromkeys(grep_files))
+        lines.append("- grep files: " + ", ".join(uniq[:12]))
+    return "\n".join(lines)
+
+
 def stream_reply(
     user: str,
     history: list[dict[str, str]],
     tool_results: list[dict[str, Any]],
+    agent_id: str | None = None,
 ) -> str:
     api_up = _active_base() is not None
     heavy_tools = {
@@ -2738,8 +2871,11 @@ def stream_reply(
     msgs = build_messages(user, history, tool_results)
     print("realai> ", end="", flush=True)
     parts: list[str] = []
+    max_tok = 1200
+    if any(tr.get("tool") in {"read", "grep", "write"} for tr in (tool_results or [])):
+        max_tok = 2048
     try:
-        for piece in stream_chat(msgs):
+        for piece in stream_chat(msgs, max_tokens=max_tok, agent_id=agent_id):
             print(piece, end="", flush=True)
             parts.append(piece)
     except KeyboardInterrupt:
@@ -2749,7 +2885,10 @@ def stream_reply(
         pass
     text = "".join(parts).strip()
     if not text:
-        if tool_results:
+        if tool_results and _is_inspect_pass(tool_results):
+            text = _inspect_brief(tool_results)
+            print(text)
+        elif tool_results:
             text = _format_tools(tool_results)
             print(text)
         else:
@@ -2773,7 +2912,7 @@ RealAI Craft — full abilities inside RealAI-clean (any project workspace).
 Slash commands:
   /help /pwd /heal /doctor /gpu /improve /gaps /extend /repair
   /list /read /grep /write path|||content /scan
-  /work <goal>                 # foreign-repo: pwd+list+grep then answer
+  /work <goal>                 # foreign-repo: inspect then coder plan + /write
   /tools /agents [query] /multi <task> /exec <tool> {json}
   /agents                         # hive first: overseer coder architect analyst memory governor router
   /task /organs /rackup /catalog /git /map /quit
@@ -2840,10 +2979,12 @@ class CraftSession:
             return msg
 
         # Orchestrator 2.0: classify + route before tools / model.
+        _rt: dict[str, Any] = {}
+        _fp = fingerprint_stack()
         try:
             from realai.meta_router import plan_call
 
-            _pc = plan_call(user)
+            _pc = plan_call(user, mode=_fp.get("mode"))
             self.last_routing = _pc.get("routing") or {}
             self.last_memory_read = _pc.get("memory_read") or {}
             _rt = self.last_routing
@@ -2855,6 +2996,7 @@ class CraftSession:
                 os.environ["REALAI_LOCAL_ONLY"] = "1"
         except Exception as _route_err:
             self.last_routing = {"error": str(_route_err), "target": "overseer", "backend": "local-gguf"}
+            _rt = self.last_routing
             print(f"[route: error {_route_err}]", flush=True)
 
         plans = plan_tools(user)
@@ -2863,7 +3005,17 @@ class CraftSession:
             names = ", ".join(tr.get("tool", "?") for tr in results)
             print(f"[tools: {names}]", flush=True)
 
-        reply = stream_reply(user, self.history, results)
+        route_target = str(_rt.get("target") or "")
+        reply = stream_reply(user, self.history, results, agent_id=route_target or None)
+        foreign = str(_fp.get("mode") or "") == "project"
+        user_is_write = user.lower().lstrip().startswith("/write")
+        if foreign and (not user_is_write) and extract_write_commands(reply):
+            applied = apply_suggested_writes(reply)
+            if applied:
+                n_ok = sum(1 for a in applied if isinstance(a.get("result"), dict) and a["result"].get("ok"))
+                note = f"\n\n[applied {n_ok}/{len(applied)} /write patch(es)]"
+                print(note.strip(), flush=True)
+                reply = reply + note
         self.history.append({"role": "user", "content": user})
         self.history.append({"role": "assistant", "content": reply})
         if len(self.history) > 20:

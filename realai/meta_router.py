@@ -54,8 +54,32 @@ def _has_secrets(text: str) -> bool:
     return any(p.search(text or "") for p in SECRET_PATTERNS)
 
 
+def _looks_like_work_loop(text: str) -> bool:
+    """True for Craft `/work <goal>`."""
+    t = (text or "").strip().lower()
+    return t.startswith("/work")
+
+
+# Free-text that Craft auto-inspects in a foreign repo (keep in sync with craft._should_auto_inspect).
+_FOREIGN_INSPECT_HINTS = (
+    "inspect", "check", "look", "review", "audit", "report", "findings",
+    "fix", "improve", "recommend", "better", "broken", "bug", "issue",
+    "hall", "shot", "sotd", "map", "rack", "site", "repo", "project",
+    "where", "how", "what", "why", "implement", "wire", "update",
+    "diagram", "location", "grep", "patch", "refactor",
+)
+
+
+def _foreign_inspect_ask(text: str) -> bool:
+    low = (text or "").lower()
+    return any(k in low for k in _FOREIGN_INSPECT_HINTS)
+
+
 def classify_task(text: str) -> str:
     t = (text or "").lower()
+    # `/work` is a coding work loop — must beat "plan"/"architect" in the goal text.
+    if _looks_like_work_loop(text):
+        return "code"
     if any(k in t for k in ("deploy", "git push", "rm -rf", "drop table", "transfer sol", "sign tx")):
         return "side-effect"
     if any(k in t for k in ("plan", "architect", "decompose", "roadmap", "design system")):
@@ -64,7 +88,7 @@ def classify_task(text: str) -> str:
         return "game-npc"
     if any(k in t for k in ("remember", "recall", "what did we", "memory")):
         return "memory"
-    if any(k in t for k in ("code", "refactor", "implement", "patch", "bug", "test")):
+    if any(k in t for k in ("code", "refactor", "implement", "patch", "bug", "test", "inspect")):
         return "code"
     if any(k in t for k in ("fast", "quick", "stream", "cheap")):
         return "speed"
@@ -78,9 +102,19 @@ def route_task(
     *,
     prefer_local: bool = True,
     allow_cloud: Optional[bool] = None,
+    mode: Optional[str] = None,
+    **_ignored: Any,
 ) -> RoutingDecision:
-    """Classify and route. Does not call models — returns the decision only."""
+    """Classify and route. Does not call models — returns the decision only.
+
+    ``mode`` is Craft's workspace mode (``product`` vs ``project``). Foreign
+    project inspect / ``/work`` asks prefer hive ``coder`` instead of the
+    default overseer.
+    """
     task_class = classify_task(text)
+    foreign = str(mode or "").strip().lower() in {"project", "foreign"}
+    if task_class == "general" and foreign and _foreign_inspect_ask(text):
+        task_class = "code"
     cloud_ok = _cloud_allowed() if allow_cloud is None else allow_cloud
     secrets = _has_secrets(text)
 
@@ -127,7 +161,10 @@ def route_task(
     elif task_class == "code":
         target = "coder"
         backend = "local-gguf"
-        reason = "code slice → hive coder on local GGUF"
+        if foreign or _looks_like_work_loop(text):
+            reason = "foreign project /work → hive coder on local GGUF"
+        else:
+            reason = "code slice → hive coder on local GGUF"
         cost = "vram:7B-q5"
         fallback = "openai" if privacy == "cloud-allowed" else "local-gguf"
     elif task_class == "memory":
@@ -165,7 +202,12 @@ def route_task(
         memory_read=True,
         memory_write=task_class not in {"speed"},
         task_class=task_class,
-        extras={"prefer_local": prefer_local, "secrets_detected": secrets},
+        extras={
+            "prefer_local": prefer_local,
+            "secrets_detected": secrets,
+            "mode": str(mode or ""),
+            "foreign": foreign,
+        },
     )
 
 
