@@ -60,6 +60,10 @@ _SKIP_DIRS = {
     ".tox",
     ".mypy_cache",
     ".pytest_cache",
+    "_parked",
+    "logs",
+    ".hive",
+    ".blackbox",
 }
 
 
@@ -539,6 +543,17 @@ def tool_grep(pattern: str, path: str = ".", glob: str = "*", max_hits: int = 40
         dirnames[:] = [d for d in dirnames if d not in _SKIP_DIRS]
         for fn in filenames:
             if only is not None and fn not in only:
+                continue
+            fn_l = fn.lower()
+            if fn_l in {
+                "package-lock.json",
+                "yarn.lock",
+                "pnpm-lock.yaml",
+                "composer.lock",
+                "cargo.lock",
+            }:
+                continue
+            if fn_l.endswith(".map") and "shot-map" not in fn_l:
                 continue
             if glob and glob != "*" and not fnmatch.fnmatch(fn, glob):
                 continue
@@ -1626,6 +1641,22 @@ def auto_inspect_plans(user_text: str) -> list[tuple[str, dict[str, Any]]]:
             plans.append(("list", {"path": sub}))
             plans.append(("grep", {"pattern": pat, "path": sub, "max_hits": 30}))
             break
+    gl = user_text.lower()
+    seeds: list[str] = []
+    if any(k in gl for k in ("sotd", "shot", "diagram", "jump", "troublemaker")):
+        seeds += [
+            "rackup-backend/src/realai/v2/sotd-shot-maps.ts",
+            "rackup-web/src/components/ShotMapDiagram.tsx",
+            "rackup-web/src/lib/shot-map-geometry.ts",
+        ]
+    if any(k in gl for k in ("hall", "map", "leaflet", "geo", "location")):
+        seeds += [
+            "rackup-web/src/components/HallsMap.tsx",
+            "rackup-web/src/pages/HallsPage.tsx",
+        ]
+    for rel in seeds:
+        if (ws / rel).is_file():
+            plans.append(("read", {"path": rel}))
     return plans
 
 
@@ -1633,6 +1664,15 @@ def auto_inspect_plans(user_text: str) -> list[tuple[str, dict[str, Any]]]:
 def plan_tools(user_text: str) -> list[tuple[str, dict[str, Any]]]:
     t = user_text.strip()
     low = t.lower().strip()
+
+    # Allow "/grep foo and /read bar" style multi-slash lines
+    if t.startswith("/") and " and /" in t.lower():
+        parts_multi = re.split(r"\s+and\s+(?=/)", t, flags=re.I)
+        if len(parts_multi) > 1:
+            plans: list[tuple[str, dict[str, Any]]] = []
+            for chunk in parts_multi:
+                plans.extend(plan_tools(chunk.strip()))
+            return plans
 
     if t.startswith("/"):
         parts = t[1:].strip().split(maxsplit=1)
@@ -1680,7 +1720,25 @@ def plan_tools(user_text: str) -> list[tuple[str, dict[str, Any]]]:
         if cmd == "work":
             goal = rest.strip() or "inspect and improve this workspace"
             plans = auto_inspect_plans(goal)
-            # Prefer reading stack fingerprints via pwd (includes fingerprint once patched)
+            # Seed high-value reads for known RackUp / SOTD / halls asks
+            gl = goal.lower()
+            ws = _ws()
+            seeds: list[str] = []
+            if any(k in gl for k in ("sotd", "shot", "diagram", "jump", "troublemaker")):
+                seeds += [
+                    "rackup-backend/src/realai/v2/sotd-shot-maps.ts",
+                    "rackup-web/src/components/ShotMapDiagram.tsx",
+                    "rackup-web/src/lib/shot-map-geometry.ts",
+                    "rackup-backend/src/shots/shot-catalog.ts",
+                ]
+            if any(k in gl for k in ("hall", "map", "leaflet", "geo", "location")):
+                seeds += [
+                    "rackup-web/src/components/HallsMap.tsx",
+                    "rackup-web/src/pages/HallsPage.tsx",
+                ]
+            for rel in seeds:
+                if (ws / rel).is_file():
+                    plans.append(("read", {"path": rel}))
             return plans
         if cmd in TOOLS:
             if cmd == "read" and rest:
