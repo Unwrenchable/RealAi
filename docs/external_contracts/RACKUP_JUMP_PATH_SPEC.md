@@ -52,7 +52,7 @@ For `category === 'jump'`:
 - Build `cueAirborne` from segments with `kind==='airborne'` OR `style==='dashed'` before contact.
 - Keep `cueApproach` as solid ground pieces only (do not include airborne midpoints in the solid path).
 - Airborne points stay **collinear-ish** with the CB–OB line (perp. ≤ 2). The hop goes **straight through/over** the blocker in plan view (overhead). Do **not** synthesize an off-line tent apex. If the blocker is within 2 of the line, `over` may sit at blocker `(x, y)` even when that y disagrees slightly with the interpolated CB–OB y.
-- Fallback if maps not yet tagged: detect the hopped ball (`role: "blocker"` or infer) on/near the CB–OB line and synthesize takeoff / over-blocker / landing (same coords as below). Tag `role: "blocker"` on emit.
+- Fallback if maps not yet tagged: detect the **jumped-over blocker ball** — `role: "blocker"`, or the unique **eligible blocker candidate** (not the primary OB; not `role: "object"` / `"prop"` / `"helper"`; center within **2** of the hop). If that set is not unique, `jump_blocker_ambiguous`. Tag `role: "blocker"` on emit.
 
 ## Diagram (`ShotMapDiagram.tsx`)
 
@@ -101,19 +101,19 @@ Template for siblings (scale takeoff/landing to each blocker.x; **no off-line ap
 - takeoff.x = blocker.x - 6; y interpolated on the CB–OB line
 - landing.x = blocker.x + 6; y interpolated on the CB–OB line
 - **over-point precedence** (when they disagree, as on sotd-50: line y ≈ 25.17, blocker y = 25.4):
-  1. No tent: every airborne vertex stays within **2** of the CB–OB line (perp.).
-  2. Cover `blocker.x` on the **contiguous airborne span**, inclusive — a vertex at `blocker.x` counts (sotd-15: 39→45 and 45→51).
+  1. No tent: every airborne vertex stays within **2** of the CB–OB line (perp. **≤ 2** pass; **> 2** fail).
+  2. Cover `blocker.x` on the **contiguous pre-contact airborne span**, inclusive — a vertex at `blocker.x` counts (sotd-15: 39→45 and 45→51). Post-contact / `cue_after` dashes do not count.
   3. If the blocker itself is within **2** of the CB–OB line, place `over` at `(blocker.x, blocker.y)` (overhead). That slack is the “collinear-ish” budget — not a Y tent.
-  4. If the blocker is **more than 2** off the CB–OB line, keep the hop on the line and still cover `blocker.x`; do not tent toward it. On-line-enough blocker is the prerequisite for “same x/y overhead.”
-- Tag the hopped ball `role: "blocker"`. If `role` is omitted, infer blocker = the non-primary object whose x is covered by the airborne span (so `blocked_lane` can exempt the hop).
+  4. If the blocker is **> 2** off the CB–OB line, keep the hop on the line and still cover `blocker.x`; do not tent toward it. On-line-enough blocker is the prerequisite for “same x/y overhead.”
+- Tag the **jumped-over blocker ball** (the obstacle, not the cue) `role: "blocker"`. Infer only if **exactly one** non-primary object (not `role: "object"` / `"prop"` / `"helper"`) lies within **2** of the airborne polyline. If zero or several candidates, require the explicit role (`jump_blocker_ambiguous`).
 - ground y ≈ cue / ball line — hop stays collinear-ish, not `cue.y + 5`
 
 ## QA flags (catalogue)
 
 1. `category==jump` && any **solid** segment midpoint with `|y - cue.y| >= 4` while x between CB and OB → **massé-shaped jump** (fail) `jump_zigzag`.
-2. `category==jump` && the **contiguous airborne span** (all `kind:airborne` / pre-contact dashed segments chained) does not cover `blocker.x` **inclusively** → **missing airborne** (fail). A shared endpoint at `blocker.x` is a pass.
-3. `category==jump` && any airborne vertex perp. distance from the CB–OB line ≳ **2** (e.g. tent apex `(45, 30.5)` vs line ~25.2) → **airborne tent** (fail) `jump_airborne_tent`.
-4. `category==jump` && min distance from the airborne polyline to blocker `(x, y)` ≳ **2**, while the blocker is within 2 of the CB–OB line → **hop misses blocker** (fail) `jump_misses_blocker`. (If the blocker is >2 off the line, flag 2 + 3 only — do not require the hop to leave the line.)
+2. `category==jump` && the **contiguous pre-contact airborne span** does not cover `blocker.x` **inclusively** → **missing airborne** (fail). Span members are segments with (`kind: "airborne"` **or** `style: "dashed"`) that occur **before primary-OB contact**. Both tags must be pre-contact. A shared endpoint at `blocker.x` is a pass. Post-contact airborne or dashed does not satisfy this.
+3. `category==jump` && any airborne vertex perp. distance from the CB–OB line **> 2** (e.g. tent apex `(45, 30.5)` vs line ~25.2) → **airborne tent** (fail) `jump_airborne_tent`. Boundary **= 2** is a pass.
+4. `category==jump` && min distance from the airborne polyline to blocker `(x, y)` **> 2**, while the blocker is **≤ 2** from the CB–OB line → **hop misses blocker** (fail) `jump_misses_blocker`. (If the blocker is **> 2** off the line, flag 2 + 3 only — do not require the hop to leave the line.)
 5. Combo drills: path must not pass through intervening object balls without contact segment (separate open QA).
 6. Diagram remount: key ShotMap by `shot.id` so layers don't stack when switching drills.
 

@@ -62,14 +62,14 @@ Copy this onto each `sotd-NN`. Pass/fail. Emit a `SotdProposeEnvelope` (`catalog
 
 - [ ] Balls in cloth **0–100 × 0–50** with clearance (`cue_off_table`, `ball_off_table`, `blocked_lane`)
 - [ ] `intended_path` continuity (connected, starts at CB, approaches OB)
-- [ ] `pocket_target` near a pocket and consistent with the object-leg end. **`pocket_unmakeable` only on direct single-OB pots** (outgoing ray from the **OB center**; walkthrough §3.5). Banks / combos / caroms / rail-first kicks use their category extras — do not fail them on a straight ghost → pocket model.
+- [ ] `pocket_target` near a pocket **when an object-leg exists**. Object-leg = last `kind: "object"`; **non-carom** `.to` fallback only. Caroms without an explicit object pocket leg skip `pocket_not_near` / `path_misses_pocket` / `pocket_unmakeable`. **`pocket_unmakeable`** = one driven primary OB, outgoing ray + incoming **segment/ray** (walkthrough §3.5). Banks / combos: category extras. **Kick:** rail-before-OB cue leg is exempt from the ghost model; a **direct object pot after contact** still gets the outgoing-ray check only.
 
 ### Jump contract (`RACKUP_JUMP_PATH_SPEC.md`) — all maps; **blocking** if `category === "jump"`
 
 - [ ] No solid massé-shaped kink over a blocker (`jump_zigzag`)
-- [ ] Contiguous airborne span **covers `blocker.x` inclusively** (`jump_needs_airborne`; vertex at `blocker.x` passes)
-- [ ] Ground segments stay straight; hop is takeoff → over-blocker → landing — collinear-ish (perp. ≤ 2), not a tent (`jump_airborne_tent`). If the blocker is within 2 of the CB–OB line, hop within 2 of blocker `(x, y)` (`jump_misses_blocker`)
-- [ ] Hopped ball tagged `role: "blocker"` (or inferred) so `blocked_lane` exempts the airborne span
+- [ ] Contiguous **pre-contact** airborne span **covers `blocker.x` inclusively** (`jump_needs_airborne`; vertex at `blocker.x` passes)
+- [ ] Ground segments stay straight; hop is takeoff → over-blocker → landing — collinear-ish (perp. **≤ 2** pass, **> 2** fail) (`jump_airborne_tent`). If the blocker is ≤ 2 of the CB–OB line, hop within 2 of blocker `(x, y)` (`jump_misses_blocker`)
+- [ ] **Jumped-over blocker ball** tagged `role: "blocker"` (infer only if unique **eligible blocker candidate**: not primary OB, not `object`/`prop`/`helper`, within 2 of the hop; else `jump_blocker_ambiguous`) so `blocked_lane` exempts that obstacle only
 - [ ] Ghost, if shown, is **derived or a rare pin** at post-landing OB contact — **not** on the hop; omit the pin unless derive would be wrong
 
 ### Ghost Ball contract (`RACKUP_GHOST_BALL_DIAGRAM_SPEC.md`) — cuts
