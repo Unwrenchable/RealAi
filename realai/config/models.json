@@ -1,4 +1,12 @@
 {
+  "notes": "Local Hive catalog only. Render api_server does not load this file. Runtime default_llm is ~/.realai/local_models.json (LocalModelManager). Weights live under REALAI_MODELS_DIR (default C:/models/checkpoints_lora on Windows). Linux CI must not require these GGUF paths to exist.",
+  "models_dir_env": "REALAI_MODELS_DIR",
+  "models_dir_default": "C:/models/checkpoints_lora",
+  "runtime_registry": "~/.realai/local_models.json",
+  "not_used_on_cloud": [
+    "C:/models/checkpoints_lora/registry.json",
+    "realai/config/models.json"
+  ],
   "models": [
     {
       "id": "qwen-coder-7b",
@@ -6,7 +14,7 @@
       "type": "chat",
       "provider": "local",
       "backend": "llama-cpp",
-      "path": "C:/realai/models/qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+      "path": "C:/models/checkpoints_lora/qwen2.5-coder-7b-instruct-q5_k_m.gguf",
       "default_llm": true,
       "context_length": 16384,
       "capabilities": ["chat", "coding", "tools"]
@@ -17,7 +25,7 @@
       "type": "chat",
       "provider": "local",
       "backend": "llama-cpp",
-      "path": "C:/llama-vulkan/models/realai-1.0/weights/realai-1.0-instruct-Q4_K_M.gguf",
+      "path": "C:/models/checkpoints_lora/realai-1.0-instruct-Q4_K_M.gguf",
       "default_llm": false,
       "context_length": 8192,
       "capabilities": ["chat", "reasoning", "tools"]
@@ -28,7 +36,7 @@
       "type": "chat",
       "provider": "local",
       "backend": "llama-cpp",
-      "path": "C:/realai/models/llama-local-1b-Q4_K_M.gguf",
+      "path": "C:/models/checkpoints_lora/llama-local-1b-Q4_K_M.gguf",
       "default_llm": false,
       "context_length": 8192,
       "capabilities": ["chat"]

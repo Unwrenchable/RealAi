@@ -35,7 +35,12 @@ class LocalModelManager:
     Manages local AI models: downloading, caching, loading, and inference.
 
     Models are stored in ~/.realai/models/ by default.
-    Configuration is stored in ~/.realai/local_models.json
+    Runtime ``default_llm`` is **only** read from ``~/.realai/local_models.json``
+    (this config_file). That is the registry ``api_server`` / ``RealAI`` loads.
+
+    Not loaded here (do not expect these on Render):
+    - ``C:\\models\\checkpoints_lora\\registry.json`` (PC Vulkan / Hive weights)
+    - repo ``realai/config/models.json`` (local catalog / docs)
     """
 
     def __init__(self, models_dir: Optional[str] = None):
