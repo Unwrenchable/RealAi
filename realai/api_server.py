@@ -33,7 +33,7 @@ from urllib.parse import urlparse, parse_qs, unquote
 from urllib import request as urlrequest
 
 from .cloud_fallback import (
-    first_configured_cloud_credentials,
+    env_credentials_for_request,
     vulkan_base as _vulkan_base,
     vulkan_forward_enabled as _vulkan_forward_enabled,
 )
@@ -845,12 +845,11 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
         )
         base_url = self.headers.get("X-Base-URL") or None
 
-        # Fall back to environment variables set by the GUI launcher / Render.
-        # Includes OPENAI_API_KEY as well as REALAI_*_API_KEY. When X-Provider
-        # is already realai/local, keep that identity and let RealAI bind
-        # cloud fallback internally if no GGUF is loaded.
+        # Fall back to environment keys. Explicit cloud X-Provider only gets
+        # that provider's key; self-host realai/local uses first configured
+        # cloud key for GGUF-miss fallback (bound later in RealAI).
         if not api_key:
-            found = first_configured_cloud_credentials()
+            found = env_credentials_for_request(provider)
             if found:
                 _env_provider, api_key = found
                 if not provider:

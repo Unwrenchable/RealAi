@@ -2160,14 +2160,19 @@ class RealAI:
             self.base_url = base_url
         self._api_format: str = getattr(self, "_api_format", None) or cfg.get("api_format", "openai")
         # The actual model name sent to the remote provider.
-        # Hive ids (realai-default-coder, *.gguf, …) map to the cloud default.
-        if self.provider and (
-            model_name == "realai-2.0"
-            or _cloud_fallback.looks_like_local_model_id(model_name)
+        # Hive ids remap only when cloud fallback was applied; keep explicit
+        # cloud ids (together llama-3, …). Always map leftover realai-2.0.
+        already = getattr(self, "_provider_model", None)
+        if self.provider and model_name == "realai-2.0":
+            self._provider_model: str = cfg.get("default_model", already or model_name)
+        elif (
+            self.provider
+            and getattr(self, "_cloud_fallback_applied", False)
+            and _cloud_fallback.looks_like_local_model_id(model_name)
         ):
-            self._provider_model: str = cfg.get("default_model", getattr(self, "_provider_model", model_name))
+            self._provider_model = cfg.get("default_model", already or model_name)
         else:
-            self._provider_model = getattr(self, "_provider_model", None) or model_name
+            self._provider_model = already or model_name
         self.response_contract_version = "2026-04-08"
         self.persona = "balanced"
         self._web_research_cache: Dict[str, Dict[str, Any]] = {}
@@ -2349,7 +2354,7 @@ class RealAI:
         if persona_prompt:
             messages_to_send = [{"role": "system", "content": persona_prompt}] + messages_to_send
 
-        local_loaded = False
+        used_local = False
         # Try local model first if enabled
         if self._use_local and self._llm_engine:
             try:
@@ -2360,7 +2365,6 @@ class RealAI:
                         self._llm_engine.load_model(default_llm)
 
                 if self._llm_engine.is_loaded():
-                    local_loaded = True
                     response_text = self._llm_engine.chat_completion(
                         messages_to_send,
                         max_tokens=max_tokens or 512,
@@ -2368,6 +2372,7 @@ class RealAI:
                     )
 
                     if response_text:
+                        used_local = True
                         return self._with_metadata({
                             "id": f"chatcmpl-local-{int(time.time())}",
                             "object": "chat.completion",
@@ -2391,9 +2396,8 @@ class RealAI:
             except Exception as e:
                 # Fall through to API or placeholder if local model fails
                 print(f"Local model inference failed: {e}")
-                local_loaded = False
 
-        if not local_loaded:
+        if not used_local:
             _cloud_fallback.apply_cloud_fallback_to_instance(
                 self, PROVIDER_CONFIGS, local_ready=False
             )
@@ -2495,7 +2499,7 @@ class RealAI:
         Returns:
             Dict[str, Any]: Text completion response
         """
-        local_loaded = False
+        used_local = False
         # Try local model first if enabled
         if self._use_local and self._llm_engine:
             try:
@@ -2506,7 +2510,6 @@ class RealAI:
                         self._llm_engine.load_model(default_llm)
 
                 if self._llm_engine.is_loaded():
-                    local_loaded = True
                     response_text = self._llm_engine.generate(
                         prompt,
                         max_tokens=max_tokens or 512,
@@ -2514,6 +2517,7 @@ class RealAI:
                     )
 
                     if response_text:
+                        used_local = True
                         return self._with_metadata({
                             "id": f"cmpl-local-{int(time.time())}",
                             "object": "text_completion",
@@ -2534,9 +2538,8 @@ class RealAI:
             except Exception as e:
                 # Fall through to API or placeholder if local model fails
                 print(f"Local model inference failed: {e}")
-                local_loaded = False
 
-        if not local_loaded:
+        if not used_local:
             _cloud_fallback.apply_cloud_fallback_to_instance(
                 self, PROVIDER_CONFIGS, local_ready=False
             )
