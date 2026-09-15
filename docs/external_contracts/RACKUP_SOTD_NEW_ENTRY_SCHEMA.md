@@ -4,7 +4,7 @@
 **For:** roc / Rack_em_up Nest ingest + RealAI emitters  
 **Status:** Ingest contract **1.0** — JSON only  
 **Walkthrough:** `RACKUP_SOTD_GENERATION_WALKTHROUGH.md`  
-**Geometry:** `RACKUP_JUMP_PATH_SPEC.md`, `RACKUP_GHOST_BALL_DIAGRAM_SPEC.md`
+**Geometry:** `RACKUP_JUMP_PATH_SPEC.md`, `RACKUP_GHOST_BALL_DIAGRAM_SPEC.md`, `RACKUP_MASSE_CURVE_SPEC.md`
 
 RealAI emits this envelope. RackUp merges into Nest modules. Draw stays RackUp-owned.
 
@@ -110,12 +110,12 @@ export type SotdShotMap = {
   coordinate_system: { x: string; y: string; units: string };
   source: SotdIngestSource; // envelope; see §1.3 for Nest mapping
   ascii_table?: string;     // optional short; Nest live field is string
-  ghost_ball?: SotdGhostBall;     // additive — Ghost Ball spec
-  contact_point?: SotdPoint;      // additive — OB surface touch
+  ghost_ball?: SotdGhostBall;     // rare pin — Ghost Ball spec; omit = SPA derive
+  contact_point?: SotdPoint;      // rare pin — OB surface touch; omit = derive
 };
 ```
 
-`ghost_ball` / `contact_point` are **not** on live `SotdShotMap` today. They are additive per `RACKUP_GHOST_BALL_DIAGRAM_SPEC.md`. roc mirrors them in Nest + `rackup-web/src/lib/types.ts` when ingesting.
+`ghost_ball` / `contact_point` are **not** on live `SotdShotMap` today. They are additive **rare pins** per `RACKUP_GHOST_BALL_DIAGRAM_SPEC.md` — catalogue default is omit + SPA `showGhost`. roc mirrors them in Nest + `rackup-web/src/lib/types.ts` when ingesting.
 
 ### 1.2 Required vs optional
 
@@ -144,9 +144,9 @@ export type SotdShotMap = {
 | Field | When |
 |-------|------|
 | `ascii_table` | Short legend OK; omit allowed on ingest |
-| `ghost_ball` | Cuts 12–78° that need aim clarity; offset placement **4.4** |
-| `contact_point` | Explicit CB–OB touch on OB surface |
-| `intended_path[].style` / `kind` | Required in practice for **jump** (airborne dashed) |
+| `ghost_ball` | **Rare pin only** — emit when SPA derive / `showGhost` would be **wrong**. Cuts 12–78° otherwise omit; offset if pinned **4.4** |
+| `contact_point` | **Rare pin** — explicit CB–OB touch; omit = midpoint derive |
+| `intended_path[].style` / `kind` | Required in practice for **jump** (airborne dashed, collinear over blocker) |
 
 Pinned `coordinate_system` (copy this unless the table aspect changes):
 
@@ -170,9 +170,9 @@ Do not write `"catalog_fallback"` into `sotd-shot-maps.ts` as a raw string until
 ### 1.4 `intended_path` rules (geometry, not draw)
 
 - Segments must chain: `to` of *n* ≈ `from` of *n+1* (gap ≤ 1.6).
-- Jump: dashed `airborne` over blocker; never a solid massé kink — `RACKUP_JUMP_PATH_SPEC.md`.
-- Curve / massé: **do not** use `kind: "airborne"` for cloth swerve.
-- Object path last `.to` must agree with `pocket_target`.
+- Jump: dashed `airborne` **straight through/over** the blocker plan-view `(x, y)`; never a solid or dashed tent / zigzag — `RACKUP_JUMP_PATH_SPEC.md`.
+- Curve / massé: **smooth curve** (dense samples or renderer curve), not a polyline tent; **do not** use `kind: "airborne"` for cloth swerve — `RACKUP_MASSE_CURVE_SPEC.md`.
+- Object path last `.to` must agree with `pocket_target`, and contact geometry must be able to send the OB to that pocket (walkthrough §3.5).
 
 ### 1.5 Example `map` (cut with ghost; illustrative)
 
@@ -211,13 +211,11 @@ Do not write `"catalog_fallback"` into `sotd-shot-maps.ts` as a raw string until
     "units": "normalized table percent (9-foot aspect 2:1)"
   },
   "source": "catalog_fallback",
-  "ascii_table": "C → 1 → side-near. Legend: C=cue 1=object O=pocket",
-  "ghost_ball": { "x": 50, "y": 16.4, "show": true },
-  "contact_point": { "x": 50, "y": 14.2 }
+  "ascii_table": "C → 1 → side-near. Legend: C=cue 1=object O=pocket"
 }
 ```
 
-Ghost numbers above are schematic. Live derive: `ghostBall = OB - normalize(aimTarget - OB) * 4.4`.
+No `ghost_ball` / `contact_point` — SPA derive / `showGhost` is the default (`ghostBall = OB - normalize(aimTarget - OB) * 4.4`). A rare pin (only when that derive would be wrong) looks like `"ghost_ball": { "x": 50, "y": 16.4, "show": true }` plus optional `contact_point`.
 
 ---
 
@@ -370,13 +368,13 @@ Walkthrough / Nest-aligned codes:
 | `blocked_lane` | Parked ball in corridor |
 | `path_disconnected` / `path_empty` | Continuity |
 | `path_not_from_cue` / `path_misses_object` | Path vs balls |
-| `jump_needs_airborne` / `jump_zigzag` | Jump QA |
-| `ghost_underivable` / `ghost_on_apex` | Cut ghost |
-| `pocket_missing` / `pocket_not_near` / `path_misses_pocket` | Pocket vs path end |
+| `jump_needs_airborne` / `jump_zigzag` / `jump_airborne_tent` | Jump QA (missing hop / solid kink / off-line tent) |
+| `ghost_underivable` / `ghost_on_apex` | Cut ghost (derive failed — not “pin missing”) |
+| `pocket_missing` / `pocket_not_near` / `path_misses_pocket` / `pocket_unmakeable` | Pocket vs path end **and** contact |
 | `bank_needs_rail` / `kick_needs_rail` | Cushion |
 | `combo_needs_two_balls` / `combo_bad_transfer` / `combo_blocked` | Combo |
 | `carom_no_redirect` | Carom |
-| `curve_used_jump_dash` | Massé/curve mis-tagged airborne |
+| `curve_used_jump_dash` / `curve_zigzag` | Massé/curve mis-tagged airborne or tent/zigzag |
 
 Merge-ready:
 
@@ -397,7 +395,7 @@ Merge-ready:
 }
 ```
 
-Fill `map` / `catalog` from §1–§2. Jump hop example: `RACKUP_JUMP_PATH_SPEC.md` sotd-15 replacement `intended_path`.
+Fill `map` / `catalog` from §1–§2. Jump hop example: `RACKUP_JUMP_PATH_SPEC.md` sotd-15 replacement `intended_path` (collinear over `(45, 25.2)`).
 
 ---
 

@@ -1,13 +1,15 @@
 # Ghost Ball diagram contract — RackUp SOTD maps
 
-**Date:** 2026-09-14  
+**Date:** 2026-09-15  
 **For:** roc / Rack_em_up (Nest + SPA) + RealAI catalogue corrections  
-**Related:** `RACKUP_JUMP_PATH_SPEC.md` (airborne stroke; ghost is contact geometry, not the hop)  
+**Related:** `RACKUP_JUMP_PATH_SPEC.md` (airborne stroke; ghost is contact geometry, not the hop), `RACKUP_MASSE_CURVE_SPEC.md` (cloth swerve is a smooth curve, not a tent)  
 **Scope:** Spec + diagram fields only. No Ghost Ball tutorial, site marketing, or instructional UI copy.
 
 When RealAI specifies or fixes shot diagrams, use **Ghost Ball aiming** for contact geometry.
 
-Live catalogue draw stays RackUp (`shot-map-geometry.ts`, `ShotMapDiagram.tsx`). RealAI does not draw SOTD at request time. This file is a schema ping — override fields are **additive**; Nest/SPA already derive ghost when the map omits them.
+**Primary path is always automatic:** Nest/SPA `deriveShotGeometry` / `showGhost`. Map `ghost_ball` / `contact_point` are **rare pins only**, not the catalogue default.
+
+Live catalogue draw stays RackUp (`shot-map-geometry.ts`, `ShotMapDiagram.tsx`). RealAI does not draw SOTD at request time. This file is a schema ping — override fields are **additive and rare**; Nest/SPA already derive ghost when the map omits them (the common case).
 
 ---
 
@@ -30,9 +32,9 @@ Use **4.4** for Ghost Ball center-to-center offset (OB → ghost CB). This is in
 
 ---
 
-## Optional map-level override (`SotdShotMap`)
+## Rare map-level pin (`SotdShotMap`) — not the default
 
-`SotdShotMap` today has **no** `ghost_ball` field. The fields below are **additive**. Prefer them when present; else derive as today.
+`SotdShotMap` today has **no** `ghost_ball` field. The fields below are **additive**. Catalogue maps **omit** them and let the SPA derive. Emit a pin **only** when live derive would be wrong (wrong aim target, combo first-OB pin, or a known derive bug). When a pin is present, the renderer prefers it.
 
 ```ts
 ghost_ball?: {
@@ -54,7 +56,7 @@ Mirror in:
 
 ---
 
-## Derived geometry (SPA source of truth when map omits override)
+## Derived geometry (SPA source of truth — the default)
 
 Nest/SPA already compute this in `shot-map-geometry.ts`:
 
@@ -88,9 +90,9 @@ showGhost = !isCombo && cut > 12 && cut < 78 && !railFirst;
 2. Ghost CB center sits on that line **behind** the OB (opposite pocket), at center-to-center distance = **4.4** map units.
 3. Real CB path aims through ghost center (or to ghost center for stun full-ball).
 4. Contact-point marker = midpoint between ghost CB center and OB center (touch point).
-5. Prefer map `ghost_ball` when present; else derive as today.
-6. Jump / airborne: ghost still applies to **OB contact after landing**; do not put ghost on the airborne apex (`RACKUP_JUMP_PATH_SPEC.md`).
-7. Combos: live renderer hides ghost (`showGhost` requires `!isCombo`). If a map forces `ghost_ball.show: true`, ghost is first OB → second ball (same **4.4** offset). Default remains hide.
+5. **Default:** derive (`showGhost`). Map `ghost_ball` / `contact_point` are rare pins — emit only when derive would be wrong. When a pin is present, prefer it.
+6. Jump / airborne: ghost still applies to **OB contact after landing**; do not put ghost on the airborne hop (`RACKUP_JUMP_PATH_SPEC.md`). The hop is collinear over the blocker in plan view — not an apex pin for ghost.
+7. Combos: live renderer hides ghost (`showGhost` requires `!isCombo`). A forced `ghost_ball.show: true` is a rare pin (first OB → second ball, same **4.4** offset). Default remains hide.
 
 ---
 
@@ -109,16 +111,18 @@ Live `ShotMapDiagram` at `geo.ghostBall` (or map `ghost_ball`):
 
 ## When RealAI corrects catalogue maps
 
-Include `ghost_ball` (+ optional `contact_point`) for **cut shots** that need aim clarity — not only path polylines.
+**Prefer auto.** Omit `ghost_ball` and `contact_point` on corrections so Nest/SPA derive / `showGhost` run. Do **not** stamp overrides onto every cut “for aim clarity.”
+
+Emit a map-level pin **only** when derive would be wrong. That is the exception, not the catalogue default.
 
 Do not emit ghost for:
 
 - rail-first shots (live `!railFirst`)
-- combo maps unless explicitly forcing first-OB → second-ball aim (`ghost_ball.show: true`)
-- the airborne apex of a jump (ghost belongs at post-landing OB contact)
+- combo maps unless a rare first-OB → second-ball pin is required (`ghost_ball.show: true`)
+- the airborne hop of a jump (ghost belongs at post-landing OB contact; hop is straight over the blocker, not an apex)
 
 ---
 
 ## Out of scope for RealAI
 
-No Rack_em_up code in this PR. roc wires Nest/SPA types + optional override read. Live derive stays the default when fields are omitted.
+No Rack_em_up code in this PR. roc wires Nest/SPA types + optional rare-pin read. Live derive / `showGhost` stays the default when fields are omitted.

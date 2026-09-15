@@ -107,7 +107,7 @@ All coach abilities (`coach`, `shot_of_the_day`, `rating_update`, …) use the e
 
 This file does not redefine them. Host only selects base URL + path.
 
-Jump / SOTD diagram stroke: `RACKUP_JUMP_PATH_SPEC.md`.
+Jump / SOTD diagram stroke: `RACKUP_JUMP_PATH_SPEC.md` (straight airborne over blocker). Ghost: `RACKUP_GHOST_BALL_DIAGRAM_SPEC.md` (auto derive). Massé: `RACKUP_MASSE_CURVE_SPEC.md` (smooth curve).
 
 ---
 

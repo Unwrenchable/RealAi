@@ -3,7 +3,7 @@
 **Date:** 2026-09-15  
 **For:** roc / Rack_em_up map-patch PR + RealAI reviewers  
 **Status:** Audit plan only — **no map JSON in this RealAI PR**  
-**Related:** `RACKUP_SOTD_GENERATION_WALKTHROUGH.md`, `RACKUP_SOTD_NEW_ENTRY_SCHEMA.md`, `RACKUP_JUMP_PATH_SPEC.md`, `RACKUP_GHOST_BALL_DIAGRAM_SPEC.md`
+**Related:** `RACKUP_SOTD_GENERATION_WALKTHROUGH.md`, `RACKUP_SOTD_NEW_ENTRY_SCHEMA.md`, `RACKUP_JUMP_PATH_SPEC.md`, `RACKUP_GHOST_BALL_DIAGRAM_SPEC.md`, `RACKUP_MASSE_CURVE_SPEC.md`
 
 This is deliverable **A** (plan). Walkthrough + schema are **B + C**. First **corrected map patches** land on **Rack_em_up** via a **separate PR**. Do not merge geometry into this RealAI docs PR.
 
@@ -38,12 +38,12 @@ Counts from `SOTD_SHOT_MAPS` (must stay 52 until ingest adds ids):
 
 | Batch | Category | IDs | Why first |
 |-------|----------|-----|-----------|
-| **1** | jump (4) | sotd-15, 32, 45, 50 | Known solid massé-shaped hop; airborne + ghost where applicable |
+| **1** | jump (4) | sotd-15, 32, 45, 50 | Known solid massé-shaped hop; airborne **straight over** blocker |
 | **2** | carom (2) | sotd-09, 25 | CB must hit first OB then redirect |
 | **3** | combo (5) | sotd-08, 18, 31, 40, 42 | No tunnel through intervening balls |
 | **4** | bank (8) + kick (7) | banks sotd-01, 13, 19, 21, 27, 34, 46, 51; kicks sotd-07, 17, 22, 28, 36, 39, 44 | Rail contact segments |
-| **5** | curve (4) + masse (1) | curve sotd-05, 14, 30, 37; masse sotd-16 | Never jump-dashed cloth swerve |
-| **6** | position (16) + novelty (5) | remaining ids below | Cuts → Ghost Ball; leftover QA |
+| **5** | curve (4) + masse (1) | curve sotd-05, 14, 30, 37; masse sotd-16 | Smooth curve; never tent / jump-dashed swerve |
+| **6** | position (16) + novelty (5) | remaining ids below | Cuts → auto Ghost Ball derive; leftover QA |
 
 Do not skip batch 1. Jump is the documented production bug (`RACKUP_JUMP_PATH_SPEC.md`).
 
@@ -62,19 +62,19 @@ Copy this onto each `sotd-NN`. Pass/fail. Emit a `SotdProposeEnvelope` (`catalog
 
 - [ ] Balls in cloth **0–100 × 0–50** with clearance (`cue_off_table`, `ball_off_table`, `blocked_lane`)
 - [ ] `intended_path` continuity (connected, starts at CB, approaches OB)
-- [ ] `pocket_target` near a pocket and consistent with object path end
+- [ ] `pocket_target` near a pocket, consistent with object path end, **and** physically sendable from contact along the aim line (`pocket_unmakeable` if the claimed pocket could not come from that contact)
 
 ### Jump contract (`RACKUP_JUMP_PATH_SPEC.md`) — all maps; **blocking** if `category === "jump"`
 
 - [ ] No solid massé-shaped kink over a blocker (`jump_zigzag`)
 - [ ] Has dashed `kind: "airborne"` (or dashed before contact) **crossing blocker.x** (`jump_needs_airborne`)
-- [ ] Ground segments stay straight; hop is takeoff → apex → landing
-- [ ] Ghost, if any, is post-landing OB contact — **not** the apex
+- [ ] Ground segments stay straight; hop is takeoff → **over blocker (x, y)** → landing — **collinear**, not an off-line tent (`jump_airborne_tent`)
+- [ ] Ghost, if shown, is **derived** at post-landing OB contact — **not** on the hop; do not pin `ghost_ball` unless derive would be wrong
 
 ### Ghost Ball contract (`RACKUP_GHOST_BALL_DIAGRAM_SPEC.md`) — cuts
 
-- [ ] Cut 12–78°, not rail-first, not combo (unless forced): `ghost_ball` present **or** derivable at offset **4.4**
-- [ ] `contact_point` optional; midpoint of ghost CB and OB if omitted
+- [ ] Cut 12–78°, not rail-first, not combo (unless a rare pin): Ghost Ball **derivable** at offset **4.4** (SPA `showGhost`). Map `ghost_ball` is **not** required
+- [ ] `contact_point` rare pin only; midpoint of ghost CB and OB if omitted
 - [ ] No ghost on rail-first; combo default hide
 - [ ] No tutorial / marketing copy added to `CatalogShot`
 
@@ -85,8 +85,8 @@ Copy this onto each `sotd-NN`. Pass/fail. Emit a `SotdProposeEnvelope` (`catalog
 - [ ] **Combo** — contact each transfer ball; no path through intervening balls without contact
 - [ ] **Bank** — rail contact on **object** path
 - [ ] **Kick** — rail contact on **cue** path before OB
-- [ ] **Curve / massé** — never `kind: "airborne"` for cloth swerve
-- [ ] **Position / novelty** — still run cloth + path + ghost-if-cut
+- [ ] **Curve / massé** — **smooth curve** (`RACKUP_MASSE_CURVE_SPEC.md`); never tent / zigzag; never `kind: "airborne"` for cloth swerve
+- [ ] **Position / novelty** — still run cloth + path + auto ghost-if-cut (derive, not a required pin)
 
 ### Emit / ingest
 
@@ -99,7 +99,7 @@ Copy this onto each `sotd-NN`. Pass/fail. Emit a `SotdProposeEnvelope` (`catalog
 
 ## 3. Batch 1 — jumps (priority)
 
-Known clone bug: solid apex `(45, 32)` on an otherwise straight CB→OB line. Reads as massé. Fix template in `RACKUP_JUMP_PATH_SPEC.md`.
+Known clone bug: solid apex `(45, 32)` on an otherwise straight CB→OB line. Reads as massé. A dashed tent at `(45, 30.5)` is the same plan-view fail. Fix template in `RACKUP_JUMP_PATH_SPEC.md` (collinear hop over the blocker).
 
 | id | name | difficulty | Cue (live) | Blocker | OB | Same bug |
 |----|------|------------|------------|---------|-----|----------|
@@ -108,16 +108,16 @@ Known clone bug: solid apex `(45, 32)` on an otherwise straight CB→OB line. Re
 | **sotd-45** | Elevator Jump Over the Rack Ghost | Insane | (24, 25.5) | #7 (45, 25.6) | #1 (70, 25.6) | YES |
 | **sotd-50** | Venom-Style Jump-Curve Tease | Insane | (26, 25) | #7 (45, 25.4) | #1 (70, 25.4) | YES — airborne still dashed; curve **after landing** only |
 
-Sibling template (scale to each `blocker.x`):
+Sibling template (scale to each `blocker.x`; **no off-line apex**):
 
-- takeoff.x = blocker.x − 6  
-- apex = (blocker.x, cue.y + 5) as **dashed airborne**  
-- landing.x = blocker.x + 6  
+- takeoff.x = blocker.x − 6; y on the CB–OB line  
+- over = `(blocker.x, blocker.y)` — same plan-view coords as the blocker (overhead)  
+- landing.x = blocker.x + 6; y on the CB–OB line  
 - ground y ≈ cue / ball line  
 
-After hop: add `ghost_ball` when the post-landing OB cut is in 12–78° and not rail-first.
+After hop: **do not** add a `ghost_ball` pin by default. SPA derives ghost at post-landing OB contact when the cut is in 12–78° and not rail-first.
 
-**sotd-15 replacement `intended_path`:** copy from `RACKUP_JUMP_PATH_SPEC.md` (do not re-invent).
+**sotd-15 replacement `intended_path`:** copy from `RACKUP_JUMP_PATH_SPEC.md` (collinear over `(45, 25.2)` — do not re-invent).
 
 ---
 
@@ -183,7 +183,7 @@ Checklist add: rail vertices + plausible reflection. **No ghost** on rail-first.
 | sotd-37 | Spin-to-Win Rail First | Hard | curve |
 | sotd-16 | Massé Orbit (Training Version) | Insane | masse |
 
-Checklist add: cloth swerve is **not** `kind: "airborne"`. `sotd-05` is a cut with inside english — Ghost Ball still applies if 12–78° and not rail-first. `sotd-37` is rail-first → no ghost.
+Checklist add: cloth swerve is a **smooth curve**, **not** a tent / zigzag, and **not** `kind: "airborne"`. `sotd-05` is a cut with inside english — SPA derives Ghost Ball if 12–78° and not rail-first (no pin required). `sotd-37` is rail-first → no ghost.
 
 ### Batch 6 — position (16) + novelty (5)
 
@@ -218,20 +218,20 @@ Checklist add: cloth swerve is **not** `kind: "airborne"`. `sotd-05` is a cut wi
 | sotd-47 | Coin Prop Freeze (Optional Prop) | Hard |
 | sotd-52 | Rapid-Fire Spot Shots | Medium |
 
-Checklist add: thin cuts (`sotd-10`, `sotd-26`, `sotd-38`, `sotd-48`, `sotd-49`, …) get Ghost Ball when in 12–78°. Straight stop/draw/follow: ghost usually **off** (cut too thick). Props (`sotd-47`) must stay on cloth with clearance.
+Checklist add: thin cuts (`sotd-10`, `sotd-26`, `sotd-38`, `sotd-48`, `sotd-49`, …) get **auto** Ghost Ball (`showGhost`) when in 12–78° — do not stamp `ghost_ball` unless derive would be wrong. Straight stop/draw/follow: ghost usually **off** (cut too thick). Props (`sotd-47`) must stay on cloth with clearance. Contact vs `pocket_target` must be sendable (`pocket_unmakeable`).
 
 ---
 
 ## 5. Tracking (for the Rack_em_up patch PR)
 
-Suggested columns: `id`, `batch`, `category`, `jump_ok`, `ghost_ok`, `path_ok`, `envelope_ok`, `merged`.
+Suggested columns: `id`, `batch`, `category`, `jump_ok`, `ghost_ok` (derivable, not pinned), `path_ok`, `makeable_ok`, `envelope_ok`, `merged`.
 
 Batch 1 (4 maps) is the first merge candidate. roc may ship sotd-15 alone, then siblings, then later batches.
 
 ```
-RealAI docs PR (this repo)     →  walkthrough + schema + this plan
-Rack_em_up map-patch PR (roc)  →  intended_path / ghost_ball / SHOT_CATALOG text
-Rack_em_up renderer PR (roc)   →  draw dashed airborne + optional ghost override
+RealAI docs PR (this repo)     →  walkthrough + schema + this plan + curve/jump/ghost contracts
+Rack_em_up map-patch PR (roc)  →  intended_path (straight jump hop / smooth massé) / SHOT_CATALOG text
+Rack_em_up renderer PR (roc)   →  dashed airborne **over** blocker + auto ghost derive + smooth curve draw
 ```
 
 Three PRs, three repos/surfaces. Do not combine map JSON into this RealAI PR.
