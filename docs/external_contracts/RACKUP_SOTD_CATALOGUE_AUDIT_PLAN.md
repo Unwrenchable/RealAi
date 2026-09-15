@@ -62,14 +62,15 @@ Copy this onto each `sotd-NN`. Pass/fail. Emit a `SotdProposeEnvelope` (`catalog
 
 - [ ] Balls in cloth **0–100 × 0–50** with clearance (`cue_off_table`, `ball_off_table`, `blocked_lane`)
 - [ ] `intended_path` continuity (connected, starts at CB, approaches OB)
-- [ ] `pocket_target` near a pocket, consistent with object path end, **and** physically sendable from contact along the aim line (`pocket_unmakeable` if the claimed pocket could not come from that contact)
+- [ ] `pocket_target` near a pocket and consistent with the object-leg end. **`pocket_unmakeable` only on direct single-OB pots** (outgoing ray from the **OB center**; walkthrough §3.5). Banks / combos / caroms / rail-first kicks use their category extras — do not fail them on a straight ghost → pocket model.
 
 ### Jump contract (`RACKUP_JUMP_PATH_SPEC.md`) — all maps; **blocking** if `category === "jump"`
 
 - [ ] No solid massé-shaped kink over a blocker (`jump_zigzag`)
-- [ ] Has dashed `kind: "airborne"` (or dashed before contact) **crossing blocker.x** (`jump_needs_airborne`)
-- [ ] Ground segments stay straight; hop is takeoff → **over blocker (x, y)** → landing — **collinear**, not an off-line tent (`jump_airborne_tent`)
-- [ ] Ghost, if shown, is **derived** at post-landing OB contact — **not** on the hop; do not pin `ghost_ball` unless derive would be wrong
+- [ ] Contiguous airborne span **covers `blocker.x` inclusively** (`jump_needs_airborne`; vertex at `blocker.x` passes)
+- [ ] Ground segments stay straight; hop is takeoff → over-blocker → landing — collinear-ish (perp. ≤ 2), not a tent (`jump_airborne_tent`). If the blocker is within 2 of the CB–OB line, hop within 2 of blocker `(x, y)` (`jump_misses_blocker`)
+- [ ] Hopped ball tagged `role: "blocker"` (or inferred) so `blocked_lane` exempts the airborne span
+- [ ] Ghost, if shown, is **derived or a rare pin** at post-landing OB contact — **not** on the hop; omit the pin unless derive would be wrong
 
 ### Ghost Ball contract (`RACKUP_GHOST_BALL_DIAGRAM_SPEC.md`) — cuts
 
@@ -108,12 +109,7 @@ Known clone bug: solid apex `(45, 32)` on an otherwise straight CB→OB line. Re
 | **sotd-45** | Elevator Jump Over the Rack Ghost | Insane | (24, 25.5) | #7 (45, 25.6) | #1 (70, 25.6) | YES |
 | **sotd-50** | Venom-Style Jump-Curve Tease | Insane | (26, 25) | #7 (45, 25.4) | #1 (70, 25.4) | YES — airborne still dashed; curve **after landing** only |
 
-Sibling template (scale to each `blocker.x`; **no off-line apex**):
-
-- takeoff.x = blocker.x − 6; y on the CB–OB line  
-- over = `(blocker.x, blocker.y)` — same plan-view coords as the blocker (overhead)  
-- landing.x = blocker.x + 6; y on the CB–OB line  
-- ground y ≈ cue / ball line  
+Sibling template: copy the jump spec (inclusive `blocker.x`, over-point precedence / 2-unit slack, `role: "blocker"`). Do not require exact blocker.y when it disagrees with the CB–OB line by a fraction (sotd-50).  
 
 After hop: **do not** add a `ghost_ball` pin by default. SPA derives ghost at post-landing OB contact when the cut is in 12–78° and not rail-first.
 
@@ -218,7 +214,7 @@ Checklist add: cloth swerve is a **smooth curve**, **not** a tent / zigzag, and 
 | sotd-47 | Coin Prop Freeze (Optional Prop) | Hard |
 | sotd-52 | Rapid-Fire Spot Shots | Medium |
 
-Checklist add: thin cuts (`sotd-10`, `sotd-26`, `sotd-38`, `sotd-48`, `sotd-49`, …) get **auto** Ghost Ball (`showGhost`) when in 12–78° — do not stamp `ghost_ball` unless derive would be wrong. Straight stop/draw/follow: ghost usually **off** (cut too thick). Props (`sotd-47`) must stay on cloth with clearance. Contact vs `pocket_target` must be sendable (`pocket_unmakeable`).
+Checklist add: thin cuts (`sotd-10`, `sotd-26`, `sotd-38`, `sotd-48`, `sotd-49`, …) get **auto** Ghost Ball (`showGhost`) when in 12–78° — do not stamp `ghost_ball` unless derive would be wrong. Straight stop/draw/follow: ghost usually **off** (cut too thick). Props (`sotd-47`) must stay on cloth with clearance. Direct pots: outgoing ray from the **OB center** to `pocket_target` (`pocket_unmakeable`).
 
 ---
 

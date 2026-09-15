@@ -83,8 +83,9 @@ Contract: `RACKUP_JUMP_PATH_SPEC.md`.
 | OB → pocket | `solid` | `object` |
 | CB after contact | `dashed` | `cue_after` |
 
-- [ ] Hop crosses **blocker.x** (takeoff.x < blocker.x < landing.x, or swapped if CB is foot-side) and stays **collinear-ish** with CB → blocker → OB. Dashed airborne goes **straight through/over** the blocker ball position (same x/y in plan view = overhead). Fail an off-line tent/apex (e.g. `(45, 30.5)` when blocker is `(45, 25.2)`).
-- [ ] Ghost Ball, if any, is **derived** at **post-landing OB contact** — never on the airborne hop (`RACKUP_GHOST_BALL_DIAGRAM_SPEC.md`). Do not emit a `ghost_ball` pin unless derive would be wrong.
+- [ ] Contiguous airborne span **covers `blocker.x` inclusively** (vertex at `blocker.x` counts; do not require a strict interior cross). Hop stays **collinear-ish** with the CB–OB line (perp. ≤ **2**). If the blocker is within 2 of that line, the hop passes within **2** of blocker `(x, y)` (overhead). Fail an off-line tent (e.g. `(45, 30.5)`). See jump spec template precedence (sotd-50 slack).
+- [ ] Tag the hopped ball `role: "blocker"` (or allow infer: non-primary object under the airborne span) so `blocked_lane` exempts the hop.
+- [ ] Ghost, if shown, is **derived or a rare pin** at **post-landing OB contact** — never on the airborne hop (`RACKUP_GHOST_BALL_DIAGRAM_SPEC.md`). Omit the pin unless derive would be wrong.
 - [ ] Known jump ids (priority): `sotd-15`, `sotd-32`, `sotd-45`, `sotd-50`.
 
 ### Cut → Ghost Ball
@@ -141,10 +142,10 @@ Run these after category rules. Envelope `validation.ok` is **true** only when e
 |------|------|--------------------------|
 | Cue on cloth | `cue_ball_start` in playing surface with inset (`BALL_INSET = 2.0`) | `cue_off_table` / `cue_missing` |
 | Object balls on cloth | every `object_ball_positions[]` in 0–100 × 0–50 with inset (~1.2) | `ball_off_table` |
-| Lane clearance | parked balls (blockers/props) are **not** in the travel corridor (`LANE_CLEARANCE = 2.4`) unless they are a **contact** or the segment is **airborne** over a `role: "blocker"` | `blocked_lane` |
+| Lane clearance | parked balls (blockers/props) are **not** in the travel corridor (`LANE_CLEARANCE = 2.4`) unless they are a **contact** or the segment is **airborne** over a jumped ball (`role: "blocker"`, or inferred — non-primary object whose x the airborne span covers) | `blocked_lane` |
 | At least one OB | `object_ball_positions.length >= 1` | `no_object_balls` |
 
-Ball diameter in cloth units: **2.25** (2.25″ on 100″ 9-ft cloth).
+Ball diameter in cloth units: **2.25** (2.25″ on 100″ 9-ft cloth) — **clearance / inset only**. Ghost center-to-center offset stays the live SPA pin **4.4** (`RACKUP_GHOST_BALL_DIAGRAM_SPEC.md`). Do not replace 4.4 with 2.25.
 
 ### 3.2 `intended_path` continuity
 
@@ -160,12 +161,13 @@ Ball diameter in cloth units: **2.25** (2.25″ on 100″ 9-ft cloth).
 
 | Flag | Pass | Fail code |
 |------|------|-----------|
-| Has airborne | some segment `kind === "airborne"` **or** `style === "dashed"` before OB contact, and that hop **crosses blocker.x** | `jump_needs_airborne` / `missing airborne` |
+| Has airborne | contiguous airborne span (`kind === "airborne"` **or** pre-contact `style === "dashed"`) **covers `blocker.x` inclusively** — a vertex at `blocker.x` is a pass | `jump_needs_airborne` / `missing airborne` |
 | No solid kink | no **solid/ground** vertex with bend > **28°** (`JUMP_ZIGZAG_MAX_DEG`) over the blocker | `jump_zigzag` |
 | Jump spec QA-1 | `category==jump` && solid midpoint with `\|y − cue.y\| ≥ 4` while x between CB and OB → **fail** | `jump_zigzag` |
-| Straight hop | airborne stays **collinear-ish** with CB → blocker → OB; hop through/over blocker `(x, y)` (overhead). Off-line tent (e.g. apex `(45, 30.5)` vs blocker `(45, 25.2)`) → **fail** | `jump_airborne_tent` |
+| No tent | airborne vertices stay within perp. **2** of the CB–OB line. Off-line tent (e.g. apex `(45, 30.5)`) → **fail** | `jump_airborne_tent` |
+| Over blocker | if blocker is within 2 of the CB–OB line, min distance from the airborne polyline to blocker `(x, y)` ≤ **2** | `jump_misses_blocker` |
 
-See `RACKUP_JUMP_PATH_SPEC.md` QA flags 1–3 and the sotd-15 replacement path (collinear over `(45, 25.2)`).
+See `RACKUP_JUMP_PATH_SPEC.md` QA flags 1–4 and the sotd-15 replacement path (collinear over `(45, 25.2)`).
 
 ### 3.4 Ghost Ball derivable for cuts 12–78° (auto default)
 
@@ -177,14 +179,31 @@ See `RACKUP_JUMP_PATH_SPEC.md` QA flags 1–3 and the sotd-15 replacement path (
 
 Cuts outside 12–78°, rail-first banks, and default combos: **pass** this flag without emitting ghost. **Do not** fail a cut for omitting `ghost_ball` when derive would be correct.
 
-### 3.5 `pocket_target` consistent with object path end **and** contact
+### 3.5 `pocket_target` vs object path (category-scoped)
+
+Universal when a pocket is claimed:
 
 | Flag | Pass | Fail code |
 |------|------|-----------|
 | Pocket exists | `pocket_target` set | `pocket_missing` |
 | Near a pocket | within **8** of a table pocket (jump may target a cloth-edge pocket) | `pocket_not_near` |
-| Path ends there | last segment `.to` within **8** of `pocket_target` | `path_misses_pocket` |
-| Contact can send | OB path from **contact** along the aim line (line of centers: ghost → OB → claimed pocket) reaches `pocket_target`. Fail if the diagram claims a pocket that contact could not send | `pocket_unmakeable` |
+| Path ends there | last **object-leg** `.to` within **8** of `pocket_target` | `path_misses_pocket` |
+
+`pocket_unmakeable` applies **only to direct single-OB pots** (typical `position` / `novelty` / `jump` / `curve` / `masse` when the object path is a straight OB → pocket with **no** rail or transfer):
+
+| Flag | Pass | Fail code |
+|------|------|-----------|
+| Outgoing ray | ray from the **primary OB center** toward `pocket_target` (not from `contact_point` — that marker is the incoming CB–OB touch, midpoint of ghost CB and OB) | `pocket_unmakeable` |
+| Aim agrees | derived (or rare-pin) ghost / aim target produces that same outgoing direction: ghost sits behind OB on the OB → pocket line | `pocket_unmakeable` |
+
+Do **not** run the straight ghost → OB → pocket model on:
+
+| Category | Use instead |
+|----------|-------------|
+| **bank** | §2 rail on the object path; `bank_needs_rail` |
+| **kick** | §2 rail on the CB path; after OB contact, if the object leg is a direct pot, then the direct-pot check applies to **that leg only** |
+| **combo** | transfer line; last driven ball → pocket (`combo_bad_transfer`) |
+| **carom** | first OB is not required to pocket; `carom_no_redirect` on the CB |
 
 Pocket centers (same as Nest `POCKETS`):
 
