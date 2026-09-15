@@ -19,8 +19,10 @@ const nextConfig = {
     // Local default only when not building for Vercel.
     NEXT_PUBLIC_API_URL:
       process.env.NEXT_PUBLIC_API_URL ||
+      process.env.NEXT_PUBLIC_REALAI_API ||
       process.env.REALAI_API_BASE ||
       (process.env.VERCEL ? "https://realai-api.onrender.com" : "http://127.0.0.1:8001"),
+    NEXT_PUBLIC_PROVIDER: process.env.NEXT_PUBLIC_PROVIDER || "realai",
     NEXT_PUBLIC_SITE_URL:
       process.env.NEXT_PUBLIC_SITE_URL ||
       (process.env.VERCEL_URL

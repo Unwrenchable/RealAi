@@ -113,7 +113,7 @@ C:\RealAI-clean\
 | [ABILITIES.md](./ABILITIES.md) | Ability / tool surface |
 | [ANY_REPO.md](./ANY_REPO.md) | Use RealAI from any project folder |
 | [QUICKSTART_LOCAL.md](./QUICKSTART_LOCAL.md) | Local quickstart |
-| [docs/sessions/PHASES.md](./docs/sessions/PHASES.md) | Phase tip / history |
+| [docs/selfhost-provider.md](./docs/selfhost-provider.md) | Self-host declares `X-Provider: realai` |
 
 ---
 

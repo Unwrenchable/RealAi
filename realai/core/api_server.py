@@ -12,6 +12,9 @@ Pass your provider API key in the standard ``Authorization: Bearer <key>``
 header.  RealAI auto-detects the provider from the key prefix and forwards
 requests to the real AI service.  You can also supply ``X-Provider`` to pick
 the provider explicitly, and ``X-Base-URL`` to override the endpoint.
+
+Self-host: unrecognized keys (no ``sk-`` / ``xai-`` / … prefix) default to
+provider ``realai`` (override with ``REALAI_PROVIDER``) instead of 400.
 """
 
 import hashlib
@@ -22,6 +25,7 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 from . import RealAI, PROVIDER_CONFIGS, PROVIDER_ENV_VARS, _KEY_PREFIX_TO_PROVIDER
 from .model_registry import MODEL_REGISTRY, get_model_metadata
+from realai.provider_resolve import resolve_request_provider
 
 # ---------------------------------------------------------------------------
 # Database helpers
@@ -244,6 +248,7 @@ header {
 <div class="settings-bar">
   <label for="provider-select">Provider</label>
   <select id="provider-select" onchange="onSettingChange()">
+    <option value="realai">RealAI (self-host)</option>
     <option value="auto">Auto-detect from key</option>
     <option value="openai">OpenAI</option>
     <option value="anthropic">Anthropic (Claude)</option>
@@ -327,7 +332,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 function loadSettings() {
   var key      = sessionStorage.getItem(KEY_STORE)     || '';
-  var provider = localStorage.getItem(PROVIDER_STORE) || 'auto';
+  var provider = localStorage.getItem(PROVIDER_STORE) || 'realai';
   document.getElementById('api-key-input').value = key;
   var ps = document.getElementById('provider-select');
   if ([].slice.call(ps.options).some(function(o){ return o.value === provider; })) {
@@ -376,6 +381,11 @@ function detectProvider(key) {
 function onKeyInput() {
   var key = document.getElementById('api-key-input').value;
   updateKeyStatus(key);
+  var currentProvider = document.getElementById('provider-select').value;
+  if (currentProvider === 'local' || currentProvider === 'realai') {
+    showProviderHint('');
+    return;
+  }
   // Auto-select provider when the key prefix is recognizable.
   var detected = detectProvider(key);
   var select = document.getElementById('provider-select');
@@ -491,7 +501,7 @@ function sendMessage() {
   document.getElementById('send-btn').disabled = true;
 
   var apiKey   = sessionStorage.getItem(KEY_STORE)    || localStorage.getItem(KEY_STORE) || '';
-  var provider = localStorage.getItem(PROVIDER_STORE) || 'auto';
+  var provider = localStorage.getItem(PROVIDER_STORE) || 'realai';
   var model    = document.getElementById('model-select').value || 'realai-2.0';
 
   var headers = { 'Content-Type': 'application/json' };
@@ -671,7 +681,13 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
         """
         auth = self.headers.get("Authorization", "")
         api_key = auth[len("Bearer "):].strip() if auth.startswith("Bearer ") else None
-        provider = self.headers.get("X-Provider") or None
+        # Explicit X-Provider wins; unknown Bearer keys default to self-host
+        # realai (REALAI_PROVIDER). Do not mutate headers.__dict__.
+        provider = resolve_request_provider(
+            self.headers.get("X-Provider"),
+            api_key,
+            _KEY_PREFIX_TO_PROVIDER,
+        )
         base_url = self.headers.get("X-Base-URL") or None
 
         # Fall back to environment variables set by the GUI launcher.
@@ -857,32 +873,10 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
             # response falls back to RealAI's placeholder regardless of model.
             model_name = body.get('model', 'realai-2.0')
 
-            # When the caller provides a Bearer token but no explicit
-            # X-Provider, attempt prefix-based detection.  If no prefix
-            # matches, return a clear 400 so the caller knows to pick a
-            # provider explicitly (e.g. via the web-UI dropdown or the
-            # X-Provider header) rather than silently receiving placeholder
-            # responses.
-            _auth_header = self.headers.get("Authorization", "")
-            _bearer_key = (
-                _auth_header[len("Bearer "):].strip()
-                if _auth_header.startswith("Bearer ")
-                else None
-            )
-            if _bearer_key and not (self.headers.get("X-Provider") or None):
-                _detected = any(
-                    _bearer_key.startswith(p)
-                    for p in _KEY_PREFIX_TO_PROVIDER
-                )
-                if not _detected:
-                    raise ValueError(
-                        "Cannot auto-detect provider from your API key. "
-                        "Please select a provider using the Provider dropdown "
-                        "in the web UI, or add an X-Provider header "
-                        "(openai, anthropic, grok, gemini, openrouter, "
-                        "mistral, together, deepseek, perplexity)."
-                    )
-
+            # Bearer + no X-Provider: prefix-detect, else default to self-host
+            # realai inside _get_model / resolve_request_provider. Unknown
+            # local keys must not 400 — Cloud UI and the embedded console
+            # both treat realai as the default provider.
             model = self._get_model(model_name=model_name)
 
             if parsed_path.path == '/v1/chat/completions':
@@ -1306,7 +1300,8 @@ def run_server(host: str = "0.0.0.0", port: int = 8000):
     print("  POST /v1/reflection/analyze")
     print("  POST /v1/agents/orchestrate")
     print("\nPass your API key via:  Authorization: Bearer <key>")
-    print("Override provider via:  X-Provider: openai|anthropic|grok|gemini|openrouter|mistral|together|deepseek|perplexity")
+    print("Override provider via:  X-Provider: realai|openai|anthropic|grok|gemini|openrouter|mistral|together|deepseek|perplexity")
+    print("Self-host default (no X-Provider, unrecognized key): REALAI_PROVIDER (realai)")
     print("Override base URL via:  X-Base-URL: https://...")
     print("\nPress Ctrl+C to stop the server")
     print("="*60)
