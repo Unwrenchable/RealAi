@@ -52,7 +52,7 @@ For `category === 'jump'`:
 - Build `cueAirborne` from segments with `kind==='airborne'` OR `style==='dashed'` before contact.
 - Keep `cueApproach` as solid ground pieces only (do not include airborne midpoints in the solid path).
 - Airborne points stay **collinear-ish** with the CB–OB line (perp. ≤ 2). The hop goes **straight through/over** the blocker in plan view (overhead). Do **not** synthesize an off-line tent apex. If the blocker is within 2 of the line, `over` may sit at blocker `(x, y)` even when that y disagrees slightly with the interpolated CB–OB y.
-- Fallback if maps not yet tagged: detect the hopped ball (`role: "blocker"` or infer) on/near the CB–OB line and synthesize takeoff / over-blocker / landing (same coords as below). Tag `role: "blocker"` on emit.
+- Fallback if maps not yet tagged: detect the **jumped-over blocker ball** (`role: "blocker"`, or the unique object within 2 of the hop) on/near the CB–OB line and synthesize takeoff / over-blocker / landing. Tag `role: "blocker"` on emit.
 
 ## Diagram (`ShotMapDiagram.tsx`)
 
