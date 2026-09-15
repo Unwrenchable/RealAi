@@ -19,6 +19,7 @@ First-class **living** RealAI plugin for the RackUp pool app.
 | `video_analysis` | Structured feedback from host checklist/notes |
 | `matchmaking` | Candidate ranking by rating/style/form |
 | `rating_intel` | Trajectory, volatility, next-band distance |
+| `player_card_sync` | Unified Player Card (ROC Glicko + Fargo + shadow RackUpRate) |
 | `tournament` | Event prep + league notes |
 | `hall_context` | Hall cloth/noise/session adaptations |
 

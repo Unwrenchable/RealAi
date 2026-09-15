@@ -374,6 +374,15 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "modules": ["abilities/rackup/rating_intel.py", "plugins/rackup_coach/abilities/rating_intel.py", "plugins/rackup_coach"],
     },
     {
+        "id": "player_card_sync",
+        "name": "unified player card sync",
+        "pillar": "advanced",
+        "keywords": ["player card", "player_card_sync", "unified player card", "fargo", "rackup"],
+        "status": "LIVE",
+        "live_path": "POST /v1/tools/execute ability.player_card_sync + rackup_invoke",
+        "modules": ["abilities/rackup/player_card_sync.py", "plugins/rackup_coach/abilities/player_card_sync.py", "plugins/rackup_coach"],
+    },
+    {
         "id": "sotd_contribute",
         "name": "sotd contribute",
         "pillar": "advanced",

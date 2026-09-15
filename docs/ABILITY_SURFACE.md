@@ -110,6 +110,7 @@ Generated: `2026-09-08T14:49:34.814847+00:00`
 | `pyramid_rules` | pyramid rules | **LIVE** | `POST /v1/tools/execute ability.pyramid_rules + rackup_invoke` |
 | `rating_convert` | rating convert | **LIVE** | `POST /v1/tools/execute ability.rating_convert + rackup_invoke` |
 | `rating_intel` | rating intel | **LIVE** | `POST /v1/tools/execute ability.rating_intel + rackup_invoke` |
+| `player_card_sync` | unified player card sync | **LIVE** | `POST /v1/tools/execute ability.player_card_sync + rackup_invoke` |
 | `sotd_contribute` | sotd contribute | **LIVE** | `POST /v1/tools/execute ability.sotd_contribute + rackup_invoke` |
 | `video_analysis` | video analysis | **LIVE** | `POST /v1/tools/execute ability.video_analysis + rackup_invoke` |
 | `desktop_lambda_chat` | desktop lambda chat | **LIVE** | `POST /v1/tools/execute ability.desktop_lambda_chat` |

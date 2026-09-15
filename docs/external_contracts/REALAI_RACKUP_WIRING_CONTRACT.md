@@ -4,7 +4,7 @@
 **Date:** 2026-08-05  
 **Audience:** RackUp NestJS engineers (integration) + RealAI maintainers  
 **RealAI branch:** `unification/ultimate-all` (rackup-coach **v1.4.0** — ROC formats + continuous BCA-style rating + cross-league convert)  
-**Related:** `ROC_SYSTEM_DESIGN.md`, `REALAI_ROC_ALIGNMENT_REPORT.md`  
+**Related:** `ROC_SYSTEM_DESIGN.md`, `REALAI_ROC_ALIGNMENT_REPORT.md`, [`RACKUP_UNIFIED_PLAYER_CARD.md`](./RACKUP_UNIFIED_PLAYER_CARD.md) (APA + Fargo + RackUp parallel card)  
 **Purpose:** Production bridge so RackUp runs **all player-level intelligence** on RealAI as its **Intelligence Provider**.
 
 ---
@@ -920,6 +920,7 @@ RackUp should log `plugin` + RealAI git SHA / health in admin for support.
 | `pyramid_rules` | Rules + race help |
 | `sotd_contribute` | Grow SOTD library |
 | `rating_intel` | Trajectory analytics |
+| `player_card_sync` | Unified Player Card — see `RACKUP_UNIFIED_PLAYER_CARD.md` |
 | `tournament` | Event prep |
 | `hall_context` | Hall/session adaptations |
 
@@ -950,6 +951,14 @@ RackUp should log `plugin` + RealAI git SHA / health in admin for support.
 | Extra ability | `roc_info` — formats + provider boundary |
 
 Pass on ROC calls when available: `format`, `game_style`, `roc_league_id`, `season_id`, `session_id`, `match_id`, `player_ids_json`, continuous `rating`, `league_ratings`.
+
+---
+
+## 16. Unified Player Card (v1.7)
+
+**Contract:** [`RACKUP_UNIFIED_PLAYER_CARD.md`](./RACKUP_UNIFIED_PLAYER_CARD.md)
+
+`player_card_sync` returns parallel fields: **ROC Glicko** (`users.rating`, 500-band, `rating_update` owns math) + **Fargo read-only** (Nest HTTP) + optional **RackUpRate shadow** + `apa_sl` / `bca` / `tap`. Leagues v2 **0–3000** is a separate continuum — never copied onto ROC. No Fargo invention, no APA without token, no LMS submit.
 
 ---
 
