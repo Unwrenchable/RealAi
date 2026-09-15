@@ -135,7 +135,7 @@ export type SotdShotMap = {
 | `intended_path` | array; each `{ from, to, style?, kind? }` |
 | `english` | `{ tip_zone, sidespin, backspin, follow, label }` |
 | `landing_zones` | array of `{x,y,label}` (e.g. `pocket`, `cb_rest`) |
-| `pocket_target` | `{x,y}` near a pocket |
+| `pocket_target` | `{x,y}` near a pocket (required on live Nest, including caroms — see §1.4) |
 | `coordinate_system` | see pin below |
 | `source` | `"realai"` \| `"catalog_fallback"` |
 
@@ -146,7 +146,7 @@ export type SotdShotMap = {
 | `ascii_table` | Short legend OK; omit allowed on ingest |
 | `ghost_ball` | **Rare pin only** — emit when SPA derive / `showGhost` would be **wrong**. Cuts 12–78° otherwise omit; offset if pinned **4.4** |
 | `contact_point` | **Rare pin** — explicit CB–OB touch; omit = midpoint derive |
-| `intended_path[].style` / `kind` | Required in practice for **jump** (airborne dashed, collinear over blocker) |
+| `intended_path[].style` / `kind` | Required in practice for **jump** (airborne dashed) and for the pocket-bearing **`kind: "object"`** leg when a pocket is claimed |
 
 Pinned `coordinate_system` (copy this unless the table aspect changes):
 
@@ -172,8 +172,9 @@ Do not write `"catalog_fallback"` into `sotd-shot-maps.ts` as a raw string until
 - Segments must chain: `to` of *n* ≈ `from` of *n+1* (gap ≤ 1.6).
 - Jump: dashed `airborne` **straight through/over** the blocker plan-view `(x, y)`; never a solid or dashed tent / zigzag — `RACKUP_JUMP_PATH_SPEC.md`.
 - Curve / massé: **smooth curve** (dense samples or renderer curve), not a polyline tent; **do not** use `kind: "airborne"` for cloth swerve — `RACKUP_MASSE_CURVE_SPEC.md`.
-- Object path last `.to` must agree with `pocket_target` when a pocket is claimed.
-- `pocket_unmakeable` is **direct single-OB pots only** (outgoing ray from the **OB center**, not from `contact_point`) — walkthrough §3.5. Do not apply the straight ghost → OB → pocket model to bank / combo / carom (or to a kick’s rail-before-OB cue path).
+- Object-leg selection: last `kind: "object"`, else last `.to` within 8 of `pocket_target` (walkthrough §3.5). Emit `kind: "object"` on that leg when a pocket is claimed.
+- `pocket_target` stays required (live Nest). On **carom**, it is the diagram / CB-or-second-ball target — skip `path_misses_pocket` and `pocket_unmakeable` unless a `kind: "object"` pocket leg exists.
+- `pocket_unmakeable` is **one driven primary OB** only (exclude blocker/prop/helper), outgoing ray from the **OB center** plus **incoming approach from the ghost side** — walkthrough §3.5. Banks / combos / caroms: category flags. Kicks: outgoing object-leg ray only; no ghost check on the rail-before-OB cue path.
 
 ### 1.5 Example `map` (cut, auto-derived ghost; no map pin)
 
@@ -369,7 +370,7 @@ Walkthrough / Nest-aligned codes:
 | `blocked_lane` | Parked ball in corridor |
 | `path_disconnected` / `path_empty` | Continuity |
 | `path_not_from_cue` / `path_misses_object` | Path vs balls |
-| `jump_needs_airborne` / `jump_zigzag` / `jump_airborne_tent` / `jump_misses_blocker` | Jump QA (missing hop / solid kink / tent / hop misses on-line blocker) |
+| `jump_needs_airborne` / `jump_zigzag` / `jump_airborne_tent` / `jump_misses_blocker` / `jump_blocker_ambiguous` | Jump QA (missing hop / kink / tent / miss / untagged obstacle) |
 | `ghost_underivable` / `ghost_on_apex` | Cut ghost (derive failed — not “pin missing”) |
 | `pocket_missing` / `pocket_not_near` / `path_misses_pocket` / `pocket_unmakeable` | Pocket vs path end; `pocket_unmakeable` = direct single-OB pots only |
 | `bank_needs_rail` / `kick_needs_rail` | Cushion |
