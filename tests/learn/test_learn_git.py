@@ -271,6 +271,8 @@ class TestCraftLearnHook(unittest.TestCase):
         self.assertTrue(plans[0][1]["write"])
         self.assertIn("some-repo", plans[0][1]["source"])
         self.assertIn("/learn", HELP)
+        self.assertIn("local-folder-OR-git-URL", HELP)
+        self.assertIn(r"C:\path\to\folder", HELP)
         self.assertNotIn("heal", plans[0][0])
         self.assertTrue(plans[0][1].get("all_branches"))
         self.assertEqual(plans[0][1].get("max_files"), FINGERPRINT_CAP)
@@ -286,6 +288,66 @@ class TestCraftLearnHook(unittest.TestCase):
         self.assertFalse(args["all_branches"])
         self.assertEqual(args["max_files"], 100)
         self.assertEqual(args["max_branches"], 5)
+
+    def test_plan_tools_learn_windows_drive_and_spaces(self):
+        from realai.cli.craft import plan_tools
+        from realai.learn_git import parse_learn_tokens, split_learn_rest
+
+        tokens = split_learn_rest(r"C:\path\to\folder")
+        self.assertEqual(tokens, [r"C:\path\to\folder"])
+        ns = parse_learn_tokens(tokens)
+        self.assertEqual(ns.source, r"C:\path\to\folder")
+
+        quoted = split_learn_rest(r'"C:\Program Files\My Repo" --write')
+        self.assertEqual(quoted[0], r"C:\Program Files\My Repo")
+        ns2 = parse_learn_tokens(quoted)
+        self.assertEqual(ns2.source, r"C:\Program Files\My Repo")
+        self.assertTrue(ns2.write)
+
+        spaced = parse_learn_tokens(split_learn_rest(r"C:\path\to\my folder"))
+        self.assertEqual(spaced.source, r"C:\path\to\my folder")
+
+        plans = plan_tools(r'/learn "C:\path with spaces\repo"')
+        self.assertEqual(len(plans), 1)
+        self.assertEqual(plans[0][1]["source"], r"C:\path with spaces\repo")
+
+
+class TestLocalFolderKind(unittest.TestCase):
+    def test_existing_folder_with_spaces_is_kind_local(self):
+        from realai.learn.source import resolve_source
+
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        folder = Path(tmp.name) / "my repo"
+        folder.mkdir()
+        (folder / "README.md").write_text("# hi\n", encoding="utf-8")
+        cache = Path(tmp.name) / "cache"
+        cache.mkdir()
+        out = resolve_source(str(folder), cache_dir=cache)
+        self.assertTrue(out["ok"], out)
+        self.assertEqual(out["kind"], "local")
+        self.assertEqual(Path(out["path"]), folder.resolve())
+
+    def test_cli_help_says_local_folder_or_git_url(self):
+        cmd = [sys.executable, "-m", "realai.learn_git", "--help"]
+        r = subprocess.run(cmd, capture_output=True, text=True, check=False)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        blob = (r.stdout or "") + (r.stderr or "")
+        self.assertRegex(blob, r"(?i)local folder OR git URL")
+        self.assertIn("kind=local", blob)
+
+    def test_quoted_source_strips_in_resolve(self):
+        from realai.learn.source import resolve_source
+
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        folder = Path(tmp.name) / "repo"
+        folder.mkdir()
+        cache = Path(tmp.name) / "cache"
+        cache.mkdir()
+        out = resolve_source(f'"{folder}"', cache_dir=cache)
+        self.assertTrue(out["ok"], out)
+        self.assertEqual(out["kind"], "local")
 
 
 class TestCloneFlags(unittest.TestCase):

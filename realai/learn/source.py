@@ -257,6 +257,8 @@ def resolve_source(
 ) -> dict[str, Any]:
     """Return a local tree to scan. Never deletes user data; cache only."""
     raw = (source or ".").strip() or "."
+    if len(raw) >= 2 and raw[0] == raw[-1] and raw[0] in {'"', "'"}:
+        raw = raw[1:-1].strip() or "."
     expanded = Path(raw).expanduser()
     if expanded.exists():
         path = expanded.resolve()

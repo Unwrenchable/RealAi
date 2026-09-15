@@ -33,6 +33,18 @@ def test_help():
     assert "agents" in result.output
     assert "multi" in result.output
     assert "stack" in result.output
+    assert "learn" in result.output.lower()
+
+
+def test_learn_help():
+    runner = CliRunner()
+    result = runner.invoke(cli, ["learn", "--help"])
+    assert result.exit_code == 0
+    out = result.output
+    low = out.lower()
+    assert "local folder" in low
+    assert "git url" in low or "git_url" in low
+    assert r"C:\path\to\folder" in out or "C:\\path\\to\\folder" in out
 
 
 def test_default_invokes_status_shape():

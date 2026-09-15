@@ -61,17 +61,17 @@ def capability_card() -> str:
     ag = str(agents) if agents is not None else "200+"
 
     return (
-        "Hey — RealAI here, running local on this PC.\n"
+        "Hey - RealAI here, running local on this PC.\n"
         "\n"
-        "Talk normally. I'll use tools when I need files or actions.\n"
-        f"• Chat + code + repo work on this machine\n"
-        f"• Tools & abilities ({tl} tools · {ab} abilities · {ag} agents)\n"
-        "• Speak aloud (Kokoro — toggle SPEAK)\n"
+        "Talk normally. I'll pick tools, abilities, and hive agents when the ask needs them.\n"
+        f"- Chat + code + repo work on this machine\n"
+        f"- Tools & abilities ({tl} tools / {ab} abilities / {ag} agents)\n"
+        "- Speak aloud (Kokoro - toggle SPEAK)\n"
         "\n"
-        "Ask in plain English — e.g. “what's in console.html”, “fix the hive health check”, "
-        "“list the repo”. I won't invent file contents; if a tool fails I'll say so.\n"
+        "Ask in plain English - e.g. what's in console.html, audit this repo, "
+        "learn from this folder. I won't invent file contents; if a tool fails I'll say so.\n"
         "\n"
-        "Power features (heal / multi / hive) live under Advanced if you want them.\n"
+        "Advanced is optional - a dock that shows what ran. You don't need it to work.\n"
         "What do you want to do?"
     )
 

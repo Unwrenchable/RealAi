@@ -8,7 +8,7 @@ from realai.learn.scan import DEFAULT_MAX_BRANCHES, FINGERPRINT_CAP
 
 
 @click.command("learn")
-@click.argument("source", required=False, default=".")
+@click.argument("source", required=False, default=".", metavar="LOCAL_FOLDER_OR_GIT_URL")
 @click.option("--write", is_flag=True, help="Scaffold or upgrade plugins/<slug>_coach/")
 @click.option("--refresh", is_flag=True, help="Wipe disposable clone cache then reclone")
 @click.option(
@@ -33,7 +33,18 @@ from realai.learn.scan import DEFAULT_MAX_BRANCHES, FINGERPRINT_CAP
 )
 @click.pass_obj
 def learn_cmd(ctx, source, write, refresh, all_branches, max_branches, max_files):
-    """Scan a git source (all branches) and write a learning packet (offline, no heal)."""
+    """Scan a local folder OR git URL (all branches) and write a learning packet.
+
+    Local folders that exist on disk stay kind=local (no clone). HTTPS / owner/repo
+    clone into a disposable cache. Offline: never starts heal / GPU / orch.
+
+    \b
+    Examples:
+      realai learn C:\\path\\to\\folder
+      realai learn "C:\\path with spaces\\repo"
+      realai learn ./my-repo
+      realai learn https://github.com/org/repo
+    """
     try:
         from realai.learn.pipeline import run_learn
 

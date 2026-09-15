@@ -2661,6 +2661,7 @@ class Handler(BaseHTTPRequestHandler):
                                 "provider": "realai",
                                 "operator": "natural",
                                 "natural": ground,
+                                "used_tools": ground.get("used_tools") or ground.get("tools") or [],
                                 "routing": body.get("realai_routing"),
                             },
                         }
@@ -2758,6 +2759,11 @@ class Handler(BaseHTTPRequestHandler):
                         "memory_injected": body.get("realai_memory_injected", False),
                         "multi_agent_requested": bool(body.get("realai_multi_agent")),
                         "natural": body.get("realai_natural"),
+                        "used_tools": (
+                            (body.get("realai_natural") or {}).get("used_tools")
+                            or (body.get("realai_natural") or {}).get("tools")
+                            or []
+                        ),
                         "routing": body.get("realai_routing"),
                         "model": rmodel,
                         "context_fit": body.get("realai_context_fit"),
