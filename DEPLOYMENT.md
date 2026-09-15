@@ -121,7 +121,7 @@ Copy from `.env.example` and `frontend/.env.example`. Prefer dashboard secrets o
 | `REALAI_DB_PATH` | SQLite file path |
 | `REALAI_DATA_DIR` | Parent dir for default DB (`~/.realai`) |
 | `REALAI_VULKAN_BASE` | Local llama-server base (default `http://127.0.0.1:8080`) — **loopback only** |
-| `REALAI_VULKAN_FORWARD` | `auto` (Hive) / `off` / `force`. Proxy chat to Vulkan **only** when the base is loopback **and** this is not Render. Disabled on Cloud API. |
+| `REALAI_VULKAN_FORWARD` | `auto` (Hive) / `off` / `force` (loopback Hive only). Hosted Cloud API (Render) is an unconditional deny — `force` does not override. |
 | `REALAI_CLOUD_FALLBACK` | `auto` (default) / `off` / `<provider>` (e.g. `openai`). When `X-Provider: realai` and no GGUF is loaded, use a cloud key instead of “register default_llm”. |
 
 Provider keys can also be sent per-request as `Authorization: Bearer ...` (prefix auto-detect) or `X-Provider` / `X-Base-URL` overrides — see `realai/api_server.py`. Self-host declares provider **`realai`**: Bearer + no `X-Provider` + unrecognized key prefix defaults to `REALAI_PROVIDER` (`realai`) instead of 400. Details: [`docs/selfhost-provider.md`](./docs/selfhost-provider.md).

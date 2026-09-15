@@ -26,7 +26,7 @@ process has a GGUF.
 
 | Surface | Process | GPU / GGUF | `default_llm` |
 |---------|---------|------------|----------------|
-| **Cloud UI** (Vercel → Render) | `python -m realai.api_server` | **None.** Render has no Vulkan and no `C:\\models\\checkpoints_lora`. | Not used. If no cloud key, chat explains Cloud vs Hive — it does **not** tell you to register a PC registry. |
+| **Cloud UI** (Vercel → Render) | `python -m realai.api_server` | **None.** Render has no Vulkan and no `C:\\models\\checkpoints_lora`. | Tried if a usable GGUF is actually present on this host; otherwise cloud fallback. Render typically has none — then a cloud key is required, or chat explains Cloud vs Hive (not “register a PC registry”). |
 | **Local Hive** (PC console `:8001`) | `python -m realai.v3_orchestrator` + loopback llama-server `:8080` | Vulkan GGUF on the PC | Set `default_llm` in **`~/.realai/local_models.json`** (what `LocalModelManager` loads). |
 
 **Which file is which**

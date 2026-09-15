@@ -86,21 +86,26 @@ def _host_is_loopback(url: str) -> bool:
 def vulkan_forward_enabled() -> bool:
     """Proxy chat to local llama-server only on loopback Hive — never on Render.
 
-    ``REALAI_VULKAN_FORWARD=force`` can override the hosted-cloud skip for
-    debugging; a non-loopback ``REALAI_VULKAN_BASE`` is always rejected.
+    Hosted cloud (Render / Fly / Railway / …) is an unconditional deny, including
+    ``REALAI_VULKAN_FORWARD=force``. A non-loopback ``REALAI_VULKAN_BASE`` is
+    always rejected.
     """
+    if is_hosted_cloud():
+        return False
     flag = (os.environ.get("REALAI_VULKAN_FORWARD") or "auto").strip().lower()
     if flag in _FALSE:
         return False
     if not _host_is_loopback(vulkan_base()):
         return False
-    if is_hosted_cloud() and flag != "force":
-        return False
     return True
 
 
 def looks_like_local_model_id(model_name: Optional[str]) -> bool:
-    """True for Hive / self-host ids that OpenAI etc. will not recognize."""
+    """True for Hive / self-host ids that OpenAI etc. will not recognize.
+
+    Does not treat every ``qwen*`` / ``llama*`` string as local — those are
+    valid cloud model ids (Together, Groq, …).
+    """
     name = (model_name or "").strip().lower()
     if not name:
         return True
@@ -109,8 +114,6 @@ def looks_like_local_model_id(model_name: Optional[str]) -> bool:
     if name.startswith("realai"):
         return True
     if name in {"local", "default", "auto", "qwen-coder-7b", "llama-local"}:
-        return True
-    if name.startswith("qwen") or name.startswith("llama"):
         return True
     return False
 
@@ -145,6 +148,38 @@ def iter_configured_cloud_credentials() -> Tuple[Tuple[str, str], ...]:
 def first_configured_cloud_credentials() -> Optional[Tuple[str, str]]:
     rows = iter_configured_cloud_credentials()
     return rows[0] if rows else None
+
+
+def credentials_for_provider(provider: Optional[str]) -> str:
+    """Return the env API key for one named cloud provider, or ``""``."""
+    wanted = (provider or "").strip().lower()
+    if not wanted:
+        return ""
+    for name, env_names in CLOUD_KEY_ENVS:
+        if name == wanted:
+            return _env_key(env_names)
+    return ""
+
+
+def env_credentials_for_request(provider: Optional[str]) -> Optional[Tuple[str, str]]:
+    """Pick env credentials for ``_get_model``.
+
+    Explicit cloud ``X-Provider`` gets **that** provider's key only (never an
+    OpenAI key stuffed into Anthropic). Self-host / missing provider uses the
+    first configured cloud key for fallback.
+    """
+    from .provider_resolve import default_selfhost_provider, is_selfhost_alias
+
+    name = (provider or "").strip().lower()
+    selfhost = (
+        (not name)
+        or is_selfhost_alias(name)
+        or name == default_selfhost_provider().lower()
+    )
+    if not selfhost:
+        key = credentials_for_provider(name)
+        return (name, key) if key else None
+    return first_configured_cloud_credentials()
 
 
 def cloud_fallback_disabled() -> bool:
@@ -226,6 +261,37 @@ def missing_generation_message(*, use_local: bool = True) -> str:
     )
 
 
+def instance_base_url(instance: Any) -> str:
+    """Base URL already bound, or the constructor ``X-Base-URL`` override."""
+    return (
+        (getattr(instance, "base_url", None) or "")
+        or (getattr(instance, "_base_url_override", None) or "")
+        or ""
+    )
+
+
+def is_selfhost_routing_provider(provider: Optional[str]) -> bool:
+    """True when generic cloud fallback may run (no explicit other provider)."""
+    from .provider_resolve import default_selfhost_provider, is_selfhost_alias
+
+    name = (provider or "").strip().lower()
+    if not name:
+        return True
+    if is_selfhost_alias(name):
+        return True
+    return name == default_selfhost_provider().lower()
+
+
+def request_skips_vulkan(x_provider: Optional[str], x_base_url: Optional[str]) -> bool:
+    """Skip loopback Vulkan when the caller asked for a cloud/custom endpoint."""
+    if (x_base_url or "").strip():
+        return True
+    name = (x_provider or "").strip().lower()
+    if not name or name in ("auto", "default"):
+        return False
+    return not is_selfhost_routing_provider(name)
+
+
 def provider_can_call_cloud(
     provider: Optional[str],
     api_key: Optional[str],
@@ -234,9 +300,13 @@ def provider_can_call_cloud(
 ) -> bool:
     if not provider or not api_key:
         return False
-    if provider not in provider_configs:
+    name = provider.strip().lower()
+    if name in {"local", "realai"}:
         return False
-    return bool(base_url or provider_configs.get(provider, {}).get("base_url"))
+    if name in provider_configs:
+        return bool(base_url or provider_configs.get(name, {}).get("base_url"))
+    # Custom REALAI_PROVIDER / X-Base-URL self-host endpoints.
+    return bool(base_url)
 
 
 def bind_cloud_provider(
@@ -269,21 +339,23 @@ def apply_cloud_fallback_to_instance(
     """If local GGUF is unusable, bind env/request cloud credentials.
 
     Returns True when cloud fallback was applied (or already bound).
+    Explicit non-self-host providers (openai, anthropic, custom-hive, …) are
+    never rebound to a different env key.
     """
     if cloud_fallback_disabled():
         return False
-    if provider_can_call_cloud(
-        getattr(instance, "provider", None),
-        getattr(instance, "api_key", None),
-        getattr(instance, "base_url", None),
-        provider_configs,
-    ):
+    provider = getattr(instance, "provider", None)
+    api_key = getattr(instance, "api_key", None)
+    base_url = instance_base_url(instance)
+    if provider_can_call_cloud(provider, api_key, base_url, provider_configs):
         return True
+    if not is_selfhost_routing_provider(provider):
+        return False
     if local_ready is None:
         local_ready = local_default_llm_ready(getattr(instance, "_model_manager", None))
     if local_ready:
         return False
-    found = discover_cloud_fallback(getattr(instance, "api_key", None))
+    found = discover_cloud_fallback(api_key)
     if not found:
         return False
     bind_cloud_provider(instance, found[0], found[1], provider_configs)
