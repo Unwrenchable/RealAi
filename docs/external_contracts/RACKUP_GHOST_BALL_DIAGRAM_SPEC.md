@@ -28,7 +28,7 @@ Live ghost **offset diameter** in map units is pinned:
 const diameter = 4.4; // deriveShotGeometry
 ```
 
-Use **4.4** for Ghost Ball center-to-center offset (OB → ghost CB). This is independent of the SVG draw radius (`ballR` / cloth `ballRadius`). Do not substitute ~3.4–3.8 or `2 × table.ballRadius` for the offset. A map may still set `ghost_ball.radius` for the **drawn** circle only.
+Use **4.4** for Ghost Ball center-to-center offset (OB → ghost CB). This is the live SPA `deriveShotGeometry` pin — **not** the physical ball diameter **2.25** used for cloth/lane clearance in the walkthrough. Do not substitute 2.25, ~3.4–3.8, or `2 × table.ballRadius` for the offset. A map may still set `ghost_ball.radius` for the **drawn** circle only.
 
 ---
 
