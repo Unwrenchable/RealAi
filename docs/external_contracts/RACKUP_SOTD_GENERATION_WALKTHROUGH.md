@@ -84,7 +84,7 @@ Contract: `RACKUP_JUMP_PATH_SPEC.md`.
 | CB after contact | `dashed` | `cue_after` |
 
 - [ ] Contiguous **pre-contact** airborne span **covers `blocker.x` inclusively** (vertex at `blocker.x` counts). Hop stays **collinear-ish** with the CB–OB line (perp. **≤ 2** pass; **> 2** fail). If the blocker is ≤ 2 of that line, the hop passes within **2** of blocker `(x, y)` (overhead). Fail an off-line tent (e.g. `(45, 30.5)`). See jump spec template precedence (sotd-50 slack).
-- [ ] Tag the **jumped-over blocker ball** (obstacle, not the cue) `role: "blocker"`. Infer only if exactly one candidate lies within **2** of the airborne polyline; otherwise require the role (`jump_blocker_ambiguous`).
+- Tag the **jumped-over blocker ball** (obstacle, not the cue) `role: "blocker"`. Infer only if exactly one **eligible blocker candidate** (not primary OB; not `role: "object"` / `"prop"` / `"helper"`; within **2** of the airborne polyline); otherwise `jump_blocker_ambiguous`.
 - [ ] Ghost, if shown, is **derived or a rare pin** at **post-landing OB contact** — never on the airborne hop (`RACKUP_GHOST_BALL_DIAGRAM_SPEC.md`). Omit the pin unless derive would be wrong.
 - [ ] Known jump ids (priority): `sotd-15`, `sotd-32`, `sotd-45`, `sotd-50`.
 
@@ -142,7 +142,7 @@ Run these after category rules. Envelope `validation.ok` is **true** only when e
 |------|------|--------------------------|
 | Cue on cloth | `cue_ball_start` in playing surface with inset (`BALL_INSET = 2.0`) | `cue_off_table` / `cue_missing` |
 | Object balls on cloth | every `object_ball_positions[]` in 0–100 × 0–50 with inset (~1.2) | `ball_off_table` |
-| Lane clearance | parked balls (blockers/props) are **not** in the travel corridor (`LANE_CLEARANCE = 2.4`) unless they are a **contact** or the segment is **airborne** over the **jumped-over blocker ball** (`role: "blocker"`, or the unique object within **2** of the airborne polyline). If inference is not unique, require the role (`jump_blocker_ambiguous`) — do not exempt a same-x prop | `blocked_lane` |
+| Lane clearance | parked balls (blockers/props) are **not** in the travel corridor (`LANE_CLEARANCE = 2.4`) unless they are a **contact** or the segment is **airborne** over the **jumped-over blocker ball** (`role: "blocker"`, or the unique **eligible blocker candidate**: not primary OB, not `object`/`prop`/`helper`, within **2** of the hop). Props/helpers are never inferred as the blocker | `blocked_lane` |
 | At least one OB | `object_ball_positions.length >= 1` | `no_object_balls` |
 
 Ball diameter in cloth units: **2.25** (2.25″ on 100″ 9-ft cloth) — **clearance / inset only**. Ghost center-to-center offset stays the live SPA pin **4.4** (`RACKUP_GHOST_BALL_DIAGRAM_SPEC.md`). Do not replace 4.4 with 2.25.
@@ -156,13 +156,13 @@ Ball diameter in cloth units: **2.25** (2.25″ on 100″ 9-ft cloth) — **clea
 | Starts at CB | gap(first.from, `cue_ball_start`) ≤ **3.5** | `path_not_from_cue` |
 | Approaches primary OB | some path point within **6.5** of primary object | `path_misses_object` |
 | Optional styles | `style`: `solid` \| `dashed` (default solid); `kind`: `ground` \| `airborne` \| `object` \| `cue_after` | record unknown values in flags |
-| Object leg | when a pocket is claimed, the pocket-bearing segment is `kind: "object"` (required in practice for ingest). Selection: last `kind === "object"`, else last `.to` within **8** of `pocket_target` | `path_misses_pocket` if neither is identifiable |
+| Object leg | pocket-bearing segment is `kind: "object"` when a pocket is claimed (**non-carom**). Selection: last `kind === "object"`; **non-carom only**, else last `.to` within **8** of `pocket_target`. Caroms: only an explicit `kind: "object"` leg counts | `path_misses_pocket` if a claimed pocket has no identifiable object leg |
 
 ### 3.3 Jump: no tent / zigzag; airborne straight over blocker
 
 | Flag | Pass | Fail code |
 |------|------|-----------|
-| Has airborne | contiguous **pre-contact** airborne span (`kind === "airborne"` **or** dashed **before primary-OB contact**) **covers `blocker.x` inclusively** — a vertex at `blocker.x` is a pass | `jump_needs_airborne` / `missing airborne` |
+| Has airborne | contiguous **pre-contact** airborne span — (`kind === "airborne"` **or** `style === "dashed"`) **and** before primary-OB contact — **covers `blocker.x` inclusively**. Both tags must be pre-contact | `jump_needs_airborne` / `missing airborne` |
 | No solid kink | no **solid/ground** vertex with bend > **28°** (`JUMP_ZIGZAG_MAX_DEG`) over the blocker | `jump_zigzag` |
 | Jump spec QA-1 | `category==jump` && solid midpoint with `\|y − cue.y\| ≥ 4` while x between CB and OB → **fail** | `jump_zigzag` |
 | No tent | airborne vertices perp. **≤ 2** of the CB–OB line (**> 2** fail). Off-line tent (e.g. apex `(45, 30.5)`) → **fail** | `jump_airborne_tent` |
@@ -182,11 +182,17 @@ Cuts outside 12–78°, rail-first banks, and default combos: **pass** this flag
 
 ### 3.5 `pocket_target` vs object path (category-scoped)
 
-`pocket_target` stays **required** on live Nest maps (including caroms). “Pocket claimed” means there is a pocket-bearing object leg (`kind: "object"`, or `.to` within **8** of `pocket_target`).
+`pocket_target` stays **required** on live Nest maps (including caroms). Near-pocket (`pocket_not_near`) applies only when a **pocket-bearing object leg** exists. On a carom without that leg, `pocket_target` is the diagram / CB-or-second-ball target and need not sit on a table pocket.
 
-**Object-leg selection** (deterministic): last segment with `kind === "object"`; else last segment whose `.to` is within **8** of `pocket_target`. Emit `kind: "object"` on that leg when a pocket is claimed.
+**Object-leg selection** (deterministic): last segment with `kind === "object"`. **Non-carom fallback only:** else last segment whose `.to` is within **8** of `pocket_target` (legacy untyped paths). Caroms: the fallback does **not** apply — only an explicit `kind: "object"` pocket leg activates path-end / unmakeable. Emit `kind: "object"` on non-carom pocket legs.
 
-Universal when an object-leg exists:
+**Primary OB** (deterministic; used for pre-contact cutoff and `pocket_unmakeable`):
+
+1. Unique `role: "object"` → that ball.
+2. Else unique untagged ball that is not `blocker` / `prop` / `helper` → that ball.
+3. Else `primary_ob_ambiguous` — emit `role: "object"` on the driven ball (several `object` or several untagged).
+
+Universal when an object-leg exists (carom: only the explicit `kind: "object"` case):
 
 | Flag | Pass | Fail code |
 |------|------|-----------|
@@ -194,12 +200,12 @@ Universal when an object-leg exists:
 | Near a pocket | within **8** of a table pocket (jump may target a cloth-edge pocket) | `pocket_not_near` |
 | Path ends there | selected object-leg `.to` within **8** of `pocket_target` | `path_misses_pocket` |
 
-`pocket_unmakeable` applies **only to direct pots of one driven primary OB** — count `role: "object"` (or the unmarked primary). **Exclude** `blocker` / `prop` / `helper`. Typical `position` / `novelty` / `jump` / `curve` / `masse` when that primary’s object path is a straight OB → pocket with **no** rail or transfer. A jump with a blocker + one primary still counts as one driven OB.
+`pocket_unmakeable` applies **only to direct pots of one driven primary OB** (selection above). **Exclude** `blocker` / `prop` / `helper`. Typical `position` / `novelty` / `jump` / `curve` / `masse` when that primary’s object path is a straight OB → pocket with **no** rail or transfer. A jump with a blocker + one primary still counts as one driven OB.
 
 | Flag | Pass | Fail code |
 |------|------|-----------|
 | Outgoing ray | ray from the **primary OB center** toward `pocket_target` (not from `contact_point`) | `pocket_unmakeable` |
-| Incoming approach | last **ground/cue** point before primary-OB contact approaches from the **ghost side** of the OB (half-plane opposite the pocket), within **6.5** of expected ghost `OB - normalize(pocket − OB) * 4.4` (or the rare pin). Independent of deriving ghost *from* `pocket_target` alone — a CB that approaches from the pocket side fails | `pocket_unmakeable` |
+| Incoming approach | the incoming **ground/cue segment or its supporting ray toward the OB** (not only the last stored vertex) approaches from the **ghost side** of the OB: direction `dir · (pocket_target − OB) > 0`, and min distance from expected ghost `OB - normalize(pocket − OB) * 4.4` (or the rare pin) to that segment/ray ≤ **6.5**. sotd-15’s landing→OB chord through the ghost passes; a vertex sitting on the OB center is not required | `pocket_unmakeable` |
 | Aim agrees | when ghost is shown (cut window, not rail-first): derived or rare-pin ghost sits behind OB on the OB → pocket line | `pocket_unmakeable` |
 
 Do **not** run the full ghost → OB → pocket model on:
