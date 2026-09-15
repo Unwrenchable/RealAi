@@ -6,6 +6,7 @@ RealAI Craft Chat — portable streaming agent for *any* project folder.
   realai chat "fix the bug"
   realai heal
   /read /write /list /grep /git /heal /doctor /gpu
+  /learn <local-folder-OR-git-URL>
   /dispatch all               # run the automation pipeline (nested-aware)
   /walk /scripts /run-script  # whole-repo nested walk + run scripts any level
 
@@ -1859,9 +1860,9 @@ def plan_tools(user_text: str) -> list[tuple[str, dict[str, Any]]]:
             if cmd == "scan" and rest:
                 return [("scan", {"path": rest.split()[0]})]
             if cmd == "learn":
-                from realai.learn_git import parse_learn_tokens
+                from realai.learn_git import parse_learn_tokens, split_learn_rest
 
-                ns = parse_learn_tokens(rest.split() if rest else [])
+                ns = parse_learn_tokens(split_learn_rest(rest))
                 return [
                     (
                         "learn",
@@ -2969,7 +2970,12 @@ Slash commands:
   /help /pwd /heal /doctor /gpu /improve /gaps /extend /repair
   /list /read /grep /write path|||content /scan
   /work <goal>                 # foreign-repo: inspect then coder plan + /write
-  /learn <path-or-url> [--write] [--all-branches] [--max-branches N] [--max-files N]
+  /learn <local-folder-OR-git-URL> [--write] [--all-branches] [--max-branches N] [--max-files N]
+      Local folder (kind: local):  /learn C:\\path\\to\\folder
+                                   /learn "C:\\path\\with spaces\\repo"
+                                   /learn ./my-repo
+      Git URL:                     /learn https://github.com/org/repo
+                                   /learn org/repo
   /tools /agents [query] /multi <task> /exec <tool> {json}
   /agents                         # hive first: overseer coder architect analyst memory governor router
   /task /organs /rackup /catalog /git /map /quit
@@ -3031,9 +3037,9 @@ class CraftSession:
             return "__QUIT__"
         if re.match(r"^/learn(\s|$)", user, re.I):
             rest = user.strip()[6:].strip()
-            from realai.learn_git import compact_learn_result, parse_learn_tokens
+            from realai.learn_git import compact_learn_result, parse_learn_tokens, split_learn_rest
 
-            ns = parse_learn_tokens(rest.split() if rest else [])
+            ns = parse_learn_tokens(split_learn_rest(rest))
             source = (ns.source or "").strip() or str(_ws())
             result = tool_learn(
                 source,

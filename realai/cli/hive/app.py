@@ -65,6 +65,7 @@ def cli(ctx, api_url, as_json, verbose, workspace, home):
       realai route "refactor gpu resume"
       realai run "verify hive pipeline"
       realai agents --hive
+      realai learn C:\\path\\to\\folder
       realai ability run chat_completion --input "ping"
       realai world show
       realai gpu status

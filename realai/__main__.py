@@ -788,9 +788,14 @@ def build_parser() -> argparse.ArgumentParser:
 
     learn = sub.add_parser(
         "learn",
-        help="Scan a git source; write a learning packet; optional plugin stub (no heal)",
+        help="Scan a local folder OR git URL; write a learning packet; optional plugin stub (no heal)",
     )
-    learn.add_argument("source", nargs="?", default=".", help="Local path, owner/repo, or HTTPS URL")
+    learn.add_argument(
+        "source",
+        nargs="?",
+        default=".",
+        help="Local folder OR git URL (Windows path, ./folder, owner/repo, or HTTPS). Real folders stay kind=local",
+    )
     learn.add_argument("--write", action="store_true", help="Scaffold plugins/<slug>_coach/")
     learn.add_argument("--refresh", action="store_true", help="Wipe disposable clone cache")
     learn.add_argument(

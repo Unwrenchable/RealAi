@@ -3,33 +3,63 @@ python -m realai.learn_git
 
 Static git-learn pipeline. Never starts heal, GPU, or the orchestrator.
 
-  python -m realai.learn_git <src> [--write] [--refresh] [--all-branches] [--max-branches N] [--max-files N]
+  python -m realai.learn_git <local-folder-OR-git-URL> [--write] [--refresh] [--all-branches] [--max-branches N] [--max-files N]
+
+Local folder (kind: local):  python -m realai.learn_git C:\\path\\to\\folder
+Git URL:                     python -m realai.learn_git https://github.com/org/repo
 """
 from __future__ import annotations
 
 import argparse
 import json
+import shlex
 import sys
 from typing import Any, Sequence
 
 from realai.learn.pipeline import run_learn
 from realai.learn.scan import DEFAULT_MAX_BRANCHES, FINGERPRINT_CAP
 
+_SOURCE_HELP = (
+    "Local folder OR git URL (Windows path, ./folder, owner/repo, or HTTPS). "
+    "Real folders stay kind=local. Default: cwd"
+)
+
+
+def split_learn_rest(rest: str) -> list[str]:
+    """Tokenize Craft ``/learn`` rest. Keep Windows drives; strip quotes; allow spaces."""
+    raw = (rest or "").strip()
+    if not raw:
+        return []
+    try:
+        # posix=False so C:\\path\\to\\folder is not eaten by \\t / \\f escapes.
+        tokens = shlex.split(raw, posix=False)
+    except ValueError:
+        tokens = raw.split()
+    out: list[str] = []
+    for t in tokens:
+        s = str(t).strip()
+        if len(s) >= 2 and s[0] == s[-1] and s[0] in {'"', "'"}:
+            s = s[1:-1]
+        if s:
+            out.append(s)
+    return out
+
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="python -m realai.learn_git",
         description=(
-            "Scan a git source (local path, owner/repo, or HTTPS URL) across "
-            "all branches, write a learning packet, optionally scaffold a coach "
-            "plugin stub. Does not start heal, GPU, or the orchestrator."
+            "Scan a local folder OR git URL across all branches, write a "
+            "learning packet, optionally scaffold a coach plugin stub. "
+            "Local folders that exist on disk stay kind=local (no clone). "
+            "Does not start heal, GPU, or the orchestrator."
         ),
     )
     p.add_argument(
         "source",
         nargs="?",
         default=".",
-        help="Local path, owner/repo, or HTTPS git URL (default: cwd)",
+        help=_SOURCE_HELP,
     )
     p.add_argument(
         "--write",
@@ -77,6 +107,29 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
+def _coalesce_source_tokens(argv: list[str]) -> list[str]:
+    """Join unquoted path pieces (Windows spaces) before argparse sees them."""
+    flags: list[str] = []
+    parts: list[str] = []
+    i = 0
+    takes_val = {"--max-branches", "--max-files"}
+    while i < len(argv):
+        t = str(argv[i])
+        if t.startswith("-"):
+            flags.append(t)
+            if t in takes_val and i + 1 < len(argv) and not str(argv[i + 1]).startswith("-"):
+                flags.append(str(argv[i + 1]))
+                i += 2
+                continue
+            i += 1
+            continue
+        parts.append(t)
+        i += 1
+    if len(parts) > 1:
+        return [" ".join(parts), *flags]
+    return argv
+
+
 def parse_learn_tokens(tokens: Sequence[str] | None) -> argparse.Namespace:
     """Parse learn CLI tokens (also used by Craft /learn). Never sys.exits."""
     argv = []
@@ -88,16 +141,24 @@ def parse_learn_tokens(tokens: Sequence[str] | None) -> argparse.Namespace:
             argv.append("--refresh")
         else:
             argv.append(str(t))
+    argv = _coalesce_source_tokens(argv)
     p = build_parser()
     p.exit_on_error = False
     try:
-        return p.parse_args(argv)
+        ns = p.parse_args(argv)
+        src = str(getattr(ns, "source", "") or "").strip()
+        if len(src) >= 2 and src[0] == src[-1] and src[0] in {'"', "'"}:
+            ns.source = src[1:-1]
+        return ns
     except (argparse.ArgumentError, SystemExit):
         ns = p.parse_args([])
-        # Best-effort: treat remaining non-flag tokens as source.
-        parts = [t for t in argv if not t.startswith("-")]
+        # Best-effort: join leftover non-flag tokens (paths with spaces).
+        parts = [t for t in argv if not str(t).startswith("-")]
         if parts:
-            ns.source = " ".join(parts)
+            joined = " ".join(parts)
+            if len(joined) >= 2 and joined[0] == joined[-1] and joined[0] in {'"', "'"}:
+                joined = joined[1:-1]
+            ns.source = joined
         ns.write = any(t.lower() in {"--write", "write"} for t in argv)
         ns.refresh = any(t.lower() in {"--refresh", "refresh"} for t in argv)
         return ns

@@ -10,10 +10,16 @@ from realai.bot.boot import HARD_IDENTITY_LOCK
 from realai.bot.natural_mode import (
     NATURAL_GROUNDING_RULE,
     apply_natural_grounding,
+    extract_learn_source,
     extract_path_tokens,
     is_explicit_command,
+    looks_like_agent_ask,
+    looks_like_learn_ask,
     looks_like_repo_ask,
+    match_ability_ids,
+    plan_natural_auto,
     plan_natural_inspect,
+    should_natural_act,
 )
 from realai.cli.craft import _should_auto_inspect
 from realai.meta_router import classify_task, route_task
@@ -37,6 +43,56 @@ class TestNaturalDetector(unittest.TestCase):
         self.assertFalse(looks_like_repo_ask("hello there"))
         self.assertFalse(looks_like_repo_ask("hey, what can you help me with?"))
         self.assertFalse(looks_like_repo_ask("/tools"))
+        self.assertFalse(should_natural_act("hello there"))
+        self.assertFalse(should_natural_act("/multi hive next"))
+
+
+class TestNaturalAutoPlan(unittest.TestCase):
+    def test_learn_ask_detects_windows_and_url(self):
+        self.assertTrue(looks_like_learn_ask("learn from this folder"))
+        self.assertTrue(looks_like_learn_ask("learn from C:\\path\\to\\folder"))
+        self.assertTrue(looks_like_learn_ask("git-learn https://github.com/acme/app"))
+        self.assertFalse(looks_like_learn_ask("what's in this repo"))
+        self.assertFalse(looks_like_learn_ask("/learn C:\\path\\to\\folder"))
+
+    def test_extract_learn_source_windows_and_quoted(self):
+        self.assertEqual(
+            extract_learn_source(r"learn from C:\path\to\folder"),
+            r"C:\path\to\folder",
+        )
+        self.assertEqual(
+            extract_learn_source(r'learn from "C:\path with spaces\repo"'),
+            r"C:\path with spaces\repo",
+        )
+        self.assertEqual(extract_learn_source("learn from this folder"), ".")
+        self.assertEqual(
+            extract_learn_source("learn from https://github.com/acme/app.git"),
+            "https://github.com/acme/app.git",
+        )
+
+    def test_audit_and_broken_plan_without_slash(self):
+        self.assertTrue(looks_like_agent_ask("audit this repo"))
+        self.assertTrue(should_natural_act("audit this repo"))
+        self.assertTrue(should_natural_act("what's broken"))
+        kinds = [k for k, _ in plan_natural_auto("audit this repo")]
+        self.assertIn("agents", kinds)
+        kinds_b = [k for k, _ in plan_natural_auto("what's broken")]
+        self.assertIn("doctor", kinds_b)
+        file_kinds = [k for k, _ in plan_natural_auto("read console.html")]
+        self.assertEqual(file_kinds, [])
+
+    def test_ability_phrases_match_catalog(self):
+        ids = match_ability_ids("give me a rackup coach practice plan")
+        self.assertIn("coach", ids)
+        ids2 = match_ability_ids("run text to speech on this line")
+        self.assertIn("audio_speech", ids2)
+        self.assertFalse(match_ability_ids("hello there"))
+
+    def test_learn_plan_skips_slash(self):
+        plans = plan_natural_auto("learn from ./my-repo")
+        self.assertTrue(any(k == "learn" for k, _ in plans), plans)
+        src = [a.get("source") for k, a in plans if k == "learn"][0]
+        self.assertEqual(src, "./my-repo")
 
     def test_extract_console_html(self):
         self.assertIn("console.html", extract_path_tokens("what's in console.html"))
