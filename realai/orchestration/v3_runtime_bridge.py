@@ -291,6 +291,16 @@ def tools_catalog() -> List[Dict[str, Any]]:
             },
         ),
         _fn(
+            "learn_git",
+            "Scan a git source (path / owner/repo / URL); write packet; optional plugin stub. No heal.",
+            {
+                "source": {"type": "string", "description": "local path, owner/repo, or HTTPS URL"},
+                "write": {"type": "boolean", "description": "scaffold plugins/<slug>_coach"},
+                "refresh": {"type": "boolean"},
+                "input": {"type": "string"},
+            },
+        ),
+        _fn(
             "agents_surface",
             "List/run hive + pipeline agents (overseer/coder/multi/self_heal/agentx)",
             {
@@ -1724,6 +1734,7 @@ def execute_registry_tool(
         "game_world",
         "organs_hive",
         "plugin_system",
+        "learn_git",
         "self_reflection",
         "multi_agent",
         "desktop_lambda_chat",
@@ -1981,6 +1992,8 @@ def execute_registry_tool(
             "plugins_surface": "abilities.plugins_surface",
             "plugins": "abilities.plugins_surface",
             "plugin_surface": "abilities.plugins_surface",
+            "learn_git": "abilities.learn_git",
+            "git_learn": "abilities.learn_git",
             "agents_surface": "abilities.agents_surface",
             "agents": "abilities.agents_surface",
             "agent_tools_surface": "abilities.agent_tools_surface",

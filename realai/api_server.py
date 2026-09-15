@@ -1326,6 +1326,19 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
                 except Exception as e:
                     self._send_response(500, {"error": str(e)})
 
+            elif (
+                parsed_path.path.startswith('/v1/plugins/')
+                and parsed_path.path.endswith('-coach')
+            ) or parsed_path.path.startswith('/v1/learned/'):
+                try:
+                    import importlib
+                    leaf = parsed_path.path.rstrip('/').rsplit('/', 1)[-1]
+                    pkg = leaf.replace('-', '_')
+                    mod = importlib.import_module(f'plugins.{pkg}')
+                    self._send_response(200, mod.invoke(body))
+                except Exception as e:
+                    self._send_response(404, {"error": str(e), "plugin": parsed_path.path})
+
             elif parsed_path.path == '/v1/organs/invoke':
                 try:
                     from modules.organs import call_organ
@@ -1691,6 +1704,8 @@ def run_server(host: str = "0.0.0.0", port=None):
     print("  POST /v1/rackup/coach")
     print("  POST /v1/plugins/atomicfizz-coach")
     print("  POST /v1/atomicfizz/coach")
+    print("  POST /v1/plugins/<slug>-coach   (learned git-learn stubs)")
+    print("  POST /v1/learned/<slug>_coach")
     print("  POST /v1/self-improve/cycle")
     print("\nPass your API key via:  Authorization: Bearer <key>")
     print("Override provider via:  X-Provider: openai|anthropic|grok|gemini|openrouter|mistral|together|deepseek|perplexity")

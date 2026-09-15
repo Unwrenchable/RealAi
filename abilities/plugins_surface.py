@@ -49,6 +49,51 @@ def _plugins_dir(ctx: Optional[Dict[str, Any]] = None) -> Path:
         return _PLUGINS_ROOT
     return _PLUGINS
 
+
+def _is_learned_plugin_dir(path: Path) -> bool:
+    man = path / "manifest.yaml"
+    if not path.is_dir() or not man.is_file():
+        return False
+    try:
+        text = man.read_text(encoding="utf-8", errors="replace").lower()
+    except OSError:
+        return False
+    compact = text.replace(" ", "")
+    return "learned:true" in compact
+
+
+def _learned_plugin_entries(plugins_dir: Optional[Path] = None) -> Dict[str, Dict[str, Any]]:
+    """Discover git-learn coach stubs (manifest learned: true)."""
+    extra: Dict[str, Dict[str, Any]] = {}
+    base = plugins_dir or _PLUGINS
+    if not base.is_dir():
+        return extra
+    try:
+        children = list(base.iterdir())
+    except OSError:
+        return extra
+    for p in children:
+        if not p.is_dir() or p.name in LIVE_PLUGINS:
+            continue
+        if not _is_learned_plugin_dir(p):
+            continue
+        hyphen = p.name.replace("_", "-")
+        extra[p.name] = {
+            "path": p.name,
+            "role": f"Learned git-learn coach stub ({p.name})",
+            "kind": "LIVE_DIR",
+            "aliases": [hyphen, p.name.removesuffix("_coach")],
+            "dispatch": "learned",
+            "learned": True,
+        }
+    return extra
+
+
+def _all_live(plugins_dir: Optional[Path] = None) -> Dict[str, Dict[str, Any]]:
+    out = dict(LIVE_PLUGINS)
+    out.update(_learned_plugin_entries(plugins_dir))
+    return out
+
 # Live product plugins (dirs / modules we intentionally keep on the path).
 LIVE_PLUGINS: Dict[str, Dict[str, Any]] = {
     "rackup_coach": {
@@ -172,6 +217,8 @@ def _classify_name(name: str, is_dir: bool) -> str:
         return "SALVAGE_NEST"
     if name in LIVE_PLUGINS or any(name == a for m in LIVE_PLUGINS.values() for a in (m.get("aliases") or [])):
         return "LIVE"
+    if _is_learned_plugin_dir(_PLUGINS / name) or _is_learned_plugin_dir(_PLUGINS_ROOT / name):
+        return "LIVE"
     if nl in {"plugins", "py", "core", "benchmarks", "scripts", "related", "memory_ecosystem"}:
         return "SUPPORT"
     if nl.startswith("c__realai"):
@@ -244,7 +291,7 @@ def _inventory(deep_files: bool = False, plugins_dir: Optional[Path] = None) -> 
                 files_out.append(item)
 
     live = []
-    for lid, meta in LIVE_PLUGINS.items():
+    for lid, meta in _all_live(plugins).items():
         path = plugins / str(meta["path"])
         # prefer realai/plugins for live presence truth
         live_path = _PLUGINS / str(meta["path"])
@@ -284,9 +331,10 @@ def _resolve_live(name: str) -> Optional[str]:
     key = (name or "").strip().lower().replace("-", "_")
     if not key:
         return None
-    if key in LIVE_PLUGINS:
+    live = _all_live()
+    if key in live:
         return key
-    for lid, meta in LIVE_PLUGINS.items():
+    for lid, meta in live.items():
         aliases = [str(a).lower().replace("-", "_") for a in (meta.get("aliases") or [])]
         path = str(meta.get("path") or "").lower().replace("-", "_").replace(".py", "")
         if key in aliases or key == path or key == lid.replace("-", "_"):
@@ -296,7 +344,8 @@ def _resolve_live(name: str) -> Optional[str]:
 
 def _run_live(lid: str, raw_input: str = "", ctx: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     ctx = dict(ctx or {})
-    meta = LIVE_PLUGINS[lid]
+    live = _all_live(_plugins_dir(ctx))
+    meta = live[lid]
     dispatch = str(meta.get("dispatch") or "status")
     out: Dict[str, Any] = {"ok": True, "plugin": lid, "role": meta.get("role"), "dispatch": dispatch}
 
@@ -322,6 +371,23 @@ def _run_live(lid: str, raw_input: str = "", ctx: Optional[Dict[str, Any]] = Non
         payload = ctx.get("payload") if isinstance(ctx.get("payload"), dict) else {}
         out["result"] = atomicfizz_invoke(ability, player, payload)
         out["via"] = "plugins.atomicfizz_coach.invoke"
+        return out
+
+    if dispatch == "learned":
+        import importlib
+
+        ability = str(ctx.get("ability") or raw_input or "health").strip() or "health"
+        if ability.lower() in {"status", lid, lid.replace("_", "-")}:
+            ability = "health"
+        player = ctx.get("player") if isinstance(ctx.get("player"), dict) else {}
+        payload = ctx.get("payload") if isinstance(ctx.get("payload"), dict) else {}
+        try:
+            mod = importlib.import_module(f"plugins.{lid}")
+            out["result"] = mod.invoke(ability, player, payload)
+            out["via"] = f"plugins.{lid}.invoke"
+        except Exception as e:
+            out["ok"] = False
+            out["error"] = str(e)
         return out
 
     if dispatch == "atomic_fizz":
@@ -589,8 +655,8 @@ def run(
             return {
                 "ok": False,
                 "error": "live_plugin_id_required",
-                "known": sorted(LIVE_PLUGINS.keys()),
-                "hint": "action=run plugin=rackup_coach|atomicfizz_coach|atomic_fizz_realai|plugin_marketplace|device_selector|tools",
+                "known": sorted(_all_live().keys()),
+                "hint": "action=run plugin=rackup_coach|atomicfizz_coach|atomic_fizz_realai|plugin_marketplace|device_selector|tools|<learned_slug>_coach",
             }
         return _run_live(lid, raw_input=raw, ctx=ctx)
 
@@ -608,5 +674,5 @@ def run(
         "ok": False,
         "error": f"unknown_action:{action}",
         "actions": ["list", "run", "quarantine_plan", "quarantine"],
-        "known_live": sorted(LIVE_PLUGINS.keys()),
+        "known_live": sorted(_all_live().keys()),
     }

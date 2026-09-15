@@ -502,6 +502,20 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "gold_paths": [r"C:\tools\realai\core\plugins.js", r"C:\tools\realai\plugins"],
     },
     {
+        "id": "learn_git",
+        "name": "Git-learn (offline packet + coach stub)",
+        "pillar": "advanced",
+        "keywords": ["learn_git", "git-learn", "/learn", "learning packet", "learned plugin"],
+        "status": "LIVE",
+        "live_path": "python -m realai.learn_git + Craft /learn (no heal)",
+        "modules": [
+            "realai/learn_git.py",
+            "realai/learn/pipeline.py",
+            "abilities/learn_git.py",
+            "realai/plugins",
+        ],
+    },
+    {
         "id": "memory_learning",
         "name": "Memory & persistent learning",
         "pillar": "advanced",
