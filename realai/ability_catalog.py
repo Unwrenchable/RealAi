@@ -547,7 +547,7 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "pillar": "advanced",
         "keywords": ["learn_git", "git-learn", "/learn", "learning packet", "learned plugin"],
         "status": "LIVE",
-        "live_path": "python -m realai.learn_git + Craft /learn (no heal)",
+        "live_path": "python -m realai.learn_git --all-branches + Craft /learn (no heal)",
         "modules": [
             "realai/learn_git.py",
             "realai/learn/pipeline.py",
