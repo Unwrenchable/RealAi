@@ -1,0 +1,56 @@
+# RealAI living plugin — Atomic Fizz Coach (stub)
+# Provider-level AI capability only (no Caps / Wrist UI / vault GPS ownership).
+
+name: atomicfizz-coach
+version: 0.1.0
+author: RealAI / Atomic Fizz
+description: >
+  Stub intelligence provider for Atomic Fizz (Caps). Same boundary as
+  rackup-coach: RealAI returns hints and validation only. Product shell owns
+  Caps, Wrist UI, and vault GPS. No game logic, no runtime heal, no money
+  movement. Placeholder abilities: health, caps_context, wrist_ui_hint.
+
+kind: living_plugin
+provider_level: true
+homepage: https://github.com/Unwrenchable/RealAi
+stub: true
+
+permissions:
+  - none   # pure inference/hint logic; host supplies player + product context
+
+entrypoints:
+  register: plugins.atomicfizz_coach:register
+  invoke: plugins.atomicfizz_coach:invoke
+
+capabilities:
+  - health
+  - caps_context
+  - wrist_ui_hint
+
+# Product-owned surfaces — RealAI must not implement these.
+product_owned:
+  - caps
+  - wrist_ui
+  - vault_gps
+
+# Hard no: this plugin never authorizes or moves funds.
+money:
+  authorize_payout: false
+  owns_ledger: false
+  moves_money: false
+
+abilities:
+  - id: health
+    module: abilities.health
+    description: Stub liveness / contract discovery (no runtime heal)
+  - id: caps_context
+    module: abilities.caps_context
+    description: Placeholder Caps context validation hints (no GPS implementation)
+  - id: wrist_ui_hint
+    module: abilities.wrist_ui_hint
+    description: Placeholder Wrist UI hint payload (product renders chrome)
+
+config_defaults:
+  stub: true
+  organs_enabled: false
+  authorize_payout: false

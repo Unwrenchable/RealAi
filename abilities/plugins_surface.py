@@ -58,6 +58,13 @@ LIVE_PLUGINS: Dict[str, Dict[str, Any]] = {
         "aliases": ["rackup-coach"],
         "dispatch": "rackup",
     },
+    "atomicfizz_coach": {
+        "path": "atomicfizz_coach",
+        "role": "Atomic Fizz / Caps coach stub (health, caps_context, wrist_ui_hint)",
+        "kind": "LIVE_DIR",
+        "aliases": ["atomicfizz-coach", "atomicfizz"],
+        "dispatch": "atomicfizz",
+    },
     "atomic_fizz_realai": {
         "path": "atomic_fizz_realai",
         "role": "Atomic Fizz NPC/quest/overseer/world gold",
@@ -302,6 +309,19 @@ def _run_live(lid: str, raw_input: str = "", ctx: Optional[Dict[str, Any]] = Non
         name = ability if ability.startswith("ability.") else f"ability.{ability}"
         out["result"] = execute_registry_tool(name, {"input": raw_input, "context": ctx})
         out["via"] = name
+        return out
+
+    if dispatch == "atomicfizz":
+        # Stub plugin path — not atomic_fizz_realai JS engines.
+        from plugins.atomicfizz_coach import invoke as atomicfizz_invoke
+
+        ability = str(ctx.get("ability") or raw_input or "health").strip() or "health"
+        if ability.lower() in {"status", "atomicfizz_coach", "atomicfizz", "atomicfizz-coach"}:
+            ability = "health"
+        player = ctx.get("player") if isinstance(ctx.get("player"), dict) else {}
+        payload = ctx.get("payload") if isinstance(ctx.get("payload"), dict) else {}
+        out["result"] = atomicfizz_invoke(ability, player, payload)
+        out["via"] = "plugins.atomicfizz_coach.invoke"
         return out
 
     if dispatch == "atomic_fizz":
@@ -570,7 +590,7 @@ def run(
                 "ok": False,
                 "error": "live_plugin_id_required",
                 "known": sorted(LIVE_PLUGINS.keys()),
-                "hint": "action=run plugin=rackup_coach|atomic_fizz_realai|plugin_marketplace|device_selector|tools",
+                "hint": "action=run plugin=rackup_coach|atomicfizz_coach|atomic_fizz_realai|plugin_marketplace|device_selector|tools",
             }
         return _run_live(lid, raw_input=raw, ctx=ctx)
 
