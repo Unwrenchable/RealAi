@@ -261,6 +261,37 @@ def missing_generation_message(*, use_local: bool = True) -> str:
     )
 
 
+def instance_base_url(instance: Any) -> str:
+    """Base URL already bound, or the constructor ``X-Base-URL`` override."""
+    return (
+        (getattr(instance, "base_url", None) or "")
+        or (getattr(instance, "_base_url_override", None) or "")
+        or ""
+    )
+
+
+def is_selfhost_routing_provider(provider: Optional[str]) -> bool:
+    """True when generic cloud fallback may run (no explicit other provider)."""
+    from .provider_resolve import default_selfhost_provider, is_selfhost_alias
+
+    name = (provider or "").strip().lower()
+    if not name:
+        return True
+    if is_selfhost_alias(name):
+        return True
+    return name == default_selfhost_provider().lower()
+
+
+def request_skips_vulkan(x_provider: Optional[str], x_base_url: Optional[str]) -> bool:
+    """Skip loopback Vulkan when the caller asked for a cloud/custom endpoint."""
+    if (x_base_url or "").strip():
+        return True
+    name = (x_provider or "").strip().lower()
+    if not name or name in ("auto", "default"):
+        return False
+    return not is_selfhost_routing_provider(name)
+
+
 def provider_can_call_cloud(
     provider: Optional[str],
     api_key: Optional[str],
@@ -308,21 +339,23 @@ def apply_cloud_fallback_to_instance(
     """If local GGUF is unusable, bind env/request cloud credentials.
 
     Returns True when cloud fallback was applied (or already bound).
+    Explicit non-self-host providers (openai, anthropic, custom-hive, …) are
+    never rebound to a different env key.
     """
     if cloud_fallback_disabled():
         return False
-    if provider_can_call_cloud(
-        getattr(instance, "provider", None),
-        getattr(instance, "api_key", None),
-        getattr(instance, "base_url", None),
-        provider_configs,
-    ):
+    provider = getattr(instance, "provider", None)
+    api_key = getattr(instance, "api_key", None)
+    base_url = instance_base_url(instance)
+    if provider_can_call_cloud(provider, api_key, base_url, provider_configs):
         return True
+    if not is_selfhost_routing_provider(provider):
+        return False
     if local_ready is None:
         local_ready = local_default_llm_ready(getattr(instance, "_model_manager", None))
     if local_ready:
         return False
-    found = discover_cloud_fallback(getattr(instance, "api_key", None))
+    found = discover_cloud_fallback(api_key)
     if not found:
         return False
     bind_cloud_provider(instance, found[0], found[1], provider_configs)

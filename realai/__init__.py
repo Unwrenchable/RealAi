@@ -2151,7 +2151,8 @@ class RealAI:
         # Self-host identity (X-Provider: realai/local) still prefers a loaded
         # GGUF. On Render there is none — bind OPENAI_API_KEY / REALAI_* keys
         # so chat does not die on the generic default_llm placeholder.
-        if self.provider in (None, "local", "realai") or self.provider not in PROVIDER_CONFIGS:
+        # Explicit cloud/custom providers are never rebound here.
+        if _cloud_fallback.is_selfhost_routing_provider(self.provider):
             _cloud_fallback.apply_cloud_fallback_to_instance(self, PROVIDER_CONFIGS)
 
         cfg: Dict[str, str] = PROVIDER_CONFIGS.get(self.provider, {}) if self.provider else {}

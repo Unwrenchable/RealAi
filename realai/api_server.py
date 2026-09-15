@@ -34,6 +34,7 @@ from urllib import request as urlrequest
 
 from .cloud_fallback import (
     env_credentials_for_request,
+    request_skips_vulkan,
     vulkan_base as _vulkan_base,
     vulkan_forward_enabled as _vulkan_forward_enabled,
 )
@@ -1100,10 +1101,8 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
 
                 # Prefer local Vulkan llama-server when healthy (loopback Hive only).
                 x_provider = (self.headers.get("X-Provider") or "").strip().lower()
-                force_cloud = x_provider in (
-                    "openai", "anthropic", "grok", "gemini", "openrouter",
-                    "mistral", "together", "deepseek", "perplexity",
-                )
+                x_base_url = (self.headers.get("X-Base-URL") or "").strip()
+                force_cloud = request_skips_vulkan(x_provider, x_base_url)
                 used_vulkan = False
                 response = None
                 if not force_cloud and not body.get("stream") and _vulkan_healthy():

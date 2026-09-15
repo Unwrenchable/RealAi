@@ -11,6 +11,7 @@ from realai.cloud_fallback import (
     looks_like_local_model_id,
     missing_generation_message,
     provider_can_call_cloud,
+    request_skips_vulkan,
     vulkan_forward_enabled,
 )
 
@@ -294,3 +295,89 @@ def test_empty_local_generation_still_cloud_falls_back(monkeypatch):
     resp = model.chat_completion([{"role": "user", "content": "hey"}])
     assert resp["choices"][0]["message"]["content"] == "hello from cloud"
     assert resp.get("realai_meta", {}).get("source") == "api"
+
+
+def test_empty_local_text_completion_still_cloud_falls_back(monkeypatch):
+    _clear_cloud_env(monkeypatch)
+    monkeypatch.setenv("RENDER", "true")
+    monkeypatch.setenv("OPENAI_API_KEY", "sk-test-fallback")
+    monkeypatch.setattr(
+        "realai.cloud_fallback.local_default_llm_ready", lambda _manager=None: False
+    )
+
+    model = RealAI(provider="local", model_name="realai-default-coder")
+
+    def fake_call(self, messages, temperature=0.7, max_tokens=None, stream=False):
+        return {
+            "id": "chatcmpl-test",
+            "object": "chat.completion",
+            "created": 1,
+            "model": self._provider_model,
+            "choices": [
+                {
+                    "index": 0,
+                    "message": {"role": "assistant", "content": "hello from cloud"},
+                    "finish_reason": "stop",
+                }
+            ],
+            "usage": {},
+        }
+
+    monkeypatch.setattr(RealAI, "_call_openai_compat", fake_call)
+    if model._llm_engine is not None:
+        monkeypatch.setattr(model._llm_engine, "is_loaded", lambda: True)
+        monkeypatch.setattr(model._llm_engine, "generate", lambda *a, **k: "")
+
+    resp = model.text_completion("hey")
+    assert resp["choices"][0]["text"] == "hello from cloud"
+    assert resp.get("realai_meta", {}).get("source") == "api"
+
+
+def test_custom_base_url_not_rebound_to_openai(monkeypatch):
+    _clear_cloud_env(monkeypatch)
+    monkeypatch.setenv("OPENAI_API_KEY", "sk-should-not-bind")
+    monkeypatch.setattr(
+        "realai.cloud_fallback.local_default_llm_ready", lambda _manager=None: False
+    )
+    model = RealAI(
+        provider="custom-hive",
+        api_key="hive-token",
+        base_url="https://hive.example/v1",
+        model_name="hive-model",
+    )
+    assert model.provider == "custom-hive"
+    assert model.api_key == "hive-token"
+    assert model.base_url == "https://hive.example/v1"
+    assert model._cloud_fallback_applied is False
+    applied = apply_cloud_fallback_to_instance(
+        model, PROVIDER_CONFIGS, local_ready=False
+    )
+    assert applied is True  # already callable via custom base URL
+    assert model.provider == "custom-hive"
+    assert model.api_key == "hive-token"
+
+
+def test_explicit_anthropic_not_rebound_to_openai(monkeypatch):
+    _clear_cloud_env(monkeypatch)
+    monkeypatch.setenv("OPENAI_API_KEY", "sk-openai-only")
+    monkeypatch.setattr(
+        "realai.cloud_fallback.local_default_llm_ready", lambda _manager=None: False
+    )
+    model = RealAI(provider="anthropic", model_name="claude-3-5-haiku-20241022")
+    assert model.provider == "anthropic"
+    assert model._cloud_fallback_applied is False
+    if model._llm_engine is not None:
+        monkeypatch.setattr(model._llm_engine, "is_loaded", lambda: False)
+    resp = model.chat_completion([{"role": "user", "content": "hey"}])
+    assert model.provider == "anthropic"
+    assert "hello from cloud" not in (
+        resp["choices"][0].get("message", {}).get("content") or ""
+    )
+
+
+def test_request_skips_vulkan_for_custom_and_base_url():
+    assert request_skips_vulkan("custom-hive", "https://hive.example/v1") is True
+    assert request_skips_vulkan("openai", None) is True
+    assert request_skips_vulkan("realai", None) is False
+    assert request_skips_vulkan("local", "") is False
+    assert request_skips_vulkan(None, None) is False
