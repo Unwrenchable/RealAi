@@ -12,6 +12,9 @@ Pass your provider API key in the standard ``Authorization: Bearer <key>``
 header.  RealAI auto-detects the provider from the key prefix and forwards
 requests to the real AI service.  You can also supply ``X-Provider`` to pick
 the provider explicitly, and ``X-Base-URL`` to override the endpoint.
+
+Self-host: unrecognized keys (no ``sk-`` / ``xai-`` / … prefix) default to
+provider ``realai`` (override with ``REALAI_PROVIDER``) instead of 400.
 """
 
 import hashlib
@@ -74,6 +77,7 @@ def _looks_like_local_placeholder(response: dict) -> bool:
 
 from . import RealAI, PROVIDER_CONFIGS, PROVIDER_ENV_VARS, _KEY_PREFIX_TO_PROVIDER
 from .model_registry import MODEL_REGISTRY, get_model_metadata
+from .provider_resolve import resolve_request_provider, realai_constructor_provider
 from .server_settings import settings
 
 # Repo-root fusion-ui (served at /fusion-ui so UI + API share one PORT / REALAI_API_BASE).
@@ -301,6 +305,7 @@ header {
 <div class="settings-bar">
   <label for="provider-select">Provider</label>
   <select id="provider-select" onchange="onSettingChange()">
+    <option value="realai">RealAI (self-host)</option>
     <option value="local">Local RealAI (no key)</option>
     <option value="auto">Auto-detect from key</option>
     <option value="openai">OpenAI</option>
@@ -385,7 +390,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 function loadSettings() {
   var key      = sessionStorage.getItem(KEY_STORE)     || '';
-  var provider = localStorage.getItem(PROVIDER_STORE) || 'auto';
+  var provider = localStorage.getItem(PROVIDER_STORE) || 'realai';
   document.getElementById('api-key-input').value = key;
   var ps = document.getElementById('provider-select');
   if ([].slice.call(ps.options).some(function(o){ return o.value === provider; })) {
@@ -435,7 +440,7 @@ function onKeyInput() {
   var key = document.getElementById('api-key-input').value;
   updateKeyStatus(key);
   var currentProvider = document.getElementById('provider-select').value;
-  if (currentProvider === 'local') {
+  if (currentProvider === 'local' || currentProvider === 'realai') {
     showProviderHint('');
     return;
   }
@@ -533,6 +538,13 @@ function autoResize(el) {
   el.style.height = Math.min(el.scrollHeight, 160) + 'px';
 }
 
+function xProviderHeader(provider) {
+  // local and realai are the same self-host path; Nest/RackUp contracts use realai.
+  if (!provider || provider === 'auto') return null;
+  if (provider === 'local' || provider === 'realai') return 'realai';
+  return provider;
+}
+
 function sendMessage() {
   if (isLoading) return;
   var input = document.getElementById('message-input');
@@ -554,12 +566,13 @@ function sendMessage() {
   document.getElementById('send-btn').disabled = true;
 
   var apiKey   = sessionStorage.getItem(KEY_STORE)    || localStorage.getItem(KEY_STORE) || '';
-  var provider = localStorage.getItem(PROVIDER_STORE) || 'auto';
+  var provider = localStorage.getItem(PROVIDER_STORE) || 'realai';
   var model    = document.getElementById('model-select').value || 'realai-2.0';
 
   var headers = { 'Content-Type': 'application/json' };
   if (apiKey)                    headers['Authorization'] = 'Bearer ' + apiKey;
-  if (provider && provider !== 'auto') headers['X-Provider'] = provider;
+  var xp = xProviderHeader(provider);
+  if (xp) headers['X-Provider'] = xp;
 
   fetch('/v1/chat/completions', {
     method: 'POST',
@@ -813,7 +826,13 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
 
         auth = self.headers.get("Authorization", "")
         api_key = auth[len("Bearer "):].strip() if auth.startswith("Bearer ") else None
-        provider = self.headers.get("X-Provider") or None
+        # Explicit X-Provider wins; unknown Bearer keys default to self-host
+        # realai (REALAI_PROVIDER). Do not mutate headers.__dict__.
+        provider = resolve_request_provider(
+            self.headers.get("X-Provider"),
+            api_key,
+            _KEY_PREFIX_TO_PROVIDER,
+        )
         base_url = self.headers.get("X-Base-URL") or None
 
         # Fall back to environment variables set by the GUI launcher.
@@ -829,7 +848,8 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
                     break
 
         return RealAI(model_name=model_name, api_key=api_key,
-                      provider=provider, base_url=base_url)
+                      provider=realai_constructor_provider(provider),
+                      base_url=base_url)
 
     def do_OPTIONS(self):
         """Handle CORS preflight requests."""
@@ -1046,32 +1066,10 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
             # response falls back to RealAI's placeholder regardless of model.
             model_name = body.get('model', 'realai-2.0')
 
-            # When the caller provides a Bearer token but no explicit
-            # X-Provider, attempt prefix-based detection.  If no prefix
-            # matches, return a clear 400 so the caller knows to pick a
-            # provider explicitly (e.g. via the web-UI dropdown or the
-            # X-Provider header) rather than silently receiving placeholder
-            # responses.
-            _auth_header = self.headers.get("Authorization", "")
-            _bearer_key = (
-                _auth_header[len("Bearer "):].strip()
-                if _auth_header.startswith("Bearer ")
-                else None
-            )
-            if _bearer_key and not (self.headers.get("X-Provider") or None):
-                _detected = any(
-                    _bearer_key.startswith(p)
-                    for p in _KEY_PREFIX_TO_PROVIDER
-                )
-                if not _detected:
-                    raise ValueError(
-                        "Cannot auto-detect provider from your API key. "
-                        "Please select a provider using the Provider dropdown "
-                        "in the web UI, or add an X-Provider header "
-                        "(openai, anthropic, grok, gemini, openrouter, "
-                        "mistral, together, deepseek, perplexity)."
-                    )
-
+            # Bearer + no X-Provider: prefix-detect, else default to self-host
+            # realai inside _get_model / resolve_request_provider. Unknown
+            # local keys must not 400 — Cloud UI and the embedded console
+            # both treat realai as the default provider.
             model = self._get_model(model_name=model_name)
 
             if parsed_path.path == '/v1/chat/completions':
@@ -1708,7 +1706,8 @@ def run_server(host: str = "0.0.0.0", port=None):
     print("  POST /v1/learned/<slug>_coach")
     print("  POST /v1/self-improve/cycle")
     print("\nPass your API key via:  Authorization: Bearer <key>")
-    print("Override provider via:  X-Provider: openai|anthropic|grok|gemini|openrouter|mistral|together|deepseek|perplexity")
+    print("Override provider via:  X-Provider: realai|openai|anthropic|grok|gemini|openrouter|mistral|together|deepseek|perplexity")
+    print("Self-host default (no X-Provider, unrecognized key): REALAI_PROVIDER (realai)")
     print("Override base URL via:  X-Base-URL: https://...")
     print("\nPress Ctrl+C to stop the server")
     print("="*60)

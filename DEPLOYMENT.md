@@ -123,7 +123,7 @@ Copy from `.env.example` and `frontend/.env.example`. Prefer dashboard secrets o
 | `REALAI_VULKAN_BASE` | Local llama-server base (default `http://127.0.0.1:8080`) |
 | `REALAI_VULKAN_FORWARD` | `auto` (default) / `off` — proxy chat to Vulkan when healthy |
 
-Provider keys can also be sent per-request as `Authorization: Bearer ...` (prefix auto-detect) or `X-Provider` / `X-Base-URL` overrides — see `realai/api_server.py`.
+Provider keys can also be sent per-request as `Authorization: Bearer ...` (prefix auto-detect) or `X-Provider` / `X-Base-URL` overrides — see `realai/api_server.py`. Self-host declares provider **`realai`**: Bearer + no `X-Provider` + unrecognized key prefix defaults to `REALAI_PROVIDER` (`realai`) instead of 400. Details: [`docs/selfhost-provider.md`](./docs/selfhost-provider.md).
 
 ---
 

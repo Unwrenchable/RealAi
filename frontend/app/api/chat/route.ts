@@ -40,6 +40,11 @@ export async function POST(req: NextRequest) {
       headers["Authorization"] = `Bearer ${apiKey}`;
     }
 
+    const provider = env.NEXT_PUBLIC_PROVIDER || "realai";
+    if (provider && provider !== "auto") {
+      headers["X-Provider"] = provider;
+    }
+
     const backendRes = await fetch(`${env.NEXT_PUBLIC_API_URL}/v1/chat/completions`, {
       method: "POST",
       headers,
