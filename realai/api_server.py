@@ -77,7 +77,7 @@ def _looks_like_local_placeholder(response: dict) -> bool:
 
 from . import RealAI, PROVIDER_CONFIGS, PROVIDER_ENV_VARS, _KEY_PREFIX_TO_PROVIDER
 from .model_registry import MODEL_REGISTRY, get_model_metadata
-from .provider_resolve import resolve_request_provider
+from .provider_resolve import resolve_request_provider, realai_constructor_provider
 from .server_settings import settings
 
 # Repo-root fusion-ui (served at /fusion-ui so UI + API share one PORT / REALAI_API_BASE).
@@ -538,6 +538,13 @@ function autoResize(el) {
   el.style.height = Math.min(el.scrollHeight, 160) + 'px';
 }
 
+function xProviderHeader(provider) {
+  // local and realai are the same self-host path; Nest/RackUp contracts use realai.
+  if (!provider || provider === 'auto') return null;
+  if (provider === 'local' || provider === 'realai') return 'realai';
+  return provider;
+}
+
 function sendMessage() {
   if (isLoading) return;
   var input = document.getElementById('message-input');
@@ -564,7 +571,8 @@ function sendMessage() {
 
   var headers = { 'Content-Type': 'application/json' };
   if (apiKey)                    headers['Authorization'] = 'Bearer ' + apiKey;
-  if (provider && provider !== 'auto') headers['X-Provider'] = provider;
+  var xp = xProviderHeader(provider);
+  if (xp) headers['X-Provider'] = xp;
 
   fetch('/v1/chat/completions', {
     method: 'POST',
@@ -840,7 +848,8 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
                     break
 
         return RealAI(model_name=model_name, api_key=api_key,
-                      provider=provider, base_url=base_url)
+                      provider=realai_constructor_provider(provider),
+                      base_url=base_url)
 
     def do_OPTIONS(self):
         """Handle CORS preflight requests."""
