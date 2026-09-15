@@ -72,6 +72,8 @@ export default function ChatInput({
         ].join(" ")}
       >
         <textarea
+          id="chat-message"
+          name="message"
           ref={textareaRef}
           value={value}
           onChange={handleChange}

@@ -96,9 +96,11 @@ export default function HomePage() {
             API: {apiBase} · chat via <code className="text-slate-300">/api/chat</code>
           </p>
         </div>
-        <label className="flex items-center gap-2 text-xs text-slate-300">
+        <label htmlFor="cloud-model" className="flex items-center gap-2 text-xs text-slate-300">
           Model
           <select
+            id="cloud-model"
+            name="model"
             className="rounded border border-white/15 bg-black/40 px-2 py-1"
             value={settings.model}
             onChange={(e) =>
@@ -172,6 +174,8 @@ export default function HomePage() {
       >
         <div className="mx-auto flex max-w-3xl gap-2">
           <textarea
+            id="cloud-message"
+            name="message"
             className="min-h-[48px] flex-1 resize-none rounded-xl border border-white/15 bg-[#0c0c12] px-3 py-2 text-sm outline-none focus:border-[#d6ff3f]/50"
             placeholder="Message RealAI…"
             value={input}
