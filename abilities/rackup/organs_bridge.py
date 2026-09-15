@@ -110,6 +110,27 @@ ABILITY_ORGANS: dict[str, tuple[str, ...]] = {
         "organ.architecture-memory",
         "organ.synthetic-intuition-layer",
     ),
+    "player_card_sync": (
+        "organ.prefrontal-cortex",
+        "organ.semantic-memory",
+        "organ.architecture-memory",
+        "organ.long-term-memory",
+        "organ.synthetic-intuition-layer",
+    ),
+    "unified_player_card": (
+        "organ.prefrontal-cortex",
+        "organ.semantic-memory",
+        "organ.architecture-memory",
+        "organ.long-term-memory",
+        "organ.synthetic-intuition-layer",
+    ),
+    "sync_player_card": (
+        "organ.prefrontal-cortex",
+        "organ.semantic-memory",
+        "organ.architecture-memory",
+        "organ.long-term-memory",
+        "organ.synthetic-intuition-layer",
+    ),
     "game_knowledge": (
         "organ.semantic-memory",
         "organ.architecture-memory",

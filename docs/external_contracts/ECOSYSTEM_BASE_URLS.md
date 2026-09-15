@@ -4,7 +4,7 @@
 **Date:** 2026-09-14  
 **Status:** LOCKED — where clients point `REALAI_BASE_URL`  
 **Audience:** RackUp Nest, Craft, local Hive, Render `api_server`, future product plugins  
-**Related:** `REALAI_RACKUP_WIRING_CONTRACT.md` (ability envelopes — `ability` / `player` / `payload`)
+**Related:** `REALAI_RACKUP_WIRING_CONTRACT.md` (ability envelopes — `ability` / `player` / `payload`), [`RACKUP_UNIFIED_PLAYER_CARD.md`](./RACKUP_UNIFIED_PLAYER_CARD.md) (`player_card_sync`)
 
 Ability JSON does **not** change by host. Only the **base URL + path** change.
 
@@ -108,6 +108,8 @@ All coach abilities (`coach`, `shot_of_the_day`, `rating_update`, …) use the e
 This file does not redefine them. Host only selects base URL + path.
 
 Jump / SOTD diagram stroke: `RACKUP_JUMP_PATH_SPEC.md` (straight airborne over blocker). Ghost: `RACKUP_GHOST_BALL_DIAGRAM_SPEC.md` (auto derive). Massé: `RACKUP_MASSE_CURVE_SPEC.md` (smooth curve).
+
+Unified Player Card (`player_card_sync`): `RACKUP_UNIFIED_PLAYER_CARD.md` — ROC Glicko vs leagues v2 0–3000 stay parallel; Nest owns Fargo HTTP.
 
 ---
 

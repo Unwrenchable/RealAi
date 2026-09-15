@@ -385,3 +385,33 @@ invoke({
 | `money_anomaly` | Advisory risk score / human review |
 
 All responses include `authorize_payout: false`.
+
+## Unified Player Card (v1.7 — APA + Fargo + RackUp)
+
+Contract: `docs/external_contracts/RACKUP_UNIFIED_PLAYER_CARD.md`.
+
+Two continua stay **parallel**: ROC Glicko on `users.rating` (500-band, `rating_update` owns math) vs leagues v2 **0–3000** (display/import only — never overwrite ROC). Fargo is read-only; never invented. APA LMS only with token. No match submit.
+
+```python
+invoke({
+  "ability": "player_card_sync",
+  "organs_enabled": False,
+  "player": {
+    "player_id": "u1",
+    "display_name": "Alex Rivera",
+    "rating": 547,
+    "rd": 80,
+    "matches_played_rackup": 12,
+  },
+  "payload": {
+    "name": "Alex Rivera",
+    "fargo": {"playerId": "12345", "rating": 552, "robustness": 410},
+    "apa_sl": 5,
+    "bca": {"value": 4, "scale": "skill_1_9"},
+    "tap": {"value": 5, "scale": "skill_1_9"},
+    "leagues_v2_rating": 1500,
+  },
+})
+# → result.schema == unified_player_card.v1
+# → card.roc_glicko.canonical, card.fargo.read_only, card.leagues_v2.overwrites_roc is False
+```

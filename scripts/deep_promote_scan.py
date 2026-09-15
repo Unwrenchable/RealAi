@@ -380,6 +380,7 @@ def propose_dest(path: Path, kind: str, signals: List[str]) -> Dict[str, str]:
         "hall_context",
         "league_validate",
         "rating_convert",
+        "player_card_sync",
     }:
         return {
             "family": "abilities/rackup",

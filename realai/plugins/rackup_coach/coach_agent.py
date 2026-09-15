@@ -12,7 +12,7 @@ class RackUpCoachAgent:
     """Professional pool coach agent (provider-level) — ROC-aware."""
 
     name = "rackup-coach"
-    version = "1.6.0"
+    version = "1.7.0"
 
     def handle(self, request: CoachRequest | dict[str, Any]) -> CoachResponse:
         if isinstance(request, dict):

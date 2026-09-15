@@ -2,13 +2,15 @@
 # Provider-level AI capability only (no NestJS / no DB code).
 
 name: rackup-coach
-version: 1.4.0
+version: 1.7.0
 author: RealAI / RackUp
 description: >
   Professional pool (billiards) coaching and platform intelligence for the
   RackUp app and ROC (Rack of Champions) — practice plans, shot of the day,
   video feedback, moderation, matchmaking, continuous BCA-style rating,
-  cross-league convert (APA/BCA/Fargo/TAP/VNEA), league_validate, tournament
+  cross-league convert (APA/BCA/Fargo/TAP/VNEA), unified player card sync
+  (ROC Glicko + read-only Fargo + optional RackUpRate shadow + apa_sl/bca/tap;
+  leagues v2 0–3000 stays parallel), league_validate, tournament
   insights, hall/ROC session context, formats (Singles→Scotch→JJ→Teams of 5),
   and full RackUp Pyramid support (7ft/10-ball vs 9ft/15-ball, skill targets,
   classical scoring, call-shot policy, rating weights).
@@ -33,6 +35,7 @@ capabilities:
   - chat_moderation
   - matchmaking_support
   - rating_intelligence
+  - player_card_sync
   - tournament_insights
   - hall_session_context
   - mental_game
@@ -116,6 +119,11 @@ abilities:
   - id: rating_intel
     module: abilities.rating_intel
     description: Dynamic rating trajectory and skill-gap analysis
+  - id: player_card_sync
+    module: abilities.player_card_sync
+    description: >
+      Unified Player Card — parallel ROC Glicko + read-only Fargo + optional
+      RackUpRate shadow + apa_sl/bca/tap; never invent Fargo or LMS-submit
   - id: tournament
     module: abilities.tournament
     description: League/tournament bracket and prep insights

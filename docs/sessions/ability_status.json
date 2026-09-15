@@ -186,6 +186,12 @@
     "live_path": "POST /v1/tools/execute ability.rating_intel + rackup_invoke"
   },
   {
+    "id": "player_card_sync",
+    "status": "LIVE",
+    "name": "unified player card sync",
+    "live_path": "POST /v1/tools/execute ability.player_card_sync + rackup_invoke"
+  },
+  {
     "id": "sotd_contribute",
     "status": "LIVE",
     "name": "sotd contribute",
