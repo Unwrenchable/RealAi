@@ -4,6 +4,8 @@
 **For:** roc / Rack_em_up cloud agent  
 **Primary bug:** sotd-15 Jump Over the Troublemaker draws as solid 90° zigzag (reads as massé)
 
+**Related:** Cut-shot **Ghost Ball** contact geometry (imaginary CB center + `contact_point`, not the airborne hop) is in `RACKUP_GHOST_BALL_DIAGRAM_SPEC.md`. Jump maps still use ghost at **post-landing OB contact** — never on the apex.
+
 ## Root cause
 
 1. `SotdPathSegment` is only `{ from, to }` - no `style` / `kind`.
