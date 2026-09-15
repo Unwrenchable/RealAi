@@ -115,7 +115,7 @@ class TestPacketShape(unittest.TestCase):
         packet = out["packet"]
         self.assertEqual(validate_packet(packet), [])
         self.assertEqual(packet["schema"], PACKET_SCHEMA)
-        self.assertEqual(packet["slug"], "fixture-app")
+        self.assertEqual(packet["slug"], "fixture_app")
         self.assertFalse(packet["heal"])
         fps = packet["fingerprints"]
         paths = {fp["path"] for fp in fps}
@@ -128,8 +128,8 @@ class TestPacketShape(unittest.TestCase):
         self.assertIn("typescript", summary["languages"])
         self.assertTrue(summary["frameworks"])
         self.assertIn("health", [a["id"] for a in packet["proposed_abilities"]])
-        self.assertTrue((self.product / "realai" / "catalog" / "learned" / "fixture-app" / "packet.json").is_file())
-        self.assertTrue((self.product / "docs" / "learning" / "fixture-app.json").is_file())
+        self.assertTrue((self.product / "realai" / "catalog" / "learned" / "fixture_app" / "packet.json").is_file())
+        self.assertTrue((self.product / "docs" / "learning" / "fixture_app.json").is_file())
         self.assertFalse(out["wrote_plugin"])
 
     def test_cli_scans_fixture(self):
@@ -256,6 +256,19 @@ class TestStubIdempotency(unittest.TestCase):
         pkg = plugin_package_name("rackup")
         self.assertNotEqual(pkg, "rackup_coach")
         self.assertTrue(pkg.endswith("_learned_coach") or pkg != "rackup_coach")
+
+
+class TestCraftLearnHook(unittest.TestCase):
+    def test_plan_tools_learn_no_heal(self):
+        from realai.cli.craft import HELP, plan_tools
+
+        plans = plan_tools("/learn ./some-repo --write")
+        self.assertEqual(len(plans), 1)
+        self.assertEqual(plans[0][0], "learn")
+        self.assertTrue(plans[0][1]["write"])
+        self.assertIn("some-repo", plans[0][1]["source"])
+        self.assertIn("/learn", HELP)
+        self.assertNotIn("heal", plans[0][0])
 
 
 if __name__ == "__main__":
