@@ -145,16 +145,22 @@ def _sha1_blobs(root: Path, blob_ids: list[str]) -> dict[str, str]:
         pass
     finally:
         try:
-            proc.stdin.close()
-        except OSError:
-            pass
-        try:
-            proc.kill()
+            if proc.stdin is not None:
+                proc.stdin.close()
         except OSError:
             pass
         try:
             proc.wait(timeout=5)
         except (OSError, subprocess.TimeoutExpired):
+            try:
+                proc.kill()
+                proc.wait(timeout=5)
+            except (OSError, subprocess.TimeoutExpired):
+                pass
+        try:
+            if proc.stdout is not None:
+                proc.stdout.close()
+        except OSError:
             pass
     return out
 
