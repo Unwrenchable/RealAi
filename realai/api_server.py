@@ -15,6 +15,11 @@ the provider explicitly, and ``X-Base-URL`` to override the endpoint.
 
 Self-host: unrecognized keys (no ``sk-`` / ``xai-`` / … prefix) default to
 provider ``realai`` (override with ``REALAI_PROVIDER``) instead of 400.
+
+Cloud UI (Vercel → Render): ``X-Provider: realai`` is identity, not a GGUF.
+If ``~/.realai/local_models.json`` has no usable ``default_llm``, chat uses
+``OPENAI_API_KEY`` / ``REALAI_*_API_KEY`` / ``REALAI_CLOUD_FALLBACK``. Vulkan
+forward is loopback Hive only — never Render.
 """
 
 import hashlib
@@ -27,15 +32,14 @@ from pathlib import Path
 from urllib.parse import urlparse, parse_qs, unquote
 from urllib import request as urlrequest
 
-# Optional local Vulkan llama-server (same box as Hive). Used when healthy so
-# /v1/chat/completions does not fall through to the "no default_llm" placeholder.
-def _vulkan_base() -> str:
-    return (os.environ.get("REALAI_VULKAN_BASE") or "http://127.0.0.1:8080").rstrip("/")
+from .cloud_fallback import (
+    first_configured_cloud_credentials,
+    vulkan_base as _vulkan_base,
+    vulkan_forward_enabled as _vulkan_forward_enabled,
+)
 
-
-def _vulkan_forward_enabled() -> bool:
-    flag = (os.environ.get("REALAI_VULKAN_FORWARD") or "auto").strip().lower()
-    return flag not in ("0", "false", "off", "no")
+# Optional local Vulkan llama-server (same box as Hive, loopback only).
+# Never used on Render — that host has no GGUF / llama-server.
 
 
 def _vulkan_healthy(timeout: float = 0.6) -> bool:
@@ -73,9 +77,15 @@ def _looks_like_local_placeholder(response: dict) -> bool:
         content = ""
     if not isinstance(content, str):
         return False
-    return "no local model is configured/loaded" in content.lower()
+    lowered = content.lower()
+    return (
+        "no local model is configured/loaded" in lowered
+        or "register a local model and set it as default_llm" in lowered
+        or "this cloud api has no local gpu model" in lowered
+        or "no gguf loaded on this machine" in lowered
+    )
 
-from . import RealAI, PROVIDER_CONFIGS, PROVIDER_ENV_VARS, _KEY_PREFIX_TO_PROVIDER
+from . import RealAI, _KEY_PREFIX_TO_PROVIDER
 from .model_registry import MODEL_REGISTRY, get_model_metadata
 from .provider_resolve import resolve_request_provider, realai_constructor_provider
 from .server_settings import settings
@@ -835,17 +845,16 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
         )
         base_url = self.headers.get("X-Base-URL") or None
 
-        # Fall back to environment variables set by the GUI launcher.
-        # Priority follows the insertion order of PROVIDER_ENV_VARS
-        # (openai → anthropic → grok → gemini); the first key found wins.
+        # Fall back to environment variables set by the GUI launcher / Render.
+        # Includes OPENAI_API_KEY as well as REALAI_*_API_KEY. When X-Provider
+        # is already realai/local, keep that identity and let RealAI bind
+        # cloud fallback internally if no GGUF is loaded.
         if not api_key:
-            for _provider, _env_var in PROVIDER_ENV_VARS.items():
-                _key = os.environ.get(_env_var, "")
-                if _key:
-                    api_key = _key
-                    if not provider:
-                        provider = _provider
-                    break
+            found = first_configured_cloud_credentials()
+            if found:
+                _env_provider, api_key = found
+                if not provider:
+                    provider = _env_provider
 
         return RealAI(model_name=model_name, api_key=api_key,
                       provider=realai_constructor_provider(provider),
@@ -1090,7 +1099,7 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
                 except Exception as _org_err:
                     organ_trace = {"enabled": False, "error": str(_org_err)}
 
-                # Prefer local Vulkan llama-server when healthy (era salvage).
+                # Prefer local Vulkan llama-server when healthy (loopback Hive only).
                 x_provider = (self.headers.get("X-Provider") or "").strip().lower()
                 force_cloud = x_provider in (
                     "openai", "anthropic", "grok", "gemini", "openrouter",

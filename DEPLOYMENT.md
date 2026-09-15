@@ -120,8 +120,9 @@ Copy from `.env.example` and `frontend/.env.example`. Prefer dashboard secrets o
 | `PORT` | Provided by host |
 | `REALAI_DB_PATH` | SQLite file path |
 | `REALAI_DATA_DIR` | Parent dir for default DB (`~/.realai`) |
-| `REALAI_VULKAN_BASE` | Local llama-server base (default `http://127.0.0.1:8080`) |
-| `REALAI_VULKAN_FORWARD` | `auto` (default) / `off` — proxy chat to Vulkan when healthy |
+| `REALAI_VULKAN_BASE` | Local llama-server base (default `http://127.0.0.1:8080`) — **loopback only** |
+| `REALAI_VULKAN_FORWARD` | `auto` (Hive) / `off` / `force`. Proxy chat to Vulkan **only** when the base is loopback **and** this is not Render. Disabled on Cloud API. |
+| `REALAI_CLOUD_FALLBACK` | `auto` (default) / `off` / `<provider>` (e.g. `openai`). When `X-Provider: realai` and no GGUF is loaded, use a cloud key instead of “register default_llm”. |
 
 Provider keys can also be sent per-request as `Authorization: Bearer ...` (prefix auto-detect) or `X-Provider` / `X-Base-URL` overrides — see `realai/api_server.py`. Self-host declares provider **`realai`**: Bearer + no `X-Provider` + unrecognized key prefix defaults to `REALAI_PROVIDER` (`realai`) instead of 400. Details: [`docs/selfhost-provider.md`](./docs/selfhost-provider.md).
 
@@ -144,6 +145,18 @@ Configured in `config/amd_inference.yaml` + env:
 
 Set one or more `REALAI_*_API_KEY` / `OPENAI_API_KEY` on Render.  
 Clients call the same OpenAI-style `/v1/chat/completions` surface.
+
+**Cloud UI (Vercel → Render) is not Local Hive.** The frontend correctly sends
+`X-Provider: realai` (self-host identity). Render still has **no** GGUF and
+does **not** read `C:\\models\\checkpoints_lora\\registry.json`. Chat then:
+
+1. Tries `~/.realai/local_models.json` `default_llm` (almost always unset/unusable on Render).
+2. Falls back to `OPENAI_API_KEY` / `REALAI_*_API_KEY` / `REALAI_CLOUD_FALLBACK`.
+3. Otherwise returns a **cloud vs local** error (open Hive console on the PC, or set a cloud key) — not “register default_llm”.
+
+Vulkan forward on `api_server` stays for **loopback Hive only**.
+
+See [`docs/selfhost-provider.md`](./docs/selfhost-provider.md).
 
 ---
 
@@ -356,6 +369,7 @@ Frontend: open the Vercel URL → chat once → DevTools Network should show `NE
 | Hive chat is health fluff in foreign repo | Update extension ≥ 1.2.15; use `/phase` local slash |
 | SPEAK calls `:8890` in browser | Use console via `:8001` proxy only |
 | Vulkan OOM / token faults | 7B GGUF + `-ngl 99` + high `-c`; prefer XTTS over fighting LLM VRAM |
+| Vercel chat says “register a local model and set it as default_llm” | Stale cloud path: Render has no GGUF. Set `OPENAI_API_KEY` (or `REALAI_CLOUD_FALLBACK`) on Render, or use Local Hive at `:8001`. `default_llm` belongs in `~/.realai/local_models.json` on the GPU PC, not in the checkpoints registry. |
 | Vercel opens `http://127.0.0.1:8001/console` | Fixed on live branch: `frontend/app/page.tsx` must not hard-redirect; set `NEXT_PUBLIC_API_URL` on Vercel |
 | Render shows old chat dashboard at `/` | Set `REALAI_PUBLIC_UI_URL=https://realaiui.vercel.app` and redeploy; old UI at `/legacy-ui` |
 | `pnpm` missing locally | `npx pnpm@9 install` — Vercel still uses lockfile |

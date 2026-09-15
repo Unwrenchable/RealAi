@@ -79,6 +79,11 @@ except Exception:
     LOCAL_MODELS_AVAILABLE = False
 
 try:
+    from . import cloud_fallback as _cloud_fallback
+except ImportError:
+    import cloud_fallback as _cloud_fallback  # type: ignore
+
+try:
     try:
         from .router import IntelligentRouter, INTELLIGENT_ROUTER, ProviderScore, CircuitBreaker, CircuitState
     except ImportError:
@@ -2122,6 +2127,8 @@ class RealAI:
 
         # Local model setup
         self._local_enabled = LOCAL_MODELS_AVAILABLE
+        self._cloud_fallback_applied = False
+        self._base_url_override = base_url
         if self._local_enabled:
             self._model_manager = get_model_manager()
             self._llm_engine = get_llm_engine()
@@ -2141,15 +2148,26 @@ class RealAI:
             self._use_local = True
             self.provider = None
 
+        # Self-host identity (X-Provider: realai/local) still prefers a loaded
+        # GGUF. On Render there is none — bind OPENAI_API_KEY / REALAI_* keys
+        # so chat does not die on the generic default_llm placeholder.
+        if self.provider in (None, "local", "realai") or self.provider not in PROVIDER_CONFIGS:
+            _cloud_fallback.apply_cloud_fallback_to_instance(self, PROVIDER_CONFIGS)
+
         cfg: Dict[str, str] = PROVIDER_CONFIGS.get(self.provider, {}) if self.provider else {}
-        self.base_url: str = base_url or cfg.get("base_url", "")
-        self._api_format: str = cfg.get("api_format", "openai")
+        self.base_url: str = getattr(self, "base_url", None) or base_url or cfg.get("base_url", "")
+        if base_url:
+            self.base_url = base_url
+        self._api_format: str = getattr(self, "_api_format", None) or cfg.get("api_format", "openai")
         # The actual model name sent to the remote provider.
-        # If the caller left model_name at the default, use the provider's default.
-        if self.provider and model_name == "realai-2.0":
-            self._provider_model: str = cfg.get("default_model", model_name)
+        # Hive ids (realai-default-coder, *.gguf, …) map to the cloud default.
+        if self.provider and (
+            model_name == "realai-2.0"
+            or _cloud_fallback.looks_like_local_model_id(model_name)
+        ):
+            self._provider_model: str = cfg.get("default_model", getattr(self, "_provider_model", model_name))
         else:
-            self._provider_model = model_name
+            self._provider_model = getattr(self, "_provider_model", None) or model_name
         self.response_contract_version = "2026-04-08"
         self.persona = "balanced"
         self._web_research_cache: Dict[str, Dict[str, Any]] = {}
@@ -2312,7 +2330,8 @@ class RealAI:
 
         Priority order:
         1. Local models (if use_local=True and a model is loaded)
-        2. External API providers (if api_key is provided)
+        2. External API providers (if api_key is provided), including
+           cloud fallback when provider is realai/local but no GGUF is loaded
         3. Placeholder response (fallback)
 
         Args:
@@ -2330,16 +2349,18 @@ class RealAI:
         if persona_prompt:
             messages_to_send = [{"role": "system", "content": persona_prompt}] + messages_to_send
 
+        local_loaded = False
         # Try local model first if enabled
         if self._use_local and self._llm_engine:
             try:
                 # Try to use an already loaded model, or load default
                 if not self._llm_engine.is_loaded():
-                    default_llm = self._model_manager.config.get("default_llm")
+                    default_llm = self._model_manager.config.get("default_llm") if self._model_manager else None
                     if default_llm and self._model_manager.is_model_available(default_llm):
                         self._llm_engine.load_model(default_llm)
 
                 if self._llm_engine.is_loaded():
+                    local_loaded = True
                     response_text = self._llm_engine.chat_completion(
                         messages_to_send,
                         max_tokens=max_tokens or 512,
@@ -2370,19 +2391,30 @@ class RealAI:
             except Exception as e:
                 # Fall through to API or placeholder if local model fails
                 print(f"Local model inference failed: {e}")
+                local_loaded = False
+
+        if not local_loaded:
+            _cloud_fallback.apply_cloud_fallback_to_instance(
+                self, PROVIDER_CONFIGS, local_ready=False
+            )
 
         # Route to the real provider when credentials are available.
-        if self.api_key and self.provider:
+        if _cloud_fallback.provider_can_call_cloud(
+            self.provider, self.api_key, self.base_url, PROVIDER_CONFIGS
+        ):
             try:
                 if self._api_format == "anthropic":
                     provider_response = self._call_anthropic(messages_to_send, temperature, max_tokens)
                 else:
                     provider_response = self._call_openai_compat(messages_to_send, temperature, max_tokens, stream)
+                extra = {"persona": self.persona, "source": "api"}
+                if getattr(self, "_cloud_fallback_applied", False):
+                    extra["cloud_fallback"] = True
                 return self._with_metadata(
                     provider_response,
                     capability=ModelCapability.TEXT_GENERATION.value,
                     modality="text",
-                    extra={"persona": self.persona, "source": "api"},
+                    extra=extra,
                 )
             except Exception as e:
                 # Log the error so operators can diagnose key/network problems.
@@ -2417,17 +2449,10 @@ class RealAI:
                 }, capability=ModelCapability.TEXT_GENERATION.value, modality="text",
                    extra={"persona": self.persona, "source": "error", "error": _api_error})
 
-        # Placeholder response when neither local nor API generation is available.
-        if self._use_local:
-            missing_credentials_msg = (
-                "Local RealAI is selected, but no local model is configured/loaded yet. "
-                "Register a local model and set it as default_llm, then retry."
-            )
-        else:
-            missing_credentials_msg = (
-                "No API key configured. Select Local RealAI to run locally without a key, "
-                "or paste a provider API key in the settings bar."
-            )
+        # Placeholder when neither local GGUF nor cloud fallback can generate.
+        missing_credentials_msg = _cloud_fallback.missing_generation_message(
+            use_local=self._use_local
+        )
         return self._with_metadata({
             "id": f"chatcmpl-{int(time.time())}",
             "object": "chat.completion",
@@ -2470,16 +2495,18 @@ class RealAI:
         Returns:
             Dict[str, Any]: Text completion response
         """
+        local_loaded = False
         # Try local model first if enabled
         if self._use_local and self._llm_engine:
             try:
                 # Try to use an already loaded model, or load default
                 if not self._llm_engine.is_loaded():
-                    default_llm = self._model_manager.config.get("default_llm")
+                    default_llm = self._model_manager.config.get("default_llm") if self._model_manager else None
                     if default_llm and self._model_manager.is_model_available(default_llm):
                         self._llm_engine.load_model(default_llm)
 
                 if self._llm_engine.is_loaded():
+                    local_loaded = True
                     response_text = self._llm_engine.generate(
                         prompt,
                         max_tokens=max_tokens or 512,
@@ -2487,16 +2514,6 @@ class RealAI:
                     )
 
                     if response_text:
-                        if self._use_local:
-                            missing_credentials_msg = (
-                                "Local RealAI is selected, but no local model is configured/loaded yet. "
-                                "Register a local model and set it as default_llm, then retry."
-                            )
-                        else:
-                            missing_credentials_msg = (
-                                "No API key configured. Select Local RealAI to run locally without a key, "
-                                "or paste a provider API key in the settings bar."
-                            )
                         return self._with_metadata({
                             "id": f"cmpl-local-{int(time.time())}",
                             "object": "text_completion",
@@ -2517,11 +2534,23 @@ class RealAI:
             except Exception as e:
                 # Fall through to API or placeholder if local model fails
                 print(f"Local model inference failed: {e}")
+                local_loaded = False
+
+        if not local_loaded:
+            _cloud_fallback.apply_cloud_fallback_to_instance(
+                self, PROVIDER_CONFIGS, local_ready=False
+            )
+
+        missing_credentials_msg = _cloud_fallback.missing_generation_message(
+            use_local=self._use_local
+        )
 
         # Route to the real provider when credentials are available.
         # All modern providers expose a chat completions endpoint; wrap the
         # prompt as a single user message for maximum compatibility.
-        if self.api_key and self.provider:
+        if _cloud_fallback.provider_can_call_cloud(
+            self.provider, self.api_key, self.base_url, PROVIDER_CONFIGS
+        ):
             try:
                 messages = [{"role": "user", "content": prompt}]
                 if self._api_format == "anthropic":
