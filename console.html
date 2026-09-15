@@ -143,14 +143,14 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
 <meta name="twitter:image" content="/og.jpg" />
 </head>
 <body>
-<div class="app" id="app">
+<div class="app no-ops" id="app">
   <div class="scrim" id="scrim" hidden></div>
   <aside class="rail" id="rail">
     <div class="brand">
       <div class="mark">R</div>
       <div>
         <h1>RealAI</h1>
-        <p id="brandSub">console // hive // unified</p>
+        <p id="brandSub">RealAI</p>
       </div>
     </div>
     <button class="new" id="newChat">+ New thread</button>
@@ -190,14 +190,14 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       <a class="pill btn" id="openVoiceLab" href="/voice-lab/" title="Voice Lab UI (speech still via RealAI :8001)">Voice</a>
       <button type="button" class="pill btn" id="openBrowser" title="Open Hive browser console">Browser</button>
       <button type="button" class="pill btn" id="openSettings" title="Chat settings (from Next shell)">Settings</button>
-      <button type="button" class="pill btn" id="toggleOps" title="Toggle ability dock">Ops</button>
+      <button type="button" class="pill btn" id="toggleOps" title="Toggle advanced dock">Advanced</button>
     </header>
     <div class="feed" id="feed"></div>
     <div class="composer-wrap">
       <form class="composer" id="form">
-        <textarea id="input" rows="2" placeholder="Talk normally — or /tools /hive /heal /multi … · click Ops →"></textarea>
+        <textarea id="input" rows="2" placeholder="Ask anything…"></textarea>
         <div class="bar">
-          <span class="ghost">ENTER send · plain English works · Ops dock for abilities</span>
+          <span class="ghost">I'll use tools when I need files or actions.</span>
           <button class="send" id="send" type="submit">Send</button>
         </div>
       </form>
@@ -205,7 +205,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
   </section>
 
   <aside class="ops" id="ops">
-    <h3>Ops · ability dock</h3>
+    <h3>Advanced · ability dock</h3>
     <div class="stat"><b>Provider</b><span>RealAI Hive — local only</span></div>
     <div class="stat"><b>Stack</b><span id="stackLine">loading…</span></div>
     <div class="tabs">
@@ -341,7 +341,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     deliver({
       command: 'bootstrap',
       version: '1.2.15-browser',
-      stage: { phaseId: 'Phase I', phaseTitle: 'Hive console + Fusion', tipLine: 'Console look · Fusion stack in Ops' },
+      stage: { phaseId: 'Phase I', phaseTitle: 'Hive console + Fusion', tipLine: 'Console look · Fusion stack in Advanced' },
       snap: {
         hiveOk,
         vulkanOk,
@@ -366,7 +366,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
   async function browserChat(text, history){
     const low = String(text || '').toLowerCase().trim();
     if (low === '/phase' || low === '/where') {
-      deliver({ command: 'assistant', text: 'Browser console on ' + HIVE + '\nSame surface as VS Code RealAI Console v1.2.15.\nUse Ops dock for abilities/tools/agents.' });
+      deliver({ command: 'assistant', text: 'Browser console on ' + HIVE + '\nSame surface as VS Code RealAI Console v1.2.15.\nUse Advanced for abilities/tools/agents.' });
       return;
     }
     if (low === '/repo' || low === '/read') {
@@ -488,7 +488,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
         '1) Phase I — Hive browser console',
         '2) Same UI as apps/vscode RealAI Console v1.2.15',
         '3) Hive ' + HIVE,
-        '4) SPEAK + tools on · Ops dock = abilities/tools/agents',
+        '4) SPEAK + tools on · Advanced = abilities/tools/agents',
       ].join('\n') });
       return;
     }
@@ -855,19 +855,12 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
   function emptyState(){
     return `<div class="empty">
       <h2>Just talk.<br><span>I'll do the rest.</span></h2>
-      <p>Plain English to RealAI on this PC — tools, hive agents, voice, and the repo. Ops dock is there when you want one-click.</p>
+      <p>Ask in plain English. I'll use tools when I need files or actions — I won't invent what's on disk.</p>
       <div class="chips">
         <button class="chip" data-p="hey, what can you help me with?">what can you do?</button>
-        <button class="chip" data-p="/research RealAI local hive">research</button>
-        <button class="chip" data-p="/image a neon hive console">draw</button>
-        <button class="chip" data-p="/multi Audit apps/vscode and list 3 concrete patches">multi</button>
-        <button class="chip" data-p="/speak hello from RealAI">speak</button>
-        <button class="chip" data-p="/remember user prefers local-only RealAI">remember</button>
-        <button class="chip" data-p="/hive">hive</button>
-        <button class="chip" data-p="/heal">heal</button>
-        <button class="chip" data-p="/nests">nests</button>
-        <button class="chip" data-p="/tools">tools</button>
-        <button class="chip" data-p="$ whoami">$ whoami</button>
+        <button class="chip" data-p="what's in this repo">what's in this repo</button>
+        <button class="chip" data-p="read console.html">read console.html</button>
+        <button class="chip" data-p="list the workspace files">list files</button>
       </div>
     </div>`;
   }
@@ -1037,7 +1030,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
   setVoiceUi('voice: ready');
   if (IS_BROWSER) {
     const brand = document.getElementById('brandSub');
-    if (brand) brand.textContent = 'console // browser';
+    if (brand) brand.textContent = 'RealAI';
   }
 
   document.querySelectorAll('[data-local]').forEach(b => {
@@ -1071,7 +1064,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     fillComposer('/multi List 3 concrete next actions for the local RealAI hive');
     form.requestSubmit();
   };
-  // Deep-link ?fusion=1 opens Ops on Fusion tab
+  // Deep-link ?fusion=1 opens Advanced on Fusion tab
   try {
     if (/[?&]fusion=1\b/.test(location.search || '')) {
       const ft = document.querySelector('.tab[data-tab="fusion"]');
@@ -1104,7 +1097,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     if (d.command === 'bootstrap') {
       boot = d;
       document.getElementById('extVer').textContent = 'v'+(d.version||'');
-      document.getElementById('brandSub').textContent = 'console // v'+(d.version||'');
+      document.getElementById('brandSub').textContent = 'RealAI';
       document.getElementById('phasePill').textContent = (d.stage && d.stage.phaseId) || 'Phase I';
       document.getElementById('pillTools').textContent = 'tools · '+((d.tools||[]).length);
       document.getElementById('pillCaps').textContent = 'caps · '+((d.capabilities||[]).length);

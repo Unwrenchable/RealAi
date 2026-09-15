@@ -34,6 +34,11 @@ class TestMetaRouterWorkLoop(unittest.TestCase):
         self.assertEqual(d.target, "coder")
         self.assertEqual(d.task_class, "code")
 
+    def test_product_file_ask_routes_coder(self):
+        d = route_task("what's in console.html", mode="product")
+        self.assertEqual(d.target, "coder")
+        self.assertEqual(d.task_class, "code")
+
     def test_product_smalltalk_stays_overseer(self):
         d = route_task("hello there", mode="product")
         self.assertEqual(d.target, "overseer")

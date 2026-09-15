@@ -80,6 +80,14 @@ def classify_task(text: str) -> str:
     # `/work` is a coding work loop — must beat "plan"/"architect" in the goal text.
     if _looks_like_work_loop(text):
         return "code"
+    # Plain-English file/fix/find/read — Console Natural Mode (product or foreign).
+    try:
+        from realai.bot.natural_mode import looks_like_repo_ask
+
+        if looks_like_repo_ask(text):
+            return "code"
+    except Exception:
+        pass
     if any(k in t for k in ("deploy", "git push", "rm -rf", "drop table", "transfer sol", "sign tx")):
         return "side-effect"
     if any(k in t for k in ("plan", "architect", "decompose", "roadmap", "design system")):
