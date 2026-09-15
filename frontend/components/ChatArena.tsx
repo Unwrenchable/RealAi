@@ -82,6 +82,8 @@ export default function ChatArena({ persona, godMode }: any) {
       <div className="p-6 border-t border-zinc-800 bg-zinc-950">
         <div className="max-w-4xl mx-auto relative">
           <textarea
+            id="arena-message"
+            name="message"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), sendMessage())}

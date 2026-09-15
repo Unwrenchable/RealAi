@@ -124,10 +124,15 @@ export default function SettingsDrawer({
 
           {/* System Prompt */}
           <section>
-            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+            <label
+              htmlFor="settings-system-prompt"
+              className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2"
+            >
               System Prompt
             </label>
             <textarea
+              id="settings-system-prompt"
+              name="systemPrompt"
               value={settings.systemPrompt}
               onChange={(e) => update("systemPrompt", e.target.value)}
               rows={5}
@@ -140,13 +145,18 @@ export default function SettingsDrawer({
 
           {/* Temperature */}
           <section>
-            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+            <label
+              htmlFor="settings-temperature"
+              className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2"
+            >
               Temperature
               <span className="ml-auto float-right text-brand-400 font-mono">
                 {settings.temperature.toFixed(1)}
               </span>
             </label>
             <input
+              id="settings-temperature"
+              name="temperature"
               type="range"
               min={0}
               max={2}
@@ -163,13 +173,18 @@ export default function SettingsDrawer({
 
           {/* Max Tokens */}
           <section>
-            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+            <label
+              htmlFor="settings-max-tokens"
+              className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2"
+            >
               Max Tokens
               <span className="ml-auto float-right text-brand-400 font-mono">
                 {settings.maxTokens.toLocaleString()}
               </span>
             </label>
             <input
+              id="settings-max-tokens"
+              name="maxTokens"
               type="range"
               min={256}
               max={8192}
@@ -186,10 +201,15 @@ export default function SettingsDrawer({
 
           {/* API Key */}
           <section>
-            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+            <label
+              htmlFor="settings-api-key"
+              className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2"
+            >
               API Key <span className="text-slate-600">(optional)</span>
             </label>
             <input
+              id="settings-api-key"
+              name="apiKey"
               type="password"
               value={settings.apiKey}
               onChange={(e) => update("apiKey", e.target.value)}
