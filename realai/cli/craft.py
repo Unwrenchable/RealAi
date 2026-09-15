@@ -1399,12 +1399,27 @@ def tool_scan(path: str = ".") -> dict[str, Any]:
     return _r({"path": path})
 
 
-def tool_learn(source: str = ".", write: bool = False, refresh: bool = False) -> dict[str, Any]:
+def tool_learn(
+    source: str = ".",
+    write: bool = False,
+    refresh: bool = False,
+    all_branches: bool = True,
+    max_branches: int | None = None,
+    max_files: int | None = None,
+) -> dict[str, Any]:
     """Static git-learn. Never starts heal, GPU, or the orchestrator."""
     from realai.learn.pipeline import run_learn
+    from realai.learn.scan import DEFAULT_MAX_BRANCHES, FINGERPRINT_CAP
 
     src = (source or "").strip() or str(_ws())
-    return run_learn(src, write=bool(write), refresh=bool(refresh))
+    return run_learn(
+        src,
+        write=bool(write),
+        refresh=bool(refresh),
+        all_branches=bool(all_branches),
+        max_branches=int(max_branches or DEFAULT_MAX_BRANCHES),
+        max_files=int(max_files or FINGERPRINT_CAP),
+    )
 
 
 TOOLS: dict[str, Callable[..., dict[str, Any]]] = {
@@ -1475,6 +1490,9 @@ TOOLS: dict[str, Callable[..., dict[str, Any]]] = {
         str(kw.get("source") or kw.get("path") or "."),
         write=bool(kw.get("write")),
         refresh=bool(kw.get("refresh")),
+        all_branches=bool(kw["all_branches"]) if "all_branches" in kw else True,
+        max_branches=kw.get("max_branches"),
+        max_files=kw.get("max_files"),
     ),
     "model": lambda **kw: tool_model(str(kw.get("name") or kw.get("model") or "RealAI Hive")),
     "walk": lambda **kw: tool_walk_root(
@@ -1841,16 +1859,22 @@ def plan_tools(user_text: str) -> list[tuple[str, dict[str, Any]]]:
             if cmd == "scan" and rest:
                 return [("scan", {"path": rest.split()[0]})]
             if cmd == "learn":
-                rest_l = rest.lower()
-                write = any(x in rest_l.split() for x in ("--write", "write"))
-                refresh = any(x in rest_l.split() for x in ("--refresh", "refresh"))
-                source_parts = [
-                    b
-                    for b in rest.split()
-                    if b.lower() not in {"--write", "write", "--refresh", "refresh"}
+                from realai.learn_git import parse_learn_tokens
+
+                ns = parse_learn_tokens(rest.split() if rest else [])
+                return [
+                    (
+                        "learn",
+                        {
+                            "source": (ns.source or ".").strip() or ".",
+                            "write": bool(ns.write),
+                            "refresh": bool(ns.refresh),
+                            "all_branches": bool(ns.all_branches),
+                            "max_branches": int(ns.max_branches),
+                            "max_files": int(ns.max_files),
+                        },
+                    )
                 ]
-                source = " ".join(source_parts).strip() or "."
-                return [("learn", {"source": source, "write": write, "refresh": refresh})]
             if cmd == "walk":
                 rest_l = rest.lower().strip()
                 deepen = any(x in rest_l for x in ("deepen", "deep", "deeper"))
@@ -2945,7 +2969,7 @@ Slash commands:
   /help /pwd /heal /doctor /gpu /improve /gaps /extend /repair
   /list /read /grep /write path|||content /scan
   /work <goal>                 # foreign-repo: inspect then coder plan + /write
-  /learn <path-or-url> [--write]  # git-learn packet (+ optional plugin stub); no heal/GPU
+  /learn <path-or-url> [--write] [--all-branches] [--max-branches N] [--max-files N]
   /tools /agents [query] /multi <task> /exec <tool> {json}
   /agents                         # hive first: overseer coder architect analyst memory governor router
   /task /organs /rackup /catalog /git /map /quit
@@ -3007,29 +3031,19 @@ class CraftSession:
             return "__QUIT__"
         if re.match(r"^/learn(\s|$)", user, re.I):
             rest = user.strip()[6:].strip()
-            write = False
-            refresh = False
-            source_parts: list[str] = []
-            for bit in rest.split():
-                bl = bit.lower()
-                if bl in {"--write", "write"}:
-                    write = True
-                    continue
-                if bl in {"--refresh", "refresh"}:
-                    refresh = True
-                    continue
-                source_parts.append(bit)
-            source = " ".join(source_parts).strip() or str(_ws())
-            result = tool_learn(source, write=write, refresh=refresh)
-            printable = dict(result)
-            packet = printable.get("packet")
-            if isinstance(packet, dict):
-                fps = packet.get("fingerprints") or []
-                printable["packet"] = {
-                    **{k: v for k, v in packet.items() if k != "fingerprints"},
-                    "fingerprint_count": len(fps) if isinstance(fps, list) else 0,
-                }
-            msg = json.dumps(printable, indent=2, default=str)
+            from realai.learn_git import compact_learn_result, parse_learn_tokens
+
+            ns = parse_learn_tokens(rest.split() if rest else [])
+            source = (ns.source or "").strip() or str(_ws())
+            result = tool_learn(
+                source,
+                write=bool(ns.write),
+                refresh=bool(ns.refresh),
+                all_branches=bool(ns.all_branches),
+                max_branches=int(ns.max_branches),
+                max_files=int(ns.max_files),
+            )
+            msg = json.dumps(compact_learn_result(result), indent=2, default=str)
             print(msg)
             return msg
         if user.lower() in ("/gpu", "/server"):

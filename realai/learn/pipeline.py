@@ -8,7 +8,7 @@ from typing import Any
 
 from realai.learn.packet import build_packet, validate_packet, write_packet
 from realai.learn.scaffold import plugin_id_for, plugin_package_name, scaffold_plugin
-from realai.learn.scan import scan_tree
+from realai.learn.scan import DEFAULT_MAX_BRANCHES, FINGERPRINT_CAP, scan_source
 from realai.learn.signals import extract_signals
 from realai.learn.source import infer_slug, resolve_source
 
@@ -43,7 +43,9 @@ def run_learn(
     plugins_root: Path | None = None,
     packet_root: Path | None = None,
     docs_root: Path | None = None,
-    max_files: int = 800,
+    max_files: int = FINGERPRINT_CAP,
+    max_branches: int = DEFAULT_MAX_BRANCHES,
+    all_branches: bool = True,
 ) -> dict[str, Any]:
     """Scan a git source, emit a learning packet, optionally scaffold a plugin stub.
 
@@ -69,7 +71,12 @@ def run_learn(
 
     tree = Path(resolved["path"])
     slug = str(resolved.get("slug") or infer_slug(source, tree))
-    scan = scan_tree(tree, max_files=max_files)
+    scan = scan_source(
+        tree,
+        all_branches=bool(all_branches),
+        max_files=int(max_files),
+        max_branches=int(max_branches),
+    )
     signals = extract_signals(tree, list(scan.get("fingerprints") or []))
     package = plugin_package_name(slug)
     plugin_id = plugin_id_for(package)
@@ -125,6 +132,16 @@ def run_learn(
         "shape_errors": shape_errors,
         "stub": stub,
         "wrote_plugin": bool(write and stub and stub.get("wrote")),
+        "scan": {
+            "all_branches": bool(all_branches),
+            "max_files": int(max_files),
+            "max_branches": int(max_branches),
+            "file_count": int(scan.get("file_count") or 0),
+            "truncated": bool(scan.get("truncated")),
+            "branches_seen": list(scan.get("branches_seen") or []),
+            "branch_counts": dict(scan.get("branch_counts") or {}),
+            "branches_truncated": bool(scan.get("branches_truncated")),
+        },
     }
 
 

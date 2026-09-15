@@ -56,6 +56,6 @@ Rack_em_up, Atomic Fizz, and other product trees use **their** default branch th
 
 ## 4. Git-learn (offline)
 
-`python -m realai.learn_git` / Craft `/learn` scans a git source (local path, `owner/repo`, or HTTPS URL), writes a learning packet, and optionally scaffolds a plugin stub. It **must not** start heal, GPU, or the orchestrator. Clone cache under `realai/.learn_cache/` is disposable; never delete user data.
+`python -m realai.learn_git` / Craft `/learn` scans a git source (local path, `owner/repo`, or HTTPS URL) **across all branches** (default; `--max-branches` cap, `--max-files` cap), writes a learning packet, and optionally scaffolds a plugin stub. It **must not** start heal, GPU, or the orchestrator. Clone cache under `realai/.learn_cache/` is disposable; never delete user data. Clones use `--no-single-branch` (not default-tip-only).
 
 See `docs/learning/README.md`.

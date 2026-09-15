@@ -1,6 +1,7 @@
 """Resolve a git-learn source: local path, owner/repo, or HTTPS URL."""
 from __future__ import annotations
 
+import os
 import re
 import shutil
 import subprocess
@@ -9,6 +10,10 @@ from typing import Any
 
 _OWNER_REPO = re.compile(r"^[\w.-]+/[\w.-]+$")
 _URL = re.compile(r"^(https?://|git@)", re.I)
+
+# Shallow tips of every remote branch (depth 1 still implies --single-branch
+# unless --no-single-branch is passed explicitly).
+CLONE_DEPTH = 1
 
 
 def slugify(name: str) -> str:
@@ -29,7 +34,27 @@ def infer_slug(source: str, resolved: Path | None = None) -> str:
     return slugify(p.name or "repo")
 
 
-def _git(root: Path, *args: str, timeout: int = 20) -> str:
+def git_env() -> dict[str, str]:
+    env = os.environ.copy()
+    env["GIT_TERMINAL_PROMPT"] = "0"
+    env.setdefault("GIT_ASKPASS", "")
+    return env
+
+
+def clone_argv(url: str, dest: Path, *, depth: int | None = CLONE_DEPTH) -> list[str]:
+    """git clone flags: all remote branches, optional shallow tips."""
+    cmd = ["git", "clone", "--no-single-branch"]
+    if depth:
+        cmd.extend(["--depth", str(int(depth))])
+    cmd.extend([url, str(dest)])
+    return cmd
+
+
+def fetch_all_argv() -> list[str]:
+    return ["fetch", "--all", "--tags"]
+
+
+def git_capture(root: Path, *args: str, timeout: int = 20) -> str:
     try:
         r = subprocess.run(
             ["git", "-C", str(root), *args],
@@ -37,6 +62,7 @@ def _git(root: Path, *args: str, timeout: int = 20) -> str:
             text=True,
             timeout=timeout,
             check=False,
+            env=git_env(),
         )
     except (OSError, subprocess.TimeoutExpired):
         return ""
@@ -45,16 +71,143 @@ def _git(root: Path, *args: str, timeout: int = 20) -> str:
     return (r.stdout or "").strip()
 
 
-def git_info(root: Path) -> dict[str, str]:
+def git_run_ok(root: Path, *args: str, timeout: int = 20) -> bool:
+    try:
+        r = subprocess.run(
+            ["git", "-C", str(root), *args],
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            check=False,
+            env=git_env(),
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return False
+    return r.returncode == 0
+
+
+def git_bytes(root: Path, *args: str, timeout: int = 60) -> bytes:
+    try:
+        r = subprocess.run(
+            ["git", "-C", str(root), *args],
+            capture_output=True,
+            timeout=timeout,
+            check=False,
+            env=git_env(),
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return b""
+    if r.returncode != 0:
+        return b""
+    return r.stdout or b""
+
+
+def _git(root: Path, *args: str, timeout: int = 20) -> str:
+    return git_capture(root, *args, timeout=timeout)
+
+
+def is_git_work_tree(root: Path) -> bool:
+    return git_capture(root, "rev-parse", "--is-inside-work-tree") == "true"
+
+
+def git_show_file(root: Path, ref: str, rel: str, *, limit: int = 4000) -> str:
+    """Read a blob at ref:path without checking out (text sample)."""
+    rel_n = (rel or "").replace("\\", "/").strip()
+    if not rel_n or rel_n.startswith("/") or ".." in rel_n.split("/"):
+        return ""
+    ref_n = (ref or "").strip()
+    if not ref_n or "\n" in ref_n or "\x00" in ref_n:
+        return ""
+    candidates = [ref_n]
+    if not ref_n.startswith("refs/") and ref_n != "HEAD":
+        candidates.extend(
+            [
+                f"refs/heads/{ref_n}",
+                f"refs/remotes/origin/{ref_n}",
+                f"origin/{ref_n}",
+            ]
+        )
+    for candidate in candidates:
+        text = git_capture(root, "show", f"{candidate}:{rel_n}", timeout=20)
+        if text:
+            return text[:limit]
+    return ""
+
+
+def _canonical_branch_name(refname: str) -> str | None:
+    raw = (refname or "").strip()
+    if not raw:
+        return None
+    if raw.endswith("/HEAD") or raw in {"HEAD", "refs/HEAD"}:
+        return None
+    if raw.startswith("refs/heads/"):
+        name = raw[len("refs/heads/") :]
+        return name or None
+    if raw.startswith("refs/remotes/"):
+        rest = raw[len("refs/remotes/") :]
+        _remote, sep, branch = rest.partition("/")
+        if not sep or branch in {"", "HEAD"}:
+            return None
+        return branch
+    return None
+
+
+def list_branch_refs(root: Path) -> list[tuple[str, str]]:
+    """Unique (short_name, refname) for local heads then remotes. Skips HEAD."""
+    raw = git_capture(
+        root,
+        "for-each-ref",
+        "--format=%(refname)",
+        "refs/heads",
+        "refs/remotes",
+        timeout=30,
+    )
+    by_name: dict[str, str] = {}
+    for line in raw.splitlines():
+        refname = line.strip()
+        name = _canonical_branch_name(refname)
+        if not name or name in by_name:
+            continue
+        by_name[name] = refname
+    return [(name, by_name[name]) for name in by_name]
+
+
+def current_branch_name(root: Path) -> str:
+    b = git_capture(root, "rev-parse", "--abbrev-ref", "HEAD")
+    if not b or b == "HEAD":
+        return ""
+    return b
+
+
+def ordered_branch_refs(
+    root: Path, *, max_branches: int
+) -> tuple[list[tuple[str, str]], int, list[str]]:
+    """Current branch first, then others. Returns (scan_list, omitted, all_names)."""
+    pairs = list_branch_refs(root)
+    all_names = [n for n, _ in pairs]
+    cur = current_branch_name(root)
+    if cur:
+        pairs = [p for p in pairs if p[0] == cur] + [p for p in pairs if p[0] != cur]
+    else:
+        pairs = [("HEAD", "HEAD")] + pairs
+        if "HEAD" not in all_names:
+            all_names = ["HEAD", *all_names]
+    limit = max(1, int(max_branches))
+    omitted = max(0, len(pairs) - limit)
+    return pairs[:limit], omitted, all_names
+
+
+def git_info(root: Path) -> dict[str, Any]:
     if not (root / ".git").exists() and not (root / ".git").is_file():
-        # still try — worktrees use .git files
         head = _git(root, "rev-parse", "HEAD")
         if not head:
-            return {"head": "", "branch": "", "remote": ""}
+            return {"head": "", "branch": "", "remote": "", "branches": []}
+    names = [n for n, _ in list_branch_refs(root)]
     return {
         "head": _git(root, "rev-parse", "HEAD"),
         "branch": _git(root, "rev-parse", "--abbrev-ref", "HEAD"),
         "remote": _git(root, "config", "--get", "remote.origin.url"),
+        "branches": names,
     }
 
 
@@ -71,6 +224,29 @@ def _to_clone_url(raw: str) -> str | None:
     if _OWNER_REPO.match(s):
         return f"https://github.com/{s}.git"
     return None
+
+
+def ensure_all_remote_refspec(root: Path) -> None:
+    """Old --single-branch caches only track one ref; expand to every head."""
+    git_run_ok(root, "remote", "set-branches", "origin", "*", timeout=30)
+    git_run_ok(
+        root,
+        "config",
+        "remote.origin.fetch",
+        "+refs/heads/*:refs/remotes/origin/*",
+        timeout=20,
+    )
+
+
+def fetch_all_refs(root: Path) -> bool:
+    """Fetch every remote branch + tags. Safe no-op when origin is missing."""
+    if not is_git_work_tree(root):
+        return False
+    remotes = git_capture(root, "remote", timeout=10)
+    if not remotes:
+        return True
+    ensure_all_remote_refspec(root)
+    return git_run_ok(root, *fetch_all_argv(), timeout=180)
 
 
 def resolve_source(
@@ -113,17 +289,20 @@ def resolve_source(
     dest.parent.mkdir(parents=True, exist_ok=True)
     if dest.exists() and refresh:
         shutil.rmtree(dest, ignore_errors=True)
+    if dest.exists() and not ((dest / ".git").exists() or (dest / ".git").is_file()):
+        shutil.rmtree(dest, ignore_errors=True)
 
     cloned = False
-    reused = dest.exists() and ((dest / ".git").exists() or dest.is_dir())
+    reused = dest.exists() and ((dest / ".git").exists() or (dest / ".git").is_file())
     if not dest.exists():
         try:
             r = subprocess.run(
-                ["git", "clone", "--depth", "1", "--single-branch", url, str(dest)],
+                clone_argv(url, dest),
                 capture_output=True,
                 text=True,
-                timeout=120,
+                timeout=180,
                 check=False,
+                env=git_env(),
             )
         except (OSError, subprocess.TimeoutExpired) as e:
             return {
@@ -146,7 +325,9 @@ def resolve_source(
         reused = False
 
     path = dest.resolve()
+    fetch_ok = fetch_all_refs(path)
     info = git_info(path)
+    info["fetch_ok"] = fetch_ok
     return {
         "ok": True,
         "kind": "remote",

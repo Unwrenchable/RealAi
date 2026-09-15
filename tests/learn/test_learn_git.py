@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -10,6 +11,7 @@ from pathlib import Path
 
 from realai.learn.packet import PACKET_SCHEMA, validate_packet
 from realai.learn.pipeline import run_learn
+from realai.learn.scan import DEFAULT_MAX_BRANCHES, FINGERPRINT_CAP
 from realai.learn.scaffold import plugin_package_name, scaffold_plugin
 from realai.learn.skip import (
     SKIP_DIR_NAMES,
@@ -17,6 +19,7 @@ from realai.learn.skip import (
     should_skip_filename,
     should_skip_rel,
 )
+from realai.learn.source import clone_argv, fetch_all_argv
 
 
 def _write_fixture(root: Path) -> None:
@@ -269,6 +272,174 @@ class TestCraftLearnHook(unittest.TestCase):
         self.assertIn("some-repo", plans[0][1]["source"])
         self.assertIn("/learn", HELP)
         self.assertNotIn("heal", plans[0][0])
+        self.assertTrue(plans[0][1].get("all_branches"))
+        self.assertEqual(plans[0][1].get("max_files"), FINGERPRINT_CAP)
+
+    def test_plan_tools_learn_caps_and_no_all_branches(self):
+        from realai.cli.craft import plan_tools
+
+        plans = plan_tools(
+            "/learn ./some-repo --no-all-branches --max-files 100 --max-branches 5"
+        )
+        self.assertEqual(len(plans), 1)
+        args = plans[0][1]
+        self.assertFalse(args["all_branches"])
+        self.assertEqual(args["max_files"], 100)
+        self.assertEqual(args["max_branches"], 5)
+
+
+class TestCloneFlags(unittest.TestCase):
+    def test_clone_fetches_all_branches_not_single_tip(self):
+        cmd = clone_argv("https://github.com/acme/app.git", Path("/tmp/acme_app"))
+        self.assertIn("--no-single-branch", cmd)
+        self.assertNotIn("--single-branch", cmd)
+        self.assertEqual(cmd[0:3], ["git", "clone", "--no-single-branch"])
+        self.assertIn("https://github.com/acme/app.git", cmd)
+
+    def test_fetch_all_argv(self):
+        self.assertEqual(fetch_all_argv(), ["fetch", "--all", "--tags"])
+
+    def test_fingerprint_cap_raised(self):
+        self.assertGreaterEqual(FINGERPRINT_CAP, 5000)
+        self.assertGreaterEqual(DEFAULT_MAX_BRANCHES, 1)
+
+
+def _git_identity_env(home: Path) -> dict[str, str]:
+    env = os.environ.copy()
+    env["GIT_CONFIG_NOSYSTEM"] = "1"
+    env["HOME"] = str(home)
+    env["GIT_AUTHOR_NAME"] = "Learn Test"
+    env["GIT_AUTHOR_EMAIL"] = "learn@test.local"
+    env["GIT_COMMITTER_NAME"] = "Learn Test"
+    env["GIT_COMMITTER_EMAIL"] = "learn@test.local"
+    return env
+
+
+def _git(cwd: Path, env: dict[str, str], *args: str) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        ["git", "-C", str(cwd), "-c", "user.name=Learn Test", "-c", "user.email=learn@test.local", *args],
+        capture_output=True,
+        text=True,
+        check=True,
+        env=env,
+    )
+
+
+def _init_multi_branch_repo(root: Path) -> None:
+    env = _git_identity_env(root)
+    init = subprocess.run(
+        ["git", "init", "-b", "main", str(root)],
+        capture_output=True,
+        text=True,
+        env=env,
+    )
+    if init.returncode != 0:
+        subprocess.run(["git", "init", str(root)], capture_output=True, text=True, check=True, env=env)
+        _git(root, env, "checkout", "-B", "main")
+    _git(root, env, "config", "commit.gpgsign", "false")
+    _git(root, env, "config", "core.hooksPath", os.devnull)
+    (root / "README.md").write_text("# Multi branch fixture\n\nShared readme.\n", encoding="utf-8")
+    (root / "shared.py").write_text("shared = 1\n", encoding="utf-8")
+    (root / "main_only.py").write_text("main_only = True\n", encoding="utf-8")
+    nm = root / "node_modules" / "left-pad"
+    nm.mkdir(parents=True)
+    (nm / "index.js").write_text("module.exports = 1;\n", encoding="utf-8")
+    (root / "package-lock.json").write_text('{"lockfileVersion": 3}\n', encoding="utf-8")
+    _git(root, env, "add", "-A")
+    _git(root, env, "commit", "-m", "main files")
+    _git(root, env, "checkout", "-b", "feature/alt")
+    (root / "feature_only.py").write_text("feature_only = True\n", encoding="utf-8")
+    _git(root, env, "rm", "main_only.py")
+    _git(root, env, "add", "feature_only.py")
+    _git(root, env, "commit", "-m", "feature files")
+    _git(root, env, "checkout", "main")
+
+
+class TestMultiBranchScan(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+        self.fixture = self.root / "multi-app"
+        self.fixture.mkdir()
+        _init_multi_branch_repo(self.fixture)
+        self.product = self.root / "product"
+        self.product.mkdir()
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def _learn(self, **kw):
+        return run_learn(
+            str(self.fixture),
+            write=False,
+            product_root=self.product,
+            cache_dir=self.product / "realai" / ".learn_cache",
+            plugins_root=self.product / "realai" / "plugins",
+            packet_root=self.product / "realai" / "catalog" / "learned",
+            docs_root=self.product / "docs" / "learning",
+            **kw,
+        )
+
+    def test_packet_sees_files_from_both_branches(self):
+        out = self._learn(all_branches=True)
+        self.assertTrue(out["ok"], out)
+        packet = out["packet"]
+        fps = packet["fingerprints"]
+        paths = {fp["path"] for fp in fps}
+        self.assertIn("main_only.py", paths, paths)
+        self.assertIn("feature_only.py", paths, paths)
+        self.assertIn("shared.py", paths, paths)
+        self.assertFalse(any("node_modules" in p for p in paths), paths)
+        self.assertFalse(any(p.endswith("package-lock.json") for p in paths), paths)
+        seen = set(packet["summary"].get("branches_seen") or [])
+        self.assertTrue({"main", "feature/alt"} <= seen or seen >= {"main", "feature/alt"}, seen)
+        git_branches = packet["source"]["git"].get("branches") or []
+        self.assertTrue(any("main" in b or b == "main" for b in git_branches), git_branches)
+        self.assertTrue(
+            any("feature/alt" in b or b == "feature/alt" for b in git_branches),
+            git_branches,
+        )
+        shared = next(fp for fp in fps if fp["path"] == "shared.py")
+        self.assertGreaterEqual(len(shared.get("seen_on_branches") or []), 2)
+
+    def test_no_all_branches_stays_on_checkout(self):
+        out = self._learn(all_branches=False)
+        self.assertTrue(out["ok"], out)
+        paths = {fp["path"] for fp in out["packet"]["fingerprints"]}
+        self.assertIn("main_only.py", paths, paths)
+        self.assertNotIn("feature_only.py", paths, paths)
+        self.assertFalse(any("node_modules" in p for p in paths), paths)
+
+    def test_cli_all_branches_default(self):
+        cmd = [
+            sys.executable,
+            "-m",
+            "realai.learn_git",
+            str(self.fixture),
+            "--max-files",
+            "50",
+        ]
+        env = os.environ.copy()
+        env["REALAI_LEARN_ROOT"] = str(self.product)
+        repo_root = str(Path(__file__).resolve().parents[2])
+        env["PYTHONPATH"] = os.pathsep.join(
+            [repo_root] + [p for p in env.get("PYTHONPATH", "").split(os.pathsep) if p]
+        )
+        r = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            timeout=30,
+            cwd=str(self.fixture),
+            env=env,
+        )
+        self.assertEqual(r.returncode, 0, r.stderr + r.stdout)
+        data = json.loads(r.stdout)
+        self.assertTrue(data.get("ok"), data)
+        summary = (data.get("packet") or {}).get("summary") or {}
+        seen = set(summary.get("branches_seen") or [])
+        self.assertIn("main", seen)
+        self.assertIn("feature/alt", seen)
 
 
 if __name__ == "__main__":

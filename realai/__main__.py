@@ -310,21 +310,17 @@ def _cmd_here(args: argparse.Namespace) -> int:
 def _cmd_learn(args: argparse.Namespace) -> int:
     """Static git-learn. Never starts heal / GPU / orchestrator."""
     from realai.learn.pipeline import run_learn
+    from realai.learn_git import compact_learn_result
 
     result = run_learn(
         getattr(args, "source", None) or ".",
         write=bool(getattr(args, "write", False)),
         refresh=bool(getattr(args, "refresh", False)),
+        all_branches=bool(getattr(args, "all_branches", True)),
+        max_branches=int(getattr(args, "max_branches", 40) or 40),
+        max_files=int(getattr(args, "max_files", 5000) or 5000),
     )
-    printable = dict(result)
-    packet = printable.get("packet")
-    if isinstance(packet, dict):
-        fps = packet.get("fingerprints") or []
-        printable["packet"] = {
-            **{k: v for k, v in packet.items() if k != "fingerprints"},
-            "fingerprint_count": len(fps) if isinstance(fps, list) else 0,
-        }
-    print(json.dumps(printable, indent=2, default=str))
+    print(json.dumps(compact_learn_result(result), indent=2, default=str))
     return 0 if result.get("ok") else 1
 
 
@@ -797,6 +793,21 @@ def build_parser() -> argparse.ArgumentParser:
     learn.add_argument("source", nargs="?", default=".", help="Local path, owner/repo, or HTTPS URL")
     learn.add_argument("--write", action="store_true", help="Scaffold plugins/<slug>_coach/")
     learn.add_argument("--refresh", action="store_true", help="Wipe disposable clone cache")
+    learn.add_argument(
+        "--all-branches",
+        dest="all_branches",
+        action="store_true",
+        default=True,
+        help="Scan every git branch (default: on)",
+    )
+    learn.add_argument(
+        "--no-all-branches",
+        dest="all_branches",
+        action="store_false",
+        help="Scan only the current checkout",
+    )
+    learn.add_argument("--max-branches", type=int, default=40, metavar="N", help="Cap branches scanned")
+    learn.add_argument("--max-files", type=int, default=5000, metavar="N", help="Cap unique fingerprints")
     learn.set_defaults(func=_cmd_learn)
 
     return p

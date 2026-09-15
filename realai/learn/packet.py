@@ -24,12 +24,15 @@ SUMMARY_REQUIRED_KEYS = (
     "title",
     "description",
     "file_count",
+    "truncated",
     "languages",
     "frameworks",
     "domain_keywords",
     "readme",
     "api_routes",
     "plugin_like_folders",
+    "branches_seen",
+    "branch_counts",
 )
 
 
@@ -59,6 +62,11 @@ def build_packet(
             "description": signals.get("description") or "",
             "file_count": int(scan.get("file_count") or len(fps)),
             "truncated": bool(scan.get("truncated")),
+            "branches_seen": list(scan.get("branches_seen") or []),
+            "branch_counts": dict(scan.get("branch_counts") or {}),
+            "branches_truncated": bool(scan.get("branches_truncated")),
+            "all_branch_names": list(scan.get("all_branch_names") or []),
+            "branches_omitted": int(scan.get("branches_omitted") or 0),
             "languages": signals.get("languages") or {},
             "frameworks": list(signals.get("frameworks") or []),
             "domain_keywords": list(signals.get("domain_keywords") or []),

@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from realai.learn.skip import should_skip_dir
+from realai.learn.source import git_show_file
 
 LANG_BY_EXT = {
     ".py": "python",
@@ -264,34 +265,50 @@ def plugin_like_folders(root: Path, *, limit: int = 24) -> list[str]:
     return out
 
 
-def _read_text_sample(root: Path, rel: str, *, limit: int = 4000) -> str:
+def _read_text_sample(root: Path, rel: str, *, limit: int = 4000, ref: str | None = None) -> str:
     p = root / rel
     try:
         if p.suffix.lower() not in _TEXT_EXTS:
             return ""
-        return p.read_text(encoding="utf-8", errors="replace")[:limit]
+        if p.is_file():
+            return p.read_text(encoding="utf-8", errors="replace")[:limit]
     except OSError:
-        return ""
+        pass
+    if ref:
+        ext = Path(rel).suffix.lower()
+        if ext not in _TEXT_EXTS:
+            return ""
+        return git_show_file(root, ref, rel, limit=limit)
+    return ""
 
 
 def extract_api_routes(root: Path, fingerprints: list[dict[str, Any]], *, limit: int = 40) -> list[str]:
     routes: list[str] = []
     seen: set[str] = set()
-    candidates = [
-        fp["path"]
-        for fp in fingerprints
-        if str(fp.get("path") or "").lower().endswith(
-            (".py", ".ts", ".js", ".tsx", ".jsx", ".go")
-        )
-        and any(
-            tok in str(fp.get("path") or "").lower()
+    candidates: list[tuple[str, str | None]] = []
+    for fp in fingerprints:
+        rel = str(fp.get("path") or "")
+        if not rel.lower().endswith((".py", ".ts", ".js", ".tsx", ".jsx", ".go")):
+            continue
+        if any(
+            tok in rel.lower()
             for tok in ("route", "api", "controller", "server", "http", "router")
-        )
-    ]
+        ):
+            branches = fp.get("seen_on_branches") or []
+            ref = branches[0] if isinstance(branches, list) and branches else None
+            candidates.append((rel, ref if isinstance(ref, str) else None))
     if not candidates:
-        candidates = [fp["path"] for fp in fingerprints if str(fp.get("ext") or "") in {".py", ".ts", ".js"}][:40]
-    for rel in candidates[:80]:
-        text = _read_text_sample(root, rel)
+        for fp in fingerprints:
+            if str(fp.get("ext") or "") not in {".py", ".ts", ".js"}:
+                continue
+            rel = str(fp.get("path") or "")
+            branches = fp.get("seen_on_branches") or []
+            ref = branches[0] if isinstance(branches, list) and branches else None
+            candidates.append((rel, ref if isinstance(ref, str) else None))
+            if len(candidates) >= 40:
+                break
+    for rel, ref in candidates[:80]:
+        text = _read_text_sample(root, rel, ref=ref)
         if not text:
             continue
         for cre in _ROUTE_RES:
