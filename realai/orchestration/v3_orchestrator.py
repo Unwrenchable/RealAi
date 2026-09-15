@@ -1369,7 +1369,13 @@ def _enrich_chat_body(body: Dict[str, Any], headers: Optional[Dict[str, str]] = 
                 _user = str(_m.get("content") or "")
                 break
         if _user.strip():
-            _pre = plan_call(_user)
+            try:
+                from realai.bot.natural_mode import workspace_route_mode
+
+                _mode = workspace_route_mode()
+            except Exception:
+                _mode = None
+            _pre = plan_call(_user, mode=_mode)
             body["realai_routing"] = _pre.get("routing") or {}
             body["realai_memory_read"] = _pre.get("memory_read") or {}
             _rt = body["realai_routing"]
@@ -2441,7 +2447,13 @@ class Handler(BaseHTTPRequestHandler):
                 from realai.meta_router import plan_call
 
                 if str(user_text or "").strip():
-                    _early = plan_call(user_text)
+                    try:
+                        from realai.bot.natural_mode import workspace_route_mode
+
+                        _early_mode = workspace_route_mode()
+                    except Exception:
+                        _early_mode = None
+                    _early = plan_call(user_text, mode=_early_mode)
                     body["realai_routing"] = _early.get("routing") or body.get("realai_routing")
                     body["realai_memory_read"] = _early.get("memory_read") or body.get("realai_memory_read")
             except Exception:
@@ -2613,6 +2625,50 @@ class Handler(BaseHTTPRequestHandler):
                     self.wfile.write(data)
                     return
 
+            # Natural Mode: plain-English file/code/repo asks run Craft inspect
+            # before Vulkan (Vulkan never executes tools). Slash/$ stay on the
+            # operator / easy_tools / live_exec paths above.
+            try:
+                from realai.bot.natural_mode import apply_natural_grounding
+
+                ground = apply_natural_grounding(body, user_text)
+                if ground.get("should_ground"):
+                    body["realai_natural"] = ground
+                    if not (
+                        body.get("agent_id")
+                        or body.get("agentId")
+                        or hdrs_norm.get("X-RealAI-Agent-Id")
+                    ):
+                        body["agent_id"] = "coder"
+                    if ground.get("admit_failure"):
+                        content = str(
+                            ground.get("failure_text")
+                            or "I tried to inspect the repo and the tools failed. I won't invent file contents."
+                        )
+                        obj = {
+                            "id": "realai-natural",
+                            "object": "chat.completion",
+                            "choices": [
+                                {
+                                    "index": 0,
+                                    "message": {"role": "assistant", "content": content},
+                                    "finish_reason": "stop",
+                                }
+                            ],
+                            "model": body.get("model") or DEFAULT_MODEL,
+                            "realai_meta": {
+                                "orchestrator": "v3",
+                                "provider": "realai",
+                                "operator": "natural",
+                                "natural": ground,
+                                "routing": body.get("realai_routing"),
+                            },
+                        }
+                        self._json(200, obj)
+                        return
+            except Exception as _nat_err:
+                body["realai_natural"] = {"error": str(_nat_err)}
+
             body = _enrich_chat_body(body, hdrs_norm)
 
             # Optional multi-agent pipeline (planner→worker→critic) via recovered gold
@@ -2674,6 +2730,8 @@ class Handler(BaseHTTPRequestHandler):
                     "agent_id", "agentId", "memory", "realai_agent", "realai_memory_injected",
                     "multi_agent", "multiAgent", "realai_multi_agent", "realai_multi_agent_error",
                     "realai_model", "realai_context_fit",
+                    "realai_routing", "realai_memory_read", "realai_natural",
+                    "realai_natural_grounded", "realai_local_only",
                 )
             }
             # Vulkan may not support tools — only send if client asked and we keep simple
@@ -2699,6 +2757,8 @@ class Handler(BaseHTTPRequestHandler):
                         "agent": body.get("realai_agent"),
                         "memory_injected": body.get("realai_memory_injected", False),
                         "multi_agent_requested": bool(body.get("realai_multi_agent")),
+                        "natural": body.get("realai_natural"),
+                        "routing": body.get("realai_routing"),
                         "model": rmodel,
                         "context_fit": body.get("realai_context_fit"),
                         "models_root": os.environ.get(

@@ -1616,10 +1616,18 @@ def _keyword_grep_pattern(user_text: str) -> str:
 
 def _should_auto_inspect(user_text: str) -> bool:
     """True when free-text ask needs repo inspection before answering."""
-    if is_realai_product_tree():
-        return False
     low = user_text.lower().strip()
     if not low or low.startswith("/"):
+        return False
+    # Product tree (Console on RealAI-clean): inspect file/code asks, not smalltalk.
+    try:
+        from realai.bot.natural_mode import looks_like_repo_ask
+
+        if looks_like_repo_ask(user_text):
+            return True
+    except Exception:
+        pass
+    if is_realai_product_tree():
         return False
     triggers = (
         "check", "look", "inspect", "review", "audit", "report", "findings",
