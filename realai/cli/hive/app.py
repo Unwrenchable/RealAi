@@ -17,6 +17,7 @@ from realai.cli.hive.commands.agents import agents_group
 from realai.cli.hive.commands.chat import ask_cmd, chat_cmd
 from realai.cli.hive.commands.craft_cmd import craft_cmd
 from realai.cli.hive.commands.heal import heal_group
+from realai.cli.hive.commands.learn import learn_cmd
 from realai.cli.hive.commands.models import models_cmd, providers_cmd
 from realai.cli.hive.commands.multi import multi_cmd
 from realai.cli.hive.commands.quarantine import quarantine_group
@@ -118,6 +119,7 @@ cli.add_command(ability_group)
 cli.add_command(tools_group)
 cli.add_command(tool_group)
 cli.add_command(heal_group)
+cli.add_command(learn_cmd)
 cli.add_command(world_group)
 cli.add_command(quarantine_group)
 

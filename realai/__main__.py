@@ -307,6 +307,27 @@ def _cmd_here(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_learn(args: argparse.Namespace) -> int:
+    """Static git-learn. Never starts heal / GPU / orchestrator."""
+    from realai.learn.pipeline import run_learn
+
+    result = run_learn(
+        getattr(args, "source", None) or ".",
+        write=bool(getattr(args, "write", False)),
+        refresh=bool(getattr(args, "refresh", False)),
+    )
+    printable = dict(result)
+    packet = printable.get("packet")
+    if isinstance(packet, dict):
+        fps = packet.get("fingerprints") or []
+        printable["packet"] = {
+            **{k: v for k, v in packet.items() if k != "fingerprints"},
+            "fingerprint_count": len(fps) if isinstance(fps, list) else 0,
+        }
+    print(json.dumps(printable, indent=2, default=str))
+    return 0 if result.get("ok") else 1
+
+
 def _cmd_client(args: argparse.Namespace) -> int:
     from realai.cli.realai_cli import main as cli_main
 
@@ -600,7 +621,7 @@ Global commands (after install_global.ps1 — all work from any project):
   realai-local           Lightweight llama-cli API :8000
   realai tools           This help
 
-Also: realai client | catalog | organs | rackup | serve | here
+Also: realai client | catalog | organs | rackup | learn | serve | here
 
 Env:
   REALAI_HOME        install tree (models)
@@ -769,6 +790,15 @@ def build_parser() -> argparse.ArgumentParser:
     cl.add_argument("cli_args", nargs=argparse.REMAINDER)
     cl.set_defaults(func=_cmd_client)
 
+    learn = sub.add_parser(
+        "learn",
+        help="Scan a git source; write a learning packet; optional plugin stub (no heal)",
+    )
+    learn.add_argument("source", nargs="?", default=".", help="Local path, owner/repo, or HTTPS URL")
+    learn.add_argument("--write", action="store_true", help="Scaffold plugins/<slug>_coach/")
+    learn.add_argument("--refresh", action="store_true", help="Wipe disposable clone cache")
+    learn.set_defaults(func=_cmd_learn)
+
     return p
 
 
@@ -801,6 +831,7 @@ KNOWN_CMDS = {
     "organs",
     "rackup",
     "client",
+    "learn",
     "-h",
     "--help",
 }

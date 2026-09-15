@@ -1399,6 +1399,14 @@ def tool_scan(path: str = ".") -> dict[str, Any]:
     return _r({"path": path})
 
 
+def tool_learn(source: str = ".", write: bool = False, refresh: bool = False) -> dict[str, Any]:
+    """Static git-learn. Never starts heal, GPU, or the orchestrator."""
+    from realai.learn.pipeline import run_learn
+
+    src = (source or "").strip() or str(_ws())
+    return run_learn(src, write=bool(write), refresh=bool(refresh))
+
+
 TOOLS: dict[str, Callable[..., dict[str, Any]]] = {
     "doctor": lambda **kw: tool_doctor(),
     "organs": lambda **kw: tool_organs(),
@@ -1463,6 +1471,11 @@ TOOLS: dict[str, Callable[..., dict[str, Any]]] = {
     "extend": lambda **kw: tool_extend(str(kw.get("goal") or "")),
     "repair": lambda **kw: tool_repair(str(kw.get("issue") or "")),
     "scan": lambda **kw: tool_scan(str(kw.get("path") or ".")),
+    "learn": lambda **kw: tool_learn(
+        str(kw.get("source") or kw.get("path") or "."),
+        write=bool(kw.get("write")),
+        refresh=bool(kw.get("refresh")),
+    ),
     "model": lambda **kw: tool_model(str(kw.get("name") or kw.get("model") or "RealAI Hive")),
     "walk": lambda **kw: tool_walk_root(
         force=bool(kw.get("force")),
@@ -1819,6 +1832,17 @@ def plan_tools(user_text: str) -> list[tuple[str, dict[str, Any]]]:
                 return [("repair", {"issue": rest})]
             if cmd == "scan" and rest:
                 return [("scan", {"path": rest.split()[0]})]
+            if cmd == "learn":
+                rest_l = rest.lower()
+                write = any(x in rest_l.split() for x in ("--write", "write"))
+                refresh = any(x in rest_l.split() for x in ("--refresh", "refresh"))
+                source_parts = [
+                    b
+                    for b in rest.split()
+                    if b.lower() not in {"--write", "write", "--refresh", "refresh"}
+                ]
+                source = " ".join(source_parts).strip() or "."
+                return [("learn", {"source": source, "write": write, "refresh": refresh})]
             if cmd == "walk":
                 rest_l = rest.lower().strip()
                 deepen = any(x in rest_l for x in ("deepen", "deep", "deeper"))
@@ -2913,6 +2937,7 @@ Slash commands:
   /help /pwd /heal /doctor /gpu /improve /gaps /extend /repair
   /list /read /grep /write path|||content /scan
   /work <goal>                 # foreign-repo: inspect then coder plan + /write
+  /learn <path-or-url> [--write]  # git-learn packet (+ optional plugin stub); no heal/GPU
   /tools /agents [query] /multi <task> /exec <tool> {json}
   /agents                         # hive first: overseer coder architect analyst memory governor router
   /task /organs /rackup /catalog /git /map /quit
@@ -2972,6 +2997,33 @@ class CraftSession:
             return HELP
         if user.lower() in ("/quit", "/exit", "quit", "exit"):
             return "__QUIT__"
+        if re.match(r"^/learn(\s|$)", user, re.I):
+            rest = user.strip()[6:].strip()
+            write = False
+            refresh = False
+            source_parts: list[str] = []
+            for bit in rest.split():
+                bl = bit.lower()
+                if bl in {"--write", "write"}:
+                    write = True
+                    continue
+                if bl in {"--refresh", "refresh"}:
+                    refresh = True
+                    continue
+                source_parts.append(bit)
+            source = " ".join(source_parts).strip() or str(_ws())
+            result = tool_learn(source, write=write, refresh=refresh)
+            printable = dict(result)
+            packet = printable.get("packet")
+            if isinstance(packet, dict):
+                fps = packet.get("fingerprints") or []
+                printable["packet"] = {
+                    **{k: v for k, v in packet.items() if k != "fingerprints"},
+                    "fingerprint_count": len(fps) if isinstance(fps, list) else 0,
+                }
+            msg = json.dumps(printable, indent=2, default=str)
+            print(msg)
+            return msg
         if user.lower() in ("/gpu", "/server"):
             st = ensure_gpu_server(wait_s=90)
             msg = f"**GPU:** {json.dumps(st, indent=2)}"

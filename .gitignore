@@ -106,6 +106,10 @@ frontend/.next/
 **/coverage/
 package-lock.json
 
+# Disposable git-learn clone cache (never user data)
+realai/.learn_cache/
+**/.learn_cache/
+
 
 # Flattened recovery filename dumps (files, not dirs)
 **/C__realai*
