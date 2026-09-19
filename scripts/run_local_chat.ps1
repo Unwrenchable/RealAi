@@ -23,6 +23,10 @@ param(
     [int]$UiPort         = 3000
 )
 
+# Operator system directive (Console Operator)
+$__dirScript = Join-Path $Root 'scripts\set_operator_directive.ps1'
+if (Test-Path $__dirScript) { . $__dirScript }
+
 $ErrorActionPreference = "Continue"
 if (-not $Model) {
     # Prefer env / checkpoints_lora (7B default; VRAM_SAFE=1 forces 1.5B)

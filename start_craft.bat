@@ -24,6 +24,7 @@ set "REALAI_SELF_IMPROVE=1"
 if not defined REALAI_GGUF set "REALAI_GGUF=C:\models\checkpoints_lora\qwen2.5-coder-7b-instruct-q5_k_m.gguf"
 if not defined REALAI_NGL set "REALAI_NGL=99"
 if not defined REALAI_CTX set "REALAI_CTX=65536"
+if not defined REALAI_N_CTX set "REALAI_N_CTX=%REALAI_CTX%"
 if not defined REALAI_DEFAULT_MODEL set "REALAI_DEFAULT_MODEL=realai-hive"
 if not defined REALAI_API_KEY set "REALAI_API_KEY=local"
 

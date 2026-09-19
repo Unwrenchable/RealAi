@@ -22,6 +22,7 @@ set "REALAI_SELF_IMPROVE=1"
 set "REALAI_TTS_BACKEND=xtts"
 if not defined REALAI_GGUF set "REALAI_GGUF=C:\models\checkpoints_lora\qwen2.5-coder-7b-instruct-q5_k_m.gguf"
 if not defined REALAI_CTX set "REALAI_CTX=65536"
+if not defined REALAI_N_CTX set "REALAI_N_CTX=%REALAI_CTX%"
 if not defined REALAI_NGL set "REALAI_NGL=99"
 set "REALAI_VRAM_SAFE=0"
 if not defined REALAI_KOKORO_MODEL_DIR set "REALAI_KOKORO_MODEL_DIR=C:\models\checkpoints_lora\Kokoro"
@@ -38,7 +39,7 @@ if errorlevel 1 (
 )
 
 echo.
-echo RealAI unified stack  ^(canonical — see docs\RUN_SERVERS.md^)
+echo RealAI unified stack  ^(canonical - see docs\RUN_SERVERS.md^)
 echo   Product home: %CD%
 echo   Package:      %CD%\realai
 echo   Vulkan :8080
@@ -48,7 +49,7 @@ echo   Fusion  http://127.0.0.1:8001/fusion-ui/
 echo   Agents  http://127.0.0.1:8001/agents-ui/
 echo   Hive UI http://127.0.0.1:3000  ^(optional: start_ui.bat^)
 echo   Voice Lab :8890  ^(launched with stack^)
-echo   Provider: RealAI local — no xAI
+echo   Provider: RealAI local - no xAI
 echo.
 
 python "%~dp0scripts\unified_stack.py" %*
