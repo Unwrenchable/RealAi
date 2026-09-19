@@ -317,8 +317,27 @@ def parse_easy_tool(text: str) -> Optional[Tuple[str, Dict[str, Any]]]:
         # leave live_exec / existing operator verbs alone if not in alias map
         # but include heal, lora, coverage, etc.
         tool = amap.get(verb.lower()) or amap.get(verb.lower().replace("-", "_"))
-        # Don't steal /run /py /script /exec — live_exec owns those
-        if verb.lower() in ("run", "py", "python", "script", "exec", "chat"):
+        # Don't steal /run /py /script /exec — live_exec owns those.
+        # Don't steal Craft file ops — operator dispatch → cli.craft TOOLS.
+        if verb.lower() in (
+            "run",
+            "py",
+            "python",
+            "script",
+            "exec",
+            "chat",
+            "write",
+            "read",
+            "list",
+            "ls",
+            "grep",
+            "git",
+            "pwd",
+            "here",
+            "cat",
+            "ws",
+            "workspace",
+        ):
             return None
         if tool:
             return (tool, _default_args_for(tool, rest))

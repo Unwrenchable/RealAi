@@ -12,13 +12,16 @@ from realai.bot.natural_mode import (
     apply_natural_grounding,
     extract_learn_source,
     extract_path_tokens,
+    extract_write_spec,
     is_explicit_command,
     looks_like_agent_ask,
     looks_like_learn_ask,
     looks_like_repo_ask,
+    looks_like_write_ask,
     match_ability_ids,
     plan_natural_auto,
     plan_natural_inspect,
+    plan_natural_write,
     should_natural_act,
 )
 from realai.cli.craft import _should_auto_inspect
@@ -45,6 +48,15 @@ class TestNaturalDetector(unittest.TestCase):
         self.assertFalse(looks_like_repo_ask("/tools"))
         self.assertFalse(should_natural_act("hello there"))
         self.assertFalse(should_natural_act("/multi hive next"))
+
+    def test_create_file_is_write_not_inspect_only(self):
+        ask = "create file docs/recovery/_auditor_probe.txt with content PROBE_OK"
+        self.assertTrue(looks_like_write_ask(ask))
+        self.assertTrue(should_natural_act(ask))
+        path, content = extract_write_spec(ask)
+        self.assertEqual(path, "docs/recovery/_auditor_probe.txt")
+        self.assertEqual(content, "PROBE_OK")
+        self.assertEqual(plan_natural_write("what's in hello.txt"), [])
 
 
 class TestNaturalAutoPlan(unittest.TestCase):

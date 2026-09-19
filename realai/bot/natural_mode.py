@@ -5,6 +5,13 @@ Console posts to ``POST /v1/chat/completions``. Vulkan never executes tools
 pass must run *before* the model call when the user asks about files, code,
 or the repo in plain English (not an explicit slash command).
 
+Write path: when path + content are concrete (create/update), this module
+plans Craft ``write`` and the orchestrator executes it — same TOOLS as
+``/write`` / ``/craft write``. Inspect-only asks never write. Ambiguous
+create/fix returns a clear need-path/content failure instead of a fake ok.
+Scattered ability nests are not the runtime; live wiring is
+``v3_orchestrator`` + ``cli/craft`` + this module.
+
 Keep this module free of top-level Craft / meta_router imports so both can
 call the detector without cycles.
 """
@@ -89,6 +96,42 @@ _SIMPLE_FILE_RE = re.compile(
 
 _EXPLICIT_CMD_RE = re.compile(r"^\s*[/$@]")
 
+# Plain-English create/update — not inspect, not slash /write.
+_WRITE_ASK_RE = re.compile(
+    r"(?i)("
+    r"\b(create|make|add)\b.{0,80}\bfiles?\b|"
+    r"\b(create|make|write|save)\s+[^\s]+\.\w+|"
+    r"\b(write|save|put)\b.{0,80}\b(to|into|in)\b|"
+    r"\bupdate\s+(the\s+)?file\b|"
+    r"\boverwrite\s+(the\s+)?file\b"
+    r")"
+)
+
+# Fix/implement after inspect → model may emit /write path|||content (Craft Phase 2).
+_PATCH_ASK_RE = re.compile(
+    r"(?i)\b(fix|patch|implement|refactor|apply (the )?(patch|fix|change)s?)\b"
+)
+
+_CONTENT_MARKER_RE = re.compile(
+    r"(?is)\b(?:with\s+content|containing|that\s+says|with\s+the\s+text|"
+    r"contents?\s*[:=]|with\s+body)\s*(.*)$"
+)
+
+_WRITE_TO_RE = re.compile(
+    r"(?is)\b(?:write|save|put|drop)\s+(.+?)\s+(?:to|into|in)\s+(\S+)"
+)
+
+_CONTENT_STOPWORDS = {
+    "a file",
+    "the file",
+    "this file",
+    "new file",
+    "a new file",
+    "the new file",
+    "file",
+    "path",
+}
+
 
 def is_explicit_command(text: str) -> bool:
     """True for slash / $ / @ operator messages — leave those to easy_tools / live_exec."""
@@ -141,6 +184,121 @@ def looks_like_broken_ask(text: str) -> bool:
     if not raw or is_explicit_command(raw):
         return False
     return bool(_BROKEN_ASK_RE.search(raw))
+
+
+def looks_like_write_ask(text: str) -> bool:
+    """True when plain English asks to create/update a file (not slash /write)."""
+    raw = (text or "").strip()
+    if not raw or is_explicit_command(raw):
+        return False
+    return bool(_WRITE_ASK_RE.search(raw))
+
+
+def looks_like_patch_ask(text: str) -> bool:
+    """True for fix/implement/patch — inspect first, then apply model /write blocks."""
+    raw = (text or "").strip()
+    if not raw or is_explicit_command(raw):
+        return False
+    if looks_like_write_ask(raw):
+        return False
+    return bool(_PATCH_ASK_RE.search(raw))
+
+
+def _strip_content_quotes(raw: str) -> str:
+    s = (raw or "").strip()
+    if len(s) >= 2 and s[0] == s[-1] and s[0] in "\"'`":
+        return s[1:-1]
+    return s
+
+
+def _content_usable(raw: Optional[str]) -> Optional[str]:
+    if raw is None:
+        return None
+    s = _strip_content_quotes(str(raw)).strip()
+    if not s:
+        return None
+    if s.lower().strip(".,;:") in _CONTENT_STOPWORDS:
+        return None
+    # Don't treat a lone path as file contents.
+    if extract_path_tokens(s) == [s.replace("\\", "/").strip("`'\"")]:
+        return None
+    return s
+
+
+def extract_write_spec(text: str) -> Tuple[Optional[str], Optional[str]]:
+    """Best-effort (path, content) from a create/update ask. Never invents either."""
+    raw = (text or "").strip()
+    if not raw:
+        return (None, None)
+
+    paths = extract_path_tokens(raw)
+    path = paths[0] if paths else None
+
+    content: Optional[str] = None
+
+    if "|||" in raw:
+        left, right = raw.split("|||", 1)
+        if not path:
+            bits = left.split()
+            cand = bits[-1].strip().replace("\\", "/") if bits else ""
+            if cand:
+                path = cand
+        content = _content_usable(right)
+
+    if content is None:
+        fence = re.search(r"```(?:[a-zA-Z0-9_+-]+)?\s*\n([\s\S]*?)```", raw)
+        if fence:
+            content = _content_usable(fence.group(1).strip("\n"))
+
+    if content is None:
+        marked = _CONTENT_MARKER_RE.search(raw)
+        if marked:
+            blob = marked.group(1) or ""
+            # Drop a trailing path if the marker captured "PROBE_OK in foo.txt"
+            blob = re.split(r"(?i)\s+(?:in|into|to)\s+\S+\s*$", blob, maxsplit=1)[0]
+            content = _content_usable(blob)
+
+    if content is None:
+        wt = _WRITE_TO_RE.search(raw)
+        if wt:
+            maybe_content = _content_usable(wt.group(1))
+            maybe_path = (wt.group(2) or "").strip().strip("`'\"").replace("\\", "/")
+            if maybe_path and not path:
+                toks = extract_path_tokens(maybe_path)
+                path = toks[0] if toks else maybe_path
+            if maybe_content:
+                content = maybe_content
+
+    if content is None:
+        for m in re.finditer(r"\"([^\"]+)\"|'([^']+)'", raw):
+            val = (m.group(1) or m.group(2) or "").strip()
+            if not val:
+                continue
+            norm = val.replace("\\", "/")
+            if path and norm == path:
+                continue
+            if extract_path_tokens(val) == [norm] and path is None:
+                path = norm
+                continue
+            content = _content_usable(val)
+            if content:
+                break
+
+    return (path, content)
+
+
+def need_write_args_reply(path: Optional[str], content: Optional[str]) -> str:
+    missing = []
+    if not (path or "").strip():
+        missing.append("a workspace-relative path")
+    if content is None or not str(content).strip():
+        missing.append("the file contents")
+    need = " and ".join(missing) if missing else "path and contents"
+    return (
+        f"I won't invent a file write. Need {need}. "
+        "Example: create file docs/note.txt with content hello — "
+        "or /write docs/note.txt hello"
+    )
 
 
 def extract_learn_source(text: str) -> str:
@@ -271,6 +429,8 @@ def should_natural_act(text: str) -> bool:
         return False
     if looks_like_repo_ask(raw) or looks_like_learn_ask(raw):
         return True
+    if looks_like_write_ask(raw) or looks_like_patch_ask(raw):
+        return True
     if looks_like_broken_ask(raw) or looks_like_agent_ask(raw):
         return True
     return bool(match_ability_ids(raw))
@@ -288,6 +448,25 @@ def workspace_route_mode() -> str:
         return "product"
     except Exception:
         return "product"
+
+
+def plan_natural_write(user_text: str) -> List[Tuple[str, Dict[str, Any]]]:
+    """Craft write when path+content are concrete. Empty if inspect-only or ambiguous."""
+    t = (user_text or "").strip()
+    if not t or is_explicit_command(t) or not looks_like_write_ask(t):
+        return []
+    path, content = extract_write_spec(t)
+    if not path or content is None or not str(content).strip():
+        return []
+    return [("write", {"path": path, "content": content, "mode": "overwrite"})]
+
+
+def run_natural_write(path: str, content: str, mode: str = "overwrite") -> Dict[str, Any]:
+    """Execute Craft tool_write. Workspace bounds via safe_under_write."""
+    from realai.cli.craft import apply_workspace, tool_write
+
+    apply_workspace()
+    return tool_write(str(path or ""), content=str(content or ""), mode=str(mode or "overwrite"))
 
 
 def plan_natural_inspect(user_text: str) -> List[Tuple[str, Dict[str, Any]]]:
@@ -385,22 +564,35 @@ def tools_all_failed(results: List[Dict[str, Any]]) -> bool:
     return all(_tool_failed(tr) for tr in results)
 
 
-def format_grounding_block(user_text: str, results: List[Dict[str, Any]]) -> str:
+def format_grounding_block(
+    user_text: str,
+    results: List[Dict[str, Any]],
+    want_writes: bool = False,
+) -> str:
     """Append-only grounding for the last user message."""
     from realai.cli.craft import _format_tools
 
     tools_txt = _format_tools(results) if results else "(no tool results)"
     failed = tools_all_failed(results)
-    follow = (
-        "Tools failed or returned nothing. Say so. Do not invent file contents, "
-        "paths, ability output, agent results, or API results."
-        if failed
-        else (
+    if failed:
+        follow = (
+            "Tools failed or returned nothing. Say so. Do not invent file contents, "
+            "paths, ability output, agent results, or API results."
+        )
+    elif want_writes:
+        follow = (
+            "Use ONLY the tool results above. Cite real paths you read. "
+            "If a tool errored, admit it. Never invent file contents. "
+            "When sure, emit one or more apply blocks exactly as:\n"
+            "/write relative/path|||<full file contents>\n"
+            "Put only file contents after ||| (Craft will apply /write)."
+        )
+    else:
+        follow = (
             "Use ONLY the tool results above. Cite real paths you read. "
             "If a tool errored, admit it. Never invent file contents, paths, "
             "ability output, agent results, or API results."
         )
-    )
     return f"{user_text}\n\n{tools_txt}\n\n{follow}"
 
 
@@ -428,25 +620,98 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
     """Mutate chat ``body`` for a plain-English repo/code/ability/agent ask.
 
     Runs Craft inspect plus auto-planned abilities / learn / hive agents.
-    Never invents tool output. Returns meta for ``realai_meta``. Caller
-    should short-circuit when ``admit_failure`` is True instead of proxying
-    to Vulkan.
+    When create/update has a concrete path+content, executes Craft write
+    (same ``tool_write`` as ``/write``). Never invents tool output. Returns
+    meta for ``realai_meta``. Caller should short-circuit when
+    ``admit_failure`` or ``short_circuit`` is True instead of proxying to Vulkan.
     """
     meta: Dict[str, Any] = {
         "should_ground": False,
         "admit_failure": False,
+        "short_circuit": False,
+        "wrote": False,
+        "apply_model_writes": False,
         "tools": [],
         "used_tools": [],
         "mode": workspace_route_mode(),
     }
     text = (user_text or "").strip()
-    extras = plan_natural_auto(text) if text and not is_explicit_command(text) else []
+    if not text or is_explicit_command(text):
+        return meta
+
+    write_ask = looks_like_write_ask(text)
+    patch_ask = looks_like_patch_ask(text)
+    write_plans = plan_natural_write(text) if write_ask else []
+
+    if write_ask and write_plans:
+        meta["should_ground"] = True
+        args = write_plans[0][1]
+        path = str(args.get("path") or "")
+        content = str(args.get("content") or "")
+        try:
+            result = run_natural_write(path, content, mode=str(args.get("mode") or "overwrite"))
+        except Exception as exc:
+            meta["admit_failure"] = True
+            meta["error"] = str(exc)
+            meta["used_tools"] = ["write"]
+            meta["tools"] = ["write"]
+            meta["failure_text"] = (
+                f"I tried to write {path} and it failed ({exc}). "
+                "I won't invent a successful write."
+            )
+            return meta
+        failed = isinstance(result, dict) and (
+            result.get("ok") is False or bool(result.get("error"))
+        )
+        meta["tools"] = ["write"]
+        meta["used_tools"] = ["write"]
+        meta["tool_count"] = 1
+        meta["write_result"] = result
+        if failed:
+            meta["admit_failure"] = True
+            err = (result or {}).get("error") or "write_failed"
+            meta["failure_text"] = (
+                f"Write failed ({err}). I won't invent a successful write. "
+                "Paths must stay under the workspace."
+            )
+            return meta
+        meta["wrote"] = True
+        meta["short_circuit"] = True
+        try:
+            from realai.bot.easy_tools import format_easy_result
+
+            meta["reply"] = format_easy_result("write", result)
+        except Exception:
+            meta["reply"] = (
+                f"[RealAI write]\nok=true  path={result.get('path')}  "
+                f"bytes={result.get('bytes')}"
+            )
+        return meta
+
+    if write_ask and not write_plans:
+        spec_path, spec_content = extract_write_spec(text)
+        meta["should_ground"] = True
+        results: List[Dict[str, Any]] = []
+        if spec_path:
+            try:
+                results.extend(run_natural_inspect(text))
+            except Exception:
+                results = []
+        meta["tools"] = [str(tr.get("tool") or "?") for tr in results]
+        meta["used_tools"] = meta["tools"]
+        meta["admit_failure"] = True
+        extra = f" I looked at `{spec_path}` but still need the contents." if spec_path else ""
+        meta["failure_text"] = need_write_args_reply(spec_path, spec_content) + extra
+        return meta
+
+    extras = plan_natural_auto(text)
     inspect_needed = looks_like_repo_ask(text) and not any(k == "learn" for k, _ in extras)
-    if not text or is_explicit_command(text) or not (inspect_needed or extras):
+    if not (inspect_needed or extras):
         return meta
 
     meta["should_ground"] = True
-    results: List[Dict[str, Any]] = []
+    meta["apply_model_writes"] = bool(patch_ask)
+    results = []
     try:
         if inspect_needed:
             results.extend(run_natural_inspect(text))
@@ -472,7 +737,7 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
         return meta
 
     msgs = list(body.get("messages") or [])
-    grounded = format_grounding_block(text, results)
+    grounded = format_grounding_block(text, results, want_writes=bool(patch_ask))
     spliced = False
     for i in range(len(msgs) - 1, -1, -1):
         msg = msgs[i]

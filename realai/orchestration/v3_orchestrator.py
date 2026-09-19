@@ -1004,6 +1004,102 @@ def _last_user_text(messages: List[Dict[str, Any]]) -> str:
     return ""
 
 
+_CRAFT_FILE_VERBS = frozenset(
+    {"write", "read", "list", "ls", "grep", "git", "pwd", "here", "cat", "ws", "workspace"}
+)
+_CRAFT_FILE_ALIASES = {
+    "ls": "list",
+    "cat": "read",
+    "ws": "pwd",
+    "workspace": "pwd",
+    "here": "pwd",
+}
+
+
+def _craft_file_dispatch(action: str, extra: str = "") -> Optional[Dict[str, Any]]:
+    """Run Craft file TOOLS (write/read/list/grep/git/pwd). Workspace-bounded."""
+    raw_action = str(action or "").strip().lstrip("/").lower()
+    if raw_action not in _CRAFT_FILE_VERBS:
+        return None
+    action = _CRAFT_FILE_ALIASES.get(raw_action, raw_action)
+    extra = extra or ""
+    slash = f"/{action}" + (f" {extra}" if str(extra).strip() else "")
+    try:
+        from realai.cli.craft import apply_workspace, plan_tools, run_tools
+
+        apply_workspace()
+        plans = plan_tools(slash)
+        if not plans:
+            return {
+                "surface": "craft",
+                "tool": action,
+                "result": {
+                    "ok": False,
+                    "error": f"unparsed_craft_file:{action}",
+                    "craft_action": action,
+                },
+            }
+        results = run_tools(plans)
+        primary = results[0] if results else {}
+        result = primary.get("result") if isinstance(primary.get("result"), dict) else None
+        if result is None:
+            err = primary.get("error") or "no_result"
+            result = {"ok": False, "error": err, "craft_action": action}
+        else:
+            if "ok" not in result:
+                result["ok"] = not bool(result.get("error"))
+            result.setdefault("craft_action", action)
+        if len(results) > 1:
+            result["also"] = results[1:]
+        return {"surface": "craft", "tool": action, "result": result}
+    except Exception as exc:
+        return {
+            "surface": "craft",
+            "tool": action,
+            "result": {
+                "ok": False,
+                "error": str(exc),
+                "craft_action": action,
+                "trace": traceback.format_exc()[-500:],
+            },
+        }
+
+
+def _chat_operator_dispatch(user_text: str) -> Optional[Dict[str, Any]]:
+    """Easy tools → craft/hive slash (incl. /write) → live_exec. Chat completions order."""
+    dispatch = None
+    try:
+        from realai.bot.easy_tools import try_easy_tool
+
+        dispatch = try_easy_tool(user_text, _run_tool)
+    except Exception:
+        dispatch = None
+    if dispatch is None:
+        dispatch = _operator_intent_dispatch(user_text)
+    if dispatch is None:
+        try:
+            from realai.bot.live_exec import try_live_exec
+
+            dispatch = try_live_exec(user_text)
+        except Exception as live_exc:
+            dispatch = {
+                "surface": "live_exec",
+                "result": {"ok": False, "live": True, "error": str(live_exc)},
+            }
+    return dispatch
+
+
+def _apply_natural_model_writes(reply: str) -> List[Dict[str, Any]]:
+    """Apply `/write path|||content` blocks from a coder reply (Craft Phase 2)."""
+    try:
+        from realai.cli.craft import apply_suggested_writes, apply_workspace
+
+        apply_workspace()
+        return apply_suggested_writes(reply)
+    except Exception as exc:
+        return [{"tool": "write", "error": str(exc)}]
+
+
 def _operator_intent_dispatch(user_text: str) -> Optional[Dict[str, Any]]:
     """Run craft/hive/ability when the user explicitly asks — no GGUF tool_calls needed."""
     import re
@@ -1012,6 +1108,17 @@ def _operator_intent_dispatch(user_text: str) -> Optional[Dict[str, Any]]:
     if not text:
         return None
     low = text.lower()
+
+    # Craft file ops BEFORE other slash/NL surfaces so /write never hits live_exec.
+    m_file = re.match(
+        r"^/(write|read|list|ls|grep|git|pwd|here|cat|ws|workspace)\b\s*(.*)$",
+        text,
+        flags=re.I | re.S,
+    )
+    if m_file:
+        disp = _craft_file_dispatch(m_file.group(1), m_file.group(2) or "")
+        if disp is not None:
+            return disp
 
     # Slash forms: /craft doctor, /hive status, /ability cli_surface, /multi …
     m = re.match(
@@ -1026,6 +1133,9 @@ def _operator_intent_dispatch(user_text: str) -> Optional[Dict[str, Any]]:
             parts = rest.split(None, 1)
             action = (parts[0] if parts else "doctor").lstrip("/")
             extra = parts[1] if len(parts) > 1 else ""
+            file_disp = _craft_file_dispatch(action, extra)
+            if file_disp is not None:
+                return file_disp
             args: Dict[str, Any] = {"action": action or "doctor"}
             if extra:
                 args["goal"] = extra
@@ -2522,28 +2632,7 @@ class Handler(BaseHTTPRequestHandler):
                 return
 
             if tools_on:
-                dispatch = None
-                # 1) Easy tools: /tools /tool X /hive /lora /heal … (live catalog, compact replies)
-                try:
-                    from realai.bot.easy_tools import try_easy_tool
-
-                    dispatch = try_easy_tool(user_text, _run_tool)
-                except Exception:
-                    dispatch = None
-                # 2) Existing slash surfaces (craft/hive/ability/…) when easy did not claim it
-                if dispatch is None:
-                    dispatch = _operator_intent_dispatch(user_text)
-                # 3) Live shell/scripts: real process only — never let the GGUF invent stdout.
-                if dispatch is None:
-                    try:
-                        from realai.bot.live_exec import try_live_exec
-
-                        dispatch = try_live_exec(user_text)
-                    except Exception as live_exc:
-                        dispatch = {
-                            "surface": "live_exec",
-                            "result": {"ok": False, "live": True, "error": str(live_exc)},
-                        }
+                dispatch = _chat_operator_dispatch(user_text)
                 if dispatch is not None:
                     if dispatch.get("surface") == "live_exec":
                         try:
@@ -2640,9 +2729,10 @@ class Handler(BaseHTTPRequestHandler):
                         or hdrs_norm.get("X-RealAI-Agent-Id")
                     ):
                         body["agent_id"] = "coder"
-                    if ground.get("admit_failure"):
+                    if ground.get("admit_failure") or ground.get("short_circuit"):
                         content = str(
-                            ground.get("failure_text")
+                            ground.get("reply")
+                            or ground.get("failure_text")
                             or "I tried to inspect the repo and the tools failed. I won't invent file contents."
                         )
                         obj = {
@@ -2662,6 +2752,7 @@ class Handler(BaseHTTPRequestHandler):
                                 "operator": "natural",
                                 "natural": ground,
                                 "used_tools": ground.get("used_tools") or ground.get("tools") or [],
+                                "wrote": bool(ground.get("wrote")),
                                 "routing": body.get("realai_routing"),
                             },
                         }
@@ -2782,6 +2873,36 @@ class Handler(BaseHTTPRequestHandler):
                             msg = ch.get("message") if isinstance(ch, dict) else None
                             if isinstance(msg, dict) and msg.get("content"):
                                 msg["content"] = _scrub_assistant_text(str(msg.get("content")))
+                    except Exception:
+                        pass
+                    # Craft Phase 2: apply /write path|||content from coder reply after inspect.
+                    try:
+                        nat = body.get("realai_natural") or {}
+                        if nat.get("apply_model_writes"):
+                            reply_txt = ""
+                            for ch in obj.get("choices") or []:
+                                msg = ch.get("message") if isinstance(ch, dict) else None
+                                if isinstance(msg, dict) and msg.get("content"):
+                                    reply_txt = str(msg.get("content") or "")
+                                    break
+                            applied = _apply_natural_model_writes(reply_txt) if reply_txt else []
+                            if applied:
+                                n_ok = sum(
+                                    1
+                                    for a in applied
+                                    if isinstance(a.get("result"), dict) and a["result"].get("ok")
+                                )
+                                note = f"\n\n[applied {n_ok}/{len(applied)} /write patch(es)]"
+                                for ch in obj.get("choices") or []:
+                                    msg = ch.get("message") if isinstance(ch, dict) else None
+                                    if isinstance(msg, dict) and msg.get("content"):
+                                        msg["content"] = str(msg.get("content") or "") + note
+                                        break
+                                used = list(meta.get("used_tools") or [])
+                                used.append("write")
+                                meta["used_tools"] = used
+                                meta["applied_writes"] = applied
+                                obj["realai_meta"] = meta
                     except Exception:
                         pass
                     # Voice metadata for console speak-aloud / local TTS

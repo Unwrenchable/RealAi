@@ -6,6 +6,19 @@ Generated: `2026-09-08T14:49:34.814847+00:00`
 
 > `verify_v3_matrix` pass counts = stack health, not full product ability completeness.
 
+## Console file ops (live wiring)
+
+Scattered ability nests are inventory, not the runtime. Console/Hive **read and write** go through:
+
+- `realai/orchestration/v3_orchestrator.py` — chat `POST /v1/chat/completions` operator dispatch
+- `realai/cli/craft.py` — Craft TOOLS (`tool_write` / `tool_read` / `list` / `grep` / `git` / `pwd`)
+- `realai/bot/natural_mode.py` — plain-English inspect + create/fix when path+content are clear
+
+**Slash:** `/write rel/path content` (also `/read` `/list` `/grep` `/git` `/pwd`, and `/craft write …`) runs Craft file tools **before** `live_exec`. Writes stay inside WORKSPACE (`safe_under_write`).
+
+**Natural:** “create file `docs/note.txt` with content hello” executes Craft write. Inspect-only asks (“what’s in console.html”) still inspect and do not write. Ambiguous create/fix returns a need-path/content failure instead of a hallucinated success. Fix/implement after inspect can apply coder `/write path|||content` blocks (Craft Phase 2 `/work` pattern).
+
+
 ## External gold roots (32/60 present)
 
 - `OK` `C:\tools\realai` — external_scan_roots_for_abilities
