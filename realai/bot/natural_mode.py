@@ -702,6 +702,26 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
 
     if write_ask and not write_plans:
         spec_path, spec_content = extract_write_spec(text)
+        if spec_path:
+            try:
+                from realai.cli.craft import is_protected_core_path
+
+                protected = is_protected_core_path(spec_path)
+            except Exception:
+                rel = spec_path.replace("\\", "/").lower()
+                protected = rel.startswith("realai/bot/") or rel.startswith(
+                    "realai/orchestration/"
+                )
+            if protected:
+                meta["should_ground"] = True
+                meta["admit_failure"] = True
+                meta["used_tools"] = ["write"]
+                meta["tools"] = ["write"]
+                meta["failure_text"] = (
+                    f"refusing_natural_write_protected_path: {spec_path} — "
+                    "use /write path|||content"
+                )
+                return meta
         meta["should_ground"] = True
         results: List[Dict[str, Any]] = []
         if spec_path:

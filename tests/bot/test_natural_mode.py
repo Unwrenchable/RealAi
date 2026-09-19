@@ -58,6 +58,15 @@ class TestNaturalDetector(unittest.TestCase):
         self.assertEqual(content, "PROBE_OK")
         self.assertEqual(plan_natural_write("what's in hello.txt"), [])
 
+    def test_natural_write_skips_protected_core_modules(self):
+        ask = "create file realai/bot/live_exec.py with content MISSION_SCRAP"
+        path, content = extract_write_spec(ask)
+        self.assertEqual(path, "realai/bot/live_exec.py")
+        self.assertEqual(content, "MISSION_SCRAP")
+        self.assertEqual(plan_natural_write(ask), [])
+        orch = "create file realai/orchestration/v3_orchestrator.py with content NOPE"
+        self.assertEqual(plan_natural_write(orch), [])
+
 
 class TestNaturalAutoPlan(unittest.TestCase):
     def test_learn_ask_detects_windows_and_url(self):
