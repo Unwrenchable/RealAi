@@ -15,7 +15,7 @@ param(
     [switch]$SkipUI,
     [switch]$SkipPromote,
     [switch]$Stop,
-    [string]$Root        = $(if ($env:REALAI_HOME) { $env:REALAI_HOME } else { "C:\RealAI-clean" }),
+    [string]$Root        = "C:\RealAI-clean",
     [string]$Llama       = "C:\llama-vulkan\llama-server.exe",
     [string]$Model       = "",
     [int]$OrchPort       = 8001,
@@ -28,6 +28,14 @@ $__dirScript = Join-Path $Root 'scripts\set_operator_directive.ps1'
 if (Test-Path $__dirScript) { . $__dirScript }
 
 $ErrorActionPreference = "Continue"
+
+# Canonical product root (never the realai\ package folder)
+if ($Root -match '[\\/]realai[/\\]?$' -and (Test-Path (Join-Path (Split-Path $Root -Parent) 'scripts\run_local_chat.ps1'))) {
+    $Root = Split-Path $Root -Parent
+}
+if (-not (Test-Path (Join-Path $Root 'scripts\run_local_chat.ps1')) -and (Test-Path 'C:\RealAI-clean\scripts\run_local_chat.ps1')) {
+    $Root = 'C:\RealAI-clean'
+}
 if (-not $Model) {
     # Prefer env / checkpoints_lora (7B default; VRAM_SAFE=1 forces 1.5B)
     if ($env:REALAI_GGUF -and (Test-Path $env:REALAI_GGUF)) {
@@ -109,6 +117,10 @@ function Start-Detached {
 
     # Write a tiny one-shot cmd so quoting stays reliable
     $launcher = Join-Path $env:TEMP ("realai_launch_{0}_{1}.cmd" -f $Title, [Guid]::NewGuid().ToString("N").Substring(0, 8))
+    $opFile = Join-Path $Root "docs\CONSOLE_OPERATOR_DIRECTIVE.md"
+    $ggufLaunch = if ($env:REALAI_GGUF) { $env:REALAI_GGUF } elseif ($Model) { $Model } else { "" }
+    $nctxLaunch = if ($env:REALAI_N_CTX) { $env:REALAI_N_CTX } elseif ($env:REALAI_CTX) { $env:REALAI_CTX } else { "65536" }
+    $ttsLaunch = if ($env:REALAI_TTS_BACKEND) { $env:REALAI_TTS_BACKEND } else { "xtts" }
     $lines = @(
         "@echo off",
         "cd /d `"$WorkingDirectory`"",
@@ -122,10 +134,14 @@ function Start-Detached {
         "set REALAI_BOT_LOCAL_ONLY=1",
         "set REALAI_BOT_VOICE=1",
         "set REALAI_BOT_TOOLS=1",
-        "set REALAI_TTS_BACKEND=kokoro",
+        "set REALAI_TTS_BACKEND=$ttsLaunch",
         "set REALAI_MODELS_DIR=C:\models\checkpoints_lora",
         "set REALAI_API_KEY=local",
         "set PYTHONUNBUFFERED=1",
+        "set REALAI_CTX=$nctxLaunch",
+        "set REALAI_N_CTX=$nctxLaunch",
+        "set REALAI_GGUF=$ggufLaunch",
+        "set REALAI_OPERATOR_SYSTEM_FILE=$opFile",
         "`"$FilePath`" $argLine > `"$StdoutLog`" 2> `"$StderrLog`""
     )
     Set-Content -Path $launcher -Value ($lines -join "`r`n") -Encoding ASCII

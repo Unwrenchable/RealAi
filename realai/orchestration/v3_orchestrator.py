@@ -178,7 +178,15 @@ except Exception:
         "You are the provider. Inference runs on the local RealAI stack. "
         "You are not Grok. You are not ChatGPT. You are not Claude. You are not Gemini."
     )
-OPERATOR_SYSTEM = os.environ.get("REALAI_OPERATOR_SYSTEM", _BOT_PROMPT)
+_op_file = (os.environ.get("REALAI_OPERATOR_SYSTEM_FILE") or "").strip()
+if _op_file and os.path.isfile(_op_file):
+    try:
+        with open(_op_file, "r", encoding="utf-8") as _opf:
+            OPERATOR_SYSTEM = _opf.read().strip() or os.environ.get("REALAI_OPERATOR_SYSTEM", _BOT_PROMPT)
+    except Exception:
+        OPERATOR_SYSTEM = os.environ.get("REALAI_OPERATOR_SYSTEM", _BOT_PROMPT)
+else:
+    OPERATOR_SYSTEM = os.environ.get("REALAI_OPERATOR_SYSTEM", _BOT_PROMPT)
 HIVE_COMPACT_SYSTEM = (
     "You are RealAI in Unified Hive Architecture Mode. "
     "Work as Researcher/Coder/Creative/Executor/Critic as needed. "
