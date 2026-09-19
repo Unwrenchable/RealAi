@@ -15,6 +15,7 @@ from realai.bot.natural_mode import (
     looks_like_write_ask,
     plan_natural_write,
 )
+from realai.cli.craft import apply_suggested_writes, is_protected_core_path, tool_write
 
 
 class _WorkspaceTmp(unittest.TestCase):
@@ -213,6 +214,138 @@ class TestNaturalCreateFileWrites(_WorkspaceTmp):
             (self.root / "hello.txt").read_text(encoding="utf-8"),
             "alpha-ground-token\n",
         )
+
+
+_CORE_SENTINEL = "# REAL_CORE live_exec — do not clobber\n"
+_MISSION_WIPE = (
+    "Do this now.\n\n"
+    "Mission\n"
+    "1. create file realai/bot/live_exec.py with content "
+    "THIS IS A TASK PROMPT SCRAP get to work and overwrite the real module\n"
+    "2. Then continue with numbered hive steps and more mission prose so this "
+    "paste is long enough to look like a multi-step operator dump rather than "
+    "an intentional Craft write.\n"
+)
+
+
+class TestProtectedCorePath(unittest.TestCase):
+    def test_core_bot_and_orch_and_launcher(self):
+        self.assertTrue(is_protected_core_path("realai/bot/live_exec.py"))
+        self.assertTrue(is_protected_core_path("realai/bot/natural_mode.py"))
+        self.assertTrue(is_protected_core_path("realai/orchestration/v3_orchestrator.py"))
+        self.assertTrue(is_protected_core_path("realai/orchestration/nested/foo.py"))
+        self.assertTrue(is_protected_core_path("scripts/run_local_chat.ps1"))
+        self.assertTrue(is_protected_core_path(r"C:\RealAI-clean\realai\bot\live_exec.py"))
+        self.assertFalse(is_protected_core_path("docs/ok.txt"))
+        self.assertFalse(is_protected_core_path("realai/docs/note.md"))
+        self.assertFalse(is_protected_core_path("apps/vscode/webview/console.html"))
+
+
+class TestNaturalMissionDoesNotWipeCore(_WorkspaceTmp):
+    def _seed_core(self) -> Path:
+        target = self.root / "realai" / "bot" / "live_exec.py"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(_CORE_SENTINEL, encoding="utf-8")
+        return target
+
+    def test_plan_natural_write_skips_live_exec(self):
+        ask = "create file realai/bot/live_exec.py with content MISSION_SCRAP"
+        self.assertTrue(looks_like_write_ask(ask))
+        path, content = extract_write_spec(ask)
+        self.assertEqual(path, "realai/bot/live_exec.py")
+        self.assertEqual(content, "MISSION_SCRAP")
+        self.assertEqual(plan_natural_write(ask), [])
+
+    def test_mission_paste_does_not_overwrite_live_exec(self):
+        target = self._seed_core()
+        body = {"messages": [{"role": "user", "content": _MISSION_WIPE}]}
+        meta = apply_natural_grounding(body, _MISSION_WIPE)
+        self.assertFalse(meta.get("wrote"), meta)
+        self.assertTrue(meta.get("admit_failure"), meta)
+        self.assertIn("refusing_natural_write_protected_path", meta.get("failure_text") or "")
+        self.assertIn("live_exec.py", meta.get("failure_text") or "")
+        self.assertEqual(target.read_text(encoding="utf-8"), _CORE_SENTINEL)
+
+    def test_write_to_live_exec_does_not_clobber(self):
+        target = self._seed_core()
+        ask = 'write "Do this now Mission scrap" to realai/bot/live_exec.py'
+        body = {"messages": [{"role": "user", "content": ask}]}
+        meta = apply_natural_grounding(body, ask)
+        self.assertFalse(meta.get("wrote"), meta)
+        self.assertTrue(meta.get("admit_failure"), meta)
+        self.assertEqual(target.read_text(encoding="utf-8"), _CORE_SENTINEL)
+
+    def test_docs_write_still_ok(self):
+        ask = "create file docs/ok.txt with content hi"
+        body = {"messages": [{"role": "user", "content": ask}]}
+        meta = apply_natural_grounding(body, ask)
+        self.assertTrue(meta.get("wrote"), meta)
+        self.assertEqual((self.root / "docs/ok.txt").read_text(encoding="utf-8"), "hi")
+
+    def test_tool_write_refuses_without_allow_protected(self):
+        target = self._seed_core()
+        result = tool_write("realai/bot/live_exec.py", content="WIPED")
+        self.assertFalse(result.get("ok"))
+        self.assertIn("refusing_write_protected_path", str(result.get("error") or ""))
+        self.assertEqual(target.read_text(encoding="utf-8"), _CORE_SENTINEL)
+
+    def test_tool_write_allow_protected_explicit(self):
+        self._seed_core()
+        result = tool_write(
+            "realai/bot/live_exec.py",
+            content="# stub\n",
+            allow_protected=True,
+        )
+        self.assertTrue(result.get("ok"), result)
+        self.assertEqual(
+            (self.root / "realai/bot/live_exec.py").read_text(encoding="utf-8"),
+            "# stub\n",
+        )
+
+    def test_model_suggested_write_to_live_exec_refused(self):
+        target = self._seed_core()
+        reply = "/write realai/bot/live_exec.py|||\nWIPED_BY_CODER\n"
+        applied = apply_suggested_writes(reply)
+        self.assertEqual(len(applied), 1)
+        result = applied[0].get("result") or {}
+        self.assertFalse(result.get("ok"), result)
+        self.assertIn("refusing_write_protected_path", str(result.get("error") or ""))
+        self.assertEqual(target.read_text(encoding="utf-8"), _CORE_SENTINEL)
+
+
+class TestExplicitWriteProtected(_WorkspaceTmp):
+    def test_slash_write_docs_pipe_still_works(self):
+        from realai.orchestration.v3_orchestrator import _operator_intent_dispatch
+
+        dispatch = _operator_intent_dispatch("/write docs/ok.txt|||hi")
+        result = (dispatch or {}).get("result") or {}
+        self.assertTrue(result.get("ok"), result)
+        self.assertEqual((self.root / "docs/ok.txt").read_text(encoding="utf-8"), "hi")
+
+    def test_slash_write_protected_pipe_allowed(self):
+        from realai.orchestration.v3_orchestrator import _operator_intent_dispatch
+
+        rel = "realai/bot/live_exec.py"
+        (self.root / "realai/bot").mkdir(parents=True, exist_ok=True)
+        (self.root / rel).write_text(_CORE_SENTINEL, encoding="utf-8")
+        dispatch = _operator_intent_dispatch(f"/write {rel}|||# stub")
+        result = (dispatch or {}).get("result") or {}
+        self.assertTrue(result.get("ok"), result)
+        self.assertEqual((self.root / rel).read_text(encoding="utf-8"), "# stub")
+
+    def test_slash_write_protected_without_pipe_refused(self):
+        from realai.orchestration.v3_orchestrator import _operator_intent_dispatch
+
+        rel = "realai/bot/live_exec.py"
+        (self.root / "realai/bot").mkdir(parents=True, exist_ok=True)
+        (self.root / rel).write_text(_CORE_SENTINEL, encoding="utf-8")
+        dispatch = _operator_intent_dispatch(
+            f"/write {rel} Do this now Mission scrap get to work"
+        )
+        result = (dispatch or {}).get("result") or {}
+        self.assertTrue(result.get("error") or result.get("ok") is False, result)
+        self.assertIn("protected", str(result.get("error") or "").lower())
+        self.assertEqual((self.root / rel).read_text(encoding="utf-8"), _CORE_SENTINEL)
 
 
 if __name__ == "__main__":
