@@ -29,6 +29,12 @@ _WANTS_RE = re.compile(
     r"|```(?:python|py|js|javascript|bash|sh|powershell|ps1)?"
 )
 
+# Craft file ops belong to operator dispatch / cli.craft — never live_exec.
+_CRAFT_FILE_SLASH_RE = re.compile(
+    r"^/(?:write|read|list|ls|grep|git|pwd|here|cat|ws|workspace)\b",
+    re.I,
+)
+
 
 def hive_root() -> Path:
     home = (
@@ -48,9 +54,15 @@ def wants_live_exec(text: str) -> bool:
     t = (text or "").strip()
     if not t:
         return False
-    if t.startswith("$") or t.lower().startswith("/run") or t.lower().startswith("/py"):
+    # /write /read /list /grep /git /pwd are Craft TOOLS, not hive shell.
+    if _CRAFT_FILE_SLASH_RE.match(t):
+        return False
+    low = t.lower()
+    if low.startswith("/craft"):
+        return False
+    if t.startswith("$") or low.startswith("/run") or low.startswith("/py"):
         return True
-    if t.lower().startswith("/script") or t.lower().startswith("/exec"):
+    if low.startswith("/script") or low.startswith("/exec"):
         return True
     return bool(_WANTS_RE.search(t))
 
