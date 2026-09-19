@@ -208,6 +208,8 @@ button{cursor:pointer;background:none;border:0}
     <div class="grow"></div>
     <a class="pill btn" href="/console">Console</a>
     <a class="pill btn" href="/fusion-ui/">Fusion</a>
+    <button type="button" class="pill btn on" id="btnSim" title="Toggle live simulation pulses">Sim ON</button>
+    <button type="button" class="pill btn" id="btnPulse" title="Pulse hive pipeline (no Vulkan)">Pulse</button>
     <button type="button" class="pill btn" id="btnRefresh" title="Reload agents + graph">Refresh</button>
   </header>
 
@@ -290,6 +292,10 @@ button{cursor:pointer;background:none;border:0}
   function esc(s){ return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function isHive(a){ return (a.tags||[]).includes('hive') || HIVE_IDS.has(a.id); }
   function isMulti(a){ return (a.tags||[]).includes('multi') || MULTI_IDS.has(a.id); }
+  function isAgency(a){
+    const tags = a.tags||[];
+    return tags.includes('agency') || tags.includes('agency-agents') || !!a.division;
+  }
 
   class ForceGraph {
     constructor(nodes, edges){
@@ -353,7 +359,7 @@ button{cursor:pointer;background:none;border:0}
     let list=st.agents.filter(a=>{
       if(st.filter==='hive') return isHive(a);
       if(st.filter==='multi') return isMulti(a);
-      if(st.filter==='agency') return !isHive(a) && !isMulti(a);
+      if(st.filter==='agency') return isAgency(a);
       return true;
     });
     if(q){
@@ -392,9 +398,17 @@ button{cursor:pointer;background:none;border:0}
 
   function fillRunAgents(){ /* watch-only */ }
 
+  const FULL_GRAPH_CAP = 48;
+
   function graphPayload(){
     const raw = st.allGraph || {nodes:[], edges:[], workflows:[]};
-    if(!st.graphHiveOnly) return raw;
+    if(!st.graphHiveOnly){
+      // Cap full graph — 245-node O(n²) force layout freezes the tab.
+      const nodes = (raw.nodes||[]).slice(0, FULL_GRAPH_CAP);
+      const keep = new Set(nodes.map(n=>n.id));
+      const edges = (raw.edges||[]).filter(e=>keep.has(e.source)&&keep.has(e.target));
+      return {nodes, edges, workflows: raw.workflows||[], capped: (raw.nodes||[]).length > FULL_GRAPH_CAP};
+    }
     const keep = new Set(
       (raw.nodes||[])
         .filter(n => isHive(n) || isMulti(n) || (n.tags||[]).includes('hive') || (n.tags||[]).includes('multi'))
@@ -406,19 +420,22 @@ button{cursor:pointer;background:none;border:0}
     }
     const nodes=(raw.nodes||[]).filter(n=>keep.has(n.id));
     const edges=(raw.edges||[]).filter(e=>keep.has(e.source)&&keep.has(e.target));
-    return {nodes, edges, workflows: raw.workflows||[]};
+    return {nodes, edges, workflows: raw.workflows||[], capped:false};
   }
 
   function initGraph(){
     const data=graphPayload();
     const svg=document.getElementById('graph-svg');
-    fg=new ForceGraph(data.nodes, data.edges);
+    if(!svg) return;
+    fg=new ForceGraph(data.nodes||[], data.edges||[]);
     fg.resize(svg.clientWidth||800, svg.clientHeight||560);
-    renderEdges(data.edges);
+    renderEdges(data.edges||[]);
     renderNodes(fg.nodes);
     document.getElementById('graphHint').textContent =
       (st.graphHiveOnly ? 'Hive + multi graph' : 'Full agency graph') +
-      ` · ${data.nodes.length} nodes · click to inspect`;
+      ` · ${data.nodes.length} nodes` +
+      (data.capped ? ` (capped ${FULL_GRAPH_CAP})` : '') +
+      ' · click to inspect';
     if(raf) cancelAnimationFrame(raf);
     const loop=()=>{ fg.tick(); updatePos(); raf=requestAnimationFrame(loop); };
     raf=requestAnimationFrame(loop);
@@ -583,12 +600,23 @@ button{cursor:pointer;background:none;border:0}
     };
   }
 
+  async function fetchJson(path, fallback){
+    try{
+      const r = await fetch(API+path, { signal: AbortSignal.timeout(20000) });
+      if(!r.ok) throw new Error(path+' HTTP '+r.status);
+      return await r.json();
+    }catch(err){
+      console.warn('agents-ui fetch failed', path, err);
+      return fallback;
+    }
+  }
+
   async function loadAll(){
     const [ar, gr, ex, hive] = await Promise.all([
-      fetch(API+'/v1/agents?full=1').then(r=>r.json()),
-      fetch(API+'/v1/agents/graph').then(r=>r.json()),
-      fetch(API+'/v1/agents/executions').then(r=>r.json()).catch(()=>({data:[]})),
-      fetch(API+'/v1/hive').then(r=>r.json()).catch(()=>({})),
+      fetchJson('/v1/agents?full=1', {data:[], count:0, source:''}),
+      fetchJson('/v1/agents/graph', {nodes:[], edges:[], workflows:[]}),
+      fetchJson('/v1/agents/executions', {data:[]}),
+      fetchJson('/v1/hive', {}),
     ]);
     const raw = Array.isArray(ar) ? ar : (ar.data || []);
     st.agents = raw.map(a=>({
@@ -598,7 +626,7 @@ button{cursor:pointer;background:none;border:0}
       preferred_profile:a.preferred_profile||'balanced',
       risk_level:a.risk_level||'medium',
     }));
-    st.allGraph = gr;
+    st.allGraph = gr && typeof gr === 'object' ? gr : {nodes:[], edges:[], workflows:[]};
     const hiveCount = st.agents.filter(isHive).length;
     document.getElementById('s-agents').textContent = String(st.agents.length);
     document.getElementById('s-hive').textContent = String(hiveCount);
@@ -606,7 +634,8 @@ button{cursor:pointer;background:none;border:0}
     const src = (ar && ar.source) ? String(ar.source) : '';
     const srcShort = src ? src.replace(/^.*[\\/](agents[\\/].*)$/,'$1') : 'agents/agentx';
     document.getElementById('brandSub').textContent =
-      (present ? `watch · ${present} cores · ` : 'watch · ') + srcShort;
+      (present ? `watch · ${present} cores · ` : 'watch · ') + srcShort +
+      (st.agents.length ? '' : ' · roster empty');
     renderAgentList();
     initGraph();
     const rows = Array.isArray(ex) ? ex : (ex.data||[]);
@@ -615,6 +644,10 @@ button{cursor:pointer;background:none;border:0}
       if(ev.type==='dispatch'){ activateNode(ev.agent_id); addFeedItem(ev); }
       else if(ev.type==='complete'){ deactivateNode(ev.agent_id); addFeedItem(ev); }
     });
+    if(!st.agents.length){
+      document.getElementById('connLbl').textContent = 'no agents loaded';
+      document.getElementById('connDot').className = 'dot off';
+    }
   }
 
   // Events
@@ -643,6 +676,48 @@ button{cursor:pointer;background:none;border:0}
     initGraph();
   };
   document.getElementById('btnRefresh').onclick=()=>loadAll().catch(console.error);
+
+  let simOn = true;
+  const btnSim = document.getElementById('btnSim');
+  function syncSimBtn(){
+    if(!btnSim) return;
+    btnSim.textContent = simOn ? 'Sim ON' : 'Sim OFF';
+    btnSim.classList.toggle('on', simOn);
+  }
+  if(btnSim){
+    syncSimBtn();
+    btnSim.onclick = async ()=>{
+      try{
+        const r = await fetch(API+'/v1/agents/simulation', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ enabled: !simOn }),
+        });
+        const j = await r.json();
+        simOn = !!(j && j.enabled);
+        syncSimBtn();
+      }catch(err){ console.error(err); }
+    };
+  }
+  const btnPulse = document.getElementById('btnPulse');
+  if(btnPulse){
+    btnPulse.onclick = async ()=>{
+      btnPulse.disabled = true;
+      try{
+        await fetch(API+'/v1/agents/run', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({
+            agent_id:'hive-orchestrator',
+            task:'Agents UI pulse check',
+            multi:true,
+            dry_run:true,
+          }),
+        });
+      }catch(err){ console.error(err); }
+      finally{ btnPulse.disabled = false; }
+    };
+  }
 
   const body=document.getElementById('body');
   document.getElementById('toggleRail').onclick=(e)=>{

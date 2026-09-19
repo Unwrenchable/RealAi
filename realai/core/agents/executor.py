@@ -2,9 +2,22 @@
 
 from typing import Any, Dict, List
 
-from core.agents.safety import AgentSafety
-from core.logging.logger import log
-from core.tracing.tracer import tracer
+from .safety import AgentSafety
+
+try:
+    from core.logging.logger import log  # type: ignore
+except Exception:  # pragma: no cover
+    log = None  # type: ignore
+try:
+    from core.tracing.tracer import tracer  # type: ignore
+except Exception:  # pragma: no cover
+    from contextlib import nullcontext
+
+    class _Tracer:
+        def start_as_current_span(self, *_a, **_k):
+            return nullcontext()
+
+    tracer = _Tracer()  # type: ignore
 
 
 class TaskExecutor:

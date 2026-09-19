@@ -1,0 +1,71 @@
+{
+  "schema": "realai.learn.packet/v1",
+  "slug": "realai_cold",
+  "source": {
+    "input": "C:\\realai-cold",
+    "kind": "local",
+    "resolved_path": "C:\\realai-cold",
+    "url": null,
+    "cloned": false,
+    "reused_cache": false,
+    "git": {
+      "head": "",
+      "branch": "",
+      "remote": "",
+      "branches": []
+    }
+  },
+  "summary": {
+    "title": "realai-cold",
+    "description": "",
+    "file_count": 1,
+    "truncated": false,
+    "branches_seen": [],
+    "branch_counts": {},
+    "branches_truncated": false,
+    "all_branch_names": [],
+    "branches_omitted": 0,
+    "languages": {
+      "json": 1
+    },
+    "frameworks": [],
+    "domain_keywords": [
+      "recovered",
+      "archive",
+      "archive_manifest",
+      "json"
+    ],
+    "readme": "",
+    "api_routes": [],
+    "plugin_like_folders": []
+  },
+  "fingerprints": [
+    {
+      "path": "recovered-archive/20260824_132750/ARCHIVE_MANIFEST.json",
+      "sha1": "ccfab9bb0348d069",
+      "bytes": 516,
+      "ext": ".json"
+    }
+  ],
+  "proposed_abilities": [
+    {
+      "id": "health",
+      "description": "Stub liveness / contract discovery (no runtime heal)"
+    },
+    {
+      "id": "repo_map",
+      "description": "Summarize learned tree layout and stack"
+    }
+  ],
+  "plugin_proposal": {
+    "id": "realai-cold-coach",
+    "package": "realai_cold_coach",
+    "path": "C:\\RealAI-clean\\realai\\plugins\\realai_cold_coach",
+    "http": {
+      "canonical": "/v1/plugins/realai-cold-coach",
+      "alias": "/v1/learned/realai_cold_coach"
+    }
+  },
+  "learned_at": "2026-09-19T14:02:48.813619+00:00",
+  "heal": false
+}

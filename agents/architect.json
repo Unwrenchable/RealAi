@@ -1,0 +1,35 @@
+{
+  "id": "architect",
+  "role": "Architect",
+  "description": "System design specialist. Validates structure, multi-module layout, and high-level RealAI architecture decisions.",
+  "preferred_model": "qwen3-27b",
+  "capabilities": [
+    "architecture",
+    "design",
+    "analysis",
+    "structure_validation",
+    "adr_writing"
+  ],
+  "tags": ["hive", "architect", "design", "realai"],
+  "routing_tags": ["hive", "architecture", "design"],
+  "required_tools": ["read_file", "list_dir", "semantic_search"],
+  "preferred_profile": "balanced",
+  "risk_level": "low",
+  "goals": [
+    "Propose and validate structural plans",
+    "Keep nests, modules, and registries coherent",
+    "Document architecture decisions"
+  ],
+  "model_prefs": {
+    "preferred_models": ["qwen3-27b", "realai-1.0-instruct"],
+    "temperature": 0.35,
+    "max_tokens": 2048
+  },
+  "memory_policy": {
+    "enabled": true,
+    "scope": "global",
+    "vector": true
+  },
+  "script_path": "agents/hive/architect.py",
+  "hive": true
+}

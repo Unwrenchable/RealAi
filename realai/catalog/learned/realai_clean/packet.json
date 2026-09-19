@@ -1,0 +1,5518 @@
+{
+  "schema": "realai.learn.packet/v1",
+  "slug": "realai_clean",
+  "source": {
+    "input": "C:\\RealAI-clean",
+    "kind": "local",
+    "resolved_path": "C:\\RealAI-clean",
+    "url": "https://github.com/Unwrenchable/RealAi.git",
+    "cloned": false,
+    "reused_cache": false,
+    "git": {
+      "head": "8ce988657ae20d5654f69b94671d750019f8bf05",
+      "branch": "live/realai-clean-20260911",
+      "remote": "https://github.com/Unwrenchable/RealAi.git",
+      "branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "RealAi-unified",
+        "analysis-clean",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "feature/ui-desktop-promote",
+        "grok_snapshot",
+        "integration/hive-merge",
+        "local/RealAIProject-clean-20260612",
+        "local/RealAi-unified-20260804",
+        "local/desktop-loose-docs-clean",
+        "local/desktop-realai-202605",
+        "local/desktop-realai-agent-202604",
+        "local/desktop-realai-api-202604",
+        "local/desktop-realai-cli-202604",
+        "local/desktop-realai-design-system-202604",
+        "local/desktop-realai-orchestration-202604",
+        "local/desktop-realai-sdk-js-202604",
+        "local/nested-realai-202607",
+        "local/real-fin-realai-source-only",
+        "local/realai-clean-20260726-source-only",
+        "local/realai-clean-20260804m",
+        "local/realai-repo-historical-20260612",
+        "local/recovery-primary-clean-20260731-clean",
+        "master",
+        "realai",
+        "realai-3.0-clean",
+        "realai-3.0-update",
+        "recovery/agents-skills/2026-08-01/HOMEPC/s137e5",
+        "recovery/atomicfizzcaps-fork-review",
+        "recovery/atomicfizzcaps-fork/2026-08-01/HOMEPC/f1a9c2",
+        "recovery/clean-base",
+        "recovery/desktop-agent/2026-08-02/HOMEPC/d1",
+        "recovery/desktop-api-pack/2026-08-02/HOMEPC/d1",
+        "recovery/desktop-api-root/2026-08-02/HOMEPC/d1",
+        "recovery/desktop-design-system/2026-08-02/HOMEPC/d1",
+        "recovery/desktop-loose/2026-08-02/HOMEPC/d1",
+        "recovery/desktop-orchestration/2026-08-02/HOMEPC/d1",
+        "recovery/desktop-plugins-desk/2026-08-02/HOMEPC/d1",
+        "recovery/desktop-unique-py/2026-08-02/HOMEPC/d1",
+        "recovery/essentials/2026-07-26/HOMEPC/snapshot1",
+        "recovery/from-accident/2026-08-01/HOMEPC/a9c301",
+        "recovery/from-wsl-files/2026-08-01/HOMEPC/w274d4f",
+        "recovery/from-wsl/2026-08-01/HOMEPC/w274d4",
+        "recovery/from-zips/2026-08-01/HOMEPC/z7f104",
+        "recovery/github-clone/2026-07-31/HOMEPC/4f8b22",
+        "recovery/grok-RealAIProject-clean/2026-07-26/HOMEPC/b8f356",
+        "recovery/grok-export/2026-07-31/HOMEPC/e1a2b3",
+        "recovery/grok-realai-repo/2026-07-26/HOMEPC/f6d134",
+        "recovery/grok-realai-sdk/2026-07-26/HOMEPC/a7e245",
+        "recovery/grok-realai2-clean/2026-07-31/HOMEPC/e5c023",
+        "recovery/modules-runtime/2026-08-01/HOMEPC/m21f01",
+        "recovery/og-mess-clean/2026-07-26/HOMEPC/9c2d11",
+        "recovery/plugin-boards/2026-08-01/HOMEPC/pb01",
+        "recovery/plugin-system/2026-08-01/HOMEPC/p26b2",
+        "recovery/primary-clean/2026-07-31/HOMEPC/p1c9e2",
+        "recovery/recycle-py-unique/2026-08-01/HOMEPC/r106a1",
+        "recovery/static-reconstruction-20260828",
+        "recovery/unique-modules-files/2026-08-01/HOMEPC/u194c3f",
+        "recovery/unique-modules/2026-08-01/HOMEPC/u194c3",
+        "recovery/unique-plugins-orchestrators-agenttools/2026-07-31/HOMEPC/u9f2a1",
+        "recovery/users-tsmit-realai-clean/2026-07-31/HOMEPC/d4b912",
+        "recovery/users-tsmit-realai/2026-07-31/HOMEPC/c3a801",
+        "recovery/wsl-RealAi/2026-07-31/HOMEPC/w4a8c2",
+        "restored-from-history",
+        "unification/ultimate-all"
+      ]
+    }
+  },
+  "summary": {
+    "title": "RealAI",
+    "description": "Local-first AI hive: GPU chat (Vulkan), multi-agent orchestration, tools, voice, and a console UI that also runs in VS Code.",
+    "file_count": 400,
+    "truncated": true,
+    "branches_seen": [
+      "live/realai-clean-20260911",
+      "main",
+      "RealAi-unified",
+      "analysis-clean",
+      "cursor/docs-travis-diagram-bounds-f027",
+      "dependabot/npm_and_yarn/frontend/next-15.5.24",
+      "dependabot/npm_and_yarn/next-15.5.24",
+      "feature/ui-desktop-promote",
+      "grok_snapshot",
+      "integration/hive-merge",
+      "local/RealAIProject-clean-20260612",
+      "local/RealAi-unified-20260804"
+    ],
+    "branch_counts": {
+      "live/realai-clean-20260911": 400,
+      "main": 400,
+      "RealAi-unified": 340,
+      "analysis-clean": 400,
+      "cursor/docs-travis-diagram-bounds-f027": 400,
+      "dependabot/npm_and_yarn/frontend/next-15.5.24": 400,
+      "dependabot/npm_and_yarn/next-15.5.24": 400,
+      "feature/ui-desktop-promote": 400,
+      "grok_snapshot": 400,
+      "integration/hive-merge": 400,
+      "local/RealAIProject-clean-20260612": 276,
+      "local/RealAi-unified-20260804": 400
+    },
+    "branches_truncated": true,
+    "all_branch_names": [
+      "live/realai-clean-20260911",
+      "main",
+      "RealAi-unified",
+      "analysis-clean",
+      "cursor/docs-travis-diagram-bounds-f027",
+      "dependabot/npm_and_yarn/frontend/next-15.5.24",
+      "dependabot/npm_and_yarn/next-15.5.24",
+      "feature/ui-desktop-promote",
+      "grok_snapshot",
+      "integration/hive-merge",
+      "local/RealAIProject-clean-20260612",
+      "local/RealAi-unified-20260804",
+      "local/desktop-loose-docs-clean",
+      "local/desktop-realai-202605",
+      "local/desktop-realai-agent-202604",
+      "local/desktop-realai-api-202604",
+      "local/desktop-realai-cli-202604",
+      "local/desktop-realai-design-system-202604",
+      "local/desktop-realai-orchestration-202604",
+      "local/desktop-realai-sdk-js-202604",
+      "local/nested-realai-202607",
+      "local/real-fin-realai-source-only",
+      "local/realai-clean-20260726-source-only",
+      "local/realai-clean-20260804m",
+      "local/realai-repo-historical-20260612",
+      "local/recovery-primary-clean-20260731-clean",
+      "master",
+      "realai",
+      "realai-3.0-clean",
+      "realai-3.0-update",
+      "recovery/agents-skills/2026-08-01/HOMEPC/s137e5",
+      "recovery/atomicfizzcaps-fork-review",
+      "recovery/atomicfizzcaps-fork/2026-08-01/HOMEPC/f1a9c2",
+      "recovery/clean-base",
+      "recovery/desktop-agent/2026-08-02/HOMEPC/d1",
+      "recovery/desktop-api-pack/2026-08-02/HOMEPC/d1",
+      "recovery/desktop-api-root/2026-08-02/HOMEPC/d1",
+      "recovery/desktop-design-system/2026-08-02/HOMEPC/d1",
+      "recovery/desktop-loose/2026-08-02/HOMEPC/d1",
+      "recovery/desktop-orchestration/2026-08-02/HOMEPC/d1",
+      "recovery/desktop-plugins-desk/2026-08-02/HOMEPC/d1",
+      "recovery/desktop-unique-py/2026-08-02/HOMEPC/d1",
+      "recovery/essentials/2026-07-26/HOMEPC/snapshot1",
+      "recovery/from-accident/2026-08-01/HOMEPC/a9c301",
+      "recovery/from-wsl-files/2026-08-01/HOMEPC/w274d4f",
+      "recovery/from-wsl/2026-08-01/HOMEPC/w274d4",
+      "recovery/from-zips/2026-08-01/HOMEPC/z7f104",
+      "recovery/github-clone/2026-07-31/HOMEPC/4f8b22",
+      "recovery/grok-RealAIProject-clean/2026-07-26/HOMEPC/b8f356",
+      "recovery/grok-export/2026-07-31/HOMEPC/e1a2b3",
+      "recovery/grok-realai-repo/2026-07-26/HOMEPC/f6d134",
+      "recovery/grok-realai-sdk/2026-07-26/HOMEPC/a7e245",
+      "recovery/grok-realai2-clean/2026-07-31/HOMEPC/e5c023",
+      "recovery/modules-runtime/2026-08-01/HOMEPC/m21f01",
+      "recovery/og-mess-clean/2026-07-26/HOMEPC/9c2d11",
+      "recovery/plugin-boards/2026-08-01/HOMEPC/pb01",
+      "recovery/plugin-system/2026-08-01/HOMEPC/p26b2",
+      "recovery/primary-clean/2026-07-31/HOMEPC/p1c9e2",
+      "recovery/recycle-py-unique/2026-08-01/HOMEPC/r106a1",
+      "recovery/static-reconstruction-20260828",
+      "recovery/unique-modules-files/2026-08-01/HOMEPC/u194c3f",
+      "recovery/unique-modules/2026-08-01/HOMEPC/u194c3",
+      "recovery/unique-plugins-orchestrators-agenttools/2026-07-31/HOMEPC/u9f2a1",
+      "recovery/users-tsmit-realai-clean/2026-07-31/HOMEPC/d4b912",
+      "recovery/users-tsmit-realai/2026-07-31/HOMEPC/c3a801",
+      "recovery/wsl-RealAi/2026-07-31/HOMEPC/w4a8c2",
+      "restored-from-history",
+      "unification/ultimate-all"
+    ],
+    "branches_omitted": 56,
+    "languages": {
+      "markdown": 185,
+      "python": 172,
+      "json": 22,
+      "html": 2
+    },
+    "frameworks": [
+      "node",
+      "pnpm",
+      "python",
+      "docker",
+      "vite",
+      "typescript",
+      "react"
+    ],
+    "domain_keywords": [
+      "abilities",
+      "agents",
+      "github",
+      "agent_tools",
+      "rackup",
+      "realai",
+      "json",
+      "agent",
+      "hive",
+      "console",
+      "local",
+      "chat",
+      "tools",
+      "init__",
+      "adapters",
+      "engine",
+      "live",
+      "vulkan",
+      "coder",
+      "post",
+      "memory",
+      "multi",
+      "browser",
+      "game"
+    ],
+    "readme": "# RealAI\n\nLocal-first AI hive: GPU chat (Vulkan), multi-agent orchestration, tools, voice, and a console UI that also runs in VS Code.\n\n**Canonical product root:** `C:\\RealAI-clean`  \n**Live Git branch:** `live/realai-clean-20260911` \u2192 https://github.com/Unwrenchable/RealAi  \n**Recovery / history branches** on GitHub are left intact for learning \u2014 do not mega-merge them into live.\n\n---\n\n## What it is (current abilities)\n\n| Surface | What you get |\n|---------|----------------|\n| **Hive gateway** `:8001` | `python -m realai.v3_orchestrator` \u2014 chat, tools, agents, multi-agent, abilities, `/console` |\n| **Vulkan llama-server** `:8080` | Local 7B GGUF (AMD RX 6700 XT / Vulkan) |\n| **Console** | Browser home: `http://127.0.0.1:8001/console` (same UI as VS Code RealAI Console) |\n| **VS Code / Cursor extension** | `apps/vscode` \u2014 RealAI Chat coder, foreign-repo mode, terminals, live abilities (`realai-vscode@1.2.15+`) |\n| **Next frontend** | `frontend/` \u2014 Vercel-ready UI shell (`NEXT_PUBLIC_API_URL` \u2192 API) |\n| **Cloud API** | `python -m realai.api_server` \u2014 OpenAI-compatible API + SQLite chat history (Render-friendly) |\n| **Voice** | XTTS / Voice Lab via gateway speech proxy (browser should hit `:8001`, not `:8890` directly) |\n| **Any-repo** | Open another folder (e.g. Rack_em_up); Hive stays at product home, workspace is cwd \u2014 see `ANY_REPO.md` |\n\n### API highlights (Hive / orchestrator)\n\n```http\nGET  /health\nGET  /console\nGET  /v1/tools\nGET  /v1/agents\nGET  /v1/capabilities\nGET  /v1/hive\nGET  /v1/abilities\nPOST /v1/chat/completions\nPOST /v1/agents/run\nPOST /v1/multi-agent/run\nPOST /v1/tools/execute\nPOST /v1/audio/speech\n```\n\n### Chat / console slash (local, deterministic)\n\n- `/phase` `/where` \u2014 stage + host mode (product vs foreign) + stack\n- `/patches` \u2014 `apps/vscode` auditor\n- `/repo` \u2014 workspace listing\n- `/tools` `/agents` `/multi` \u2014 via Craft / console Ops when stack is up\n\n### Ability catalog (honesty map)\n\nSee `realai/ability_catalog.py` and `ABILITIES.md`. Many abilities are **LIVE** against local Hive (chat, tools, web research, local image/GIF helpers, embeddings, speech paths, self-heal tools, and more). Status is LIVE / PARTIAL / STUB \u2014 trust the catalog over marketing lists.\n\n---\n\n## Quick local stack (Windows GPU)\n\n```powershell\n# 1) Vulkan model server (7B GGUF, high context)\nC:\\llama-vulkan\\llama-server.exe `\n  -m \"C:\\models\\checkpoints_lora\\qwen2.5-coder-7b-instruct-q5_k_m.gguf\" `\n  --host 127.0.0.1 --port 8080 -ngl 99 -c 65536\n\n# 2) Hive gatewa",
+    "api_routes": [],
+    "plugin_like_folders": [
+      "abilities",
+      "adapters",
+      "agents",
+      "modules",
+      "packages",
+      "plugins",
+      ".github/agents",
+      "realai/abilities",
+      "realai/adapters",
+      "realai/agents",
+      "realai/modules",
+      "realai/packages",
+      "realai/plugins",
+      "realai/skills"
+    ]
+  },
+  "fingerprints": [
+    {
+      "path": ".dockerignore",
+      "sha1": "ea6322688828b92f",
+      "bytes": 795,
+      "ext": "",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".env.example",
+      "sha1": "a23b96b6cf1a8ca9",
+      "bytes": 3096,
+      "ext": ".example",
+      "seen_on_branches": [
+        "live/realai-clean-20260911"
+      ]
+    },
+    {
+      "path": ".gitattributes",
+      "sha1": "2b275b4a9f810eb6",
+      "bytes": 375,
+      "ext": "",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot"
+      ]
+    },
+    {
+      "path": ".github/agents/README.md",
+      "sha1": "a184a82da1dc4246",
+      "bytes": 2028,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot",
+        "local/RealAIProject-clean-20260612"
+      ]
+    },
+    {
+      "path": ".github/agents/agent-network.md",
+      "sha1": "cb69c0e823568382",
+      "bytes": 9231,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/agent.md",
+      "sha1": "dc6f9ad0eb49a601",
+      "bytes": 10286,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot",
+        "local/RealAIProject-clean-20260612"
+      ]
+    },
+    {
+      "path": ".github/agents/analyst.json",
+      "sha1": "3a8d462831ea8739",
+      "bytes": 446,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/architect.json",
+      "sha1": "2809f3b5e17a17b0",
+      "bytes": 450,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/bootstrap.md",
+      "sha1": "c95f740c7cecba92",
+      "bytes": 4425,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot",
+        "local/RealAIProject-clean-20260612"
+      ]
+    },
+    {
+      "path": ".github/agents/browser-test-engineer.agent.md",
+      "sha1": "3f1c9810f885ee6f",
+      "bytes": 5271,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/capability-dev.md",
+      "sha1": "8952089588a960c3",
+      "bytes": 8593,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot",
+        "local/RealAIProject-clean-20260612"
+      ]
+    },
+    {
+      "path": ".github/agents/coder.json",
+      "sha1": "162a25005bf92520",
+      "bytes": 452,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/coder.json.py",
+      "sha1": "da39a3ee5e6b4b0d",
+      "bytes": 0,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/coder.json.txt",
+      "sha1": "6c05f70e5313605f",
+      "bytes": 236,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/cybersecurity-expert.agent.md",
+      "sha1": "c95702c6d887423b",
+      "bytes": 3564,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/executor.json",
+      "sha1": "7bd60ac015ecdffb",
+      "bytes": 424,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/fullstack-dev.md",
+      "sha1": "5e625a1f12dec335",
+      "bytes": 5010,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot",
+        "local/RealAIProject-clean-20260612"
+      ]
+    },
+    {
+      "path": ".github/agents/game-creative-director.agent.md",
+      "sha1": "f704257766b6ac49",
+      "bytes": 4823,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/game-designer.agent.md",
+      "sha1": "01f49cf977f3b833",
+      "bytes": 5771,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/game-technical-director.agent.md",
+      "sha1": "09a4710e110635c8",
+      "bytes": 4829,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/game-tester.md",
+      "sha1": "9474314188f419cc",
+      "bytes": 15783,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/gameplay-programmer.agent.md",
+      "sha1": "423454face043f57",
+      "bytes": 5008,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/governor.json",
+      "sha1": "d641fb0a8b4630a4",
+      "bytes": 461,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/guardian.json",
+      "sha1": "46a15a3256ee5101",
+      "bytes": 419,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/hive-orchestrator.json",
+      "sha1": "5c34e1051bae25cc",
+      "bytes": 468,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/memory.json",
+      "sha1": "2c6b925d5dc41098",
+      "bytes": 451,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/memory.md",
+      "sha1": "7acc73bd70684282",
+      "bytes": 5589,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot",
+        "local/RealAIProject-clean-20260612"
+      ]
+    },
+    {
+      "path": ".github/agents/my-agent.agent.md",
+      "sha1": "e736fe4e3c05d965",
+      "bytes": 6137,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/overseer.json",
+      "sha1": "6a41a74f1c3ce839",
+      "bytes": 463,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/overseer.json.txt",
+      "sha1": "da39a3ee5e6b4b0d",
+      "bytes": 0,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/planner.json",
+      "sha1": "8035750a9536f96a",
+      "bytes": 406,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/provider-specialist.md",
+      "sha1": "2218129589ad27b4",
+      "bytes": 6373,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot",
+        "local/RealAIProject-clean-20260612"
+      ]
+    },
+    {
+      "path": ".github/agents/router.json",
+      "sha1": "6478e2c8ae3bb2be",
+      "bytes": 437,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/self-heal.json",
+      "sha1": "bf68806eec54f08c",
+      "bytes": 459,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/tasks.md",
+      "sha1": "14f75de3aec3c4ca",
+      "bytes": 23531,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/tokenized-agents.agent.md",
+      "sha1": "d491ca9ed54c8ed7",
+      "bytes": 4356,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/wasteland-assistant.md",
+      "sha1": "9441f2e2f393e7c0",
+      "bytes": 2075,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".github/agents/web3-specialist.md",
+      "sha1": "d9f871a6b49b0642",
+      "bytes": 7983,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".gitignore",
+      "sha1": "af7a654a652125b6",
+      "bytes": 1754,
+      "ext": "",
+      "seen_on_branches": [
+        "live/realai-clean-20260911"
+      ]
+    },
+    {
+      "path": ".node_modules.lock",
+      "sha1": "da39a3ee5e6b4b0d",
+      "bytes": 0,
+      "ext": ".lock",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".prettierrc",
+      "sha1": "8c1a1f23f5f588f0",
+      "bytes": 90,
+      "ext": "",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".project_id",
+      "sha1": "786e4a7d1fab606a",
+      "bytes": 36,
+      "ext": "",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": ".python-version",
+      "sha1": "2c561ed018185a0a",
+      "bytes": 5,
+      "ext": "",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot",
+        "local/RealAIProject-clean-20260612"
+      ]
+    },
+    {
+      "path": "ABILITIES.md",
+      "sha1": "1bc7439dca187699",
+      "bytes": 2928,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "sha1": "d800b28fb5e0e544",
+      "bytes": 18723,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "ANY_REPO.md",
+      "sha1": "5a888da548e49bc9",
+      "bytes": 3024,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "API.md",
+      "sha1": "d8d5e9790d557556",
+      "bytes": 17577,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot",
+        "local/RealAIProject-clean-20260612"
+      ]
+    },
+    {
+      "path": "BUILD_REALAI_BOT_PROMPT.md",
+      "sha1": "da3d080880520c83",
+      "bytes": 2943,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha1": "1c1326c991b8697d",
+      "bytes": 2017,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot",
+        "local/RealAIProject-clean-20260612"
+      ]
+    },
+    {
+      "path": "DEPLOYMENT.md",
+      "sha1": "9d70a05b5ffd4af9",
+      "bytes": 13180,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911"
+      ]
+    },
+    {
+      "path": "Dockerfile",
+      "sha1": "b929a18233e15607",
+      "bytes": 786,
+      "ext": "",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "Dockerfile.gpu",
+      "sha1": "f001a99c139681b2",
+      "bytes": 324,
+      "ext": ".gpu",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot",
+        "local/RealAIProject-clean-20260612"
+      ]
+    },
+    {
+      "path": "How to run RealAI.txt",
+      "sha1": "31af84c652bda06d",
+      "bytes": 1252,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "LICENSE",
+      "sha1": "ee22e5b5df11e2c1",
+      "bytes": 1063,
+      "ext": "",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot",
+        "local/RealAIProject-clean-20260612"
+      ]
+    },
+    {
+      "path": "QUICKSTART.md",
+      "sha1": "d96f77faeedba5e6",
+      "bytes": 3759,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot",
+        "local/RealAIProject-clean-20260612"
+      ]
+    },
+    {
+      "path": "QUICKSTART_LOCAL.md",
+      "sha1": "35149cdadb5a2ba7",
+      "bytes": 5623,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "README.md",
+      "sha1": "6b88e3699358a2d9",
+      "bytes": 4448,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911"
+      ]
+    },
+    {
+      "path": "REALAI_3.0.md",
+      "sha1": "da65b8265737e028",
+      "bytes": 2043,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot",
+        "local/RealAIProject-clean-20260612"
+      ]
+    },
+    {
+      "path": "RUN_CHAT.md",
+      "sha1": "877b11168629dcdb",
+      "bytes": 4203,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "SETUP_COMPLETE.md",
+      "sha1": "4c50a971a3a66c4a",
+      "bytes": 4892,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "START_HERE.bat",
+      "sha1": "ac37d02e22d59d49",
+      "bytes": 1522,
+      "ext": ".bat",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/__init__.py",
+      "sha1": "f912d7dbd21eac1c",
+      "bytes": 66,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/ability_catalog.py",
+      "sha1": "6da297e395811566",
+      "bytes": 50076,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911"
+      ]
+    },
+    {
+      "path": "abilities/agent_tools_surface.py",
+      "sha1": "8d456c2b59c15704",
+      "bytes": 8005,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/agents_surface.py",
+      "sha1": "c7bde2e2f4fcf1c4",
+      "bytes": 9158,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/approval_store.py",
+      "sha1": "864d4c17c4c0befd",
+      "bytes": 2179,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/approval_ui.py",
+      "sha1": "365aa0bb63c71666",
+      "bytes": 1697,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/architect_mode.py",
+      "sha1": "bda29f2be876d2dd",
+      "bytes": 194,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/assemble_gold_index.py",
+      "sha1": "189e2f1ac118ed6f",
+      "bytes": 22074,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/audio_speech.py",
+      "sha1": "2dd6f5a9d7f39d38",
+      "bytes": 2832,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/audio_transcription.py",
+      "sha1": "27c3b76f2e8e8300",
+      "bytes": 6171,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/auto_wire.py",
+      "sha1": "9cfc30eb7f34a44e",
+      "bytes": 3708,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/business_planning.py",
+      "sha1": "a3940ed3bb85b530",
+      "bytes": 1583,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/cli_surface.py",
+      "sha1": "648eb86b12b3400d",
+      "bytes": 1994,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/code_engineer_agent.py",
+      "sha1": "2a07c5b6cfdc80ed",
+      "bytes": 2725,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/code_engineer_cli.py",
+      "sha1": "582515f334718ea3",
+      "bytes": 2899,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/core_surface.py",
+      "sha1": "f55f2b95984a884a",
+      "bytes": 19521,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/deep_promote.py",
+      "sha1": "a5aed1c2e9bbe117",
+      "bytes": 4698,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/delta_extractor.py",
+      "sha1": "e194e67c7e186915",
+      "bytes": 3441,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/desktop_lambda_advanced.py",
+      "sha1": "a8f1c2dc0c6cb827",
+      "bytes": 2722,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/desktop_lambda_chat.py",
+      "sha1": "86f8e678514fd63f",
+      "bytes": 2670,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/desktop_lambda_image.py",
+      "sha1": "ff465100662e17b9",
+      "bytes": 2683,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/desktop_lambda_video.py",
+      "sha1": "8d509a505da1e5f5",
+      "bytes": 2683,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/device_selector.py",
+      "sha1": "045e177b0b60c976",
+      "bytes": 982,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/from_accident/realai-ish_memory_summarizer_agent.py",
+      "sha1": "96179ae7668884fe",
+      "bytes": 7089,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/from_accident/realai-ish_memory_summarizer_agent_117.py",
+      "sha1": "96179ae7668884fe",
+      "bytes": 7089,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/game_world.py",
+      "sha1": "bf92743d26e98188",
+      "bytes": 3945,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/harden_repos.py",
+      "sha1": "467aa3c260701497",
+      "bytes": 1150,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/hierarchical_specialists.py",
+      "sha1": "b5aec716e841af73",
+      "bytes": 2393,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/hive_governance.py",
+      "sha1": "4dd74295a4c532d6",
+      "bytes": 3570,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/hive_memory.py",
+      "sha1": "37c54ea38e58997c",
+      "bytes": 3482,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/hive_orchestrator.py",
+      "sha1": "dfff0005aa23e1f7",
+      "bytes": 1454,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/hominis_enterprise.py",
+      "sha1": "969c72a14043fd47",
+      "bytes": 885,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/image_analysis.py",
+      "sha1": "50c7ce035d4ca499",
+      "bytes": 2690,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/image_generation.py",
+      "sha1": "6437beff2aac2064",
+      "bytes": 2179,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/knowledge_synthesis.py",
+      "sha1": "b9768d286087a124",
+      "bytes": 3526,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/learn_git.py",
+      "sha1": "74678b57be24562f",
+      "bytes": 1397,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911"
+      ]
+    },
+    {
+      "path": "abilities/memory_learning.py",
+      "sha1": "d5dfeb7bc42baeb6",
+      "bytes": 1996,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/modules_surface.py",
+      "sha1": "bc12b7c97aa3411f",
+      "bytes": 9820,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/nest_orchestrators.py",
+      "sha1": "8512ce3580353bad",
+      "bytes": 1096,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/notifier.py",
+      "sha1": "397eda903631e9a1",
+      "bytes": 1857,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/observability_self_improve.py",
+      "sha1": "011043083cc49144",
+      "bytes": 2813,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/omnibrain.py",
+      "sha1": "fb2fc6b2fa5b761d",
+      "bytes": 4357,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/orchestration_surface.py",
+      "sha1": "778b5cee7da730e6",
+      "bytes": 17035,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/orchestration_worker.py",
+      "sha1": "ea6396d9ac09772d",
+      "bytes": 1856,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/organs_hive.py",
+      "sha1": "1a804c7166c8fd0e",
+      "bytes": 1808,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/overmind_runner.py",
+      "sha1": "dcaee7cd83e4d422",
+      "bytes": 2672,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/overseer.py",
+      "sha1": "ad842378f6d4d0af",
+      "bytes": 3054,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/plugins_surface.py",
+      "sha1": "51b02d5abfa75946",
+      "bytes": 24403,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911"
+      ]
+    },
+    {
+      "path": "abilities/quarantine_reconstruct.py",
+      "sha1": "6aba5ddcb2db3034",
+      "bytes": 6845,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/__init__.py",
+      "sha1": "eb7999fc24468b63",
+      "bytes": 6264,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911"
+      ]
+    },
+    {
+      "path": "abilities/rackup/_player.py",
+      "sha1": "70d66fb086bc2cfa",
+      "bytes": 1359,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/coach.py",
+      "sha1": "9c6a963f6e0411a2",
+      "bytes": 17381,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/coach_agent.py",
+      "sha1": "c99e073646f90841",
+      "bytes": 5051,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/games.py",
+      "sha1": "bbb5c03e6a4fd03c",
+      "bytes": 11869,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/glicko2.py",
+      "sha1": "94006dc1ec5cfc68",
+      "bytes": 14887,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/hall_context.py",
+      "sha1": "bc7027a55959f77e",
+      "bytes": 4213,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/league_validate.py",
+      "sha1": "f4cc1943c88a6b65",
+      "bytes": 9717,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/leagues.py",
+      "sha1": "0cf86d1f8cc852d1",
+      "bytes": 15340,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/ledger_audit.py",
+      "sha1": "ee79e5954129f969",
+      "bytes": 1450,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/matchmaking.py",
+      "sha1": "68df2bf65de35390",
+      "bytes": 10244,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/moderation.py",
+      "sha1": "d9dc1e5612521a3e",
+      "bytes": 6049,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/money_anomaly.py",
+      "sha1": "7feffc0372991d44",
+      "bytes": 1175,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/money_audit.py",
+      "sha1": "3e144504fe08dfa8",
+      "bytes": 47203,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/organs_bridge.py",
+      "sha1": "70a5e369eb001848",
+      "bytes": 6173,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911"
+      ]
+    },
+    {
+      "path": "abilities/rackup/payout_sanity.py",
+      "sha1": "1ee86fa4d19e402e",
+      "bytes": 1175,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/player_card_sync.py",
+      "sha1": "07d3d994784e0ef9",
+      "bytes": 1408,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911"
+      ]
+    },
+    {
+      "path": "abilities/rackup/pyramid.py",
+      "sha1": "e720674dd622f18f",
+      "bytes": 11475,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/pyramid_rules.py",
+      "sha1": "3108323bc747f380",
+      "bytes": 1430,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/rackup_coach.py",
+      "sha1": "b3c2b4a57ce9f2a6",
+      "bytes": 2877,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/rating_convert.py",
+      "sha1": "acad03e02d4c95ab",
+      "bytes": 3011,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/rating_intel.py",
+      "sha1": "38fe6699412ac8c4",
+      "bytes": 6177,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/rating_update.py",
+      "sha1": "82026a477086b929",
+      "bytes": 13814,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/roc.py",
+      "sha1": "b1e506e3efec9147",
+      "bytes": 13570,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/shot_of_the_day.py",
+      "sha1": "6c5881340843ad18",
+      "bytes": 24023,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/sotd_contribute.py",
+      "sha1": "ef8bce9295bd6fe2",
+      "bytes": 4497,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/sotd_library.py",
+      "sha1": "e1cf77fb14dc247e",
+      "bytes": 3953,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/tournament.py",
+      "sha1": "0a5b822fb7a9d42d",
+      "bytes": 4129,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/types.py",
+      "sha1": "e943192082e17b09",
+      "bytes": 9214,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rackup/video_analysis.py",
+      "sha1": "b205f0aed092144b",
+      "bytes": 8863,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/realai/abilities/audio_speech.py",
+      "sha1": "ae1b771963cca1f2",
+      "bytes": 2276,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027"
+      ]
+    },
+    {
+      "path": "abilities/realai/abilities/audio_transcription.py",
+      "sha1": "0e7bdd2dc6d5ed1c",
+      "bytes": 2250,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027"
+      ]
+    },
+    {
+      "path": "abilities/realai/abilities/auto_wire.py",
+      "sha1": "66e4d8bc45be52b1",
+      "bytes": 3709,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027"
+      ]
+    },
+    {
+      "path": "abilities/realai/abilities/image_analysis.py",
+      "sha1": "fcc0facd31dd1ec7",
+      "bytes": 2835,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027"
+      ]
+    },
+    {
+      "path": "abilities/realai/abilities/image_generation.py",
+      "sha1": "d14b4dad40d1e52a",
+      "bytes": 2220,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027"
+      ]
+    },
+    {
+      "path": "abilities/realai/abilities/overseer.py",
+      "sha1": "dffcc72fa0ece3cc",
+      "bytes": 2765,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027"
+      ]
+    },
+    {
+      "path": "abilities/realai/abilities/video_generation.py",
+      "sha1": "3f2a118f7c429479",
+      "bytes": 2220,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027"
+      ]
+    },
+    {
+      "path": "abilities/realai/abilities/voice_streaming.py",
+      "sha1": "53202edea4771efb",
+      "bytes": 3770,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027"
+      ]
+    },
+    {
+      "path": "abilities/registry.json",
+      "sha1": "12eb4fb13abe3ef6",
+      "bytes": 637,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/repo_surface.py",
+      "sha1": "7f4968418a03fe0a",
+      "bytes": 4113,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/rollout_all_repos.py",
+      "sha1": "ab3aab6c4fe4828b",
+      "bytes": 1192,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/secure_tools.py",
+      "sha1": "9933802d4d1d4a4e",
+      "bytes": 1772,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/therapy_counseling.py",
+      "sha1": "4c5ab1650f69d43e",
+      "bytes": 1728,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/translation.py",
+      "sha1": "2b2ae81a62be71ac",
+      "bytes": 1657,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/video_generation.py",
+      "sha1": "abcc97f8022d71de",
+      "bytes": 2330,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/voice_streaming.py",
+      "sha1": "2079e1c326f720d5",
+      "bytes": 3738,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/web3_integration.py",
+      "sha1": "768fbd00e41d2b1d",
+      "bytes": 1571,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "abilities/world_brain.py",
+      "sha1": "2a28fdc125716576",
+      "bytes": 2233,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "adapters/__init__.py",
+      "sha1": "43dbf7b97f1179e9",
+      "bytes": 146,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "adapters/agents.py",
+      "sha1": "63c141303513e031",
+      "bytes": 159,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "adapters/memory.py",
+      "sha1": "fec8912081e06d50",
+      "bytes": 159,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "adapters/organs.py",
+      "sha1": "39405b4c905f7f7a",
+      "bytes": 159,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "adapters/rackup_coach.py",
+      "sha1": "8aa2daa25b1b4135",
+      "bytes": 177,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "adapters/self_improvement.py",
+      "sha1": "36b90dd858b81f84",
+      "bytes": 189,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "adapters/training.py",
+      "sha1": "10fae839dd7f9e4f",
+      "bytes": 165,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_runtime.py",
+      "sha1": "2eeb7a5d177bd02c",
+      "bytes": 17313,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "feature/ui-desktop-promote",
+        "integration/hive-merge",
+        "local/RealAi-unified-20260804"
+      ]
+    },
+    {
+      "path": "agent_tools/__init__.py",
+      "sha1": "55af9e6f05534783",
+      "bytes": 749,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/agents_impl/__init__.py",
+      "sha1": "26182eb648be2621",
+      "bytes": 121,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/agents_impl/code_engineer_agent.py",
+      "sha1": "14aa621b69bf9144",
+      "bytes": 15282,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/agents_impl/memory_summarizer_agent.py",
+      "sha1": "9e93d4758ac45d18",
+      "bytes": 7089,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/amd_inference.py",
+      "sha1": "70f7a678c3370d51",
+      "bytes": 1533,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/anthropic.py",
+      "sha1": "a00d105fa9b1ff51",
+      "bytes": 613,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/cli.py",
+      "sha1": "a19b578512efefa9",
+      "bytes": 14219,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/crypto.py",
+      "sha1": "9a4238e8789ddb2b",
+      "bytes": 888,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/dashboard.py",
+      "sha1": "dfee02f216179a2e",
+      "bytes": 44268,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/data/__init__.py",
+      "sha1": "adc83b19e793491b",
+      "bytes": 1,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/data/access_profiles.json",
+      "sha1": "c37a9b8078d746fb",
+      "bytes": 978,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/data/agents.json",
+      "sha1": "91f95f1de929edf5",
+      "bytes": 45754,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/docs/REAL_TIME_EXECUTION.md",
+      "sha1": "fb674f652260cee8",
+      "bytes": 7135,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/docs/VERCEL_DEPLOY.md",
+      "sha1": "b9719e0d956c2fdc",
+      "bytes": 9856,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/docs/knowledge-base/ai-browser-testing.md",
+      "sha1": "2f0ae5dfbb94d52b",
+      "bytes": 6325,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/docs/knowledge-base/pump-fun-agent-payments.md",
+      "sha1": "4a09fb02b6d4da7a",
+      "bytes": 10202,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/docs/knowledge-base/quantitative-methods-formulas.md",
+      "sha1": "d4479f0cd6c660a8",
+      "bytes": 6332,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/engine/__init__.py",
+      "sha1": "e38a3e4b44f10eba",
+      "bytes": 429,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/engine/executor.py",
+      "sha1": "0fd0a43e51b8becb",
+      "bytes": 8637,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/engine/loader.py",
+      "sha1": "27227e8375ebda7b",
+      "bytes": 5272,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/engine/logger.py",
+      "sha1": "96a4c9812b41ec5b",
+      "bytes": 1258,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/engine/memory.py",
+      "sha1": "ba2c9a55548c6582",
+      "bytes": 16004,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/engine/router.py",
+      "sha1": "d7e6f22bd46e7d12",
+      "bytes": 1498,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/engine/test_harness.py",
+      "sha1": "4335eaf44b2627ed",
+      "bytes": 1816,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/executor.py",
+      "sha1": "8673869c2cd30ef1",
+      "bytes": 4484,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/extract_from_agent_tools.py",
+      "sha1": "ef6093b9be2f0bb2",
+      "bytes": 1097,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/filesystem.py",
+      "sha1": "34c6e1682353bcf4",
+      "bytes": 2226,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/groq.py",
+      "sha1": "5377481414fe6131",
+      "bytes": 589,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/http.py",
+      "sha1": "1df7448f72c1842b",
+      "bytes": 904,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/importer.py",
+      "sha1": "a990ce8d94b09161",
+      "bytes": 7703,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/loader.py",
+      "sha1": "27227e8375ebda7b",
+      "bytes": 5272,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/local.py",
+      "sha1": "08a4f8a49bf12900",
+      "bytes": 631,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/logger.py",
+      "sha1": "96a4c9812b41ec5b",
+      "bytes": 1258,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/memory.py",
+      "sha1": "9e940b5accbceeb0",
+      "bytes": 14315,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/models.py",
+      "sha1": "dc954472b8b5d3bc",
+      "bytes": 1068,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/openai.py",
+      "sha1": "33eb388a0cd11071",
+      "bytes": 601,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/orch__init__.py",
+      "sha1": "95a484f1dbfdaeca",
+      "bytes": 243,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/overmind_runner.py",
+      "sha1": "20b89eb542a0a71c",
+      "bytes": 6788,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/persona.py",
+      "sha1": "626aac14823f2e3a",
+      "bytes": 1980,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/providers/__init__.py",
+      "sha1": "684c54dd27eab2b6",
+      "bytes": 135,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/providers/anthropic.py",
+      "sha1": "a00d105fa9b1ff51",
+      "bytes": 613,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/providers/groq.py",
+      "sha1": "5377481414fe6131",
+      "bytes": 589,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/providers/local.py",
+      "sha1": "08a4f8a49bf12900",
+      "bytes": 631,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/providers/openai.py",
+      "sha1": "33eb388a0cd11071",
+      "bytes": 601,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/providers/realai.py",
+      "sha1": "f87423f1380807a2",
+      "bytes": 2177,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/providers/realai_embeddings.py",
+      "sha1": "3c7547d4b487e15d",
+      "bytes": 1233,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/providers/router.py",
+      "sha1": "634909fb38717544",
+      "bytes": 2490,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/realai-ish_extract_from_agent_tools.py",
+      "sha1": "ef6093b9be2f0bb2",
+      "bytes": 1097,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/realai-ish_extract_from_agent_tools_105.py",
+      "sha1": "ef6093b9be2f0bb2",
+      "bytes": 1097,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/realai-ish_importer.py",
+      "sha1": "a990ce8d94b09161",
+      "bytes": 7703,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/realai.py",
+      "sha1": "f87423f1380807a2",
+      "bytes": 2177,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/realai_embeddings.py",
+      "sha1": "3c7547d4b487e15d",
+      "bytes": 1233,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/registry.py",
+      "sha1": "07f919871cfd8ff4",
+      "bytes": 5309,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/router.py",
+      "sha1": "634909fb38717544",
+      "bytes": 2490,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/runtime.py",
+      "sha1": "1c5a40b13ec40d5f",
+      "bytes": 9766,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/solana.py",
+      "sha1": "507f9a0c21492aef",
+      "bytes": 868,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/test_harness.py",
+      "sha1": "4335eaf44b2627ed",
+      "bytes": 1816,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/tooling/__init__.py",
+      "sha1": "8453853445dd4643",
+      "bytes": 133,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/tooling/crypto.py",
+      "sha1": "9a4238e8789ddb2b",
+      "bytes": 888,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/tooling/filesystem.py",
+      "sha1": "34c6e1682353bcf4",
+      "bytes": 2226,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/tooling/http.py",
+      "sha1": "1df7448f72c1842b",
+      "bytes": 904,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/tooling/registry.py",
+      "sha1": "50c6d7b627f8db7a",
+      "bytes": 2615,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/tooling/solana.py",
+      "sha1": "507f9a0c21492aef",
+      "bytes": 868,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/tts_engine.py",
+      "sha1": "aae4feed2d63f0ca",
+      "bytes": 4737,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/tts_routing.py",
+      "sha1": "117844c456689e62",
+      "bytes": 2090,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agent_tools/voice__init__.py",
+      "sha1": "2998f2345644373b",
+      "bytes": 422,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents-ui/_from_agentx.html",
+      "sha1": "db06311a85d34313",
+      "bytes": 27597,
+      "ext": ".html",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents-ui/index.html",
+      "sha1": "22eee609884534db",
+      "bytes": 30229,
+      "ext": ".html",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/README.md",
+      "sha1": "a184a82da1dc4246",
+      "bytes": 2028,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot"
+      ]
+    },
+    {
+      "path": "agents/__init__.py",
+      "sha1": "bea99e4055fb095a",
+      "bytes": 78,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/academic/academic-anthropologist.md",
+      "sha1": "bda24c4914884627",
+      "bytes": 7878,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/academic/academic-geographer.md",
+      "sha1": "55dd327f5e04d00e",
+      "bytes": 7740,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/academic/academic-historian.md",
+      "sha1": "c08d73302cf8f714",
+      "bytes": 7272,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/academic/academic-narratologist.md",
+      "sha1": "9b744448a2133d2d",
+      "bytes": 6797,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/academic/academic-psychologist.md",
+      "sha1": "f3268b6e5a32dc69",
+      "bytes": 7833,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/design/design-brand-guardian.md",
+      "sha1": "16242d90420449ae",
+      "bytes": 11641,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/design/design-image-prompt-engineer.md",
+      "sha1": "cb10eac2c440b39e",
+      "bytes": 11160,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/design/design-ui-designer.md",
+      "sha1": "aa4f6b16eccefce5",
+      "bytes": 13339,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/design/design-ux-architect.md",
+      "sha1": "b8802f660025aedd",
+      "bytes": 15758,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/design/design-ux-researcher.md",
+      "sha1": "4c1890a56f810db0",
+      "bytes": 13030,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/design/design-visual-storyteller.md",
+      "sha1": "e15eba46c964723b",
+      "bytes": 7416,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/design/design-whimsy-injector.md",
+      "sha1": "cec7288e223ef4a2",
+      "bytes": 15851,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-ai-data-remediation-engineer.md",
+      "sha1": "6a6fa259c448e828",
+      "bytes": 10691,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-ai-engineer.md",
+      "sha1": "f6b5269f423a2b5c",
+      "bytes": 7383,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-autonomous-optimization-architect.md",
+      "sha1": "6d4472eccc85ede9",
+      "bytes": 7953,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-backend-architect.md",
+      "sha1": "325d795d599b9d98",
+      "bytes": 9542,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-cms-developer.md",
+      "sha1": "07280a74ff1e9612",
+      "bytes": 19520,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-code-reviewer.md",
+      "sha1": "e584b8535f46e517",
+      "bytes": 3076,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-codebase-onboarding-engineer.md",
+      "sha1": "78791451cb12c439",
+      "bytes": 9569,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-data-engineer.md",
+      "sha1": "1fd57807951f2e86",
+      "bytes": 14687,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-devops-automator.md",
+      "sha1": "714044da5803a652",
+      "bytes": 12879,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-email-intelligence-engineer.md",
+      "sha1": "f9b25172e7280c2c",
+      "bytes": 16550,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-filament-optimization-specialist.md",
+      "sha1": "3da8b369232a24ab",
+      "bytes": 14269,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-frontend-developer.md",
+      "sha1": "545e9876c9d47796",
+      "bytes": 9283,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-incident-response-commander.md",
+      "sha1": "71506ceab6474733",
+      "bytes": 21121,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-minimal-change-engineer.md",
+      "sha1": "79d0baf8e15d9ea7",
+      "bytes": 11231,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-mobile-app-builder.md",
+      "sha1": "abbd2828798e8f65",
+      "bytes": 17034,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-rapid-prototyper.md",
+      "sha1": "35c3a06e33867a12",
+      "bytes": 15492,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-security-engineer.md",
+      "sha1": "d607b16dc1c810de",
+      "bytes": 17731,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-senior-developer.md",
+      "sha1": "2aea84b6ed8ed97a",
+      "bytes": 6252,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-software-architect.md",
+      "sha1": "2b4d366c598179cd",
+      "bytes": 3719,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-sre.md",
+      "sha1": "2a5c553c03e65877",
+      "bytes": 3882,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-technical-writer.md",
+      "sha1": "6ed5dd1a26addaaf",
+      "bytes": 14210,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-threat-detection-engineer.md",
+      "sha1": "b799363d35f26f11",
+      "bytes": 24873,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-voice-ai-integration-engineer.md",
+      "sha1": "30cc359c016969d7",
+      "bytes": 27288,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/engineering/engineering-wechat-mini-program-developer.md",
+      "sha1": "9fa61da26545b8dc",
+      "bytes": 15566,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/finance/finance-bookkeeper-controller.md",
+      "sha1": "f2997d303a5b2a56",
+      "bytes": 15247,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/finance/finance-financial-analyst.md",
+      "sha1": "373117acbf842714",
+      "bytes": 13448,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/finance/finance-fpa-analyst.md",
+      "sha1": "ef683fbad237245a",
+      "bytes": 16614,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/finance/finance-investment-researcher.md",
+      "sha1": "b59c156e06e8370a",
+      "bytes": 15678,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/finance/finance-tax-strategist.md",
+      "sha1": "b27ea819bedfee94",
+      "bytes": 13731,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/blender/blender-addon-engineer.md",
+      "sha1": "0ed6045a2d0437f4",
+      "bytes": 10954,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/game-audio-engineer.md",
+      "sha1": "e70d1fe4c9cde2cc",
+      "bytes": 12298,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/game-designer.md",
+      "sha1": "7a73476b0c0453a1",
+      "bytes": 8433,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/godot/godot-gameplay-scripter.md",
+      "sha1": "6ad225681aee60da",
+      "bytes": 15538,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/godot/godot-multiplayer-engineer.md",
+      "sha1": "26d8b1d21f8ef1bd",
+      "bytes": 13918,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/godot/godot-shader-developer.md",
+      "sha1": "ae1b6158094196d8",
+      "bytes": 13392,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/level-designer.md",
+      "sha1": "8062a1021bb04b68",
+      "bytes": 10340,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/narrative-designer.md",
+      "sha1": "ea56dc8b4e8e6093",
+      "bytes": 13160,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/roblox-studio/roblox-avatar-creator.md",
+      "sha1": "b1f617c35ff31430",
+      "bytes": 14116,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/roblox-studio/roblox-experience-designer.md",
+      "sha1": "a7008efb4d8245e3",
+      "bytes": 14863,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/roblox-studio/roblox-systems-scripter.md",
+      "sha1": "21ba9dd692aaddb8",
+      "bytes": 15204,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/technical-artist.md",
+      "sha1": "a22f9e9f09ae64f5",
+      "bytes": 11220,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/unity/unity-architect.md",
+      "sha1": "83d8ad5ff7bb6dee",
+      "bytes": 12244,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/unity/unity-editor-tool-developer.md",
+      "sha1": "b56c20df6cbbe12a",
+      "bytes": 14889,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/unity/unity-multiplayer-engineer.md",
+      "sha1": "76dda39bfa544dcc",
+      "bytes": 14947,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/unity/unity-shader-graph-artist.md",
+      "sha1": "c380606b87f6151b",
+      "bytes": 13080,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/unreal-engine/unreal-multiplayer-architect.md",
+      "sha1": "1dcc46ada0c630bb",
+      "bytes": 14039,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/unreal-engine/unreal-systems-engineer.md",
+      "sha1": "bf048456dbb1a1c0",
+      "bytes": 15507,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/unreal-engine/unreal-technical-artist.md",
+      "sha1": "aeab12bdea07e5a0",
+      "bytes": 11854,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/game-development/unreal-engine/unreal-world-builder.md",
+      "sha1": "34a23d6c174f6367",
+      "bytes": 14011,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/marketing/marketing-agentic-search-optimizer.md",
+      "sha1": "fc9a971df822305d",
+      "bytes": 15674,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/marketing/marketing-app-store-optimizer.md",
+      "sha1": "eb9581a5284de32f",
+      "bytes": 13086,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/marketing/marketing-carousel-growth-engine.md",
+      "sha1": "678dd32893892cb6",
+      "bytes": 14840,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/marketing/marketing-china-market-localization-strategist.md",
+      "sha1": "654c74c86b0bc624",
+      "bytes": 16913,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/marketing/marketing-content-creator.md",
+      "sha1": "e833e5c276c44392",
+      "bytes": 3129,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/marketing/marketing-growth-hacker.md",
+      "sha1": "f58a816b8ee78fe6",
+      "bytes": 3044,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/marketing/marketing-short-video-editing-coach.md",
+      "sha1": "c67cc36f63438173",
+      "bytes": 30779,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/marketing/marketing-social-media-strategist.md",
+      "sha1": "6782ff4cc4759dd1",
+      "bytes": 7414,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/marketing/marketing-video-optimization-specialist.md",
+      "sha1": "b62384b3617169b7",
+      "bytes": 6245,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/paid-media/paid-media-auditor.md",
+      "sha1": "aec3ae0a4942217a",
+      "bytes": 5546,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/paid-media/paid-media-creative-strategist.md",
+      "sha1": "1087c9ddf21b3f06",
+      "bytes": 5151,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/paid-media/paid-media-paid-social-strategist.md",
+      "sha1": "768151f5621aaf4d",
+      "bytes": 5440,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/paid-media/paid-media-ppc-strategist.md",
+      "sha1": "e3bbd81aefc82d62",
+      "bytes": 4984,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/paid-media/paid-media-programmatic-buyer.md",
+      "sha1": "5a88d2449f68128d",
+      "bytes": 5271,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/paid-media/paid-media-search-query-analyst.md",
+      "sha1": "1ed0ba2d593e5812",
+      "bytes": 4930,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/paid-media/paid-media-tracking-specialist.md",
+      "sha1": "c162b86bfb8cabe8",
+      "bytes": 5315,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/product/product-feedback-synthesizer.md",
+      "sha1": "0e2f61c59c649322",
+      "bytes": 7260,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/product/product-manager.md",
+      "sha1": "3a62bb71c4f5bc43",
+      "bytes": 22687,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/product/product-sprint-prioritizer.md",
+      "sha1": "ea4203ecf5f34b93",
+      "bytes": 9464,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/product/product-trend-researcher.md",
+      "sha1": "b278d7c3855038d8",
+      "bytes": 10482,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/project-management/project-management-experiment-tracker.md",
+      "sha1": "09424231b3d9d6b7",
+      "bytes": 9455,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/project-management/project-management-project-shepherd.md",
+      "sha1": "2cb0740db58e57a4",
+      "bytes": 9825,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/project-management/project-management-studio-operations.md",
+      "sha1": "edbe8960ff7cad62",
+      "bytes": 9926,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/project-management/project-management-studio-producer.md",
+      "sha1": "784211c3b809d898",
+      "bytes": 10905,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/project-management/project-manager-senior.md",
+      "sha1": "3b1af69713943d96",
+      "bytes": 5308,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/sales/sales-account-strategist.md",
+      "sha1": "45e8f558a18a9890",
+      "bytes": 14844,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/sales/sales-coach.md",
+      "sha1": "0d1220b225ae2fde",
+      "bytes": 21009,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/sales/sales-deal-strategist.md",
+      "sha1": "91497564d82926c9",
+      "bytes": 13698,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/sales/sales-discovery-coach.md",
+      "sha1": "8c0ec17be25128d5",
+      "bytes": 13591,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/sales/sales-engineer.md",
+      "sha1": "9f11f63fdfaa861b",
+      "bytes": 13948,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/sales/sales-outbound-strategist.md",
+      "sha1": "02373fcfc1fe68fa",
+      "bytes": 10744,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/sales/sales-pipeline-analyst.md",
+      "sha1": "a24cc6846aba0aba",
+      "bytes": 18765,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/sales/sales-proposal-strategist.md",
+      "sha1": "96946fe8c7d3c804",
+      "bytes": 14295,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/spatial-computing/macos-spatial-metal-engineer.md",
+      "sha1": "c747f6e9a9f1192b",
+      "bytes": 12141,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/spatial-computing/xr-cockpit-interaction-specialist.md",
+      "sha1": "9f5def5e0d363731",
+      "bytes": 1795,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/spatial-computing/xr-immersive-developer.md",
+      "sha1": "a2c611a10d0a9f3e",
+      "bytes": 1847,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/spatial-computing/xr-interface-architect.md",
+      "sha1": "7866c9a2642fbf0e",
+      "bytes": 1700,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/accounts-payable-agent.md",
+      "sha1": "4f425b3b2e9b3f54",
+      "bytes": 6795,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/agentic-identity-trust.md",
+      "sha1": "e607eec0696ea517",
+      "bytes": 18398,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/agents-orchestrator.md",
+      "sha1": "642a63e1676338d1",
+      "bytes": 15725,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/compliance-auditor.md",
+      "sha1": "b1a08a77bc22e573",
+      "bytes": 7213,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/customer-service.md",
+      "sha1": "b1412082208535ca",
+      "bytes": 19184,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/data-consolidation-agent.md",
+      "sha1": "68084c8fe911f367",
+      "bytes": 2393,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/healthcare-customer-service.md",
+      "sha1": "0963af64459eaecb",
+      "bytes": 22100,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/hospitality-guest-services.md",
+      "sha1": "580cd84f11a481f0",
+      "bytes": 27773,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/hr-onboarding.md",
+      "sha1": "604ef8b605505519",
+      "bytes": 23923,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/identity-graph-operator.md",
+      "sha1": "c73a4f41e0c4d27c",
+      "bytes": 14122,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/legal-billing-time-tracking.md",
+      "sha1": "74553bdca50d238c",
+      "bytes": 27280,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/legal-client-intake.md",
+      "sha1": "a5281fa525200e22",
+      "bytes": 25630,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/legal-document-review.md",
+      "sha1": "ac84a9aff9beb445",
+      "bytes": 24728,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/loan-officer-assistant.md",
+      "sha1": "ddb85404098855eb",
+      "bytes": 28515,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/lsp-index-engineer.md",
+      "sha1": "d6d32399bcd680c4",
+      "bytes": 11197,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/real-estate-buyer-seller.md",
+      "sha1": "2dfdf8167146061d",
+      "bytes": 31124,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/recruitment-specialist.md",
+      "sha1": "6d7dd25516cade3a",
+      "bytes": 29401,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/report-distribution-agent.md",
+      "sha1": "15bc62d8537b2238",
+      "bytes": 2653,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/retail-customer-returns.md",
+      "sha1": "03a7a99fa2cdfb35",
+      "bytes": 27700,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/sales-data-extraction-agent.md",
+      "sha1": "f689ddc445bb085f",
+      "bytes": 2697,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/sales-outreach.md",
+      "sha1": "29bf15c84d731be7",
+      "bytes": 20656,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/specialized-chief-of-staff.md",
+      "sha1": "d1decca578bc8af0",
+      "bytes": 18190,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/specialized-civil-engineer.md",
+      "sha1": "5f99f666e7bdc81a",
+      "bytes": 17068,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/specialized-developer-advocate.md",
+      "sha1": "2b22b54481246c2b",
+      "bytes": 14829,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/specialized-document-generator.md",
+      "sha1": "daab8422dec3587d",
+      "bytes": 2437,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/specialized-french-consulting-market.md",
+      "sha1": "546e2a01e1d7a7db",
+      "bytes": 11156,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/specialized-korean-business-navigator.md",
+      "sha1": "eb00a91b29ae4b40",
+      "bytes": 14071,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/specialized-mcp-builder.md",
+      "sha1": "a66f6663943448b0",
+      "bytes": 12062,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/specialized-salesforce-architect.md",
+      "sha1": "5ea7cb8035121461",
+      "bytes": 9904,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/supply-chain-strategist.md",
+      "sha1": "24320d9ae736bc2b",
+      "bytes": 32397,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/specialized/zk-steward.md",
+      "sha1": "de664d13dc7d689e",
+      "bytes": 10890,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/support/support-analytics-reporter.md",
+      "sha1": "e6d815e71ccba9d0",
+      "bytes": 15796,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/support/support-executive-summary-generator.md",
+      "sha1": "80a08f2bde0e7c41",
+      "bytes": 8992,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/support/support-finance-tracker.md",
+      "sha1": "cd6da7c92b78f058",
+      "bytes": 19249,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/support/support-infrastructure-maintainer.md",
+      "sha1": "74aa9f7c2d468c19",
+      "bytes": 22365,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/support/support-legal-compliance-checker.md",
+      "sha1": "93cd54a009953863",
+      "bytes": 26545,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/support/support-support-responder.md",
+      "sha1": "983f0a1ba1ecf7e9",
+      "bytes": 24683,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/testing/testing-accessibility-auditor.md",
+      "sha1": "b068a21a4cb8af22",
+      "bytes": 15300,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/testing/testing-api-tester.md",
+      "sha1": "d8b252ab843bb676",
+      "bytes": 12526,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/testing/testing-evidence-collector.md",
+      "sha1": "4e5a60e3a8932f63",
+      "bytes": 8354,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/testing/testing-performance-benchmarker.md",
+      "sha1": "ebc6cdcd14b31321",
+      "bytes": 12213,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/testing/testing-reality-checker.md",
+      "sha1": "d72c342568d8994d",
+      "bytes": 9969,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/testing/testing-test-results-analyzer.md",
+      "sha1": "a79ed0d6b9ff0cd8",
+      "bytes": 14602,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agency/testing/testing-tool-evaluator.md",
+      "sha1": "8500947dfdd5b42e",
+      "bytes": 17542,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agent.md",
+      "sha1": "d5759fa78b6f2ab5",
+      "bytes": 11689,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agent.py",
+      "sha1": "d38b35ba81f9fb0b",
+      "bytes": 8157,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agent_protocol.py",
+      "sha1": "782a9955b3451199",
+      "bytes": 7545,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agent_runtime.py",
+      "sha1": "b5f9535255f1ec18",
+      "bytes": 18701,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agents.py",
+      "sha1": "94fd90f8495c7739",
+      "bytes": 5701,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agentx/.gitkeep",
+      "sha1": "da39a3ee5e6b4b0d",
+      "bytes": 0,
+      "ext": "",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agentx/README.md",
+      "sha1": "adfa07f89ad8ab9a",
+      "bytes": 455,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "feature/ui-desktop-promote",
+        "integration/hive-merge",
+        "local/RealAi-unified-20260804"
+      ]
+    },
+    {
+      "path": "agents/agentx/access_profiles.json",
+      "sha1": "5b2d043467edf522",
+      "bytes": 840,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agentx/agency_import.json",
+      "sha1": "b5ff05abce80ccc8",
+      "bytes": 107879,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agentx/agent_manifests_for_finetuning.json",
+      "sha1": "261cb6a9d2bc16a3",
+      "bytes": 76554,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agentx/agent_tools_gold_map.json",
+      "sha1": "2f42250b66b25b62",
+      "bytes": 16967,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agentx/agents.json",
+      "sha1": "c5b25f9b323dabe1",
+      "bytes": 192722,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/agentx/vault77_overseer_import.json",
+      "sha1": "3a8ad40c47d42c4f",
+      "bytes": 20938,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/architect.agentx",
+      "sha1": "c93ff72c56c78f6a",
+      "bytes": 1082,
+      "ext": ".agentx",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/base.py",
+      "sha1": "f14528214b24ab2d",
+      "bytes": 256,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/bootstrap.md",
+      "sha1": "c95f740c7cecba92",
+      "bytes": 4425,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot"
+      ]
+    },
+    {
+      "path": "agents/capability-dev.md",
+      "sha1": "8952089588a960c3",
+      "bytes": 8593,
+      "ext": ".md",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "grok_snapshot"
+      ]
+    },
+    {
+      "path": "agents/code_engineer.agentx",
+      "sha1": "2c55590a4ddfa265",
+      "bytes": 1002,
+      "ext": ".agentx",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/code_reviewer.agentx",
+      "sha1": "b04b3c929140cd8b",
+      "bytes": 1029,
+      "ext": ".agentx",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    },
+    {
+      "path": "agents/coder.agent.json",
+      "sha1": "e5950f2fed5accde",
+      "bytes": 822,
+      "ext": ".json",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "feature/ui-desktop-promote",
+        "grok_snapshot",
+        "integration/hive-merge",
+        "local/RealAi-unified-20260804"
+      ]
+    },
+    {
+      "path": "agents/coding_agent.py",
+      "sha1": "283fb57f158441a2",
+      "bytes": 1210,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24",
+        "feature/ui-desktop-promote",
+        "integration/hive-merge",
+        "local/RealAi-unified-20260804"
+      ]
+    },
+    {
+      "path": "agents/critic.py",
+      "sha1": "7637a84287bd57c3",
+      "bytes": 1020,
+      "ext": ".py",
+      "seen_on_branches": [
+        "live/realai-clean-20260911",
+        "main",
+        "cursor/docs-travis-diagram-bounds-f027",
+        "dependabot/npm_and_yarn/frontend/next-15.5.24",
+        "dependabot/npm_and_yarn/next-15.5.24"
+      ]
+    }
+  ],
+  "proposed_abilities": [
+    {
+      "id": "health",
+      "description": "Stub liveness / contract discovery (no runtime heal)"
+    },
+    {
+      "id": "repo_map",
+      "description": "Summarize learned tree layout and stack"
+    },
+    {
+      "id": "node_context",
+      "description": "Placeholder context hints for node (product owns runtime)"
+    },
+    {
+      "id": "pnpm_context",
+      "description": "Placeholder context hints for pnpm (product owns runtime)"
+    },
+    {
+      "id": "python_context",
+      "description": "Placeholder context hints for python (product owns runtime)"
+    },
+    {
+      "id": "docker_context",
+      "description": "Placeholder context hints for docker (product owns runtime)"
+    },
+    {
+      "id": "vite_context",
+      "description": "Placeholder context hints for vite (product owns runtime)"
+    },
+    {
+      "id": "typescript_context",
+      "description": "Placeholder context hints for typescript (product owns runtime)"
+    },
+    {
+      "id": "react_context",
+      "description": "Placeholder context hints for react (product owns runtime)"
+    },
+    {
+      "id": "abilities_bridge",
+      "description": "Bridge stub for existing abilities/ surface"
+    },
+    {
+      "id": "adapters_bridge",
+      "description": "Bridge stub for existing adapters/ surface"
+    },
+    {
+      "id": "agents_bridge",
+      "description": "Bridge stub for existing agents/ surface"
+    },
+    {
+      "id": "modules_bridge",
+      "description": "Bridge stub for existing modules/ surface"
+    },
+    {
+      "id": "packages_bridge",
+      "description": "Bridge stub for existing packages/ surface"
+    },
+    {
+      "id": "plugins_bridge",
+      "description": "Bridge stub for existing plugins/ surface"
+    },
+    {
+      "id": "hive",
+      "description": "Domain stub from source keyword 'hive'"
+    }
+  ],
+  "plugin_proposal": {
+    "id": "realai-clean-coach",
+    "package": "realai_clean_coach",
+    "path": "C:\\RealAI-clean\\realai\\plugins\\realai_clean_coach",
+    "http": {
+      "canonical": "/v1/plugins/realai-clean-coach",
+      "alias": "/v1/learned/realai_clean_coach"
+    }
+  },
+  "learned_at": "2026-09-19T14:02:46.610578+00:00",
+  "heal": false
+}

@@ -1,0 +1,35 @@
+{
+  "id": "coder",
+  "role": "Coder",
+  "description": "Implementation specialist. Writes, fixes, refactors, and optimizes code across the RealAI-clean tree.",
+  "preferred_model": "realai-default-coder-10",
+  "capabilities": [
+    "coding",
+    "debugging",
+    "refactoring",
+    "code_generation",
+    "test_validation"
+  ],
+  "tags": ["hive", "coder", "implementation", "realai"],
+  "routing_tags": ["hive", "code", "implementation"],
+  "required_tools": ["read_file", "list_dir", "apply_patch", "run_in_terminal"],
+  "preferred_profile": "balanced",
+  "risk_level": "medium",
+  "goals": [
+    "Produce correct, idiomatic code matching repo conventions",
+    "Fix bugs and wire missing modules",
+    "Validate changes with targeted checks"
+  ],
+  "model_prefs": {
+    "preferred_models": ["realai-default-coder-10", "realai-hive"],
+    "temperature": 0.2,
+    "max_tokens": 2048
+  },
+  "memory_policy": {
+    "enabled": true,
+    "scope": "session",
+    "vector": false
+  },
+  "script_path": "agents/hive/coder.py",
+  "hive": true
+}

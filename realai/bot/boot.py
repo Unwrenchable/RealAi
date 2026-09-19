@@ -34,6 +34,31 @@ HARD_IDENTITY_LOCK = (
     "verify by re-reading. Be direct and short. Lead with the result."
 )
 
+# Cap so tiny local models still see the easy-mode contract without a manifesto.
+_OPERATOR_SYSTEM_CHAT_CAP = 480
+
+
+def chat_system_prefix(operator_system: Optional[str] = None) -> str:
+    """Build the always-on Console system prefix: identity lock + short operator contract.
+
+    ``OPERATOR_SYSTEM`` (from ``REALAI_OPERATOR_SYSTEM_FILE`` / env) is the editable
+    lever; the lock stays first so small models do not ignore the whole dump.
+    """
+    parts: List[str] = [HARD_IDENTITY_LOCK]
+    op = (operator_system or "").strip()
+    if not op:
+        try:
+            op = (load_prompt() or "").strip()
+        except Exception:
+            op = (DEFAULT_REALAI_PROMPT or "").strip()
+    if op:
+        # Avoid duplicating the lock text when the directive already echoes it.
+        if op != HARD_IDENTITY_LOCK and HARD_IDENTITY_LOCK not in op:
+            if len(op) > _OPERATOR_SYSTEM_CHAT_CAP:
+                op = op[: _OPERATOR_SYSTEM_CHAT_CAP - 1].rstrip() + "…"
+            parts.append(op)
+    return "\n\n".join(parts)
+
 
 _REGISTERED = False
 _ROOT = Path(__file__).resolve().parents[2]  # C:\RealAI-clean
@@ -264,8 +289,19 @@ def maybe_voice_route(text: str, intent: str = "chat", synthesize: Optional[bool
         out["spoken_text"] = spoken
         do_synth = synthesize if synthesize is not None else False
         if speak and spoken and do_synth:
-            result = get_voice_provider().speak(spoken, prepare=False, as_base64=False)
-            out["audio"] = result.get("audio")
+            # Always base64 for HTTP/JSON chat responses — raw bytes break
+            # json.dumps and show up in the browser as net::ERR_EMPTY_RESPONSE.
+            result = get_voice_provider().speak(spoken, prepare=False, as_base64=True)
+            audio = result.get("audio")
+            if isinstance(audio, (bytes, bytearray)):
+                import base64
+
+                out["audio"] = base64.b64encode(bytes(audio)).decode("ascii")
+                out["audio_encoding"] = "base64"
+            else:
+                out["audio"] = audio
+                if isinstance(audio, str) and audio:
+                    out["audio_encoding"] = "base64"
             out["spoken_text"] = result.get("spoken_text") or spoken
             out["backend"] = result.get("backend")
             if not result.get("ok"):

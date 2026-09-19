@@ -1,0 +1,35 @@
+{
+  "id": "router",
+  "role": "Router",
+  "description": "Provider router. Maps agent roles and task types to models from the RealAI model registry and supports dynamic preference updates.",
+  "preferred_model": "local-llama-1b",
+  "capabilities": [
+    "model_routing",
+    "switching",
+    "provider_selection",
+    "fallback_chains",
+    "adaptive_routing"
+  ],
+  "tags": ["hive", "router", "models", "realai"],
+  "routing_tags": ["hive", "routing", "models"],
+  "required_tools": ["list_agents", "local_llama_health", "ability_coverage"],
+  "preferred_profile": "balanced",
+  "risk_level": "low",
+  "goals": [
+    "Route each agent/task to the correct model id",
+    "Honor preferred_model on hive agent manifests",
+    "Fall back to local-llama-1b when unspecified"
+  ],
+  "model_prefs": {
+    "preferred_models": ["local-llama-1b", "realai-hive"],
+    "temperature": 0.1,
+    "max_tokens": 256
+  },
+  "memory_policy": {
+    "enabled": true,
+    "scope": "session",
+    "vector": false
+  },
+  "script_path": "agents/hive/router.py",
+  "hive": true
+}

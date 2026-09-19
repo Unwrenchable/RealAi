@@ -1,0 +1,57 @@
+{
+  "schema": "realai.learn.packet/v1",
+  "slug": "realai",
+  "source": {
+    "input": "C:\\RealAi",
+    "kind": "local",
+    "resolved_path": "C:\\RealAi",
+    "url": null,
+    "cloned": false,
+    "reused_cache": false,
+    "git": {
+      "head": "",
+      "branch": "",
+      "remote": "",
+      "branches": []
+    }
+  },
+  "summary": {
+    "title": "RealAi",
+    "description": "",
+    "file_count": 0,
+    "truncated": false,
+    "branches_seen": [],
+    "branch_counts": {},
+    "branches_truncated": false,
+    "all_branch_names": [],
+    "branches_omitted": 0,
+    "languages": {},
+    "frameworks": [],
+    "domain_keywords": [],
+    "readme": "",
+    "api_routes": [],
+    "plugin_like_folders": []
+  },
+  "fingerprints": [],
+  "proposed_abilities": [
+    {
+      "id": "health",
+      "description": "Stub liveness / contract discovery (no runtime heal)"
+    },
+    {
+      "id": "repo_map",
+      "description": "Summarize learned tree layout and stack"
+    }
+  ],
+  "plugin_proposal": {
+    "id": "realai-coach",
+    "package": "realai_coach",
+    "path": "C:\\RealAI-clean\\realai\\plugins\\realai_coach",
+    "http": {
+      "canonical": "/v1/plugins/realai-coach",
+      "alias": "/v1/learned/realai_coach"
+    }
+  },
+  "learned_at": "2026-09-19T14:02:44.785521+00:00",
+  "heal": false
+}

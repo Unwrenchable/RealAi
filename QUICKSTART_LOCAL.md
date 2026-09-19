@@ -6,6 +6,17 @@
 
 ## Canonical quick start
 
+**Easiest (stack + Console):**
+
+```powershell
+cd C:\RealAI-clean
+powershell -ExecutionPolicy Bypass -File .\scripts\realai-go.ps1
+# Opens http://127.0.0.1:8001/console — just talk (inspect → write → verify).
+# Examples: "what's in console.html" · "work in C:\path\to\other\repo" · "learn from https://github.com/org/repo"
+```
+
+Or the menu:
+
 ```powershell
 cd C:\RealAI-clean
 .\START_HERE.bat

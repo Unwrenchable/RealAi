@@ -1,0 +1,36 @@
+{
+  "id": "memory",
+  "role": "Memory",
+  "description": "Hive memory archivist. Stores and retrieves shared context using embeddings so the overseer can maintain continuity across tasks.",
+  "preferred_model": "realai-embeddings",
+  "capabilities": [
+    "embedding",
+    "recall",
+    "context_management",
+    "archival",
+    "similarity_search"
+  ],
+  "tags": ["hive", "memory", "embeddings", "realai"],
+  "routing_tags": ["hive", "memory", "embeddings"],
+  "required_tools": ["list_agents", "self_heal_status"],
+  "preferred_profile": "safe",
+  "risk_level": "low",
+  "goals": [
+    "Persist task summaries and decisions",
+    "Recall relevant context before delegation",
+    "Aggregate performance signals for evolution"
+  ],
+  "model_prefs": {
+    "preferred_models": ["realai-embeddings"],
+    "temperature": 0.0,
+    "max_tokens": 256
+  },
+  "memory_policy": {
+    "enabled": true,
+    "scope": "global",
+    "vector": true,
+    "ttl_seconds": 0
+  },
+  "script_path": "agents/hive/memory.py",
+  "hive": true
+}

@@ -2,13 +2,35 @@
 
 import json
 
-from core.agents.base import Agent, AgentContext
-from core.agents.safety import AgentSafety
-from core.inference.registry import InferenceRegistry
-from core.logging.logger import log
-from core.metrics.metrics import AGENT_STEPS
-from core.tools.registry import ToolRegistry
-from core.tracing.tracer import tracer
+from .base import Agent, AgentContext
+from .safety import AgentSafety
+
+try:
+    from core.inference.registry import InferenceRegistry  # type: ignore
+except Exception:  # pragma: no cover
+    InferenceRegistry = object  # type: ignore
+try:
+    from core.logging.logger import log  # type: ignore
+except Exception:  # pragma: no cover
+    log = None  # type: ignore
+try:
+    from core.metrics.metrics import AGENT_STEPS  # type: ignore
+except Exception:  # pragma: no cover
+    AGENT_STEPS = None  # type: ignore
+try:
+    from core.tools.registry import ToolRegistry  # type: ignore
+except Exception:  # pragma: no cover
+    ToolRegistry = object  # type: ignore
+try:
+    from core.tracing.tracer import tracer  # type: ignore
+except Exception:  # pragma: no cover
+    from contextlib import nullcontext
+
+    class _Tracer:
+        def start_as_current_span(self, *_a, **_k):
+            return nullcontext()
+
+    tracer = _Tracer()  # type: ignore
 
 
 class WorkerAgent(Agent):

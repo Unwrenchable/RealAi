@@ -1,70 +1,49 @@
 #!/usr/bin/env node
+import { Command } from "commander";
+import { loginCommand } from "./commands/login";
+import { whoamiCommand } from "./commands/whoami";
+import { modelsListCommand } from "./commands/models";
+import { chatCommand } from "./commands/chat";
 
-/**
- * RealAI CLI
- * Command-line interface for RealAI platform
- */
+const program = new Command();
 
-const args = process.argv.slice(2);
-const command = args[0] || "help";
-const baseUrl = (process.env.REALAI_API_URL || "http://127.0.0.1:8000").replace(/\/+$/, "");
+program
+  .name("realai")
+  .description("RealAI CLI — interact with RealAI from your terminal")
+  .version("0.1.0");
 
-function getArg(flag: string): string | undefined {
-  const index = args.indexOf(flag);
-  return index >= 0 ? args[index + 1] : undefined;
-}
+program
+  .command("login")
+  .description("Authenticate with an AI provider")
+  .option("-p, --provider <provider>", "AI provider name")
+  .action(async (options: { provider?: string }) => {
+    await loginCommand(options);
+  });
 
-async function main(): Promise<void> {
-  if (command === "health") {
-    console.log(JSON.stringify(await request("/health"), null, 2));
-    return;
-  }
-  if (command === "models") {
-    console.log(JSON.stringify(await request("/v1/models"), null, 2));
-    return;
-  }
-  if (command === "providers") {
-    console.log(JSON.stringify(await request("/v1/providers"), null, 2));
-    return;
-  }
-  if (command === "tasks") {
-    console.log(JSON.stringify(await request("/v1/tasks"), null, 2));
-    return;
-  }
-  if (command === "chat") {
-    const model = getArg("--model") || "realai-1.0";
-    const prompt = args
-      .slice(1)
-      .filter((value, index, all) => value !== "--model" && all[index - 1] !== "--model")
-      .join(" ")
-      .trim();
-    if (!prompt) {
-      throw new Error("Usage: realai chat [--model realai-1.0] <prompt>");
-    }
-    const response = await request("/v1/chat/completions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model,
-        messages: [{ role: "user", content: prompt }],
-      }),
-    });
-    console.log(response?.choices?.[0]?.message?.content ?? "");
-    return;
-  }
-  console.log("Available commands: health, models, providers, tasks, chat");
-}
+program
+  .command("whoami")
+  .description("Show current authentication details")
+  .action(async () => {
+    await whoamiCommand();
+  });
 
-async function request(path: string, init?: RequestInit): Promise<any> {
-  const response = await fetch(`${baseUrl}${path}`, init);
-  if (!response.ok) {
-    throw new Error(`RealAI API error: ${response.status} ${response.statusText}`);
-  }
-  return response.json();
-}
+const modelsCmd = program.command("models").description("Model management commands");
 
-main().catch((error: unknown) => {
-  const message = error instanceof Error ? error.message : String(error);
-  console.error(message);
-  process.exitCode = 1;
-});
+modelsCmd
+  .command("list")
+  .description("List available models")
+  .action(async () => {
+    await modelsListCommand();
+  });
+
+program
+  .command("chat")
+  .description("Start an interactive chat session")
+  .option("-m, --model <model>", "Model to use")
+  .option("-p, --provider <provider>", "AI provider")
+  .option("-s, --system <prompt>", "System prompt")
+  .action(async (options: { model?: string; provider?: string; system?: string }) => {
+    await chatCommand(options);
+  });
+
+program.parse(process.argv);

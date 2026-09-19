@@ -1,0 +1,757 @@
+{
+  "ok": true,
+  "dry_run": false,
+  "applied_at": "2026-09-19T16:20:57.385691+00:00",
+  "copied": 61,
+  "would_copy": 0,
+  "staged": 12,
+  "would_stage": 0,
+  "skipped": 10,
+  "mapping": {
+    "realai-cli": "packages/cli (unique commands/config)",
+    "realai-sdk-js": "packages/realai-sdk",
+    "tools_realai": "tools/realai",
+    "lambda_*.py": "modules/desktop_unique",
+    "needs_review": "recovered/from_d_roots/realai_* then selective wire"
+  },
+  "results": [
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai-cli\\src\\config.ts",
+      "dest": "C:\\RealAI-clean\\packages\\cli\\src\\config.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 963,
+      "section": "cli"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai-cli\\src\\commands\\chat.ts",
+      "dest": "C:\\RealAI-clean\\packages\\cli\\src\\commands\\chat.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 3423,
+      "section": "cli"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai-cli\\src\\commands\\login.ts",
+      "dest": "C:\\RealAI-clean\\packages\\cli\\src\\commands\\login.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 2728,
+      "section": "cli"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai-cli\\src\\commands\\models.ts",
+      "dest": "C:\\RealAI-clean\\packages\\cli\\src\\commands\\models.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 2526,
+      "section": "cli"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai-cli\\src\\commands\\whoami.ts",
+      "dest": "C:\\RealAI-clean\\packages\\cli\\src\\commands\\whoami.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 911,
+      "section": "cli"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai-cli\\package.json",
+      "dest": "C:\\RealAI-clean\\packages\\cli\\package.json",
+      "ok": true,
+      "action": "skip_exists",
+      "size": 336,
+      "section": "cli"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai-sdk-js\\package.json",
+      "dest": "C:\\RealAI-clean\\packages\\realai-sdk\\package.json",
+      "ok": true,
+      "action": "copied",
+      "size": 590,
+      "section": "sdk"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai-sdk-js\\tsconfig.json",
+      "dest": "C:\\RealAI-clean\\packages\\realai-sdk\\tsconfig.json",
+      "ok": true,
+      "action": "copied",
+      "size": 387,
+      "section": "sdk"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai-sdk-js\\tsup.config.ts",
+      "dest": "C:\\RealAI-clean\\packages\\realai-sdk\\tsup.config.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 202,
+      "section": "sdk"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai-sdk-js\\src\\client.ts",
+      "dest": "C:\\RealAI-clean\\packages\\realai-sdk\\src\\client.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 9075,
+      "section": "sdk"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai-sdk-js\\src\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\realai-sdk\\src\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 625,
+      "section": "sdk"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai-sdk-js\\src\\providers.ts",
+      "dest": "C:\\RealAI-clean\\packages\\realai-sdk\\src\\providers.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 1871,
+      "section": "sdk"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai-sdk-js\\src\\types.ts",
+      "dest": "C:\\RealAI-clean\\packages\\realai-sdk\\src\\types.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 4623,
+      "section": "sdk"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\tools_realai\\realai.cmd",
+      "dest": "C:\\RealAI-clean\\tools\\realai\\realai.cmd",
+      "ok": true,
+      "action": "copied",
+      "size": 37,
+      "section": "tools"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\tools_realai\\realai.js",
+      "dest": "C:\\RealAI-clean\\tools\\realai\\realai.js",
+      "ok": true,
+      "action": "copied",
+      "size": 677,
+      "section": "tools"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\tools_realai\\realai.ps1",
+      "dest": "C:\\RealAI-clean\\tools\\realai\\realai.ps1",
+      "ok": true,
+      "action": "copied",
+      "size": 38,
+      "section": "tools"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\tools_realai\\commands\\help.js",
+      "dest": "C:\\RealAI-clean\\tools\\realai\\commands\\help.js",
+      "ok": true,
+      "action": "copied",
+      "size": 342,
+      "section": "tools"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\tools_realai\\core\\plugins.js",
+      "dest": "C:\\RealAI-clean\\tools\\realai\\core\\plugins.js",
+      "ok": true,
+      "action": "copied",
+      "size": 327,
+      "section": "tools"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai\\lambda_advanced.py",
+      "dest": "C:\\RealAI-clean\\modules\\desktop_unique\\lambda_advanced.py",
+      "ok": true,
+      "action": "skip_same",
+      "size": 3379,
+      "section": "desktop_unique"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai\\lambda_chat.py",
+      "dest": "C:\\RealAI-clean\\modules\\desktop_unique\\lambda_chat.py",
+      "ok": true,
+      "action": "skip_same",
+      "size": 2453,
+      "section": "desktop_unique"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai\\lambda_core.py",
+      "dest": "C:\\RealAI-clean\\modules\\desktop_unique\\lambda_core.py",
+      "ok": true,
+      "action": "skip_same",
+      "size": 5332,
+      "section": "desktop_unique"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai\\lambda_core_shared.py",
+      "dest": "C:\\RealAI-clean\\modules\\desktop_unique\\lambda_core_shared.py",
+      "ok": true,
+      "action": "skip_same",
+      "size": 3239,
+      "section": "desktop_unique"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai\\lambda_embeddings_audio.py",
+      "dest": "C:\\RealAI-clean\\modules\\desktop_unique\\lambda_embeddings_audio.py",
+      "ok": true,
+      "action": "copied",
+      "size": 2972,
+      "section": "desktop_unique"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai\\lambda_image.py",
+      "dest": "C:\\RealAI-clean\\modules\\desktop_unique\\lambda_image.py",
+      "ok": true,
+      "action": "skip_same",
+      "size": 1849,
+      "section": "desktop_unique"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai\\lambda_video.py",
+      "dest": "C:\\RealAI-clean\\modules\\desktop_unique\\lambda_video.py",
+      "ok": true,
+      "action": "skip_same",
+      "size": 2012,
+      "section": "desktop_unique"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai\\local_model_cli.py",
+      "dest": "C:\\RealAI-clean\\modules\\desktop_unique\\local_model_cli.py",
+      "ok": true,
+      "action": "skip_same",
+      "size": 8934,
+      "section": "desktop_unique"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai\\standalone_ai.py",
+      "dest": "C:\\RealAI-clean\\modules\\desktop_unique\\standalone_ai.py",
+      "ok": true,
+      "action": "skip_same",
+      "size": 242,
+      "section": "desktop_unique"
+    },
+    {
+      "id": "droot:d:\\realai-archive",
+      "priority": 100,
+      "subsystem": "agents_hive",
+      "src": "D:\\RealAI-archive",
+      "dest": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai-archive",
+      "kind": "needs_review_stage",
+      "truncated": true,
+      "ok": true,
+      "action": "staged",
+      "copied": 1500,
+      "skipped": 16,
+      "errors": [],
+      "section": "needs_review"
+    },
+    {
+      "id": "droot:d:\\from_accident\\desktop\\realai-orchestration",
+      "priority": 90,
+      "subsystem": "agents_hive",
+      "src": "D:\\from_accident\\desktop\\realai-orchestration",
+      "dest": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_orchestration",
+      "kind": "needs_review_stage",
+      "ok": true,
+      "action": "staged",
+      "copied": 7,
+      "skipped": 0,
+      "errors": [],
+      "section": "needs_review"
+    },
+    {
+      "id": "droot:d:\\realai-orchestration",
+      "priority": 90,
+      "subsystem": "agents_hive",
+      "src": "D:\\realai-orchestration",
+      "dest": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_orchestration",
+      "kind": "needs_review_stage",
+      "ok": true,
+      "action": "staged",
+      "copied": 0,
+      "skipped": 106,
+      "errors": [],
+      "section": "needs_review"
+    },
+    {
+      "id": "droot:d:\\realai_agent",
+      "priority": 90,
+      "subsystem": "agents_hive",
+      "src": "D:\\realai_agent",
+      "dest": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_agent",
+      "kind": "needs_review_stage",
+      "ok": true,
+      "action": "staged",
+      "copied": 10,
+      "skipped": 106,
+      "errors": [],
+      "section": "needs_review"
+    },
+    {
+      "id": "droot:d:\\realai_archives",
+      "priority": 90,
+      "subsystem": "agents_hive",
+      "src": "D:\\realai_archives",
+      "dest": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_archives",
+      "kind": "needs_review_stage",
+      "truncated": true,
+      "ok": true,
+      "action": "staged",
+      "copied": 1500,
+      "skipped": 33972,
+      "errors": [],
+      "section": "needs_review"
+    },
+    {
+      "id": "droot:d:\\recovered \\atomicfizzcaps-live\\api",
+      "priority": 90,
+      "subsystem": "server_api",
+      "src": "D:\\recovered \\atomicfizzcaps-live\\api",
+      "dest": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_api_atomicfizz",
+      "kind": "needs_review_stage",
+      "ok": true,
+      "action": "staged",
+      "copied": 1,
+      "skipped": 0,
+      "errors": [],
+      "section": "needs_review"
+    },
+    {
+      "id": "droot:d:\\realai_historical_backups",
+      "priority": 80,
+      "subsystem": "other",
+      "src": "D:\\realai_historical_backups",
+      "dest": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_historical_backups",
+      "kind": "needs_review_stage",
+      "ok": true,
+      "action": "staged",
+      "copied": 488,
+      "skipped": 11929,
+      "errors": [],
+      "section": "needs_review"
+    },
+    {
+      "id": "droot:d:\\from_accident\\desktop\\realai - copy",
+      "priority": 75,
+      "subsystem": "other",
+      "src": "D:\\from_accident\\desktop\\realai - Copy",
+      "dest": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_copy",
+      "kind": "needs_review_stage",
+      "ok": true,
+      "action": "staged",
+      "copied": 156,
+      "skipped": 0,
+      "errors": [],
+      "section": "needs_review"
+    },
+    {
+      "id": "droot:d:\\realai - copy",
+      "priority": 75,
+      "subsystem": "other",
+      "src": "D:\\realai - Copy",
+      "dest": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_copy",
+      "kind": "needs_review_stage",
+      "ok": true,
+      "action": "staged",
+      "copied": 4,
+      "skipped": 323,
+      "errors": [],
+      "section": "needs_review"
+    },
+    {
+      "id": "droot:d:\\realai_api",
+      "priority": 75,
+      "subsystem": "other",
+      "src": "D:\\realai_api",
+      "dest": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_api",
+      "kind": "needs_review_stage",
+      "ok": true,
+      "action": "staged",
+      "copied": 7,
+      "skipped": 103,
+      "errors": [],
+      "section": "needs_review"
+    },
+    {
+      "id": "droot:d:\\recovered \\realai_launcher",
+      "priority": 75,
+      "subsystem": "other",
+      "src": "D:\\recovered \\realai_launcher",
+      "dest": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_launcher",
+      "kind": "needs_review_stage",
+      "ok": true,
+      "action": "staged",
+      "copied": 0,
+      "skipped": 0,
+      "errors": [],
+      "section": "needs_review"
+    },
+    {
+      "id": "droot:d:\\realai-design-system",
+      "priority": 75,
+      "subsystem": "ui_fusion_vscode",
+      "src": "D:\\realai-design-system",
+      "dest": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system",
+      "kind": "needs_review_stage",
+      "ok": true,
+      "action": "staged",
+      "copied": 44,
+      "skipped": 157,
+      "errors": [],
+      "section": "needs_review"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\package.json",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\package.json",
+      "ok": true,
+      "action": "skip_exists",
+      "size": 748,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\tailwind.config.js",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\tailwind.config.js",
+      "ok": true,
+      "action": "copied",
+      "size": 512,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\tsconfig.json",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\tsconfig.json",
+      "ok": true,
+      "action": "copied",
+      "size": 419,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\tsup.config.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\tsup.config.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 239,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 634,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\icons\\CopyIcon.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\icons\\CopyIcon.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 506,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\icons\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\icons\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 380,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\icons\\MemoryIcon.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\icons\\MemoryIcon.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 533,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\icons\\OverseerIcon.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\icons\\OverseerIcon.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 474,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\icons\\RealAILogo.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\icons\\RealAILogo.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 668,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\icons\\RouterIcon.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\icons\\RouterIcon.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 597,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\icons\\RunIcon.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\icons\\RunIcon.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 411,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\icons\\SaveIcon.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\icons\\SaveIcon.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 542,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\icons\\StopIcon.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\icons\\StopIcon.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 430,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\icons\\ToolsIcon.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\icons\\ToolsIcon.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 539,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\theme\\tailwind.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\theme\\tailwind.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 375,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\theme\\theme.css",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\theme\\theme.css",
+      "ok": true,
+      "action": "copied",
+      "size": 1583,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\theme\\tokens.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\theme\\tokens.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 2149,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Avatar\\Avatar.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Avatar\\Avatar.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 2074,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Avatar\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Avatar\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 82,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Badge\\Badge.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Badge\\Badge.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 1444,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Badge\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Badge\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 78,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Button\\Button.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Button\\Button.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 2212,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Button\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Button\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 82,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Card\\Card.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Card\\Card.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 1542,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Card\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Card\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 74,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\ChatBubble\\ChatBubble.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\ChatBubble\\ChatBubble.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 1728,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\ChatBubble\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\ChatBubble\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 98,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\CodeBlock\\CodeBlock.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\CodeBlock\\CodeBlock.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 2092,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\CodeBlock\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\CodeBlock\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 94,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Dropdown\\Dropdown.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Dropdown\\Dropdown.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 2529,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Dropdown\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Dropdown\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 104,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Input\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Input\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 78,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Input\\Input.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Input\\Input.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 1852,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Modal\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Modal\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 78,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Modal\\Modal.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Modal\\Modal.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 2592,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\ModelTag\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\ModelTag\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 90,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\ModelTag\\ModelTag.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\ModelTag\\ModelTag.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 1599,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Tabs\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Tabs\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 83,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Tabs\\Tabs.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Tabs\\Tabs.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 2396,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\TextArea\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\TextArea\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 90,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\TextArea\\TextArea.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\TextArea\\TextArea.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 1503,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Tooltip\\index.ts",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Tooltip\\index.ts",
+      "ok": true,
+      "action": "copied",
+      "size": 86,
+      "section": "design_system"
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_design_system\\src\\components\\Tooltip\\Tooltip.tsx",
+      "dest": "C:\\RealAI-clean\\packages\\design-system\\src\\components\\Tooltip\\Tooltip.tsx",
+      "ok": true,
+      "action": "copied",
+      "size": 1538,
+      "section": "design_system"
+    }
+  ]
+}

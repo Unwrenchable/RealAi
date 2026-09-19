@@ -1542,17 +1542,25 @@ def _enrich_chat_body(body: Dict[str, Any], headers: Optional[Dict[str, str]] = 
         body["realai_multi_agent"] = multi_mode
 
     system_parts: List[str] = []
-    # Always lead with a SHORT identity lock (1.5B models ignore long system dumps),
-    # then the full RealAI Bot prompt. Drop client "helpful assistant" fluff.
+    # Identity lock + short operator directive (CONSOLE_OPERATOR_DIRECTIVE.md / env).
+    # Small local models ignore long essays — keep the prefix short, but do not
+    # drop the directive entirely (editing the file must change Console behavior).
     existing_systems = [m.get("content", "") for m in msgs if m.get("role") == "system"]
     non_system = [m for m in msgs if m.get("role") != "system"]
     try:
-        from realai.bot.boot import HARD_IDENTITY_LOCK
+        from realai.bot.boot import chat_system_prefix
 
-        # Small local models ignore long system essays — keep the lock only.
-        system_parts.append(HARD_IDENTITY_LOCK)
+        system_parts.append(chat_system_prefix(OPERATOR_SYSTEM))
     except Exception:
-        system_parts.append(OPERATOR_SYSTEM)
+        try:
+            from realai.bot.boot import HARD_IDENTITY_LOCK
+
+            system_parts.append(HARD_IDENTITY_LOCK)
+            op = (OPERATOR_SYSTEM or "").strip()
+            if op and op != HARD_IDENTITY_LOCK:
+                system_parts.append(op[:480])
+        except Exception:
+            system_parts.append(OPERATOR_SYSTEM)
     for s in existing_systems:
         text = str(s or "").strip()
         if not text:
@@ -1649,13 +1657,40 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Max-Age", "86400")
 
     def _json(self, code: int, obj: Any) -> None:
-        data = json.dumps(obj, indent=2).encode("utf-8")
-        self.send_response(code)
-        self.send_header("Content-Type", "application/json")
-        self._cors()
-        self.send_header("Content-Length", str(len(data)))
-        self.end_headers()
-        self.wfile.write(data)
+        def _default(o: Any) -> Any:
+            if isinstance(o, (bytes, bytearray)):
+                import base64
+
+                return {
+                    "__bytes_base64__": base64.b64encode(bytes(o)).decode("ascii"),
+                    "length": len(o),
+                }
+            if isinstance(o, Path):
+                return str(o)
+            return str(o)
+
+        try:
+            data = json.dumps(obj, indent=2, default=_default).encode("utf-8")
+        except Exception as exc:
+            # Never abort the socket with an empty body — browsers show ERR_EMPTY_RESPONSE.
+            data = json.dumps(
+                {
+                    "error": "json_encode_failed",
+                    "detail": str(exc),
+                    "orchestrator": "v3",
+                }
+            ).encode("utf-8")
+            code = 500 if code < 400 else code
+        try:
+            self.send_response(code)
+            self.send_header("Content-Type", "application/json")
+            self._cors()
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+        except (ConnectionAbortedError, ConnectionResetError, BrokenPipeError, OSError):
+            # Client navigated away / aborted — do not tear down the server thread loudly.
+            return
 
     def _send_bytes(self, code: int, body: bytes, content_type: str) -> None:
         self.send_response(code)
@@ -1827,9 +1862,14 @@ class Handler(BaseHTTPRequestHandler):
         """Server-Sent Events stream for live agent activity."""
         import queue as _queue
 
-        from realai.agent_activity import BUS, ensure_simulation
+        from realai.agent_activity import BUS, ensure_simulation, set_simulation
 
         ensure_simulation(_load_agents())
+        # First Agents UI connection turns sim on so the graph is not a dead page.
+        try:
+            set_simulation(True)
+        except Exception:
+            pass
         self.send_response(200)
         self.send_header("Content-Type", "text/event-stream")
         self.send_header("Cache-Control", "no-cache")
@@ -1837,29 +1877,34 @@ class Handler(BaseHTTPRequestHandler):
         self._cors()
         self.end_headers()
         q = BUS.subscribe()
+
+        def _sse_bytes(obj: Any) -> bytes:
+            try:
+                return f"data: {json.dumps(obj, default=str)}\n\n".encode("utf-8")
+            except Exception:
+                return b'data: {"type":"error","error":"sse_encode_failed"}\n\n'
+
         try:
             self.wfile.write(b'data: {"type":"connected"}\n\n')
             self.wfile.flush()
             # Replay recent hive/agent activity so a freshly opened Agents UI
             # immediately shows work that already happened.
             for event in BUS.recent(40):
-                msg = f"data: {json.dumps(event)}\n\n"
-                self.wfile.write(msg.encode("utf-8"))
+                self.wfile.write(_sse_bytes(event))
             self.wfile.flush()
-        except OSError:
+        except (OSError, ConnectionAbortedError, ConnectionResetError, BrokenPipeError):
             BUS.unsubscribe(q)
             return
         try:
             while True:
                 try:
                     event = q.get(timeout=15)
-                    msg = f"data: {json.dumps(event)}\n\n"
-                    self.wfile.write(msg.encode("utf-8"))
+                    self.wfile.write(_sse_bytes(event))
                     self.wfile.flush()
                 except _queue.Empty:
                     self.wfile.write(b": keepalive\n\n")
                     self.wfile.flush()
-        except OSError:
+        except (OSError, ConnectionAbortedError, ConnectionResetError, BrokenPipeError):
             pass
         finally:
             BUS.unsubscribe(q)
@@ -2015,6 +2060,36 @@ class Handler(BaseHTTPRequestHandler):
             except Exception:
                 pass
             self._json(200, health_payload)
+            return
+
+        if path == "/v1/workspace":
+            try:
+                from realai.workspace import (
+                    get_request_workspace,
+                    is_realai_product_tree,
+                    product_root,
+                    realai_home,
+                    realai_workspace,
+                )
+
+                ws = realai_workspace()
+                self._json(
+                    200,
+                    {
+                        "ok": True,
+                        "workspace": str(ws),
+                        "home": str(realai_home()),
+                        "product_root": str(product_root()),
+                        "mode": "product" if is_realai_product_tree(ws) else "project",
+                        "request_override": str(get_request_workspace() or ""),
+                        "hint": (
+                            "Say 'work in C:\\path\\to\\repo' in Console to switch. "
+                            "Writes stay under the active workspace."
+                        ),
+                    },
+                )
+            except Exception as exc:
+                self._json(500, {"ok": False, "error": str(exc)})
             return
 
         if path == "/v1/models":
@@ -2628,12 +2703,20 @@ class Handler(BaseHTTPRequestHandler):
                         or hdrs_norm.get("x-realai-voice")
                         or ""
                     ).lower()
-                    if voice_hdr in ("1", "true", "yes", "on"):
-                        from realai.bot.boot import maybe_voice_route
-
-                        voice = maybe_voice_route(content, intent="chat", synthesize=True)
-                        if voice:
-                            obj["realai_meta"]["voice"] = voice
+                    want_voice = voice_hdr in ("1", "true", "yes", "on") or os.environ.get(
+                        "REALAI_BOT_VOICE", ""
+                    ).strip().lower() in ("1", "true", "yes", "on")
+                    if want_voice:
+                        # Do not import/synthesize TTS here. Loading voice backends
+                        # inside chat/completions has hard-crashed Hive (browser:
+                        # net::ERR_EMPTY_RESPONSE). Console speaks via POST /v1/audio/speech.
+                        obj["realai_meta"]["voice"] = {
+                            "speak": True,
+                            "spoken_text": content,
+                            "enabled": True,
+                            "provider": "realai-voice",
+                            "synthesize_via": "/v1/audio/speech",
+                        }
                 except Exception:
                     pass
                 self._json(200, obj)
@@ -3016,8 +3099,18 @@ class Handler(BaseHTTPRequestHandler):
 
                 ensure_simulation(_load_agents())
                 multi = bool(body.get("multi") or body.get("use_multi"))
+                dry = bool(body.get("dry_run") or body.get("pulse_only"))
                 # Run in-thread so SSE subscribers see dispatch→complete around the call
-                self._json(200, run_agent_task(agent_id, task, use_multi=multi))
+                self._json(
+                    200,
+                    run_agent_task(
+                        agent_id,
+                        task,
+                        use_multi=multi,
+                        dry_run=dry,
+                        pulse_only=dry,
+                    ),
+                )
             except Exception as e:
                 self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
             return
@@ -3033,10 +3126,13 @@ class Handler(BaseHTTPRequestHandler):
 
                 task = str(body.get("task") or body.get("prompt") or "")
                 ensure_simulation(_load_agents())
+                dry = bool(body.get("dry_run") or body.get("pulse_only"))
                 result = run_agent_task(
                     str(body.get("agent_id") or body.get("agent") or "hive-orchestrator"),
                     task,
                     use_multi=True,
+                    dry_run=dry,
+                    pulse_only=dry,
                 )
                 self._json(200, result)
             except Exception as e:

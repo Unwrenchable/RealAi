@@ -18,21 +18,37 @@ MAX_OUT = 48_000
 CMD_TIMEOUT = 20
 SCRIPT_TIMEOUT = 25
 
+# Loose keyword match — intentionally narrow. Bare "type"/"run"/"command" in
+# operator policy prose must NOT steal the Console turn (shell-help hijack).
 _WANTS_RE = re.compile(
-    r"(?is)\b("
-    r"run|exec(?:ute)?|script|command|shell|terminal|"
-    r"python|node|powershell|pwsh|cmd\.exe|"
-    r"whoami|hostname|dir\b|ls\b|pwd|echo\b|type\b|cat\b|"
-    r"pip\b|npm\b|git\b"
-    r")\b"
-    r"|^\s*\$"
-    r"|```(?:python|py|js|javascript|bash|sh|powershell|ps1)?"
+    r"(?is)("
+    r"^\s*\$"
+    r"|^\s*/(?:run|exec|py|python|script)\b"
+    r"|\brun\s+`"
+    r"|\bexec(?:ute)?\s+`"
+    r"|\b(?:whoami|hostname)\b"
+    r"|```(?:python|py|js|javascript|bash|sh|powershell|ps1)"
+    r"|\b(?:powershell|pwsh|cmd\.exe)\b"
+    r")"
 )
 
 # Craft file ops belong to operator dispatch / cli.craft — never live_exec.
 _CRAFT_FILE_SLASH_RE = re.compile(
     r"^/(?:write|read|list|ls|grep|git|pwd|here|cat|ws|workspace)\b",
     re.I,
+)
+
+# Operator / coding-agent policy pastes — never live_exec, even under 280 chars.
+_POLICY_PROSE_RE = re.compile(
+    r"(?is)("
+    r"work like a desktop coding agent"
+    r"|loop\s*[—\-–:]?\s*every request"
+    r"|never invent (?:file )?contents"
+    r"|prefer tools over essays"
+    r"|inspect\s*[—\-–].*act\s*[—\-–].*verify"
+    r"|writes stay in workspace"
+    r"|no fake success"
+    r")"
 )
 
 
@@ -50,6 +66,32 @@ def hive_root() -> Path:
     return root
 
 
+def _explicit_exec_prefix(text: str) -> bool:
+    """True for $ /run /py /script /exec or run `cmd` — real shell asks."""
+    t = (text or "").strip()
+    if not t:
+        return False
+    low = t.lower()
+    if t.startswith("$") or low.startswith(("/run", "/py", "/python", "/script", "/exec")):
+        return True
+    if re.search(r"(?is)^\s*run\s+`", t) or re.search(r"(?is)\brun\s+`[^`]+`", t):
+        return True
+    if re.search(r"(?is)\bexec(?:ute)?\s+`[^`]+`", t):
+        return True
+    if "```" in t and re.search(r"(?is)\b(run|exec(?:ute)?)\b.{0,40}```", t):
+        return True
+    # "run whoami" / "run dir" / "please run hostname" — single safe shell asks
+    m_run = re.match(
+        r"(?i)^(?:please\s+)?(?:can you\s+)?run\s+([a-zA-Z0-9_./\\:-]+(?:\s+\S+){0,8})\s*$",
+        t,
+    )
+    if m_run:
+        head = m_run.group(1).split()[0].lower()
+        if head not in ("craft", "hive", "ability", "heal", "doctor", "multi", "agents"):
+            return True
+    return False
+
+
 def wants_live_exec(text: str) -> bool:
     t = (text or "").strip()
     if not t:
@@ -60,27 +102,37 @@ def wants_live_exec(text: str) -> bool:
     low = t.lower()
     if low.startswith("/craft"):
         return False
-    if t.startswith("$") or low.startswith("/run") or low.startswith("/py"):
-        return True
-    if low.startswith("/script") or low.startswith("/exec"):
-        return True
-    # Explicit: run `cmd` — not the word "run" in policy prose.
-    if re.search(r"(?is)^\s*run\s+`", t) or re.search(r"(?is)\brun\s+`[^`]+`", t):
-        return True
-    if "```" in t and re.search(r"(?is)\b(run|exec(?:ute)?)\b.{0,40}```", t):
-        return True
+    # Operator / coding-agent policy pastes — never shell-help.
+    if _POLICY_PROSE_RE.search(t):
+        return False
     # Natural Mode / Craft file asks win over shell-help (avoid "I type", "run exactly").
     try:
         from realai.bot.natural_mode import (
+            looks_like_learn_ask,
             looks_like_repo_ask,
             looks_like_write_ask,
             should_natural_act,
         )
 
-        if should_natural_act(t) or looks_like_repo_ask(t) or looks_like_write_ask(t):
+        if (
+            should_natural_act(t)
+            or looks_like_repo_ask(t)
+            or looks_like_write_ask(t)
+            or looks_like_learn_ask(t)
+        ):
             return False
     except Exception:
         pass
+    try:
+        from realai.bot.workspace_intent import looks_like_workspace_switch
+
+        if looks_like_workspace_switch(t):
+            return False
+    except Exception:
+        pass
+    # Explicit shell forms always win (even when long).
+    if _explicit_exec_prefix(t):
+        return True
     # Long pastes are never live_exec via loose keyword match.
     if len(t) > 280:
         return False
@@ -359,6 +411,10 @@ def try_live_exec(text: str) -> Optional[Dict[str, Any]]:
         return None
     req = parse_live_request(text)
     if req is None:
+        # Only show shell-help when the user clearly tried to run something
+        # incomplete. Prose that merely mentions run/type must not steal the turn.
+        if not _explicit_exec_prefix(text):
+            return None
         return {
             "surface": "live_exec",
             "result": {

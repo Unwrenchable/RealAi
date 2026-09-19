@@ -1,0 +1,35 @@
+{
+  "id": "overseer",
+  "role": "Overseer",
+  "description": "Top-level hive coordinator. Decomposes goals, assigns specialist agents, merges results, and maintains continuity via memory before delegation.",
+  "preferred_model": "realai-1.0-instruct",
+  "capabilities": [
+    "task_decomposition",
+    "delegation",
+    "coordination",
+    "orchestration",
+    "feedback_loops"
+  ],
+  "tags": ["hive", "overseer", "orchestration", "realai"],
+  "routing_tags": ["hive", "orchestrator", "delegation"],
+  "required_tools": ["list_agents", "multi_agent_run", "self_heal_status"],
+  "preferred_profile": "power",
+  "risk_level": "medium",
+  "goals": [
+    "Decompose user goals into agent-sized tasks",
+    "Delegate to coder, architect, analyst, memory, governor, router",
+    "Return a coherent multi-agent report"
+  ],
+  "model_prefs": {
+    "preferred_models": ["realai-1.0-instruct", "realai-hive"],
+    "temperature": 0.3,
+    "max_tokens": 1024
+  },
+  "memory_policy": {
+    "enabled": true,
+    "scope": "global",
+    "vector": true
+  },
+  "script_path": "agents/hive/overseer.py",
+  "hive": true
+}

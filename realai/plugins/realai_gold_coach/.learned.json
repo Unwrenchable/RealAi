@@ -1,0 +1,24 @@
+{
+  "slug": "realai_gold",
+  "package": "realai_gold_coach",
+  "plugin_id": "realai-gold-coach",
+  "version": "0.1.0",
+  "packet_sha": "ae1b771963cca1f2:800",
+  "abilities": [
+    "health",
+    "repo_map",
+    "abilities_bridge",
+    "agents_bridge",
+    "packages_bridge",
+    "modules_bridge",
+    "plugins_bridge",
+    "route_v1_audio_transcriptions",
+    "route_v1_audio_speech",
+    "route_v1_chat_completions",
+    "route_v1_embeddings",
+    "route_healthz",
+    "route_readyz",
+    "route_v1_models",
+    "route_v1_models_reload"
+  ]
+}

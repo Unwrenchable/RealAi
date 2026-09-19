@@ -18,6 +18,7 @@ call the detector without cycles.
 from __future__ import annotations
 
 import re
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 # Short lock for small local models (they ignore long system essays).
@@ -481,6 +482,35 @@ def run_natural_write(path: str, content: str, mode: str = "overwrite") -> Dict[
     return tool_write(str(path or ""), content=str(content or ""), mode=str(mode or "overwrite"))
 
 
+def verify_natural_write(path: str, *, limit: int = 12) -> Dict[str, Any]:
+    """Re-read a path after write. Never invent contents — errors stay as errors."""
+    from realai.cli.craft import apply_workspace, tool_read
+
+    apply_workspace()
+    try:
+        return tool_read(str(path or ""), start=1, limit=int(limit))
+    except Exception as exc:
+        return {"error": str(exc), "path": path}
+
+
+def format_write_verified_reply(write_result: Dict[str, Any], verify: Dict[str, Any]) -> str:
+    """Short reply: write ok + on-disk confirmation (or verify failure)."""
+    path = (write_result or {}).get("path") or (verify or {}).get("path") or "?"
+    nbytes = (write_result or {}).get("bytes")
+    head = f"[RealAI write]\nok=true  path={path}  bytes={nbytes}"
+    if not isinstance(verify, dict):
+        return head + "\nverify=unavailable"
+    if verify.get("error"):
+        return head + f"\nverify=failed  error={verify.get('error')}"
+    content = str(verify.get("content") or "")
+    preview = "\n".join(content.splitlines()[:8])
+    total = verify.get("total_lines")
+    return (
+        f"{head}\nverify=ok  lines={total}\n"
+        f"--- on disk (first lines) ---\n{preview}"
+    )
+
+
 def plan_natural_inspect(user_text: str) -> List[Tuple[str, Dict[str, Any]]]:
     """Craft ``plan_tools`` plus explicit path reads; inspect even in the product tree."""
     from realai.cli.craft import auto_inspect_plans, dedupe_plans, plan_tools
@@ -628,6 +658,87 @@ def failure_reply(results: List[Dict[str, Any]]) -> str:
     )
 
 
+def _session_id_from_body(body: Dict[str, Any]) -> str:
+    for key in ("session_id", "sessionId", "conversation_id", "conversationId"):
+        val = str((body or {}).get(key) or "").strip()
+        if val:
+            return val
+    return "console-default"
+
+
+def apply_workspace_intent(
+    text: str,
+    *,
+    session_id: str = "console-default",
+    learn_then_work: bool = True,
+) -> Dict[str, Any]:
+    """Switch Craft workspace from chat. Optionally learn+bind git URLs."""
+    from realai.bot.workspace_intent import (
+        extract_workspace_target,
+        is_git_source,
+        resolve_local_workspace,
+        set_session_workspace,
+    )
+    from realai.workspace import realai_workspace, set_request_workspace
+
+    out: Dict[str, Any] = {
+        "switched": False,
+        "target": None,
+        "workspace": str(realai_workspace()),
+    }
+    target = extract_workspace_target(text)
+    if not target:
+        return out
+    out["target"] = target
+
+    if is_git_source(target):
+        if not learn_then_work:
+            out["error"] = "git_url_needs_learn"
+            return out
+        try:
+            from realai.cli.craft import tool_learn
+            from realai.learn_git import compact_learn_result
+
+            learned = compact_learn_result(tool_learn(source=target, write=False))
+        except Exception as exc:
+            out["error"] = f"learn_failed: {exc}"
+            return out
+        out["learn"] = learned
+        src = learned.get("source") if isinstance(learned, dict) else None
+        tree = None
+        if isinstance(src, dict):
+            tree = src.get("path") or src.get("local_path")
+        if not tree and isinstance(learned, dict):
+            tree = learned.get("path")
+        if not tree:
+            out["error"] = learned.get("error") if isinstance(learned, dict) else "learn_no_path"
+            out["admit_failure"] = True
+            return out
+        path = Path(str(tree))
+        if not path.is_dir():
+            out["error"] = f"learned path missing: {path}"
+            out["admit_failure"] = True
+            return out
+        set_session_workspace(session_id, str(path))
+        set_request_workspace(path)
+        out["switched"] = True
+        out["workspace"] = str(path)
+        out["kind"] = "git"
+        return out
+
+    path, err = resolve_local_workspace(target)
+    if err or path is None:
+        out["error"] = err or "resolve_failed"
+        out["admit_failure"] = True
+        return out
+    set_session_workspace(session_id, str(path))
+    set_request_workspace(path)
+    out["switched"] = True
+    out["workspace"] = str(path)
+    out["kind"] = "local"
+    return out
+
+
 def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, Any]:
     """Mutate chat ``body`` for a plain-English repo/code/ability/agent ask.
 
@@ -637,6 +748,12 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
     meta for ``realai_meta``. Caller should short-circuit when
     ``admit_failure`` or ``short_circuit`` is True instead of proxying to Vulkan.
     """
+    from realai.bot.workspace_intent import (
+        bind_session_workspace_for_request,
+        looks_like_workspace_switch,
+    )
+    from realai.workspace import realai_workspace
+
     meta: Dict[str, Any] = {
         "should_ground": False,
         "admit_failure": False,
@@ -651,12 +768,92 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
     if not text or is_explicit_command(text):
         return meta
 
+    session_id = _session_id_from_body(body if isinstance(body, dict) else {})
+    bind_session_workspace_for_request(session_id)
+    meta["workspace"] = str(realai_workspace())
+    meta["session_id"] = session_id
+
+    # Chat-driven workspace switch (local folder or git URL → learn then work).
+    if looks_like_workspace_switch(text):
+        meta["should_ground"] = True
+        ws_meta = apply_workspace_intent(text, session_id=session_id)
+        meta["workspace_switch"] = ws_meta
+        meta["workspace"] = ws_meta.get("workspace") or meta["workspace"]
+        meta["used_tools"] = ["workspace"]
+        meta["tools"] = ["workspace"]
+        if ws_meta.get("learn"):
+            meta["used_tools"].append("learn")
+            meta["tools"].append("learn")
+        if ws_meta.get("admit_failure") or ws_meta.get("error"):
+            meta["admit_failure"] = True
+            meta["failure_text"] = (
+                f"Could not switch workspace ({ws_meta.get('error')}). "
+                "Name an existing local folder or a git URL."
+            )
+            return meta
+        # Pure switch ("work in C:\foo") short-circuits; follow-on inspect/write
+        # in the same message still runs below when those intents are present.
+        only_switch = (
+            not looks_like_write_ask(text)
+            and not looks_like_learn_ask(text)
+            and not looks_like_repo_ask(text)
+        )
+        # "work in X" alone, or "work in X then list" — if repo ask remains, continue.
+        if only_switch or (
+            not looks_like_write_ask(text)
+            and not looks_like_learn_ask(text)
+            and not looks_like_repo_ask(text.replace(str(ws_meta.get("target") or ""), " "))
+        ):
+            # If the message is only a switch (maybe with trailing punctuation), stop.
+            remainder = text
+            tgt = str(ws_meta.get("target") or "")
+            if tgt:
+                remainder = remainder.replace(tgt, " ")
+            remainder_l = remainder.lower()
+            for cue in (
+                "work in",
+                "use workspace",
+                "switch to",
+                "switch workspace to",
+                "set workspace to",
+                "set workspace",
+                "open the repo",
+                "open repo",
+                "open the project",
+                "open project",
+                "open the folder",
+                "open folder",
+                "cd to",
+            ):
+                remainder_l = remainder_l.replace(cue, " ")
+            if not looks_like_repo_ask(remainder_l) and not looks_like_write_ask(remainder_l):
+                meta["short_circuit"] = True
+                kind = ws_meta.get("kind") or "local"
+                meta["reply"] = (
+                    f"[RealAI workspace]\nok=true  kind={kind}\n"
+                    f"workspace={ws_meta.get('workspace')}\n"
+                    "Say what to read or change here — I'll inspect, write, and verify."
+                )
+                return meta
+        meta["mode"] = workspace_route_mode()
+
     write_ask = looks_like_write_ask(text)
     patch_ask = looks_like_patch_ask(text)
     write_plans = plan_natural_write(text) if write_ask else []
 
     if write_ask and write_plans:
         meta["should_ground"] = True
+        used: List[str] = []
+        # Multi-step: when the ask also wants inspect, read/list/grep first
+        # (never collapse "read X then write Y" into a blind write).
+        if looks_like_repo_ask(text):
+            try:
+                pre = run_natural_inspect(text)
+            except Exception:
+                pre = []
+            if pre:
+                meta["pre_inspect"] = pre
+                used.extend(str(tr.get("tool") or "?") for tr in pre)
         args = write_plans[0][1]
         path = str(args.get("path") or "")
         content = str(args.get("content") or "")
@@ -665,8 +862,9 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
         except Exception as exc:
             meta["admit_failure"] = True
             meta["error"] = str(exc)
-            meta["used_tools"] = ["write"]
-            meta["tools"] = ["write"]
+            used.append("write")
+            meta["used_tools"] = used
+            meta["tools"] = used
             meta["failure_text"] = (
                 f"I tried to write {path} and it failed ({exc}). "
                 "I won't invent a successful write."
@@ -675,29 +873,28 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
         failed = isinstance(result, dict) and (
             result.get("ok") is False or bool(result.get("error"))
         )
-        meta["tools"] = ["write"]
-        meta["used_tools"] = ["write"]
-        meta["tool_count"] = 1
+        used.append("write")
         meta["write_result"] = result
         if failed:
             meta["admit_failure"] = True
+            meta["used_tools"] = used
+            meta["tools"] = used
+            meta["tool_count"] = len(used)
             err = (result or {}).get("error") or "write_failed"
             meta["failure_text"] = (
                 f"Write failed ({err}). I won't invent a successful write. "
                 "Paths must stay under the workspace."
             )
             return meta
+        verify = verify_natural_write(path)
+        used.append("read")
+        meta["verify"] = verify
+        meta["tools"] = used
+        meta["used_tools"] = used
+        meta["tool_count"] = len(used)
         meta["wrote"] = True
         meta["short_circuit"] = True
-        try:
-            from realai.bot.easy_tools import format_easy_result
-
-            meta["reply"] = format_easy_result("write", result)
-        except Exception:
-            meta["reply"] = (
-                f"[RealAI write]\nok=true  path={result.get('path')}  "
-                f"bytes={result.get('bytes')}"
-            )
+        meta["reply"] = format_write_verified_reply(result, verify)
         return meta
 
     if write_ask and not write_plans:
@@ -767,6 +964,43 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
     if meta["admit_failure"]:
         meta["failure_text"] = failure_reply(results)
         return meta
+
+    # "learn from X and work there" → bind session workspace to the learned tree.
+    if any(k == "learn" for k, _ in extras) and re.search(
+        r"(?i)\bwork\s+(there|here|in\s+it|on\s+it)\b", text
+    ):
+        for tr in results:
+            if str(tr.get("tool") or "") != "learn":
+                continue
+            payload = tr.get("result") if isinstance(tr, dict) else None
+            if not isinstance(payload, dict):
+                continue
+            src = payload.get("source") if isinstance(payload.get("source"), dict) else {}
+            tree = src.get("path") or payload.get("path")
+            if not tree:
+                continue
+            p = Path(str(tree))
+            if p.is_dir():
+                from realai.bot.workspace_intent import set_session_workspace
+                from realai.workspace import set_request_workspace
+
+                set_session_workspace(session_id, str(p))
+                set_request_workspace(p)
+                meta["workspace"] = str(p)
+                meta["workspace_switch"] = {
+                    "switched": True,
+                    "kind": "learn_then_work",
+                    "workspace": str(p),
+                }
+                meta["short_circuit"] = True
+                meta["reply"] = (
+                    f"[RealAI learn+workspace]\nok=true\n"
+                    f"workspace={p}\n"
+                    f"packet={payload.get('packet_path') or payload.get('slug') or ''}\n"
+                    "Workspace is set to the learned tree. Ask me to list, read, or patch files."
+                )
+                return meta
+            break
 
     msgs = list(body.get("messages") or [])
     grounded = format_grounding_block(text, results, want_writes=bool(patch_ask))

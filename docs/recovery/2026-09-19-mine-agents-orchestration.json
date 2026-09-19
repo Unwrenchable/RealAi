@@ -1,0 +1,139 @@
+{
+  "ok": true,
+  "dry_run": false,
+  "applied_at": "2026-09-19T16:28:03.008663+00:00",
+  "copied": 16,
+  "would": 0,
+  "skipped": 0,
+  "inventory": {
+    "orchestration_bodies": "already identical in modules/orchestrators + realai/orchestration",
+    "agent_bodies": "already in realai/core/agents (rise_system/supervisor/hierarchical_*)",
+    "agents_shims_kept": [
+      "agents/rise_system.py",
+      "agents/supervisor.py"
+    ],
+    "packages_added": [
+      "agents/orchestration",
+      "realai/agents/orchestration",
+      "agents/hierarchical",
+      "realai/agents/hierarchical"
+    ]
+  },
+  "results": [
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_orchestration\\README.md",
+      "dest": "C:\\RealAI-clean\\modules\\orchestrators\\README.md",
+      "ok": true,
+      "action": "copied",
+      "size": 4121
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_orchestration\\README.md",
+      "dest": "C:\\RealAI-clean\\realai\\orchestration\\README.md",
+      "ok": true,
+      "action": "copied",
+      "size": 4121
+    },
+    {
+      "dest": "C:\\RealAI-clean\\agents\\orchestration\\__init__.py",
+      "ok": true,
+      "action": "written",
+      "size": 489
+    },
+    {
+      "dest": "C:\\RealAI-clean\\realai\\agents\\orchestration\\__init__.py",
+      "ok": true,
+      "action": "written",
+      "size": 489
+    },
+    {
+      "dest": "C:\\RealAI-clean\\agents\\hierarchical_main.py",
+      "ok": true,
+      "action": "written",
+      "size": 176
+    },
+    {
+      "dest": "C:\\RealAI-clean\\realai\\agents\\hierarchical_main.py",
+      "ok": true,
+      "action": "written",
+      "size": 176
+    },
+    {
+      "dest": "C:\\RealAI-clean\\agents\\test_hierarchical_agent.py",
+      "ok": true,
+      "action": "written",
+      "size": 182
+    },
+    {
+      "dest": "C:\\RealAI-clean\\realai\\agents\\test_hierarchical_agent.py",
+      "ok": true,
+      "action": "written",
+      "size": 182
+    },
+    {
+      "dest": "C:\\RealAI-clean\\agents\\hierarchical\\__init__.py",
+      "ok": true,
+      "action": "written",
+      "size": 747
+    },
+    {
+      "dest": "C:\\RealAI-clean\\realai\\agents\\hierarchical\\__init__.py",
+      "ok": true,
+      "action": "written",
+      "size": 747
+    },
+    {
+      "dest": "C:\\RealAI-clean\\agents\\training_pipeline.py",
+      "ok": true,
+      "action": "written",
+      "size": 188
+    },
+    {
+      "dest": "C:\\RealAI-clean\\realai\\agents\\training_pipeline.py",
+      "ok": true,
+      "action": "written",
+      "size": 188
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_agent\\README.md",
+      "dest": "C:\\RealAI-clean\\agents\\hierarchical\\README.md",
+      "ok": true,
+      "action": "copied",
+      "size": 4720
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_agent\\README.md",
+      "dest": "C:\\RealAI-clean\\realai\\agents\\hierarchical\\README.md",
+      "ok": true,
+      "action": "copied",
+      "size": 4720
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_agent\\tools.py",
+      "dest": "C:\\RealAI-clean\\agents\\hierarchical\\tools.py",
+      "ok": true,
+      "action": "copied",
+      "size": 5078
+    },
+    {
+      "src": "C:\\RealAI-clean\\recovered\\from_d_roots\\realai_agent\\tools.py",
+      "dest": "C:\\RealAI-clean\\realai\\agents\\hierarchical\\tools.py",
+      "ok": true,
+      "action": "copied",
+      "size": 5078
+    }
+  ],
+  "import_check": {
+    "agents.hierarchical": "ok",
+    "RISESystem": "ok",
+    "SupervisorAgent": "ok",
+    "HierarchicalAgentSystem": "ok"
+  },
+  "deps_installed": {
+    "python": "3.12",
+    "langchain-core": "1.6.3",
+    "langgraph": "1.2.11",
+    "langgraph-supervisor": "0.0.31",
+    "langchain-openai": "1.6.2"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "analyst",
+  "role": "Analyst",
+  "description": "Explainer and evaluator. Summarizes results, compares options, and produces clear commentary for the hive.",
+  "preferred_model": "local-llama-1b",
+  "capabilities": [
+    "analysis",
+    "summarization",
+    "explanation",
+    "evaluation",
+    "reporting"
+  ],
+  "tags": ["hive", "analyst", "explanation", "realai"],
+  "routing_tags": ["hive", "analysis", "summary"],
+  "required_tools": ["read_file", "list_dir", "list_agents"],
+  "preferred_profile": "safe",
+  "risk_level": "low",
+  "goals": [
+    "Summarize multi-agent outcomes clearly",
+    "Explain tradeoffs and risks",
+    "Produce concise status reports"
+  ],
+  "model_prefs": {
+    "preferred_models": ["local-llama-1b", "realai-hive"],
+    "temperature": 0.4,
+    "max_tokens": 768
+  },
+  "memory_policy": {
+    "enabled": true,
+    "scope": "session",
+    "vector": false
+  },
+  "script_path": "agents/hive/analyst.py",
+  "hive": true
+}

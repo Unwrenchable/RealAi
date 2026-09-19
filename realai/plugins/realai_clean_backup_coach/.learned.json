@@ -1,0 +1,25 @@
+{
+  "slug": "realai_clean_backup",
+  "package": "realai_clean_backup_coach",
+  "plugin_id": "realai-clean-backup-coach",
+  "version": "0.1.0",
+  "packet_sha": "dfb3ca87f4650459:800",
+  "abilities": [
+    "health",
+    "repo_map",
+    "node_context",
+    "pnpm_context",
+    "python_context",
+    "docker_context",
+    "typescript_context",
+    "abilities_bridge",
+    "adapters_bridge",
+    "agents_bridge",
+    "modules_bridge",
+    "packages_bridge",
+    "plugins_bridge",
+    "route_v1_audio_transcriptions",
+    "route_v1_audio_speech",
+    "route_v1_chat_completions"
+  ]
+}

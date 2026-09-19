@@ -5,6 +5,7 @@ Used by Hive to power ``/agents-ui/`` live visualization and SSE feed.
 from __future__ import annotations
 
 import json
+import os
 import queue
 import random
 import threading
@@ -278,7 +279,14 @@ class EventBus:
 BUS = EventBus()
 # Demo sim is OFF by default — Agents UI should show real hive/tool work first.
 # Toggle via POST /v1/agents/simulation {"toggle": true}.
-_simulation_enabled = False
+# Default ON so /agents-ui shows live pulses without a manual toggle.
+# Set REALAI_AGENTS_SIM=0 to disable at process start.
+_simulation_enabled = os.environ.get("REALAI_AGENTS_SIM", "1").strip().lower() not in (
+    "0",
+    "false",
+    "no",
+    "off",
+)
 _sim_started = False
 _sim_lock = threading.Lock()
 
@@ -468,48 +476,61 @@ def run_agent_task(
     task: str,
     *,
     use_multi: bool = False,
+    dry_run: bool = False,
+    pulse_only: bool = False,
 ) -> Dict[str, Any]:
-    """Dispatch a real Hive agent / multi-agent run and emit activity events.
+    """Dispatch a Hive agent / multi-agent run and emit activity events.
 
-    Always lights the Hive Pipeline graph (staggered) so Agents UI looks like a
-    live hive, not a single-card blip. Multi runs also pulse the multi pipeline.
+    Lights the Hive Pipeline graph (staggered) so Agents UI shows live work.
+    Multi runs also pulse the multi pipeline.
+
+    ``dry_run`` / ``pulse_only``: publish UI events only — do not call Vulkan.
     """
     agent_id = str(agent_id or "coder").strip() or "coder"
     task = str(task or "").strip()
     want_multi = bool(use_multi) or agent_id in _ORCH_IDS
-    # Hive-looking run: multi, orchestrator, or any core hive role
     hive_core_ids = {
         str(a.get("id"))
         for a in HIVE_CORE_AGENTS
         if "core" in (a.get("tags") or [])
     }
-    want_hive_vis = want_multi or agent_id in hive_core_ids or True  # always show hive cast
+    # Pulse hive cast for multi/orchestrator/core roles — not for every agency agent.
+    want_hive_vis = want_multi or agent_id in hive_core_ids or agent_id in _ORCH_IDS
+    skip_llm = bool(dry_run) or bool(pulse_only)
 
     publish_dispatch(agent_id, task, source="hive")
     publish_dispatch("hive-orchestrator", (task or "hive-run")[:120], source="hive")
     try:
-        from realai.v3_runtime_bridge import run_multi_agent
-
-        # Keep hive roles ACTIVE during the real pipeline work
         if want_hive_vis:
-            _pulse_dispatch(HIVE_PIPELINE_ROLES, task, "hive", hold=0.4)
+            _pulse_dispatch(HIVE_PIPELINE_ROLES, task, "hive", hold=0.25 if skip_llm else 0.4)
         if want_multi:
-            _pulse_dispatch(MULTI_PIPELINE_ROLES, task, "multi", hold=0.3)
+            _pulse_dispatch(MULTI_PIPELINE_ROLES, task, "multi", hold=0.2 if skip_llm else 0.3)
 
-        prompt = task if want_multi else f"[agent:{agent_id}] {task}"
-        result = run_multi_agent(prompt, mode="pipeline")
+        if skip_llm:
+            result = {
+                "ok": True,
+                "dry_run": True,
+                "mode": "pulse_only",
+                "note": "No Vulkan call — Agents UI pulse only",
+            }
+        else:
+            from realai.v3_runtime_bridge import run_multi_agent
+
+            prompt = task if want_multi else f"[agent:{agent_id}] {task}"
+            result = run_multi_agent(prompt, mode="pipeline")
 
         if want_multi:
-            _pulse_complete(MULTI_PIPELINE_ROLES, "multi", hold=0.25, ok=True)
+            _pulse_complete(MULTI_PIPELINE_ROLES, "multi", hold=0.15 if skip_llm else 0.25, ok=True)
         if want_hive_vis:
-            _pulse_complete(HIVE_PIPELINE_ROLES, "hive", hold=0.25, ok=True)
+            _pulse_complete(HIVE_PIPELINE_ROLES, "hive", hold=0.15 if skip_llm else 0.25, ok=True)
         publish_complete("hive-orchestrator", source="hive", ok=True)
         publish_complete(agent_id, source="hive", ok=True)
         return {
             "ok": True,
             "agent_id": agent_id,
-            "mode": "multi" if want_multi else "pipeline",
-            "hive_vis": True,
+            "mode": "multi" if want_multi else ("pulse_only" if skip_llm else "pipeline"),
+            "hive_vis": want_hive_vis,
+            "dry_run": skip_llm,
             "result": result,
         }
     except Exception as exc:

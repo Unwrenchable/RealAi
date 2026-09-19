@@ -1,0 +1,4976 @@
+{
+  "schema": "realai.learn.packet/v1",
+  "slug": "realai_gold",
+  "source": {
+    "input": "C:\\RealAI-gold",
+    "kind": "local",
+    "resolved_path": "C:\\RealAI-gold",
+    "url": null,
+    "cloned": false,
+    "reused_cache": false,
+    "git": {
+      "head": "",
+      "branch": "",
+      "remote": "",
+      "branches": []
+    }
+  },
+  "summary": {
+    "title": "RealAI-gold",
+    "description": "",
+    "file_count": 800,
+    "truncated": true,
+    "branches_seen": [],
+    "branch_counts": {},
+    "branches_truncated": false,
+    "all_branch_names": [],
+    "branches_omitted": 0,
+    "languages": {
+      "python": 339,
+      "typescript": 190,
+      "json": 121,
+      "javascript": 116,
+      "markdown": 30,
+      "powershell": 2
+    },
+    "frameworks": [],
+    "domain_keywords": [
+      "vscode",
+      "c__realai_apps_frontend_node_modules_micromark",
+      "extension",
+      "agents",
+      "json",
+      "realai",
+      "abilities",
+      "c__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec",
+      "frontend",
+      "agent",
+      "autolink",
+      "task",
+      "list",
+      "repo_levels_wiring_20260831",
+      "c__realai_apps_frontend_node_modules_next_dist_server_web_spec",
+      "routes",
+      "c__realai_apps_frontend_node_modules_next_dist_esm_server_node",
+      "environment",
+      "route",
+      "c__realai_apps_frontend_node_modules_binary",
+      "extension_adapters_headers",
+      "extension_adapters_next",
+      "request",
+      "init__"
+    ],
+    "readme": "",
+    "api_routes": [
+      "/v1/audio/transcriptions",
+      "/v1/audio/speech",
+      "/v1/chat/completions",
+      "/v1/embeddings",
+      "/healthz",
+      "/readyz",
+      "/v1/models",
+      "/v1/models/reload",
+      "/v1/tasks",
+      "/v1/voice",
+      "/v1/web3"
+    ],
+    "plugin_like_folders": [
+      "abilities",
+      "agents",
+      "packages",
+      "realai/agents",
+      "realai/modules",
+      "realai/plugins"
+    ]
+  },
+  "fingerprints": [
+    {
+      "path": "abilities/realai/abilities/audio_speech.py",
+      "sha1": "ae1b771963cca1f2",
+      "bytes": 2276,
+      "ext": ".py"
+    },
+    {
+      "path": "abilities/realai/abilities/audio_transcription.py",
+      "sha1": "0e7bdd2dc6d5ed1c",
+      "bytes": 2250,
+      "ext": ".py"
+    },
+    {
+      "path": "abilities/realai/abilities/auto_wire.py",
+      "sha1": "d6be19b2697f8f8c",
+      "bytes": 3854,
+      "ext": ".py"
+    },
+    {
+      "path": "abilities/realai/abilities/image_analysis.py",
+      "sha1": "fcc0facd31dd1ec7",
+      "bytes": 2835,
+      "ext": ".py"
+    },
+    {
+      "path": "abilities/realai/abilities/image_generation.py",
+      "sha1": "d14b4dad40d1e52a",
+      "bytes": 2220,
+      "ext": ".py"
+    },
+    {
+      "path": "abilities/realai/abilities/overseer.py",
+      "sha1": "dffcc72fa0ece3cc",
+      "bytes": 2765,
+      "ext": ".py"
+    },
+    {
+      "path": "abilities/realai/abilities/video_generation.py",
+      "sha1": "3f2a118f7c429479",
+      "bytes": 2220,
+      "ext": ".py"
+    },
+    {
+      "path": "abilities/realai/abilities/voice_streaming.py",
+      "sha1": "53202edea4771efb",
+      "bytes": 3770,
+      "ext": ".py"
+    },
+    {
+      "path": "abilities/realai/repo_levels_20260830/realai_identical_twins/scanners/ability_matrix.py",
+      "sha1": "aba04df9e99c8314",
+      "bytes": 1467,
+      "ext": ".py"
+    },
+    {
+      "path": "abilities/realai/repo_levels_wiring_20260831/realai_abilities_identical/code_engineer_cli.py",
+      "sha1": "21b194f708a599e8",
+      "bytes": 1756,
+      "ext": ".py"
+    },
+    {
+      "path": "abilities/realai/repo_levels_wiring_20260831/realai_abilities_identical/nest_orchestrators.py",
+      "sha1": "69953b820d0e630b",
+      "bytes": 20430,
+      "ext": ".py"
+    },
+    {
+      "path": "abilities/realai/repo_levels_wiring_20260831/realai_abilities_identical/quarantine_reconstruct.py",
+      "sha1": "a8e4a8afd51ef5e4",
+      "bytes": 5546,
+      "ext": ".py"
+    },
+    {
+      "path": "abilities/realai/repo_levels_wiring_20260831/realai_abilities_identical_DIFF/repo_surface.py",
+      "sha1": "38595a60c6ad6314",
+      "bytes": 3569,
+      "ext": ".py"
+    },
+    {
+      "path": "agents/README (2).md",
+      "sha1": "47001a070dfa7f69",
+      "bytes": 16701,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/__init__ (2).py",
+      "sha1": "9c436fdcfd691899",
+      "bytes": 26,
+      "ext": ".py"
+    },
+    {
+      "path": "agents/agent (2).md",
+      "sha1": "1b253000ce2b4768",
+      "bytes": 10589,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/agent-network.md",
+      "sha1": "6f09e6fae836d8dd",
+      "bytes": 9469,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/analyst.json",
+      "sha1": "98984bcc090d1c89",
+      "bytes": 962,
+      "ext": ".json"
+    },
+    {
+      "path": "agents/architect.json",
+      "sha1": "c1905237db3f6938",
+      "bytes": 1004,
+      "ext": ".json"
+    },
+    {
+      "path": "agents/bootstrap (2).md",
+      "sha1": "9780242dbfaf056f",
+      "bytes": 6018,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/browser-test-engineer.agent.md",
+      "sha1": "3f1c9810f885ee6f",
+      "bytes": 5271,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/coder.json",
+      "sha1": "7bddf45e7183c509",
+      "bytes": 1037,
+      "ext": ".json"
+    },
+    {
+      "path": "agents/cybersecurity-expert.agent.md",
+      "sha1": "d57d0d3c6d6d7d60",
+      "bytes": 3640,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/fullstack-dev (2).md",
+      "sha1": "4f5e77a4a6c78d22",
+      "bytes": 12653,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/game-creative-director.agent.md",
+      "sha1": "e863ced40db180ca",
+      "bytes": 4911,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/game-designer.agent.md",
+      "sha1": "e031e1f181d7cc03",
+      "bytes": 5876,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/game-technical-director.agent.md",
+      "sha1": "33faef964cf6adfe",
+      "bytes": 4940,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/game-tester.md",
+      "sha1": "70f2855c937db173",
+      "bytes": 16086,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/gameplay-programmer.agent.md",
+      "sha1": "8b95c0d479a687f1",
+      "bytes": 5108,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/governor.json",
+      "sha1": "d28bb05f874591e2",
+      "bytes": 1040,
+      "ext": ".json"
+    },
+    {
+      "path": "agents/memory (2).md",
+      "sha1": "6a2284b1e05cc38b",
+      "bytes": 35886,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/memory.json",
+      "sha1": "fb0c10f7fac92b4d",
+      "bytes": 1019,
+      "ext": ".json"
+    },
+    {
+      "path": "agents/my-agent.agent.md",
+      "sha1": "4e4dde219ecffee3",
+      "bytes": 6266,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/overseer.json",
+      "sha1": "6c50e486ebd47e26",
+      "bytes": 1102,
+      "ext": ".json"
+    },
+    {
+      "path": "agents/router.json",
+      "sha1": "4900e6535f7b0588",
+      "bytes": 1055,
+      "ext": ".json"
+    },
+    {
+      "path": "agents/tasks.md",
+      "sha1": "230df9519bd98900",
+      "bytes": 23822,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/tokenized-agents.agent.md",
+      "sha1": "d491ca9ed54c8ed7",
+      "bytes": 4356,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/wasteland-assistant.md",
+      "sha1": "fc7f82af1f541ecf",
+      "bytes": 2128,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/web3-specialist.md",
+      "sha1": "518b2f7469d41385",
+      "bytes": 8209,
+      "ext": ".md"
+    },
+    {
+      "path": "agents/realai/imports/external/agent_tools_gold/tooling/filesystem.py",
+      "sha1": "5c48cea028c96464",
+      "bytes": 1289,
+      "ext": ".py"
+    },
+    {
+      "path": "agents/realai/imports/external/agent_tools_gold/tooling/registry.py",
+      "sha1": "ffffa99636976355",
+      "bytes": 1969,
+      "ext": ".py"
+    },
+    {
+      "path": "agents/realai/modules/agents_advanced/__init__.py",
+      "sha1": "409fa3d94e6dc27f",
+      "bytes": 68,
+      "ext": ".py"
+    },
+    {
+      "path": "agents/realai/modules/agents_advanced/code_engineer_agent.py",
+      "sha1": "3ad3472d9db4a0bd",
+      "bytes": 15708,
+      "ext": ".py"
+    },
+    {
+      "path": "agents/realai/modules/agents_skills/coding_agent.py",
+      "sha1": "3afb9e136a1f3644",
+      "bytes": 1275,
+      "ext": ".py"
+    },
+    {
+      "path": "agents/realai/repo_levels_wiring_20260831/realai_agent_tools_identical/amd_inference.py",
+      "sha1": "70f7a678c3370d51",
+      "bytes": 1533,
+      "ext": ".py"
+    },
+    {
+      "path": "agents/realai/repo_levels_wiring_20260831/realai_agent_tools_identical/tts_engine.py",
+      "sha1": "aae4feed2d63f0ca",
+      "bytes": 4737,
+      "ext": ".py"
+    },
+    {
+      "path": "agents/realai/repo_levels_wiring_20260831/realai_agent_tools_identical/agents_impl/__init__.py",
+      "sha1": "b9ad75133dfba7fe",
+      "bytes": 69,
+      "ext": ".py"
+    },
+    {
+      "path": "agents/realai/repo_levels_wiring_20260831/realai_agent_tools_identical/agents_impl/code_engineer_agent.py",
+      "sha1": "d1f1c440c21168a2",
+      "bytes": 301,
+      "ext": ".py"
+    },
+    {
+      "path": "agents/realai/repo_levels_wiring_20260831/realai_agent_tools_identical_UNIQUE_SRC/orch__init__.py",
+      "sha1": "95a484f1dbfdaeca",
+      "bytes": 243,
+      "ext": ".py"
+    },
+    {
+      "path": "agents/realai/repo_levels_wiring_20260831/realai_agent_tools_identical_UNIQUE_SRC/voice__init__.py",
+      "sha1": "2998f2345644373b",
+      "bytes": 422,
+      "ext": ".py"
+    },
+    {
+      "path": "apps/__init__.py",
+      "sha1": "c4cd3a830f21cad0",
+      "bytes": 32,
+      "ext": ".py"
+    },
+    {
+      "path": "apps/api/main.py",
+      "sha1": "6431a52cd8c8773d",
+      "bytes": 3062,
+      "ext": ".py"
+    },
+    {
+      "path": "apps/api/state.py",
+      "sha1": "63d6edd5eb3c82fb",
+      "bytes": 1822,
+      "ext": ".py"
+    },
+    {
+      "path": "apps/api/routes/audio.py",
+      "sha1": "44d2845ed66e9f56",
+      "bytes": 947,
+      "ext": ".py"
+    },
+    {
+      "path": "apps/api/routes/chat.py",
+      "sha1": "c9a12443f9024710",
+      "bytes": 755,
+      "ext": ".py"
+    },
+    {
+      "path": "apps/api/routes/embeddings.py",
+      "sha1": "65a589834a2b14ad",
+      "bytes": 414,
+      "ext": ".py"
+    },
+    {
+      "path": "apps/api/routes/health.py",
+      "sha1": "64da2776e8c1104d",
+      "bytes": 315,
+      "ext": ".py"
+    },
+    {
+      "path": "apps/api/routes/models.py",
+      "sha1": "8791c3ffe31acc1c",
+      "bytes": 544,
+      "ext": ".py"
+    },
+    {
+      "path": "apps/api/routes/tasks.py",
+      "sha1": "11d2f6176d18347f",
+      "bytes": 956,
+      "ext": ".py"
+    },
+    {
+      "path": "apps/api/routes/voice_ws.py",
+      "sha1": "8f154d7a63839680",
+      "bytes": 855,
+      "ext": ".py"
+    },
+    {
+      "path": "apps/api/routes/web3.py",
+      "sha1": "986b784b50289de1",
+      "bytes": 1308,
+      "ext": ".py"
+    },
+    {
+      "path": "apps/dashboard/C__realai_apps_frontend_node_modules_lucide-react_dist_esm_icons_layout-dashboard.js",
+      "sha1": "d64a748666386201",
+      "bytes": 708,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/frontend/next.config.js",
+      "sha1": "61f1a770fbd3529a",
+      "bytes": 523,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/frontend/package.json",
+      "sha1": "f3711adaf3be203c",
+      "bytes": 753,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/frontend/src/app/api/agents/route.ts",
+      "sha1": "f7e09d09c89b5731",
+      "bytes": 595,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/frontend/src/app/api/models/route.ts",
+      "sha1": "baac0e9b439d597c",
+      "bytes": 949,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/frontend/src/app/api/self-heal/cycle/route.ts",
+      "sha1": "7656f984f95b30fa",
+      "bytes": 899,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/frontend/src/app/api/self-heal/status/route.ts",
+      "sha1": "40f5fdacd9e10a90",
+      "bytes": 700,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/frontend/src/app/api/self-improve/status/route.ts",
+      "sha1": "23a4c9c4c728f4dc",
+      "bytes": 795,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/frontend/src/app/api/training/status/route.ts",
+      "sha1": "48a04db52de5caaa",
+      "bytes": 761,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/frontend/src/components/SettingsDrawer.tsx",
+      "sha1": "10fd3a30be4bce22",
+      "bytes": 8037,
+      "ext": ".tsx"
+    },
+    {
+      "path": "apps/frontend/src/components/SystemStatusPanel.tsx",
+      "sha1": "b702e625c78c1478",
+      "bytes": 7756,
+      "ext": ".tsx"
+    },
+    {
+      "path": "apps/frontend/src/lib/design.ts",
+      "sha1": "c003092b2bc4fc3c",
+      "bytes": 865,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/frontend/src/lib/env.ts",
+      "sha1": "54934d5070c0ed50",
+      "bytes": 474,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/frontend/src/lib/types.ts",
+      "sha1": "e7be262b4f08586f",
+      "bytes": 1353,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_.backup_clean_backup_20260708_112400_apps_vscode_package.json",
+      "sha1": "d65662962d02168d",
+      "bytes": 500,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_.backup_clean_backup_20260708_112400_apps_vscode_tsconfig.json",
+      "sha1": "e03b230b9e04608f",
+      "bytes": 365,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_binary-extensions_binary-extensions.json",
+      "sha1": "25a77a5ea8c8c375",
+      "bytes": 2193,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_binary-extensions_binary-extensions.json.d.ts",
+      "sha1": "8381b6d0b1030b9a",
+      "bytes": 87,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_binary-extensions_index.d.ts",
+      "sha1": "6581e9089eac4ce0",
+      "bytes": 249,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_binary-extensions_index.js",
+      "sha1": "322abebc9731f9d1",
+      "bytes": 54,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_binary-extensions_package.json",
+      "sha1": "09235a3c2fdebe7e",
+      "bytes": 739,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_binary-extensions_readme.md",
+      "sha1": "f9007eb200556eb2",
+      "bytes": 541,
+      "ext": ".md"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_eslint-plugin-import_docs_rules_extensions.md",
+      "sha1": "4e5ba4e8ebe51167",
+      "bytes": 7558,
+      "ext": ".md"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_eslint-plugin-import_lib_rules_extensions.js",
+      "sha1": "aa01d66720e0835a",
+      "bytes": 25824,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_eslint-plugin-react_lib_rules_jsx-filename-extension.d.ts",
+      "sha1": "6998b461c3ab0927",
+      "bytes": 129,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_eslint-plugin-react_lib_rules_jsx-filename-extension.js",
+      "sha1": "422d120d096da5b0",
+      "bytes": 3240,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-autolink-literal_dev_index.js",
+      "sha1": "cd9e972a2fe4adc5",
+      "bytes": 104,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-autolink-literal_dev_lib_html.js",
+      "sha1": "c19db69a2cb2f8e5",
+      "bytes": 1312,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-autolink-literal_dev_lib_syntax.js",
+      "sha1": "bf6295780a7ff45c",
+      "bytes": 21820,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-autolink-literal_index.d.ts",
+      "sha1": "a144e44ee61f7138",
+      "bytes": 551,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-autolink-literal_index.js",
+      "sha1": "a1fb1bb8be58b2e2",
+      "bytes": 109,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-autolink-literal_lib_html.d.ts",
+      "sha1": "2607ec481d28e924",
+      "bytes": 399,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-autolink-literal_lib_html.js",
+      "sha1": "bdf9669311887e9f",
+      "bytes": 1346,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-autolink-literal_lib_syntax.d.ts",
+      "sha1": "97caed7fcf73b08a",
+      "bytes": 334,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-autolink-literal_lib_syntax.js",
+      "sha1": "9476bfc1b30feaf3",
+      "bytes": 20276,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-autolink-literal_package.json",
+      "sha1": "42d72705c5ceb617",
+      "bytes": 2976,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-autolink-literal_readme.md",
+      "sha1": "57ac6fa8497e17fa",
+      "bytes": 13771,
+      "ext": ".md"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-footnote_dev_index.js",
+      "sha1": "0e4b3c005de92a24",
+      "bytes": 159,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-footnote_dev_lib_html.js",
+      "sha1": "ab7face8eb84bb29",
+      "bytes": 7065,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-footnote_dev_lib_syntax.js",
+      "sha1": "e0d98d0a564233cf",
+      "bytes": 13484,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-footnote_index.d.ts",
+      "sha1": "8886a1467432cc46",
+      "bytes": 5441,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-footnote_index.js",
+      "sha1": "144fe372fc51f895",
+      "bytes": 164,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-footnote_lib_html.d.ts",
+      "sha1": "41ded485bb41ed0d",
+      "bytes": 991,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-footnote_lib_html.js",
+      "sha1": "6a6e4893282e5ef3",
+      "bytes": 6371,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-footnote_lib_syntax.d.ts",
+      "sha1": "f354d5919942cafb",
+      "bytes": 304,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-footnote_lib_syntax.js",
+      "sha1": "609b8bd36f301d4d",
+      "bytes": 12479,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-footnote_package.json",
+      "sha1": "5d836317ddafa486",
+      "bytes": 3422,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-footnote_readme.md",
+      "sha1": "4ae2c35885b6e255",
+      "bytes": 21751,
+      "ext": ".md"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-strikethrough_dev_index.d.ts",
+      "sha1": "14f5a4370aa30f2c",
+      "bytes": 718,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-strikethrough_dev_index.js",
+      "sha1": "b7e8f24f25a9ad48",
+      "bytes": 147,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-strikethrough_dev_lib_html.js",
+      "sha1": "54c25c2dfb0e6603",
+      "bytes": 549,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-strikethrough_dev_lib_syntax.js",
+      "sha1": "e0be8a8ff68c228a",
+      "bytes": 5300,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-strikethrough_index.d.ts",
+      "sha1": "401b2a98278c5883",
+      "bytes": 668,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-strikethrough_index.js",
+      "sha1": "b4117e9ea07afc18",
+      "bytes": 152,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-strikethrough_lib_html.d.ts",
+      "sha1": "1cb1aa1ddd93eb13",
+      "bytes": 449,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-strikethrough_lib_html.js",
+      "sha1": "ac4b341bb633772f",
+      "bytes": 551,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-strikethrough_lib_syntax.d.ts",
+      "sha1": "2bbf3a62eb014466",
+      "bytes": 498,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-strikethrough_lib_syntax.js",
+      "sha1": "cb07c84050763221",
+      "bytes": 4763,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-strikethrough_package.json",
+      "sha1": "e7e5766f869e6aba",
+      "bytes": 3306,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-strikethrough_readme.md",
+      "sha1": "4c04979fddd71c99",
+      "bytes": 8438,
+      "ext": ".md"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_dev_index.js",
+      "sha1": "d63649dd7e922da4",
+      "bytes": 84,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_dev_lib_edit-map.js",
+      "sha1": "93518f0f27ed772d",
+      "bytes": 5293,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_dev_lib_html.js",
+      "sha1": "bbdc10790d26699b",
+      "bytes": 4439,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_dev_lib_infer.js",
+      "sha1": "b4b14aca7250391b",
+      "bytes": 1658,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_dev_lib_syntax.js",
+      "sha1": "22555d817555aae9",
+      "bytes": 21916,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_index.d.ts",
+      "sha1": "e04bb33110ef6667",
+      "bytes": 1273,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_index.js",
+      "sha1": "4b5292a188075b7e",
+      "bytes": 89,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_lib_edit-map.d.ts",
+      "sha1": "a3457585efea4244",
+      "bytes": 950,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_lib_edit-map.js",
+      "sha1": "94a11911da6d113d",
+      "bytes": 5284,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_lib_html.d.ts",
+      "sha1": "dd2a4663910b0a48",
+      "bytes": 403,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_lib_html.js",
+      "sha1": "6a41340f54d0d285",
+      "bytes": 3820,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_lib_infer.d.ts",
+      "sha1": "4ae12e6186b320c7",
+      "bytes": 451,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_lib_infer.js",
+      "sha1": "cd37938342d89ca3",
+      "bytes": 1511,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_lib_syntax.d.ts",
+      "sha1": "28b2f2da246a19dd",
+      "bytes": 538,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_lib_syntax.js",
+      "sha1": "cf65773e4d5eac25",
+      "bytes": 20730,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_package.json",
+      "sha1": "de1f99baf637a566",
+      "bytes": 3205,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-table_readme.md",
+      "sha1": "edd1487d340c3a3b",
+      "bytes": 13505,
+      "ext": ".md"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-tagfilter_index.js",
+      "sha1": "1b51b5d7f4c26c70",
+      "bytes": 48,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-tagfilter_lib_index.d.ts",
+      "sha1": "1666856429641615",
+      "bytes": 562,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-tagfilter_lib_index.js",
+      "sha1": "ccb2023e2a652895",
+      "bytes": 1482,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-tagfilter_package.json",
+      "sha1": "0210472c28ed0546",
+      "bytes": 2148,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-tagfilter_readme.md",
+      "sha1": "54e580d01e7653b0",
+      "bytes": 6573,
+      "ext": ".md"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-task-list-item_dev_index.js",
+      "sha1": "220a2f304812e896",
+      "bytes": 98,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-task-list-item_dev_lib_html.js",
+      "sha1": "1268a4c099de0515",
+      "bytes": 654,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-task-list-item_dev_lib_syntax.js",
+      "sha1": "09d869366aaf0cc0",
+      "bytes": 3756,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-task-list-item_index.d.ts",
+      "sha1": "6516b4efd6b50a9c",
+      "bytes": 432,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-task-list-item_index.js",
+      "sha1": "5e2df3465a7a3e83",
+      "bytes": 103,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-task-list-item_lib_html.d.ts",
+      "sha1": "9cfbde2ec01f8472",
+      "bytes": 451,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-task-list-item_lib_html.js",
+      "sha1": "cb50585f9a612284",
+      "bytes": 657,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-task-list-item_lib_syntax.d.ts",
+      "sha1": "4456bb7633ba9e20",
+      "bytes": 354,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-task-list-item_lib_syntax.js",
+      "sha1": "3cbeab54c24697b9",
+      "bytes": 3563,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-task-list-item_package.json",
+      "sha1": "b59630777352fe01",
+      "bytes": 3295,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm-task-list-item_readme.md",
+      "sha1": "46e783aa267f17da",
+      "bytes": 8711,
+      "ext": ".md"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm_index.d.ts",
+      "sha1": "41a5bd3ac4fe4e98",
+      "bytes": 1142,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm_index.js",
+      "sha1": "17e6cd990508e0c5",
+      "bytes": 2031,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm_package.json",
+      "sha1": "f044a990676d460c",
+      "bytes": 2936,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-extension-gfm_readme.md",
+      "sha1": "2a699a8eae5a58f3",
+      "bytes": 13113,
+      "ext": ".md"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-util-combine-extensions_index.d.ts",
+      "sha1": "1a2d433dc51e0b38",
+      "bytes": 823,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-util-combine-extensions_index.js",
+      "sha1": "3098aeecc42d8024",
+      "bytes": 3318,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-util-combine-extensions_package.json",
+      "sha1": "8feeb17a7d90ecb9",
+      "bytes": 1244,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_micromark-util-combine-extensions_readme.md",
+      "sha1": "4ba6913e0bbf7b05",
+      "bytes": 5639,
+      "ext": ".md"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_build_page-extensions-type.js",
+      "sha1": "aa65c294355ef515",
+      "bytes": 130,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_compiled_@babel_runtime_helpers_tsRewriteRelativeImportExtensions.js",
+      "sha1": "6eca9c09359b21dd",
+      "bytes": 427,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_lib_router-utils_instrumentation-node-extensions.js",
+      "sha1": "62e738877185eee9",
+      "bytes": 4625,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_node-environment-extensions_console-dev.js",
+      "sha1": "bbdb52df78ef4ee1",
+      "bytes": 6147,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_node-environment-extensions_date.js",
+      "sha1": "dd0f14fbf16c3b5c",
+      "bytes": 2237,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_node-environment-extensions_error-inspect.js",
+      "sha1": "ab06990771513d64",
+      "bytes": 151,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_node-environment-extensions_node-crypto.js",
+      "sha1": "be51fdcd8165468b",
+      "bytes": 5433,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_node-environment-extensions_random.js",
+      "sha1": "91126bbfa2d9f925",
+      "bytes": 1130,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_node-environment-extensions_utils.js",
+      "sha1": "e484d7c30da60567",
+      "bytes": 6475,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_node-environment-extensions_web-crypto.js",
+      "sha1": "cb382010ab894784",
+      "bytes": 1809,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_headers.js",
+      "sha1": "df8bb14a64abca1b",
+      "bytes": 6986,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_headers.json",
+      "sha1": "e0500d45c78a3645",
+      "bytes": 278,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_next-request.js",
+      "sha1": "82e19376e5efce5f",
+      "bytes": 5004,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_next-request.json",
+      "sha1": "950afae7b2265881",
+      "bytes": 283,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_reflect.js",
+      "sha1": "a46c41a52aa11307",
+      "bytes": 581,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_reflect.json",
+      "sha1": "55133e8bc4ee6139",
+      "bytes": 278,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_request-cookies.js",
+      "sha1": "16c4f9cb1f73ac37",
+      "bytes": 6660,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_request-cookies.json",
+      "sha1": "7bee06ba094ac10d",
+      "bytes": 286,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_cookies.js",
+      "sha1": "ac0cafdf5b7badb3",
+      "bytes": 145,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_fetch-event.js",
+      "sha1": "fdec269d850d1fcf",
+      "bytes": 2768,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_image-response.js",
+      "sha1": "cde06c709b61676d",
+      "bytes": 587,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_request.js",
+      "sha1": "a2b910ebe08e38ce",
+      "bytes": 2987,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_response.js",
+      "sha1": "f32798719510d78c",
+      "bytes": 4988,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_revalidate.js",
+      "sha1": "b6c1b10343cc380b",
+      "bytes": 8635,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_unstable-cache.js",
+      "sha1": "4b8bc303f2f173ec",
+      "bytes": 16714,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_unstable-no-store.js",
+      "sha1": "6939d85209093679",
+      "bytes": 2308,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_url-pattern.js",
+      "sha1": "d1ed111d47303b50",
+      "bytes": 228,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_user-agent.js",
+      "sha1": "d1415b16c8cab631",
+      "bytes": 780,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_headers.d.ts",
+      "sha1": "46ccdddf6de400c4",
+      "bytes": 1918,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_headers.js",
+      "sha1": "70696ad70134842d",
+      "bytes": 7523,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_headers.json",
+      "sha1": "f5d4b1a11b1c2f13",
+      "bytes": 274,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_next-request.d.ts",
+      "sha1": "1bcc0fba55475819",
+      "bytes": 1444,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_next-request.js",
+      "sha1": "4d868c8b21c7a4fb",
+      "bytes": 5298,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_next-request.json",
+      "sha1": "3b35ddf82025c3b9",
+      "bytes": 279,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_reflect.js",
+      "sha1": "419e9a635c188a1f",
+      "bytes": 791,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_reflect.json",
+      "sha1": "0debc8afbb9e245a",
+      "bytes": 274,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_request-cookies.d.ts",
+      "sha1": "5e9d0ea1187ab7ea",
+      "bytes": 1214,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_request-cookies.js",
+      "sha1": "8d0dbc0c49702406",
+      "bytes": 7998,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_request-cookies.json",
+      "sha1": "6ac272feb04b17dc",
+      "bytes": 282,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_cookies.d.ts",
+      "sha1": "56e998c508e189e4",
+      "bytes": 110,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_cookies.js",
+      "sha1": "9e0fcd299eaf9002",
+      "bytes": 714,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_fetch-event.d.ts",
+      "sha1": "11978daa4d3faaf9",
+      "bytes": 1478,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_fetch-event.js",
+      "sha1": "d8c53e81a4bf78c1",
+      "bytes": 3277,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_image-response.js",
+      "sha1": "42fa1ad75d28c26a",
+      "bytes": 795,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_request.d.ts",
+      "sha1": "a2241ec1e5dc0a54",
+      "bytes": 1267,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_request.js",
+      "sha1": "12781818ff63f24e",
+      "bytes": 3168,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_response.js",
+      "sha1": "028de01081b09de4",
+      "bytes": 4977,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_revalidate.d.ts",
+      "sha1": "f0ac87a2a4f0e6d7",
+      "bytes": 1450,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_revalidate.js",
+      "sha1": "34a9711619783940",
+      "bytes": 8344,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_unstable-cache.d.ts",
+      "sha1": "2bdc7d58ff8b8257",
+      "bytes": 546,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_unstable-cache.js",
+      "sha1": "ceacc78ce5755c3b",
+      "bytes": 16920,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_unstable-no-store.js",
+      "sha1": "59067f81170e8ca6",
+      "bytes": 1916,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_url-pattern.js",
+      "sha1": "b9662d35069e192b",
+      "bytes": 400,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_user-agent.d.ts",
+      "sha1": "7800194d8641b277",
+      "bytes": 668,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_user-agent.js",
+      "sha1": "f02e03528cac941f",
+      "bytes": 1487,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/C__realai_node_modules_@types_vscode_index.d.ts",
+      "sha1": "11cb78d3779f9b34",
+      "bytes": 742205,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_node_modules_@types_vscode_package.json",
+      "sha1": "21b2d2ccd9e18b8c",
+      "bytes": 836,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_.kilo_node_modules_kubernetes-types_apiextensions_v1.d.ts",
+      "sha1": "7cbc90a2599a033b",
+      "bytes": 31515,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_.package-lock.json",
+      "sha1": "a14e3ead733d62dc",
+      "bytes": 1616,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_README.md",
+      "sha1": "ea37d0e03f0106fb",
+      "bytes": 2842,
+      "ext": ".md"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_cs_diagnosticMessages.json",
+      "sha1": "32170fd193857e76",
+      "bytes": 290,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_de_diagnosticMessages.json",
+      "sha1": "befa671ef93e4589",
+      "bytes": 290,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_es_diagnosticMessages.json",
+      "sha1": "79c5506156a8fff5",
+      "bytes": 290,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_fr_diagnosticMessages.json",
+      "sha1": "a9dd78966f2cd3c0",
+      "bytes": 290,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_it_diagnosticMessages.json",
+      "sha1": "8a6ae686dd544421",
+      "bytes": 290,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_ja_diagnosticMessages.json",
+      "sha1": "4fb8a11078857e7e",
+      "bytes": 290,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_ko_diagnosticMessages.json",
+      "sha1": "0f8ad80c01a6fcce",
+      "bytes": 290,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_pl_diagnosticMessages.json",
+      "sha1": "01f94ea974201731",
+      "bytes": 290,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_pt-br_diagnosticMessages.json",
+      "sha1": "96bcc805d392927c",
+      "bytes": 293,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_ru_diagnosticMessages.json",
+      "sha1": "f42f9ea1a2c5d28a",
+      "bytes": 290,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_tr_diagnosticMessages.json",
+      "sha1": "1d019f66b2ce7d81",
+      "bytes": 290,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_zh-cn_diagnosticMessages.json",
+      "sha1": "ccc89fb2843d2b74",
+      "bytes": 293,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_zh-tw_diagnosticMessages.json",
+      "sha1": "8b940a19bb8f3b2d",
+      "bytes": 293,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_package.json",
+      "sha1": "b9c8f230aaaebf4f",
+      "bytes": 3620,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_undici-types_README.md",
+      "sha1": "ecfc54eac7d96e1a",
+      "bytes": 455,
+      "ext": ".md"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_undici-types_cache-interceptor.json",
+      "sha1": "b83b2f079151459d",
+      "bytes": 274,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_undici-types_cookies.d.ts",
+      "sha1": "cae159a3d89e995c",
+      "bytes": 696,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_undici-types_fetch.d.ts",
+      "sha1": "20d3e4c27d8c896a",
+      "bytes": 7029,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_undici-types_index.d.ts",
+      "sha1": "67e23de44d550d7b",
+      "bytes": 4707,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_undici-types_package.json",
+      "sha1": "7a61f1ecb6464cbe",
+      "bytes": 1192,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_undici-types_util.d.ts",
+      "sha1": "c06fc56578e6bde8",
+      "bytes": 623,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_archive_node_modules.disabled_.json",
+      "sha1": "f58b08ae4837434f",
+      "bytes": 274,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_archive_node_modules.disabled_.pnpm_binary-extensions@2.3.json",
+      "sha1": "18389d8fb6e81add",
+      "bytes": 317,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_archive_node_modules.disabled_.pnpm_binary-extensions@2.json",
+      "sha1": "d258db740d7659b4",
+      "bytes": 276,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_archive_node_modules_.json",
+      "sha1": "424defc1a122c0df",
+      "bytes": 265,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_archive_node_modules_.pnpm_binary-extensions@2.3.json",
+      "sha1": "4ded2c225460caf3",
+      "bytes": 308,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/C__realai_realai_og_mess_realai_archive_node_modules_.pnpm_binary-extensions@2.json",
+      "sha1": "8b3f548e38cf711d",
+      "bytes": 267,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/_typingsInstaller.js",
+      "sha1": "8e3d00eadcdd1080",
+      "bytes": 10363,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/abortcontroller.d.ts",
+      "sha1": "0122ac5e14e10e49",
+      "bytes": 1989,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/agent.d.ts",
+      "sha1": "50c2e749d69de840",
+      "bytes": 1062,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/api.d.ts",
+      "sha1": "a2017cb7e0cf7939",
+      "bytes": 1609,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/assert.d.ts",
+      "sha1": "2cc1d5e0d2a98423",
+      "bytes": 42891,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/async_hooks.d.ts",
+      "sha1": "b5a91dfd5bf87b17",
+      "bytes": 29929,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/balanced-pool.d.ts",
+      "sha1": "0e97d08b41dd95f0",
+      "bytes": 1019,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/blob.d.ts",
+      "sha1": "06595c7783e53bb8",
+      "bytes": 902,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/buffer.buffer.d.ts",
+      "sha1": "58eb5df25e59fa06",
+      "bytes": 21855,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/buffer.d.ts",
+      "sha1": "49e52397536e25d7",
+      "bytes": 81152,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/cache-interceptor.d.ts",
+      "sha1": "20f04a99738d90c8",
+      "bytes": 4362,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/cache.d.ts",
+      "sha1": "582eece8ceedf918",
+      "bytes": 1251,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/chatPanel.js",
+      "sha1": "01c5ae78518adec1",
+      "bytes": 17986,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/chatPanel.ts",
+      "sha1": "f1344f522675da18",
+      "bytes": 16171,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/child_process.d.ts",
+      "sha1": "4ccc457504844a01",
+      "bytes": 59930,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/client-stats.d.ts",
+      "sha1": "ac9f8dc5578d09f2",
+      "bytes": 456,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/client.d.ts",
+      "sha1": "485969873f2a1296",
+      "bytes": 6458,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/cluster.d.ts",
+      "sha1": "148fd82fa5655041",
+      "bytes": 19527,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/connector.d.ts",
+      "sha1": "e102b553002f2320",
+      "bytes": 1105,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/console-dev.js",
+      "sha1": "76d8beccde3c06e4",
+      "bytes": 6311,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/console.d.ts",
+      "sha1": "9918b16ee9c0e77e",
+      "bytes": 149,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/constants.d.ts",
+      "sha1": "89f8d729d6cbbbf5",
+      "bytes": 491,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/consumers.d.ts",
+      "sha1": "f02198594fc7e0ba",
+      "bytes": 4272,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/content-type.d.ts",
+      "sha1": "be4b1b1b54c3573d",
+      "bytes": 561,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/cookies.d.ts",
+      "sha1": "204f3b476373ab25",
+      "bytes": 93,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/cookies.js",
+      "sha1": "38bf24ee72f25dfe",
+      "bytes": 605,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/crypto.d.ts",
+      "sha1": "fca8c64556951759",
+      "bytes": 1449,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/date.d.ts",
+      "sha1": "b878c11a77128e74",
+      "bytes": 11,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/date.js",
+      "sha1": "1b9df0c6a83de72d",
+      "bytes": 2359,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/dgram.d.ts",
+      "sha1": "48a2b2c5b600cc9f",
+      "bytes": 24921,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/diagnosticMessages.generated.json",
+      "sha1": "6161920f7fb7affb",
+      "bytes": 292532,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/diagnostics-channel.d.ts",
+      "sha1": "7d694ee3ee918728",
+      "bytes": 1776,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/diagnostics_channel.d.ts",
+      "sha1": "443a5acd0a06bd62",
+      "bytes": 34577,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/dispatcher.d.ts",
+      "sha1": "ce5a59b3d4a8de01",
+      "bytes": 14424,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/dispatcher1-wrapper.d.ts",
+      "sha1": "6e7f54655e01cb3a",
+      "bytes": 169,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/dns.d.ts",
+      "sha1": "807ee5ab0235a428",
+      "bytes": 34348,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/domain.d.ts",
+      "sha1": "30f53d618f8f38ed",
+      "bytes": 6597,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/domexception.d.ts",
+      "sha1": "ead686cf61c0e88e",
+      "bytes": 3052,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/encoding.d.ts",
+      "sha1": "42ad52e0d3fdabeb",
+      "bytes": 414,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/env-http-proxy-agent.d.ts",
+      "sha1": "71f37a2013c81d8c",
+      "bytes": 732,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/error-inspect.js",
+      "sha1": "cb0fa1a1bb210072",
+      "bytes": 252,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/errors.d.ts",
+      "sha1": "66717827abc975f5",
+      "bytes": 4868,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/events.d.ts",
+      "sha1": "ef99707c76bbc528",
+      "bytes": 3367,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/eventsource.d.ts",
+      "sha1": "ba3cfe817b70033b",
+      "bytes": 1794,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/extension.js",
+      "sha1": "b46a458895310fae",
+      "bytes": 7005,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/fetch-event.d.ts",
+      "sha1": "5fcb33838cbe211f",
+      "bytes": 1098,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/fetch-event.js",
+      "sha1": "648f7a361ab84e63",
+      "bytes": 1896,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/fetch.d.ts",
+      "sha1": "26861f61289d8962",
+      "bytes": 3524,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/ffi.d.ts",
+      "sha1": "a1cf49300f3269eb",
+      "bytes": 20013,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/float16array.d.ts",
+      "sha1": "bbe267b01e4b1f24",
+      "bytes": 3872,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/formdata.d.ts",
+      "sha1": "795adae28fd17038",
+      "bytes": 5009,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/fs.d.ts",
+      "sha1": "1f0d958bc9926eef",
+      "bytes": 201283,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/global-dispatcher.d.ts",
+      "sha1": "6b7818ba606739ae",
+      "bytes": 275,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/global-origin.d.ts",
+      "sha1": "e94f496840d9ea5c",
+      "bytes": 176,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/globals.d.ts",
+      "sha1": "d6ff3e9d9a2d107f",
+      "bytes": 5084,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/globals.typedarray.d.ts",
+      "sha1": "7d038b5a870edcdd",
+      "bytes": 1238,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/h2c-client.d.ts",
+      "sha1": "b400d0da973c4254",
+      "bytes": 4298,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/handlers.d.ts",
+      "sha1": "79ba4936fc711dce",
+      "bytes": 413,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/header.d.ts",
+      "sha1": "893fc9865d08640f",
+      "bytes": 3500,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/headers.d.ts",
+      "sha1": "a657a3cbee3b8479",
+      "bytes": 1953,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/headers.js",
+      "sha1": "ab086aca7ea46ade",
+      "bytes": 7523,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/http.d.ts",
+      "sha1": "12193c3a931d260a",
+      "bytes": 96833,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/http2.d.ts",
+      "sha1": "7f711902358b6580",
+      "bytes": 119039,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/https.d.ts",
+      "sha1": "54aea87544a13199",
+      "bytes": 16812,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/image-response.d.ts",
+      "sha1": "dca80f60ef0987c2",
+      "bytes": 295,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/image-response.js",
+      "sha1": "fb4e3fa79f92de2e",
+      "bytes": 665,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/importmeta.d.ts",
+      "sha1": "4b6e855d31a2f234",
+      "bytes": 259,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/index.d.ts",
+      "sha1": "f518538fb58fab17",
+      "bytes": 5343,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/inspector.d.ts",
+      "sha1": "f3af1a4970ae690e",
+      "bytes": 12198,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/inspector.generated.d.ts",
+      "sha1": "82d86c635d8cc879",
+      "bytes": 228362,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/instrumentation-node-extensions.d.ts",
+      "sha1": "43621eb66563b301",
+      "bytes": 194,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/instrumentation-node-extensions.js",
+      "sha1": "ce2640c725f9f356",
+      "bytes": 5030,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/interceptors.d.ts",
+      "sha1": "267b52b426fff3e1",
+      "bytes": 3624,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/iter.d.ts",
+      "sha1": "bb48e873040b993e",
+      "bytes": 5077,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/messaging.d.ts",
+      "sha1": "70391ff0a4363a88",
+      "bytes": 1113,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/mock-agent.d.ts",
+      "sha1": "42991cfe1159bf6d",
+      "bytes": 3448,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/mock-call-history.d.ts",
+      "sha1": "3d9910a07b8a2d9b",
+      "bytes": 5558,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/mock-client.d.ts",
+      "sha1": "65ca4d16c5bc11d4",
+      "bytes": 1065,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/mock-errors.d.ts",
+      "sha1": "72472d20da72fc4e",
+      "bytes": 336,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/mock-interceptor.d.ts",
+      "sha1": "e7255796ccc0be7d",
+      "bytes": 3931,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/mock-pool.d.ts",
+      "sha1": "ed8cbbff01db9948",
+      "bytes": 1037,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/module.d.ts",
+      "sha1": "60e68f72afaacc92",
+      "bytes": 32983,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/navigator.d.ts",
+      "sha1": "ed44e4b264e8764a",
+      "bytes": 891,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/net.d.ts",
+      "sha1": "19c459284c712d25",
+      "bytes": 43748,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/next-request.d.ts",
+      "sha1": "3a7d1a61d8ae6758",
+      "bytes": 1475,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/next-request.js",
+      "sha1": "17283d3829bac37c",
+      "bytes": 4763,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/node-crypto.d.ts",
+      "sha1": "fb48582f5c16de1e",
+      "bytes": 481,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/node-crypto.js",
+      "sha1": "896d072fb669be97",
+      "bytes": 5603,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/os.d.ts",
+      "sha1": "fe1811080d3fec1e",
+      "bytes": 19193,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/page-extensions-type.d.ts",
+      "sha1": "97222785f224a1cc",
+      "bytes": 39,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/page-extensions-type.js",
+      "sha1": "f0c15dd09dd5e671",
+      "bytes": 61,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/patch.d.ts",
+      "sha1": "073f4b02e4e7880b",
+      "bytes": 599,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/path.d.ts",
+      "sha1": "f4d7fc78794d7004",
+      "bytes": 7639,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/perf_hooks.d.ts",
+      "sha1": "e5d154a146c20363",
+      "bytes": 22973,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/performance.d.ts",
+      "sha1": "497ebb2fad3df9bb",
+      "bytes": 2551,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/pool-stats.d.ts",
+      "sha1": "e2b75db6cfc80931",
+      "bytes": 663,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/pool.d.ts",
+      "sha1": "8dc288c53dabcb07",
+      "bytes": 1384,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/posix.d.ts",
+      "sha1": "0803753b4d09dfb8",
+      "bytes": 194,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/process.d.ts",
+      "sha1": "bd136e78a4c86855",
+      "bytes": 112070,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/promises.d.ts",
+      "sha1": "8c4500f7eaae2335",
+      "bytes": 3383,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/proxy-agent.d.ts",
+      "sha1": "af4b7c75f2cfe180",
+      "bytes": 806,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/punycode.d.ts",
+      "sha1": "24d4731087b02c5e",
+      "bytes": 3780,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/querystring.d.ts",
+      "sha1": "92bcfb71f2c0161a",
+      "bytes": 6642,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/quic.d.ts",
+      "sha1": "4addce4131930149",
+      "bytes": 33850,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/random.d.ts",
+      "sha1": "204726a32e8ea26d",
+      "bytes": 447,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/random.js",
+      "sha1": "cbf5c6a9ce5dd9cf",
+      "bytes": 1228,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/readable.d.ts",
+      "sha1": "e0a622b6d1370dd9",
+      "bytes": 1910,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/readline.d.ts",
+      "sha1": "b52e711d5aea6ae6",
+      "bytes": 21216,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/realaiClient.js",
+      "sha1": "47a88646d63ce031",
+      "bytes": 7742,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/realaiClient.ts",
+      "sha1": "766ec2481b1f8388",
+      "bytes": 7288,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/reflect.d.ts",
+      "sha1": "58f7f2d270a2312a",
+      "bytes": 401,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/reflect.js",
+      "sha1": "8a38060c03801521",
+      "bytes": 791,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/repl.d.ts",
+      "sha1": "61a3311e2dd8f6c7",
+      "bytes": 19023,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/reporters.d.ts",
+      "sha1": "354830d4d86a96d5",
+      "bytes": 2779,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/request-cookies.d.ts",
+      "sha1": "5f5e07ef68b06908",
+      "bytes": 800,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/request-cookies.js",
+      "sha1": "53e7813498927efd",
+      "bytes": 5788,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/request.d.ts",
+      "sha1": "f3dec2b8fc165327",
+      "bytes": 1820,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/request.js",
+      "sha1": "b05911ce73215197",
+      "bytes": 2987,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/response.d.ts",
+      "sha1": "2a5c5c535b8d2660",
+      "bytes": 1610,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/response.js",
+      "sha1": "7450753f1739f51a",
+      "bytes": 3441,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/retry-agent.d.ts",
+      "sha1": "03650cd8fe31418c",
+      "bytes": 233,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/retry-handler.d.ts",
+      "sha1": "2c589ae21a7fa93a",
+      "bytes": 3262,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/revalidate.d.ts",
+      "sha1": "8496c85186f362fa",
+      "bytes": 697,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/revalidate.js",
+      "sha1": "d181260a009bbbd9",
+      "bytes": 3434,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/round-robin-pool.d.ts",
+      "sha1": "c8c3e6c5998effce",
+      "bytes": 1474,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/sea.d.ts",
+      "sha1": "34c89f0ffcd4c227",
+      "bytes": 2045,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/snapshot-agent.d.ts",
+      "sha1": "29010f3288b68078",
+      "bytes": 3306,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/socks5-proxy-agent.d.ts",
+      "sha1": "f1131baf42c7d798",
+      "bytes": 870,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/sqlite.d.ts",
+      "sha1": "efa3a08ddba6a5d2",
+      "bytes": 54652,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/storage.d.ts",
+      "sha1": "0dda407ae7ff7fa0",
+      "bytes": 724,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/stream.d.ts",
+      "sha1": "5b207b9cd4938f82",
+      "bytes": 90588,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/streams.d.ts",
+      "sha1": "5a2bd47f3f58e6a3",
+      "bytes": 6707,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/strict.d.ts",
+      "sha1": "308043b3b0c54ff0",
+      "bytes": 1652,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/string_decoder.d.ts",
+      "sha1": "6163a9b7c5eb39c5",
+      "bytes": 1318,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/test.d.ts",
+      "sha1": "a37f3f85093b722b",
+      "bytes": 111992,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/timers.d.ts",
+      "sha1": "2e7759dc48790a50",
+      "bytes": 1557,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/tls.d.ts",
+      "sha1": "595a086941515417",
+      "bytes": 58012,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/trace_events.d.ts",
+      "sha1": "7dfc91d70ca753d7",
+      "bytes": 3842,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/tsRewriteRelativeImportExtensions.js",
+      "sha1": "62e3a821def80773",
+      "bytes": 354,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/tsc.cmd",
+      "sha1": "05df03d36ab85ac7",
+      "bytes": 323,
+      "ext": ".cmd"
+    },
+    {
+      "path": "apps/vscode/tsc.js",
+      "sha1": "e40e0eeb24a3671a",
+      "bytes": 267,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/tsc.ps1",
+      "sha1": "d033d87e98f9fdd3",
+      "bytes": 797,
+      "ext": ".ps1"
+    },
+    {
+      "path": "apps/vscode/tsserver.cmd",
+      "sha1": "7636e4be8c90a340",
+      "bytes": 328,
+      "ext": ".cmd"
+    },
+    {
+      "path": "apps/vscode/tsserver.js",
+      "sha1": "95a80e7d2d006148",
+      "bytes": 272,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/tsserver.ps1",
+      "sha1": "5d1c93f6afe5316b",
+      "bytes": 817,
+      "ext": ".ps1"
+    },
+    {
+      "path": "apps/vscode/tsserverlibrary.d.ts",
+      "sha1": "16d18a2ecef5b3f5",
+      "bytes": 865,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/tsserverlibrary.js",
+      "sha1": "b03b5d3b5f756c9b",
+      "bytes": 1012,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/tty.d.ts",
+      "sha1": "36215d696613c990",
+      "bytes": 11152,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/types.d.ts",
+      "sha1": "02032f53d51933d8",
+      "bytes": 23832,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/typingsInstaller.js",
+      "sha1": "36160f9abfbd2752",
+      "bytes": 280,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/unstable-cache.d.ts",
+      "sha1": "f0d4f7e3e46035f2",
+      "bytes": 485,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/unstable-cache.js",
+      "sha1": "905998918bd3ae74",
+      "bytes": 12565,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/unstable-no-store.d.ts",
+      "sha1": "eb88d4c8d494d4da",
+      "bytes": 748,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/unstable-no-store.js",
+      "sha1": "eeb6b15338d959b7",
+      "bytes": 1160,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/url-pattern.d.ts",
+      "sha1": "55fe58372f418624",
+      "bytes": 80,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/url-pattern.js",
+      "sha1": "0ceb9f635b014060",
+      "bytes": 400,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/url.d.ts",
+      "sha1": "8ab2c6f300bdf7cd",
+      "bytes": 800,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/user-agent.d.ts",
+      "sha1": "547241a4358b4c5d",
+      "bytes": 644,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/user-agent.js",
+      "sha1": "4b3bea2960664b2f",
+      "bytes": 1487,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/util.d.ts",
+      "sha1": "f1fd3d308965c6e0",
+      "bytes": 65409,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/utility.d.ts",
+      "sha1": "bf126050afe1048e",
+      "bytes": 245,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/utils.d.ts",
+      "sha1": "a101ace6187062c0",
+      "bytes": 125,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/utils.js",
+      "sha1": "11c9de5f6160d13f",
+      "bytes": 6785,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/v8.d.ts",
+      "sha1": "4f77e59487993e87",
+      "bytes": 42920,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/vm.d.ts",
+      "sha1": "9d5361f545062a32",
+      "bytes": 53143,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/wasi.d.ts",
+      "sha1": "ec19c1b0e603bd5f",
+      "bytes": 6250,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/watchGuard.js",
+      "sha1": "5bb5fd1cbe962af2",
+      "bytes": 2313,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/web-crypto.d.ts",
+      "sha1": "d3de6b59e7255f8a",
+      "bytes": 480,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/web-crypto.js",
+      "sha1": "3d037d6afbf95c1c",
+      "bytes": 1919,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/web.d.ts",
+      "sha1": "97340c341f983069",
+      "bytes": 12122,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/webidl.d.ts",
+      "sha1": "48535d6db85330de",
+      "bytes": 8870,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/websocket.d.ts",
+      "sha1": "2c7dff53da653246",
+      "bytes": 4711,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/win32.d.ts",
+      "sha1": "fcbed6b9b7a1d95c",
+      "bytes": 194,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/worker_threads.d.ts",
+      "sha1": "41d14dbbbc3d0406",
+      "bytes": 29736,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/zlib.d.ts",
+      "sha1": "482472836f8a38ad",
+      "bytes": 22874,
+      "ext": ".ts"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_headers.json",
+      "sha1": "e2c0a7b484122adf",
+      "bytes": 300,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_next-request.json",
+      "sha1": "7c36fac6eada2c09",
+      "bytes": 305,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_reflect.json",
+      "sha1": "fe6af6d9f36eebb9",
+      "bytes": 300,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_request-cookies.json",
+      "sha1": "7a5314e444cc5325",
+      "bytes": 308,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_headers.json",
+      "sha1": "208859c28b1af026",
+      "bytes": 296,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_next-request.json",
+      "sha1": "8bc2fc0fafdb8609",
+      "bytes": 301,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_reflect.json",
+      "sha1": "e02234ec0a60a094",
+      "bytes": 296,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_request-cookies.json",
+      "sha1": "a865c37d2672ca6c",
+      "bytes": 304,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_phase4_tools_plan_phase4_preview_previews_.venv__Lib__site-packages__setuptools__extension.json",
+      "sha1": "13fcf797fcc48240",
+      "bytes": 310,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_phase4_tools_plan_phase4_preview_previews_.venv__Lib__site-packages__setuptools__extension.py.json",
+      "sha1": "a6c4f5ee5ad4a315",
+      "bytes": 314,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_phase4_tools_plan_phase4_preview_previews_realai_og_mess__realai__.venv__Lib__site-packages__setuptools__extension.json",
+      "sha1": "7c6002bcb471118f",
+      "bytes": 334,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_phase4_tools_plan_phase4_preview_previews_realai_og_mess__realai__.venv__Lib__site-packages__setuptools__extension.py.json",
+      "sha1": "7b89a511bc91da96",
+      "bytes": 338,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_LICENSE.json",
+      "sha1": "71d5009bfb584452",
+      "bytes": 281,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_ThirdPartyNoticeText.json",
+      "sha1": "4b93ee809b335915",
+      "bytes": 294,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_cs_diagnosticMessages.json",
+      "sha1": "4c30feb64aaa06d7",
+      "bytes": 312,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_de_diagnosticMessages.json",
+      "sha1": "a46b261c7dfa600a",
+      "bytes": 312,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_es_diagnosticMessages.json",
+      "sha1": "412d21e222a66745",
+      "bytes": 312,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_fr_diagnosticMessages.json",
+      "sha1": "941e63c27cc4b1aa",
+      "bytes": 312,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_it_diagnosticMessages.json",
+      "sha1": "405985263a6bb4c8",
+      "bytes": 312,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_ja_diagnosticMessages.json",
+      "sha1": "4306aaac9e800d49",
+      "bytes": 312,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_ko_diagnosticMessages.json",
+      "sha1": "d37471df5d738d78",
+      "bytes": 312,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_pl_diagnosticMessages.json",
+      "sha1": "d6d8c7399b742287",
+      "bytes": 312,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_pt-br_diagnosticMessages.json",
+      "sha1": "d3986ae5e77e0104",
+      "bytes": 315,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_ru_diagnosticMessages.json",
+      "sha1": "fb2539e35ca0032a",
+      "bytes": 312,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_tr_diagnosticMessages.json",
+      "sha1": "32b4a51874b8c413",
+      "bytes": 312,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_zh-cn_diagnosticMessages.json",
+      "sha1": "63460197f5f0fc88",
+      "bytes": 315,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_zh-tw_diagnosticMessages.json",
+      "sha1": "c5c006d8bc504cff",
+      "bytes": 315,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_apps_vscode_node_modules_undici-types_cache-interceptor.json",
+      "sha1": "df4c439762a8a626",
+      "bytes": 296,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_archive_node_modules.disabled_.json",
+      "sha1": "8ee6f3a7a6af349c",
+      "bytes": 296,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_archive_node_modules.disabled_.pnpm_binary-extensions@2.3.json",
+      "sha1": "a738900b4bb6371f",
+      "bytes": 339,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_archive_node_modules.disabled_.pnpm_binary-extensions@2.json",
+      "sha1": "c050aac203d93277",
+      "bytes": 298,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_archive_node_modules_.json",
+      "sha1": "774d6a2c4c53ab47",
+      "bytes": 287,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_archive_node_modules_.pnpm_binary-extensions@2.3.json",
+      "sha1": "00e004fbf1ff7619",
+      "bytes": 330,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_realai_og_mess_realai_archive_node_modules_.pnpm_binary-extensions@2.json",
+      "sha1": "c3fdebb5d418c3e4",
+      "bytes": 289,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_recovered_from_recycle_bin_009__.json",
+      "sha1": "9d6145384ef5b651",
+      "bytes": 258,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_recovered_from_recycle_bin_009__.vscode.json",
+      "sha1": "1cb385f390d61218",
+      "bytes": 267,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_recovered_from_recycle_bin_extracted_realai_core_realai_realai_historical_backups_realai_versions_20260612_agent-tools-main_agent-tools-main_.json",
+      "sha1": "90f1fcd443b642cf",
+      "bytes": 376,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_recovered_from_recycle_bin_extracted_realai_core_realai_realai_repo_.json",
+      "sha1": "e2b53cb11e8d6bf4",
+      "bytes": 348,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_recovered_from_recycle_bin_extracted_realai_core_realai_venv_Lib_site-packages_huggingface_hub_cli_extensions.json",
+      "sha1": "4b533313437fbdda",
+      "bytes": 326,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/RealAI_Recovery_SAFE/C__realai_recovered_from_recycle_bin_extracted_realai_core_realai_venv_Lib_site-packages_pylint_extensions_docparams.json",
+      "sha1": "a571740c12f4c586",
+      "bytes": 323,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/ts/extension.js",
+      "sha1": "3db6514f68376b73",
+      "bytes": 32317,
+      "ext": ".js"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_headers.json",
+      "sha1": "c29d5c0387c4a886",
+      "bytes": 286,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_next-request.json",
+      "sha1": "b92c4329d72ff1f4",
+      "bytes": 291,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_reflect.json",
+      "sha1": "2fe761879f687b28",
+      "bytes": 286,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_apps_frontend_node_modules_next_dist_esm_server_web_spec-extension_adapters_request-cookies.json",
+      "sha1": "41fa3b57f64c4e48",
+      "bytes": 294,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_headers.json",
+      "sha1": "bf048c8fc9713da1",
+      "bytes": 282,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_next-request.json",
+      "sha1": "1db5f2a30148030c",
+      "bytes": 287,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_reflect.json",
+      "sha1": "909f8ecc13694dda",
+      "bytes": 282,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_apps_frontend_node_modules_next_dist_server_web_spec-extension_adapters_request-cookies.json",
+      "sha1": "3ddc197ef446c904",
+      "bytes": 290,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_cs_diagnosticMessages.json",
+      "sha1": "0b0a0169bfa23343",
+      "bytes": 298,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_de_diagnosticMessages.json",
+      "sha1": "23138a4b2ff7f88c",
+      "bytes": 298,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_es_diagnosticMessages.json",
+      "sha1": "d453120b613c30f2",
+      "bytes": 298,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_fr_diagnosticMessages.json",
+      "sha1": "c590db9754dc221e",
+      "bytes": 298,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_it_diagnosticMessages.json",
+      "sha1": "34fe2cb15afbb878",
+      "bytes": 298,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_ja_diagnosticMessages.json",
+      "sha1": "58b152608749cf93",
+      "bytes": 298,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_ko_diagnosticMessages.json",
+      "sha1": "27e8b0936dfc50d8",
+      "bytes": 298,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_pl_diagnosticMessages.json",
+      "sha1": "bf4050c1db29894e",
+      "bytes": 298,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_pt-br_diagnosticMessages.json",
+      "sha1": "76273901d68bfee6",
+      "bytes": 301,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_ru_diagnosticMessages.json",
+      "sha1": "0ecb5cc73f72a767",
+      "bytes": 298,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_tr_diagnosticMessages.json",
+      "sha1": "0de18aeee16beaaf",
+      "bytes": 298,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_zh-cn_diagnosticMessages.json",
+      "sha1": "f3acbd75eca0fe78",
+      "bytes": 301,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_typescript_lib_zh-tw_diagnosticMessages.json",
+      "sha1": "9d1f3e984f9086bb",
+      "bytes": 301,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_apps_vscode_node_modules_undici-types_cache-interceptor.json",
+      "sha1": "e6c5c1f32b5cd72d",
+      "bytes": 282,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_archive_node_modules.disabled_.json",
+      "sha1": "18df8a329d2bc389",
+      "bytes": 282,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_archive_node_modules.disabled_.pnpm_binary-extensions@2.3.json",
+      "sha1": "fa265e703807c326",
+      "bytes": 325,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_archive_node_modules.disabled_.pnpm_binary-extensions@2.json",
+      "sha1": "afd1e8b5f9f945ea",
+      "bytes": 284,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_archive_node_modules_.json",
+      "sha1": "9c86901de680d6bc",
+      "bytes": 273,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_archive_node_modules_.pnpm_binary-extensions@2.3.json",
+      "sha1": "c890e04b3ea87fe6",
+      "bytes": 316,
+      "ext": ".json"
+    },
+    {
+      "path": "apps/vscode/vscode/C__realai_realai_og_mess_realai_archive_node_modules_.pnpm_binary-extensions@2.json",
+      "sha1": "7763a19d390efeb5",
+      "bytes": 275,
+      "ext": ".json"
+    },
+    {
+      "path": "frontend/lib/overseer-client.js",
+      "sha1": "603d11a729d5f71f",
+      "bytes": 581,
+      "ext": ".js"
+    },
+    {
+      "path": "frontend/src/app/page.tsx",
+      "sha1": "e95edb2a5b488556",
+      "bytes": 11131,
+      "ext": ".tsx"
+    },
+    {
+      "path": "frontend/src/app/api/chat/route.ts",
+      "sha1": "5b5b5b9b7d4cf738",
+      "bytes": 3190,
+      "ext": ".ts"
+    },
+    {
+      "path": "frontend/src/lib/types.ts",
+      "sha1": "f63949a552a9668e",
+      "bytes": 1347,
+      "ext": ".ts"
+    },
+    {
+      "path": "orphans/RealAIProject-clean-20260612/setup.py",
+      "sha1": "a3557b362147ce24",
+      "bytes": 297,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAIProject-clean-20260612/realai/sdk/python/realai_client.py",
+      "sha1": "e9af37a20a234cf8",
+      "bytes": 1342,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAIProject-clean-20260612/realai/server/backends.py",
+      "sha1": "44bc944e0680d53e",
+      "bytes": 5404,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAIProject-clean-20260612/realai/server/router.py",
+      "sha1": "f6bb16001085f7ad",
+      "bytes": 13005,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/aura/memory/__init__.py",
+      "sha1": "0316d5037b78eae6",
+      "bytes": 202,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/essentials/.backup/clean_backup_20260708_112400/realai/api_server.py",
+      "sha1": "5c7713a1d87d8a4b",
+      "bytes": 10868,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/essentials/from_recycle_bin/restored_clear_names/Users/tsmit/realai/api_server.py",
+      "sha1": "d467ba48717f0e3b",
+      "bytes": 571,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/modules_runtime/from_zips/agent-tools-main/agent-tools-main/agent_tools/cli.py",
+      "sha1": "4fd64245f7feec86",
+      "bytes": 11440,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/modules_runtime/from_zips/agent-tools-main/agent-tools-main/tests/test_dashboard.py",
+      "sha1": "7826efacb7b4bd9b",
+      "bytes": 9289,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/modules_runtime/from_zips/agent-tools-main__2_/agent-tools-main/tests/test_agents_impl.py",
+      "sha1": "f5d28de0ff93e3b8",
+      "bytes": 12272,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/modules_runtime/from_zips/agent-tools-main__2_/agent-tools-main/tests/test_code_engineer.py",
+      "sha1": "4277a0b20318cb91",
+      "bytes": 8772,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/modules_runtime/from_zips/agent-tools-main__2_/agent-tools-main/tests/test_code_engineer_sandbox.py",
+      "sha1": "7f1edcc6789c3b95",
+      "bytes": 5966,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/modules_runtime/from_zips/agent-tools-main__2_/agent-tools-main/tests/test_registry.py",
+      "sha1": "2ebd84ef6454fdf5",
+      "bytes": 2940,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/modules_runtime/recycle_py_unique/api_server_api_server_20.py",
+      "sha1": "38e261acf4c00e44",
+      "bytes": 54211,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/modules_runtime/recycle_py_unique/realai-ish___init___118.py",
+      "sha1": "1a094c3cf9c8a454",
+      "bytes": 287,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/modules_runtime/recycle_py_unique/realai-ish_executor.py",
+      "sha1": "b6c359c036a096ba",
+      "bytes": 4933,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/modules_runtime/recycle_py_unique/realai-ish_model_registry_26.py",
+      "sha1": "6e95c86007c2ee3e",
+      "bytes": 13537,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/modules_runtime/recycle_py_unique/realai-ish_realai.py",
+      "sha1": "0cdbedca13037113",
+      "bytes": 623,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/realai/deepen_cycle.py",
+      "sha1": "20ab3c8349f8c964",
+      "bytes": 20529,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/realai/lambda_embeddings_audio.py",
+      "sha1": "3650e8bb429999d0",
+      "bytes": 5893,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/realai/memory/__init__.py",
+      "sha1": "b3e26635f7002205",
+      "bytes": 54,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/realai/plugins/tools/__init__.py",
+      "sha1": "a4e32e3d9ea69565",
+      "bytes": 31,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/realai/providers/__init__.py",
+      "sha1": "e6712d11faae1b68",
+      "bytes": 237,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/realai/server/tools/__init__.py",
+      "sha1": "63b092b1c8b698ce",
+      "bytes": 56,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/realai/server/tools/self_extend_tool.py",
+      "sha1": "8f686bd2ca9cca77",
+      "bytes": 2110,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/realai/server/tools/self_repair_tool.py",
+      "sha1": "60e80dccd632bd2e",
+      "bytes": 1395,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/realai/server/tools/system_scan_tool.py",
+      "sha1": "22063433858ba05d",
+      "bytes": 2206,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/scripts/heal_cli.py",
+      "sha1": "e8adc3598a0526b6",
+      "bytes": 2741,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/RealAi-unified-20260804/tests/test_agent_protocol.py",
+      "sha1": "90583639662e4871",
+      "bytes": 1766,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_cli-hf-preexisting/add_new_model_like.py",
+      "sha1": "a2cbf2bc38cdf34f",
+      "bytes": 32486,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_cli-hf-preexisting/auth.py",
+      "sha1": "8ec68a4c40669395",
+      "bytes": 6056,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_cli-hf-preexisting/autocompletion.py",
+      "sha1": "bf45574598478858",
+      "bytes": 6690,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_cli-hf-preexisting/chardetect.py",
+      "sha1": "f513cae1e068585c",
+      "bytes": 3242,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_cli-hf-preexisting/chat_completion.py",
+      "sha1": "d3f30637e4c2341f",
+      "bytes": 17056,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_cli-hf-preexisting/parse.py",
+      "sha1": "481ae6265129a347",
+      "bytes": 3362,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/auto_factory.py",
+      "sha1": "3f594e47820a4c1c",
+      "bytes": 35134,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/chunk_utils.py",
+      "sha1": "5b28b313e1bf03d7",
+      "bytes": 14357,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_afmoe.py",
+      "sha1": "379cb5cc12e3fa6a",
+      "bytes": 4186,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_aimv2.py",
+      "sha1": "eb48881b069b2ed8",
+      "bytes": 6537,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_albert.py",
+      "sha1": "0fa5605a27bfa22f",
+      "bytes": 2676,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_align.py",
+      "sha1": "50d02154b7f3c36b",
+      "bytes": 8459,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_altclip.py",
+      "sha1": "b8446301cb6bf25f",
+      "bytes": 10975,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_apertus.py",
+      "sha1": "5c566a41f148a7b3",
+      "bytes": 4153,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_arcee.py",
+      "sha1": "5293f8191089c0fe",
+      "bytes": 4180,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_aria.py",
+      "sha1": "55be0bd3c8a3124d",
+      "bytes": 6423,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_audio_spectrogram_transformer.py",
+      "sha1": "a6238981b8e98352",
+      "bytes": 2349,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_audioflamingo3.py",
+      "sha1": "9643a205ea3f6873",
+      "bytes": 4324,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_autoformer.py",
+      "sha1": "a17e9125a238cfa8",
+      "bytes": 7522,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_axk1.py",
+      "sha1": "ea20691395c8c085",
+      "bytes": 5228,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_axk2.py",
+      "sha1": "7449ca951363c936",
+      "bytes": 8043,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_aya_vision.py",
+      "sha1": "e8fbeb4e36400373",
+      "bytes": 3223,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_bamba.py",
+      "sha1": "0024f666084e73fd",
+      "bytes": 4759,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_bark.py",
+      "sha1": "5db68296e5acf390",
+      "bytes": 11592,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_bart.py",
+      "sha1": "4477aa42bbd69f46",
+      "bytes": 2995,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_beit.py",
+      "sha1": "0d62dceb1be2f428",
+      "bytes": 5711,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_bert.py",
+      "sha1": "75f453729d8bf68e",
+      "bytes": 2194,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_bert_generation.py",
+      "sha1": "0471acbe33c71deb",
+      "bytes": 2073,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_big_bird.py",
+      "sha1": "3c4287c2fd07336d",
+      "bytes": 3186,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_bigbird_pegasus.py",
+      "sha1": "5fdc76734af2723e",
+      "bytes": 3530,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_biogpt.py",
+      "sha1": "6f494189823f3844",
+      "bytes": 2053,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_bit.py",
+      "sha1": "09556053db92fe68",
+      "bytes": 3670,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_bitnet.py",
+      "sha1": "25b3b6d80ae1d8a1",
+      "bytes": 2336,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_blenderbot.py",
+      "sha1": "81cabdd688b616e0",
+      "bytes": 2756,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_blenderbot_small.py",
+      "sha1": "e59efb1c265c1cae",
+      "bytes": 2655,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_blip.py",
+      "sha1": "3355c2b37ff6a03c",
+      "bytes": 6482,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_blip_2.py",
+      "sha1": "828efcdb21444691",
+      "bytes": 7170,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_bloom.py",
+      "sha1": "471c5bb477c68c5b",
+      "bytes": 3203,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_blt.py",
+      "sha1": "6cbdb6158a7c6bff",
+      "bytes": 11674,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_bridgetower.py",
+      "sha1": "609677817251631a",
+      "bytes": 6039,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_bros.py",
+      "sha1": "99aa9f56f3ab180f",
+      "bytes": 2770,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_camembert.py",
+      "sha1": "8514e88394e5daec",
+      "bytes": 2208,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_canine.py",
+      "sha1": "1b600276442468f7",
+      "bytes": 2998,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_chameleon.py",
+      "sha1": "a503f32b24319077",
+      "bytes": 4810,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_chinese_clip.py",
+      "sha1": "720739f89287644d",
+      "bytes": 11460,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_chmv2.py",
+      "sha1": "1ac65f0717460d7b",
+      "bytes": 5533,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_clap.py",
+      "sha1": "619498451e5a8550",
+      "bytes": 7732,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_clip.py",
+      "sha1": "4fb1bf6af03e449b",
+      "bytes": 10674,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_clipseg.py",
+      "sha1": "64a850257b706afa",
+      "bytes": 12069,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_clvp.py",
+      "sha1": "1a5924cc1a43edc1",
+      "bytes": 10568,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_codegen.py",
+      "sha1": "70018135d44e6e90",
+      "bytes": 2650,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_cohere.py",
+      "sha1": "b541928127f5b9dc",
+      "bytes": 3390,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_cohere2.py",
+      "sha1": "18e7ae1277cf3d1e",
+      "bytes": 4605,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_cohere2_moe.py",
+      "sha1": "4a9cdebc2f6d3a83",
+      "bytes": 6578,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_cohere2_vision.py",
+      "sha1": "b11772cde487ee5e",
+      "bytes": 2611,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_cohere_asr.py",
+      "sha1": "8692ae23aa367917",
+      "bytes": 3607,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_cohere_compass.py",
+      "sha1": "7d9149e9b044b9c0",
+      "bytes": 8042,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_colmodernvbert.py",
+      "sha1": "cf1fbb786e3b8ab5",
+      "bytes": 3578,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_colpali.py",
+      "sha1": "ef6d2540fe64a43d",
+      "bytes": 2251,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_colqwen2.py",
+      "sha1": "da91d36e03d1511c",
+      "bytes": 2100,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_conditional_detr.py",
+      "sha1": "deb611fa9a9fa55a",
+      "bytes": 4663,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_convbert.py",
+      "sha1": "f06715a690afafe6",
+      "bytes": 2427,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_convnext.py",
+      "sha1": "bd670df42d1d9b18",
+      "bytes": 2492,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_convnextv2.py",
+      "sha1": "4abd2b69df63a47f",
+      "bytes": 2484,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_cosmos3_edge.py",
+      "sha1": "1e2d385e83429418",
+      "bytes": 7887,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_cosmos3_omni.py",
+      "sha1": "ef0ea2c7f763e5e6",
+      "bytes": 3496,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_cpmant.py",
+      "sha1": "7f64f1eef734b482",
+      "bytes": 2448,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_csm.py",
+      "sha1": "5f213c50bbd56a6c",
+      "bytes": 6952,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_ctrl.py",
+      "sha1": "8d4cdc0f1471aee3",
+      "bytes": 2211,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_cvt.py",
+      "sha1": "34a3c9deabd0d1c0",
+      "bytes": 4244,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_cwm.py",
+      "sha1": "ed96c94c160d9108",
+      "bytes": 5182,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_d_fine.py",
+      "sha1": "c59f1c017c917b52",
+      "bytes": 12871,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_dab_detr.py",
+      "sha1": "e219317090040f26",
+      "bytes": 5833,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_dac.py",
+      "sha1": "ef4274d59670c192",
+      "bytes": 2797,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_data2vec_audio.py",
+      "sha1": "1e320a5217613d3e",
+      "bytes": 11098,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_dbrx.py",
+      "sha1": "e8ecb6d4f858391d",
+      "bytes": 6541,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_deberta.py",
+      "sha1": "8f41324dae7e3ac4",
+      "bytes": 3632,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_deberta_v2.py",
+      "sha1": "188e8a81bd0f755a",
+      "bytes": 3687,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_decision_transformer.py",
+      "sha1": "829e336f6efa9a3e",
+      "bytes": 3371,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_deepseek_ocr2.py",
+      "sha1": "543f61d7ce0a1f76",
+      "bytes": 12405,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_deepseek_v2.py",
+      "sha1": "04bed0fb0e51bd79",
+      "bytes": 6031,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_deepseek_v3.py",
+      "sha1": "a4a5592bfa312384",
+      "bytes": 4999,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_deepseek_v32.py",
+      "sha1": "89963fc2ad1b125e",
+      "bytes": 6820,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_deepseek_v4.py",
+      "sha1": "d03f067149dc46a2",
+      "bytes": 15548,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_deepseek_vl.py",
+      "sha1": "b57f6be3d0363154",
+      "bytes": 3581,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_deepseek_vl_hybrid.py",
+      "sha1": "f2abb5e30bfa7b56",
+      "bytes": 4514,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_deformable_detr.py",
+      "sha1": "c81fe2da87ed811d",
+      "bytes": 6319,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_deimv2.py",
+      "sha1": "1f8d09b1c9e3e529",
+      "bytes": 14107,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_deit.py",
+      "sha1": "e17f2e447809ab94",
+      "bytes": 2610,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_depth_anything.py",
+      "sha1": "439fc5772f3c135d",
+      "bytes": 4243,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_depth_pro.py",
+      "sha1": "8571dd39abb2714d",
+      "bytes": 9390,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_detr.py",
+      "sha1": "91f0f8829f948277",
+      "bytes": 4308,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_dia.py",
+      "sha1": "8b44d0fc6bdefcf5",
+      "bytes": 6366,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_diffllama.py",
+      "sha1": "ba7dfa96f53a49b8",
+      "bytes": 2835,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_diffusion_gemma.py",
+      "sha1": "e48b86654bcbffcc",
+      "bytes": 10430,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_dinat.py",
+      "sha1": "3fb5f1d09f46b92c",
+      "bytes": 3261,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_dinov2.py",
+      "sha1": "83c42bfaf96bb0a6",
+      "bytes": 3385,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_dinov2_with_registers.py",
+      "sha1": "430fc4b3f5a7e61a",
+      "bytes": 4331,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_dinov3_convnext.py",
+      "sha1": "9c5d87c1164e0eb7",
+      "bytes": 2512,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_dinov3_vit.py",
+      "sha1": "b7f9b44abf34160e",
+      "bytes": 4554,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_distilbert.py",
+      "sha1": "d6828a8f1c74a367",
+      "bytes": 2739,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_doge.py",
+      "sha1": "0aae32dc91cd8c3f",
+      "bytes": 4741,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_donut_swin.py",
+      "sha1": "8dcbfca1cc24a4cf",
+      "bytes": 2627,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_dots1.py",
+      "sha1": "95c7adf87f04e046",
+      "bytes": 5376,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_dpr.py",
+      "sha1": "a36e4d0ff8130bb3",
+      "bytes": 2052,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_dpt.py",
+      "sha1": "2ee1d01df4df82d3",
+      "bytes": 7759,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_edgetam.py",
+      "sha1": "99b5d3fc769fa689",
+      "bytes": 9846,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_edgetam_video.py",
+      "sha1": "1dd26882434aa7a4",
+      "bytes": 16306,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_efficientloftr.py",
+      "sha1": "1332647e3af709a2",
+      "bytes": 6250,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_efficientnet.py",
+      "sha1": "856d1d4d94ebac97",
+      "bytes": 4180,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_electra.py",
+      "sha1": "bf3b4cf0e5f27e16",
+      "bytes": 3754,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_emu3.py",
+      "sha1": "843dc38f2c219472",
+      "bytes": 5245,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_encodec.py",
+      "sha1": "57cecfa1b59eee13",
+      "bytes": 6613,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_encoder_decoder.py",
+      "sha1": "36017e8f613b0923",
+      "bytes": 3941,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_eomt.py",
+      "sha1": "2803c906b6609fcc",
+      "bytes": 4465,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_eomt_dinov3.py",
+      "sha1": "8dfcddc2f283471b",
+      "bytes": 5045,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_ernie.py",
+      "sha1": "93e933cfd02b9d8f",
+      "bytes": 2515,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_ernie4_5.py",
+      "sha1": "29cb67c3765dd673",
+      "bytes": 3253,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_ernie4_5_moe.py",
+      "sha1": "95d89be04d81ebd1",
+      "bytes": 5026,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_ernie4_5_vl_moe.py",
+      "sha1": "11989bf83232b275",
+      "bytes": 9488,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_esm.py",
+      "sha1": "f7fe23f64bc68ec1",
+      "bytes": 10091,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_esmc.py",
+      "sha1": "b2232b6d9d806f50",
+      "bytes": 5459,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_esmfold2.py",
+      "sha1": "b8362811856f1fa2",
+      "bytes": 20211,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_eurobert.py",
+      "sha1": "f6e845ccd201d3f0",
+      "bytes": 4776,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_evolla.py",
+      "sha1": "518f3623be47937c",
+      "bytes": 6204,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_exaone4.py",
+      "sha1": "9c62a32accd52d8e",
+      "bytes": 5015,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_exaone4_5.py",
+      "sha1": "b10e3649f15453d8",
+      "bytes": 4232,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_exaone_moe.py",
+      "sha1": "5f19035d685a4d60",
+      "bytes": 6212,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_falcon.py",
+      "sha1": "f3d6c7ef658b9925",
+      "bytes": 4413,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_falcon_h1.py",
+      "sha1": "f915455e4ade29a6",
+      "bytes": 6554,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_falcon_mamba.py",
+      "sha1": "cb091b9d62bfa1ad",
+      "bytes": 5439,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_fast_vlm.py",
+      "sha1": "fd8b3f4a1c3b86cd",
+      "bytes": 5001,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_fastspeech2_conformer.py",
+      "sha1": "0130bf656d716c63",
+      "bytes": 19284,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_flaubert.py",
+      "sha1": "c620d58b6f9c6791",
+      "bytes": 6981,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_flava.py",
+      "sha1": "2b0d6df646924a68",
+      "bytes": 18811,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_flex_olmo.py",
+      "sha1": "933c593b8b9da2bd",
+      "bytes": 4504,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_florence2.py",
+      "sha1": "d0427cbad7f635a2",
+      "bytes": 5833,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_fnet.py",
+      "sha1": "a9510417a3f8db9a",
+      "bytes": 2526,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_focalnet.py",
+      "sha1": "f00df72722966053",
+      "bytes": 4254,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_fsmt.py",
+      "sha1": "9a94d9aa43406d39",
+      "bytes": 4267,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_funnel.py",
+      "sha1": "11eca9aca8446d82",
+      "bytes": 4609,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_fuyu.py",
+      "sha1": "611336d970af9944",
+      "bytes": 3822,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gemma.py",
+      "sha1": "ad1ee58e1c1b0d11",
+      "bytes": 3657,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gemma2.py",
+      "sha1": "4c23e01e088fa9bd",
+      "bytes": 4973,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gemma3.py",
+      "sha1": "5939bfd02411af2e",
+      "bytes": 10250,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gemma3n.py",
+      "sha1": "bd578bcba5c152ae",
+      "bytes": 23202,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gemma4.py",
+      "sha1": "62078ef8be8f92ac",
+      "bytes": 16585,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gemma4_assistant.py",
+      "sha1": "14344631dd6f0796",
+      "bytes": 4364,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gemma4_unified.py",
+      "sha1": "93dfb5de800bb928",
+      "bytes": 14186,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gemma4_unified_assistant.py",
+      "sha1": "612c423b99e483c7",
+      "bytes": 3117,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_git.py",
+      "sha1": "27bdaf49a3b5f8b0",
+      "bytes": 3732,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_glm.py",
+      "sha1": "5659f35362896667",
+      "bytes": 3054,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_glm4.py",
+      "sha1": "4992e51a7249224c",
+      "bytes": 3040,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_glm46v.py",
+      "sha1": "cf03548ec9f33f36",
+      "bytes": 3986,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_glm4_moe.py",
+      "sha1": "83a1da57803b53ad",
+      "bytes": 5705,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_glm4_moe_lite.py",
+      "sha1": "4d516d2305f642c5",
+      "bytes": 5082,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_glm4v.py",
+      "sha1": "c2cb0c81f8b88052",
+      "bytes": 7706,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_glm4v_moe.py",
+      "sha1": "42acdfdcd13bf381",
+      "bytes": 8786,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_glm5_next.py",
+      "sha1": "04864deee81807b5",
+      "bytes": 14202,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_glm_image.py",
+      "sha1": "6ae28ffceaf2e4b1",
+      "bytes": 7772,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_glm_moe_dsa.py",
+      "sha1": "a089caf710f7f2fa",
+      "bytes": 7926,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_glm_ocr.py",
+      "sha1": "f17dacd2e13c0c01",
+      "bytes": 7652,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_glmasr.py",
+      "sha1": "c18231c992a29644",
+      "bytes": 4200,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_glmga.py",
+      "sha1": "a9bbafbfa6829a9d",
+      "bytes": 4005,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_glpn.py",
+      "sha1": "31aab5857c1f5935",
+      "bytes": 3451,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_got_ocr2.py",
+      "sha1": "320d509e9dde46f9",
+      "bytes": 5435,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gpt2.py",
+      "sha1": "0c5cbf3eb87a6da7",
+      "bytes": 4552,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gpt_bigcode.py",
+      "sha1": "5111ab358f040cd5",
+      "bytes": 3095,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gpt_neo.py",
+      "sha1": "1f8ae0e2f8531a19",
+      "bytes": 5192,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gpt_neox.py",
+      "sha1": "56c17b024b263780",
+      "bytes": 4092,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gpt_neox_japanese.py",
+      "sha1": "7594f8f560350883",
+      "bytes": 3105,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gpt_oss.py",
+      "sha1": "a93ecce9a46737e5",
+      "bytes": 3336,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_gptj.py",
+      "sha1": "57d40b78e37854e2",
+      "bytes": 2227,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_granite.py",
+      "sha1": "84b446b3173e6bb7",
+      "bytes": 3444,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_granite4_vision.py",
+      "sha1": "c57353cee827abc5",
+      "bytes": 8548,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_granite_speech.py",
+      "sha1": "c5c1cb49d0ce898d",
+      "bytes": 5860,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_granite_speech5.py",
+      "sha1": "4f1508d73ae28768",
+      "bytes": 6761,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_granite_speech_plus.py",
+      "sha1": "4047e2de1c7a2c7b",
+      "bytes": 8085,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_granite_swa.py",
+      "sha1": "358c2200384cc8d1",
+      "bytes": 5478,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_granitemoe.py",
+      "sha1": "9988cf5d3665394b",
+      "bytes": 3047,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_granitemoe_swa.py",
+      "sha1": "f9b90118478601e9",
+      "bytes": 6439,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_granitemoehybrid.py",
+      "sha1": "c0b97db5dbe45f6c",
+      "bytes": 4918,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_granitemoeshared.py",
+      "sha1": "d05ded15ba801cbb",
+      "bytes": 3590,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_grounding_dino.py",
+      "sha1": "9f8c50386f9110a1",
+      "bytes": 6868,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_groupvit.py",
+      "sha1": "a6f7581af4f682e5",
+      "bytes": 9910,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_helium.py",
+      "sha1": "6301cbfab62a3150",
+      "bytes": 2717,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_hgnet_v2.py",
+      "sha1": "e910dafe313aef2b",
+      "bytes": 6683,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_hiera.py",
+      "sha1": "ff29950336458912",
+      "bytes": 5428,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_higgs_audio_v2.py",
+      "sha1": "35912d197472ac71",
+      "bytes": 5595,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_higgs_audio_v2_tokenizer.py",
+      "sha1": "8280e20d03c3d372",
+      "bytes": 7534,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_hrm_text.py",
+      "sha1": "c0c6908cdf8e37fd",
+      "bytes": 7519,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_hubert.py",
+      "sha1": "f4f44317229ea3ab",
+      "bytes": 10288,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_hunyuan_v1_dense.py",
+      "sha1": "ac6b7c07f94f34f2",
+      "bytes": 2345,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_hunyuan_v1_moe.py",
+      "sha1": "e52312eb191d6193",
+      "bytes": 4650,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_hunyuan_vl.py",
+      "sha1": "945c5a794eaa6b87",
+      "bytes": 13280,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_hy_v3.py",
+      "sha1": "6385c9372d3b9144",
+      "bytes": 5104,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_hyperclovax.py",
+      "sha1": "b2673c1392b23214",
+      "bytes": 6083,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_ibert.py",
+      "sha1": "dc008ca01645c914",
+      "bytes": 2532,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_idefics.py",
+      "sha1": "a3433cfec2010834",
+      "bytes": 6974,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_idefics2.py",
+      "sha1": "0c93582a0c8ee4d6",
+      "bytes": 6630,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_idefics3.py",
+      "sha1": "5104f3eda7765be4",
+      "bytes": 4060,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_ijepa.py",
+      "sha1": "05f55d83228cb702",
+      "bytes": 2369,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_imagegpt.py",
+      "sha1": "11e4976d55090197",
+      "bytes": 2753,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_informer.py",
+      "sha1": "c3e4ad975d00e949",
+      "bytes": 8133,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_inkling.py",
+      "sha1": "8065c7fffe302a01",
+      "bytes": 13998,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_instructblip.py",
+      "sha1": "f0ef9bacaad962c3",
+      "bytes": 7316,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_instructblipvideo.py",
+      "sha1": "91b46e94f7e87a62",
+      "bytes": 8365,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_internvl.py",
+      "sha1": "2d6538055742ab1c",
+      "bytes": 5138,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_jais2.py",
+      "sha1": "f80d1a1c6c9d2917",
+      "bytes": 4235,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_jamba.py",
+      "sha1": "b01be59d1f601634",
+      "bytes": 5693,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_janus.py",
+      "sha1": "2e55ab9220dc637f",
+      "bytes": 6787,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_jetmoe.py",
+      "sha1": "7988fbfe433ebef0",
+      "bytes": 2933,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_jina_embeddings_v3.py",
+      "sha1": "a5aa28c7e2d1bb3d",
+      "bytes": 3109,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_kimi_k25.py",
+      "sha1": "e23330877f1c65aa",
+      "bytes": 4448,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_kosmos2.py",
+      "sha1": "cbb583efe7499ff6",
+      "bytes": 4397,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_kosmos2_5.py",
+      "sha1": "1c20e8697af8b6b2",
+      "bytes": 4999,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_kyutai_speech_to_text.py",
+      "sha1": "290da7316a8f2198",
+      "bytes": 3926,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_laguna.py",
+      "sha1": "3795d4e697063d22",
+      "bytes": 8456,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_lasr.py",
+      "sha1": "1841fb651645ca42",
+      "bytes": 6665,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_layoutlm.py",
+      "sha1": "65b3e4f01528cab9",
+      "bytes": 2205,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_layoutlmv2.py",
+      "sha1": "e158266660fd2cdc",
+      "bytes": 7063,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_layoutlmv3.py",
+      "sha1": "76d6d90d84782f62",
+      "bytes": 4153,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_layoutxlm.py",
+      "sha1": "4f3608baf037626c",
+      "bytes": 7817,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_led.py",
+      "sha1": "aec1843e94b7fccd",
+      "bytes": 3214,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_levit.py",
+      "sha1": "c8013be3e035bc44",
+      "bytes": 2854,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_lfm2.py",
+      "sha1": "dfa05ec4ed936db5",
+      "bytes": 3442,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_lfm2_moe.py",
+      "sha1": "3d9f11fcfa76e1d6",
+      "bytes": 3153,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_lfm2_vl.py",
+      "sha1": "326928d14bf3767f",
+      "bytes": 2559,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_lightglue.py",
+      "sha1": "5ef296a2380879a4",
+      "bytes": 4745,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_lighton_ocr.py",
+      "sha1": "f29bb24424b6ab87",
+      "bytes": 4357,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_lilt.py",
+      "sha1": "6e21343439772ba8",
+      "bytes": 2442,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_llama.py",
+      "sha1": "66b81405182a5795",
+      "bytes": 3896,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_llama4.py",
+      "sha1": "862be368809fc974",
+      "bytes": 11139,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_llava.py",
+      "sha1": "27038e92f0cebbe3",
+      "bytes": 3788,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_llava_next.py",
+      "sha1": "2f1e28f27b771d51",
+      "bytes": 3962,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_llava_next_video.py",
+      "sha1": "7ced34498fa2258e",
+      "bytes": 5484,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_llava_onevision.py",
+      "sha1": "f535981e503f6e19",
+      "bytes": 5571,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_longcat_flash.py",
+      "sha1": "d97442a8247494a8",
+      "bytes": 4538,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_longformer.py",
+      "sha1": "9b23b6c266442d3c",
+      "bytes": 2470,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_longt5.py",
+      "sha1": "346f16ef34706f3f",
+      "bytes": 4563,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_luke.py",
+      "sha1": "cc4b95e043647118",
+      "bytes": 2694,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_lw_detr.py",
+      "sha1": "8e5bdbab3b571733",
+      "bytes": 10668,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_lxmert.py",
+      "sha1": "393316f4bdfeb15a",
+      "bytes": 5183,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_m2m_100.py",
+      "sha1": "16bcc799075f3bdd",
+      "bytes": 2473,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mamba.py",
+      "sha1": "faada788995e01cd",
+      "bytes": 4285,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mamba2.py",
+      "sha1": "a0d2f08293ead95a",
+      "bytes": 4085,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_marian.py",
+      "sha1": "7409d0109486c32c",
+      "bytes": 3049,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_markuplm.py",
+      "sha1": "c07bbfc5edcde411",
+      "bytes": 3079,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mask2former.py",
+      "sha1": "d1023f246b79daf1",
+      "bytes": 5631,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_maskformer.py",
+      "sha1": "95fddbc27b7f4a44",
+      "bytes": 9599,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mbart.py",
+      "sha1": "61964bb98a05d7a2",
+      "bytes": 2613,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_megatron_bert.py",
+      "sha1": "3ea965d0c9ff5c23",
+      "bytes": 2165,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mellum.py",
+      "sha1": "9177956e8a19b0d5",
+      "bytes": 5593,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_metaclip_2.py",
+      "sha1": "389c2a123ea30a48",
+      "bytes": 11438,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mgp_str.py",
+      "sha1": "6801cea7eff14337",
+      "bytes": 3046,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mimi.py",
+      "sha1": "e75b3ed23a1cae7f",
+      "bytes": 7783,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mimo_v2_flash.py",
+      "sha1": "d587c6d7e47c0a40",
+      "bytes": 6269,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_minicpm3.py",
+      "sha1": "613d2b7de41b0999",
+      "bytes": 7105,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_minicpmv4_6.py",
+      "sha1": "09a160af076a8555",
+      "bytes": 5348,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_minimax.py",
+      "sha1": "3d10f190bc02f4f9",
+      "bytes": 5822,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_minimax_m2.py",
+      "sha1": "a43f7e5a3dd69f4a",
+      "bytes": 4120,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_minimax_m3_vl.py",
+      "sha1": "00a923c19b18c5ba",
+      "bytes": 10130,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_ministral.py",
+      "sha1": "a81624f5c302fdab",
+      "bytes": 4054,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_ministral3.py",
+      "sha1": "8ef0c2159c52153a",
+      "bytes": 4423,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mistral.py",
+      "sha1": "e7da2c4e7bf5bb4c",
+      "bytes": 3401,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mistral3.py",
+      "sha1": "0d1f118a6b7ddffd",
+      "bytes": 3875,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mistral4.py",
+      "sha1": "9aef59f3d19ddd53",
+      "bytes": 5261,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mixtral.py",
+      "sha1": "75c48521a6801e3a",
+      "bytes": 3467,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mlcd.py",
+      "sha1": "c48dba9b5eab8f2f",
+      "bytes": 2884,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mllama.py",
+      "sha1": "c51894000578c981",
+      "bytes": 7446,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mm_grounding_dino.py",
+      "sha1": "52017fa67a2e5bfa",
+      "bytes": 7041,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mobilebert.py",
+      "sha1": "5977c67bc0d7c1fe",
+      "bytes": 3443,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mobilenet_v1.py",
+      "sha1": "8153eee3bf92371d",
+      "bytes": 2219,
+      "ext": ".py"
+    },
+    {
+      "path": "orphans/_parked/2026-08-30-pkg-clean/_models-hf-preexisting/configuration_mobilenet_v2.py",
+      "sha1": "87541b199ed3767c",
+      "bytes": 3591,
+      "ext": ".py"
+    }
+  ],
+  "proposed_abilities": [
+    {
+      "id": "health",
+      "description": "Stub liveness / contract discovery (no runtime heal)"
+    },
+    {
+      "id": "repo_map",
+      "description": "Summarize learned tree layout and stack"
+    },
+    {
+      "id": "abilities_bridge",
+      "description": "Bridge stub for existing abilities/ surface"
+    },
+    {
+      "id": "agents_bridge",
+      "description": "Bridge stub for existing agents/ surface"
+    },
+    {
+      "id": "packages_bridge",
+      "description": "Bridge stub for existing packages/ surface"
+    },
+    {
+      "id": "modules_bridge",
+      "description": "Bridge stub for existing realai/modules/ surface"
+    },
+    {
+      "id": "plugins_bridge",
+      "description": "Bridge stub for existing realai/plugins/ surface"
+    },
+    {
+      "id": "route_v1_audio_transcriptions",
+      "description": "Hint stub for discovered route /v1/audio/transcriptions"
+    },
+    {
+      "id": "route_v1_audio_speech",
+      "description": "Hint stub for discovered route /v1/audio/speech"
+    },
+    {
+      "id": "route_v1_chat_completions",
+      "description": "Hint stub for discovered route /v1/chat/completions"
+    },
+    {
+      "id": "route_v1_embeddings",
+      "description": "Hint stub for discovered route /v1/embeddings"
+    },
+    {
+      "id": "route_healthz",
+      "description": "Hint stub for discovered route /healthz"
+    },
+    {
+      "id": "route_readyz",
+      "description": "Hint stub for discovered route /readyz"
+    },
+    {
+      "id": "route_v1_models",
+      "description": "Hint stub for discovered route /v1/models"
+    },
+    {
+      "id": "route_v1_models_reload",
+      "description": "Hint stub for discovered route /v1/models/reload"
+    }
+  ],
+  "plugin_proposal": {
+    "id": "realai-gold-coach",
+    "package": "realai_gold_coach",
+    "path": "C:\\RealAI-clean\\realai\\plugins\\realai_gold_coach",
+    "version": "0.1.0",
+    "abilities": [
+      "health",
+      "repo_map",
+      "abilities_bridge",
+      "agents_bridge",
+      "packages_bridge",
+      "modules_bridge",
+      "plugins_bridge",
+      "route_v1_audio_transcriptions",
+      "route_v1_audio_speech",
+      "route_v1_chat_completions",
+      "route_v1_embeddings",
+      "route_healthz",
+      "route_readyz",
+      "route_v1_models",
+      "route_v1_models_reload"
+    ],
+    "protected_collision": false
+  },
+  "learned_at": "2026-09-19T15:39:33.099814+00:00",
+  "heal": false
+}

@@ -138,5 +138,23 @@ def get_agent_registry() -> Dict[str, SpecialistAgent]:
 
 
 def get_agent(agent_type: str) -> Optional[SpecialistAgent]:
-    """Get a specialist agent by type."""
-    return get_agent_registry().get((agent_type or "").lower())
+    """Get a specialist agent by type (core hierarchical or Agency id)."""
+    key = (agent_type or "").lower().strip()
+    hit = get_agent_registry().get(key)
+    if hit is not None:
+        return hit
+    # Agency persona → SpecialistAgent with markdown system prompt
+    try:
+        from agents.hierarchical.agency import get_agency_specialist
+
+        spec = get_agency_specialist(key)
+        if not spec:
+            return None
+        prompt = str(spec.get("system_prompt") or spec.get("description") or spec.get("role") or "")
+        return SpecialistAgent(
+            str(spec.get("role") or key),
+            str(spec.get("division") or "agency"),
+            prompt[:12000] or f"You are the {key} Agency specialist for RealAI.",
+        )
+    except Exception:
+        return None

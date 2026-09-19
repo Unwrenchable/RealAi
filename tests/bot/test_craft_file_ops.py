@@ -23,13 +23,31 @@ class _WorkspaceTmp(unittest.TestCase):
         self._cwd = os.getcwd()
         self._env = {
             k: os.environ.get(k)
-            for k in ("REALAI_WORKSPACE", "REALAI_HOME", "REALAI_PRODUCT_ROOT", "REALAI_ROOT")
+            for k in (
+                "REALAI_WORKSPACE",
+                "REALAI_HOME",
+                "REALAI_PRODUCT_ROOT",
+                "REALAI_ROOT",
+                "REALAI_EXTRA_WRITE_ROOTS",
+                "REALAI_EXTRA_READ_ROOTS",
+                "REALAI_EXTRA_WORKSPACES",
+            )
         }
         self._tmp = tempfile.TemporaryDirectory()
         self.root = Path(self._tmp.name)
         (self.root / "hello.txt").write_text("alpha-ground-token\n", encoding="utf-8")
         os.environ["REALAI_WORKSPACE"] = str(self.root)
+        # Machine-wide EXTRA_WRITE=C:\ would defeat path sandbox assertions.
+        os.environ.pop("REALAI_EXTRA_WRITE_ROOTS", None)
+        os.environ.pop("REALAI_EXTRA_READ_ROOTS", None)
+        os.environ.pop("REALAI_EXTRA_WORKSPACES", None)
         os.chdir(self.root)
+        try:
+            from realai.workspace import set_request_workspace
+
+            set_request_workspace(None)
+        except Exception:
+            pass
 
     def tearDown(self):
         os.chdir(self._cwd)
@@ -38,6 +56,12 @@ class _WorkspaceTmp(unittest.TestCase):
                 os.environ.pop(k, None)
             else:
                 os.environ[k] = v
+        try:
+            from realai.workspace import set_request_workspace
+
+            set_request_workspace(None)
+        except Exception:
+            pass
         self._tmp.cleanup()
 
 
@@ -60,6 +84,44 @@ class TestLiveExecDoesNotClaimCraftFileVerbs(unittest.TestCase):
         self.assertTrue(wants_live_exec("$ whoami"))
         self.assertTrue(wants_live_exec("/run dir"))
         self.assertTrue(wants_live_exec("run `hostname`"))
+
+    def test_long_policy_paste_is_not_live_exec(self):
+        paste = (
+            "Work like a desktop coding agent. LOOP every request: "
+            "INSPECT read/list/grep real files. Never invent contents. "
+            "ACT write with Craft. VERIFY re-read. REPORT short. "
+            + ("x" * 200)
+        )
+        self.assertGreater(len(paste), 280)
+        self.assertFalse(wants_live_exec(paste))
+        self.assertFalse(wants_live_exec("type this and run that " + ("policy " * 40)))
+
+    def test_prose_with_type_and_run_does_not_steal_turn(self):
+        from realai.bot.live_exec import try_live_exec
+
+        prose = "I type and run commands. Prefer tools. Never invent stdout."
+        self.assertFalse(wants_live_exec(prose))
+        self.assertIsNone(try_live_exec(prose))
+
+        policy = (
+            "Work like a desktop coding agent (same loop as our Grok Bot sessions), "
+            "not a chatbot.\nLOOP — every request:\n"
+            "1) INSPECT — read/list/grep real files.\n"
+            "Prove it: read docs/CONSOLE_OPERATOR_DIRECTIVE.md"
+        )
+        self.assertFalse(wants_live_exec(policy))
+        self.assertIsNone(try_live_exec(policy))
+
+    def test_run_whoami_still_live_exec(self):
+        from realai.bot.live_exec import try_live_exec
+
+        self.assertTrue(wants_live_exec("run whoami"))
+        dispatch = try_live_exec("run whoami")
+        self.assertEqual((dispatch or {}).get("surface"), "live_exec")
+        self.assertNotEqual(
+            ((dispatch or {}).get("result") or {}).get("error"),
+            "need_explicit_command",
+        )
 
 
 class TestEasyToolsDoesNotStealCraftFileVerbs(unittest.TestCase):
@@ -127,10 +189,13 @@ class TestOperatorWriteDispatch(_WorkspaceTmp):
     def test_write_outside_workspace_fails(self):
         from realai.orchestration.v3_orchestrator import _operator_intent_dispatch
 
+        escape = self.root.parent / "escape.txt"
+        if escape.exists():
+            escape.unlink()
         dispatch = _operator_intent_dispatch("/write ../escape.txt NOPE")
         result = (dispatch or {}).get("result") or {}
         self.assertTrue(result.get("error") or result.get("ok") is False, result)
-        self.assertFalse((self.root.parent / "escape.txt").exists())
+        self.assertFalse(escape.exists())
 
 
 class TestNaturalWriteSpec(unittest.TestCase):

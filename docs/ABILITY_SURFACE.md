@@ -1,23 +1,10 @@
 # RealAI Ability Surface (Phase 5F)
 
-Generated: `2026-09-08T14:49:34.814847+00:00`
+Generated: `2026-09-19T17:02:14.081308+00:00`
 
-**Coverage vs technical rundown:** **100.0%** weighted (62 LIVE, 0 PARTIAL, 0 CODE/GOLD/STUB, 0 MISSING/SOFT)
+**Coverage vs technical rundown:** **100.0%** weighted (64 LIVE, 0 PARTIAL, 0 CODE/GOLD/STUB, 0 MISSING/SOFT)
 
 > `verify_v3_matrix` pass counts = stack health, not full product ability completeness.
-
-## Console file ops (live wiring)
-
-Scattered ability nests are inventory, not the runtime. Console/Hive **read and write** go through:
-
-- `realai/orchestration/v3_orchestrator.py` — chat `POST /v1/chat/completions` operator dispatch
-- `realai/cli/craft.py` — Craft TOOLS (`tool_write` / `tool_read` / `list` / `grep` / `git` / `pwd`)
-- `realai/bot/natural_mode.py` — plain-English inspect + create/fix when path+content are clear
-
-**Slash:** `/write rel/path content` (also `/read` `/list` `/grep` `/git` `/pwd`, and `/craft write …`) runs Craft file tools **before** `live_exec`. Writes stay inside WORKSPACE (`safe_under_write`).
-
-**Natural:** “create file `docs/note.txt` with content hello” executes Craft write. Inspect-only asks (“what’s in console.html”) still inspect and do not write. Ambiguous create/fix returns a need-path/content failure instead of a hallucinated success. Fix/implement after inspect can apply coder `/write path|||content` blocks (Craft Phase 2 `/work` pattern).
-
 
 ## External gold roots (32/60 present)
 
@@ -141,6 +128,7 @@ Scattered ability nests are inventory, not the runtime. Console/Hive **read and 
 | `rollout_all_repos` | Rollout all repos | **LIVE** | `abilities/rollout_all_repos.py + realai.plugins.tools.rollout_all_repos` |
 | `quarantine_reconstruct` | Quarantine reconstruct | **LIVE** | `abilities/quarantine_reconstruct.py` |
 | `plugin_system` | Plugin system | **LIVE** | `plugins/rackup_coach + POST tools rackup_invoke` |
+| `learn_git` | Git-learn (offline packet + coach stub) | **LIVE** | `python -m realai.learn_git --all-branches + Craft /learn (no heal)` |
 | `memory_learning` | Memory & persistent learning | **LIVE** | `POST /v1/tools/execute ability.memory_learning + aura_memory + hive_memory + chat inject` |
 | `self_reflection` | Chain-of-thought + self-reflection | **LIVE** | `POST /v1/self-improve/evaluate` |
 | `knowledge_synthesis` | Knowledge synthesis | **LIVE** | `POST /v1/tools/execute ability.knowledge_synthesis + knowledge_graph + world_model` |

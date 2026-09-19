@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "dry_run": false,
+  "applied_at": "2026-09-19T16:47:29.077573+00:00",
+  "agency_md_imported": 142,
+  "repo_harvested": 253,
+  "registry_total": 258,
+  "tagged_agency": 142,
+  "tagged_hive": 12,
+  "tagged_multi": 3,
+  "paths": {
+    "agency_dir": "C:\\RealAI-clean\\agents\\agency",
+    "agents_json": "C:\\RealAI-clean\\agents\\agentx\\agents.json",
+    "agency_import": "C:\\RealAI-clean\\agents\\agentx\\agency_import.json"
+  }
+}

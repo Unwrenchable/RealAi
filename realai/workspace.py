@@ -21,14 +21,23 @@ Rules:
 from __future__ import annotations
 
 import os
+from contextlib import contextmanager
+from contextvars import ContextVar
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Iterator, Optional, Tuple
 
 _PKG = Path(__file__).resolve().parent
 _PRODUCT_ROOT = _PKG.parent.resolve()
 
 _CANONICAL_HOME = _PKG
 _CANONICAL_WORKSPACE = _PRODUCT_ROOT
+
+# Per-request / per-task workspace override (Console "work in <path>").
+# Beats sticky REALAI_WORKSPACE env without mutating process-global state for
+# other concurrent requests on the same Hive process.
+_REQUEST_WORKSPACE: ContextVar[Optional[Path]] = ContextVar(
+    "realai_request_workspace", default=None
+)
 
 
 # ------------------------------------------------------------
@@ -133,22 +142,57 @@ def realai_home() -> Path:
     return _CANONICAL_HOME
 
 
+def get_request_workspace() -> Optional[Path]:
+    """Return the ContextVar workspace override, if any."""
+    return _REQUEST_WORKSPACE.get()
+
+
+def set_request_workspace(path: Optional[str | Path]) -> Optional[Path]:
+    """Set per-request workspace override. ``None`` clears it."""
+    if path is None or str(path).strip() == "":
+        _REQUEST_WORKSPACE.set(None)
+        return None
+    resolved = clamp_to_product_root(Path(str(path)).expanduser())
+    try:
+        resolved = resolved.resolve()
+    except OSError:
+        pass
+    _REQUEST_WORKSPACE.set(resolved)
+    return resolved
+
+
+@contextmanager
+def request_workspace(path: Optional[str | Path]) -> Iterator[Optional[Path]]:
+    """Temporarily bind Craft/Console tools to ``path`` for this task."""
+    token = _REQUEST_WORKSPACE.set(None)
+    try:
+        bound = set_request_workspace(path) if path else None
+        yield bound
+    finally:
+        _REQUEST_WORKSPACE.reset(token)
+
+
 def realai_workspace(explicit: Optional[str] = None) -> Path:
     """
     Resolve the project workspace root.
 
     Priority:
       1. explicit path (CLI ``-C`` / ``--workspace``)
-      2. foreign ``Path.cwd()`` (outside the product tree) — beats a
+      2. per-request ContextVar override (Console ``work in <path>``)
+      3. foreign ``Path.cwd()`` (outside the product tree) — beats a
          product-pinned ``REALAI_WORKSPACE`` (common Windows User env)
-      3. ``REALAI_WORKSPACE`` when it points at a foreign/peer project
-      4. ``REALAI_WORKSPACE`` / canonical product root when cwd is inside product
+      4. ``REALAI_WORKSPACE`` when it points at a foreign/peer project
+      5. ``REALAI_WORKSPACE`` / canonical product root when cwd is inside product
 
     Nested paths *inside* the product tree always clamp up to the product root.
     ``REALAI_HOME`` stays the install package; only WORKSPACE moves for foreign repos.
     """
     if explicit:
         return clamp_to_product_root(Path(explicit))
+
+    req = _REQUEST_WORKSPACE.get()
+    if req is not None:
+        return clamp_to_product_root(req)
 
     try:
         cwd = Path.cwd().resolve()
@@ -176,8 +220,6 @@ def realai_workspace(explicit: Optional[str] = None) -> Path:
 
     if env_ws is not None:
         return env_ws
-
-    return _CANONICAL_WORKSPACE
 
     return _CANONICAL_WORKSPACE
 

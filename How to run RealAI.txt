@@ -14,6 +14,13 @@ Menu:      START_HERE.bat
 1. Start the stack (Vulkan + Hive)
 ----------------------------------
 
+  Easiest (opens Console too):
+  powershell -ExecutionPolicy Bypass -File C:\RealAI-clean\scripts\realai-go.ps1
+
+  Then just talk in Console — no operator paste needed.
+  Examples: what's in console.html | work in C:\other\repo | learn from https://github.com/org/repo
+
+  Or:
   cd /d C:\RealAI-clean
   START_HERE.bat          (pick 1)
   -or-

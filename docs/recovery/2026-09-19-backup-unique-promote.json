@@ -1,0 +1,33 @@
+{
+  "ok": true,
+  "source": "C:\\RealAI-clean-backup",
+  "applied_at": "2026-09-19T15:13:08.541079+00:00",
+  "copied": 1,
+  "overwrote_richer": 1,
+  "skipped": 0,
+  "results": [
+    {
+      "id": "agent_tools_importer",
+      "src": "C:\\RealAI-clean-backup\\agent_tools\\realai-ish_importer.py",
+      "dest": "C:\\RealAI-clean\\agent_tools\\realai_ish_importer.py",
+      "size_src": 7919,
+      "action": "copied",
+      "ok": true,
+      "size_dest": 7919
+    },
+    {
+      "id": "realai_local_server_richer",
+      "src": "C:\\RealAI-clean-backup\\realai_local_server.py",
+      "dest": "C:\\RealAI-clean\\realai\\server\\realai_local_server.py",
+      "size_src": 8845,
+      "action": "overwrote_richer",
+      "ok": true,
+      "size_dest": 8845,
+      "backup_of_live": "C:\\RealAI-clean\\realai\\server\\realai_local_server.py.pre_backup_promote"
+    }
+  ],
+  "note": "Backup largely already merged into live gold paths (shim targets). Promoted unique importer + richer realai_local_server. Rejected C__ mangled orchestrator dumps.",
+  "rejected_junk": [
+    "modules/orchestrators/C__*.py (removed after copy)"
+  ]
+}

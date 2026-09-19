@@ -1,0 +1,29 @@
+{
+  "schema": "realai.learn.index/v1",
+  "slugs": {
+    "rack_em_up": {
+      "packet": "C:\\RealAI-clean\\realai\\catalog\\learned\\rack_em_up\\packet.json",
+      "plugin_id": "rack-em-up-coach"
+    },
+    "realai_gold": {
+      "packet": "C:\\RealAI-clean\\realai\\catalog\\learned\\realai_gold\\packet.json",
+      "plugin_id": "realai-gold-coach"
+    },
+    "realai": {
+      "packet": "C:\\RealAI-clean\\realai\\catalog\\learned\\realai\\packet.json",
+      "plugin_id": "realai-coach"
+    },
+    "realai_clean": {
+      "packet": "C:\\RealAI-clean\\realai\\catalog\\learned\\realai_clean\\packet.json",
+      "plugin_id": "realai-clean-coach"
+    },
+    "realai_clean_backup": {
+      "packet": "C:\\RealAI-clean\\realai\\catalog\\learned\\realai_clean_backup\\packet.json",
+      "plugin_id": "realai-clean-backup-coach"
+    },
+    "realai_cold": {
+      "packet": "C:\\RealAI-clean\\realai\\catalog\\learned\\realai_cold\\packet.json",
+      "plugin_id": "realai-cold-coach"
+    }
+  }
+}

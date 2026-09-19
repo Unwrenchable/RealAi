@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "source": "C:\\RealAI-gold",
+  "applied_at": "2026-09-19T15:06:17.512800+00:00",
+  "copied": 2,
+  "skipped": 0,
+  "results": [
+    {
+      "id": "promote_eval",
+      "src": "C:\\RealAI-gold\\realai\\repo_levels_20260830\\realai_identical_twins\\scanners\\promote_eval.py",
+      "dest": "C:\\RealAI-clean\\scripts\\promote_eval.py",
+      "action": "copied",
+      "ok": true,
+      "size": 797,
+      "sha256": "dd6aee4dd8a3ca18cd5896776a91f7d49b87c627402ce9ae774a418f8eaeb31a"
+    },
+    {
+      "id": "ability_matrix",
+      "src": "C:\\RealAI-gold\\abilities\\realai\\repo_levels_20260830\\realai_identical_twins\\scanners\\ability_matrix.py",
+      "dest": "C:\\RealAI-clean\\scripts\\ability_matrix.py",
+      "action": "copied",
+      "ok": true,
+      "size": 1467,
+      "sha256": "b4ae8c87a2276f22ff2a520507103e60fb8d017d34f22848df81153b45e90c8f"
+    }
+  ],
+  "note": "Gold clean scripts/packages/providers already present in live. Promoted missing promote_eval + ability_matrix (+ any missing agent defs). Orphans/C__ dumps skipped."
+}

@@ -6,10 +6,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from realai.bot.boot import HARD_IDENTITY_LOCK
+from realai.bot.boot import HARD_IDENTITY_LOCK, chat_system_prefix
 from realai.bot.natural_mode import (
     NATURAL_GROUNDING_RULE,
     apply_natural_grounding,
+    apply_workspace_intent,
     extract_learn_source,
     extract_path_tokens,
     extract_write_spec,
@@ -24,8 +25,14 @@ from realai.bot.natural_mode import (
     plan_natural_write,
     should_natural_act,
 )
+from realai.bot.workspace_intent import (
+    clear_session_workspace,
+    extract_workspace_target,
+    looks_like_workspace_switch,
+)
 from realai.cli.craft import _should_auto_inspect
 from realai.meta_router import classify_task, route_task
+from realai.workspace import get_request_workspace, set_request_workspace
 
 
 class TestNaturalDetector(unittest.TestCase):
@@ -147,6 +154,72 @@ class TestCraftInspectProductTree(unittest.TestCase):
         self.assertIn("read", names)
         reads = [kw.get("path") for n, kw in plans if n == "read"]
         self.assertTrue(any(str(p).replace("\\", "/").endswith("console.html") for p in reads), reads)
+
+
+class TestChatSystemPrefix(unittest.TestCase):
+    def test_prefix_includes_lock_and_operator(self):
+        text = chat_system_prefix(
+            "When the user asks about files or code: read/list/grep first — never invent contents."
+        )
+        self.assertIn("Never invent file contents", text)
+        self.assertIn("never invent contents", text.lower())
+
+
+class TestWorkspaceIntent(unittest.TestCase):
+    def test_extract_work_in_windows_path(self):
+        self.assertTrue(looks_like_workspace_switch(r"work in C:\Users\tsmit\Rack_em_up"))
+        self.assertEqual(
+            extract_workspace_target(r"work in C:\Users\tsmit\Rack_em_up"),
+            r"C:\Users\tsmit\Rack_em_up",
+        )
+
+    def test_switch_local_folder_and_verify_write(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        root = Path(tmp.name)
+        sid = "test-ws-intent"
+        self.addCleanup(lambda: clear_session_workspace(sid))
+        self.addCleanup(lambda: set_request_workspace(None))
+        prev = {
+            k: os.environ.get(k)
+            for k in (
+                "REALAI_WORKSPACE",
+                "REALAI_HOME",
+                "REALAI_PRODUCT_ROOT",
+                "REALAI_ROOT",
+                "REALAI_EXTRA_WRITE_ROOTS",
+                "REALAI_EXTRA_READ_ROOTS",
+                "REALAI_EXTRA_WORKSPACES",
+            )
+        }
+
+        def _restore_env():
+            for k, v in prev.items():
+                if v is None:
+                    os.environ.pop(k, None)
+                else:
+                    os.environ[k] = v
+
+        self.addCleanup(_restore_env)
+        os.environ.pop("REALAI_EXTRA_WRITE_ROOTS", None)
+        os.environ.pop("REALAI_EXTRA_READ_ROOTS", None)
+        os.environ.pop("REALAI_EXTRA_WORKSPACES", None)
+
+        switched = apply_workspace_intent(f"work in {root}", session_id=sid)
+        self.assertTrue(switched.get("switched"), switched)
+        self.assertEqual(Path(switched["workspace"]), root.resolve())
+        self.assertEqual(get_request_workspace(), root.resolve())
+
+        note = root / "note.txt"
+        body = {"session_id": sid}
+        ask = "create file note.txt with content HELLO_WS"
+        ground = apply_natural_grounding(body, ask)
+        self.assertTrue(ground.get("wrote"), ground)
+        self.assertTrue(ground.get("short_circuit"), ground)
+        self.assertTrue(note.is_file())
+        self.assertEqual(note.read_text(encoding="utf-8"), "HELLO_WS")
+        self.assertIn("verify=ok", str(ground.get("reply") or ""))
+        self.assertIn("HELLO_WS", str(ground.get("reply") or ""))
 
 
 class TestGroundingLock(unittest.TestCase):

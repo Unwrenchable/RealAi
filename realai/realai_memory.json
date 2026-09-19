@@ -1,0 +1,14 @@
+{
+  "interactions": [
+    {
+      "timestamp": 1778255644,
+      "data": {
+        "test": "data"
+      },
+      "patterns": [],
+      "adaptations": []
+    }
+  ],
+  "patterns": {},
+  "adaptations": []
+}

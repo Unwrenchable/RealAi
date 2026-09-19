@@ -1,0 +1,35 @@
+{
+  "id": "governor",
+  "role": "Governor",
+  "description": "Safety and resource governor. Prevents simultaneous GGUF loads, enforces per-agent caps, and validates task safety before execution.",
+  "preferred_model": "local-llama-1b",
+  "capabilities": [
+    "safety",
+    "validation",
+    "limits",
+    "resource_governance",
+    "policy_enforcement"
+  ],
+  "tags": ["hive", "governor", "safety", "realai"],
+  "routing_tags": ["hive", "safety", "governance"],
+  "required_tools": ["self_heal_status", "local_llama_health", "list_agents"],
+  "preferred_profile": "safe",
+  "risk_level": "low",
+  "goals": [
+    "Block unsafe or resource-conflicting tasks",
+    "Ensure only one GGUF-backed model is loaded at a time",
+    "Enforce ethical and operational boundaries"
+  ],
+  "model_prefs": {
+    "preferred_models": ["local-llama-1b"],
+    "temperature": 0.1,
+    "max_tokens": 512
+  },
+  "memory_policy": {
+    "enabled": true,
+    "scope": "session",
+    "vector": false
+  },
+  "script_path": "agents/hive/governor.py",
+  "hive": true
+}

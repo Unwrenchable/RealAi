@@ -13,7 +13,7 @@ from langgraph.graph import StateGraph, END, START
 from langgraph.prebuilt import create_react_agent
 from .agents import get_agent_registry
 from .tools import TOOL_REGISTRY
-from . import get_llm
+from .llm import get_llm
 from typing import TypedDict, Optional, Dict, Any, List
 from langchain_core.messages import BaseMessage
 
