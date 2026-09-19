@@ -64,6 +64,26 @@ def wants_live_exec(text: str) -> bool:
         return True
     if low.startswith("/script") or low.startswith("/exec"):
         return True
+    # Explicit: run `cmd` — not the word "run" in policy prose.
+    if re.search(r"(?is)^\s*run\s+`", t) or re.search(r"(?is)\brun\s+`[^`]+`", t):
+        return True
+    if "```" in t and re.search(r"(?is)\b(run|exec(?:ute)?)\b.{0,40}```", t):
+        return True
+    # Natural Mode / Craft file asks win over shell-help (avoid "I type", "run exactly").
+    try:
+        from realai.bot.natural_mode import (
+            looks_like_repo_ask,
+            looks_like_write_ask,
+            should_natural_act,
+        )
+
+        if should_natural_act(t) or looks_like_repo_ask(t) or looks_like_write_ask(t):
+            return False
+    except Exception:
+        pass
+    # Long pastes are never live_exec via loose keyword match.
+    if len(t) > 280:
+        return False
     return bool(_WANTS_RE.search(t))
 
 
