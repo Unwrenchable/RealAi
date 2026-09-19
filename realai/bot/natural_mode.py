@@ -456,6 +456,18 @@ def plan_natural_write(user_text: str) -> List[Tuple[str, Dict[str, Any]]]:
     if not t or is_explicit_command(t) or not looks_like_write_ask(t):
         return []
     path, content = extract_write_spec(t)
+    if path:
+        try:
+            from realai.cli.craft import is_protected_core_path
+
+            if is_protected_core_path(path):
+                return []  # orchestrator should surface need_write / protected via apply path
+        except Exception:
+            # Fail closed for obvious core paths even if import fails.
+            rel = path.replace("\\", "/").lower()
+            if rel.startswith("realai/bot/") or rel.startswith("realai/orchestration/"):
+                return []
+
     if not path or content is None or not str(content).strip():
         return []
     return [("write", {"path": path, "content": content, "mode": "overwrite"})]

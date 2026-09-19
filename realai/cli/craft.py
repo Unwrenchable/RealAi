@@ -484,8 +484,38 @@ def tool_read(path: str, start: int = 1, limit: int = 80) -> dict[str, Any]:
     }
 
 
-def tool_write(path: str, content: str = "", mode: str = "overwrite") -> dict[str, Any]:
+def is_protected_core_path(path: str) -> bool:
+    """Core runtime modules — Natural Mode must not clobber these with prompt scraps."""
+    rel = str(path or "").replace("\\", "/").lstrip("./").lower()
+    if rel.endswith("scripts/run_local_chat.ps1") or rel.endswith("scripts\\run_local_chat.ps1"):
+        return True
+    if "/bot/" in f"/{rel}" and rel.endswith(".py"):
+        if rel.startswith("realai/bot/") or "/realai/bot/" in f"/{rel}":
+            return True
+    if rel.startswith("realai/orchestration/") and rel.endswith(".py"):
+        return True
+    if rel.startswith("realai\\orchestration\\") and rel.endswith(".py"):
+        return True
+    return False
+
+
+def tool_write(
+    path: str,
+    content: str = "",
+    mode: str = "overwrite",
+    *,
+    allow_protected: bool = False,
+) -> dict[str, Any]:
     """Write file under WORKSPACE only (never EXTRA_READ roots). mode=overwrite|append."""
+    if is_protected_core_path(path) and not allow_protected:
+        return {
+            "ok": False,
+            "error": (
+                f"refusing_write_protected_path: {path} — "
+                "core module; use explicit /write path|||content (allow_protected)"
+            ),
+            "path": path,
+        }
     p, err = safe_under_write(_ws(), path)
     if err or p is None:
         return {"error": err or "bad path"}
@@ -1434,19 +1464,18 @@ TOOLS: dict[str, Callable[..., dict[str, Any]]] = {
         start=int(kw.get("start") or 1),
         limit=int(kw.get("limit") or 80),
     ),
-   "write": lambda **kw: tool_write(
-    str(kw.get("path") or ""),
-    content=str(kw.get("content") or ""),
-    mode=str(kw.get("mode") or "overwrite"),
-),
-
-"architect_mode": lambda **kw: tool_architect_mode(),
-
-"grep": lambda **kw: tool_grep(
-    str(kw.get("pattern") or "."),
-    path=str(kw.get("path") or "."),
-    glob=str(kw.get("glob") or "*"),
-),
+    "write": lambda **kw: tool_write(
+        str(kw.get("path") or ""),
+        str(kw.get("content") or kw.get("text") or ""),
+        mode=str(kw.get("mode") or "overwrite"),
+        allow_protected=bool(kw.get("allow_protected")),
+    ),
+    "architect_mode": lambda **kw: tool_architect_mode(),
+    "grep": lambda **kw: tool_grep(
+        str(kw.get("pattern") or "."),
+        path=str(kw.get("path") or "."),
+        glob=str(kw.get("glob") or "*"),
+    ),
 
     "task": lambda **kw: tool_organs_task(str(kw.get("goal") or "")),
     "git": lambda **kw: tool_git_status(),
@@ -1825,7 +1854,14 @@ def plan_tools(user_text: str) -> list[tuple[str, dict[str, Any]]]:
                 # /write path\ncontent...  or /write path|||content
                 if "|||" in rest:
                     path, content = rest.split("|||", 1)
-                    return [("write", {"path": path.strip(), "content": content})]
+                    return [(
+                        "write",
+                        {
+                            "path": path.strip(),
+                            "content": content,
+                            "allow_protected": True,
+                        },
+                    )]
                 bits = rest.split(maxsplit=1)
                 path = bits[0]
                 content = bits[1] if len(bits) > 1 else ""
