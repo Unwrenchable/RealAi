@@ -3,15 +3,23 @@
 First-party plugins live as subpackages of ``realai.plugins``.
 Root ``plugins/`` is a compat shim that aliases this package.
 
+Older plugin internals still ``import plugins.rackup_coach``. Installing this
+module also registers ``sys.modules['plugins']`` so those imports resolve to
+the same gold without a second copy.
+
 ``_loader.py`` in this folder is a vendored Pydantic entry-point helper,
 not the RealAI plugin host. Use ``load_first_party`` / ``register_all``.
 """
 from __future__ import annotations
 
+import sys
 from importlib import import_module
-from typing import Any, Iterable
+from typing import Any
 
 from . import sample_plugin
+
+# Keep v2 import path alive: `import plugins.rackup_coach` == this package.
+sys.modules.setdefault("plugins", sys.modules[__name__])
 
 FIRST_PARTY = (
     "sample_plugin",
