@@ -2304,6 +2304,23 @@ class Handler(BaseHTTPRequestHandler):
                 self._json(500, {"error": str(e)})
             return
 
+
+        # Learned packets (list / preview) — logic in realai.learn.http
+        if path == "/v1/learn/packets" or path.startswith("/v1/learn/packets/"):
+            try:
+                from realai.learn.http import dispatch_learn_get
+
+                rec = dispatch_learn_get(path)
+                if rec is None:
+                    self._json(404, {"error": "not_found"})
+                elif rec.get("error") == "not_found":
+                    self._json(404, rec)
+                else:
+                    self._json(200, rec)
+            except Exception as e:
+                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
+            return
+
         if path == "/v1/tools":
             self._json(200, {
                 "tools": _readonly_tools_catalog(),
@@ -3219,6 +3236,29 @@ class Handler(BaseHTTPRequestHandler):
                     pulse_only=dry,
                 )
                 self._json(200, result)
+            except Exception as e:
+                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
+            return
+
+
+        # Learn promote stub / optional queue — logic in realai.learn.http
+        if path in ("/v1/learn/promote", "/v1/learn/queue"):
+            try:
+                body = json.loads(raw.decode("utf-8") or "{}") if raw else {}
+            except json.JSONDecodeError:
+                body = {}
+            try:
+                from realai.learn.http import dispatch_learn_post
+
+                rec = dispatch_learn_post(path, body if isinstance(body, dict) else {})
+                if rec is None:
+                    self._json(404, {"error": "not_found"})
+                elif rec.get("error") == "confirm_required":
+                    self._json(400, rec)
+                elif rec.get("error") == "not_found":
+                    self._json(404, rec)
+                else:
+                    self._json(200, rec)
             except Exception as e:
                 self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
             return

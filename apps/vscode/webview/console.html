@@ -254,6 +254,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       <button class="tab" data-tab="agents">Agents</button>
       <button class="tab" data-tab="hive">Hive</button>
       <button class="tab" data-tab="fusion">Fusion</button>
+      <button class="tab" data-tab="promote">Promote</button>
     </div>
     <input class="filter" id="filter" placeholder="Filter abilities / tools..." />
     <div class="dock" id="dock"></div>
@@ -267,6 +268,18 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       <button type="button" class="chip" id="fusMulti" style="margin:0 10px 8px;display:block;width:calc(100% - 20px)">/multi hive next actions</button>
       <a class="chip" href="/agents-ui/" style="margin:0 10px 8px;display:block;width:calc(100% - 20px);text-align:center;text-decoration:none">Open Agents UI</a>
       <a class="chip" href="/voice-lab/" style="margin:0 10px 12px;display:block;width:calc(100% - 20px);text-align:center;text-decoration:none">Voice Lab UI (speech via :8001)</a>
+    </div>
+
+    <div class="promote-panel" id="promotePanel" hidden>
+      <div class="stat"><b>Learned packets</b><span id="promoteCount">...</span></div>
+      <button type="button" class="chip" id="promoteRefresh" style="margin:8px 10px;display:block;width:calc(100% - 20px)">Refresh packets</button>
+      <label for="promoteSelect" class="sec" style="font-weight:400;margin:0 10px 4px;display:block">Packet</label>
+      <select id="promoteSelect" style="margin:0 10px 6px;width:calc(100% - 20px);padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:#0e0e15;color:#ececf1"></select>
+      <button type="button" class="chip" id="promotePreview" style="margin:0 10px 6px;display:block;width:calc(100% - 20px)">Preview</button>
+      <pre id="promotePreviewBox" style="margin:0 10px 8px;padding:8px;max-height:180px;overflow:auto;font-size:10px;background:#07070b;border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#b8b8c2;white-space:pre-wrap"></pre>
+      <button type="button" class="chip" id="promoteStubBtn" style="margin:0 10px 6px;display:block;width:calc(100% - 20px);background:rgba(214,255,63,.15);border-color:rgba(214,255,63,.45)">Promote stub</button>
+      <div class="stat"><b>Last result</b><span id="promoteResult">idle</span></div>
+      <p style="margin:8px 12px;font-size:10px;color:#8a8a96">Stub only — writes realai/plugins/&lt;slug&gt;_coach and refreshes abilities. No orchestrator rewrite.</p>
     </div>
   </aside>
 </div>
@@ -944,8 +957,11 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     const showFusion = tab === 'fusion';
     const hivePanel = document.getElementById('hivePanel');
     const showHive = tab === 'hive';
+    const promotePanel = document.getElementById('promotePanel');
+    const showPromote = tab === 'promote';
     if (fusionPanel) fusionPanel.hidden = !showFusion;
     if (hivePanel) hivePanel.hidden = !showHive;
+    if (promotePanel) promotePanel.hidden = !showPromote;
     if (showHive) {
       const s = boot.snap || {};
       const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
@@ -964,8 +980,13 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       return;
     }
 
-    if (filter) filter.style.display = (showFusion || tab === 'hive') ? 'none' : '';
-    if (dock) dock.style.display = (showFusion || tab === 'hive') ? 'none' : '';
+    if (filter) filter.style.display = (showFusion || showPromote || tab === 'hive') ? 'none' : '';
+    if (dock) dock.style.display = (showFusion || showPromote || tab === 'hive') ? 'none' : '';
+
+    if (showPromote) {
+      if (typeof window.__realaiLoadPromote === 'function') window.__realaiLoadPromote();
+      return;
+    }
     if (showFusion) {
       const s = boot.snap || {};
       const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
@@ -1113,6 +1134,85 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     fillComposer('/multi List 3 concrete next actions for the local RealAI hive');
     form.requestSubmit();
   };
+
+  // Promote tab — learned packets → stub
+  window.__realaiPromotePackets = [];
+  async function __realaiLoadPromote(force){
+    const sel = document.getElementById('promoteSelect');
+    const countEl = document.getElementById('promoteCount');
+    if (!sel) return;
+    if (!force && window.__realaiPromotePackets.length && sel.options.length) return;
+    try {
+      const data = await hiveGet('/v1/learn/packets');
+      const rows = (data && data.packets) || [];
+      window.__realaiPromotePackets = rows;
+      if (countEl) countEl.textContent = String(rows.length) + ' packets';
+      const prev = sel.value;
+      sel.innerHTML = rows.map(p => {
+        const stub = p.has_stub ? ' [stub]' : '';
+        const fc = (p.file_count != null) ? (' · ' + p.file_count + ' files') : '';
+        return '<option value="' + String(p.slug||'').replace(/"/g,'&quot;') + '">' +
+          String(p.slug||'') + stub + fc + '</option>';
+      }).join('');
+      if (prev && [...sel.options].some(o => o.value === prev)) sel.value = prev;
+    } catch (e) {
+      if (countEl) countEl.textContent = 'error';
+      const box = document.getElementById('promotePreviewBox');
+      if (box) box.textContent = String(e && e.message || e);
+    }
+  }
+  window.__realaiLoadPromote = __realaiLoadPromote;
+  const promoteRefresh = document.getElementById('promoteRefresh');
+  if (promoteRefresh) promoteRefresh.onclick = () => __realaiLoadPromote(true);
+  const promotePreview = document.getElementById('promotePreview');
+  if (promotePreview) promotePreview.onclick = async () => {
+    const sel = document.getElementById('promoteSelect');
+    const box = document.getElementById('promotePreviewBox');
+    const slug = sel && sel.value;
+    if (!slug) { if (box) box.textContent = 'Pick a packet'; return; }
+    try {
+      const data = await hiveGet('/v1/learn/packets/' + encodeURIComponent(slug));
+      if (box) box.textContent = JSON.stringify((data && data.packet) || data, null, 2);
+    } catch (e) {
+      if (box) box.textContent = String(e && e.message || e);
+    }
+  };
+  const promoteStubBtn = document.getElementById('promoteStubBtn');
+  if (promoteStubBtn) promoteStubBtn.onclick = async () => {
+    const sel = document.getElementById('promoteSelect');
+    const resultEl = document.getElementById('promoteResult');
+    const slug = sel && sel.value;
+    if (!slug) { if (resultEl) resultEl.textContent = 'pick a packet'; return; }
+    if (!confirm('Promote stub for ' + slug + '? Writes realai/plugins/<slug>_coach (no orch rewrite).')) return;
+    if (resultEl) resultEl.textContent = 'promoting...';
+    promoteStubBtn.disabled = true;
+    try {
+      const data = await hivePost('/v1/learn/promote', { slug, mode: 'stub', confirm: true });
+      const path = (data && (data.plugin_path || data.plugin_dir)) || '';
+      const ok = !!(data && data.ok);
+      if (resultEl) resultEl.textContent = (ok ? 'ok · ' : 'fail · ') + (data && data.plugin_id || slug) + (path ? (' · ' + path) : '');
+      const box = document.getElementById('promotePreviewBox');
+      if (box) box.textContent = JSON.stringify(data, null, 2);
+      await __realaiLoadPromote(true);
+      try {
+        if (typeof browserBootstrap === 'function') await browserBootstrap();
+        else {
+          const [caps, tools] = await Promise.all([
+            hiveGet('/v1/abilities').catch(() => null),
+            hiveGet('/v1/tools').catch(() => null),
+          ]);
+          if (caps && caps.abilities) boot.capabilities = caps.abilities;
+          if (tools && tools.tools) boot.tools = tools.tools;
+          renderDock();
+        }
+      } catch (_) {}
+    } catch (e) {
+      if (resultEl) resultEl.textContent = 'error: ' + (e && e.message || e);
+    } finally {
+      promoteStubBtn.disabled = false;
+    }
+  };
+
   // Deep-link ?fusion=1 opens Advanced on Fusion tab
   try {
     if (/[?&]fusion=1\b/.test(location.search || '')) {
