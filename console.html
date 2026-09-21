@@ -332,7 +332,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       method: 'POST',
       headers: Object.assign({ 'Content-Type': 'application/json' }, headers || {}),
       body: JSON.stringify(body || {}),
-      signal: AbortSignal.timeout(120000),
+      signal: AbortSignal.timeout(180000),
     });
     const text = await res.text();
     let data = null;
@@ -454,7 +454,11 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
         speak: voiceOn,
       });
     } catch (e) {
-      deliver({ command: 'assistant', text: 'Error: ' + (e && e.message || e) });
+      const msg = String((e && e.message) || e || '');
+      const timed = /timed out|TimeoutError|abort/i.test(msg);
+      deliver({ command: 'assistant', text: timed
+        ? ('Error: signal timed out (chat abort 180s). Tools used this turn may be incomplete — try a shorter ask or /read path.')
+        : ('Error: ' + msg) });
     }
   }
   async function browserRunTool(name, args){

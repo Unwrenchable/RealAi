@@ -28,6 +28,13 @@ NATURAL_GROUNDING_RULE = (
     "If tools fail or return empty, say so."
 )
 
+# One operator turn: inspect/auto tools hard-capped (no pwd+git+grep storms).
+MAX_TOOLS_THIS_TURN = 3
+
+_SIMPLE_PATH_ASK_RE = re.compile(
+    r"(?i)\b(quote|read|open|show|what.?s\s+in|whats\s+in|marker|contents?\s+of)\b"
+)
+
 # Path-ish tokens: relative files with a real extension.
 _PATH_RE = re.compile(
     r"(?i)(?:^|[\s`'\"(\[])("
@@ -512,17 +519,34 @@ def format_write_verified_reply(write_result: Dict[str, Any], verify: Dict[str, 
 
 
 def plan_natural_inspect(user_text: str) -> List[Tuple[str, Dict[str, Any]]]:
-    """Craft ``plan_tools`` plus explicit path reads; inspect even in the product tree."""
+    """Craft ``plan_tools`` plus explicit path reads; inspect even in the product tree.
+
+    Cap: at most ``MAX_TOOLS_THIS_TURN`` tools. Named-file quote/read asks
+    prefer ``read`` only — never pwd+list+grep storms on one path ask.
+    """
     from realai.cli.craft import auto_inspect_plans, dedupe_plans, plan_tools
 
     t = (user_text or "").strip()
+    paths = extract_path_tokens(t)
+    # Fast path: "quote/read … path.md" → read those files only
+    if paths and _SIMPLE_PATH_ASK_RE.search(t):
+        plans = [("read", {"path": rel}) for rel in paths[:MAX_TOOLS_THIS_TURN]]
+        return dedupe_plans(plans)[:MAX_TOOLS_THIS_TURN]
+
     plans: List[Tuple[str, Dict[str, Any]]] = list(plan_tools(t) or [])
-    for rel in extract_path_tokens(t):
+    for rel in paths:
         plans.append(("read", {"path": rel}))
     names = {n for n, _ in plans}
     if looks_like_repo_ask(t) and not names.intersection({"pwd", "list", "grep", "read"}):
         plans.extend(auto_inspect_plans(t))
-    return dedupe_plans(plans)
+    # Prefer named reads first when capping a mixed plan
+    if paths:
+        preferred = [("read", {"path": rel}) for rel in paths]
+        rest = [p for p in plans if p not in preferred and not (
+            p[0] == "read" and (p[1] or {}).get("path") in paths
+        )]
+        plans = preferred + rest
+    return dedupe_plans(plans)[:MAX_TOOLS_THIS_TURN]
 
 
 def run_natural_inspect(user_text: str) -> List[Dict[str, Any]]:
@@ -542,7 +566,7 @@ def run_natural_auto(
 ) -> List[Dict[str, Any]]:
     """Execute ability / learn / agent / doctor plans. Never invent results."""
     out: List[Dict[str, Any]] = []
-    for kind, args in plans or []:
+    for kind, args in (plans or [])[:MAX_TOOLS_THIS_TURN]:
         name = str(kind)
         try:
             if kind == "learn":
@@ -944,8 +968,9 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
     try:
         if inspect_needed:
             results.extend(run_natural_inspect(text))
-        if extras:
-            results.extend(run_natural_auto(extras, text))
+        budget = max(0, MAX_TOOLS_THIS_TURN - len(results))
+        if extras and budget:
+            results.extend(run_natural_auto(extras[:budget], text))
     except Exception as exc:
         meta["admit_failure"] = True
         meta["error"] = str(exc)

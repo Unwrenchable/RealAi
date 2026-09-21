@@ -20,6 +20,10 @@ export interface ChatRequestOptions {
   multiAgent?: boolean;
 }
 
+/** Console / extension chat abort (ms). Keep probes shorter separately. */
+export const CHAT_TIMEOUT_MS = 180_000;
+export const DEFAULT_FETCH_TIMEOUT_MS = 60_000;
+
 export class RealAIClient {
   private baseUrl = 'http://127.0.0.1:8001';
   selectedModel = 'realai-hive';
@@ -75,8 +79,13 @@ export class RealAIClient {
 
   private async _fetch(path: string, options?: RequestInit): Promise<any> {
     const url = `${this.baseUrl}${path}`;
+    const isChat = path.includes('/chat/completions') || path.includes('/v1/completions');
+    const timeoutMs = isChat ? CHAT_TIMEOUT_MS : DEFAULT_FETCH_TIMEOUT_MS;
+    const signal = options?.signal ?? AbortSignal.timeout(timeoutMs);
+    try {
     const res = await fetch(url, {
       ...options,
+      signal,
       headers: {
         'Content-Type': 'application/json',
         ...(options?.headers || {}),
@@ -94,6 +103,13 @@ export class RealAIClient {
       throw new Error(`API ${res.status}: ${msg}`);
     }
     return res.json();
+    } catch (e: any) {
+      const msg = String(e?.message || e || '');
+      if (/timed out|TimeoutError|abort/i.test(msg) || e?.name === 'TimeoutError' || e?.name === 'AbortError') {
+        throw new Error(`signal timed out (chat abort ${Math.round(timeoutMs/1000)}s)`);
+      }
+      throw e;
+    }
   }
 
   private buildBody(messages: ChatMessage[], opts: ChatRequestOptions = {}, stream = false) {
@@ -267,6 +283,7 @@ export class RealAIClient {
         method: 'POST',
         headers: this.buildHeaders(opts),
         body: JSON.stringify(this.buildBody(messages, opts, true)),
+        signal: AbortSignal.timeout(CHAT_TIMEOUT_MS),
       });
 
       if (!res.ok) {

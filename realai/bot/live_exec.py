@@ -15,8 +15,8 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 MAX_OUT = 48_000
-CMD_TIMEOUT = 20
-SCRIPT_TIMEOUT = 25
+CMD_TIMEOUT = 45
+SCRIPT_TIMEOUT = 60
 
 # Loose keyword match — intentionally narrow. Bare "type"/"run"/"command" in
 # operator policy prose must NOT steal the Console turn (shell-help hijack).
