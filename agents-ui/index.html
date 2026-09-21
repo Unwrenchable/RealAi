@@ -551,6 +551,8 @@ button{cursor:pointer;background:none;border:0}
   }
 
   function addFeedItem(ev){
+    // When Sim is OFF, drop demo pulses so feed stays live-hive only
+    if(!st.simOn && ev && ev.source === 'simulation') return;
     const feed=document.getElementById('act-feed');
     const d=document.createElement('div');
     d.className='ai '+ev.type;
@@ -593,6 +595,7 @@ button{cursor:pointer;background:none;border:0}
     es.onmessage=(e)=>{
       let ev; try{ ev=JSON.parse(e.data); }catch(_){ return; }
       if(ev.type==='connected') return;
+      if(!st.simOn && ev.source === 'simulation') return;
       if(ev.type==='dispatch'){ activateNode(ev.agent_id); addFeedItem(ev); }
       else if(ev.type==='complete'){
         // Hold the run highlight so staggered hive pulses are visible
@@ -615,6 +618,7 @@ button{cursor:pointer;background:none;border:0}
   }
 
   async function loadAll(){
+    await syncSimFromServer();
     const [ar, gr, ex, hive] = await Promise.all([
       fetchJson(st.showCatalog ? '/v1/agents?full=1' : '/v1/agents', {data:[], count:0, source:''}),
       fetchJson('/v1/agents/graph', {nodes:[], edges:[], workflows:[]}),
@@ -646,6 +650,7 @@ button{cursor:pointer;background:none;border:0}
     const rows = Array.isArray(ex) ? ex : (ex.data||[]);
     rows.slice(-25).forEach(ev=>{
       if(!ev||!ev.type) return;
+      if(!st.simOn && ev.source === 'simulation') return;
       if(ev.type==='dispatch'){ activateNode(ev.agent_id); addFeedItem(ev); }
       else if(ev.type==='complete'){ deactivateNode(ev.agent_id); addFeedItem(ev); }
     });
@@ -682,12 +687,18 @@ button{cursor:pointer;background:none;border:0}
   };
   document.getElementById('btnRefresh').onclick=()=>loadAll().catch(console.error);
 
-  let simOn = false;
   const btnSim = document.getElementById('btnSim');
   function syncSimBtn(){
     if(!btnSim) return;
-    btnSim.textContent = simOn ? 'Sim ON' : 'Sim OFF';
-    btnSim.classList.toggle('on', simOn);
+    btnSim.textContent = st.simOn ? 'Sim ON' : 'Sim OFF';
+    btnSim.classList.toggle('on', st.simOn);
+  }
+  async function syncSimFromServer(){
+    try{
+      const j = await fetchJson('/v1/agents/simulation', {ok:true, enabled:false});
+      st.simOn = !!(j && j.enabled);
+      syncSimBtn();
+    }catch(err){ console.warn('sim status', err); syncSimBtn(); }
   }
   if(btnSim){
     syncSimBtn();
@@ -696,10 +707,10 @@ button{cursor:pointer;background:none;border:0}
         const r = await fetch(API+'/v1/agents/simulation', {
           method:'POST',
           headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ enabled: !simOn }),
+          body: JSON.stringify({ enabled: !st.simOn }),
         });
         const j = await r.json();
-        simOn = !!(j && j.enabled);
+        st.simOn = !!(j && j.enabled);
         syncSimBtn();
       }catch(err){ console.error(err); }
     };

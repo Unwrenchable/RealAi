@@ -129,7 +129,7 @@ function Start-Detached {
         "set REALAI_WORKSPACE=$Root",
         "set REALAI_PRODUCT_ROOT=$Root",
         "set REALAI_AGENTS_PATH=$Root\agents\agentx\agents.json",
-        "set REALAI_AGENTS_SIM=1",
+        "set REALAI_AGENTS_SIM=0",
         "set PYTHONPATH=$Root;%PYTHONPATH%",
         "set REALAI_VULKAN_BASE=http://127.0.0.1:$VulkanPort",
         "set REALAI_API_BASE=http://127.0.0.1:$OrchPort",

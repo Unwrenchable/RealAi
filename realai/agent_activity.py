@@ -279,13 +279,12 @@ class EventBus:
 BUS = EventBus()
 # Demo sim is OFF by default — Agents UI should show real hive/tool work first.
 # Toggle via POST /v1/agents/simulation {"toggle": true}.
-# Default ON so /agents-ui shows live pulses without a manual toggle.
-# Set REALAI_AGENTS_SIM=0 to disable at process start.
-_simulation_enabled = os.environ.get("REALAI_AGENTS_SIM", "1").strip().lower() not in (
-    "0",
-    "false",
-    "no",
-    "off",
+# Opt in with REALAI_AGENTS_SIM=1/true/on. Default is OFF.
+_simulation_enabled = os.environ.get("REALAI_AGENTS_SIM", "0").strip().lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
 )
 _sim_started = False
 _sim_lock = threading.Lock()
@@ -403,14 +402,19 @@ def simulation_enabled() -> bool:
     return _simulation_enabled
 
 
-def ensure_simulation(agents: List[Dict[str, Any]]) -> None:
-    """Start background simulated activity once (demo feed when idle)."""
+def ensure_simulation(agents: Optional[List[Dict[str, Any]]] = None) -> None:
+    """Start background simulated activity once (opt-in via set_simulation / env).
+
+    The sim loop ALWAYS dispatches HIVE_CORE_AGENTS ids only — never the catalog,
+    regardless of what list callers pass.
+    """
     global _sim_started
     with _sim_lock:
         if _sim_started:
             return
         _sim_started = True
-        ids = [normalize_agent(a)["id"] for a in agents if a.get("id")]
+        _ = agents  # ignored — hive-core only
+        ids = [str(a.get("id")) for a in HIVE_CORE_AGENTS if a.get("id")]
         if not ids:
             return
 

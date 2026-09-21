@@ -823,8 +823,8 @@ def _run_tool(name: str, arguments: Optional[Dict] = None) -> Dict[str, Any]:
                 str(arguments.get("profile") or "balanced"),
             )
         if name == "multi_agent_run":
-            from realai.agent_activity import ensure_simulation, run_agent_task
-            ensure_simulation(_load_agents())
+            from realai.agent_activity import HIVE_CORE_AGENTS, ensure_simulation, run_agent_task
+            ensure_simulation(HIVE_CORE_AGENTS)
             task = str(arguments.get("task") or arguments.get("prompt") or "")
             # Lights full Hive + multi cast on Agents UI (staggered), then real pipeline
             return run_agent_task(
@@ -1937,14 +1937,10 @@ class Handler(BaseHTTPRequestHandler):
         """Server-Sent Events stream for live agent activity."""
         import queue as _queue
 
-        from realai.agent_activity import BUS, ensure_simulation, set_simulation
+        from realai.agent_activity import BUS, HIVE_CORE_AGENTS, ensure_simulation
 
-        ensure_simulation(_load_agents())
-        # First Agents UI connection turns sim on so the graph is not a dead page.
-        try:
-            set_simulation(True)
-        except Exception:
-            pass
+        # Start sim thread (idle until enabled). Never auto-enable on UI connect.
+        ensure_simulation(HIVE_CORE_AGENTS)
         self.send_response(200)
         self.send_header("Content-Type", "text/event-stream")
         self.send_header("Cache-Control", "no-cache")
@@ -2205,10 +2201,10 @@ class Handler(BaseHTTPRequestHandler):
 
         if path == "/v1/agents/graph":
             try:
-                from realai.agent_activity import build_graph, ensure_simulation
+                from realai.agent_activity import HIVE_CORE_AGENTS, build_graph, ensure_simulation
 
                 agents = _load_agents()
-                ensure_simulation(agents)
+                ensure_simulation(HIVE_CORE_AGENTS)
                 self._json(200, build_graph(agents))
             except Exception as e:
                 self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
@@ -2232,6 +2228,15 @@ class Handler(BaseHTTPRequestHandler):
                 else:
                     recent = BUS.recent(50)
                     self._json(200, {"data": recent, "count": len(recent)})
+            except Exception as e:
+                self._json(500, {"error": str(e)})
+            return
+
+        if path == "/v1/agents/simulation":
+            try:
+                from realai.agent_activity import simulation_enabled
+
+                self._json(200, {"ok": True, "enabled": bool(simulation_enabled())})
             except Exception as e:
                 self._json(500, {"error": str(e)})
             return
@@ -3144,12 +3149,13 @@ class Handler(BaseHTTPRequestHandler):
                 return
             try:
                 from realai.agent_activity import (
+                    HIVE_CORE_AGENTS,
                     ensure_simulation,
                     set_simulation,
                     simulation_enabled,
                 )
 
-                ensure_simulation(_load_agents())
+                ensure_simulation(HIVE_CORE_AGENTS)
                 if body.get("toggle"):
                     enabled = set_simulation(not simulation_enabled())
                 elif "enabled" in body:
@@ -3173,9 +3179,9 @@ class Handler(BaseHTTPRequestHandler):
                 self._json(400, {"error": "missing_task"})
                 return
             try:
-                from realai.agent_activity import ensure_simulation, run_agent_task
+                from realai.agent_activity import HIVE_CORE_AGENTS, ensure_simulation, run_agent_task
 
-                ensure_simulation(_load_agents())
+                ensure_simulation(HIVE_CORE_AGENTS)
                 multi = bool(body.get("multi") or body.get("use_multi"))
                 dry = bool(body.get("dry_run") or body.get("pulse_only"))
                 # Run in-thread so SSE subscribers see dispatch→complete around the call
@@ -3200,10 +3206,10 @@ class Handler(BaseHTTPRequestHandler):
                 self._json(400, {"error": "invalid_json"})
                 return
             try:
-                from realai.agent_activity import ensure_simulation, run_agent_task
+                from realai.agent_activity import HIVE_CORE_AGENTS, ensure_simulation, run_agent_task
 
                 task = str(body.get("task") or body.get("prompt") or "")
-                ensure_simulation(_load_agents())
+                ensure_simulation(HIVE_CORE_AGENTS)
                 dry = bool(body.get("dry_run") or body.get("pulse_only"))
                 result = run_agent_task(
                     str(body.get("agent_id") or body.get("agent") or "hive-orchestrator"),
