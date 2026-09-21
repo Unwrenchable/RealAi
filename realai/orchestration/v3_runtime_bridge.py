@@ -1168,23 +1168,72 @@ def _extract_workspace_paths(task: str) -> List[str]:
     """Pull likely repo-relative paths from a task string."""
     text = (task or "").replace("\\", "/")
     found: List[str] = []
-    for m in re.finditer(
-        r"(?<![\w./-])((?:apps|realai|modules|abilities|docs|scripts|frontend|agents|\.github)/[\w./\-]+\.[\w]+)",
-        text,
-        flags=re.I,
-    ):
-        p = m.group(1).replace("\\", "/")
-        if p not in found:
-            found.append(p)
-    for m in re.finditer(r"\bread\s+([\w./\-]+\.[\w]+)", text, flags=re.I):
-        p = m.group(1).replace("\\", "/")
+
+    def _add(p: str) -> None:
+        p = (p or "").replace("\\", "/").strip().strip("\"'")
+        if not p:
+            return
+        # Map absolute product paths to repo-relative
+        low = p.lower()
+        for prefix in (
+            "c:/realai-clean/",
+            "/realai-clean/",
+        ):
+            if low.startswith(prefix):
+                p = p[len(prefix):] if len(p) >= len(prefix) else p
+                low = p.lower()
+                break
+        # Bare console.html → gold webview (product twin is synced)
+        if "/" not in p and p.lower() == "console.html":
+            p = "apps/vscode/webview/console.html"
         if "/" not in p and p.lower() == "readme.md":
             p = "apps/vscode/README.md"
         if p not in found:
             found.append(p)
+
+    for m in re.finditer(
+        r"(?<![\w./-])((?:apps|realai|modules|abilities|docs|scripts|frontend|agents|fusion-ui|\.github)/[\w./\-]+\.[\w]+)",
+        text,
+        flags=re.I,
+    ):
+        _add(m.group(1))
+    # Absolute Windows / POSIX under RealAI-clean
+    for m in re.finditer(
+        r"(?<![\w])([A-Za-z]:/RealAI-clean/[\w./\-]+\.[\w]+)",
+        text,
+        flags=re.I,
+    ):
+        _add(m.group(1))
+    for m in re.finditer(r"\bread\s+([\w./\-]+\.[\w]+)", text, flags=re.I):
+        _add(m.group(1))
+    # Bare known UI/config filenames named in the task
+    for m in re.finditer(
+        r"(?<![\w./-])(console\.html|package\.json|realai\.toml|models\.yaml|model\.json)\b",
+        text,
+        flags=re.I,
+    ):
+        _add(m.group(1))
     if not found and re.search(r"apps[/\\]vscode[/\\]README\.md", text, re.I):
-        found.append("apps/vscode/README.md")
+        _add("apps/vscode/README.md")
     return found[:5]
+
+
+def _task_names_a_path(task: str) -> bool:
+    """True when the task mentions a file path (even if extraction missed)."""
+    text = (task or "").replace("\\", "/")
+    if _extract_workspace_paths(task):
+        return True
+    if re.search(r"[A-Za-z]:/RealAI-clean/[\w./\-]+", text, re.I):
+        return True
+    if re.search(
+        r"(?<![\w./-])(?:apps|realai|modules|abilities|docs|scripts|frontend|agents|fusion-ui)/[\w./\-]+",
+        text,
+        re.I,
+    ):
+        return True
+    if re.search(r"(?<![\w./-])console\.html\b", text, re.I):
+        return True
+    return False
 
 
 def _workspace_reads_for_task(task: str) -> Dict[str, Any]:
@@ -1213,25 +1262,50 @@ def _workspace_reads_for_task(task: str) -> Dict[str, Any]:
             )[:2000]
         ok_any = ok_any or ok
         reads.append({"path": path, "ok": ok, "result": result, "snippet": snippet})
+    named = bool(paths) or _task_names_a_path(task)
     return {
         "paths": paths,
         "reads": reads,
-        "ok": ok_any if paths else True,
-        "required": bool(paths),
+        "ok": (ok_any if paths else (False if named else True)),
+        "required": named,
+        "named_path": named,
     }
 
 
 
 def _task_requests_write(task: str) -> bool:
-    """True when the user asked for an edit/patch/commit/write (not read-only quote)."""
+    """True only for explicit write/apply/commit intents — not propose/quote/read."""
     low = (task or "").lower()
-    write_keys = (
-        "edit", "patch", "commit", "write", "overwrite", "refactor",
-        "implement", "create file", "update file", "apply change", "landed",
+    # Explicit non-write / proposal language wins
+    if re.search(r"\bdo\s+not\s+(?:workspace_)?write\b", low):
+        return False
+    if re.search(r"\b(?:don'?t|do\s+not)\s+write\b", low):
+        return False
+    propose_keys = (
+        "propose", "suggest", "quote", "read", "first n lines", "as a proposal",
+        "css change as proposal", "do not write", "do not workspace_write",
     )
-    # read/quote/plan alone are not writes
-    if any(k in low for k in write_keys):
-        # "write" in "overwrite" etc already covered; avoid "rewrite history" false positives lightly
+    # Quote / propose / suggest CSS tweak without apply → not a write
+    if re.search(r"\b(propose|suggest|quote)\b", low) and not re.search(
+        r"\b(workspace_write|overwrite|apply|commit|save\s+file|write\s+to)\b", low
+    ):
+        return False
+    if re.search(r"\b(read|first\s+\d+\s+lines)\b", low) and not re.search(
+        r"\b(workspace_write|overwrite|apply|commit|save\s+file|write\s+to)\b", low
+    ):
+        return False
+    true_keys = (
+        "workspace_write",
+        "overwrite",
+        "save file",
+        "write to",
+    )
+    if any(k in low for k in true_keys):
+        return True
+    # standalone apply / commit (not "apply to thinking")
+    if re.search(r"\bapply\b", low) and not re.search(r"\bpropose\b", low):
+        return True
+    if re.search(r"\bcommit\b", low):
         return True
     return False
 
@@ -1325,7 +1399,7 @@ def _stage_text(resp: Dict[str, Any]) -> str:
         return ""
 
 
-BRIDGE_MULTI_REVISION = "2026-09-21-critic-readonly-pass-v2"
+BRIDGE_MULTI_REVISION = "2026-09-21-critic-propose-neq-write-v3"
 
 def _is_apps_vscode_patch_task(task: str) -> bool:
     """True when the user asked for concrete apps/vscode file patches (not health fluff)."""
@@ -1581,7 +1655,7 @@ def _run_planner_worker_critic(
         stages["critic"] = (
             "[RealAI critic — FAIL]\n"
             "verdict: fail\n"
-            "reason: task named workspace file(s) but workspace_read did not succeed.\n"
+            "reason: named path but no workspace_read\n"
             f"paths={file_reads.get('paths')}\n"
         )
         return {
