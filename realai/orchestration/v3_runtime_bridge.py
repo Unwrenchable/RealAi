@@ -1156,9 +1156,10 @@ _PWC_PROMPTS = {
         "Do not invent file contents. Do not say LANDED. Forbidden: Apache Hive fluff."
     ),
     "critic": (
-        "You are the RealAI HIVE CRITIC. Fail the run if the task named a file but no "
-        "successful workspace_read happened. Fail if output says LANDED without a tool write. "
-        "Verdict pass/fail plus top gaps. Prefer PROPOSED over LANDED."
+        "You are the RealAI HIVE CRITIC. "
+        "If the task is read/quote/plan and workspace_read succeeded, verdict Pass. "
+        "Fail only if a named file was unread, or a write/edit/patch was requested without a tool write. "
+        "Never Fail a successful read-only quote for lacking a write. Prefer PROPOSED over LANDED."
     ),
 }
 
@@ -1219,6 +1220,20 @@ def _workspace_reads_for_task(task: str) -> Dict[str, Any]:
         "required": bool(paths),
     }
 
+
+
+def _task_requests_write(task: str) -> bool:
+    """True when the user asked for an edit/patch/commit/write (not read-only quote)."""
+    low = (task or "").lower()
+    write_keys = (
+        "edit", "patch", "commit", "write", "overwrite", "refactor",
+        "implement", "create file", "update file", "apply change", "landed",
+    )
+    # read/quote/plan alone are not writes
+    if any(k in low for k in write_keys):
+        # "write" in "overwrite" etc already covered; avoid "rewrite history" false positives lightly
+        return True
+    return False
 
 def _scrub_landed(text: str, write_ok: bool = False) -> str:
     if write_ok or not text:
@@ -1310,7 +1325,7 @@ def _stage_text(resp: Dict[str, Any]) -> str:
         return ""
 
 
-BRIDGE_MULTI_REVISION = "2026-09-21-hive-agents-read-v1"
+BRIDGE_MULTI_REVISION = "2026-09-21-critic-readonly-pass-v2"
 
 def _is_apps_vscode_patch_task(task: str) -> bool:
     """True when the user asked for concrete apps/vscode file patches (not health fluff)."""
@@ -1531,6 +1546,34 @@ def _run_planner_worker_critic(
                     "or name exact files e.g. apps/vscode/src/*.ts, webview/*, package.json.\n"
                     "Forbidden: Live Share, marketplace, update VS Code, generic multi-agent fluff."
                 )
+
+
+
+    # Deterministic critic verdict (do not trust LLM drift on read-only)
+    wants_write = _task_requests_write(task)
+    write_ok = bool(write_ok)
+    if file_reads.get("required") and not file_reads.get("ok"):
+        pass  # handled below as hard fail
+    elif wants_write and not write_ok:
+        stages["critic"] = (
+            "[RealAI critic — FAIL]\n"
+            "verdict: fail\n"
+            "reason: task requested edit/patch/write/commit but no workspace_write succeeded.\n"
+        )
+    elif (not wants_write) and (file_reads.get("ok") or not file_reads.get("required")):
+        # Read/quote/plan (or no file named): Pass when reads ok / not required
+        quote_bits = []
+        for r in (file_reads.get("reads") or []):
+            if r.get("ok") and r.get("snippet"):
+                first = (r.get("snippet") or "").splitlines()[:2]
+                quote_bits.append(" / ".join(first)[:200])
+        stages["critic"] = (
+            "[RealAI critic — grounded]\n"
+            "verdict: pass\n"
+            "reason: read-only task with successful workspace_read (or no file required); "
+            "tool write not required.\n"
+            + (f"quoted: {quote_bits[0]}\n" if quote_bits else "")
+        )
 
 
     # Hard fail: named file but no successful workspace_read
