@@ -1,39 +1,28 @@
-# Wiring pass 2026-09-21
+# Wiring + surface (live as of 2026-09-21)
 
-Goal: v1/v2 modules reachable from live names without breaking existing shims.
+Merged to `live/realai-clean-20260911`:
 
-## What was broken
+- PR #127 — product-root `core/` shims, `realai.plugins` host, RackUp alias, pyproject 3.0.0
+- PR #126 — `ARCHITECTURE.md` contract
 
-| Caller | Asked for | Reality |
-|--------|-----------|--------|
-| `realai/hive_orchestrator.py` | `core.orchestration.hive_router` | No product-root `core/` package |
-| `realai.plugins.rackup_coach` | `plugins.rackup_coach.*` | Only works after root `plugins/` alias loads |
-| `realai.plugins` | `sample_plugin` only | RackUp / Atomic Fizz were invisible |
-| `realai/plugins/registry.json` | atomic_fizz only | RackUp missing |
+This pass adds:
 
-Gold was already present:
+- `realai/hive.py` — public hive surface (status, tools, plugins, catalog)
+- `scripts/park_nested_dumps.ps1` — HOMEPC `git mv` of nested dumps into `_quarantine`
 
-- `realai/orchestration/v3_orchestrator.py` (153 KB)
-- `realai/orchestration/v3_runtime_bridge.py` (81 KB)
-- `realai/orchestration/hive_router.py`
-- `realai/plugins/rackup_coach/`
-- `realai/core/self_*.py`
+## Do not replace yet
 
-## What this pass did
+`realai/__init__.py` (421 KB) is the v1 `RealAI` / `RealAIClient` SDK.
+`from realai import RealAI` still loads it. New code should use `realai.hive`.
 
-1. Added product-root `core/` as **compat shims** to `realai.core` / `realai.orchestration`.
-2. Pointed `realai/hive_orchestrator.py` at `realai.orchestration.hive_router`.
-3. Switched RackUp plugin to **relative imports** (`.coach_agent`, `.types`).
-4. Made `realai.plugins` a real host: `list_first_party`, `load_first_party`, `register_all`.
-5. Registered RackUp + Atomic Fizz + sample in `registry.json`.
-6. Included `core*` in the installable package set.
+## HOMEPC after pull
 
-## Shims that stay on purpose
-
-Package-root dest-empty modules (`realai/v3_orchestrator.py`, `realai/self_builder.py`, …) re-export gold. Do not put logic in them. Do not delete them until every launcher is grepped.
-
-## Not moved in this pass
-
-- 421 KB `realai/__init__.py` v1 SDK dump — `from realai import RealAI` still depends on it.
-- Nested dumps (`realai/realai_repo`, `deep_nests`) — park in a later `git mv` on HOMEPC.
-- Recovery-branch desktop gold — promote file-by-file after this wiring lands.
+```powershell
+cd C:\RealAI-clean
+git checkout live/realai-clean-20260911
+git pull
+python -c "from realai.hive import hive_status, register_plugins; print(hive_status().get('ok')); print(register_plugins())"
+python -m realai.v3_orchestrator --help
+# optional park:
+powershell -File .\scripts\park_nested_dumps.ps1
+```
