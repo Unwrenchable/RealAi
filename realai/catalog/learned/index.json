@@ -24,6 +24,14 @@
     "realai_cold": {
       "packet": "C:\\RealAI-clean\\realai\\catalog\\learned\\realai_cold\\packet.json",
       "plugin_id": "realai-cold-coach"
+    },
+    "effective_engine_main": {
+      "packet": "C:\\RealAI-clean\\realai\\catalog\\learned\\effective_engine_main\\packet.json",
+      "plugin_id": "effective-engine-main-learned"
+    },
+    "llama_cpp": {
+      "packet": "C:\\RealAI-clean\\realai\\catalog\\learned\\llama_cpp\\packet.json",
+      "plugin_id": "llama-cpp-coach"
     }
   }
 }

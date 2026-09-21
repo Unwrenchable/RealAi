@@ -1,0 +1,14 @@
+{
+  "slug": "effective_engine_main",
+  "package": "effective_engine_main_learned",
+  "plugin_id": "effective-engine-main-learned",
+  "version": "0.1.0",
+  "packet_sha": "9dfc31cfbc7e3569:82",
+  "abilities": [
+    "health",
+    "repo_map",
+    "node_context",
+    "fastify_context",
+    "agents_bridge"
+  ]
+}

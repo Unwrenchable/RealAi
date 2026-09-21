@@ -588,14 +588,296 @@
     }
   ],
   "plugin_proposal": {
-    "id": "effective-engine-main-coach",
-    "package": "effective_engine_main_coach",
-    "path": "C:\\RealAI-clean\\realai\\plugins\\effective_engine_main_coach",
+    "id": "effective-engine-main-learned",
+    "package": "effective_engine_main_learned",
+    "path": "C:\\RealAI-clean\\realai\\plugins\\effective_engine_main_learned",
     "http": {
-      "canonical": "/v1/plugins/effective-engine-main-coach",
-      "alias": "/v1/learned/effective_engine_main_coach"
+      "canonical": "/v1/plugins/effective-engine-main-learned",
+      "alias": "/v1/learned/effective_engine_main_learned"
     }
   },
-  "learned_at": "2026-09-21T14:43:51.007018+00:00",
-  "heal": false
+  "learned_at": "2026-09-21T16:22:29.077996+00:00",
+  "heal": false,
+  "scores": [
+    {
+      "path": "server/routes/admin/leads.js",
+      "kind": "ability",
+      "score": 60,
+      "why": "ability/route surface; keywords:server,routes",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/routes/admin/newsletter.js",
+      "kind": "ability",
+      "score": 60,
+      "why": "ability/route surface; keywords:server,routes",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/routes/admin/sync.js",
+      "kind": "ability",
+      "score": 60,
+      "why": "ability/route surface; keywords:server,routes",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/routes/ai.js",
+      "kind": "ability",
+      "score": 60,
+      "why": "ability/route surface; keywords:server,routes",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/routes/alerts.js",
+      "kind": "ability",
+      "score": 60,
+      "why": "ability/route surface; keywords:server,routes",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/routes/auth.js",
+      "kind": "ability",
+      "score": 60,
+      "why": "ability/route surface; keywords:server,routes",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/routes/engine.js",
+      "kind": "ability",
+      "score": 60,
+      "why": "ability/route surface; keywords:server,routes",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/routes/idx.js",
+      "kind": "ability",
+      "score": 60,
+      "why": "ability/route surface; keywords:server,routes",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/routes/inquiries.js",
+      "kind": "ability",
+      "score": 60,
+      "why": "ability/route surface; keywords:server,routes",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/routes/listings.js",
+      "kind": "ability",
+      "score": 60,
+      "why": "ability/route surface; keywords:server,routes",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/routes/market.js",
+      "kind": "ability",
+      "score": 60,
+      "why": "ability/route surface; keywords:server,routes",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/routes/neighborhoods.js",
+      "kind": "ability",
+      "score": 60,
+      "why": "ability/route surface; keywords:server,routes",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/routes/newsletter.js",
+      "kind": "ability",
+      "score": 60,
+      "why": "ability/route surface; keywords:server,routes",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/routes/agent-studio.js",
+      "kind": "agent",
+      "score": 58,
+      "why": "agent-shaped path; keywords:server,routes",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "server/routes/agents.js",
+      "kind": "agent",
+      "score": 58,
+      "why": "agent-shaped path; keywords:server,routes",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "server/services/ai.js",
+      "kind": "ability",
+      "score": 55,
+      "why": "ability/route surface; keywords:server",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/services/avm.js",
+      "kind": "ability",
+      "score": 55,
+      "why": "ability/route surface; keywords:server",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/services/compliance.js",
+      "kind": "ability",
+      "score": 55,
+      "why": "ability/route surface; keywords:server",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/services/engine.js",
+      "kind": "ability",
+      "score": 55,
+      "why": "ability/route surface; keywords:server",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/services/market.js",
+      "kind": "ability",
+      "score": 55,
+      "why": "ability/route surface; keywords:server",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "server/services/search.js",
+      "kind": "ability",
+      "score": 55,
+      "why": "ability/route surface; keywords:server",
+      "adapt": "wrap as hive ability (invoke learned module \u2014 never copy file)"
+    },
+    {
+      "path": "real_estate_agent/README.md",
+      "kind": "agent",
+      "score": 53,
+      "why": "agent-shaped path; entrypoint metadata",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "real_estate_agent/agent_server.py",
+      "kind": "agent",
+      "score": 53,
+      "why": "agent-shaped path; keywords:server",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "real_estate_inquiries_agent/README.md",
+      "kind": "agent",
+      "score": 53,
+      "why": "agent-shaped path; entrypoint metadata",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "real_estate_listings_agent/README.md",
+      "kind": "agent",
+      "score": 53,
+      "why": "agent-shaped path; entrypoint metadata",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "server/models/agent.js",
+      "kind": "agent",
+      "score": 53,
+      "why": "agent-shaped path; keywords:server",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "agent-tools",
+      "kind": "agent",
+      "score": 48,
+      "why": "agent-shaped path",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "github/agents",
+      "kind": "agent",
+      "score": 48,
+      "why": "agent-shaped path",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "github/agents/my-agent.agent.md",
+      "kind": "agent",
+      "score": 48,
+      "why": "agent-shaped path",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "real_estate_agent",
+      "kind": "agent",
+      "score": 48,
+      "why": "agent-shaped path",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "real_estate_agent/main.py",
+      "kind": "agent",
+      "score": 48,
+      "why": "agent-shaped path",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "real_estate_agent/requirements.txt",
+      "kind": "agent",
+      "score": 48,
+      "why": "agent-shaped path",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "real_estate_agent/test_agent.py",
+      "kind": "agent",
+      "score": 48,
+      "why": "agent-shaped path",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "real_estate_agents.json",
+      "kind": "agent",
+      "score": 48,
+      "why": "agent-shaped path",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "real_estate_inquiries_agent",
+      "kind": "agent",
+      "score": 48,
+      "why": "agent-shaped path",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "real_estate_inquiries_agent/main.py",
+      "kind": "agent",
+      "score": 48,
+      "why": "agent-shaped path",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "real_estate_inquiries_agent/requirements.txt",
+      "kind": "agent",
+      "score": 48,
+      "why": "agent-shaped path",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "real_estate_inquiries_agent/test_agent.py",
+      "kind": "agent",
+      "score": 48,
+      "why": "agent-shaped path",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "real_estate_listings_agent",
+      "kind": "agent",
+      "score": 48,
+      "why": "agent-shaped path",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    },
+    {
+      "path": "real_estate_listings_agent/main.py",
+      "kind": "agent",
+      "score": 48,
+      "why": "agent-shaped path",
+      "adapt": "wrap as hive agent task bridge \u2014 never copy file"
+    }
+  ]
 }

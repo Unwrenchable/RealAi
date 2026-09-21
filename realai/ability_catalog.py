@@ -972,6 +972,40 @@ def _enrich_status_from_disk(entry: Dict[str, Any]) -> Dict[str, Any]:
     return e
 
 
+
+
+def load_wired_learned_abilities() -> List[Dict[str, Any]]:
+    """Abilities created by POST /v1/learn/wire (PARTIAL / learned)."""
+    path = _ROOT / "realai" / "catalog" / "learned" / "wired_abilities.json"
+    if not path.is_file():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+    rows = data.get("abilities") if isinstance(data, dict) else data
+    out: List[Dict[str, Any]] = []
+    for row in rows or []:
+        if not isinstance(row, dict):
+            continue
+        aid = str(row.get("id") or "").strip()
+        if not aid:
+            continue
+        out.append(
+            {
+                "id": aid,
+                "name": str(row.get("name") or aid),
+                "status": "PARTIAL",
+                "learned": True,
+                "keywords": list(row.get("keywords") or ["learned", "wire"]),
+                "modules": list(row.get("modules") or []),
+                "live_path": str(row.get("live_path") or f"POST /v1/tools/execute ability.{aid}"),
+                "status_note": "Learned bridge via /v1/learn/wire — wraps plugin invoke, no foreign copy",
+            }
+        )
+    return out
+
+
 def build_catalog() -> Dict[str, Any]:
     inv = load_ability_inventory()
     inv_tokens = _token_keywords_from_inventory(inv)
@@ -991,6 +1025,15 @@ def build_catalog() -> Dict[str, Any]:
         e["inventory_tokens"] = sorted(set(matched))[:40]
         e["inventory_hit_count"] = len(set(matched))
         abilities.append(e)
+
+    # Learned wires (PARTIAL) — never overwrite rundown ids
+    existing_ids = {str(a.get("id") or "") for a in abilities}
+    for row in load_wired_learned_abilities():
+        rid = str(row.get("id") or "")
+        if not rid or rid in existing_ids:
+            continue
+        abilities.append(row)
+        existing_ids.add(rid)
 
     by_status: Dict[str, int] = {}
     weighted = 0.0

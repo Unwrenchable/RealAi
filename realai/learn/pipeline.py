@@ -96,6 +96,18 @@ def run_learn(
         signals=signals,
         plugin_proposal=plugin_proposal,
     )
+    try:
+        from realai.learn.score import score_source
+
+        packet["scores"] = score_source(
+            tree,
+            list(scan.get("fingerprints") or []),
+            signals,
+            cap=40,
+        )
+    except Exception as _score_err:
+        packet["scores"] = []
+        packet["scores_error"] = str(_score_err)
     shape_errors = validate_packet(packet)
     catalog_path = catalog_root / slug / "packet.json"
     docs_path = docs / f"{slug}.json"

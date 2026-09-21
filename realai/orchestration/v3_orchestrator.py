@@ -3242,7 +3242,7 @@ class Handler(BaseHTTPRequestHandler):
 
 
         # Learn promote stub / optional queue — logic in realai.learn.http
-        if path in ("/v1/learn/promote", "/v1/learn/queue"):
+        if path in ("/v1/learn/promote", "/v1/learn/wire", "/v1/learn/queue"):
             try:
                 body = json.loads(raw.decode("utf-8") or "{}") if raw else {}
             except json.JSONDecodeError:

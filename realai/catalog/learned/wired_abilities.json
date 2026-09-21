@@ -1,0 +1,25 @@
+{
+  "schema": "realai.learn.wired/v1",
+  "abilities": [
+    {
+      "id": "effective_engine_main_leads",
+      "name": "effective_engine_main_leads",
+      "status": "PARTIAL",
+      "learned": true,
+      "slug": "effective_engine_main",
+      "package": "effective_engine_main_learned",
+      "plugin_id": "effective-engine-main-learned",
+      "modules": [
+        "abilities/effective_engine_main_leads.py",
+        "realai/plugins/effective_engine_main_learned"
+      ],
+      "live_path": "POST /v1/tools/execute ability.effective_engine_main_leads (learned bridge)",
+      "keywords": [
+        "effective_engine_main",
+        "effective_engine_main_learned",
+        "learned",
+        "wire"
+      ]
+    }
+  ]
+}
