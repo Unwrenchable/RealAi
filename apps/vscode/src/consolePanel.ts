@@ -121,21 +121,55 @@ export class RealAIConsolePanel {
 
   private resolveConsoleHtmlPath(): string {
     const workspaceRoots = (vscode.workspace.workspaceFolders || []).map((f) => f.uri.fsPath);
-    const candidates: string[] = [];
-    for (const root of workspaceRoots) {
-      candidates.push(path.join(root, 'console.html'));
-      candidates.push(path.join(root, 'apps', 'vscode', 'webview', 'console.html'));
-    }
     const extRoot = this.ctx.extensionPath;
-    candidates.push(path.join(extRoot, '..', '..', 'console.html'));
-    candidates.push(path.join(extRoot, 'webview', 'console.html'));
-    for (const c of candidates) {
+
+    const looksLikeHtml = (filePath: string): boolean => {
       try {
-        if (fs.existsSync(c) && fs.statSync(c).isFile()) {
-          return path.resolve(c);
-        }
+        const head = fs.readFileSync(filePath, { encoding: 'utf8' }).slice(0, 512);
+        const trimmed = head.trimStart();
+        return (
+          trimmed.startsWith('<!DOCTYPE') ||
+          trimmed.startsWith('<!doctype') ||
+          /<html[\s>]/i.test(head)
+        );
       } catch {
-        /* continue */
+        return false;
+      }
+    };
+
+    const tryFile = (filePath: string, requireHtml: boolean): string | null => {
+      try {
+        if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
+          return null;
+        }
+        if (requireHtml && !looksLikeHtml(filePath)) {
+          return null;
+        }
+        return path.resolve(filePath);
+      } catch {
+        return null;
+      }
+    };
+
+    // Prefer packaged + tree webview UI over a workspace console.html Craft dump.
+    const ordered: Array<{ path: string; requireHtml: boolean }> = [];
+    ordered.push({ path: path.join(extRoot, 'webview', 'console.html'), requireHtml: false });
+    for (const root of workspaceRoots) {
+      ordered.push({
+        path: path.join(root, 'apps', 'vscode', 'webview', 'console.html'),
+        requireHtml: false,
+      });
+    }
+    for (const root of workspaceRoots) {
+      ordered.push({ path: path.join(root, 'console.html'), requireHtml: true });
+    }
+    // Legacy install layout (extension nested under product) — HTML-gated.
+    ordered.push({ path: path.join(extRoot, '..', '..', 'console.html'), requireHtml: true });
+
+    for (const item of ordered) {
+      const hit = tryFile(item.path, item.requireHtml);
+      if (hit) {
+        return hit;
       }
     }
     return path.join(extRoot, 'webview', 'console.html');
