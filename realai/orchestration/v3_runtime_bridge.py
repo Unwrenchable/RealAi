@@ -14,6 +14,7 @@ This is product code for C:\\RealAI-clean — not a shim to C:\\realai.
 from __future__ import annotations
 
 import json
+import re
 import os
 import sys
 import urllib.error
@@ -1145,27 +1146,84 @@ _PWC_PROMPTS = {
     "planner": (
         "You are the RealAI HIVE PLANNER (multi-agent orchestration on local Vulkan). "
         "RealAI 'hive' means the local agent swarm (overseer/coder/architect/...), "
-        "NOT Apache Hive, NOT Hadoop, NOT Hive CLI, NOT Hiveserver2. "
-        "Never emit Apache/Hadoop install or SQL-warehouse steps unless the user "
-        "explicitly wrote 'Apache Hive' or 'Hadoop'. "
-        "Produce a short numbered plan (3-5 steps) for the RealAI product/workspace task. "
-        "Prefer concrete local checks: orchestrator :8001 health, Vulkan :8080, "
-        "/v1/hive, /v1/agents, console/abilities — not generic 'sync all git repos'."
+        "NOT Apache Hive. Produce a short numbered plan (3-5 steps). "
+        "If the task names a workspace file, step 1 MUST be workspace_read on that path. "
+        "Never claim LANDED unless a tool write already succeeded. Prefer PROPOSED."
     ),
     "worker": (
-        "You are the RealAI HIVE WORKER. You will be given REAL probe JSON from the "
-        "local stack (already executed). Summarize only those facts in 6-10 bullets: "
-        "what is up/down, agent counts, risks, and the next 2 concrete console actions. "
-        "Do not invent stdout. Do not ask for $ /run /py commands — probes already ran. "
-        "Forbidden: Apache Hive/Hadoop unless explicitly requested."
+        "You are the RealAI HIVE WORKER. You receive REAL probe JSON and any workspace_read "
+        "results already executed. Quote real file content when a read is present. "
+        "Do not invent file contents. Do not say LANDED. Forbidden: Apache Hive fluff."
     ),
     "critic": (
-        "You are the RealAI HIVE CRITIC. Review planner + REAL worker probe summary. "
-        "If either stage drifted into Apache Hive/Hadoop, reject that drift. "
-        "Verdict: pass/fail on whether the plan matches the live stack facts, "
-        "plus top 3 gaps focused on RealAI multi-agent health."
+        "You are the RealAI HIVE CRITIC. Fail the run if the task named a file but no "
+        "successful workspace_read happened. Fail if output says LANDED without a tool write. "
+        "Verdict pass/fail plus top gaps. Prefer PROPOSED over LANDED."
     ),
 }
+
+
+def _extract_workspace_paths(task: str) -> List[str]:
+    """Pull likely repo-relative paths from a task string."""
+    text = (task or "").replace("\\", "/")
+    found: List[str] = []
+    for m in re.finditer(
+        r"(?<![\w./-])((?:apps|realai|modules|abilities|docs|scripts|frontend|agents|\.github)/[\w./\-]+\.[\w]+)",
+        text,
+        flags=re.I,
+    ):
+        p = m.group(1).replace("\\", "/")
+        if p not in found:
+            found.append(p)
+    for m in re.finditer(r"\bread\s+([\w./\-]+\.[\w]+)", text, flags=re.I):
+        p = m.group(1).replace("\\", "/")
+        if "/" not in p and p.lower() == "readme.md":
+            p = "apps/vscode/README.md"
+        if p not in found:
+            found.append(p)
+    if not found and re.search(r"apps[/\\]vscode[/\\]README\.md", text, re.I):
+        found.append("apps/vscode/README.md")
+    return found[:5]
+
+
+def _workspace_reads_for_task(task: str) -> Dict[str, Any]:
+    """Execute workspace_read for paths named in the task (before LLM stages)."""
+    paths = _extract_workspace_paths(task)
+    reads: List[Dict[str, Any]] = []
+    ok_any = False
+    for path in paths:
+        result = workspace_tool("workspace_read", {"path": path, "start": 1, "limit": 40})
+        ok = False
+        snippet = ""
+        if isinstance(result, dict):
+            if result.get("error"):
+                ok = False
+            elif result.get("ok") is False:
+                ok = False
+            elif result.get("content") or result.get("text") or result.get("lines"):
+                ok = True
+            elif result.get("ok") is True:
+                ok = True
+            snippet = str(
+                result.get("content")
+                or result.get("text")
+                or "\n".join(result.get("lines") or [])
+                or ""
+            )[:2000]
+        ok_any = ok_any or ok
+        reads.append({"path": path, "ok": ok, "result": result, "snippet": snippet})
+    return {
+        "paths": paths,
+        "reads": reads,
+        "ok": ok_any if paths else True,
+        "required": bool(paths),
+    }
+
+
+def _scrub_landed(text: str, write_ok: bool = False) -> str:
+    if write_ok or not text:
+        return text
+    return re.sub(r"\bLANDED\b", "PROPOSED", text, flags=re.I)
 
 def _collect_worker_probes(task: str) -> Dict[str, Any]:
     """Run real local probes for the multi-agent worker stage (no invented stdout)."""
@@ -1252,7 +1310,7 @@ def _stage_text(resp: Dict[str, Any]) -> str:
         return ""
 
 
-BRIDGE_MULTI_REVISION = "2026-09-08-pwc-vscode-patches-v3"
+BRIDGE_MULTI_REVISION = "2026-09-21-hive-agents-read-v1"
 
 def _is_apps_vscode_patch_task(task: str) -> bool:
     """True when the user asked for concrete apps/vscode file patches (not health fluff)."""
@@ -1282,7 +1340,7 @@ def _vscode_patch_task_addon(task: str) -> str:
         "\n\nHARD RULES FOR THIS TASK (AtomicFizz / RealAI):\n"
         "- Output ONLY concrete patches with exact paths under apps/vscode/ "
         "(or docs/sessions/PHASES.md for stage tip).\n"
-        "- Prefer the deterministic auditor pattern: name file, Change, Why, LANDED|PROPOSED.\n"
+        "- Prefer the deterministic auditor pattern: name file, Change, Why, PROPOSED (use LANDED only after a real tool write succeeded).\n"
         "- FORBIDDEN: Live Share, marketplace installs, 'update VS Code', generic multi-agent fluff, "
         "agent-count health essays, 'monitor 245 agents', stack restart checklists as the answer.\n"
         "- Stack health may be assumed from REAL probes; do not make health the deliverable.\n"
@@ -1312,6 +1370,20 @@ def _run_planner_worker_critic(
     stages: Dict[str, str] = {}
     errors: Dict[str, str] = {}
 
+    # Deterministic workspace_read BEFORE planner/worker invent content
+    file_reads = _workspace_reads_for_task(task)
+    write_ok = False
+    read_blob = ""
+    if file_reads.get("reads"):
+        parts = []
+        for r in file_reads["reads"]:
+            parts.append(
+                f"### workspace_read path={r.get('path')} ok={r.get('ok')}\n"
+                f"{(r.get('snippet') or '')[:1500]}"
+            )
+        read_blob = "\n\nFILE READS (real disk):\n" + "\n\n".join(parts)
+    ctx_blob = (ctx_blob or "") + read_blob
+
     # PLANNER
     plan_resp = client.chat_completion(
         [
@@ -1339,7 +1411,10 @@ def _run_planner_worker_critic(
 
     # WORKER — real probes first, then short LLM summary grounded in those facts
     probes = _collect_worker_probes(task)
+    probes["file_reads"] = file_reads
     probe_report = _format_worker_probe_report(probes)
+    if read_blob:
+        probe_report = probe_report + "\n\n" + read_blob.strip()
     work_resp = client.chat_completion(
         [
             {"role": "system", "content": _PWC_PROMPTS["worker"]},
@@ -1457,6 +1532,37 @@ def _run_planner_worker_critic(
                     "Forbidden: Live Share, marketplace, update VS Code, generic multi-agent fluff."
                 )
 
+
+    # Hard fail: named file but no successful workspace_read
+    if file_reads.get("required") and not file_reads.get("ok"):
+        stages["critic"] = (
+            "[RealAI critic — FAIL]\n"
+            "verdict: fail\n"
+            "reason: task named workspace file(s) but workspace_read did not succeed.\n"
+            f"paths={file_reads.get('paths')}\n"
+        )
+        return {
+            "ok": False,
+            "mode": "pipeline",
+            "planner": _scrub_landed(stages.get("planner") or "", write_ok),
+            "worker": _scrub_landed(stages.get("worker") or "", write_ok),
+            "critic": stages["critic"],
+            "stage_outputs": {k: _scrub_landed(v, write_ok) for k, v in stages.items()},
+            "final_output": _scrub_landed(
+                f"## Planner\n{stages.get('planner')}\n\n## Worker\n{stages.get('worker')}\n\n## Critic\n{stages['critic']}",
+                write_ok,
+            ),
+            "error": "workspace_read_required",
+            "file_reads": file_reads,
+            "duration_ms": int((time.time() - t0) * 1000),
+            "source": "realai.v3_runtime_bridge.planner_worker_critic",
+            "bridge_revision": BRIDGE_MULTI_REVISION,
+        }
+
+    # Scrub LANDED from stage text unless a write succeeded
+    for _k in list(stages.keys()):
+        stages[_k] = _scrub_landed(stages.get(_k) or "", write_ok)
+
     final = (
         f"## Planner\n{stages['planner']}\n\n"
         f"## Worker\n{stages['worker']}\n\n"
@@ -1477,7 +1583,9 @@ def _run_planner_worker_critic(
             "vulkan_ok": bool((probes.get("vulkan") or {}).get("ok")),
             "agents_count": probes.get("agents_count"),
             "agent_ids_sample": probes.get("agent_ids_sample"),
+            "file_reads": file_reads,
         },
+        "file_reads": file_reads,
         "orch": orch_health(),
         "vulkan": vulkan_health(),
         "source": "realai.v3_runtime_bridge.planner_worker_critic",

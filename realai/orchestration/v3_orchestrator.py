@@ -401,6 +401,81 @@ def _self_improve_evaluate() -> Dict[str, Any]:
         return {"ok": False, "error": str(e), "trace": traceback.format_exc()[-800:]}
 
 
+
+def _primary_agent_ids() -> set:
+    """Default /v1/agents roster: 12 hive JSON roles + small pipeline set."""
+    ids = {
+        "researcher",
+        "critic",
+        "executor",
+        "planner",
+    }
+    try:
+        gdir = _product_home() / ".github" / "agents"
+        if gdir.is_dir():
+            for p in gdir.glob("*.json"):
+                try:
+                    data = json.loads(p.read_text(encoding="utf-8-sig"))
+                    if isinstance(data, dict) and data.get("id"):
+                        ids.add(str(data["id"]))
+                except Exception:
+                    continue
+    except Exception:
+        ids.update({
+            "overseer", "coder", "architect", "analyst", "memory", "governor",
+            "router", "executor", "planner", "guardian", "self-heal", "hive-orchestrator",
+        })
+    return ids
+
+
+def _filter_agents_for_api(agents: list, full: bool) -> list:
+    if full:
+        return list(agents or [])
+    # Prefer live .github/agents/*.json cards, then fill from catalog, then pipeline stubs.
+    out = []
+    seen = set()
+    try:
+        gdir = _product_home() / ".github" / "agents"
+        if gdir.is_dir():
+            for path in sorted(gdir.glob("*.json")):
+                try:
+                    data = json.loads(path.read_text(encoding="utf-8-sig"))
+                except Exception:
+                    continue
+                if not isinstance(data, dict) or not data.get("id"):
+                    continue
+                aid = str(data["id"])
+                if aid in seen:
+                    continue
+                row = dict(data)
+                row.setdefault("hive", True)
+                out.append(row)
+                seen.add(aid)
+    except Exception:
+        pass
+    primary = _primary_agent_ids()
+    for a in agents or []:
+        if not isinstance(a, dict):
+            continue
+        aid = str(a.get("id") or "")
+        if aid in primary and aid not in seen:
+            out.append(a)
+            seen.add(aid)
+    for pid in ("researcher", "critic", "executor", "planner"):
+        if pid not in seen:
+            out.append({
+                "id": pid,
+                "role": f"Pipeline {pid}",
+                "description": f"Pipeline role {pid}",
+                "capabilities": [],
+                "risk_level": "low",
+                "preferred_profile": "balanced",
+                "hive": False,
+                "pipeline": True,
+            })
+            seen.add(pid)
+    return out
+
 def _load_agents() -> List[Dict[str, Any]]:
     """Agency catalog from product-root agents/agentx + live Hive core roles."""
     global _AGENTS_CACHE, AGENTS_PATH
@@ -2164,6 +2239,7 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/v1/agents":
             agents = _load_agents()
             full = (qs.get("full") or ["0"])[0] in ("1", "true", "yes")
+            agents = _filter_agents_for_api(agents, full=full)
             data = []
             for a in agents:
                 item = {
@@ -2173,6 +2249,7 @@ class Handler(BaseHTTPRequestHandler):
                     "capabilities": a.get("capabilities") or [],
                     "risk_level": a.get("risk_level"),
                     "preferred_profile": a.get("preferred_profile"),
+                    "hive": bool(a.get("hive")),
                 }
                 if full:
                     item["description"] = a.get("description") or ""
@@ -2182,8 +2259,9 @@ class Handler(BaseHTTPRequestHandler):
             self._json(200, {
                 "object": "list",
                 "data": data,
-                "count": len(agents),
-                "source": str(AGENTS_PATH),
+                "count": len(data),
+                "full": full,
+                "source": str(AGENTS_PATH) if full else ".github/agents + pipeline",
                 "agents_ui": "/agents-ui/",
             })
             return
