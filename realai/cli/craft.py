@@ -1453,6 +1453,50 @@ def tool_learn(
     )
 
 
+def tool_learn_auto(
+    write: bool = False,
+    refresh: bool = False,
+    max_candidates: int = 8,
+    max_files: int | None = None,
+    paths: list[str] | None = None,
+    urls: list[str] | None = None,
+) -> dict[str, Any]:
+    """Scout allowed roots + queue run_learn (packet-only unless write=True)."""
+    from realai.learn.scout import scout_and_queue
+
+    return scout_and_queue(
+        paths=paths,
+        urls=urls,
+        write=bool(write),
+        refresh=bool(refresh),
+        noop_if_packet=not bool(refresh),
+        max_candidates=int(max_candidates or 8),
+        all_branches=False,
+        max_files=int(max_files or 800),
+    )
+
+
+def tool_learn_queue(
+    sources: list[str] | None = None,
+    write: bool = False,
+    refresh: bool = False,
+    max_files: int | None = None,
+    auto: bool = False,
+) -> dict[str, Any]:
+    """Explicit learn queue (same body as optional POST /v1/learn/queue)."""
+    from realai.learn.scout import handle_learn_queue_request
+
+    return handle_learn_queue_request(
+        {
+            "sources": list(sources or []),
+            "write": bool(write),
+            "refresh": bool(refresh),
+            "max_files": int(max_files or 800),
+            "auto": bool(auto),
+        }
+    )
+
+
 TOOLS: dict[str, Callable[..., dict[str, Any]]] = {
     "doctor": lambda **kw: tool_doctor(),
     "organs": lambda **kw: tool_organs(),
@@ -1523,6 +1567,21 @@ TOOLS: dict[str, Callable[..., dict[str, Any]]] = {
         all_branches=bool(kw["all_branches"]) if "all_branches" in kw else True,
         max_branches=kw.get("max_branches"),
         max_files=kw.get("max_files"),
+    ),
+    "learn_auto": lambda **kw: tool_learn_auto(
+        write=bool(kw.get("write")),
+        refresh=bool(kw.get("refresh")),
+        max_candidates=int(kw.get("max_candidates") or 8),
+        max_files=kw.get("max_files"),
+        paths=kw.get("paths"),
+        urls=kw.get("urls"),
+    ),
+    "learn_queue": lambda **kw: tool_learn_queue(
+        sources=list(kw.get("sources") or kw.get("queue") or []),
+        write=bool(kw.get("write")),
+        refresh=bool(kw.get("refresh")),
+        max_files=kw.get("max_files"),
+        auto=bool(kw.get("auto")),
     ),
     "model": lambda **kw: tool_model(str(kw.get("name") or kw.get("model") or "RealAI Hive")),
     "walk": lambda **kw: tool_walk_root(
@@ -1898,6 +1957,41 @@ def plan_tools(user_text: str) -> list[tuple[str, dict[str, Any]]]:
             if cmd == "learn":
                 from realai.learn_git import parse_learn_tokens, split_learn_rest
 
+                bits0 = (rest or "").strip().split(maxsplit=1)
+                head = (bits0[0].lower() if bits0 else "")
+                if head in {"auto", "scout"}:
+                    tail = bits0[1] if len(bits0) > 1 else ""
+                    ns = parse_learn_tokens(split_learn_rest(tail))
+                    extra_src = (ns.source or "").strip()
+                    paths = [extra_src] if extra_src and extra_src not in {".", "auto", "scout"} else []
+                    return [
+                        (
+                            "learn_auto",
+                            {
+                                "write": bool(ns.write),
+                                "refresh": bool(ns.refresh),
+                                "max_files": int(ns.max_files),
+                                "paths": paths,
+                            },
+                        )
+                    ]
+                if head == "queue":
+                    tail = bits0[1] if len(bits0) > 1 else ""
+                    ns = parse_learn_tokens(split_learn_rest(tail))
+                    src = (ns.source or "").strip()
+                    sources = [src] if src and src != "." else []
+                    return [
+                        (
+                            "learn_queue",
+                            {
+                                "sources": sources,
+                                "write": bool(ns.write),
+                                "refresh": bool(ns.refresh),
+                                "max_files": int(ns.max_files),
+                                "auto": not sources,
+                            },
+                        )
+                    ]
                 ns = parse_learn_tokens(split_learn_rest(rest))
                 return [
                     (
@@ -3007,6 +3101,8 @@ Slash commands:
   /list /read /grep /write path|||content /scan
   /work <goal>                 # foreign-repo: inspect then coder plan + /write
   /learn <local-folder-OR-git-URL> [--write] [--all-branches] [--max-branches N] [--max-files N]
+  /learn auto|scout [path|url] [--refresh]   # scout + queue (packet only)
+  /learn queue [path|url ...] [--refresh]    # explicit queue → run_learn(write=False)
       Local folder (kind: local):  /learn C:\\path\\to\\folder
                                    /learn "C:\\path\\with spaces\\repo"
                                    /learn ./my-repo
@@ -3075,16 +3171,42 @@ class CraftSession:
             rest = user.strip()[6:].strip()
             from realai.learn_git import compact_learn_result, parse_learn_tokens, split_learn_rest
 
-            ns = parse_learn_tokens(split_learn_rest(rest))
-            source = (ns.source or "").strip() or str(_ws())
-            result = tool_learn(
-                source,
-                write=bool(ns.write),
-                refresh=bool(ns.refresh),
-                all_branches=bool(ns.all_branches),
-                max_branches=int(ns.max_branches),
-                max_files=int(ns.max_files),
-            )
+            bits0 = rest.split(maxsplit=1)
+            head = (bits0[0].lower() if bits0 else "")
+            if head in {"auto", "scout"}:
+                tail = bits0[1] if len(bits0) > 1 else ""
+                ns = parse_learn_tokens(split_learn_rest(tail))
+                extra_src = (ns.source or "").strip()
+                paths = [extra_src] if extra_src and extra_src not in {".", "auto", "scout"} else []
+                result = tool_learn_auto(
+                    write=bool(ns.write),
+                    refresh=bool(ns.refresh),
+                    max_files=int(ns.max_files),
+                    paths=paths,
+                )
+            elif head == "queue":
+                tail = bits0[1] if len(bits0) > 1 else ""
+                ns = parse_learn_tokens(split_learn_rest(tail))
+                src = (ns.source or "").strip()
+                sources = [src] if src and src != "." else []
+                result = tool_learn_queue(
+                    sources=sources,
+                    write=bool(ns.write),
+                    refresh=bool(ns.refresh),
+                    max_files=int(ns.max_files),
+                    auto=not sources,
+                )
+            else:
+                ns = parse_learn_tokens(split_learn_rest(rest))
+                source = (ns.source or "").strip() or str(_ws())
+                result = tool_learn(
+                    source,
+                    write=bool(ns.write),
+                    refresh=bool(ns.refresh),
+                    all_branches=bool(ns.all_branches),
+                    max_branches=int(ns.max_branches),
+                    max_files=int(ns.max_files),
+                )
             msg = json.dumps(compact_learn_result(result), indent=2, default=str)
             print(msg)
             return msg

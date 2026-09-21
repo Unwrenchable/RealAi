@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from realai.learn.packet import PACKET_SCHEMA, validate_packet
 from realai.learn.pipeline import run_learn
+from realai.learn.scout import handle_learn_queue_request, scout, scout_and_queue
 from realai.learn.scaffold import plugin_package_name, scaffold_plugin
 from realai.learn.skip import (
     SKIP_DIR_NAMES,
@@ -20,7 +21,10 @@ __all__ = [
     "SKIP_FILE_NAMES",
     "SKIP_SUFFIXES",
     "plugin_package_name",
+    "handle_learn_queue_request",
     "run_learn",
+    "scout",
+    "scout_and_queue",
     "scaffold_plugin",
     "should_skip_dir",
     "should_skip_file",
