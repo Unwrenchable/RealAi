@@ -422,8 +422,8 @@
   },
   "scripts": {
     "sync-webview": "node ./scripts/sync-webview.js",
-    "compile": "npm run sync-webview && tsc -p ./",
-    "watch": "npm run sync-webview && tsc -watch -p ./",
+    "compile": "npm run sync-webview && node ./node_modules/typescript/lib/tsc.js -p ./",
+    "watch": "npm run sync-webview && node ./node_modules/typescript/lib/tsc.js -watch -p ./",
     "vscode:prepublish": "npm run compile",
     "package": "npx @vscode/vsce package --no-dependencies --allow-missing-repository"
   },
