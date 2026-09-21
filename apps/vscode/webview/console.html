@@ -170,6 +170,19 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
   .ghost{display:none}
   header.top .pill:not(.btn):not(.live){display:none}
 }
+
+.top{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.top .pill-secondary{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+@media (max-width:1100px){
+  .top .pill-secondary{display:none}
+  .top.more-open .pill-secondary{display:flex;width:100%;order:99;padding-top:4px}
+}
+.ops{overflow:auto;min-height:0}
+.ops .dock{overflow:auto;flex:1;min-height:0;max-height:none}
+.composer-wrap{flex-shrink:0;position:sticky;bottom:0;z-index:5;background:var(--bg,#0b0b11)}
+.stage{display:flex;flex-direction:column;min-width:0}
+.stage .feed{flex:1;min-height:0;overflow:auto}
+
 </style>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
@@ -214,20 +227,23 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
   </aside>
 
   <section class="stage">
-    <header class="top">
+    <header class="top" id="topBar">
       <button type="button" class="pill btn" id="toggleRail" title="Toggle rail">Rail</button>
       <div class="pill"><span class="dot" id="dot2"></span> realai-hive</div>
       <div class="pill" id="pillHive" title="Hive :8001">hive - ...</div>
-      <div class="pill" id="pillVulkan" title="Vulkan :8080">vulkan - ...</div>
-      <div class="pill" id="pillVoiceLab" title="RealAI voice (gateway)">voice lab - ...</div>
-      <div class="pill" id="pillTools">tools - ...</div>
-      <div class="pill" id="pillCaps">caps - ...</div>
-      <div class="pill" id="pillModel">model - realai-hive</div>
-      <div class="pill" id="pillAgents">agents - ...</div>
-      <button type="button" class="pill btn on" id="voiceToggle" title="Speak replies (browser console parity)">SPEAK ON</button>
+      <div class="pill" id="pillAgents" title="Catalog agents · live hive roles">agents - ...</div>
+      <button type="button" class="pill btn" id="pillMore" title="More status pills" hidden>More</button>
+      <div class="pill-secondary" id="pillSecondary">
+        <div class="pill" id="pillVulkan" title="Vulkan :8080">vulkan - ...</div>
+        <div class="pill" id="pillVoiceLab" title="RealAI voice (gateway)">voice lab - ...</div>
+        <div class="pill" id="pillTools">tools - ...</div>
+        <div class="pill" id="pillCaps">caps - ...</div>
+        <div class="pill" id="pillModel">model - realai-hive</div>
+        <button type="button" class="pill btn on" id="voiceToggle" title="Speak replies (browser console parity)">SPEAK ON</button>
+        <div class="pill" id="voiceState">voice: ready</div>
+        <div class="pill live" id="clock"></div>
+      </div>
       <div class="grow"></div>
-      <div class="pill" id="voiceState">voice: ready</div>
-      <div class="pill live" id="clock"></div>
       <a class="pill btn" id="openAgents" href="/agents-ui/" title="Agents UI">Agents</a>
       <a class="pill btn" id="openVoiceLab" href="/voice-lab/" title="Voice Lab UI (speech still via RealAI :8001)">Voice</a>
       <button type="button" class="pill btn" id="openBrowser" title="Open Hive browser console">Browser</button>
@@ -367,13 +383,14 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     return {};
   }
   async function browserBootstrap(){
-    const [health, hive, caps, abilitiesPack, tools, agents, coverage, voiceLab] = await Promise.all([
+    const [health, hive, caps, abilitiesPack, tools, agentsLive, agentsCatalog, coverage, voiceLab] = await Promise.all([
       hiveGet('/health').catch(e => ({ error: String(e) })),
       hiveGet('/v1/hive').catch(() => ({})),
       hiveGet('/v1/capabilities').catch(() => ({})),
       hiveGet('/v1/abilities').catch(() => hiveGet('/v1/abilities/list').catch(() => ({ data: [] }))),
       hiveGet('/v1/tools').catch(() => ({ tools: [] })),
       hiveGet('/v1/agents').catch(() => ({ data: [] })),
+      hiveGet('/v1/agents?full=1').catch(() => ({ data: [] })),
       hivePost('/v1/tools/execute', { name: 'ability_coverage', arguments: {} }).catch(() => null),
       Promise.resolve({ ok: true, provider: 'realai' }),
     ]);
@@ -389,7 +406,11 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       abilNames.forEach(n => { if (!have.has(n)) capList.push(typeof n === 'string' ? n : String(n)); });
     }
 
-    const agentIds = ((agents && agents.data) || []).map(a => a && a.id).filter(Boolean);
+    const agentLiveIds = ((agentsLive && agentsLive.data) || []).map(a => a && a.id).filter(Boolean);
+    const agentCatalogRows = ((agentsCatalog && agentsCatalog.data) || []);
+    const agentIds = agentCatalogRows.map(a => a && a.id).filter(Boolean);
+    const agentsCatalogCount = agentIds.length || Number((agentsCatalog && agentsCatalog.count) || 0);
+    const agentsHiveCount = agentLiveIds.length || 0;
     const hiveOk = !!(health && (health.status === 'ok' || health.status === 'degraded'));
     const vulkanOk = !!(health && health.vulkan && health.vulkan.ok);
     const voiceLabOk = !!(voiceLab && (voiceLab.ok === true || voiceLab.status === 'ok'));
@@ -406,7 +427,9 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
         voiceLabOk,
         baseUrl: HIVE,
         toolsCount: toolNames.length,
-        agentsCount: agentIds.length,
+        agentsCount: agentsCatalogCount,
+        agentsCatalogCount: agentsCatalogCount,
+        agentsHiveCount: agentsHiveCount,
         capabilitiesCount: capList.length,
         summaryLine: 'Hive ' + (hiveOk ? 'OK' : 'DOWN') + ' - Vulkan ' + (vulkanOk ? 'OK' : 'down') + ' - Voice Lab ' + (voiceLabOk ? 'OK' : 'down'),
         hiveAgents: hiveRoles,
@@ -414,6 +437,9 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       capabilities: capList,
       tools: toolNames,
       agents: agentIds,
+      agentsLive: agentLiveIds,
+      agentsCatalogCount: agentsCatalogCount,
+      agentsHiveCount: agentsHiveCount,
       hiveRoles,
       abilityStatus: [],
       coverage: (coverage && coverage.result && coverage.result.coverage) || (coverage && coverage.coverage) || null,
@@ -586,7 +612,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
   };
   const vscode = IS_BROWSER ? browserHost : acquireVsCodeApi();
 
-  let boot = { version:'', stage:{}, snap:{}, capabilities:[], tools:[], agents:[], hiveRoles:[], abilityStatus:[], coverage:null, voiceProvider:'realai-voice' };
+  let boot = { version:'', stage:{}, snap:{}, capabilities:[], tools:[], agents:[], agentsLive:[], agentsCatalogCount:0, agentsHiveCount:0, hiveRoles:[], abilityStatus:[], coverage:null };
   function statusFor(id){
     const raw = String(id||'').replace(/^ability\./,'').replace(/^partial:/,'');
     const row = (boot.abilityStatus||[]).find(a => a.id === raw || a.id === id);
@@ -668,7 +694,8 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       if (!sel) return;
       const ids = [];
       (boot.hiveRoles || []).forEach(r => { if (r && !ids.includes(r)) ids.push(r); });
-      (boot.agents || []).forEach(a => { if (a && !ids.includes(a)) ids.push(a); });
+      (boot.agentsLive || boot.agents || []).forEach(a => { if (a && !ids.includes(a)) ids.push(a); });
+    // catalog names available in Advanced Agents dock; run select prefers live hive
       const cur = sel.value;
       sel.innerHTML = ids.map(id => `<option value="${String(id).replace(/"/g,'')}">${String(id)}</option>`).join('')
         || '<option value="overseer">overseer</option>';
@@ -1024,14 +1051,18 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       ];
     } else if (tab === 'tools') {
       items = (boot.tools||[]).map(n => ({ title:n, sub:'hive tool - click to run', action:n, kind:'tool' }));
-    } else {
-      items = (boot.agents||[]).map(n => ({ title:n, sub:'agent - fills /multi', action:n, kind:'agent' }));
+    } else if (tab === 'agents') {
+      // Catalog list (full roster) — live hive runners stay on /v1/agents default (~14)
+      const catalog = (boot.agents||[]);
+      items = catalog.map(n => ({ title:n, sub:'catalog agent - fills /multi', action:n, kind:'agent' }));
       if ((boot.hiveRoles||[]).length) {
         items = [
-          ...boot.hiveRoles.map(r => ({ title:r, sub:'hive role - fills /multi', action:r, kind:'agent' })),
-          ...items
+          ...boot.hiveRoles.map(r => ({ title:r, sub:'hive live role', action:r, kind:'agent' })),
+          ...items.filter(i => !(boot.hiveRoles||[]).includes(i.title))
         ];
       }
+    } else {
+      items = [];
     }
     if (q) items = items.filter(i => (i.title+i.sub).toLowerCase().includes(q));
     dock.innerHTML = items.slice(0, 200).map(i => {
@@ -1138,6 +1169,22 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     fillComposer('/multi List 3 concrete next actions for the local RealAI hive');
     form.requestSubmit();
   };
+
+
+  // Header scale: secondary pills behind More under 1100px
+  (function(){
+    const top = document.getElementById('topBar');
+    const more = document.getElementById('pillMore');
+    function syncMore(){
+      if (!top || !more) return;
+      const narrow = window.matchMedia('(max-width:1100px)').matches;
+      more.hidden = !narrow;
+      if (!narrow) top.classList.remove('more-open');
+    }
+    if (more) more.onclick = () => { if (top) top.classList.toggle('more-open'); };
+    window.addEventListener('resize', syncMore);
+    syncMore();
+  })();
 
   // Promote tab — learned packets → stub
   window.__realaiPromotePackets = [];
@@ -1304,7 +1351,9 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       document.getElementById('phasePill').textContent = (d.stage && d.stage.phaseId) || 'Phase I';
       document.getElementById('pillTools').textContent = 'tools - '+((d.tools||[]).length);
       document.getElementById('pillCaps').textContent = 'caps - '+((d.capabilities||[]).length);
-      document.getElementById('pillAgents').textContent = 'agents - '+((d.agents||[]).length);
+      const catN = Number(d.agentsCatalogCount || (d.agents||[]).length || 0);
+      const hiveN = Number(d.agentsHiveCount || (d.agentsLive||[]).length || (d.hiveRoles||[]).length || 0);
+      document.getElementById('pillAgents').textContent = 'agents - ' + catN + (hiveN ? (' · hive ' + hiveN) : '');
       const s = d.snap || {};
       setLive(!!s.hiveOk);
       const ph = document.getElementById('pillHive');

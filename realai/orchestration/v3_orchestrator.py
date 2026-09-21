@@ -42,22 +42,38 @@ _REPO_HOME = _ROOT.parent if (_ROOT.parent / "fusion-ui").is_dir() else _ROOT
 
 
 def _resolve_fusion_ui_dir() -> Optional[Path]:
-    """Locate Fusion UI static tree. Prefer product-home fusion-ui/ (same as api_server)."""
+    """Locate Fusion UI static tree.
+
+    Gold is product-home ``C:\\RealAI-clean\\fusion-ui`` (sibling of ``realai/``).
+    ``realai/fusion-ui`` is last-resort only — never preferred.
+    """
+    env_root = (os.environ.get("REALAI_ROOT") or "").strip()
+    env_home = (os.environ.get("REALAI_HOME") or "").strip()
     candidates = [
-        Path(os.environ.get("REALAI_ROOT") or "") / "fusion-ui",
+        Path(env_root) / "fusion-ui" if env_root else None,
         _REPO_HOME / "fusion-ui",
         _ROOT.parent / "fusion-ui",
-        Path(os.environ.get("REALAI_HOME") or "") / "fusion-ui",
+        Path(env_home) / "fusion-ui" if env_home else None,
         _REPO_HOME / "apps" / "fusion-ui",
+        # Last: in-package copy (do not edit this tree for Fusion gold)
         _ROOT / "fusion-ui",
     ]
     seen: set[str] = set()
     for p in candidates:
-        if not p or str(p) in seen:
+        if p is None:
             continue
-        seen.add(str(p))
-        if p.is_dir() and (p / "index.html").is_file():
-            return p.resolve()
+        try:
+            key = str(p.resolve()) if p.exists() else str(p)
+        except OSError:
+            key = str(p)
+        if key in seen:
+            continue
+        seen.add(key)
+        try:
+            if p.is_dir() and (p / "index.html").is_file():
+                return p.resolve()
+        except OSError:
+            continue
     return None
 
 
