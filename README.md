@@ -4,7 +4,8 @@ Local-first AI hive: GPU chat (Vulkan), multi-agent orchestration, tools, voice,
 
 **Canonical product root:** `C:\RealAI-clean`  
 **Live Git branch:** `live/realai-clean-20260911` → https://github.com/Unwrenchable/RealAi  
-**Recovery / history branches** on GitHub are left intact for learning — do not mega-merge them into live.
+**Architecture contract:** [ARCHITECTURE.md](./ARCHITECTURE.md) — v1 and v2 live *inside* this tree, not as version folders.  
+**Recovery / history branches** on GitHub are libraries — do not mega-merge them into live.
 
 ---
 
@@ -15,11 +16,11 @@ Local-first AI hive: GPU chat (Vulkan), multi-agent orchestration, tools, voice,
 | **Hive gateway** `:8001` | `python -m realai.v3_orchestrator` — chat, tools, agents, multi-agent, abilities, `/console` |
 | **Vulkan llama-server** `:8080` | Local 7B GGUF (AMD RX 6700 XT / Vulkan) |
 | **Console** | Browser home: `http://127.0.0.1:8001/console` (same UI as VS Code RealAI Console) |
-| **VS Code / Cursor extension** | `apps/vscode` — RealAI Chat coder, foreign-repo mode, terminals, live abilities (`realai-vscode@1.2.15+`) |
+| **VS Code / Cursor extension** | `apps/vscode` — RealAI Chat coder, foreign-repo mode, terminals, live abilities |
 | **Next frontend** | `frontend/` — Vercel-ready UI shell (`NEXT_PUBLIC_API_URL` → API) |
-| **Cloud API** | `python -m realai.api_server` — OpenAI-compatible API + SQLite chat history (Render-friendly) |
+| **Cloud API** | `python -m realai.api_server` — OpenAI-compatible API + SQLite chat history |
 | **Voice** | XTTS / Voice Lab via gateway speech proxy (browser should hit `:8001`, not `:8890` directly) |
-| **Any-repo** | Open another folder (e.g. Rack_em_up); Hive stays at product home, workspace is cwd — see `ANY_REPO.md` |
+| **Any-repo** | Open another folder; Hive stays at product home — see `ANY_REPO.md` |
 
 ### API highlights (Hive / orchestrator)
 
@@ -47,7 +48,7 @@ POST /v1/audio/speech
 
 ### Ability catalog (honesty map)
 
-See `realai/ability_catalog.py` and `ABILITIES.md`. Many abilities are **LIVE** against local Hive (chat, tools, web research, local image/GIF helpers, embeddings, speech paths, self-heal tools, and more). Status is LIVE / PARTIAL / STUB — trust the catalog over marketing lists.
+See `realai/ability_catalog.py` and `ABILITIES.md`. Trust LIVE / PARTIAL / STUB in the catalog over marketing lists.
 
 ---
 
@@ -68,48 +69,51 @@ python -m realai.v3_orchestrator --host 127.0.0.1 --port 8001
 
 Open **http://127.0.0.1:8001/console**
 
-Optional helpers (if global install is configured): `realai-stack`, `realai-health`, `realai-orch` — see `ANY_REPO.md`.
+Optional helpers: `realai-stack`, `realai-health`, `realai-orch` — see `ANY_REPO.md`.
 
 ---
 
 ## Deploy (cloud)
 
-Full provider / frontend / backend / database instructions:
-
-→ **[DEPLOYMENT.md](./DEPLOYMENT.md)**
-
-Short map:
+Full instructions: **[DEPLOYMENT.md](./DEPLOYMENT.md)**
 
 | Piece | Provider | Notes |
 |-------|----------|--------|
 | Frontend | **Vercel** | `frontend/` + root `vercel.json`; set `NEXT_PUBLIC_API_URL` |
 | API (cloud) | **Render** | `render.yml` → `python -m realai.api_server` |
-| Full GPU hive | **Your PC** (not Vercel) | Vulkan + `v3_orchestrator` |
-| Database | **SQLite** by default | `REALAI_DB_PATH` / `~/.realai/conversations.db` |
+| Full GPU hive | **Your PC** | Vulkan + `v3_orchestrator` |
+| Database | **SQLite** | `REALAI_DB_PATH` / `~/.realai/conversations.db` |
 
 ---
 
-## Repo layout (high signal)
+## Repo layout
+
+One product. v1/v2 modules live inside these names — there is no `v1/` or `v2/` folder.
 
 ```
-C:\RealAI-clean\
-  realai\                 # Python package (orchestrator, bridge, voice, training hooks)
-  frontend\               # Next.js UI (Vercel)
-  console.html            # Served at /console (also apps/vscode/webview/)
-  apps\vscode\            # VS Code / Cursor extension
-  packages\design-system\ # UI tokens/components
-  agents\ / plugins\      # Agent defs + plugins
-  _quarantine\            # Parked recovery (gitignored) — learn later, don't merge blindly
-  docs\sessions\PHASES.md # Development phase tip
+realai/                 Python package (hive gold in realai/orchestration/)
+abilities/              Ability handlers
+modules/organs/         Organs hive
+frontend/               Next.js UI
+apps/vscode/            Console extension
+packages/               design-system + SDKs
+scanners/               Promote / DDS tools (not runtime)
+_quarantine/            Pointer to D:\ archive — do not merge dumps back
 ```
+
+Full contract: **[ARCHITECTURE.md](./ARCHITECTURE.md)**  
+Authority table: **[docs/AUTHORITY.md](./docs/AUTHORITY.md)**  
+How v1/v2 are implemented: **[docs/LINEAGE.md](./docs/LINEAGE.md)**  
+Physical tidy order: **[docs/REORG_PHASES.md](./docs/REORG_PHASES.md)**
 
 ---
 
 ## Docs index
 
 | Doc | Purpose |
-|-----|---------|
-| [DEPLOYMENT.md](./DEPLOYMENT.md) | Vercel + Render + providers + SQLite |
+|-----|--------|
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | Single-tree layout + lineage |
+| [DEPLOYMENT.md](./DEPLOYMENT.md) | Vercel + Render + providers |
 | [ABILITIES.md](./ABILITIES.md) | Ability / tool surface |
 | [ANY_REPO.md](./ANY_REPO.md) | Use RealAI from any project folder |
 | [QUICKSTART_LOCAL.md](./QUICKSTART_LOCAL.md) | Local quickstart |
