@@ -70,6 +70,28 @@ async function apiCall(endpoint, options = {}) {
   return response;
 }
 
+
+// Same Hive surfaces as Console (abilities / tools / learned packets) — no Console tab.
+async function refreshLearnedSurfaces() {
+  try {
+    const [abilities, tools, packets] = await Promise.all([
+      apiCall('/v1/abilities').then((r) => r.json()).catch(() => null),
+      apiCall('/v1/tools').then((r) => r.json()).catch(() => null),
+      apiCall('/v1/learn/packets').then((r) => r.json()).catch(() => null),
+    ]);
+    window.__REALAI_FUSION_SURFACES__ = {
+      abilities: abilities,
+      tools: tools,
+      packets: packets,
+      at: new Date().toISOString(),
+    };
+    const n = (packets && packets.count) || ((packets && packets.packets) || []).length || 0;
+    console.log('[FusionUI] surfaces abilities/tools/packets', (abilities && (abilities.abilities || []).length), (tools && (tools.tools || []).length), n);
+  } catch (e) {
+    console.warn('[FusionUI] surface refresh failed', e);
+  }
+}
+
 // Health check on load
 async function checkBackend() {
   const healthUrl = `${BACKEND_BASE}/health`;
@@ -78,6 +100,7 @@ async function checkBackend() {
   try {
     const res = await apiCall('/health');
     const data = await res.json();
+    refreshLearnedSurfaces();
     console.log('✅ Backend OK:', data);
     window.__REALAI_MODEL__ = data?.model || window.__REALAI_MODEL__;
     if (banner) {

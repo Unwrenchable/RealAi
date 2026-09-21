@@ -130,6 +130,8 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
 .badge.STUB,.badge.MISSING{color:var(--hot);border-color:var(--hot)}
 .filter{margin:0 10px 6px;padding:7px 9px;border-radius:8px;border:1px solid var(--line);background:#0e0e15;width:calc(100% - 20px);font-size:12px;flex-shrink:0}
 .tabs{display:flex;gap:6px;padding:0 10px 6px;flex-shrink:0;flex-wrap:wrap}
+.topbar,.header-pills,#pills{flex-wrap:wrap}
+@media (max-width:900px){.stage{width:100%!important;max-width:100%!important}.ops{position:static;width:100%}}
 .tab{padding:5px 9px;border-radius:999px;border:1px solid var(--line);font-size:10px;color:var(--mute)}
 .tab.on{color:#111;background:var(--acid);border-color:var(--acid);font-weight:700}
 
@@ -253,7 +255,6 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       <button class="tab" data-tab="tools">Tools</button>
       <button class="tab" data-tab="agents">Agents</button>
       <button class="tab" data-tab="hive">Hive</button>
-      <button class="tab" data-tab="fusion">Fusion</button>
       <button class="tab" data-tab="promote">Promote</button>
     </div>
     <input class="filter" id="filter" placeholder="Filter abilities / tools..." />
@@ -277,7 +278,10 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       <select id="promoteSelect" style="margin:0 10px 6px;width:calc(100% - 20px);padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:#0e0e15;color:#ececf1"></select>
       <button type="button" class="chip" id="promotePreview" style="margin:0 10px 6px;display:block;width:calc(100% - 20px)">Preview</button>
       <pre id="promotePreviewBox" style="margin:0 10px 8px;padding:8px;max-height:180px;overflow:auto;font-size:10px;background:#07070b;border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#b8b8c2;white-space:pre-wrap"></pre>
+      <div class="sec" style="margin:4px 10px">Top scores</div>
+      <pre id="promoteScoresBox" style="margin:0 10px 8px;padding:8px;max-height:120px;overflow:auto;font-size:10px;background:#07070b;border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#b8b8c2;white-space:pre-wrap"></pre>
       <button type="button" class="chip" id="promoteStubBtn" style="margin:0 10px 6px;display:block;width:calc(100% - 20px);background:rgba(214,255,63,.15);border-color:rgba(214,255,63,.45)">Promote stub</button>
+      <button type="button" class="chip" id="promoteWireBtn" style="margin:0 10px 6px;display:block;width:calc(100% - 20px)">Wire ability</button>
       <div class="stat"><b>Last result</b><span id="promoteResult">idle</span></div>
       <p style="margin:8px 12px;font-size:10px;color:#8a8a96">Stub only — writes realai/plugins/&lt;slug&gt;_coach and refreshes abilities. No orchestrator rewrite.</p>
     </div>
@@ -1213,10 +1217,60 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     }
   };
 
-  // Deep-link ?fusion=1 opens Advanced on Fusion tab
+
+  const promoteSelect = document.getElementById('promoteSelect');
+  function __realaiShowPromoteScores(slug){
+    const box = document.getElementById('promoteScoresBox');
+    if (!box) return;
+    const row = (window.__realaiPromotePackets || []).find(p => p.slug === slug);
+    const scores = (row && (row.score_top || row.scores)) || [];
+    if (!scores.length) { box.textContent = '(no scores — re-learn packet)'; return; }
+    box.textContent = scores.slice(0,8).map(s =>
+      String(s.score).padStart(3,' ') + '  ' + String(s.kind||'') + '  ' + String(s.path||'') + '\n    ' + String(s.why||'') + '\n    → ' + String(s.adapt||'')
+    ).join('\n');
+  }
+  if (promoteSelect) promoteSelect.onchange = () => __realaiShowPromoteScores(promoteSelect.value);
+  const _oldLoad = window.__realaiLoadPromote;
+  window.__realaiLoadPromote = async function(force){
+    await _oldLoad(force);
+    const sel = document.getElementById('promoteSelect');
+    if (sel && sel.value) __realaiShowPromoteScores(sel.value);
+  };
+  const promoteWireBtn = document.getElementById('promoteWireBtn');
+  if (promoteWireBtn) promoteWireBtn.onclick = async () => {
+    const sel = document.getElementById('promoteSelect');
+    const resultEl = document.getElementById('promoteResult');
+    const slug = sel && sel.value;
+    if (!slug) { if (resultEl) resultEl.textContent = 'pick a packet'; return; }
+    if (!confirm('Wire ability for ' + slug + '? Writes abilities/<id>.py bridge (PARTIAL).')) return;
+    if (resultEl) resultEl.textContent = 'wiring...';
+    promoteWireBtn.disabled = true;
+    try {
+      const data = await hivePost('/v1/learn/wire', { slug, target: 'ability', confirm: true });
+      const path = (data && data.ability_path) || '';
+      if (resultEl) resultEl.textContent = (data && data.ok ? 'wired · ' : 'fail · ') + (data && data.ability_id || '') + (path ? (' · ' + path) : '');
+      const box = document.getElementById('promotePreviewBox');
+      if (box) box.textContent = JSON.stringify(data, null, 2);
+      try {
+        const [caps, tools] = await Promise.all([
+          hiveGet('/v1/abilities').catch(() => null),
+          hiveGet('/v1/tools').catch(() => null),
+        ]);
+        if (caps && caps.abilities) boot.capabilities = caps.abilities;
+        if (tools && tools.tools) boot.tools = tools.tools;
+        renderDock();
+      } catch (_) {}
+    } catch (e) {
+      if (resultEl) resultEl.textContent = 'error: ' + (e && e.message || e);
+    } finally {
+      promoteWireBtn.disabled = false;
+    }
+  };
+
+  // Deep-link ?promote=1 opens Advanced on Promote tab
   try {
-    if (/[?&]fusion=1\b/.test(location.search || '')) {
-      const ft = document.querySelector('.tab[data-tab="fusion"]');
+    if (/[?&]promote=1\b/.test(location.search || '') || /[?&]fusion=1\b/.test(location.search || '')) {
+      const ft = document.querySelector('.tab[data-tab="promote"]') || document.querySelector('.tab[data-tab="hive"]');
       if (ft) ft.click();
       app.classList.remove('no-ops');
     }
