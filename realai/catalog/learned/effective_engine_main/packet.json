@@ -1,0 +1,601 @@
+{
+  "schema": "realai.learn.packet/v1",
+  "slug": "effective_engine_main",
+  "source": {
+    "input": "C:\\Users\\tsmit\\effective-engine-main\\effective-engine-main",
+    "kind": "local",
+    "resolved_path": "C:\\Users\\tsmit\\effective-engine-main\\effective-engine-main",
+    "url": null,
+    "cloned": false,
+    "reused_cache": false,
+    "git": {
+      "head": "",
+      "branch": "",
+      "remote": "",
+      "branches": []
+    }
+  },
+  "summary": {
+    "title": "effective-engine",
+    "description": "Production-ready luxury real estate platform for [Donna Sells LV](https://www.donnasellslv.com/) \u2014 and the foundation for a **proprietary MLS / IDX provider** ecosystem.",
+    "file_count": 82,
+    "truncated": false,
+    "branches_seen": [],
+    "branch_counts": {},
+    "branches_truncated": false,
+    "all_branch_names": [],
+    "branches_omitted": 0,
+    "languages": {
+      "javascript": 36,
+      "sql": 10,
+      "python": 7,
+      "markdown": 6,
+      "json": 5,
+      "html": 5,
+      "yaml": 2,
+      "css": 2
+    },
+    "frameworks": [
+      "node",
+      "fastify"
+    ],
+    "domain_keywords": [
+      "server",
+      "routes",
+      "horse",
+      "index",
+      "html",
+      "migrations",
+      "horses",
+      "equestrian",
+      "site",
+      "luxury",
+      "henderson",
+      "styles",
+      "models",
+      "services",
+      "engine",
+      "property",
+      "json",
+      "real_estate_agent",
+      "sync",
+      "real",
+      "estate",
+      "donna",
+      "community",
+      "nevada"
+    ],
+    "readme": "# effective-engine\n\nProduction-ready luxury real estate platform for [Donna Sells LV](https://www.donnasellslv.com/) \u2014 and the foundation for a **proprietary MLS / IDX provider** ecosystem.\n\n## Sites\n\nThis repository powers **two distinct frontends** under the same Vercel deployment:\n\n| URL | File | Audience |\n|-----|------|----------|\n| `donnasellslv.com/` | `app/index.html` | Luxury real estate buyers/sellers across the Las Vegas Valley |\n| `donnasellslv.com/horses/` | `app/horses/index.html` | Henderson equestrian community \u2014 horse property buyers and sellers |\n\n### Site 1: Donna Sells LV (Luxury Real Estate)\n\nDark midnight-blue / saddle-gold luxury aesthetic. Serves high-net-worth buyers and sellers across Summerlin, Henderson, Southern Highlands, Strip penthouses, and all Las Vegas Valley guard-gated communities.\n\n### Site 2: Nevada Horse Properties\n\n`app/horses/` \u2014 earthy desert tones (dark earth, warm parchment, Nevada sage green, saddle gold). Built specifically for the Henderson equestrian community.\n\n**Why it exists:** Donna and Jeremy are active members of the Henderson horse community \u2014 they own horses and know this world firsthand. Horse properties have unique requirements (A-1/A-2 zoning, water rights, barn quality, arena footing, trail access, HOA restrictions on livestock) that a generic luxury site doesn't address. This frontend speaks directly to that audience with dedicated content:\n- Horse property MLS search with equestrian filters (acreage, barn, arena, round pen, pasture)\n- Featured equestrian property cards with feature tags (stall count, arena, acreage)\n- *What Makes a Great Horse Property* \u2014 9-point evaluation guide\n- *Henderson Equestrian Community* \u2014 Cornerstone Park equestrian area, River Mountains Loop Trail, Lake Mead/BLM open space, East Henderson horse corridor, Boulder City ranchettes, North LV A-1 zones\n- *Nevada Zoning & Law Essentials* \u2014 A-1/A-2/R-E zoning, NRS 40.140 Right to Farm Act, water rights, HOA alert, commercial operation permits\n- Clark County horse property market snapshot\n- Contact form with horse-specific fields (horse count, facility needs)\n\n---\n\n## Architecture\n\n```\neffective-engine/\n\u2502\n\u251c\u2500\u2500 app/                   Static frontend (HTML/CSS)\n\u2502   \u251c\u2500\u2500 index.html         Site 1: Donna Sells LV (luxury real estate)\n\u2502   \u251c\u2500\u2500 styles.css         Site 1 styles\n\u2502   \u251c\u2500\u2500 horses/\n\u2502   \u2502   \u251c\u2500\u2500 index.html     Site 2: Nevada Horse Properties\n\u2502   \u2502   \u2514\u2500\u2500 styles.css     Site 2 styles (earthy equestrian design system)\n\u2502\n\u251c\u2500\u2500 pu",
+    "api_routes": [],
+    "plugin_like_folders": [
+      ".github/agents"
+    ]
+  },
+  "fingerprints": [
+    {
+      "path": ".env.example",
+      "sha1": "9dfc31cfbc7e3569",
+      "bytes": 6472,
+      "ext": ".example"
+    },
+    {
+      "path": ".gitignore",
+      "sha1": "3ca50b2e9e881035",
+      "bytes": 166,
+      "ext": ""
+    },
+    {
+      "path": "DEPLOYMENT.md",
+      "sha1": "acf91ff3f60d3ffe",
+      "bytes": 11918,
+      "ext": ".md"
+    },
+    {
+      "path": "README.md",
+      "sha1": "e1b7a2529b76b83f",
+      "bytes": 11918,
+      "ext": ".md"
+    },
+    {
+      "path": "package.json",
+      "sha1": "ee53039512e936f0",
+      "bytes": 755,
+      "ext": ".json"
+    },
+    {
+      "path": "real_estate_agents.json",
+      "sha1": "9f8f127c7c725eb2",
+      "bytes": 4363,
+      "ext": ".json"
+    },
+    {
+      "path": "real_estate_workflows.json",
+      "sha1": "5c662f72293315bf",
+      "bytes": 4096,
+      "ext": ".json"
+    },
+    {
+      "path": "render.yaml",
+      "sha1": "59e7cf6927d213b6",
+      "bytes": 5016,
+      "ext": ".yaml"
+    },
+    {
+      "path": "vercel.json",
+      "sha1": "98e445d2d9d1e8f9",
+      "bytes": 1029,
+      "ext": ".json"
+    },
+    {
+      "path": ".github/agents/my-agent.agent.md",
+      "sha1": "83f6c679e95f7e99",
+      "bytes": 1607,
+      "ext": ".md"
+    },
+    {
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "sha1": "acb3b3dbf850119c",
+      "bytes": 1692,
+      "ext": ".yml"
+    },
+    {
+      "path": "app/index.html",
+      "sha1": "b7a4a67f9caa4e58",
+      "bytes": 50036,
+      "ext": ".html"
+    },
+    {
+      "path": "app/robots.txt",
+      "sha1": "1349805c3e8b82a0",
+      "bytes": 373,
+      "ext": ".txt"
+    },
+    {
+      "path": "app/styles.css",
+      "sha1": "07c8ff32d88f73e2",
+      "bytes": 22312,
+      "ext": ".css"
+    },
+    {
+      "path": "app/admin/index.html",
+      "sha1": "8272556d3dfd2cfb",
+      "bytes": 28864,
+      "ext": ".html"
+    },
+    {
+      "path": "app/analytics/index.html",
+      "sha1": "ddcf79388f0a6d3a",
+      "bytes": 2596,
+      "ext": ".html"
+    },
+    {
+      "path": "app/engine/index.html",
+      "sha1": "0366882065230e73",
+      "bytes": 7738,
+      "ext": ".html"
+    },
+    {
+      "path": "app/horses/index.html",
+      "sha1": "f6a876a61fe32326",
+      "bytes": 67662,
+      "ext": ".html"
+    },
+    {
+      "path": "app/horses/styles.css",
+      "sha1": "49ab25cf091d888a",
+      "bytes": 25827,
+      "ext": ".css"
+    },
+    {
+      "path": "app/icons/horse-line.svg",
+      "sha1": "d519bc00728f6e8d",
+      "bytes": 1179,
+      "ext": ".svg"
+    },
+    {
+      "path": "app/icons/house-line.svg",
+      "sha1": "afd892a74d7c2e8e",
+      "bytes": 411,
+      "ext": ".svg"
+    },
+    {
+      "path": "db/migrate.js",
+      "sha1": "b3be498edb77b84f",
+      "bytes": 2889,
+      "ext": ".js"
+    },
+    {
+      "path": "db/seed.js",
+      "sha1": "42cf9842ac36757d",
+      "bytes": 1757,
+      "ext": ".js"
+    },
+    {
+      "path": "db/migrations/001_schema.sql",
+      "sha1": "0e7fc1ff0af69b4f",
+      "bytes": 8098,
+      "ext": ".sql"
+    },
+    {
+      "path": "db/migrations/002_vectors.sql",
+      "sha1": "cf981df34317b334",
+      "bytes": 721,
+      "ext": ".sql"
+    },
+    {
+      "path": "db/migrations/003_auth.sql",
+      "sha1": "d5eb8c5979816fd2",
+      "bytes": 1090,
+      "ext": ".sql"
+    },
+    {
+      "path": "db/migrations/004_alerts.sql",
+      "sha1": "68f0862b1e263baf",
+      "bytes": 1186,
+      "ext": ".sql"
+    },
+    {
+      "path": "db/migrations/005_portal.sql",
+      "sha1": "66232ac2c9ed10a8",
+      "bytes": 2015,
+      "ext": ".sql"
+    },
+    {
+      "path": "db/migrations/006_compliance.sql",
+      "sha1": "aa63dae64a01b3fb",
+      "bytes": 1435,
+      "ext": ".sql"
+    },
+    {
+      "path": "db/migrations/007_local_ai.sql",
+      "sha1": "d05fe3414d6fe983",
+      "bytes": 1200,
+      "ext": ".sql"
+    },
+    {
+      "path": "db/migrations/008_future.sql",
+      "sha1": "4c08afc983ae33af",
+      "bytes": 4197,
+      "ext": ".sql"
+    },
+    {
+      "path": "db/migrations/009_leads.sql",
+      "sha1": "64df67af4b28931c",
+      "bytes": 2103,
+      "ext": ".sql"
+    },
+    {
+      "path": "db/migrations/010_newsletter.sql",
+      "sha1": "9091e77d116e411b",
+      "bytes": 1188,
+      "ext": ".sql"
+    },
+    {
+      "path": "db/seed/listings.json",
+      "sha1": "6423d675c134ffdf",
+      "bytes": 9903,
+      "ext": ".json"
+    },
+    {
+      "path": "public/media/.gitkeep",
+      "sha1": "da39a3ee5e6b4b0d",
+      "bytes": 0,
+      "ext": ""
+    },
+    {
+      "path": "real_estate_agent/README.md",
+      "sha1": "91a6152b486d10bb",
+      "bytes": 1692,
+      "ext": ".md"
+    },
+    {
+      "path": "real_estate_agent/agent_server.py",
+      "sha1": "bac327d3c19be05b",
+      "bytes": 2953,
+      "ext": ".py"
+    },
+    {
+      "path": "real_estate_agent/main.py",
+      "sha1": "3fccbf0bf5e100a8",
+      "bytes": 3849,
+      "ext": ".py"
+    },
+    {
+      "path": "real_estate_agent/requirements.txt",
+      "sha1": "01f3b386ef08c2f6",
+      "bytes": 89,
+      "ext": ".txt"
+    },
+    {
+      "path": "real_estate_agent/test_agent.py",
+      "sha1": "412915a7e7f6ed24",
+      "bytes": 1322,
+      "ext": ".py"
+    },
+    {
+      "path": "real_estate_inquiries_agent/README.md",
+      "sha1": "c34f614ad8f9b309",
+      "bytes": 1777,
+      "ext": ".md"
+    },
+    {
+      "path": "real_estate_inquiries_agent/main.py",
+      "sha1": "282cefc12fd520f4",
+      "bytes": 3671,
+      "ext": ".py"
+    },
+    {
+      "path": "real_estate_inquiries_agent/requirements.txt",
+      "sha1": "d18aa5cdfbc6b18c",
+      "bytes": 251,
+      "ext": ".txt"
+    },
+    {
+      "path": "real_estate_inquiries_agent/test_agent.py",
+      "sha1": "140bdc0cd2ed1d47",
+      "bytes": 1328,
+      "ext": ".py"
+    },
+    {
+      "path": "real_estate_listings_agent/README.md",
+      "sha1": "a35f7eb3d2c1e7f2",
+      "bytes": 2122,
+      "ext": ".md"
+    },
+    {
+      "path": "real_estate_listings_agent/main.py",
+      "sha1": "278b0d3238bbf79c",
+      "bytes": 5213,
+      "ext": ".py"
+    },
+    {
+      "path": "real_estate_listings_agent/requirements.txt",
+      "sha1": "6ee2c4a122e28aa8",
+      "bytes": 243,
+      "ext": ".txt"
+    },
+    {
+      "path": "real_estate_listings_agent/test_agent.py",
+      "sha1": "25caeea356edc2ae",
+      "bytes": 1328,
+      "ext": ".py"
+    },
+    {
+      "path": "server/cache.js",
+      "sha1": "64df105544d7ebf7",
+      "bytes": 1777,
+      "ext": ".js"
+    },
+    {
+      "path": "server/config.js",
+      "sha1": "0b33e4266f6b9587",
+      "bytes": 6155,
+      "ext": ".js"
+    },
+    {
+      "path": "server/index.js",
+      "sha1": "724ca44b033ea32b",
+      "bytes": 7872,
+      "ext": ".js"
+    },
+    {
+      "path": "server/models/agent.js",
+      "sha1": "a193130c4d60622b",
+      "bytes": 1471,
+      "ext": ".js"
+    },
+    {
+      "path": "server/models/alert.js",
+      "sha1": "fe2bb654df4fdbe0",
+      "bytes": 2266,
+      "ext": ".js"
+    },
+    {
+      "path": "server/models/db.js",
+      "sha1": "72abcd753194b87e",
+      "bytes": 1948,
+      "ext": ".js"
+    },
+    {
+      "path": "server/models/listing.js",
+      "sha1": "66e693b84f53e1ad",
+      "bytes": 16154,
+      "ext": ".js"
+    },
+    {
+      "path": "server/models/market.js",
+      "sha1": "ad3c3c91f01fd30e",
+      "bytes": 3876,
+      "ext": ".js"
+    },
+    {
+      "path": "server/models/user.js",
+      "sha1": "9751191c055e8ce5",
+      "bytes": 3857,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/agent-studio.js",
+      "sha1": "7898697400902a72",
+      "bytes": 4726,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/agents.js",
+      "sha1": "9698fab6c0f3d765",
+      "bytes": 1428,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/ai.js",
+      "sha1": "be884e717678ba43",
+      "bytes": 741,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/alerts.js",
+      "sha1": "d81ed3b9fe2b7600",
+      "bytes": 2941,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/auth.js",
+      "sha1": "5bbc3ae1ff6a5c37",
+      "bytes": 4943,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/engine.js",
+      "sha1": "bc622746dc6fb3eb",
+      "bytes": 1241,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/idx.js",
+      "sha1": "72792c99186ec420",
+      "bytes": 11524,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/inquiries.js",
+      "sha1": "677ffb3968d628b9",
+      "bytes": 7017,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/listings.js",
+      "sha1": "9e155f69015fe7a6",
+      "bytes": 6122,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/market.js",
+      "sha1": "882e1d40a498a1f5",
+      "bytes": 950,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/neighborhoods.js",
+      "sha1": "1842a1ee7a9232c4",
+      "bytes": 1752,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/newsletter.js",
+      "sha1": "aab139b5f920cee7",
+      "bytes": 5577,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/admin/leads.js",
+      "sha1": "d453ae7648b127c1",
+      "bytes": 7498,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/admin/newsletter.js",
+      "sha1": "ce1d104a09f3ee86",
+      "bytes": 3170,
+      "ext": ".js"
+    },
+    {
+      "path": "server/routes/admin/sync.js",
+      "sha1": "06304bf07e36d6fd",
+      "bytes": 3144,
+      "ext": ".js"
+    },
+    {
+      "path": "server/services/ai.js",
+      "sha1": "1874c1f9233a22c1",
+      "bytes": 16917,
+      "ext": ".js"
+    },
+    {
+      "path": "server/services/avm.js",
+      "sha1": "598851995607e891",
+      "bytes": 4007,
+      "ext": ".js"
+    },
+    {
+      "path": "server/services/compliance.js",
+      "sha1": "80f5f34e15615dff",
+      "bytes": 3883,
+      "ext": ".js"
+    },
+    {
+      "path": "server/services/engine.js",
+      "sha1": "51b98a1dbb088560",
+      "bytes": 3070,
+      "ext": ".js"
+    },
+    {
+      "path": "server/services/market.js",
+      "sha1": "f8382c1f6f1c3304",
+      "bytes": 5902,
+      "ext": ".js"
+    },
+    {
+      "path": "server/services/search.js",
+      "sha1": "f04a65044c2bc795",
+      "bytes": 9315,
+      "ext": ".js"
+    },
+    {
+      "path": "server/sync/ingest.js",
+      "sha1": "ca12a8a46eec741f",
+      "bytes": 10080,
+      "ext": ".js"
+    },
+    {
+      "path": "server/sync/media.js",
+      "sha1": "46592d7c398b23b0",
+      "bytes": 6726,
+      "ext": ".js"
+    },
+    {
+      "path": "server/sync/reso-client.js",
+      "sha1": "c4315950d517e266",
+      "bytes": 19385,
+      "ext": ".js"
+    },
+    {
+      "path": "server/sync/scheduler.js",
+      "sha1": "a21b717200a38e54",
+      "bytes": 3192,
+      "ext": ".js"
+    }
+  ],
+  "proposed_abilities": [
+    {
+      "id": "health",
+      "description": "Stub liveness / contract discovery (no runtime heal)"
+    },
+    {
+      "id": "repo_map",
+      "description": "Summarize learned tree layout and stack"
+    },
+    {
+      "id": "node_context",
+      "description": "Placeholder context hints for node (product owns runtime)"
+    },
+    {
+      "id": "fastify_context",
+      "description": "Placeholder context hints for fastify (product owns runtime)"
+    },
+    {
+      "id": "agents_bridge",
+      "description": "Bridge stub for existing .github/agents/ surface"
+    }
+  ],
+  "plugin_proposal": {
+    "id": "effective-engine-main-coach",
+    "package": "effective_engine_main_coach",
+    "path": "C:\\RealAI-clean\\realai\\plugins\\effective_engine_main_coach",
+    "http": {
+      "canonical": "/v1/plugins/effective-engine-main-coach",
+      "alias": "/v1/learned/effective_engine_main_coach"
+    }
+  },
+  "learned_at": "2026-09-21T14:43:51.007018+00:00",
+  "heal": false
+}
