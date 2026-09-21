@@ -2,7 +2,7 @@
 RackUp Coach — RealAI living plugin
 ===================================
 Plugin id: ``rackup-coach``
-Package:   ``plugins.rackup_coach``
+Package:   ``realai.plugins.rackup_coach``
 
 Provider-level pool coaching + platform intelligence.
 Uses synthetic organs via ``organs_bridge`` / hive.
@@ -11,8 +11,8 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
-from plugins.rackup_coach.coach_agent import COACH, RackUpCoachAgent
-from plugins.rackup_coach.types import CoachRequest, CoachResponse, PlayerProfile
+from .coach_agent import COACH, RackUpCoachAgent
+from .types import CoachRequest, CoachResponse, PlayerProfile
 
 __all__ = [
     "COACH",
@@ -121,7 +121,7 @@ METADATA = {
     },
     "pyramid": {
         "7ft": {"rack": 10, "points": {"beginner": 25, "intermediate": 35, "advanced": 45, "pro": 50}},
-        "9ft": {"rack": 15, "points": {"beginner": 40, "intermediate": 55, "advanced": 71, "pro": 71}},
+        "9ft": {"rack": 15, "points": {"beginner": 40, "intermediate": 55, "advanced": 45, "pro": 71}},
         "call_shot": {"beginner": "no", "intermediate": "no", "advanced": "optional", "pro": "yes"},
         "rating_weight": {"beginner": 0.7, "intermediate": 0.85, "advanced": 1.0, "pro": 1.15},
         "scoring": {"1_ball": 11, "cue": "designated_only", "style": "classical"},
@@ -136,7 +136,7 @@ def invoke(data: Optional[dict[str, Any]] = None) -> dict[str, Any]:
 
 
 def register(model=None, config=None) -> dict[str, Any]:
-    """Register plugin methods on a RealAI model instance (sample_plugin style)."""
+    """Register plugin methods on a RealAI model instance."""
     config = config or {}
 
     def _invoke(data=None):

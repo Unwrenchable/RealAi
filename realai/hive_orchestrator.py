@@ -1,5 +1,8 @@
-"""Ability: unified hive orchestrator router + specialist cycle."""
+"""Ability: unified hive orchestrator router + specialist cycle.
 
+Imports live gold only. Product-root ``core.orchestration`` is a compat shim
+kept for older callers; new code uses ``realai.orchestration.hive_router``.
+"""
 from __future__ import annotations
 
 from typing import Any
@@ -9,7 +12,7 @@ ABILITY = {
     "name": "hive_orchestrator",
     "type": "ability",
     "status": "LIVE",
-    "source": "core.orchestration.hive_router",
+    "source": "realai.orchestration.hive_router",
     "dest": "abilities/hive_orchestrator.py",
     "capabilities": ["routing", "nested_orchestrators", "planner_specialist_critic_executor"],
     "secrets_policy": "none",
@@ -21,7 +24,11 @@ def run(
     context: dict[str, Any] | None = None,
     **kwargs: Any,
 ) -> dict[str, Any]:
-    from core.orchestration.hive_router import list_nest_orchestrators, register_routes, run_cycle
+    from realai.orchestration.hive_router import (
+        list_nest_orchestrators,
+        register_routes,
+        run_cycle,
+    )
 
     ctx = dict(context or {})
     ctx.update(kwargs)

@@ -1,7 +1,22 @@
 [
   {
-    "source": "realai\\plugins\\plugin_manifest.json",
+    "name": "rackup_coach",
+    "package": "realai.plugins.rackup_coach",
+    "version": "1.7.0",
+    "capabilities": [
+      "professional_coach",
+      "shot_of_the_day",
+      "rating_update",
+      "glicko2",
+      "matchmaking",
+      "moderation",
+      "league_validate"
+    ]
+  },
+  {
     "name": "atomic_fizz_realai",
+    "package": "realai.plugins.atomic_fizz_realai",
+    "source": "realai/plugins/plugin_manifest.json",
     "version": "0.1.0-gold",
     "capabilities": [
       "npc_generation",
@@ -12,5 +27,11 @@
       "world_events",
       "survival_rewards"
     ]
+  },
+  {
+    "name": "sample_plugin",
+    "package": "realai.plugins.sample_plugin",
+    "version": "0.1",
+    "capabilities": ["sample_action"]
   }
 ]
