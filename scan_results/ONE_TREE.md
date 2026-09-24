@@ -213,3 +213,72 @@ web3 | unknown |  | no | 12
 widget | nested_tree |  | no | 1
 workflows | unknown |  | no | 2
 world_model | nested_tree |  | yes | 34
+## realai/ unknown import triage
+
+Method: aggregate scoped `rg` over `realai`, `abilities`, `agents`, `modules`, `plugins`, `server`; Python import forms authoritative; required skip globs applied.
+
+### unknown_imported
+
+| name | site_count | sample_files |
+|---|---:|---|
+| `atomic_fizz` | 4 | `abilities/omnibrain.py`<br>`abilities/overseer.py`<br>`abilities/realai/abilities/overseer.py`<br>`abilities/world_brain.py` |
+| `benchmarks` | 1 | `realai/benchmarks/bench_world_model.py` |
+| `bot` | 15 | `realai/apps/api/main.py`<br>`realai/apps/api/routes/chat.py`<br>`realai/bot/__init__.py`<br>`realai/bot/easy_tools.py`<br>`realai/bot/live_exec.py` |
+| `config` | 1 | `realai/models/loader.py` |
+| `executive` | 7 | `realai/executive/__init__.py`<br>`realai/executive/daemon.py`<br>`realai/executive/loop.py`<br>`realai/executive/watchers/__init__.py`<br>`realai/executive/watchers/caps_watch.py` |
+| `learn` | 12 | `abilities/learn_git.py`<br>`realai/__main__.py`<br>`realai/cli/craft.py`<br>`realai/cli/hive/commands/learn.py`<br>`realai/learn/__init__.py` |
+| `models` | 2 | `realai/model_catalog.py`<br>`realai/nested_realai_model_catalog.py` |
+| `routes` | 2 | `realai/api/main.py`<br>`realai/routes/__init__.py` |
+| `tests` | 2 | `realai/test_local_server.py`<br>`realai/test_realai.py` |
+| `tools` | 25 | `modules/organs/body/synthetic_guardian_layer.py`<br>`realai/api_server.py`<br>`realai/benchmarks/bench_tool_use.py`<br>`realai/core/api_server.py`<br>`realai/core/tools/hive_executor.py` |
+| `universe` | 8 | `realai/cli/hive/commands/world.py`<br>`realai/meta_router.py`<br>`realai/universe/__init__.py`<br>`realai/universe/architect.py`<br>`realai/universe/doctor.py` |
+
+### unknown_unused
+
+- `adapters`
+- `aura`
+- `aura_pkg`
+- `autopilot`
+- `billing`
+- `bin`
+- `catalog`
+- `chat`
+- `commands`
+- `components`
+- `context`
+- `data`
+- `datasets`
+- `docs`
+- `engine`
+- `examples`
+- `exportable`
+- `inference`
+- `marketplace`
+- `mcp`
+- `metrics`
+- `middleware`
+- `orchestrator`
+- `orchestrators`
+- `profiles`
+- `prompts`
+- `registry`
+- `runtime`
+- `schema`
+- `schemas`
+- `scripts`
+- `security`
+- `skills`
+- `static`
+- `templates`
+- `tooling`
+- `tools_realai`
+- `tracing`
+- `utilities`
+- `v18`
+- `variants`
+- `web3`
+- `workflows`
+
+### unknown_unscanned
+
+- none

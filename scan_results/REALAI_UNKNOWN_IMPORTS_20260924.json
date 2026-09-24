@@ -1,0 +1,438 @@
+{
+  "root": "C:\\RealAI-clean",
+  "date": "2026-09-24",
+  "source_inventory": "scan_results/REALAI_DIR_INVENTORY_20260924.json",
+  "rows": [
+    {
+      "name": "adapters",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "atomic_fizz",
+      "imported": "yes",
+      "site_count": 4,
+      "sample_files": [
+        "abilities/omnibrain.py",
+        "abilities/overseer.py",
+        "abilities/realai/abilities/overseer.py",
+        "abilities/world_brain.py"
+      ]
+    },
+    {
+      "name": "aura",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "aura_pkg",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "autopilot",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "benchmarks",
+      "imported": "yes",
+      "site_count": 1,
+      "sample_files": [
+        "realai/benchmarks/bench_world_model.py"
+      ]
+    },
+    {
+      "name": "billing",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "bin",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "bot",
+      "imported": "yes",
+      "site_count": 15,
+      "sample_files": [
+        "realai/apps/api/main.py",
+        "realai/apps/api/routes/chat.py",
+        "realai/bot/__init__.py",
+        "realai/bot/easy_tools.py",
+        "realai/bot/live_exec.py"
+      ]
+    },
+    {
+      "name": "catalog",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "chat",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "commands",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "components",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "config",
+      "imported": "yes",
+      "site_count": 1,
+      "sample_files": [
+        "realai/models/loader.py"
+      ]
+    },
+    {
+      "name": "context",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "data",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "datasets",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "docs",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "engine",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "examples",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "executive",
+      "imported": "yes",
+      "site_count": 7,
+      "sample_files": [
+        "realai/executive/__init__.py",
+        "realai/executive/daemon.py",
+        "realai/executive/loop.py",
+        "realai/executive/watchers/__init__.py",
+        "realai/executive/watchers/caps_watch.py"
+      ]
+    },
+    {
+      "name": "exportable",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "inference",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "learn",
+      "imported": "yes",
+      "site_count": 12,
+      "sample_files": [
+        "abilities/learn_git.py",
+        "realai/__main__.py",
+        "realai/cli/craft.py",
+        "realai/cli/hive/commands/learn.py",
+        "realai/learn/__init__.py"
+      ]
+    },
+    {
+      "name": "marketplace",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "mcp",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "metrics",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "middleware",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "models",
+      "imported": "yes",
+      "site_count": 2,
+      "sample_files": [
+        "realai/model_catalog.py",
+        "realai/nested_realai_model_catalog.py"
+      ]
+    },
+    {
+      "name": "orchestrator",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "orchestrators",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "profiles",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "prompts",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "registry",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "routes",
+      "imported": "yes",
+      "site_count": 2,
+      "sample_files": [
+        "realai/api/main.py",
+        "realai/routes/__init__.py"
+      ]
+    },
+    {
+      "name": "runtime",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "schema",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "schemas",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "scripts",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "security",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "skills",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "static",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "templates",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "tests",
+      "imported": "yes",
+      "site_count": 2,
+      "sample_files": [
+        "realai/test_local_server.py",
+        "realai/test_realai.py"
+      ]
+    },
+    {
+      "name": "tooling",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "tools",
+      "imported": "yes",
+      "site_count": 25,
+      "sample_files": [
+        "modules/organs/body/synthetic_guardian_layer.py",
+        "realai/api_server.py",
+        "realai/benchmarks/bench_tool_use.py",
+        "realai/core/api_server.py",
+        "realai/core/tools/hive_executor.py"
+      ]
+    },
+    {
+      "name": "tools_realai",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "tracing",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "universe",
+      "imported": "yes",
+      "site_count": 8,
+      "sample_files": [
+        "realai/cli/hive/commands/world.py",
+        "realai/meta_router.py",
+        "realai/universe/__init__.py",
+        "realai/universe/architect.py",
+        "realai/universe/doctor.py"
+      ]
+    },
+    {
+      "name": "utilities",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "v18",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "variants",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "web3",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    },
+    {
+      "name": "workflows",
+      "imported": "no",
+      "site_count": 0,
+      "sample_files": []
+    }
+  ],
+  "unknown_imported": [
+    "atomic_fizz",
+    "benchmarks",
+    "bot",
+    "config",
+    "executive",
+    "learn",
+    "models",
+    "routes",
+    "tests",
+    "tools",
+    "universe"
+  ],
+  "unknown_unused": [
+    "adapters",
+    "aura",
+    "aura_pkg",
+    "autopilot",
+    "billing",
+    "bin",
+    "catalog",
+    "chat",
+    "commands",
+    "components",
+    "context",
+    "data",
+    "datasets",
+    "docs",
+    "engine",
+    "examples",
+    "exportable",
+    "inference",
+    "marketplace",
+    "mcp",
+    "metrics",
+    "middleware",
+    "orchestrator",
+    "orchestrators",
+    "profiles",
+    "prompts",
+    "registry",
+    "runtime",
+    "schema",
+    "schemas",
+    "scripts",
+    "security",
+    "skills",
+    "static",
+    "templates",
+    "tooling",
+    "tools_realai",
+    "tracing",
+    "utilities",
+    "v18",
+    "variants",
+    "web3",
+    "workflows"
+  ],
+  "unknown_unscanned": []
+}
