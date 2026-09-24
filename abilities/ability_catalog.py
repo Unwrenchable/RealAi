@@ -665,7 +665,7 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "keywords": ["lora", "peft", "adapter", "checkpoints_lora", "finetune adapter"],
         "status": "LIVE",
         "live_path": "GET /v1/lora",
-        "modules": ["realai/recovery_registry.py", "realai/model_catalog.py"],
+        "modules": ["realai/recovery_registry.py"],
         "gold_paths": [
             r"C:\models\checkpoints_lora",
             r"recovered/from_kilo_restore/_discovered/checkpoints_lora",
