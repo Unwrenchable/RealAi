@@ -978,7 +978,7 @@ def tool_organize_repo(apply: bool = False, refresh_walk: bool = False, limit: i
 
 def tool_architect_mode() -> dict[str, Any]:
     try:
-        from realai.abilities.architect_mode import run_architect_mode
+        from abilities.architect_mode import run_architect_mode
         return run_architect_mode()
     except Exception as e:
         return {"ok": False, "error": str(e)}
