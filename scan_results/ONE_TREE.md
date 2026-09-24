@@ -300,3 +300,12 @@ Method: aggregate scoped `rg` over `realai`, `abilities`, `agents`, `modules`, `
 | tools | `gold_in_realai` | `realai/tools` |
 
 Facts: `realai/api_server.py` has two A-form imports from `realai.tools`; `realai/v3_orchestrator.py` is present with no A-D scoped tool import. Scoped AST totals: A=3 hits/2 files, B=4/4, C=0/0, D=4/4. `modules/organs` uses A, not B; no split trigger. `*_gold` is shelf-only.
+
+
+## 9. Routes winner (2026-09-24)
+
+| Package | Winner path | Class | Evidence |
+|---|---|---|---|
+| routes | null | `split` | `realai/api_server.py` runs a live stdlib `HTTPServer`/`RealAIAPIHandler` with `do_GET`/`do_POST`; `realai/api/main.py` mounts `realai.routes` on FastAPI |
+
+Disk: product-root `routes/` missing; `realai/routes/` has 10 Python files; `realai/api/` has 14. Scoped imports: A=1 hit/1 file, B=0/0, C=0/0. Two live HTTP routers trigger split. Do not merge `realai/api/` into `realai/routes/`.

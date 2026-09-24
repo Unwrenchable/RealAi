@@ -1,0 +1,56 @@
+{
+  "winner": null,
+  "class": "split",
+  "paths_exist": {
+    "routes": false,
+    "realai/routes": true,
+    "realai/api": true,
+    "realai/api/main.py": true,
+    "realai/api_server.py": true,
+    "realai/v3_orchestrator.py": true,
+    "realai/hive.py": true
+  },
+  "py_counts": {
+    "routes": 0,
+    "realai/routes": 10,
+    "realai/api": 14
+  },
+  "import_form_counts": {
+    "A": {
+      "meaning": "realai.routes / from realai.routes",
+      "hits": 1,
+      "files": 1
+    },
+    "B": {
+      "meaning": "realai.api / from realai.api",
+      "hits": 0,
+      "files": 0
+    },
+    "C": {
+      "meaning": "bare routes / from routes / import routes",
+      "hits": 0,
+      "files": 0
+    }
+  },
+  "sample_files": [
+    "realai/api_server.py",
+    "realai/api/main.py",
+    "realai/routes/__init__.py",
+    "realai/routes/chat.py",
+    "realai/routes/health.py",
+    "realai/routes/models.py",
+    "realai/routes/embeddings.py",
+    "realai/routes/audio.py"
+  ],
+  "do_not_merge": [
+    "Do not merge realai/api/ into realai/routes/.",
+    "No parks, moves, or push."
+  ],
+  "notes": [
+    "Scoped roots: realai/api_server.py, realai/v3_orchestrator.py, realai/api/, realai/hive.py; skipped .learn_cache, __pycache__, archive, Output, logs, _quarantine, tests.",
+    "realai/api/main.py imports from realai.routes import include_all and calls include_all(app) on its FastAPI app.",
+    "realai/api_server.py does not import a route package, but defines live RealAIAPIHandler do_GET/do_POST routes and serves them with stdlib HTTPServer (including /health and /v1/*).",
+    "Two live HTTP routers exist: api_server.py custom handler and realai/api/main.py FastAPI mounted realai.routes; therefore class is split and winner is null.",
+    "v3_orchestrator.py has no scoped route import; realai/hive.py imports realai.orchestration.hive_router register_routes, not the HTTP routes package."
+  ]
+}
