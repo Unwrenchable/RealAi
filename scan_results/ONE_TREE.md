@@ -87,3 +87,26 @@ IMPORT_OK <function run_architect_mode at 0x0000029D896F96C0>
 `:8001/health` — `"status":"ok"`, `"service":"realai-v3-orchestrator"`, `"vulkan":{"ok":true,...}`
 
 `:8080/health` — `{"status":"ok"}`
+
+## 7. Cold-start verify freeze (2026-09-24)
+
+- pushed: yes (remote tip `e7af4cc6`)
+- cold_start: yes
+- chat_non_empty: yes
+- verified_at: 2026-09-24 03:54:03 PT
+
+Evidence (fresh this freeze):
+
+- `:8080/health` -> `{"status":"ok"}`
+- `:8001/health` -> `"status":"ok"`, `vulkan.ok=true`, service `realai-v3-orchestrator`
+- import: `IMPORT_OK <function run_architect_mode ...> True`
+- chat `choices[0].message.content` quote: `Hey — RealAI, local on this PC.` (non-empty; model realai-hive)
+- abilities count: 65
+- tools_count: 117
+
+Path table (re-checked): agents/ yes; realai/agents no; quarantine realai_agents yes; modules/organs/ yes; realai/modules/organs yes (marker); quarantine organs twin yes; abilities/architect_mode.py yes; realai/plugins/ yes; plugins/rackup_coach/ yes; scripts/promote_gold.py yes.
+
+Vulkan start used (canonical `start_realai_server.bat`):
+`C:\llama-vulkan\llama-server.exe -m C:\models\checkpoints_lora\qwen2.5-coder-7b-instruct-q5_k_m.gguf --host 127.0.0.1 --port 8080 -c 65536 -ngl 99 --jinja`
+
+Hive: `python -m realai.v3_orchestrator --host 127.0.0.1 --port 8001`
