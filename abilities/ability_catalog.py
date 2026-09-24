@@ -165,7 +165,7 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "keywords": ["web research", "scraping", "research", "web_search"],
         "status": "LIVE",
         "live_path": "POST /v1/tools/execute web_research",
-        "modules": ["realai/v3_runtime_bridge.py", "realai/tools.py"],
+        "modules": ["abilities/web_search.py"],
         "gold_paths": [r"C:\tools\realai\commands\research.js"],
     },
     {
