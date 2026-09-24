@@ -1,0 +1,79 @@
+{
+  "winner": "realai/tools",
+  "class": "gold_in_realai",
+  "paths_exist": {
+    "tools": true,
+    "realai/tools": true,
+    "realai/core/tools": true,
+    "realai/tools_realai": true,
+    "realai/agent_tools": true,
+    "realai/agent_tools_gold": true,
+    "agent_tools": true
+  },
+  "py_counts": {
+    "tools": 1,
+    "realai/tools": 19,
+    "realai/core/tools": 9,
+    "realai/tools_realai": 0,
+    "realai/agent_tools": 1,
+    "realai/agent_tools_gold": 27,
+    "agent_tools": 60
+  },
+  "import_form_counts": {
+    "A": {
+      "raw_hit_count": 3,
+      "unique_file_count": 2,
+      "files": [
+        "modules/organs/body/synthetic_guardian_layer.py",
+        "realai/api_server.py"
+      ],
+      "api_server_hits": 2,
+      "v3_orchestrator_hits": 0
+    },
+    "B": {
+      "raw_hit_count": 4,
+      "unique_file_count": 4,
+      "files": [
+        "abilities/core_surface.py",
+        "abilities/secure_tools.py",
+        "abilities/web3_integration.py",
+        "agents/worker.py"
+      ],
+      "api_server_hits": 0,
+      "v3_orchestrator_hits": 0
+    },
+    "C": {
+      "raw_hit_count": 0,
+      "unique_file_count": 0,
+      "files": [],
+      "api_server_hits": 0,
+      "v3_orchestrator_hits": 0
+    },
+    "D": {
+      "raw_hit_count": 4,
+      "unique_file_count": 4,
+      "files": [
+        "abilities/agent_tools_surface.py",
+        "abilities/code_engineer_cli.py",
+        "abilities/hive_memory.py",
+        "modules/orchestrators/orchestration_worker.py"
+      ],
+      "api_server_hits": 0,
+      "v3_orchestrator_hits": 0
+    }
+  },
+  "sample_files": [
+    "modules/organs/body/synthetic_guardian_layer.py",
+    "realai/api_server.py",
+    "abilities/core_surface.py",
+    "abilities/secure_tools.py",
+    "abilities/agent_tools_surface.py",
+    "abilities/code_engineer_cli.py"
+  ],
+  "do_not_merge": [],
+  "notes": [
+    "realai/api_server.py has two imports from realai.tools; realai/v3_orchestrator.py is present and has no A-D scoped tool import.",
+    "modules/organs has an A-form import from realai.tools, not a B-form import; the api_server/modules-organs split trigger is absent.",
+    "realai/agent_tools_gold is shelf-only and is not a winner; product-root agent_tools exists and was recorded."
+  ]
+}

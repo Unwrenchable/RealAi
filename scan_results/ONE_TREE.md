@@ -282,3 +282,21 @@ Method: aggregate scoped `rg` over `realai`, `abilities`, `agents`, `modules`, `
 ### unknown_unscanned
 
 - none
+
+## 8. Tools winner (2026-09-24)
+
+| Path | Exists | Recursive `*.py` count (excluding `__pycache__`) |
+|---|---:|---:|
+| `tools/` | yes | 1 |
+| `realai/tools/` | yes | 19 |
+| `realai/core/tools/` | yes | 9 |
+| `realai/tools_realai/` | yes | 0 |
+| `realai/agent_tools/` | yes | 1 |
+| `realai/agent_tools_gold/` | yes | 27 |
+| `agent_tools/` (product root) | yes | 60 |
+
+| Decision | Class | Winner |
+|---|---|---|
+| tools | `gold_in_realai` | `realai/tools` |
+
+Facts: `realai/api_server.py` has two A-form imports from `realai.tools`; `realai/v3_orchestrator.py` is present with no A-D scoped tool import. Scoped AST totals: A=3 hits/2 files, B=4/4, C=0/0, D=4/4. `modules/organs` uses A, not B; no split trigger. `*_gold` is shelf-only.
