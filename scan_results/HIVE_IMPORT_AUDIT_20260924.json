@@ -1,0 +1,1032 @@
+{
+  "date": "2026-09-24",
+  "hat": "builder",
+  "branch": "live/realai-clean-20260911",
+  "home": "C:\\RealAI-clean",
+  "scope": "Hive import audit: abilities/agents product-root vs realai.* twins",
+  "scan_dirs": [
+    "abilities",
+    "agents",
+    "modules",
+    "plugins",
+    "server",
+    "scripts",
+    "realai",
+    "apps",
+    "frontend",
+    "tests",
+    "tools",
+    "scanners",
+    "agent_tools",
+    "orchestration"
+  ],
+  "py_files_scanned": 3923,
+  "prior_commits_untouched": [
+    "663bae82",
+    "46c6b158"
+  ],
+  "git_status_note": "Working tree had unrelated dirty files (config/docs/catalog); this slice only adds audit JSON",
+  "packages": {
+    "abilities": {
+      "exists": true,
+      "path": "abilities",
+      "py_files": 97,
+      "bytes": 591684
+    },
+    "realai.abilities": {
+      "exists": true,
+      "path": "realai/abilities",
+      "py_files": 1,
+      "bytes": 469
+    },
+    "agents": {
+      "exists": true,
+      "path": "agents",
+      "py_files": 45,
+      "bytes": 155826
+    },
+    "realai.agents": {
+      "exists": true,
+      "path": "realai/agents",
+      "py_files": 44,
+      "bytes": 150156
+    }
+  },
+  "resolve": {
+    "abilities": {
+      "ok": true,
+      "file": "C:\\RealAI-clean\\abilities\\__init__.py",
+      "under_quarantine": false,
+      "under_realai_clean": true
+    },
+    "realai.abilities": {
+      "ok": true,
+      "file": "C:\\RealAI-clean\\abilities\\__init__.py",
+      "under_quarantine": false,
+      "under_realai_clean": true
+    },
+    "agents": {
+      "ok": true,
+      "file": "C:\\RealAI-clean\\agents\\__init__.py",
+      "under_quarantine": false,
+      "under_realai_clean": true
+    },
+    "realai.agents": {
+      "ok": true,
+      "file": "C:\\RealAI-clean\\realai\\agents\\__init__.py",
+      "under_quarantine": false,
+      "under_realai_clean": true
+    },
+    "modules.organs": {
+      "ok": true,
+      "file": "C:\\RealAI-clean\\modules\\organs\\__init__.py",
+      "under_quarantine": false,
+      "under_realai_clean": true
+    },
+    "realai.modules.organs": {
+      "ok": true,
+      "file": "C:\\RealAI-clean\\modules\\organs\\__init__.py",
+      "under_quarantine": false,
+      "under_realai_clean": true
+    }
+  },
+  "summary_counts": {
+    "abilities": {
+      "import_sites": 70,
+      "unique_files": 52
+    },
+    "realai.abilities": {
+      "import_sites": 6,
+      "unique_files": 6
+    },
+    "agents": {
+      "import_sites": 52,
+      "unique_files": 52
+    },
+    "realai.agents": {
+      "import_sites": 4,
+      "unique_files": 4
+    }
+  },
+  "winner_table": [
+    {
+      "concern": "abilities",
+      "hive_import_winner": "abilities (product-root)",
+      "twin": "realai.abilities",
+      "twin_role": "compat shim only (realai/abilities/__init__.py re-exports product-root abilities); plus stray realai.abilities.architect_mode import sites that resolve through the shim",
+      "park_safe_this_slice": false,
+      "park_reason": "Hive and product code import both product-root abilities and realai.abilities; wholesale park unsafe",
+      "import_sites_winner": 70,
+      "import_sites_twin": 6,
+      "winner_stats": {
+        "exists": true,
+        "path": "abilities",
+        "py_files": 97,
+        "bytes": 591684
+      },
+      "twin_stats": {
+        "exists": true,
+        "path": "realai/abilities",
+        "py_files": 1,
+        "bytes": 469
+      },
+      "resolve_winner": {
+        "ok": true,
+        "file": "C:\\RealAI-clean\\abilities\\__init__.py",
+        "under_quarantine": false,
+        "under_realai_clean": true
+      },
+      "resolve_twin": {
+        "ok": true,
+        "file": "C:\\RealAI-clean\\abilities\\__init__.py",
+        "under_quarantine": false,
+        "under_realai_clean": true
+      }
+    },
+    {
+      "concern": "agents",
+      "hive_import_winner": "agents (product-root)",
+      "twin": "realai.agents",
+      "twin_role": "partial body + hive shims; 4 import sites still use realai.agents.* \u2014 keep; park not safe this slice",
+      "park_safe_this_slice": false,
+      "park_reason": "Hive imports agents.*; realai.agents shims into agents \u2014 park would break bridges",
+      "import_sites_winner": 52,
+      "import_sites_twin": 4,
+      "winner_stats": {
+        "exists": true,
+        "path": "agents",
+        "py_files": 45,
+        "bytes": 155826
+      },
+      "twin_stats": {
+        "exists": true,
+        "path": "realai/agents",
+        "py_files": 44,
+        "bytes": 150156
+      },
+      "resolve_winner": {
+        "ok": true,
+        "file": "C:\\RealAI-clean\\agents\\__init__.py",
+        "under_quarantine": false,
+        "under_realai_clean": true
+      },
+      "resolve_twin": {
+        "ok": true,
+        "file": "C:\\RealAI-clean\\realai\\agents\\__init__.py",
+        "under_quarantine": false,
+        "under_realai_clean": true
+      }
+    }
+  ],
+  "park_decision": {
+    "abilities": "DO_NOT_PARK",
+    "realai.abilities": "DO_NOT_PARK",
+    "agents": "DO_NOT_PARK",
+    "realai.agents": "DO_NOT_PARK"
+  },
+  "parked_dirs_related": [
+    "_quarantine/twins_20260924/realai__modules__organs",
+    "_quarantine/twins_20260921_b/realai__imports/external/C_realai_modules/organs",
+    "_quarantine/twins_20260921_b/realai__imports/external/C_realai_modules/organs/body",
+    "_quarantine/twins_20260921_b/realai__imports/external/C_realai_modules/organs/cognitive",
+    "_quarantine/twins_20260921_b/realai__imports/external/C_realai_modules/organs/dream",
+    "_quarantine/twins_20260921_b/realai__imports/external/C_realai_modules/organs/evolution",
+    "_quarantine/twins_20260921_b/realai__imports/external/C_realai_modules/organs/memory_ecosystem",
+    "_quarantine/twins_20260921_b/realai__imports/external/C_realai_modules/organs/meta",
+    "_quarantine/twins_20260921_b/realai__imports/external/C_realai_modules/organs/metabolic",
+    "_quarantine/twins_20260921_b/realai__imports/external/C_realai_modules/organs/nervous",
+    "_quarantine/twins_20260924/realai__modules__organs/body",
+    "_quarantine/twins_20260924/realai__modules__organs/cognitive",
+    "_quarantine/twins_20260924/realai__modules__organs/dream",
+    "_quarantine/twins_20260924/realai__modules__organs/evolution",
+    "_quarantine/twins_20260924/realai__modules__organs/memory_ecosystem",
+    "_quarantine/twins_20260924/realai__modules__organs/meta",
+    "_quarantine/twins_20260924/realai__modules__organs/metabolic",
+    "_quarantine/twins_20260924/realai__modules__organs/nervous"
+  ],
+  "imports_pointing_at_parked_twins": [],
+  "optional_fix_needed": false,
+  "optional_fix_applied": false,
+  "commit_happened": false,
+  "hive_critical": [
+    {
+      "file": "realai/orchestration/v3_orchestrator.py",
+      "ability_agent_imports": []
+    },
+    {
+      "file": "realai/orchestration/v3_runtime_bridge.py",
+      "ability_agent_imports": []
+    },
+    {
+      "file": "realai/ability_catalog.py",
+      "ability_agent_imports": []
+    },
+    {
+      "file": "realai/v3_orchestrator.py",
+      "ability_agent_imports": []
+    }
+  ],
+  "sites": [
+    {
+      "file": "abilities/agents_surface.py",
+      "line": 178,
+      "import": "abilities.hierarchical_specialists",
+      "package": "abilities"
+    },
+    {
+      "file": "abilities/architect_mode.py",
+      "line": 3,
+      "import": "realai.abilities.architect_mode",
+      "package": "realai.abilities"
+    },
+    {
+      "file": "abilities/audio_transcription.py",
+      "line": 118,
+      "import": "abilities.audio_speech",
+      "package": "abilities"
+    },
+    {
+      "file": "abilities/hominis_enterprise.py",
+      "line": 7,
+      "import": "abilities.hive_governance",
+      "package": "abilities"
+    },
+    {
+      "file": "abilities/hominis_enterprise.py",
+      "line": 8,
+      "import": "abilities.hive_governance",
+      "package": "abilities"
+    },
+    {
+      "file": "abilities/memory_learning.py",
+      "line": 30,
+      "import": "abilities.hive_memory",
+      "package": "abilities"
+    },
+    {
+      "file": "abilities/orchestration_surface.py",
+      "line": 276,
+      "import": "abilities.nest_orchestrators",
+      "package": "abilities"
+    },
+    {
+      "file": "abilities/voice_streaming.py",
+      "line": 94,
+      "import": "abilities.audio_speech",
+      "package": "abilities"
+    },
+    {
+      "file": "abilities/realai/abilities/image_generation.py",
+      "line": 36,
+      "import": "abilities.desktop_lambda_image",
+      "package": "abilities"
+    },
+    {
+      "file": "abilities/realai/abilities/video_generation.py",
+      "line": 35,
+      "import": "abilities.desktop_lambda_video",
+      "package": "abilities"
+    },
+    {
+      "file": "abilities/realai/abilities/voice_streaming.py",
+      "line": 103,
+      "import": "abilities.audio_speech",
+      "package": "abilities"
+    },
+    {
+      "file": "abilities/realai/abilities/voice_streaming.py",
+      "line": 65,
+      "import": "abilities.audio_transcription",
+      "package": "abilities"
+    },
+    {
+      "file": "agents/hierarchical_agent.py",
+      "line": 10,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "agents/hive/analyst.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "agents/hive/architect.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "agents/hive/coder.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "agents/hive/governor.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "agents/hive/memory.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "agents/hive/overseer.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "agents/hive/router.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "scripts/deep_unify_walk.py",
+      "line": 97,
+      "import": "abilities.auto_wire",
+      "package": "abilities"
+    },
+    {
+      "file": "scripts/_register_core_agents_promote.py",
+      "line": 100,
+      "import": "abilities.approval_store",
+      "package": "abilities"
+    },
+    {
+      "file": "scripts/_register_core_agents_promote.py",
+      "line": 101,
+      "import": "abilities.device_selector",
+      "package": "abilities"
+    },
+    {
+      "file": "scripts/_register_core_agents_promote.py",
+      "line": 102,
+      "import": "abilities.hierarchical_specialists",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/core_hive_router.py",
+      "line": 191,
+      "import": "abilities.hierarchical_specialists",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/core_hive_router.py",
+      "line": 208,
+      "import": "abilities.hierarchical_specialists",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/core_hive_router.py",
+      "line": 217,
+      "import": "abilities.hierarchical_specialists",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/core_hive_router.py",
+      "line": 229,
+      "import": "abilities.hive_memory",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/craft.py",
+      "line": 183,
+      "import": "abilities.deep_promote",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/craft.py",
+      "line": 981,
+      "import": "realai.abilities.architect_mode",
+      "package": "realai.abilities"
+    },
+    {
+      "file": "realai/hierarchical_agent.py",
+      "line": 10,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/realai_self_improving_agent.py",
+      "line": 8,
+      "import": "realai.agents.realai_self_improving_agent",
+      "package": "realai.agents"
+    },
+    {
+      "file": "realai/self_improving_agent.py",
+      "line": 8,
+      "import": "realai.agents.self_improving_agent",
+      "package": "realai.agents"
+    },
+    {
+      "file": "realai/agents/hierarchical_agent.py",
+      "line": 10,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/cli/craft.py",
+      "line": 189,
+      "import": "abilities.deep_promote",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/cli/craft.py",
+      "line": 1066,
+      "import": "realai.abilities.architect_mode",
+      "package": "realai.abilities"
+    },
+    {
+      "file": "realai/core/supervisor.py",
+      "line": 14,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/memory/memory_learning.py",
+      "line": 30,
+      "import": "abilities.hive_memory",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/orchestration/nest_orchestrators.py",
+      "line": 5,
+      "import": "abilities.nest_orchestrators",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/orchestration/surface.py",
+      "line": 5,
+      "import": "abilities.orchestration_surface",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/orchestrators/nest_orchestrators.py",
+      "line": 5,
+      "import": "abilities.nest_orchestrators",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/realai_agent/__init__.py",
+      "line": 44,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/scripts/deep_unify_walk.py",
+      "line": 97,
+      "import": "abilities.auto_wire",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/scripts/_register_core_agents_promote.py",
+      "line": 100,
+      "import": "abilities.approval_store",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/scripts/_register_core_agents_promote.py",
+      "line": 101,
+      "import": "abilities.device_selector",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/scripts/_register_core_agents_promote.py",
+      "line": 102,
+      "import": "abilities.hierarchical_specialists",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/tests/test_agent.py",
+      "line": 33,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/voice/hive_tools.py",
+      "line": 107,
+      "import": "abilities.audio_transcription",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/abilities/agents_surface.py",
+      "line": 178,
+      "import": "abilities.hierarchical_specialists",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/abilities/architect_mode.py",
+      "line": 3,
+      "import": "realai.abilities.architect_mode",
+      "package": "realai.abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/abilities/audio_transcription.py",
+      "line": 118,
+      "import": "abilities.audio_speech",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/abilities/hominis_enterprise.py",
+      "line": 7,
+      "import": "abilities.hive_governance",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/abilities/hominis_enterprise.py",
+      "line": 8,
+      "import": "abilities.hive_governance",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/abilities/memory_learning.py",
+      "line": 30,
+      "import": "abilities.hive_memory",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/abilities/orchestration_surface.py",
+      "line": 276,
+      "import": "abilities.nest_orchestrators",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/abilities/voice_streaming.py",
+      "line": 94,
+      "import": "abilities.audio_speech",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/agents/hierarchical_agent.py",
+      "line": 10,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/core_hive_router.py",
+      "line": 191,
+      "import": "abilities.hierarchical_specialists",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/core_hive_router.py",
+      "line": 208,
+      "import": "abilities.hierarchical_specialists",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/core_hive_router.py",
+      "line": 217,
+      "import": "abilities.hierarchical_specialists",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/core_hive_router.py",
+      "line": 229,
+      "import": "abilities.hive_memory",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/craft.py",
+      "line": 183,
+      "import": "abilities.deep_promote",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/craft.py",
+      "line": 981,
+      "import": "realai.abilities.architect_mode",
+      "package": "realai.abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/hierarchical_agent.py",
+      "line": 10,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/realai_self_improving_agent.py",
+      "line": 8,
+      "import": "realai.agents.realai_self_improving_agent",
+      "package": "realai.agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/self_improving_agent.py",
+      "line": 8,
+      "import": "realai.agents.self_improving_agent",
+      "package": "realai.agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/scripts/deep_unify_walk.py",
+      "line": 97,
+      "import": "abilities.auto_wire",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/scripts/_register_core_agents_promote.py",
+      "line": 100,
+      "import": "abilities.approval_store",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/scripts/_register_core_agents_promote.py",
+      "line": 101,
+      "import": "abilities.device_selector",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/scripts/_register_core_agents_promote.py",
+      "line": 102,
+      "import": "abilities.hierarchical_specialists",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/abilities/realai/abilities/image_generation.py",
+      "line": 36,
+      "import": "abilities.desktop_lambda_image",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/abilities/realai/abilities/video_generation.py",
+      "line": 35,
+      "import": "abilities.desktop_lambda_video",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/abilities/realai/abilities/voice_streaming.py",
+      "line": 103,
+      "import": "abilities.audio_speech",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/abilities/realai/abilities/voice_streaming.py",
+      "line": 65,
+      "import": "abilities.audio_transcription",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/agents/hive/analyst.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/agents/hive/architect.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/agents/hive/coder.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/agents/hive/governor.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/agents/hive/memory.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/agents/hive/overseer.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/agents/hive/router.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/agents/hierarchical_agent.py",
+      "line": 10,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/cli/craft.py",
+      "line": 189,
+      "import": "abilities.deep_promote",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/cli/craft.py",
+      "line": 1066,
+      "import": "realai.abilities.architect_mode",
+      "package": "realai.abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/core/supervisor.py",
+      "line": 14,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/memory/memory_learning.py",
+      "line": 30,
+      "import": "abilities.hive_memory",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/orchestration/nest_orchestrators.py",
+      "line": 5,
+      "import": "abilities.nest_orchestrators",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/orchestration/surface.py",
+      "line": 5,
+      "import": "abilities.orchestration_surface",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/orchestrators/nest_orchestrators.py",
+      "line": 5,
+      "import": "abilities.nest_orchestrators",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/realai_agent/__init__.py",
+      "line": 44,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/scripts/deep_unify_walk.py",
+      "line": 97,
+      "import": "abilities.auto_wire",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/scripts/_register_core_agents_promote.py",
+      "line": 100,
+      "import": "abilities.approval_store",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/scripts/_register_core_agents_promote.py",
+      "line": 101,
+      "import": "abilities.device_selector",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/scripts/_register_core_agents_promote.py",
+      "line": 102,
+      "import": "abilities.hierarchical_specialists",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/tests/test_agent.py",
+      "line": 33,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/voice/hive_tools.py",
+      "line": 107,
+      "import": "abilities.audio_transcription",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/agents/hive/analyst.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/agents/hive/architect.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/agents/hive/coder.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/agents/hive/governor.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/agents/hive/memory.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/agents/hive/overseer.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/agents/hive/router.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/core/agents/agents.py",
+      "line": 148,
+      "import": "agents.hierarchical.agency",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/core/agents/hierarchical_agent.py",
+      "line": 10,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/core/agents/supervisor.py",
+      "line": 14,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/core/agents/test_hierarchical_agent.py",
+      "line": 33,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/core/agents/__init__.py",
+      "line": 57,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/memory/hive/memory.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/memory/memory/memory_learning.py",
+      "line": 30,
+      "import": "abilities.hive_memory",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/plugins/atomicfizz_coach/__init__.py",
+      "line": 15,
+      "import": "abilities",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/plugins/realai_clean_backup_coach/__init__.py",
+      "line": 14,
+      "import": "abilities",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/plugins/realai_gold_coach/__init__.py",
+      "line": 14,
+      "import": "abilities",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/agents/hive/analyst.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/agents/hive/architect.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/agents/hive/coder.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/agents/hive/governor.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/agents/hive/memory.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/agents/hive/overseer.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/agents/hive/router.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/core/agents/agents.py",
+      "line": 148,
+      "import": "agents.hierarchical.agency",
+      "package": "agents"
+    },
+    {
+      "file": "realai/core/agents/hierarchical_agent.py",
+      "line": 10,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/core/agents/supervisor.py",
+      "line": 14,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/core/agents/test_hierarchical_agent.py",
+      "line": 33,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/core/agents/__init__.py",
+      "line": 57,
+      "import": "agents",
+      "package": "agents"
+    },
+    {
+      "file": "realai/memory/hive/memory.py",
+      "line": 1,
+      "import": "agents.hive",
+      "package": "agents"
+    },
+    {
+      "file": "realai/memory/memory/memory_learning.py",
+      "line": 30,
+      "import": "abilities.hive_memory",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/plugins/atomicfizz_coach/__init__.py",
+      "line": 15,
+      "import": "abilities",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/plugins/effective_engine_main_coach/__init__.py",
+      "line": 14,
+      "import": "abilities",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/plugins/effective_engine_main_learned/__init__.py",
+      "line": 14,
+      "import": "abilities",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/plugins/realai_clean_backup_coach/__init__.py",
+      "line": 14,
+      "import": "abilities",
+      "package": "abilities"
+    },
+    {
+      "file": "realai/plugins/realai_gold_coach/__init__.py",
+      "line": 14,
+      "import": "abilities",
+      "package": "abilities"
+    }
+  ],
+  "gitignored": true,
+  "gitignore_rule": ".gitignore:70:scan_results/",
+  "notes": [
+    "Product-root abilities/ wins (97 py, 591684 bytes). realai/abilities/__init__.py is already a compat shim re-exporting abilities.",
+    "Product-root agents/ wins for Hive (45 py). realai/agents/ still has body (44 py) and is imported (4 sites); DO_NOT_PARK this slice.",
+    "realai.abilities resolves to C:\\\\RealAI-clean\\\\abilities\\\\__init__.py via shim.",
+    "realai.modules.organs resolves to modules/organs (shim after prior park); 0 live imports point at parked twin path.",
+    "Working tree was NOT clean at start: unrelated M/?? under config/docs/catalog/root junk. Untouched. Prior commits 663bae82 and 46c6b158 not amended."
+  ]
+}

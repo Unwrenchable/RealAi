@@ -1,0 +1,145 @@
+{
+  "date": "2026-09-24",
+  "hat": "builder",
+  "branch": "live/realai-clean-20260911",
+  "home": "C:\\RealAI-clean",
+  "source_audit": "scan_results/HIVE_IMPORT_AUDIT_20260924.json",
+  "scope": "Map 4 realai.agents.* + 6 realai.abilities.* twin sites; no park, no promote, no organs, no code rewrite",
+  "sites": [
+    {
+      "file": "abilities/architect_mode.py",
+      "line": 3,
+      "import": "realai.abilities.architect_mode",
+      "resolved_module_file": "C:\\RealAI-clean\\abilities\\architect_mode.py",
+      "safe_to_rewrite_to_product_root": false,
+      "reason": "This file IS the product-root path, but it is a circular shim: it imports realai.abilities.architect_mode which find_spec-resolves back to this same file. No realai/abilities/architect_mode.py body exists; no def run_architect_mode found under abilities/ or realai/abilities/. Broken stub \u2014 rewrite alone cannot fix.",
+      "package": "realai.abilities",
+      "live": true
+    },
+    {
+      "file": "realai/craft.py",
+      "line": 981,
+      "import": "realai.abilities.architect_mode",
+      "resolved_module_file": "C:\\RealAI-clean\\abilities\\architect_mode.py",
+      "safe_to_rewrite_to_product_root": false,
+      "reason": "Import already resolves via realai.abilities shim to abilities/architect_mode.py, which is itself a circular stub exporting run_architect_mode from a missing body. Rewriting to abilities.architect_mode hits the same broken file.",
+      "package": "realai.abilities",
+      "live": true
+    },
+    {
+      "file": "realai/cli/craft.py",
+      "line": 1066,
+      "import": "realai.abilities.architect_mode",
+      "resolved_module_file": "C:\\RealAI-clean\\abilities\\architect_mode.py",
+      "safe_to_rewrite_to_product_root": false,
+      "reason": "Same as realai/craft.py: resolves to circular product-root stub; no architect_mode body to point at.",
+      "package": "realai.abilities",
+      "live": true
+    },
+    {
+      "file": "realai/.learn_cache/realai/abilities/architect_mode.py",
+      "line": 3,
+      "import": "realai.abilities.architect_mode",
+      "resolved_module_file": "C:\\RealAI-clean\\abilities\\architect_mode.py",
+      "safe_to_rewrite_to_product_root": false,
+      "reason": "learn_cache mirror (sha differs from live abilities/architect_mode.py). Do not rewrite cache artifacts.",
+      "package": "realai.abilities",
+      "live": false
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/craft.py",
+      "line": 981,
+      "import": "realai.abilities.architect_mode",
+      "resolved_module_file": "C:\\RealAI-clean\\abilities\\architect_mode.py",
+      "safe_to_rewrite_to_product_root": false,
+      "reason": "learn_cache mirror of craft.py. Do not rewrite cache.",
+      "package": "realai.abilities",
+      "live": false
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/cli/craft.py",
+      "line": 1066,
+      "import": "realai.abilities.architect_mode",
+      "resolved_module_file": "C:\\RealAI-clean\\abilities\\architect_mode.py",
+      "safe_to_rewrite_to_product_root": false,
+      "reason": "learn_cache mirror of cli/craft.py. Do not rewrite cache.",
+      "package": "realai.abilities",
+      "live": false
+    },
+    {
+      "file": "realai/realai_self_improving_agent.py",
+      "line": 8,
+      "import": "realai.agents.realai_self_improving_agent",
+      "resolved_module_file": "C:\\RealAI-clean\\realai\\agents\\realai_self_improving_agent.py",
+      "safe_to_rewrite_to_product_root": true,
+      "reason": "Leftover package-root shim (star-import). Product-root agents/realai_self_improving_agent.py is byte-identical (sha 82022a33dfe613ae, 3860 bytes) and exports AutonomousRealAIAgent. Safe rewrite: from agents.realai_self_improving_agent import *",
+      "package": "realai.agents",
+      "live": true,
+      "product_root_twin": "agents/realai_self_improving_agent.py",
+      "symbols": [
+        "AutonomousRealAIAgent"
+      ],
+      "bodies_identical": true
+    },
+    {
+      "file": "realai/self_improving_agent.py",
+      "line": 8,
+      "import": "realai.agents.self_improving_agent",
+      "resolved_module_file": "C:\\RealAI-clean\\realai\\agents\\self_improving_agent.py",
+      "safe_to_rewrite_to_product_root": true,
+      "reason": "Leftover package-root shim (star-import). Product-root agents/self_improving_agent.py is byte-identical (sha bf246541e7360398, 2880 bytes) and exports SelfImprovingAgent. Safe rewrite: from agents.self_improving_agent import *",
+      "package": "realai.agents",
+      "live": true,
+      "product_root_twin": "agents/self_improving_agent.py",
+      "symbols": [
+        "SelfImprovingAgent"
+      ],
+      "bodies_identical": true
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/realai_self_improving_agent.py",
+      "line": 8,
+      "import": "realai.agents.realai_self_improving_agent",
+      "resolved_module_file": "C:\\RealAI-clean\\realai\\agents\\realai_self_improving_agent.py",
+      "safe_to_rewrite_to_product_root": false,
+      "reason": "learn_cache mirror (sha identical to live shim). Do not rewrite cache.",
+      "package": "realai.agents",
+      "live": false
+    },
+    {
+      "file": "realai/.learn_cache/realai/realai/self_improving_agent.py",
+      "line": 8,
+      "import": "realai.agents.self_improving_agent",
+      "resolved_module_file": "C:\\RealAI-clean\\realai\\agents\\self_improving_agent.py",
+      "safe_to_rewrite_to_product_root": false,
+      "reason": "learn_cache mirror (sha identical to live shim). Do not rewrite cache.",
+      "package": "realai.agents",
+      "live": false
+    }
+  ],
+  "counts": {
+    "realai.abilities": 6,
+    "realai.agents": 4,
+    "live_abilities": 3,
+    "live_agents": 2,
+    "learn_cache": 5
+  },
+  "agents_verdict": "agents park possible next slice",
+  "agents_notes": [
+    "Every live realai.agents import site is a leftover package-root shim (realai/realai_self_improving_agent.py, realai/self_improving_agent.py).",
+    "Product-root agents/ already exports the same module names with byte-identical bodies.",
+    "Symbols: AutonomousRealAIAgent, SelfImprovingAgent \u2014 present on both trees, identical.",
+    "No live site uniquely needs the realai.agents body over agents/.",
+    "Park still requires rewriting those 2 shims (or deleting them) before moving realai/agents/ to quarantine \u2014 not this slice."
+  ],
+  "abilities_verdict": "architect_mode body missing; circular shim; do not rewrite this slice",
+  "abilities_notes": [
+    "realai/abilities/__init__.py already shims package to product-root abilities/.",
+    "abilities/architect_mode.py claims gold at realai.abilities.architect_mode but that file does not exist; find_spec loops to abilities/architect_mode.py.",
+    "No def run_architect_mode under abilities/ or realai/abilities/.",
+    "craft.py / cli/craft.py import run_architect_mode through that broken path."
+  ],
+  "code_edits": false,
+  "park": false,
+  "promote": false
+}
