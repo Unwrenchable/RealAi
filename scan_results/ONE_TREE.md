@@ -110,3 +110,106 @@ Vulkan start used (canonical `start_realai_server.bat`):
 `C:\llama-vulkan\llama-server.exe -m C:\models\checkpoints_lora\qwen2.5-coder-7b-instruct-q5_k_m.gguf --host 127.0.0.1 --port 8080 -c 65536 -ngl 99 --jinja`
 
 Hive: `python -m realai.v3_orchestrator --host 127.0.0.1 --port 8001`
+
+## realai/ top-level dirs
+
+name | class | twin_of | imported | file_count
+--- | --- | --- | --- | ---
+abilities | shim |  | yes | 11
+adapters | unknown |  | no | 15
+agent-tools-main | run_dump |  | no | 2
+agent-tools-orchestrator-default-run | run_dump |  | no | 1
+agent_runtime | nested_tree |  | yes | 55
+agent_tools | shim |  | yes | 5
+agent_tools_gold | twin_of | agent_tools | yes | 27
+agents-orchestrator-default-run | run_dump |  | no | 1
+ai-orchestrator-default-run | run_dump |  | no | 1
+api | gold_in_realai |  | yes | 20
+app | nested_tree |  | yes | 4
+apps | nested_tree |  | no | 24701
+atomic_fizz | unknown |  | yes | 6
+aura | unknown |  | yes | 10
+aura_pkg | unknown |  | no | 2
+autopilot | unknown |  | no | 2
+backend_realai | nested_tree |  | no | 13
+benchmarks | unknown |  | yes | 37
+billing | unknown |  | no | 1
+bin | unknown |  | no | 23
+bot | unknown |  | yes | 20
+catalog | unknown |  | no | 12
+chat | unknown |  | no | 1
+cli | gold_in_realai |  | yes | 92
+commands | unknown |  | no | 1
+components | unknown |  | no | 9
+config | unknown |  | yes | 14
+context | unknown |  | no | 2
+core | gold_in_realai |  | yes | 282
+core_unify_20260830 | run_dump |  | no | 2
+data | unknown |  | no | 2
+datasets | unknown |  | no | 9
+docs | unknown |  | no | 31
+engine | unknown |  | yes | 11
+examples | unknown |  | no | 7
+executive | unknown |  | yes | 12
+exportable | unknown |  | no | 5
+fusion-ui | nested_tree |  | no | 5
+inference | unknown |  | no | 12
+learn | unknown |  | yes | 30
+marketplace | unknown |  | no | 1
+mcp | unknown |  | no | 4
+memory | gold_in_realai |  | yes | 128
+metrics | unknown |  | no | 4
+middleware | unknown |  | no | 4
+models | unknown |  | yes | 33
+modules | gold_in_realai |  | yes | 46
+orchestration | gold_in_realai | orchestration_gold | yes | 41
+orchestration_gold | twin_of | orchestration | yes | 1
+orchestrator | unknown |  | yes | 1
+orchestrator-default-run | run_dump |  | no | 2
+orchestrators | unknown |  | yes | 15
+packages | nested_tree |  | no | 22
+plugins | gold_in_realai |  | yes | 436
+profiles | unknown |  | no | 1
+prompts | unknown |  | no | 7
+providers | gold_in_realai |  | yes | 32
+python | nested_tree |  | no | 2
+realai-backend | nested_tree |  | no | 1
+realai-cli | nested_tree |  | no | 1
+realai-core | nested_tree |  | no | 24
+realai-frontend | nested_tree |  | no | 6
+realai-frontend__dup1 | nested_tree |  | no | 1
+realai_agent | nested_tree |  | no | 2
+realai_training | nested_tree |  | no | 1
+registry | unknown |  | no | 2
+results | run_dump |  | no | 4
+routes | unknown |  | yes | 10
+runtime | unknown |  | no | 3
+scan_results | run_dump |  | no | 12
+scanners | run_dump |  | yes | 5
+schema | unknown |  | no | 2
+schemas | unknown |  | no | 7
+scripts | unknown |  | no | 120
+sdk | gold_in_realai |  | yes | 9
+sdk-py | nested_tree |  | no | 2
+sdk-ts | nested_tree |  | no | 2
+security | unknown |  | no | 4
+server | gold_in_realai |  | yes | 68
+skills | unknown |  | no | 6
+static | unknown |  | no | 1
+templates | unknown |  | no | 3
+tests | unknown |  | yes | 51
+tooling | unknown |  | no | 6
+tools | unknown |  | yes | 19
+tools_realai | unknown |  | no | 1
+tracing | unknown |  | no | 2
+training | gold_in_realai |  | yes | 30
+ui | nested_tree |  | yes | 7
+universe | unknown |  | yes | 31
+utilities | unknown |  | no | 6
+v18 | unknown |  | no | 2
+variants | unknown |  | no | 1
+voice | nested_tree |  | yes | 32814
+web3 | unknown |  | no | 12
+widget | nested_tree |  | no | 1
+workflows | unknown |  | no | 2
+world_model | nested_tree |  | yes | 34
