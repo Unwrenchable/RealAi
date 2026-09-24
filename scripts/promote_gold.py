@@ -24,7 +24,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
-ROOT = Path(r"C:\realai")
+ROOT = Path(r"C:\RealAI-clean")
 QUEUE = ROOT / "scan_results" / "promote_queue.json"
 LOG = ROOT / "recovered" / "PROMOTE_LOG.json"
 REPORT = ROOT / "scan_results" / "phase2_promote_report.md"
