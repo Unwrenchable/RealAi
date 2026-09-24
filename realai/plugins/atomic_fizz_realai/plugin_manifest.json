@@ -1,7 +1,7 @@
 {
   "name": "atomic_fizz_realai",
-  "version": "0.1.0-gold",
-  "description": "Atomic Fizz NPC/Overseer engines recovered from vault backend/realai",
+  "version": "0.2.0-gold",
+  "description": "Atomic Fizz NPC/Overseer engines + hive :8001 client. Full ESM generators live in engines_src/; load-module prefers that then AFC vault.",
   "capabilities": [
     "npc_generation",
     "quest_generation",
@@ -9,7 +9,10 @@
     "overseer",
     "dialogue",
     "world_events",
-    "survival_rewards"
+    "survival_rewards",
+    "hive_http_client",
+    "multiprovider_client",
+    "engines_src"
   ],
   "source": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\\backend\\realai",
   "status": "GOLD",
@@ -17,6 +20,14 @@
     "overseer": "realai-overseer.js",
     "local_overseer": "local-overseer.js",
     "generate_npc": "generate-npc.js",
-    "quest": "quest-generator.js"
+    "quest": "quest-generator.js",
+    "hive_client": "realai-client.js",
+    "multiprovider_client": "realai-client.multiprovider.js",
+    "engines_src": "engines_src/"
+  },
+  "honesty": {
+    "hive_client": "LIVE",
+    "overseer_js": "LIVE",
+    "generators_esm": "PARTIAL \u2014 need AFC systems/region-influence + world-brain when run outside vault"
   }
 }
