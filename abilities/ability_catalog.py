@@ -175,7 +175,7 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "keywords": ["automation", "infra", "self-heal", "self_heal", "task"],
         "status": "LIVE",
         "live_path": "POST /v1/self-heal/* + tools self_heal_*",
-        "modules": ["realai/self_heal.py"],
+        "modules": ["abilities/task_automation.py"],
     },
     {
         "id": "voice_streaming",
