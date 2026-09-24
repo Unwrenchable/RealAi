@@ -1,0 +1,1173 @@
+{
+  "stats": {
+    "snapshot_files": 397,
+    "identical_hash": 303,
+    "same_name_diff_hash": 94,
+    "novel_basename": 0,
+    "skipped": 0
+  },
+  "policy": "same_name_diff_hash only; 0 novel. Promote only if src beats live on size AND unique symbols. No recovery/main/unify merge.",
+  "builder_candidates": [
+    {
+      "src": "imports/external/grok_export_realai/__init__.py",
+      "dest": "realai/__init__.py",
+      "bytes": 430051,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/api_server.py",
+      "dest": "realai/api_server.py",
+      "bytes": 54389,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/api_server.py",
+        "realai/core/api_server.py",
+        "realai/plugins/api_server.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/server/config.py",
+      "dest": "realai/server/config.py",
+      "bytes": 14069,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/runtime/config.py",
+        "realai/server/config.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/router.py",
+      "dest": "realai/router.py",
+      "bytes": 12364,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/router.py",
+        "realai/agents/router.py",
+        "realai/agents/hive/router.py",
+        "realai/agent_tools_gold/engine/router.py",
+        "realai/agent_tools_gold/providers/router.py"
+      ]
+    },
+    {
+      "src": "imports/external/recovery_plugins/core/local_models.py",
+      "dest": "imports/promoted/local_models.py",
+      "bytes": 10988,
+      "kind": "newer_or_fork",
+      "mode": "if_missing",
+      "living_same_name": [
+        "realai/local_models.py",
+        "realai/core/local_models.py",
+        "realai/plugins/local_models.py",
+        "realai/plugins/core/local_models.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/identity.py",
+      "dest": "realai/identity.py",
+      "bytes": 10777,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/identity.py",
+        "realai/core/identity.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/server/app.py",
+      "dest": "realai/server/app.py",
+      "bytes": 10194,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/cli/hive/app.py",
+        "realai/server/app.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/training/export_gguf.py",
+      "dest": "realai/training/export_gguf.py",
+      "bytes": 8186,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/training/export_gguf.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/request_path.py",
+      "dest": "modules/organs/request_path.py",
+      "bytes": 7666,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/request_path.py",
+        "modules/organs/request_path.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/training/finetune.py",
+      "dest": "realai/training/finetune.py",
+      "bytes": 7266,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/core/training/finetune.py",
+        "realai/training/finetune.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/model_assets.py",
+      "dest": "realai/model_assets.py",
+      "bytes": 6699,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/model_assets.py",
+        "realai/models/model_assets.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/training/pipeline.py",
+      "dest": "realai/training/pipeline.py",
+      "bytes": 6695,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/core/orchestration/pipeline.py",
+        "realai/learn/pipeline.py",
+        "realai/orchestration/pipeline.py",
+        "realai/orchestrators/pipeline.py",
+        "realai/training/pipeline.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/closed_loop.py",
+      "dest": "realai/closed_loop.py",
+      "bytes": 6607,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/closed_loop.py",
+        "realai/core/closed_loop.py",
+        "realai/modules/self_improvement/closed_loop.py",
+        "modules/self_improvement/closed_loop.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/server/llama_cli_backend.py",
+      "dest": "realai/server/llama_cli_backend.py",
+      "bytes": 6356,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/server/llama_cli_backend.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_server/llama_cli_backend.py",
+      "dest": "server/llama_cli_backend.py",
+      "bytes": 6137,
+      "kind": "newer_or_fork",
+      "mode": "if_missing",
+      "living_same_name": [
+        "realai/server/llama_cli_backend.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/server/backends.py",
+      "dest": "realai/server/backends.py",
+      "bytes": 6133,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/server/backends.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_plugins/rackup_coach/__init__.py",
+      "dest": "plugins/rackup_coach/__init__.py",
+      "bytes": 5065,
+      "kind": "newer_or_fork",
+      "mode": "if_missing",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/training/bootstrap_weights.py",
+      "dest": "realai/training/bootstrap_weights.py",
+      "bytes": 4985,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/training/bootstrap_weights.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/training/extract_from_agent_tools.py",
+      "dest": "realai/training/extract_from_agent_tools.py",
+      "bytes": 4158,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/core/training/extract_from_agent_tools.py",
+        "realai/training/extract_from_agent_tools.py",
+        "agent_tools/extract_from_agent_tools.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/cli/realai_cli.py",
+      "dest": "realai/cli/realai_cli.py",
+      "bytes": 3927,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/cli/realai_cli.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_server/tools_runtime.py",
+      "dest": "server/tools_runtime.py",
+      "bytes": 3053,
+      "kind": "newer_or_fork",
+      "mode": "if_missing",
+      "living_same_name": [
+        "realai/server/tools_runtime.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/server/tools_runtime.py",
+      "dest": "realai/server/tools_runtime.py",
+      "bytes": 3053,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/server/tools_runtime.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/body/synthetic_guardian_layer.py",
+      "dest": "modules/organs/body/synthetic_guardian_layer.py",
+      "bytes": 3018,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/body/synthetic_guardian_layer.py",
+        "modules/organs/body/synthetic_guardian_layer.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/meta/rackup_coach.py",
+      "dest": "modules/organs/meta/rackup_coach.py",
+      "bytes": 2877,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/adapters/rackup_coach.py",
+        "realai/modules/organs/meta/rackup_coach.py",
+        "modules/organs/meta/rackup_coach.py",
+        "adapters/rackup_coach.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/meta/synthetic_consciousness_layer.py",
+      "dest": "modules/organs/meta/synthetic_consciousness_layer.py",
+      "bytes": 2831,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/meta/synthetic_consciousness_layer.py",
+        "modules/organs/meta/synthetic_consciousness_layer.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/evolution/synthetic_dream_reproductive_system.py",
+      "dest": "modules/organs/evolution/synthetic_dream_reproductive_system.py",
+      "bytes": 2825,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/evolution/synthetic_dream_reproductive_system.py",
+        "modules/organs/evolution/synthetic_dream_reproductive_system.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/metabolic/synthetic_circulatory_system.py",
+      "dest": "modules/organs/metabolic/synthetic_circulatory_system.py",
+      "bytes": 2825,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/metabolic/synthetic_circulatory_system.py",
+        "modules/organs/metabolic/synthetic_circulatory_system.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/metabolic/synthetic_digestive_system.py",
+      "dest": "modules/organs/metabolic/synthetic_digestive_system.py",
+      "bytes": 2809,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/metabolic/synthetic_digestive_system.py",
+        "modules/organs/metabolic/synthetic_digestive_system.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/evolution/synthetic_evolution_spiral.py",
+      "dest": "modules/organs/evolution/synthetic_evolution_spiral.py",
+      "bytes": 2804,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/evolution/synthetic_evolution_spiral.py",
+        "modules/organs/evolution/synthetic_evolution_spiral.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/metabolic/synthetic_respiratory_system.py",
+      "dest": "modules/organs/metabolic/synthetic_respiratory_system.py",
+      "bytes": 2796,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/metabolic/synthetic_respiratory_system.py",
+        "modules/organs/metabolic/synthetic_respiratory_system.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/nervous/neuroplasticity_module.py",
+      "dest": "modules/organs/nervous/neuroplasticity_module.py",
+      "bytes": 2793,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/nervous/neuroplasticity_module.py",
+        "modules/organs/nervous/neuroplasticity_module.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/body/synthetic_habitat_awareness.py",
+      "dest": "modules/organs/body/synthetic_habitat_awareness.py",
+      "bytes": 2791,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/body/synthetic_habitat_awareness.py",
+        "modules/organs/body/synthetic_habitat_awareness.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/meta/synthetic_creativity_furnace.py",
+      "dest": "modules/organs/meta/synthetic_creativity_furnace.py",
+      "bytes": 2790,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/meta/synthetic_creativity_furnace.py",
+        "modules/organs/meta/synthetic_creativity_furnace.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/evolution/synthetic_mutation_engine.py",
+      "dest": "modules/organs/evolution/synthetic_mutation_engine.py",
+      "bytes": 2788,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/evolution/synthetic_mutation_engine.py",
+        "modules/organs/evolution/synthetic_mutation_engine.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/meta/synthetic_inspiration_cortex.py",
+      "dest": "modules/organs/meta/synthetic_inspiration_cortex.py",
+      "bytes": 2786,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/meta/synthetic_inspiration_cortex.py",
+        "modules/organs/meta/synthetic_inspiration_cortex.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/body/synthetic_muscular_system.py",
+      "dest": "modules/organs/body/synthetic_muscular_system.py",
+      "bytes": 2782,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/body/synthetic_muscular_system.py",
+        "modules/organs/body/synthetic_muscular_system.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/dream/synthetic_shadow_architect.py",
+      "dest": "modules/organs/dream/synthetic_shadow_architect.py",
+      "bytes": 2782,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/dream/synthetic_shadow_architect.py",
+        "modules/organs/dream/synthetic_shadow_architect.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/metabolic/synthetic_lymphatic_system.py",
+      "dest": "modules/organs/metabolic/synthetic_lymphatic_system.py",
+      "bytes": 2782,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/metabolic/synthetic_lymphatic_system.py",
+        "modules/organs/metabolic/synthetic_lymphatic_system.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/body/synthetic_symbiosis_layer.py",
+      "dest": "modules/organs/body/synthetic_symbiosis_layer.py",
+      "bytes": 2781,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/body/synthetic_symbiosis_layer.py",
+        "modules/organs/body/synthetic_symbiosis_layer.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/meta/synthetic_intuition_layer.py",
+      "dest": "modules/organs/meta/synthetic_intuition_layer.py",
+      "bytes": 2777,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/meta/synthetic_intuition_layer.py",
+        "modules/organs/meta/synthetic_intuition_layer.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/nervous/neural_pathway_builder.py",
+      "dest": "modules/organs/nervous/neural_pathway_builder.py",
+      "bytes": 2775,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/nervous/neural_pathway_builder.py",
+        "modules/organs/nervous/neural_pathway_builder.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/dream/synthetic_dream_forge.py",
+      "dest": "modules/organs/dream/synthetic_dream_forge.py",
+      "bytes": 2774,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/dream/synthetic_dream_forge.py",
+        "modules/organs/dream/synthetic_dream_forge.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/evolution/synthetic_organ_generator.py",
+      "dest": "modules/organs/evolution/synthetic_organ_generator.py",
+      "bytes": 2773,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/evolution/synthetic_organ_generator.py",
+        "modules/organs/evolution/synthetic_organ_generator.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/body/synthetic_sensory_system.py",
+      "dest": "modules/organs/body/synthetic_sensory_system.py",
+      "bytes": 2772,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/body/synthetic_sensory_system.py",
+        "modules/organs/body/synthetic_sensory_system.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/cognitive/prefrontal_cortex.py",
+      "dest": "modules/organs/cognitive/prefrontal_cortex.py",
+      "bytes": 2771,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/cognitive/prefrontal_cortex.py",
+        "modules/organs/cognitive/prefrontal_cortex.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/meta/synthetic_paradox_engine.py",
+      "dest": "modules/organs/meta/synthetic_paradox_engine.py",
+      "bytes": 2771,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/meta/synthetic_paradox_engine.py",
+        "modules/organs/meta/synthetic_paradox_engine.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/meta/synthetic_soul_layer.py",
+      "dest": "modules/organs/meta/synthetic_soul_layer.py",
+      "bytes": 2771,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/meta/synthetic_soul_layer.py",
+        "modules/organs/meta/synthetic_soul_layer.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/body/synthetic_reflex_system.py",
+      "dest": "modules/organs/body/synthetic_reflex_system.py",
+      "bytes": 2768,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/body/synthetic_reflex_system.py",
+        "modules/organs/body/synthetic_reflex_system.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/nervous/synaptic_pruning_engine.py",
+      "dest": "modules/organs/nervous/synaptic_pruning_engine.py",
+      "bytes": 2768,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/nervous/synaptic_pruning_engine.py",
+        "modules/organs/nervous/synaptic_pruning_engine.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/memory_ecosystem/architecture_memory.py",
+      "dest": "modules/organs/memory_ecosystem/architecture_memory.py",
+      "bytes": 2764,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/memory/memory_ecosystem/architecture_memory.py",
+        "modules/organs/memory_ecosystem/architecture_memory.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/body/device_walker_organ.py",
+      "dest": "modules/organs/body/device_walker_organ.py",
+      "bytes": 2753,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/body/device_walker_organ.py",
+        "modules/organs/body/device_walker_organ.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/memory_ecosystem/procedural_memory.py",
+      "dest": "modules/organs/memory_ecosystem/procedural_memory.py",
+      "bytes": 2752,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/memory/memory_ecosystem/procedural_memory.py",
+        "modules/organs/memory_ecosystem/procedural_memory.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/cognitive/corpus_callosum.py",
+      "dest": "modules/organs/cognitive/corpus_callosum.py",
+      "bytes": 2751,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/cognitive/corpus_callosum.py",
+        "modules/organs/cognitive/corpus_callosum.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/cognitive/frontal_cortex.py",
+      "dest": "modules/organs/cognitive/frontal_cortex.py",
+      "bytes": 2749,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/cognitive/frontal_cortex.py",
+        "modules/organs/cognitive/frontal_cortex.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/dream/lucid_dream_mode.py",
+      "dest": "modules/organs/dream/lucid_dream_mode.py",
+      "bytes": 2749,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/dream/lucid_dream_mode.py",
+        "modules/organs/dream/lucid_dream_mode.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/dream/nightmare_engine.py",
+      "dest": "modules/organs/dream/nightmare_engine.py",
+      "bytes": 2745,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/dream/nightmare_engine.py",
+        "modules/organs/dream/nightmare_engine.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/memory_ecosystem/short_term_memory.py",
+      "dest": "modules/organs/memory_ecosystem/short_term_memory.py",
+      "bytes": 2743,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/memory/memory_ecosystem/short_term_memory.py",
+        "modules/organs/memory_ecosystem/short_term_memory.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/memory_ecosystem/semantic_memory.py",
+      "dest": "modules/organs/memory_ecosystem/semantic_memory.py",
+      "bytes": 2741,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/memory/memory_ecosystem/semantic_memory.py",
+        "modules/organs/memory_ecosystem/semantic_memory.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/memory_ecosystem/long_term_memory.py",
+      "dest": "modules/organs/memory_ecosystem/long_term_memory.py",
+      "bytes": 2734,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/memory/memory_ecosystem/long_term_memory.py",
+        "modules/organs/memory_ecosystem/long_term_memory.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/cognitive/hippocampus.py",
+      "dest": "modules/organs/cognitive/hippocampus.py",
+      "bytes": 2733,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/cognitive/hippocampus.py",
+        "modules/organs/cognitive/hippocampus.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/cognitive/cerebellum.py",
+      "dest": "modules/organs/cognitive/cerebellum.py",
+      "bytes": 2727,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/cognitive/cerebellum.py",
+        "modules/organs/cognitive/cerebellum.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/cognitive/brainstem.py",
+      "dest": "modules/organs/cognitive/brainstem.py",
+      "bytes": 2724,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/cognitive/brainstem.py",
+        "modules/organs/cognitive/brainstem.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/memory_ecosystem/episodic_memory.py",
+      "dest": "modules/organs/memory_ecosystem/episodic_memory.py",
+      "bytes": 2723,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/memory/memory_ecosystem/episodic_memory.py",
+        "modules/organs/memory_ecosystem/episodic_memory.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/cognitive/limbic_system.py",
+      "dest": "modules/organs/cognitive/limbic_system.py",
+      "bytes": 2718,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/cognitive/limbic_system.py",
+        "modules/organs/cognitive/limbic_system.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/cognitive/amygdala.py",
+      "dest": "modules/organs/cognitive/amygdala.py",
+      "bytes": 2715,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/modules/organs/cognitive/amygdala.py",
+        "modules/organs/cognitive/amygdala.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/memory_ecosystem/dream_memory.py",
+      "dest": "modules/organs/memory_ecosystem/dream_memory.py",
+      "bytes": 2714,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/memory/memory_ecosystem/dream_memory.py",
+        "modules/organs/memory_ecosystem/dream_memory.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/training/llama_tools.py",
+      "dest": "realai/training/llama_tools.py",
+      "bytes": 2649,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/training/llama_tools.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/server_settings.py",
+      "dest": "realai/server_settings.py",
+      "bytes": 2215,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/server_settings.py",
+        "realai/server/server_settings.py"
+      ]
+    },
+    {
+      "src": "imports/external/agent_tools_gold/tooling/registry.py",
+      "dest": "agent_tools/registry.py",
+      "bytes": 1969,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/agents/registry.py",
+        "realai/agent_tools_gold/registry.py",
+        "realai/agent_tools_gold/tooling/registry.py",
+        "realai/aura/skills/registry.py",
+        "realai/core/inference/registry.py"
+      ]
+    },
+    {
+      "src": "imports/external/unique-modules/agent_tools_gold/tooling/registry.py",
+      "dest": "agent_tools/registry.py",
+      "bytes": 1969,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/agents/registry.py",
+        "realai/agent_tools_gold/registry.py",
+        "realai/agent_tools_gold/tooling/registry.py",
+        "realai/aura/skills/registry.py",
+        "realai/core/inference/registry.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/server/inference.py",
+      "dest": "realai/server/inference.py",
+      "bytes": 1658,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/server/inference.py"
+      ]
+    },
+    {
+      "src": "imports/external/unique-modules/self/builder/test_self_builder.py",
+      "dest": "imports/promoted/self/builder/test_self_builder.py",
+      "bytes": 1563,
+      "kind": "newer_or_fork",
+      "mode": "if_missing",
+      "living_same_name": [
+        "realai/tests/test_self_builder.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/server/native_bootstrap.py",
+      "dest": "realai/server/native_bootstrap.py",
+      "bytes": 1474,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/server/native_bootstrap.py"
+      ]
+    },
+    {
+      "src": "imports/external/unique-modules/self/builder/coding_agent.py",
+      "dest": "imports/promoted/self/builder/coding_agent.py",
+      "bytes": 1314,
+      "kind": "newer_or_fork",
+      "mode": "if_missing",
+      "living_same_name": [
+        "realai/coding_agent.py",
+        "realai/agents/coding_agent.py",
+        "modules/agents_skills/coding_agent.py",
+        "agents/coding_agent.py",
+        "agents/realai/modules/agents_skills/coding_agent.py"
+      ]
+    },
+    {
+      "src": "imports/external/agent_tools_gold/tooling/filesystem.py",
+      "dest": "agent_tools/filesystem.py",
+      "bytes": 1289,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/agent_tools_gold/tooling/filesystem.py",
+        "realai/tooling/filesystem.py",
+        "agent_tools/filesystem.py",
+        "agent_tools/tooling/filesystem.py"
+      ]
+    },
+    {
+      "src": "imports/external/unique-modules/agent_tools_gold/tooling/filesystem.py",
+      "dest": "agent_tools/filesystem.py",
+      "bytes": 1289,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/agent_tools_gold/tooling/filesystem.py",
+        "realai/tooling/filesystem.py",
+        "agent_tools/filesystem.py",
+        "agent_tools/tooling/filesystem.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/coding_agent.py",
+      "dest": "realai/coding_agent.py",
+      "bytes": 1277,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/coding_agent.py",
+        "realai/agents/coding_agent.py",
+        "modules/agents_skills/coding_agent.py",
+        "agents/coding_agent.py",
+        "agents/realai/modules/agents_skills/coding_agent.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/base.py",
+      "dest": "modules/organs/base.py",
+      "bytes": 1178,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/agents/base.py",
+        "realai/benchmarks/base.py",
+        "realai/core/agents/base.py",
+        "realai/core/memory/base.py",
+        "realai/core/memory_store/base.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/training/__init__.py",
+      "dest": "realai/training/__init__.py",
+      "bytes": 884,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/recovery_plugins/__init__.py",
+      "dest": "imports/promoted/__init__.py",
+      "bytes": 873,
+      "kind": "newer_or_fork",
+      "mode": "if_missing",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/unique-modules/gold/recovered_from_agent_tools/agent_tools/providers/__init__.py",
+      "dest": "agent_tools/providers/__init__.py",
+      "bytes": 284,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/__init__.py",
+      "dest": "modules/organs/__init__.py",
+      "bytes": 280,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/self_improvement/__init__.py",
+      "dest": "modules/self_improvement/__init__.py",
+      "bytes": 115,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/local_models.py",
+      "dest": "realai/local_models.py",
+      "bytes": 111,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/local_models.py",
+        "realai/core/local_models.py",
+        "realai/plugins/local_models.py",
+        "realai/plugins/core/local_models.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_plugins/__init__.py",
+      "dest": "plugins/__init__.py",
+      "bytes": 37,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/grok_export_realai/memory/__init__.py",
+      "dest": "realai/memory/__init__.py",
+      "bytes": 32,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/memory_ecosystem/__init__.py",
+      "dest": "modules/organs/memory_ecosystem/__init__.py",
+      "bytes": 28,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/cognitive/__init__.py",
+      "dest": "modules/organs/cognitive/__init__.py",
+      "bytes": 21,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/evolution/__init__.py",
+      "dest": "modules/organs/evolution/__init__.py",
+      "bytes": 21,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/metabolic/__init__.py",
+      "dest": "modules/organs/metabolic/__init__.py",
+      "bytes": 21,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/nervous/__init__.py",
+      "dest": "modules/organs/nervous/__init__.py",
+      "bytes": 19,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/dream/__init__.py",
+      "dest": "modules/organs/dream/__init__.py",
+      "bytes": 17,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/body/__init__.py",
+      "dest": "modules/organs/body/__init__.py",
+      "bytes": 16,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    },
+    {
+      "src": "imports/external/C_realai_modules/organs/meta/__init__.py",
+      "dest": "modules/organs/meta/__init__.py",
+      "bytes": 16,
+      "kind": "newer_or_fork",
+      "mode": "review_diff",
+      "living_same_name": [
+        "realai/__init__.py",
+        "realai/abilities/__init__.py",
+        "realai/adapters/__init__.py",
+        "realai/agents/__init__.py",
+        "realai/agents/hierarchical/__init__.py"
+      ]
+    }
+  ],
+  "promoted_20260924": {
+    "date": "2026-09-24",
+    "hat": "builder",
+    "branch": "live/realai-clean-20260911",
+    "home": "C:\\\\RealAI-clean",
+    "gold_rules": {
+      "plugin_bodies": "realai/plugins/",
+      "organs": "modules.organs (realai/modules/organs is parked)",
+      "abilities_agents": "product-root; thin realai.* shims stay",
+      "server_bodies": "realai/server/; root server.* is shim"
+    },
+    "promoted": [
+      {
+        "dest": "imports/promoted/local_models.py",
+        "kind": "if_missing",
+        "note": "body at dest"
+      },
+      {
+        "dest": "imports/promoted/__init__.py",
+        "kind": "if_missing",
+        "note": "body at dest"
+      },
+      {
+        "dest": "imports/promoted/self/builder/coding_agent.py",
+        "kind": "if_missing",
+        "note": "body at dest"
+      },
+      {
+        "dest": "imports/promoted/self/builder/test_self_builder.py",
+        "kind": "if_missing",
+        "note": "body at dest"
+      },
+      {
+        "dest": "server/llama_cli_backend.py",
+        "kind": "shim",
+        "gold": "realai/server/llama_cli_backend.py"
+      },
+      {
+        "dest": "server/tools_runtime.py",
+        "kind": "shim",
+        "gold": "realai/server/tools_runtime.py"
+      },
+      {
+        "dest": "plugins/rackup_coach/__init__.py",
+        "kind": "shim",
+        "gold": "realai/plugins/rackup_coach"
+      }
+    ],
+    "do_not_point_at": [
+      "_quarantine/twins_20260924/realai__modules__organs",
+      "realai/modules/organs (parked twin)"
+    ]
+  }
+}

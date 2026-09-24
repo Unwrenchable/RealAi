@@ -1,0 +1,53 @@
+{
+  "date": "2026-09-24",
+  "hat": "builder",
+  "branch": "live/realai-clean-20260911",
+  "home": "C:\\\\RealAI-clean",
+  "gold_rules": {
+    "plugin_bodies": "realai/plugins/",
+    "organs": "modules.organs (realai/modules/organs is parked)",
+    "abilities_agents": "product-root; thin realai.* shims stay",
+    "server_bodies": "realai/server/; root server.* is shim"
+  },
+  "promoted": [
+    {
+      "dest": "imports/promoted/local_models.py",
+      "kind": "if_missing",
+      "note": "body at dest"
+    },
+    {
+      "dest": "imports/promoted/__init__.py",
+      "kind": "if_missing",
+      "note": "body at dest"
+    },
+    {
+      "dest": "imports/promoted/self/builder/coding_agent.py",
+      "kind": "if_missing",
+      "note": "body at dest"
+    },
+    {
+      "dest": "imports/promoted/self/builder/test_self_builder.py",
+      "kind": "if_missing",
+      "note": "body at dest"
+    },
+    {
+      "dest": "server/llama_cli_backend.py",
+      "kind": "shim",
+      "gold": "realai/server/llama_cli_backend.py"
+    },
+    {
+      "dest": "server/tools_runtime.py",
+      "kind": "shim",
+      "gold": "realai/server/tools_runtime.py"
+    },
+    {
+      "dest": "plugins/rackup_coach/__init__.py",
+      "kind": "shim",
+      "gold": "realai/plugins/rackup_coach"
+    }
+  ],
+  "do_not_point_at": [
+    "_quarantine/twins_20260924/realai__modules__organs",
+    "realai/modules/organs (parked twin)"
+  ]
+}
