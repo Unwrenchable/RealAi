@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-24",
+  "function": "generate_image_local",
+  "module": "realai/local_media.py",
+  "class": "real_local",
+  "LIVE_or_STUB": "LIVE",
+  "signature": "generate_image_local(prompt: str, *, size: str = \"512x512\", out_dir: Optional[Path] = None) -> Dict[str, Any]",
+  "calls": [
+    "PIL.Image / ImageDraw / ImageFont",
+    "_seed_from(prompt)",
+    "_palette(seed)",
+    "deterministic procedural PNG to scan_results/local_media/"
+  ],
+  "no_dalle": true,
+  "no_new_model_download": true,
+  "catalog": {
+    "id": "image_generation",
+    "modules": ["abilities/image_generation.py", "realai/local_media.py"],
+    "action": "unchanged — row already existed and pointed at local_media"
+  },
+  "notes": "Full local Pillow procedural renderer; not a stub/wrapper. frontend_ui not touched (HARD NO)."
+}
