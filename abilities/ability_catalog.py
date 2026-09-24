@@ -652,7 +652,7 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "keywords": ["finetune", "training", "dataset", "lora", "realai-1.0"],
         "status": "LIVE",
         "live_path": "GET /v1/training/* GET /v1/lora",
-        "modules": ["realai/training", "training/data", "realai/recovery_registry.py"],
+        "modules": ["realai/training/training_pipeline.py"],
         "gold_paths": [
             r"C:\Users\tsmit\Downloads\realai_finetune_dataset.jsonl",
             r"C:\models\checkpoints_lora",
