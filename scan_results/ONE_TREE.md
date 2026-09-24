@@ -423,3 +423,18 @@ orphan_unique:
 - readme_gap: 4
 - noise: 18
 - keep: __init__.hive_status, agent_activity.with_hive_core, api_server.init_db, cloud_fallback.is_hosted_cloud, coding_agent.CodingAgent, craft.tool_doctor, hive.tools, hive_orchestrator.run, lambda_embeddings_audio.create_embeddings_response, local_media.generate_image_local, mcp_server.call_tool, mcp_vault77.call_tool, plugin_registry.load_registry, provider_resolve.default_selfhost_provider, recovery_registry.resolve_lora_root, self_heal.status, self_heal_loop.log, unified_orchestrator.UnifiedOrchestrator, world_model.Goal
+
+## freeze catalog id module map 2026-09-24
+
+| id | modules | kind |
+| --- | --- | --- |
+| web_research | abilities/web_search.py | stub |
+| task_automation | abilities/task_automation.py | stub |
+| self_reflection | realai/core/self_improvement.py, realai/core/critique.py | live core |
+| training_pipeline | realai/training/training_pipeline.py | live class |
+| lora_adapters | realai/recovery_registry.py | list/resolve only |
+| frontend_ui | deferred (apps/frontend nested) | WONT this freeze |
+
+- hive catalog file = realai/ability_catalog.py
+- health :8001 = ok (PID 6444 python); :8080 = ok (PID 9744 llama-server)
+- truth vs freeze: freeze-table module paths all exist on disk as labeled; no path alias note needed this freeze.
