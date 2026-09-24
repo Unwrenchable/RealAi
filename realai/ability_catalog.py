@@ -584,7 +584,7 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "keywords": ["self_reflect", "critique", "self-reflection", "chain-of-thought"],
         "status": "LIVE",
         "live_path": "POST /v1/self-improve/evaluate",
-        "modules": ["realai/self_improvement.py", "realai/critique.py"],
+        "modules": ["realai/core/self_improvement.py", "realai/core/critique.py"],
     },
     {
         "id": "knowledge_synthesis",
