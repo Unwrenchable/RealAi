@@ -416,3 +416,10 @@ orphan_unique:
 - self_heal_loop.log
 - unified_orchestrator.UnifiedOrchestrator
 - world_model.Goal
+
+## Orphan buckets (2026-09-24)
+
+- runtime: 14
+- readme_gap: 4
+- noise: 18
+- keep: __init__.hive_status, agent_activity.with_hive_core, api_server.init_db, cloud_fallback.is_hosted_cloud, coding_agent.CodingAgent, craft.tool_doctor, hive.tools, hive_orchestrator.run, lambda_embeddings_audio.create_embeddings_response, local_media.generate_image_local, mcp_server.call_tool, mcp_vault77.call_tool, plugin_registry.load_registry, provider_resolve.default_selfhost_provider, recovery_registry.resolve_lora_root, self_heal.status, self_heal_loop.log, unified_orchestrator.UnifiedOrchestrator, world_model.Goal

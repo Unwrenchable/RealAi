@@ -1,0 +1,320 @@
+{
+  "date": "2026-09-24",
+  "source": "scan_results/CAPABILITY_LEDGER_20260924.json",
+  "orphan_count": 36,
+  "counts": {
+    "runtime": 14,
+    "readme_gap": 4,
+    "noise": 18
+  },
+  "keep": [
+    "agent_activity.with_hive_core",
+    "api_server.init_db",
+    "cloud_fallback.is_hosted_cloud",
+    "coding_agent.CodingAgent",
+    "craft.tool_doctor",
+    "hive.tools",
+    "hive_orchestrator.run",
+    "lambda_embeddings_audio.create_embeddings_response",
+    "local_media.generate_image_local",
+    "mcp_server.call_tool",
+    "mcp_vault77.call_tool",
+    "plugin_registry.load_registry",
+    "provider_resolve.default_selfhost_provider",
+    "recovery_registry.resolve_lora_root",
+    "self_heal.status",
+    "self_heal_loop.log",
+    "unified_orchestrator.UnifiedOrchestrator",
+    "world_model.Goal"
+  ],
+  "orphans": [
+    {
+      "name": "__init__.hive_status",
+      "file": "realai/__init__.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Package status helper is not a live hive/API capability."
+    },
+    {
+      "name": "__main__.build_parser",
+      "file": "realai/__main__.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "CLI parser construction helper."
+    },
+    {
+      "name": "_legacy_main.build_parser",
+      "file": "realai/_legacy_main.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Legacy CLI parser construction helper."
+    },
+    {
+      "name": "_v1_client.AgentExecutionStatus",
+      "file": "realai/_v1_client.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Legacy client status type, not a live hive/API capability."
+    },
+    {
+      "name": "ability_catalog.to_wsl_or_native",
+      "file": "realai/ability_catalog.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Path/platform conversion helper."
+    },
+    {
+      "name": "agent_activity.with_hive_core",
+      "file": "realai/agent_activity.py",
+      "bucket": "runtime",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "Imported and used by the live v3 orchestrator hive path."
+    },
+    {
+      "name": "agent_protocol.build_system_prompt",
+      "file": "realai/agent_protocol.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Agent protocol prompt helper has no live hive/API call site."
+    },
+    {
+      "name": "api_server.init_db",
+      "file": "realai/api_server.py",
+      "bucket": "runtime",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "API server initializes its database with this function."
+    },
+    {
+      "name": "app_framework.AppEvent",
+      "file": "realai/app_framework.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Application event type, not a README capability or live hive/API entry point."
+    },
+    {
+      "name": "cli-hive-banner.render_banner",
+      "file": "realai/cli-hive-banner.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "CLI banner rendering helper."
+    },
+    {
+      "name": "cloud_fallback.is_hosted_cloud",
+      "file": "realai/cloud_fallback.py",
+      "bucket": "readme_gap",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "Maps to the README hosted/cloud fallback capability area."
+    },
+    {
+      "name": "coding_agent.CodingAgent",
+      "file": "realai/coding_agent.py",
+      "bucket": "runtime",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "Load-bearing coding agent implementation used by runtime orchestration."
+    },
+    {
+      "name": "core_hive_router.list_nest_orchestrators",
+      "file": "realai/core_hive_router.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Nest enumeration helper explicitly treated as noise."
+    },
+    {
+      "name": "craft.tool_doctor",
+      "file": "realai/craft.py",
+      "bucket": "runtime",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "Craft runtime uses the tool doctor for live health and repair operations."
+    },
+    {
+      "name": "hive.tools",
+      "file": "realai/hive.py",
+      "bucket": "runtime",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "Public hive API exposes the live tools catalog through this function."
+    },
+    {
+      "name": "hive_orchestrator.run",
+      "file": "realai/hive_orchestrator.py",
+      "bucket": "runtime",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "Live hive orchestrator entry point used to run a task."
+    },
+    {
+      "name": "lambda_embeddings_audio.create_embeddings_response",
+      "file": "realai/lambda_embeddings_audio.py",
+      "bucket": "readme_gap",
+      "readme_map": "embeddings",
+      "keep": true,
+      "reason": "Maps to the README embeddings capability area."
+    },
+    {
+      "name": "learn_git.split_learn_rest",
+      "file": "realai/learn_git.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Parser/string-splitting helper."
+    },
+    {
+      "name": "local_media.generate_image_local",
+      "file": "realai/local_media.py",
+      "bucket": "readme_gap",
+      "readme_map": "image",
+      "keep": true,
+      "reason": "Maps to the README image capability area."
+    },
+    {
+      "name": "local_runtime.CachedModel",
+      "file": "realai/local_runtime.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Local model cache type, not a live hive/API capability."
+    },
+    {
+      "name": "mcp_server.call_tool",
+      "file": "realai/mcp_server.py",
+      "bucket": "runtime",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "Live MCP server dispatch entry point."
+    },
+    {
+      "name": "mcp_vault77.call_tool",
+      "file": "realai/mcp_vault77.py",
+      "bucket": "runtime",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "Live MCP Vault77 dispatch entry point."
+    },
+    {
+      "name": "meta_router.RoutingDecision",
+      "file": "realai/meta_router.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Routing result type, not a live hive/API capability."
+    },
+    {
+      "name": "model_assets.repo_root",
+      "file": "realai/model_assets.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Repository path helper."
+    },
+    {
+      "name": "model_registry.ModelMetadata",
+      "file": "realai/model_registry.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Model metadata type, not a README capability or live entry point."
+    },
+    {
+      "name": "plugin_registry.load_registry",
+      "file": "realai/plugin_registry.py",
+      "bucket": "runtime",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "Runtime plugin registry loading entry point."
+    },
+    {
+      "name": "provider_resolve.default_selfhost_provider",
+      "file": "realai/provider_resolve.py",
+      "bucket": "runtime",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "API/provider runtime uses the default self-host provider resolver."
+    },
+    {
+      "name": "realai_hive_orchestrator.safe_read",
+      "file": "realai/realai_hive_orchestrator.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Safe-read utility explicitly treated as noise."
+    },
+    {
+      "name": "realai_self_healing_core.safe_read_text",
+      "file": "realai/realai_self_healing_core.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Safe-read text utility explicitly treated as noise."
+    },
+    {
+      "name": "recovery_registry.resolve_lora_root",
+      "file": "realai/recovery_registry.py",
+      "bucket": "readme_gap",
+      "readme_map": "lora",
+      "keep": true,
+      "reason": "Maps to the README LoRA capability area."
+    },
+    {
+      "name": "repo_tools.workspace_root",
+      "file": "realai/repo_tools.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Workspace path helper."
+    },
+    {
+      "name": "router.ProviderScore",
+      "file": "realai/router.py",
+      "bucket": "noise",
+      "readme_map": "none",
+      "keep": false,
+      "reason": "Provider scoring type, not a live hive/API capability."
+    },
+    {
+      "name": "self_heal.status",
+      "file": "realai/self_heal.py",
+      "bucket": "runtime",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "Live v3 orchestration and repair tools use self-heal status."
+    },
+    {
+      "name": "self_heal_loop.log",
+      "file": "realai/self_heal_loop.py",
+      "bucket": "runtime",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "Self-heal loop runtime writes operational status through this logger."
+    },
+    {
+      "name": "unified_orchestrator.UnifiedOrchestrator",
+      "file": "realai/unified_orchestrator.py",
+      "bucket": "runtime",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "Load-bearing unified orchestrator runtime class."
+    },
+    {
+      "name": "world_model.Goal",
+      "file": "realai/world_model.py",
+      "bucket": "runtime",
+      "readme_map": "none",
+      "keep": true,
+      "reason": "Load-bearing world-model goal type used by orchestration."
+    }
+  ]
+}
