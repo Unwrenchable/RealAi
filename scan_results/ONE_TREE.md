@@ -309,3 +309,61 @@ Facts: `realai/api_server.py` has two A-form imports from `realai.tools`; `reala
 | routes | null | `split` | `realai/api_server.py` runs a live stdlib `HTTPServer`/`RealAIAPIHandler` with `do_GET`/`do_POST`; `realai/api/main.py` mounts `realai.routes` on FastAPI |
 
 Disk: product-root `routes/` missing; `realai/routes/` has 10 Python files; `realai/api/` has 14. Scoped imports: A=1 hit/1 file, B=0/0, C=0/0. Two live HTTP routers trigger split. Do not merge `realai/api/` into `realai/routes/`.
+
+## unique scope vs junk
+
+| A gold_runtime path | exists | py_count |
+|---|---:|---:|
+| abilities | True | 97 |
+| agents | True | 45 |
+| modules | True | 113 |
+| plugins | True | 3 |
+| realai/plugins | True | 259 |
+| realai/server | True | 26 |
+| realai/api | True | 14 |
+| realai/cli | True | 30 |
+| realai/tools | True | 19 |
+| realai/v3_orchestrator.py | True | 1 |
+| realai/api_server.py | True | 1 |
+| realai/craft.py | True | 1 |
+| **A total** |  | **609** |
+
+| B imported_features dir | exists | py_count |
+|---|---:|---:|
+| realai/atomic_fizz | True | 3 |
+| realai/universe | True | 15 |
+| realai/learn | True | 11 |
+| realai/executive | True | 9 |
+| realai/bot | True | 7 |
+| realai/routes | True | 10 |
+| realai/models | True | 7 |
+| realai/config | True | 6 |
+| **B total** |  | **68** |
+
+| C catalog item | count | source |
+|---|---:|---|
+| abilities | 65 | live_8001 |
+| tools | 117 | live_8001 |
+
+| D junk-excluded name |
+|---|
+| .continue |
+| .git |
+| .learn_cache |
+| .pytest_cache |
+| .pytest_cache__dup1 |
+| .vs |
+| __pycache__ |
+| _quarantine |
+| agent_tools_gold |
+| agents-orchestrator-default-run |
+| agent-tools-orchestrator-default-run |
+| ai-orchestrator-default-run |
+| archive |
+| core_unify_20260830 |
+| logs |
+| node_modules |
+| orchestration_gold |
+| orchestrator-default-run |
+| Output |
+| realai-frontend__dup1 |

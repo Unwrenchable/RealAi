@@ -1,0 +1,178 @@
+{
+    "date":  "2026-09-24",
+    "junk_regex":  "node_modules|__pycache__|\\.learn_cache|_quarantine|archive|__dup1|HOMEPC|grok_export|default-run|from-wsl|from-zips|from-accident|deep_nests|realai_recovery_|agent_tools_gold|orchestration_gold|weights|\\.gguf",
+    "A_gold_runtime":  {
+                           "roots":  [
+                                         {
+                                             "path":  "abilities",
+                                             "exists":  true,
+                                             "py_count":  97,
+                                             "sample_paths":  [
+                                                                  "abilities\\game_world.py",
+                                                                  "abilities\\from_accident\\realai-ish_memory_summarizer_agent_117.py"
+                                                              ]
+                                         },
+                                         {
+                                             "path":  "agents",
+                                             "exists":  true,
+                                             "py_count":  45,
+                                             "sample_paths":  [
+                                                                  "agents\\realai_self_improving_agent.py",
+                                                                  "agents\\realai_self_heal.py"
+                                                              ]
+                                         },
+                                         {
+                                             "path":  "modules",
+                                             "exists":  true,
+                                             "py_count":  113,
+                                             "sample_paths":  [
+                                                                  "modules\\__init__.py",
+                                                                  "modules\\self_improvement\\__init__.py"
+                                                              ]
+                                         },
+                                         {
+                                             "path":  "plugins",
+                                             "exists":  true,
+                                             "py_count":  3,
+                                             "sample_paths":  [
+                                                                  "plugins\\__init__.py",
+                                                                  "plugins\\sample_plugin.py"
+                                                              ]
+                                         },
+                                         {
+                                             "path":  "realai/plugins",
+                                             "exists":  true,
+                                             "py_count":  259,
+                                             "sample_paths":  [
+                                                                  "realai/plugins\\league_validate.py",
+                                                                  "realai/plugins\\realai_gui.py"
+                                                              ]
+                                         },
+                                         {
+                                             "path":  "realai/server",
+                                             "exists":  true,
+                                             "py_count":  26,
+                                             "sample_paths":  [
+                                                                  "realai/server\\metrics.py",
+                                                                  "realai/server\\memory_store.py"
+                                                              ]
+                                         },
+                                         {
+                                             "path":  "realai/api",
+                                             "exists":  true,
+                                             "py_count":  14,
+                                             "sample_paths":  [
+                                                                  "realai/api\\__init__.py",
+                                                                  "realai/api\\test_providers.py"
+                                                              ]
+                                         },
+                                         {
+                                             "path":  "realai/cli",
+                                             "exists":  true,
+                                             "py_count":  30,
+                                             "sample_paths":  [
+                                                                  "realai/cli\\__init__.py",
+                                                                  "realai/cli\\realai_cli.py"
+                                                              ]
+                                         },
+                                         {
+                                             "path":  "realai/tools",
+                                             "exists":  true,
+                                             "py_count":  19,
+                                             "sample_paths":  [
+                                                                  "realai/tools\\walk_root.py",
+                                                                  "realai/tools\\visualizer.py"
+                                                              ]
+                                         },
+                                         {
+                                             "path":  "realai/v3_orchestrator.py",
+                                             "exists":  true,
+                                             "py_count":  1
+                                         },
+                                         {
+                                             "path":  "realai/api_server.py",
+                                             "exists":  true,
+                                             "py_count":  1
+                                         },
+                                         {
+                                             "path":  "realai/craft.py",
+                                             "exists":  true,
+                                             "py_count":  1
+                                         }
+                                     ],
+                           "total_py":  609
+                       },
+    "B_imported_features":  {
+                                "dirs":  [
+                                             {
+                                                 "path":  "realai/atomic_fizz",
+                                                 "exists":  true,
+                                                 "py_count":  3
+                                             },
+                                             {
+                                                 "path":  "realai/universe",
+                                                 "exists":  true,
+                                                 "py_count":  15
+                                             },
+                                             {
+                                                 "path":  "realai/learn",
+                                                 "exists":  true,
+                                                 "py_count":  11
+                                             },
+                                             {
+                                                 "path":  "realai/executive",
+                                                 "exists":  true,
+                                                 "py_count":  9
+                                             },
+                                             {
+                                                 "path":  "realai/bot",
+                                                 "exists":  true,
+                                                 "py_count":  7
+                                             },
+                                             {
+                                                 "path":  "realai/routes",
+                                                 "exists":  true,
+                                                 "py_count":  10
+                                             },
+                                             {
+                                                 "path":  "realai/models",
+                                                 "exists":  true,
+                                                 "py_count":  7
+                                             },
+                                             {
+                                                 "path":  "realai/config",
+                                                 "exists":  true,
+                                                 "py_count":  6
+                                             }
+                                         ],
+                                "total_py":  68
+                            },
+    "C_catalog":  {
+                      "abilities":  65,
+                      "tools":  117,
+                      "source":  "live_8001"
+                  },
+    "D_junk_excluded":  [
+                            ".continue",
+                            ".git",
+                            ".learn_cache",
+                            ".pytest_cache",
+                            ".pytest_cache__dup1",
+                            ".vs",
+                            "__pycache__",
+                            "_quarantine",
+                            "agent_tools_gold",
+                            "agents-orchestrator-default-run",
+                            "agent-tools-orchestrator-default-run",
+                            "ai-orchestrator-default-run",
+                            "archive",
+                            "core_unify_20260830",
+                            "logs",
+                            "node_modules",
+                            "orchestration_gold",
+                            "orchestrator-default-run",
+                            "Output",
+                            "realai-frontend__dup1"
+                        ],
+    "full_scope_rule":  "A + B + any catalog id in C missing from A"
+}
