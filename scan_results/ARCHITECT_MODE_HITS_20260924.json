@@ -1,0 +1,61 @@
+{
+  "date": "2026-09-24",
+  "hat": "builder",
+  "branch": "live/realai-clean-20260911",
+  "home": "C:\\RealAI-clean",
+  "query": "def run_architect_mode",
+  "live_tree_hits": 0,
+  "quarantine_live_hits": 0,
+  "archive_hits": [
+    {
+      "path": "D:\\RealAI-archive\\_quarantine\\_parked\\2026-08-30-live-junk\\husks\\recovered\\quarantine_pkg_dupes_20260828\\abilities\\architect_mode.py",
+      "line": 135,
+      "signature": "def run_architect_mode() -> dict",
+      "size": 5624,
+      "sha256": "10c442968eb9f0e0a0830fbf08edaeff9db393823ff10d1a5587e5ff13942c95",
+      "looks_complete": true,
+      "identical_to_gold": true,
+      "source_tree": "D:\\RealAI-archive"
+    },
+    {
+      "path": "D:\\RealAI-archive\\_quarantine\\_parked\\2026-08-30-unify\\recovered\\delta_candidates\\abilities\\realai\\recovered\\quarantine_pkg_dupes_20260828\\abilities\\architect_mode.py",
+      "line": 135,
+      "signature": "def run_architect_mode() -> dict",
+      "size": 5624,
+      "sha256": "10c442968eb9f0e0a0830fbf08edaeff9db393823ff10d1a5587e5ff13942c95",
+      "looks_complete": true,
+      "identical_to_gold": true,
+      "source_tree": "D:\\RealAI-archive"
+    },
+    {
+      "path": "D:\\RealAI-archive\\_quarantine\\_parked\\2026-08-30-unify\\recovered\\quarantine_pkg_dupes_20260828\\abilities\\architect_mode.py",
+      "line": 135,
+      "signature": "def run_architect_mode() -> dict",
+      "size": 5624,
+      "sha256": "10c442968eb9f0e0a0830fbf08edaeff9db393823ff10d1a5587e5ff13942c95",
+      "looks_complete": true,
+      "identical_to_gold": true,
+      "source_tree": "D:\\RealAI-archive"
+    },
+    {
+      "path": "D:\\RealAI-archive\\_quarantine\\recovered\\quarantine_pkg_dupes_20260828\\abilities\\architect_mode.py",
+      "line": 135,
+      "signature": "def run_architect_mode() -> dict",
+      "size": 5624,
+      "sha256": "10c442968eb9f0e0a0830fbf08edaeff9db393823ff10d1a5587e5ff13942c95",
+      "looks_complete": true,
+      "identical_to_gold": true,
+      "source_tree": "D:\\RealAI-archive"
+    }
+  ],
+  "gold_chosen": "D:\\RealAI-archive\\_quarantine\\recovered\\quarantine_pkg_dupes_20260828\\abilities\\architect_mode.py",
+  "gold_sha256": "10c442968eb9f0e0a0830fbf08edaeff9db393823ff10d1a5587e5ff13942c95",
+  "gold_complete": true,
+  "action": "copy_gold_into_abilities_architect_mode",
+  "notes": [
+    "Four archive copies, byte-identical.",
+    "Live C:\\RealAI-clean and _quarantine had zero def run_architect_mode.",
+    "Gold defines run_architect_mode() -> dict with helpers _skip_dir and _compact_repo_view.",
+    "Breaks circular import: abilities/architect_mode.py will no longer import realai.abilities.architect_mode."
+  ]
+}
