@@ -1,0 +1,2228 @@
+{
+  "date": "2026-09-24",
+  "rows": [
+    {
+      "name": "chat_completion",
+      "source": "catalog",
+      "gold_path": "realai/v3_orchestrator.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "text_generation",
+      "source": "catalog",
+      "gold_path": "realai/v3_orchestrator.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "image_generation",
+      "source": "catalog",
+      "gold_path": "abilities/image_generation.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "video_generation",
+      "source": "catalog",
+      "gold_path": "abilities/video_generation.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "image_analysis",
+      "source": "catalog",
+      "gold_path": "abilities/image_analysis.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "code_generation",
+      "source": "catalog",
+      "gold_path": "realai/v3_orchestrator.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "code_execution",
+      "source": "catalog",
+      "gold_path": "realai/v3_orchestrator.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "embeddings",
+      "source": "catalog",
+      "gold_path": "realai/server/embeddings_backend.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "audio_transcription",
+      "source": "catalog",
+      "gold_path": "abilities/audio_transcription.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "audio_speech",
+      "source": "catalog",
+      "gold_path": "abilities/audio_speech.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "translation",
+      "source": "catalog",
+      "gold_path": "abilities/translation.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "web_research",
+      "source": "catalog",
+      "gold_path": "abilities/web_search.py",
+      "also_found_in_junk": false,
+      "class": "stub_gold"
+    },
+    {
+      "name": "task_automation",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "voice_streaming",
+      "source": "catalog",
+      "gold_path": "abilities/voice_streaming.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "business_planning",
+      "source": "catalog",
+      "gold_path": "abilities/business_planning.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "therapy_counseling",
+      "source": "catalog",
+      "gold_path": "abilities/therapy_counseling.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "web3_integration",
+      "source": "catalog",
+      "gold_path": "abilities/web3_integration.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "coach",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/coach.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "shot_of_the_day",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/shot_of_the_day.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "rating_update",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/rating_update.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "tournament",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/tournament.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ledger_audit",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/ledger_audit.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "matchmaking",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/matchmaking.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "hall_context",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/hall_context.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "league_validate",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/league_validate.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "moderation",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/moderation.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "money_anomaly",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/money_anomaly.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "payout_sanity",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/payout_sanity.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "pyramid_rules",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/pyramid_rules.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "rating_convert",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/rating_convert.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "rating_intel",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/rating_intel.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "player_card_sync",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/player_card_sync.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "sotd_contribute",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/sotd_contribute.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "video_analysis",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/video_analysis.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "desktop_lambda_chat",
+      "source": "catalog",
+      "gold_path": "abilities/desktop_lambda_chat.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "desktop_lambda_image",
+      "source": "catalog",
+      "gold_path": "abilities/desktop_lambda_image.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "desktop_lambda_video",
+      "source": "catalog",
+      "gold_path": "abilities/desktop_lambda_video.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "desktop_lambda_advanced",
+      "source": "catalog",
+      "gold_path": "abilities/desktop_lambda_advanced.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "overmind_runner",
+      "source": "catalog",
+      "gold_path": "abilities/overmind_runner.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "code_engineer_agent",
+      "source": "catalog",
+      "gold_path": "abilities/code_engineer_agent.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "deep_promote",
+      "source": "catalog",
+      "gold_path": "abilities/deep_promote.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "hierarchical_specialists",
+      "source": "catalog",
+      "gold_path": "abilities/hierarchical_specialists.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "approval_store",
+      "source": "catalog",
+      "gold_path": "abilities/approval_store.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "device_selector",
+      "source": "catalog",
+      "gold_path": "abilities/device_selector.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "code_engineer_cli",
+      "source": "catalog",
+      "gold_path": "abilities/code_engineer_cli.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "harden_repos",
+      "source": "catalog",
+      "gold_path": "abilities/harden_repos.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "rollout_all_repos",
+      "source": "catalog",
+      "gold_path": "abilities/rollout_all_repos.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "quarantine_reconstruct",
+      "source": "catalog",
+      "gold_path": "abilities/quarantine_reconstruct.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "plugin_system",
+      "source": "catalog",
+      "gold_path": "plugins/rackup_coach",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "learn_git",
+      "source": "catalog",
+      "gold_path": "realai/learn/pipeline.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "memory_learning",
+      "source": "catalog",
+      "gold_path": "abilities/memory_learning.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "self_reflection",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "knowledge_synthesis",
+      "source": "catalog",
+      "gold_path": "abilities/knowledge_synthesis.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "multi_agent",
+      "source": "catalog",
+      "gold_path": "agents/agentx",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "game_world",
+      "source": "catalog",
+      "gold_path": "abilities/game_world.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "organs_hive",
+      "source": "catalog",
+      "gold_path": "abilities/organs_hive.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "observability_self_improve",
+      "source": "catalog",
+      "gold_path": "abilities/observability_self_improve.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "local_inference",
+      "source": "catalog",
+      "gold_path": "realai/v3_orchestrator.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "training_pipeline",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "lora_adapters",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "kilo_recovery",
+      "source": "catalog",
+      "gold_path": "realai/v3_orchestrator.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "frontend_ui",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "cli_surface",
+      "source": "catalog",
+      "gold_path": "realai/cli/craft.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "hive_governance",
+      "source": "catalog",
+      "gold_path": "abilities/hive_governance.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "effective_engine_main_leads",
+      "source": "catalog",
+      "gold_path": "abilities/effective_engine_main_leads.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "self_heal_status",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "self_heal_assemble",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "self_heal_promote_dry",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "list_agents",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "agent_info",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "recovery_status",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "list_lora_adapters",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "local_llama_health",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "voice_health",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "voice_inventory",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "voice_speak",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "voice_listen",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "training_status",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "ability_coverage",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "multi_agent_run",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "craft_run",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "craft_chat",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "hive_status",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "hive_run",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "orchestration_surface",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "plugins_surface",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "learn_git",
+      "source": "catalog",
+      "gold_path": "realai/learn/pipeline.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "agents_surface",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "agent_tools_surface",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "core_surface",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "modules_surface",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "repo_surface",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "organs_task",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "omnibrain",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "world_brain",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "overseer",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "rackup_invoke",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "aura_memory",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "device_selector",
+      "source": "catalog",
+      "gold_path": "abilities/device_selector.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "self_extend",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "self_repair",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "system_scan",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "workspace_list",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "workspace_read",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "workspace_grep",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "execute_code",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "web_research",
+      "source": "catalog",
+      "gold_path": "abilities/web_search.py",
+      "also_found_in_junk": false,
+      "class": "stub_gold"
+    },
+    {
+      "name": "read_file",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "list_dir",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "search_replace",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "run_terminal_command",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "agent_tools_status",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "agent_tools_list_agents",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "agent_tools_list_profiles",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "agent_tools_assess",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "agent_tools_list_tools",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "agent_tools_invoke",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "ability.chat_completion",
+      "source": "catalog",
+      "gold_path": "realai/v3_orchestrator.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.text_generation",
+      "source": "catalog",
+      "gold_path": "realai/v3_orchestrator.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.image_generation",
+      "source": "catalog",
+      "gold_path": "abilities/image_generation.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.video_generation",
+      "source": "catalog",
+      "gold_path": "abilities/video_generation.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.image_analysis",
+      "source": "catalog",
+      "gold_path": "abilities/image_analysis.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.code_generation",
+      "source": "catalog",
+      "gold_path": "realai/v3_orchestrator.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.code_execution",
+      "source": "catalog",
+      "gold_path": "realai/v3_orchestrator.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.embeddings",
+      "source": "catalog",
+      "gold_path": "realai/server/embeddings_backend.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.audio_transcription",
+      "source": "catalog",
+      "gold_path": "abilities/audio_transcription.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.audio_speech",
+      "source": "catalog",
+      "gold_path": "abilities/audio_speech.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.translation",
+      "source": "catalog",
+      "gold_path": "abilities/translation.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.web_research",
+      "source": "catalog",
+      "gold_path": "abilities/web_search.py",
+      "also_found_in_junk": false,
+      "class": "stub_gold"
+    },
+    {
+      "name": "ability.task_automation",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "ability.voice_streaming",
+      "source": "catalog",
+      "gold_path": "abilities/voice_streaming.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.business_planning",
+      "source": "catalog",
+      "gold_path": "abilities/business_planning.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.therapy_counseling",
+      "source": "catalog",
+      "gold_path": "abilities/therapy_counseling.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.web3_integration",
+      "source": "catalog",
+      "gold_path": "abilities/web3_integration.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.coach",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/coach.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.shot_of_the_day",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/shot_of_the_day.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.rating_update",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/rating_update.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.tournament",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/tournament.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.ledger_audit",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/ledger_audit.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.matchmaking",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/matchmaking.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.hall_context",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/hall_context.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.league_validate",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/league_validate.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.moderation",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/moderation.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.money_anomaly",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/money_anomaly.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.payout_sanity",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/payout_sanity.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.pyramid_rules",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/pyramid_rules.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.rating_convert",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/rating_convert.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.rating_intel",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/rating_intel.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.player_card_sync",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/player_card_sync.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.sotd_contribute",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/sotd_contribute.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.video_analysis",
+      "source": "catalog",
+      "gold_path": "abilities/rackup/video_analysis.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.desktop_lambda_chat",
+      "source": "catalog",
+      "gold_path": "abilities/desktop_lambda_chat.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.desktop_lambda_image",
+      "source": "catalog",
+      "gold_path": "abilities/desktop_lambda_image.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.desktop_lambda_video",
+      "source": "catalog",
+      "gold_path": "abilities/desktop_lambda_video.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.desktop_lambda_advanced",
+      "source": "catalog",
+      "gold_path": "abilities/desktop_lambda_advanced.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.overmind_runner",
+      "source": "catalog",
+      "gold_path": "abilities/overmind_runner.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.code_engineer_agent",
+      "source": "catalog",
+      "gold_path": "abilities/code_engineer_agent.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.deep_promote",
+      "source": "catalog",
+      "gold_path": "abilities/deep_promote.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.hierarchical_specialists",
+      "source": "catalog",
+      "gold_path": "abilities/hierarchical_specialists.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.approval_store",
+      "source": "catalog",
+      "gold_path": "abilities/approval_store.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.device_selector",
+      "source": "catalog",
+      "gold_path": "abilities/device_selector.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.code_engineer_cli",
+      "source": "catalog",
+      "gold_path": "abilities/code_engineer_cli.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.harden_repos",
+      "source": "catalog",
+      "gold_path": "abilities/harden_repos.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.rollout_all_repos",
+      "source": "catalog",
+      "gold_path": "abilities/rollout_all_repos.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.quarantine_reconstruct",
+      "source": "catalog",
+      "gold_path": "abilities/quarantine_reconstruct.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.plugin_system",
+      "source": "catalog",
+      "gold_path": "plugins/rackup_coach",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.learn_git",
+      "source": "catalog",
+      "gold_path": "realai/learn/pipeline.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.memory_learning",
+      "source": "catalog",
+      "gold_path": "abilities/memory_learning.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.self_reflection",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "ability.knowledge_synthesis",
+      "source": "catalog",
+      "gold_path": "abilities/knowledge_synthesis.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.multi_agent",
+      "source": "catalog",
+      "gold_path": "agents/agentx",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.game_world",
+      "source": "catalog",
+      "gold_path": "abilities/game_world.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.organs_hive",
+      "source": "catalog",
+      "gold_path": "abilities/organs_hive.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.observability_self_improve",
+      "source": "catalog",
+      "gold_path": "abilities/observability_self_improve.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.local_inference",
+      "source": "catalog",
+      "gold_path": "realai/v3_orchestrator.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.training_pipeline",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "ability.lora_adapters",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "ability.kilo_recovery",
+      "source": "catalog",
+      "gold_path": "realai/v3_orchestrator.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.frontend_ui",
+      "source": "catalog",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "missing_off_gold"
+    },
+    {
+      "name": "ability.cli_surface",
+      "source": "catalog",
+      "gold_path": "realai/cli/craft.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.hive_governance",
+      "source": "catalog",
+      "gold_path": "abilities/hive_governance.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "ability.effective_engine_main_leads",
+      "source": "catalog",
+      "gold_path": "abilities/effective_engine_main_leads.py",
+      "also_found_in_junk": false,
+      "class": "live"
+    },
+    {
+      "name": "abilities.architect_mode.run_architect_mode",
+      "source": "import",
+      "gold_path": "abilities/architect_mode.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "abilities.deep_promote.run",
+      "source": "import",
+      "gold_path": "abilities/deep_promote.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "modules.organs.call_organ",
+      "source": "import",
+      "gold_path": "modules/organs/__init__.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "modules.organs.hive_status",
+      "source": "import",
+      "gold_path": "modules/organs/__init__.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "modules.organs.list_organs",
+      "source": "import",
+      "gold_path": "modules/organs/__init__.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "modules.organs.request_path.audio_with_organs",
+      "source": "import",
+      "gold_path": "modules/organs/request_path.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "modules.organs.request_path.embeddings_with_organs",
+      "source": "import",
+      "gold_path": "modules/organs/request_path.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "modules.organs.request_path.enrich_chat_messages",
+      "source": "import",
+      "gold_path": "modules/organs/request_path.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "modules.organs.request_path.living_stack_status",
+      "source": "import",
+      "gold_path": "modules/organs/request_path.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "modules.organs.request_path.orchestrate_with_organs",
+      "source": "import",
+      "gold_path": "modules/organs/request_path.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "modules.organs.request_path.run_organ_pipeline",
+      "source": "import",
+      "gold_path": "modules/organs/request_path.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "modules.organs.request_path.self_improve_with_organs",
+      "source": "import",
+      "gold_path": "modules/organs/request_path.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "modules.organs.request_path.tools_with_organs",
+      "source": "import",
+      "gold_path": "modules/organs/request_path.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "modules.self_improvement.closed_loop.ClosedLoop",
+      "source": "import",
+      "gold_path": "modules/self_improvement/closed_loop.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "plugins.atomicfizz_coach.invoke",
+      "source": "import",
+      "gold_path": "plugins/__init__.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "plugins.rackup_coach.METADATA",
+      "source": "import",
+      "gold_path": "plugins/rackup_coach/__init__.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "plugins.rackup_coach.invoke",
+      "source": "import",
+      "gold_path": "plugins/rackup_coach/__init__.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.AgentRegistry",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.ability_catalog.coverage_summary",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.ability_catalog.emit_training_samples",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.ability_catalog.learn_keywords_from_scans",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.ability_catalog.save_catalog",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.agent_runtime.AgentEdge",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.agent_runtime.AgentGraph",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.agent_runtime.AgentNode",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.agent_runtime.PipelineDefinition",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.agent_runtime.PipelineRunner",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.agent_runtime.PipelineStep",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.agent_runtime.run_with_organs",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.doctor.run_doctor",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.guardian.guardian_mode",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.identity.IDENTITY_MANAGER",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.identity.PERSONA_SWITCHER",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.knowledge_graph.Entity",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.knowledge_graph.KNOWLEDGE_GRAPH",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.knowledge_graph.Relationship",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.knowledge_graph.SynthesisEngine",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.memory.engine.MEMORY_ENGINE",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.model_catalog.build_catalog",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.model_catalog.resolve_model_for_backend",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.orchestration.hive_router.register_routes",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.orchestration.hive_router.run_cycle",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.orchestration.v3_orchestrator.*",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.orchestration.v3_orchestrator.main",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.plugin_marketplace.PluginDiscovery",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.plugin_marketplace.PluginManifest",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.plugins.register_all",
+      "source": "import",
+      "gold_path": "realai/plugins/__init__.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.self_heal.run_curated_promote",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.self_improvement",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.server.tools.self_extend_tool.run",
+      "source": "import",
+      "gold_path": "realai/server/tools/self_extend_tool.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.server.tools.self_repair_tool.run",
+      "source": "import",
+      "gold_path": "realai/server/tools/self_repair_tool.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.server.tools.system_scan_tool.run",
+      "source": "import",
+      "gold_path": "realai/server/tools/system_scan_tool.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.tools.TOOL_REGISTRY",
+      "source": "import",
+      "gold_path": "realai/tools",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.tools.ToolCallValidator",
+      "source": "import",
+      "gold_path": "realai/tools",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.v3_orchestrator._run_tool",
+      "source": "import",
+      "gold_path": "realai/v3_orchestrator.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.v3_runtime_bridge.agent_tools_status",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.v3_runtime_bridge.assess_agent_profile",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.v3_runtime_bridge.execute_registry_tool",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.v3_runtime_bridge.invoke_agent_tool",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.v3_runtime_bridge.list_access_profiles",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.v3_runtime_bridge.list_agent_tools_agents",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.v3_runtime_bridge.list_agent_tools_tools",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.v3_runtime_bridge.tools_catalog",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.v3_runtime_bridge.workspace_tool",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.workspace.apply_workspace",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.workspace.default_gguf",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.workspace.is_realai_product_tree",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.workspace.product_root",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.workspace.realai_home",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.workspace.realai_workspace",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.workspace.safe_under_read",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.workspace.safe_under_write",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.workspace.workspace_banner",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.workspace.workspace_scripts",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.world_model.BeliefUpdater",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.world_model.GOAL_TRACKER",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.world_model.Observation",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "realai.world_model.WORLD_STATE",
+      "source": "import",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued"
+    },
+    {
+      "name": "__init__.hive_status",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": true,
+      "class": "orphan_unique",
+      "sha256": "9be549966bb1bbc80325f13752fe85e4f5acc988c39d6e37e31713a2dae6d538"
+    },
+    {
+      "name": "__main__.build_parser",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "39301ae90a8053bbf39d773e4a3dcbdb3bfa3f58e747046f47171ee8b9d62b3a"
+    },
+    {
+      "name": "_legacy_main.build_parser",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "48bbf8e6c3469f27f3e85bc84b9533946d6a439a40dc6c0bdf849dd678ee1d36"
+    },
+    {
+      "name": "_v1_client.AgentExecutionStatus",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "71aef99016e9f21a4f474929dfa7edf34f5a9cd6d211b9e893f4d31c96146f13"
+    },
+    {
+      "name": "ability_catalog.to_wsl_or_native",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": true,
+      "class": "orphan_unique",
+      "sha256": "27c70db2ef340d38f168711ac99d5c745798f27a701c2b1a27b21a63f91a2b52"
+    },
+    {
+      "name": "agent_activity.with_hive_core",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "7b0ad54522e213b27c9fd3b8cff2e60040531e05ec4fc68611f42e14fac15d3e"
+    },
+    {
+      "name": "agent_protocol.build_system_prompt",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": true,
+      "class": "orphan_unique",
+      "sha256": "4188f7498e96b358fbbe87e1b5108ffb25fc9fe62540b3bde027a231e616b5bc"
+    },
+    {
+      "name": "api_server.init_db",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": true,
+      "class": "orphan_unique",
+      "sha256": "d50ddaf91ee8ccd3efbdfd93f421e31b9e9d2ce797974a84e6330f00182cf8d2"
+    },
+    {
+      "name": "app_framework.AppEvent",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "fb6f8e53ce332c928b6e3fed95494dded375139d314a78ef0246ade77c0d7bad"
+    },
+    {
+      "name": "cli-hive-banner.render_banner",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "2d404461154b5566a590b0725077a8d9c34246beea0142619fce5c210e9523c3"
+    },
+    {
+      "name": "cloud_fallback.is_hosted_cloud",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "c4943909f39c9a98d58fc48bf240edc1b9be4171d3ac5a8f3a8029446e8c4ade"
+    },
+    {
+      "name": "coding_agent.CodingAgent",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": true,
+      "class": "orphan_unique",
+      "sha256": "585a0a625ac46c4b3d204a2cb1c86d9ce7f8928b09a17e4470a0c0e5d10db26a"
+    },
+    {
+      "name": "core_hive_router.list_nest_orchestrators",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "9fb4518ed51aa7b60d5850150bb373d8d5651c8e2c6f6a3b3429964eb7aeb5bb"
+    },
+    {
+      "name": "craft.tool_doctor",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "7497d18b8e8b8ceae3690f43c486d8f214a6c80c3de9246a63d511ff7462068f"
+    },
+    {
+      "name": "doctor.run_doctor",
+      "source": "top_level_py",
+      "gold_path": "realai/doctor.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued",
+      "sha256": "6e72d126876b03dce3e7ebe8bfc968e91190a715dccc776f54e7a4fe66be83cc"
+    },
+    {
+      "name": "hierarchical_agent.HierarchicalAgentSystem",
+      "source": "top_level_py",
+      "gold_path": "agents/hierarchical_agent.py",
+      "also_found_in_junk": true,
+      "class": "twin",
+      "sha256": "63e3b8f461b341cc12eb097596884444ae84337da1b48a58a458563639d2be1e"
+    },
+    {
+      "name": "hive.tools",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": true,
+      "class": "orphan_unique",
+      "sha256": "132a0ab9c53349b0074aa2b385f0156eeae49588b68493ca432d04167be48941"
+    },
+    {
+      "name": "hive_orchestrator.run",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": true,
+      "class": "orphan_unique",
+      "sha256": "5cc2582a6d6945444d187c57df584565ce94b118a52de4a42aae0debbe06464c"
+    },
+    {
+      "name": "lambda_embeddings_audio.create_embeddings_response",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": true,
+      "class": "orphan_unique",
+      "sha256": "c61130df95e063b1a885725be1af7cd974ab9ddd2181c9f273c40cfe4ba3400f"
+    },
+    {
+      "name": "learn_git.split_learn_rest",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "4d6fe2466dd8ca27a628efeeccc96761c3a78d8b05885e82694640bb2d1f2d2b"
+    },
+    {
+      "name": "local_media.generate_image_local",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "2e4e1c9c07d23b048d1157b1f1c8793c17414d019546c32a05f29a904cd8f933"
+    },
+    {
+      "name": "local_runtime.CachedModel",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "8d87fbfbb395bd3d8befc2d37e8ed463f0bac670a48a1aae4e4e206066ac8b44"
+    },
+    {
+      "name": "main.app",
+      "source": "top_level_py",
+      "gold_path": "realai/plugins/main.py",
+      "also_found_in_junk": true,
+      "class": "twin",
+      "sha256": "d43fb165d7dc830e462a7ace9aab4e1323ec5d80f605011fc01b8b6f95ca03f4"
+    },
+    {
+      "name": "mcp_server.call_tool",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "8a84bf4e001c25eec37d892e6da4e5093fd25ec1eb56ef0a9f93293cdc9fb290"
+    },
+    {
+      "name": "mcp_vault77.call_tool",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "1d6d5320d432d8b5714c4c64ae6eb8baee7c45093f3988096c1fa6e077e011e2"
+    },
+    {
+      "name": "meta_router.RoutingDecision",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "ec9f420734a91d69d972123e023260e711e69eb5d52e27f9adcf1f6f01df5868"
+    },
+    {
+      "name": "model_assets.repo_root",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "9b797befca665807956ad47188ee95fa15185a5dedd61e87fa6732e6e075d148"
+    },
+    {
+      "name": "model_registry.ModelMetadata",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "ef0d17059a13b40827a561c8d1cb7bd2724a66ae3ecb6657511a317600a4eeef"
+    },
+    {
+      "name": "orchestrator.RealAIOrchestrator",
+      "source": "top_level_py",
+      "gold_path": "modules/orchestrators/orchestrator__realai.py",
+      "also_found_in_junk": false,
+      "class": "twin",
+      "sha256": "e1e7892ad87ac9202b80dda17b28a2c88f37ba17fe437cedd29a8cb21712fa79"
+    },
+    {
+      "name": "plugin_registry.load_registry",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "db235553c9e78bb29663a81aecb049be3865b604b6af38977109727e33f74cb3"
+    },
+    {
+      "name": "provider_resolve.default_selfhost_provider",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "106f46302464dc260b302ed75b0e89a4ba56e44b8078b84be563d26a20d8564f"
+    },
+    {
+      "name": "realai__self_heal.status",
+      "source": "top_level_py",
+      "gold_path": "agents/realai_self_heal.py",
+      "also_found_in_junk": true,
+      "class": "twin",
+      "sha256": "46f61bf5b05c549973ceda3d450ed4bb9e2b9efa5bdd799bb09d94874b78c6db"
+    },
+    {
+      "name": "realai_hive_orchestrator.safe_read",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": true,
+      "class": "orphan_unique",
+      "sha256": "d70c0838bd1529fb1bc54c03abb221a430377698e74f447ec65d3eda21f34c36"
+    },
+    {
+      "name": "realai_self_heal.status",
+      "source": "top_level_py",
+      "gold_path": "agents/realai_self_heal.py",
+      "also_found_in_junk": true,
+      "class": "twin",
+      "sha256": "46f61bf5b05c549973ceda3d450ed4bb9e2b9efa5bdd799bb09d94874b78c6db"
+    },
+    {
+      "name": "realai_self_healing_core.safe_read_text",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "9cff85ef1aef53792beb62e107be53324045a67a88b696c0ad2f9e280f3d6aaf"
+    },
+    {
+      "name": "recovery_registry.resolve_lora_root",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "d27192ad49d308606cf16c3b0f637d49332edc9ce99217181beb279d33afafe6"
+    },
+    {
+      "name": "repo_tools.workspace_root",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "16717408f675e81f3736ed7800d44a0d872d095c3e8c21b9fc8507e11046479a"
+    },
+    {
+      "name": "router.ProviderScore",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": true,
+      "class": "orphan_unique",
+      "sha256": "a20304bb7942fe654c72692982feef32dfc748aa8b2fd11e1199d93ca2e8130b"
+    },
+    {
+      "name": "self_heal.status",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": true,
+      "class": "orphan_unique",
+      "sha256": "d329be1fb61958dd003828a38304878442ed152de122c82ff0fd83307784023d"
+    },
+    {
+      "name": "self_heal_loop.log",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "ac45a5bd15206a560021ec3e98b978465f1f9ccb11e630c0c646728a4f7b618d"
+    },
+    {
+      "name": "tools.ToolSchema",
+      "source": "top_level_py",
+      "gold_path": "realai/tools/tools.py",
+      "also_found_in_junk": true,
+      "class": "twin",
+      "sha256": "58f1aa20749700f739cc4a476056bc431b533279a663b1d033b6cb03e7e68ee9"
+    },
+    {
+      "name": "unified_orchestrator.UnifiedOrchestrator",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "e8d1849a0a0fe647d69b15f848f86c4148d54f2db0321cbd493d325a399e5d24"
+    },
+    {
+      "name": "workspace.product_root",
+      "source": "top_level_py",
+      "gold_path": "realai/workspace.py",
+      "also_found_in_junk": false,
+      "class": "imported_uncatalogued",
+      "sha256": "761fa933d6160b37306e95d390c6ffc3a4b9e0ec42b0ae53e1a94dfc7abdf5b0"
+    },
+    {
+      "name": "world_model.Goal",
+      "source": "top_level_py",
+      "gold_path": null,
+      "also_found_in_junk": false,
+      "class": "orphan_unique",
+      "sha256": "1ddbca4363ae19cbe35d0df4225cc57830956b36b3251f620cba5c47af22d6ed"
+    }
+  ],
+  "counts": {
+    "imported_uncatalogued": 80,
+    "live": 120,
+    "missing_off_gold": 59,
+    "orphan_unique": 36,
+    "stub_gold": 3,
+    "twin": 6
+  },
+  "orphan_unique": [
+    "__init__.hive_status",
+    "__main__.build_parser",
+    "_legacy_main.build_parser",
+    "_v1_client.AgentExecutionStatus",
+    "ability_catalog.to_wsl_or_native",
+    "agent_activity.with_hive_core",
+    "agent_protocol.build_system_prompt",
+    "api_server.init_db",
+    "app_framework.AppEvent",
+    "cli-hive-banner.render_banner",
+    "cloud_fallback.is_hosted_cloud",
+    "coding_agent.CodingAgent",
+    "core_hive_router.list_nest_orchestrators",
+    "craft.tool_doctor",
+    "hive.tools",
+    "hive_orchestrator.run",
+    "lambda_embeddings_audio.create_embeddings_response",
+    "learn_git.split_learn_rest",
+    "local_media.generate_image_local",
+    "local_runtime.CachedModel",
+    "mcp_server.call_tool",
+    "mcp_vault77.call_tool",
+    "meta_router.RoutingDecision",
+    "model_assets.repo_root",
+    "model_registry.ModelMetadata",
+    "plugin_registry.load_registry",
+    "provider_resolve.default_selfhost_provider",
+    "realai_hive_orchestrator.safe_read",
+    "realai_self_healing_core.safe_read_text",
+    "recovery_registry.resolve_lora_root",
+    "repo_tools.workspace_root",
+    "router.ProviderScore",
+    "self_heal.status",
+    "self_heal_loop.log",
+    "unified_orchestrator.UnifiedOrchestrator",
+    "world_model.Goal"
+  ],
+  "notes": {
+    "web_research_vs_web_search": "web_research is present in the live API catalog while the requested ledger treats web_search/web_research (including ability.web_research) as stub_gold at abilities/web_search.py; name drift was not changed.",
+    "catalog_ability_count": 65,
+    "catalog_tool_count": 117
+  }
+}

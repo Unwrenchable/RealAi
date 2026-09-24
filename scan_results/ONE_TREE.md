@@ -367,3 +367,52 @@ Disk: product-root `routes/` missing; `realai/routes/` has 10 Python files; `rea
 | orchestrator-default-run |
 | Output |
 | realai-frontend__dup1 |
+
+## Capability ledger (2026-09-24)
+
+| class | count |
+|---|---:|
+| imported_uncatalogued | 80 |
+| live | 120 |
+| missing_off_gold | 59 |
+| orphan_unique | 36 |
+| stub_gold | 3 |
+| twin | 6 |
+
+orphan_unique:
+- __init__.hive_status
+- __main__.build_parser
+- _legacy_main.build_parser
+- _v1_client.AgentExecutionStatus
+- ability_catalog.to_wsl_or_native
+- agent_activity.with_hive_core
+- agent_protocol.build_system_prompt
+- api_server.init_db
+- app_framework.AppEvent
+- cli-hive-banner.render_banner
+- cloud_fallback.is_hosted_cloud
+- coding_agent.CodingAgent
+- core_hive_router.list_nest_orchestrators
+- craft.tool_doctor
+- hive.tools
+- hive_orchestrator.run
+- lambda_embeddings_audio.create_embeddings_response
+- learn_git.split_learn_rest
+- local_media.generate_image_local
+- local_runtime.CachedModel
+- mcp_server.call_tool
+- mcp_vault77.call_tool
+- meta_router.RoutingDecision
+- model_assets.repo_root
+- model_registry.ModelMetadata
+- plugin_registry.load_registry
+- provider_resolve.default_selfhost_provider
+- realai_hive_orchestrator.safe_read
+- realai_self_healing_core.safe_read_text
+- recovery_registry.resolve_lora_root
+- repo_tools.workspace_root
+- router.ProviderScore
+- self_heal.status
+- self_heal_loop.log
+- unified_orchestrator.UnifiedOrchestrator
+- world_model.Goal
