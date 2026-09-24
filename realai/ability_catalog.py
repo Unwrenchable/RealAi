@@ -637,6 +637,8 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
             "realai/mcp_vault77.py",
             "realai/plugins/atomic_fizz_realai",
             "realai/plugins/atomic_fizz_realai/engines_gold",
+            "realai/plugins/atomic_fizz_realai/engines_src",
+            "realai/plugins/atomic_fizz_realai/realai-client.js",
             "realai/plugins/atomic_fizz_realai/media",
             "realai/plugins/atomic_fizz_realai/plugin_manifest.json",
         ],
@@ -649,6 +651,28 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
             r"C:\realai\recovered\from_atomic_fizz\backend_realai",
             r"C:\realai\plugins\atomic_fizz_realai",
         ],
+    },
+    {
+        "id": "atomic_fizz_hive_client",
+        "name": "Atomic Fizz hive HTTP client",
+        "pillar": "advanced",
+        "keywords": [
+            "atomic fizz hive client", "afc hive", "realai-client", "REALAI_API_BASE",
+            "hive http client", "atomic_fizz_realai client",
+        ],
+        "status": "LIVE",
+        "live_path": "POST /v1/tools/execute ability.atomic_fizz_hive_client action=paths|health|chat",
+        "modules": [
+            "abilities/atomic_fizz_hive_client.py",
+            "realai/plugins/atomic_fizz_realai/realai-client.js",
+            "realai/plugins/atomic_fizz_realai/realai-client.multiprovider.js",
+            "realai/plugins/atomic_fizz_realai/engines_src",
+            "realai/plugins/atomic_fizz_realai/load-module.js",
+        ],
+        "gold_paths": [
+            r"C:\Users\tsmit\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\scripts\realai",
+        ],
+        "notes": "AFC points REALAI_HOME + REALAI_API_BASE at live hive; CJS client is plugin gold.",
     },
     {
         "id": "organs_hive",

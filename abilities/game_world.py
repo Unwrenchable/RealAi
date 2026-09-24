@@ -92,7 +92,7 @@ def list_entrypoints() -> dict[str, Any]:
         "manifest_ok": bool(man.get("ok")),
         "vault_source": r"C:\Users\tsmit\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
         "note": (
-            "Root *.js may be thin load-module husks; engines_gold/ holds fuller scripts/realai "
+            "Root realai-client.js is LIVE CJS hive client; engines_src/ (+ engines_gold/) hold fuller scripts/realai "
             "implementations. media/grok_xai.js = xAI image/video client. "
             "Python Hive path: ability.image_generation / ability.video_generation via xai_media."
         ),
