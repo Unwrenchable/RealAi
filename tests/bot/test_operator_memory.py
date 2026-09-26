@@ -123,7 +123,8 @@ class TestOperatorMemoryLoad(unittest.TestCase):
         self.assertNotIn("ENDMARKER", mem)
         prefix = chat_system_prefix("")
         self.assertIn(HARD_IDENTITY_LOCK, prefix)
-        self.assertLessEqual(prefix.count("M" * 50), 1)
+        self.assertNotIn("ENDMARKER", prefix)
+        self.assertLess(len(mem), 4000)
 
 
 if __name__ == "__main__":
