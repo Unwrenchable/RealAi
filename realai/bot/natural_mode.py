@@ -36,15 +36,22 @@ MAX_TOOLS_THIS_TURN = 3
 CHAT_ABORT_SECONDS = 180
 
 # Always-on reply contract. Also documented in docs/CONSOLE_OPERATOR_DIRECTIVE.md.
+# The hat card leads; the four lines from the operator contract stay so both
+# shapes coexist. Hat choice itself is per-turn (see hat_routing.infer_hat).
 NATURAL_REPLY_CONTRACT = (
-    "REPLY CONTRACT when tools finish, four short lines:\n"
+    "REPLY CONTRACT: inferred hat card, then four short lines.\n"
+    "Mode Active: Hive | One-tree | Builder | RackUp (automatic, no toggle).\n"
+    "Action Taken: 1-2 sentences.\n"
+    "Key Results: 2-3 bullets.\n"
+    "Next Recommended Step: one follow-up.\n"
     "Summary: one sentence.\n"
     "What changed: paths or none.\n"
     "Verify: pass or fail. Never claim success if hive smoke failed.\n"
     "Next: one step.\n"
     "CAPS: MAX_TOOLS_THIS_TURN=3. Chat abort 180s. Do not loosen.\n"
-    "Never say LANDED unless a write tool succeeded. Propose is not a write. "
-    "Named paths need workspace_read."
+    "Never say LANDED or shipped unless a write tool succeeded. Propose is not a write. "
+    "Named paths need workspace_read. No raw JSON in the main reply. "
+    "Service down: say Service Unavailable and retry."
 )
 
 _REPLY_HEADINGS = ("Summary:", "What changed:", "Verify:", "Next:")
@@ -649,14 +656,65 @@ def _one_line(text: Any, limit: int = 220) -> str:
     return raw
 
 
-def format_operator_reply(*, summary: str, changed: str, verify: str, nxt: str) -> str:
-    """Natural Mode reply contract: Summary / What changed / Verify / Next."""
-    return (
+def _key_result_lines(changed: str, verify: str, extra: str = "") -> str:
+    rows: List[str] = []
+    changed_s = _one_line(changed, 140)
+    verify_s = _one_line(verify, 160)
+    if changed_s and changed_s.lower() != "none":
+        rows.append(f"- {changed_s}")
+    if verify_s:
+        rows.append(f"- {verify_s}")
+    extra_s = _one_line(extra, 140) if extra else ""
+    if extra_s and extra_s.lower() != "none" and extra_s not in rows:
+        rows.append(f"- {extra_s}")
+    if not rows:
+        rows.append("- none")
+    return "\n".join(rows[:3])
+
+
+def format_operator_reply(
+    *,
+    summary: str,
+    changed: str,
+    verify: str,
+    nxt: str,
+    hat: str = "One-tree",
+    extra: str = "",
+) -> str:
+    """Hat card plus the Summary / What changed / Verify / Next contract.
+
+    Mode Active leads. The four legacy lines stay so older checks and the
+    model contract still match.
+    """
+    from realai.bot.hat_routing import normalize_hat
+
+    name = normalize_hat(hat)
+    card = (
+        f"Mode Active: {name}\n"
+        f"Action Taken: {_one_line(summary)}\n"
+        f"Key Results:\n{_key_result_lines(changed, verify, extra)}\n"
+        f"Next Recommended Step: {_one_line(nxt)}"
+    )
+    legacy = (
         f"Summary: {_one_line(summary)}\n"
         f"What changed: {_one_line(changed)}\n"
         f"Verify: {_one_line(verify)}\n"
         f"Next: {_one_line(nxt)}"
     )
+    return card + "\n\n" + legacy
+
+
+def ensure_mode_active(text: str, hat: str = "One-tree") -> str:
+    """Put ``Mode Active`` on the first line when a reply does not have it."""
+    from realai.bot.hat_routing import normalize_hat
+
+    raw = text or ""
+    if re.search(r"(?im)^\s*Mode Active\s*:", raw):
+        return raw
+    name = normalize_hat(hat)
+    if not raw.strip():
+        return f"Mode Active: {name}"
+    return f"Mode Active: {name}\n{raw}"
 
 
 def reply_has_contract(text: str) -> bool:
@@ -665,10 +723,11 @@ def reply_has_contract(text: str) -> bool:
 
 
 def scrub_unearned_landed(text: str, *, write_ok: bool) -> str:
-    """LANDED is allowed only after a write tool succeeded and smoke did not fail."""
+    """LANDED / SHIPPED only after a write tool succeeded and smoke did not fail."""
     if write_ok:
         return text or ""
-    return re.sub(r"\bLANDED\b", "PROPOSED", text or "", flags=re.I)
+    out = re.sub(r"\bLANDED\b", "PROPOSED", text or "", flags=re.I)
+    return re.sub(r"\bSHIPPED\b", "PROPOSED", out, flags=re.I)
 
 
 def post_write_smoke(*, timeout: float = 2.5) -> Dict[str, Any]:
@@ -722,25 +781,64 @@ def post_write_smoke(*, timeout: float = 2.5) -> Dict[str, Any]:
         }
 
 
+def _smoke_visible(smoke: Dict[str, Any]) -> tuple[str, str]:
+    """Visible smoke line plus a raw appendix payload.
+
+    Transport failures stay out of the card. The exception text is folded.
+    """
+    from realai.bot.hat_routing import service_down_visible
+
+    err = str((smoke or {}).get("error") or "").strip()
+    status = (smoke or {}).get("status")
+    snippet = str((smoke or {}).get("snippet") or "").strip()
+    try:
+        http = int(status) if status is not None and str(status).isdigit() else None
+    except (TypeError, ValueError):
+        http = None
+    collapsed = " ".join(err.split())
+    friendly = service_down_visible(err) if err else ""
+    raw = err or snippet
+    # service_down_visible rewrites only transport failures. Other errors
+    # stay in the card when they are already short.
+    if err and friendly != collapsed:
+        return friendly, err
+    if http is not None and http >= 500:
+        return "Service Unavailable. Retry GET /health.", raw
+    if http is not None:
+        return f"HTTP {http}", snippet if len(snippet) > 80 else ""
+    if collapsed and (len(collapsed) > 160 or "traceback" in collapsed.lower()):
+        return "Service Unavailable. Retry GET /health.", raw
+    if collapsed:
+        return collapsed, ""
+    return service_down_visible(str(status or "unhealthy")), snippet if len(snippet) > 80 else ""
+
+
 def format_write_verified_reply(
     write_result: Dict[str, Any],
     verify: Dict[str, Any],
     smoke: Optional[Dict[str, Any]] = None,
+    hat: str = "Builder",
 ) -> str:
     """Write reply in the operator contract. Smoke failure is not success."""
+    from realai.bot.hat_routing import raw_diagnostic_appendix
+
     path = (write_result or {}).get("path") or (verify or {}).get("path") or "?"
     nbytes = (write_result or {}).get("bytes")
     disk_ok = isinstance(verify, dict) and not verify.get("error")
     smoke_d = smoke if isinstance(smoke, dict) else {"ok": False, "error": "not_run"}
     smoke_ok = bool(smoke_d.get("ok"))
+    raw_payload = ""
     if not disk_ok:
         err = (verify or {}).get("error") if isinstance(verify, dict) else "verify_unavailable"
-        verify_line = f"FAIL re-read ({err})"
+        verify_line = "FAIL re-read. The file did not verify on disk."
         summary = f"Write of {path} did not verify on disk."
         changed = "none"
+        raw_payload = str(err or "")
     elif not smoke_ok:
-        detail = smoke_d.get("error") or smoke_d.get("status") or "unhealthy"
-        verify_line = f"FAIL hive smoke ({detail}) at {smoke_d.get('url') or 'hive'}. Do not treat this as done."
+        visible, raw_payload = _smoke_visible(smoke_d)
+        verify_line = (
+            f"FAIL hive smoke failed ({visible}). Do not treat this as done."
+        )
         summary = f"Wrote {path} on disk ({nbytes} bytes), but hive smoke failed."
         changed = str(path)
     else:
@@ -753,11 +851,15 @@ def format_write_verified_reply(
     nxt = (
         "Ask for the next edit."
         if disk_ok and smoke_ok
-        else "Fix the failed check before treating this change as done."
+        else "Retry the failed check before treating this change as done."
     )
     text = scrub_unearned_landed(
         format_operator_reply(
-            summary=summary, changed=changed, verify=verify_line, nxt=nxt
+            summary=summary,
+            changed=changed,
+            verify=verify_line,
+            nxt=nxt,
+            hat=hat,
         ),
         write_ok=bool(disk_ok and smoke_ok),
     )
@@ -766,12 +868,24 @@ def format_write_verified_reply(
         preview = "\n".join(content.splitlines()[:8])
         # Preview is on-disk bytes. Do not rewrite words inside the file.
         text += f"\n--- on disk (first lines) ---\n{preview}"
+    if raw_payload and not smoke_ok:
+        text += raw_diagnostic_appendix(raw_payload)
+    elif raw_payload and not disk_ok:
+        text += raw_diagnostic_appendix(raw_payload)
     return text
 
 
-def _operator_failure(summary: str, *, verify: str = "FAIL", nxt: str = "Narrow the ask and retry.") -> str:
+def _operator_failure(
+    summary: str,
+    *,
+    verify: str = "FAIL",
+    nxt: str = "Narrow the ask and retry.",
+    hat: str = "One-tree",
+) -> str:
     return scrub_unearned_landed(
-        format_operator_reply(summary=summary, changed="none", verify=verify, nxt=nxt),
+        format_operator_reply(
+            summary=summary, changed="none", verify=verify, nxt=nxt, hat=hat
+        ),
         write_ok=False,
     )
 
@@ -803,14 +917,10 @@ def finalize_natural_choice_text(
     elif isinstance(nat.get("post_write_smoke"), dict):
         smoke = nat.get("post_write_smoke")
     smoke_ok = True if smoke is None else bool(smoke.get("ok"))
+    smoke_raw = ""
     if smoke is not None and not smoke_ok:
-        if smoke.get("error") or smoke.get("status"):
-            verify = (
-                f"FAIL hive smoke ({smoke.get('error') or smoke.get('status')}). "
-                "Do not treat this as done."
-            )
-        else:
-            verify = "FAIL hive smoke. Do not treat this as done."
+        visible, smoke_raw = _smoke_visible(smoke)
+        verify = f"FAIL hive smoke failed ({visible}). Do not treat this as done."
     elif smoke is not None and smoke_ok:
         verify = f"PASS hive health {smoke.get('status')} {smoke.get('url')}"
     else:
@@ -820,10 +930,16 @@ def finalize_natural_choice_text(
         ", ".join(str(t) for t in tools) if tools else "none"
     )
     earned = bool(write_ok and smoke_ok)
+    from realai.bot.hat_routing import normalize_hat, raw_diagnostic_appendix
+
+    hat = normalize_hat(str(nat.get("hat") or "One-tree"))
     body = scrub_unearned_landed(text or "", write_ok=earned)
     if reply_has_contract(body):
+        body = ensure_mode_active(body, hat)
         if smoke is not None and not smoke_ok and "fail" not in body.lower():
             body = body.rstrip() + "\nVerify: " + verify
+        if smoke_raw and "View raw diagnostic payload" not in body:
+            body = body.rstrip() + raw_diagnostic_appendix(smoke_raw)
         return body, smoke
     first = body.split("\n", 1)[0] if body else ""
     summary = _one_line(first, 220) if first else "Tools finished."
@@ -832,9 +948,12 @@ def finalize_natural_choice_text(
         changed=changed,
         verify=verify,
         nxt="Continue from Verify.",
+        hat=hat,
     )
     if body and body not in shaped:
         shaped += "\n\n" + body
+    if smoke_raw and "View raw diagnostic payload" not in shaped:
+        shaped = shaped.rstrip() + raw_diagnostic_appendix(smoke_raw)
     return scrub_unearned_landed(shaped, write_ok=earned), smoke
 
 
@@ -1092,6 +1211,7 @@ def format_grounding_block(
     user_text: str,
     results: List[Dict[str, Any]],
     want_writes: bool = False,
+    hat: str = "",
 ) -> str:
     """Append-only grounding for the last user message."""
     from realai.cli.craft import _format_tools
@@ -1117,15 +1237,23 @@ def format_grounding_block(
             "If a tool errored, admit it. Never invent file contents, paths, "
             "ability output, agent results, or API results."
         )
+    from realai.bot.hat_routing import hat_turn_prefix, infer_hat
+
+    name = hat or infer_hat(user_text)
     follow += (
-        "\n\nReply shape after these tools: Summary / What changed / Verify / Next. "
-        "Short sentences. Never say LANDED unless a write tool succeeded. "
-        f"MAX_TOOLS_THIS_TURN={MAX_TOOLS_THIS_TURN}. Abort {CHAT_ABORT_SECONDS}s."
+        "\n\nReply shape after these tools: Mode Active, Action Taken, "
+        "Key Results, Next Recommended Step, then Summary / What changed / "
+        "Verify / Next. Short sentences. Never say LANDED unless a write tool "
+        "succeeded. "
+        f"MAX_TOOLS_THIS_TURN={MAX_TOOLS_THIS_TURN}. Abort {CHAT_ABORT_SECONDS}s.\n"
+        + hat_turn_prefix(name)
     )
     return f"{user_text}\n\n{tools_txt}\n\n{follow}"
 
 
-def failure_reply(results: List[Dict[str, Any]]) -> str:
+def failure_reply(results: List[Dict[str, Any]], hat: str = "One-tree") -> str:
+    from realai.bot.hat_routing import raw_diagnostic_appendix, service_down_visible
+
     bits: List[str] = []
     for tr in results or []:
         name = tr.get("tool") or "tool"
@@ -1139,13 +1267,21 @@ def failure_reply(results: List[Dict[str, Any]]) -> str:
         elif _tool_failed(tr):
             bits.append(f"{name}: failed")
     detail = "; ".join(bits) if bits else "no inspect tools ran"
-    return _operator_failure(
+    visible = service_down_visible(detail)
+    # Long tool dumps and tracebacks stay in the appendix, not the card.
+    if len(visible) > 180 or "traceback" in visible.lower() or visible[:1] in "{[":
+        visible = "Service Unavailable. Retry a narrower ask." if "Service Unavailable" in visible else "tool error folded below"
+    text = _operator_failure(
         "Tools failed ("
-        + detail
+        + visible
         + "). I won't invent file contents, ability output, or agent results.",
         verify="FAIL",
         nxt="Retry a narrower ask or name a path to read.",
+        hat=hat,
     )
+    if detail and detail != visible:
+        text += raw_diagnostic_appendix(detail)
+    return text
 
 
 def _session_id_from_body(body: Dict[str, Any]) -> str:
@@ -1258,6 +1394,11 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
     if not text or is_explicit_command(text):
         return meta
 
+    from realai.bot.hat_routing import infer_hat, raw_diagnostic_appendix
+
+    hat = infer_hat(text)
+    meta["hat"] = hat
+
     session_id = _session_id_from_body(body if isinstance(body, dict) else {})
     bind_session_workspace_for_request(session_id)
     meta["workspace"] = str(realai_workspace())
@@ -1276,10 +1417,13 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
             meta["tools"].append("learn")
         if ws_meta.get("admit_failure") or ws_meta.get("error"):
             meta["admit_failure"] = True
-            meta["failure_text"] = (
-                f"Could not switch workspace ({ws_meta.get('error')}). "
-                "Name an existing local folder or a git URL."
-            )
+            meta["failure_text"] = _operator_failure(
+                "Could not switch workspace. "
+                "Name an existing local folder or a git URL.",
+                verify="FAIL workspace switch",
+                nxt="Name an existing local folder or a git URL.",
+                hat=hat,
+            ) + raw_diagnostic_appendix(str(ws_meta.get("error") or ""))
             return meta
         # Pure switch ("work in C:\foo") short-circuits; follow-on inspect/write
         # in the same message still runs below when those intents are present.
@@ -1324,6 +1468,7 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
                     changed="none",
                     verify="PASS workspace switch",
                     nxt="Say what to read or change. I will inspect, write, and verify.",
+                    hat=hat,
                 )
                 return meta
         meta["mode"] = workspace_route_mode()
@@ -1361,11 +1506,12 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
             meta["used_tools"] = used
             meta["tools"] = used
             meta["failure_text"] = _operator_failure(
-                f"I tried to write {path} and it failed ({exc}). "
+                f"I tried to write {path} and it failed. "
                 "I will not invent a successful write.",
                 verify="FAIL write",
                 nxt="Fix the path or contents and try again.",
-            )
+                hat=hat,
+            ) + raw_diagnostic_appendix(str(exc))
             return meta
         failed = isinstance(result, dict) and (
             result.get("ok") is False or bool(result.get("error"))
@@ -1379,11 +1525,12 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
             meta["tool_count"] = len(used)
             err = (result or {}).get("error") or "write_failed"
             meta["failure_text"] = _operator_failure(
-                f"Write failed ({err}). I will not invent a successful write. "
+                "Write failed. I will not invent a successful write. "
                 "Paths must stay under the workspace.",
                 verify="FAIL write",
                 nxt="Choose a path inside the workspace.",
-            )
+                hat=hat,
+            ) + raw_diagnostic_appendix(str(err))
             return meta
         verify = verify_natural_write(path)
         used.append("workspace_read")
@@ -1398,7 +1545,7 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
         meta["tool_count"] = len([u for u in used if u != "post_write_smoke"])
         meta["wrote"] = True
         meta["short_circuit"] = True
-        meta["reply"] = format_write_verified_reply(result, verify, smoke)
+        meta["reply"] = format_write_verified_reply(result, verify, smoke, hat=hat)
         return meta
 
     if write_ask and not write_plans:
@@ -1423,6 +1570,7 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
                     "Use /write path|||content.",
                     verify="FAIL protected path",
                     nxt="Use an explicit /write if this core path should change.",
+                    hat=hat,
                 )
                 return meta
         meta["should_ground"] = True
@@ -1440,6 +1588,7 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
             need_write_args_reply(spec_path, spec_content) + extra,
             verify="FAIL missing write args",
             nxt="Name a relative path and the file contents.",
+            hat=hat,
         )
         return meta
 
@@ -1461,11 +1610,12 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
         meta["admit_failure"] = True
         meta["error"] = str(exc)
         meta["failure_text"] = _operator_failure(
-            f"I tried to run tools and they failed ({exc}). "
+            "I tried to run tools and they failed. "
             "I will not invent file contents, ability output, or agent results.",
             verify="FAIL",
             nxt="Retry a narrower ask.",
-        )
+            hat=hat,
+        ) + raw_diagnostic_appendix(str(exc))
         return meta
 
     names = [str(tr.get("tool") or "?") for tr in results]
@@ -1475,7 +1625,7 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
     meta["auto"] = [k for k, _ in extras]
     meta["admit_failure"] = tools_all_failed(results)
     if meta["admit_failure"]:
-        meta["failure_text"] = failure_reply(results)
+        meta["failure_text"] = failure_reply(results, hat=hat)
         return meta
 
     # "learn from X and work there" → bind session workspace to the learned tree.
@@ -1511,12 +1661,15 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
                     changed=str(payload.get("packet_path") or payload.get("slug") or "learn packet"),
                     verify="PASS learn+workspace",
                     nxt="Ask me to list, read, or patch files.",
+                    hat=hat,
                 )
                 return meta
             break
 
     msgs = list(body.get("messages") or [])
-    grounded = format_grounding_block(text, results, want_writes=bool(patch_ask))
+    grounded = format_grounding_block(
+        text, results, want_writes=bool(patch_ask), hat=hat
+    )
     spliced = False
     for i in range(len(msgs) - 1, -1, -1):
         msg = msgs[i]
