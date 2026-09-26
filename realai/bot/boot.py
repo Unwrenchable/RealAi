@@ -37,6 +37,8 @@ HARD_IDENTITY_LOCK = (
 # Cap the editable directive body so tiny local models still see the contract.
 # The reply contract itself is prepended and is not truncated away.
 _OPERATOR_SYSTEM_CHAT_CAP = 480
+# Sticky facts sit beside the directive, not inside its 480-char clip.
+_OPERATOR_MEMORY_CHAT_CAP = 900
 
 
 def operator_directive_path() -> Optional[Path]:
@@ -81,7 +83,8 @@ def chat_system_prefix(operator_system: Optional[str] = None) -> str:
 
     The directive file is loaded even when the caller passes only the default
     bot prompt or an empty string. ``NATURAL_REPLY_CONTRACT`` stays in front of
-    the capped directive body.
+    the capped directive body. Sticky operator memory is appended after that
+    clip so a long directive cannot drop the facts.
     """
     parts: List[str] = [HARD_IDENTITY_LOCK]
     try:
@@ -111,11 +114,53 @@ def chat_system_prefix(operator_system: Optional[str] = None) -> str:
     blob = "\n\n".join(c for c in chunks if c)
     if blob and blob != HARD_IDENTITY_LOCK and HARD_IDENTITY_LOCK not in blob:
         parts.append(blob)
+    try:
+        memory = load_operator_memory()
+    except Exception:
+        memory = ""
+    if memory and memory not in "\n".join(parts):
+        parts.append(memory)
     return "\n\n".join(parts)
 
 
 _REGISTERED = False
 _ROOT = Path(__file__).resolve().parents[2]  # C:\RealAI-clean
+
+
+def operator_memory_path() -> Optional[Path]:
+    """On-disk sticky operator facts. Missing file is non-fatal.
+
+    ``REALAI_OPERATOR_MEMORY_FILE`` wins when it points at a real file.
+    Otherwise the product ``docs/OPERATOR_MEMORY.md`` is used.
+    An explicit path that is missing does not raise; the product file is
+    the fallback, and a missing product file yields no path.
+    """
+    env = (os.environ.get("REALAI_OPERATOR_MEMORY_FILE") or "").strip()
+    if env:
+        p = Path(env)
+        if p.is_file():
+            return p
+    cand = _ROOT / "docs" / "OPERATOR_MEMORY.md"
+    if cand.is_file():
+        return cand
+    return None
+
+
+def load_operator_memory() -> str:
+    """Load sticky operator memory for the Console system prefix.
+
+    Returns ``""`` when the file is missing, empty, or unreadable.
+    """
+    try:
+        path = operator_memory_path()
+        if path is None or not path.is_file():
+            return ""
+        text = path.read_text(encoding="utf-8").strip()
+    except Exception:
+        return ""
+    if not text:
+        return ""
+    return _clip_prompt(text, _OPERATOR_MEMORY_CHAT_CAP)
 
 
 def _personas_dir() -> Path:
