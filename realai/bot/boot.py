@@ -78,13 +78,22 @@ def _clip_prompt(text: str, limit: int) -> str:
     return raw[: limit - 1].rstrip() + "…"
 
 
-def chat_system_prefix(operator_system: Optional[str] = None) -> str:
+def chat_system_prefix(
+    operator_system: Optional[str] = None,
+    user_text: Optional[str] = None,
+    *,
+    hat: Optional[str] = None,
+) -> str:
     """Build the always-on Console system prefix: identity lock + directive + reply contract.
 
     The directive file is loaded even when the caller passes only the default
     bot prompt or an empty string. ``NATURAL_REPLY_CONTRACT`` stays in front of
     the capped directive body. Sticky operator memory is appended after that
     clip so a long directive cannot drop the facts.
+
+    When ``hat`` or ``user_text`` is set, a one-turn Mode Active block is
+    appended (inferred from the prompt when ``hat`` is omitted). Empty calls
+    stay hat-free so a prefix with no prompt does not invent a turn.
     """
     parts: List[str] = [HARD_IDENTITY_LOCK]
     try:
@@ -120,6 +129,20 @@ def chat_system_prefix(operator_system: Optional[str] = None) -> str:
         memory = ""
     if memory and memory not in "\n".join(parts):
         parts.append(memory)
+    try:
+        from realai.bot.hat_routing import hat_turn_prefix, infer_hat, normalize_hat
+
+        resolved = ""
+        if hat:
+            resolved = normalize_hat(hat)
+        elif (user_text or "").strip():
+            resolved = infer_hat(user_text)
+        if resolved:
+            note = hat_turn_prefix(resolved)
+            if note and note not in "\n".join(parts):
+                parts.append(note)
+    except Exception:
+        pass
     return "\n\n".join(parts)
 
 

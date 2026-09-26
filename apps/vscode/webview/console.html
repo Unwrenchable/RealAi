@@ -107,6 +107,9 @@ header.top{
 .who.bot{color:var(--acid)}
 .who.used{letter-spacing:.08em;margin:-4px 0 10px;color:var(--mute);font-size:10px}
 .bubble{padding:12px 14px;border-radius:14px;line-height:1.5;font-size:clamp(12px,1.6vw,14px);background:#14141c;border:1px solid var(--line);white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
+.bubble details{margin-top:8px;white-space:normal}
+.bubble details summary{cursor:pointer;color:var(--mute);font-size:12px}
+.bubble details pre{white-space:pre-wrap;max-height:200px;overflow:auto;font-size:11px;color:var(--mute);margin:8px 0 0}
 .msg.user .bubble{background:#1a1a12;border-color:rgba(214,255,63,.18)}
 .composer-wrap{flex:0 0 auto;padding:8px clamp(10px,3vw,28px) 12px;border-top:1px solid transparent}
 .composer{max-width:min(820px,100%);margin:0 auto;background:#101018;border:1px solid var(--line);border-radius:16px;padding:8px 10px 8px 12px}
@@ -521,9 +524,10 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     } catch (e) {
       const msg = String((e && e.message) || e || '');
       const timed = /timed out|TimeoutError|abort/i.test(msg);
-      deliver({ command: 'assistant', text: timed
-        ? ('Error: signal timed out (chat abort 180s). Tools used this turn may be incomplete - try a shorter ask or /read path.')
-        : ('Error: ' + msg) });
+      const lead = timed
+        ? 'Service Unavailable. Chat timed out (180s). Retry with a shorter ask.'
+        : 'Service Unavailable. The hive did not answer. Retry in a moment.';
+      deliver({ command: 'assistant', text: withRawAppendix(lead, msg) });
     }
   }
   async function browserRunTool(name, args){
@@ -539,12 +543,13 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
         name: resolved,
         arguments: defaultToolArgs(resolved, args || {}),
       });
-      deliver({ command: 'assistant', text: 'Tool `' + resolved + '`\n\n```json\n' + JSON.stringify(result, null, 2).slice(0, 12000) + '\n```' });
+      const raw = JSON.stringify(result, null, 2).slice(0, 4000);
+      deliver({ command: 'assistant', text: withRawAppendix('Tool ' + resolved + ' finished.', raw) });
     } catch (e) {
       try {
         await browserRunAbility(resolved, (args && args.input) || ('Console invoke ' + resolved));
       } catch (e2) {
-        deliver({ command: 'assistant', text: 'Tool ' + resolved + ' failed: ' + (e && e.message || e) });
+        deliver({ command: 'assistant', text: withRawAppendix('Service Unavailable. Tool ' + resolved + ' did not finish. Retry in a moment.', String((e && e.message) || e || '')) });
       }
     }
   }
@@ -569,9 +574,10 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
           action: args.action,
         });
       }
-      deliver({ command: 'assistant', text: 'Ability `' + ability + '`\n\n```json\n' + JSON.stringify(result, null, 2).slice(0, 12000) + '\n```' });
+      const raw = JSON.stringify(result, null, 2).slice(0, 4000);
+      deliver({ command: 'assistant', text: withRawAppendix('Ability ' + ability + ' finished.', raw) });
     } catch (e) {
-      deliver({ command: 'assistant', text: 'Ability ' + ability + ' failed: ' + (e && e.message || e) });
+      deliver({ command: 'assistant', text: withRawAppendix('Service Unavailable. Ability ' + ability + ' did not finish. Retry in a moment.', String((e && e.message) || e || '')) });
     }
   }
   async function browserSmoke(){
@@ -586,6 +592,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       { label: 'ability_coverage', run: () => hivePost('/v1/tools/execute', { name: 'ability_coverage', arguments: {} }) },
     ];
     const lines = ['Console smoke test (browser parity)', ''];
+    const rawFails = [];
     let pass = 0;
     for (const c of checks) {
       try {
@@ -593,11 +600,14 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
         lines.push('PASS  ' + c.label + '  (' + JSON.stringify(result ?? null).length + ' bytes)');
         pass++;
       } catch (e) {
-        lines.push('FAIL  ' + c.label + '  ' + (e && e.message || e));
+        lines.push('FAIL  ' + c.label + '  Service Unavailable');
+        rawFails.push(c.label + ': ' + String((e && e.message) || e || ''));
       }
     }
     lines.push('', 'Result: ' + pass + '/' + checks.length + ' passed');
-    deliver({ command: 'assistant', text: lines.join('\n') });
+    let text = lines.join('\n');
+    if (rawFails.length) text = withRawAppendix(text, rawFails.join('\n'));
+    deliver({ command: 'assistant', text: text });
   }
   async function browserLocal(kind){
     if (kind === 'phase') {
@@ -758,11 +768,11 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       runBtn.disabled = true; runBtn.textContent = 'Running...';
       try {
         const j = await hivePost('/v1/agents/run', { agent_id, task, multi });
-        deliver({ command:'assistant', text: 'Hive run ' + agent_id + ':\n' + JSON.stringify(j, null, 2).slice(0, 4000) });
+        deliver({ command:'assistant', text: withRawAppendix('Hive run ' + agent_id + ' finished.', JSON.stringify(j, null, 2).slice(0, 4000)) });
         const fr = document.getElementById('hiveWatchFrame');
         if (fr) { try { fr.contentWindow.location.reload(); } catch(_){ fr.src = fr.src; } }
       } catch (e) {
-        deliver({ command:'assistant', text: 'Hive run failed: ' + (e && e.message || e) });
+        deliver({ command:'assistant', text: withRawAppendix('Service Unavailable. Hive run did not finish. Retry in a moment.', String((e && e.message) || e || '')) });
       }
       runBtn.disabled = false; runBtn.textContent = 'Run via Hive API';
     };
@@ -911,6 +921,31 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
   const toggleOps = document.getElementById('toggleOps');
 
   function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function withRawAppendix(lead, raw){
+    const body = String(raw || '').trim();
+    if (!body) return String(lead || '');
+    return String(lead || '').replace(/\s+$/, '')
+      + '\n<details><summary>View raw diagnostic payload</summary>\n'
+      + body.slice(0, 4000)
+      + '\n</details>';
+  }
+  function renderBubble(content){
+    const raw = String(content || '');
+    const open = '<details><summary>View raw diagnostic payload</summary>';
+    const close = '</details>';
+    const i = raw.indexOf(open);
+    if (i < 0) return esc(raw);
+    const j = raw.indexOf(close, i + open.length);
+    if (j < 0) return esc(raw);
+    const before = raw.slice(0, i);
+    const inner = raw.slice(i + open.length, j);
+    const after = raw.slice(j + close.length);
+    return esc(before)
+      + '<details><summary>View raw diagnostic payload</summary><pre>'
+      + esc(inner)
+      + '</pre></details>'
+      + renderBubble(after);
+  }
   function tick(){ document.getElementById('clock').textContent = new Date().toLocaleTimeString(); }
   tick(); setInterval(tick, 1000);
 
@@ -1002,7 +1037,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     feed.innerHTML = t.messages.map(m => `
       <div class="msg ${m.role}">
         <div class="who ${m.role==='assistant'?'bot':''}">${m.role==='assistant'?'REALAI':'YOU'}</div>
-        <div class="bubble">${esc(m.content)}</div>
+        <div class="bubble">${renderBubble(m.content)}</div>
         ${m.role==='assistant' && m.usedTools && m.usedTools.length ? `<div class="who used">used tools: ${esc((m.usedTools||[]).join(', '))}</div>` : ''}
       </div>`).join('');
     feed.scrollTop = feed.scrollHeight;
@@ -1512,7 +1547,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       t.messages.push({ role:'assistant', content:text, usedTools: Array.isArray(d.usedTools) ? d.usedTools : [] });
       render();
       if (d.speak !== false) {
-        const spoken = (d.voice && d.voice.spoken_text) || text;
+        const spoken = (d.voice && d.voice.spoken_text) || text.replace(/<details[\s\S]*<\/details>/gi, '');
         void speakReply(spoken, d.voice || null);
       }
       return;
@@ -1520,7 +1555,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     if (d.command === 'error') {
       streaming=false; send.disabled=false;
       const t = threads.find(x => x.id===active);
-      t.messages.push({ role:'assistant', content:'Error: '+String(d.text||'') });
+      t.messages.push({ role:'assistant', content: withRawAppendix('Service Unavailable. Retry the last ask.', String(d.text||'')) });
       render();
     }
     if (d.command === 'status') {

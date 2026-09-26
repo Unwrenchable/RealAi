@@ -1577,6 +1577,7 @@ def _enrich_chat_body(body: Dict[str, Any], headers: Optional[Dict[str, str]] = 
     """Operator system + optional agent + memory inject + multi-agent flag + default model."""
     headers = headers or {}
     body = dict(body)
+    _user = ""
     # Orchestrator 2.0: classify + route + memory read before any backend call.
     try:
         from realai.meta_router import plan_call
@@ -1651,7 +1652,18 @@ def _enrich_chat_body(body: Dict[str, Any], headers: Optional[Dict[str, str]] = 
     try:
         from realai.bot.boot import chat_system_prefix
 
-        system_parts.append(chat_system_prefix(OPERATOR_SYSTEM))
+        _hat = str(body.get("realai_hat") or "").strip()
+        if not _hat and _user.strip():
+            try:
+                from realai.bot.hat_routing import infer_hat
+
+                _hat = infer_hat(_user.split("\n\n", 1)[0])
+                body["realai_hat"] = _hat
+            except Exception:
+                _hat = ""
+        system_parts.append(
+            chat_system_prefix(OPERATOR_SYSTEM, hat=_hat or None)
+        )
     except Exception:
         try:
             from realai.bot.boot import HARD_IDENTITY_LOCK
@@ -2761,6 +2773,15 @@ class Handler(BaseHTTPRequestHandler):
 
             # Operator intent: craft / hive / ability / multi without waiting for GGUF tool_calls
             user_text = _last_user_text(body.get("messages") or [])
+            # Hat is inferred once from the original ask, before grounding
+            # rewrites the user message with tool text.
+            try:
+                from realai.bot.hat_routing import infer_hat
+
+                if str(user_text or "").strip():
+                    body["realai_hat"] = infer_hat(user_text)
+            except Exception:
+                pass
             # Early meta-route (talk/operator short-circuits included)
             try:
                 from realai.meta_router import plan_call
@@ -2968,6 +2989,7 @@ class Handler(BaseHTTPRequestHandler):
                                 "provider": "realai",
                                 "operator": "natural",
                                 "natural": ground,
+                                "hat": body.get("realai_hat") or ground.get("hat"),
                                 "used_tools": ground.get("used_tools") or ground.get("tools") or [],
                                 "wrote": bool(ground.get("wrote")),
                                 "routing": body.get("realai_routing"),
@@ -3067,6 +3089,8 @@ class Handler(BaseHTTPRequestHandler):
                         "memory_injected": body.get("realai_memory_injected", False),
                         "multi_agent_requested": bool(body.get("realai_multi_agent")),
                         "natural": body.get("realai_natural"),
+                        "hat": body.get("realai_hat")
+                        or (body.get("realai_natural") or {}).get("hat"),
                         "used_tools": (
                             (body.get("realai_natural") or {}).get("used_tools")
                             or (body.get("realai_natural") or {}).get("tools")
