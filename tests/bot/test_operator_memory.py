@@ -109,7 +109,7 @@ class TestOperatorMemoryLoad(unittest.TestCase):
         with patch("realai.bot.boot.load_operator_memory", side_effect=RuntimeError("boom")):
             prefix = chat_system_prefix("")
         self.assertIn(HARD_IDENTITY_LOCK, prefix)
-        self.assertIn("Summary:", prefix)
+        self.assertIn("EXECUTE", prefix)
 
     def test_oversize_memory_is_clipped(self):
         tmp = tempfile.TemporaryDirectory()

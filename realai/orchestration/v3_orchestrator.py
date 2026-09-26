@@ -1661,8 +1661,13 @@ def _enrich_chat_body(body: Dict[str, Any], headers: Optional[Dict[str, str]] = 
                 body["realai_hat"] = _hat
             except Exception:
                 _hat = ""
+        _ask = _user.split("\n\n", 1)[0].strip() if _user else ""
         system_parts.append(
-            chat_system_prefix(OPERATOR_SYSTEM, hat=_hat or None)
+            chat_system_prefix(
+                OPERATOR_SYSTEM,
+                user_text=_ask or None,
+                hat=_hat or None,
+            )
         )
     except Exception:
         try:
