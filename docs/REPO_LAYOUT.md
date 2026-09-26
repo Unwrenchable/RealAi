@@ -22,6 +22,8 @@ START_HERE.bat
 REM or: start_all.bat / realai-stack
 ```
 
+`START_HERE.bat` is the menu. Root `start_all.bat` and `start_orchestrator.bat` are one-line forwarders to `scripts\windows\` (same names). Those bodies `cd` to product home, then start the stack or `python -m realai.v3_orchestrator`. Other root `start_*.bat` / `run_*.bat` names that used to hold logic are the same kind of forwarder. `start_stack.bat` and `start_realai.bat` still alias `start_all.bat`.
+
 ## One product, two roles for `realai/` — not a nested repo
 
 | Path | Role |
