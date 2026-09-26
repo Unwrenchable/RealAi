@@ -7,4 +7,4 @@ OPERATOR MEMORY:
 - Fusion UI is product-root fusion-ui/. No Fusion tab in Console.
 - Console gold: apps/vscode/webview/console.html (sync product-root console.html).
 - AFC and RackUp are HTTP clients to :8001 only. GET /v1/agents stays ~14 hive roles.
-- Hats are inferred per Natural Mode prompt: Hive, One-tree, Builder, RackUp. No Core-desk hat toggle.
+- Hats are inferred per Natural Mode prompt: Hive, Inspect, Patch, Smoke. No Core-desk hat toggle. Smoke is HTTP/smoke only, not the RackUp product.
