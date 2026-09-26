@@ -50,8 +50,25 @@ NATURAL_REPLY_CONTRACT = (
 _REPLY_HEADINGS = ("Summary:", "What changed:", "Verify:", "Next:")
 
 _SIMPLE_PATH_ASK_RE = re.compile(
-    r"(?i)\b(quote|read|open|show|what.?s\s+in|whats\s+in|marker|contents?\s+of)\b"
+    r"(?i)\b(quote|read|open|show|propose|suggest|what.?s\s+in|whats\s+in|marker|contents?\s+of)\b"
 )
+
+# Same shapes the bridge critic treats as named workspace files
+# (_extract_workspace_paths). Keep these in lockstep — a named path with no
+# workspace_read is a critic fail.
+_NAMED_REL_RE = re.compile(
+    r"(?<![\w./-])((?:apps|realai|modules|abilities|docs|scripts|frontend|agents|fusion-ui|\.github)/[\w./\-]+\.[\w]+)",
+    re.I,
+)
+_NAMED_ABS_RE = re.compile(
+    r"(?<![\w])([A-Za-z]:/RealAI-clean/[\w./\-]+\.[\w]+)",
+    re.I,
+)
+_NAMED_BARE_RE = re.compile(
+    r"(?<![\w./-])(console\.html|package\.json|realai\.toml|models\.yaml|model\.json)\b",
+    re.I,
+)
+_NAMED_READ_VERB_RE = re.compile(r"\bread\s+([\w./\-]+\.[\w]+)", re.I)
 
 # Path-ish tokens: relative files with a real extension.
 _PATH_RE = re.compile(
@@ -177,12 +194,113 @@ def extract_path_tokens(text: str) -> List[str]:
     return out
 
 
+def canonicalize_named_path(raw: str, *, remap_readme: bool = False) -> str:
+    """Map a mentioned path to the repo-relative file the critic would read.
+
+    Bare ``console.html`` is the webview gold file. Bare ``README.md`` is
+    remapped only when the bridge would (``read README.md`` or a
+    ``C:\\RealAI-clean\\README.md`` path). A plain "create README.md" stays
+    at the workspace root.
+    """
+    p = (raw or "").strip().strip("`'\"").replace("\\", "/")
+    p = p.rstrip(".,;:)]")
+    if not p:
+        return ""
+    low = p.lower()
+    product_abs = low.startswith("c:/realai-clean/") or low.startswith("/realai-clean/")
+    for prefix in ("c:/realai-clean/", "/realai-clean/"):
+        if low.startswith(prefix):
+            p = p[len(prefix) :]
+            low = p.lower()
+            break
+    while p.startswith("./"):
+        p = p[2:]
+        low = p.lower()
+    if "/" not in p and low == "console.html":
+        return "apps/vscode/webview/console.html"
+    if "/" not in p and low == "readme.md" and (remap_readme or product_abs):
+        return "apps/vscode/README.md"
+    return p
+
+
+def _looks_like_file(path: str) -> bool:
+    base = (path or "").rsplit("/", 1)[-1]
+    return "." in base and not base.startswith(".")
+
+
+def named_workspace_paths(text: str) -> List[str]:
+    """Concrete files named in free text, critic shapes first.
+
+    Covers ``console.html``, ``C:\\RealAI-clean\\...``, and
+    ``apps/vscode/webview/...``. Cap matches the bridge extractor (5). The
+    turn planner still spends at most ``MAX_TOOLS_THIS_TURN`` slots.
+    """
+    raw = text or ""
+    norm = raw.replace("\\", "/")
+    found: List[str] = []
+    seen: set[str] = set()
+
+    def _add(token: str, *, remap_readme: bool = False) -> None:
+        canon = canonicalize_named_path(token, remap_readme=remap_readme)
+        if not canon or not _looks_like_file(canon):
+            return
+        key = canon.lower()
+        # Prefer the critic's README alias over a second root README read.
+        if key == "readme.md" and "apps/vscode/readme.md" in seen:
+            return
+        if key == "apps/vscode/readme.md" and "readme.md" in seen:
+            seen.discard("readme.md")
+            found[:] = [p for p in found if p.lower() != "readme.md"]
+        if key in seen:
+            return
+        seen.add(key)
+        found.append(canon)
+
+    for m in _NAMED_REL_RE.finditer(norm):
+        _add(m.group(1))
+    for m in _NAMED_ABS_RE.finditer(norm):
+        _add(m.group(1), remap_readme=True)
+    for m in _NAMED_READ_VERB_RE.finditer(norm):
+        _add(m.group(1), remap_readme=True)
+    for m in _NAMED_BARE_RE.finditer(norm):
+        _add(m.group(1))
+    if re.search(r"apps/vscode/README\.md", norm, re.I):
+        _add("apps/vscode/README.md")
+    for token in extract_path_tokens(raw):
+        _add(token)
+    for token in extract_path_tokens(norm):
+        _add(token)
+    return found[:5]
+
+
+def resolve_write_path(text: str, raw: str) -> str:
+    """Write target. Absolute product paths and ``console.html`` follow the critic."""
+    norm = (raw or "").strip().strip("`'\"").replace("\\", "/")
+    low = norm.lower()
+    remap_readme = low.startswith("c:/realai-clean/") or low.startswith("/realai-clean/")
+    canon = canonicalize_named_path(norm, remap_readme=remap_readme)
+    if not canon:
+        return norm
+    for path in named_workspace_paths(text):
+        if path.lower() == canon.lower():
+            return path
+    return canonicalize_named_path(norm, remap_readme=False) or norm
+
+
+def plan_named_workspace_reads(text: str) -> List[Tuple[str, Dict[str, Any]]]:
+    """``workspace_read`` plans for named files. One read, one tool slot."""
+    return [
+        ("workspace_read", {"path": rel})
+        for rel in named_workspace_paths(text)[:MAX_TOOLS_THIS_TURN]
+    ]
+
+
 def looks_like_repo_ask(text: str) -> bool:
     """True when a plain-English message is about files / code / the repo."""
     raw = (text or "").strip()
     if not raw or is_explicit_command(raw):
         return False
-    if extract_path_tokens(raw):
+    if extract_path_tokens(raw) or named_workspace_paths(raw):
         return True
     return bool(_REPO_ASK_RE.search(raw))
 
@@ -483,6 +601,8 @@ def plan_natural_write(user_text: str) -> List[Tuple[str, Dict[str, Any]]]:
         return []
     path, content = extract_write_spec(t)
     if path:
+        path = resolve_write_path(t, path) or path
+    if path:
         try:
             from realai.cli.craft import is_protected_core_path
 
@@ -716,35 +836,173 @@ def finalize_natural_choice_text(
     return scrub_unearned_landed(shaped, write_ok=earned), smoke
 
 
-def plan_natural_inspect(user_text: str) -> List[Tuple[str, Dict[str, Any]]]:
-    """Craft ``plan_tools`` plus explicit path reads; inspect even in the product tree.
+def _explicit_search_verb(text: str) -> bool:
+    return bool(re.search(r"(?i)\b(grep|search|list|pwd)\b", text or ""))
 
-    Cap: at most ``MAX_TOOLS_THIS_TURN`` tools. Named-file quote/read asks
-    prefer ``read`` only — never pwd+list+grep storms on one path ask.
+
+def _covered_named_path(path: str, covered: set[str]) -> bool:
+    canon = canonicalize_named_path(path).lower()
+    return bool(canon) and canon in covered
+
+
+def _drop_unnamed_storm(
+    plans: List[Tuple[str, Dict[str, Any]]],
+    text: str,
+) -> List[Tuple[str, Dict[str, Any]]]:
+    """When a file is named, don't spend the cap on an auto pwd/list/grep storm."""
+    explicit_list = bool(re.search(r"(?i)\blist\b", text))
+    explicit_grep = bool(re.search(r"(?i)\b(grep|search)\b", text))
+    explicit_pwd = bool(re.search(r"(?i)\b(pwd|where am i)\b", text))
+    kept: List[Tuple[str, Dict[str, Any]]] = []
+    for name, args in plans:
+        if name in ("pwd", "here") and not explicit_pwd:
+            continue
+        if name == "list" and not explicit_list:
+            continue
+        if name == "grep" and not explicit_grep:
+            continue
+        kept.append((name, args))
+    return kept
+
+
+def plan_natural_inspect(user_text: str) -> List[Tuple[str, Dict[str, Any]]]:
+    """Craft ``plan_tools`` plus named-file ``workspace_read`` first.
+
+    Cap: at most ``MAX_TOOLS_THIS_TURN`` tools. A named path spends slot 1 on
+    ``workspace_read`` (the critic fails the turn otherwise). Quote / read /
+    propose asks that only name files do not add a pwd+list+grep storm.
     """
     from realai.cli.craft import auto_inspect_plans, dedupe_plans, plan_tools
 
     t = (user_text or "").strip()
-    paths = extract_path_tokens(t)
-    # Fast path: "quote/read … path.md" → read those files only
-    if paths and _SIMPLE_PATH_ASK_RE.search(t):
-        plans = [("read", {"path": rel}) for rel in paths[:MAX_TOOLS_THIS_TURN]]
-        return dedupe_plans(plans)[:MAX_TOOLS_THIS_TURN]
+    reads = plan_named_workspace_reads(t)
+    covered = {
+        canonicalize_named_path(str((args or {}).get("path") or "")).lower()
+        for _name, args in reads
+    }
+    covered.discard("")
+    # Fast path: "quote/read/propose … path" → workspace_read those files only.
+    # An explicit grep/list/pwd still shares the remaining slots.
+    if reads and _SIMPLE_PATH_ASK_RE.search(t) and not _explicit_search_verb(t):
+        return dedupe_plans(reads)[:MAX_TOOLS_THIS_TURN]
 
-    plans: List[Tuple[str, Dict[str, Any]]] = list(plan_tools(t) or [])
-    for rel in paths:
-        plans.append(("read", {"path": rel}))
+    plans: List[Tuple[str, Dict[str, Any]]] = []
+    for name, args in list(plan_tools(t) or []):
+        if name in ("read", "workspace_read") and _covered_named_path(
+            str((args or {}).get("path") or ""), covered
+        ):
+            continue
+        plans.append((name, args))
+    if reads:
+        plans = _drop_unnamed_storm(plans, t)
+        plans = reads + plans
     names = {n for n, _ in plans}
-    if looks_like_repo_ask(t) and not names.intersection({"pwd", "list", "grep", "read"}):
+    if looks_like_repo_ask(t) and not names.intersection(
+        {"pwd", "list", "grep", "read", "workspace_read"}
+    ):
         plans.extend(auto_inspect_plans(t))
-    # Prefer named reads first when capping a mixed plan
-    if paths:
-        preferred = [("read", {"path": rel}) for rel in paths]
-        rest = [p for p in plans if p not in preferred and not (
-            p[0] == "read" and (p[1] or {}).get("path") in paths
-        )]
-        plans = preferred + rest
+    if reads:
+        rest = [
+            p
+            for p in plans
+            if p not in reads
+            and not (
+                p[0] in ("read", "workspace_read")
+                and _covered_named_path(str((p[1] or {}).get("path") or ""), covered)
+            )
+        ]
+        plans = list(reads) + rest
     return dedupe_plans(plans)[:MAX_TOOLS_THIS_TURN]
+
+
+def _other_natural_intents(text: str) -> bool:
+    return bool(
+        looks_like_agent_ask(text)
+        or looks_like_learn_ask(text)
+        or looks_like_broken_ask(text)
+        or looks_like_write_ask(text)
+        or match_ability_ids(text)
+    )
+
+
+def plan_natural_turn(user_text: str) -> List[Tuple[str, Dict[str, Any]]]:
+    """One Natural Mode turn. Named-path ``workspace_read`` is always first.
+
+    Auto-read counts toward ``MAX_TOOLS_THIS_TURN``. Remaining slots go to
+    inspect / learn / doctor / agents — never a fourth tool.
+    """
+    from realai.cli.craft import dedupe_plans
+
+    t = (user_text or "").strip()
+    if not t or is_explicit_command(t):
+        return []
+    reads = plan_named_workspace_reads(t)
+    if (
+        reads
+        and _SIMPLE_PATH_ASK_RE.search(t)
+        and not _other_natural_intents(t)
+        and not _explicit_search_verb(t)
+    ):
+        return dedupe_plans(reads)[:MAX_TOOLS_THIS_TURN]
+
+    rest: List[Tuple[str, Dict[str, Any]]] = []
+    # Learn should not pick up a pwd storm; the named read (if any) is enough.
+    if not looks_like_learn_ask(t) and (looks_like_repo_ask(t) or reads):
+        for name, args in plan_natural_inspect(t):
+            if name == "workspace_read":
+                continue
+            rest.append((name, args))
+    if not looks_like_write_ask(t):
+        rest.extend(plan_natural_auto(t))
+    return dedupe_plans(list(reads) + rest)[:MAX_TOOLS_THIS_TURN]
+
+
+def plans_before_write(text: str, write_path: str) -> List[Tuple[str, Dict[str, Any]]]:
+    """Named-path reads before a concrete write.
+
+    Write and the post-write re-read take two slots. Auto-read uses what is
+    left (one, while the cap is 3). Paths that are not the write target come
+    first so "read A and write B" still reads A.
+    """
+    slots = max(0, MAX_TOOLS_THIS_TURN - 2)
+    if slots <= 0:
+        return []
+    target = canonicalize_named_path(write_path).lower()
+    paths = named_workspace_paths(text)
+    others = [p for p in paths if p.lower() != target]
+    same = [p for p in paths if p.lower() == target]
+    ordered = others + same
+    if not ordered and target:
+        ordered = [canonicalize_named_path(write_path)]
+    return [("workspace_read", {"path": p}) for p in ordered[:slots]]
+
+
+_AUTO_KINDS = {"learn", "ability", "agents", "doctor"}
+
+
+def run_natural_turn(user_text: str) -> List[Dict[str, Any]]:
+    """Execute ``plan_natural_turn`` in order. Never invents tool results."""
+    from realai.cli.craft import apply_workspace, run_tools
+
+    apply_workspace()
+    plans = plan_natural_turn(user_text)[:MAX_TOOLS_THIS_TURN]
+    out: List[Dict[str, Any]] = []
+    craft_buf: List[Tuple[str, Dict[str, Any]]] = []
+
+    def _flush() -> None:
+        if not craft_buf:
+            return
+        out.extend(run_tools(craft_buf))
+        craft_buf.clear()
+
+    for kind, args in plans:
+        if kind in _AUTO_KINDS:
+            _flush()
+            out.extend(run_natural_auto([(kind, args)], user_text))
+        else:
+            craft_buf.append((kind, args))
+    _flush()
+    return out[:MAX_TOOLS_THIS_TURN]
 
 
 def run_natural_inspect(user_text: str) -> List[Dict[str, Any]]:
@@ -1075,19 +1333,23 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
     if write_ask and write_plans:
         meta["should_ground"] = True
         used: List[str] = []
-        # Multi-step: when the ask also wants inspect, read/list/grep first
-        # (never collapse "read X then write Y" into a blind write).
-        if looks_like_repo_ask(text):
+        args = write_plans[0][1]
+        path = str(args.get("path") or "")
+        content = str(args.get("content") or "")
+        # Named-path workspace_read first. It spends a slot; write + verify
+        # take the other two. Smoke stays a post-step.
+        pre_plans = plans_before_write(text, path)
+        if pre_plans:
             try:
-                pre = run_natural_inspect(text)
+                from realai.cli.craft import apply_workspace, run_tools
+
+                apply_workspace()
+                pre = run_tools(pre_plans)
             except Exception:
                 pre = []
             if pre:
                 meta["pre_inspect"] = pre
                 used.extend(str(tr.get("tool") or "?") for tr in pre)
-        args = write_plans[0][1]
-        path = str(args.get("path") or "")
-        content = str(args.get("content") or "")
         try:
             result = run_natural_write(path, content, mode=str(args.get("mode") or "overwrite"))
         except Exception as exc:
@@ -1122,7 +1384,7 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
             )
             return meta
         verify = verify_natural_write(path)
-        used.append("read")
+        used.append("workspace_read")
         # Post-step health GET. Not counted in MAX_TOOLS_THIS_TURN.
         smoke = post_write_smoke()
         meta["smoke"] = smoke
@@ -1180,19 +1442,19 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
         return meta
 
     extras = plan_natural_auto(text)
-    inspect_needed = looks_like_repo_ask(text) and not any(k == "learn" for k, _ in extras)
-    if not (inspect_needed or extras):
+    named = named_workspace_paths(text)
+    # A learn ask skips the pwd storm, but a named file is still read first.
+    inspect_needed = (looks_like_repo_ask(text) or bool(named)) and not (
+        looks_like_learn_ask(text) and not named
+    )
+    if not (inspect_needed or extras or named):
         return meta
 
     meta["should_ground"] = True
     meta["apply_model_writes"] = bool(patch_ask)
     results = []
     try:
-        if inspect_needed:
-            results.extend(run_natural_inspect(text))
-        budget = max(0, MAX_TOOLS_THIS_TURN - len(results))
-        if extras and budget:
-            results.extend(run_natural_auto(extras[:budget], text))
+        results.extend(run_natural_turn(text))
     except Exception as exc:
         meta["admit_failure"] = True
         meta["error"] = str(exc)
