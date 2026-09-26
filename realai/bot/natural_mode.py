@@ -40,7 +40,7 @@ CHAT_ABORT_SECONDS = 180
 # shapes coexist. Hat choice itself is per-turn (see hat_routing.infer_hat).
 NATURAL_REPLY_CONTRACT = (
     "REPLY CONTRACT: inferred hat card, then four short lines.\n"
-    "Mode Active: Hive | One-tree | Builder | RackUp (automatic, no toggle).\n"
+    "Mode Active: Hive | Inspect | Patch | Smoke (automatic, no toggle).\n"
     "Action Taken: 1-2 sentences.\n"
     "Key Results: 2-3 bullets.\n"
     "Next Recommended Step: one follow-up.\n"
@@ -678,7 +678,7 @@ def format_operator_reply(
     changed: str,
     verify: str,
     nxt: str,
-    hat: str = "One-tree",
+    hat: str = "Inspect",
     extra: str = "",
 ) -> str:
     """Hat card plus the Summary / What changed / Verify / Next contract.
@@ -704,7 +704,7 @@ def format_operator_reply(
     return card + "\n\n" + legacy
 
 
-def ensure_mode_active(text: str, hat: str = "One-tree") -> str:
+def ensure_mode_active(text: str, hat: str = "Inspect") -> str:
     """Put ``Mode Active`` on the first line when a reply does not have it."""
     from realai.bot.hat_routing import normalize_hat
 
@@ -817,7 +817,7 @@ def format_write_verified_reply(
     write_result: Dict[str, Any],
     verify: Dict[str, Any],
     smoke: Optional[Dict[str, Any]] = None,
-    hat: str = "Builder",
+    hat: str = "Patch",
 ) -> str:
     """Write reply in the operator contract. Smoke failure is not success."""
     from realai.bot.hat_routing import raw_diagnostic_appendix
@@ -880,7 +880,7 @@ def _operator_failure(
     *,
     verify: str = "FAIL",
     nxt: str = "Narrow the ask and retry.",
-    hat: str = "One-tree",
+    hat: str = "Inspect",
 ) -> str:
     return scrub_unearned_landed(
         format_operator_reply(
@@ -932,7 +932,7 @@ def finalize_natural_choice_text(
     earned = bool(write_ok and smoke_ok)
     from realai.bot.hat_routing import normalize_hat, raw_diagnostic_appendix
 
-    hat = normalize_hat(str(nat.get("hat") or "One-tree"))
+    hat = normalize_hat(str(nat.get("hat") or "Inspect"))
     body = scrub_unearned_landed(text or "", write_ok=earned)
     if reply_has_contract(body):
         body = ensure_mode_active(body, hat)
@@ -1251,7 +1251,7 @@ def format_grounding_block(
     return f"{user_text}\n\n{tools_txt}\n\n{follow}"
 
 
-def failure_reply(results: List[Dict[str, Any]], hat: str = "One-tree") -> str:
+def failure_reply(results: List[Dict[str, Any]], hat: str = "Inspect") -> str:
     from realai.bot.hat_routing import raw_diagnostic_appendix, service_down_visible
 
     bits: List[str] = []

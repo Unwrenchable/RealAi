@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 class TestInferHat(unittest.TestCase):
     def test_only_four_hats(self):
-        self.assertEqual(HATS, ("Hive", "One-tree", "Builder", "RackUp"))
+        self.assertEqual(HATS, ("Hive", "Inspect", "Patch", "Smoke"))
         prompts = [
             "what's the hive health",
             "read console.html",
@@ -39,9 +39,17 @@ class TestInferHat(unittest.TestCase):
         ]
         for prompt in prompts:
             self.assertIn(infer_hat(prompt), HATS, prompt)
-        self.assertEqual(normalize_hat("Wizard"), "One-tree")
-        self.assertEqual(normalize_hat("rack up"), "RackUp")
-        self.assertEqual(normalize_hat(""), "One-tree")
+        self.assertEqual(normalize_hat("Wizard"), "Inspect")
+        self.assertEqual(normalize_hat("inspect"), "Inspect")
+        self.assertEqual(normalize_hat("patch"), "Patch")
+        self.assertEqual(normalize_hat("smoke"), "Smoke")
+        self.assertEqual(normalize_hat("hive"), "Hive")
+        # Clean cut: old hat strings are not aliases.
+        self.assertEqual(normalize_hat("One-tree"), "Inspect")
+        self.assertEqual(normalize_hat("Builder"), "Inspect")
+        self.assertEqual(normalize_hat("RackUp"), "Inspect")
+        self.assertEqual(normalize_hat("rack up"), "Inspect")
+        self.assertEqual(normalize_hat(""), "Inspect")
 
     def test_hive_prompts(self):
         for prompt in (
@@ -55,7 +63,7 @@ class TestInferHat(unittest.TestCase):
         ):
             self.assertEqual(infer_hat(prompt), "Hive", prompt)
 
-    def test_one_tree_prompts(self):
+    def test_inspect_prompts(self):
         for prompt in (
             "what's in this repo",
             "read console.html",
@@ -65,9 +73,9 @@ class TestInferHat(unittest.TestCase):
             "list the workspace files",
             "scan the codebase",
         ):
-            self.assertEqual(infer_hat(prompt), "One-tree", prompt)
+            self.assertEqual(infer_hat(prompt), "Inspect", prompt)
 
-    def test_builder_prompts(self):
+    def test_patch_prompts(self):
         for prompt in (
             "fix the hive health check",
             "refactor realai/bot/natural_mode.py",
@@ -76,9 +84,9 @@ class TestInferHat(unittest.TestCase):
             "create file docs/note.txt with content hi",
             "implement the missing handler",
         ):
-            self.assertEqual(infer_hat(prompt), "Builder", prompt)
+            self.assertEqual(infer_hat(prompt), "Patch", prompt)
 
-    def test_rackup_prompts(self):
+    def test_smoke_prompts(self):
         for prompt in (
             "smoke GET /health",
             "deploy and validate the API",
@@ -86,9 +94,9 @@ class TestInferHat(unittest.TestCase):
             "curl http://127.0.0.1:8001/health",
             "hit the health endpoint",
         ):
-            self.assertEqual(infer_hat(prompt), "RackUp", prompt)
+            self.assertEqual(infer_hat(prompt), "Smoke", prompt)
 
-    def test_ambiguous_prefers_one_tree_for_readonly_inspect(self):
+    def test_ambiguous_prefers_inspect_for_readonly_inspect(self):
         # Noun collisions (smoke, agents, orchestration) lose to a real read.
         for prompt in (
             "",
@@ -99,28 +107,30 @@ class TestInferHat(unittest.TestCase):
             "audit this repo",
             "audit console.html",
         ):
-            self.assertEqual(infer_hat(prompt), "One-tree", prompt)
+            self.assertEqual(infer_hat(prompt), "Inspect", prompt)
 
-    def test_write_verb_beats_hive_and_rackup(self):
-        self.assertEqual(infer_hat("fix the hive health check"), "Builder")
-        self.assertEqual(infer_hat("patch the health endpoint and smoke it"), "Builder")
-        self.assertEqual(infer_hat("fix the endpoint then smoke it"), "Builder")
+    def test_write_verb_beats_hive_and_smoke(self):
+        self.assertEqual(infer_hat("fix the hive health check"), "Patch")
+        self.assertEqual(infer_hat("patch the health endpoint and smoke it"), "Patch")
+        self.assertEqual(infer_hat("fix the endpoint then smoke it"), "Patch")
 
     def test_smoke_action_beats_a_supporting_read(self):
-        # A smoke verb is an action. "read the smoke test" stays One-tree.
-        self.assertEqual(infer_hat("smoke the hive and read console.html"), "RackUp")
-        self.assertEqual(infer_hat("read the smoke test"), "One-tree")
+        # A smoke verb is an action. "read the smoke test" stays Inspect.
+        self.assertEqual(infer_hat("smoke the hive and read console.html"), "Smoke")
+        self.assertEqual(infer_hat("read the smoke test"), "Inspect")
 
-    def test_coach_is_not_the_rackup_hat(self):
-        self.assertEqual(infer_hat("give me a rackup coach practice plan"), "One-tree")
-        self.assertNotEqual(infer_hat("atomicfizz coach wrist hint"), "RackUp")
-        # A real HTTP verb still selects RackUp even if Coach is named.
-        self.assertEqual(infer_hat("smoke the rackup coach API"), "RackUp")
+    def test_coach_and_rackup_product_are_not_the_smoke_hat(self):
+        self.assertEqual(infer_hat("give me a rackup coach practice plan"), "Inspect")
+        self.assertNotEqual(infer_hat("atomicfizz coach wrist hint"), "Smoke")
+        self.assertEqual(infer_hat("explain rackup payouts"), "Inspect")
+        self.assertEqual(infer_hat("rackup pyramid rules"), "Inspect")
+        # A real HTTP verb still selects Smoke even if Coach is named.
+        self.assertEqual(infer_hat("smoke the rackup coach API"), "Smoke")
 
     def test_grounding_dump_does_not_flip_the_hat(self):
         ask = "read console.html"
         dumped = ask + "\n\nTool results\nsmoke GET /health hive agents fix the file"
-        self.assertEqual(infer_hat(dumped), "One-tree")
+        self.assertEqual(infer_hat(dumped), "Inspect")
 
 
 class TestHatInPrefixAndReply(unittest.TestCase):
@@ -137,16 +147,17 @@ class TestHatInPrefixAndReply(unittest.TestCase):
         self.assertIn("Service Unavailable", text)
 
     def test_explicit_hat_overrides_prompt(self):
-        text = chat_system_prefix("operator-bit", user_text="read console.html", hat="RackUp")
-        self.assertIn("Mode Active: RackUp", text)
-        self.assertIn("HTTP client", text)
-        self.assertNotIn("Mode Active: One-tree", text)
+        text = chat_system_prefix("operator-bit", user_text="read console.html", hat="Smoke")
+        self.assertIn("Mode Active: Smoke", text)
+        self.assertIn("HTTP/smoke", text)
+        self.assertIn("not the RackUp product", text)
+        self.assertNotIn("Mode Active: Inspect", text)
 
     def test_empty_call_does_not_invent_a_turn_hat(self):
         text = chat_system_prefix("")
         # The standing contract names the four hats. A specific Mode Active
         # line is only added once a prompt or hat is supplied.
-        self.assertIn("Mode Active: Hive | One-tree | Builder | RackUp", text)
+        self.assertIn("Mode Active: Hive | Inspect | Patch | Smoke", text)
         self.assertNotIn("Tool bias this turn:", text)
 
     def test_reply_card_coexists_with_legacy_contract(self):
@@ -155,9 +166,9 @@ class TestHatInPrefixAndReply(unittest.TestCase):
             changed="none",
             verify="PASS read",
             nxt="Ask for a change.",
-            hat="One-tree",
+            hat="Inspect",
         )
-        self.assertTrue(reply.startswith("Mode Active: One-tree"))
+        self.assertTrue(reply.startswith("Mode Active: Inspect"))
         self.assertIn("Action Taken:", reply)
         self.assertIn("Key Results:", reply)
         self.assertIn("Next Recommended Step:", reply)
@@ -177,9 +188,9 @@ class TestHatInPrefixAndReply(unittest.TestCase):
                 "error": "URLError: [Errno 111] Connection refused",
                 "post_step": True,
             },
-            hat="Builder",
+            hat="Patch",
         )
-        self.assertIn("Mode Active: Builder", reply)
+        self.assertIn("Mode Active: Patch", reply)
         self.assertIn("hive smoke failed", reply)
         self.assertIn("Service Unavailable", reply)
         self.assertIn("FAIL", reply)
@@ -197,10 +208,10 @@ class TestHatInPrefixAndReply(unittest.TestCase):
 
         shaped, smoke = finalize_natural_choice_text(
             "SHIPPED the patch in app.py",
-            {"should_ground": True, "used_tools": ["read"], "hat": "Builder"},
+            {"should_ground": True, "used_tools": ["read"], "hat": "Patch"},
             applied=[],
         )
-        self.assertIn("Mode Active: Builder", shaped)
+        self.assertIn("Mode Active: Patch", shaped)
         self.assertIn("PROPOSED", shaped)
         self.assertNotIn("SHIPPED", shaped)
         self.assertNotIn("LANDED", shaped)
@@ -211,19 +222,19 @@ class TestHatInPrefixAndReply(unittest.TestCase):
         plans = plan_natural_turn("propose a css change for console.html")
         self.assertEqual([name for name, _ in plans], ["workspace_read"])
         self.assertEqual(plans[0][1]["path"], "apps/vscode/webview/console.html")
-        self.assertEqual(infer_hat("propose a css change for console.html"), "Builder")
+        self.assertEqual(infer_hat("propose a css change for console.html"), "Patch")
         # Hat bias is guidance. It does not spend a fourth tool or skip the read.
         self.assertLessEqual(len(plans), MAX_TOOLS_THIS_TURN)
-        self.assertIn("workspace_read", hat_turn_prefix("One-tree"))
-        self.assertIn("propose", hat_turn_prefix("Builder").lower())
+        self.assertIn("workspace_read", hat_turn_prefix("Inspect"))
+        self.assertIn("propose", hat_turn_prefix("Patch").lower())
 
     def test_grounding_records_hat_and_bias(self):
         body = {"messages": [{"role": "user", "content": "what's in this repo"}]}
         meta = apply_natural_grounding(body, "what's in this repo")
-        self.assertEqual(meta.get("hat"), "One-tree")
+        self.assertEqual(meta.get("hat"), "Inspect")
         if meta.get("should_ground") and not meta.get("admit_failure"):
             content = str((body["messages"][-1] or {}).get("content") or "")
-            self.assertIn("Mode Active: One-tree", content)
+            self.assertIn("Mode Active: Inspect", content)
             self.assertIn("Tool bias this turn:", content)
             self.assertIn("Never say LANDED", content)
 
@@ -266,12 +277,12 @@ class TestOrchestratorHatHook(unittest.TestCase):
         body = _enrich_chat_body(
             {
                 "messages": [{"role": "user", "content": "smoke GET /health"}],
-                "realai_hat": "RackUp",
+                "realai_hat": "Smoke",
             }
         )
-        self.assertEqual(body.get("realai_hat"), "RackUp")
+        self.assertEqual(body.get("realai_hat"), "Smoke")
         system = body["messages"][0]["content"]
-        self.assertIn("Mode Active: RackUp", system)
+        self.assertIn("Mode Active: Smoke", system)
         self.assertIn("MAX_TOOLS_THIS_TURN=3", system)
         # Live hive size stays a standing fact, not a catalog dump.
         self.assertIn("GET /v1/agents stays", system)
@@ -293,8 +304,10 @@ class TestDirectiveMentionsHats(unittest.TestCase):
         text = load_operator_directive()
         self.assertIn("Reply contract", text)
         self.assertIn("Mode Active", text)
-        self.assertIn("One-tree", text)
-        self.assertIn("RackUp", text)
+        self.assertIn("Inspect", text)
+        self.assertIn("Patch", text)
+        self.assertIn("Smoke", text)
+        self.assertIn("not the RackUp product", text)
         self.assertIn("MAX_TOOLS_THIS_TURN=3", text)
         self.assertIn("atomic_fizz_hive_client", text)
         self.assertIn("No hat pills", text)

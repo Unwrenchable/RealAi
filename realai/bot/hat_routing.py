@@ -5,41 +5,38 @@ and there is no fifth hat.
 
 Precedence (first decisive match):
 
-1. **Builder** — a clear write / patch / generate / fix / propose-a-change
-   verb. Wins over Hive and RackUp ("fix the hive health check",
+1. **Patch** — a clear write / patch / generate / fix / propose-a-change
+   verb. Wins over Hive and Smoke ("fix the hive health check",
    "patch the endpoint then smoke it").
-2. **One-tree** — read-only inspect (read, grep, what's in, list files,
-   a named path) when no Builder verb and no RackUp *action* verb.
+2. **Inspect** — read-only inspect (read, grep, what's in, list files,
+   a named path) when no Patch verb and no Smoke *action* verb.
    This is the tie-break for ambiguous inspect ("read the smoke test",
    "grep agents", "what's in v3_orchestrator.py").
-3. **RackUp** — deploy, smoke, test, or HTTP/API validation. RackUp is
-   the hive HTTP client, not a second product tree, and not Coach.
+3. **Smoke** — deploy, smoke, test, or HTTP/API validation. Smoke is
+   the HTTP/smoke hat only. It is not the RackUp product and not Coach.
 4. **Hive** — system state, health, orchestration, agents, learn queue.
-5. **One-tree** — anything still ambiguous, including empty prompts.
+5. **Inspect** — anything still ambiguous, including empty prompts.
 
-``rackup coach`` / ``atomicfizz coach`` do not select RackUp unless a
+``rackup coach`` / ``atomicfizz coach`` do not select Smoke unless a
 real deploy/smoke/HTTP verb is also present. Coach stays a plugin.
+A bare RackUp product mention is not a Smoke ask.
 """
 from __future__ import annotations
 
 import re
 
-HATS = ("Hive", "One-tree", "Builder", "RackUp")
+HATS = ("Hive", "Inspect", "Patch", "Smoke")
 
 _CANON = {
     "hive": "Hive",
-    "one-tree": "One-tree",
-    "onetree": "One-tree",
-    "one tree": "One-tree",
-    "builder": "Builder",
-    "rackup": "RackUp",
-    "rack-up": "RackUp",
-    "rack up": "RackUp",
+    "inspect": "Inspect",
+    "patch": "Patch",
+    "smoke": "Smoke",
 }
 
 # Clear code-change verbs. ``propose`` counts only when it is a change,
-# so "propose next steps" stays free for Hive / One-tree.
-_BUILDER_RE = re.compile(
+# so "propose next steps" stays free for Hive / Inspect.
+_PATCH_RE = re.compile(
     r"(?i)("
     r"\b(patch|refactor|implement|overwrite|regenerate)\b|"
     r"\bgenerate\b|"
@@ -64,7 +61,7 @@ _INSPECT_RE = re.compile(
 )
 
 # A named source file is a read-only inspect cue even without a read verb,
-# so "audit console.html" stays One-tree. "audit this repo" does not.
+# so "audit console.html" stays Inspect. "audit this repo" does not.
 _NAMED_FILE_RE = re.compile(
     r"(?i)(?<![\w./-])(?:[\w.-]+[\\/])+[\w.-]+\.\w+"
     r"|(?<![\w./-])[\w.-]+\.(?:py|html|md|json|ts|tsx|js|css|yml|yaml|toml)\b"
@@ -92,8 +89,8 @@ _HIVE_RE = re.compile(
 )
 
 # Verbs that mean "hit the hive over HTTP", not a filename that happens
-# to contain the word smoke.
-_RACK_ACTION_RE = re.compile(
+# to contain the word smoke. The RackUp product name is not a verb.
+_SMOKE_ACTION_RE = re.compile(
     r"(?i)("
     r"\b(deploy|redeploy|rollout)\b|"
     r"\b(run|do|start|kick)\s+(a\s+|the\s+)?smoke\b|"
@@ -112,8 +109,8 @@ _RACK_ACTION_RE = re.compile(
     r")"
 )
 
-_RACK_NOUN_RE = re.compile(
-    r"(?i)(\bsmoke\b|\bendpoint\b|\brackup\b|\bcurl\b|\bhttps?://)"
+_SMOKE_NOUN_RE = re.compile(
+    r"(?i)(\bsmoke\b|\bendpoint\b|\bcurl\b|\bhttps?://)"
 )
 
 _COACH_RE = re.compile(
@@ -133,68 +130,73 @@ HAT_TOOL_BIAS = {
         "diagnostics, topology, observability "
         "(doctor, agents, hive status). GET /v1/agents stays the live hive."
     ),
-    "One-tree": (
+    "Inspect": (
         "workspace_read, grep, scan. Read a named path before quoting it."
     ),
-    "Builder": (
+    "Patch": (
         "write, patch, or propose. Propose is not a write. "
         "Never say LANDED or shipped unless a write tool succeeded."
     ),
-    "RackUp": (
+    "Smoke": (
         "smoke, execute, and HTTP endpoint checks. "
-        "RackUp is the HTTP client for this hive."
+        "HTTP/smoke only. This hat is not the RackUp product."
     ),
 }
 
 
 def normalize_hat(value: str) -> str:
-    """Map aliases onto the four hats. Anything else is One-tree."""
+    """Map Hive, Inspect, Patch, and Smoke onto themselves.
+
+    Anything else, including the retired labels One-tree, Builder, and
+    RackUp, is Inspect. Those old strings are not aliases.
+    """
     key = " ".join(str(value or "").strip().lower().replace("_", " ").split())
     if not key:
-        return "One-tree"
+        return "Inspect"
     if key in _CANON:
         return _CANON[key]
     # Already-canonical spellings survive a case fold via _CANON.
-    return "One-tree"
+    return "Inspect"
 
 
-def _rack_flags(text: str) -> tuple[bool, bool]:
+def _smoke_flags(text: str) -> tuple[bool, bool]:
     """Return ``(action, any)`` after stripping Coach phrasing.
 
     Coach mentions drop the word ``rackup`` so a practice-plan ask is not
     an HTTP validation. A leftover deploy/smoke/HTTP verb still counts.
+    The RackUp product name alone is not a smoke noun.
     """
     sample = text or ""
     if _COACH_RE.search(sample):
         sample = _COACH_RE.sub(" ", sample)
         sample = re.sub(r"(?i)\brackup\b", " ", sample)
-    action = bool(_RACK_ACTION_RE.search(sample))
-    noun = action or bool(_RACK_NOUN_RE.search(sample))
+    action = bool(_SMOKE_ACTION_RE.search(sample))
+    noun = action or bool(_SMOKE_NOUN_RE.search(sample))
     return action, noun
 
 
 def infer_hat(prompt: str) -> str:
-    """Return Hive, One-tree, Builder, or RackUp for ``prompt``."""
+    """Return Hive, Inspect, Patch, or Smoke for ``prompt``."""
     text = (prompt or "").strip()
     if not text:
-        return "One-tree"
+        return "Inspect"
     # Grounding appends tool dumps after a blank line. Score the ask only.
     text = text.split("\n\n", 1)[0]
-    builder = bool(_BUILDER_RE.search(text))
+    patch = bool(_PATCH_RE.search(text))
     inspect = bool(_INSPECT_RE.search(text) or _NAMED_FILE_RE.search(text))
     hive = bool(_HIVE_RE.search(text))
-    rack_action, rack_any = _rack_flags(text)
+    smoke_action, smoke_any = _smoke_flags(text)
 
-    if builder:
-        return "Builder"
-    # Ambiguous read-only inspect beats Hive nouns and RackUp nouns.
-    if inspect and not rack_action:
-        return "One-tree"
-    if rack_action or (rack_any and not inspect):
-        return "RackUp"
+    if patch:
+        return "Patch"
+    # Ambiguous read-only inspect beats Hive nouns and Smoke nouns.
+    if inspect and not smoke_action:
+        return "Inspect"
+    if smoke_action or (smoke_any and not inspect):
+        return "Smoke"
     if hive:
         return "Hive"
-    return "One-tree"
+    return "Inspect"
 
 
 def hat_turn_prefix(hat: str) -> str:
