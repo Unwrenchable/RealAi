@@ -50,7 +50,7 @@ class TestConsoleLayoutSmoke(unittest.TestCase):
         self.assertIn('data-core="verify"', text)
         self.assertIn("console_verify_pack", text)
         self.assertIn("learn status", text)
-        self.assertIn("Summary / What changed / Verify / Next", text)
+        self.assertIn("Mode / Action / Results / Next, or Goal / Now / Then", text)
         self.assertIn(".core-desk .core-secondary{display:none}", text)
         self.assertIn('data-p="what\'s in this repo"', text)
         self.assertIn('data-p="learn from this folder"', text)

@@ -34,45 +34,39 @@ def is_talk_easy(text: str) -> bool:
     return bool(_HELP_RE.match(raw))
 
 
-def capability_card() -> str:
-    """Deterministic, friendly operator card — live counts when catalogs load."""
-    abilities = tools = agents = None
-    try:
-        from realai.ability_catalog import build_catalog
-
-        abilities = len((build_catalog() or {}).get("abilities") or [])
-    except Exception:
-        pass
-    try:
-        from realai.v3_runtime_bridge import tools_catalog
-
-        tools = len(tools_catalog() or [])
-    except Exception:
-        pass
-    try:
-        from realai.orchestration.v3_orchestrator import _load_agents
-
-        agents = len(_load_agents() or [])
-    except Exception:
-        pass
-
-    ab = str(abilities) if abilities is not None else "60+"
-    tl = str(tools) if tools is not None else "100+"
-    ag = str(agents) if agents is not None else "200+"
-
+def greeting_card() -> str:
+    """Short hello. Not a capability list and not a slash manual."""
     return (
         "Hey — RealAI, local on this PC.\n"
         "Just talk. I'll open files, fix things, and check my work when you ask.\n"
-        f"({tl} tools / {ab} abilities / {ag} agents ready — you don't need slash commands.)\n"
         "What do you need?"
     )
+
+
+def capability_card() -> str:
+    """Greeting used when a model reply collapses to generic assistant filler.
+
+    Capability and status asks go through ``format_live_manifest`` instead
+    of a canned tool/ability/agent count.
+    """
+    return greeting_card()
 
 
 def try_talk_easy(text: str) -> Optional[Dict[str, Any]]:
     if not is_talk_easy(text):
         return None
+    raw = (text or "").strip()
+    try:
+        from realai.bot.live_manifest import format_live_manifest, is_manifest_turn
+
+        if is_manifest_turn(raw):
+            card = format_live_manifest(raw)
+        else:
+            card = greeting_card()
+    except Exception:
+        card = greeting_card()
     return {
         "surface": "talk",
         "tool": "talk_easy",
-        "result": {"ok": True, "card": True, "text": capability_card()},
+        "result": {"ok": True, "card": True, "text": card},
     }

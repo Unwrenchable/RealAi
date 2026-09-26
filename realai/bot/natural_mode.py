@@ -36,25 +36,26 @@ MAX_TOOLS_THIS_TURN = 3
 CHAT_ABORT_SECONDS = 180
 
 # Always-on reply contract. Also documented in docs/CONSOLE_OPERATOR_DIRECTIVE.md.
-# The hat card leads; the four lines from the operator contract stay so both
-# shapes coexist. Hat choice itself is per-turn (see hat_routing.infer_hat).
+# ROLE hats and the job class are per turn (see hat_routing). No pills.
 NATURAL_REPLY_CONTRACT = (
-    "REPLY CONTRACT: inferred hat card, then four short lines.\n"
-    "Mode Active: Hive | Inspect | Patch | Smoke (automatic, no toggle).\n"
-    "Action Taken: 1-2 sentences.\n"
-    "Key Results: 2-3 bullets.\n"
-    "Next Recommended Step: one follow-up.\n"
-    "Summary: one sentence.\n"
-    "What changed: paths or none.\n"
-    "Verify: pass or fail. Never claim success if hive smoke failed.\n"
-    "Next: one step.\n"
+    "REPLY CONTRACT: one ROLE hat and one job class per turn. No pills, no hat switcher.\n"
+    "Mode: Hive | One-Tree | Builder | RackUp (automatic).\n"
+    "EXECUTE (one concrete act): Mode / Action / Results (2-3 facts) / Next.\n"
+    "PHASE (open or architectural): Mode / Goal / Now / Then "
+    "(2-4 of See, Change, Prove, Keep). Blockers only if real.\n"
+    "Mixed: short PHASE, then one EXECUTE next step. No 12-item roadmap unless asked.\n"
+    "Capability or status: live manifest from probes. "
+    "Failed probe: one warning line. Never raw JSON in the card.\n"
     "CAPS: MAX_TOOLS_THIS_TURN=3. Chat abort 180s. Do not loosen.\n"
     "Never say LANDED or shipped unless a write tool succeeded. Propose is not a write. "
     "Named paths need workspace_read. No raw JSON in the main reply. "
-    "Service down: say Service Unavailable and retry."
+    "Service down: say Service Unavailable and retry. No silent learn POST."
 )
 
 _REPLY_HEADINGS = ("Summary:", "What changed:", "Verify:", "Next:")
+_EXECUTE_HEADINGS = ("Action:", "Results:", "Next:")
+_PHASE_HEADINGS = ("Goal:", "Now:", "Then:")
+_PHASE_NAMES = ("See", "Change", "Prove", "Keep")
 
 _SIMPLE_PATH_ASK_RE = re.compile(
     r"(?i)\b(quote|read|open|show|propose|suggest|what.?s\s+in|whats\s+in|marker|contents?\s+of)\b"
@@ -678,48 +679,114 @@ def format_operator_reply(
     changed: str,
     verify: str,
     nxt: str,
-    hat: str = "Inspect",
+    hat: str = "One-Tree",
     extra: str = "",
 ) -> str:
-    """Hat card plus the Summary / What changed / Verify / Next contract.
+    """EXECUTE card: Mode / Action / Results (2-3 facts) / Next.
 
-    Mode Active leads. The four legacy lines stay so older checks and the
-    model contract still match.
+    Verify and changed stay as result facts. A write that failed smoke
+    still says so in Results. This is one concrete act, not a roadmap.
     """
     from realai.bot.hat_routing import normalize_hat
 
     name = normalize_hat(hat)
-    card = (
-        f"Mode Active: {name}\n"
-        f"Action Taken: {_one_line(summary)}\n"
-        f"Key Results:\n{_key_result_lines(changed, verify, extra)}\n"
-        f"Next Recommended Step: {_one_line(nxt)}"
-    )
-    legacy = (
-        f"Summary: {_one_line(summary)}\n"
-        f"What changed: {_one_line(changed)}\n"
-        f"Verify: {_one_line(verify)}\n"
+    return (
+        f"Mode: {name}\n"
+        f"Action: {_one_line(summary)}\n"
+        f"Results:\n{_key_result_lines(changed, verify, extra)}\n"
         f"Next: {_one_line(nxt)}"
     )
-    return card + "\n\n" + legacy
 
 
-def ensure_mode_active(text: str, hat: str = "Inspect") -> str:
-    """Put ``Mode Active`` on the first line when a reply does not have it."""
+def format_phase_reply(
+    *,
+    goal: str,
+    now: str,
+    then_steps: Optional[List[Tuple[str, str]]] = None,
+    hat: str = "One-Tree",
+    blockers: str = "",
+    job: str = "PHASE",
+    execute_next: Optional[Dict[str, Any]] = None,
+) -> str:
+    """PHASE card: Mode / Goal / Now / Then. Blockers only when real.
+
+    Then lists 1-3 of Change, Prove, Keep (Now is See, so the card stays
+    inside 2-4 phases). MIXED keeps a single Then line and adds one
+    EXECUTE next step. Empty blocker text is omitted.
+    """
+    from realai.bot.hat_routing import normalize_hat, normalize_job
+
+    name = normalize_hat(hat)
+    kind = normalize_job(job)
+    steps: List[Tuple[str, str]] = []
+    for label, detail in list(then_steps or []):
+        phase = str(label or "").strip().title()
+        if phase not in _PHASE_NAMES or phase == "See":
+            phase = "Change"
+        text = _one_line(detail)
+        if text.lower() == "none":
+            continue
+        steps.append((phase, text))
+    if not steps:
+        steps = [("Change", "one concrete change")]
+    if kind == "MIXED":
+        steps = steps[:1]
+    else:
+        steps = steps[:3]
+    lines = [
+        f"Mode: {name}",
+        f"Goal: {_one_line(goal)}",
+        f"Now: See — {_one_line(now)}",
+        "Then:",
+    ]
+    for phase, detail in steps:
+        lines.append(f"- {phase} — {detail}")
+    block = _one_line(blockers, 180) if str(blockers or "").strip() else ""
+    if block and block.lower() not in {"none", "n/a", "no", "nothing"}:
+        lines.append(f"Blockers: {block}")
+    if kind == "MIXED":
+        step = execute_next if isinstance(execute_next, dict) else {}
+        action = _one_line(step.get("action") or step.get("summary") or "Do the next concrete step.")
+        facts = step.get("results")
+        if isinstance(facts, list) and facts:
+            result_body = "\n".join(f"- {_one_line(row, 140)}" for row in facts[:3])
+        else:
+            result_body = _key_result_lines(
+                str(step.get("changed") or "none"),
+                str(step.get("verify") or "not run yet"),
+                str(step.get("extra") or ""),
+            )
+        nxt = _one_line(step.get("nxt") or step.get("next") or action)
+        lines.extend(
+            [
+                f"Action: {action}",
+                "Results:",
+                result_body,
+                f"Next: {nxt}",
+            ]
+        )
+    return "\n".join(lines)
+
+
+def ensure_mode_active(text: str, hat: str = "One-Tree") -> str:
+    """Put ``Mode:`` on the first line when a reply does not have it."""
     from realai.bot.hat_routing import normalize_hat
 
     raw = text or ""
-    if re.search(r"(?im)^\s*Mode Active\s*:", raw):
+    if re.search(r"(?im)^\s*Mode(?:\s+Active)?\s*:", raw):
         return raw
     name = normalize_hat(hat)
     if not raw.strip():
-        return f"Mode Active: {name}"
-    return f"Mode Active: {name}\n{raw}"
+        return f"Mode: {name}"
+    return f"Mode: {name}\n{raw}"
 
 
 def reply_has_contract(text: str) -> bool:
     low = (text or "").lower()
-    return all(h.lower() in low for h in _REPLY_HEADINGS)
+    legacy = all(h.lower() in low for h in _REPLY_HEADINGS)
+    execute = all(h.lower() in low for h in _EXECUTE_HEADINGS)
+    phase = all(h.lower() in low for h in _PHASE_HEADINGS)
+    return legacy or execute or phase
 
 
 def scrub_unearned_landed(text: str, *, write_ok: bool) -> str:
@@ -817,7 +884,7 @@ def format_write_verified_reply(
     write_result: Dict[str, Any],
     verify: Dict[str, Any],
     smoke: Optional[Dict[str, Any]] = None,
-    hat: str = "Patch",
+    hat: str = "Builder",
 ) -> str:
     """Write reply in the operator contract. Smoke failure is not success."""
     from realai.bot.hat_routing import raw_diagnostic_appendix
@@ -880,7 +947,7 @@ def _operator_failure(
     *,
     verify: str = "FAIL",
     nxt: str = "Narrow the ask and retry.",
-    hat: str = "Inspect",
+    hat: str = "One-Tree",
 ) -> str:
     return scrub_unearned_landed(
         format_operator_reply(
@@ -930,26 +997,56 @@ def finalize_natural_choice_text(
         ", ".join(str(t) for t in tools) if tools else "none"
     )
     earned = bool(write_ok and smoke_ok)
-    from realai.bot.hat_routing import normalize_hat, raw_diagnostic_appendix
+    from realai.bot.hat_routing import normalize_hat, normalize_job, raw_diagnostic_appendix
 
-    hat = normalize_hat(str(nat.get("hat") or "Inspect"))
+    hat = normalize_hat(str(nat.get("hat") or "One-Tree"))
+    job = normalize_job(str(nat.get("job") or "EXECUTE"))
     body = scrub_unearned_landed(text or "", write_ok=earned)
     if reply_has_contract(body):
         body = ensure_mode_active(body, hat)
         if smoke is not None and not smoke_ok and "fail" not in body.lower():
-            body = body.rstrip() + "\nVerify: " + verify
+            body = body.rstrip() + "\nResults:\n- " + verify
         if smoke_raw and "View raw diagnostic payload" not in body:
             body = body.rstrip() + raw_diagnostic_appendix(smoke_raw)
         return body, smoke
     first = body.split("\n", 1)[0] if body else ""
     summary = _one_line(first, 220) if first else "Tools finished."
-    shaped = format_operator_reply(
-        summary=summary,
-        changed=changed,
-        verify=verify,
-        nxt="Continue from Verify.",
-        hat=hat,
-    )
+    blockers = "" if smoke_ok else verify
+    if job == "PHASE":
+        shaped = format_phase_reply(
+            goal=summary,
+            now="See what the tools just returned.",
+            then_steps=[
+                ("Change", "one concrete change from that read"),
+                ("Prove", verify),
+            ],
+            hat=hat,
+            blockers=blockers,
+            job="PHASE",
+        )
+    elif job == "MIXED":
+        shaped = format_phase_reply(
+            goal=summary,
+            now="See the current state.",
+            then_steps=[("Change", "one next edit")],
+            hat=hat,
+            blockers=blockers,
+            job="MIXED",
+            execute_next={
+                "action": summary,
+                "changed": changed,
+                "verify": verify,
+                "nxt": "Continue from the result facts.",
+            },
+        )
+    else:
+        shaped = format_operator_reply(
+            summary=summary,
+            changed=changed,
+            verify=verify,
+            nxt="Continue from the result facts.",
+            hat=hat,
+        )
     if body and body not in shaped:
         shaped += "\n\n" + body
     if smoke_raw and "View raw diagnostic payload" not in shaped:
@@ -1237,21 +1334,19 @@ def format_grounding_block(
             "If a tool errored, admit it. Never invent file contents, paths, "
             "ability output, agent results, or API results."
         )
-    from realai.bot.hat_routing import hat_turn_prefix, infer_hat
+    from realai.bot.hat_routing import hat_turn_prefix, infer_hat, infer_job_class
 
     name = hat or infer_hat(user_text)
+    job = infer_job_class(user_text)
     follow += (
-        "\n\nReply shape after these tools: Mode Active, Action Taken, "
-        "Key Results, Next Recommended Step, then Summary / What changed / "
-        "Verify / Next. Short sentences. Never say LANDED unless a write tool "
-        "succeeded. "
+        "\n\nShort sentences. Never say LANDED unless a write tool succeeded. "
         f"MAX_TOOLS_THIS_TURN={MAX_TOOLS_THIS_TURN}. Abort {CHAT_ABORT_SECONDS}s.\n"
-        + hat_turn_prefix(name)
+        + hat_turn_prefix(name, job)
     )
     return f"{user_text}\n\n{tools_txt}\n\n{follow}"
 
 
-def failure_reply(results: List[Dict[str, Any]], hat: str = "Inspect") -> str:
+def failure_reply(results: List[Dict[str, Any]], hat: str = "One-Tree") -> str:
     from realai.bot.hat_routing import raw_diagnostic_appendix, service_down_visible
 
     bits: List[str] = []
@@ -1394,10 +1489,11 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
     if not text or is_explicit_command(text):
         return meta
 
-    from realai.bot.hat_routing import infer_hat, raw_diagnostic_appendix
+    from realai.bot.hat_routing import infer_hat, infer_job_class, raw_diagnostic_appendix
 
     hat = infer_hat(text)
     meta["hat"] = hat
+    meta["job"] = infer_job_class(text)
 
     session_id = _session_id_from_body(body if isinstance(body, dict) else {})
     bind_session_workspace_for_request(session_id)

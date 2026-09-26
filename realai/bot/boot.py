@@ -91,9 +91,10 @@ def chat_system_prefix(
     the capped directive body. Sticky operator memory is appended after that
     clip so a long directive cannot drop the facts.
 
-    When ``hat`` or ``user_text`` is set, a one-turn Mode Active block is
-    appended (inferred from the prompt when ``hat`` is omitted). Empty calls
-    stay hat-free so a prefix with no prompt does not invent a turn.
+    When ``hat`` or ``user_text`` is set, a one-turn Mode block is appended
+    (inferred from the prompt when ``hat`` is omitted) plus the job class.
+    Capability and status asks also get a live manifest. Empty calls stay
+    hat-free so a prefix with no prompt does not invent a turn.
     """
     parts: List[str] = [HARD_IDENTITY_LOCK]
     try:
@@ -130,17 +131,31 @@ def chat_system_prefix(
     if memory and memory not in "\n".join(parts):
         parts.append(memory)
     try:
-        from realai.bot.hat_routing import hat_turn_prefix, infer_hat, normalize_hat
+        from realai.bot.hat_routing import (
+            hat_turn_prefix,
+            infer_hat,
+            infer_job_class,
+            normalize_hat,
+        )
 
         resolved = ""
+        ask = (user_text or "").strip()
         if hat:
             resolved = normalize_hat(hat)
-        elif (user_text or "").strip():
-            resolved = infer_hat(user_text)
+        elif ask:
+            resolved = infer_hat(ask)
         if resolved:
-            note = hat_turn_prefix(resolved)
+            job = infer_job_class(ask) if ask else "EXECUTE"
+            note = hat_turn_prefix(resolved, job)
             if note and note not in "\n".join(parts):
                 parts.append(note)
+        if ask and resolved:
+            from realai.bot.live_manifest import format_live_manifest, is_manifest_turn
+
+            if is_manifest_turn(ask):
+                card = format_live_manifest(ask, hat=resolved)
+                if card and card not in "\n".join(parts):
+                    parts.append(card)
     except Exception:
         pass
     return "\n\n".join(parts)
