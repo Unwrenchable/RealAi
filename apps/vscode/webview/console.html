@@ -265,6 +265,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
         <button type="button" class="pill btn" data-core="write" title="workspace_write">write</button>
         <button type="button" class="pill btn" data-core="git-status" title="git status">git status</button>
         <button type="button" class="pill btn" data-core="hive-health" title="ability.atomic_fizz_hive_client health">hive health</button>
+        <button type="button" class="pill btn" data-core="verify" title="ability.console_verify_pack">verify</button>
         <button type="button" class="pill btn" id="coreMore" title="More core desk actions" hidden>More</button>
         <span class="core-secondary" id="coreSecondary">
           <button type="button" class="pill btn" data-core="git-diff" title="git diff --stat">git diff</button>
@@ -1240,6 +1241,15 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
         name:'ability.atomic_fizz_hive_client',
         input: prompt,
         context:{ action:'chat', prompt: prompt, input: prompt }
+      });
+      return;
+    }
+    if (kind === 'verify') {
+      vscode.postMessage({
+        command:'runAbility',
+        name:'ability.console_verify_pack',
+        input:'verify',
+        context:{ action:'verify', input:'verify' }
       });
       return;
     }

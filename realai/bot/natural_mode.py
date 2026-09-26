@@ -485,7 +485,9 @@ def match_ability_ids(text: str) -> List[str]:
 
     def _add(aid: str) -> None:
         a = (aid or "").strip()
-        if not a or a in seen or a in {"learn_git", "git_learn"}:
+        # console_verify_pack is Core desk / ability execute only.
+        # Do not spend a Natural Mode turn slot on it.
+        if not a or a in seen or a in {"learn_git", "git_learn", "console_verify_pack"}:
             return
         seen.add(a)
         hits.append(a)
