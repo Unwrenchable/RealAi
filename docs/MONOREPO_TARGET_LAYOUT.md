@@ -334,8 +334,8 @@ Still inside the product tree and not gold:
 | `realai/.continue`, `.pytest_cache__dup1`, `.vs`, `Output`, `pnpm-lock.yaml` twins | caches and editor meta (package map NOISE) |
 | `packages/core/` | empty npm package named `realai-core` |
 | root `src/` (78 files), root `package.json` name `app-builder-workspace`, `vite.config.ts` | foreign App Builder overlay sharing the product root |
-| root launcher pile | `start_all.bat`, `start_craft.bat`, `start_gpu_chat.bat`, `start_orchestrator.bat`, `start_realai.bat`, `start_realai_server.bat`, `start_self_build.bat`, `start_stack.bat`, `start_ui.bat`, `START_HERE.bat`, `run_chat.bat`, `run_selfheal.bat` — `START_HERE.bat` is the front door |
-| root `world_model.json` (78 KB) | confirm Hive loads `realai/world_model.json` before any later park (`TARGET_LAYOUT.md`) |
+| root launcher pile | Phase 4: bodies live in `scripts/windows/`. Root keeps `START_HERE.bat` plus one-line forwarders for `start_all.bat`, `start_orchestrator.bat`, and the other `start_*` / `run_*` names operators and docs already call. `start_stack.bat` / `start_realai.bat` remain aliases of `start_all.bat`. |
+| root `world_model.json` (78 KB) | Left in place (phase 4). sha256 matches `realai/world_model.json` (`800980f8b4b3c476dc800753c348a17d289c3d5db683816cec534ce3ad83bb03`). Hive gold does not open the JSON; `abilities/repo_surface.py` still names the repo-root path, so it was not parked. |
 | root `scan_and_reconstruct.py` + `.txt` duplicate, `vercel_main.py` | one-off scripts at the root junk drawer |
 
 `docs/architecture.md` and `docs/structure.md` are historical (May 2026 JS-engine / early server tree). Live contract is root `ARCHITECTURE.md`.

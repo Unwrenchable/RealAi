@@ -34,8 +34,8 @@ Move to `_quarantine/twins_YYYYMMDD/` or delete after a week on a park branch:
 - `realai/grok_export_realai/`, `realai/deep_nests/`, `realai/from_nests/`
 - `realai/plugins/plugins/`, `realai/plugins/C_realai_plugins/`
 - Root `layout.tsx`, `globals.css`, `Hey — I'm here..txt`
-- Root `world_model.json` if `realai/world_model.json` is the copy Hive loads
-- Duplicate `start_*.bat` once `START_HERE.bat` + `scripts/` cover them
+- Root `world_model.json` if `realai/world_model.json` is the copy Hive loads. Phase 4 left it: same sha256 as `realai/world_model.json`, but `abilities/repo_surface.py` still names the repo-root path and Hive gold does not open the JSON.
+- Duplicate `start_*.bat` once `START_HERE.bat` + `scripts/` cover them. Phase 4 moved the bodies to `scripts/windows/` and left root forwarders (menu stays `START_HERE.bat`).
 
 ## Relabel
 

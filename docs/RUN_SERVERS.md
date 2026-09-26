@@ -74,12 +74,14 @@ Legacy scripts that set `REALAI_HOME` to `...\realai` (the package) cause “los
 
 ## Bat legend (aliases → canonical)
 
+Root `start_*.bat` / `run_*.bat` names below still work from `C:\RealAI-clean`. Except `START_HERE.bat` (the menu) and the `start_stack.bat` / `start_realai.bat` aliases, the bodies live in `scripts\windows\` and the root file is a one-line forwarder.
+
 | File | Role |
 |------|------|
 | **`START_HERE.bat`** | Menu — use this if unsure |
-| **`start_all.bat`** | **Canonical** Vulkan+Hive |
+| **`start_all.bat`** | **Canonical** Vulkan+Hive (forwarder → `scripts\windows\start_all.bat`) |
 | `start_stack.bat` / `start_realai.bat` | Alias → `start_all.bat` |
-| `start_orchestrator.bat` | Hive `:8001` only |
+| `start_orchestrator.bat` | Hive `:8001` only (forwarder → `scripts\windows\start_orchestrator.bat` → `python -m realai.v3_orchestrator`) |
 | `start_realai_server.bat` | Vulkan `:8080` only |
 | `start_gpu_chat.bat` / `run_chat.bat` | Older full-stack variants (prefer `start_all`) |
 | `start_ui.bat` | Optional frontend `:5173` |

@@ -9,6 +9,8 @@
 start_orchestrator.bat
 ```
 
+Root `start_orchestrator.bat` is a one-line forwarder to `scripts\windows\start_orchestrator.bat`. That body `cd`s to product home (two levels up) and runs the same `python -m realai.v3_orchestrator` line. `start_all.bat` is the same kind of forwarder; its body runs `scripts\unified_stack.py`.
+
 Or:
 
 ```bat
@@ -38,7 +40,7 @@ Logs directory: `C:\RealAI-clean\logs\` (marker `.wellkept`).
 
 - Package-root shims `realai\v3_orchestrator.py` and `realai\realai_orchestrator.py` hardened with `sys.path` insert for product home + package; re-export `main` from gold `realai.orchestration.v3_orchestrator`.
 - Confirmed `realai\v3_runtime_bridge.py` package-root shim → gold `orchestration\v3_runtime_bridge.py` (hive OFF fix path).
-- `start_orchestrator.bat` (repo root): added `REALAI_HOME`/`ROOT`/`WORKSPACE`, `REALAI_CTX=65536`, `REALAI_GGUF` 7B, logs mkdir note.
+- `start_orchestrator.bat` (repo root): one-line forwarder to `scripts\windows\start_orchestrator.bat`, which sets `REALAI_HOME`/`ROOT`/`WORKSPACE`, `REALAI_CTX=65536`, `REALAI_GGUF` 7B, creates `logs\` if needed, then `python -m realai.v3_orchestrator --host 127.0.0.1 --port 8001`.
 - `realai\scripts\start_orchestrator.bat`: fixed wrong `cd`/`PYTHONPATH` (was scripts dir); now cds to product home two levels up.
 - Created `logs\.wellkept`.
 - Import hole scan: all `from realai.*` modules referenced by gold v3 exist size>0; no dest-empty stubs required for bind.

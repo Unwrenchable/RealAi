@@ -143,6 +143,8 @@ Fusion file diff recorded before the move: `config.js` identical across all thre
 
 **Smoke:** `start_orchestrator.bat` still reaches `python -m realai.v3_orchestrator` on `:8001`. Import lines. Console hash pair.
 
+**Landed 2026-09-26.** `START_HERE.bat` stays the Windows menu and still calls the root names. Implementation bodies moved with `git mv` to `scripts/windows/` (`start_all`, `start_orchestrator`, `start_orchestration_worker`, `start_craft`, `start_gpu_chat`, `start_ui`, `start_realai_server`, `start_self_build`, `run_chat`, `run_selfheal`). Each of those root names is a one-line `call` forwarder, so `start_all.bat` still reaches `scripts\unified_stack.py` and `start_orchestrator.bat` still reaches `python -m realai.v3_orchestrator`. `start_stack.bat` and `start_realai.bat` were already aliases to `start_all.bat` and stayed. Root `world_model.json` stayed: sha256 `800980f8b4b3c476dc800753c348a17d289c3d5db683816cec534ce3ad83bb03` matches `realai/world_model.json`, but Hive gold does not open that JSON, and `abilities/repo_surface.py` still names the repo-root path, so unused was not proven. `packages/core/` stayed the empty npm package `realai-core` (no Python, still under `packages/*`). Root `src/`, `package.json`, and `vite.config.ts` were not folded.
+
 ---
 
 ## Phase 5 — promote from shelves (optional, file by file)
