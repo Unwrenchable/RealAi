@@ -46,7 +46,7 @@ The phrase "packages/realai-core" describes a **logical** package (the Python hi
 |----------------------|---------------------|
 | `realai/` | The Python package. `pyproject.toml` (`version = "3.0.0"`) finds `realai*`. Every launcher imports it. |
 | `packages/core/` | An empty npm package whose `package.json` `name` is `realai-core` (noop lint/build scripts, one file). It is not the hive. |
-| `realai/realai-core/` | A nested dump inside the Python package (224 KB). Noise, not a workspace member. |
+| `realai/realai-core/` | Was a nested dump inside the Python package (224 KB). Parked at `_quarantine/twins_20260926/realai__realai-core/`. Not a workspace member. |
 
 Moving hive gold into `packages/realai-core/` would break `import realai`, the setuptools `include` list, and the gold paths above. Short-term and long-term, hive source stays at `realai/`. The empty npm stub keeps its current name until a later JS-only tidy, and it never receives Python.
 
@@ -143,9 +143,9 @@ Weights stay outside git: `C:\llama-vulkan\models`, `C:\models`, `D:\models`.
 | Self-build / closed loop | `realai/core/` | root `core/` (re-export) and package-root `self_*.py` shims |
 | Console UI | `apps/vscode/webview/console.html`, then sync to root `console.html` | `realai/apps/vscode/` (incomplete nest) |
 | Fusion static assets | product-root `fusion-ui/` | `apps/fusion-ui/`, `realai/fusion-ui/` |
-| Next shell | `frontend/` | `apps/frontend/` (slim parked twin), `realai/realai-frontend/` |
+| Next shell | `frontend/` | `apps/frontend/` (slim parked twin), `_quarantine/twins_20260926/realai__realai-frontend/` |
 | UI tokens | `packages/design-system/` | ad-hoc CSS at repo root |
-| Worker loop | `modules/orchestrators/` (`realai-worker`) | `realai/orchestrator-default-run/` |
+| Worker loop | `modules/orchestrators/` (`realai-worker`) | `_quarantine/twins_20260926/realai__orchestrator-default-run/` |
 | Docs for humans | `docs/` plus root `ARCHITECTURE.md` | `realai/docs/` historical copies |
 | Promote tools | `scanners/` | not on the runtime import path |
 
@@ -303,7 +303,7 @@ Other package-root modules whose docstrings say "re-exports that gold" (`critiqu
 | `apps/fusion-ui/` | `fusion-ui/` | `index.html` / `script.js` differ. Do not overwrite product-root from apps. |
 | `realai/fusion-ui/` | `fusion-ui/` | `script.js` matches `apps/fusion-ui`, not product root. |
 | `apps/frontend/` | `frontend/` | Same package name `realai-frontend`; 16 files vs 43. Park candidate later. |
-| `realai/realai-frontend/` | `frontend/` | 172 KB nest. |
+| `_quarantine/twins_20260926/realai__realai-frontend/` | `frontend/` | 172 KB nest, parked phase 2. |
 | `realai/apps/` | `apps/` | 560 KB parallel tree, including an incomplete `vscode/` (no live `package.json` authority). |
 | `apps/vscode/vscode_snapshot_recovery/`, `vscode_snapshot_users_realai/` | `apps/vscode/` | Extension snapshots inside the extension. |
 | `realai/docs/` | `docs/` + root architecture docs | Historical copies (`structure.md`, `architecture.md`). |
@@ -315,16 +315,21 @@ Other package-root modules whose docstrings say "re-exports that gold" (`critiqu
 
 Nested dumps already removed from `realai/` and sitting under `_quarantine/twins_20260921/`: `realai__realai`, `realai__realai_repo`, `realai__realai_sdk`, `realai__grok_export_realai`, `realai__deep_nests`, `realai__from_nests`, `realai__plugins__plugins`, `realai__plugins__C_realai_plugins`. They are shelf, not missing features.
 
-Still inside `realai/` and not gold:
+Parked 2026-09-26 under `_quarantine/twins_20260926/` (phase 2). Not gold:
 
 | Path | Why it is noise |
 |------|-----------------|
-| `realai/orchestrator-default-run/` | 11 MB default-run dump |
-| `realai/agent-tools-orchestrator-default-run/`, `agents-orchestrator-default-run/`, `ai-orchestrator-default-run/` | default-run leftovers |
-| `realai/core_unify_20260830/` | unify snapshot |
-| `realai/orchestration_gold/` | 8 KB side folder; gold is `realai/orchestration/` |
-| `realai/realai-core/` | 224 KB nest; collides with the logical package name |
-| `realai/exportable/`, `realai/v18/`, `realai/variants/` | debris called out in `docs/sessions/TOP_LEVEL_SURFACES.md` |
+| `realai__orchestrator-default-run/` | 11 MB default-run dump |
+| `realai__agent-tools-orchestrator-default-run/`, `realai__agents-orchestrator-default-run/`, `realai__ai-orchestrator-default-run/` | default-run leftovers |
+| `realai__core_unify_20260830/` | unify snapshot |
+| `realai__orchestration_gold/` | README-only side folder; gold is `realai/orchestration/` |
+| `realai__realai-core/` | 224 KB nest; collides with the logical package name |
+| `realai__exportable/`, `realai__v18/`, `realai__variants/` | debris called out in `docs/sessions/TOP_LEVEL_SURFACES.md` |
+
+Still inside the product tree and not gold:
+
+| Path | Why it is noise |
+|------|-----------------|
 | `realai/modules/*.py` (`linear_fused.py`, `pixelshuffle.py`, `rnn.py`, …) | Torch-style `nn` dump. Not organs. Organs are `modules/organs` |
 | `realai/.continue`, `.pytest_cache__dup1`, `.vs`, `Output`, `pnpm-lock.yaml` twins | caches and editor meta (package map NOISE) |
 | `packages/core/` | empty npm package named `realai-core` |
@@ -339,7 +344,7 @@ Still inside `realai/` and not gold:
 
 | Location | What it is |
 |----------|------------|
-| `_quarantine/twins_20260921/`, `twins_20260921_b/`, `twins_20260924/`, `twins_pkg_ui/` | Parked twins already removed from the hot path. Content delta: 0 promotions (`docs/QUARANTINE_CONTENT_DELTA.md`) |
+| `_quarantine/twins_20260921/`, `twins_20260921_b/`, `twins_20260924/`, `twins_20260926/`, `twins_pkg_ui/` | Parked twins already removed from the hot path. Content delta: 0 promotions (`docs/QUARANTINE_CONTENT_DELTA.md`) |
 | `recovered/`, `imports/` | Archaeology. Pytest already skips them |
 | Git branches `recovery/*`, `local/*`, `main` | Snapshot / older unified dump. Not the hive (`AUTHORITY.md`) |
 | `C:\RealAI-gold` | External gold shelf. Orphans and `.before` files stay parked (`docs/SHELF_CONTENT_DELTA.md`, 0 promotions) |

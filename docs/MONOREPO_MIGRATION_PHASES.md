@@ -93,6 +93,8 @@ Tooling already sketched: `scripts/park_nested_dumps.ps1` (see `docs/WIRING_PASS
 
 **Risk note:** `realai/orchestrator-default-run/` is about 11 MB. Reviewers should expect a large rename diff and a small logical change.
 
+**Landed 2026-09-26** on shelf `_quarantine/twins_20260926/` (`realai__<name>`). `rg` found no live importer, so no dest-empty shim was left. `realai/scripts/exportable/` (hive nest index) was not this dump and stayed. Already-shelved `twins_20260921*` and `twins_20260924` were not moved again.
+
 ---
 
 ## Phase 3 — one import path per surface
