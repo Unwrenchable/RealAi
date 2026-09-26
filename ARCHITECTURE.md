@@ -108,7 +108,7 @@ There is no `v1/` or `v2/` directory on purpose.
 | Hive HTTP / tools / multi-agent | `realai/orchestration/v3_orchestrator.py` | root `v3_orchestrator.py` shims |
 | Runtime bridge | `realai/orchestration/v3_runtime_bridge.py` | dest-empty shims |
 | Plugins | `realai/plugins/` | root `plugins/` (compat shim) |
-| Abilities | product-root `abilities/` | nested copies under `realai/plugins/abilities` unless Hive loads them |
+| Abilities | product-root `abilities/` | `realai/plugins/abilities` parked phase 3 (Hive loads `rackup_coach`, not that tree) |
 | Organs | `modules/organs/` | copies under `realai/modules/organs` |
 | Self-build / closed loop | `realai/core/` | 200-byte package-root shims |
 | UI tokens | `packages/design-system/` | ad-hoc CSS at repo root |

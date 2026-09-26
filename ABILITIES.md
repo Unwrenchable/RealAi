@@ -24,7 +24,7 @@ realai / UI (@realai/design-system tokens + components)
 |------|------|
 | `packages/design-system/` | Prebuilt UI kit + `tokens.cjs` |
 | `packages/ui/` | Facade re-export |
-| `frontend/tailwind.config.js (and/or apps/frontend legacy)` | Merges design tokens into Tailwind |
+| `frontend/tailwind.config.js` | Merges design tokens into Tailwind |
 | `frontend/lib/design.ts` | Brand colors for TS components |
 
 ```tsx

@@ -141,9 +141,9 @@ Weights stay outside git: `C:\llama-vulkan\models`, `C:\models`, `D:\models`.
 | Honesty map | `realai/ability_catalog.py` | quarantine copies of the same basename |
 | Organs | `modules/organs/` | `realai/modules/organs/` (park note; body already in `_quarantine`) |
 | Self-build / closed loop | `realai/core/` | root `core/` (re-export) and package-root `self_*.py` shims |
-| Console UI | `apps/vscode/webview/console.html`, then sync to root `console.html` | `realai/apps/vscode/` (incomplete nest) |
-| Fusion static assets | product-root `fusion-ui/` | `apps/fusion-ui/`, `realai/fusion-ui/` |
-| Next shell | `frontend/` | `apps/frontend/` (slim parked twin), `_quarantine/twins_20260926/realai__realai-frontend/` |
+| Console UI | `apps/vscode/webview/console.html`, then sync to root `console.html` | `_quarantine/twins_20260926/realai__apps` (incomplete vscode nest) |
+| Fusion static assets | product-root `fusion-ui/` | `_quarantine/twins_20260926/apps__fusion-ui`, `realai__fusion-ui` |
+| Next shell | `frontend/` | `_quarantine/twins_20260926/apps__frontend`, `_quarantine/twins_20260926/realai__realai-frontend/` |
 | UI tokens | `packages/design-system/` | ad-hoc CSS at repo root |
 | Worker loop | `modules/orchestrators/` (`realai-worker`) | `_quarantine/twins_20260926/realai__orchestrator-default-run/` |
 | Docs for humans | `docs/` plus root `ARCHITECTURE.md` | `realai/docs/` historical copies |
@@ -176,7 +176,7 @@ Stays exactly where it is until a later phase says otherwise, and even then only
 
 Console twins on this snapshot already match: both files are 75,961 bytes, SHA-256 prefix `33ae79a11a93`. Edit the webview file, then copy it onto root `console.html`. Older session notes (`docs/CONSOLE_SESSION.md`) describe a root→webview sync script; going forward the webview is the source.
 
-Fusion files do **not** match across the three trees (`index.html` and `script.js` differ; `config.js` matches). Product-root `fusion-ui/` remains the asset hive serves. The larger `apps/fusion-ui/index.html` is not promoted over it by size.
+Fusion files did **not** match across the three trees (`index.html` and `script.js` differed; `config.js` matched). Product-root `fusion-ui/` remains the asset hive serves. The larger `apps/fusion-ui/index.html` was not promoted over it. Phase 3 parked `apps/fusion-ui/` and `realai/fusion-ui/` at `_quarantine/twins_20260926/` after `:8001` served the product-root tree (`fusion_ui_dir` plus matching `script.js` hash).
 
 ---
 
@@ -300,11 +300,11 @@ Other package-root modules whose docstrings say "re-exports that gold" (`critiqu
 | Path | Gold counterpart | Note |
 |------|------------------|------|
 | root `console.html` | `apps/vscode/webview/console.html` | In sync on this snapshot. Twin is the one hive static-serves; gold is the webview. |
-| `apps/fusion-ui/` | `fusion-ui/` | `index.html` / `script.js` differ. Do not overwrite product-root from apps. |
-| `realai/fusion-ui/` | `fusion-ui/` | `script.js` matches `apps/fusion-ui`, not product root. |
-| `apps/frontend/` | `frontend/` | Same package name `realai-frontend`; 16 files vs 43. Park candidate later. |
+| `apps/fusion-ui/` | `fusion-ui/` | Parked phase 3. Was larger; not promoted. |
+| `realai/fusion-ui/` | `fusion-ui/` | Parked phase 3. `script.js` matched `apps/fusion-ui`, not product root. |
+| `apps/frontend/` | `frontend/` | Parked phase 3 (`apps__frontend`). Same package name `realai-frontend`. |
 | `_quarantine/twins_20260926/realai__realai-frontend/` | `frontend/` | 172 KB nest, parked phase 2. |
-| `realai/apps/` | `apps/` | 560 KB parallel tree, including an incomplete `vscode/` (no live `package.json` authority). |
+| `realai/apps/` | `apps/` | Parked phase 3 (`realai__apps`), including the incomplete `vscode/` nest. |
 | `apps/vscode/vscode_snapshot_recovery/`, `vscode_snapshot_users_realai/` | `apps/vscode/` | Extension snapshots inside the extension. |
 | `realai/docs/` | `docs/` + root architecture docs | Historical copies (`structure.md`, `architecture.md`). |
 | root `AGENTS.md` | `docs/AGENTS_REALAI.md` | Root file is the Grok App Builder sandbox contract (`docs/foreign/README.md`). |
@@ -330,7 +330,7 @@ Still inside the product tree and not gold:
 
 | Path | Why it is noise |
 |------|-----------------|
-| `realai/modules/*.py` (`linear_fused.py`, `pixelshuffle.py`, `rnn.py`, …) | Torch-style `nn` dump. Not organs. Organs are `modules/organs` |
+| `realai/modules/*.py` torch dump, `desktop_unique`, `self_improvement`, `training` | Parked phase 3 at `_quarantine/twins_20260926/realai__modules__*`. Shim and organs park note stayed. |
 | `realai/.continue`, `.pytest_cache__dup1`, `.vs`, `Output`, `pnpm-lock.yaml` twins | caches and editor meta (package map NOISE) |
 | `packages/core/` | empty npm package named `realai-core` |
 | root `src/` (78 files), root `package.json` name `app-builder-workspace`, `vite.config.ts` | foreign App Builder overlay sharing the product root |

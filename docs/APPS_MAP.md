@@ -7,13 +7,13 @@ Live product UI and extension live at **product root**. Nested copies under `rea
 | `frontend/` | Canonical Next UI (`realai-frontend` 0.1.0) | **KEEP** | Full tree (`app/`, `components/`, `.next`); noted as gold in `apps/FRONTEND_PARKED_NOTE.md` |
 | `apps/vscode/` | Live VS Code / Cursor Console extension | **KEEP** | `realai-vscode` **1.2.15** with `package.json`, `src/`, `webview/` |
 | `apps/api/` | Local API helpers | **KEEP** | Small Python surface (`main.py`, `routes/`) |
-| `apps/fusion-ui/` | Static fusion UI | **KEEP** | Tiny HTML/JS; not a nest dump |
+| `apps/fusion-ui/` | Static fusion twin | **PARKED** phase 3 | `_quarantine/twins_20260926/apps__fusion-ui`. Product-root `fusion-ui/` is what `:8001` serves |
 | `apps/dashboard/` | Dashboard package stub | **SHIM** | `@realai/dashboard` 0.1.0; sparse; confirm before delete |
-| `apps/frontend/` | Former nested frontend | **PARK** (later) | Explicitly parked by note; slim vs root `frontend/` |
-| `apps/` (root) | App container | **KEEP** | Holds vscode/api/fusion; child `frontend/` is the parked one |
-| `realai/apps/` | Nest twin of `apps/` | **PARK** (later) | Parallel tree (~24k files); different `__init__.py`; extra `desktop/`/`widget/` |
-| `realai/apps/vscode/` | Incomplete vscode nest | **PARK** (later) | No `package.json`; subset of live extension |
-| `realai/realai-frontend/` | Thin frontend dump | **PARK** (later) | 6 files only; package.json ≠ root `frontend/` |
+| `apps/frontend/` | Former nested frontend | **PARKED** phase 3 | `_quarantine/twins_20260926/apps__frontend`. Authority is `frontend/` |
+| `apps/` (root) | App container | **KEEP** | Holds vscode/api; child `frontend/` and `fusion-ui/` twins are shelved |
+| `realai/apps/` | Nest twin of `apps/` | **PARKED** phase 3 | `_quarantine/twins_20260926/realai__apps` (incomplete `vscode/`, no `package.json`) |
+| `realai/apps/vscode/` | Incomplete vscode nest | **PARKED** phase 3 | Moved with `realai/apps/`. Live extension stays `apps/vscode/` |
+| `realai/realai-frontend/` | Thin frontend dump | **PARKED** phase 2 | `_quarantine/twins_20260926/realai__realai-frontend/` |
 
 ## Organs (related)
 

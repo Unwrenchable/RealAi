@@ -38,7 +38,23 @@ $Candidates = @(
     "realai\realai-frontend",
     "realai\exportable",
     "realai\v18",
-    "realai\variants"
+    "realai\variants",
+    # Phase 3 (2026-09-26) — one import path. rg: no live importer, so no shim.
+    # Already moved when this list is extended; skipped when the source is gone.
+    "realai\plugins\abilities",
+    "realai\apps",
+    "apps\frontend",
+    "abilities\realai",
+    "agents\realai",
+    "apps\fusion-ui",
+    "realai\fusion-ui",
+    "realai\modules\desktop_unique",
+    "realai\modules\self_improvement",
+    "realai\modules\training"
+    # Torch nn files (realai\modules\*.py except __init__.py) were moved as a
+    # group to _quarantine\twins_20260926\realai__modules__torch_nn. Not listed
+    # one-by-one so a later run cannot treat a missing file as a failure mode
+    # beyond "skip missing".
 )
 
 foreach ($Rel in $Candidates) {

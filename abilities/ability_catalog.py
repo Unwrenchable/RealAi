@@ -687,7 +687,7 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "keywords": ["frontend", "next.js", "chat ui", "settings drawer"],
         "status": "LIVE",
         "live_path": "http://127.0.0.1:3000",
-        "modules": ["apps/frontend"],
+        "modules": ["frontend"],
         "gold_paths": [r"C:\temp\realai_ui.html"],
     },
     {
