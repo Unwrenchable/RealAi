@@ -2049,6 +2049,57 @@ def execute_registry_tool(
         )
     if name == "workspace_grep" or name == "grep":
         return workspace_tool("workspace_grep", arguments)
+    if name in ("git", "git_status"):
+        try:
+            from realai.cli.craft import apply_workspace, tool_git_status
+
+            apply_workspace()
+            out = tool_git_status()
+            if isinstance(out, dict):
+                out.setdefault("ok", not bool(out.get("error")))
+                out["tool"] = "git_status"
+                return out
+            return {"ok": False, "error": "bad_git_status", "tool": "git_status"}
+        except Exception as e:
+            return {"ok": False, "error": str(e), "tool": "git_status"}
+    if name in ("git_diff", "diff"):
+        try:
+            from realai.cli.craft import apply_workspace, tool_git_diff
+
+            apply_workspace()
+            out = tool_git_diff(str(arguments.get("path") or ""))
+            if isinstance(out, dict):
+                out.setdefault("ok", not bool(out.get("error")))
+                out["tool"] = "git_diff"
+                return out
+            return {"ok": False, "error": "bad_git_diff", "tool": "git_diff"}
+        except Exception as e:
+            return {"ok": False, "error": str(e), "tool": "git_diff"}
+    if name in ("learn_status", "learn_packets"):
+        try:
+            from realai.learn.http import list_packets
+
+            out = list_packets()
+            rows = out.get("packets") if isinstance(out, dict) else None
+            rows = rows if isinstance(rows, list) else []
+            slugs: List[str] = []
+            for row in rows[:20]:
+                if isinstance(row, dict) and row.get("slug"):
+                    slugs.append(str(row.get("slug")))
+                elif isinstance(row, str):
+                    slugs.append(row)
+            return {
+                "ok": True,
+                "tool": name,
+                "count": len(rows),
+                "slugs": slugs,
+                "note": (
+                    "Learn status via packet list. "
+                    "POST /v1/learn/queue is not auto-run from the core desk."
+                ),
+            }
+        except Exception as e:
+            return {"ok": False, "error": str(e), "tool": name}
 
     # --- core.* → core.tools.ToolRegistry ---
     if name.startswith("core.") or name in ("code_exec", "web_search"):

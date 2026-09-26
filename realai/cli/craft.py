@@ -1104,6 +1104,35 @@ def tool_git_status() -> dict[str, Any]:
         return {"error": str(e), "workspace": str(_ws())}
 
 
+def tool_git_diff(path: str = "") -> dict[str, Any]:
+    """Short ``git diff --stat`` for the Console core desk. Bounded output."""
+    try:
+        rel = str(path or "").strip()
+        cmd = ["git", "diff", "--stat", "--", rel] if rel else ["git", "diff", "--stat"]
+        stat = subprocess.check_output(
+            cmd,
+            cwd=_ws(),
+            text=True,
+            stderr=subprocess.DEVNULL,
+            timeout=8,
+        ).strip()
+        cached = subprocess.check_output(
+            ["git", "diff", "--cached", "--stat"],
+            cwd=_ws(),
+            text=True,
+            stderr=subprocess.DEVNULL,
+            timeout=8,
+        ).strip()
+        text = stat or "(no unstaged diff)"
+        if cached:
+            text = text + "\n-- cached --\n" + cached
+        if len(text) > 4000:
+            text = text[:4000] + "\n...[truncated]"
+        return {"ok": True, "diff_stat": text, "workspace": str(_ws())}
+    except Exception as e:
+        return {"ok": False, "error": str(e), "workspace": str(_ws())}
+
+
 def tool_pwd() -> dict[str, Any]:
     fp = fingerprint_stack()
     return {
@@ -1523,6 +1552,7 @@ TOOLS: dict[str, Callable[..., dict[str, Any]]] = {
 
     "task": lambda **kw: tool_organs_task(str(kw.get("goal") or "")),
     "git": lambda **kw: tool_git_status(),
+    "git_diff": lambda **kw: tool_git_diff(str(kw.get("path") or "")),
     "map": lambda **kw: tool_living_map(),
     "improve": lambda **kw: tool_improve(),
     "heal": lambda **kw: tool_heal(force=bool(kw.get("force"))),
@@ -2210,6 +2240,9 @@ def plan_tools(user_text: str) -> list[tuple[str, dict[str, Any]]]:
                 if action in ("agents", "list_agents") and len(bits) >= 2:
                     return [("at", {"action": "agents", "query": bits[1]})]
                 return [("at", {"action": action or "status"})]
+            if cmd == "git" and rest.strip().lower().startswith("diff"):
+                rel = rest.strip()[4:].strip()
+                return [("git_diff", {"path": rel})]
             return [(cmd, {})]
         return []
 

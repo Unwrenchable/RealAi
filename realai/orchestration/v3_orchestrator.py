@@ -195,6 +195,16 @@ except Exception:
         "You are not Grok. You are not ChatGPT. You are not Claude. You are not Gemini."
     )
 _op_file = (os.environ.get("REALAI_OPERATOR_SYSTEM_FILE") or "").strip()
+if not _op_file or not os.path.isfile(_op_file):
+    # Natural Mode directive is non-optional: fall back to docs/CONSOLE_OPERATOR_DIRECTIVE.md.
+    try:
+        from realai.bot.boot import operator_directive_path as _operator_directive_path
+
+        _found = _operator_directive_path()
+        if _found is not None:
+            _op_file = str(_found)
+    except Exception:
+        pass
 if _op_file and os.path.isfile(_op_file):
     try:
         with open(_op_file, "r", encoding="utf-8") as _opf:
@@ -3110,6 +3120,32 @@ class Handler(BaseHTTPRequestHandler):
                                 meta["used_tools"] = used
                                 meta["applied_writes"] = applied
                                 obj["realai_meta"] = meta
+                    except Exception:
+                        pass
+                    # Natural Mode reply contract + one post-write health GET (not a tool storm).
+                    try:
+                        nat = body.get("realai_natural") or {}
+                        if isinstance(nat, dict) and nat.get("should_ground"):
+                            from realai.bot.natural_mode import finalize_natural_choice_text
+
+                            for ch in obj.get("choices") or []:
+                                msg = ch.get("message") if isinstance(ch, dict) else None
+                                if not isinstance(msg, dict) or not msg.get("content"):
+                                    continue
+                                shaped, smoke = finalize_natural_choice_text(
+                                    str(msg.get("content") or ""),
+                                    nat,
+                                    applied=meta.get("applied_writes") or [],
+                                )
+                                msg["content"] = shaped
+                                if smoke:
+                                    meta["post_write_smoke"] = smoke
+                                    used = list(meta.get("used_tools") or [])
+                                    if "post_write_smoke" not in used:
+                                        used.append("post_write_smoke")
+                                    meta["used_tools"] = used
+                                obj["realai_meta"] = meta
+                                break
                     except Exception:
                         pass
                     # Voice metadata for console speak-aloud / local TTS

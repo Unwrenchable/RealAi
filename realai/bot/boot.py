@@ -34,29 +34,83 @@ HARD_IDENTITY_LOCK = (
     "verify by re-reading. Be direct and short. Lead with the result."
 )
 
-# Cap so tiny local models still see the easy-mode contract without a manifesto.
+# Cap the editable directive body so tiny local models still see the contract.
+# The reply contract itself is prepended and is not truncated away.
 _OPERATOR_SYSTEM_CHAT_CAP = 480
 
 
-def chat_system_prefix(operator_system: Optional[str] = None) -> str:
-    """Build the always-on Console system prefix: identity lock + short operator contract.
+def operator_directive_path() -> Optional[Path]:
+    """On-disk Console operator directive. Non-optional for Natural Mode.
 
-    ``OPERATOR_SYSTEM`` (from ``REALAI_OPERATOR_SYSTEM_FILE`` / env) is the editable
-    lever; the lock stays first so small models do not ignore the whole dump.
+    ``REALAI_OPERATOR_SYSTEM_FILE`` wins when it points at a real file.
+    Otherwise the product ``docs/CONSOLE_OPERATOR_DIRECTIVE.md`` is used.
+    """
+    env = (os.environ.get("REALAI_OPERATOR_SYSTEM_FILE") or "").strip()
+    if env:
+        p = Path(env)
+        if p.is_file():
+            return p
+    cand = _ROOT / "docs" / "CONSOLE_OPERATOR_DIRECTIVE.md"
+    if cand.is_file():
+        return cand
+    return None
+
+
+def load_operator_directive() -> str:
+    """Load the operator directive. Empty only when the file and env are both missing."""
+    path = operator_directive_path()
+    if path is not None:
+        try:
+            text = path.read_text(encoding="utf-8").strip()
+            if text:
+                return text
+        except Exception:
+            pass
+    return (os.environ.get("REALAI_OPERATOR_SYSTEM") or "").strip()
+
+
+def _clip_prompt(text: str, limit: int) -> str:
+    raw = (text or "").strip()
+    if len(raw) <= limit:
+        return raw
+    return raw[: limit - 1].rstrip() + "…"
+
+
+def chat_system_prefix(operator_system: Optional[str] = None) -> str:
+    """Build the always-on Console system prefix: identity lock + directive + reply contract.
+
+    The directive file is loaded even when the caller passes only the default
+    bot prompt or an empty string. ``NATURAL_REPLY_CONTRACT`` stays in front of
+    the capped directive body.
     """
     parts: List[str] = [HARD_IDENTITY_LOCK]
+    try:
+        from realai.bot.natural_mode import NATURAL_REPLY_CONTRACT
+    except Exception:
+        NATURAL_REPLY_CONTRACT = (
+            "REPLY CONTRACT: Summary / What changed / Verify / Next. "
+            "MAX_TOOLS_THIS_TURN=3. Chat abort 180s. "
+            "Never say LANDED unless a write tool succeeded."
+        )
     op = (operator_system or "").strip()
-    if not op:
+    directive = load_operator_directive()
+    chunks: List[str] = [NATURAL_REPLY_CONTRACT]
+    if directive and directive not in op:
+        chunks.append(_clip_prompt(directive, _OPERATOR_SYSTEM_CHAT_CAP))
+    elif directive and directive == op:
+        chunks.append(_clip_prompt(directive, _OPERATOR_SYSTEM_CHAT_CAP))
+    if op and op != directive and HARD_IDENTITY_LOCK not in op and NATURAL_REPLY_CONTRACT not in op:
+        chunks.append(_clip_prompt(op, _OPERATOR_SYSTEM_CHAT_CAP))
+    if len(chunks) == 1 and not directive:
         try:
-            op = (load_prompt() or "").strip()
+            fallback = (load_prompt() or "").strip()
         except Exception:
-            op = (DEFAULT_REALAI_PROMPT or "").strip()
-    if op:
-        # Avoid duplicating the lock text when the directive already echoes it.
-        if op != HARD_IDENTITY_LOCK and HARD_IDENTITY_LOCK not in op:
-            if len(op) > _OPERATOR_SYSTEM_CHAT_CAP:
-                op = op[: _OPERATOR_SYSTEM_CHAT_CAP - 1].rstrip() + "…"
-            parts.append(op)
+            fallback = (DEFAULT_REALAI_PROMPT or "").strip()
+        if fallback and fallback != HARD_IDENTITY_LOCK:
+            chunks.append(_clip_prompt(fallback, _OPERATOR_SYSTEM_CHAT_CAP))
+    blob = "\n\n".join(c for c in chunks if c)
+    if blob and blob != HARD_IDENTITY_LOCK and HARD_IDENTITY_LOCK not in blob:
+        parts.append(blob)
     return "\n\n".join(parts)
 
 
