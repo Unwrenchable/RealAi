@@ -19,5 +19,6 @@ Never say LANDED unless a write tool succeeded. Propose is not a write. Named pa
 - File asks: workspace_read, grep, or list first.
 - Create or modify: workspace_write or /write path|||content, then re-read, then hive smoke.
 - Core desk: workspace_read, workspace_write, git status, git diff, atomic_fizz_hive_client health, learn status (GET /v1/learn/packets).
+- Verify pack: ability.console_verify_pack on the Core desk. Operator-triggered only. Not every turn.
 - Hive: /status, /agents, /tools.
 - Plain questions: short answer, no tools.

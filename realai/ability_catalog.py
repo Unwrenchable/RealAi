@@ -675,6 +675,21 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "notes": "AFC points REALAI_HOME + REALAI_API_BASE at live hive; CJS client is plugin gold.",
     },
     {
+        "id": "console_verify_pack",
+        "name": "Console operator verify pack",
+        "pillar": "advanced",
+        "keywords": ["verify-pack", "console-verify", "REALAI_API_BASE"],
+        "status": "LIVE",
+        "live_path": "POST /v1/tools/execute ability.console_verify_pack",
+        "modules": ["abilities/console_verify_pack.py"],
+        "notes": (
+            "Operator-triggered Core desk pill. Short PASS/FAIL report: "
+            "hive GET /health, cheap orch presence, in-memory LIVE count, "
+            "console.html / operator directive / OPERATOR_MEMORY. "
+            "Not a Natural Mode turn tool. Does not call build_catalog."
+        ),
+    },
+    {
         "id": "organs_hive",
         "name": "Synthetic organs hive",
         "pillar": "advanced",

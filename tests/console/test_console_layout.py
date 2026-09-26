@@ -47,6 +47,8 @@ class TestConsoleLayoutSmoke(unittest.TestCase):
         self.assertIn("workspace_read", text)
         self.assertIn("workspace_write", text)
         self.assertIn("atomic_fizz_hive_client", text)
+        self.assertIn('data-core="verify"', text)
+        self.assertIn("console_verify_pack", text)
         self.assertIn("learn status", text)
         self.assertIn("Summary / What changed / Verify / Next", text)
         self.assertIn(".core-desk .core-secondary{display:none}", text)
