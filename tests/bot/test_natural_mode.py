@@ -13,6 +13,7 @@ from realai.bot.natural_mode import (
     apply_natural_grounding,
     apply_workspace_intent,
     extract_learn_source,
+    MAX_TOOLS_THIS_TURN,
     extract_path_tokens,
     extract_write_spec,
     is_explicit_command,
@@ -21,8 +22,10 @@ from realai.bot.natural_mode import (
     looks_like_repo_ask,
     looks_like_write_ask,
     match_ability_ids,
+    named_workspace_paths,
     plan_natural_auto,
     plan_natural_inspect,
+    plan_natural_turn,
     plan_natural_write,
     should_natural_act,
 )
@@ -152,9 +155,149 @@ class TestCraftInspectProductTree(unittest.TestCase):
     def test_plan_includes_read_for_named_file(self):
         plans = plan_natural_inspect("what's in console.html")
         names = [n for n, _ in plans]
-        self.assertIn("read", names)
-        reads = [kw.get("path") for n, kw in plans if n == "read"]
-        self.assertTrue(any(str(p).replace("\\", "/").endswith("console.html") for p in reads), reads)
+        self.assertEqual(names[0], "workspace_read")
+        self.assertLessEqual(len(plans), MAX_TOOLS_THIS_TURN)
+        reads = [kw.get("path") for n, kw in plans if n == "workspace_read"]
+        self.assertIn("apps/vscode/webview/console.html", reads)
+
+
+class TestNamedPathAutoRead(unittest.TestCase):
+    """Named files are workspace_read first, inside the 3-tool cap.
+
+    The bridge critic fails a turn that names a path and never reads it.
+    These plans are the happy path for that rule.
+    """
+
+    def _reads(self, plans):
+        return [kw.get("path") for name, kw in plans if name == "workspace_read"]
+
+    def test_cap_stays_three(self):
+        self.assertEqual(MAX_TOOLS_THIS_TURN, 3)
+
+    def test_console_webview_and_windows_paths_match_critic(self):
+        from realai.orchestration.v3_runtime_bridge import _extract_workspace_paths
+
+        samples = [
+            "what's in console.html",
+            "quote apps/vscode/webview/console.html",
+            r"propose a css change for C:\RealAI-clean\apps\vscode\webview\console.html",
+            "read apps/vscode/webview/console.html",
+        ]
+        for ask in samples:
+            critic = _extract_workspace_paths(ask)
+            self.assertTrue(critic, ask)
+            ours = named_workspace_paths(ask)
+            for path in critic:
+                self.assertIn(path, ours, ask)
+            plans = plan_natural_turn(ask)
+            self.assertTrue(plans, ask)
+            self.assertEqual(plans[0][0], "workspace_read", plans)
+            self.assertEqual(plans[0][1]["path"], critic[0], plans)
+            self.assertLessEqual(len(plans), MAX_TOOLS_THIS_TURN, plans)
+            self.assertEqual(plan_natural_write(ask), [])
+            self.assertNotIn("write", [name for name, _ in plans])
+
+    def test_readme_root_is_not_retargeted_unless_critic_says_so(self):
+        self.assertEqual(named_workspace_paths("what's in README.md"), ["README.md"])
+        self.assertEqual(
+            named_workspace_paths("read README.md"),
+            ["apps/vscode/README.md"],
+        )
+        plans = plan_natural_write("create file README.md with content HI")
+        self.assertEqual(plans[0][1]["path"], "README.md")
+        gold = plan_natural_write("create file console.html with content HI")
+        self.assertEqual(gold[0][1]["path"], "apps/vscode/webview/console.html")
+
+    def test_propose_reads_before_any_other_tool(self):
+        ask = "propose a css change for console.html"
+        self.assertFalse(looks_like_write_ask(ask))
+        plans = plan_natural_turn(ask)
+        self.assertEqual([name for name, _ in plans], ["workspace_read"])
+        self.assertEqual(self._reads(plans), ["apps/vscode/webview/console.html"])
+
+    def test_named_read_leaves_room_for_one_follow_on_tool(self):
+        plans = plan_natural_turn("quote console.html and what's broken")
+        kinds = [name for name, _ in plans]
+        self.assertEqual(kinds[0], "workspace_read")
+        self.assertIn("doctor", kinds)
+        self.assertLessEqual(len(plans), MAX_TOOLS_THIS_TURN)
+
+    def test_three_named_files_fill_the_cap(self):
+        plans = plan_natural_turn("quote a.py b.ts c.md and what's broken")
+        self.assertEqual(len(plans), MAX_TOOLS_THIS_TURN)
+        self.assertTrue(all(name == "workspace_read" for name, _ in plans), plans)
+        self.assertEqual(self._reads(plans), ["a.py", "b.ts", "c.md"])
+
+    def test_audit_of_a_named_file_reads_first(self):
+        plans = plan_natural_turn("audit console.html")
+        kinds = [name for name, _ in plans]
+        self.assertEqual(kinds[0], "workspace_read")
+        self.assertIn("agents", kinds)
+        self.assertLessEqual(len(plans), MAX_TOOLS_THIS_TURN)
+        self.assertNotIn("pwd", kinds)
+
+    def test_quote_executes_workspace_read(self):
+        root = Path(tempfile.mkdtemp())
+        self.addCleanup(lambda: __import__("shutil").rmtree(root, ignore_errors=True))
+        (root / "hello.txt").write_text("alpha-ground-token\n", encoding="utf-8")
+        env_keys = ("REALAI_WORKSPACE", "REALAI_HOME", "REALAI_PRODUCT_ROOT", "REALAI_ROOT")
+        prev = {k: os.environ.get(k) for k in env_keys}
+        cwd = os.getcwd()
+
+        def _restore():
+            os.chdir(cwd)
+            for k, v in prev.items():
+                if v is None:
+                    os.environ.pop(k, None)
+                else:
+                    os.environ[k] = v
+
+        self.addCleanup(_restore)
+        os.environ["REALAI_WORKSPACE"] = str(root)
+        os.chdir(root)
+        ask = "quote hello.txt"
+        body = {"messages": [{"role": "user", "content": ask}]}
+        meta = apply_natural_grounding(body, ask)
+        self.assertTrue(meta.get("should_ground"), meta)
+        self.assertFalse(meta.get("wrote"), meta)
+        self.assertFalse(meta.get("admit_failure"), meta)
+        used = list(meta.get("used_tools") or [])
+        self.assertEqual(used, ["workspace_read"])
+        content = str((body["messages"][-1] or {}).get("content") or "")
+        self.assertIn("alpha-ground-token", content)
+        self.assertIn("Never say LANDED", content)
+
+    def test_write_still_lands_only_after_write_and_counts_the_read(self):
+        root = Path(tempfile.mkdtemp())
+        self.addCleanup(lambda: __import__("shutil").rmtree(root, ignore_errors=True))
+        env_keys = ("REALAI_WORKSPACE", "REALAI_HOME", "REALAI_PRODUCT_ROOT", "REALAI_ROOT")
+        prev = {k: os.environ.get(k) for k in env_keys}
+        cwd = os.getcwd()
+
+        def _restore():
+            os.chdir(cwd)
+            for k, v in prev.items():
+                if v is None:
+                    os.environ.pop(k, None)
+                else:
+                    os.environ[k] = v
+
+        self.addCleanup(_restore)
+        os.environ["REALAI_WORKSPACE"] = str(root)
+        os.chdir(root)
+        ask = "create file notes/desk.txt with content HELLO_WS"
+        body = {"messages": [{"role": "user", "content": ask}]}
+        meta = apply_natural_grounding(body, ask)
+        self.assertTrue(meta.get("wrote"), meta)
+        self.assertFalse(meta.get("admit_failure"), meta)
+        used = list(meta.get("used_tools") or [])
+        self.assertEqual(used[0], "workspace_read", used)
+        self.assertIn("write", used)
+        self.assertLessEqual(meta.get("tool_count"), MAX_TOOLS_THIS_TURN, meta)
+        self.assertTrue((root / "notes" / "desk.txt").is_file())
+        self.assertEqual((root / "notes" / "desk.txt").read_text(encoding="utf-8"), "HELLO_WS")
+        reply = str(meta.get("reply") or "")
+        self.assertNotIn("LANDED", reply.split("--- on disk", 1)[0])
 
 
 class TestChatSystemPrefix(unittest.TestCase):

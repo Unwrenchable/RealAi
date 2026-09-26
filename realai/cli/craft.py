@@ -1537,6 +1537,11 @@ TOOLS: dict[str, Callable[..., dict[str, Any]]] = {
         start=int(kw.get("start") or 1),
         limit=int(kw.get("limit") or 80),
     ),
+    "workspace_read": lambda **kw: tool_read(
+        str(kw.get("path") or ""),
+        start=int(kw.get("start") or 1),
+        limit=int(kw.get("limit") or 80),
+    ),
     "write": lambda **kw: tool_write(
         str(kw.get("path") or ""),
         str(kw.get("content") or kw.get("text") or ""),
@@ -1821,8 +1826,8 @@ def _work_seed_paths(user_text: str) -> list[str]:
 
 def _plan_key(name: str, kwargs: dict[str, Any]) -> tuple[Any, ...]:
     kw = kwargs or {}
-    if name == "read":
-        return (name, _norm_rel(str(kw.get("path") or "")))
+    if name in ("read", "workspace_read"):
+        return ("workspace_read", _norm_rel(str(kw.get("path") or "")))
     if name == "list":
         return (name, _norm_rel(str(kw.get("path") or ".")) or ".")
     if name == "grep":
@@ -2765,8 +2770,10 @@ def _format_tools(tool_results: list[dict[str, Any]]) -> str:
             lines.append(f"- **workspace:** {r.get('banner')}")
         elif name == "git":
             lines.append(f"- **git:** {r.get('branch')}\n```\n{r.get('status')}\n```")
-        elif name == "read":
-            lines.append(f"- **read** `{r.get('path')}`:\n```\n{(r.get('content') or '')[:2500]}\n```")
+        elif name in ("read", "workspace_read"):
+            lines.append(
+                f"- **{name}** `{r.get('path')}`:\n```\n{(r.get('content') or '')[:2500]}\n```"
+            )
         elif name == "write":
             lines.append(f"- **write** `{r.get('path')}` ok={r.get('ok')} bytes={r.get('bytes')}")
         elif name == "grep":
@@ -2966,7 +2973,7 @@ _WRITE_BLOCK_RE = re.compile(
     r"(?:^|\n)/write\s+(\S+)\s*\|\|\|\s*(.*?)(?=(?:\n/write\s)|\Z)",
     re.I | re.S,
 )
-_INSPECT_TOOLS = {"pwd", "here", "list", "grep", "read"}
+_INSPECT_TOOLS = {"pwd", "here", "list", "grep", "read", "workspace_read"}
 
 
 def extract_write_commands(text: str) -> list[tuple[str, str]]:
@@ -3026,7 +3033,7 @@ def _inspect_brief(tool_results: list[dict[str, Any]]) -> str:
         r = tr.get("result") if isinstance(tr.get("result"), dict) else {}
         if name in ("pwd", "here"):
             lines.append(f"- workspace: {r.get('banner') or r.get('workspace')}")
-        elif name == "read":
+        elif name in ("read", "workspace_read"):
             p = r.get("path")
             if p:
                 read_paths.append(str(p))
@@ -3092,7 +3099,7 @@ def stream_reply(
     print("realai> ", end="", flush=True)
     parts: list[str] = []
     max_tok = 1200
-    if any(tr.get("tool") in {"read", "grep", "write"} for tr in (tool_results or [])):
+    if any(tr.get("tool") in {"read", "workspace_read", "grep", "write"} for tr in (tool_results or [])):
         max_tok = 2048
     try:
         for piece in stream_chat(msgs, max_tokens=max_tok, agent_id=agent_id):
