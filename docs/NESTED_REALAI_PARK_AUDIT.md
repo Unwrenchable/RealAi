@@ -1,8 +1,10 @@
-# Nested `realai/` park audit (2026-09-26)
+# Nested parks, `recovered/`, and gold-shelf audit (2026-09-26)
 
-Did phase 2–3 parking of the old nested `realai/` leave unique product code off live Unwrenchable/RealAi (`live/realai-clean-20260911`)?
+Did phase 2–3 parking of the old nested `realai/`, or the in-repo `recovered/` and `imports/` shelves, leave unique product code off live Unwrenchable/RealAi (`live/realai-clean-20260911`)?
 
-**No. No product implementation needs to come back.** 243 of 253 parked Python files are byte-identical to a file already on live. The other 10 do not beat live gold: they are strict subsets, older `realai_core` import paths, a one-line package docstring, SymPy/NumPy debris, or pytest modules whose functions already live under `agent_tools/`, `agents/`, and `realai/plugins/tools/`. This pass copied nothing.
+**No product implementation needs to come back from what this checkout can read.** 243 of 253 parked Python files under `_quarantine/` are byte-identical to a file already on live. The other 10 do not beat live gold: they are strict subsets, older `realai_core` import paths, a one-line package docstring, SymPy/NumPy debris, or pytest modules whose functions already live under `agent_tools/`, `agents/`, and `realai/plugins/tools/`. In-repo `recovered/` is a placeholder with no Python. `imports/` has four Python files; none beat live gold. This pass copied nothing.
+
+`C:\RealAI-gold` and `D:\RealAI-archive\recovered` are not on this machine. What the repo already records about them is in [External shelves (operator machine)](#external-shelves-operator-machine). This audit does not invent a file list for those paths.
 
 Hive gold stays `realai/orchestration/v3_orchestrator.py`. Bridge gold stays `realai/orchestration/v3_runtime_bridge.py`. `rackup_coach` and `atomicfizz_coach` were not edited. `atomicfizz*` does not appear under `_quarantine/` at all. `rackup_coach.py` on the 2026-09-24 organ shelf is byte-identical to `modules/organs/meta/rackup_coach.py`.
 
@@ -10,8 +12,8 @@ Hive gold stays `realai/orchestration/v3_orchestrator.py`. Bridge gold stays `re
 
 ## Method
 
-- Shelves walked: `_quarantine/twins_20260926/` (primary, phase 2 of 2026-09-26), plus `twins_20260921/`, `twins_20260921_b/`, `twins_20260924/`, `twins_pkg_ui/`.
-- Every parked `*.py` (253 files): sha256 against every live `*.py` outside `_quarantine/`, and an AST pass for top-level `def` / `async def` / `class`.
+- Shelves walked: `_quarantine/twins_20260926/` (primary, phase 2 of 2026-09-26), plus `twins_20260921/`, `twins_20260921_b/`, `twins_20260924/`, `twins_pkg_ui/`, then in-repo `recovered/` and `imports/`.
+- Every parked `*.py` (253 quarantine files, 4 under `imports/`, 0 under `recovered/`): sha256 against every live `*.py` outside `_quarantine/`, `imports/`, and `recovered/`, and an AST pass for top-level `def` / `async def` / `class`. Class methods were compared when top-level names matched but the body did not.
 - Basename hits preferred, in order: `realai/orchestration/`, `realai/plugins/`, `realai/bot/`, `realai/core/`, `abilities/`, `modules/organs/`, `agents/`, then the rest of the tree. A hash match under a different basename still counts as already on live (numbered dump aliases).
 - Skipped as product on purpose: README-only trees, `tokenizer.json`, LoRA `adapter_config.json`, VS `DocumentLayout*.json`, SymPy/NumPy modules under `junk_misplaced/`, coach copies, App Builder overlay (that overlay is still at the product root `src/`; it is not in these shelves).
 
@@ -24,9 +26,11 @@ Hive gold stays `realai/orchestration/v3_orchestrator.py`. Bridge gold stays `re
 | `twins_20260921_b` | 57 | 57 | 0 |
 | `twins_20260924` | 92 | 91 | 1 |
 | `twins_pkg_ui` | 2 | 2 | 0 |
-| **total** | **253** | **243** | **10** |
+| **quarantine total** | **253** | **243** | **10** |
+| `recovered/` | 0 | 0 | 0 |
+| `imports/promoted/` | 4 | 1 | 3 |
 
-Non-identical files are listed in [File exceptions](#file-exceptions). None were promoted.
+Quarantine exceptions are in the tables below. The three non-identical `imports/` files do not beat gold. None were promoted.
 
 ## `twins_20260926` — phase 2 nested dumps
 
@@ -78,7 +82,7 @@ They were **not** copied. They are not high-confidence and not small drop-ins: t
 | `twins_20260921/realai__realai_repo/` | KEEP_SHELF | VS `DocumentLayout*.json` only. | — |
 | `twins_20260921/realai__realai_sdk/` | KEEP_SHELF | VS `DocumentLayout*.json` only. | — |
 | `twins_20260921/globals.css`, `layout.tsx` | KEEP_SHELF | Root orphan UI parked in phase 2 (1,532 B and 381 B). Not a frontend. Live front door is `frontend/`. | — |
-| `twins_20260921_b/realai__imports/` | IDENTICAL_NOISE | 57/57 Python files byte-identical to live. Organ tree matches `modules/organs/` (`base.py` 1,177 B, `request_path.py` 7,666 B, body/cognitive/dream/evolution/memory/meta/metabolic/nervous). `local_models.py` matches `imports/promoted/local_models.py`. Nothing to lift out of `imports/`. | — |
+| `twins_20260921_b/realai__imports/` | IDENTICAL_NOISE | 57 Python files. 56 match a live product file. The organ tree matches `modules/organs/` (`base.py` 1,177 B, `request_path.py` 7,666 B, body/cognitive/dream/evolution/memory/meta/metabolic/nervous). `recovery_plugins/core/local_models.py` (10,692 B) matches only `imports/promoted/local_models.py`, not `realai/core/local_models.py`. Same KEEP_SHELF verdict as that imports file below. Nothing to lift. | — |
 | `twins_20260921_b/realai__recovered/` | KEEP_SHELF | No Python. `REALAI_REPO_SCAN.json` and `REALAI_SELF_IMPROVE_CANDIDATES.json` (~1.2 MB scan dumps). | — |
 | `twins_20260924/realai__modules__organs/` | IDENTICAL_NOISE | 48/48 Python files byte-identical to `modules/organs/`, including `meta/rackup_coach.py` (2,877 B) and `hive.py` (2,455 B). `request_path.py` matches. Do not recreate `realai/modules/organs` from this shelf. The park note at `realai/modules/organs/README_PARKED.md` can stay. | — |
 | `twins_20260924/realai_agents/` | IDENTICAL_NOISE | 43/44 Python files byte-identical to live `agents/` (and a few `realai/` twins such as `realai_hive_orchestrator.py`). `agentx/agents.json` is 234 ids, a subset of live `agents/agentx/agents.json` (258 ids, 224,900 B vs 187,203 B); zero parked ids are missing on live. `access_profiles.json` matches. | — |
@@ -86,14 +90,55 @@ They were **not** copied. They are not high-confidence and not small drop-ins: t
 | `twins_20260924/Hey — I'm here..txt` | KEEP_SHELF | 582,398 B chat dump. Not code. | — |
 | `twins_pkg_ui/desktop/` | IDENTICAL_NOISE | `__init__.py` (28 B) and `voice_mode.py` (291 B) byte-identical to product-root `desktop/`. | — |
 
+## In-repo `recovered/` and `imports/`
+
+These directories are git placeholders after the 2026-09-13 junction unlink (`docs/recovery/2026-09-13-final-gold/PROMOTE_REPORT.md`). The historical trees were `D:\RealAI-archive\recovered` and `D:\RealAI-archive\imports`. This checkout does not contain those trees.
+
+| parked path | verdict | evidence | live destination if promote |
+|-------------|---------|----------|-----------------------------|
+| `recovered/` | KEEP_SHELF | `README.txt` only (the same pointer text as `imports/README.txt`: archive on `D:\RealAI-archive\recovered`, gold shelf `C:\RealAI-gold\`). Zero Python. `docs/recovery/realai-import-20260919.md` says a duplicate `realai/realai/` mirror was moved to `recovered/realai-import-20260919/`. That folder is not in this checkout. `docs/unification/GOLD_DEEP_SCAN.md` also names `recovered/from_recycle_bin/` as untracked forensic; it is not here. | — |
+| `imports/README.txt` | KEEP_SHELF | Pointer only. Names `D:\RealAI-archive\imports` and `C:\RealAI-gold\`. | — |
+| `imports/promoted/__init__.py` | KEEP_SHELF | 846 B. Sole top-level symbol `auto_load_plugins`. Byte-identical to `_quarantine/twins_20260921/realai__plugins__plugins/__init__.py`. Not identical to live `realai/plugins/__init__.py`, which has `list_first_party`, `load_first_party`, `register_all` and the `sys.modules['plugins']` alias. The parked file imports every child of `./plugins` as a side effect of import. Do not overwrite that shim. | — |
+| `imports/promoted/local_models.py` | KEEP_SHELF | 10,692 B. Top-level names match live `realai/core/local_models.py` (14,282 B) and `realai/plugins/local_models.py` (13,980 B): `LocalModelType`, `LocalModelManager`, `LocalLLMEngine`, `get_model_manager`, `get_llm_engine`. The imports copy is the smaller AMD/DirectML variant. It has three methods live does not (`LocalModelManager.get_llm`, `LocalLLMEngine._load_peft_transformers`, `LocalLLMEngine._generate_peft_transformers`). Live has the larger loader surface (`list_models`, `register_model`, `is_model_available`, transformers and llama.cpp checks, `unload`). Same top-level symbols, smaller file, less surface. Not a win. The PEFT helpers were not extracted. | — |
+| `imports/promoted/self/builder/coding_agent.py` | KEEP_SHELF | 1,277 B. Top-level symbol `CodingAgent` only, same as `realai/coding_agent.py` (1,226 B) and `agents/coding_agent.py` (1,210 B). Body is a different call path (`SelfBuilder.run` plus `workspace_root()`), not a superset of the live `RealAI().chat` agent. Live `realai/coding_agent.py` already uses `REALAI_ROOT` or `C:\RealAI-clean`. Do not replace it with this alternate. | — |
+| `imports/promoted/self/builder/test_self_builder.py` | IDENTICAL_NOISE | 1,526 B, class `TestSelfBuilder`. Byte-identical to `tests/test_self_builder.py` and `realai/tests/test_self_builder.py`. | — |
+
+`scripts/recovered/` is scanner JSON (`REALAI_REPO_SCAN.json`, `REALAI_SELF_IMPROVE_CANDIDATES.json`, `GOOD_CODE_ROOTS.json`), not the unlinked archive. It was not treated as a second product tree.
+
+## External shelves (operator machine)
+
+`C:\RealAI-gold` is not mounted here. `D:\RealAI-archive\recovered`, `D:\RealAI-archive\imports`, and `C:\RealAI-clean-backup` are not mounted here. No file under those paths was opened for this pass. The notes below are only what in-repo docs and placeholders already say. They are not a fresh inventory.
+
+Operator follow-up, on the box that has the disks:
+
+1. Inventory `C:\RealAI-gold` (especially `orphans\` and any `.before` orchestrator copies) with the same bar: promote a file only when it beats the live file on size and unique top-level symbols, and the live file is not an intentional shim.
+2. Inventory `D:\RealAI-archive\recovered` the same way. Git `recovered/` is the placeholder, not the archive.
+3. Do not xcopy either tree onto `live/realai-clean-20260911`.
+
+What the repo already records:
+
+| source | what it says about the external shelf |
+|--------|----------------------------------------|
+| `recovered/README.txt`, `imports/README.txt`, `_quarantine/README.txt` | Junctions from `C:\RealAI-clean\{recovered,imports,_quarantine}` to `D:\RealAI-archive\...` were unlinked on purpose. D: data was not deleted. Gold shelf path named: `C:\RealAI-gold\`. |
+| `docs/AUTHORITY.md` | Gold shelf is `C:\RealAI-gold`. Quarantine data is `D:\RealAI-archive\_quarantine`. |
+| `docs/recovery/2026-09-13-final-gold/PROMOTE_REPORT.md` | 2026-09-13 copy from the gold shelf onto live only where the live path was missing or empty: **1,760 files**, 505,474,950 bytes, 0 missing-gold, 21 skipped because live was non-empty. Then the three junctions were removed. After unlink, D: still existed: `recovered` top_entries=45 (sample 501 files / 120,142,517 bytes), `imports` top_entries=1 (sample 399 files / 2,720,044 bytes), `_quarantine` top_entries=347 (sample 507 files / 262,666,148 bytes). Those sample counts are from that log, not a listing this pass could re-read. |
+| `docs/recovery/2026-09-13-final-gold/MANIFEST.md` | Static unique-hash pass of D: archives vs live, then copy onto the gold shelf: **5,249 files**, 570,731,925 bytes, of which **3,489** orphan `.py` under `orphans/`. Unique candidate hashes 6,623. Rule in the manifest: copy `C:\RealAI-gold\<rel>` to live only if the dest is still empty; orphans need manual placement; do not wholesale-promote nested Recovery or grok_export trees. The manifest's "top interesting" rows are archive paths from that day (organ `hive.py` / `base.py`, `self_builder.py`, desktop_unique examples, torch QAT stubs). Several of those basenames now live at `modules/organs/` and `realai/core/` in this checkout; this pass did not re-stat the D: originals. |
+| `docs/SHELF_CONTENT_DELTA.md` (2026-09-21) | Operator-machine scan, cap 400 `.py` per shelf. Gold top-level `~py` counts recorded then: abilities 14, agents 12, apps 11, frontend 0, orphans 3,488, packages 2, providers 2, realai 292, scripts 16. Raw scan: IDENTICAL 218, NOISE 154, REVIEW 19, UNIQUE 136, PROMOTED 0. After junk filter, ~6 clean UNIQUE and 19 clean REVIEW. Clean gold rows called out and left parked: `orphans/` `cli-hive-commands-world.py`, `agent_activity.before.py`, `v3_orchestrator.before-*.py`, `configuration_bridgetower.py` (HF config). `hive_router.py` REVIEW was `_root` vs live `_product_root`. `base.py` REVIEW was a basename collision; `Organ` already in `modules/organs/base.py`. Backup shelf `C:\RealAI-clean-backup` was scanned in the same doc (recovered ~96 `.py` on that backup, not in this git tree) and also promoted nothing. |
+| `docs/recovery/2026-09-19-gold-unique-promote.json` | Later gold-shelf copy into live scripts only: `scripts/promote_eval.py` (797 B) and `scripts/ability_matrix.py` (1,467 B). Note in the file: gold `scripts/`, `packages/`, and `providers/` were already on live; orphans and `C__` dumps skipped. |
+| `docs/recovery/realai-import-20260919.md` | Claims `recovered/realai-import-20260919/` holds the old nested `realai/realai/` mirror, and that the overlapping files were older or smaller than live `api_server.py`, `tools.py`, `v3_orchestrator.py`, `server/app.py`, `server/tools_runtime.py`. The folder is absent here. |
+| `docs/unification/GOLD_DEEP_SCAN.md` | Names local-only dirt still outside git at the time of that note: `recovered/from_recycle_bin/`, `realai_og_mess/`, `_hold_untracked_*`, `C:\realai_giant_hold\`. Not readable from this checkout. |
+| `docs/MONOREPO_TARGET_LAYOUT.md`, `docs/MONOREPO_MIGRATION_PHASES.md` | Shelves stay libraries. Prior deltas recorded zero promotions. Phase 5 still requires size and unique symbols, and forbids merging `C:\RealAI-gold`, `C:\RealAI-clean-backup`, `D:\RealAI-archive`, `recovered/`, or `imports/` onto live. |
+
 ## What should come back
 
-Nothing in the product tree.
+Nothing from the trees this checkout can read.
 
 - Orchestration, plugins, organs, abilities, bot, and core gold are not missing a parked sibling that is both larger and symbol-richer.
-- Coach files on the shelf match live. They stay where they are.
-- The three `realai-core` pytest modules are the only optional follow-up, and only as new tests with imports rewritten to the live modules named above. They do not replace any gold file.
+- Coach files on the quarantine shelf match live. They stay where they are.
+- The three `realai-core` pytest modules are the only optional follow-up from `_quarantine/`, and only as new tests with imports rewritten to the live modules named above. They do not replace any gold file.
 - Do not revive the `QUARANTINE_DELTA.md` basename candidates. They are aliases.
+- Do not promote `imports/promoted/local_models.py` or `coding_agent.py` over the live modules. The PEFT helpers and the `SelfBuilder` coding agent are alternate bodies, not larger gold.
+- `C:\RealAI-gold` and `D:\RealAI-archive\recovered` still need an operator-machine pass. The 2026-09-21 shelf delta already promoted zero files from the gold shelf and told the operator to leave `orphans/` and `.before` copies parked.
 
 ## Not done
 
