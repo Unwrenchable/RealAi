@@ -116,6 +116,20 @@ Leave a dest-empty shim wherever an external launcher or `from <loser> import` s
 
 **Smoke:** full table, plus `GET /console` and the console hash pair.
 
+**Landed 2026-09-26** on shelf `_quarantine/twins_20260926/` (see `PHASE3_PARK.md`). `rg` found no live importer, so no dest-empty shim was left.
+
+| Surface | Result |
+|---------|--------|
+| Abilities | Authority stays `abilities/`. `realai/abilities/` stays (note + `registry.json`, loaded by `realai/plugins/plugin_registry.py`). `realai/plugins/abilities/` parked: not in `FIRST_PARTY`, zero `import` hits, 16/17 files byte-identical to `realai/plugins/rackup_coach/abilities`. Coach packages not edited. Wrong-level `abilities/realai/` parked. |
+| Agents | Product-root `agents/` stays. `realai/agents/` was not restored. Wrong-level `agents/realai/` parked. |
+| Organs | `modules/organs` stays. Torch `realai/modules/*.py` (29 files) plus non-organ `desktop_unique`, `self_improvement`, and `training` parked. Shim `realai/modules/__init__.py` and `organs/README_PARKED.md` stay. |
+| Core / plugins | Root `core/` and root `plugins/` untouched (compat). |
+| Console | `apps/vscode/webview/console.html` not edited. Incomplete nest `realai/apps/` (includes `vscode/` and `frontend/`) parked. Twin hashes were already equal and were not rewritten. |
+| Fusion | Losers `apps/fusion-ui/` and `realai/fusion-ui/` parked only after `:8001` confirmed product-root `fusion-ui/`: `GET /health` `fusion_ui_dir` was that directory, and `GET /fusion-ui/script.js` SHA-256 matched product-root `script.js` (`d9c7abaf…`, 9807 bytes), not the twin (`64a07090…`, 8862 bytes). `/fusion-ui/` still 302s to `/console?fusion=1`. |
+| Frontend | `apps/frontend/` parked. Catalog row `frontend_ui` now points at `frontend/`. |
+
+Fusion file diff recorded before the move: `config.js` identical across all three trees. `script.js` identical between `apps/fusion-ui` and `realai/fusion-ui`, different from product root. `index.html` different in all three (product root 1841 bytes, redirect into Console; apps 9087; package copy 9700). Product-root files were not replaced.
+
 ---
 
 ## Phase 4 — launcher and root-drawer tidy
