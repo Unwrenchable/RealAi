@@ -177,6 +177,13 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
   .top .pill-secondary{display:none}
   .top.more-open .pill-secondary{display:flex;width:100%;order:99;padding-top:4px}
 }
+.core-desk{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 2px 0}
+.core-desk .core-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-right:2px}
+.core-desk .core-secondary{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+@media (max-width:1100px){
+  .core-desk .core-secondary{display:none}
+  .core-desk.more-open .core-secondary{display:flex;width:100%}
+}
 .ops{overflow:auto;min-height:0}
 .ops .dock{overflow:auto;flex:1;min-height:0;max-height:none}
 .composer-wrap{flex-shrink:0;position:sticky;bottom:0;z-index:5;background:var(--bg,#0b0b11)}
@@ -231,7 +238,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       <button type="button" class="pill btn" id="toggleRail" title="Toggle rail">Rail</button>
       <div class="pill"><span class="dot" id="dot2"></span> realai-hive</div>
       <div class="pill" id="pillHive" title="Hive :8001">hive - ...</div>
-      <div class="pill" id="pillAgents" title="Catalog agents · live hive roles">agents - ...</div>
+      <div class="pill" id="pillAgents" title="Catalog agents | live hive roles">agents - ...</div>
       <button type="button" class="pill btn" id="pillMore" title="More status pills" hidden>More</button>
       <div class="pill-secondary" id="pillSecondary">
         <div class="pill" id="pillVulkan" title="Vulkan :8080">vulkan - ...</div>
@@ -252,10 +259,23 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     </header>
     <div class="feed" id="feed"></div>
     <div class="composer-wrap">
+      <div class="core-desk" id="coreDesk" aria-label="Core desk">
+        <span class="core-label">Core desk</span>
+        <button type="button" class="pill btn" data-core="read" title="workspace_read">read</button>
+        <button type="button" class="pill btn" data-core="write" title="workspace_write">write</button>
+        <button type="button" class="pill btn" data-core="git-status" title="git status">git status</button>
+        <button type="button" class="pill btn" data-core="hive-health" title="ability.atomic_fizz_hive_client health">hive health</button>
+        <button type="button" class="pill btn" id="coreMore" title="More core desk actions" hidden>More</button>
+        <span class="core-secondary" id="coreSecondary">
+          <button type="button" class="pill btn" data-core="git-diff" title="git diff --stat">git diff</button>
+          <button type="button" class="pill btn" data-core="hive-chat" title="ability.atomic_fizz_hive_client chat">hive chat</button>
+          <button type="button" class="pill btn" data-core="learn" title="learn status GET /v1/learn/packets">learn status</button>
+        </span>
+      </div>
       <form class="composer" id="form">
         <textarea id="input" rows="2" placeholder="Ask anything."></textarea>
         <div class="bar">
-          <span class="ghost">I'll use tools, abilities, and agents when needed.</span>
+          <span class="ghost">I'll use tools, abilities, and agents when needed. Reply: Summary / What changed / Verify / Next.</span>
           <button class="send" id="send" type="submit">Send</button>
         </div>
       </form>
@@ -299,7 +319,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       <button type="button" class="chip" id="promoteStubBtn" style="margin:0 10px 6px;display:block;width:calc(100% - 20px);background:rgba(214,255,63,.15);border-color:rgba(214,255,63,.45)">Promote stub</button>
       <button type="button" class="chip" id="promoteWireBtn" style="margin:0 10px 6px;display:block;width:calc(100% - 20px)">Wire ability</button>
       <div class="stat"><b>Last result</b><span id="promoteResult">idle</span></div>
-      <p style="margin:8px 12px;font-size:10px;color:#8a8a96">Stub only — writes realai/plugins/&lt;slug&gt;_coach and refreshes abilities. No orchestrator rewrite.</p>
+      <p style="margin:8px 12px;font-size:10px;color:#8a8a96">Stub only - writes realai/plugins/&lt;slug&gt;_coach and refreshes abilities. No orchestrator rewrite.</p>
     </div>
   </aside>
 </div>
@@ -380,6 +400,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     if (name === 'workspace_grep') return { pattern: 'RealAI|console', path: '.', glob: '*.{py,ts,md}' };
     if (name === 'workspace_read') return { path: 'docs/RUN_SERVERS.md', limit: 80 };
     if (name === 'multi_agent_run') return { task: 'Summarize RealAI Hive health and list 3 next actions.', mode: 'pipeline' };
+    if (name === 'git' || name === 'git_status' || name === 'git_diff' || name === 'learn_status') return {};
     return {};
   }
   async function browserBootstrap(){
@@ -500,7 +521,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       const msg = String((e && e.message) || e || '');
       const timed = /timed out|TimeoutError|abort/i.test(msg);
       deliver({ command: 'assistant', text: timed
-        ? ('Error: signal timed out (chat abort 180s). Tools used this turn may be incomplete — try a shorter ask or /read path.')
+        ? ('Error: signal timed out (chat abort 180s). Tools used this turn may be incomplete - try a shorter ask or /read path.')
         : ('Error: ' + msg) });
     }
   }
@@ -526,20 +547,25 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       }
     }
   }
-  async function browserRunAbility(name, input){
+  async function browserRunAbility(name, input, context){
     const ability = String(name || '').replace(/^ability\./, '');
     deliver({ command: 'status', text: 'Running ability ' + ability + '...' });
+    const args = Object.assign(
+      { input: input || ('Console invoke ' + ability) },
+      (context && typeof context === 'object') ? context : {}
+    );
     try {
       let result;
       try {
         result = await hivePost('/v1/tools/execute', {
           name: name.startsWith('ability.') ? name : ('ability.' + ability),
-          arguments: { input: input || ('Console invoke ' + ability) },
+          arguments: args,
         });
       } catch (_) {
         result = await hivePost('/v1/abilities/run', {
           ability,
-          input: input || ('Console invoke ' + ability),
+          input: args.input,
+          action: args.action,
         });
       }
       deliver({ command: 'assistant', text: 'Ability `' + ability + '`\n\n```json\n' + JSON.stringify(result, null, 2).slice(0, 12000) + '\n```' });
@@ -599,7 +625,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
           if (cmd === 'ready' || cmd === 'refresh') await browserBootstrap();
           else if (cmd === 'chat') await browserChat(String(msg.text || ''), Array.isArray(msg.history) ? msg.history : []);
           else if (cmd === 'runTool') await browserRunTool(String(msg.name || ''), msg.args || {});
-          else if (cmd === 'runAbility') await browserRunAbility(String(msg.name || ''), msg.input);
+          else if (cmd === 'runAbility') await browserRunAbility(String(msg.name || ''), msg.input, msg.context || null);
           else if (cmd === 'local') await browserLocal(String(msg.kind || ''));
           else if (cmd === 'smoke') await browserSmoke();
           else if (cmd === 'setVoice') { /* voiceOn toggled in UI */ }
@@ -1052,7 +1078,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     } else if (tab === 'tools') {
       items = (boot.tools||[]).map(n => ({ title:n, sub:'hive tool - click to run', action:n, kind:'tool' }));
     } else if (tab === 'agents') {
-      // Catalog list (full roster) — live hive runners stay on /v1/agents default (~14)
+      // Catalog list (full roster) - live hive runners stay on /v1/agents default (~14)
       const catalog = (boot.agents||[]);
       items = catalog.map(n => ({ title:n, sub:'catalog agent - fills /multi', action:n, kind:'agent' }));
       if ((boot.hiveRoles||[]).length) {
@@ -1171,6 +1197,75 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
   };
 
 
+  function coreDeskAct(kind){
+    if (kind === 'read') {
+      const path = window.prompt('workspace_read path', 'README.md');
+      if (!path) return;
+      vscode.postMessage({ command:'runTool', name:'workspace_read', args:{ path: path, limit: 80 } });
+      return;
+    }
+    if (kind === 'write') {
+      const path = window.prompt('workspace_write path (relative)', 'notes/desk.txt');
+      if (!path) return;
+      const content = window.prompt('File contents. Cancel to skip. Empty is refused.', 'hello');
+      if (content == null || !String(content).length) {
+        fillComposer('/write ' + path + '|||');
+        return;
+      }
+      vscode.postMessage({ command:'runTool', name:'workspace_write', args:{ path: path, content: content, mode: 'overwrite' } });
+      return;
+    }
+    if (kind === 'git-status') {
+      vscode.postMessage({ command:'runTool', name:'git_status', args:{} });
+      return;
+    }
+    if (kind === 'git-diff') {
+      vscode.postMessage({ command:'runTool', name:'git_diff', args:{} });
+      return;
+    }
+    if (kind === 'hive-health') {
+      vscode.postMessage({
+        command:'runAbility',
+        name:'ability.atomic_fizz_hive_client',
+        input:'health',
+        context:{ action:'health', input:'health' }
+      });
+      return;
+    }
+    if (kind === 'hive-chat') {
+      const prompt = window.prompt('atomic_fizz_hive_client chat prompt', 'Reply with ok');
+      if (!prompt) return;
+      vscode.postMessage({
+        command:'runAbility',
+        name:'ability.atomic_fizz_hive_client',
+        input: prompt,
+        context:{ action:'chat', prompt: prompt, input: prompt }
+      });
+      return;
+    }
+    if (kind === 'learn') {
+      vscode.postMessage({ command:'runTool', name:'learn_status', args:{} });
+    }
+  }
+  (function(){
+    const desk = document.getElementById('coreDesk');
+    const more = document.getElementById('coreMore');
+    function syncCore(){
+      if (!desk || !more) return;
+      const narrow = window.matchMedia('(max-width:1100px)').matches;
+      more.hidden = !narrow;
+      if (!narrow) desk.classList.remove('more-open');
+    }
+    if (more) more.onclick = function(){ if (desk) desk.classList.toggle('more-open'); };
+    if (desk) {
+      desk.querySelectorAll('[data-core]').forEach(function(btn){
+        btn.onclick = function(){ coreDeskAct(btn.getAttribute('data-core')); };
+      });
+    }
+    window.addEventListener('resize', syncCore);
+    syncCore();
+  })();
+
   // Header scale: secondary pills behind More under 1100px
   (function(){
     const top = document.getElementById('topBar');
@@ -1186,7 +1281,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     syncMore();
   })();
 
-  // Promote tab — learned packets → stub
+  // Promote tab - learned packets -> stub
   window.__realaiPromotePackets = [];
   async function __realaiLoadPromote(force){
     const sel = document.getElementById('promoteSelect');
@@ -1201,7 +1296,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       const prev = sel.value;
       sel.innerHTML = rows.map(p => {
         const stub = p.has_stub ? ' [stub]' : '';
-        const fc = (p.file_count != null) ? (' · ' + p.file_count + ' files') : '';
+        const fc = (p.file_count != null) ? (' | ' + p.file_count + ' files') : '';
         return '<option value="' + String(p.slug||'').replace(/"/g,'&quot;') + '">' +
           String(p.slug||'') + stub + fc + '</option>';
       }).join('');
@@ -1241,7 +1336,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       const data = await hivePost('/v1/learn/promote', { slug, mode: 'stub', confirm: true });
       const path = (data && (data.plugin_path || data.plugin_dir)) || '';
       const ok = !!(data && data.ok);
-      if (resultEl) resultEl.textContent = (ok ? 'ok · ' : 'fail · ') + (data && data.plugin_id || slug) + (path ? (' · ' + path) : '');
+      if (resultEl) resultEl.textContent = (ok ? 'ok | ' : 'fail | ') + (data && data.plugin_id || slug) + (path ? (' | ' + path) : '');
       const box = document.getElementById('promotePreviewBox');
       if (box) box.textContent = JSON.stringify(data, null, 2);
       await __realaiLoadPromote(true);
@@ -1271,9 +1366,9 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     if (!box) return;
     const row = (window.__realaiPromotePackets || []).find(p => p.slug === slug);
     const scores = (row && (row.score_top || row.scores)) || [];
-    if (!scores.length) { box.textContent = '(no scores — re-learn packet)'; return; }
+    if (!scores.length) { box.textContent = '(no scores - re-learn packet)'; return; }
     box.textContent = scores.slice(0,8).map(s =>
-      String(s.score).padStart(3,' ') + '  ' + String(s.kind||'') + '  ' + String(s.path||'') + '\n    ' + String(s.why||'') + '\n    → ' + String(s.adapt||'')
+      String(s.score).padStart(3,' ') + '  ' + String(s.kind||'') + '  ' + String(s.path||'') + '\n    ' + String(s.why||'') + '\n    -> ' + String(s.adapt||'')
     ).join('\n');
   }
   if (promoteSelect) promoteSelect.onchange = () => __realaiShowPromoteScores(promoteSelect.value);
@@ -1295,7 +1390,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
     try {
       const data = await hivePost('/v1/learn/wire', { slug, target: 'ability', confirm: true });
       const path = (data && data.ability_path) || '';
-      if (resultEl) resultEl.textContent = (data && data.ok ? 'wired · ' : 'fail · ') + (data && data.ability_id || '') + (path ? (' · ' + path) : '');
+      if (resultEl) resultEl.textContent = (data && data.ok ? 'wired | ' : 'fail | ') + (data && data.ability_id || '') + (path ? (' | ' + path) : '');
       const box = document.getElementById('promotePreviewBox');
       if (box) box.textContent = JSON.stringify(data, null, 2);
       try {
@@ -1353,7 +1448,7 @@ textarea{width:100%;min-height:48px;max-height:22vh;resize:vertical;background:t
       document.getElementById('pillCaps').textContent = 'caps - '+((d.capabilities||[]).length);
       const catN = Number(d.agentsCatalogCount || (d.agents||[]).length || 0);
       const hiveN = Number(d.agentsHiveCount || (d.agentsLive||[]).length || (d.hiveRoles||[]).length || 0);
-      document.getElementById('pillAgents').textContent = 'agents - ' + catN + (hiveN ? (' · hive ' + hiveN) : '');
+      document.getElementById('pillAgents').textContent = 'agents - ' + catN + (hiveN ? (' | hive ' + hiveN) : '');
       const s = d.snap || {};
       setLive(!!s.hiveOk);
       const ph = document.getElementById('pillHive');

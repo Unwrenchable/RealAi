@@ -6,9 +6,10 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from realai.bot.boot import HARD_IDENTITY_LOCK, chat_system_prefix
+from realai.bot.boot import HARD_IDENTITY_LOCK, chat_system_prefix, load_operator_directive
 from realai.bot.natural_mode import (
     NATURAL_GROUNDING_RULE,
+    NATURAL_REPLY_CONTRACT,
     apply_natural_grounding,
     apply_workspace_intent,
     extract_learn_source,
@@ -163,6 +164,32 @@ class TestChatSystemPrefix(unittest.TestCase):
         )
         self.assertIn("Never invent file contents", text)
         self.assertIn("never invent contents", text.lower())
+        self.assertIn("Summary:", text)
+        self.assertIn("MAX_TOOLS_THIS_TURN=3", text)
+        self.assertIn("180s", text)
+        self.assertIn("LANDED", text)
+
+    def test_directive_loads_without_env_file(self):
+        prev_file = os.environ.pop("REALAI_OPERATOR_SYSTEM_FILE", None)
+        prev_sys = os.environ.pop("REALAI_OPERATOR_SYSTEM", None)
+
+        def _restore(key: str, val):
+            if val is None:
+                os.environ.pop(key, None)
+            else:
+                os.environ[key] = val
+
+        self.addCleanup(lambda: _restore("REALAI_OPERATOR_SYSTEM_FILE", prev_file))
+        self.addCleanup(lambda: _restore("REALAI_OPERATOR_SYSTEM", prev_sys))
+        text = load_operator_directive()
+        self.assertIn("Reply contract", text)
+        self.assertIn("MAX_TOOLS_THIS_TURN=3", text)
+        self.assertIn("180s", text)
+        self.assertIn("LANDED", text)
+        self.assertIn("atomic_fizz_hive_client", text)
+        prefix = chat_system_prefix("")
+        self.assertIn(NATURAL_REPLY_CONTRACT.splitlines()[0], prefix)
+        self.assertIn("Console Operator", prefix)
 
 
 class TestWorkspaceIntent(unittest.TestCase):
@@ -218,8 +245,13 @@ class TestWorkspaceIntent(unittest.TestCase):
         self.assertTrue(ground.get("short_circuit"), ground)
         self.assertTrue(note.is_file())
         self.assertEqual(note.read_text(encoding="utf-8"), "HELLO_WS")
-        self.assertIn("verify=ok", str(ground.get("reply") or ""))
-        self.assertIn("HELLO_WS", str(ground.get("reply") or ""))
+        reply = str(ground.get("reply") or "")
+        self.assertIn("Summary:", reply)
+        self.assertIn("What changed:", reply)
+        self.assertIn("Verify:", reply)
+        self.assertIn("Next:", reply)
+        self.assertIn("HELLO_WS", reply)
+        self.assertNotIn("LANDED", reply.split("--- on disk", 1)[0])
 
 
 class TestGroundingLock(unittest.TestCase):
@@ -254,6 +286,71 @@ class TestGroundingLock(unittest.TestCase):
                     os.environ.pop(k, None)
                 else:
                     os.environ[k] = v
+
+
+class TestPostWriteSmoke(unittest.TestCase):
+    def test_hive_down_is_guarded_failure(self):
+        from realai.bot.natural_mode import post_write_smoke
+
+        prev = os.environ.get("REALAI_API_BASE")
+        os.environ["REALAI_API_BASE"] = "http://127.0.0.1:9"
+        try:
+            out = post_write_smoke(timeout=0.4)
+        finally:
+            if prev is None:
+                os.environ.pop("REALAI_API_BASE", None)
+            else:
+                os.environ["REALAI_API_BASE"] = prev
+        self.assertFalse(out.get("ok"))
+        self.assertTrue(out.get("post_step"))
+        self.assertTrue(out.get("error") or out.get("guarded"))
+
+    def test_smoke_fail_does_not_claim_success(self):
+        from realai.bot import natural_mode as nm
+
+        orig = nm.post_write_smoke
+        nm.post_write_smoke = lambda **_k: {
+            "ok": False,
+            "url": "http://127.0.0.1:8001/health",
+            "error": "connection refused",
+            "post_step": True,
+            "guarded": True,
+        }
+        self.addCleanup(lambda: setattr(nm, "post_write_smoke", orig))
+        reply = nm.format_write_verified_reply(
+            {"ok": True, "path": "notes/desk.txt", "bytes": 5},
+            {"path": "notes/desk.txt", "content": "hello\n", "total_lines": 1},
+            nm.post_write_smoke(),
+        )
+        self.assertIn("hive smoke failed", reply)
+        self.assertIn("FAIL", reply)
+        self.assertNotIn("smoke passed", reply)
+        self.assertNotIn("LANDED", reply.split("--- on disk", 1)[0])
+        shaped, smoke = nm.finalize_natural_choice_text(
+            "LANDED the patch in app.py",
+            {"should_ground": True, "used_tools": ["read"]},
+            applied=[],
+        )
+        self.assertIn("Summary:", shaped)
+        self.assertIn("PROPOSED", shaped)
+        self.assertNotIn("LANDED", shaped)
+        self.assertIsNone(smoke)
+
+    def test_core_desk_tools_are_real(self):
+        from realai.cli.craft import plan_tools, tool_git_diff, tool_git_status
+        from realai.orchestration.v3_runtime_bridge import execute_registry_tool
+
+        status = tool_git_status()
+        self.assertTrue(status.get("branch") or status.get("error") or status.get("workspace"))
+        diff = tool_git_diff()
+        self.assertIn("ok", diff)
+        plans = plan_tools("/git diff")
+        self.assertEqual(plans[0][0], "git_diff")
+        reg = execute_registry_tool("git_status", {})
+        self.assertIn("tool", reg)
+        learn = execute_registry_tool("learn_status", {})
+        self.assertIn("count", learn)
+        self.assertTrue(learn.get("ok") or learn.get("error"))
 
 
 if __name__ == "__main__":
