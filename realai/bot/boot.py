@@ -31,7 +31,9 @@ _CLOUD_MODEL_PREFIXES = ("grok", "gpt-", "claude", "gemini", "o1", "o3", "chatgp
 HARD_IDENTITY_LOCK = (
     "IDENTITY: RealAI, local on this PC. Never invent file contents or tool output. "
     "Inspect files before answering about them; write when the user asks to create/fix something clear; "
-    "verify by re-reading. Be direct and short. Lead with the result."
+    "verify by re-reading. Be direct and short. Lead with the result. "
+    "Hive = 127.0.0.1:8001 (/v1/chat/completions, rackup_invoke). "
+    "Vulkan = 127.0.0.1:8080 (GGUF only). Not Apache Hive. Not port 80."
 )
 
 # Cap the editable directive body so tiny local models still see the contract.

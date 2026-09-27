@@ -306,6 +306,8 @@ class TestChatSystemPrefix(unittest.TestCase):
             "When the user asks about files or code: read/list/grep first — never invent contents."
         )
         self.assertIn("Never invent file contents", text)
+        self.assertIn("Hive = 127.0.0.1:8001 (/v1/chat/completions, rackup_invoke)", text)
+        self.assertIn("Vulkan = 127.0.0.1:8080 (GGUF only). Not Apache Hive. Not port 80.", text)
         self.assertIn("never invent contents", text.lower())
         self.assertIn("EXECUTE", text)
         self.assertIn("MAX_TOOLS_THIS_TURN=3", text)
@@ -330,6 +332,9 @@ class TestChatSystemPrefix(unittest.TestCase):
         self.assertIn("180s", text)
         self.assertIn("LANDED", text)
         self.assertIn("atomic_fizz_hive_client", text)
+        self.assertIn("## Ports (AtomicFizz / Nest)", text)
+        self.assertIn("Hive = 127.0.0.1:8001 (/v1/chat/completions, rackup_invoke)", text)
+        self.assertIn("Vulkan = 127.0.0.1:8080 (GGUF only). Not Apache Hive. Not port 80.", text)
         prefix = chat_system_prefix("")
         self.assertIn(NATURAL_REPLY_CONTRACT.splitlines()[0], prefix)
         self.assertIn("Console Operator", prefix)
@@ -400,6 +405,14 @@ class TestWorkspaceIntent(unittest.TestCase):
 class TestGroundingLock(unittest.TestCase):
     def test_identity_lock_forbids_invented_files(self):
         self.assertIn("Never invent file contents", HARD_IDENTITY_LOCK)
+        self.assertIn(
+            "Hive = 127.0.0.1:8001 (/v1/chat/completions, rackup_invoke)",
+            HARD_IDENTITY_LOCK,
+        )
+        self.assertIn(
+            "Vulkan = 127.0.0.1:8080 (GGUF only). Not Apache Hive. Not port 80.",
+            HARD_IDENTITY_LOCK,
+        )
         self.assertIn("GROUNDING LOCK", NATURAL_GROUNDING_RULE)
 
     def test_apply_grounding_splices_tool_results(self):
