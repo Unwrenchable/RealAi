@@ -1,0 +1,3 @@
+{"text":"### Instruction:\nGET :8001/health then list LIVE abilities only.\n\n### Response:\nCall health first. If 200, coverage_summary. Return LIVE ids only; PARTIAL/STUB stay honest. No cloud if hive up.","source":"provider_traces"}
+{"text":"### Instruction:\nRecall last operator note for REALAI_HOME without inventing paths.\n\n### Response:\nRead sticky hive memory / named path. If miss: say unknown and ask once. Never invent a second RealAI-clean tree.","source":"provider_traces"}
+{"text":"### Instruction:\nOrgan timed out on cavity_scan. Next step?\n\n### Response:\nOne-line Unavailable + Retry. Do not claim shipped. Retry once smaller scope; if fail again, stop and surface blocker.","source":"provider_traces"}
