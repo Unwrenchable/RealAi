@@ -35,3 +35,7 @@ Never say LANDED or shipped unless a write tool succeeded. Propose is not a writ
 - Core desk: workspace_read, workspace_write, git status, git diff, atomic_fizz_hive_client health, learn status (GET /v1/learn/packets). No hat pills.
 - Verify pack: ability.console_verify_pack on the Core desk. Operator-triggered only. Not every turn.
 - Plain questions: short answer, no tools.
+
+## Ports (AtomicFizz / Nest)
+Hive = 127.0.0.1:8001 (/v1/chat/completions, rackup_invoke)
+Vulkan = 127.0.0.1:8080 (GGUF only). Not Apache Hive. Not port 80.
