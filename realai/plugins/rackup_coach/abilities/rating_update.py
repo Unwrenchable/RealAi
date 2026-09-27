@@ -29,27 +29,185 @@ from plugins.rackup_coach.roc import extract_roc_context, format_config, rating_
 from plugins.rackup_coach.types import PlayerProfile, rating_band
 
 
+_WIN_WORDS = {"1", "1.0", "win", "won", "w", "true", "yes", "victory"}
+_LOSS_WORDS = {"0", "0.0", "loss", "lose", "lost", "l", "false", "no", "defeat"}
+_DRAW_WORDS = {"0.5", "draw", "tie", "push", "split", "halved"}
+_MY_SCORE_KEYS = (
+    "my_score",
+    "my",
+    "me",
+    "player",
+    "self",
+    "home",
+    "us",
+    "player_score",
+    "score",
+)
+_OPP_SCORE_KEYS = (
+    "opp_score",
+    "opponent_score",
+    "opponent",
+    "opp",
+    "them",
+    "away",
+    "their_score",
+)
+
+
+def _coerce_outcome(raw: Any) -> float | None:
+    """Map won/outcome tokens to 1 / 0 / 0.5. Unknown shapes return None."""
+    if isinstance(raw, bool):
+        return 1.0 if raw else 0.0
+    if isinstance(raw, (int, float)) and not isinstance(raw, bool):
+        val = float(raw)
+        if val in (1.0, 0.0, 0.5):
+            return val
+        return None
+    if isinstance(raw, str):
+        token = raw.strip().lower()
+        if token in _WIN_WORDS:
+            return 1.0
+        if token in _LOSS_WORDS:
+            return 0.0
+        if token in _DRAW_WORDS:
+            return 0.5
+        return None
+    if isinstance(raw, dict):
+        if raw.get("draw") or raw.get("tie"):
+            return 0.5
+        if "won" in raw:
+            return _coerce_outcome(raw.get("won"))
+        for key in ("outcome", "result"):
+            if key in raw:
+                parsed = _coerce_outcome(raw.get(key))
+                if parsed is not None:
+                    return parsed
+    return None
+
+
+def _as_score(raw: Any) -> int | None:
+    if isinstance(raw, bool) or raw is None:
+        return None
+    if isinstance(raw, (int, float)):
+        return int(raw)
+    if isinstance(raw, str):
+        text = raw.strip()
+        if text.lstrip("-").isdigit():
+            return int(text)
+        return None
+    if isinstance(raw, dict):
+        for key in ("score", "points", "games", "racks", "value"):
+            if key in raw:
+                return _as_score(raw.get(key))
+    return None
+
+
+def _score_pair(scores: Any, player: PlayerProfile) -> tuple[int, int] | None:
+    """Pull (my_score, opp_score) from a scores object, list, or name map."""
+    if isinstance(scores, (list, tuple)) and len(scores) >= 2:
+        mine, theirs = _as_score(scores[0]), _as_score(scores[1])
+        if mine is not None and theirs is not None:
+            return mine, theirs
+        return None
+    if not isinstance(scores, dict):
+        return None
+    mine: int | None = None
+    theirs: int | None = None
+    for key in _MY_SCORE_KEYS:
+        if key in scores:
+            mine = _as_score(scores.get(key))
+            if mine is not None:
+                break
+    for key in _OPP_SCORE_KEYS:
+        if key in scores:
+            theirs = _as_score(scores.get(key))
+            if theirs is not None:
+                break
+    if mine is not None and theirs is not None:
+        return mine, theirs
+    players = scores.get("players")
+    if isinstance(players, list) and len(players) >= 2:
+        a, b = _as_score(players[0]), _as_score(players[1])
+        if a is not None and b is not None:
+            return a, b
+    named: dict[str, int] = {}
+    for key, val in scores.items():
+        if not isinstance(key, str):
+            continue
+        num = _as_score(val)
+        if num is not None:
+            named[key.strip().lower()] = num
+    if len(named) >= 2:
+        labels = {
+            (player.display_name or "").strip().lower(),
+            (player.player_id or "").strip().lower(),
+        }
+        labels.discard("")
+        mine_named = None
+        for label in labels:
+            if label in named:
+                mine_named = named.pop(label)
+                break
+        if mine_named is not None and len(named) == 1:
+            return mine_named, next(iter(named.values()))
+    return None
+
+
+def _outcome_from_scores(
+    my_score: int,
+    opp_score: int,
+    payload: dict[str, Any],
+    cfg: Any,
+) -> tuple[float, None]:
+    target = int(payload.get("points_to_win") or getattr(cfg, "points_to_win", 0) or 0)
+    if my_score >= target > 0 and opp_score < target:
+        return 1.0, None
+    if opp_score >= target > 0 and my_score < target:
+        return 0.0, None
+    if my_score == opp_score:
+        return 0.5, None
+    return (1.0 if my_score > opp_score else 0.0), None
+
+
 def _resolve_outcome(
     player: PlayerProfile,
     payload: dict[str, Any],
     cfg: Any,
 ) -> tuple[float | None, str | None]:
-    """Return (outcome 1/0/0.5, error_hint)."""
+    """Return (outcome 1/0/0.5, error_hint).
+
+    Nest may send any of payload.won, payload.outcome, or payload.scores.
+    """
     if "won" in payload:
         if payload.get("draw") or payload.get("tie"):
             return 0.5, None
-        return (1.0 if payload.get("won") else 0.0), None
+        coerced = _coerce_outcome(payload.get("won"))
+        if coerced is None:
+            return (1.0 if payload.get("won") else 0.0), None
+        return coerced, None
+    if "outcome" in payload:
+        coerced = _coerce_outcome(payload.get("outcome"))
+        if coerced is not None:
+            return coerced, None
     if "my_score" in payload and "opp_score" in payload:
-        ms, os_ = int(payload["my_score"]), int(payload["opp_score"])
-        target = int(payload.get("points_to_win") or getattr(cfg, "points_to_win", 0) or 0)
-        if ms >= target > 0 and os_ < target:
-            return 1.0, None
-        if os_ >= target > 0 and ms < target:
-            return 0.0, None
-        if ms == os_:
-            return 0.5, None
-        return (1.0 if ms > os_ else 0.0), None
-    return None, "Provide won:bool or my_score+opp_score"
+        try:
+            return _outcome_from_scores(
+                int(payload["my_score"]),
+                int(payload["opp_score"]),
+                payload,
+                cfg,
+            )
+        except (TypeError, ValueError):
+            pass
+    scores = payload.get("scores")
+    if scores is not None:
+        coerced = _coerce_outcome(scores)
+        if coerced is not None:
+            return coerced, None
+        pair = _score_pair(scores, player)
+        if pair is not None:
+            return _outcome_from_scores(pair[0], pair[1], payload, cfg)
+    return None, "Provide won, outcome, or scores"
 
 
 def _opponent_state(player: PlayerProfile, payload: dict[str, Any]) -> PlayerRating:
@@ -123,7 +281,7 @@ def compute_rating_update(
     RackUp sends match result; RealAI returns Glicko-2 winner_after / loser_after.
 
     Required:
-      won:bool  OR  my_score + opp_score
+      won:bool  OR  outcome  OR  scores  OR  my_score + opp_score
       opponent_rating (or opponent object / opponent_league_ratings)
     Optional Glicko state:
       rd, volatility (player) — default 175 / 0.06

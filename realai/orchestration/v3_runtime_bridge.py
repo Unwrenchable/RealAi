@@ -389,7 +389,14 @@ def tools_catalog() -> List[Dict[str, Any]]:
             "Invoke RackUp coach ability (rating, SOTD, pyramid, etc.)",
             {
                 "ability": {"type": "string"},
-                "payload": {"type": "object"},
+                "player": {
+                    "type": "object",
+                    "description": "Player profile (display_name, discipline, rating). Maps to ctx.player.",
+                },
+                "payload": {
+                    "type": "object",
+                    "description": "Ability input (question, won, outcome, scores, opponent). Maps to ctx.payload.",
+                },
                 "player_id": {"type": "string"},
             },
             ["ability"],

@@ -79,7 +79,9 @@ class RackUpCoachAgent:
                 )
             chip = getattr(player, "rating_chip", None) or f"rating={player.rating}"
             fmt = (roc_ctx or {}).get("format") or ""
-            notes = f"chip={chip} band={player.band.value}"
+            who = (player.display_name or player.player_id or "").strip()
+            disc_label = (player.normalized_discipline() or "").replace("_", "-")
+            notes = f"{who} · {disc_label} chip={chip} band={player.band.value}"
             if fmt:
                 notes += f" format={fmt}"
             return CoachResponse(
