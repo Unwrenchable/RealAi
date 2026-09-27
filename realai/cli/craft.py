@@ -428,23 +428,106 @@ def tool_gaps() -> dict[str, Any]:
     }
 
 
-def tool_rackup(ability: str = "roc_info", payload: dict | None = None) -> dict[str, Any]:
+# Keys that belong on the coach envelope, not flattened into ability payload.
+_RACKUP_ENVELOPE_KEYS = {
+    "ability",
+    "action",
+    "player",
+    "profile",
+    "payload",
+    "data",
+    "goal",
+    "message",
+    "text",
+    "organs_enabled",
+    "name",
+    "tool",
+    "command",
+}
+_RACKUP_PLAYER_KEYS = (
+    "player_id",
+    "display_name",
+    "discipline",
+    "game_style",
+    "rating",
+    "rd",
+    "volatility",
+    "rating_system",
+    "user_id",
+    "id",
+)
+
+
+def _rackup_player_from_call(
+    player: dict | None,
+    kwargs: dict[str, Any],
+) -> dict[str, Any]:
+    """Nest sends arguments.player; CLI may omit it (craft-cli demo)."""
+    if not isinstance(player, dict):
+        alt = kwargs.get("profile")
+        player = alt if isinstance(alt, dict) else None
+    if isinstance(player, dict) and player:
+        return dict(player)
+    flat: dict[str, Any] = {}
+    for key in _RACKUP_PLAYER_KEYS:
+        val = kwargs.get(key)
+        if val not in (None, ""):
+            flat[key] = val
+    if flat:
+        return flat
+    return {"player_id": "craft-cli"}
+
+
+def _rackup_payload_from_call(
+    payload: dict | None,
+    kwargs: dict[str, Any],
+) -> dict[str, Any]:
+    """Honor arguments.payload and flatten sibling ability inputs onto it."""
+    body = dict(payload) if isinstance(payload, dict) else {}
+    extra = kwargs.get("data")
+    if isinstance(extra, dict):
+        for key, val in extra.items():
+            if key not in body and val is not None:
+                body[key] = val
+    skip = _RACKUP_ENVELOPE_KEYS | set(_RACKUP_PLAYER_KEYS)
+    for key, val in kwargs.items():
+        if key in skip or val is None:
+            continue
+        body.setdefault(key, val)
+    return body
+
+
+def tool_rackup(
+    ability: str = "roc_info",
+    payload: dict | None = None,
+    player: dict | None = None,
+    **kwargs: Any,
+) -> dict[str, Any]:
+    """Craft / hive entry for rackup-coach.
+
+    Nest ``rackup_invoke`` passes ``arguments.player`` and ``arguments.payload``.
+    Those map onto the coach envelope. Omitting player keeps the craft-cli demo.
+    """
     from plugins.rackup_coach import METADATA, invoke
 
+    ability = str(ability or kwargs.get("action") or "roc_info")
     if not ability or ability in ("status", "meta", "info"):
         return {
             "version": METADATA.get("version"),
             "methods": METADATA.get("methods"),
             "roc": METADATA.get("roc"),
         }
-    return invoke(
-        {
-            "ability": ability,
-            "player": {"player_id": "craft-cli"},
-            "payload": payload or {},
-            "organs_enabled": True,
-        }
-    )
+    organs = kwargs.get("organs_enabled", True)
+    req: dict[str, Any] = {
+        "ability": ability,
+        "player": _rackup_player_from_call(player, kwargs),
+        "payload": _rackup_payload_from_call(payload, kwargs),
+        "organs_enabled": bool(organs) if organs is not None else True,
+    }
+    goal = kwargs.get("goal") or kwargs.get("message") or kwargs.get("text") or ""
+    if goal:
+        req["goal"] = str(goal)
+    return invoke(req)
 
 
 def tool_list(path: str = ".") -> dict[str, Any]:
@@ -1530,7 +1613,18 @@ TOOLS: dict[str, Callable[..., dict[str, Any]]] = {
     "doctor": lambda **kw: tool_doctor(),
     "organs": lambda **kw: tool_organs(),
     "catalog": lambda **kw: tool_catalog(learn=bool(kw.get("learn"))),
-    "rackup": lambda **kw: tool_rackup(ability=str(kw.get("ability") or "roc_info")),
+    "rackup": lambda **kw: tool_rackup(
+        ability=str(kw.get("ability") or kw.get("action") or "roc_info"),
+        payload=kw.get("payload") if isinstance(kw.get("payload"), dict) else None,
+        player=kw.get("player") if isinstance(kw.get("player"), dict) else (
+            kw.get("profile") if isinstance(kw.get("profile"), dict) else None
+        ),
+        **{
+            k: v
+            for k, v in kw.items()
+            if k not in ("ability", "action", "payload", "player", "profile")
+        },
+    ),
     "list": lambda **kw: tool_list(str(kw.get("path") or ".")),
     "read": lambda **kw: tool_read(
         str(kw.get("path") or "README.md"),

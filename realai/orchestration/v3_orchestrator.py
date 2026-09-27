@@ -959,11 +959,13 @@ def _run_tool(name: str, arguments: Optional[Dict] = None) -> Dict[str, Any]:
         if name == "organs_task":
             return _craft_run({"action": "task", "goal": arguments.get("goal") or arguments.get("input") or ""})
         if name == "rackup_invoke":
-            return _craft_run({
-                "action": "rackup",
-                "ability": arguments.get("ability") or "roc_info",
-                "payload": arguments.get("payload"),
-            })
+            # Nest envelope: arguments.{ability, player, payload} → coach ctx.
+            # Do not drop player (identity) or payload (won / outcome / scores).
+            args = dict(arguments or {})
+            ability = str(args.get("ability") or args.get("action") or "roc_info")
+            args.pop("action", None)
+            args["ability"] = ability
+            return _craft_run({"action": "rackup", **args})
         # Fall through to registry abilities (ability.*) + workspace tools (craft parity)
         from realai.v3_runtime_bridge import execute_registry_tool, workspace_tool
 
