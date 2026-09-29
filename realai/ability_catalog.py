@@ -732,8 +732,10 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "status": "PARTIAL",
         "status_note": (
             "Read-only GET /v1/training/{status,samples,plan} only (dataset inventory + plan text). "
-            "DirectML LoRA runs are operator-run scripts (scripts/train_lora_local.py), not an HTTP handler; "
-            "adapters under C:\\models\\checkpoints_lora\\lora\\ are shelf until they pass the eval gate; no PEFT LIVE."
+            "Real runner: scripts\\train_lora_local.py + directml_vram_safe.py train the Instruct Qwen2.5-1.5B "
+            "(Qwen/Qwen2.5-1.5B-Instruct) on DirectML; operator-run, not an HTTP handler. "
+            "Adapters under C:\\models\\checkpoints_lora\\lora\\ stay shelf until they pass the eval gate; no PEFT LIVE. "
+            "Any GRPO / 70B text in realai/training/training_pipeline.py is aspirational, not what runs."
         ),
         "live_path": "GET /v1/training/status GET /v1/training/samples GET /v1/training/plan (read-only)",
         "modules": ["realai/training/training_pipeline.py"],
