@@ -729,8 +729,13 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "name": "Training + fine-tune pipeline",
         "pillar": "model_family",
         "keywords": ["finetune", "training", "dataset", "lora", "realai-1.0"],
-        "status": "LIVE",
-        "live_path": "GET /v1/training/* GET /v1/lora",
+        "status": "PARTIAL",
+        "status_note": (
+            "Read-only GET /v1/training/{status,samples,plan} only (dataset inventory + plan text). "
+            "DirectML LoRA runs are operator-run scripts (scripts/train_lora_local.py), not an HTTP handler; "
+            "adapters under C:\\models\\checkpoints_lora\\lora\\ are shelf until they pass the eval gate; no PEFT LIVE."
+        ),
+        "live_path": "GET /v1/training/status GET /v1/training/samples GET /v1/training/plan (read-only)",
         "modules": ["realai/training/training_pipeline.py"],
         "gold_paths": [
             r"C:\Users\tsmit\Downloads\realai_finetune_dataset.jsonl",
