@@ -729,8 +729,15 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "name": "Training + fine-tune pipeline",
         "pillar": "model_family",
         "keywords": ["finetune", "training", "dataset", "lora", "realai-1.0"],
-        "status": "LIVE",
-        "live_path": "GET /v1/training/* GET /v1/lora",
+        "status": "PARTIAL",
+        "status_note": (
+            "Read-only GET /v1/training/{status,samples,plan} only (dataset inventory + plan text). "
+            "Real runner: scripts\\train_lora_local.py + directml_vram_safe.py train the Instruct Qwen2.5-1.5B "
+            "(Qwen/Qwen2.5-1.5B-Instruct) on DirectML; operator-run, not an HTTP handler. "
+            "Adapters under C:\\models\\checkpoints_lora\\lora\\ stay shelf until they pass the eval gate; no PEFT LIVE. "
+            "Any GRPO / 70B text in realai/training/training_pipeline.py is aspirational, not what runs."
+        ),
+        "live_path": "GET /v1/training/status GET /v1/training/samples GET /v1/training/plan (read-only)",
         "modules": ["realai/training/training_pipeline.py"],
         "gold_paths": [
             r"C:\Users\tsmit\Downloads\realai_finetune_dataset.jsonl",
