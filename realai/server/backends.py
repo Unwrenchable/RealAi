@@ -103,6 +103,32 @@ class LlamaCppBackend(InferenceBackend):
         return choices[0].get('text')
 
 
+class RealAIGGUFBackend(InferenceBackend):
+    """Run RealAI-owned weights via local GGUF backends only (no API wrapper).
+
+    Ported from ``main``'s ``realai/server/backends.py``. The snapshot called
+    ``select_backend('llama-cli')``, which auto-falls through to the chat
+    fallback when llama is missing. Live's fallback returns text, so this
+    copy talks to the llama backends directly and never wraps an API.
+    """
+
+    name = 'realai-gguf'
+
+    def __init__(self, resolver: 'BackendResolver'):
+        self._resolver = resolver
+
+    def generate(self, model_path: str, prompt: str, sampling: SamplingConfig):
+        candidates = (self._resolver._llama_cli, self._resolver._llama_cpp)
+        for backend in candidates:
+            if backend is None or not backend.available():
+                continue
+            text = backend.generate(model_path, prompt, sampling)
+            if text:
+                return text
+        logger.error('No local GGUF backend available for RealAI weights: %s', model_path)
+        return None
+
+
 class RealAIFallbackBackend(InferenceBackend):
     """Legacy fallback backend based on RealAI runtime."""
 
@@ -134,9 +160,12 @@ class BackendResolver(object):
         self._llama_cpp = LlamaCppBackend()
         self._llama_cli = LlamaCliBackend() if LlamaCliBackend is not None else None
         self._fallback = RealAIFallbackBackend()
+        self._realai_gguf = RealAIGGUFBackend(self)
 
     def select_backend(self, backend_hint: str):
         hint = (backend_hint or '').lower()
+        if hint in ('realai-gguf', 'realai-native'):
+            return self._realai_gguf
         if hint == 'vllm' and self._vllm.available():
             return self._vllm
         if hint in ('llama.cpp', 'llamacpp') and self._llama_cpp.available():
@@ -157,6 +186,12 @@ class BackendResolver(object):
         text = backend.generate(model_path, prompt, sampling)
         if text is not None:
             return text, backend.name
+        if (backend_hint or '').lower() in ('realai-gguf', 'realai-native'):
+            return (
+                'RealAI weights are missing or llama-cli/llama.cpp is unavailable. '
+                'Place a .gguf under models/<model-id>/weights/ and install llama.cpp.',
+                self._realai_gguf.name,
+            )
         text = self._fallback.generate(model_path, prompt, sampling)
         return text, self._fallback.name
 

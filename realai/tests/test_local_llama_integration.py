@@ -73,6 +73,30 @@ class TestBackendIntegration(TestCase):
             backend = resolver.select_backend(hint)
             self.assertIsNotNone(backend)
 
+    def test_realai_gguf_hint_selects_local_weights_backend(self):
+        resolver = BackendResolver()
+        backend = resolver.select_backend('realai-gguf')
+        self.assertEqual(backend.name, 'realai-gguf')
+        self.assertEqual(resolver.select_backend('realai-native').name, 'realai-gguf')
+
+    def test_realai_gguf_does_not_call_chat_fallback_when_llama_missing(self):
+        resolver = BackendResolver()
+        resolver._llama_cpp.available = lambda: False
+        if resolver._llama_cli is not None:
+            resolver._llama_cli.available = lambda: False
+        resolver._vllm.available = lambda: False
+        resolver._fallback.generate = lambda *args, **kwargs: 'chat-fallback'
+
+        text, name = resolver.generate(
+            'realai-gguf',
+            'missing.gguf',
+            'hello',
+            SamplingConfig(),
+        )
+        self.assertEqual(name, 'realai-gguf')
+        self.assertNotEqual(text, 'chat-fallback')
+        self.assertIn('gguf', text.lower())
+
 
 class TestModelRegistry(TestCase):
     def test_registry_lists_default_models(self):
