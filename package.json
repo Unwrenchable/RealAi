@@ -1,35 +1,16 @@
 {
-  "name": "@realai/design-system",
+  "name": "realai-monorepo",
+  "private": true,
   "version": "0.1.0",
-  "description": "RealAI Design System - React component library",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./theme.css": "./dist/theme.css"
-  },
-  "files": ["dist"],
+  "packageManager": "pnpm@10.32.1",
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "type-check": "tsc --noEmit"
-  },
-  "peerDependencies": {
-    "react": ">=17",
-    "react-dom": ">=17"
+    "build": "pnpm -r --if-present build",
+    "lint": "pnpm -r --if-present lint",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "dev": "pnpm --filter @realai/frontend dev",
+    "autopilot": "tsx autopilot/index.ts"
   },
   "devDependencies": {
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss": "^3.4.0",
-    "tsup": "^8.0.0",
-    "typescript": "^5.3.0"
+    "tsx": "^4.20.6"
   }
 }
