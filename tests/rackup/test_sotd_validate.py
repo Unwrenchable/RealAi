@@ -574,10 +574,10 @@ def test_pockets_round_and_symmetric():
         assert len(jaws) == 2
         if pid.startswith("corner"):
             assert abs(hx - px) == pytest.approx(abs(hy - py), abs=0.01)  # on the diagonal
-            assert (hx - px) * (X - 50) > 0 and (hy - py) * (Y - 25) > 0  # behind the cloth corner
+            assert (hx - px) * (X - 50) > 0 and (hy - py) * (Y - 25) > 0  # just behind the grid corner
+            assert math.dist((hx, hy), (px, py)) <= 1.0 * sd.SCALE  # only slightly outward
         else:
-            assert hx == pytest.approx(px, abs=0.01)
-            assert (hy - py) * (Y - 25) > 0
+            assert (hx, hy) == pytest.approx((px, py), abs=0.01)  # centered on the nose midpoint
         # jaw backs land on the hole; jaws mirror each other about the pocket axis
         for j in jaws:
             bx, by = float(j.get("x2")), float(j.get("y2"))
@@ -740,3 +740,95 @@ def test_hive_tools_execute_rackup_invoke_passes_mode():
     assert out["ok"] is True
     assert out["result"]["mode"] == "sotd_validate"
     assert out["result"]["tangent_side"] == "left"
+
+
+def test_cloth_rect_is_the_grid_rect_and_pockets_on_grid_points():
+    r = sc.validate_sotd(EXAMPLE, render_diagram=True, show_grid=True)
+    root = _svg_root(r)
+    x0, y0 = sd._px(0, 0)
+    x1, y1 = sd._px(100, 50)
+    cloth = _by_class(root, "rect", "cloth")
+    assert len(cloth) == 1
+    c = cloth[0]
+    got = tuple(float(c.get(k)) for k in ("x", "y", "width", "height"))
+    assert got == pytest.approx((x0, y0, 1000.0, 500.0), abs=1e-9)
+    assert (x1 - x0, y1 - y0) == pytest.approx((1000.0, 500.0))
+    assert c.get("stroke") in (None, "none")  # nothing spills past the playing edge
+    # the grid boundary (cushion nose) is drawn exactly on the cloth rect
+    gb = _by_class(root, "rect", "grid-boundary")
+    assert len(gb) == 1
+    assert tuple(float(gb[0].get(k)) for k in ("x", "y", "width", "height")) == pytest.approx(got, abs=1e-9)
+    # the grid's outer cells end exactly at the cloth edges
+    cells = sd.grid_cells_px()
+    assert min(cl[0] for cl in cells) == pytest.approx(x0) and max(cl[2] for cl in cells) == pytest.approx(x1)
+    assert min(cl[1] for cl in cells) == pytest.approx(y0) and max(cl[3] for cl in cells) == pytest.approx(y1)
+    # pocket centers are the grid corners and long-edge midpoints
+    want = {
+        "corner_head_left": (x0, y0), "corner_head_right": (x0, y1),
+        "side_left": ((x0 + x1) / 2, y0), "side_right": ((x0 + x1) / 2, y1),
+        "corner_foot_left": (x1, y0), "corner_foot_right": (x1, y1),
+    }
+    groups = {g.get("data-pocket"): g for g in root.iter(SVG_NS + "g") if "pocket" in (g.get("class") or "").split()}
+    corners = {(cl[i], cl[j]) for cl in cells for i in (0, 2) for j in (1, 3)}
+    for pid, (wx, wy) in want.items():
+        g = groups[pid]
+        assert (float(g.get("data-cx")), float(g.get("data-cy"))) == pytest.approx((wx, wy), abs=1e-9)
+        assert any(math.dist((wx, wy), q) < 1e-6 for q in corners)  # a grid corner
+        # jaw noses sit on the playing edge, symmetric about the pocket point
+        jaws = [e for e in g.iter(SVG_NS + "line") if e.get("class") == "jaw"]
+        noses = [(float(j.get("x1")), float(j.get("y1"))) for j in jaws]
+        for nx, ny in noses:
+            on_edge = abs(nx - x0) < 1e-6 or abs(nx - x1) < 1e-6 or abs(ny - y0) < 1e-6 or abs(ny - y1) < 1e-6
+            assert on_edge, pid
+        assert math.dist(noses[0], (wx, wy)) == pytest.approx(math.dist(noses[1], (wx, wy)), abs=1e-6)
+    # pockets and cushions are drawn before the cloth, so nothing bites a grid cell
+    order = list(root.iter())
+    ci = order.index(c)
+    assert all(order.index(g) < ci for g in groups.values())
+    assert all(order.index(e) < ci for e in _by_class(root, "polygon", "cushion"))
+
+
+def test_cushions_sit_outside_the_playing_rect():
+    root = _svg_root(sc.validate_sotd(EXAMPLE, render_diagram=True))
+    x0, y0 = sd._px(0, 0)
+    x1, y1 = sd._px(100, 50)
+    cushions = _by_class(root, "polygon", "cushion")
+    assert len(cushions) == 6
+    for cu in cushions:
+        assert cu.get("fill", "").startswith("url(#") and "cush-" in cu.get("fill")  # its own bevel, not cloth
+        pts = [tuple(map(float, q.split(","))) for q in cu.get("points").split()]
+        for x, y in pts:  # every vertex on or outside the playing rect
+            inside = (x0 + 1e-6 < x < x1 - 1e-6) and (y0 + 1e-6 < y < y1 - 1e-6)
+            assert not inside
+        on_edge = [q for q in pts if abs(q[0] - x0) < 1e-6 or abs(q[0] - x1) < 1e-6
+                   or abs(q[1] - y0) < 1e-6 or abs(q[1] - y1) < 1e-6]
+        assert len(on_edge) >= 2  # the nose edge is the playing edge
+        depth = max(max(x0 - x, x - x1, y0 - y, y - y1, 0.0) for x, y in pts)  # how far out it reaches
+        assert depth == pytest.approx(sd.CUSHION_IN * sd.SCALE, abs=1e-6)
+    assert len(_by_class(root, "line", "cushion-nose")) == 6  # nose highlight on each cushion
+
+
+def test_diamonds_line_up_with_grid_lines_through_the_cushion():
+    m, _ = sc.normalize_map(EXAMPLE)
+    root = ET.fromstring(sd.render_sotd_svg(m, sc.analyze(m), debug_grid=True))
+    ticks = _by_class(root, "line", "debug-tick")
+    grid = _by_class(root, "line", "grid-line")
+    for d in _by_class(root, "polygon", "diamond"):
+        cx, cy = _poly_center(d)
+        rail = d.get("data-rail")
+        if rail.startswith("long"):
+            gl = [e for e in grid if e.get("data-axis") == "x" and abs(float(e.get("x1")) - cx) < 0.5]
+            tk = [e for e in ticks if abs(float(e.get("x1")) - cx) < 0.5 and float(e.get("x1")) == float(e.get("x2"))
+                  and min(float(e.get("y1")), float(e.get("y2"))) - 0.5 <= cy <= max(float(e.get("y1")), float(e.get("y2"))) + 0.5]
+        else:
+            gl = [e for e in grid if e.get("data-axis") == "y" and abs(float(e.get("y1")) - cy) < 0.5]
+            tk = [e for e in ticks if abs(float(e.get("y1")) - cy) < 0.5 and float(e.get("y1")) == float(e.get("y2"))
+                  and min(float(e.get("x1")), float(e.get("x2"))) - 0.5 <= cx <= max(float(e.get("x1")), float(e.get("x2"))) + 0.5]
+        assert len(gl) == 1, (rail, d.get("data-at"))  # its grid line on the cloth
+        assert len(tk) == 1, (rail, d.get("data-at"))  # extended through the cushion to the diamond
+    # diamonds every 12.5 in along each rail, on the wood centerline, none at a pocket
+    for dm in sd.diamond_positions():
+        assert dm["at"] % 12.5 == 0 and dm["at"] not in (0.0, 50.0, 100.0)
+        off = dm["y"] if dm["rail"] == "long_left" else dm["x"] if dm["rail"] == "short_head" else None
+        if off is not None:
+            assert off == pytest.approx(-(sd.CUSHION_IN + sd.WOOD_IN / 2))
