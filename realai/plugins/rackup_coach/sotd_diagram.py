@@ -15,8 +15,8 @@ inches to pixels, and balls, lines, pockets and diamonds all go through it.
 
 Table style: dark walnut rails with a thin brass outer trim, a darker cushion
 strip, dark green cloth with a radial vignette, a faint dashed head string at
-x = 25, round pocket holes centered on the pocket points with straight,
-symmetric jaw cuts through the cushion, and mother-of-pearl diamond inlays.
+x = 25, round pocket holes (one radius) centered exactly on the pocket points
+and biting the cloth, with straight, symmetric jaw cuts through the cushion, and mother-of-pearl diamond inlays.
 The cushions are a darker beveled strip in the rail band with a highlight at
 the nose; the cloth is exactly the 100 x 50 playing rectangle (1000 x 500 px),
 so the playing edge reads at the grid boundary.
@@ -63,9 +63,9 @@ SCALE = 10.0  # px per inch
 TABLE_LONG = 100.0
 TABLE_SHORT = 50.0
 BALL_R = 1.125
-CUSHION_IN = 1.75  # cushion rubber, nose to wood
-WOOD_IN = 4.0  # visible wood rail
-RAIL_IN = CUSHION_IN + WOOD_IN  # 5.75 in total rail (real 9-ft: ~5-6 in)
+CUSHION_IN = 1.25  # cushion rubber, nose to wood
+WOOD_IN = 2.5  # visible wood rail (thin rail keeps the corner from reading as an oversize box)
+RAIL_IN = CUSHION_IN + WOOD_IN  # 3.75 in total rail
 MARGIN_IN = 3.5  # transparent margin outside the table (holds the pocket arrow)
 OUTER_RX_IN = 1.4  # rounded outer rail corners
 DIAMOND_OFFSET_IN = CUSHION_IN + WOOD_IN / 2.0  # diamond centers: middle of the wood
@@ -78,30 +78,29 @@ assert GRID_STEP_IN == TABLE_SHORT / 4.0  # square cells
 GRID_X = tuple(GRID_STEP_IN * i for i in range(1, 8))  # 12.5 ... 87.5, includes 50
 GRID_Y = tuple(GRID_STEP_IN * i for i in range(1, 4))  # 12.5, 25, 37.5
 HEAD_STRING_X = TABLE_LONG / 4.0
-# Pockets. Each pocket point is exactly its grid point: the cushion-nose corner
-# (corners) or the nose midpoint (sides). Side holes are centered on it; corner
-# holes sit CORNER_HOLE_OFFSET_IN outward along the diagonal (realistic), with
-# the jaw opening symmetric about the grid corner. The cloth is drawn
-# on top of the holes, so the playing rectangle (and every grid cell, corner
-# cells included) stays a full, unbroken square; the hole shows around it in
-# the cushion/rail. Jaws are straight cuts through the cushion from the nose
-# (CORNER_MOUTH_IN / SIDE_MOUTH_HALF_IN from the pocket point) back to where
-# the hole meets the cushion back, symmetric by construction.
-CORNER_HOLE_R_IN = 2.4  # ~4.8 in corner hole
-CORNER_HOLE_OFFSET_IN = 0.6  # hole center sits this far outward on both axes (on the diagonal)
-CORNER_MOUTH_IN = 3.1  # nose point along each rail from the corner
-SIDE_HOLE_R_IN = 2.5  # ~5 in side hole
-SIDE_MOUTH_HALF_IN = 2.6
-CORNER_JAW_BACK_IN = (math.sqrt(CORNER_HOLE_R_IN ** 2 - (CUSHION_IN - CORNER_HOLE_OFFSET_IN) ** 2)
-                      - CORNER_HOLE_OFFSET_IN)  # where the jaw meets the hole at the cushion back
+# Pockets. Every pocket hole is centered exactly on its pocket point: the
+# cushion-nose corner (corners) or the nose midpoint (sides), i.e. a grid
+# corner / edge midpoint. Holes are drawn over the cloth with one radius for
+# all six, so a corner pocket bites a quarter circle out of the corner cell
+# exactly as a side pocket bites a quarter circle out of each cell beside it.
+# Along every rail centerline the pocket center is then one diamond spacing
+# (12.5 in) past the end diamond, the same as diamond to diamond.
+# Jaws are straight cuts through the cushion from the nose (CORNER_MOUTH_IN /
+# SIDE_MOUTH_HALF_IN from the pocket point) to where the hole meets the
+# cushion back; symmetric by construction.
+POCKET_HOLE_R_IN = 2.3  # 4.6 in hole, same for corners and sides
+CORNER_HOLE_R_IN = POCKET_HOLE_R_IN
+SIDE_HOLE_R_IN = POCKET_HOLE_R_IN
+CORNER_MOUTH_IN = 2.9  # nose point along each rail from the corner
+SIDE_MOUTH_HALF_IN = 2.55
+CORNER_JAW_BACK_IN = math.sqrt(CORNER_HOLE_R_IN ** 2 - CUSHION_IN ** 2)  # jaw meets the hole at the cushion back
 SIDE_JAW_BACK_HALF_IN = math.sqrt(SIDE_HOLE_R_IN ** 2 - CUSHION_IN ** 2)
 STOP_BAR_IN = 3.4  # stop marker width across the shot line
 TANGENT_LEN_IN = 15.0
 SPIN_ARROW_IN = 6.0
 # Pocket arrows start in the margin and stop just short of the pocket mouth.
 POCKET_ARROW_SIDE = (RAIL_IN + 2.2, SIDE_HOLE_R_IN + 1.0)  # (tail, tip) from pocket center
-_CORNER_REACH = CORNER_HOLE_OFFSET_IN * math.sqrt(2) + CORNER_HOLE_R_IN
-POCKET_ARROW_CORNER = (_CORNER_REACH + 5.4, _CORNER_REACH + 0.9)  # along the diagonal
+POCKET_ARROW_CORNER = (CORNER_HOLE_R_IN + 5.6, CORNER_HOLE_R_IN + 0.9)  # along the diagonal
 POCKET_ARROW_HALO_PX = 6.5
 
 WOOD_DARK = "#33190a"
@@ -265,8 +264,7 @@ def _corner_pocket(pid: str, X: float, Y: float) -> str:
     a, b, c = CORNER_MOUTH_IN, CORNER_JAW_BACK_IN, CUSHION_IN
     n1, b1, n2, b2 = P(a, 0), P(b, -c), P(0, a), P(-c, b)
     shelf = [P(0, 0), n1, b1, P(-c, -c), b2, n2]
-    k = CORNER_HOLE_OFFSET_IN
-    return _pocket_group(pid, "corner-pocket", shelf, [(n1, b1), (n2, b2)], P(-k, -k), CORNER_HOLE_R_IN,
+    return _pocket_group(pid, "corner-pocket", shelf, [(n1, b1), (n2, b2)], P(0, 0), CORNER_HOLE_R_IN,
                          P(0, 0))
 
 
@@ -397,14 +395,15 @@ def _grid(*, debug: bool) -> list[str]:
     for g in grid_lines():
         el = _line(g["a"], g["b"], color, width, cls=cls, opacity=opacity)
         out.append(el.replace("<line ", f'<line data-axis="{g["axis"]}" data-at="{_f(g["at"])}" ', 1))
-    if debug:  # extend each diamond line out to its diamonds (not into the side pockets)
+    if debug:  # faint dotted extensions out to the diamonds, so they don't read as an extra frame
         o = DIAMOND_OFFSET_IN
+        tk = dict(cls="debug-tick", opacity=0.3, dash="2 3")
         for x in LONG_DIAMONDS_X:
-            out.append(_line((x, -o), (x, 0), color, width, cls="debug-tick", opacity=0.5))
-            out.append(_line((x, TABLE_SHORT), (x, TABLE_SHORT + o), color, width, cls="debug-tick", opacity=0.5))
+            out.append(_line((x, -o), (x, 0), color, 0.8, **tk))
+            out.append(_line((x, TABLE_SHORT), (x, TABLE_SHORT + o), color, 0.8, **tk))
         for y in SHORT_DIAMONDS_Y:
-            out.append(_line((-o, y), (0, y), color, width, cls="debug-tick", opacity=0.5))
-            out.append(_line((TABLE_LONG, y), (TABLE_LONG + o, y), color, width, cls="debug-tick", opacity=0.5))
+            out.append(_line((-o, y), (0, y), color, 0.8, **tk))
+            out.append(_line((TABLE_LONG, y), (TABLE_LONG + o, y), color, 0.8, **tk))
     return out
 
 
@@ -428,17 +427,17 @@ def _table(pfx: str, *, debug_grid: bool = False, show_grid: bool = False) -> li
         f'<rect class="trim-inner" x="{_f(m + 5)}" y="{_f(m + 5)}" width="{_f(tw - 10)}" height="{_f(th - 10)}" '
         f'rx="{_f(max(rx - 4, 0))}" fill="none" stroke="{BRASS}" stroke-opacity="0.35" stroke-width="0.8"/>'
     )
-    # cushions (in the rail band), then pockets centered on the grid points,
-    # then the cloth exactly on the 100 x 50 playing rectangle, on top of the
-    # holes so every grid cell is a full square.
+    # cushions (in the rail band), the cloth exactly on the 100 x 50 playing
+    # rectangle, then the pockets on top, centered on the grid points, so corner
+    # and side mouths bite the cloth the same way.
     out.extend(_cushions(pfx))
-    for pid, (X, Y) in POCKETS.items():
-        out.append(_corner_pocket(pid, X, Y) if pid.startswith("corner") else _side_pocket(pid, X, Y))
     out.append(
         f'<rect class="cloth" x="{_f(sx)}" y="{_f(sy)}" width="{_f(TABLE_LONG * SCALE)}" '
         f'height="{_f(TABLE_SHORT * SCALE)}" fill="url(#{pfx}cloth)"/>'
     )
     out.extend(_cushion_highlights())
+    for pid, (X, Y) in POCKETS.items():
+        out.append(_corner_pocket(pid, X, Y) if pid.startswith("corner") else _side_pocket(pid, X, Y))
     # head string (faint, dashed) at the 1/4 line from the head rail
     out.append(_line((HEAD_STRING_X, 0), (HEAD_STRING_X, TABLE_SHORT), "#ffffff", 1.0,
                      dash="6 7", cls="head-string", opacity=0.22))

@@ -574,8 +574,7 @@ def test_pockets_round_and_symmetric():
         assert len(jaws) == 2
         if pid.startswith("corner"):
             assert abs(hx - px) == pytest.approx(abs(hy - py), abs=0.01)  # on the diagonal
-            assert (hx - px) * (X - 50) > 0 and (hy - py) * (Y - 25) > 0  # just behind the grid corner
-            assert math.dist((hx, hy), (px, py)) <= 1.0 * sd.SCALE  # only slightly outward
+            assert (hx, hy) == pytest.approx((px, py), abs=0.01)  # centered on the grid corner
         else:
             assert (hx, hy) == pytest.approx((px, py), abs=0.01)  # centered on the nose midpoint
         # jaw backs land on the hole; jaws mirror each other about the pocket axis
@@ -781,10 +780,10 @@ def test_cloth_rect_is_the_grid_rect_and_pockets_on_grid_points():
             on_edge = abs(nx - x0) < 1e-6 or abs(nx - x1) < 1e-6 or abs(ny - y0) < 1e-6 or abs(ny - y1) < 1e-6
             assert on_edge, pid
         assert math.dist(noses[0], (wx, wy)) == pytest.approx(math.dist(noses[1], (wx, wy)), abs=1e-6)
-    # pockets and cushions are drawn before the cloth, so nothing bites a grid cell
+    # cushions under the cloth; pocket holes over it, so corner and side mouths bite the cloth alike
     order = list(root.iter())
     ci = order.index(c)
-    assert all(order.index(g) < ci for g in groups.values())
+    assert all(order.index(g) > ci for g in groups.values())
     assert all(order.index(e) < ci for e in _by_class(root, "polygon", "cushion"))
 
 
@@ -832,3 +831,35 @@ def test_diamonds_line_up_with_grid_lines_through_the_cushion():
         off = dm["y"] if dm["rail"] == "long_left" else dm["x"] if dm["rail"] == "short_head" else None
         if off is not None:
             assert off == pytest.approx(-(sd.CUSHION_IN + sd.WOOD_IN / 2))
+
+
+def test_diamond_to_pocket_spacing_equals_diamond_spacing_on_every_rail():
+    """Along each rail centerline, end diamond -> pocket center (corner or side)
+    must equal diamond -> diamond (125 px) within 1 px, so no box looks bigger."""
+    root = _svg_root(sc.validate_sotd(EXAMPLE, render_diagram=True))
+    holes = {}
+    for g in root.iter(SVG_NS + "g"):
+        if "pocket" in (g.get("class") or "").split():
+            c = [e for e in g.iter(SVG_NS + "circle") if e.get("class") == "pocket-hole"][0]
+            holes[g.get("data-pocket")] = (float(c.get("cx")), float(c.get("cy")), float(c.get("r")))
+    # one hole size everywhere, so corner and side mouths bite the cloth equally
+    assert len({round(h[2], 6) for h in holes.values()}) == 1
+    step = 12.5 * sd.SCALE
+    rails = {
+        "long_left": (0, ["corner_head_left", "side_left", "corner_foot_left"]),
+        "long_right": (0, ["corner_head_right", "side_right", "corner_foot_right"]),
+        "short_head": (1, ["corner_head_left", "corner_head_right"]),
+        "short_foot": (1, ["corner_foot_left", "corner_foot_right"]),
+    }
+    diamonds = _by_class(root, "polygon", "diamond")
+    for rail, (ax, pids) in rails.items():
+        seq = sorted([("D", _poly_center(d)[ax]) for d in diamonds if d.get("data-rail") == rail]
+                     + [("P", holes[p][ax]) for p in pids], key=lambda t: t[1])
+        assert seq[0][0] == "P" and seq[-1][0] == "P"  # a pocket at each end of every rail
+        gaps = [b[1] - a[1] for a, b in zip(seq, seq[1:])]
+        assert len(gaps) == (8 if ax == 0 else 4)
+        for gp in gaps:
+            assert gp == pytest.approx(step, abs=1.0), (rail, gaps)
+    # pocket centers stay on the table-coordinate pocket points (cloth corners / edge midpoints)
+    for pid, (X, Y) in sc.POCKETS.items():
+        assert holes[pid][:2] == pytest.approx(sd._px(X, Y), abs=1e-6)
