@@ -32,6 +32,7 @@ capabilities:
   - professional_coach
   - shot_of_the_day
   - sotd_validate   # shot_of_the_day payload.mode=sotd_validate (deterministic map checker)
+  - sotd_diagram_svg   # local deterministic SVG of the validated map (no API keys)
   - video_analysis
   - chat_moderation
   - matchmaking_support

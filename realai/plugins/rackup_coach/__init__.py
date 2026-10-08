@@ -32,6 +32,7 @@ METADATA = {
         "professional_coach",
         "shot_of_the_day",
         "sotd_validate",
+        "sotd_diagram_svg",
         "video_analysis",
         "chat_moderation",
         "matchmaking_support",

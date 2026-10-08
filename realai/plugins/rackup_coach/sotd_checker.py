@@ -58,6 +58,12 @@ Interpretations (named constants below):
   follow: the sector between the shot line and the tangent. draw: the sector
   between the tangent and the reversed shot line. A legal stop may name the
   next ball, since the cue ball stays at the ghost spot.
+
+Diagram: when ``render_diagram`` is set and ``ok`` is true (after fixes),
+``sotd_diagram.render_sotd_svg`` draws the validated map as a deterministic
+local SVG (``diagram_svg``, plus ``diagram`` as a base64 data URI). It uses no
+API keys and makes no network calls. ``diagram_prompt`` is kept for a future
+local image model only.
 """
 from __future__ import annotations
 
@@ -771,38 +777,63 @@ def render_diagram_prompt(m: dict[str, Any], a: dict[str, Any]) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Image backend (only after ok is true)
+# Diagram backend (local only, only after ok is true). No API keys anywhere.
 # ---------------------------------------------------------------------------
-ImageFn = Callable[[str], Optional[str]]
+DIAGRAM_BACKENDS = ("svg", "local_sd", "none")
 
 
-def resolve_image_fn() -> tuple[Optional[ImageFn], Optional[str]]:
-    """Return (image_fn, error). Default is *no backend*.
+def resolve_diagram_backend() -> str:
+    """``REALAI_SOTD_IMAGE_BACKEND``: ``svg`` (default), ``local_sd`` or ``none``.
 
-    Opt in with ``REALAI_SOTD_IMAGE_BACKEND=xai`` (needs XAI_API_KEY or
-    GROK_API_KEY in the hive env; the key is read by providers.xai_media,
-    never here)."""
-    backend = (os.environ.get("REALAI_SOTD_IMAGE_BACKEND") or "").strip().lower()
-    if backend in ("", "none", "off", "0", "false"):
-        return None, "no image backend configured (set REALAI_SOTD_IMAGE_BACKEND=xai with XAI_API_KEY in the hive env)"
-    if backend == "xai":
-        xm = None
-        for mod in ("realai.providers.xai_media", "providers.xai_media"):
-            try:
-                xm = __import__(mod, fromlist=["generate_image"])
-                break
-            except Exception:
-                continue
-        if xm is None:
-            return None, "xai image backend module not importable"
-        if not xm.has_api_key():
-            return None, "REALAI_SOTD_IMAGE_BACKEND=xai but XAI_API_KEY/GROK_API_KEY is not set"
+    * ``svg``: deterministic local SVG from ``sotd_diagram``. No deps, no network.
+    * ``local_sd``: a hook for a future local Stable Diffusion server
+      (``REALAI_SOTD_LOCAL_SD_URL``, loopback only). It is a stub: no call is
+      made yet, and the SVG is still returned as the diagram.
+    * ``none``: no diagram.
+    Unknown values fall back to ``svg``.
+    """
+    b = (os.environ.get("REALAI_SOTD_IMAGE_BACKEND") or "svg").strip().lower()
+    if b in ("", "default"):
+        return "svg"
+    if b in ("off", "0", "false"):
+        return "none"
+    return b if b in DIAGRAM_BACKENDS else "svg"
 
-        def _fn(prompt: str) -> Optional[str]:
-            return (xm.generate_image(prompt, size=None) or {}).get("url")
 
-        return _fn, None
-    return None, f"unknown REALAI_SOTD_IMAGE_BACKEND {backend!r} (supported: xai)"
+def _local_sd_stub_note() -> str:
+    url = (os.environ.get("REALAI_SOTD_LOCAL_SD_URL") or "").strip()
+    if not url:
+        return "local_sd hook is off: REALAI_SOTD_LOCAL_SD_URL is not set; returned the SVG render"
+    if not re.match(r"^https?://(127\.0\.0\.1|localhost|\[::1\])(:\d+)?(/|$)", url, re.I):
+        return "local_sd hook refused: REALAI_SOTD_LOCAL_SD_URL must be a loopback URL; returned the SVG render"
+    return "local_sd hook is a stub (no call made yet); returned the SVG render"
+
+
+def _render_diagram_into(result: dict[str, Any], m: dict[str, Any], a: dict[str, Any], *, save: bool) -> None:
+    from plugins.rackup_coach import sotd_diagram as sd
+
+    backend = resolve_diagram_backend()
+    result["diagram_backend"] = backend
+    if backend == "none":
+        result["diagram"] = None
+        result["diagram_error"] = "diagram backend is none (REALAI_SOTD_IMAGE_BACKEND=none)"
+        return
+    try:
+        svg = sd.render_sotd_svg(m, a)
+    except Exception as e:  # a failed render never fails a passed map
+        result["diagram"] = None
+        result["diagram_error"] = f"svg render failed: {e}"[:300]
+        return
+    result["diagram_svg"] = svg
+    result["diagram"] = sd.svg_data_uri(svg)
+    result["diagram_mime"] = "image/svg+xml"
+    if backend == "local_sd":
+        result["diagram_error"] = _local_sd_stub_note()
+    if save:
+        try:
+            result["diagram_path"] = sd.save_svg(svg, m.get("id"))
+        except Exception as e:
+            result["diagram_save_error"] = f"could not save svg: {e}"[:300]
 
 
 # ---------------------------------------------------------------------------
@@ -919,7 +950,7 @@ def validate_sotd(
     raw_map: Any,
     *,
     render_diagram: bool = False,
-    image_fn: Optional[ImageFn] = None,
+    save_diagram: bool = False,
     catalog: Optional[list[dict[str, Any]]] = None,
     default_game: str = "",
     allow_fixes: bool = True,
@@ -990,7 +1021,7 @@ def validate_sotd(
         if a0 is not None:
             result.update(cut_deg=a0["cut_deg"], blocked_by=a0["blocked_by"], tangent_side=a0["tangent_side"])
         result["map"] = m or None
-        result["diagram_error"] = "map failed checks; no image is generated for a bad map"
+        result["diagram_error"] = "map failed checks; no diagram is rendered for a bad map"
         return result
 
     # Re-check the (possibly fixed) map, claim included. A claim that does not
@@ -1036,19 +1067,7 @@ def validate_sotd(
     result["diagram_prompt"] = render_diagram_prompt(current, a)
 
     if render_diagram:
-        fn, err = (image_fn, None) if image_fn is not None else resolve_image_fn()
-        if fn is None:
-            result["diagram"] = None
-            result["diagram_error"] = err
-        else:
-            try:
-                url = fn(result["diagram_prompt"])
-                result["diagram"] = url or None
-                if not url:
-                    result["diagram_error"] = "image backend returned no url"
-            except Exception as e:  # a failed image never fails a passed map
-                result["diagram"] = None
-                result["diagram_error"] = f"image generation failed: {e}"[:300]
+        _render_diagram_into(result, current, a, save=save_diagram)
     return result
 
 
@@ -1064,6 +1083,7 @@ def run_validate(player: Any, payload: dict[str, Any] | None) -> dict[str, Any]:
     out = validate_sotd(
         payload.get("map"),
         render_diagram=bool(payload.get("render_diagram")),
+        save_diagram=bool(payload.get("save_diagram")),
         default_game=default_game,
     )
     out["mode"] = "sotd_validate"

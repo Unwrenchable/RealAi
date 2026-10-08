@@ -47,8 +47,11 @@ def _checks(a):
 
 
 @pytest.fixture(autouse=True)
-def _no_image_backend(monkeypatch):
-    monkeypatch.delenv("REALAI_SOTD_IMAGE_BACKEND", raising=False)
+def _default_backend_no_keys(monkeypatch, tmp_path):
+    for k in ("REALAI_SOTD_IMAGE_BACKEND", "REALAI_SOTD_LOCAL_SD_URL", "XAI_API_KEY", "GROK_API_KEY",
+              "OPENAI_API_KEY", "REALAI_OPENAI_API_KEY"):
+        monkeypatch.delenv(k, raising=False)
+    monkeypatch.setenv("REALAI_DATA_DIR", str(tmp_path / "realai-data"))
 
 
 # ---------------------------------------------------------------- axis
@@ -90,8 +93,10 @@ def test_travis_example_full_result():
     assert r["map"]["claim"] == r["sentence"]
     assert r["map"]["balls"] == [{"n": 1, "x": 62.0, "y": 14.0}, {"n": 2, "x": 78.0, "y": 36.0}]
     assert r["geometry"]["ghost"] == {"x": pytest.approx(60.367, abs=1e-3), "y": pytest.approx(12.453, abs=1e-3)}
-    assert r["diagram"] is None
-    assert "no image backend" in r["diagram_error"]
+    assert r["diagram_backend"] == "svg"
+    assert r["diagram"].startswith("data:image/svg+xml;base64,")
+    assert r["diagram_svg"].startswith("<svg")
+    assert "diagram_error" not in r
     assert "dashed tangent" in r["diagram_prompt"] and "shooter's left" in r["diagram_prompt"]
 
 
@@ -327,14 +332,22 @@ def test_catalog_maps_all_pass():
 
 def test_unfixable_map_stays_failed_and_draws_nothing():
     calls = []
-    r = sc.validate_sotd(
-        _map(called={"ball": 2, "pocket": "corner_foot_right"}),
-        render_diagram=True,
-        image_fn=lambda p: calls.append(p) or "http://img",
-        catalog=[],
-    )
+    import plugins.rackup_coach.sotd_diagram as sd
+
+    orig = sd.render_sotd_svg
+    try:
+        sd.render_sotd_svg = lambda *a, **k: calls.append(1) or orig(*a, **k)
+        r = sc.validate_sotd(
+            _map(called={"ball": 2, "pocket": "corner_foot_right"}),
+            render_diagram=True,
+            save_diagram=True,
+            catalog=[],
+        )
+    finally:
+        sd.render_sotd_svg = orig
     assert r["ok"] is False
     assert r["sentence"] is None and r["diagram_prompt"] is None and r["diagram"] is None
+    assert "diagram_svg" not in r and "diagram_path" not in r
     assert calls == []
 
 
@@ -346,35 +359,129 @@ def test_fixed_sentences_pass_their_own_claim_check():
         assert [f for f in sc.analyze(m)["fails"] if f["check"] == "claim"] == []
 
 
-# ---------------------------------------------------------------- diagram
-def test_image_fn_called_only_after_pass_and_failure_is_soft():
-    r = sc.validate_sotd(EXAMPLE, render_diagram=True, image_fn=lambda p: "https://img.example/sotd.png")
-    assert r["ok"] is True and r["diagram"] == "https://img.example/sotd.png"
-    assert "diagram_error" not in r
+# ---------------------------------------------------------------- diagram (local SVG)
+import base64  # noqa: E402
+import xml.etree.ElementTree as ET  # noqa: E402
 
-    def boom(_p):
-        raise RuntimeError("backend down")
+import plugins.rackup_coach.sotd_diagram as sd  # noqa: E402
 
-    r = sc.validate_sotd(EXAMPLE, render_diagram=True, image_fn=boom)
-    assert r["ok"] is True and r["diagram"] is None
-    assert "backend down" in r["diagram_error"]
+SVG_NS = "{http://www.w3.org/2000/svg}"
 
 
-def test_diagram_prompt_only_uses_map_balls():
+def _svg_root(r):
+    return ET.fromstring(r["diagram_svg"])
+
+
+def _by_class(root, tag, cls):
+    return [e for e in root.iter(SVG_NS + tag) if cls in (e.get("class") or "").split()]
+
+
+def test_svg_well_formed_with_exact_balls_ghost_tangent():
+    r = sc.validate_sotd(EXAMPLE, render_diagram=True)
+    root = _svg_root(r)
+    assert root.tag == SVG_NS + "svg"
+    objs = [g for g in root.iter(SVG_NS + "g") if (g.get("class") or "") == "ball object"]
+    cues = [g for g in root.iter(SVG_NS + "g") if (g.get("class") or "") == "ball cue"]
+    assert sorted(int(g.get("data-ball")) for g in objs) == [1, 2]
+    assert len(cues) == 1
+    assert len(_by_class(root, "circle", "ghost")) == 1
+    assert len(_by_class(root, "line", "tangent")) == 1
+    assert len(_by_class(root, "line", "cue-path")) == 1
+    assert len(_by_class(root, "line", "object-path")) == 1
+    assert len(_by_class(root, "line", "pocket-arrow")) == 1
+    assert len(_by_class(root, "circle", "pocket")) == 6
+    # cue ball unlabeled; true-scale positions (x+6)*10, (y+6)*10
+    cue_c = cues[0].find(SVG_NS + "circle")
+    assert (float(cue_c.get("cx")), float(cue_c.get("cy")), float(cue_c.get("r"))) == (340.0, 240.0, 11.25)
+    assert cues[0].find(SVG_NS + "text") is None
+    label = "".join(_by_class(root, "g", "tangent-label")[0].itertext())
+    assert label == "center medium"
+    # data URI decodes to the same SVG
+    assert base64.b64decode(r["diagram"].split(",", 1)[1]).decode() == r["diagram_svg"]
+
+
+def test_svg_called_pocket_arrow_points_at_called_pocket():
+    r = sc.validate_sotd(EXAMPLE, render_diagram=True)
+    arrow = _by_class(_svg_root(r), "line", "pocket-arrow")[0]
+    x1, y1, x2, y2 = (float(arrow.get(k)) for k in ("x1", "y1", "x2", "y2"))
+    px, py = (100 + 6) * 10, (50 + 6) * 10  # corner_foot_right
+    assert math.dist((x2, y2), (px, py)) < math.dist((x1, y1), (px, py))
+    assert 0 <= x1 <= 1120 and 0 <= y1 <= 620  # inside the drawn frame
+
+
+def test_svg_follow_draw_and_straight():
+    r = sc.validate_sotd(_map(stroke={"tip": "follow", "speed": "soft"}), render_diagram=True)
+    root = _svg_root(r)
+    assert len(_by_class(root, "line", "spin-forward")) == 1
+    r = sc.validate_sotd(_map(stroke={"tip": "draw", "speed": "firm"}), render_diagram=True)
+    assert len(_by_class(_svg_root(r), "line", "spin-back")) == 1
+    r = sc.validate_sotd(_map(**STRAIGHT), render_diagram=True)
+    root = _svg_root(r)
+    assert _by_class(root, "line", "tangent") == []
+    assert len(_by_class(root, "circle", "ghost")) == 1
+
+
+def test_svg_stripes_and_ids_unique_and_escaped():
+    raw = _map(game="eight_ball", id='x"<b>&', balls=[{"n": 3, "x": 62, "y": 14}, {"n": 11, "x": 78, "y": 36}],
+               called={"ball": 3, "pocket": "corner_foot_right"})
+    r = sc.validate_sotd(raw, render_diagram=True)
+    root = _svg_root(r)  # parses despite the hostile id
+    assert root.find(SVG_NS + "title").text == 'x"<b>&'
+    clips = list(root.iter(SVG_NS + "clipPath"))
+    assert len(clips) == 1 and clips[0].get("id").endswith("clip-ball-11")
+
+
+def test_no_diagram_when_render_flag_off():
     r = sc.validate_sotd(EXAMPLE)
-    dp = r["diagram_prompt"]
-    assert "1 ball: solid yellow" in dp and "2 ball: solid blue" in dp
-    assert "3 ball" not in dp
-    assert "62.0% across, 28.0% down" in dp  # (62,14) -> x/100, y/50
-    assert "cue ball: plain white, unlabeled, at 28.0% across, 36.0% down" in dp
-    assert "no people, no cue stick, no room" in dp
+    assert r["ok"] is True and r["diagram"] is None and "diagram_svg" not in r
+    assert r["diagram_prompt"]  # kept for a future local image model
 
 
-def test_unknown_backend_reports_error(monkeypatch):
-    monkeypatch.setenv("REALAI_SOTD_IMAGE_BACKEND", "dalle9000")
+def test_backend_default_svg_and_others(monkeypatch):
+    assert sc.resolve_diagram_backend() == "svg"
+    monkeypatch.setenv("REALAI_SOTD_IMAGE_BACKEND", "xai")  # not supported -> local svg
+    assert sc.resolve_diagram_backend() == "svg"
+    monkeypatch.setenv("REALAI_SOTD_IMAGE_BACKEND", "none")
+    r = sc.validate_sotd(EXAMPLE, render_diagram=True)
+    assert r["ok"] is True and r["diagram"] is None and "none" in r["diagram_error"]
+    monkeypatch.setenv("REALAI_SOTD_IMAGE_BACKEND", "local_sd")
+    r = sc.validate_sotd(EXAMPLE, render_diagram=True)
+    assert r["diagram_svg"] and "not set" in r["diagram_error"]
+    monkeypatch.setenv("REALAI_SOTD_LOCAL_SD_URL", "https://api.example.com/sd")
+    r = sc.validate_sotd(EXAMPLE, render_diagram=True)
+    assert "loopback" in r["diagram_error"] and r["diagram_svg"]
+    monkeypatch.setenv("REALAI_SOTD_LOCAL_SD_URL", "http://127.0.0.1:7860")
+    r = sc.validate_sotd(EXAMPLE, render_diagram=True)
+    assert "stub" in r["diagram_error"] and r["diagram_svg"]
+
+
+def test_render_failure_never_fails_passed_map(monkeypatch):
+    def boom(*_a, **_k):
+        raise RuntimeError("renderer down")
+
+    monkeypatch.setattr(sd, "render_sotd_svg", boom)
     r = sc.validate_sotd(EXAMPLE, render_diagram=True)
     assert r["ok"] is True and r["diagram"] is None
-    assert "unknown" in r["diagram_error"]
+    assert "renderer down" in r["diagram_error"]
+
+
+def test_save_diagram_to_data_dir(tmp_path, monkeypatch):
+    monkeypatch.setenv("REALAI_DATA_DIR", str(tmp_path))
+    raw = copy.deepcopy(EXAMPLE)
+    raw["id"] = "../../etc/sotd 2026"
+    r = sc.validate_sotd(raw, render_diagram=True, save_diagram=True)
+    p = Path(r["diagram_path"])
+    assert p.parent == tmp_path / "rackup_coach" / "sotd"
+    assert p.name == "_.._etc_sotd_2026.svg"
+    assert p.read_text(encoding="utf-8") == r["diagram_svg"]
+
+
+def test_sotd_code_has_no_cloud_image_path():
+    root = Path(sc.__file__).resolve().parent
+    for name in ("sotd_checker.py", "sotd_diagram.py", "abilities/shot_of_the_day.py"):
+        src = (root / name).read_text(encoding="utf-8").lower()
+        for needle in ("xai_media", "xai_api_key", "grok_api_key", "api.x.ai", "openai"):
+            assert needle not in src, (name, needle)
 
 
 # ---------------------------------------------------------------- envelope
@@ -394,6 +501,7 @@ def test_envelope_through_plugin_invoke():
     assert res["mode"] == "sotd_validate"
     assert res["ok"] is True
     assert res["cut_deg"] == pytest.approx(53.2, abs=0.05)
+    assert res["diagram_backend"] == "svg" and res["diagram_svg"].startswith("<svg")
 
 
 def test_failed_map_is_http_style_not_crash():

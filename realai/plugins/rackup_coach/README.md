@@ -52,10 +52,20 @@ diagram prompt. Travis's standing instruction is saved verbatim in
 - **Fixes, in order:** nudge the cue to the open side, drop the blocking ball, swap to the open
   pocket with the smaller cut, or use a catalog map (`SOTD_MAP_CATALOG`). A claim that disagrees with the
   validated geometry is replaced by the rendered sentence (`claim_rerender`).
-- **Image:** generated only when `ok` is true and `render_diagram` is set. The default is no backend
-  (`diagram: null` plus `diagram_error`). Opt in with
-  `REALAI_SOTD_IMAGE_BACKEND=xai` and `XAI_API_KEY` in the hive env. A failed image
-  never fails a passed map.
+- **Diagram (local only, no API keys):** rendered only when `ok` is true and `render_diagram` is set.
+  `sotd_diagram.py` draws the validated map as a deterministic SVG. It is pure Python string building
+  with no dependencies and no network. The SVG shows the table, true-scale balls (stripes as a white ball
+  with a color band), the cue-to-ghost line, the dashed ghost, the object-to-pocket line, a dashed tangent
+  labeled `<tip> <speed>`, a follow/draw arrow, and an arrow at the called pocket. The result carries
+  `diagram_svg` (raw SVG), `diagram` (`data:image/svg+xml;base64,...`) and `diagram_backend`.
+  With `save_diagram: true` the SVG is also written to
+  `$REALAI_DATA_DIR/rackup_coach/sotd/<id>.svg` (default `~/.realai`), and the path comes back as `diagram_path`.
+  The PNG helper `svg_to_png` works only if `cairosvg` is already installed; it is not a requirement.
+  `REALAI_SOTD_IMAGE_BACKEND` is `svg` (default) or `none`. `local_sd` is an off-by-default
+  stub for a future local Stable Diffusion server (`REALAI_SOTD_LOCAL_SD_URL`, loopback
+  only). It makes no call yet and still returns the SVG. No cloud image API is used,
+  and `diagram_prompt` is kept only for a future local image model.
+  A failed render never fails a passed map.
 - **HTTP style:** a failed map returns envelope `ok: true` (the plugin ran) with
   `result.ok: false`. It never crashes.
 
@@ -77,7 +87,7 @@ invoke({
         },
     },
 })
-# -> result.cut_deg 53.2, tangent_side "left", claim fails (stop on a 53 deg cut;
+# -> result.cut_deg 53.2, tangent_side "left", diagram_svg + diagram (data URI), claim fails (stop on a 53 deg cut;
 #    the 2 is not on the exit side), sentence re-rendered:
 #    "Cut the 1 in the foot-right corner with center ball at medium speed and come off the tangent."
 ```
