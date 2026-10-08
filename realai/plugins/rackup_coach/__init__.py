@@ -31,6 +31,7 @@ METADATA = {
     "capabilities": [
         "professional_coach",
         "shot_of_the_day",
+        "sotd_validate",
         "video_analysis",
         "chat_moderation",
         "matchmaking_support",

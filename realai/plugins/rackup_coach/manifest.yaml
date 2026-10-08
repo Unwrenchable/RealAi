@@ -31,6 +31,7 @@ entrypoints:
 capabilities:
   - professional_coach
   - shot_of_the_day
+  - sotd_validate   # shot_of_the_day payload.mode=sotd_validate (deterministic map checker)
   - video_analysis
   - chat_moderation
   - matchmaking_support
