@@ -15,9 +15,9 @@ inches to pixels, and balls, lines, pockets and diamonds all go through it.
 
 Table style: dark walnut rails with a thin brass outer trim, a darker cushion
 strip, dark green cloth with a radial vignette, a faint dashed head string at
-x = 25, round pocket holes (one radius) sitting inside their grid boxes at
-the checker's pocket targets, with a dark throat out through the cushion
-between straight, symmetric jaw cuts, and mother-of-pearl diamond inlays.
+x = 25, round pocket holes (one radius) centered exactly on the pocket points
+and set in the rail under the cloth, with straight, symmetric jaw cuts through
+the cushion, and mother-of-pearl diamond inlays.
 The cushions are a darker beveled strip in the rail band with a highlight at
 the nose; the cloth is exactly the 100 x 50 playing rectangle (1000 x 500 px),
 so the playing edge reads at the grid boundary.
@@ -60,10 +60,6 @@ from pathlib import Path
 from typing import Any, Optional
 from xml.sax.saxutils import escape
 
-from .sotd_checker import POCKET_HOLE_R_IN
-from .sotd_checker import POCKET_MOUTHS as _CHECKER_MOUTHS
-from .sotd_checker import POCKETS as _CHECKER_POCKETS
-
 SCALE = 10.0  # px per inch
 TABLE_LONG = 100.0
 TABLE_SHORT = 50.0
@@ -83,27 +79,30 @@ assert GRID_STEP_IN == TABLE_SHORT / 4.0  # square cells
 GRID_X = tuple(GRID_STEP_IN * i for i in range(1, 8))  # 12.5 ... 87.5, includes 50
 GRID_Y = tuple(GRID_STEP_IN * i for i in range(1, 4))  # 12.5, 25, 37.5
 HEAD_STRING_X = TABLE_LONG / 4.0
-# Pockets (Travis's grid rule): the 8 x 4 boxes never change size, and each
-# pocket sits inside its box. Hole centers are the checker's pocket targets
-# (``sotd_checker.POCKETS``): a corner hole is tangent to both cushion noses
-# at its corner, a side hole is tangent to its long rail and straddles x = 50.
-# All six share ``POCKET_HOLE_R_IN``. The dark throat joins the hole to its
-# mouth on the cloth edge (``POCKET_MOUTHS``) and runs out through the cushion
-# between two straight jaw cuts, symmetric by construction.
+# Pockets. Every pocket hole is centered exactly on its pocket point: the
+# cushion-nose corner (corners) or the nose midpoint (sides), i.e. a grid
+# corner / edge midpoint, with one radius for all six. Holes, throats and jaws
+# are drawn *under* the cloth, so a pocket shows only in the cushion/rail and
+# never intrudes on the playing surface: every grid cell, corner cells
+# included, stays a full 12.5 in square. Along every rail centerline the pocket
+# center is one diamond spacing (12.5 in) past the end diamond, the same as
+# diamond to diamond.
+# Jaws are straight cuts through the cushion from the nose (CORNER_MOUTH_IN /
+# SIDE_MOUTH_HALF_IN from the pocket point) to where the hole meets the
+# cushion back; symmetric by construction.
+POCKET_HOLE_R_IN = 2.3  # 4.6 in hole, same for corners and sides
 CORNER_HOLE_R_IN = POCKET_HOLE_R_IN
 SIDE_HOLE_R_IN = POCKET_HOLE_R_IN
-CORNER_MOUTH_IN = POCKET_HOLE_R_IN  # cushion nose ends where the hole touches the edge
-SIDE_MOUTH_HALF_IN = POCKET_HOLE_R_IN
-CORNER_JAW_BACK_IN = POCKET_HOLE_R_IN - CUSHION_IN  # 45 deg jaw toward the rail corner
-SIDE_JAW_BACK_HALF_IN = POCKET_HOLE_R_IN - 0.6
+CORNER_MOUTH_IN = 2.9  # nose point along each rail from the corner
+SIDE_MOUTH_HALF_IN = 2.55
+CORNER_JAW_BACK_IN = math.sqrt(CORNER_HOLE_R_IN ** 2 - CUSHION_IN ** 2)  # jaw meets the hole at the cushion back
+SIDE_JAW_BACK_HALF_IN = math.sqrt(SIDE_HOLE_R_IN ** 2 - CUSHION_IN ** 2)
 STOP_BAR_IN = 3.4  # stop marker width across the shot line
 TANGENT_LEN_IN = 15.0
 SPIN_ARROW_IN = 6.0
 # Pocket arrows start in the margin and stop just short of the pocket mouth.
-# Pocket arrows are measured from the pocket mouth on the cloth edge, outward:
-# the tail is in the margin, the tip stops in the throat just outside the cloth.
-POCKET_ARROW_SIDE = (RAIL_IN + 2.2, 0.5)  # (tail, tip)
-POCKET_ARROW_CORNER = (RAIL_IN * math.sqrt(2) + 1.6, 0.7)  # along the diagonal
+POCKET_ARROW_SIDE = (RAIL_IN + 2.2, SIDE_HOLE_R_IN + 1.0)  # (tail, tip) from pocket center
+POCKET_ARROW_CORNER = (CORNER_HOLE_R_IN + 5.6, CORNER_HOLE_R_IN + 0.9)  # along the diagonal
 POCKET_ARROW_HALO_PX = 6.5
 
 WOOD_DARK = "#33190a"
@@ -140,10 +139,14 @@ BALL_HEX = {
 for _n in range(9, 16):
     BALL_HEX[_n] = BALL_HEX[_n - 8]
 
-# Pocket targets and mouths come from the checker so the drawn holes and the
-# geometry can never disagree.
-POCKETS = dict(_CHECKER_POCKETS)
-POCKET_MOUTHS = dict(_CHECKER_MOUTHS)
+POCKETS: dict[str, tuple[float, float]] = {
+    "corner_head_left": (0.0, 0.0),
+    "corner_head_right": (0.0, TABLE_SHORT),
+    "side_left": (TABLE_LONG / 2.0, 0.0),
+    "side_right": (TABLE_LONG / 2.0, TABLE_SHORT),
+    "corner_foot_left": (TABLE_LONG, 0.0),
+    "corner_foot_right": (TABLE_LONG, TABLE_SHORT),
+}
 
 CANVAS_W = (TABLE_LONG + 2 * (RAIL_IN + MARGIN_IN)) * SCALE
 CANVAS_H = (TABLE_SHORT + 2 * (RAIL_IN + MARGIN_IN)) * SCALE
@@ -231,18 +234,16 @@ def _line(a: tuple[float, float], b: tuple[float, float], color: str, width: flo
     )
 
 
-def _pocket_group(pid: str, cls: str, throat: list, jaws: list, hole: tuple[float, float], r_in: float,
-                  mouth: tuple[float, float]) -> str:
-    """``hole`` is the hole center (= checker pocket target), ``mouth`` the
-    pocket's point on the cloth edge, both in px."""
-    pts = " ".join(f"{_f(px)},{_f(py)}" for px, py in throat)
-    parts = [
-        f'<g class="pocket {cls}" data-pocket="{pid}" data-cx="{_f(hole[0])}" data-cy="{_f(hole[1])}" '
-        f'data-mouth-x="{_f(mouth[0])}" data-mouth-y="{_f(mouth[1])}">',
-        f'<polygon class="pocket-shelf" points="{pts}" fill="{POCKET_SHELF}"/>',
+def _pocket_group(pid: str, cls: str, shelf: list, jaws: list, hole: tuple[float, float], r_in: float,
+                  center: tuple[float, float]) -> str:
+    """``center`` is the pocket point (grid corner / nose midpoint) in px."""
+    pts = " ".join(f"{_f(px)},{_f(py)}" for px, py in shelf)
+    parts = [f'<g class="pocket {cls}" data-pocket="{pid}" data-cx="{_f(center[0])}" data-cy="{_f(center[1])}">',
+             f'<polygon class="pocket-shelf" points="{pts}" fill="{POCKET_SHELF}"/>']
+    parts.append(
         f'<circle class="pocket-hole" cx="{_f(hole[0])}" cy="{_f(hole[1])}" r="{_f(r_in * SCALE)}" '
-        f'fill="{POCKET}" stroke="{POCKET_LINER}" stroke-width="1.2"/>',
-    ]
+        f'fill="{POCKET}" stroke="{POCKET_LINER}" stroke-width="1.2"/>'
+    )
     for n, bk in jaws:
         parts.append(
             f'<line class="jaw" x1="{_f(n[0])}" y1="{_f(n[1])}" x2="{_f(bk[0])}" y2="{_f(bk[1])}" '
@@ -252,38 +253,34 @@ def _pocket_group(pid: str, cls: str, throat: list, jaws: list, hole: tuple[floa
     return "".join(parts)
 
 
-def _corner_pocket(pid: str) -> str:
-    """Hole inside the corner box, tangent to both noses; throat out to the rail corner.
+def _corner_pocket(pid: str, X: float, Y: float) -> str:
+    """Round hole centered on the cushion-nose corner, straight symmetric jaws.
 
-    Local frame from the mouth (cloth corner): +x along the end rail into the
-    table, +y along the side rail into the table."""
-    X, Y = POCKET_MOUTHS[pid]
+    Local frame: +x along the end rail into the table, +y along the side rail."""
     dx = 1 if X == 0 else -1
     dy = 1 if Y == 0 else -1
 
     def P(lx: float, ly: float) -> tuple[float, float]:
         return _px(X + dx * lx, Y + dy * ly)
 
-    r, c, b = CORNER_HOLE_R_IN, CUSHION_IN, CORNER_JAW_BACK_IN
-    n1, b1, n2, b2 = P(r, 0), P(b, -c), P(0, r), P(-c, b)
-    throat = [b1, n1, P(r, r), n2, b2, P(-c, -c)]
-    hx, hy = POCKETS[pid]
-    return _pocket_group(pid, "corner-pocket", throat, [(n1, b1), (n2, b2)], _px(hx, hy), r, P(0, 0))
+    a, b, c = CORNER_MOUTH_IN, CORNER_JAW_BACK_IN, CUSHION_IN
+    n1, b1, n2, b2 = P(a, 0), P(b, -c), P(0, a), P(-c, b)
+    shelf = [P(0, 0), n1, b1, P(-c, -c), b2, n2]
+    return _pocket_group(pid, "corner-pocket", shelf, [(n1, b1), (n2, b2)], P(0, 0), CORNER_HOLE_R_IN,
+                         P(0, 0))
 
 
-def _side_pocket(pid: str) -> str:
-    """Hole tangent to the long rail, straddling x = 50; throat out through the cushion."""
-    X, Y = POCKET_MOUTHS[pid]
+def _side_pocket(pid: str, X: float, Y: float) -> str:
+    """Round hole centered on the nose midpoint (x = 50), straight symmetric jaws."""
     dy = 1 if Y == 0 else -1  # local +y points into the table
 
     def P(lx: float, ly: float) -> tuple[float, float]:
         return _px(X + lx, Y + dy * ly)
 
-    r, c, b = SIDE_HOLE_R_IN, CUSHION_IN, SIDE_JAW_BACK_HALF_IN
-    n1, b1, n2, b2 = P(-r, 0), P(-b, -c), P(r, 0), P(b, -c)
-    throat = [b1, n1, P(-r, r), P(r, r), n2, b2]
-    hx, hy = POCKETS[pid]
-    return _pocket_group(pid, "side-pocket", throat, [(n1, b1), (n2, b2)], _px(hx, hy), r, P(0, 0))
+    a, b, c = SIDE_MOUTH_HALF_IN, SIDE_JAW_BACK_HALF_IN, CUSHION_IN
+    n1, b1, n2, b2 = P(-a, 0), P(-b, -c), P(a, 0), P(b, -c)
+    shelf = [n1, b1, b2, n2]
+    return _pocket_group(pid, "side-pocket", shelf, [(n1, b1), (n2, b2)], P(0, 0), SIDE_HOLE_R_IN, P(0, 0))
 
 
 def cushion_segments() -> list[dict[str, Any]]:
@@ -432,17 +429,17 @@ def _table(pfx: str, *, debug_grid: bool = False, show_grid: bool = False) -> li
         f'<rect class="trim-inner" x="{_f(m + 5)}" y="{_f(m + 5)}" width="{_f(tw - 10)}" height="{_f(th - 10)}" '
         f'rx="{_f(max(rx - 4, 0))}" fill="none" stroke="{BRASS}" stroke-opacity="0.35" stroke-width="0.8"/>'
     )
-    # cushions (in the rail band), the cloth exactly on the 100 x 50 playing
-    # rectangle, then the pockets on top, centered on the grid points, so corner
-    # and side mouths bite the cloth the same way.
+    # cushions and pockets (holes, throats, jaws) in the rail band, then the
+    # cloth exactly on the 100 x 50 playing rectangle ON TOP, so no pocket
+    # intrudes on the playing surface and every grid cell stays a full square.
     out.extend(_cushions(pfx))
+    for pid, (X, Y) in POCKETS.items():
+        out.append(_corner_pocket(pid, X, Y) if pid.startswith("corner") else _side_pocket(pid, X, Y))
     out.append(
         f'<rect class="cloth" x="{_f(sx)}" y="{_f(sy)}" width="{_f(TABLE_LONG * SCALE)}" '
         f'height="{_f(TABLE_SHORT * SCALE)}" fill="url(#{pfx}cloth)"/>'
     )
     out.extend(_cushion_highlights())
-    for pid in POCKETS:
-        out.append(_corner_pocket(pid) if pid.startswith("corner") else _side_pocket(pid))
     # head string (faint, dashed) at the 1/4 line from the head rail
     out.append(_line((HEAD_STRING_X, 0), (HEAD_STRING_X, TABLE_SHORT), "#ffffff", 1.0,
                      dash="6 7", cls="head-string", opacity=0.22))
@@ -505,16 +502,15 @@ def render_sotd_svg(m: dict[str, Any], a: dict[str, Any], *, debug_grid: bool = 
     )
     out.extend(_table(pfx, debug_grid=debug_grid, show_grid=show_grid))
 
-    # called-pocket arrow: from the margin, across the trim, into the pocket mouth
-    mouth = POCKET_MOUTHS[called["pocket"]]
-    ox = mouth[0] - TABLE_LONG / 2.0
-    oy = mouth[1] - TABLE_SHORT / 2.0
+    # called-pocket arrow: from the margin, across the trim, toward the mouth
+    ox = pocket[0] - TABLE_LONG / 2.0
+    oy = pocket[1] - TABLE_SHORT / 2.0
     on = (1.0 if ox > 0 else -1.0 if ox < 0 else 0.0, 1.0 if oy > 0 else -1.0 if oy < 0 else 0.0)
     nrm = math.hypot(*on) or 1.0
     on = (on[0] / nrm, on[1] / nrm)
     tail, tipd = POCKET_ARROW_SIDE if (on[0] == 0 or on[1] == 0) else POCKET_ARROW_CORNER
-    a_start = (mouth[0] + on[0] * tail, mouth[1] + on[1] * tail)
-    a_end = (mouth[0] + on[0] * tipd, mouth[1] + on[1] * tipd)
+    a_start = (pocket[0] + on[0] * tail, pocket[1] + on[1] * tail)
+    a_end = (pocket[0] + on[0] * tipd, pocket[1] + on[1] * tipd)
     out.append(_line(a_start, a_end, "#000000", POCKET_ARROW_HALO_PX, cls="pocket-arrow-halo", opacity=0.45))
     out.append(_line(a_start, a_end, MARK, 4.0, marker="arrow-pocket", cls="pocket-arrow", pfx=pfx))
 
