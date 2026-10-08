@@ -65,9 +65,9 @@ TABLE_LONG = 100.0
 TABLE_SHORT = 50.0
 BALL_R = 1.125
 CUSHION_IN = 1.25  # cushion rubber, nose to wood
-WOOD_IN = 2.5  # visible wood rail (thin rail keeps the corner from reading as an oversize box)
-RAIL_IN = CUSHION_IN + WOOD_IN  # 3.75 in total rail
-MARGIN_IN = 3.5  # transparent margin outside the table (holds the pocket arrow)
+WOOD_IN = 3.0  # visible wood rail (room for the pocket holes set into the rail)
+RAIL_IN = CUSHION_IN + WOOD_IN  # 4.25 in total rail
+MARGIN_IN = 4.0  # transparent margin outside the table (holds the pocket arrow)
 OUTER_RX_IN = 1.4  # rounded outer rail corners
 DIAMOND_OFFSET_IN = CUSHION_IN + WOOD_IN / 2.0  # diamond centers: middle of the wood
 DIAMOND_ALONG_IN = 0.7  # rhombus half-diagonal along the rail
@@ -79,30 +79,32 @@ assert GRID_STEP_IN == TABLE_SHORT / 4.0  # square cells
 GRID_X = tuple(GRID_STEP_IN * i for i in range(1, 8))  # 12.5 ... 87.5, includes 50
 GRID_Y = tuple(GRID_STEP_IN * i for i in range(1, 4))  # 12.5, 25, 37.5
 HEAD_STRING_X = TABLE_LONG / 4.0
-# Pockets. Every pocket hole is centered exactly on its pocket point: the
-# cushion-nose corner (corners) or the nose midpoint (sides), i.e. a grid
-# corner / edge midpoint, with one radius for all six. Holes, throats and jaws
-# are drawn *under* the cloth, so a pocket shows only in the cushion/rail and
-# never intrudes on the playing surface: every grid cell, corner cells
-# included, stays a full 12.5 in square. Along every rail centerline the pocket
-# center is one diamond spacing (12.5 in) past the end diamond, the same as
-# diamond to diamond.
-# Jaws are straight cuts through the cushion from the nose (CORNER_MOUTH_IN /
-# SIDE_MOUTH_HALF_IN from the pocket point) to where the hole meets the
-# cushion back; symmetric by construction.
-POCKET_HOLE_R_IN = 2.3  # 4.6 in hole, same for corners and sides
-CORNER_HOLE_R_IN = POCKET_HOLE_R_IN
-SIDE_HOLE_R_IN = POCKET_HOLE_R_IN
-CORNER_MOUTH_IN = 2.9  # nose point along each rail from the corner
-SIDE_MOUTH_HALF_IN = 2.55
-CORNER_JAW_BACK_IN = math.sqrt(CORNER_HOLE_R_IN ** 2 - CUSHION_IN ** 2)  # jaw meets the hole at the cushion back
-SIDE_JAW_BACK_HALF_IN = math.sqrt(SIDE_HOLE_R_IN ** 2 - CUSHION_IN ** 2)
+# Pockets (shaped like the classic diagram reference, in Travis's styling).
+# The checker's pocket points stay on the cloth corners / long-edge midpoints;
+# the holes are set into the rail and touch the cloth only at that point:
+#
+# * corner: a "D" - a round hole of radius CORNER_HOLE_R_IN centered
+#   CORNER_HOLE_OFFSET_IN outward on both axes (on the diagonal), extended
+#   toward the cloth corner and cut flat by the mouth line through the corner,
+#   perpendicular to the diagonal. Both cushions end on that line (angled jaw
+#   facings pointing at the hole), so their noses meet at the cloth corner.
+# * side: a round hole of radius SIDE_HOLE_R_IN centered SIDE_HOLE_R_IN behind
+#   the nose midpoint, so its lower arc just reaches the nose line. The two
+#   cushions stop short in angled jaws, leaving a gap (dark slate throat).
+#
+# Holes are drawn before the cloth and never cover cloth area.
+CORNER_HOLE_R_IN = 2.2
+CORNER_HOLE_OFFSET_IN = 1.3
+SIDE_HOLE_R_IN = 1.85
+SIDE_MOUTH_HALF_IN = 2.25  # cushion nose ends this far from x = 50
+SIDE_JAW_BACK_HALF_IN = 1.9  # cushion back ends here: short angled jaw facing the hole
 STOP_BAR_IN = 3.4  # stop marker width across the shot line
 TANGENT_LEN_IN = 15.0
 SPIN_ARROW_IN = 6.0
 # Pocket arrows start in the margin and stop just short of the pocket mouth.
-POCKET_ARROW_SIDE = (RAIL_IN + 2.2, SIDE_HOLE_R_IN + 1.0)  # (tail, tip) from pocket center
-POCKET_ARROW_CORNER = (CORNER_HOLE_R_IN + 5.6, CORNER_HOLE_R_IN + 0.9)  # along the diagonal
+_CORNER_REACH = CORNER_HOLE_OFFSET_IN * math.sqrt(2) + CORNER_HOLE_R_IN  # mouth point -> far edge of the hole
+POCKET_ARROW_SIDE = (RAIL_IN + 3.2, 2 * SIDE_HOLE_R_IN + 0.25)  # (tail, tip) from the pocket point
+POCKET_ARROW_CORNER = (_CORNER_REACH + 5.0, _CORNER_REACH + 0.45)  # along the diagonal
 POCKET_ARROW_HALO_PX = 6.5
 
 WOOD_DARK = "#33190a"
@@ -117,7 +119,7 @@ CLOTH_CENTER = "#1f7d47"
 CLOTH_EDGE = "#166a3c"  # mild vignette so edge cells read the same as inner cells
 POCKET = "#050505"
 POCKET_LINER = "#1a1a1a"
-POCKET_SHELF = "#021a0c"  # slate shelf inside the jaws
+POCKET_SHELF = "#0c4a2a"  # slate showing in the side-pocket throat between the jaws
 PEARL = "#f2ead6"
 PEARL_EDGE = "#b8a77f"
 CUE_PATH = "#f5efd9"
@@ -234,53 +236,83 @@ def _line(a: tuple[float, float], b: tuple[float, float], color: str, width: flo
     )
 
 
-def _pocket_group(pid: str, cls: str, shelf: list, jaws: list, hole: tuple[float, float], r_in: float,
-                  center: tuple[float, float]) -> str:
-    """``center`` is the pocket point (grid corner / nose midpoint) in px."""
-    pts = " ".join(f"{_f(px)},{_f(py)}" for px, py in shelf)
-    parts = [f'<g class="pocket {cls}" data-pocket="{pid}" data-cx="{_f(center[0])}" data-cy="{_f(center[1])}">',
-             f'<polygon class="pocket-shelf" points="{pts}" fill="{POCKET_SHELF}"/>']
-    parts.append(
-        f'<circle class="pocket-hole" cx="{_f(hole[0])}" cy="{_f(hole[1])}" r="{_f(r_in * SCALE)}" '
-        f'fill="{POCKET}" stroke="{POCKET_LINER}" stroke-width="1.2"/>'
+def _jaw(n: tuple[float, float], bk: tuple[float, float]) -> str:
+    return (
+        f'<line class="jaw" x1="{_f(n[0])}" y1="{_f(n[1])}" x2="{_f(bk[0])}" y2="{_f(bk[1])}" '
+        f'stroke="{CUSHION_HIGHLIGHT}" stroke-opacity="0.55" stroke-width="1.2"/>'
     )
-    for n, bk in jaws:
-        parts.append(
-            f'<line class="jaw" x1="{_f(n[0])}" y1="{_f(n[1])}" x2="{_f(bk[0])}" y2="{_f(bk[1])}" '
-            f'stroke="{CUSHION_HIGHLIGHT}" stroke-opacity="0.45" stroke-width="1.2"/>'
-        )
-    parts.append("</g>")
-    return "".join(parts)
+
+
+def corner_hole_geometry(pid: str) -> dict[str, Any]:
+    """Corner "D" in playing-surface inches: circle center/radius, the mouth
+    line (through the cloth corner, perpendicular to the diagonal) end points,
+    and the outward unit diagonal."""
+    X, Y = POCKETS[pid]
+    ux = -1.0 if X == 0 else 1.0
+    uy = -1.0 if Y == 0 else 1.0
+    k, r = CORNER_HOLE_OFFSET_IN, CORNER_HOLE_R_IN
+    d = (ux / math.sqrt(2), uy / math.sqrt(2))  # outward diagonal
+    n = (-d[1], d[0])  # along the mouth line
+    c = (X + ux * k, Y + uy * k)
+    return {
+        "center": c, "r": r, "out": d,
+        "mouth": ((X + n[0] * r, Y + n[1] * r), (X - n[0] * r, Y - n[1] * r)),
+        "back": ((c[0] + n[0] * r, c[1] + n[1] * r), (c[0] - n[0] * r, c[1] - n[1] * r)),
+    }
+
+
+def side_hole_geometry(pid: str) -> dict[str, Any]:
+    X, Y = POCKETS[pid]
+    o = -1.0 if Y == 0 else 1.0  # outward
+    return {"center": (X, Y + o * SIDE_HOLE_R_IN), "r": SIDE_HOLE_R_IN, "out": (0.0, o)}
 
 
 def _corner_pocket(pid: str, X: float, Y: float) -> str:
-    """Round hole centered on the cushion-nose corner, straight symmetric jaws.
-
-    Local frame: +x along the end rail into the table, +y along the side rail."""
-    dx = 1 if X == 0 else -1
-    dy = 1 if Y == 0 else -1
-
-    def P(lx: float, ly: float) -> tuple[float, float]:
-        return _px(X + dx * lx, Y + dy * ly)
-
-    a, b, c = CORNER_MOUTH_IN, CORNER_JAW_BACK_IN, CUSHION_IN
-    n1, b1, n2, b2 = P(a, 0), P(b, -c), P(0, a), P(-c, b)
-    shelf = [P(0, 0), n1, b1, P(-c, -c), b2, n2]
-    return _pocket_group(pid, "corner-pocket", shelf, [(n1, b1), (n2, b2)], P(0, 0), CORNER_HOLE_R_IN,
-                         P(0, 0))
+    g = corner_hole_geometry(pid)
+    (m1, m2), (k1, k2) = g["mouth"], g["back"]
+    r = g["r"] * SCALE
+    P = [_px(*q) for q in (m1, k1, k2, m2)]
+    # the far half of the circle: from k1 to k2 around the outside (sweep picked by orientation)
+    cx, cy = _px(*g["center"])
+    ox, oy = g["out"]
+    mid = (cx + ox * r, cy + oy * r)
+    cross = (P[1][0] - cx) * (mid[1] - cy) - (P[1][1] - cy) * (mid[0] - cx)
+    sweep = 1 if cross > 0 else 0
+    d = (f"M{_f(P[0][0])},{_f(P[0][1])} L{_f(P[1][0])},{_f(P[1][1])} "
+         f"A{_f(r)},{_f(r)} 0 0 {sweep} {_f(P[2][0])},{_f(P[2][1])} L{_f(P[3][0])},{_f(P[3][1])} Z")
+    C = CUSHION_IN
+    ux = 1 if X == 0 else -1  # into the table
+    uy = 1 if Y == 0 else -1
+    corner = _px(X, Y)
+    jaws = [_jaw(corner, _px(X + ux * C, Y - uy * C)), _jaw(corner, _px(X - ux * C, Y + uy * C))]
+    return (
+        f'<g class="pocket corner-pocket" data-pocket="{pid}" data-cx="{_f(corner[0])}" data-cy="{_f(corner[1])}">'
+        f'<path class="pocket-hole" d="{d}" data-cx="{_f(cx)}" data-cy="{_f(cy)}" data-r="{_f(r)}" '
+        f'fill="{POCKET}" stroke="{POCKET_LINER}" stroke-width="1.2" stroke-linejoin="round"/>'
+        + "".join(jaws) + "</g>"
+    )
 
 
 def _side_pocket(pid: str, X: float, Y: float) -> str:
-    """Round hole centered on the nose midpoint (x = 50), straight symmetric jaws."""
-    dy = 1 if Y == 0 else -1  # local +y points into the table
+    g = side_hole_geometry(pid)
+    dy = 1 if Y == 0 else -1  # into the table
 
     def P(lx: float, ly: float) -> tuple[float, float]:
         return _px(X + lx, Y + dy * ly)
 
     a, b, c = SIDE_MOUTH_HALF_IN, SIDE_JAW_BACK_HALF_IN, CUSHION_IN
     n1, b1, n2, b2 = P(-a, 0), P(-b, -c), P(a, 0), P(b, -c)
-    shelf = [n1, b1, b2, n2]
-    return _pocket_group(pid, "side-pocket", shelf, [(n1, b1), (n2, b2)], P(0, 0), SIDE_HOLE_R_IN, P(0, 0))
+    throat = " ".join(f"{_f(px)},{_f(py)}" for px, py in (n1, b1, b2, n2))
+    cx, cy = _px(*g["center"])
+    r = g["r"] * SCALE
+    mx, my = _px(X, Y)
+    return (
+        f'<g class="pocket side-pocket" data-pocket="{pid}" data-cx="{_f(mx)}" data-cy="{_f(my)}">'
+        f'<polygon class="pocket-shelf" points="{throat}" fill="{POCKET_SHELF}"/>'
+        f'<circle class="pocket-hole" cx="{_f(cx)}" cy="{_f(cy)}" r="{_f(r)}" data-cx="{_f(cx)}" data-cy="{_f(cy)}" '
+        f'data-r="{_f(r)}" fill="{POCKET}" stroke="{POCKET_LINER}" stroke-width="1.2"/>'
+        + _jaw(n1, b1) + _jaw(n2, b2) + "</g>"
+    )
 
 
 def cushion_segments() -> list[dict[str, Any]]:
@@ -290,7 +322,7 @@ def cushion_segments() -> list[dict[str, Any]]:
     playing-rectangle edge, the back edge ``CUSHION_IN`` further out, and the
     ends are the angled jaw cuts. ``out`` is the outward unit normal."""
     C = CUSHION_IN
-    ac, bc = CORNER_MOUTH_IN, CORNER_JAW_BACK_IN
+    ac, bc = 0.0, CUSHION_IN  # corner: nose runs to the cloth corner, end cut along the mouth line
     as_, bs = SIDE_MOUTH_HALF_IN, SIDE_JAW_BACK_HALF_IN
     L, S, H = TABLE_LONG, TABLE_SHORT, TABLE_LONG / 2.0
     segs = []

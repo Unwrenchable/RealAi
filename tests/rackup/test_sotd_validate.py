@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import copy
 import math
+import re
 import sys
 from pathlib import Path
 
@@ -559,33 +560,6 @@ def test_pocket_arrow_inside_image_for_every_pocket():
         assert math.dist((x1, y1), (x2, y2)) > marker_px  # a visible shaft behind the head
 
 
-def test_pockets_round_and_symmetric():
-    r = sc.validate_sotd(EXAMPLE, render_diagram=True)
-    root = _svg_root(r)
-    groups = {g.get("data-pocket"): g for g in root.iter(SVG_NS + "g") if "pocket" in (g.get("class") or "").split()}
-    assert sorted(groups) == sorted(sc.POCKETS)
-    for pid, g in groups.items():
-        X, Y = sc.POCKETS[pid]
-        px, py = sd._px(X, Y)
-        hole = [e for e in g.iter(SVG_NS + "circle") if e.get("class") == "pocket-hole"]
-        assert len(hole) == 1  # one round hole, no teardrop path
-        hx, hy, hr = (float(hole[0].get(k)) for k in ("cx", "cy", "r"))
-        jaws = [e for e in g.iter(SVG_NS + "line") if e.get("class") == "jaw"]
-        assert len(jaws) == 2
-        if pid.startswith("corner"):
-            assert abs(hx - px) == pytest.approx(abs(hy - py), abs=0.01)  # on the diagonal
-            assert (hx, hy) == pytest.approx((px, py), abs=0.01)  # centered on the grid corner
-        else:
-            assert (hx, hy) == pytest.approx((px, py), abs=0.01)  # centered on the nose midpoint
-        # jaw backs land on the hole; jaws mirror each other about the pocket axis
-        for j in jaws:
-            bx, by = float(j.get("x2")), float(j.get("y2"))
-            assert math.dist((bx, by), (hx, hy)) == pytest.approx(hr, abs=0.05)
-        (a1, b1), (a2, b2) = [((float(j.get("x1")), float(j.get("y1"))), (float(j.get("x2")), float(j.get("y2")))) for j in jaws]
-        assert math.dist(a1, b1) == pytest.approx(math.dist(a2, b2), abs=0.01)
-        assert math.dist(a1, (hx, hy)) == pytest.approx(math.dist(a2, (hx, hy)), abs=0.01)
-
-
 def test_object_path_uses_object_ball_color():
     r = sc.validate_sotd(EXAMPLE, render_diagram=True)
     line = _by_class(_svg_root(r), "line", "object-path")[0]
@@ -833,17 +807,111 @@ def test_diamonds_line_up_with_grid_lines_through_the_cushion():
             assert off == pytest.approx(-(sd.CUSHION_IN + sd.WOOD_IN / 2))
 
 
-def test_diamond_to_pocket_spacing_equals_diamond_spacing_on_every_rail():
-    """Along each rail centerline, end diamond -> pocket center (corner or side)
-    must equal diamond -> diamond (125 px) within 1 px, so no box looks bigger."""
+# ---------------------------------------------------------------- pockets (reference shape)
+def _pocket_groups(root):
+    return {g.get("data-pocket"): g for g in root.iter(SVG_NS + "g") if "pocket" in (g.get("class") or "").split()}
+
+
+def _hole(g):
+    return [e for e in g.iter() if e.get("class") == "pocket-hole"][0]
+
+
+def _path_points(d):
+    nums = [float(v) for v in re.findall(r"-?\d+(?:\.\d+)?", d)]
+    # M x,y L x,y A rx,ry 0 0 s x,y L x,y Z -> vertices m1, k1, k2, m2
+    return [(nums[0], nums[1]), (nums[2], nums[3]), (nums[9], nums[10]), (nums[11], nums[12])]
+
+
+def test_pocket_shapes_like_reference_and_symmetric():
     root = _svg_root(sc.validate_sotd(EXAMPLE, render_diagram=True))
-    holes = {}
-    for g in root.iter(SVG_NS + "g"):
-        if "pocket" in (g.get("class") or "").split():
-            c = [e for e in g.iter(SVG_NS + "circle") if e.get("class") == "pocket-hole"][0]
-            holes[g.get("data-pocket")] = (float(c.get("cx")), float(c.get("cy")), float(c.get("r")))
-    # one hole size everywhere, so corner and side mouths bite the cloth equally
-    assert len({round(h[2], 6) for h in holes.values()}) == 1
+    groups = _pocket_groups(root)
+    assert sorted(groups) == sorted(sc.POCKETS)
+    corner_r, side_r = set(), set()
+    for pid, g in groups.items():
+        X, Y = sc.POCKETS[pid]
+        px, py = sd._px(X, Y)
+        # the group's pocket point is the checker target on the cloth edge
+        assert (float(g.get("data-cx")), float(g.get("data-cy"))) == pytest.approx((px, py), abs=1e-6)
+        h = _hole(g)
+        hx, hy, hr = (float(h.get(k)) for k in ("data-cx", "data-cy", "data-r"))
+        jaws = [e for e in g.iter(SVG_NS + "line") if e.get("class") == "jaw"]
+        assert len(jaws) == 2
+        J = [((float(j.get("x1")), float(j.get("y1"))), (float(j.get("x2")), float(j.get("y2")))) for j in jaws]
+        if pid.startswith("corner"):
+            corner_r.add(round(hr, 6))
+            assert h.tag == SVG_NS + "path"  # a "D": round into the rail, flat mouth at the cloth corner
+            ux = -1 if X == 0 else 1
+            uy = -1 if Y == 0 else 1
+            k = sd.CORNER_HOLE_OFFSET_IN * sd.SCALE
+            assert (hx, hy) == pytest.approx((px + ux * k, py + uy * k), abs=0.01)  # pushed out on the diagonal
+            m1, k1, k2, m2 = _path_points(h.get("d"))
+            # the mouth line passes through the cloth corner, perpendicular to the diagonal
+            assert ((m1[0] + m2[0]) / 2, (m1[1] + m2[1]) / 2) == pytest.approx((px, py), abs=0.02)
+            assert (m2[0] - m1[0]) * ux + (m2[1] - m1[1]) * uy == pytest.approx(0, abs=0.05)
+            assert math.dist(m1, m2) == pytest.approx(2 * hr, abs=0.05)
+            assert math.dist(k1, (hx, hy)) == pytest.approx(hr, abs=0.05)
+            assert math.dist(k2, (hx, hy)) == pytest.approx(hr, abs=0.05)
+            # jaws: both cushion noses end at the cloth corner, cut along the mouth line, mirror images
+            for (n, b) in J:
+                assert n == pytest.approx((px, py), abs=0.01)
+                assert (b[0] - px) * ux + (b[1] - py) * uy == pytest.approx(0, abs=0.05)  # on the mouth line
+            assert math.dist(*J[0]) == pytest.approx(math.dist(*J[1]), abs=0.01)
+        else:
+            side_r.add(round(hr, 6))
+            assert h.tag == SVG_NS + "circle"
+            o = -1 if Y == 0 else 1
+            assert hx == pytest.approx(px, abs=0.01)
+            assert hy == pytest.approx(py + o * hr, abs=0.01)  # lower arc just reaches the nose line
+            assert abs(hy - py) + hr <= sd.RAIL_IN * sd.SCALE  # stays inside the rail
+            # short angled jaws facing the hole, leaving a gap; mirror images about x = 50
+            (n1, b1), (n2, b2) = J
+            assert n1[0] + n2[0] == pytest.approx(2 * px, abs=0.01) and b1[0] + b2[0] == pytest.approx(2 * px, abs=0.01)
+            assert n1[1] == pytest.approx(py) and n2[1] == pytest.approx(py)
+            assert abs(n1[0] - b1[0]) > 0.5  # angled, not square
+            assert min(abs(b1[0] - px), abs(b2[0] - px)) >= hr - 1.0  # the gap clears the hole
+    assert len(corner_r) == 1 and len(side_r) == 1  # equal radii per pocket type
+
+
+def test_holes_never_cover_the_cloth():
+    root = _svg_root(sc.validate_sotd(EXAMPLE, render_diagram=True, show_grid=True))
+    x0, y0 = sd._px(0, 0)
+    x1, y1 = sd._px(100, 50)
+    order = list(root.iter())
+    cloth = _by_class(root, "rect", "cloth")[0]
+    ci = order.index(cloth)
+    for pid, g in _pocket_groups(root).items():
+        assert order.index(g) < ci  # drawn under the cloth as well
+        h = _hole(g)
+        hx, hy, hr = (float(h.get(k)) for k in ("data-cx", "data-cy", "data-r"))
+        X, Y = sc.POCKETS[pid]
+        px, py = sd._px(X, Y)
+        if pid.startswith("corner"):
+            ux = -1 if X == 0 else 1
+            uy = -1 if Y == 0 else 1
+            # every vertex on or behind the mouth line through the corner; the arc is the far half
+            for vx, vy in _path_points(h.get("d")):
+                assert (vx - px) * ux + (vy - py) * uy >= -0.05
+            assert (hx - px) * ux + (hy - py) * uy > 0
+        else:
+            # circle touches the nose line at one point only
+            assert min(abs(hy + hr - y0), abs(hy - hr - y0), abs(hy + hr - y1), abs(hy - hr - y1)) == pytest.approx(0, abs=0.01)
+            assert not (y0 < hy < y1)
+    # 32 full 125 px cells; nothing black drawn on top of the cloth
+    w, h, xs, ys, cells = _cells_from_svg(root)
+    assert len(cells) == 32 and all(c == pytest.approx((125.0, 125.0), abs=0.01) for c in cells)
+    for e in order[ci + 1:]:
+        assert e.get("fill") != sd.POCKET
+    assert sc.POCKET_MOUTHS is sc.POCKETS
+    assert "grid rule" not in sc.PROMPT_PATH.read_text(encoding="utf-8")
+
+
+def test_pocket_point_to_diamond_spacing_on_every_rail():
+    """Along each rail, pocket point (cloth corner / midpoint) -> diamond ->
+    ... -> pocket point is 125 px each. The visible corner hole sits
+    CORNER_HOLE_OFFSET_IN further out on the diagonal (reference look)."""
+    root = _svg_root(sc.validate_sotd(EXAMPLE, render_diagram=True))
+    groups = _pocket_groups(root)
+    pts = {pid: (float(g.get("data-cx")), float(g.get("data-cy"))) for pid, g in groups.items()}
     step = 12.5 * sd.SCALE
     rails = {
         "long_left": (0, ["corner_head_left", "side_left", "corner_foot_left"]),
@@ -854,48 +922,31 @@ def test_diamond_to_pocket_spacing_equals_diamond_spacing_on_every_rail():
     diamonds = _by_class(root, "polygon", "diamond")
     for rail, (ax, pids) in rails.items():
         seq = sorted([("D", _poly_center(d)[ax]) for d in diamonds if d.get("data-rail") == rail]
-                     + [("P", holes[p][ax]) for p in pids], key=lambda t: t[1])
-        assert seq[0][0] == "P" and seq[-1][0] == "P"  # a pocket at each end of every rail
-        gaps = [b[1] - a[1] for a, b in zip(seq, seq[1:])]
-        assert len(gaps) == (8 if ax == 0 else 4)
-        for gp in gaps:
-            assert gp == pytest.approx(step, abs=1.0), (rail, gaps)
-    # pocket centers stay on the table-coordinate pocket points (cloth corners / edge midpoints)
-    for pid, (X, Y) in sc.POCKETS.items():
-        assert holes[pid][:2] == pytest.approx(sd._px(X, Y), abs=1e-6)
-
-
-def test_pockets_set_in_the_rail_and_cloth_intact():
-    """Pocket holes, throats and jaws are all drawn before the (opaque) cloth,
-    so every one of the 32 grid cells is a full, unbroken 125 x 125 px square;
-    the object-ball line ends at the pocket point on the cloth edge."""
-    r = sc.validate_sotd(EXAMPLE, render_diagram=True, show_grid=True)
-    root = _svg_root(r)
-    order = list(root.iter())
-    cloth = _by_class(root, "rect", "cloth")[0]
-    ci = order.index(cloth)
-    assert cloth.get("fill-opacity") in (None, "1") and cloth.get("opacity") in (None, "1")
-    pocket_parts = [e for e in root.iter() if (e.get("class") or "").split()
-                    and {"pocket", "pocket-hole", "pocket-shelf", "jaw"} & set((e.get("class") or "").split())]
-    assert len(pocket_parts) == 6 * 5  # group + shelf + hole + 2 jaws, per pocket
-    assert all(order.index(e) < ci for e in pocket_parts)
-    w, h, xs, ys, cells = _cells_from_svg(root)
-    assert len(cells) == 32
-    for cw, ch in cells:
-        assert cw == pytest.approx(125.0, abs=0.01) and ch == pytest.approx(125.0, abs=0.01)
-    # nothing black drawn after the cloth except balls/lines: no pocket fill sits on a cell
-    for e in order[ci + 1:]:
-        assert e.get("fill") != sd.POCKET
-    # hole centers are the cloth corners / long-edge midpoints, equal radii
-    holes = [e for e in root.iter(SVG_NS + "circle") if e.get("class") == "pocket-hole"]
-    assert len({e.get("r") for e in holes}) == 1
-    centers = sorted((float(e.get("cx")), float(e.get("cy"))) for e in holes)
-    want = sorted(sd._px(*p) for p in sc.POCKETS.values())
-    assert centers == pytest.approx(want, abs=1e-6)
-    assert sorted(sc.POCKETS.values()) == sorted([(0.0, 0.0), (50.0, 0.0), (100.0, 0.0), (0.0, 50.0), (50.0, 50.0), (100.0, 50.0)])
-    assert sc.POCKET_MOUTHS is sc.POCKETS
-    # the object-ball line ends at the pocket point on the cloth edge
+                     + [("P", pts[p][ax]) for p in pids], key=lambda t: t[1])
+        assert seq[0][0] == "P" and seq[-1][0] == "P"
+        for a, b in zip(seq, seq[1:]):
+            assert b[1] - a[1] == pytest.approx(step, abs=1.0), rail
+    # side holes are centered on x = 50 exactly; corner holes are offset by a fixed, small amount
+    for pid, g in groups.items():
+        hx, hy = (float(_hole(g).get(k)) for k in ("data-cx", "data-cy"))
+        if pid.startswith("side"):
+            assert hx == pytest.approx(pts[pid][0], abs=1e-6)
+        else:
+            assert abs(hx - pts[pid][0]) == pytest.approx(sd.CORNER_HOLE_OFFSET_IN * sd.SCALE, abs=1e-6)
+    # object line ends at the pocket point on the cloth edge
     line = _by_class(root, "line", "object-path")[0]
     assert (float(line.get("x2")), float(line.get("y2"))) == pytest.approx(sd._px(100, 50), abs=0.01)
-    # prompt file is the verbatim standing instruction again
-    assert "grid rule" not in sc.PROMPT_PATH.read_text(encoding="utf-8")
+
+
+def test_cushions_are_six_pieces_with_angled_ends():
+    root = _svg_root(sc.validate_sotd(EXAMPLE, render_diagram=True))
+    cushions = _by_class(root, "polygon", "cushion")
+    assert len(cushions) == 6
+    for cu in cushions:
+        pts = [tuple(map(float, q.split(","))) for q in cu.get("points").split()]
+        assert len(pts) == 4
+        nose_a, nose_b, back_b, back_a = pts
+        long = cu.get("data-rail").startswith("long")
+        ax = 0 if long else 1
+        # both ends are cut at an angle (nose and back end at different positions along the rail)
+        assert abs(nose_a[ax] - back_a[ax]) > 1.0 and abs(nose_b[ax] - back_b[ax]) > 1.0
