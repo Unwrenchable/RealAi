@@ -389,10 +389,12 @@ def test_svg_well_formed_with_exact_balls_ghost_tangent():
     assert len(_by_class(root, "line", "cue-path")) == 1
     assert len(_by_class(root, "line", "object-path")) == 1
     assert len(_by_class(root, "line", "pocket-arrow")) == 1
-    assert len(_by_class(root, "circle", "pocket")) == 6
-    # cue ball unlabeled; true-scale positions (x+6)*10, (y+6)*10
+    pockets = [e for e in root.iter() if "pocket" in (e.get("class") or "").split()]
+    assert sorted(e.get("data-pocket") for e in pockets) == sorted(sc.POCKETS)
+    # cue ball unlabeled; true-scale position through the shared transform
     cue_c = cues[0].find(SVG_NS + "circle")
-    assert (float(cue_c.get("cx")), float(cue_c.get("cy")), float(cue_c.get("r"))) == (340.0, 240.0, 11.25)
+    assert (float(cue_c.get("cx")), float(cue_c.get("cy"))) == pytest.approx(sd._px(28, 18), abs=0.01)
+    assert float(cue_c.get("r")) == pytest.approx(sd.BALL_R * sd.SCALE)
     assert cues[0].find(SVG_NS + "text") is None
     label = "".join(_by_class(root, "g", "tangent-label")[0].itertext())
     assert label == "center medium"
@@ -404,9 +406,73 @@ def test_svg_called_pocket_arrow_points_at_called_pocket():
     r = sc.validate_sotd(EXAMPLE, render_diagram=True)
     arrow = _by_class(_svg_root(r), "line", "pocket-arrow")[0]
     x1, y1, x2, y2 = (float(arrow.get(k)) for k in ("x1", "y1", "x2", "y2"))
-    px, py = (100 + 6) * 10, (50 + 6) * 10  # corner_foot_right
+    px, py = sd._px(100, 50)  # corner_foot_right
     assert math.dist((x2, y2), (px, py)) < math.dist((x1, y1), (px, py))
-    assert 0 <= x1 <= 1120 and 0 <= y1 <= 620  # inside the drawn frame
+    assert 0 <= x1 <= sd.CANVAS_W and 0 <= y1 <= sd.CANVAS_H  # inside the canvas
+
+
+def _poly_center(el):
+    pts = [tuple(map(float, p.split(","))) for p in el.get("points").split()]
+    return (sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts))
+
+
+def test_svg_diamonds_real_nine_foot_layout():
+    r = sc.validate_sotd(EXAMPLE, render_diagram=True)
+    root = _svg_root(r)
+    diamonds = _by_class(root, "polygon", "diamond")
+    assert len(diamonds) == 18
+    by_rail = {}
+    for d in diamonds:
+        by_rail.setdefault(d.get("data-rail"), []).append(d)
+    assert {k: len(v) for k, v in by_rail.items()} == {
+        "long_left": 6, "long_right": 6, "short_head": 3, "short_foot": 3,
+    }
+    off = sd.DIAMOND_OFFSET_IN
+    assert sd.CUSHION_IN < off < sd.RAIL_IN  # on the wood, not the cushion
+    for rail, els in by_rail.items():
+        for d in els:
+            at = float(d.get("data-at"))
+            want = {
+                "long_left": (at, -off), "long_right": (at, 50 + off),
+                "short_head": (-off, at), "short_foot": (100 + off, at),
+            }[rail]
+            got = _poly_center(d)
+            assert got == pytest.approx(sd._px(*want), abs=0.5), (rail, at)
+            assert (float(d.get("data-cx")), float(d.get("data-cy"))) == pytest.approx(sd._px(*want), abs=0.5)
+        ats = sorted(float(d.get("data-at")) for d in els)
+        if rail.startswith("long"):
+            assert ats == [12.5, 25, 37.5, 62.5, 75, 87.5]
+            assert 50 not in ats  # side pocket, no diamond
+            # equal spacing (12.5 in = 125 px) on each side of the side pocket, 25 in across it
+            xs = sorted(_poly_center(d)[0] for d in els)
+            gaps = [round(b - a, 2) for a, b in zip(xs, xs[1:])]
+            assert gaps == pytest.approx([125, 125, 250, 125, 125], abs=0.5)
+        else:
+            assert ats == [12.5, 25, 37.5]
+            ys = sorted(_poly_center(d)[1] for d in els)
+            assert [b - a for a, b in zip(ys, ys[1:])] == pytest.approx([125, 125], abs=0.5)
+    # a ball at x=25 lines up with the x=25 diamonds
+    assert sd._px(25, 10)[0] == pytest.approx(_poly_center(by_rail["long_left"][1])[0], abs=0.5)
+    # no diamond at a corner
+    for d in diamonds:
+        assert float(d.get("data-at")) not in (0.0, 50.0, 100.0)
+
+
+def test_svg_head_string_and_debug_grid():
+    r = sc.validate_sotd(EXAMPLE, render_diagram=True)
+    root = _svg_root(r)
+    hs = _by_class(root, "line", "head-string")
+    assert len(hs) == 1 and float(hs[0].get("x1")) == pytest.approx(sd._px(25, 0)[0])
+    assert _by_class(root, "line", "debug-grid") == []
+    m, _ = sc.normalize_map(r["map"])
+    dbg = ET.fromstring(sd.render_sotd_svg(m, sc.analyze(m), debug_grid=True))
+    assert len(_by_class(dbg, "line", "debug-grid")) == 9
+
+
+def test_object_path_uses_object_ball_color():
+    r = sc.validate_sotd(EXAMPLE, render_diagram=True)
+    line = _by_class(_svg_root(r), "line", "object-path")[0]
+    assert line.get("stroke") == sd.BALL_HEX[1]
 
 
 def test_svg_follow_draw_and_straight():

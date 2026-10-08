@@ -6,26 +6,35 @@ The SVG is a render of the *validated* map and is not evidence: nobody should
 read a cut angle back out of it. ``sotd_checker.validate_sotd`` calls this only
 after ``ok`` is true (after any fixes).
 
-Frame
------
+Frame and transform
+-------------------
 This uses the same ``x_long`` frame as ``sotd_checker``. The 100 x 50 in
-playing surface is drawn at ``SCALE`` px per inch, with the head rail on the
-left and y growing downward. Balls are true scale (radius 1.125 in).
+playing surface (cushion nose to cushion nose) has the head rail on the left
+and y growing downward. ``_px`` is the single transform from playing-surface
+inches to pixels, and balls, lines, pockets and diamonds all go through it.
 
-What is drawn (and nothing else):
+Table style: dark walnut rails with a thin brass outer trim, a darker cushion
+strip, dark green cloth with a radial vignette, a faint dashed head string at
+x = 25, black pocket mouths cut into the rail (angled corners, half-circle
+sides), and mother-of-pearl diamond inlays.
 
-* the green cloth, wooden rails, and the six pockets at the documented centers
-* the cue ball (white, unlabeled) and every object ball in the map, in
-  standard colors with numbers; 9-15 are drawn as a white ball with a color
-  band
-* a solid line from the cue center to the ghost center, and the ghost ball as
-  a dashed outline
-* a solid line from the object ball to the called pocket
-* a dashed tangent from the ghost on the cue-ball exit side, labeled
-  ``<tip> <speed>``. follow adds a short forward arrow and draw a short back
-  arrow along the shot line. A straight-in center hit has no tangent; only
-  the label is drawn.
-* a small arrow in the rail pointing at the called pocket
+Diamonds (real 9-ft layout)
+---------------------------
+Diamonds are measured from the pocket center points, so they split the
+playing length into 8 equal parts and the width into 4:
+
+* long rails: x = 12.5, 25, 37.5, 62.5, 75, 87.5. 50 is the side pocket, so no
+  diamond there. That is 6 per long rail.
+* short rails: y = 12.5, 25, 37.5, 3 per short rail.
+* 18 total, none at corners. Each sits on the middle of the wood rail:
+  ``CUSHION_IN + WOOD_IN / 2`` outside the cushion nose.
+
+What is drawn from the map (and nothing else): the cue ball (white,
+unlabeled); every object ball in standard colors with numbers (9-15 as a white
+ball with a color band); a cream line from the cue to the ghost; the ghost as a
+dashed outline; a line from the object ball to the called pocket in the object
+ball's color; a dashed tangent labeled ``<tip> <speed>``; a follow (forward) or
+draw (back) arrow; and an arrow pointing at the called pocket.
 """
 from __future__ import annotations
 
@@ -38,25 +47,39 @@ from typing import Any, Optional
 from xml.sax.saxutils import escape
 
 SCALE = 10.0  # px per inch
-RAIL_IN = 6.0  # rail + frame width drawn around the playing surface (in)
 TABLE_LONG = 100.0
 TABLE_SHORT = 50.0
 BALL_R = 1.125
-CORNER_POCKET_R = 2.4
-SIDE_POCKET_R = 2.2
+CUSHION_IN = 1.75  # cushion rubber, nose to wood
+WOOD_IN = 4.0  # visible wood rail
+RAIL_IN = CUSHION_IN + WOOD_IN  # 5.75 in total rail (real 9-ft: ~5-6 in)
+MARGIN_IN = 2.5  # transparent margin outside the table (holds the pocket arrow)
+OUTER_RX_IN = 1.4  # rounded outer rail corners
+DIAMOND_OFFSET_IN = CUSHION_IN + WOOD_IN / 2.0  # diamond centers: middle of the wood
+DIAMOND_ALONG_IN = 0.7  # rhombus half-diagonal along the rail
+DIAMOND_ACROSS_IN = 0.4  # rhombus half-diagonal across the rail
+LONG_DIAMONDS_X = (12.5, 25.0, 37.5, 62.5, 75.0, 87.5)
+SHORT_DIAMONDS_Y = (12.5, 25.0, 37.5)
+HEAD_STRING_X = TABLE_LONG / 4.0
 TANGENT_LEN_IN = 15.0
 SPIN_ARROW_IN = 6.0
-POCKET_ARROW_OUT_IN = 5.6  # side pockets: arrow tail distance from the pocket center (in)
-POCKET_ARROW_OUT_CORNER_IN = 7.0  # corners: along the diagonal, still inside the rounded frame
-POCKET_ARROW_TIP_IN = 2.9  # arrow tip stops just outside the pocket circle
+# Pocket arrows start in the margin and stop just short of the pocket mouth.
+POCKET_ARROW_SIDE = (RAIL_IN + 1.8, 5.0)  # (tail, tip) distance from pocket center
+POCKET_ARROW_CORNER = (RAIL_IN * math.sqrt(2) + 2.0, 4.2)  # along the diagonal
 
-CLOTH = "#0f6b3a"
-CLOTH_EDGE = "#0b5a30"
-RAIL = "#5a3a1e"
-RAIL_EDGE = "#3d2712"
-POCKET = "#0a0a0a"
-CUE_PATH = "#ffffff"
-OBJ_PATH = "#ffe066"
+WOOD_DARK = "#33190a"
+WOOD_MID = "#43230f"
+WOOD_LIGHT = "#512d15"
+BRASS = "#c9a24a"
+CUSHION = "#0b4a28"
+CUSHION_NOSE = "#06331b"
+CLOTH_CENTER = "#1d7a45"
+CLOTH_EDGE = "#0c5130"
+POCKET = "#050505"
+POCKET_LINER = "#1a1a1a"
+PEARL = "#f2ead6"
+PEARL_EDGE = "#b8a77f"
+CUE_PATH = "#f5efd9"
 TANGENT = "#8fd8ff"
 SPIN = "#ffb347"
 MARK = "#ff4d4d"
@@ -84,14 +107,34 @@ POCKETS: dict[str, tuple[float, float]] = {
     "corner_foot_right": (TABLE_LONG, TABLE_SHORT),
 }
 
+CANVAS_W = (TABLE_LONG + 2 * (RAIL_IN + MARGIN_IN)) * SCALE
+CANVAS_H = (TABLE_SHORT + 2 * (RAIL_IN + MARGIN_IN)) * SCALE
+
 
 def _px(x: float, y: float) -> tuple[float, float]:
-    return ((x + RAIL_IN) * SCALE, (y + RAIL_IN) * SCALE)
+    """Playing-surface inches -> SVG pixels (the single transform)."""
+    return ((x + RAIL_IN + MARGIN_IN) * SCALE, (y + RAIL_IN + MARGIN_IN) * SCALE)
 
 
 def _f(v: float) -> str:
     s = f"{v:.2f}".rstrip("0").rstrip(".")
     return "0" if s in ("-0", "") else s
+
+
+def diamond_positions() -> list[dict[str, Any]]:
+    """The 18 diamonds in playing-surface inches (rail centerline of the wood).
+
+    ``at`` is the playing-surface coordinate the diamond marks; (x, y) is where
+    it is drawn (outside the cushion nose)."""
+    o = DIAMOND_OFFSET_IN
+    out: list[dict[str, Any]] = []
+    for x in LONG_DIAMONDS_X:
+        out.append({"rail": "long_left", "at": x, "x": x, "y": -o})
+        out.append({"rail": "long_right", "at": x, "x": x, "y": TABLE_SHORT + o})
+    for y in SHORT_DIAMONDS_Y:
+        out.append({"rail": "short_head", "at": y, "x": -o, "y": y})
+        out.append({"rail": "short_foot", "at": y, "x": TABLE_LONG + o, "y": y})
+    return out
 
 
 def _clip_ray(p: tuple[float, float], d: tuple[float, float], cap: float) -> float:
@@ -106,7 +149,7 @@ def _clip_ray(p: tuple[float, float], d: tuple[float, float], cap: float) -> flo
 
 
 def _line(a: tuple[float, float], b: tuple[float, float], color: str, width: float,
-          *, dash: str = "", marker: str = "", cls: str = "", pfx: str = "") -> str:
+          *, dash: str = "", marker: str = "", cls: str = "", pfx: str = "", opacity: float = 1.0) -> str:
     ax, ay = _px(*a)
     bx, by = _px(*b)
     extra = ""
@@ -116,19 +159,90 @@ def _line(a: tuple[float, float], b: tuple[float, float], color: str, width: flo
         extra += f' marker-end="url(#{pfx}{marker})"'
     if cls:
         extra += f' class="{cls}"'
+    if opacity < 1.0:
+        extra += f' stroke-opacity="{_f(opacity)}"'
     return (
         f'<line x1="{_f(ax)}" y1="{_f(ay)}" x2="{_f(bx)}" y2="{_f(by)}" '
         f'stroke="{color}" stroke-width="{_f(width)}" stroke-linecap="round"{extra}/>'
     )
 
 
+def _path_local(origin: tuple[float, float], dx: int, dy: int, cmds: list[tuple]) -> str:
+    """Build a path in pocket-local inches. +x/+y point into the table along
+    (dx, dy). Arc sweep flips when the mapping is a reflection."""
+    flip = (dx * dy) < 0
+    parts: list[str] = []
+    for c in cmds:
+        if c[0] in ("M", "L"):
+            X, Y = _px(origin[0] + dx * c[1], origin[1] + dy * c[2])
+            parts.append(f"{c[0]}{_f(X)},{_f(Y)}")
+        elif c[0] == "A":
+            _, r, large, sweep, lx, ly = c
+            X, Y = _px(origin[0] + dx * lx, origin[1] + dy * ly)
+            sw = (1 - sweep) if flip else sweep
+            parts.append(f"A{_f(r * SCALE)},{_f(r * SCALE)} 0 {large} {sw} {_f(X)},{_f(Y)}")
+        elif c[0] == "Z":
+            parts.append("Z")
+    return " ".join(parts)
+
+
+def _corner_pocket(pid: str, X: float, Y: float) -> str:
+    dx = 1 if X == 0 else -1
+    dy = 1 if Y == 0 else -1
+    # Angled jaws cut through the cushion; round hole tucked into the rail corner.
+    # Local frame: x along the end rail into the table, y along the side rail.
+    jb = (1.55, -CUSHION_IN - 0.15)  # jaw back on the end rail; mirrored on the side rail
+    r = math.hypot(jb[0] - jb[1], jb[1] - jb[0]) / 2.0  # semicircle across the two jaw backs
+    cmds = [
+        ("M", 3.0, 0.0),
+        ("L", jb[0], jb[1]),
+        ("A", r, 0, 0, jb[1], jb[0]),
+        ("L", 0.0, 3.0),
+        ("Z",),
+    ]
+    d = _path_local((X, Y), dx, dy, cmds)
+    return f'<path class="pocket" data-pocket="{pid}" d="{d}" fill="{POCKET}" stroke="{POCKET_LINER}" stroke-width="1"/>'
+
+
+def _side_pocket(pid: str, X: float, Y: float) -> str:
+    dy = 1 if Y == 0 else -1
+    # Half-circle mouth into the long rail; local +y points into the table.
+    cmds = [
+        ("M", -2.6, 0.0),
+        ("L", -2.2, -CUSHION_IN),
+        ("A", 2.2, 0, 1, 2.2, -CUSHION_IN),  # semicircle into the long rail
+        ("L", 2.6, 0.0),
+        ("Z",),
+    ]
+    d = _path_local((X, Y), 1, dy, cmds)
+    return f'<path class="pocket" data-pocket="{pid}" d="{d}" fill="{POCKET}" stroke="{POCKET_LINER}" stroke-width="1"/>'
+
+
+def _diamond(dm: dict[str, Any]) -> str:
+    cx, cy = _px(dm["x"], dm["y"])
+    along = DIAMOND_ALONG_IN * SCALE
+    across = DIAMOND_ACROSS_IN * SCALE
+    if dm["rail"].startswith("long"):
+        ax, ay = along, across
+    else:
+        ax, ay = across, along
+    pts = f"{_f(cx - ax)},{_f(cy)} {_f(cx)},{_f(cy - ay)} {_f(cx + ax)},{_f(cy)} {_f(cx)},{_f(cy + ay)}"
+    return (
+        f'<polygon class="diamond" data-rail="{dm["rail"]}" data-at="{_f(dm["at"])}" '
+        f'data-cx="{_f(cx)}" data-cy="{_f(cy)}" points="{pts}" '
+        f'fill="{PEARL}" stroke="{PEARL_EDGE}" stroke-width="0.6"/>'
+    )
+
+
 def _ball(n: Optional[int], x: float, y: float, pfx: str = "") -> str:
     cx, cy = _px(x, y)
     r = BALL_R * SCALE
+    shade = f'<circle cx="{_f(cx)}" cy="{_f(cy)}" r="{_f(r)}" fill="url(#{pfx}ball-shade)"/>'
     if n is None:  # cue ball: plain white, unlabeled
         return (
             f'<g class="ball cue" data-ball="cue">'
-            f'<circle cx="{_f(cx)}" cy="{_f(cy)}" r="{_f(r)}" fill="#fbfbf5" stroke="#222" stroke-width="0.8"/>'
+            f'<circle cx="{_f(cx)}" cy="{_f(cy)}" r="{_f(r)}" fill="#fbfbf5"/>{shade}'
+            f'<circle cx="{_f(cx)}" cy="{_f(cy)}" r="{_f(r)}" fill="none" stroke="#1a1a1a" stroke-width="0.8"/>'
             f"</g>"
         )
     color = BALL_HEX.get(n, "#888888")
@@ -144,7 +258,8 @@ def _ball(n: Optional[int], x: float, y: float, pfx: str = "") -> str:
     else:
         parts.append(f'<circle cx="{_f(cx)}" cy="{_f(cy)}" r="{_f(r)}" fill="{color}"/>')
     parts.append(
-        f'<circle cx="{_f(cx)}" cy="{_f(cy)}" r="{_f(r)}" fill="none" stroke="#222" stroke-width="0.8"/>'
+        shade
+        + f'<circle cx="{_f(cx)}" cy="{_f(cy)}" r="{_f(r)}" fill="none" stroke="#1a1a1a" stroke-width="0.8"/>'
         f'<circle cx="{_f(cx)}" cy="{_f(cy)}" r="{_f(r * 0.5)}" fill="#fbfbf5"/>'
         f'<text x="{_f(cx)}" y="{_f(cy)}" font-family="Arial, Helvetica, sans-serif" font-size="{_f(r * 0.78)}" '
         f'font-weight="bold" fill="#111" text-anchor="middle" dominant-baseline="central">{n}</text>'
@@ -153,8 +268,57 @@ def _ball(n: Optional[int], x: float, y: float, pfx: str = "") -> str:
     return "".join(parts)
 
 
-def render_sotd_svg(m: dict[str, Any], a: dict[str, Any]) -> str:
-    """Render a validated map. ``a`` is ``sotd_checker.analyze(m)`` output."""
+def _table(pfx: str, *, debug_grid: bool = False) -> list[str]:
+    out: list[str] = []
+    m = MARGIN_IN * SCALE
+    tw = (TABLE_LONG + 2 * RAIL_IN) * SCALE
+    th = (TABLE_SHORT + 2 * RAIL_IN) * SCALE
+    rx = OUTER_RX_IN * SCALE
+    sx, sy = _px(0, 0)
+    out.append(
+        f'<rect class="rail" x="{_f(m)}" y="{_f(m)}" width="{_f(tw)}" height="{_f(th)}" rx="{_f(rx)}" '
+        f'fill="url(#{pfx}wood)"/>'
+    )
+    # brass trim: outer edge + a hairline just inside it
+    out.append(
+        f'<rect class="trim" x="{_f(m + 1)}" y="{_f(m + 1)}" width="{_f(tw - 2)}" height="{_f(th - 2)}" rx="{_f(rx)}" '
+        f'fill="none" stroke="{BRASS}" stroke-width="2"/>'
+    )
+    out.append(
+        f'<rect class="trim-inner" x="{_f(m + 5)}" y="{_f(m + 5)}" width="{_f(tw - 10)}" height="{_f(th - 10)}" '
+        f'rx="{_f(max(rx - 4, 0))}" fill="none" stroke="{BRASS}" stroke-opacity="0.35" stroke-width="0.8"/>'
+    )
+    # cushion strip, then cloth with vignette
+    cx0, cy0 = _px(-CUSHION_IN, -CUSHION_IN)
+    out.append(
+        f'<rect class="cushion" x="{_f(cx0)}" y="{_f(cy0)}" width="{_f((TABLE_LONG + 2 * CUSHION_IN) * SCALE)}" '
+        f'height="{_f((TABLE_SHORT + 2 * CUSHION_IN) * SCALE)}" fill="{CUSHION}"/>'
+    )
+    out.append(
+        f'<rect class="cloth" x="{_f(sx)}" y="{_f(sy)}" width="{_f(TABLE_LONG * SCALE)}" '
+        f'height="{_f(TABLE_SHORT * SCALE)}" fill="url(#{pfx}cloth)" stroke="{CUSHION_NOSE}" stroke-width="1.5"/>'
+    )
+    # head string (faint, dashed) at the 1/4 line from the head rail
+    out.append(_line((HEAD_STRING_X, 0), (HEAD_STRING_X, TABLE_SHORT), "#ffffff", 1.0,
+                     dash="6 7", cls="head-string", opacity=0.22))
+    if debug_grid:
+        for x in LONG_DIAMONDS_X:
+            out.append(_line((x, -DIAMOND_OFFSET_IN), (x, TABLE_SHORT + DIAMOND_OFFSET_IN), "#ff66ff", 0.8,
+                             cls="debug-grid", opacity=0.55))
+        for y in SHORT_DIAMONDS_Y:
+            out.append(_line((-DIAMOND_OFFSET_IN, y), (TABLE_LONG + DIAMOND_OFFSET_IN, y), "#ff66ff", 0.8,
+                             cls="debug-grid", opacity=0.55))
+    for dm in diamond_positions():
+        out.append(_diamond(dm))
+    for pid, (X, Y) in POCKETS.items():
+        out.append(_corner_pocket(pid, X, Y) if pid.startswith("corner") else _side_pocket(pid, X, Y))
+    return out
+
+
+def render_sotd_svg(m: dict[str, Any], a: dict[str, Any], *, debug_grid: bool = False) -> str:
+    """Render a validated map. ``a`` is ``sotd_checker.analyze(m)`` output.
+
+    ``debug_grid`` draws faint lines through every diamond (alignment check)."""
     geo = a["geometry"]
     ghost = geo["_ghost"]
     t = geo["_t"]
@@ -164,53 +328,55 @@ def render_sotd_svg(m: dict[str, Any], a: dict[str, Any]) -> str:
     obj = next(b for b in m["balls"] if b["n"] == called["ball"])
     tip = m["stroke"]["tip"]
     speed = m["stroke"]["speed"]
-    W = (TABLE_LONG + 2 * RAIL_IN) * SCALE
-    H = (TABLE_SHORT + 2 * RAIL_IN) * SCALE
     sx, sy = _px(0, 0)
     pfx = f"sotd-{safe_id(m.get('id'))}-"  # unique ids if several SVGs share a page
 
     out: list[str] = []
     out.append(
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {_f(W)} {_f(H)}" '
-        f'width="{_f(W)}" height="{_f(H)}" data-axis="x_long" data-renderer="sotd_svg_v1">'
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {_f(CANVAS_W)} {_f(CANVAS_H)}" '
+        f'width="{_f(CANVAS_W)}" height="{_f(CANVAS_H)}" data-axis="x_long" data-renderer="sotd_svg_v2" '
+        f'data-scale="{_f(SCALE)}" data-origin-x="{_f(sx)}" data-origin-y="{_f(sy)}">'
     )
     out.append(f"<title>{escape(str(m.get('id') or 'sotd'))}</title>")
     out.append(
         "<defs>"
-        f'<marker id="{pfx}arrow-pocket" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">'
+        f'<linearGradient id="{pfx}wood" x1="0" y1="0" x2="1" y2="1">'
+        f'<stop offset="0" stop-color="{WOOD_LIGHT}"/><stop offset="0.5" stop-color="{WOOD_MID}"/>'
+        f'<stop offset="1" stop-color="{WOOD_DARK}"/></linearGradient>'
+        f'<radialGradient id="{pfx}cloth" cx="0.5" cy="0.5" r="0.62">'
+        f'<stop offset="0" stop-color="{CLOTH_CENTER}"/><stop offset="1" stop-color="{CLOTH_EDGE}"/></radialGradient>'
+        f'<radialGradient id="{pfx}ball-shade" cx="0.35" cy="0.3" r="0.75">'
+        f'<stop offset="0" stop-color="#ffffff" stop-opacity="0.45"/><stop offset="0.45" stop-color="#ffffff" stop-opacity="0"/>'
+        f'<stop offset="1" stop-color="#000000" stop-opacity="0.28"/></radialGradient>'
+        f'<marker id="{pfx}arrow-pocket" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">'
         f'<path d="M0,0 L10,5 L0,10 z" fill="{MARK}"/></marker>'
         f'<marker id="{pfx}arrow-spin" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">'
         f'<path d="M0,0 L10,5 L0,10 z" fill="{SPIN}"/></marker>'
         "</defs>"
     )
-    # table
-    out.append(f'<rect class="rail" x="0" y="0" width="{_f(W)}" height="{_f(H)}" rx="{_f(2.5 * SCALE)}" fill="{RAIL}" stroke="{RAIL_EDGE}" stroke-width="3"/>')
-    out.append(
-        f'<rect class="cloth" x="{_f(sx)}" y="{_f(sy)}" width="{_f(TABLE_LONG * SCALE)}" '
-        f'height="{_f(TABLE_SHORT * SCALE)}" fill="{CLOTH}" stroke="{CLOTH_EDGE}" stroke-width="2"/>'
-    )
-    for pid, (px_, py_) in POCKETS.items():
-        cx, cy = _px(px_, py_)
-        r = (CORNER_POCKET_R if pid.startswith("corner") else SIDE_POCKET_R) * SCALE
-        out.append(f'<circle class="pocket" data-pocket="{pid}" cx="{_f(cx)}" cy="{_f(cy)}" r="{_f(r)}" fill="{POCKET}"/>')
+    out.extend(_table(pfx, debug_grid=debug_grid))
 
-    # called-pocket arrow, in the rail, pointing at the pocket
+    # called-pocket arrow: from the margin, across the trim, toward the mouth
     ox = pocket[0] - TABLE_LONG / 2.0
     oy = pocket[1] - TABLE_SHORT / 2.0
     on = (1.0 if ox > 0 else -1.0 if ox < 0 else 0.0, 1.0 if oy > 0 else -1.0 if oy < 0 else 0.0)
     nrm = math.hypot(*on) or 1.0
     on = (on[0] / nrm, on[1] / nrm)
-    # Keep the whole arrow inside the drawn frame (corners run on the diagonal).
-    tail = POCKET_ARROW_OUT_IN if (on[0] == 0 or on[1] == 0) else POCKET_ARROW_OUT_CORNER_IN
+    tail, tipd = POCKET_ARROW_SIDE if (on[0] == 0 or on[1] == 0) else POCKET_ARROW_CORNER
     a_start = (pocket[0] + on[0] * tail, pocket[1] + on[1] * tail)
-    a_end = (pocket[0] + on[0] * POCKET_ARROW_TIP_IN, pocket[1] + on[1] * POCKET_ARROW_TIP_IN)
+    a_end = (pocket[0] + on[0] * tipd, pocket[1] + on[1] * tipd)
+    out.append(_line(a_start, a_end, "#000000", 6.5, cls="pocket-arrow-halo", opacity=0.45))
     out.append(_line(a_start, a_end, MARK, 4.0, marker="arrow-pocket", cls="pocket-arrow", pfx=pfx))
 
     # paths
     cue = (float(m["cue"]["x"]), float(m["cue"]["y"]))
     O = (float(obj["x"]), float(obj["y"]))
-    out.append(_line(cue, ghost, CUE_PATH, 2.0, cls="cue-path"))
-    out.append(_line(O, pocket, OBJ_PATH, 2.0, cls="object-path"))
+    obj_color = BALL_HEX.get(int(obj["n"]), "#ffe066")
+    halo = "#f5efd9" if int(obj["n"]) == 8 else "#000000"
+    out.append(_line(cue, ghost, "#000000", 4.0, cls="cue-path-halo", opacity=0.3))
+    out.append(_line(cue, ghost, CUE_PATH, 2.2, cls="cue-path"))
+    out.append(_line(O, pocket, halo, 4.2, cls="object-path-halo", opacity=0.45))
+    out.append(_line(O, pocket, obj_color, 2.4, cls="object-path"))
 
     label = f"{tip} {speed}"
     label_w = 7.2 * len(label) + 10
@@ -257,7 +423,7 @@ def render_sotd_svg(m: dict[str, Any], a: dict[str, Any]) -> str:
     )
     for b in sorted(m["balls"], key=lambda x: x["n"]):
         out.append(_ball(int(b["n"]), float(b["x"]), float(b["y"]), pfx))
-    out.append(_ball(None, *cue))
+    out.append(_ball(None, *cue, pfx))
     out.append("</svg>")
     return "".join(out)
 
@@ -300,6 +466,7 @@ def svg_to_png(svg: str) -> Optional[bytes]:
 
 
 __all__ = [
+    "diamond_positions",
     "render_sotd_svg",
     "svg_data_uri",
     "save_svg",
