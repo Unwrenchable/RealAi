@@ -56,7 +56,9 @@ diagram prompt. Travis's standing instruction is saved verbatim in
   `sotd_diagram.py` draws the validated map as a deterministic SVG. It is pure Python string building
   with no dependencies and no network. The SVG shows the table, true-scale balls (stripes as a white ball
   with a color band), the cue-to-ghost line, the dashed ghost, the object-to-pocket line, a dashed tangent
-  labeled `<tip> <speed>`, a follow/draw arrow, and an arrow at the called pocket. The result carries
+  labeled `<tip> <speed>`, a follow/draw arrow (or a stop bar on a straight-in center hit), and an arrow
+  at the called pocket. `show_grid: true` adds the faint 8 x 4 diamond grid (32 equal 12.5 in squares;
+  the x = 50 line runs side pocket to side pocket). The result carries
   `diagram_svg` (raw SVG), `diagram` (`data:image/svg+xml;base64,...`) and `diagram_backend`.
   With `save_diagram: true` the SVG is also written to
   `$REALAI_DATA_DIR/rackup_coach/sotd/<id>.svg` (default `~/.realai`), and the path comes back as `diagram_path`.

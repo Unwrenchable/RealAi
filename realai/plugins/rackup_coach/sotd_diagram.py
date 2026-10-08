@@ -15,8 +15,18 @@ inches to pixels, and balls, lines, pockets and diamonds all go through it.
 
 Table style: dark walnut rails with a thin brass outer trim, a darker cushion
 strip, dark green cloth with a radial vignette, a faint dashed head string at
-x = 25, black pocket mouths cut into the rail (angled corners, half-circle
-sides), and mother-of-pearl diamond inlays.
+x = 25, round pocket holes cut into the rail with straight, symmetric jaw cuts
+through the cushion, and mother-of-pearl diamond inlays.
+
+Diamond grid
+------------
+On a 9-ft table the diamonds are 12.5 in apart both ways (100 / 8 = 50 / 4),
+so the diamond lines cut the cloth into an 8 x 4 grid of 32 identical squares.
+``grid_lines()`` gives x = 12.5 ... 87.5 (including x = 50, which runs side
+pocket to side pocket and has no diamond) and y = 12.5, 25, 37.5; the cloth
+edges are the outer boundary. ``_px`` uses one ``SCALE`` for both axes, so the
+squares stay square in pixels. ``show_grid=True`` draws it faintly in a normal
+render; ``debug_grid=True`` draws it bold and extends it out to the diamonds.
 
 Diamonds (real 9-ft layout)
 ---------------------------
@@ -53,19 +63,38 @@ BALL_R = 1.125
 CUSHION_IN = 1.75  # cushion rubber, nose to wood
 WOOD_IN = 4.0  # visible wood rail
 RAIL_IN = CUSHION_IN + WOOD_IN  # 5.75 in total rail (real 9-ft: ~5-6 in)
-MARGIN_IN = 2.5  # transparent margin outside the table (holds the pocket arrow)
+MARGIN_IN = 3.5  # transparent margin outside the table (holds the pocket arrow)
 OUTER_RX_IN = 1.4  # rounded outer rail corners
 DIAMOND_OFFSET_IN = CUSHION_IN + WOOD_IN / 2.0  # diamond centers: middle of the wood
 DIAMOND_ALONG_IN = 0.7  # rhombus half-diagonal along the rail
 DIAMOND_ACROSS_IN = 0.4  # rhombus half-diagonal across the rail
 LONG_DIAMONDS_X = (12.5, 25.0, 37.5, 62.5, 75.0, 87.5)
 SHORT_DIAMONDS_Y = (12.5, 25.0, 37.5)
+GRID_STEP_IN = TABLE_LONG / 8.0  # 12.5 in, one diamond
+assert GRID_STEP_IN == TABLE_SHORT / 4.0  # square cells
+GRID_X = tuple(GRID_STEP_IN * i for i in range(1, 8))  # 12.5 ... 87.5, includes 50
+GRID_Y = tuple(GRID_STEP_IN * i for i in range(1, 4))  # 12.5, 25, 37.5
 HEAD_STRING_X = TABLE_LONG / 4.0
+# Corner pocket (pocket-local inches, +x/+y into the table along each rail):
+# cushion nose points at CORNER_MOUTH_IN from the cloth corner, straight jaw cuts
+# back to CORNER_JAW_BACK_IN at the wood (about 142 deg to the nose, like a real
+# corner jaw), and a round hole centered on the diagonal that the jaw backs land on.
+CORNER_MOUTH_IN = 3.2
+CORNER_JAW_BACK_IN = 1.8
+CORNER_HOLE_OFFSET_IN = 0.45
+CORNER_HOLE_R_IN = math.hypot(CORNER_JAW_BACK_IN + CORNER_HOLE_OFFSET_IN, CUSHION_IN - CORNER_HOLE_OFFSET_IN)
+SIDE_MOUTH_HALF_IN = 2.6  # side mouth ~5.2 in at the noses
+SIDE_JAW_BACK_HALF_IN = 2.3
+SIDE_HOLE_OFFSET_IN = 0.3  # hole center behind the cushion back
+SIDE_HOLE_R_IN = math.hypot(SIDE_JAW_BACK_HALF_IN, SIDE_HOLE_OFFSET_IN)
+STOP_BAR_IN = 3.4  # stop marker width across the shot line
 TANGENT_LEN_IN = 15.0
 SPIN_ARROW_IN = 6.0
 # Pocket arrows start in the margin and stop just short of the pocket mouth.
-POCKET_ARROW_SIDE = (RAIL_IN + 1.8, 5.0)  # (tail, tip) distance from pocket center
-POCKET_ARROW_CORNER = (RAIL_IN * math.sqrt(2) + 2.0, 4.2)  # along the diagonal
+POCKET_ARROW_SIDE = (RAIL_IN + 2.2, CUSHION_IN + SIDE_HOLE_OFFSET_IN + SIDE_HOLE_R_IN + 0.7)  # (tail, tip) from pocket center
+_CORNER_HOLE_REACH = CORNER_HOLE_OFFSET_IN * math.sqrt(2) + CORNER_HOLE_R_IN
+POCKET_ARROW_CORNER = (_CORNER_HOLE_REACH + 5.6, _CORNER_HOLE_REACH + 0.9)  # along the diagonal
+POCKET_ARROW_HALO_PX = 6.5
 
 WOOD_DARK = "#33190a"
 WOOD_MID = "#43230f"
@@ -77,6 +106,7 @@ CLOTH_CENTER = "#1d7a45"
 CLOTH_EDGE = "#0c5130"
 POCKET = "#050505"
 POCKET_LINER = "#1a1a1a"
+POCKET_SHELF = "#06301b"  # slate shelf inside the jaws
 PEARL = "#f2ead6"
 PEARL_EDGE = "#b8a77f"
 CUE_PATH = "#f5efd9"
@@ -137,6 +167,32 @@ def diamond_positions() -> list[dict[str, Any]]:
     return out
 
 
+def grid_lines() -> list[dict[str, Any]]:
+    """The diamond grid on the cloth, in playing-surface inches.
+
+    Seven x lines (including x = 50, side pocket to side pocket) and three y
+    lines. With the cloth edges they bound 32 equal 12.5 in squares."""
+    out: list[dict[str, Any]] = []
+    for x in GRID_X:
+        out.append({"axis": "x", "at": x, "a": (x, 0.0), "b": (x, TABLE_SHORT)})
+    for y in GRID_Y:
+        out.append({"axis": "y", "at": y, "a": (0.0, y), "b": (TABLE_LONG, y)})
+    return out
+
+
+def grid_cells_px() -> list[tuple[float, float, float, float]]:
+    """The 32 grid squares as pixel boxes (x0, y0, x1, y1) via ``_px``."""
+    xs = [0.0, *GRID_X, TABLE_LONG]
+    ys = [0.0, *GRID_Y, TABLE_SHORT]
+    cells = []
+    for j in range(len(ys) - 1):
+        for i in range(len(xs) - 1):
+            x0, y0 = _px(xs[i], ys[j])
+            x1, y1 = _px(xs[i + 1], ys[j + 1])
+            cells.append((x0, y0, x1, y1))
+    return cells
+
+
 def _clip_ray(p: tuple[float, float], d: tuple[float, float], cap: float) -> float:
     """Longest step <= cap from p along unit d that stays on the cloth."""
     s = cap
@@ -167,55 +223,61 @@ def _line(a: tuple[float, float], b: tuple[float, float], color: str, width: flo
     )
 
 
-def _path_local(origin: tuple[float, float], dx: int, dy: int, cmds: list[tuple]) -> str:
-    """Build a path in pocket-local inches. +x/+y point into the table along
-    (dx, dy). Arc sweep flips when the mapping is a reflection."""
-    flip = (dx * dy) < 0
-    parts: list[str] = []
-    for c in cmds:
-        if c[0] in ("M", "L"):
-            X, Y = _px(origin[0] + dx * c[1], origin[1] + dy * c[2])
-            parts.append(f"{c[0]}{_f(X)},{_f(Y)}")
-        elif c[0] == "A":
-            _, r, large, sweep, lx, ly = c
-            X, Y = _px(origin[0] + dx * lx, origin[1] + dy * ly)
-            sw = (1 - sweep) if flip else sweep
-            parts.append(f"A{_f(r * SCALE)},{_f(r * SCALE)} 0 {large} {sw} {_f(X)},{_f(Y)}")
-        elif c[0] == "Z":
-            parts.append("Z")
-    return " ".join(parts)
-
-
 def _corner_pocket(pid: str, X: float, Y: float) -> str:
+    """Round hole in the rail corner with straight, symmetric jaw cuts.
+
+    Local frame: +x along the end rail into the table, +y along the side rail,
+    both pointing into the table, so the shape is mirror-symmetric about the
+    diagonal by construction."""
     dx = 1 if X == 0 else -1
     dy = 1 if Y == 0 else -1
-    # Angled jaws cut through the cushion; round hole tucked into the rail corner.
-    # Local frame: x along the end rail into the table, y along the side rail.
-    jb = (1.55, -CUSHION_IN - 0.15)  # jaw back on the end rail; mirrored on the side rail
-    r = math.hypot(jb[0] - jb[1], jb[1] - jb[0]) / 2.0  # semicircle across the two jaw backs
-    cmds = [
-        ("M", 3.0, 0.0),
-        ("L", jb[0], jb[1]),
-        ("A", r, 0, 0, jb[1], jb[0]),
-        ("L", 0.0, 3.0),
-        ("Z",),
-    ]
-    d = _path_local((X, Y), dx, dy, cmds)
-    return f'<path class="pocket" data-pocket="{pid}" d="{d}" fill="{POCKET}" stroke="{POCKET_LINER}" stroke-width="1"/>'
+
+    def P(lx: float, ly: float) -> tuple[float, float]:
+        return _px(X + dx * lx, Y + dy * ly)
+
+    a, b, c, k = CORNER_MOUTH_IN, CORNER_JAW_BACK_IN, CUSHION_IN, CORNER_HOLE_OFFSET_IN
+    n1, b1, n2, b2 = P(a, 0), P(b, -c), P(0, a), P(-c, b)
+    shelf = [P(0, 0), n1, b1, P(-c, -c), b2, n2]
+    hx, hy = P(-k, -k)
+    r = CORNER_HOLE_R_IN * SCALE
+    pts = " ".join(f"{_f(px)},{_f(py)}" for px, py in shelf)
+    return (
+        f'<g class="pocket corner-pocket" data-pocket="{pid}">'
+        f'<polygon class="pocket-shelf" points="{pts}" fill="{POCKET_SHELF}"/>'
+        f'<line class="jaw" x1="{_f(n1[0])}" y1="{_f(n1[1])}" x2="{_f(b1[0])}" y2="{_f(b1[1])}" '
+        f'stroke="{CUSHION_NOSE}" stroke-width="1.5"/>'
+        f'<line class="jaw" x1="{_f(n2[0])}" y1="{_f(n2[1])}" x2="{_f(b2[0])}" y2="{_f(b2[1])}" '
+        f'stroke="{CUSHION_NOSE}" stroke-width="1.5"/>'
+        f'<circle class="pocket-hole" cx="{_f(hx)}" cy="{_f(hy)}" r="{_f(r)}" fill="{POCKET}" '
+        f'stroke="{POCKET_LINER}" stroke-width="1.2"/>'
+        f"</g>"
+    )
 
 
 def _side_pocket(pid: str, X: float, Y: float) -> str:
-    dy = 1 if Y == 0 else -1
-    # Half-circle mouth into the long rail; local +y points into the table.
-    cmds = [
-        ("M", -2.6, 0.0),
-        ("L", -2.2, -CUSHION_IN),
-        ("A", 2.2, 0, 1, 2.2, -CUSHION_IN),  # semicircle into the long rail
-        ("L", 2.6, 0.0),
-        ("Z",),
-    ]
-    d = _path_local((X, Y), 1, dy, cmds)
-    return f'<path class="pocket" data-pocket="{pid}" d="{d}" fill="{POCKET}" stroke="{POCKET_LINER}" stroke-width="1"/>'
+    """Same style as the corners: straight jaw cuts through the cushion and a
+    round hole in the long rail that the jaw backs land on. Symmetric about x = 50."""
+    dy = 1 if Y == 0 else -1  # local +y points into the table
+
+    def P(lx: float, ly: float) -> tuple[float, float]:
+        return _px(X + lx, Y + dy * ly)
+
+    a, b, c, k = SIDE_MOUTH_HALF_IN, SIDE_JAW_BACK_HALF_IN, CUSHION_IN, SIDE_HOLE_OFFSET_IN
+    n1, b1, n2, b2 = P(-a, 0), P(-b, -c), P(a, 0), P(b, -c)
+    pts = " ".join(f"{_f(px)},{_f(py)}" for px, py in (n1, b1, b2, n2))
+    hx, hy = P(0, -(c + k))
+    r = SIDE_HOLE_R_IN * SCALE
+    return (
+        f'<g class="pocket side-pocket" data-pocket="{pid}">'
+        f'<polygon class="pocket-shelf" points="{pts}" fill="{POCKET_SHELF}"/>'
+        f'<line class="jaw" x1="{_f(n1[0])}" y1="{_f(n1[1])}" x2="{_f(b1[0])}" y2="{_f(b1[1])}" '
+        f'stroke="{CUSHION_NOSE}" stroke-width="1.5"/>'
+        f'<line class="jaw" x1="{_f(n2[0])}" y1="{_f(n2[1])}" x2="{_f(b2[0])}" y2="{_f(b2[1])}" '
+        f'stroke="{CUSHION_NOSE}" stroke-width="1.5"/>'
+        f'<circle class="pocket-hole" cx="{_f(hx)}" cy="{_f(hy)}" r="{_f(r)}" fill="{POCKET}" '
+        f'stroke="{POCKET_LINER}" stroke-width="1.2"/>'
+        f"</g>"
+    )
 
 
 def _diamond(dm: dict[str, Any]) -> str:
@@ -268,7 +330,25 @@ def _ball(n: Optional[int], x: float, y: float, pfx: str = "") -> str:
     return "".join(parts)
 
 
-def _table(pfx: str, *, debug_grid: bool = False) -> list[str]:
+def _grid(*, debug: bool) -> list[str]:
+    out: list[str] = []
+    color, width, opacity = ("#ff66ff", 1.0, 0.75) if debug else ("#ffffff", 0.8, 0.13)
+    cls = "grid-line debug-grid" if debug else "grid-line"
+    for g in grid_lines():
+        el = _line(g["a"], g["b"], color, width, cls=cls, opacity=opacity)
+        out.append(el.replace("<line ", f'<line data-axis="{g["axis"]}" data-at="{_f(g["at"])}" ', 1))
+    if debug:  # extend each diamond line out to its diamonds (not into the side pockets)
+        o = DIAMOND_OFFSET_IN
+        for x in LONG_DIAMONDS_X:
+            out.append(_line((x, -o), (x, 0), color, width, cls="debug-tick", opacity=0.5))
+            out.append(_line((x, TABLE_SHORT), (x, TABLE_SHORT + o), color, width, cls="debug-tick", opacity=0.5))
+        for y in SHORT_DIAMONDS_Y:
+            out.append(_line((-o, y), (0, y), color, width, cls="debug-tick", opacity=0.5))
+            out.append(_line((TABLE_LONG, y), (TABLE_LONG + o, y), color, width, cls="debug-tick", opacity=0.5))
+    return out
+
+
+def _table(pfx: str, *, debug_grid: bool = False, show_grid: bool = False) -> list[str]:
     out: list[str] = []
     m = MARGIN_IN * SCALE
     tw = (TABLE_LONG + 2 * RAIL_IN) * SCALE
@@ -301,13 +381,8 @@ def _table(pfx: str, *, debug_grid: bool = False) -> list[str]:
     # head string (faint, dashed) at the 1/4 line from the head rail
     out.append(_line((HEAD_STRING_X, 0), (HEAD_STRING_X, TABLE_SHORT), "#ffffff", 1.0,
                      dash="6 7", cls="head-string", opacity=0.22))
-    if debug_grid:
-        for x in LONG_DIAMONDS_X:
-            out.append(_line((x, -DIAMOND_OFFSET_IN), (x, TABLE_SHORT + DIAMOND_OFFSET_IN), "#ff66ff", 0.8,
-                             cls="debug-grid", opacity=0.55))
-        for y in SHORT_DIAMONDS_Y:
-            out.append(_line((-DIAMOND_OFFSET_IN, y), (TABLE_LONG + DIAMOND_OFFSET_IN, y), "#ff66ff", 0.8,
-                             cls="debug-grid", opacity=0.55))
+    if debug_grid or show_grid:
+        out.extend(_grid(debug=debug_grid))
     for dm in diamond_positions():
         out.append(_diamond(dm))
     for pid, (X, Y) in POCKETS.items():
@@ -315,10 +390,13 @@ def _table(pfx: str, *, debug_grid: bool = False) -> list[str]:
     return out
 
 
-def render_sotd_svg(m: dict[str, Any], a: dict[str, Any], *, debug_grid: bool = False) -> str:
+def render_sotd_svg(m: dict[str, Any], a: dict[str, Any], *, debug_grid: bool = False,
+                    show_grid: bool = False) -> str:
     """Render a validated map. ``a`` is ``sotd_checker.analyze(m)`` output.
 
-    ``debug_grid`` draws faint lines through every diamond (alignment check)."""
+    ``show_grid`` draws the 8 x 4 diamond grid faintly on the cloth (off by
+    default). ``debug_grid`` draws it bold and out to the diamonds (alignment
+    check)."""
     geo = a["geometry"]
     ghost = geo["_ghost"]
     t = geo["_t"]
@@ -354,7 +432,7 @@ def render_sotd_svg(m: dict[str, Any], a: dict[str, Any], *, debug_grid: bool = 
         f'<path d="M0,0 L10,5 L0,10 z" fill="{SPIN}"/></marker>'
         "</defs>"
     )
-    out.extend(_table(pfx, debug_grid=debug_grid))
+    out.extend(_table(pfx, debug_grid=debug_grid, show_grid=show_grid))
 
     # called-pocket arrow: from the margin, across the trim, toward the mouth
     ox = pocket[0] - TABLE_LONG / 2.0
@@ -365,7 +443,7 @@ def render_sotd_svg(m: dict[str, Any], a: dict[str, Any], *, debug_grid: bool = 
     tail, tipd = POCKET_ARROW_SIDE if (on[0] == 0 or on[1] == 0) else POCKET_ARROW_CORNER
     a_start = (pocket[0] + on[0] * tail, pocket[1] + on[1] * tail)
     a_end = (pocket[0] + on[0] * tipd, pocket[1] + on[1] * tipd)
-    out.append(_line(a_start, a_end, "#000000", 6.5, cls="pocket-arrow-halo", opacity=0.45))
+    out.append(_line(a_start, a_end, "#000000", POCKET_ARROW_HALO_PX, cls="pocket-arrow-halo", opacity=0.45))
     out.append(_line(a_start, a_end, MARK, 4.0, marker="arrow-pocket", cls="pocket-arrow", pfx=pfx))
 
     # paths
@@ -406,9 +484,27 @@ def render_sotd_svg(m: dict[str, Any], a: dict[str, Any], *, debug_grid: bool = 
         d = v if side == "forward" else (-v[0], -v[1])
         Ls = _clip_ray(ghost, d, SPIN_ARROW_IN)
         out.append(_line(ghost, (ghost[0] + d[0] * Ls, ghost[1] + d[1] * Ls), SPIN, 2.5, marker="arrow-spin", cls=f"spin-{side}", pfx=pfx))
+    elif side == "straight":
+        # Straight-in with no follow/draw: the cue ball stops on the ghost spot.
+        # A bar across the shot line marks it so the label is not orphaned.
+        hb = STOP_BAR_IN / 2.0
+        p1 = (ghost[0] - v[1] * hb, ghost[1] + v[0] * hb)
+        p2 = (ghost[0] + v[1] * hb, ghost[1] - v[0] * hb)
+        out.append(_line(p1, p2, "#000000", 5.0, cls="spin-stop-halo", opacity=0.35))
+        out.append(_line(p1, p2, SPIN, 3.0, cls="spin-stop"))
     W_lab = label_w
     lx = min(max(lx, sx + W_lab / 2 + 2), sx + TABLE_LONG * SCALE - W_lab / 2 - 2)
     ly = min(max(ly, sy + 12), sy + TABLE_SHORT * SCALE - 12)
+    if geo.get("tangent_geo_side") == "straight":
+        # No tangent line to sit on: tie the label to the ghost with a leader.
+        dxl, dyl = gx - lx, gy - ly
+        dl = math.hypot(dxl, dyl) or 1.0
+        rb = BALL_R * SCALE + 2
+        ex, ey = gx - dxl / dl * rb, gy - dyl / dl * rb
+        out.append(
+            f'<line class="label-leader" x1="{_f(lx)}" y1="{_f(ly)}" x2="{_f(ex)}" y2="{_f(ey)}" '
+            f'stroke="{SPIN}" stroke-width="1.2" stroke-opacity="0.85" stroke-dasharray="2 3"/>'
+        )
     out.append(
         f'<g class="tangent-label"><rect x="{_f(lx - W_lab / 2)}" y="{_f(ly - 10)}" width="{_f(W_lab)}" height="20" rx="4" '
         f'fill="#000" fill-opacity="0.55"/>'
@@ -467,6 +563,8 @@ def svg_to_png(svg: str) -> Optional[bytes]:
 
 __all__ = [
     "diamond_positions",
+    "grid_lines",
+    "grid_cells_px",
     "render_sotd_svg",
     "svg_data_uri",
     "save_svg",

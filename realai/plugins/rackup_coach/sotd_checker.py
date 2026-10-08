@@ -62,7 +62,8 @@ Interpretations (named constants below):
 Diagram: when ``render_diagram`` is set and ``ok`` is true (after fixes),
 ``sotd_diagram.render_sotd_svg`` draws the validated map as a deterministic
 local SVG (``diagram_svg``, plus ``diagram`` as a base64 data URI). It uses no
-API keys and makes no network calls. ``diagram_prompt`` is kept for a future
+API keys and makes no network calls. ``show_grid`` adds the faint 8 x 4
+diamond grid. ``diagram_prompt`` is kept for a future
 local image model only.
 """
 from __future__ import annotations
@@ -809,7 +810,8 @@ def _local_sd_stub_note() -> str:
     return "local_sd hook is a stub (no call made yet); returned the SVG render"
 
 
-def _render_diagram_into(result: dict[str, Any], m: dict[str, Any], a: dict[str, Any], *, save: bool) -> None:
+def _render_diagram_into(result: dict[str, Any], m: dict[str, Any], a: dict[str, Any], *, save: bool,
+                         show_grid: bool = False) -> None:
     from plugins.rackup_coach import sotd_diagram as sd
 
     backend = resolve_diagram_backend()
@@ -819,7 +821,7 @@ def _render_diagram_into(result: dict[str, Any], m: dict[str, Any], a: dict[str,
         result["diagram_error"] = "diagram backend is none (REALAI_SOTD_IMAGE_BACKEND=none)"
         return
     try:
-        svg = sd.render_sotd_svg(m, a)
+        svg = sd.render_sotd_svg(m, a, show_grid=show_grid)
     except Exception as e:  # a failed render never fails a passed map
         result["diagram"] = None
         result["diagram_error"] = f"svg render failed: {e}"[:300]
@@ -951,6 +953,7 @@ def validate_sotd(
     *,
     render_diagram: bool = False,
     save_diagram: bool = False,
+    show_grid: bool = False,
     catalog: Optional[list[dict[str, Any]]] = None,
     default_game: str = "",
     allow_fixes: bool = True,
@@ -1067,7 +1070,7 @@ def validate_sotd(
     result["diagram_prompt"] = render_diagram_prompt(current, a)
 
     if render_diagram:
-        _render_diagram_into(result, current, a, save=save_diagram)
+        _render_diagram_into(result, current, a, save=save_diagram, show_grid=show_grid)
     return result
 
 
@@ -1084,6 +1087,7 @@ def run_validate(player: Any, payload: dict[str, Any] | None) -> dict[str, Any]:
         payload.get("map"),
         render_diagram=bool(payload.get("render_diagram")),
         save_diagram=bool(payload.get("save_diagram")),
+        show_grid=bool(payload.get("show_grid")),
         default_game=default_game,
     )
     out["mode"] = "sotd_validate"

@@ -464,9 +464,127 @@ def test_svg_head_string_and_debug_grid():
     hs = _by_class(root, "line", "head-string")
     assert len(hs) == 1 and float(hs[0].get("x1")) == pytest.approx(sd._px(25, 0)[0])
     assert _by_class(root, "line", "debug-grid") == []
+    assert _by_class(root, "line", "grid-line") == []  # show_grid is off by default
     m, _ = sc.normalize_map(r["map"])
     dbg = ET.fromstring(sd.render_sotd_svg(m, sc.analyze(m), debug_grid=True))
-    assert len(_by_class(dbg, "line", "debug-grid")) == 9
+    assert len(_by_class(dbg, "line", "debug-grid")) == 10  # 7 x lines (incl. 50) + 3 y lines
+    assert len(_by_class(dbg, "line", "debug-tick")) == 18  # one out to each diamond
+
+
+def _cells_from_svg(root):
+    cloth = _by_class(root, "rect", "cloth")[0]
+    x0, y0 = float(cloth.get("x")), float(cloth.get("y"))
+    w, h = float(cloth.get("width")), float(cloth.get("height"))
+    lines = _by_class(root, "line", "grid-line")
+    xs = sorted(float(e.get("x1")) for e in lines if e.get("data-axis") == "x")
+    ys = sorted(float(e.get("y1")) for e in lines if e.get("data-axis") == "y")
+    for e in lines:  # x lines are vertical and span the cloth; y lines horizontal
+        if e.get("data-axis") == "x":
+            assert float(e.get("x1")) == float(e.get("x2"))
+            assert (float(e.get("y1")), float(e.get("y2"))) == pytest.approx((y0, y0 + h), abs=0.01)
+        else:
+            assert float(e.get("y1")) == float(e.get("y2"))
+            assert (float(e.get("x1")), float(e.get("x2"))) == pytest.approx((x0, x0 + w), abs=0.01)
+    bx = [x0, *xs, x0 + w]
+    by = [y0, *ys, y0 + h]
+    cells = [(bx[i + 1] - bx[i], by[j + 1] - by[j]) for j in range(len(by) - 1) for i in range(len(bx) - 1)]
+    return (w, h, xs, ys, cells)
+
+
+def test_grid_is_32_equal_squares():
+    assert sd.SCALE > 0 and sd._px(1, 0)[0] - sd._px(0, 0)[0] == sd._px(0, 1)[1] - sd._px(0, 0)[1]  # one scale
+    r = sc.validate_sotd(EXAMPLE, render_diagram=True, show_grid=True)
+    root = _svg_root(r)
+    w, h, xs, ys, cells = _cells_from_svg(root)
+    assert w == pytest.approx(2 * h, abs=1e-9)  # cloth exactly 2:1 in pixels
+    assert len(xs) == 7 and len(ys) == 3
+    assert sd._px(50, 0)[0] in [pytest.approx(x, abs=0.01) for x in xs]  # side-pocket line is there
+    assert len(cells) == 32
+    cw = [c[0] for c in cells]
+    ch = [c[1] for c in cells]
+    assert max(cw) - min(cw) <= 0.5 and max(ch) - min(ch) <= 0.5
+    for cwi, chi in cells:
+        assert cwi == pytest.approx(chi, abs=0.5)  # square
+        assert cwi == pytest.approx(12.5 * sd.SCALE, abs=0.5)
+    # the helper agrees with the drawn grid
+    helper = sd.grid_cells_px()
+    assert len(helper) == 32
+    assert all((c[2] - c[0]) == pytest.approx(c[3] - c[1], abs=0.5) for c in helper)
+    # grid lines pass through the diamonds they belong to
+    dm = {(d.get("data-rail"), float(d.get("data-at"))): d for d in _by_class(root, "polygon", "diamond")}
+    for x in sd.LONG_DIAMONDS_X:
+        assert _poly_center(dm[("long_left", x)])[0] == pytest.approx(sd._px(x, 0)[0], abs=0.5)
+        assert sd._px(x, 0)[0] in [pytest.approx(v, abs=0.5) for v in xs]
+    for y in sd.SHORT_DIAMONDS_Y:
+        assert _poly_center(dm[("short_head", y)])[1] == pytest.approx(sd._px(0, y)[1], abs=0.5)
+        assert sd._px(0, y)[1] in [pytest.approx(v, abs=0.5) for v in ys]
+    # no diamond on the x = 50 line
+    assert ("long_left", 50.0) not in dm and ("long_right", 50.0) not in dm
+
+
+def test_show_grid_through_payload():
+    res = sc.run_validate(None, {"map": copy.deepcopy(EXAMPLE), "render_diagram": True, "show_grid": True})
+    root = ET.fromstring(res["diagram_svg"])
+    assert len(_by_class(root, "line", "grid-line")) == 10
+    assert _by_class(root, "line", "debug-grid") == []
+    res = sc.run_validate(None, {"map": copy.deepcopy(EXAMPLE), "render_diagram": True})
+    assert _by_class(ET.fromstring(res["diagram_svg"]), "line", "grid-line") == []
+
+
+def test_pocket_arrow_inside_image_for_every_pocket():
+    marker_px = 4 * 4.0  # markerWidth x stroke-width
+    for pid, (X, Y) in sc.POCKETS.items():
+        ball_n = 1
+        m, _ = sc.normalize_map(EXAMPLE)
+        a = sc.analyze(m, check_claim=False)
+        m = copy.deepcopy(m)
+        m["called"] = {"ball": ball_n, "pocket": pid}
+        a = sc.analyze(m, check_claim=False)
+        root = ET.fromstring(sd.render_sotd_svg(m, a))
+        arrow = _by_class(root, "line", "pocket-arrow")[0]
+        x1, y1, x2, y2 = (float(arrow.get(k)) for k in ("x1", "y1", "x2", "y2"))
+        pad = sd.POCKET_ARROW_HALO_PX / 2 + 2
+        for x, y in ((x1, y1), (x2, y2)):
+            assert pad <= x <= sd.CANVAS_W - pad and pad <= y <= sd.CANVAS_H - pad, pid
+        # tail sits outside the cushion (rail / margin), tip stops short of the cloth
+        cx0, cy0 = sd._px(-sd.CUSHION_IN, -sd.CUSHION_IN)
+        cx1, cy1 = sd._px(100 + sd.CUSHION_IN, 50 + sd.CUSHION_IN)
+        assert not (cx0 < x1 < cx1 and cy0 < y1 < cy1), pid
+        sx0, sy0 = sd._px(0, 0)
+        sx1, sy1 = sd._px(100, 50)
+        assert not (sx0 < x2 < sx1 and sy0 < y2 < sy1), pid
+        # tip points at the pocket and does not run into the hole
+        px, py = sd._px(X, Y)
+        assert math.dist((x2, y2), (px, py)) < math.dist((x1, y1), (px, py))
+        assert math.dist((x1, y1), (x2, y2)) > marker_px  # a visible shaft behind the head
+
+
+def test_pockets_round_and_symmetric():
+    r = sc.validate_sotd(EXAMPLE, render_diagram=True)
+    root = _svg_root(r)
+    groups = {g.get("data-pocket"): g for g in root.iter(SVG_NS + "g") if "pocket" in (g.get("class") or "").split()}
+    assert sorted(groups) == sorted(sc.POCKETS)
+    for pid, g in groups.items():
+        X, Y = sc.POCKETS[pid]
+        px, py = sd._px(X, Y)
+        hole = [e for e in g.iter(SVG_NS + "circle") if e.get("class") == "pocket-hole"]
+        assert len(hole) == 1  # one round hole, no teardrop path
+        hx, hy, hr = (float(hole[0].get(k)) for k in ("cx", "cy", "r"))
+        jaws = [e for e in g.iter(SVG_NS + "line") if e.get("class") == "jaw"]
+        assert len(jaws) == 2
+        if pid.startswith("corner"):
+            assert abs(hx - px) == pytest.approx(abs(hy - py), abs=0.01)  # on the diagonal
+            assert (hx - px) * (X - 50) > 0 and (hy - py) * (Y - 25) > 0  # behind the cloth corner
+        else:
+            assert hx == pytest.approx(px, abs=0.01)
+            assert (hy - py) * (Y - 25) > 0
+        # jaw backs land on the hole; jaws mirror each other about the pocket axis
+        for j in jaws:
+            bx, by = float(j.get("x2")), float(j.get("y2"))
+            assert math.dist((bx, by), (hx, hy)) == pytest.approx(hr, abs=0.05)
+        (a1, b1), (a2, b2) = [((float(j.get("x1")), float(j.get("y1"))), (float(j.get("x2")), float(j.get("y2")))) for j in jaws]
+        assert math.dist(a1, b1) == pytest.approx(math.dist(a2, b2), abs=0.01)
+        assert math.dist(a1, (hx, hy)) == pytest.approx(math.dist(a2, (hx, hy)), abs=0.01)
 
 
 def test_object_path_uses_object_ball_color():
@@ -485,6 +603,23 @@ def test_svg_follow_draw_and_straight():
     root = _svg_root(r)
     assert _by_class(root, "line", "tangent") == []
     assert len(_by_class(root, "circle", "ghost")) == 1
+    # straight-in center hit: a stop bar at the ghost and a leader to the label
+    stop = _by_class(root, "line", "spin-stop")
+    assert len(stop) == 1
+    x1, y1, x2, y2 = (float(stop[0].get(k)) for k in ("x1", "y1", "x2", "y2"))
+    g = r["geometry"]["ghost"]
+    gx, gy = sd._px(g["x"], g["y"])
+    assert ((x1 + x2) / 2, (y1 + y2) / 2) == pytest.approx((gx, gy), abs=0.6)
+    assert math.dist((x1, y1), (x2, y2)) > 2 * sd.BALL_R * sd.SCALE  # wider than the ball
+    assert len(_by_class(root, "line", "label-leader")) == 1
+    # straight-in with follow still gets its arrow (and the leader), no stop bar
+    r = sc.validate_sotd(_map(**STRAIGHT, stroke={"tip": "follow", "speed": "soft"}), render_diagram=True)
+    root = _svg_root(r)
+    assert len(_by_class(root, "line", "spin-forward")) == 1 and _by_class(root, "line", "spin-stop") == []
+    assert len(_by_class(root, "line", "label-leader")) == 1
+    # a cut shot has a tangent and no leader
+    r = sc.validate_sotd(EXAMPLE, render_diagram=True)
+    assert _by_class(_svg_root(r), "line", "label-leader") == []
 
 
 def test_svg_stripes_and_ids_unique_and_escaped():
