@@ -1,0 +1,33 @@
+# Dependabot config scoped to the LIVE manifests only.
+#   npm  "/" -> root pnpm workspace (Vercel: realai-frontend, plus the root Vite/TanStack app)
+#   pip  "/" -> requirements*.txt at the repo root (Render API + local hive)
+# Parked copies under _quarantine/ and the nested lockfiles under realai/ are not covered on purpose.
+#
+# open-pull-requests-limit: 0 turns OFF routine version-bump PRs. Security-update PRs
+# (if "Dependabot security updates" is enabled in repo settings) still open, grouped
+# into one PR per ecosystem. No target-branch: security updates always target the
+# default branch, and setting target-branch would make these options apply to
+# version updates only.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
+    groups:
+      npm-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
+    groups:
+      pip-security:
+        applies-to: security-updates
+        patterns:
+          - "*"

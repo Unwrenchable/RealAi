@@ -6,6 +6,11 @@
   "overrides": {
     "nf3": "0.3.17"
   },
+  "pnpm": {
+    "overrides": {
+      "next>postcss": "^8.5.23"
+    }
+  },
   "scripts": {
     "dev": "node scripts/with-app-env.mjs vite dev --host 127.0.0.1 --port 5173",
     "dev:ui": "node scripts/with-app-env.mjs vite dev --host 127.0.0.1 --port 5173",
