@@ -4,6 +4,7 @@ Table law (9-foot, playing surface):
 - width 100 in, height 50 in, ball diameter 2.25 in, radius 1.125 in
 - pockets: corner_head_left, corner_head_right, side_left, side_right, corner_foot_left, corner_foot_right
 - pocket centers: (0,0), (100,0), (0,25), (100,25), (0,50), (100,50) with y along the long rail if the map uses that axis; if the map uses x as the long axis, swap. State which axis you used.
+- grid rule: the surface is an 8 x 4 grid of equal 12.5 in boxes that never change size. Each pocket hole (radius 2.3) sits inside its box, so aim at the hole centers: the pocket centers above moved 2.3 in off every rail they touch. With x as the long axis: (2.3,2.3), (50,2.3), (97.7,2.3), (2.3,47.7), (50,47.7), (97.7,47.7). The object-ball line ends at that hole center.
 - a ball is on the cloth only if its center is at least 1.125 from every rail
 - two balls overlap if center distance is under 2.25
 

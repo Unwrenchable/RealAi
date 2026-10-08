@@ -17,19 +17,28 @@ head rail is the left edge of the diagram and the foot rail the right edge.
 (+x), with y growing downward in the image: left = the y=0 rail, right = the
 y=50 rail.
 
-=====================  ===========
-pocket id              center (x,y)
-=====================  ===========
-corner_head_left       (0, 0)
-corner_head_right      (0, 50)
-side_left              (50, 0)
-side_right             (50, 50)
-corner_foot_left       (100, 0)
-corner_foot_right      (100, 50)
-=====================  ===========
+Pocket targets follow Travis's grid rule. The 100 x 50 cloth is an 8 x 4 grid
+of equal 12.5 in boxes, and a pocket sits *inside* its box: each corner hole
+(radius ``POCKET_HOLE_R_IN`` = 2.3) is tangent to both cushion noses at its
+corner, and each side hole is tangent to its long rail, straddling x = 50. The
+checker aims at those hole centers, which are exactly where the diagram draws
+the holes, so the object-ball line ends at the drawn hole center:
 
-This is the standing instruction's list with the axes swapped, because the
-maps use x up to 100 and y up to 50.
+=====================  ==============  =====================
+pocket id              target (x,y)    mouth on the cloth edge
+=====================  ==============  =====================
+corner_head_left       (2.3, 2.3)      (0, 0)
+corner_head_right      (2.3, 47.7)     (0, 50)
+side_left              (50, 2.3)       (50, 0)
+side_right             (50, 47.7)      (50, 50)
+corner_foot_left       (97.7, 2.3)     (100, 0)
+corner_foot_right      (97.7, 47.7)    (100, 50)
+=====================  ==============  =====================
+
+The mouth points (``POCKET_MOUTHS``) are the standing instruction's corner /
+midpoint list with the axes swapped (x up to 100, y up to 50); the targets
+(``POCKETS``) are those points moved ``POCKET_HOLE_R_IN`` into the table on
+each axis that meets a rail.
 
 Checks, in order: place, called, ghost, path, cut, tangent, claim. Every visible
 fail is listed. A hard fail in checks 1-6 stops the map from shipping until a
@@ -95,13 +104,25 @@ NUDGE_STEP = 0.5
 NUDGE_MAX = 12.0
 EPS = 1e-9
 
-POCKETS: dict[str, tuple[float, float]] = {
+POCKET_HOLE_R_IN = 2.3  # one hole radius for all six pockets
+# Where each pocket opens on the cloth edge (cushion-nose corner / midpoint).
+POCKET_MOUTHS: dict[str, tuple[float, float]] = {
     "corner_head_left": (0.0, 0.0),
     "corner_head_right": (0.0, TABLE_SHORT),
     "side_left": (TABLE_LONG / 2.0, 0.0),
     "side_right": (TABLE_LONG / 2.0, TABLE_SHORT),
     "corner_foot_left": (TABLE_LONG, 0.0),
     "corner_foot_right": (TABLE_LONG, TABLE_SHORT),
+}
+_R = POCKET_HOLE_R_IN
+# Pocket targets = drawn hole centers, inside the corner box / straddling x = 50.
+POCKETS: dict[str, tuple[float, float]] = {
+    "corner_head_left": (_R, _R),
+    "corner_head_right": (_R, TABLE_SHORT - _R),
+    "side_left": (TABLE_LONG / 2.0, _R),
+    "side_right": (TABLE_LONG / 2.0, TABLE_SHORT - _R),
+    "corner_foot_left": (TABLE_LONG - _R, _R),
+    "corner_foot_right": (TABLE_LONG - _R, TABLE_SHORT - _R),
 }
 
 POCKET_PHRASE = {
@@ -1098,6 +1119,8 @@ def run_validate(player: Any, payload: dict[str, Any] | None) -> dict[str, Any]:
 __all__ = [
     "AXIS",
     "POCKETS",
+    "POCKET_MOUTHS",
+    "POCKET_HOLE_R_IN",
     "SOTD_MAP_CATALOG",
     "analyze",
     "load_checker_prompt",
