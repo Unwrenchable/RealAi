@@ -2,10 +2,10 @@
 
 from typing import Any, Dict
 
-from core.tools.base import Tool
-from core.tools.permissions import Permissions
-from core.web3.policy import Web3Policy
-from core.web3.registry import Web3Registry
+from ..tools.base import Tool
+from ..tools.permissions import Permissions
+from ..web3.policy import Web3Policy
+from ..web3.registry import Web3Registry
 
 
 class Web3Tool(Tool):
@@ -35,6 +35,8 @@ class Web3Tool(Tool):
             raise ValueError("params must be an object")
 
         backend = self.registry.get(backend_name)
+        if method in {"sendTransaction", "eth_sendRawTransaction", "eth_sendTransaction"}:
+            raise PermissionError("raw send methods must go through method='send' (policy-gated)")
         if method == "get_account":
             return backend.get_account(str(params.get("address", "")))
         if method == "simulate":

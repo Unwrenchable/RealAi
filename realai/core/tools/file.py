@@ -3,8 +3,8 @@
 from pathlib import Path
 from typing import Any, Dict
 
-from core.tools.base import Tool
-from core.tools.permissions import Permissions
+from ..tools.base import Tool
+from ..tools.permissions import Permissions
 
 
 class FileTool(Tool):

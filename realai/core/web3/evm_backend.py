@@ -2,8 +2,8 @@
 
 from typing import Any, Dict
 
-from core.logging.logger import log
-from core.tracing.tracer import tracer
+from ..logging.logger import log
+from ..tracing.tracer import tracer
 
 try:
     from web3 import Web3
