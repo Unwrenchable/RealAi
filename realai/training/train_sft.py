@@ -538,6 +538,7 @@ def train(args, recipe: Recipe) -> int:
         print(line, flush=True); logf.write(line + "\n"); logf.flush()
 
     last = None
+    started = time.strftime("%Y-%m-%dT%H:%M:%S%z")
     for n in p["len_backoff"]:
         try:
             res = _train_once(args, recipe, n, log)
@@ -548,6 +549,8 @@ def train(args, recipe: Recipe) -> int:
                 log(f"smoke done ({res['steps']} steps, {res['sec_per_step']:.1f}s/step) -> {out / name}; no adapter saved")
             else:
                 log(f"done best_eval_loss={res['best_eval_loss']:.4f} -> {out / 'adapter_best'}")
+                from realai.training import ledger
+                ledger.safe(ledger.on_train, out, res, started=started, model_id=args.model_id)
             return 0
         except Exception as exc:  # DirectML OOM -> shorter sequences
             if not _is_oom(exc):
@@ -582,6 +585,8 @@ def evaluate(args, recipe: Recipe) -> int:
            "pass_bar": PASS_BAR, "passed": passed, "eval_rows": len(rows), "max_len": max_len, "device": dev_name}
     (out / "eval_report.json").write_text(json.dumps(rep, indent=2), encoding="utf-8")
     print(json.dumps(rep, indent=2))
+    from realai.training import ledger
+    ledger.safe(ledger.on_eval, out, rep)
     return 0 if passed else 1
 
 
@@ -593,7 +598,10 @@ def export(args, recipe: Recipe) -> int:
     merged = t2g.merge_adapter(recipe.base_model, out / "adapter_best", out / "merged")
     f16 = t2g.convert_to_gguf(merged, out / "gguf" / f"{args.model_id}-f16.gguf")
     q = t2g.quantize_gguf(f16, out / "gguf" / f"{args.model_id}-{args.quant}.gguf", args.quant)
-    print(json.dumps({"gguf": str(q), "sha256": sha256_file(q)}, indent=2))
+    sha = sha256_file(q)
+    print(json.dumps({"gguf": str(q), "sha256": sha}, indent=2))
+    from realai.training import ledger
+    ledger.safe(ledger.on_export, out, q, args.quant, args.model_id, sha)
     return 0
 
 
@@ -636,6 +644,8 @@ def register(args, recipe: Recipe) -> int:
     cat["models"] = [m for m in cat["models"] if m.get("id") != args.model_id] + [entry]
     cat_p.write_text(json.dumps(cat, indent=2), encoding="utf-8")
     print(json.dumps(entry, indent=2))
+    from realai.training import ledger
+    ledger.safe(ledger.on_register, out, entry)
     return 0
 
 

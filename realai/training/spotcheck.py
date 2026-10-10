@@ -137,6 +137,7 @@ def main(argv=None) -> int:
     ap.add_argument("--shot-catalog", help="shot-catalog.ts or .json (else REALAI_HOME/datasets/_sources/shot_catalog.json)")
     ap.add_argument("--out", help="report path (default REALAI_HOME/runs/spotcheck-<stamp>.json)")
     ap.add_argument("--label", default="")
+    ap.add_argument("--model-id", default="", help="record the score for this model/run id in the model ledger (MODELS.md)")
     a = ap.parse_args(argv)
     if a.shot_catalog:
         from realai.training.dataset_builder.adapters import load_shot_catalog
@@ -149,6 +150,9 @@ def main(argv=None) -> int:
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(rep, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"pass {rep['passed']}/{rep['n']} = {rep['pass_rate']:.0%} -> {out}")
+    if a.model_id:
+        from realai.training import ledger
+        ledger.safe(ledger.on_spotcheck, rep, out, a.model_id)
     return 0
 
 

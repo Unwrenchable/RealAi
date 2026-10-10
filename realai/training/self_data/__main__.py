@@ -45,7 +45,10 @@ def main(argv=None) -> int:
 
         rep = analyse(Path(a.spotcheck) if a.spotcheck else None)
         print(json.dumps({k: rep[k] for k in ("spotcheck_pass_rate", "weak", "plan")}, indent=1))
-        print("report:", write_report(rep))
+        _md = write_report(rep)
+        print("report:", _md)
+        from realai.training import ledger
+        ledger.safe(ledger.on_improve, rep, _md)
         return 0
     if a.cmd == "verify-traffic":
         print(json.dumps(gen.verify_traffic(), indent=1))
