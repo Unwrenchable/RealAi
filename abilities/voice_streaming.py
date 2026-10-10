@@ -65,28 +65,15 @@ def run(
     chat_used = False
     if ctx.get("chat", True):
         try:
-            import json
-            import urllib.request
+            from realai.local_media import local_chat
 
-            body = json.dumps(
-                {
-                    "model": "realai-default-coder",
-                    "messages": [{"role": "user", "content": text_in}],
-                    "max_tokens": int(ctx.get("max_tokens") or 128),
-                }
-            ).encode()
-            req = urllib.request.Request(
-                "http://127.0.0.1:8001/v1/chat/completions",
-                data=body,
-                headers={"Content-Type": "application/json"},
-                method="POST",
+            out = local_chat(
+                [{"role": "user", "content": text_in}],
+                max_tokens=int(ctx.get("max_tokens") or 128),
             )
-            with urllib.request.urlopen(req, timeout=45) as resp:
-                data = json.loads(resp.read().decode("utf-8", errors="replace"))
-            reply = (
-                ((data.get("choices") or [{}])[0].get("message") or {}).get("content")
-                or reply
-            )
+            if not out.get("ok"):
+                raise ConnectionError(out.get("error") or "no local chat endpoint reachable")
+            reply = out.get("text") or reply
             chat_used = True
         except Exception as e:
             reply = f"(chat unavailable: {e}) echo: {text_in}"

@@ -50,6 +50,46 @@ READ_METHODS = {
 SEND_METHODS = {"send", "sendTransaction", "eth_sendRawTransaction", "eth_sendTransaction", "requestAirdrop"}
 
 
+def _cli_config_paths() -> list[str]:
+    paths = [os.getenv("REALAI_CLI_CONFIG") or ""]
+    home = os.path.expanduser("~")
+    paths += [r"C:\tools\realai\config.json", os.path.join(home, ".realai", "cli-config.json")]
+    return [p for p in paths if p]
+
+
+def resolve_solana_rpc() -> tuple[str, str]:
+    """Return ``(rpc_url, source_name)``. The URL may embed a provider key, so
+    callers must only ever report ``source_name``.
+
+    Order (same setting names as realai-cli ``core/config.js``):
+    ``REALAI_SOLANA_RPC`` env -> realai-cli ``config.json`` ``solana.rpcUrl``
+    -> public mainnet-beta.
+    """
+    import json
+
+    env = (os.getenv("REALAI_SOLANA_RPC") or "").strip()
+    if env:
+        return env, "env:REALAI_SOLANA_RPC"
+    for path in _cli_config_paths():
+        try:
+            with open(path, encoding="utf-8") as fh:
+                cfg = json.load(fh)
+        except Exception:
+            continue
+        url = str(((cfg.get("solana") or {}).get("rpcUrl")) or "").strip()
+        if url.startswith(("http://", "https://")):
+            return url, "realai-cli config solana.rpcUrl"
+    return DEFAULT_SOLANA_RPC, "public mainnet-beta"
+
+
+def _redact(msg: str) -> str:
+    import re
+
+    rpc = resolve_solana_rpc()[0]
+    msg = msg.replace(rpc, "<solana-rpc>") if rpc else msg
+    return re.sub(r"(api[-_]?key|token|key)=[^&\s'\"]+", r"\1=<redacted>", msg, flags=re.I)
+
+
 def _send_allowed(ctx: dict[str, Any]) -> bool:
     env_ok = str(os.getenv("REALAI_WEB3_ALLOW_SEND") or "").strip().lower() in {"1", "true", "yes"}
     return env_ok and ctx.get("approved") is True
@@ -63,7 +103,8 @@ def get_web3_tool() -> Any:
     from realai.core.web3.solana_backend import SolanaBackend
 
     registry = Web3Registry()
-    registry.register(SolanaBackend(rpc_url=(os.getenv("REALAI_SOLANA_RPC") or DEFAULT_SOLANA_RPC).strip()))
+    rpc, _src = resolve_solana_rpc()
+    registry.register(SolanaBackend(rpc_url=rpc))
     evm_rpc = (os.getenv("REALAI_EVM_RPC_URL") or "").strip()
     if evm_rpc:
         try:
@@ -93,6 +134,8 @@ def run(
     if method == "query":
         method = "getAccountInfo" if ctx.get("address") else "getHealth"
     base = {"ability": "web3_integration", "chain": chain, "method": method}
+    if chain == "solana":
+        base["rpc_source"] = resolve_solana_rpc()[1]  # never the URL itself
 
     if method in SEND_METHODS:
         if not _send_allowed(ctx):
@@ -111,7 +154,7 @@ def run(
     try:
         tool = get_web3_tool()
     except Exception as exc:
-        return {**base, "ok": False, "status": "unavailable", "error": f"{type(exc).__name__}: {exc}"}
+        return {**base, "ok": False, "status": "unavailable", "error": _redact(f"{type(exc).__name__}: {exc}")}
     if chain not in tool.registry.backends:
         return {**base, "ok": False, "status": "unavailable", "error": f"chain not configured: {chain}"}
 
@@ -135,6 +178,6 @@ def run(
                 params = [ctx["address"]] if ctx.get("address") else []
             result = tool.registry.get(chain).call(method, {"params": params} if isinstance(params, list) else params)
     except Exception as exc:
-        return {**base, "ok": False, "status": "error", "error": f"{type(exc).__name__}: {exc}"}
+        return {**base, "ok": False, "status": "error", "error": _redact(f"{type(exc).__name__}: {exc}")}
     err = result.get("error") if isinstance(result, dict) else None
     return {**base, "ok": err is None, "status": "success" if err is None else "error", "result": result, "real": True}

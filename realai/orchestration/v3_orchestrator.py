@@ -2774,6 +2774,31 @@ class Handler(BaseHTTPRequestHandler):
             except json.JSONDecodeError:
                 self._json(400, {"error": "invalid_json"})
                 return
+            # model=realai-overseer -> local model + OVERSEER-77 persona (PARTIAL)
+            try:
+                from realai.atomic_fizz.overseer_route import apply_overseer_persona
+
+                _ov_msgs, _ov_meta = apply_overseer_persona(body.get("messages") or [], body.get("model"))
+                if _ov_meta:
+                    # Persona chat goes straight to the local model (no hive/tool routing).
+                    _ov_body = {k: v for k, v in body.items() if not str(k).startswith("realai_")}
+                    _ov_body["messages"] = _ov_msgs
+                    _ov_code, _ov_hdrs, _ov_data = _proxy(
+                        "POST", "/v1/chat/completions", json.dumps(_ov_body).encode("utf-8"), dict(self.headers)
+                    )
+                    try:
+                        _ov_obj = json.loads(_ov_data.decode("utf-8"))
+                    except Exception:
+                        _ov_obj = {"error": "upstream_non_json", "raw": _ov_data[:300].decode("utf-8", "replace")}
+                    if isinstance(_ov_obj, dict):
+                        _ov_obj["model"] = str(body.get("model"))
+                        _ov_obj.setdefault("realai_meta", {}).update(
+                            {"orchestrator": "v3", "overseer": _ov_meta, "vulkan_base": VULKAN_BASE}
+                        )
+                    self._json(_ov_code, _ov_obj)
+                    return
+            except Exception:
+                pass
             hdrs_in = {k: self.headers.get(k) for k in self.headers.keys()}
             # Normalize header keys for our helpers
             hdrs_norm = {str(k): str(v) for k, v in hdrs_in.items() if v is not None}

@@ -45,6 +45,6 @@ def run(
         "disclaimer": "Not clinical therapy — local supportive draft only.",
         "backend": "local_hive_chat",
         "local": True,
-        "live_path": "POST /v1/tools/execute ability.therapy_counseling → local chat (REALAI_CHAT_URL, :8001, :8080)",
+        "live_path": "POST /v1/tools/execute ability.therapy_counseling → local chat (REALAI_CHAT_URL, :8080, optional Hive :8001)",
         "model": out.get("model"),
     }

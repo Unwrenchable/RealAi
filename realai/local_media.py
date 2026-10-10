@@ -245,7 +245,9 @@ def analyze_image_local(image_ref: str) -> Dict[str, Any]:
     }
 
 
-_DEFAULT_CHAT_BASES = ("http://127.0.0.1:8001/v1", "http://127.0.0.1:8080/v1")
+# :8080 (llama-server chat) is the default target; the Hive on :8001 is optional.
+# REALAI_HIVE_FIRST=1 puts :8001 first; REALAI_CHAT_NO_HIVE=1 drops it.
+_DEFAULT_CHAT_BASES = ("http://127.0.0.1:8080/v1", "http://127.0.0.1:8001/v1")
 
 
 def chat_url_candidates() -> List[str]:
@@ -253,7 +255,7 @@ def chat_url_candidates() -> List[str]:
 
     ``REALAI_CHAT_URL`` (a full ``.../chat/completions`` URL or a base URL) wins,
     then ``REALAI_LLM_BASE_URL`` (OpenAI-style base, e.g. ``http://127.0.0.1:8081/v1``),
-    then the Hive on :8001, then a plain llama-server on :8080.
+    then llama-server chat on :8080 (default), then the optional Hive on :8001.
     """
     import os
 
@@ -268,7 +270,12 @@ def chat_url_candidates() -> List[str]:
             out.append(raw + "/chat/completions")
         else:
             out.append(raw + "/v1/chat/completions")
-    for base in _DEFAULT_CHAT_BASES:
+    bases = list(_DEFAULT_CHAT_BASES)
+    if os.environ.get("REALAI_HIVE_FIRST", "").strip() in {"1", "true", "yes"}:
+        bases = sorted(bases, key=lambda b: ":8001" not in b)
+    if os.environ.get("REALAI_CHAT_NO_HIVE", "").strip() in {"1", "true", "yes"}:
+        bases = [b for b in bases if ":8001" not in b]
+    for base in bases:
         out.append(base + "/chat/completions")
     seen: List[str] = []
     for u in out:

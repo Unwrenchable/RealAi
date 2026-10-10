@@ -53,29 +53,23 @@ def run(
 
     messages = build_overseer_messages(text, context=str(ctx.get("lore_context") or ctx.get("context") or ""))
     try:
-        body = json.dumps(
-            {
-                "model": ctx.get("model") or "realai-default-coder",
-                "messages": messages,
-                "max_tokens": int(ctx.get("max_tokens") or 180),
-                "temperature": float(ctx.get("temperature") or 0.85),
-            }
-        ).encode()
-        req = urllib.request.Request(
-            "http://127.0.0.1:8001/v1/chat/completions",
-            data=body,
-            headers={"Content-Type": "application/json"},
-            method="POST",
+        from realai.local_media import local_chat
+
+        out = local_chat(
+            messages,
+            max_tokens=int(ctx.get("max_tokens") or 180),
+            temperature=float(ctx.get("temperature") or 0.85),
         )
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            data = json.loads(resp.read().decode("utf-8", errors="replace"))
-        reply = ((data.get("choices") or [{}])[0].get("message") or {}).get("content") or ""
+        if not out.get("ok"):
+            raise ConnectionError(out.get("error") or "no local chat endpoint reachable")
+        reply = out.get("text") or ""
         return {
             "ok": True,
             "ability": "overseer",
             "action": "chat",
             "reply": reply,
             "persona": "OVERSEER-77",
+            "endpoint": out.get("endpoint"),
         }
     except Exception as e:
         return {

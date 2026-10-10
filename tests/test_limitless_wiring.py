@@ -59,7 +59,9 @@ def test_chat_url_candidates_order(monkeypatch):
     urls = chat_url_candidates()
     assert urls[0] == "http://127.0.0.1:8081/v1/chat/completions"
     assert urls[1] == "http://127.0.0.1:9999/v1/chat/completions"
-    assert urls[-2:] == ["http://127.0.0.1:8001/v1/chat/completions", "http://127.0.0.1:8080/v1/chat/completions"]
+    assert urls[-2:] == ["http://127.0.0.1:8080/v1/chat/completions", "http://127.0.0.1:8001/v1/chat/completions"]
+    monkeypatch.setenv("REALAI_CHAT_NO_HIVE", "1")
+    assert not any(":8001" in u for u in chat_url_candidates())
 
 
 def test_hive_chat_unreachable_does_not_raise(no_llm):
@@ -257,3 +259,57 @@ def test_math_and_data_via_client():
     c = RealAIClient()
     assert c.math.solve(problem="x^2 = 4")["verified"] is True
     assert c.data.analyze(data=[1, 2, 3])["statistics"]["mean"] == 2.0
+
+
+def test_solana_rpc_resolution_never_reports_url(monkeypatch, tmp_path):
+    from abilities import web3_integration as w
+
+    cfg = tmp_path / "config.json"
+    cfg.write_text(json.dumps({"solana": {"rpcUrl": "https://rpc.example.invalid/?api-key=SECRET123"}}))
+    monkeypatch.delenv("REALAI_SOLANA_RPC", raising=False)
+    monkeypatch.setenv("REALAI_CLI_CONFIG", str(cfg))
+    url, src = w.resolve_solana_rpc()
+    assert url.endswith("SECRET123") and src == "realai-cli config solana.rpcUrl"
+
+    def boom(*a, **k):
+        raise RuntimeError("HTTPError for url: https://rpc.example.invalid/?api-key=SECRET123")
+
+    with mock.patch("requests.post", side_effect=boom):
+        out = w.run(context={"method": "getHealth"})
+    assert out["rpc_source"] == "realai-cli config solana.rpcUrl"
+    assert "SECRET123" not in json.dumps(out)
+    monkeypatch.setenv("REALAI_SOLANA_RPC", "https://env.invalid")
+    assert w.resolve_solana_rpc()[1] == "env:REALAI_SOLANA_RPC"
+
+
+def test_overseer_voice_omnibrain_use_shared_resolver(stub_llm):
+    from abilities.overseer import run as overseer
+
+    out = overseer("status report", {"action": "chat"})
+    assert out["reply"].startswith("STUB:") and out["endpoint"].startswith("http://127.0.0.1:")
+    from abilities import omnibrain, voice_streaming
+    import inspect
+
+    for m in (omnibrain, voice_streaming):
+        assert "127.0.0.1:8001/v1/chat" not in inspect.getsource(m)
+
+
+def test_realai_cli_bridge_blocks_live():
+    from abilities.realai_cli_bridge import check_args, run
+
+    assert check_args(["status"]) is None
+    assert check_args(["paper", "buy", "SOL"]) is None
+    assert check_args(["trade", "buy"]) is not None
+    assert check_args(["solana", "send", "a", "b", "1"]) is not None
+    assert check_args(["market", "--live"]) is not None
+    assert check_args(["token", "sell"]) is not None
+    assert run("wallet send x")["status"] == "blocked"
+
+
+def test_overseer_model_persona():
+    from realai.atomic_fizz.overseer_route import apply_overseer_persona
+
+    msgs, meta = apply_overseer_persona([{"role": "user", "content": "hi"}], "realai-overseer")
+    assert meta["status"] == "PARTIAL" and msgs[0]["role"] == "system" and "OVERSEER-77" in msgs[0]["content"]
+    same, none = apply_overseer_persona([{"role": "user", "content": "hi"}], "realai-default-coder")
+    assert none is None and len(same) == 1

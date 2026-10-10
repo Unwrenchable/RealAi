@@ -150,6 +150,15 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "modules": ["abilities/audio_speech.py", "core/voice/tts_piper.py", "realai/lambda_embeddings_audio.py"],
     },
     {
+        "id": "realai_cli_bridge",
+        "name": "realai-cli bridge (markets, rug-watch, paper trading)",
+        "pillar": "advanced",
+        "keywords": ["realai-cli", "paper trading", "rug watch", "dexscreener", "token scan", "backtest"],
+        "status": "PARTIAL",
+        "live_path": "ability.realai_cli_bridge -> installed C:\\tools\\realai CLI (read-only/paper; live blocked)",
+        "modules": ["abilities/realai_cli_bridge.py"],
+    },
+    {
         "id": "math_solver",
         "name": "Math solver (SymPy, verified)",
         "pillar": "core_ai",

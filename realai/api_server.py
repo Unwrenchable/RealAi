@@ -1086,6 +1086,15 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
             if parsed_path.path == '/v1/chat/completions':
                 messages = body.get('messages', [])
                 organ_trace = None
+                overseer_meta = None
+                try:
+                    from realai.atomic_fizz.overseer_route import apply_overseer_persona
+
+                    messages, overseer_meta = apply_overseer_persona(messages, body.get('model'))
+                    if overseer_meta:
+                        body['messages'] = messages
+                except Exception:
+                    overseer_meta = None
                 # Deep organ fusion on live chat path (local provider, not external wrapper)
                 try:
                     use_organs = body.get("organs", True)
@@ -1144,6 +1153,8 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
                 if isinstance(response, dict):
                     if organ_trace is not None:
                         response.setdefault("realai", {})["organs"] = organ_trace
+                    if overseer_meta and isinstance(response, dict):
+                        response.setdefault("realai", {})["overseer"] = overseer_meta
                     if used_vulkan:
                         response.setdefault("realai", {})["inference"] = {
                             "backend": "vulkan-llama",
