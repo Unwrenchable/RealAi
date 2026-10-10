@@ -180,3 +180,65 @@ def device_profiles_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterato
         r = recommend(p)
         yield {"messages": _msgs(qs[i % len(qs)].format(r=report_text(p)), rec_text(r)),
                "meta": {"target": r.get("target"), "model": r.get("model")}}
+
+
+# --------------------------------------------------------------------------- chess self-play experience
+SELFPLAY_SYSTEM = ("You are RealAI playing a game of chess. Think briefly if you like, but your final line "
+                   "must be exactly one legal move in SAN (for example: Nf3, exd5, O-O, e8=Q).")
+
+
+@adapter("chess_selfplay_experience")
+def chess_selfplay_experience_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterator[Row]:
+    """Experience logs from scripts/chess_vs_stockfish.py (results/experience/*.jsonl).
+
+    One row per unique FEN. The TARGET is always Stockfish's best move + PV, never the model's own move,
+    so mistakes become corrections. Positions where the model already played the best move are kept too
+    (reinforcement) unless ``only_mistakes`` is set. Rows without engine analysis are skipped. No files -> no rows."""
+    import chess
+
+    only_mistakes = bool(spec.get("only_mistakes", False))
+    min_loss = int(spec.get("min_cp_loss", 0))
+    limit = int(spec.get("limit", 5000))
+    best: Dict[str, Dict[str, Any]] = {}
+    for path in _resolve(spec.get("paths", []), ctx["roots"]):
+        for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            fen, san = r.get("fen"), r.get("sf_best_san")
+            if not fen or not san:
+                continue
+            try:
+                b = chess.Board(fen)
+                if b.parse_san(san).uci() != r.get("sf_best_uci", b.parse_san(san).uci()):
+                    continue
+            except ValueError:
+                continue
+            key = " ".join(fen.split()[:4])  # dedup by position (ignore move counters)
+            prev = best.get(key)
+            # keep the most informative record per FEN: a mistake beats a correct move, deeper beats shallower
+            score = (0 if r.get("legal") and r.get("matched_best") else 1, int(r.get("sf_depth") or 0), int(r.get("cp_loss") or 0))
+            if prev is None or score > prev["_score"]:
+                best[key] = {**r, "_score": score}
+    n = 0
+    for key in sorted(best, key=_h):
+        r = best[key]
+        mistake = not (r.get("legal") and r.get("matched_best"))
+        if only_mistakes and not mistake:
+            continue
+        if r.get("legal") and (r.get("cp_loss") or 0) < min_loss and mistake:
+            continue
+        ev = r.get("sf_eval_cp")
+        ev_txt = (f"mate in {r['sf_mate']}" if r.get("sf_mate") else
+                  f"{ev / 100:+.2f}" if isinstance(ev, (int, float)) else "n/a")
+        user = (f"You are playing {r.get('side', 'White')}.\nFEN: {r['fen']}\n"
+                f"Moves so far: {r.get('history_san') or '(no moves yet)'}\nReply with one move in SAN.")
+        answer = (f"Best move (Stockfish depth {r.get('sf_depth', '?')}): {r['sf_best_san']}, eval {ev_txt}. "
+                  f"Main line: {r.get('sf_pv_san') or r['sf_best_san']}.\n{r['sf_best_san']}")
+        yield {"messages": [{"role": "system", "content": SELFPLAY_SYSTEM}] + _msgs(user, answer),
+               "meta": {"tags": ["own-data", "chess", "selfplay"], "match": r.get("match"), "mistake": mistake,
+                        "model_move": r.get("model_move_san"), "legal": r.get("legal"), "cp_loss": r.get("cp_loss")}}
+        n += 1
+        if n >= limit:
+            break
