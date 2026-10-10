@@ -1,6 +1,6 @@
 # RealAI SFT on AMD/Windows DirectML (verified on RX 6700 XT, Python 3.12.3, 2026-10-10)
-torch-directml==0.2.5.dev240914   # pulls torch==2.4.1 (+cpu wheel; DML backend)
-torch==2.4.1
+torch-directml==0.2.5.dev240914   # pulls torch==2.13.0 (+cpu wheel; DML backend)
+torch==2.13.0
 transformers==4.46.3              # 5.x does not import with torch 2.4
 peft==0.13.2
 accelerate==1.1.1
