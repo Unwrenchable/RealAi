@@ -192,3 +192,15 @@ def test_pipeline_keeps_tool_calls(tmp_path, monkeypatch):
     row = r.train[0]
     assert row["tools"] and any(m.get("tool_calls") for m in row["messages"]) and r.manifest["kinds"]["tool_call"] == len(r.train) + len(r.eval)
     assert not (tmp_path / "datasets").exists()
+
+
+def test_clis_import_and_export_shots(tmp_path, monkeypatch, capsys):
+    import importlib
+
+    monkeypatch.setenv("REALAI_HOME", str(tmp_path))
+    m = importlib.import_module("realai.training.self_data.__main__")
+    importlib.import_module("realai.training.spotcheck")
+    cat = tmp_path / "c.json"
+    cat.write_text(json.dumps([{"id": "s1", "name": "Test Shot", "setup": ["Route: CB -> 1 -> corner."]}]))
+    assert m.main(["export-shots", str(cat)]) == 0
+    assert (tmp_path / "datasets" / "_sources" / "shot_catalog.json").is_file()

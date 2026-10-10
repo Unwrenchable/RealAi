@@ -51,7 +51,7 @@ def main(argv=None) -> int:
         print(json.dumps(gen.verify_traffic(), indent=1))
         return 0
     from realai import hive_tools
-from realai.hive_tools import tool_loop
+    from realai.hive_tools import tool_loop
 
     if a.shot_catalog:
         from realai.training.dataset_builder.adapters import load_shot_catalog
