@@ -87,10 +87,12 @@ def load_rows(path: Path) -> List[Dict[str, Any]]:
         if not isinstance(msgs, list) or not msgs:
             raise ValueError(f"{path.name}:{i} has no messages")
         roles = [m.get("role") for m in msgs]
-        if "assistant" not in roles or any(x not in {"system", "user", "assistant"} for x in roles):
+        if "assistant" not in roles or any(x not in {"system", "user", "assistant", "tool"} for x in roles):
             raise ValueError(f"{path.name}:{i} bad roles {roles}")
-        if any(not str(m.get("content", "")).strip() for m in msgs):
+        if any(not str(m.get("content", "")).strip() and not m.get("tool_calls") for m in msgs):
             raise ValueError(f"{path.name}:{i} empty content")
+        if "tool" in roles and not r.get("tools"):
+            raise ValueError(f"{path.name}:{i} tool messages without row.tools")
         rows.append(r)
     return rows
 
@@ -117,28 +119,30 @@ def validate_dataset(ds_dir: Path) -> Dict[str, Any]:
             "manifest_sha256": sha256_file(man_p), "manifest_name": man.get("name"), "date": man.get("date")}
 
 
-def _tmpl(tok, msgs, gen=False) -> List[int]:
+def _tmpl(tok, msgs, gen=False, tools=None) -> List[int]:
     if not msgs:
         return []
-    r = tok.apply_chat_template(msgs, tokenize=True, add_generation_prompt=gen)
+    kw = {"tools": tools} if tools else {}
+    r = tok.apply_chat_template(msgs, tokenize=True, add_generation_prompt=gen, **kw)
     if hasattr(r, "keys") and "input_ids" in r:  # transformers >= 5 returns BatchEncoding
         r = r["input_ids"]
     return list(r)
 
 
-def encode_assistant_only(tok, messages: List[Dict[str, str]], max_len: int):
+def encode_assistant_only(tok, messages: List[Dict[str, Any]], max_len: int, tools=None):
     """input_ids + labels where only assistant-turn tokens are trained (-100 elsewhere).
 
-    Prefix rendering: tokens added by message i belong to message i. Truncated from the left
+    Tool rows: pass ``tools`` (row["tools"]); assistant tool-call turns are targets, role=tool output is
+    prompt (never trained). Prefix rendering: tokens added by message i belong to message i. Truncated from the left
     of the prompt is avoided; overly long rows are cut at max_len (labels kept aligned)."""
     ids: List[int] = []
     labels: List[int] = []
     prev: List[int] = []
     for i, m in enumerate(messages):
-        cur = _tmpl(tok, messages[: i + 1])
+        cur = _tmpl(tok, messages[: i + 1], tools=tools)
         if m["role"] == "assistant":
             # the "<|im_start|>assistant\n" header is prompt, not target
-            head = _tmpl(tok, messages[:i], gen=True)
+            head = _tmpl(tok, messages[:i], gen=True, tools=tools)
             n_head = len(head) if head[: len(prev)] == prev else len(prev)
             new = cur[len(prev):]
             hdr = n_head - len(prev)
@@ -239,7 +243,7 @@ def sft_loss(model, ids: List[int], labels: List[int], device):
 def _encode_all(rows, tok, max_len):
     out = []
     for r in rows:
-        ids, lab = encode_assistant_only(tok, r["messages"], max_len)
+        ids, lab = encode_assistant_only(tok, r["messages"], max_len, tools=r.get("tools"))
         if any(x != -100 for x in lab[1:]):
             out.append((ids, lab))
     return out
@@ -599,6 +603,19 @@ def register(args, recipe: Recipe) -> int:
     ev_p = out / "eval_report.json"
     ev = json.loads(ev_p.read_text(encoding="utf-8")) if ev_p.is_file() else None
     gguf = out / "gguf" / f"{args.model_id}-{args.quant}.gguf"
+    sc = None
+    sc_p = Path(args.spotcheck) if getattr(args, "spotcheck", None) else None
+    if sc_p is None:
+        cands = sorted((realai_home() / "runs").glob("spotcheck-*.json"), key=lambda p: p.stat().st_mtime) if (realai_home() / "runs").is_dir() else []
+        sc_p = cands[-1] if cands else None
+    if sc_p and sc_p.is_file():
+        sc = json.loads(sc_p.read_text(encoding="utf-8"))
+    min_pass = float(getattr(args, "min_pass", 0.8))
+    want_default = bool(getattr(args, "default", False))
+    if want_default and (not sc or float(sc.get("pass_rate", 0)) < min_pass):
+        got = "no spot-check report" if not sc else f"spot-check pass rate {sc.get('pass_rate')}"
+        print(f"REFUSED: --default needs spot-check pass rate >= {min_pass} ({got}). Run python -m realai.training.spotcheck first.")
+        return 2
     entry = {
         "id": args.model_id, "base_model": recipe.base_model, "base_license": BASE_LICENSE,
         "trained": True, "method": "lora-sft merged", "quant": args.quant,
@@ -606,8 +623,11 @@ def register(args, recipe: Recipe) -> int:
         "gguf_sha256": sha256_file(gguf) if gguf.is_file() else None,
         "dataset": tr["dataset"]["dir"], "dataset_manifest_sha256": tr["dataset"]["manifest_sha256"],
         "best_eval_loss": tr["best_eval_loss"], "eval": ev,
-        "status": "candidate-passed" if ev and ev.get("passed") else "candidate-not-passed",
-        "default": False, "loaded_now": False,
+        "status": ("promoted" if want_default else "candidate-passed") if ev and ev.get("passed") and sc and float(sc.get("pass_rate", 0)) >= min_pass
+        else "candidate-not-passed",
+        "spotcheck": {"report": str(sc_p), "pass_rate": sc.get("pass_rate"), "passed": sc.get("passed"), "n": sc.get("n"),
+                      "min_pass": min_pass} if sc else None,
+        "default": want_default, "loaded_now": False,
         "registered_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
     }
     cat_p = _inside_home(realai_home() / "models" / "trained_catalog.json")
@@ -636,6 +656,9 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--lora-alpha", type=int, default=32)
     ap.add_argument("--device", default="auto", choices=["auto", "directml", "cuda", "cpu"])
     ap.add_argument("--dml-adapter", default="RX 6700", help="substring of the DirectML adapter name")
+    ap.add_argument("--spotcheck", help="register: spot-check report (default newest REALAI_HOME/runs/spotcheck-*.json)")
+    ap.add_argument("--min-pass", type=float, default=0.8, help="register: spot-check pass rate needed for --default")
+    ap.add_argument("--default", action="store_true", help="register as default (refused unless spot-check >= --min-pass)")
     ap.add_argument("--max-steps", type=int, default=0, help="smoke: stop after N optimizer steps (no adapter saved)")
     ap.add_argument("--eval-smoke", action="store_true", help="with --max-steps: eval loss before/after on --eval-rows")
     ap.add_argument("--save-smoke", action="store_true", help="with --max-steps: write a checkpoint (tests the save path)")

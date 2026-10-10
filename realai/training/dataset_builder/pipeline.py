@@ -70,13 +70,15 @@ class _Tok:
                 self.tok = None
         self.kind = "hf:" + str(name) if self.tok else "chars/3.6"
 
-    def count(self, msgs: List[Dict[str, str]]) -> int:
+    def count(self, msgs: List[Dict[str, Any]], tools: Optional[List[Dict[str, Any]]] = None) -> int:
         if self.tok is not None:
             try:
-                return len(self.tok.apply_chat_template(msgs, tokenize=True))
+                r = self.tok.apply_chat_template(msgs, tools=tools or None, tokenize=True)
+                return len(r["input_ids"] if hasattr(r, "keys") else r)
             except Exception:
                 pass
-        return int(sum(len(m["content"]) + 12 for m in msgs) / 3.6) + 1
+        extra = len(json.dumps(tools)) + 200 if tools else 0
+        return int((sum(len(_msg_text(m)) + 12 for m in msgs) + extra) / 3.6) + 1
 
 
 @dataclass
@@ -88,8 +90,25 @@ class BuildResult:
     attribution: str = ""
 
 
-def _row_text(msgs: List[Dict[str, str]]) -> str:
-    return "\n".join(f"{m['role']}: {m['content']}" for m in msgs if m["role"] != "system")
+def _msg_text(m: Dict[str, Any]) -> str:
+    """content plus serialized tool calls (tool-call rows have empty content on the calling turn)."""
+    t = str(m.get("content") or "")
+    if m.get("tool_calls"):
+        t += json.dumps(m["tool_calls"], ensure_ascii=False, sort_keys=True)
+    return t
+
+
+def _row_text(msgs: List[Dict[str, Any]]) -> str:
+    return "\n".join(f"{m['role']}: {_msg_text(m)}" for m in msgs if m["role"] != "system")
+
+
+def _redact_msg(m: Dict[str, Any], users: List[str]) -> Dict[str, Any]:
+    out = {"role": m["role"], "content": redact(str(m.get("content") or ""), users)}
+    if m.get("tool_calls"):
+        out["tool_calls"] = json.loads(redact(json.dumps(m["tool_calls"], ensure_ascii=False), users))
+    if m.get("name"):
+        out["name"] = m["name"]
+    return out
 
 
 def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = None) -> BuildResult:
@@ -131,14 +150,15 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
         for row in rows:
             st["read"] += 1
             msgs = row["messages"]
-            raw = "\n".join(m["content"] for m in msgs)
+            raw = "\n".join(_msg_text(m) for m in msgs)
             hits = find_secrets(raw)
             if hits:
                 st["dropped_secret"] += 1
                 secret_kinds.update(hits)
                 continue
-            msgs = [{"role": m["role"], "content": redact(m["content"], cfg["redact_usernames"])} for m in msgs]
-            n_tok = tok.count(msgs)
+            msgs = [_redact_msg(m, cfg["redact_usernames"]) for m in msgs]
+            tools = row.get("tools")
+            n_tok = tok.count(msgs, tools)
             if n_tok < int(cfg["min_tokens"]):
                 st["dropped_short"] += 1
                 continue
@@ -151,12 +171,13 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
                 st["dropped_exact_dup"] += 1
                 continue
             exact_seen.add(key)
-            if not near.add_if_new(text):
+            if spec.get("near_dedupe", True) and not near.add_if_new(text):
                 st["dropped_near_dup"] += 1
                 continue
             st["kept"] += 1
             kept.append({
                 "messages": msgs,
+                **({"tools": tools} if tools else {}),
                 "source": name,
                 "license": spec.get("license", "unknown"),
                 "origin": spec.get("origin", ""),
@@ -189,7 +210,8 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
     manifest = {
         "name": cfg["name"],
         "date": date,
-        "format": "qwen-chat messages (role/content); apply tokenizer.apply_chat_template at train time",
+        "format": "qwen-chat messages (role/content; assistant tool_calls + role=tool for tool rows, row.tools = specs); apply tokenizer.apply_chat_template(messages, tools=row.tools) at train time",
+        "kinds": dict(Counter("tool_call" if r.get("tools") else "plain" for r in kept)),
         "out_dir": str(out_dir),
         "dry_run": dry_run,
         "seed": cfg["seed"],

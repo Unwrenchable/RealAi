@@ -2774,6 +2774,17 @@ class Handler(BaseHTTPRequestHandler):
             except json.JSONDecodeError:
                 self._json(400, {"error": "invalid_json"})
                 return
+            # Opt-in hive tool loop (REALAI_TOOL_LOOP=1 / X-RealAI-Tool-Loop: 1 / realai_tool_loop): model routes to tools.
+            try:
+                from realai.hive_tools.orchestrator_hook import capture_chat, maybe_tool_loop
+
+                _tl = maybe_tool_loop(body, dict(self.headers), VULKAN_BASE)
+                if _tl is not None:
+                    capture_chat(body, dict(self.headers), _tl)
+                    self._json(200, _tl)
+                    return
+            except Exception as _tl_err:  # never break normal chat
+                body.setdefault("realai_tool_loop_error", str(_tl_err)[:200])
             # model=realai-overseer -> local model + OVERSEER-77 persona (PARTIAL)
             try:
                 from realai.atomic_fizz.overseer_route import apply_overseer_persona
@@ -3094,7 +3105,7 @@ class Handler(BaseHTTPRequestHandler):
                     "multi_agent", "multiAgent", "realai_multi_agent", "realai_multi_agent_error",
                     "realai_model", "realai_context_fit",
                     "realai_routing", "realai_memory_read", "realai_natural",
-                    "realai_natural_grounded", "realai_local_only",
+                    "realai_natural_grounded", "realai_local_only", "realai_tool_loop_error",
                 )
             }
             # Vulkan may not support tools — only send if client asked and we keep simple
@@ -3105,6 +3116,13 @@ class Handler(BaseHTTPRequestHandler):
                 proxy_body.pop("tools", None)
             out = json.dumps(proxy_body).encode("utf-8")
             code, hdrs, data = _proxy("POST", "/v1/chat/completions", out, dict(self.headers))
+            try:  # opt-in learning-loop capture (REALAI_CAPTURE=1); no-op otherwise
+                from realai.hive_tools.orchestrator_hook import capture_chat
+
+                if code == 200:
+                    capture_chat(body, dict(self.headers), json.loads(data.decode("utf-8")))
+            except Exception:
+                pass
             # annotate meta if json
             try:
                 obj = json.loads(data.decode("utf-8"))
@@ -3488,6 +3506,12 @@ class Handler(BaseHTTPRequestHandler):
                     done(aid, source="tool", tool=tool_name, ok=ok)
                 except Exception:
                     pass
+            try:  # opt-in learning-loop capture (REALAI_CAPTURE=1)
+                from realai.hive_tools.orchestrator_hook import capture_tool
+
+                capture_tool(tool_name, args, result, dict(self.headers))
+            except Exception:
+                pass
             self._json(200, {"tool": tool_name, "result": result})
             return
 
