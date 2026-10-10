@@ -85,6 +85,7 @@ class BuildResult:
     train: List[Dict[str, Any]] = field(default_factory=list)
     eval: List[Dict[str, Any]] = field(default_factory=list)
     out_dir: Optional[Path] = None
+    attribution: str = ""
 
 
 def _row_text(msgs: List[Dict[str, str]]) -> str:
@@ -217,11 +218,39 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
             "eval.jsonl": hashlib.sha256(eval_s.encode("utf-8")).hexdigest(),
         },
     }
+    attribution = attribution_text(cfg, stats)
+    manifest["attribution_sha256"] = hashlib.sha256(attribution.encode("utf-8")).hexdigest()
     res = BuildResult(manifest=manifest, train=train, eval=ev, out_dir=out_dir)
+    res.attribution = attribution
     if dry_run:
         return res
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / "train.jsonl").write_text(train_s, encoding="utf-8")
-    (out_dir / "eval.jsonl").write_text(eval_s, encoding="utf-8")
+    (out_dir / "train.jsonl").write_bytes(train_s.encode("utf-8"))  # LF on Windows too: hashes match
+    (out_dir / "eval.jsonl").write_bytes(eval_s.encode("utf-8"))
     (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
+    (out_dir / "ATTRIBUTION.md").write_text(attribution, encoding="utf-8")
     return res
+
+
+_REPO_ROOT = Path(__file__).resolve().parents[3]
+
+
+def attribution_text(cfg: Dict[str, Any], stats: Dict[str, Any]) -> str:
+    """Per-source licence/origin; third-party sources carry their licence text (MIT etc. require it)."""
+    out = [f"# Attribution for dataset {cfg['name']}", "",
+           "| source | rows kept | licence | origin |", "|---|---|---|---|"]
+    third = []
+    for spec in cfg.get("sources", []):
+        name = spec.get("name")
+        kept = (stats.get(name) or {}).get("kept", 0)
+        if not kept:
+            continue
+        out.append(f"| {name} | {kept} | {spec.get('license', 'unknown')} | {spec.get('origin', '')} |")
+        if spec.get("license_file"):
+            third.append(spec)
+    for spec in third:
+        lf = Path(spec["license_file"])
+        lf = lf if lf.is_absolute() else _REPO_ROOT / lf
+        out += ["", f"## {spec['name']}", "", spec.get("attribution", ""), ""]
+        out.append("```\n" + (lf.read_text(encoding="utf-8").strip() if lf.is_file() else f"MISSING licence file {lf}") + "\n```")
+    return "\n".join(out) + "\n"

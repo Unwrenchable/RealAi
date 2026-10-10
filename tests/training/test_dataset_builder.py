@@ -96,7 +96,7 @@ def test_real_run_writes_only_inside_home(tmp_path, home):
     res = build(_cfg(tmp_path, [_qa("q", "answer here"), _qa("q2", "another answer")]), today="2026-10-10")
     out = home / "datasets" / "t-2026-10-10"
     assert res.out_dir == out
-    assert sorted(p.name for p in out.iterdir()) == ["eval.jsonl", "manifest.json", "train.jsonl"]
+    assert sorted(p.name for p in out.iterdir()) == ["ATTRIBUTION.md", "eval.jsonl", "manifest.json", "train.jsonl"]
     files = {p for p in tmp_path.rglob("*") if p.is_file()}
     assert all(str(p).startswith(str(home)) or p.name == "src.jsonl" for p in files)
     m = json.loads((out / "manifest.json").read_text())
@@ -175,13 +175,19 @@ def test_hive_run_gate(tmp_path, home):
     assert m["sources"]["h"]["kept"] == 1 and m["sources"]["h"]["dropped_quality_gate"] == 1
 
 
-def test_example_config_thirdparty_persona_off():
+def test_example_config_thirdparty_persona_attributed():
     from pathlib import Path
 
     cfg = json.loads((Path(__file__).resolve().parents[2] / "config" / "dataset_builder.example.json").read_text(encoding="utf-8"))
     src = {s["name"]: s for s in cfg["sources"]}
-    assert src["agency_import_thirdparty"]["enabled"] is False
-    assert "agency_import.json" in src["realai_agents"]["exclude"]
+    aa = src["agency_import_thirdparty"]
+    assert aa["license"].startswith("MIT") and aa["license_file"] and "AgentLand" in aa["attribution"]
+    assert (Path(__file__).resolve().parents[2] / aa["license_file"]).is_file()
+    names = [s["name"] for s in cfg["sources"]]
+    for s in cfg["sources"]:
+        if s["type"] == "agent_docs" and s["name"] != "agency_import_thirdparty":
+            assert "agency_import.json" in s["exclude"], s["name"]  # MIT rows only via the attributed source
+    assert names.index("agency_import_thirdparty") < min(names.index(s["name"]) for s in cfg["sources"] if s["type"] == "agent_docs" and s["name"] != "agency_import_thirdparty")
     assert cfg["allow_vendor_chat"] is False
 
 
@@ -193,3 +199,15 @@ def test_agent_docs_exclude(tmp_path, home):
     cfg = {"name": "t", "min_tokens": 1, "sources": [{"name": "a", "type": "agent_docs", "paths": [str(d)], "exclude": ["agency_import.json"]}]}
     res = build(cfg, dry_run=True)
     assert "Foreign" not in json.dumps(res.train + res.eval) and res.manifest["totals"]["kept"] == 1
+
+
+def test_attribution_written(tmp_path, home):
+    d = tmp_path / "a.json"
+    d.write_text(json.dumps([{"name": "P", "description": "Some persona text here."}]))
+    lic = tmp_path / "LIC.txt"
+    lic.write_text("MIT License\nCopyright (c) X")
+    cfg = {"name": "t", "min_tokens": 1, "sources": [{"name": "p", "type": "agent_docs", "paths": [str(d)],
+           "license": "MIT", "attribution": "From X.", "license_file": str(lic)}]}
+    res = build(cfg)
+    text = (res.out_dir / "ATTRIBUTION.md").read_text()
+    assert "From X." in text and "Copyright (c) X" in text and "| p | 1 | MIT |" in text

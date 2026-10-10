@@ -7,10 +7,15 @@
   "near_dup_threshold": 0.85,
   "allow_vendor_chat": false,
   "tokenizer": "Qwen/Qwen2.5-1.5B-Instruct",
-  "redact_usernames": [],
+  "redact_usernames": [
+    "tsmit",
+    "tsmithtravis555"
+  ],
   "roots": {
-    "realai": "C:/RealAI-clean",
-    "repos": "C:/Users/<USER>/src"
+    "realai": "C:/temp/realai-dsb-sources",
+    "repos": "C:/Users/tsmit",
+    "clean": "C:/RealAI-clean",
+    "agent_tools": "C:/Users/tsmit/agent-tools-main/agent-tools-main"
   },
   "sources": [
     {
@@ -23,12 +28,22 @@
       ]
     },
     {
+      "name": "ability_surface_modules",
+      "type": "jsonl",
+      "license": "realai-own",
+      "paths": [
+        "{realai}/modules/training/datasets/*.jsonl",
+        "{realai}/realai/training/data/*.jsonl",
+        "{realai}/realai/datasets/processed/instructions.jsonl"
+      ]
+    },
+    {
       "name": "hive_expand_run",
       "type": "hive_run_dir",
       "license": "realai-own",
       "min_grounding": 0.3,
       "paths": [
-        "{realai}/training/data/provider_traces/_hive_expand_run"
+        "{clean}/training/data/provider_traces/_hive_expand_run"
       ]
     },
     {
@@ -90,7 +105,8 @@
       "name": "rackup_rules",
       "type": "rackup_rules",
       "license": "realai-own",
-      "origin": "realai/plugins/rackup_coach pyramid, leagues, league_validate"
+      "origin": "realai/plugins/rackup_coach pyramid, leagues, league_validate",
+      "paths": []
     },
     {
       "name": "agency_import_thirdparty",
@@ -111,10 +127,10 @@
       "type": "agent_docs",
       "license": "unwrenchable-own (agent-tools: owner proprietary/non-commercial; internal training OK, do not redistribute dataset)",
       "paths": [
-        "{repos}/agent-tools/.agentx",
-        "{repos}/agent-tools/.github/agents",
-        "{repos}/agent-tools/agents",
-        "{repos}/agent-tools/.github/copilot-instructions.md"
+        "{agent_tools}/.agentx",
+        "{agent_tools}/.github/agents",
+        "{agent_tools}/agents",
+        "{agent_tools}/.github/copilot-instructions.md"
       ],
       "exclude": [
         "agency_import.json"
@@ -149,7 +165,7 @@
     {
       "name": "persona_dump_filtered",
       "type": "filtered_text",
-      "enabled": false,
+      "enabled": true,
       "license": "realai-own (Unwrenchable/RealAi, MIT) incl. agency-agents-derived personas (MIT)",
       "paths": [
         "{realai}/datasets/_sources/persona_dump.jsonl"
@@ -167,9 +183,24 @@
       "paths": [
         "{realai}/docs_from_dotfolders/**/*.jsonl"
       ]
+    },
+    {
+      "name": "other_repo_agents",
+      "type": "agent_docs",
+      "license": "unwrenchable-own",
+      "paths": [
+        "{repos}/cookbook/.github",
+        "{repos}/overseer-bot-ai/agents",
+        "{repos}/overseer-bot-ai/.github",
+        "{repos}/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/.github"
+      ],
+      "exclude": [
+        "agency_import.json"
+      ]
     }
   ],
   "notes": [
-    "Licences checked 2026-10-10: agency-agents MIT (attribution in ATTRIBUTION.md); agent-tools is Travis's own non-commercial/proprietary repo; RealAi MIT."
+    "Licences checked 2026-10-10: agency-agents MIT (attribution in ATTRIBUTION.md); agent-tools is Travis's own non-commercial/proprietary repo; RealAi MIT.",
+    "Travis's PC config. roots.realai = the C:/temp clone (REALAI_HOME). Other roots are read-only. Persona dump: git show origin/feature/ui-desktop-promote:dataset.jsonl > datasets/_sources/persona_dump.jsonl (see docs/training/RUNBOOK.md)."
   ]
 }
