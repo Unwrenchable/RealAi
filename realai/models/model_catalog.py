@@ -22,6 +22,8 @@ _PKG = Path(__file__).resolve().parent
 _ROOT = _PKG.parent
 _SCAN = _ROOT / "scan_results"
 _REGISTRY = _ROOT / "config" / "realai_models.json"
+# Product-root twin (C:\RealAI-clean\config\realai_models.json)
+_PRODUCT_REGISTRY = _ROOT.parent / "config" / "realai_models.json"
 # Canonical weights live outside the nested/archive-heavy repo tree
 _MODELS_DIR = Path(
     os.environ.get("REALAI_MODELS_DIR", r"C:\models\checkpoints_lora")
@@ -149,7 +151,26 @@ def _load_registry_file() -> Dict[str, Any]:
 
 
 def save_registry(models: List[Dict[str, Any]]) -> Path:
-    """Persist registry for stable IDs across restarts."""
+    """Persist registry for stable IDs across restarts.
+
+    Merges with the existing file: ids already registered are never dropped,
+    and their extra metadata (base_model, note, …) is preserved.
+    """
+    new_by_id = {m["id"]: dict(m) for m in models if isinstance(m, dict) and m.get("id")}
+    merged: List[Dict[str, Any]] = []
+    for old in (_load_registry_file().get("models") or []):
+        if not isinstance(old, dict) or not old.get("id"):
+            continue
+        row = dict(old)
+        upd = new_by_id.pop(old["id"], None)
+        if upd:
+            row.update({k: v for k, v in upd.items() if v is not None or k not in row})
+        else:
+            row["available"] = _path_exists(row.get("gguf_path") or row.get("adapter_path"))
+            row["loaded_now"] = False
+        merged.append(row)
+    merged.extend(new_by_id.values())
+    models = merged
     payload = {
         "version": 1,
         "updated_at": _utc(),
@@ -163,7 +184,7 @@ def save_registry(models: List[Dict[str, Any]]) -> Path:
     }
     text = json.dumps(payload, indent=2)
     # Package registry (canonical for model_catalog) + product-root twin.
-    targets = [_REGISTRY, _ROOT.parent / "config" / "realai_models.json"]
+    targets = [_REGISTRY, _PRODUCT_REGISTRY]
     written = _REGISTRY
     for target in targets:
         try:
@@ -380,8 +401,14 @@ def _seed_candidates_from_local() -> List[Dict[str, Any]]:
     return cands
 
 
-def build_catalog(include_incomplete: bool = False) -> Dict[str, Any]:
-    """Build OpenAI-compatible models list with RealAI IDs."""
+def build_catalog(include_incomplete: bool = False, persist: bool = False) -> Dict[str, Any]:
+    """Build OpenAI-compatible models list with RealAI IDs.
+
+    Read-only by default: ``config/realai_models.json`` is only written when
+    ``persist=True`` (see :func:`refresh_registry`). Registry rows whose weights
+    are not on this machine are kept and marked ``available: false`` instead of
+    being dropped.
+    """
     # Prefer live GGUFs under C:\models\checkpoints_lora over stale scan maps.
     candidates = _seed_candidates_from_local()
     if not candidates:
@@ -609,6 +636,10 @@ def build_catalog(include_incomplete: bool = False) -> Dict[str, Any]:
             },
         })
 
+    # Keep every registered id: rows from config/realai_models.json that the
+    # local scan did not produce are listed with available=false (never dropped).
+    _merge_registry_rows(models, used_ids)
+
     # Aliases for convenience (legacy + short names → public RealAI ids)
     aliases = {
         "realai-default": "realai-default-coder",
@@ -669,22 +700,107 @@ def build_catalog(include_incomplete: bool = False) -> Dict[str, Any]:
         },
     }
 
-    # persist slim registry
-    try:
-        save_registry([
-            {
-                "id": m["id"],
-                "gguf_path": (m.get("realai") or {}).get("gguf_path"),
-                "gguf_filename": (m.get("realai") or {}).get("gguf_filename"),
-                "family": (m.get("realai") or {}).get("family"),
-                "loaded_now": (m.get("realai") or {}).get("loaded_now"),
-            }
-            for m in models
-        ])
-    except Exception:
-        pass
+    if persist:
+        try:
+            save_registry([_slim_row(m) for m in models])
+        except Exception:
+            pass
 
     return catalog
+
+
+
+_REGISTRY_EXTRA_KEYS = (
+    "base_model", "adapter_path", "trained", "stock_copy_of", "note",
+    "dataset", "merged_path", "created",
+)
+
+
+def _path_exists(p: Optional[str]) -> bool:
+    if not p:
+        return False
+    try:
+        return Path(str(p)).exists()
+    except Exception:
+        return False
+
+
+def _slim_row(m: Dict[str, Any]) -> Dict[str, Any]:
+    r = m.get("realai") or {}
+    row: Dict[str, Any] = {
+        "id": m["id"],
+        "gguf_path": r.get("gguf_path"),
+        "gguf_filename": r.get("gguf_filename"),
+        "family": r.get("family"),
+        "loaded_now": r.get("loaded_now"),
+    }
+    if "available" in r:
+        row["available"] = r.get("available")
+    for k in _REGISTRY_EXTRA_KEYS:
+        if r.get(k) is not None:
+            row[k] = r.get(k)
+    return row
+
+
+def _merge_registry_rows(models: List[Dict[str, Any]], used_ids: set) -> None:
+    """Union registry-file rows into ``models`` in place.
+
+    * Scanned entries get registry metadata (base_model, trained, note, …) and
+      ``available`` from the filesystem.
+    * Registry-only rows are appended with ``available`` reflecting whether the
+      gguf/adapter path exists here, and ``loaded_now=False``.
+    """
+    reg = _load_registry_file()
+    rows = [r for r in (reg.get("models") or []) if isinstance(r, dict) and r.get("id")]
+    by_id = {r["id"]: r for r in rows}
+    for m in models:
+        rm = m.setdefault("realai", {})
+        row = by_id.get(m["id"])
+        if row:
+            for k in _REGISTRY_EXTRA_KEYS:
+                if row.get(k) is not None and rm.get(k) is None:
+                    rm[k] = row[k]
+        if "available" not in rm:
+            p = rm.get("gguf_path") or rm.get("adapter_path") or rm.get("model_dir")
+            rm["available"] = True if rm.get("role") == "embeddings" else (_path_exists(p) if p else True)
+    for row in rows:
+        mid = row["id"]
+        if mid in used_ids:
+            continue
+        used_ids.add(mid)
+        path = row.get("gguf_path") or row.get("adapter_path")
+        fam = row.get("family") or "local"
+        meta: Dict[str, Any] = {
+            "display_name": mid,
+            "family": fam,
+            "role": "lora_adapter" if fam == "lora" else ("tts_weights" if fam == "tts" else "gguf_chat"),
+            "gguf_path": row.get("gguf_path"),
+            "gguf_filename": row.get("gguf_filename"),
+            "backend": "peft-lora" if fam == "lora" else "llama.cpp-vulkan",
+            "backend_model_id": row.get("gguf_filename"),
+            "loaded_now": False,
+            "available": _path_exists(path),
+            "source": "config/realai_models.json (registered)",
+        }
+        for k in _REGISTRY_EXTRA_KEYS:
+            if row.get(k) is not None:
+                meta[k] = row[k]
+        models.append({
+            "id": mid,
+            "object": "model",
+            "created": int(datetime.now(timezone.utc).timestamp()),
+            "owned_by": "realai",
+            "permission": [],
+            "root": mid,
+            "parent": row.get("base_model"),
+            "realai": meta,
+        })
+
+
+def refresh_registry(include_incomplete: bool = False) -> Path:
+    """Explicitly rebuild and persist ``config/realai_models.json``."""
+    build_catalog(include_incomplete=include_incomplete, persist=True)
+    return _REGISTRY
 
 
 def resolve_model_for_backend(requested: Optional[str]) -> Tuple[str, Dict[str, Any]]:
