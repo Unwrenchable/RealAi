@@ -125,6 +125,8 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
             st["error"] += 1
             st["error_msg:" + type(exc).__name__ + ": " + str(exc)[:120]] += 1
             continue
+        for drop in ctx.pop("_gate_drops", []):
+            st["dropped_quality_gate"] += 1
         for row in rows:
             st["read"] += 1
             msgs = row["messages"]
@@ -205,6 +207,7 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
             "dropped_secret": sum(s["dropped_secret"] for s in stats.values()),
             "dropped_long": sum(s["dropped_long"] for s in stats.values()),
             "dropped_short": sum(s["dropped_short"] for s in stats.values()),
+            "dropped_quality_gate": sum(s["dropped_quality_gate"] for s in stats.values()),
         },
         "secret_kinds_dropped": dict(secret_kinds),
         "sources": {k: dict(v) for k, v in stats.items()},

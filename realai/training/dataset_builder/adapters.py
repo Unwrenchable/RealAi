@@ -198,9 +198,11 @@ def agent_docs_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterator[Row
     """.agentx/, .github/{agents,instructions,prompts}, copilot-instructions.md, agents/ folders."""
     exts = {".agentx", ".json", ".md"}
     for root in _resolve(spec.get("paths", []), ctx["roots"]):
+        excl = [str(x) for x in spec.get("exclude", [])]
         files = [root] if root.is_file() else sorted(
             p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in exts and "node_modules" not in p.parts
         )
+        files = [f for f in files if not any(f.match(x) for x in excl)]
         for f in files:
             try:
                 text = f.read_text(encoding="utf-8", errors="replace")
@@ -235,7 +237,9 @@ def load_shot_catalog(path: Path) -> List[Dict[str, Any]]:
     if not m or not node:
         raise RuntimeError("shot catalog needs node (or pass a .json export)")
     js = "process.stdout.write(JSON.stringify(" + m.group(1) + "))"
-    out = subprocess.run([node, "-e", js], capture_output=True, text=True, timeout=60, check=True)
+    # Script via stdin: Windows caps command lines (~32K), the catalogue is larger.
+    out = subprocess.run([node, "-"], input=js, capture_output=True, text=True, encoding="utf-8",
+                         timeout=60, check=True)
     return json.loads(out.stdout)
 
 
@@ -313,3 +317,230 @@ def ide_chat_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterator[Row]:
     if not ctx.get("allow_vendor_chat"):
         return
     yield from jsonl_source(spec, ctx)
+
+
+# --------------------------------------------------------------------------- SOTD shot maps (geometry)
+_MAPS_ARRAY = re.compile(r"SOTD_SHOT_MAPS\s*:\s*[^=]+=\s*(\[.*?\n\]);", re.S)
+DIAMOND_IN = 12.5  # 9 ft table: 100 x 50 in playing surface, 8 x 4 diamonds
+
+
+def load_sotd_maps(path: Path) -> List[Dict[str, Any]]:
+    """SOTD_SHOT_MAPS from sotd-shot-maps.ts (array body is JSON) or a .json export."""
+    text = path.read_text(encoding="utf-8")
+    if path.suffix == ".json":
+        return json.loads(text)
+    m = _MAPS_ARRAY.search(text)
+    if not m:
+        raise RuntimeError("SOTD_SHOT_MAPS array not found")
+    body = re.sub(r",(\s*[\]}])", r"\1", m.group(1))
+    return json.loads(body)
+
+
+def _fmt_pt(p: Dict[str, float]) -> str:
+    x, y = float(p["x"]), float(p["y"])
+    return f"x={x:g}, y={y:g} ({x / DIAMOND_IN:.1f} diamonds from the head rail, {y / DIAMOND_IN:.1f} from the y=0 long rail)"
+
+
+def _dist(a, b) -> float:
+    return ((a["x"] - b["x"]) ** 2 + (a["y"] - b["y"]) ** 2) ** 0.5
+
+
+def _seg_point_dist(p, a, b) -> float:
+    ax, ay, bx, by, px, py = a["x"], a["y"], b["x"], b["y"], p["x"], p["y"]
+    dx, dy = bx - ax, by - ay
+    L = dx * dx + dy * dy
+    t = 0.0 if L == 0 else max(0.0, min(1.0, ((px - ax) * dx + (py - ay) * dy) / L))
+    return ((ax + t * dx - px) ** 2 + (ay + t * dy - py) ** 2) ** 0.5
+
+
+def _angle(u, v) -> Optional[float]:
+    import math
+
+    nu, nv = math.hypot(*u), math.hypot(*v)
+    if nu == 0 or nv == 0:
+        return None
+    c = max(-1.0, min(1.0, (u[0] * v[0] + u[1] * v[1]) / (nu * nv)))
+    return math.degrees(math.acos(c))
+
+
+_POCKETS = {(0, 0): "head corner on the y=0 rail", (0, 50): "head corner on the y=50 rail",
+            (100, 0): "foot corner on the y=0 rail", (100, 50): "foot corner on the y=50 rail",
+            (50, 0): "side pocket on the y=0 rail", (50, 50): "side pocket on the y=50 rail"}
+_KIND = {"ground": "cue ball rolls", "airborne": "cue ball is airborne (jump hop)", "object": "object ball travels",
+         "cue_after": "cue ball continues"}
+MAP_FRAME = ("Shot-map frame: 9-foot table, x = 0 at the head rail to 100 at the foot rail, y = 0 to 50 between "
+             "the long rails, units are inches; 1 diamond = 12.5 in.")
+
+
+def map_facts(m: Dict[str, Any], pocket_names: Optional[Dict[str, str]] = None,
+              routes: Optional[Dict[str, str]] = None) -> Iterator[List[Dict[str, str]]]:
+    """Q&A computed only from the map's own coordinates (no invented numbers)."""
+    n = m.get("name", m.get("id"))
+    balls = m.get("object_ball_positions") or []
+    cb = m.get("cue_ball_start")
+    if cb and balls:
+        lines = [f"Cue ball: {_fmt_pt(cb)}."]
+        for b in balls:
+            lines.append(f"{b['ballId']}-ball ({b.get('role', 'object')}): {_fmt_pt(b)}.")
+        yield _msgs(f"Using the shot map, where are the balls for the {n}?", "\n".join(lines))
+    segs = m.get("intended_path") or []
+    if segs:
+        blockers = [b for b in balls if b.get("role") == "blocker"]
+        steps = []
+        for i, s in enumerate(segs, 1):
+            line = f"{i}. {_KIND.get(s.get('kind'), 'path leg') if s.get('kind') else 'path leg'} from ({s['from']['x']:g}, {s['from']['y']:g}) to ({s['to']['x']:g}, {s['to']['y']:g}), {_dist(s['from'], s['to']):.1f} in"
+            if s.get("kind") == "airborne":
+                over = [b for b in blockers if _seg_point_dist(b, s["from"], s["to"]) <= 2.25]
+                if over:
+                    line += ", passing over the " + " and ".join(f"{b['ballId']}-ball" for b in over)
+            steps.append(line + ".")
+        pt = m.get("pocket_target")
+        if pt and m.get("shot_goal", "pocket") == "pocket":
+            key = (int(round(pt["x"])), int(round(pt["y"])))
+            steps.append("Target pocket: " + ((pocket_names or {}).get(m.get("id")) or _POCKETS.get(key, f"({pt['x']:g}, {pt['y']:g})")) + ".")
+        if (routes or {}).get(m.get("id")):
+            steps.append(routes[m["id"]])
+        yield _msgs(f"Trace the path of the {n} on the shot map.", "\n".join(steps))
+        air = [s for s in segs if s.get("kind") == "airborne"]
+        if air:
+            facts = []
+            for s in air:
+                over = [b for b in blockers if _seg_point_dist(b, s["from"], s["to"]) <= 2.25]
+                facts.append(
+                    f"Takeoff ({s['from']['x']:g}, {s['from']['y']:g}), landing ({s['to']['x']:g}, {s['to']['y']:g}): "
+                    f"a straight hop of {_dist(s['from'], s['to']):.1f} in"
+                    + (", directly over the " + " and ".join(f"{b['ballId']}-ball" for b in over) if over else "")
+                    + "."
+                )
+            yield _msgs(f"What does the cue ball jump over in the {n}, and how long is the hop?", "\n".join(facts))
+        # Cut angle from drawn paths: last cue segment into the object ball vs object segment to pocket.
+        obj = next((s for s in segs if s.get("kind") == "object"), None)
+        if obj:
+            into = [s for s in segs if s.get("kind") in {"ground", "airborne"} and _dist(s["to"], obj["from"]) < 0.6]
+            if into:
+                s = into[-1]
+                ang = _angle((s["to"]["x"] - s["from"]["x"], s["to"]["y"] - s["from"]["y"]),
+                             (obj["to"]["x"] - obj["from"]["x"], obj["to"]["y"] - obj["from"]["y"]))
+                if ang is not None:
+                    yield _msgs(
+                        f"How thin is the cut on the {n}?",
+                        f"From the drawn paths, the cue ball arrives at about {ang:.0f} degrees to the object ball's line to the pocket "
+                        f"({'nearly straight-in' if ang < 10 else 'a thin cut' if ang > 45 else 'a moderate cut'}).",
+                    )
+    rest = next((z for z in m.get("landing_zones") or [] if z.get("label") == "cb_rest"), None)
+    if rest:
+        yield _msgs(f"Where should the cue ball finish on the {n}?", f"Cue ball rest zone on the map: {_fmt_pt(rest)}.")
+
+
+@adapter("sotd_maps")
+def sotd_maps_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterator[Row]:
+    pocket_names: Dict[str, str] = {}
+    routes: Dict[str, str] = {}
+    for cat in _resolve(spec.get("catalog_paths", []), ctx["roots"]):
+        try:
+            shots = load_shot_catalog(cat)
+        except Exception:
+            continue
+        pocket_names.update({s["id"]: s["pocket"] for s in shots if s.get("pocket")})
+        routes.update({s["id"]: r for s in shots for r in s.get("setup", []) if str(r).startswith("Route:")})
+    for path in _resolve(spec.get("paths", []), ctx["roots"]):
+        for m in load_sotd_maps(path):
+            for msgs in map_facts(m, pocket_names, routes):
+                yield {"messages": [{"role": "system", "content": MAP_FRAME}] + msgs,
+                       "meta": {"file": path.name, "shot": m.get("id"), "category": m.get("category")}}
+
+
+# --------------------------------------------------------------------------- RackUp rules from code
+@adapter("rackup_rules")
+def rackup_rules_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterator[Row]:
+    """Pyramid + league/ROC rules read from the live rackup_coach modules (values from code only)."""
+    from realai.plugins.rackup_coach import leagues, pyramid
+    from realai.plugins.rackup_coach.abilities import league_validate
+
+    mx = pyramid.pyramid_matrix()
+    for row in mx["skill_matrix"]:
+        sk = row["skill_level"]
+        yield {"messages": _msgs(f"How many points to win RackUp Pyramid at {sk} level?",
+                                 f"{row['7ft_10ball_points']} on a 7-foot table (10-ball rack), {row['9ft_15ball_points']} on a 9-foot table (15-ball rack)."),
+               "meta": {"rule": "pyramid_points"}}
+        yield {"messages": _msgs(f"Is call-shot required in Pyramid at {sk} level?",
+                                 {"no": "No, call-shot is not required.", "optional": "Call-shot is optional.", "yes": "Yes, call-shot is on."}[row["call_shot"]]),
+               "meta": {"rule": "pyramid_call_shot"}}
+        yield {"messages": _msgs(f"What rating weight does a {sk} Pyramid result carry?", f"A {sk} Pyramid result is weighted {row['rating_weight']} in rating updates."),
+               "meta": {"rule": "pyramid_weight"}}
+        for table in ("7ft", "9ft"):
+            cfg = pyramid.resolve_pyramid(table_size=table, skill_level=sk)
+            tips = pyramid.classical_mindset_tips(cfg)
+            yield {"messages": _msgs(f"Give me Pyramid strategy tips for a {sk} player on a {table} table.", _bullets(tips)),
+                   "meta": {"rule": "pyramid_tips"}}
+    sc = mx["scoring"]
+    yield {"messages": _msgs("How is RackUp Pyramid scored?",
+                             f"Classical scoring: a pocketed ball scores its number, except the 1-ball, which scores {sc['ball_1']}. "
+                             f"Designated cue ball only. First to the target score wins. A 7-foot table uses a {mx['table_to_rack']['7ft']}-ball rack; a 9-foot table uses a {mx['table_to_rack']['9ft']}-ball rack."),
+           "meta": {"rule": "pyramid_scoring"}}
+    for rack in (10, 15):
+        yield {"messages": _msgs(f"How many points are in a full {rack}-ball Pyramid rack?", f"{pyramid.max_rack_points(rack)} points."),
+               "meta": {"rule": "pyramid_rack_points"}}
+    # Display bands: derive ranges by evaluating the code.
+    bands, prev, start = [], None, leagues.RACKUP_MIN
+    for r in range(leagues.RACKUP_MIN, leagues.RACKUP_MAX + 1):
+        b = leagues.display_band(r)
+        if b != prev and prev is not None:
+            bands.append(f"{prev}: {start}–{r - 1}")
+            start = r
+        prev = b
+    bands.append(f"{prev}: {start}–{leagues.RACKUP_MAX}")
+    yield {"messages": _msgs("What are the ROC rating display bands?",
+                             "\n".join(bands) + f"\nChips read like \"{leagues.format_rating_chip(547)}\". Bands are labels only; they do not drive matchmaking or rating updates."),
+           "meta": {"rule": "roc_bands"}}
+    for sl, roc in sorted(leagues.APA_TO_ROC.items()):
+        yield {"messages": _msgs(f"What ROC rating does an APA skill level {sl} start near?",
+                                 f"About {roc} on the ROC continuous scale (an onboarding estimate, not an official handicap)."),
+               "meta": {"rule": "apa_to_roc"}}
+    yield {"messages": _msgs("What ROC rating does a new player start at?", f"{leagues.DEFAULT_SEED}, on a scale clamped to {leagues.RACKUP_MIN}–{leagues.RACKUP_MAX}."),
+           "meta": {"rule": "roc_seed"}}
+    doc = (league_validate.__doc__ or "").strip()
+    if doc:
+        yield {"messages": _msgs("In what order is a league or ROC match finalized?", doc), "meta": {"rule": "league_finalize"}}
+    vdoc = (league_validate.validate_league_submission.__doc__ or "").strip()
+    if vdoc:
+        yield {"messages": _msgs("What does league_validate need in its payload?", vdoc), "meta": {"rule": "league_payload"}}
+
+
+# --------------------------------------------------------------------------- hive run dirs (req/resp pairs)
+_WORD = re.compile(r"[A-Za-z0-9_./:\-]{5,}")
+
+
+def grounding_overlap(user: str, answer: str) -> float:
+    """Share of distinctive GROUNDING terms that the answer actually uses."""
+    g = user.split("GROUNDING", 1)[-1]
+    terms = {t.lower().strip(".:,") for t in _WORD.findall(g)}
+    terms = {t for t in terms if t not in {"answer", "which", "there", "their", "should"}}
+    if not terms:
+        return 1.0
+    a = answer.lower()
+    return sum(1 for t in terms if t in a) / len(terms)
+
+
+@adapter("hive_run_dir")
+def hive_run_dir_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterator[Row]:
+    """N_*_req.json + N_*_resp.json captured hive turns. Quality gate: grounding overlap >= min_grounding."""
+    min_g = float(spec.get("min_grounding", 0.3))
+    for d in _resolve(spec.get("paths", []), ctx["roots"]):
+        for req in sorted(d.glob("*_req.json")):
+            resp = req.with_name(req.name.replace("_req.json", "_resp.json"))
+            if not resp.is_file():
+                continue
+            try:
+                rq = json.loads(req.read_text(encoding="utf-8-sig"))
+                rs = json.loads(resp.read_text(encoding="utf-8-sig"))
+                ans = rs["choices"][0]["message"]["content"]
+            except Exception:
+                continue
+            msgs = [m for m in rq.get("messages", []) if m.get("role") in {"system", "user"}] + [{"role": "assistant", "content": ans}]
+            user = " ".join(m["content"] for m in msgs if m["role"] == "user")
+            score = grounding_overlap(user, ans)
+            if score < min_g:
+                ctx.setdefault("_gate_drops", []).append({"file": req.name, "grounding": round(score, 2)})
+                continue
+            yield {"messages": row_to_messages({"messages": msgs}) or msgs, "meta": {"file": req.name, "grounding": round(score, 2)}}

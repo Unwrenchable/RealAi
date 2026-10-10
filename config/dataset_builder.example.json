@@ -13,30 +13,147 @@
     "repos": "C:/Users/<USER>/src"
   },
   "sources": [
-    {"name": "provider_traces", "type": "jsonl", "license": "realai-own", "origin": "hive provider traces",
-     "paths": ["{realai}/training/data/provider_traces/*.jsonl"]},
-    {"name": "ability_surface", "type": "jsonl", "license": "realai-own",
-     "paths": ["{realai}/training/data/ability_surface.jsonl"]},
-    {"name": "packA_coach", "type": "jsonl", "license": "realai-own",
-     "paths": ["{realai}/training/data/packA_coach/packA_coach.jsonl"]},
-    {"name": "realai_finetune_dataset", "type": "jsonl", "license": "realai-own (model-assisted)",
-     "paths": ["{realai}/training/data/realai_finetune_dataset.jsonl"]},
-    {"name": "self_builder_sessions", "type": "self_builder_sessions", "license": "realai-own", "require_success": true,
-     "paths": ["{realai}/realai/datasets/processed/self_builder_sessions.jsonl"]},
-    {"name": "rackup_shots", "type": "rackup_shots", "license": "rackup-own", "origin": "Rack_em_up shot-catalog.ts",
-     "convention": "Head = the break end; foot = the racking end. Left/right as you stand at the head rail facing the foot.",
-     "paths": ["{repos}/Rack_em_up/rackup-backend/src/shots/shot-catalog.ts"]},
-    {"name": "agent_tools_agents", "type": "agent_docs", "license": "unwrenchable-own",
-     "paths": ["{repos}/agent-tools/.agentx", "{repos}/agent-tools/.github/agents", "{repos}/agent-tools/agents",
-               "{repos}/agent-tools/.github/copilot-instructions.md"]},
-    {"name": "afc_agents", "type": "agent_docs", "license": "unwrenchable-own",
-     "paths": ["{repos}/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/.agentx", "{repos}/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/agents",
-               "{repos}/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/.github/agents"]},
-    {"name": "realai_agents", "type": "agent_docs", "license": "realai-own",
-     "paths": ["{realai}/agents/agentx", "{realai}/.github/agents", "{realai}/.github/instructions"]},
-    {"name": "persona_dump_filtered", "type": "filtered_text", "enabled": false, "license": "realai-own (generated)",
-     "paths": ["{realai}/dataset.jsonl"], "max_table_ratio": 0.2, "min_answer_chars": 80},
-    {"name": "ide_chat_logs", "type": "ide_chat", "license": "third-party-vendor (excluded by default)",
-     "paths": ["{realai}/docs_from_dotfolders/**/*.jsonl"]}
+    {
+      "name": "provider_traces",
+      "type": "jsonl",
+      "license": "realai-own",
+      "origin": "hive provider traces",
+      "paths": [
+        "{realai}/training/data/provider_traces/*.jsonl"
+      ]
+    },
+    {
+      "name": "hive_expand_run",
+      "type": "hive_run_dir",
+      "license": "realai-own",
+      "min_grounding": 0.3,
+      "paths": [
+        "{realai}/training/data/provider_traces/_hive_expand_run"
+      ]
+    },
+    {
+      "name": "ability_surface",
+      "type": "jsonl",
+      "license": "realai-own",
+      "paths": [
+        "{realai}/training/data/ability_surface.jsonl"
+      ]
+    },
+    {
+      "name": "packA_coach",
+      "type": "jsonl",
+      "license": "realai-own",
+      "paths": [
+        "{realai}/training/data/packA_coach/packA_coach.jsonl"
+      ]
+    },
+    {
+      "name": "realai_finetune_dataset",
+      "type": "jsonl",
+      "license": "realai-own (model-assisted)",
+      "paths": [
+        "{realai}/training/data/realai_finetune_dataset.jsonl"
+      ]
+    },
+    {
+      "name": "self_builder_sessions",
+      "type": "self_builder_sessions",
+      "license": "realai-own",
+      "require_success": true,
+      "paths": [
+        "{realai}/realai/datasets/processed/self_builder_sessions.jsonl"
+      ]
+    },
+    {
+      "name": "rackup_shots",
+      "type": "rackup_shots",
+      "license": "rackup-own",
+      "origin": "Rack_em_up shot-catalog.ts",
+      "convention": "Head = the break end; foot = the racking end. Left/right as you stand at the head rail facing the foot.",
+      "paths": [
+        "{repos}/Rack_em_up/rackup-backend/src/shots/shot-catalog.ts"
+      ]
+    },
+    {
+      "name": "sotd_maps",
+      "type": "sotd_maps",
+      "license": "rackup-own",
+      "origin": "Rack_em_up sotd-shot-maps.ts geometry",
+      "paths": [
+        "{repos}/Rack_em_up/rackup-backend/src/realai/v2/sotd-shot-maps.ts"
+      ],
+      "catalog_paths": [
+        "{repos}/Rack_em_up/rackup-backend/src/shots/shot-catalog.ts"
+      ]
+    },
+    {
+      "name": "rackup_rules",
+      "type": "rackup_rules",
+      "license": "realai-own",
+      "origin": "realai/plugins/rackup_coach pyramid, leagues, league_validate"
+    },
+    {
+      "name": "agent_tools_agents",
+      "type": "agent_docs",
+      "license": "unwrenchable-own",
+      "paths": [
+        "{repos}/agent-tools/.agentx",
+        "{repos}/agent-tools/.github/agents",
+        "{repos}/agent-tools/agents",
+        "{repos}/agent-tools/.github/copilot-instructions.md"
+      ]
+    },
+    {
+      "name": "afc_agents",
+      "type": "agent_docs",
+      "license": "unwrenchable-own",
+      "paths": [
+        "{repos}/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/.agentx",
+        "{repos}/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/agents",
+        "{repos}/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS/.github/agents"
+      ]
+    },
+    {
+      "name": "realai_agents",
+      "type": "agent_docs",
+      "license": "realai-own",
+      "paths": [
+        "{realai}/agents/agentx",
+        "{realai}/.github/agents",
+        "{realai}/.github/instructions"
+      ],
+      "exclude": [
+        "agency_import.json"
+      ]
+    },
+    {
+      "name": "agency_import_thirdparty",
+      "type": "agent_docs",
+      "enabled": false,
+      "license": "third-party persona import (UNCHECKED - keep off until licence verified)",
+      "paths": [
+        "{realai}/agents/agentx/agency_import.json",
+        "{realai}/.agentx/agency_import.json"
+      ]
+    },
+    {
+      "name": "persona_dump_filtered",
+      "type": "filtered_text",
+      "enabled": false,
+      "license": "realai-own (generated)",
+      "paths": [
+        "{realai}/dataset.jsonl"
+      ],
+      "max_table_ratio": 0.2,
+      "min_answer_chars": 80
+    },
+    {
+      "name": "ide_chat_logs",
+      "type": "ide_chat",
+      "license": "third-party-vendor (excluded by default)",
+      "paths": [
+        "{realai}/docs_from_dotfolders/**/*.jsonl"
+      ]
+    }
   ]
 }

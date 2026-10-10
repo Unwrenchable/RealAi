@@ -125,3 +125,71 @@ def test_grounded_doc_and_shot_pairs():
     out = list(shot_pairs(shot))
     assert "Route: CB → 1-ball → right long rail → left side pocket." in out[0][1]["content"]
     assert out[-1][1]["content"] == "The 1 drops."
+
+
+# --- new sources -------------------------------------------------------------
+
+def test_sotd_map_geometry_facts():
+    from realai.training.dataset_builder.adapters import map_facts
+
+    m = {"id": "x", "name": "Jump", "cue_ball_start": {"x": 10, "y": 10},
+         "object_ball_positions": [{"ballId": 1, "x": 40, "y": 10, "role": "object"}, {"ballId": 5, "x": 25, "y": 10.5, "role": "blocker"}],
+         "intended_path": [{"from": {"x": 10, "y": 10}, "to": {"x": 20, "y": 10}, "kind": "ground"},
+                           {"from": {"x": 20, "y": 10}, "to": {"x": 30, "y": 10}, "kind": "airborne"},
+                           {"from": {"x": 30, "y": 10}, "to": {"x": 40, "y": 10}, "kind": "ground"},
+                           {"from": {"x": 40, "y": 10}, "to": {"x": 50, "y": 0}, "kind": "object"}],
+         "pocket_target": {"x": 50, "y": 0}, "landing_zones": [{"x": 45, "y": 12, "label": "cb_rest"}]}
+    out = {q[0]["content"]: q[1]["content"] for q in map_facts(m)}
+    assert "directly over the 5-ball" in out["What does the cue ball jump over in the Jump, and how long is the hop?"]
+    assert "10.0 in" in out["What does the cue ball jump over in the Jump, and how long is the hop?"]
+    assert "about 45 degrees" in out["How thin is the cut on the Jump?"]
+    assert "side pocket on the y=0 rail" in out["Trace the path of the Jump on the shot map."]
+    m2 = dict(m, intended_path=[{"from": {"x": 10, "y": 10}, "to": {"x": 40, "y": 10}}])
+    traced = {q[0]["content"]: q[1]["content"] for q in map_facts(m2, routes={"x": "Route: CB → 1-ball → pocket."})}
+    assert "path leg" in traced["Trace the path of the Jump on the shot map."]  # no invented ball labels
+    assert traced["Trace the path of the Jump on the shot map."].endswith("Route: CB → 1-ball → pocket.")
+    assert "How thin is the cut on the Jump?" not in traced
+
+
+def test_rackup_rules_match_code():
+    from realai.plugins.rackup_coach import pyramid
+    from realai.training.dataset_builder.adapters import rackup_rules_source
+
+    rows = list(rackup_rules_source({}, {"roots": {}}))
+    qa = {r["messages"][0]["content"]: r["messages"][1]["content"] for r in rows}
+    want = pyramid.POINTS_TO_WIN["pro"]
+    assert qa["How many points to win RackUp Pyramid at pro level?"].startswith(f"{want['7ft']} on a 7-foot")
+    assert "scores 11" in qa["How is RackUp Pyramid scored?"]
+    assert "Elite" in qa["What are the ROC rating display bands?"]
+
+
+def test_hive_run_gate(tmp_path, home):
+    d = tmp_path / "run"
+    d.mkdir()
+    user = "Q?\n\nGROUNDING:\n- POST /v1/plugins/rackup-coach on 127.0.0.1:8001\n- rating_update owned by RealAI"
+    for i, ans in ((1, "RealAI owns rating_update; POST /v1/plugins/rackup-coach on 127.0.0.1:8001."), (2, "Hive is up, 14 agents.")):
+        (d / f"{i}_x_req.json").write_text(json.dumps({"messages": [{"role": "user", "content": user}]}))
+        (d / f"{i}_x_resp.json").write_text(json.dumps({"choices": [{"message": {"role": "assistant", "content": ans}}]}))
+    cfg = {"name": "t", "min_tokens": 1, "sources": [{"name": "h", "type": "hive_run_dir", "paths": [str(d)]}]}
+    m = build(cfg, dry_run=True).manifest
+    assert m["sources"]["h"]["kept"] == 1 and m["sources"]["h"]["dropped_quality_gate"] == 1
+
+
+def test_example_config_thirdparty_persona_off():
+    from pathlib import Path
+
+    cfg = json.loads((Path(__file__).resolve().parents[2] / "config" / "dataset_builder.example.json").read_text(encoding="utf-8"))
+    src = {s["name"]: s for s in cfg["sources"]}
+    assert src["agency_import_thirdparty"]["enabled"] is False
+    assert "agency_import.json" in src["realai_agents"]["exclude"]
+    assert cfg["allow_vendor_chat"] is False
+
+
+def test_agent_docs_exclude(tmp_path, home):
+    d = tmp_path / "agentx"
+    d.mkdir()
+    (d / "agents.json").write_text(json.dumps([{"name": "Own", "description": "Our own agent does things."}]))
+    (d / "agency_import.json").write_text(json.dumps([{"name": "Foreign", "description": "Imported persona text here."}]))
+    cfg = {"name": "t", "min_tokens": 1, "sources": [{"name": "a", "type": "agent_docs", "paths": [str(d)], "exclude": ["agency_import.json"]}]}
+    res = build(cfg, dry_run=True)
+    assert "Foreign" not in json.dumps(res.train + res.eval) and res.manifest["totals"]["kept"] == 1
