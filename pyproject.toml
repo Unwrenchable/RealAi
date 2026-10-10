@@ -9,6 +9,10 @@ description = "RealAI Hive — unified orchestrator, agents, abilities, GPU stac
 readme = "README.md"
 requires-python = ">=3.12,<4.0"
 
+[project.optional-dependencies]
+cli = ["click>=8"]
+test = ["pytest>=8", "click>=8", "pyyaml>=6"]
+
 [project.scripts]
 realai = "realai.cli.hive.app:main"
 realai-cli = "realai.cli.hive.app:main"
