@@ -66,11 +66,13 @@ Stop the `:8080` llama-server first (Ctrl+C in its window). It holds about 6 GB 
 & $PY -m realai.training.train_sft train --dataset $DS --base-model $BASE --device directml --dml-adapter "RX 6700"
 ```
 * Logs go to the console and to `runs\sft-<dataset>\train.log`. Step 1 prints s/step and an ETA.
-* VRAM: the fp16 base alone is 3.1 GB; plan on 4–6 GB total. `:8080` (7B Q5) holds about 9.5 GB of the 12 GB,
-  so **training needs `:8080` stopped**. Out of memory drops max_len to 768, then 512, automatically.
-* Data is short (measured with the Qwen tokenizer: mean 119 tokens/row, p95 253, max 852; 201k tokens/epoch,
-  117k of them trained assistant tokens). 318 optimizer steps (106/epoch × 3, accum 16).
-  Estimate: about 30–90 min on the 6700 XT (DirectML step speed is unmeasured; step 1 prints s/step + ETA).
+* Smoke first (about 3 min, saves nothing):
+  `& $PY -m realai.training.train_sft train --dataset $DS --base-model $BASE --device directml --dml-adapter "RX 6700" --max-steps 10 --eval-smoke --eval-rows 20 --out runs\smoke-10`
+* Measured 2026-10-10 on the RX 6700 XT (fp32 base, LoRA, grad checkpointing, batch 1 × accum 16):
+  base eval loss 3.79 → 3.58 after 10 steps, train loss about 3.0, **11.3 s/step, about 60 min for the full 318 steps**
+  (+ about 1 min eval per epoch). VRAM about 11.3 GB of 12 (whole adapter), so **`:8080` must be stopped**.
+  Rows that OOM at 1024 are retried at 768, then 512 (one 849-token row did that in the smoke), then skipped.
+* Data is short (mean 119 tokens/row, p95 253, max 852).
 * Output: `runs\sft-<dataset>\adapter_best` (lowest eval loss), `adapter_last`, `train_result.json`.
 
 ## 5. Eval against the base model on the held-out set

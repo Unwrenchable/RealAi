@@ -180,7 +180,8 @@ def pick_device(kind: str, dml_adapter: str):
 
 def _is_oom(exc: BaseException) -> bool:
     s = str(exc).lower()
-    return any(k in s for k in ("out of memory", "not enough memory", "failed to allocate", "e_outofmemory", "887a0005", "device removed"))
+    return any(k in s for k in ("out of memory", "not enough memory", "failed to allocate", "could not allocate",
+                                "video memory", "e_outofmemory", "887a0005", "device removed"))
 
 
 # ----------------------------------------------------------------------------- plan
@@ -207,22 +208,41 @@ def plan(args, recipe: Recipe) -> Dict[str, Any]:
 
 
 # ----------------------------------------------------------------------------- train
-def _batches(rows, tok, max_len, bs, shuffle, seed):
-    order = list(range(len(rows)))
-    if shuffle:
-        random.Random(seed).shuffle(order)
-    enc = []
-    for i in order:
-        ids, lab = encode_assistant_only(tok, rows[i]["messages"], max_len)
-        if any(x != -100 for x in lab):
-            enc.append((ids, lab))
-    for k in range(0, len(enc), bs):
-        chunk = enc[k: k + bs]
-        L = max(len(c[0]) for c in chunk)
-        pad = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
-        yield ([c[0] + [pad] * (L - len(c[0])) for c in chunk],
-               [c[1] + [-100] * (L - len(c[1])) for c in chunk],
-               [[1] * len(c[0]) + [0] * (L - len(c[0])) for c in chunk])
+def _parts(model):
+    """(backbone, lm_head) for a plain or PEFT-wrapped causal LM."""
+    m = model.get_base_model() if hasattr(model, "get_base_model") else model
+    return m.model, m.lm_head
+
+
+def sft_loss(model, ids: List[int], labels: List[int], device):
+    """Next-token CE on assistant positions only; returns (sum_loss_tensor, n_tokens).
+
+    Labels are NOT pre-shifted: position t predicts labels[t+1]. We gather the hidden states of
+    the positions that matter and run lm_head only there, so logits are [n_target, vocab] instead
+    of [seq, vocab] (151936 vocab -> ~600 MB per 1k tokens otherwise). The CE is written with
+    logsumexp/gather because torch-directml's cross_entropy(ignore_index=-100) returns garbage
+    (measured: ~12 vs 3-4 on CPU for the same logits)."""
+    import torch
+
+    pos = [t for t in range(len(ids) - 1) if labels[t + 1] != -100]
+    if not pos:
+        return None, 0
+    backbone, head = _parts(model)
+    h = backbone(input_ids=torch.tensor([ids], device=device)).last_hidden_state[0]
+    h = h.index_select(0, torch.tensor(pos, device=device))
+    logits = head(h).float()
+    tgt = torch.tensor([labels[t + 1] for t in pos], device=device)
+    nll = torch.logsumexp(logits, dim=-1) - logits.gather(1, tgt[:, None]).squeeze(1)
+    return nll.sum(), len(pos)
+
+
+def _encode_all(rows, tok, max_len):
+    out = []
+    for r in rows:
+        ids, lab = encode_assistant_only(tok, r["messages"], max_len)
+        if any(x != -100 for x in lab[1:]):
+            out.append((ids, lab))
+    return out
 
 
 def eval_loss(model, tok, rows, max_len, device) -> float:
@@ -231,20 +251,102 @@ def eval_loss(model, tok, rows, max_len, device) -> float:
     model.eval()
     tot, n = 0.0, 0
     with torch.no_grad():
-        for ids, lab, att in _batches(rows, tok, max_len, 1, False, 0):
-            t = lambda x: torch.tensor(x, device=device)
-            out = model(input_ids=t(ids), attention_mask=t(att), labels=t(lab))
-            k = sum(1 for x in lab[0][1:] if x != -100)
-            tot += float(out.loss.detach().to("cpu")) * k
-            n += k
+        for ids, lab in _encode_all(rows, tok, max_len):
+            loss, k = sft_loss(model, ids, lab, device)
+            if k:
+                tot += float(loss.to("cpu"))
+                n += k
     model.train()
     return tot / max(n, 1)
 
 
+class DmlAdamW:
+    """AdamW with only mul_/add_/addcmul_/addcdiv_ (no lerp_, which torch-directml runs on CPU)."""
+
+    def __init__(self, params, lr, betas=(0.9, 0.999), eps=1e-8, weight_decay=0.0):
+        import torch
+
+        self.params = [p for p in params]
+        self.param_groups = [{"lr": lr, "initial_lr": lr, "params": self.params}]
+        self.defaults = {"lr": lr}
+        self.b1, self.b2, self.eps, self.wd, self.t = betas[0], betas[1], eps, weight_decay, 0
+        self.m = [torch.zeros_like(p) for p in self.params]
+        self.v = [torch.zeros_like(p) for p in self.params]
+        self.state = {}
+
+    def zero_grad(self, set_to_none=True):
+        for p in self.params:
+            p.grad = None
+
+    def step(self):
+        import torch
+
+        self.t += 1
+        lr = self.param_groups[0]["lr"]
+        bc1, bc2 = 1 - self.b1 ** self.t, 1 - self.b2 ** self.t
+        with torch.no_grad():
+            for p, m, v in zip(self.params, self.m, self.v):
+                if p.grad is None:
+                    continue
+                g = p.grad
+                if self.wd:
+                    p.mul_(1 - lr * self.wd)
+                m.mul_(self.b1).add_(g, alpha=1 - self.b1)
+                v.mul_(self.b2).addcmul_(g, g, value=1 - self.b2)
+                denom = (v / bc2).sqrt_().add_(self.eps)
+                p.addcdiv_(m, denom, value=-lr / bc1)
+
+    def state_dict(self):
+        return {}
+
+
+class CosineWarmup:
+    """Linear warmup then cosine to 0 (same curve as transformers.get_cosine_schedule_with_warmup)."""
+
+    def __init__(self, opt, warmup: int, total: int):
+        self.opt, self.warmup, self.total, self.n = opt, max(1, warmup), max(1, total), 0
+        self.base = opt.param_groups[0]["lr"]
+        self._set()
+
+    def lr_at(self, n: int) -> float:
+        if n < self.warmup:
+            return self.base * n / self.warmup
+        prog = min(1.0, (n - self.warmup) / max(1, self.total - self.warmup))
+        return self.base * 0.5 * (1 + math.cos(math.pi * prog))
+
+    def _set(self):
+        for g in self.opt.param_groups:
+            g["lr"] = self.lr_at(self.n)
+
+    def step(self):
+        self.n += 1
+        self._set()
+
+    def get_last_lr(self):
+        return [self.opt.param_groups[0]["lr"]]
+
+
+def _vram_gb():
+    """Dedicated GPU memory in use (Windows perf counter, whole adapter); None elsewhere."""
+    if os.name != "nt":
+        return None
+    import subprocess
+
+    try:
+        out = subprocess.run(["powershell", "-NoProfile", "-Command",
+                              "((Get-Counter '\\GPU Adapter Memory(*)\\Dedicated Usage').CounterSamples | "
+                              "Measure-Object CookedValue -Maximum).Maximum"], capture_output=True, text=True, timeout=20)
+        return round(float(out.stdout.strip()) / 2 ** 30, 2)
+    except Exception:
+        return None
+
+
 def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
+    import gc
+
     import torch
     from peft import LoraConfig, get_peft_model
-    from transformers import AutoModelForCausalLM, AutoTokenizer, get_cosine_schedule_with_warmup
+    from transformers import AutoModelForCausalLM, AutoTokenizer
 
     torch.manual_seed(recipe.seed)
     device, dev_name = pick_device(recipe.device, recipe.dml_adapter)
@@ -254,44 +356,83 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
     tok = AutoTokenizer.from_pretrained(recipe.base_model)
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
-    dtype = torch.float32 if dev_name == "cpu" else torch.float16
-    model = AutoModelForCausalLM.from_pretrained(recipe.base_model, torch_dtype=dtype)
+    # fp32 on every device: DirectML fp16 training is unstable and the 1.5B fits (6.2 GB) with :8080 stopped.
+    model = AutoModelForCausalLM.from_pretrained(recipe.base_model, torch_dtype=torch.float32)
     model.gradient_checkpointing_enable()
     model.enable_input_require_grads()
     model.config.use_cache = False
     model = get_peft_model(model, LoraConfig(r=recipe.lora_r, lora_alpha=recipe.lora_alpha,
                                              lora_dropout=recipe.lora_dropout, target_modules=recipe.lora_targets,
                                              bias="none", task_type="CAUSAL_LM"))
-    for p in model.parameters():  # trainable LoRA weights in fp32 for stable AdamW
-        if p.requires_grad:
-            p.data = p.data.float()
     model.to(device)
+    model.train()
     params = [p for p in model.parameters() if p.requires_grad]
-    opt = torch.optim.AdamW(params, lr=recipe.lr, weight_decay=recipe.weight_decay, foreach=False)
-    eff = recipe.batch_size * recipe.grad_accum
-    total = math.ceil(len(train_rows) / eff) * recipe.epochs
-    sched = get_cosine_schedule_with_warmup(opt, max(1, int(total * recipe.warmup_ratio)), total)
+    opt = DmlAdamW(params, lr=recipe.lr, weight_decay=recipe.weight_decay)
+    total = math.ceil(len(train_rows) / recipe.grad_accum) * recipe.epochs
+    if args.max_steps:
+        total = min(total, args.max_steps)
+    full_total = math.ceil(len(train_rows) / recipe.grad_accum) * recipe.epochs
+    sched = CosineWarmup(opt, int(full_total * recipe.warmup_ratio), full_total)  # smoke uses the real curve
     out = _inside_home(Path(args.out))
     out.mkdir(parents=True, exist_ok=True)
-    best, history, step, t0 = float("inf"), [], 0, time.time()
+    if not args.max_steps or args.eval_smoke:
+        log(f"base eval_loss (step 0) {eval_loss(model, tok, eval_rows[: args.eval_rows or None], max_len, device):.4f}")
+    best, history, step, t0, skipped, peak = float("inf"), [], 0, time.time(), 0, None
+    win_loss, win_tok = 0.0, 0
+    done = False
     for ep in range(recipe.epochs):
+        enc = _encode_all(train_rows, tok, max_len)
+        random.Random(recipe.seed + ep).shuffle(enc)
         micro = 0
-        for ids, lab, att in _batches(train_rows, tok, max_len, recipe.batch_size, True, recipe.seed + ep):
-            t = lambda x: torch.tensor(x, device=device)
-            loss = model(input_ids=t(ids), attention_mask=t(att), labels=t(lab)).loss / recipe.grad_accum
-            loss.backward()
+        for ids, lab in enc:
+            for attempt_len in [n for n in LEN_BACKOFF if n <= max_len] + [None]:
+                if attempt_len is None:
+                    skipped += 1
+                    log(f"skip row (OOM even at 512 tokens), skipped={skipped}")
+                    break
+                i2, l2 = ids[:attempt_len], lab[:attempt_len]
+                try:
+                    loss, k = sft_loss(model, i2, l2, device)
+                    if not k:
+                        break
+                    # mean over this row's target tokens, averaged over the accumulation window
+                    (loss / k / recipe.grad_accum).backward()
+                    win_loss += float(loss.detach().to("cpu"))
+                    win_tok += k
+                    break
+                except RuntimeError as exc:
+                    if not _is_oom(exc):
+                        raise
+                    loss = None
+                    opt.zero_grad()
+                    gc.collect()
+                    log(f"OOM on a {len(ids)}-token row at len {attempt_len}: retrying shorter")
             micro += 1
             if micro % recipe.grad_accum == 0:
                 torch.nn.utils.clip_grad_norm_(params, recipe.max_grad_norm)
-                opt.step(); sched.step(); opt.zero_grad(set_to_none=True)
+                opt.step(); sched.step(); opt.zero_grad()
                 step += 1
-                if step % 5 == 0 or step == 1:
+                if step in (1, 2, 5) or step % 5 == 0 or (args.max_steps and step <= args.max_steps):
                     rate = (time.time() - t0) / step
-                    log(f"ep {ep + 1} step {step}/{total} loss {float(loss.detach().to('cpu')) * recipe.grad_accum:.4f} "
-                        f"lr {sched.get_last_lr()[0]:.2e} {rate:.1f}s/step eta {rate * (total - step) / 60:.0f} min")
+                    full = math.ceil(len(train_rows) / recipe.grad_accum) * recipe.epochs
+                    v = _vram_gb()
+                    peak = max(peak or 0, v or 0) or None
+                    log(f"ep {ep + 1} step {step}/{total} loss {win_loss / max(win_tok, 1):.4f} "
+                        f"lr {sched.get_last_lr()[0]:.2e} {rate:.1f}s/step vram {v}GB "
+                        f"eta(full {full} steps) {rate * (full - step) / 60:.0f} min")
+                win_loss, win_tok = 0.0, 0
+                if args.max_steps and step >= args.max_steps:
+                    done = True
+                    break
+        if done:
+            if args.eval_smoke:
+                el = eval_loss(model, tok, eval_rows[: args.eval_rows or None], max_len, device)
+                log(f"smoke eval_loss {el:.4f}")
+                history.append({"epoch": ep + 1, "eval_loss": el, "step": step})
+            break
         if micro % recipe.grad_accum:
             torch.nn.utils.clip_grad_norm_(params, recipe.max_grad_norm)
-            opt.step(); sched.step(); opt.zero_grad(set_to_none=True); step += 1
+            opt.step(); sched.step(); opt.zero_grad(); step += 1
         el = eval_loss(model, tok, eval_rows, max_len, device)
         history.append({"epoch": ep + 1, "eval_loss": el, "step": step})
         log(f"epoch {ep + 1} eval_loss {el:.4f}")
@@ -299,8 +440,11 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
             best = el
             model.save_pretrained(str(out / "adapter_best"))
             tok.save_pretrained(str(out / "adapter_best"))
-    model.save_pretrained(str(out / "adapter_last"))
-    return {"device": dev_name, "max_len": max_len, "best_eval_loss": best, "history": history, "steps": step}
+    if not args.max_steps:
+        model.save_pretrained(str(out / "adapter_last"))
+    return {"device": dev_name, "max_len": max_len, "best_eval_loss": best, "history": history, "steps": step,
+            "skipped_rows": skipped, "peak_vram_gb": peak, "sec_per_step": (time.time() - t0) / max(step, 1),
+            "smoke": bool(args.max_steps)}
 
 
 def train(args, recipe: Recipe) -> int:
@@ -319,8 +463,12 @@ def train(args, recipe: Recipe) -> int:
         try:
             res = _train_once(args, recipe, n, log)
             res.update(recipe=asdict(recipe), dataset=p["dataset"], base_license=BASE_LICENSE)
-            (out / "train_result.json").write_text(json.dumps(res, indent=2), encoding="utf-8")
-            log(f"done best_eval_loss={res['best_eval_loss']:.4f} -> {out / 'adapter_best'}")
+            name = "smoke_result.json" if args.max_steps else "train_result.json"
+            (out / name).write_text(json.dumps(res, indent=2), encoding="utf-8")
+            if args.max_steps:
+                log(f"smoke done ({res['steps']} steps, {res['sec_per_step']:.1f}s/step) -> {out / name}; no adapter saved")
+            else:
+                log(f"done best_eval_loss={res['best_eval_loss']:.4f} -> {out / 'adapter_best'}")
             return 0
         except Exception as exc:  # DirectML OOM -> shorter sequences
             if not _is_oom(exc):
@@ -343,7 +491,7 @@ def evaluate(args, recipe: Recipe) -> int:
     device, dev_name = pick_device(recipe.device, recipe.dml_adapter)
     rows = load_rows(Path(args.dataset) / "eval.jsonl")
     tok = AutoTokenizer.from_pretrained(recipe.base_model)
-    dtype = torch.float32 if dev_name == "cpu" else torch.float16
+    dtype = torch.float32
     base = AutoModelForCausalLM.from_pretrained(recipe.base_model, torch_dtype=dtype).to(device)
     base_loss = eval_loss(base, tok, rows, max_len, device)
     tuned = PeftModel.from_pretrained(base, str(out / "adapter_best")).to(device)
@@ -412,6 +560,9 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--lora-alpha", type=int, default=32)
     ap.add_argument("--device", default="auto", choices=["auto", "directml", "cuda", "cpu"])
     ap.add_argument("--dml-adapter", default="RX 6700", help="substring of the DirectML adapter name")
+    ap.add_argument("--max-steps", type=int, default=0, help="smoke: stop after N optimizer steps (no adapter saved)")
+    ap.add_argument("--eval-smoke", action="store_true", help="with --max-steps: eval loss before/after on --eval-rows")
+    ap.add_argument("--eval-rows", type=int, default=0, help="limit eval rows (0 = all)")
     ap.add_argument("--model-id", default="realai-sft-1.5b")
     ap.add_argument("--quant", default="Q5_K_M")
     return ap

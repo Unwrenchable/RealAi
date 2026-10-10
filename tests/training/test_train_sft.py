@@ -90,3 +90,42 @@ def test_loss_only_on_assistant_tokens():
 def test_oom_detection():
     assert T._is_oom(RuntimeError("DML: Could not allocate tensor... not enough memory"))
     assert not T._is_oom(ValueError("shape mismatch"))
+
+
+def test_sft_loss_matches_reference_ce():
+    torch = pytest.importorskip("torch")
+    tr = pytest.importorskip("transformers")
+    cfg = tr.Qwen2Config(vocab_size=64, hidden_size=32, intermediate_size=64, num_hidden_layers=2,
+                         num_attention_heads=4, num_key_value_heads=2, max_position_embeddings=64)
+    torch.manual_seed(0)
+    model = tr.Qwen2ForCausalLM(cfg).eval()
+    ids = list(range(1, 13))
+    lab = [-100] * 6 + ids[6:]
+    with torch.no_grad():
+        ref = model(input_ids=torch.tensor([ids]), labels=torch.tensor([lab])).loss.item()
+        s, k = T.sft_loss(model, ids, lab, "cpu")
+    assert k == 6 and abs(s.item() / k - ref) < 1e-4
+
+
+def test_oom_message_from_directml_is_caught():
+    assert T._is_oom(RuntimeError("Could not allocate tensor with 515366912 bytes. There is not enough GPU video memory available!"))
+
+
+def test_max_steps_flag():
+    a = T.build_parser().parse_args(["train", "--dataset", "x", "--max-steps", "10", "--eval-smoke", "--eval-rows", "20"])
+    assert (a.max_steps, a.eval_smoke, a.eval_rows) == (10, True, 20)
+
+
+def test_cosine_warmup_curve():
+    class O:
+        param_groups = [{"lr": 1e-4}]
+
+    o = O()
+    s = T.CosineWarmup(o, 10, 100)
+    assert o.param_groups[0]["lr"] == 0
+    for _ in range(10):
+        s.step()
+    assert abs(s.get_last_lr()[0] - 1e-4) < 1e-12
+    for _ in range(90):
+        s.step()
+    assert s.get_last_lr()[0] < 1e-12
