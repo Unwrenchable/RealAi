@@ -72,7 +72,8 @@
       "gguf_path": "C:\\models\\checkpoints_lora\\qwen2.5-coder-1.5b-instruct-q5_k_m.gguf",
       "gguf_filename": "qwen2.5-coder-1.5b-instruct-q5_k_m.gguf",
       "family": "local",
-      "loaded_now": false
+      "loaded_now": false,
+      "note": "The Aug 25 file once shipped under this name was the realai-lora-1.5b export (same MD5 02087C2F...); use realai-lora-1.5b for the trained model. Stock quant archived on D:\\ARCHIVE."
     },
     {
       "id": "realai-coder-1.5b-q6",
@@ -100,14 +101,89 @@
       "gguf_path": "C:\\models\\checkpoints_lora\\realai-1.0-instruct-Q4_K_M.gguf",
       "gguf_filename": "realai-1.0-instruct-Q4_K_M.gguf",
       "family": "local",
-      "loaded_now": false
+      "loaded_now": false,
+      "base_model": "meta-llama/Llama-3.2-1B-Instruct",
+      "trained": false,
+      "stock_copy_of": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "note": "Stock Llama-3.2-1B-Instruct Q4_K_M under a RealAI name (MD5 A792DEDE..., GGUF general.name \"Llama 3.2 1B Instruct\"). Not a RealAI-trained model."
     },
     {
       "id": "realai-lora-1.5b",
-      "gguf_path": "C:\\models\\checkpoints_lora\\qwen2.5-1.5b-lora-realai-export\\qwen2.5-1.5b-lora-realai-Q5_K_M.gguf",
+      "gguf_path": "C:\\models\\checkpoints_lora\\lora\\qwen2.5-1.5b-lora-realai-export\\qwen2.5-1.5b-lora-realai-Q5_K_M.gguf",
       "gguf_filename": "qwen2.5-1.5b-lora-realai-Q5_K_M.gguf",
       "family": "local",
-      "loaded_now": false
+      "loaded_now": false,
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true,
+      "merged_path": "C:\\models\\checkpoints_lora\\lora\\qwen2.5-1.5b-lora-realai-export\\merged",
+      "note": "Real Aug 25 2026 RealAI LoRA export (merged + Q5_K_M). Moved under lora\\ during reorg."
+    },
+    {
+      "id": "realai-1.5b-expand-b2",
+      "gguf_path": "C:\\models\\checkpoints_lora\\gguf\\qwen2.5-1.5b-expand-b2-20260927-Q5_K_M.gguf",
+      "gguf_filename": "qwen2.5-1.5b-expand-b2-20260927-Q5_K_M.gguf",
+      "family": "local",
+      "loaded_now": false,
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true,
+      "adapter_path": "C:\\models\\checkpoints_lora\\lora\\qwen2.5-1.5b-lora-realai-dml-provider-expand-b2-20260927",
+      "merged_path": "C:\\models\\checkpoints_lora\\merged\\qwen2.5-1.5b-expand-b2-20260927",
+      "dataset": "provider_traces_expand.jsonl",
+      "created": "2026-09-27",
+      "note": "Sep 27 provider-traces expand (b2) LoRA merged + Q5_K_M. Not live."
+    },
+    {
+      "id": "realai-1.5b-expand-ports-b3",
+      "gguf_path": "C:\\models\\checkpoints_lora\\gguf\\qwen2.5-1.5b-expand-ports-b3-20260927-Q5_K_M.gguf",
+      "gguf_filename": "qwen2.5-1.5b-expand-ports-b3-20260927-Q5_K_M.gguf",
+      "family": "local",
+      "loaded_now": false,
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true,
+      "adapter_path": "C:\\models\\checkpoints_lora\\lora\\qwen2.5-1.5b-lora-realai-dml-provider-expand-ports-b3-20260927",
+      "merged_path": "C:\\models\\checkpoints_lora\\merged\\qwen2.5-1.5b-expand-ports-b3-20260927",
+      "dataset": "provider_traces_expand_ports_b3.jsonl",
+      "created": "2026-09-27",
+      "note": "Sep 27 provider-traces expand ports (b3) LoRA merged + Q5_K_M. Not live."
+    },
+    {
+      "id": "realai-1.5b-hive-expand-29",
+      "gguf_path": "C:\\models\\checkpoints_lora\\gguf\\qwen2.5-1.5b-hive-expand-29-20260927-Q5_K_M.gguf",
+      "gguf_filename": "qwen2.5-1.5b-hive-expand-29-20260927-Q5_K_M.gguf",
+      "family": "local",
+      "loaded_now": false,
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true,
+      "adapter_path": "C:\\models\\checkpoints_lora\\lora\\qwen2.5-1.5b-lora-realai-dml-hive-expand-29-20260927",
+      "merged_path": "C:\\models\\checkpoints_lora\\merged\\qwen2.5-1.5b-hive-expand-29-20260927",
+      "dataset": "provider_traces_hive_expand.jsonl",
+      "created": "2026-09-27",
+      "note": "Sep 27 hive-expand LoRA (29) merged + Q5_K_M. Not live."
+    },
+    {
+      "id": "realai-1.5b-hive-expand-32",
+      "gguf_path": "C:\\models\\checkpoints_lora\\gguf\\qwen2.5-1.5b-hive-expand-32-20260927-Q5_K_M.gguf",
+      "gguf_filename": "qwen2.5-1.5b-hive-expand-32-20260927-Q5_K_M.gguf",
+      "family": "local",
+      "loaded_now": false,
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true,
+      "adapter_path": "C:\\models\\checkpoints_lora\\lora\\qwen2.5-1.5b-lora-realai-dml-hive-expand-32-20260927",
+      "merged_path": "C:\\models\\checkpoints_lora\\merged\\qwen2.5-1.5b-hive-expand-32-20260927",
+      "dataset": "provider_traces_hive_expand.jsonl",
+      "created": "2026-09-27",
+      "note": "Sep 27 hive-expand LoRA (32) merged + Q5_K_M. WARNING: training loss stayed high (~9.5-15.3 over steps 50-60 of 60); shelved until Q1+Q4 eval gate. Not live."
+    },
+    {
+      "id": "realai-overseer",
+      "gguf_path": "C:\\llama-vulkan\\models\\realai-overseer\\weights\\realai-1.0-instruct-Q4_K_M.gguf",
+      "gguf_filename": "realai-1.0-instruct-Q4_K_M.gguf",
+      "family": "local",
+      "loaded_now": false,
+      "base_model": "meta-llama/Llama-3.2-1B-Instruct",
+      "trained": false,
+      "stock_copy_of": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "note": "Stock Llama-3.2-1B-Instruct Q4_K_M bootstrap copy (its manifest says: until a dedicated overseer checkpoint is trained). Not a RealAI-trained model."
     },
     {
       "id": "local-qwen3-27b",
@@ -128,280 +204,412 @@
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\agent-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-agent-evals-engineer-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\agent-evals-engineer-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-agent-observability-engineer-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\agent-observability-engineer-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-agent-tools-documentation-pilot-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\agent-tools-documentation-pilot-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-agent-tools-implementation-pilot-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\agent-tools-implementation-pilot-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-agent-tools-orchestrator-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\agent-tools-orchestrator-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-agent-tools-performance-engineer-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\agent-tools-performance-engineer-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-agent-tools-qa-pilot-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\agent-tools-qa-pilot-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-agent-tools-repo-architect-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\agent-tools-repo-architect-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-agent-tools-security-hardener-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\agent-tools-security-hardener-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-agents-orchestrator-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\agents-orchestrator-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-ai-agent-developer-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\ai-agent-developer-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-ai-expansion-architect-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\ai-expansion-architect-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-ai-incident-responder-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\ai-incident-responder-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-ai-model-manager-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\ai-model-manager-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-ai-orchestrator-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\ai-orchestrator-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-ai-self-builder-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\ai-self-builder-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-analytics-reporter-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\analytics-reporter-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-api-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\api-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-api-designer-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\api-designer-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-api-tester-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\api-tester-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-app-store-optimizer-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\app-store-optimizer-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-architectux-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\architectux-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-backend-architect-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\backend-architect-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-backend-engineer-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\backend-engineer-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-brand-guardian-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\brand-guardian-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-browser-test-engineer-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\browser-test-engineer-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-capability-guardian-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\capability-guardian-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-cloud-architect-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\cloud-architect-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-contributing-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\contributing-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-cybersecurity-expert-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\cybersecurity-expert-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-data-analytics-reporter-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\data-analytics-reporter-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-data-scientist-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\data-scientist-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-database-architect-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\database-architect-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-deployment-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\deployment-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-design-visual-storyteller-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\design-visual-storyteller-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-devops-automator-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\devops-automator-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-devops-engineer-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\devops-engineer-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-devsecops-engineer-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\devsecops-engineer-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
     },
     {
       "id": "realai-lora-documentation-specialist-default-run",
       "gguf_path": null,
       "gguf_filename": null,
       "family": "lora",
-      "loaded_now": false
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\agent_lora_runs\\documentation-specialist-default-run",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true
+    },
+    {
+      "id": "realai-lora-1.5b-20260926",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false,
+      "adapter_path": "C:\\models\\checkpoints_lora\\lora\\qwen2.5-1.5b-lora-realai-20260926",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true,
+      "created": "2026-09-26",
+      "note": "Sep 26 qwen2.5-1.5b-lora-realai PEFT adapter, restored from D:\\ARCHIVE\\git-cleanup-2026-09\\models-dupes\\20260927-074836."
     },
     {
       "id": "realai-voice-kokoro",
@@ -425,5 +633,5 @@
       "loaded_now": false
     }
   ],
-  "note": "RealAI public model IDs. backend_filename is what llama-server currently expects when that GGUF is loaded. Only one GGUF is hot on :8080 at a time."
+  "note": "RealAI public model IDs. backend_filename is what llama-server currently expects when that GGUF is loaded. Only one GGUF is hot on :8080 at a time. trained=true marks RealAI fine-tunes; base_model/stock_copy_of label stock weights. available is computed at runtime, not stored here."
 }
