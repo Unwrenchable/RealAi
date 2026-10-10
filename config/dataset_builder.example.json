@@ -93,6 +93,25 @@
       "origin": "realai/plugins/rackup_coach pyramid, leagues, league_validate"
     },
     {
+      "name": "chess_stockfish",
+      "type": "chess_stockfish",
+      "license": "CC0-1.0 positions (Lichess puzzle database) + Stockfish 19 analysis (GPLv3 engine used as a local tool, not redistributed)",
+      "origin": "Lichess puzzles CSV sample + local Stockfish",
+      "attribution": "Positions and puzzle themes: Lichess puzzle database, https://database.lichess.org/ (CC0 1.0). Best moves, evaluations and lines computed locally with Stockfish 19 (https://stockfishchess.org/, GPLv3); the engine is used as a tool and is not part of this dataset.",
+      "paths": [
+        "{realai}/datasets/_sources/lichess_puzzles_sample.csv"
+      ],
+      "depth": 12,
+      "limit": 1500
+    },
+    {
+      "name": "device_profiles",
+      "type": "device_profiles",
+      "license": "realai-own (computed by realai/core/device_profile.recommend)",
+      "origin": "mocked + local hardware reports",
+      "include_local": false
+    },
+    {
       "name": "agency_import_thirdparty",
       "type": "agent_docs",
       "enabled": true,

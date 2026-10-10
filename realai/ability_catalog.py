@@ -745,6 +745,19 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         ],
     },
     {
+        "id": "chess_engine",
+        "name": "Chess engine (local Stockfish)",
+        "pillar": "local_intelligence",
+        "keywords": ["chess", "stockfish", "best move", "fen", "chess engine"],
+        "status": "PARTIAL",
+        "status_note": (
+            "abilities/chess_engine.py calls a local Stockfish (REALAI_STOCKFISH or C:\\tools\\stockfish) via python-chess; "
+            "the model defers strong play to it. Operator installs the engine (GPLv3, not bundled); no HTTP route yet."
+        ),
+        "live_path": "abilities.chess_engine.run(fen) (in-process)",
+        "modules": ["abilities/chess_engine.py"],
+    },
+    {
         "id": "lora_adapters",
         "name": "Recovered PEFT LoRA adapters",
         "pillar": "model_family",

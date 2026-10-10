@@ -43,6 +43,9 @@ accelerate 1.1.1, numpy 2.5.3. DML devices: `AMD Radeon RX 6700 XT` (index 0, se
 New-Item -ItemType Directory -Force datasets\_sources | Out-Null
 git fetch origin feature/ui-desktop-promote
 cmd /c "git show origin/feature/ui-desktop-promote:dataset.jsonl > datasets\_sources\persona_dump.jsonl"   # byte-exact, no BOM
+& $PY -m pip install -r requirements\dataset-builder.txt                         # python-chess, zstandard (once)
+# Stockfish (once): official build unzipped under C:\tools\stockfish (found automatically; or set REALAI_STOCKFISH)
+& $PY -m realai.training.dataset_builder.fetch_lichess_puzzles --rows 1500 --scan 30000   # ~2 MB streamed, CC0
 & $PY -m realai.training.dataset_builder --config config\dataset_builder.pc.json --dry-run   # counts only
 & $PY -m realai.training.dataset_builder --config config\dataset_builder.pc.json
 $DS = (Get-ChildItem datasets -Directory -Filter 'realai-sft-*' | Sort-Object LastWriteTime | Select-Object -Last 1).FullName
@@ -50,6 +53,8 @@ Get-Content "$DS\manifest.json" | Select-String '"kept"|"train"|"eval"'
 ```
 
 `ATTRIBUTION.md` sits next to the dataset. It holds the MIT notice for agency-agents. Keep it with any copy of the data or the model.
+
+Optional: `& $PY -m realai.core.device_profile` prints this machine's hardware and the recommended model/quant/ctx/device.
 
 ## 3. Dry run (checks data and prints the plan; loads no model)
 

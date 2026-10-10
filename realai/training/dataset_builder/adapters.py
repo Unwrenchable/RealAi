@@ -544,3 +544,6 @@ def hive_run_dir_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterator[R
                 ctx.setdefault("_gate_drops", []).append({"file": req.name, "grounding": round(score, 2)})
                 continue
             yield {"messages": row_to_messages({"messages": msgs}) or msgs, "meta": {"file": req.name, "grounding": round(score, 2)}}
+
+
+from . import adapters_extra  # noqa: E402,F401  (registers chess_stockfish, device_profiles)
