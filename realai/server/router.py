@@ -348,6 +348,12 @@ def dispatch_request(method, path, payload=None):
             return 200, handle_tasks_list(), 'application/json'
         if method == 'GET' and path.startswith('/v1/tasks/'):
             return 200, handle_task_read(path), 'application/json'
+        # Opt-in (REALAI_UNIFIED_ROUTES=1) promoted routes; existing routes win.
+        from . import unified_routes
+
+        extra = unified_routes.dispatch(method, path, payload)
+        if extra is not None:
+            return extra
         return 404, {'error': {'message': 'Not found'}}, 'application/json'
     except RequestValidationError as exc:
         return exc.status_code, {'error': {'message': str(exc)}}, 'application/json'
