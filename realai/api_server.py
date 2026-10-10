@@ -86,7 +86,9 @@ def _looks_like_local_placeholder(response: dict) -> bool:
         or "no gguf loaded on this machine" in lowered
     )
 
-from . import RealAI, _KEY_PREFIX_TO_PROVIDER
+# The v1 SDK moved out of realai/__init__.py into realai/_v1_client.py
+# (6257a60, 2026-09-21); private names are only importable from there.
+from ._v1_client import RealAI, _KEY_PREFIX_TO_PROVIDER
 from .model_registry import MODEL_REGISTRY, get_model_metadata
 from .provider_resolve import resolve_request_provider, realai_constructor_provider
 from .server_settings import settings
@@ -1408,7 +1410,7 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
                     from realai.agent_runtime import (
                         PipelineRunner, PipelineDefinition, PipelineStep,
                     )
-                    from realai import AgentRegistry
+                    from realai._v1_client import AgentRegistry
                     pipeline_data = body.get("pipeline", {})
                     steps = [
                         PipelineStep(
@@ -1435,7 +1437,7 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
             elif parsed_path.path == '/v1/agents/graph':
                 try:
                     from realai.agent_runtime import AgentGraph, AgentNode, AgentEdge
-                    from realai import AgentRegistry
+                    from realai._v1_client import AgentRegistry
                     graph = AgentGraph()
                     for node_data in body.get("nodes", []):
                         graph.add_node(AgentNode(

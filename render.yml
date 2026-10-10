@@ -3,7 +3,7 @@ services:
     name: realai-api
     runtime: python
     pythonVersion: 3.11
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements-render.txt
     startCommand: python -m realai.api_server
     envVars:
       - key: WEB_CONCURRENCY
