@@ -204,3 +204,58 @@ def test_clis_import_and_export_shots(tmp_path, monkeypatch, capsys):
     cat.write_text(json.dumps([{"id": "s1", "name": "Test Shot", "setup": ["Route: CB -> 1 -> corner."]}]))
     assert m.main(["export-shots", str(cat)]) == 0
     assert (tmp_path / "datasets" / "_sources" / "shot_catalog.json").is_file()
+
+
+@pytest.mark.parametrize("text", [
+    '<think>\nlet me think</think>\n["What is the race for 9ft beginner?", "Convert APA 5 to ROC please."]',
+    '```json\n[{"question": "What is the race for 9ft beginner?"}, {"request": "Convert APA 5 to ROC please."}]\n```',
+    'Sure! Here are some:\n1. What is the race for 9ft beginner?\n2. Convert APA 5 to ROC please.',
+    'Here [note] are: ["What is the race for 9ft beginner?", "Convert APA 5 to ROC please."] and [more]',
+])
+def test_extract_questions_tolerant(text):
+    from realai.training.self_data.generate import extract_questions
+
+    assert extract_questions(text)[:2] == ["What is the race for 9ft beginner?", "Convert APA 5 to ROC please."]
+
+
+@pytest.mark.parametrize("tool", ["rackup_invoke", "shot_lookup", "math_solver", "data_analysis", "ability_lookup",
+                                  "route_to_agent", "device_profile"])
+def test_propose_falls_back_and_logs_reason(tool, tmp_path, monkeypatch):
+    import random
+    from collections import Counter
+
+    from realai.training.self_data.generate import propose
+
+    H.set_shot_catalog([{"id": "s1", "name": "Cross-Side Bank", "setup": []}])
+    why = Counter()
+    qs = propose(lambda m, t: {"content": "<think>hmm</think>"}, tool, 3, random.Random(1), why=why)
+    assert qs and why["teacher_unparseable"] + why["teacher_empty"] == 1 and why["fallback_templates"] == 1
+    why = Counter()
+
+    def boom(m, t):
+        raise ConnectionRefusedError("8080 down")
+    assert propose(boom, tool, 3, random.Random(1), why=why) and why["teacher_error:ConnectionRefusedError"] == 1
+
+
+def test_verifier_ignores_list_and_move_numbers():
+    msgs = [{"role": "user", "content": "best move?"}, {"role": "assistant", "content":
+            "Engine result:\n1. Best move: **Qxf7#** (h5f7)\n2. Evaluation: mate in 1 for White\n4. Line: 4. Qxf7#"}]
+    assert verify(msgs, [_chess_call()])[0]
+
+
+def test_generate_run_counts_fallback(tmp_path, monkeypatch):
+    from realai.training.self_data import generate as G
+
+    monkeypatch.setenv("REALAI_HOME", str(tmp_path))
+    monkeypatch.setattr("abilities.chess_engine.find_engine", lambda *a, **k: None)
+
+    def chat(messages, tools):
+        if tools is None:
+            return {"content": "garbled ////"}
+        if messages[-1]["role"] == "tool":
+            return {"content": "Per pyramid_rules: first to 40 points."}
+        return {"tool_calls": [{"function": {"name": "rackup_invoke", "arguments": {"ability": "pyramid_rules",
+                                             "payload": {"table_size": "9ft", "skill_level": "beginner"}}}}]}
+    s = G.run(chat, plan={"rackup_invoke": 1}, minutes=0.05, max_rows=2, per_batch=2, seed=3, log=lambda m: None)
+    st = s["per_tool"]["rackup_invoke"]
+    assert st["proposed"] >= 2 and st["propose_fallback_templates"] >= 1 and s["accepted"] >= 1

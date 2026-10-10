@@ -76,19 +76,84 @@ def seeds(tool: str, rng: random.Random, n: int) -> str:
     return ""
 
 
-def propose(chat, tool: str, n: int, rng: random.Random, focus: str = "") -> List[str]:
+_THINK = re.compile(r"<think>.*?(</think>|$)", re.S)
+_FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.S)
+_Q_KEYS = ("question", "request", "query", "prompt", "text", "user", "content", "q", "message")
+
+
+def extract_questions(text: str) -> List[str]:
+    """Tolerant: strips <think>, code fences; accepts arrays of strings or objects; falls back to list lines."""
+    t = _THINK.sub("", str(text or "")).strip()
+    cands = [m.group(1) for m in _FENCE.finditer(t)] + [t]
+    for c in cands:
+        for m in re.finditer(r"\[", c):  # every '[' as a possible array start; raw_decode stops at its end
+            try:
+                arr, _ = json.JSONDecoder().raw_decode(c[m.start():])
+            except json.JSONDecodeError:
+                continue
+            out = []
+            for x in arr if isinstance(arr, list) else []:
+                if isinstance(x, dict):
+                    x = next((x[k] for k in _Q_KEYS if isinstance(x.get(k), str)), None) or next(
+                        (v for v in x.values() if isinstance(v, str) and len(v) > 8), None)
+                if isinstance(x, str) and 8 < len(x.strip()) < 600:
+                    out.append(x.strip())
+            if out:
+                return out
+    lines = [re.sub(r"^\s*(?:[-*\u2022]|\d+[.)])\s*", "", ln).strip().strip('"') for ln in t.splitlines()]
+    return [ln for ln in lines if 15 < len(ln) < 600 and (ln.endswith("?") or ln.endswith(".")) and not ln.startswith(("{", "["))]
+
+
+def fallback_questions(tool: str, n: int, rng: random.Random) -> List[str]:
+    """Template questions (grounded seeds) when the teacher returns nothing usable."""
+    if tool == "chess_engine":
+        return [f"What's the best move here? {f}" for f in _fens(n, rng)]
+    if tool == "rackup_invoke":
+        out = [f"How many points to win RackUp Pyramid on a {t} table at {s} level?" for t in ("7ft", "9ft")
+               for s in ("beginner", "intermediate", "advanced", "pro")]
+        out += [f"Convert {sy} {v} to the RackUp/ROC scale." for sy, v in (("APA", 3), ("APA", 6), ("Fargo", 480), ("Fargo", 650))]
+        out += ["Validate my league match: I won 5-3 against opponent p2 in eight ball."]
+    elif tool == "shot_lookup":
+        out = [f"{p} the {s['name']} shot?" for s in hive_tools.shots() for p in ("What's the route for", "Any tip for")]
+    elif tool == "math_solver":
+        out = [f"Solve {a}x + {b} = {c} for x." for a, b, c in ((3, 4, 19), (5, -2, 23), (7, 3, 52))] + ["What is the derivative of x**3 + 2*x?"]
+    elif tool == "data_analysis":
+        out = ["Give me the mean, median and spread of 12, 15, 9, 22, 30, 18.", "Stats please: 3, 7, 7, 10, 41."]
+    elif tool == "ability_lookup":
+        out = [f"Can you do {a['name'].lower()}? Is it live?" for a in hive_tools.abilities()]
+    elif tool in ("list_agents", "route_to_agent"):
+        out = [f"Who in the hive should handle this: {str(a.get('description', ''))[:140]}" for a in hive_tools.agents() if a.get("description")]
+    elif tool == "device_profile":
+        out = ["What model and quant should you run on this PC?", "Which GPU should llama-server use on this machine?"]
+    else:
+        out = []
+    rng.shuffle(out)
+    return out[:n]
+
+
+def propose(chat, tool: str, n: int, rng: random.Random, focus: str = "", why: Optional[Counter] = None) -> List[str]:
     spec = hive_tools.SPECS[tool]["function"]
-    prompt = (f"Write {n} diverse, realistic user requests that RealAI should answer by calling the `{tool}` tool "
-              f"({spec['description']}). Vary tone and length; no answers.{(' Focus: ' + focus) if focus else ''}\n"
-              f"{seeds(tool, rng, n)}\nReturn ONLY a JSON array of strings.")
-    msg = chat([{"role": "user", "content": prompt}], None)
-    text = str(msg.get("content") or "")
-    m = re.search(r"\[.*\]", text, re.S)
+    prompt = (f"/no_think\nWrite {n} diverse, realistic user requests that RealAI should answer by calling the `{tool}` tool "
+              f"({spec['description']}). Vary tone and length; write only the requests, no answers.{(' Focus: ' + focus) if focus else ''}\n"
+              f"{seeds(tool, rng, n)}\nReturn ONLY a JSON array of strings, e.g. [\"...\", \"...\"].")
+    why = why if why is not None else Counter()
     try:
-        qs = json.loads(m.group(0)) if m else []
-    except json.JSONDecodeError:
+        msg = chat([{"role": "user", "content": prompt}], None)
+        text = str(msg.get("content") or "") or str(msg.get("reasoning_content") or "")
+        qs = extract_questions(text)[:n]
+        if not text.strip():
+            why["teacher_empty"] += 1
+        elif not qs:
+            why["teacher_unparseable"] += 1
+    except Exception as exc:
         qs = []
-    return [q.strip() for q in qs if isinstance(q, str) and 8 < len(q.strip()) < 600][:n]
+        why[f"teacher_error:{type(exc).__name__}"] += 1
+    if not qs:
+        qs = fallback_questions(tool, n, rng)
+        why["fallback_templates"] += 1 if qs else 0
+        if not qs:
+            why["no_fallback"] += 1
+    return qs
 
 
 def make_row(tool: str, res: Dict[str, Any], model: str) -> Dict[str, Any]:
@@ -132,14 +197,14 @@ def run(chat, model: str = "local", plan: Optional[Dict[str, int]] = None, minut
         while time.time() < deadline and accepted < max_rows:
             tool = rng.choices([t for t, _ in weights], [w for _, w in weights])[0]
             st = stats.setdefault(tool, Counter())
-            try:
-                qs = propose(propose_chat or chat, tool, per_batch, rng)
-            except Exception as exc:
-                st["propose_error"] += 1
-                log(f"propose {tool} failed: {exc}")
+            why: Counter = Counter()
+            qs = propose(propose_chat or chat, tool, per_batch, rng, why=why)
+            st.update({"propose_" + k: v for k, v in why.items() if v})
+            st["proposed"] += len(qs)
+            if not qs:
+                log(f"propose {tool}: 0 questions ({dict(why)})")
                 time.sleep(2)
                 continue
-            st["proposed"] += len(qs)
             for q in qs:
                 if time.time() >= deadline or accepted >= max_rows:
                     break
@@ -168,6 +233,8 @@ def run(chat, model: str = "local", plan: Optional[Dict[str, int]] = None, minut
                 if sleep:
                     time.sleep(sleep)
             log(f"[{_dt.datetime.now():%H:%M:%S}] {tool}: {dict(st)} total accepted {accepted}")
+    except KeyboardInterrupt:
+        log("interrupted: writing summary")
     finally:
         if eng is not None:
             eng.quit()

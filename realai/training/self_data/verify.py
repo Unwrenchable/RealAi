@@ -34,6 +34,15 @@ def _nums(s: str) -> List[str]:
     return out
 
 
+_LISTNUM = re.compile(r"(?m)^\s*(?:[#>*-]+\s*)?\d+[.)]\s+")
+_MOVENUM = re.compile(r"\b\d+\.(?:\.\.)?\s*(?=[KQRBNO]|[a-h][1-8x])")
+
+
+def _strip_markers(s: str) -> str:
+    """Drop list numbering ("4. ") and chess move numbers ("34. f4", "12...Nf6"): formatting, not claims."""
+    return _MOVENUM.sub(" ", _LISTNUM.sub("", s))
+
+
 def final_answer(messages: List[Dict[str, Any]]) -> str:
     for m in reversed(messages):
         if m.get("role") == "assistant" and not m.get("tool_calls"):
@@ -57,7 +66,7 @@ def verify(messages: List[Dict[str, Any]], calls: List[Dict[str, Any]], judge: O
         return (bool(_FAIL.search(ans)), ["all_tools_failed" + ("" if _FAIL.search(ans) else "_but_answer_claims_success")])
     blob = json.dumps([c["result"] for c in ok_calls] + [c.get("arguments") for c in calls], ensure_ascii=False)
     have = set(_nums(blob)) | set(_nums(question)) | {"0", "1", "2", "3"}
-    bad = [n for n in _nums(ans) if n not in have]
+    bad = [n for n in _nums(_strip_markers(ans)) if n not in have]
     if bad:
         reasons.append("ungrounded_numbers:" + ",".join(sorted(set(bad))[:6]))
     for c in ok_calls:
