@@ -14,7 +14,7 @@ so use a pinned venv:
 ```powershell
 py -3.12 -m venv C:\venvs\realai-train
 C:\venvs\realai-train\Scripts\python -m pip install -U pip
-C:\venvs\realai-train\Scripts\python -m pip install torch-directml "transformers==4.46.3" "peft==0.13.2" "accelerate==1.1.1" safetensors sentencepiece jinja2 pytest
+C:\venvs\realai-train\Scripts\python -m pip install -r requirements\train-directml.txt
 C:\venvs\realai-train\Scripts\python -c "import torch_directml as d; print([d.device_name(i) for i in range(d.device_count())])"
 # expect: ['AMD Radeon RX 6700 XT', 'AMD Radeon(TM) Graphics']  (the trainer picks the 6700 XT by name)
 ```
@@ -28,7 +28,14 @@ git pull --ff-only
 $env:REALAI_HOME = (Get-Location).Path
 $env:REALAI_LLAMA_CPP_ROOT = 'C:\tools\llama.cpp'   # convert_hf_to_gguf.py lives here
 $PY = 'C:\venvs\realai-train\Scripts\python.exe'
+$BASE = 'C:\models\hf\Qwen2.5-1.5B-Instruct'   # local HF weights (3.09 GB safetensors), no download
 ```
+Pass `--base-model $BASE` to **every** `train_sft` command (train/eval/export/register) so they all use the same base.
+
+Verified 2026-10-10: Python 3.12.3, torch 2.4.1 + torch-directml 0.2.5.dev240914, transformers 4.46.3, peft 0.13.2,
+accelerate 1.1.1, numpy 2.5.3. DML devices: `AMD Radeon RX 6700 XT` (index 0, selected by `--dml-adapter "RX 6700"`),
+`AMD Radeon(TM) Graphics` (iGPU, never picked). Export tools: `C:\tools\llama.cpp\convert_hf_to_gguf.py`
+(@9adc7f4, has its own gguf-py) and `C:\llama-vulkan\llama-quantize.exe` (Q5_K_M supported).
 
 ## 2. Build the dataset
 
@@ -48,7 +55,7 @@ Get-Content "$DS\manifest.json" | Select-String '"kept"|"train"|"eval"'
 
 ```powershell
 & $PY -m pytest tests\training -q
-& $PY -m realai.training.train_sft train --dataset $DS --dry-run
+& $PY -m realai.training.train_sft train --dataset $DS --dry-run --base-model $BASE
 ```
 Check `"ok": true` and that `issues` is empty (sha256 matches the manifest, no eval/train overlap). The plan also shows optimizer steps (about 100 per epoch for 1.6k rows).
 
@@ -56,17 +63,20 @@ Check `"ok": true` and that `issues` is empty (sha256 matches the manifest, no e
 
 Stop the `:8080` llama-server first (Ctrl+C in its window). It holds about 6 GB of the 6700 XT's 12 GB.
 ```powershell
-& $PY -m realai.training.train_sft train --dataset $DS --device directml --dml-adapter "RX 6700"
+& $PY -m realai.training.train_sft train --dataset $DS --base-model $BASE --device directml --dml-adapter "RX 6700"
 ```
 * Logs go to the console and to `runs\sft-<dataset>\train.log`. Step 1 prints s/step and an ETA.
-* Expected: about 5–7 GB VRAM at 1024 tokens (fp16 frozen base, fp32 LoRA, gradient checkpointing).
-  Roughly 2–5 h for about 1.6k rows × 3 epochs on DirectML. Out of memory drops it to 768, then 512, automatically.
+* VRAM: the fp16 base alone is 3.1 GB; plan on 4–6 GB total. `:8080` (7B Q5) holds about 9.5 GB of the 12 GB,
+  so **training needs `:8080` stopped**. Out of memory drops max_len to 768, then 512, automatically.
+* Data is short (measured with the Qwen tokenizer: mean 119 tokens/row, p95 253, max 852; 201k tokens/epoch,
+  117k of them trained assistant tokens). 318 optimizer steps (106/epoch × 3, accum 16).
+  Estimate: about 30–90 min on the 6700 XT (DirectML step speed is unmeasured; step 1 prints s/step + ETA).
 * Output: `runs\sft-<dataset>\adapter_best` (lowest eval loss), `adapter_last`, `train_result.json`.
 
 ## 5. Eval against the base model on the held-out set
 
 ```powershell
-& $PY -m realai.training.train_sft eval --dataset $DS --device directml
+& $PY -m realai.training.train_sft eval --dataset $DS --base-model $BASE --device directml
 ```
 Writes `eval_report.json`. **Pass bar:** tuned eval loss is at least **10% lower** than base and **≤ 1.5**
 (exit code 0 = pass, 1 = fail). After it passes, also do a manual spot check (step 7) with 10 eval prompts. Include
@@ -75,14 +85,14 @@ Pyramid points, a shot-map route, and the hive identity. Answers must match the 
 ## 6. Export: merge → GGUF f16 → Q5_K_M (reuses `realai/scripts/train_to_chat_gguf.py` helpers)
 
 ```powershell
-& $PY -m realai.training.train_sft export --dataset $DS --model-id realai-sft-1.5b --quant Q5_K_M
+& $PY -m realai.training.train_sft export --dataset $DS --base-model $BASE --model-id realai-sft-1.5b --quant Q5_K_M
 ```
 The merge runs on CPU (about 5 min, about 7 GB RAM). Output: `runs\sft-<dataset>\gguf\realai-sft-1.5b-Q5_K_M.gguf` (about 1.1 GB).
 
 ## 7. Register (honest candidate, never default) and serve on :8081
 
 ```powershell
-& $PY -m realai.training.train_sft register --dataset $DS --model-id realai-sft-1.5b
+& $PY -m realai.training.train_sft register --dataset $DS --base-model $BASE --model-id realai-sft-1.5b
 # -> $env:REALAI_HOME\models\trained_catalog.json: base_model, trained:true, dataset_manifest_sha256,
 #    eval numbers, status candidate-passed / candidate-not-passed, default:false
 $G = "$((Get-ChildItem runs -Directory | Sort-Object LastWriteTime | Select-Object -Last 1).FullName)\gguf\realai-sft-1.5b-Q5_K_M.gguf"
