@@ -1,15 +1,2 @@
-"""Web3 backend registry."""
-
-
-class Web3Registry:
-    def __init__(self):
-        self.backends = {}
-
-    def register(self, backend):
-        self.backends[backend.name] = backend
-
-    def get(self, name):
-        if name not in self.backends:
-            raise KeyError("Unknown web3 backend: {0}".format(name))
-        return self.backends[name]
-
+"""Compat twin: canonical code lives in realai.core.web3.registry."""
+from realai.core.web3.registry import *  # noqa: F401,F403

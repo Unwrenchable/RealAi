@@ -2,9 +2,9 @@
 
 from typing import Any, Dict
 
-from core.security.python_sandbox import PythonSandbox
-from core.tools.base import Tool
-from core.tools.permissions import Permissions
+from ..security.python_sandbox import PythonSandbox
+from ..tools.base import Tool
+from ..tools.permissions import Permissions
 
 
 class CodeExecutionTool(Tool):

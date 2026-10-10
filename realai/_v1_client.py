@@ -2349,6 +2349,34 @@ class RealAI:
                 }, capability=ModelCapability.TEXT_GENERATION.value, modality="text",
                    extra={"persona": self.persona, "source": "error", "error": _api_error})
 
+        # Local OpenAI-compatible HTTP endpoint (llama-server / Hive), no key needed.
+        if os.environ.get("REALAI_LOCAL_HTTP_FALLBACK", "1").strip().lower() not in {"0", "false", "no"}:
+            try:
+                from realai.local_media import local_chat as _local_chat
+
+                _lc = _local_chat(
+                    messages_to_send,
+                    max_tokens=int(max_tokens or 512),
+                    temperature=float(temperature if temperature is not None else 0.7),
+                )
+            except Exception:
+                _lc = {"ok": False}
+            if _lc.get("ok"):
+                _raw = _lc.get("raw") or {}
+                return self._with_metadata({
+                    "id": _raw.get("id") or f"chatcmpl-http-{int(time.time())}",
+                    "object": "chat.completion",
+                    "created": int(time.time()),
+                    "model": _lc.get("model") or self.model_name,
+                    "choices": [{
+                        "index": 0,
+                        "message": {"role": "assistant", "content": _lc.get("text") or ""},
+                        "finish_reason": "stop",
+                    }],
+                    "usage": _raw.get("usage") or {},
+                }, capability=ModelCapability.TEXT_GENERATION.value, modality="text",
+                   extra={"persona": self.persona, "source": "local_http", "endpoint": _lc.get("endpoint")})
+
         # Placeholder when neither local GGUF nor cloud fallback can generate.
         missing_credentials_msg = _cloud_fallback.missing_generation_message(
             use_local=self._use_local
@@ -9050,7 +9078,6 @@ class RealAIClient:
         self.reasoning = self.Reasoning(self.model)
         self.synthesis = self.Synthesis(self.model)
         self.reflection = self.Reflection(self.model)
-        self.agents = self.Agents(self.model)
 
         # Advanced capabilities
         self.math = self.Math(self.model)
@@ -9096,6 +9123,11 @@ class RealAIClient:
 
         # Agent Orchestration and Hive Mind System
         self.agents = self.Agents(self.model)
+
+        # Route capabilities to real local abilities where they exist; label the rest honestly.
+        from realai.limitless_wiring import wire_client
+
+        wire_client(self)
 
     class ChatCompletions:
         """Chat completions interface."""
@@ -9329,19 +9361,6 @@ class RealAIClient:
         def improve(self, focus: str = "general") -> Dict[str, Any]:
             """Return targeted improvement suggestions for the given focus area."""
             return self.model.self_reflect(focus=focus)
-
-    class Agents:
-        """Multi-agent orchestration interface."""
-        def __init__(self, model: RealAI):
-            self.model = model
-
-        def run(self, task: str, **kwargs) -> Dict[str, Any]:
-            """Run multiple specialised agents on a complex task."""
-            return self.model.orchestrate_agents(task=task, **kwargs)
-
-        def coordinate(self, task: str, roles: Optional[List[str]] = None) -> Dict[str, Any]:
-            """Coordinate a specific set of agent roles for a task."""
-            return self.model.orchestrate_agents(task=task, agent_roles=roles)
 
     class Personas:
         """Persona profile management interface."""
@@ -9764,6 +9783,28 @@ class RealAIClient:
         """Agent orchestration and hive mind interface."""
         def __init__(self, model: RealAI):
             self.model = model
+
+        def run(self, task: str, **kwargs) -> Dict[str, Any]:
+            """Run a task through the hive planner/specialist/critic cycle.
+
+            Uses ``abilities.hive_orchestrator`` (real router + specialist cycle);
+            falls back to the in-process multi-agent coordinator.
+            """
+            from realai.limitless_wiring import call_ability
+
+            res = call_ability("hive_orchestrator", task, {"agent": kwargs.pop("agent", "researcher"), **kwargs})
+            inner = (res or {}).get("result") if isinstance((res or {}).get("result"), dict) else {}
+            if res is not None and res.get("ok", True) and not res.get("error") and inner.get("ok", True):
+                res.setdefault("status", "success")
+                return res
+            out = self.model.orchestrate_agents(task=task, agent_roles=kwargs.get("agent_roles"))
+            if isinstance(out, dict):
+                out.setdefault("hive_error", (res or {}).get("error") or inner.get("error"))
+            return out
+
+        def coordinate(self, task: str, roles: Optional[List[str]] = None) -> Dict[str, Any]:
+            """Coordinate specific agent roles on a task."""
+            return self.model.orchestrate_agents(task=task, agent_roles=roles)
 
         def orchestrate(self, task: str, agents: Optional[List[str]] = None,
                        workflow_type: str = "sequential", **kwargs) -> Dict[str, Any]:

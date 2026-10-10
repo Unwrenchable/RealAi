@@ -245,31 +245,104 @@ def analyze_image_local(image_ref: str) -> Dict[str, Any]:
     }
 
 
-def hive_chat(prompt: str, *, system: str, max_tokens: int = 256) -> Dict[str, Any]:
-    """Call local Hive chat for specialist text abilities."""
+_DEFAULT_CHAT_BASES = ("http://127.0.0.1:8001/v1", "http://127.0.0.1:8080/v1")
+
+
+def chat_url_candidates() -> List[str]:
+    """Ordered chat-completions URLs for local abilities (no outside keys).
+
+    ``REALAI_CHAT_URL`` (a full ``.../chat/completions`` URL or a base URL) wins,
+    then ``REALAI_LLM_BASE_URL`` (OpenAI-style base, e.g. ``http://127.0.0.1:8081/v1``),
+    then the Hive on :8001, then a plain llama-server on :8080.
+    """
+    import os
+
+    out: List[str] = []
+    for raw in (os.environ.get("REALAI_CHAT_URL"), os.environ.get("REALAI_LLM_BASE_URL")):
+        raw = (raw or "").strip().rstrip("/")
+        if not raw:
+            continue
+        if raw.endswith("/chat/completions"):
+            out.append(raw)
+        elif raw.endswith("/v1"):
+            out.append(raw + "/chat/completions")
+        else:
+            out.append(raw + "/v1/chat/completions")
+    for base in _DEFAULT_CHAT_BASES:
+        out.append(base + "/chat/completions")
+    seen: List[str] = []
+    for u in out:
+        if u not in seen:
+            seen.append(u)
+    return seen
+
+
+def local_chat(
+    messages: List[Dict[str, Any]],
+    *,
+    max_tokens: int = 256,
+    temperature: float = 0.35,
+) -> Dict[str, Any]:
+    """POST OpenAI-style messages to the first reachable local chat endpoint.
+
+    Returns ``{"ok": True, "text", "model", "endpoint", "raw"}`` or
+    ``{"ok": False, "error", "tried"}``; never raises for connection problems.
+    """
     import json
+    import os
     import urllib.request
 
     body = json.dumps(
         {
-            "model": "realai-default-coder",
-            "messages": [
-                {"role": "system", "content": system},
-                {"role": "user", "content": prompt},
-            ],
+            "model": os.environ.get("REALAI_CHAT_MODEL") or "realai-default-coder",
+            "messages": messages,
             "max_tokens": max_tokens,
-            "temperature": 0.35,
+            "temperature": temperature,
         }
     ).encode("utf-8")
-    req = urllib.request.Request(
-        "http://127.0.0.1:8001/v1/chat/completions",
-        data=body,
-        headers={"Content-Type": "application/json", "X-RealAI-Tools": "off"},
-        method="POST",
+    timeout = float(os.environ.get("REALAI_CHAT_TIMEOUT") or 90)
+    tried: List[str] = []
+    errors: List[str] = []
+    for url in chat_url_candidates():
+        tried.append(url)
+        req = urllib.request.Request(
+            url,
+            data=body,
+            headers={"Content-Type": "application/json", "X-RealAI-Tools": "off"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                data = json.loads(resp.read().decode("utf-8", errors="replace"))
+        except Exception as exc:  # connection refused, timeout, bad JSON
+            errors.append(f"{url}: {exc}")
+            continue
+        text = (
+            ((data.get("choices") or [{}])[0].get("message") or {}).get("content") or ""
+        )
+        return {
+            "ok": True,
+            "text": text,
+            "model": data.get("model"),
+            "raw_id": data.get("id"),
+            "endpoint": url,
+            "raw": data,
+        }
+    return {
+        "ok": False,
+        "text": "",
+        "error": "no local chat endpoint reachable",
+        "errors": errors,
+        "tried": tried,
+        "hint": "start llama-server/Hive or set REALAI_CHAT_URL / REALAI_LLM_BASE_URL",
+    }
+
+
+def hive_chat(prompt: str, *, system: str, max_tokens: int = 256) -> Dict[str, Any]:
+    """Call the local chat endpoint for specialist text abilities (see :func:`local_chat`)."""
+    out = local_chat(
+        [{"role": "system", "content": system}, {"role": "user", "content": prompt}],
+        max_tokens=max_tokens,
     )
-    with urllib.request.urlopen(req, timeout=90) as resp:
-        data = json.loads(resp.read().decode("utf-8", errors="replace"))
-    text = (
-        ((data.get("choices") or [{}])[0].get("message") or {}).get("content") or ""
-    )
-    return {"ok": True, "text": text, "model": data.get("model"), "raw_id": data.get("id")}
+    out.pop("raw", None)
+    return out

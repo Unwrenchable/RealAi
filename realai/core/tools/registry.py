@@ -2,10 +2,10 @@
 
 from typing import Any, Dict
 
-from core.tools.base import Tool
-from core.logging.logger import log
-from core.metrics.metrics import TOOL_CALLS
-from core.tracing.tracer import tracer
+from ..tools.base import Tool
+from ..logging.logger import log
+from ..metrics.metrics import TOOL_CALLS
+from ..tracing.tracer import tracer
 
 
 class ToolRegistry:
