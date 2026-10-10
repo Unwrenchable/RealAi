@@ -341,6 +341,66 @@ def _vram_gb():
         return None
 
 
+def save_adapter(model, tok, dest: Path) -> Path:
+    """Standard PEFT adapter dir from a model living on any device (DirectML tensors are opaque:
+    PeftModel.save_pretrained -> safetensors cannot read their storage). Copies LoRA weights to CPU."""
+    from peft import get_peft_model_state_dict
+    from safetensors.torch import save_file
+
+    dest = _inside_home(Path(dest))
+    tmp = dest.with_name(dest.name + ".tmp")
+    tmp.mkdir(parents=True, exist_ok=True)
+    sd = {k: v.detach().to("cpu").contiguous().clone() for k, v in get_peft_model_state_dict(model).items()}
+    save_file(sd, str(tmp / "adapter_model.safetensors"), metadata={"format": "pt"})
+    model.peft_config["default"].save_pretrained(str(tmp))
+    if tok is not None:
+        tok.save_pretrained(str(tmp))
+    if dest.exists():
+        import shutil
+
+        shutil.rmtree(dest)
+    tmp.replace(dest)
+    return dest
+
+
+def load_adapter_weights(model, src: Path) -> None:
+    """Load adapter_model.safetensors into an existing PEFT model (before or after .to(device))."""
+    from peft import set_peft_model_state_dict
+    from safetensors.torch import load_file
+
+    res = set_peft_model_state_dict(model, load_file(str(Path(src) / "adapter_model.safetensors")))
+    bad = [k for k in getattr(res, "unexpected_keys", []) or []]
+    if bad:
+        raise RuntimeError(f"adapter keys not in model: {bad[:3]}")
+
+
+def save_checkpoint(out: Path, model, tok, opt, sched, state: Dict[str, Any]) -> Path:
+    """ckpt-ep<N>/: adapter + optimizer moments (CPU) + trainer state; latest pointer in checkpoint.json."""
+    import torch
+
+    d = save_adapter(model, tok, out / f"ckpt-ep{state['epoch']}")
+    torch.save({"t": opt.t, "m": [x.detach().to("cpu").clone() for x in opt.m],
+                "v": [x.detach().to("cpu").clone() for x in opt.v], "sched_n": sched.n}, str(d / "optimizer.pt"))
+    (d / "trainer_state.json").write_text(json.dumps(state, indent=2), encoding="utf-8")
+    (out / "checkpoint.json").write_text(json.dumps({"latest": d.name, **state}, indent=2), encoding="utf-8")
+    return d
+
+
+def load_checkpoint(d: Path, model, opt, sched) -> Dict[str, Any]:
+    import torch
+
+    load_adapter_weights(model, d)
+    o = torch.load(str(d / "optimizer.pt"), map_location="cpu")
+    opt.t = o["t"]
+    for dst, src in zip(opt.m, o["m"]):
+        dst.copy_(src.to(dst.device))
+    for dst, src in zip(opt.v, o["v"]):
+        dst.copy_(src.to(dst.device))
+    sched.n = o["sched_n"]
+    sched._set()
+    return json.loads((d / "trainer_state.json").read_text(encoding="utf-8"))
+
+
 def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
     import gc
 
@@ -378,9 +438,19 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
     if not args.max_steps or args.eval_smoke:
         log(f"base eval_loss (step 0) {eval_loss(model, tok, eval_rows[: args.eval_rows or None], max_len, device):.4f}")
     best, history, step, t0, skipped, peak = float("inf"), [], 0, time.time(), 0, None
+    start_ep = 0
+    if args.resume:
+        ck = out / "checkpoint.json"
+        rdir = Path(args.resume) if args.resume != "auto" else (out / json.loads(ck.read_text())["latest"] if ck.is_file() else None)
+        if rdir and rdir.is_dir():
+            st = load_checkpoint(rdir, model, opt, sched)
+            start_ep, step, best, history = st["epoch"], st["step"], st["best"], st["history"]
+            log(f"resumed from {rdir.name}: epoch {start_ep} done, step {step}, best {best:.4f}")
+        else:
+            log("resume requested but no checkpoint found; starting fresh")
     win_loss, win_tok = 0.0, 0
     done = False
-    for ep in range(recipe.epochs):
+    for ep in range(start_ep, recipe.epochs):
         enc = _encode_all(train_rows, tok, max_len)
         random.Random(recipe.seed + ep).shuffle(enc)
         micro = 0
@@ -425,6 +495,9 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
                     done = True
                     break
         if done:
+            if args.save_smoke:
+                d = save_checkpoint(out, model, tok, opt, sched, {"epoch": 0, "step": step, "best": best, "history": history})
+                log(f"smoke checkpoint saved -> {d}")
             if args.eval_smoke:
                 el = eval_loss(model, tok, eval_rows[: args.eval_rows or None], max_len, device)
                 log(f"smoke eval_loss {el:.4f}")
@@ -438,10 +511,12 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
         log(f"epoch {ep + 1} eval_loss {el:.4f}")
         if el < best:
             best = el
-            model.save_pretrained(str(out / "adapter_best"))
-            tok.save_pretrained(str(out / "adapter_best"))
+            save_adapter(model, tok, out / "adapter_best")
+            log(f"saved adapter_best (eval_loss {el:.4f})")
+        save_checkpoint(out, model, tok, opt, sched, {"epoch": ep + 1, "step": step, "best": best, "history": history})
+        log(f"checkpoint ckpt-ep{ep + 1} saved (resume with --resume auto)")
     if not args.max_steps:
-        model.save_pretrained(str(out / "adapter_last"))
+        save_adapter(model, tok, out / "adapter_last")
     return {"device": dev_name, "max_len": max_len, "best_eval_loss": best, "history": history, "steps": step,
             "skipped_rows": skipped, "peak_vram_gb": peak, "sec_per_step": (time.time() - t0) / max(step, 1),
             "smoke": bool(args.max_steps)}
@@ -494,6 +569,7 @@ def evaluate(args, recipe: Recipe) -> int:
     dtype = torch.float32
     base = AutoModelForCausalLM.from_pretrained(recipe.base_model, torch_dtype=dtype).to(device)
     base_loss = eval_loss(base, tok, rows, max_len, device)
+    base = base.to("cpu")  # attach LoRA on CPU (plain tensors), then move as one module
     tuned = PeftModel.from_pretrained(base, str(out / "adapter_best")).to(device)
     tuned_loss = eval_loss(tuned, tok, rows, max_len, device)
     rel = (base_loss - tuned_loss) / base_loss if base_loss else 0.0
@@ -562,6 +638,8 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--dml-adapter", default="RX 6700", help="substring of the DirectML adapter name")
     ap.add_argument("--max-steps", type=int, default=0, help="smoke: stop after N optimizer steps (no adapter saved)")
     ap.add_argument("--eval-smoke", action="store_true", help="with --max-steps: eval loss before/after on --eval-rows")
+    ap.add_argument("--save-smoke", action="store_true", help="with --max-steps: write a checkpoint (tests the save path)")
+    ap.add_argument("--resume", default="", help="'auto' (latest ckpt in --out) or a ckpt-ep<N> dir")
     ap.add_argument("--eval-rows", type=int, default=0, help="limit eval rows (0 = all)")
     ap.add_argument("--model-id", default="realai-sft-1.5b")
     ap.add_argument("--quant", default="Q5_K_M")

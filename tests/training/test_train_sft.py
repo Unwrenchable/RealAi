@@ -129,3 +129,60 @@ def test_cosine_warmup_curve():
     for _ in range(90):
         s.step()
     assert s.get_last_lr()[0] < 1e-12
+
+
+def _tiny_peft(seed=0):
+    torch = pytest.importorskip("torch")
+    tr = pytest.importorskip("transformers")
+    peft = pytest.importorskip("peft")
+    cfg = tr.Qwen2Config(vocab_size=64, hidden_size=32, intermediate_size=64, num_hidden_layers=2,
+                         num_attention_heads=4, num_key_value_heads=2, max_position_embeddings=64)
+    torch.manual_seed(seed)
+    base = tr.Qwen2ForCausalLM(cfg).eval()
+    m = peft.get_peft_model(base, peft.LoraConfig(r=4, lora_alpha=8, target_modules=["q_proj", "v_proj", "up_proj"],
+                                                  task_type="CAUSAL_LM"))
+    with torch.no_grad():  # make LoRA non-trivial (B starts at zero)
+        for n, p in m.named_parameters():
+            if "lora_B" in n:
+                p.normal_(0, 0.5)
+    return torch, peft, base, m
+
+
+def test_save_adapter_reloads_with_peft(tmp_path, monkeypatch):
+    monkeypatch.setenv("REALAI_HOME", str(tmp_path))
+    torch, peft, base, m = _tiny_peft()
+    d = T.save_adapter(m, None, tmp_path / "adapter_best")
+    assert (d / "adapter_model.safetensors").is_file() and (d / "adapter_config.json").is_file()
+    ids = torch.tensor([[1, 2, 3, 4, 5]])
+    with torch.no_grad():
+        want = m(input_ids=ids).logits
+    tr = pytest.importorskip("transformers")
+    torch.manual_seed(0)  # same seed -> identical base weights, no LoRA
+    base2 = tr.Qwen2ForCausalLM(base.config).eval()
+    re = peft.PeftModel.from_pretrained(base2, str(d)).eval()
+    with torch.no_grad():
+        got = re(input_ids=ids).logits
+    assert torch.allclose(want, got, atol=1e-5)
+
+
+def test_checkpoint_roundtrip(tmp_path, monkeypatch):
+    monkeypatch.setenv("REALAI_HOME", str(tmp_path))
+    torch, peft, base, m = _tiny_peft()
+    params = [p for p in m.parameters() if p.requires_grad]
+    opt = T.DmlAdamW(params, lr=1e-3)
+    sch = T.CosineWarmup(opt, 2, 10)
+    for p in params:
+        p.grad = torch.ones_like(p)
+    opt.step(); sch.step()
+    T.save_checkpoint(tmp_path, m, None, opt, sch, {"epoch": 1, "step": 1, "best": 2.0, "history": []})
+    _, _, _, m2 = _tiny_peft(seed=1)
+    p2 = [p for p in m2.parameters() if p.requires_grad]
+    opt2 = T.DmlAdamW(p2, lr=1e-3)
+    sch2 = T.CosineWarmup(opt2, 2, 10)
+    st = T.load_checkpoint(tmp_path / "ckpt-ep1", m2, opt2, sch2)
+    assert st["epoch"] == 1 and opt2.t == 1 and sch2.n == 1
+    sd1 = peft.get_peft_model_state_dict(m)
+    sd2 = peft.get_peft_model_state_dict(m2)
+    assert all(torch.equal(sd1[k], sd2[k]) for k in sd1)
+    assert all(torch.equal(a, b) for a, b in zip(opt.m, opt2.m))
+    assert json.loads((tmp_path / "checkpoint.json").read_text())["latest"] == "ckpt-ep1"
