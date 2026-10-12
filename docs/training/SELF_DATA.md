@@ -55,3 +55,20 @@ Set `REALAI_CAPTURE=1` on the orchestrator (:8001). Every chat reply, tool-loop 
 spotcheck -> improve (weights + report) -> generate --plan auto (verified rows) -> verify-traffic
           -> dataset_builder --config config/dataset_builder.hive.pc.json -> train_sft -> spotcheck ...
 ```
+
+## Wire-audit tools (2026-10-12, branch feat/hive-wire-audit)
+
+Twelve read-only tools were added to `realai/hive_tools/extended.py`. Each one is deterministic for the same arguments, and none of them uses the network, sends anything or touches money:
+
+- **RackUp:** `rating_update_preview`, `matchmaking_suggest`, `rating_intel`, `game_rules`, `coach_drill` and `hall_context`. All of them call `realai/plugins/rackup_coach`, which is the canonical RackUp code.
+- **Self-knowledge:** `module_lookup`, `plugin_lookup`, `plugin_registry_list` and `organs_hive_status`. These read `abilities/*_surface.py`, `realai.plugin_registry` and `modules.organs`.
+- **Local stores:** `memory_search` and `approval_status`. Each reads a private temp copy of its source, either `memory/hive/memory.sqlite3` or `.approvals.json`. `approval_status` has no write path.
+- **Skipped:** `knowledge_query`. The knowledge graph has no persisted store, so there's nothing to ground an answer in.
+
+`route_to_agent` now hands off through `realai.orchestration.hive_router.run_cycle(dry_run=True)`. That resolves the model, the routes and the pipeline stages exactly like a live cycle, but executes nothing.
+
+**Verifier.** For each of these tools the verifier re-runs the same executor with the same arguments. The row is rejected if the result differs (`recompute_mismatch`) or if the answer leaves out the key fact (`<tool>_fact_missing`).
+
+**improve.** Each new tool gets weight ≥ 2.5 until it has 40 accepted rows.
+
+**Spot-check.** Use `python -m realai.training.spotcheck --suite extended` to score the new tools. The default `core` suite, the `register --default` gate and the comparable MODELS.md score are unchanged. Extended scores are stored as `tools_extended`.
