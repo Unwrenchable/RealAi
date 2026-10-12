@@ -441,7 +441,7 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "name": "desktop lambda image",
         "pillar": "advanced",
         "keywords": ["desktop lambda image", "rackup", "desktop_lambda_image"],
-        "status": "LIVE",
+        "status": "CODE",
         "live_path": "POST /v1/tools/execute ability.desktop_lambda_image",
         "modules": ["abilities/desktop_lambda_image.py", "modules/desktop_unique/lambda_image.py"],
     },

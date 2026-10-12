@@ -1,4 +1,7 @@
-"""Image generation — local Pillow first; optional xAI only if keyed."""
+"""Image generation - local only. SDXL-Turbo (diffusers/DirectML) when weights exist, Pillow procedural fallback.
+
+No external API keys. The old xAI path is disabled.
+"""
 
 from __future__ import annotations
 
@@ -9,10 +12,10 @@ ABILITY = {
     "name": "image_generation",
     "type": "ability",
     "status": "LIVE",
-    "source": "realai.local_media (+ optional xai_media)",
+    "source": "realai.local_sdxl (SDXL-Turbo) -> realai.local_media (Pillow fallback)",
     "dest": "abilities/image_generation.py",
-    "capabilities": ["image", "images/generations", "local_pillow"],
-    "secrets_policy": "none required — XAI_API_KEY optional upgrade only",
+    "capabilities": ["image", "images/generations", "sdxl_turbo_local", "local_pillow"],
+    "secrets_policy": "none - fully local, no API keys",
 }
 
 
@@ -26,37 +29,28 @@ def run(
     prompt = str(ctx.get("prompt") or input or "").strip()
     if not prompt:
         return {"ok": False, "error": "prompt_required", "ability": "image_generation"}
+    size = str(ctx.get("size") or "512x512")
+    backend = str(ctx.get("backend") or "auto").lower()
+    sdxl_err = None
 
-    prefer_cloud = str(ctx.get("backend") or "").lower() in {"xai", "grok", "cloud"}
-    if prefer_cloud:
+    if backend in {"auto", "sdxl", "sdxl_turbo", "local"}:
         try:
-            from realai.providers import xai_media
+            from realai import local_sdxl
 
-            if xai_media.has_api_key():
-                result = xai_media.generate_image(
-                    prompt,
-                    model=ctx.get("model"),
-                    n=int(ctx.get("n") or 1),
-                    size=ctx.get("size"),
+            if local_sdxl.weights_present():
+                r = local_sdxl.generate(
+                    prompt, size=size, steps=int(ctx.get("steps") or 1),
+                    seed=ctx.get("seed"), out_path=ctx.get("out_path"),
                 )
-                return {
-                    "ok": True,
-                    "ability": "image_generation",
-                    "prompt": prompt,
-                    "result": result,
-                    "source": "xai_media",
-                    "local": False,
-                }
-        except Exception as e:
-            cloud_err = str(e)
-        else:
-            cloud_err = "xai_api_key_missing"
-    else:
-        cloud_err = None
+                return {"ok": True, "ability": "image_generation", "prompt": prompt,
+                        "result": r, "source": "sdxl_turbo_local", "local": True}
+            sdxl_err = "sdxl_weights_missing"
+        except Exception as e:  # fall back to Pillow
+            sdxl_err = f"{type(e).__name__}: {e}"
 
     from realai.local_media import generate_image_local
 
-    local = generate_image_local(prompt, size=str(ctx.get("size") or "512x512"))
+    local = generate_image_local(prompt, size=size)
     return {
         "ok": bool(local.get("ok")),
         "ability": "image_generation",
@@ -65,5 +59,5 @@ def run(
         "source": "local_pillow",
         "local": True,
         "live_path": "POST /v1/tools/execute ability.image_generation (local PNG)",
-        "cloud_note": cloud_err,
+        "sdxl_note": sdxl_err,
     }
