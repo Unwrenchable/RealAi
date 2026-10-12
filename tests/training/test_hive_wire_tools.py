@@ -178,3 +178,21 @@ def test_register_gate_ignores_extended_reports(tmp_path, monkeypatch, capsys):
     (run / "eval_report.json").write_text(json.dumps({"passed": True}))
     a = T.build_parser().parse_args(["register", "--dataset", "d", "--out", str(run), "--model-id", "m", "--default"])
     assert T.register(a, T.recipe_from(a)) == 2 and "0.5" in capsys.readouterr().out
+
+
+def test_verifier_smoke_regressions_2026_10_12():
+    """Rejects from the first :8080 smoke that were verifier bugs, not model errors."""
+    from realai.training.self_data.verify import verify
+
+    a = ARGS["rating_intel"]
+    r = H.execute("rating_intel", a)
+    t = r["trajectory"].replace("_", " ").capitalize()
+    assert verify(*_msgs("trend?", "rating_intel", a, r, f"Trajectory: {t}."))[0]
+    ap = H.execute("approval_status", {})
+    if ap["total"] == 0:
+        assert verify(*_msgs("counts?", "approval_status", {}, ap,
+                             "There are no approval requests; all counts are at zero."))[0]
+    pl = H.execute("plugin_lookup", {"query": "public speaking coaching zz"})
+    assert pl["ok"] is False
+    assert verify(*_msgs("plugin?", "plugin_lookup", {"query": "public speaking coaching zz"}, pl,
+                         "It seems there are no plugins for public speaking in the registry."))[0]

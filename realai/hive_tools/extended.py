@@ -353,7 +353,8 @@ def key_facts(name: str, r: Dict[str, Any], args: Dict[str, Any]) -> List[List[s
     if name == "organs_hive_status":
         return [num(r.get("organ_count")) + num(r.get("category_count"))]
     if name == "approval_status":
-        return [[str(r.get("total")), "no " + str(r.get("status")), "none", "no pending", "0"]]
+        return [[str(r.get("total")), "no " + str(r.get("status")), "none", "no pending", "0", "zero", "no approval",
+                 "no request", "are no", "is no", "nothing"]]
     if name == "memory_search":
         return [] if r.get("hits") else [["no", "nothing", "empty", "0"]]
     return []

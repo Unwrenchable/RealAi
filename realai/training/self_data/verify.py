@@ -17,7 +17,7 @@ from typing import Any, Callable, Dict, List, Optional, Tuple
 
 _NUM = re.compile(r"(?<![A-Za-z0-9_])[-+]?\d+(?:\.\d+)?")
 _FAIL = re.compile(r"\b(fail|failed|error|couldn't|could not|can't|cannot|unable|not found|unavailable|disabled|no match|"
-                   r"issue|problem|invalid|missing|please provide|need the|need more)\b", re.I)
+                   r"issue|problem|invalid|missing|please provide|need the|need more|there (?:are|is|were) no|no \w+ (?:match|matches|found))\b", re.I)
 _THOUSANDS = re.compile(r"(?<=\d),(?=\d{3}(?!\d))")
 
 
@@ -156,7 +156,7 @@ def recompute_check(ok_calls: List[Dict[str, Any]], ans: str) -> List[str]:
             out.append(f"recompute_mismatch:{name}")
             continue
         for group in extended.key_facts(str(name), c["result"], args):
-            alts = [_norm(g) for g in group if g and g != "None"]
+            alts = [a for g in group if g and g != "None" for a in {_norm(g), _norm(g).replace("_", " ")}]
             if alts and not any(a in low for a in alts):
                 out.append(f"{name}_fact_missing")
                 break
