@@ -158,6 +158,8 @@ def on_spotcheck(rep: Dict[str, Any], report: Path, model_id: str) -> bool:
         return False
     d = load()
     mode = "tools" if rep.get("use_tools", True) else "no_tools"
+    if rep.get("suite", "core") != "core":  # extended/all never overwrite the comparable 16-check score
+        mode += "_" + str(rep["suite"])
     sec = next((s for s in ("runs", "baselines") if any(k == model_id or v.get("model_id") == model_id for k, v in d[s].items())), "baselines")
     key = next((k for k, v in d[sec].items() if k == model_id or v.get("model_id") == model_id), model_id)
     f = {"spotcheck": {mode: {"passed": rep.get("passed"), "n": rep.get("n"), "pass_rate": rep.get("pass_rate"),

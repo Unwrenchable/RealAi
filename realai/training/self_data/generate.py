@@ -24,11 +24,15 @@ from realai.hive_tools import tool_loop
 from .verify import verify
 
 TARGETS = ("chess_engine", "rackup_invoke", "shot_lookup", "math_solver", "data_analysis", "ability_lookup",
-           "list_agents", "route_to_agent", "device_profile")
+           "list_agents", "route_to_agent", "device_profile") + tuple(hive_tools.NEW_TOOLS)
 # what a correct routing looks like per target (a row that routes elsewhere is rejected)
 ACCEPT_TOOLS = {"list_agents": {"list_agents", "route_to_agent"}, "route_to_agent": {"route_to_agent", "list_agents"},
                 # "can RealAI do X?" may legitimately be answered by an ability OR an agent; both are hive routing
-                "ability_lookup": {"ability_lookup", "list_agents", "route_to_agent"}}
+                "ability_lookup": {"ability_lookup", "list_agents", "route_to_agent"},
+                "plugin_lookup": {"plugin_lookup", "plugin_registry_list"},
+                "plugin_registry_list": {"plugin_registry_list", "plugin_lookup"},
+                "module_lookup": {"module_lookup", "organs_hive_status"}}
+_DISC = ("8-ball", "9-ball", "10-ball", "one pocket", "pyramid")
 
 
 def home() -> Path:
@@ -82,7 +86,36 @@ def seeds(tool: str, rng: random.Random, n: int) -> str:
         return "Hive agents: " + "; ".join(f"{a['id']}: {str(a.get('description', ''))[:110]}" for a in ag)
     if tool == "device_profile":
         return "Questions are about THIS machine (no hardware details needed), e.g. which model/quant/GPU to run locally."
+    if tool in ("rating_update_preview", "matchmaking_suggest", "rating_intel"):
+        return ("Every request must include the numbers inline: ROC ratings are 200-800 (e.g. 520), optional RD 40-175. "
+                + {"rating_update_preview": "Give my rating, my opponent's rating and whether I won or lost.",
+                   "matchmaking_suggest": "Give my rating and 2-5 named opponents with their ratings.",
+                   "rating_intel": "Give my current rating and 3-8 past ratings in order."}[tool])
+    if tool in ("game_rules", "coach_drill"):
+        return "Disciplines: " + ", ".join(_DISC) + (". Include a rating 300-750 and optionally minutes." if tool == "coach_drill" else ".")
+    if tool == "hall_context":
+        return "Each request names a table size (7ft or 9ft) and optionally a skill level (beginner/intermediate/advanced/pro)."
+    if tool == "module_lookup":
+        ms = [m["id"] for m in _safe(lambda: __import__("realai.hive_tools.extended", fromlist=["x"]).modules_index())]
+        return "RealAI modules: " + ", ".join(rng.sample(ms, min(12, len(ms)))) if ms else ""
+    if tool in ("plugin_lookup", "plugin_registry_list"):
+        ps = [p["id"] for p in _safe(lambda: __import__("realai.hive_tools.extended", fromlist=["x"]).plugins_index())]
+        return "RealAI plugins: " + ", ".join(ps) if ps else ""
+    if tool == "organs_hive_status":
+        return "Ask about the synthetic organs hive: how many organs, is it complete, how many in a category " \
+               "(cognitive, nervous, dream, body, metabolic, evolution, memory_ecosystem, meta)."
+    if tool == "memory_search":
+        return "Ask RealAI to search its hive memory for a topic (chess, RackUp, training, a project name)."
+    if tool == "approval_status":
+        return "Ask what human approvals are pending/approved/rejected. Never ask to approve anything."
     return ""
+
+
+def _safe(fn):
+    try:
+        return fn() or []
+    except Exception:
+        return []
 
 
 _THINK = re.compile(r"<think>.*?(</think>|$)", re.S)
@@ -142,9 +175,55 @@ def fallback_questions(tool: str, n: int, rng: random.Random) -> List[str]:
     elif tool == "device_profile":
         out = ["What model and quant should you run on this PC?", "Which GPU should llama-server use on this machine?"]
     else:
-        out = []
+        out = new_tool_templates(tool, n, rng)
     rng.shuffle(out)
     return out[:n]
+
+
+def new_tool_templates(tool: str, n: int, rng: random.Random) -> List[str]:
+    """Grounded template questions for the wire-audit tools (numbers inline, ids from the live indexes)."""
+    r = lambda a, b: rng.randrange(a, b, 5)  # noqa: E731
+    out: List[str] = []
+    for _ in range(max(n, 4)):
+        if tool == "rating_update_preview":
+            me, op = r(380, 700), r(380, 700)
+            out.append(rng.choice([f"I'm rated {me} and just {{w}} against a {op}. What's my new rating?",
+                                   f"Preview my ROC rating: me {me}, opponent {op}, I {{w}}."]).format(w=rng.choice(["won", "lost"])))
+        elif tool == "matchmaking_suggest":
+            me = r(400, 680)
+            opp = ", ".join(f"{nm} {r(350, 750)}" for nm in rng.sample(["Ana", "Ben", "Cruz", "Dee", "Eli", "Fox"], rng.randint(2, 4)))
+            out.append(f"My rating is {me}. Who's the best match from: {opp}?")
+        elif tool == "rating_intel":
+            hist = sorted(r(380, 700) for _ in range(rng.randint(3, 6)))
+            hist = hist if rng.random() < 0.5 else hist[::-1]
+            out.append(f"My ratings went {', '.join(map(str, hist))}. Am I trending up or down?")
+        elif tool == "game_rules":
+            out.append(rng.choice(["What are the key rules of {d}?", "How do you rack and win in {d}?", "What fouls apply in {d}?"])
+                       .format(d=rng.choice(_DISC)))
+        elif tool == "coach_drill":
+            out.append(f"I'm a {r(300, 750)} rated player. Give me a {rng.choice([20, 30, 45, 60])}-minute {rng.choice(_DISC)} practice plan.")
+        elif tool == "hall_context":
+            out.append(f"On a {rng.choice(['7ft', '9ft'])} table at {rng.choice(['beginner', 'intermediate', 'advanced', 'pro'])} "
+                       "level, how many points win RackUp Pyramid and is it call-shot?")
+        elif tool == "module_lookup":
+            ms = _safe(lambda: __import__("realai.hive_tools.extended", fromlist=["x"]).modules_index())
+            if ms:
+                m = rng.choice(ms)
+                out.append(rng.choice(["What does RealAI's {i} module do?", "Is the {i} module present, and how is it imported?"]).format(i=m["id"]))
+        elif tool == "plugin_lookup":
+            ps = _safe(lambda: __import__("realai.hive_tools.extended", fromlist=["x"]).plugins_index())
+            if ps:
+                out.append(f"What is the {rng.choice(ps)['id']} plugin for?")
+        elif tool == "plugin_registry_list":
+            out.append(rng.choice(["Which plugins are in RealAI's plugin registry?", "List your registered plugins and versions."]))
+        elif tool == "organs_hive_status":
+            out.append(rng.choice(["How many synthetic organs does the hive have, and is it complete?",
+                                   f"How many {rng.choice(['cognitive', 'memory_ecosystem', 'body', 'meta'])} organs are in the hive?"]))
+        elif tool == "memory_search":
+            out.append(f"Search your hive memory for anything about {rng.choice(['chess', 'RackUp', 'training', 'Atomic Fizz', '9dttt'])}.")
+        elif tool == "approval_status":
+            out.append(rng.choice(["Are there any pending approvals?", "How many approval requests are waiting on me?"]))
+    return list(dict.fromkeys(out))
 
 
 def propose(chat, tool: str, n: int, rng: random.Random, focus: str = "", why: Optional[Counter] = None) -> List[str]:

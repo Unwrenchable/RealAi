@@ -778,6 +778,8 @@ def register(args, recipe: Recipe) -> int:
     sc_p = Path(args.spotcheck) if getattr(args, "spotcheck", None) else None
     if sc_p is None:
         cands = sorted((realai_home() / "runs").glob("spotcheck-*.json"), key=lambda p: p.stat().st_mtime) if (realai_home() / "runs").is_dir() else []
+        # the gate is the core suite only (extended wire-audit reports are informational)
+        cands = [p for p in cands if json.loads(p.read_text(encoding="utf-8")).get("suite", "core") == "core"]
         sc_p = cands[-1] if cands else None
     if sc_p and sc_p.is_file():
         sc = json.loads(sc_p.read_text(encoding="utf-8"))

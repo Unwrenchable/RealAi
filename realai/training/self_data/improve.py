@@ -14,9 +14,14 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from realai.hive_tools import NEW_TOOLS
+
 from .generate import TARGETS, home, out_dir
 
-ABILITY_TO_TOOL = {"rackup_invoke": "rackup_invoke", "shot_lookup": "shot_lookup", "chess_engine": "chess_engine",
+# tools added by the 2026-10-12 wire audit start WEAK: no accepted rows yet -> weight bumped until they have some
+NEW_TOOL_WEAK_WEIGHT = 2.5
+NEW_TOOL_MIN_ROWS = 40
+ABILITY_TO_TOOL = {**{t: t for t in NEW_TOOLS},"rackup_invoke": "rackup_invoke", "shot_lookup": "shot_lookup", "chess_engine": "chess_engine",
                    "device_profile": "device_profile", "ability_lookup": "ability_lookup", "route_to_agent": "route_to_agent",
                    "math_solver": "math_solver", "data_analysis": "data_analysis", "list_agents": "list_agents"}
 
@@ -57,10 +62,13 @@ def analyse(spotcheck: Optional[Path] = None) -> Dict[str, Any]:
         tried = st.get("accepted", 0) + st.get("rejected", 0)
         rej = st.get("rejected", 0) / tried if tried else 0.0
         w = round(1.0 + 3.0 * sc_fail + 1.0 * rej, 2)
+        new_weak = t in NEW_TOOLS and st.get("accepted", 0) < NEW_TOOL_MIN_ROWS
+        if new_weak:
+            w = max(w, NEW_TOOL_WEAK_WEIGHT)
         plan[t] = w
-        if sc_fail > 0 or rej > 0.5:
+        if sc_fail > 0 or rej > 0.5 or new_weak:
             weak.append({"tool": t, "spotcheck_fail_rate": round(sc_fail, 2), "selfplay_reject_rate": round(rej, 2),
-                         "accepted_rows": st.get("accepted", 0)})
+                         "accepted_rows": st.get("accepted", 0), "new_tool": t in NEW_TOOLS})
     weak.sort(key=lambda w: -(w["spotcheck_fail_rate"] * 3 + w["selfplay_reject_rate"]))
     return {"ts": _dt.datetime.now().isoformat(timespec="seconds"), "spotcheck": str(sc_paths[0]) if sc_paths else None,
             "spotcheck_pass_rate": sc.get("pass_rate") if sc else None, "weak": weak, "failures": failures,

@@ -128,6 +128,7 @@ def verify(messages: List[Dict[str, Any]], calls: List[Dict[str, Any]], judge: O
                 reasons.append("ability_not_named")
             elif named and not any(str(m.get("status", "")).lower() in low for m in named if m.get("status")):
                 reasons.append("ability_status_missing")
+    reasons += recompute_check(ok_calls, ans)
     if not reasons and judge is not None:
         try:
             if not judge(question=question, answer=ans, tool_output=blob):
@@ -135,6 +136,31 @@ def verify(messages: List[Dict[str, Any]], calls: List[Dict[str, Any]], judge: O
         except Exception as exc:
             reasons.append(f"judge_error:{type(exc).__name__}")
     return (not reasons), reasons
+
+
+def recompute_check(ok_calls: List[Dict[str, Any]], ans: str) -> List[str]:
+    """Wire-audit tools (and route_to_agent): re-run the SAME executor with the same arguments; the result must be
+    identical (deterministic, grounded) and the answer must state the key fact(s) from it."""
+    from realai import hive_tools
+    from realai.hive_tools import extended
+
+    out: List[str] = []
+    low = _norm(ans)
+    for c in ok_calls:
+        name = c.get("name")
+        if name not in hive_tools.NEW_TOOLS and name != "route_to_agent":
+            continue
+        args = c.get("arguments") if isinstance(c.get("arguments"), dict) else {}
+        again = hive_tools.execute(str(name), args, offline=True)
+        if json.dumps(again, sort_keys=True, default=str) != json.dumps(c["result"], sort_keys=True, default=str):
+            out.append(f"recompute_mismatch:{name}")
+            continue
+        for group in extended.key_facts(str(name), c["result"], args):
+            alts = [_norm(g) for g in group if g and g != "None"]
+            if alts and not any(a in low for a in alts):
+                out.append(f"{name}_fact_missing")
+                break
+    return out
 
 
 def llm_judge(chat) -> Callable[..., bool]:

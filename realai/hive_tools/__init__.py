@@ -56,6 +56,11 @@ SPECS: Dict[str, Dict[str, Any]] = {
 }
 NETWORK_TOOLS = {"web_search", "solana_read"}
 
+from realai.hive_tools import extended as _ext  # noqa: E402  (read-only RackUp / self-knowledge / snapshot tools)
+
+SPECS.update(_ext.SPECS)
+NEW_TOOLS = tuple(_ext.SPECS)  # added 2026-10-12 (wire audit); improve.py starts them as weak
+
 
 def specs(names: Optional[List[str]] = None) -> List[Dict[str, Any]]:
     return [SPECS[n] for n in (names or list(SPECS))]
@@ -216,12 +221,21 @@ def _list_agents(args, ctx):
 
 
 def _route(args, ctx):
+    """Hand-off through the REAL hive runtime (realai.orchestration.hive_router.run_cycle) in dry-run mode:
+    routes and model are resolved exactly as a live cycle would; nothing runs, nothing is persisted."""
     aid = str(args.get("agent", "")).strip()
     a = next((x for x in agents() if x["id"] == aid or str(x.get("role", "")).lower() == aid.lower()), None)
     if not a:
         return {"ok": False, "error": f"no agent {aid!r}; call list_agents first"}
-    return {"ok": True, "handoff": {"agent": a["id"], "role": a.get("role"), "task": str(args.get("task", ""))[:300],
-                                    "status": "queued", "runs_via": "POST /v1/tools/execute hive_run"}}
+    from realai.orchestration.hive_router import run_cycle
+
+    task = str(args.get("task", ""))[:300] or "status"
+    plan = run_cycle(task, agent=a["id"], persist=False, dry_run=True)
+    return {"ok": bool(plan.get("ok")), "handoff": {"agent": a["id"], "role": a.get("role"), "task": task,
+                                                    "status": "planned (dry run)", "model": plan.get("model"),
+                                                    "stages": (plan.get("plan") or {}).get("stages"),
+                                                    "hive_mode": (plan.get("routes") or {}).get("hive_mode"),
+                                                    "runs_via": "hive_router.run_cycle"}}
 
 
 def _network(args, ctx):
@@ -244,6 +258,7 @@ EXECUTORS: Dict[str, Callable[[Dict[str, Any], Dict[str, Any]], Dict[str, Any]]]
     "chess_engine": _chess, "rackup_invoke": _rackup, "shot_lookup": _shot, "device_profile": _device,
     "math_solver": _math, "data_analysis": _data, "ability_lookup": _ability, "list_agents": _list_agents,
     "route_to_agent": _route, "web_search": _web, "solana_read": _solana,
+    **_ext.EXECUTORS,
 }
 
 
