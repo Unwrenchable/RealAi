@@ -26,7 +26,9 @@ from .verify import verify
 TARGETS = ("chess_engine", "rackup_invoke", "shot_lookup", "math_solver", "data_analysis", "ability_lookup",
            "list_agents", "route_to_agent", "device_profile")
 # what a correct routing looks like per target (a row that routes elsewhere is rejected)
-ACCEPT_TOOLS = {"list_agents": {"list_agents", "route_to_agent"}, "route_to_agent": {"route_to_agent", "list_agents"}}
+ACCEPT_TOOLS = {"list_agents": {"list_agents", "route_to_agent"}, "route_to_agent": {"route_to_agent", "list_agents"},
+                # "can RealAI do X?" may legitimately be answered by an ability OR an agent; both are hive routing
+                "ability_lookup": {"ability_lookup", "list_agents", "route_to_agent"}}
 
 
 def home() -> Path:
@@ -67,7 +69,14 @@ def seeds(tool: str, rng: random.Random, n: int) -> str:
                 "league_validate (payload my_score, opp_score, opponent_id, discipline).")
     if tool == "ability_lookup":
         ab = rng.sample(hive_tools.abilities(), min(10, len(hive_tools.abilities())))
-        return "Some RealAI abilities: " + "; ".join(f"{a['name']} ({a['status']})" for a in ab)
+        return ("Each request must name ONE of these RealAI abilities (by its name) and ask whether it is live, "
+                "what its status is, or how to call it. Do not ask about products or abilities not in this list.\n"
+                "Abilities: " + "; ".join(f"{a['name']} (id {a['id']})" for a in ab))
+    if tool == "data_analysis":
+        return ("Each request must include the actual data inline: 5-12 short numbers (a plain comma list, or "
+                "label: value pairs), and ask for specific statistics (mean, median, standard deviation, quartiles, "
+                "min/max/range, outliers or trend). Never refer to data that is not in the request "
+                "(no 'our database', 'last year', attached files).")
     if tool in ("list_agents", "route_to_agent"):
         ag = rng.sample(hive_tools.agents(), min(8, len(hive_tools.agents())))
         return "Hive agents: " + "; ".join(f"{a['id']}: {str(a.get('description', ''))[:110]}" for a in ag)
@@ -118,9 +127,16 @@ def fallback_questions(tool: str, n: int, rng: random.Random) -> List[str]:
     elif tool == "math_solver":
         out = [f"Solve {a}x + {b} = {c} for x." for a, b, c in ((3, 4, 19), (5, -2, 23), (7, 3, 52))] + ["What is the derivative of x**3 + 2*x?"]
     elif tool == "data_analysis":
-        out = ["Give me the mean, median and spread of 12, 15, 9, 22, 30, 18.", "Stats please: 3, 7, 7, 10, 41."]
+        out = []
+        for _ in range(max(n, 4)):
+            xs = [rng.randint(1, 99) for _ in range(rng.randint(5, 10))]
+            ask = rng.choice(["mean, median and standard deviation", "quartiles and range", "min, max and any outliers",
+                              "the trend", "mean and spread"])
+            out.append(f"What are the {ask} of {', '.join(map(str, xs))}?")
     elif tool == "ability_lookup":
-        out = [f"Can you do {a['name'].lower()}? Is it live?" for a in hive_tools.abilities()]
+        tpl = ["Is the {n} ability live in RealAI?", "What's the status of {n}, and how do I call it?",
+               "Can RealAI do {n} right now?", "How do I invoke RealAI's {n} ability?"]
+        out = [rng.choice(tpl).format(n=a["name"]) for a in hive_tools.abilities()]
     elif tool in ("list_agents", "route_to_agent"):
         out = [f"Who in the hive should handle this: {str(a.get('description', ''))[:140]}" for a in hive_tools.agents() if a.get("description")]
     elif tool == "device_profile":
@@ -217,6 +233,8 @@ def run(chat, model: str = "local", plan: Optional[Dict[str, int]] = None, minut
                     continue
                 called = {c["name"] for c in res["calls"]}
                 ok, why = verify(res["messages"], res["calls"], judge=judge)
+                if any(isinstance(c.get("arguments"), dict) and "_raw" in c["arguments"] for c in res["calls"]):
+                    ok, why = False, ["truncated_tool_args"]  # model ran out of tokens mid tool-call JSON
                 if ok and not (called & ACCEPT_TOOLS.get(tool, {tool})):
                     ok, why = False, ["wrong_tool:" + ",".join(sorted(called)) if called else "no_tool_call"]
                 if ok:

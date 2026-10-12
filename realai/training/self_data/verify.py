@@ -16,7 +16,9 @@ import re
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 _NUM = re.compile(r"(?<![A-Za-z0-9_])[-+]?\d+(?:\.\d+)?")
-_FAIL = re.compile(r"\b(fail|failed|error|couldn't|could not|unable|not found|unavailable|disabled|no match)\b", re.I)
+_FAIL = re.compile(r"\b(fail|failed|error|couldn't|could not|can't|cannot|unable|not found|unavailable|disabled|no match|"
+                   r"issue|problem|invalid|missing|please provide|need the|need more)\b", re.I)
+_THOUSANDS = re.compile(r"(?<=\d),(?=\d{3}(?!\d))")
 
 
 def _norm(s: str) -> str:
@@ -25,7 +27,7 @@ def _norm(s: str) -> str:
 
 def _nums(s: str) -> List[str]:
     out = []
-    for n in _NUM.findall(s or ""):
+    for n in _NUM.findall(_THOUSANDS.sub("", s or "")):
         try:
             f = float(n)
         except ValueError:
@@ -41,6 +43,34 @@ _MOVENUM = re.compile(r"\b\d+\.(?:\.\.)?\s*(?=[KQRBNO]|[a-h][1-8x])")
 def _strip_markers(s: str) -> str:
     """Drop list numbering ("4. ") and chess move numbers ("34. f4", "12...Nf6"): formatting, not claims."""
     return _MOVENUM.sub(" ", _LISTNUM.sub("", s))
+
+
+def _decimals(tok: str, ans: str) -> int:
+    m = re.search(r"(?<![\d.])" + re.escape(tok).replace(r"\.", r"\.") + r"(\.\d+)?", _THOUSANDS.sub("", ans))
+    return len(m.group(1)) - 1 if m and m.group(1) else (len(tok.split(".")[1]) if "." in tok else 0)
+
+
+def _derived(n: str, ans: str, have: set) -> bool:
+    """A number is still grounded if it is a tool value rounded to the answer's precision (6.48 for 6.480741),
+    a percentage of a 0-1 tool value, or a difference of two tool values (range = max - min)."""
+    try:
+        x = float(n)
+    except ValueError:
+        return False
+    vals = []
+    for h in have:
+        try:
+            vals.append(float(h))
+        except ValueError:
+            pass
+    d = len(n.split(".")[1]) if "." in n else 0
+    tol = 0.5 * 10 ** -d + 1e-9
+    if any(abs(v - x) <= tol for v in vals):
+        return True
+    if any(abs(v * 100 - x) <= tol for v in vals if -1 <= v <= 1):
+        return True
+    small = vals[:60]
+    return any(abs(abs(a - b) - x) <= tol for i, a in enumerate(small) for b in small[i + 1:])
 
 
 def final_answer(messages: List[Dict[str, Any]]) -> str:
@@ -66,7 +96,7 @@ def verify(messages: List[Dict[str, Any]], calls: List[Dict[str, Any]], judge: O
         return (bool(_FAIL.search(ans)), ["all_tools_failed" + ("" if _FAIL.search(ans) else "_but_answer_claims_success")])
     blob = json.dumps([c["result"] for c in ok_calls] + [c.get("arguments") for c in calls], ensure_ascii=False)
     have = set(_nums(blob)) | set(_nums(question)) | {"0", "1", "2", "3"}
-    bad = [n for n in _nums(_strip_markers(ans)) if n not in have]
+    bad = [n for n in _nums(_strip_markers(ans)) if n not in have and not _derived(n, ans, have)]
     if bad:
         reasons.append("ungrounded_numbers:" + ",".join(sorted(set(bad))[:6]))
     for c in ok_calls:
@@ -90,10 +120,13 @@ def verify(messages: List[Dict[str, Any]], calls: List[Dict[str, Any]], judge: O
             if r["handoff"]["agent"] not in ans:
                 reasons.append("agent_not_named")
         elif name == "ability_lookup":
-            top = (r.get("matches") or [{}])[0]
-            if top.get("id") and top["id"] not in ans:
+            # any returned match may be the one the user meant; it must be named (id or name) with its status
+            low = ans.lower()
+            named = [m for m in r.get("matches") or [] if (m.get("id") and (m["id"].lower() in low or m["id"].replace("_", " ") in low))
+                     or (m.get("name") and m["name"].lower() in low)]
+            if r.get("matches") and not named:
                 reasons.append("ability_not_named")
-            elif top.get("status") and top["status"] not in ans and top["status"].lower() not in ans.lower():
+            elif named and not any(str(m.get("status", "")).lower() in low for m in named if m.get("status")):
                 reasons.append("ability_status_missing")
     if not reasons and judge is not None:
         try:

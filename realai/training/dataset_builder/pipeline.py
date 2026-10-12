@@ -65,7 +65,9 @@ class _Tok:
             try:
                 from transformers import AutoTokenizer
 
-                self.tok = AutoTokenizer.from_pretrained(name, local_files_only=True)
+                from realai.training.hf_paths import resolve_model_path
+
+                self.tok = AutoTokenizer.from_pretrained(resolve_model_path(name), local_files_only=True)
             except Exception:
                 self.tok = None
         self.kind = "hf:" + str(name) if self.tok else "chars/3.6"

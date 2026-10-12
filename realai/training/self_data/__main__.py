@@ -22,6 +22,7 @@ def main(argv=None) -> int:
     g.add_argument("--judge", action="store_true", help="also ask the teacher to judge grounding (slower)")
     g.add_argument("--shot-catalog")
     g.add_argument("--seed", type=int, default=0)
+    g.add_argument("--exec-max-tokens", type=int, default=900, help="executor max_tokens (tool-call JSON with inline data needs room)")
     sub.add_parser("verify-traffic", help="captured real traffic -> verifier -> hive_selfplay")
     i = sub.add_parser("improve", help="spot-check + self-play failures -> plan + report")
     i.add_argument("--spotcheck")
@@ -60,7 +61,7 @@ def main(argv=None) -> int:
         from realai.training.dataset_builder.adapters import load_shot_catalog
 
         hive_tools.set_shot_catalog(load_shot_catalog(Path(a.shot_catalog)))
-    chat = tool_loop.http_chat(a.base_url, a.model, temperature=0.2, max_tokens=500)
+    chat = tool_loop.http_chat(a.base_url, a.model, temperature=0.2, max_tokens=a.exec_max_tokens)
     propose_chat = tool_loop.http_chat(a.base_url, a.model, temperature=0.9, max_tokens=900)
     if a.plan == "even":
         plan = {t: 1.0 for t in gen.TARGETS}
