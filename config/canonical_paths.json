@@ -1,0 +1,2776 @@
+{
+ "generated_by": "python -m realai.repo_hygiene.canonical_paths --write",
+ "rule": "identical bytes, >= 300 B, not __init__.py, tracked, outside shelves/tests",
+ "archive_root_for_future_moves": "D:\\ARCHIVE",
+ "moves_done": false,
+ "groups": [
+  {
+   "sha256": "8acd0d7295f1b84d343374ba487ed1e7f9f464232ff17d00dd2b0cd5312f71de",
+   "canonical": "abilities/assemble_gold_index.py",
+   "why": "prior: ONE_TREE winner: product-root abilities/ (realai/abilities is a compat shim, DO_NOT_PARK)",
+   "duplicates": [
+    "scanners/assemble_gold_index.py"
+   ]
+  },
+  {
+   "sha256": "870e35dfa7f4de0b53ac02e7f6cd03f00916f20e693e275d590421e487951fb7",
+   "canonical": "realai/memory/recycle_py/realai-ish_memory_summarizer_agent.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "abilities/from_accident/realai-ish_memory_summarizer_agent.py",
+    "abilities/from_accident/realai-ish_memory_summarizer_agent_117.py",
+    "realai/memory/recycle_py/realai-ish_memory_summarizer_agent_117.py",
+    "realai/memory/recycle_py_unique/realai-ish_memory_summarizer_agent.py"
+   ]
+  },
+  {
+   "sha256": "7417624e0dac55da460c8452b630af18af6a2a66a5dd57cef7a311ae15e06266",
+   "canonical": "abilities/hive_memory.py",
+   "why": "prior: ONE_TREE winner: product-root abilities/ (realai/abilities is a compat shim, DO_NOT_PARK)",
+   "duplicates": [
+    "realai/memory/hive_memory.py",
+    "realai/memory/memory/hive_memory.py"
+   ]
+  },
+  {
+   "sha256": "cd48fe36d80504e44f0e31dc6dd537335c4b7444ab1361499aa1dd641801dbfd",
+   "canonical": "abilities/memory_learning.py",
+   "why": "prior: ONE_TREE winner: product-root abilities/ (realai/abilities is a compat shim, DO_NOT_PARK)",
+   "duplicates": [
+    "realai/memory/memory/memory_learning.py",
+    "realai/memory/memory_learning.py"
+   ]
+  },
+  {
+   "sha256": "6819eaa40d9a0e82667f2eed1b5e3ee234e8d36ccd33236653aa391d24db158d",
+   "canonical": "abilities/nest_orchestrators.py",
+   "why": "prior: ONE_TREE winner: product-root abilities/ (realai/abilities is a compat shim, DO_NOT_PARK)",
+   "duplicates": [
+    "modules/orchestrators/nest_orchestrators.py"
+   ]
+  },
+  {
+   "sha256": "31cfcc71ac51d28672f649adf1c65f849c9a28a1f57fe3ebd9026cb53ba08b38",
+   "canonical": "realai/plugins/rackup_coach/abilities/coach.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/coach.py",
+    "realai/plugins/coach.py"
+   ]
+  },
+  {
+   "sha256": "b58431c5a74ccf1badf8b7640147af0bc451684aa571a0e6420b62bdb2222897",
+   "canonical": "realai/plugins/coach_agent.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "abilities/rackup/coach_agent.py"
+   ]
+  },
+  {
+   "sha256": "01b2482f39eb57477c72e302da2fca329177d754bdc6317063f5c1e8c8f96765",
+   "canonical": "realai/plugins/rackup_coach/games.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/games.py",
+    "realai/plugins/games.py"
+   ]
+  },
+  {
+   "sha256": "c52e83cbfc84b9372c0ee13d61be09a6055025e51a719fb21cf8ec2805b30747",
+   "canonical": "realai/plugins/rackup_coach/glicko2.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/glicko2.py",
+    "realai/plugins/glicko2.py"
+   ]
+  },
+  {
+   "sha256": "064e491d7d2391fe3e5ee93c3a5e425edcc1cb7e48f2dbbfcf49960f91a3317e",
+   "canonical": "realai/plugins/rackup_coach/abilities/hall_context.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/hall_context.py",
+    "realai/plugins/hall_context.py"
+   ]
+  },
+  {
+   "sha256": "79f017ee72f72b5072b85677e4c8de42a238342d8a0a69a94734d7ca30c103cd",
+   "canonical": "realai/plugins/rackup_coach/abilities/league_validate.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/league_validate.py",
+    "realai/plugins/league_validate.py"
+   ]
+  },
+  {
+   "sha256": "512e4a8370a436e2d5be9fe86e8ed2e690185755cc222810e9fa1a6bc9f21e9c",
+   "canonical": "realai/plugins/rackup_coach/leagues.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/leagues.py",
+    "realai/plugins/leagues.py"
+   ]
+  },
+  {
+   "sha256": "58ff704a808ce3a7bcb4708a6e24644ce1e7096b968365c51d478019cd9b4490",
+   "canonical": "realai/plugins/rackup_coach/abilities/matchmaking.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/matchmaking.py",
+    "realai/plugins/matchmaking.py"
+   ]
+  },
+  {
+   "sha256": "af4aa7d615c636b54d42e8659e6edc5709388fda46b8335311ed1a2514816f4a",
+   "canonical": "realai/plugins/rackup_coach/abilities/moderation.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/moderation.py",
+    "realai/plugins/moderation.py"
+   ]
+  },
+  {
+   "sha256": "b20c04cf46c6ad70d2c431a085867c491977bdc77104fbb578b537ecd6c891ba",
+   "canonical": "realai/plugins/rackup_coach/money_audit.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/money_audit.py",
+    "realai/plugins/money_audit.py",
+    "realai/scripts/exportable/variants/rackup_money_audit.py",
+    "scripts/exportable/variants/rackup_money_audit.py"
+   ]
+  },
+  {
+   "sha256": "35b6aa28c839cd494c6e3ad1f18b7121b84d43b8c0bfa533963316bf7cdb91c0",
+   "canonical": "realai/plugins/rackup_coach/organs_bridge.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/organs_bridge.py"
+   ]
+  },
+  {
+   "sha256": "bff77a44bad63c549856d8b67e65792c9f878e0cfe5d9c1a29cda245b45b5de5",
+   "canonical": "realai/plugins/rackup_coach/pyramid.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/pyramid.py",
+    "realai/plugins/pyramid.py"
+   ]
+  },
+  {
+   "sha256": "ad197afbda7f43489ef3d8158bc4b58e22fcbd5f3850c551663c553f474608d6",
+   "canonical": "realai/plugins/rackup_coach/abilities/pyramid_rules.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/pyramid_rules.py",
+    "realai/plugins/pyramid_rules.py"
+   ]
+  },
+  {
+   "sha256": "5b9659323e357e94e7cd3c6344faa23195344d37e655f0ff1c567e76d82a4ebe",
+   "canonical": "modules/organs/meta/rackup_coach.py",
+   "why": "prior: AUTHORITY.md: organs are modules/organs (realai/modules/organs parked 2026-09-24)",
+   "duplicates": [
+    "abilities/rackup/rackup_coach.py"
+   ]
+  },
+  {
+   "sha256": "dc8c40b5693bf936c8d63250beed2fbbd488f735561e964a337035ea6dca6a6b",
+   "canonical": "realai/plugins/rackup_coach/abilities/rating_convert.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/rating_convert.py",
+    "realai/plugins/rating_convert.py"
+   ]
+  },
+  {
+   "sha256": "88cc2ab5b06c146323bc649be8b3ab72c55f19b82efa11edbca727d520a8062f",
+   "canonical": "realai/plugins/rackup_coach/abilities/rating_intel.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/rating_intel.py",
+    "realai/plugins/rating_intel.py"
+   ]
+  },
+  {
+   "sha256": "8d99e7c50f4af62342b07b77e4b89f843d8d1b523ea4951c04bccb31a90c5370",
+   "canonical": "realai/plugins/rating_update.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "abilities/rackup/rating_update.py"
+   ]
+  },
+  {
+   "sha256": "7f98f9b0640da911d8fca880f2e05e82a4762a23c49698a87b02216786aad524",
+   "canonical": "realai/plugins/rackup_coach/roc.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/roc.py",
+    "realai/plugins/roc.py"
+   ]
+  },
+  {
+   "sha256": "7df4cafa5b320ba6a3b7f849aaefb5e79e8b6c2eb352eb90518b6e6310883352",
+   "canonical": "realai/plugins/shot_of_the_day.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "abilities/rackup/shot_of_the_day.py"
+   ]
+  },
+  {
+   "sha256": "7ac4d1922c6679a03b21e3283fc9f1511ac0cbc08737ecce63d033bf60a416d7",
+   "canonical": "realai/plugins/rackup_coach/sotd_library.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/sotd_library.py",
+    "realai/plugins/sotd_library.py"
+   ]
+  },
+  {
+   "sha256": "a5e47b451bcd79b8f00b512c205ad0fd29b872f423b5ced140b9008ef9c3c0aa",
+   "canonical": "realai/plugins/rackup_coach/abilities/tournament.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/tournament.py",
+    "realai/plugins/tournament.py"
+   ]
+  },
+  {
+   "sha256": "e71c089b0e7c7eebc8e78d56e0cab5b0b4209c0fbf8e40d37131f5b1a87cb19e",
+   "canonical": "realai/plugins/rackup_coach/types.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/types.py",
+    "realai/plugins/types.py"
+   ]
+  },
+  {
+   "sha256": "69ca14a3a25d534b93f58a6df414ebe793ba5e3a752e7707a9f0edbc46090cc8",
+   "canonical": "realai/plugins/rackup_coach/abilities/video_analysis.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "abilities/rackup/video_analysis.py",
+    "realai/plugins/video_analysis.py"
+   ]
+  },
+  {
+   "sha256": "cae42c2c1bcf2f39bc55e7dd3eaf1a260d276703c72ab4547ca2ebdf49557242",
+   "canonical": "realai/agent_runtime/realai/agent_runtime.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "agent_runtime.py",
+    "realai/agent_runtime/RealAi-unified-20260804/agent_runtime.py",
+    "realai/agent_runtime/agents-skills-2026-08-01-HOMEPC-s137e5/agent_runtime.py",
+    "realai/agent_runtime/atomicfizzcaps-fork-2026-08-01-HOMEPC-f1a9c2/agent_runtime.py",
+    "realai/agent_runtime/clean-base/agent_runtime.py",
+    "realai/agent_runtime/feature-ui-desktop-promote/agent_runtime.py",
+    "realai/agent_runtime/from-accident-2026-08-01-HOMEPC-a9c301/agent_runtime.py",
+    "realai/agent_runtime/from-wsl-2026-08-01-HOMEPC-w274d4/agent_runtime.py",
+    "realai/agent_runtime/from-wsl-files-2026-08-01-HOMEPC-w274d4f/agent_runtime.py",
+    "realai/agent_runtime/from-wsl-w274d4/agent_runtime.py",
+    "realai/agent_runtime/from-zips-2026-08-01-HOMEPC-z7f104/agent_runtime.py",
+    "realai/agent_runtime/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_2026-06-16-262686d6_realai_agent_runtime.py",
+    "realai/agent_runtime/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_RealAIProject_realai_agent_runtime.py",
+    "realai/agent_runtime/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_agent_runtime.py",
+    "realai/agent_runtime/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_realai-clean_realai_agent_runtime.py",
+    "realai/agent_runtime/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_realai_agent_runtime.py",
+    "realai/agent_runtime/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_realai_historical_backups_realai_versions_20260612_RealAIProject_realai_agent_runtime.py",
+    "realai/agent_runtime/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_realai_repo_realai_agent_runtime.py",
+    "realai/agent_runtime/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_realai_sdk_realai_agent_runtime.py",
+    "realai/agent_runtime/from_desktop_missing/C_Users_tsmit_.grok_worktrees_tsmit-realai_realai2_realai_sdk_realai_sdk_agent_runtime.py",
+    "realai/agent_runtime/from_desktop_missing/C_Users_tsmit_Documents_GitHub_realai_realai_agent_runtime.py",
+    "realai/agent_runtime/from_desktop_missing/C_Users_tsmit_realai_.kilo_worktrees_cotton-mistake_realai_agent_runtime.py",
+    "realai/agent_runtime/from_desktop_missing/C_Users_tsmit_realai_realai_agent_runtime.py",
+    "realai/agent_runtime/grok-realai2-clean-2026-07-31-HOMEPC-e5c023/agent_runtime.py",
+    "realai/agent_runtime/grok_export_realai/agent_runtime.py",
+    "realai/agent_runtime/integration-hive-merge/agent_runtime.py",
+    "realai/agent_runtime/local-RealAi-unified-20260804/agent_runtime.py",
+    "realai/agent_runtime/local-nested-realai-202607/agent_runtime.py",
+    "realai/agent_runtime/local-recovery-primary-clean-20260731-clean/agent_runtime.py",
+    "realai/agent_runtime/modules-runtime-2026-08-01-HOMEPC-m21f01/agent_runtime.py",
+    "realai/agent_runtime/nested-realai-202607/agent_runtime.py",
+    "realai/agent_runtime/plugin-boards-2026-08-01-HOMEPC-pb01/agent_runtime.py",
+    "realai/agent_runtime/plugin-system-2026-08-01-HOMEPC-p26b2/agent_runtime.py",
+    "realai/agent_runtime/plugin-system-p26b2/agent_runtime.py",
+    "realai/agent_runtime/realai2_p0/agent_runtime.py",
+    "realai/agent_runtime/realai__dup1/agent_runtime.py",
+    "realai/agent_runtime/realai_recovery_/agent_runtime.py",
+    "realai/agent_runtime/realai_sdk/agent_runtime.py",
+    "realai/agent_runtime/realai_sdk__dup1/agent_runtime.py",
+    "realai/agent_runtime/recovery-primary-clean-20260731-clean/agent_runtime.py",
+    "realai/agent_runtime/recycle-py-unique-2026-08-01-HOMEPC-r106a1/agent_runtime.py",
+    "realai/agent_runtime/scripts/agent_runtime.py",
+    "realai/agent_runtime/unique-modules-2026-08-01-HOMEPC-u194c3/agent_runtime.py",
+    "realai/agent_runtime/unique-modules-files-2026-08-01-HOMEPC-u194c3f/agent_runtime.py"
+   ]
+  },
+  {
+   "sha256": "0ff695d2f38facac2863ab97a58b649ae43c7956fcddbffcd6af8200194b1ea8",
+   "canonical": "agent_tools/agents_impl/code_engineer_agent.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "modules/agents_advanced/code_engineer_agent.py"
+   ]
+  },
+  {
+   "sha256": "7c6a8d36c2334894efa799f712b4c0dec21e8b7ab89e00e02a95b8b2d4d79af5",
+   "canonical": "agent_tools/agents_impl/memory_summarizer_agent.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "realai/memory/agents_impl/memory_summarizer_agent.py"
+   ]
+  },
+  {
+   "sha256": "6897b32c83135d9e18b55fc3fa39bda901dd09d753ed008b3c0d8015aa2f4e42",
+   "canonical": "agent_tools/anthropic.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/providers/anthropic.py",
+    "realai/agent_tools_gold/providers/anthropic.py"
+   ]
+  },
+  {
+   "sha256": "55119795fa9ad5a0c0b6ee29ef0648d16cc21e02fb7673261917fcbaa7649e88",
+   "canonical": "agent_tools/cli.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "realai/agent_tools_gold/cli.py"
+   ]
+  },
+  {
+   "sha256": "b6cab8d0b229e0e325a5b3d6879cdcd5889d9db7c83913047b5d43cdb77f7bcb",
+   "canonical": "agent_tools/crypto.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/tooling/crypto.py",
+    "realai/agent_tools_gold/tooling/crypto.py"
+   ]
+  },
+  {
+   "sha256": "8e99f16ef9fb6f0b8eff0b253832e9c79d8cc91cdb90bd8bd612348a8887a7e5",
+   "canonical": "agent_tools/dashboard.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "realai/agent_tools_gold/dashboard.py"
+   ]
+  },
+  {
+   "sha256": "016fbcfff1e0ded031d5151961f7f2ac07ee640d3283d54725649e63954458d9",
+   "canonical": "agent_tools/engine/executor.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "realai/agent_tools_gold/engine/executor.py"
+   ]
+  },
+  {
+   "sha256": "2692ba50185acfb6b6cc72e93a6ec8d94077abb1a1b5638c7b8f713d9717b123",
+   "canonical": "agent_tools/loader.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/engine/loader.py",
+    "realai/agent_tools_gold/engine/loader.py"
+   ]
+  },
+  {
+   "sha256": "c61b571013ea33197dcc9337a9e878eca8869f344f4011e3cda610970e2ef870",
+   "canonical": "agent_tools/logger.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/engine/logger.py",
+    "realai/agent_tools_gold/engine/logger.py"
+   ]
+  },
+  {
+   "sha256": "1e0da88ba3496c52c4536bfbf5d908df8f7afcee1be15f6599ae1a337274a1c0",
+   "canonical": "agent_tools/engine/memory.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "realai/memory/engine/memory.py"
+   ]
+  },
+  {
+   "sha256": "ec0a7630058f70fbcb2a03645c29709669384b3ed1f93771c6a66c391787791e",
+   "canonical": "agent_tools/engine/router.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "realai/agent_tools_gold/engine/router.py"
+   ]
+  },
+  {
+   "sha256": "23567ab9728634b4cabe591ed0bf0cdc16068f4b3701e6b33122723b1da9f35a",
+   "canonical": "agent_tools/executor.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "realai/agent_tools_gold/executor.py"
+   ]
+  },
+  {
+   "sha256": "7e778357fd8b694e4cc4a9aa81e292b174edfe3960c8fa31db19244bece1dd3e",
+   "canonical": "realai/core/training/extract_from_agent_tools.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "agent_tools/extract_from_agent_tools.py",
+    "agent_tools/realai-ish_extract_from_agent_tools.py",
+    "agent_tools/realai-ish_extract_from_agent_tools_105.py"
+   ]
+  },
+  {
+   "sha256": "2d56cd4f65aa884482ec03bc824fd0feb2ad095aee7e2c440a37177504e48023",
+   "canonical": "agent_tools/filesystem.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/tooling/filesystem.py",
+    "realai/agent_tools_gold/tooling/filesystem.py"
+   ]
+  },
+  {
+   "sha256": "9a898ed80c7aad84b370a17b492cf65d27f65a3ed5a9d4fd64b8a1e3dcf46980",
+   "canonical": "agent_tools/groq.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/providers/groq.py",
+    "realai/agent_tools_gold/providers/groq.py"
+   ]
+  },
+  {
+   "sha256": "7b28ca45f9ceb782a9eb43bf278ccb51fcae6091681408d63a840742f83f5a95",
+   "canonical": "agent_tools/http.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/tooling/http.py",
+    "realai/agent_tools_gold/tooling/http.py"
+   ]
+  },
+  {
+   "sha256": "38a2ad666056fffeb33fcb7496df29dba3d54564ce6460fad2c9fde931669742",
+   "canonical": "agent_tools/importer.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/realai-ish_importer.py",
+    "agent_tools/realai_ish_importer.py",
+    "realai/agent_tools_gold/importer.py"
+   ]
+  },
+  {
+   "sha256": "3997894bbc2fd848e9ecd9e43ffa7efed2c8fe4b3041bf80a7586edf119d22f2",
+   "canonical": "agent_tools/local.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/providers/local.py",
+    "realai/agent_tools_gold/providers/local.py"
+   ]
+  },
+  {
+   "sha256": "be07156650dd5da949d68ac76b5d0a4f2ebaa0cf2717e9f86a7bed3827d8ea69",
+   "canonical": "agent_tools/memory.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "realai/engine/memory.py"
+   ]
+  },
+  {
+   "sha256": "0f7234dcef38bf39f41283cab4af81f7cd1a661d04b235c44266417d534a6211",
+   "canonical": "agent_tools/models.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "realai/agent_tools_gold/models.py"
+   ]
+  },
+  {
+   "sha256": "064530fc404984603314276f4e8873fd4599f6088126e674cbbb88f6d7d67a38",
+   "canonical": "agent_tools/openai.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/providers/openai.py",
+    "realai/agent_tools_gold/providers/openai.py"
+   ]
+  },
+  {
+   "sha256": "d2850ddc94ffd5786c50c6d6a16eb1ba04e1bd580b30451e9dd76141c64e4951",
+   "canonical": "agent_tools/overmind_runner.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "modules/agents_advanced/overmind_runner.py",
+    "modules/orchestrators/orchestrator_overmind_runner.py",
+    "modules/orchestrators/orchestrator_overmind_runner_128.py",
+    "realai/orchestrators/orchestrator_overmind_runner.py",
+    "realai/scripts/overmind_runner.py"
+   ]
+  },
+  {
+   "sha256": "c53a002c922a54909070f7bf9092c10ef32f549d27502012dabf5bbbf69cf993",
+   "canonical": "agent_tools/persona.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "realai/voice/persona.py"
+   ]
+  },
+  {
+   "sha256": "0ad8b4ca50d569e5aa2952085fb87c1d761f02cf811b551dae9c3769cc7d40ba",
+   "canonical": "agent_tools/realai.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/providers/realai.py",
+    "realai/agent_tools_gold/providers/realai.py"
+   ]
+  },
+  {
+   "sha256": "f12b66a8f900982b49c9ceeca8c609749338fc2facfcfdf82e09ea176a4238b6",
+   "canonical": "realai/providers/realai_embeddings.py",
+   "why": "prior: AUTHORITY.md: provider config gold is realai/providers",
+   "duplicates": [
+    "agent_tools/providers/realai_embeddings.py",
+    "agent_tools/realai_embeddings.py"
+   ]
+  },
+  {
+   "sha256": "1aba736ea9258b3db31d681121d30a93dc643085a55308714f2293d92a9e2a5a",
+   "canonical": "agent_tools/router.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/providers/router.py",
+    "realai/agent_tools_gold/providers/router.py"
+   ]
+  },
+  {
+   "sha256": "fc44ebbb876a522183e7c6d5be0099ca8a19c280a804c44be08955f06a56a5d3",
+   "canonical": "agent_tools/registry.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "realai/agent_tools_gold/registry.py"
+   ]
+  },
+  {
+   "sha256": "f54d8a6d5d8e695bd0b3d0a36714406320aa4e2764a097878e6912539135c872",
+   "canonical": "agent_tools/runtime.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "realai/agent_tools_gold/runtime.py"
+   ]
+  },
+  {
+   "sha256": "b77e48831549044fcee7b6df8460082bc4d370f59bf01ed5f11e66941b28f7e0",
+   "canonical": "agent_tools/solana.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/tooling/solana.py",
+    "modules/orchestrators/orchestrator_solana.py",
+    "modules/orchestrators/orchestrator_solana_127.py",
+    "realai/orchestrators/orchestrator_solana.py"
+   ]
+  },
+  {
+   "sha256": "9f3adf257fbf92802d1c5658eaea30b90127ae861e8be154443e3ea4fb68ffa6",
+   "canonical": "agent_tools/tooling/registry.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "realai/agent_tools_gold/tooling/registry.py"
+   ]
+  },
+  {
+   "sha256": "38570cdb2c08e7eb7803930c713873ebc68ad9fb76da47f37f417f786c8f32d7",
+   "canonical": "realai/orchestration/tts_routing.py",
+   "why": "prior: AUTHORITY.md: hive/bridge gold is realai/orchestration",
+   "duplicates": [
+    "agent_tools/tts_routing.py"
+   ]
+  },
+  {
+   "sha256": "b3316976e94e6a0392c8d56fd8cbf128307656db8227f46a0addbefa14294d58",
+   "canonical": "realai/orchestration/agent.py",
+   "why": "prior: AUTHORITY.md: hive/bridge gold is realai/orchestration",
+   "duplicates": [
+    "agents/agent.py",
+    "modules/orchestrators/agent.py",
+    "realai/core/orchestration/agent.py",
+    "realai/orchestrators/agent.py"
+   ]
+  },
+  {
+   "sha256": "4188f7498e96b358fbbe87e1b5108ffb25fc9fe62540b3bde027a231e616b5bc",
+   "canonical": "agents/agent_protocol.py",
+   "why": "prior: ONE_TREE winner: product-root agents/ (realai/agents parked 2b52297)",
+   "duplicates": [
+    "realai/agent_protocol.py"
+   ]
+  },
+  {
+   "sha256": "3d1aa8e2829970cfb6b79fac8ca3911c498c09fe8123014173251adb13e4dd8e",
+   "canonical": "agents/agent_runtime.py",
+   "why": "prior: ONE_TREE winner: product-root agents/ (realai/agents parked 2b52297)",
+   "duplicates": [
+    "realai/agent_runtime/_archive_nest/agent_runtime.py",
+    "realai/agent_runtime/agent_runtime.py"
+   ]
+  },
+  {
+   "sha256": "3be3db852fcd946cf2f7180eee02e8446d96c537b1697fcce07362cfdc8ba81e",
+   "canonical": "agents/agents.py",
+   "why": "prior: ONE_TREE winner: product-root agents/ (realai/agents parked 2b52297)",
+   "duplicates": [
+    "realai/scripts/exportable/variants/hierarchical_agent_gold_agents.py",
+    "scripts/exportable/variants/hierarchical_agent_gold_agents.py"
+   ]
+  },
+  {
+   "sha256": "4bae5cb0593ded7066a3355b7833121fcf3fcd32f030378b9d2918f46acd44dd",
+   "canonical": "agents/coding_agent.py",
+   "why": "prior: ONE_TREE winner: product-root agents/ (realai/agents parked 2b52297)",
+   "duplicates": [
+    "agents/realai__coding_agent.py",
+    "realai/scripts/exportable/variants/nested_realai_coding_agent.py",
+    "scripts/exportable/variants/nested_realai_coding_agent.py"
+   ]
+  },
+  {
+   "sha256": "e406e7ddc9088b26963147a7ec16eafa1f0d9bfbd94cd3ac40e6e917e8e69f47",
+   "canonical": "agents/hierarchical/tools.py",
+   "why": "prior: ONE_TREE winner: product-root agents/ (realai/agents parked 2b52297)",
+   "duplicates": [
+    "realai/scripts/exportable/variants/hierarchical_agent_gold_tools.py",
+    "scripts/exportable/variants/hierarchical_agent_gold_tools.py"
+   ]
+  },
+  {
+   "sha256": "fbae8118a24c0e9eabaf8111872509dd11fb4ec2f0d75faca0e44bde493189be",
+   "canonical": "realai/core/agents/hierarchical_agent.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "agents/hierarchical_agent.py",
+    "realai/hierarchical_agent.py"
+   ]
+  },
+  {
+   "sha256": "a32cd1a9752d0e35056be3687700d80add4ade1358497341061fe4e16d13e889",
+   "canonical": "realai/core/agents/self_heal.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "agents/realai__self_heal.py",
+    "agents/realai_self_heal.py",
+    "agents/self_heal.py",
+    "modules/agents_skills/realai__self_heal.py",
+    "modules/agents_skills/self_heal.py",
+    "realai/core/agents/realai_self_heal.py",
+    "realai/realai__self_heal.py",
+    "realai/realai_self_heal.py",
+    "realai/scripts/realai__self_heal.py",
+    "realai/scripts/realai_self_heal.py"
+   ]
+  },
+  {
+   "sha256": "2d701580d6f004761ce48de586e00633cb10ac810cbfe2f8e1f074f3c54ed9d0",
+   "canonical": "realai/plugins/realai_self_improving_agent.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "agents/realai_self_improving_agent.py",
+    "modules/self_improvement/realai_self_improving_agent.py"
+   ]
+  },
+  {
+   "sha256": "55f048599e92f044efd2c655c6f3f62a75819b6b93b794d89136407b8b7d9437",
+   "canonical": "realai/plugins/registry.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "agents/registry.py"
+   ]
+  },
+  {
+   "sha256": "9111c87d564644a38a9719fb2c0fa271e8ff550f2a7dd05e9a09a5d590ab6d9b",
+   "canonical": "realai/core/agents/safety.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "agents/safety.py"
+   ]
+  },
+  {
+   "sha256": "bd6e706bf97f326d399002bceedd48c0466b39d1d58ab4ae54d06c7b16c70557",
+   "canonical": "realai/plugins/self_improving_agent.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "agents/self_improving_agent.py",
+    "modules/self_improvement/self_improving_agent.py"
+   ]
+  },
+  {
+   "sha256": "cac9e985748bf629f2d904dd22b300617d0b33f40596f9e76a1851916fe036c7",
+   "canonical": "realai/core/core_extensions.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "apps/vscode/core_extensions.py"
+   ]
+  },
+  {
+   "sha256": "433c209260e449deeb7f20dc0f03103c86b0673100549122bfeddc396ab6bea6",
+   "canonical": "realai/benchmarks/base.py",
+   "why": "heuristic: most imported (52 importers)",
+   "duplicates": [
+    "benchmarks/base.py"
+   ]
+  },
+  {
+   "sha256": "49a28db4abfb0d0fe9bfa156f4cc0252e2c57e9ca70018bc4780f49b676b78c0",
+   "canonical": "realai/benchmarks/bench_ability.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "benchmarks/bench_ability.py"
+   ]
+  },
+  {
+   "sha256": "c483db29b469cf96c2aebebb0916c71810497c89e9c20ce7c9269fb5c2bd09c6",
+   "canonical": "realai/benchmarks/bench_agent.py",
+   "why": "heuristic: most imported (5 importers)",
+   "duplicates": [
+    "benchmarks/bench_agent.py"
+   ]
+  },
+  {
+   "sha256": "4ff620d39004acefbfe39ddf030c206aafab8e5908ace63d2f3f9254ff3eeb3f",
+   "canonical": "realai/benchmarks/bench_agent_eval.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "benchmarks/bench_agent_eval.py"
+   ]
+  },
+  {
+   "sha256": "c66374c72a57b18f79ebf04adb03450b8eccec432cfb7fd299b9f74259780e61",
+   "canonical": "realai/benchmarks/bench_coding.py",
+   "why": "heuristic: most imported (3 importers)",
+   "duplicates": [
+    "benchmarks/bench_coding.py"
+   ]
+  },
+  {
+   "sha256": "ddb44cbb88933eab1fa3f317c7a7aa43c230be4e469400ca0aabae54687b32e3",
+   "canonical": "realai/benchmarks/bench_memory.py",
+   "why": "heuristic: most imported (3 importers)",
+   "duplicates": [
+    "benchmarks/bench_memory.py",
+    "benchmarks/realai_ish_bench_memory.py",
+    "benchmarks/variants/realai_ish_bench_memory.py",
+    "benchmarks/variants/realai_ish_bench_memory_13.py",
+    "benchmarks/variants/realai_ish_bench_memory_48.py",
+    "realai/memory/benchmarks/bench_memory.py",
+    "realai/memory/recycle_py/realai-ish_bench_memory.py",
+    "realai/memory/recycle_py/realai-ish_bench_memory_13.py",
+    "realai/memory/recycle_py/realai-ish_bench_memory_48.py",
+    "realai/memory/recycle_py_unique/realai-ish_bench_memory.py"
+   ]
+  },
+  {
+   "sha256": "84b6084f2d6c325b7135e213ac48d4fc26827fb60c05f01395da6c690b59830d",
+   "canonical": "realai/benchmarks/bench_promote.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "benchmarks/bench_promote.py"
+   ]
+  },
+  {
+   "sha256": "2ca650a80e1de1e3d080c7c6b1d692fb7cca151d4459df706f582efa767e5a0c",
+   "canonical": "realai/benchmarks/bench_reasoning.py",
+   "why": "heuristic: most imported (3 importers)",
+   "duplicates": [
+    "benchmarks/bench_reasoning.py"
+   ]
+  },
+  {
+   "sha256": "150efc51555eb327cbcddfb5243b3c2ead44ad815d84c0a86d2bd2e19a58afbb",
+   "canonical": "realai/benchmarks/bench_safety.py",
+   "why": "heuristic: most imported (3 importers)",
+   "duplicates": [
+    "benchmarks/bench_safety.py"
+   ]
+  },
+  {
+   "sha256": "abca142443befa37078ce1dc9d9e4588339209795ec97793cee2ffee08646751",
+   "canonical": "realai/benchmarks/bench_stack.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "benchmarks/bench_stack.py"
+   ]
+  },
+  {
+   "sha256": "dad45ee6c54ac19d875e08e3672162698707be57e0ed4fce0f9ac857db7a6331",
+   "canonical": "realai/benchmarks/bench_stack_health.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "benchmarks/bench_stack_health.py"
+   ]
+  },
+  {
+   "sha256": "557c0a840997c7f54b7843b8d1a09798754b9ebed52ab7c74ead625e497ead80",
+   "canonical": "realai/plugins/benchmarks/bench_tool_use.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "benchmarks/bench_tool_use.py",
+    "benchmarks/variants/realai_ish_bench_tool_use.py",
+    "realai/benchmarks/bench_tool_use.py",
+    "realai/plugins/realai-ish_bench_tool_use.py",
+    "realai/plugins/tools/benchmarks/bench_tool_use.py",
+    "realai/plugins/tools/realai-ish_bench_tool_use.py",
+    "realai/plugins/tools/realai-ish_bench_tool_use_15.py",
+    "realai/plugins/tools/realai-ish_bench_tool_use_50.py",
+    "realai/plugins/tools/recycle_py/realai-ish_bench_tool_use.py",
+    "realai/plugins/tools/recycle_py/realai-ish_bench_tool_use_15.py",
+    "realai/plugins/tools/recycle_py/realai-ish_bench_tool_use_50.py",
+    "realai/plugins/tools/recycle_py_unique/realai-ish_bench_tool_use.py",
+    "realai/plugins/tools/tools/realai-ish_bench_tool_use.py",
+    "realai/plugins/tools/tools/realai-ish_bench_tool_use_15.py",
+    "realai/plugins/tools/tools/realai-ish_bench_tool_use_50.py"
+   ]
+  },
+  {
+   "sha256": "5c5a2cddd34e9e8759702516028f4fc9336b481e45360c4e755188e40b1fc8f4",
+   "canonical": "realai/benchmarks/bench_verify.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "benchmarks/bench_verify.py"
+   ]
+  },
+  {
+   "sha256": "e2393238c5f207dd6ba8aed9ea7c55f510d4e134f20ffb9b9ec7ef4f0cd10078",
+   "canonical": "realai/benchmarks/bench_world.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "benchmarks/bench_world.py"
+   ]
+  },
+  {
+   "sha256": "78d0d9686e454c7ff817bf9515e5a96f20e8b17049b8c4019fb68ff968f0fea5",
+   "canonical": "realai/benchmarks/bench_world_model.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "benchmarks/bench_world_model.py"
+   ]
+  },
+  {
+   "sha256": "637fef6e81a65cba0d1b719d15ed0a63fcd9b9679eb7931cd3d27562d12cc519",
+   "canonical": "realai/benchmarks/runner.py",
+   "why": "heuristic: most imported (9 importers)",
+   "duplicates": [
+    "benchmarks/runner.py"
+   ]
+  },
+  {
+   "sha256": "9293d69cd8c147d75b4ecc86b6800796c3267540d26cd8c70a6ef0736f9b8d53",
+   "canonical": "realai/scripts/verify_v3_matrix.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "benchmarks/verify_v3_matrix.py",
+    "realai/benchmarks/verify_v3_matrix.py",
+    "scanners/verify_v3_matrix.py",
+    "scripts/verify_v3_matrix.py"
+   ]
+  },
+  {
+   "sha256": "2adddc2f63c03718050bf46214f5b1c39f91819454b3ec420ae855b16c8173de",
+   "canonical": "realai/examples/local_llama_example.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "examples/local_llama_example.py"
+   ]
+  },
+  {
+   "sha256": "0d24c798dde6ecd60b43c44a447314d809afe5a3ad0b5fe3262e4966f09ccfb4",
+   "canonical": "realai/examples/examples_limitless.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "examples_limitless.py"
+   ]
+  },
+  {
+   "sha256": "33edc51ca4874176997fce0ac8a980176c06fb50092bacd48c6552b21c9a147b",
+   "canonical": "modules/agents_skills/coding_agent.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "modules/agents_skills/realai__coding_agent.py"
+   ]
+  },
+  {
+   "sha256": "03081d09e27266e5a0e57d222298a90a01d507000a8ad1de2e54fbe8dc054da4",
+   "canonical": "realai/plugins/lambda_chat.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "modules/desktop_unique/lambda_chat.py"
+   ]
+  },
+  {
+   "sha256": "f2044634fd8386c912c1a2abc16ae6f839fa2aee95d83d6d3275a1c40675f111",
+   "canonical": "realai/plugins/lambda_core.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "modules/desktop_unique/lambda_core.py"
+   ]
+  },
+  {
+   "sha256": "23801c3198040273f419b3f3e4eb9ad845528a6ef2d0e15a18594d9d55635409",
+   "canonical": "realai/plugins/lambda_core_shared.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "modules/desktop_unique/lambda_core_shared.py"
+   ]
+  },
+  {
+   "sha256": "60ab521cae500caa5d746127a131db7dbc9d4b8eb6c8a0c5f2ecb0197ba30547",
+   "canonical": "realai/plugins/lambda_embeddings_audio.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "modules/desktop_unique/lambda_embeddings_audio.py"
+   ]
+  },
+  {
+   "sha256": "e4d776ac582fd785611ca6cce816b35290a726c2f9bc3aef8fc6450113f97fe9",
+   "canonical": "realai/plugins/lambda_image.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "modules/desktop_unique/lambda_image.py"
+   ]
+  },
+  {
+   "sha256": "4f5368db8523406cadc7581fdf88f62490075f610cdc98b56336f24b1eea502c",
+   "canonical": "realai/plugins/lambda_video.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "modules/desktop_unique/lambda_video.py"
+   ]
+  },
+  {
+   "sha256": "5e6ac646960b9673971d6e4b5ea663bc82d4379a41243923686bf72a4ab44f50",
+   "canonical": "modules/desktop_unique/local_model_cli.py",
+   "why": "prior: PHASE3_PARK: catalog and hive use product-root modules/desktop_unique",
+   "duplicates": [
+    "realai/scripts/local_model_cli.py",
+    "scripts/local_model_cli.py"
+   ]
+  },
+  {
+   "sha256": "5b6c3ca5ace5457459862a920043fb209bff9709982a0f8ec1789a03b7b88f52",
+   "canonical": "realai/orchestration/memory.py",
+   "why": "prior: AUTHORITY.md: hive/bridge gold is realai/orchestration",
+   "duplicates": [
+    "modules/orchestrators/memory.py",
+    "realai/core/orchestration/memory.py",
+    "realai/memory/orchestration/memory.py",
+    "realai/memory/orchestration_gold/memory.py",
+    "realai/memory/orchestrators/memory.py",
+    "realai/memory/realai-orchestration/memory.py",
+    "realai/memory/realai_orchestration_gold/memory.py"
+   ]
+  },
+  {
+   "sha256": "ea305af25672da52b2e88475717d14ff40e6f47c09e9dc23679c692def177736",
+   "canonical": "realai/orchestrators/nested_realai_v3_orchestrator.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "modules/orchestrators/nested_realai_v3_orchestrator.py"
+   ]
+  },
+  {
+   "sha256": "bafa0bfd1a280e29128c07fad9e5690d9cf0f7e5dac316ac18a408069e252bdf",
+   "canonical": "realai/server/orchestration.py",
+   "why": "prior: ONE_TREE winner: server gold realai/server (server/* are shims)",
+   "duplicates": [
+    "modules/orchestrators/orchestration.py",
+    "realai/orchestrators/orchestration.py"
+   ]
+  },
+  {
+   "sha256": "a0236f85164ebef7bbaeb64fde55d6c8aef1f7de2c884ea898210757da748dd7",
+   "canonical": "realai/orchestration/orchestrator.py",
+   "why": "prior: AUTHORITY.md: hive/bridge gold is realai/orchestration",
+   "duplicates": [
+    "modules/orchestrators/orchestration_gold__orchestrator.py",
+    "modules/orchestrators/orchestrator.py",
+    "modules/orchestrators/orchestrator__orchestration_gold.py",
+    "realai/core/orchestration/orchestrator.py"
+   ]
+  },
+  {
+   "sha256": "d02996090654e066ebf7744bae2803737f4c231b6e5644059a85ad63524e6d9e",
+   "canonical": "realai/orchestration/legacy_orchestrator.py",
+   "why": "prior: AUTHORITY.md: hive/bridge gold is realai/orchestration",
+   "duplicates": [
+    "modules/orchestrators/orchestrator__realai.py",
+    "modules/orchestrators/realai__orchestrator.py",
+    "realai/orchestrator.py"
+   ]
+  },
+  {
+   "sha256": "6d8de7f170ec60901d26388a9dde65d92df3711e226db4c5c460e9126af9af97",
+   "canonical": "modules/orchestrators/orchestrator_agent_runtime.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: realai-worker entry modules/orchestrators",
+   "duplicates": [
+    "modules/orchestrators/orchestrator_agent_runtime_19.py",
+    "modules/orchestrators/orchestrator_agent_runtime_71.py",
+    "realai/agent_runtime/orchestrator_agent_runtime.py"
+   ]
+  },
+  {
+   "sha256": "01e055c9a8264c1a3c59ce3e51a6fe9e879fcd189189c7c22ea4b8480fd7d847",
+   "canonical": "modules/orchestrators/orchestrator_orchestration.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: realai-worker entry modules/orchestrators",
+   "duplicates": [
+    "modules/orchestrators/orchestrator_orchestration_100.py",
+    "realai/orchestrators/orchestrator_orchestration.py"
+   ]
+  },
+  {
+   "sha256": "708be58b3f65cf620c5d45e8b027cfee2fc2cf02bb8ec296d839c613bb2c7b96",
+   "canonical": "modules/orchestrators/orchestrator_router.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: realai-worker entry modules/orchestrators",
+   "duplicates": [
+    "modules/orchestrators/orchestrator_router_101.py",
+    "realai/orchestrators/orchestrator_router.py"
+   ]
+  },
+  {
+   "sha256": "56184525a8a2181f1b25c47763b7123c8a1f38abbdb54dc487046ef59ed73f37",
+   "canonical": "realai/core/self_improvement.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "modules/orchestrators/orchestrator_self_improvement.py",
+    "modules/orchestrators/orchestrator_self_improvement_29.py",
+    "modules/orchestrators/orchestrator_self_improvement_81.py",
+    "realai/orchestrators/orchestrator_self_improvement.py"
+   ]
+  },
+  {
+   "sha256": "5c2aae769855519f01185292bcf5c669dc7972f763428d09ae602041ff3b9e33",
+   "canonical": "realai/orchestration/pipeline.py",
+   "why": "prior: AUTHORITY.md: hive/bridge gold is realai/orchestration",
+   "duplicates": [
+    "modules/orchestrators/pipeline.py",
+    "realai/core/orchestration/pipeline.py",
+    "realai/orchestrators/pipeline.py"
+   ]
+  },
+  {
+   "sha256": "b8191622d49bb31a010931e3038fda60b1a591544968f8b6beff450f70333361",
+   "canonical": "realai/orchestrators/realai-ish_test_orchestration.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "modules/orchestrators/realai-ish_test_orchestration.py",
+    "modules/orchestrators/realai-ish_test_orchestration_130.py"
+   ]
+  },
+  {
+   "sha256": "e6493a18f58330e3586339c24408b2f20dc2c2c68d523750189f6cebe9b701d5",
+   "canonical": "modules/orchestrators/realai__v3_orchestrator.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: realai-worker entry modules/orchestrators",
+   "duplicates": [
+    "modules/orchestrators/v3_orchestrator__realai.py",
+    "realai/orchestrators/realai__v3_orchestrator.py"
+   ]
+  },
+  {
+   "sha256": "3b90197fcf2965bfe58bb0946c5efc9bcf7d815c739e50e6a1b29c0029d73a5e",
+   "canonical": "realai/orchestration/tools.py",
+   "why": "prior: AUTHORITY.md: hive/bridge gold is realai/orchestration",
+   "duplicates": [
+    "modules/orchestrators/tools.py",
+    "realai/core/orchestration/tools.py",
+    "realai/orchestrators/tools.py"
+   ]
+  },
+  {
+   "sha256": "54e9f2fee2c9be5c50095dd8cacc44c677e094037955e109421d32fb1c6d92b0",
+   "canonical": "modules/organs/memory_ecosystem/architecture_memory.py",
+   "why": "prior: AUTHORITY.md: organs are modules/organs (realai/modules/organs parked 2026-09-24)",
+   "duplicates": [
+    "realai/memory/memory_ecosystem/architecture_memory.py"
+   ]
+  },
+  {
+   "sha256": "1a180f9207f865860a72934183773fce2cdf0823a5269f89a9e0d55a983eb1dc",
+   "canonical": "modules/organs/memory_ecosystem/dream_memory.py",
+   "why": "prior: AUTHORITY.md: organs are modules/organs (realai/modules/organs parked 2026-09-24)",
+   "duplicates": [
+    "realai/memory/memory_ecosystem/dream_memory.py"
+   ]
+  },
+  {
+   "sha256": "ee96a00e97e00f25245272294c6da64f63aff4771abc840986560cc666a08647",
+   "canonical": "modules/organs/memory_ecosystem/episodic_memory.py",
+   "why": "prior: AUTHORITY.md: organs are modules/organs (realai/modules/organs parked 2026-09-24)",
+   "duplicates": [
+    "realai/memory/memory_ecosystem/episodic_memory.py"
+   ]
+  },
+  {
+   "sha256": "bc10ebb6b1a98b8a78ec653bc22145e30057d508bed181a6a9ea3375629950c5",
+   "canonical": "modules/organs/memory_ecosystem/long_term_memory.py",
+   "why": "prior: AUTHORITY.md: organs are modules/organs (realai/modules/organs parked 2026-09-24)",
+   "duplicates": [
+    "realai/memory/memory_ecosystem/long_term_memory.py"
+   ]
+  },
+  {
+   "sha256": "46f94f6029d4fc5c41fcd924a89269aed634da7270da372ffa48264948f709b5",
+   "canonical": "realai/plugins/plugin_memory.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "modules/organs/memory_ecosystem/plugin_memory.py",
+    "realai/plugins/memory_ecosystem/plugin_memory.py"
+   ]
+  },
+  {
+   "sha256": "40ef82dc45fba4011e121c0a783db8f49c8bcba54e1d4e712986fedf6f5588de",
+   "canonical": "modules/organs/memory_ecosystem/procedural_memory.py",
+   "why": "prior: AUTHORITY.md: organs are modules/organs (realai/modules/organs parked 2026-09-24)",
+   "duplicates": [
+    "realai/memory/memory_ecosystem/procedural_memory.py"
+   ]
+  },
+  {
+   "sha256": "be2aac0e0d1a6cf195b237ef6586baf1a993c8aa8e19917f6c3614064fcf01c0",
+   "canonical": "modules/organs/memory_ecosystem/semantic_memory.py",
+   "why": "prior: AUTHORITY.md: organs are modules/organs (realai/modules/organs parked 2026-09-24)",
+   "duplicates": [
+    "realai/memory/memory_ecosystem/semantic_memory.py"
+   ]
+  },
+  {
+   "sha256": "14b64a2590fdad0632563ccdebb26cb486e2b72897568ea6581e093cedfe60e2",
+   "canonical": "modules/organs/memory_ecosystem/short_term_memory.py",
+   "why": "prior: AUTHORITY.md: organs are modules/organs (realai/modules/organs parked 2026-09-24)",
+   "duplicates": [
+    "realai/memory/memory_ecosystem/short_term_memory.py"
+   ]
+  },
+  {
+   "sha256": "863feeb77e5861ee60b50e73c8e1e796ef780494c6c565453971b1a7c596b3bf",
+   "canonical": "modules/self_improvement/self_builder.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/scripts/exportable/variants/grok_export_self_builder.py",
+    "scripts/exportable/variants/grok_export_self_builder.py"
+   ]
+  },
+  {
+   "sha256": "63cd96769567a5193890bdbb7d850418378e55d0ab7bbb102f308a97cad7a67d",
+   "canonical": "realai/sdk/python/realai_client.py",
+   "why": "heuristic: most imported (6 importers)",
+   "duplicates": [
+    "packages/sdk-py/realai/realai_client.py"
+   ]
+  },
+  {
+   "sha256": "fa00684da1ae687745fdbadd42d7e4cda8af1f190f4ad84df979f286e9e8b356",
+   "canonical": "realai/plugins/plugin_sample_plugin.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "plugins/sample_plugin.py",
+    "realai/plugins/desktop_plugins/sample_plugin.py"
+   ]
+  },
+  {
+   "sha256": "f320d54446a0e8476c668ba060136da4ceeea931566f1f91513f54893b9a38d9",
+   "canonical": "realai/core/agents/agent_runtime.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/agent_runtime/agents/agent_runtime.py"
+   ]
+  },
+  {
+   "sha256": "c7a4cc70f088194a55dc87034eb313e9ae99dbc65e6da5cbe2619e362bc016e9",
+   "canonical": "realai/app_framework.py",
+   "why": "heuristic: most imported (2 importers)",
+   "duplicates": [
+    "realai/app/app_framework.py"
+   ]
+  },
+  {
+   "sha256": "706471ce791d37c6411a4de171e2d405d2680804f0e5af0b405c7bca1b1ed4d4",
+   "canonical": "realai/aura/main.py",
+   "why": "heuristic: most imported (1 importers)",
+   "duplicates": [
+    "realai/memory/aura_memory_engine/main.py"
+   ]
+  },
+  {
+   "sha256": "de0b7a3e0cc5dabb05036a9c04ba48d1b8f9a7fb867735c9eb7d0502daec11c9",
+   "canonical": "realai/aura/memory.py",
+   "why": "heuristic: most imported (7 importers)",
+   "duplicates": [
+    "realai/memory/aura/memory.py",
+    "realai/memory/memory.py",
+    "realai/memory/memory/memory.py"
+   ]
+  },
+  {
+   "sha256": "f321cb394d167082a9f38a84c15c3947fe077d9a1aa4563f19f9b32b3389e772",
+   "canonical": "realai/skills/code.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/aura/skills/code.py",
+    "realai/memory/skills/code.py"
+   ]
+  },
+  {
+   "sha256": "62c0cf941a793ab77b40d42382ca48ded57ae0a9ab7e4ce70d51128495e333d6",
+   "canonical": "realai/skills/core.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/aura/skills/core.py",
+    "realai/memory/skills/core.py"
+   ]
+  },
+  {
+   "sha256": "22bd77e4f6589588b1e6dde7fcfda721a6d32f38a6fc035afc6a850fe543bb1e",
+   "canonical": "realai/skills/file_io.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/aura/skills/file_io.py",
+    "realai/memory/skills/file_io.py"
+   ]
+  },
+  {
+   "sha256": "9b2cc6bf2bf772b8832ebb8c74090d838e91bee19e7a881d27066cf47b8b5953",
+   "canonical": "realai/skills/registry.py",
+   "why": "heuristic: most imported (2 importers)",
+   "duplicates": [
+    "realai/aura/skills/registry.py",
+    "realai/memory/skills/registry.py"
+   ]
+  },
+  {
+   "sha256": "a9ffb426612c4468e663404afbfcf300a2a3e84a56f9d84c705b8a73406ef61c",
+   "canonical": "realai/skills/web.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/aura/skills/web.py",
+    "realai/memory/skills/web.py"
+   ]
+  },
+  {
+   "sha256": "2569f9869cc340ac6618b7ba3de95c330b1c413257aeedaef55e744a40baf1ee",
+   "canonical": "realai/world_model.py",
+   "why": "heuristic: most imported (34 importers)",
+   "duplicates": [
+    "realai/benchmarks/world_model.py",
+    "realai/world_model/from_aura_p0_hunt/world_model.py",
+    "realai/world_model/grok_export_realai/world_model.py",
+    "realai/world_model/local-nested-realai-202607/world_model.py",
+    "realai/world_model/local-recovery-primary-clean-20260731-clean/world_model.py",
+    "realai/world_model/nested-realai-202607/world_model.py",
+    "realai/world_model/realai-ish_world_model.py",
+    "realai/world_model/realai-ish_world_model_31.py",
+    "realai/world_model/realai-ish_world_model_83.py",
+    "realai/world_model/realai/world_model.py",
+    "realai/world_model/realai__dup1/world_model.py",
+    "realai/world_model/realai_sdk/world_model.py",
+    "realai/world_model/realai_sdk__dup1/world_model.py",
+    "realai/world_model/recovery-primary-clean-20260731-clean/world_model.py",
+    "realai/world_model/recycle_py/realai-ish_world_model.py",
+    "realai/world_model/recycle_py/realai-ish_world_model_31.py",
+    "realai/world_model/recycle_py/realai-ish_world_model_83.py",
+    "realai/world_model/recycle_py_unique/realai-ish_world_model.py",
+    "realai/world_model/scripts/world_model.py",
+    "realai/world_model/world_model/realai-ish_world_model.py",
+    "realai/world_model/world_model/realai-ish_world_model_31.py",
+    "realai/world_model/world_model/realai-ish_world_model_83.py",
+    "realai/world_model/world_model/world_model.py"
+   ]
+  },
+  {
+   "sha256": "14eca56b507447098c94a83fa13198d89146aa52be288d1ed65909e43fd5bbed",
+   "canonical": "realai/core/config/loader.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/config/loader.py"
+   ]
+  },
+  {
+   "sha256": "eb606458a2900cb9e50ae90addde1bb66579aac8ea07d27c52fc6ea0e04a7d6c",
+   "canonical": "realai/core/agents/hierarchical_main.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/scripts/exportable/variants/hierarchical_agent_gold_main.py",
+    "scripts/exportable/variants/hierarchical_agent_gold_main.py"
+   ]
+  },
+  {
+   "sha256": "d897abdb17a6c878568bd9bd896a9e8c89aa2e280ee4c98a4153033ac045ff38",
+   "canonical": "realai/core/rise_system.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/core/agents/rise_system.py"
+   ]
+  },
+  {
+   "sha256": "46b99d98fd0b96415fb54167b50d4e3ee67960abf7ce035b9a1579ac5421f93c",
+   "canonical": "realai/core/agents/training_pipeline.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/core/training/training_pipeline.py",
+    "realai/training/training_pipeline.py"
+   ]
+  },
+  {
+   "sha256": "912c8fc1195053864b9d20fe6af3e428cb928b4c566fa5f5722f21edc796b2c8",
+   "canonical": "realai/core/api/schemas/chat.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/schemas/chat.py"
+   ]
+  },
+  {
+   "sha256": "9812272a0ddfbc6c5f682768a726ea6dab4ebd71ed6b6dd07cf02a2ea736d1c4",
+   "canonical": "realai/core/api/schemas/tasks.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/schemas/tasks.py"
+   ]
+  },
+  {
+   "sha256": "013749c1d964910ace39690043bf9b3adcf1f226cecb835544542c8fb8886498",
+   "canonical": "realai/core/engine.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/core/memory_store/long_term_engine.py",
+    "realai/memory/engine.py",
+    "realai/memory/memory/engine.py",
+    "realai/memory/memory_store/long_term_engine.py"
+   ]
+  },
+  {
+   "sha256": "929147af34b976b5e14b828a500cf726430a90ecaf25645e9fcf9423b81c0591",
+   "canonical": "realai/plugins/tools/tools/harden_repos.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/core/harden_repos.py"
+   ]
+  },
+  {
+   "sha256": "f09e573908d028d4815687738b521f3cf602057e4f4444b812f817db7db1e730",
+   "canonical": "realai/core/inference/backend.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/inference/backend.py"
+   ]
+  },
+  {
+   "sha256": "af7192c1c2d66ede4a562fa6be0cbafe219cfb223af0e7abef6c809eadcbf86c",
+   "canonical": "realai/core/inference/chat_pipeline.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/inference/chat_pipeline.py"
+   ]
+  },
+  {
+   "sha256": "09791d2f054464f8962b5ac92300d7e8f8ba1f811dad507a9c3deb1b814fe0a2",
+   "canonical": "realai/core/inference/llamacpp_backend.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/inference/llamacpp_backend.py"
+   ]
+  },
+  {
+   "sha256": "bcda9613a18fb9bc328047ed555ec05a442e9fca20c9697eb19ab1d210e38d4f",
+   "canonical": "realai/core/inference/local_stub.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/inference/local_stub.py"
+   ]
+  },
+  {
+   "sha256": "3d843bebd84a8bac08c3c4896300300b95a11e9bdeedfd65537437d806c57e03",
+   "canonical": "realai/core/inference/registry.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/inference/registry.py"
+   ]
+  },
+  {
+   "sha256": "e34d4e5bdf34a16b73786628c002b8e55f933fd76bc8312c12ab69cab7f6bdba",
+   "canonical": "realai/core/memory/base.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/core/memory_store/base.py",
+    "realai/memory/memory/base.py",
+    "realai/memory/memory_store/base.py"
+   ]
+  },
+  {
+   "sha256": "80c6f0c2e1cccd0c7fd0d5eb45e685c173160f7ec2b7d5222ed9713502159ffd",
+   "canonical": "realai/core/memory/json_engine.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/memory/memory/json_engine.py"
+   ]
+  },
+  {
+   "sha256": "b744613cb65e4043e34e5771db27bb7ae0c79dfb47d61638de3590eb5272449c",
+   "canonical": "realai/core/memory/sqlite_store.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/core/memory_store/sqlite_store.py",
+    "realai/memory/memory/sqlite_store.py",
+    "realai/memory/memory_store/sqlite_store.py"
+   ]
+  },
+  {
+   "sha256": "0446cfcd6c0854deadcb77b623042d5c56cace89ad3ae67a7a6385dfe13c69a3",
+   "canonical": "realai/core/memory/summarizer.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/core/memory_store/summarizer.py",
+    "realai/memory/memory/summarizer.py",
+    "realai/memory/memory_store/summarizer.py"
+   ]
+  },
+  {
+   "sha256": "5ef89a64d981010994cfeeef64e8e1f1b56d2658dc29bcf625fd1f095a1429f2",
+   "canonical": "realai/core/memory_store/bridge.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/memory/memory_store/bridge.py"
+   ]
+  },
+  {
+   "sha256": "4073fcb291b1f904ef73a1f7f63bd2b66961df2d6e7c3c583274be57e90df0e3",
+   "canonical": "realai/core/metrics/metrics.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/metrics/metrics.py"
+   ]
+  },
+  {
+   "sha256": "84ee8ec2990ff5832895919cafc4b1c133ac6da7be596ada8d47fff637015ec5",
+   "canonical": "realai/core/realai_self_healing_core.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/realai_self_healing_core.py",
+    "realai/scripts/realai_self_healing_core.py"
+   ]
+  },
+  {
+   "sha256": "c30f6396a101c734e7d5d14a6d183ddfcd3560a33484c84427e8041c70e43718",
+   "canonical": "realai/core/security/python_sandbox.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/security/python_sandbox.py"
+   ]
+  },
+  {
+   "sha256": "a275808ed268696a4e2ed13f3c768dfcef35a2cf9ef109eb9281804d352c0fdb",
+   "canonical": "realai/core/tracing/tracer.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/tracing/tracer.py"
+   ]
+  },
+  {
+   "sha256": "80c67e861dc1da00f0caf61ab36df75dda38464d81d9f2091df9c96759409f48",
+   "canonical": "realai/plugins/build_datasets.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/core/training/build_datasets.py"
+   ]
+  },
+  {
+   "sha256": "e066a8dbbce0ad7029f372095388d786820c4971df0ce32e513a44190eba498b",
+   "canonical": "realai/core/training/eval.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "training/eval.py"
+   ]
+  },
+  {
+   "sha256": "c52dcb5057fce0f87e2fe51976f01304cb0ac7f56678d63e573d5d96a4fe5b59",
+   "canonical": "realai/core/training/finetune.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/training/realai-ish_finetune.py",
+    "realai/training/realai-ish_finetune_106.py",
+    "training/finetune.py"
+   ]
+  },
+  {
+   "sha256": "59cc9c5e53c352f6d05b1786cf904ff56fe9b8c773a9f2bb14d34256ea7bc2bf",
+   "canonical": "realai/plugins/train_directml.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/core/training/train_directml.py",
+    "realai/core/training/train_qwen_directml.py",
+    "realai/plugins/train_qwen_directml.py"
+   ]
+  },
+  {
+   "sha256": "395f83d659f98879bb5fd7a77cc26e54b49c68cb6d00ffbbdc21d06979a34b24",
+   "canonical": "realai/plugins/train_from_agent_manifests.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/core/training/train_from_agent_manifests.py",
+    "realai/training/train_from_agent_manifests.py"
+   ]
+  },
+  {
+   "sha256": "6227e337f20350c5e2012df45489b68bbe97f34c756d36c59172d6ee7700b2d9",
+   "canonical": "realai/plugins/train_qwen_lora_directml.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/core/training/train_qwen_lora_directml.py"
+   ]
+  },
+  {
+   "sha256": "3830f59994bc7d1e3eff28bb961f792d68379c3395fd83afa28dff16d98a6695",
+   "canonical": "realai/core/voice/asr_whisper.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/voice/asr_whisper.py"
+   ]
+  },
+  {
+   "sha256": "6791519ed65871d9f4e0bb79c80c605a9df2dc80d6b22e0e649f7bb4d211f985",
+   "canonical": "realai/core/voice/registry.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/voice/registry.py"
+   ]
+  },
+  {
+   "sha256": "a881194ef6d02d4b524a51c2f6d9a44740c10dff422f72bf49938a8af694d6dc",
+   "canonical": "realai/core/voice/tts_piper.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/voice/tts_piper.py"
+   ]
+  },
+  {
+   "sha256": "6e72f75220c58df9ccf7b04a119a9607652151a51f402477a185efaa1d2584b0",
+   "canonical": "realai/core/world_model.py",
+   "why": "prior: MONOREPO_TARGET_LAYOUT: self_builder/self_heal/closed_loop gold is realai/core",
+   "duplicates": [
+    "realai/world_model/world_model.py"
+   ]
+  },
+  {
+   "sha256": "35cc2dcd0ead99d639a42062eda59efab36e29571b96fe42cc20efdc15f5b850",
+   "canonical": "realai/lambda_embeddings_audio.py",
+   "why": "heuristic: most imported (4 importers)",
+   "duplicates": [
+    "realai/scripts/lambda_embeddings_audio.py"
+   ]
+  },
+  {
+   "sha256": "86dd98653da25652df8decc5e4c2f724536d84156a4579e65a413f2a0cc0340f",
+   "canonical": "realai/plugins/main.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/main.py"
+   ]
+  },
+  {
+   "sha256": "1d6d5320d432d8b5714c4c64ae6eb8baee7c45093f3988096c1fa6e077e011e2",
+   "canonical": "realai/mcp_vault77.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/mcp/mcp_vault77.py"
+   ]
+  },
+  {
+   "sha256": "e44dc59bd5145efb7930f19fdd62ec2d2707258553bc2a769fa0d089736a63a8",
+   "canonical": "realai/server/memory_store.py",
+   "why": "prior: ONE_TREE winner: server gold realai/server (server/* are shims)",
+   "duplicates": [
+    "realai/memory/C_realai_server/memory_store.py",
+    "realai/memory/memory/memory_store.py",
+    "realai/memory/memory_store.py",
+    "realai/memory/server/memory_store.py"
+   ]
+  },
+  {
+   "sha256": "36fa91f3272ccc25a00bfd17905a4878f1f9aacd649db7f8979cbfd43942cdf6",
+   "canonical": "realai/memory/assemble_gold_index.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/scripts/assemble_gold_index.py",
+    "scripts/assemble_gold_index.py"
+   ]
+  },
+  {
+   "sha256": "0c3036570a69711f767451dedb4ccde124ad5c433f0d711831a5fb5c01f9dafb",
+   "canonical": "realai/memory/aura_memory.py",
+   "why": "heuristic: most imported (1 importers)",
+   "duplicates": [
+    "realai/memory/memory/aura_memory.py",
+    "realai/memory/realai/aura_memory.py"
+   ]
+  },
+  {
+   "sha256": "a6d32c6a1c1bb24aaadeb45af37ae4f1164542e59be69cf49e00c2839b863722",
+   "canonical": "realai/memory/dds3_deep_gold_map.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/scanners/dds3_deep_gold_map.py",
+    "scanners/dds3_deep_gold_map.py",
+    "scripts/dds3_deep_gold_map.py"
+   ]
+  },
+  {
+   "sha256": "3b4ba9906ac3f97a60b7892a49326945c8fe87cae0ccddce32a677d3e99152b5",
+   "canonical": "realai/memory/promote_gold.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/scripts/promote_gold.py"
+   ]
+  },
+  {
+   "sha256": "ebae432fe674748ecea0a629426af68ce2cab75f6d8a15dea0b471e7d21f0372",
+   "canonical": "realai/memory/realai2_server/memory_store.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/memory/recycle_py/realai-ish_memory_store.py",
+    "realai/memory/recycle_py/realai-ish_memory_store_98.py",
+    "realai/memory/recycle_py_unique/realai-ish_memory_store.py"
+   ]
+  },
+  {
+   "sha256": "d8265a0eb57f91a3c096d499616d280b7025f76dd45ce99c4e1fe927c1aeba49",
+   "canonical": "realai/memory/recover_archive_gold.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/scripts/recover_archive_gold.py",
+    "scanners/recover_archive_gold.py",
+    "scripts/recover_archive_gold.py"
+   ]
+  },
+  {
+   "sha256": "953497bcedeec21434d7fdfda1dea358aa01249da0b106f3958f7a24a8296098",
+   "canonical": "realai/memory/scan_desktop_missing_gold.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/scanners/scan_desktop_missing_gold.py",
+    "scanners/scan_desktop_missing_gold.py",
+    "scripts/scan_desktop_missing_gold.py"
+   ]
+  },
+  {
+   "sha256": "c9b1dfae6a69ccfa28770aa75f75e0ef8036fba6d979299aae09c08c8793f6bb",
+   "canonical": "realai/memory/scan_local_keyword_gold.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/scanners/scan_local_keyword_gold.py",
+    "scanners/scan_local_keyword_gold.py",
+    "scripts/scan_local_keyword_gold.py"
+   ]
+  },
+  {
+   "sha256": "9b797befca665807956ad47188ee95fa15185a5dedd61e87fa6732e6e075d148",
+   "canonical": "realai/model_assets.py",
+   "why": "heuristic: most imported (6 importers)",
+   "duplicates": [
+    "realai/models/model_assets.py"
+   ]
+  },
+  {
+   "sha256": "220129ca3d06fc85bb98ec32d9b228646ddf1efcc97455a6a3a70c972b0f7bd3",
+   "canonical": "realai/model_registry.py",
+   "why": "heuristic: most imported (6 importers)",
+   "duplicates": [
+    "realai/models/model_registry.py"
+   ]
+  },
+  {
+   "sha256": "1434072302005e47f17f13bf2377f58c09188cbee4f88bb9901b38b348c07f5b",
+   "canonical": "realai/models/nested_realai_model_catalog.py",
+   "why": "heuristic: most imported (1 importers)",
+   "duplicates": [
+    "realai/scripts/exportable/variants/nested_realai_model_catalog.py",
+    "scripts/exportable/variants/nested_realai_model_catalog.py"
+   ]
+  },
+  {
+   "sha256": "fcab8b027d2f4e39eb7ab614eaf9a5da4c15ea24eea062fdc9d4dbb75115695f",
+   "canonical": "realai/orchestration/unified_orchestrator.py",
+   "why": "prior: AUTHORITY.md: hive/bridge gold is realai/orchestration",
+   "duplicates": [
+    "realai/unified_orchestrator.py"
+   ]
+  },
+  {
+   "sha256": "9fe590a50d29eac2a668c01d3234e8f4611946ee0a464f17c2c2850b55da0906",
+   "canonical": "realai/plugins/extract_agent_tool_data.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/RealAi-unified-20260804/extract_agent_tool_data.py",
+    "realai/plugins/tools/RealAi-unified-20260804/extract_agent_tool_data.py",
+    "realai/plugins/tools/agents-skills-2026-08-01-HOMEPC-s137e5/extract_agent_tool_data.py",
+    "realai/plugins/tools/atomicfizzcaps-fork-2026-08-01-HOMEPC-f1a9c2/extract_agent_tool_data.py",
+    "realai/plugins/tools/clean-base/extract_agent_tool_data.py",
+    "realai/plugins/tools/extract_agent_tool_data.py",
+    "realai/plugins/tools/feature-ui-desktop-promote/extract_agent_tool_data.py",
+    "realai/plugins/tools/from-accident-2026-08-01-HOMEPC-a9c301/extract_agent_tool_data.py",
+    "realai/plugins/tools/from-wsl-2026-08-01-HOMEPC-w274d4/extract_agent_tool_data.py",
+    "realai/plugins/tools/from-wsl-files-2026-08-01-HOMEPC-w274d4f/extract_agent_tool_data.py",
+    "realai/plugins/tools/from-wsl-w274d4/extract_agent_tool_data.py",
+    "realai/plugins/tools/from-zips-2026-08-01-HOMEPC-z7f104/extract_agent_tool_data.py",
+    "realai/plugins/tools/grok-realai2-clean-2026-07-31-HOMEPC-e5c023/extract_agent_tool_data.py",
+    "realai/plugins/tools/integration-hive-merge/extract_agent_tool_data.py",
+    "realai/plugins/tools/local-RealAi-unified-20260804/extract_agent_tool_data.py",
+    "realai/plugins/tools/modules-runtime-2026-08-01-HOMEPC-m21f01/extract_agent_tool_data.py",
+    "realai/plugins/tools/plugin-boards-2026-08-01-HOMEPC-pb01/extract_agent_tool_data.py",
+    "realai/plugins/tools/plugin-system-2026-08-01-HOMEPC-p26b2/extract_agent_tool_data.py",
+    "realai/plugins/tools/plugin-system-p26b2/extract_agent_tool_data.py",
+    "realai/plugins/tools/realai_recovery_/extract_agent_tool_data.py",
+    "realai/plugins/tools/recycle-py-unique-2026-08-01-HOMEPC-r106a1/extract_agent_tool_data.py",
+    "realai/plugins/tools/tools/extract_agent_tool_data.py",
+    "realai/plugins/tools/unique-modules-2026-08-01-HOMEPC-u194c3/extract_agent_tool_data.py",
+    "realai/plugins/tools/unique-modules-files-2026-08-01-HOMEPC-u194c3f/extract_agent_tool_data.py"
+   ]
+  },
+  {
+   "sha256": "360affb7e6f51db2fbc529dab8be5120929e7e1f8374c42aecbbacf238fb6149",
+   "canonical": "realai/plugins/agent-tools-main/sanity_check.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/agent-tools-main/sanity_check.py",
+    "realai/scripts/sanity_check.py",
+    "scripts/sanity_check.py"
+   ]
+  },
+  {
+   "sha256": "d6f0fcc093eb95e68aeeac17f8cc890611d331383bd328047376885aaa44afce",
+   "canonical": "realai/plugins/local_models.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/core/local_models.py"
+   ]
+  },
+  {
+   "sha256": "cfa813bf72432c1c437ec14e49865625b2fff8950419ab66b78403c3f7f43c58",
+   "canonical": "realai/plugins/device_selector.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/device_selector.py",
+    "realai/plugins/tools/tools/device_selector.py"
+   ]
+  },
+  {
+   "sha256": "8c3c0ec37af2a9f6bd1ea271dd08c03f5985ccd86d9d9cef5b3c27f5c3c24a80",
+   "canonical": "realai/plugins/rackup_coach/abilities/ledger_audit.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "realai/plugins/ledger_audit.py"
+   ]
+  },
+  {
+   "sha256": "452cc1e156485c63b1704c4a116a3bb365c827d9768b92ca03cfe417a2a9f8a6",
+   "canonical": "realai/plugins/rackup_coach/abilities/money_anomaly.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "realai/plugins/money_anomaly.py"
+   ]
+  },
+  {
+   "sha256": "cf958b4680a3b5bcca655d08372ea718c32cf0ceab53200c3403fa558aa0f52a",
+   "canonical": "realai/plugins/rackup_coach/abilities/payout_sanity.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "realai/plugins/payout_sanity.py"
+   ]
+  },
+  {
+   "sha256": "e4339b2a02aa49f1b7357b710c336d0798d70db0b91b58861c3409ecbbcb8030",
+   "canonical": "realai/plugins/plugin_marketplace.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/plugin_plugin_marketplace.py",
+    "realai/plugins/realai/plugin_marketplace.py",
+    "realai/plugins/scripts/plugin_marketplace.py"
+   ]
+  },
+  {
+   "sha256": "146f3babc28066f7430c8ada4c9c4ac3fef54bc96bb130e46185b09615b329a0",
+   "canonical": "realai/plugins/plugin_registry_builder.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/scripts/plugin_registry_builder.py",
+    "scripts/plugin_registry_builder.py"
+   ]
+  },
+  {
+   "sha256": "1a4e3d4b8b553ea8f0556cbfa16064e67b38b00c323d46d9e71b7c3f4c065301",
+   "canonical": "realai/plugins/rackup_coach/abilities/sotd_contribute.py",
+   "why": "prior: ONE_TREE winner: rackup_coach gold under realai/plugins (plugins/rackup_coach is a shim)",
+   "duplicates": [
+    "realai/plugins/sotd_contribute.py"
+   ]
+  },
+  {
+   "sha256": "795786958684fbb334fec938eb69fffa2b2ae88f1f79c9e01c230f0e34285912",
+   "canonical": "realai/plugins/self_improvement.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/related/self_improvement.py"
+   ]
+  },
+  {
+   "sha256": "a3946b8f13e1ed7373c58a15ba1b659418e403587e648019c2715da160f3c5bc",
+   "canonical": "realai/plugins/tools/_shared.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/tools/_shared.py"
+   ]
+  },
+  {
+   "sha256": "a07dba8b035f335559f1d830ae79544d547c0ccbb4fa5650ce25ad68bb9049d5",
+   "canonical": "realai/plugins/tools/approval_store.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/tools/approval_store.py"
+   ]
+  },
+  {
+   "sha256": "9a7b4422705dde2d72635a392a3e6d03ca5701918be5b83d355197ac8c8772eb",
+   "canonical": "realai/plugins/tools/approval_ui.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/tools/approval_ui.py"
+   ]
+  },
+  {
+   "sha256": "76462cd95d9c82e317d718a9a0d0703e1e37d658fa240674cc06b26a94be52d1",
+   "canonical": "realai/plugins/tools/code.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/tools/code.py"
+   ]
+  },
+  {
+   "sha256": "09976bb71b9865bca0a46cb8f2d3f86335031ae1bd0f51462105e5ff7c933449",
+   "canonical": "realai/plugins/tools/file.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/tools/file.py"
+   ]
+  },
+  {
+   "sha256": "210ff412e3db0fd980fdc08e3e6f69c228dccb5a09ecf4a662bccc1f3c86f587",
+   "canonical": "realai/plugins/tools/from_aura_p0_hunt/device_selector.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/tools/device_selector.py"
+   ]
+  },
+  {
+   "sha256": "c0f0c3060bf45cc247e1208e07ff12ee683e3fdf11cb494f7a29c68def47e5db",
+   "canonical": "realai/plugins/tools/github_workflow_helper.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/tools/github_workflow_helper.py"
+   ]
+  },
+  {
+   "sha256": "d0953d881aa71bf0e557f859f9fac55a3358a4d6be841d852ccaa9b1fdf3f2ce",
+   "canonical": "realai/plugins/tools/notifier.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/tools/notifier.py"
+   ]
+  },
+  {
+   "sha256": "7b72c1bed11c4fe78800d0260842e58d609e3a91892837f590acd1b74259d9eb",
+   "canonical": "realai/plugins/tools/orchestration_worker.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/tools/orchestration_worker.py"
+   ]
+  },
+  {
+   "sha256": "a6d71abbd356e5f09d5ea0d09785a75e41f41a9118ed46d35c1dbc2514d4c08e",
+   "canonical": "realai/plugins/tools/registry.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/tools/registry.py"
+   ]
+  },
+  {
+   "sha256": "7168eaa282da67ec1904da198e0075f1e2b23dd1482f8800c5000dbaf288e535",
+   "canonical": "realai/plugins/tools/retry_rollout_pushes.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/tools/retry_rollout_pushes.py"
+   ]
+  },
+  {
+   "sha256": "46b092877d4456e37f6e47f3e325f3ca10fc56af36221d178ad5a53ef7bc2c29",
+   "canonical": "realai/plugins/tools/self_extend_tool.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/tools/self_extend_tool.py",
+    "realai/server/tools/self_extend_tool.py"
+   ]
+  },
+  {
+   "sha256": "8f92ac3e16eadd4e2344a6fea771e10d4275be6934eece52399d6d5d9ef30478",
+   "canonical": "realai/plugins/tools/self_repair_tool.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/tools/self_repair_tool.py",
+    "realai/server/tools/self_repair_tool.py"
+   ]
+  },
+  {
+   "sha256": "b88d5d7000c28404c9a954fa378bb5927c372a4bb6acac0d48d2945d060ef59b",
+   "canonical": "realai/plugins/tools/system_scan_tool.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/tools/system_scan_tool.py",
+    "realai/server/tools/system_scan_tool.py"
+   ]
+  },
+  {
+   "sha256": "45e6682d5853b0a31e43824f95a99c949bb0e9c475c711e9954f3b03c07ecfde",
+   "canonical": "realai/plugins/tools/web.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/tools/web.py"
+   ]
+  },
+  {
+   "sha256": "1b0548b594ff30c9129e60736885c6f74f7c527854564e9c8f4db0abb5208e55",
+   "canonical": "realai/plugins/tools/web3.py",
+   "why": "prior: AUTHORITY.md: plugins are realai/plugins (NESTED_REALAI_PARK_AUDIT: coach.py etc. gold here)",
+   "duplicates": [
+    "realai/plugins/tools/tools/web3.py"
+   ]
+  },
+  {
+   "sha256": "24a2d64934ba50a6ec53023e3d95bb57ab7b7d9fb3539e217a7479b2c6255e10",
+   "canonical": "sdk/python/realai_client.py",
+   "why": "heuristic: most imported (1 importers)",
+   "duplicates": [
+    "realai/python/realai_client.py"
+   ]
+  },
+  {
+   "sha256": "0b230cbf5d3b3dde4204d06ebcd286612c64c2878bde5bf45a9f115933501f1f",
+   "canonical": "realai/realai_hive_orchestrator.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/realai_hive_orchestrator.py"
+   ]
+  },
+  {
+   "sha256": "d27192ad49d308606cf16c3b0f637d49332edc9ce99217181beb279d33afafe6",
+   "canonical": "realai/recovery_registry.py",
+   "why": "heuristic: most imported (7 importers)",
+   "duplicates": [
+    "realai/scripts/recovery_registry.py"
+   ]
+  },
+  {
+   "sha256": "16717408f675e81f3736ed7800d44a0d872d095c3e8c21b9fc8507e11046479a",
+   "canonical": "realai/repo_tools.py",
+   "why": "heuristic: most imported (1 importers)",
+   "duplicates": [
+    "realai/scripts/exportable/variants/nested_realai_repo_tools.py",
+    "realai/scripts/repo_tools.py",
+    "scripts/exportable/variants/nested_realai_repo_tools.py"
+   ]
+  },
+  {
+   "sha256": "25f07f868797630ea1920f84d6bb9b4c5ef37949f11043252bdfdc32829d9bd9",
+   "canonical": "realai/scanners/ingest_realai_roots.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/ingest_realai_roots.py"
+   ]
+  },
+  {
+   "sha256": "626135906ab98e16d46200af4c2732470ca7cebebc4c487fac5c581b65571d3c",
+   "canonical": "realai/scanners/promote_gold.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/promote_gold.py"
+   ]
+  },
+  {
+   "sha256": "94019ceca484b17883cf6515d206f374ac6a7c11a43324eb98d95b5c73638495",
+   "canonical": "realai/scripts/_register_core_agents_promote.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/_register_core_agents_promote.py"
+   ]
+  },
+  {
+   "sha256": "d9101c1749ce21a776ceb2729d0efeef79274efaab21f4a42382baaf01a15032",
+   "canonical": "realai/scripts/_register_deep_promote.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/_register_deep_promote.py"
+   ]
+  },
+  {
+   "sha256": "947a0064e9a8a4c7c8f308e7f85edba4f61e87d26e2f461a2a78f8eed16d764a",
+   "canonical": "realai/scripts/_rewrite_module_wraps.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/_rewrite_module_wraps.py"
+   ]
+  },
+  {
+   "sha256": "836ecf757873973a57be5c4ced9b3be534df5e87c6910936fea3a9ee8c69af21",
+   "canonical": "realai/scripts/_smoke_craft_promote.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/_smoke_craft_promote.py"
+   ]
+  },
+  {
+   "sha256": "de03e258fe3e1eb86b8b140f9ceadafce3ff4a8d489a962bc06accb8bb516eaa",
+   "canonical": "realai/scripts/ability_inventory.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/ability_inventory.py",
+    "scripts/ability_inventory.py"
+   ]
+  },
+  {
+   "sha256": "7f686aebced4c24a96f3e4c64c11c49403a7646fa7fd82b9bcbfa434e2cf2c51",
+   "canonical": "realai/scripts/amd_stack_status.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/amd_stack_status.py"
+   ]
+  },
+  {
+   "sha256": "928885d069c4b2ac597acce6decd4b627cadf647e43a0d40d2aa8ec83f2c2668",
+   "canonical": "realai/scripts/apply_unification_results.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/apply_unification_results.py"
+   ]
+  },
+  {
+   "sha256": "0d4ad698a6b8c562930b2e45b1016cb62b73b487dc17f45a08b8bcc5627efda6",
+   "canonical": "realai/scripts/assemble_gold.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/assemble_gold.py",
+    "scripts/assemble_gold.py"
+   ]
+  },
+  {
+   "sha256": "475327010dfa215d53430133f3fa3fb89794ff3ff6c911297d71fed4b1208bf6",
+   "canonical": "realai/scripts/auto_update_pipeline.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/auto_update_pipeline.py"
+   ]
+  },
+  {
+   "sha256": "68a387d81f714f9e63cf4eed3799d816d24aec4616e50a862782dc37a5bd2324",
+   "canonical": "realai/scripts/bring_back_from.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/bring_back_from.py"
+   ]
+  },
+  {
+   "sha256": "89aa58e3ec9cf88be07ac433fb584bfdb4f02c5c61ecb198238be9b72f13937e",
+   "canonical": "realai/scripts/cold_archive_recovered.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/cold_archive_recovered.py"
+   ]
+  },
+  {
+   "sha256": "5b4b2c302140cd9ff0ca7672f24819820137889d0e6ddd34df8da30617bf8bff",
+   "canonical": "realai/scripts/curated_promote.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/curated_promote.py"
+   ]
+  },
+  {
+   "sha256": "2a6ab504eb9c4914f9cff1f00ae9b20a55d7570bdd714df1c30ac90635e0c51d",
+   "canonical": "realai/scripts/dds3.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/dds3.py",
+    "scripts/dds3.py"
+   ]
+  },
+  {
+   "sha256": "bb2c94c82e3a7eea01292ed64417daf49a71095b32323c34b7dc803b7fca6f15",
+   "canonical": "realai/scripts/dds3_missing_files.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/dds3_missing_files.py"
+   ]
+  },
+  {
+   "sha256": "6e64aeed7ebff61f9b8130672eddb3c40b0e28fd15e043e92566114574f6c426",
+   "canonical": "realai/scripts/deep_promote_wire.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/deep_promote_wire.py"
+   ]
+  },
+  {
+   "sha256": "d4daa5397e8520eef4bdecaf0cc8620f5338321052871675d45195593feef515",
+   "canonical": "realai/scripts/deep_unify_walk.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/deep_unify_walk.py"
+   ]
+  },
+  {
+   "sha256": "b3f9602aaf04db001549f753c3ff6959947dd82d13ffedb879fe4f797b2983e7",
+   "canonical": "realai/scripts/diff_grok_export.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/diff_grok_export.py"
+   ]
+  },
+  {
+   "sha256": "537bf0dc07055e46c11c0fbe867529ca0f46506e22303d58d9aecb9931d56b29",
+   "canonical": "realai/scripts/diff_imports_promote_allowlist.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/diff_imports_promote_allowlist.py"
+   ]
+  },
+  {
+   "sha256": "0ed5c0fe714003a4bbb87f7f727dde9616fe34eaa09e8d601c1563fdabb482bd",
+   "canonical": "realai/scripts/dispatch_training.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/dispatch_training.py"
+   ]
+  },
+  {
+   "sha256": "11ebaf641dee40292c5c6b71580e9f9231a0246e27387e1393f1dbf43dab4fa1",
+   "canonical": "realai/scripts/era_map.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/era_map.py",
+    "scripts/era_map.py"
+   ]
+  },
+  {
+   "sha256": "89ea4324fb3dcf57ede2054633e86cbd093cc9c74d93ab98248298269aeb396b",
+   "canonical": "realai/scripts/exportable/realai_server.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/exportable/realai_server.py"
+   ]
+  },
+  {
+   "sha256": "cb78d03d5de795df3ada999b40f24188dcb4e8a09f13e73fb29bbd6a81b4e5c1",
+   "canonical": "realai/scripts/exportable/variants/grok_export_tools.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/exportable/variants/grok_export_tools.py"
+   ]
+  },
+  {
+   "sha256": "a13a4a080910e4c2768911e68f20211867feeae2ad0bf6bf84087554acf9c3fe",
+   "canonical": "realai/scripts/exportable/variants/nested_realai_audit.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/exportable/variants/nested_realai_audit.py"
+   ]
+  },
+  {
+   "sha256": "065244488cae91bbc426a05c6835c1f24aa413791e95e79c4bbe1b0cc9a16ae4",
+   "canonical": "realai/scripts/exportable/variants/nested_realai_recovery_registry.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/exportable/variants/nested_realai_recovery_registry.py"
+   ]
+  },
+  {
+   "sha256": "4cb7c620bafddff6d4406a8838e2779542721163088ffb803f8a63c9535a6ab8",
+   "canonical": "realai/scripts/exportable/variants/nested_realai_v3_runtime_bridge.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/exportable/variants/nested_realai_v3_runtime_bridge.py"
+   ]
+  },
+  {
+   "sha256": "709b75f10b42eb9b0cc55848645f65d04ce2634e107132bfce891eb51aa0de74",
+   "canonical": "realai/scripts/gold_index.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/gold_index.py",
+    "scripts/gold_index.py"
+   ]
+  },
+  {
+   "sha256": "1eb221a764f68a7673753d45bbfa0eba595315dbf1341c5e65e724fca9d9b18e",
+   "canonical": "realai/scripts/heal_cli.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/heal_cli.py"
+   ]
+  },
+  {
+   "sha256": "8f42b924a84e280f233d5e00fc814579a4cb2744402772b1048f25ac15480488",
+   "canonical": "realai/scripts/import_external_trees.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/import_external_trees.py"
+   ]
+  },
+  {
+   "sha256": "5b2ad0e191f97a20866e30b0c81a2771bf2cfabbd04515cdee6b029fc9816228",
+   "canonical": "realai/scripts/live_gap_agent.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/live_gap_agent.py"
+   ]
+  },
+  {
+   "sha256": "11e24b97298b74d59458e8b9a37fee5bfd1220585fb6cda4c3c23483fb6a2764",
+   "canonical": "realai/scripts/monitor_model.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/monitor_model.py"
+   ]
+  },
+  {
+   "sha256": "566419750167514d9ceae6238e016dbdb8b9b2613eabc1c2f34f687bccd20d83",
+   "canonical": "realai/scripts/organize_repo.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/organize_repo.py"
+   ]
+  },
+  {
+   "sha256": "64450ae5dd7525e8ddb2f12c86a09400c9cd98af7098aef40ac6664029bf29dd",
+   "canonical": "realai/scripts/probe_chat.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/probe_chat.py"
+   ]
+  },
+  {
+   "sha256": "97e1bdecde1891589597c1be7f10760af5442340dc5593d71527977aad3c97bc",
+   "canonical": "realai/scripts/promote_unified_realai.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/promote_unified_realai.py"
+   ]
+  },
+  {
+   "sha256": "e8607fcd49fdde595fd554fd632941e9ae8bb612c95fa35602f65cf1aface77d",
+   "canonical": "realai/scripts/quarantine_catalog.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/quarantine_catalog.py"
+   ]
+  },
+  {
+   "sha256": "1670f32fa697270eef1ad2bed7747a24a768a8dc772667c5910ec0c07b806c46",
+   "canonical": "realai/scripts/realai_full_loop_integrator.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/realai_full_loop_integrator.py"
+   ]
+  },
+  {
+   "sha256": "4d861e741d15e522535ef834c9e01dcf24c077ac4e89c203c8ecacaf1cad623d",
+   "canonical": "realai/scripts/realai_full_loop_integrator_auto.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/realai_full_loop_integrator_auto.py"
+   ]
+  },
+  {
+   "sha256": "a623a9d549a0477d3877d09d0ca91ffd4c1f6db948182a981c8dcf4bca0c5b98",
+   "canonical": "realai/scripts/realai_full_loop_integrator_auto_final.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/realai_full_loop_integrator_auto_final.py"
+   ]
+  },
+  {
+   "sha256": "b38ffb6ce541fbb4f236a81df8ac489e22143711cac7eaa088124deaffad8972",
+   "canonical": "realai/scripts/realai_full_loop_integrator_auto_fixed.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/realai_full_loop_integrator_auto_fixed.py"
+   ]
+  },
+  {
+   "sha256": "230977d0abb5bf93c8b7a02b5ed336367dbae177f4c313f95160d96d4722e9b2",
+   "canonical": "realai/scripts/realai_full_loop_integrator_complete.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/realai_full_loop_integrator_complete.py"
+   ]
+  },
+  {
+   "sha256": "34f83e746757e567680af04b749c56c28d32d0c773bab4251b96cbdd25d44dd4",
+   "canonical": "realai/scripts/realai_full_loop_integrator_final.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/realai_full_loop_integrator_final.py"
+   ]
+  },
+  {
+   "sha256": "f03a8003bcece75560ad22dde30fdf472bfe8ff6d54c2c3fd9aebb24481ad10d",
+   "canonical": "realai/scripts/realai_full_loop_integrator_total.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/realai_full_loop_integrator_total.py"
+   ]
+  },
+  {
+   "sha256": "1bf193f833566d6ee5b2222dcc09cb0f127932bc194cdfe1e951475fcfb2f21a",
+   "canonical": "realai/scripts/realai_full_loop_integrator_ultra.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/realai_full_loop_integrator_ultra.py"
+   ]
+  },
+  {
+   "sha256": "4c1272a4b1de55a1da9fa3deed3ee554a5977a6a8d1831b3af2eb5669de0be54",
+   "canonical": "realai/scripts/realai_hive_dashboard.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/realai_hive_dashboard.py"
+   ]
+  },
+  {
+   "sha256": "3945ba6ce610627032b28e829fa4ca48dad4216ec566aabb5be011075eadc889",
+   "canonical": "realai/scripts/realai_hive_dashboard_pro.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/realai_hive_dashboard_pro.py"
+   ]
+  },
+  {
+   "sha256": "b5840f34e3912adac646c7f71dc5ba39cae7dd93227f09dd474177a6af0653fc",
+   "canonical": "realai/scripts/realai_hive_integrator_v2.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/realai_hive_integrator_v2.py"
+   ]
+  },
+  {
+   "sha256": "aa587af2ca9513b7ab68a1b5d191155e17dbfccd9c295e4775b61fdd4e34ca7f",
+   "canonical": "realai/scripts/realai_hive_multi_root_integrator.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/realai_hive_multi_root_integrator.py"
+   ]
+  },
+  {
+   "sha256": "ec3f3a5e8b19d3692afc50368a9fcda18f0bae58271279cfb5239fa707a2225e",
+   "canonical": "realai/scripts/realai_smart_learn_controller.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/realai_smart_learn_controller.py"
+   ]
+  },
+  {
+   "sha256": "1498d965a93dc0d3f7780c5aa7dc00f2e2eab54a91ebd34816f2dcc30a0ff637",
+   "canonical": "realai/scripts/register_realai_hive.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/register_realai_hive.py"
+   ]
+  },
+  {
+   "sha256": "0df806ac69ea84dbd1fa517d19cbf41f01730dfa1e59cb9afef5f4850eded14b",
+   "canonical": "realai/scripts/reregister_models.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/reregister_models.py"
+   ]
+  },
+  {
+   "sha256": "76a6fbb99ed13331bd5ccc7f5c56cda3883e07397079799f843123a5a35b49c0",
+   "canonical": "realai/scripts/roots_ingest.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/roots_ingest.py",
+    "scripts/roots_ingest.py"
+   ]
+  },
+  {
+   "sha256": "fa2067abedda1a53af18d3205036a4713074e79dc8a0b54d63a9046e8f1c7fd6",
+   "canonical": "realai/scripts/run_all_repo_scripts.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/run_all_repo_scripts.py"
+   ]
+  },
+  {
+   "sha256": "853d9abf06b67ad5264727e336b313d8b5fa53c359a69876181507319fd31b9a",
+   "canonical": "realai/scripts/scan_and_reconstruct.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scan_and_reconstruct.py"
+   ]
+  },
+  {
+   "sha256": "ca6cda97ba5d517e902a92b80d2b111129099a767a88be05253871390b3b7529",
+   "canonical": "realai/scripts/scan_repos_for_realai.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/scan_repos_for_realai.py"
+   ]
+  },
+  {
+   "sha256": "d329be1fb61958dd003828a38304878442ed152de122c82ff0fd83307784023d",
+   "canonical": "realai/self_heal.py",
+   "why": "heuristic: most imported (13 importers)",
+   "duplicates": [
+    "realai/scripts/self_heal.py"
+   ]
+  },
+  {
+   "sha256": "ac45a5bd15206a560021ec3e98b978465f1f9ccb11e630c0c646728a4f7b618d",
+   "canonical": "realai/self_heal_loop.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/scripts/self_heal_loop.py",
+    "scripts/self_heal_loop.py"
+   ]
+  },
+  {
+   "sha256": "70af0cbeed32675bdf8b29ed3beafee5e1cfc597629d399d430489a48cc976e8",
+   "canonical": "realai/scripts/self_improve_loop_smoke.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/self_improve_loop_smoke.py"
+   ]
+  },
+  {
+   "sha256": "048320a2c7d91778bf7ed21a5ed2c1e1793b59e4247afb476de19bdcd1431f75",
+   "canonical": "realai/scripts/setup_local_llama.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/setup_local_llama.py"
+   ]
+  },
+  {
+   "sha256": "2baefe54a8a0e4a3bc4123eeed61fb9e9ca1696034fdff0adc9f414e3a2d23ed",
+   "canonical": "realai/scripts/stack_health.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/stack_health.py"
+   ]
+  },
+  {
+   "sha256": "9adbac7e2cc2c69df1022f21d22482b62a181515df5d1c8a5cf7725055f4e2e0",
+   "canonical": "realai/scripts/try_load_qwen.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/try_load_qwen.py"
+   ]
+  },
+  {
+   "sha256": "f13230130e0b66d946dcb05519cb49a462ed2f552da5de807e6f45078f4897fe",
+   "canonical": "realai/scripts/unified_structure_validator.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/unified_structure_validator.py"
+   ]
+  },
+  {
+   "sha256": "67b0beef9156bab32ab77fee73125255a4bbae5ac01bec7914e027d18ed748f5",
+   "canonical": "realai/scripts/universal_badass_engine_run.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/universal_badass_engine_run.py"
+   ]
+  },
+  {
+   "sha256": "43c98e069c3c716d4f9c7569ad81827df789e7ed3933c1015c741f170454a8cc",
+   "canonical": "realai/scripts/verify_matrix.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/verify_matrix.py",
+    "scripts/verify_matrix.py"
+   ]
+  },
+  {
+   "sha256": "a97957792050ec0445d1ca3d98531f0a0b0ad3654ba17588c2133fc9a3337055",
+   "canonical": "realai/scripts/vulkan_chat.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/vulkan_chat.py"
+   ]
+  },
+  {
+   "sha256": "c5c8a015752c5a99870b2970c5eb06679da3ed6873b50035f46a75c570e5b677",
+   "canonical": "realai/scripts/vulkan_engine.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/vulkan_engine.py"
+   ]
+  },
+  {
+   "sha256": "2da7de895bc305397e24e61953ea75033ca6d59f13a4dfab6b3e5e6e84b60d29",
+   "canonical": "realai/scripts/walk_root.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/walk_root.py"
+   ]
+  },
+  {
+   "sha256": "5dcd1026d0b05c29bc0c179f23bd99d2e64e9e05231b223c61699efb285dccd1",
+   "canonical": "realai/scripts/walk_training_sources.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/walk_training_sources.py"
+   ]
+  },
+  {
+   "sha256": "5182240edc47183baf2e6daf5757cb04f090fe541f0b3af18d6ee603244e382b",
+   "canonical": "realai/scripts/wire_hive_agents.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/wire_hive_agents.py"
+   ]
+  },
+  {
+   "sha256": "2a3f9409fc07d5b0cba31f30fb70dfaf3f835869ce36d270251f7ed15a28c5fd",
+   "canonical": "realai/scripts/wire_recovered.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/wire_recovered.py"
+   ]
+  },
+  {
+   "sha256": "a045904a764fb55c8c2ac232856eb70c10839229f1dcd9b9b4cac02ff88457a8",
+   "canonical": "realai/scripts/wire_training.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/wire_training.py"
+   ]
+  },
+  {
+   "sha256": "d85ee7515e6b718725b703753cfacae87eee03ea0a1782e21a17824f1825d042",
+   "canonical": "realai/scripts/wire_vulkan_backend.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scripts/wire_vulkan_backend.py"
+   ]
+  },
+  {
+   "sha256": "e860b7891c248b129d630f983e3a24db7a5ee97ad3e9920d0ccecfa3be3e93a0",
+   "canonical": "realai/scripts/world_model_merger.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/world_model/world_model/world_model_merger.py",
+    "realai/world_model/world_model_merger.py",
+    "scripts/world_model_merger.py"
+   ]
+  },
+  {
+   "sha256": "5358a9cd4ad0f97bddd80361b1252e1d20b195d9407d2b6dd42ac76998e853c6",
+   "canonical": "realai/server/vercel_main.py",
+   "why": "prior: ONE_TREE winner: server gold realai/server (server/* are shims)",
+   "duplicates": [
+    "vercel_main.py"
+   ]
+  },
+  {
+   "sha256": "5b2711142d1d077fc37799347a33a14079ecfa0ffa59f2a407e514c975b536f4",
+   "canonical": "realai/tools.py",
+   "why": "heuristic: most imported (28 importers)",
+   "duplicates": [
+    "realai/tools/tools.py"
+   ]
+  },
+  {
+   "sha256": "2d4f054f47ba6e3d766e771e2a1109b5b8d5d3b63c3c8130d706feb32b4aee7d",
+   "canonical": "realai/tools/architect_mode.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/architect_mode.py"
+   ]
+  },
+  {
+   "sha256": "eafbc091d7d416f003671a67f5708e6809f07a2e423fdfb5e5500bafd98c891a",
+   "canonical": "realai/tools/detect_models.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/detect_models.py"
+   ]
+  },
+  {
+   "sha256": "40ee355d5c3f086d51d261a27e5d7345ac8700dd6d29e1a18e829ee090ecd511",
+   "canonical": "realai/tools/find_all_lora_bits.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/find_all_lora_bits.py"
+   ]
+  },
+  {
+   "sha256": "c047ce8680bd9c5d200754f9296d6595a0e26e5d953bf2dc32aed9e88dc8477b",
+   "canonical": "realai/tools/find_lora_files.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/find_lora_files.py"
+   ]
+  },
+  {
+   "sha256": "3743d29521066662b295cb3cca6216b69d16ca7c27bce2c712bf99a754880483",
+   "canonical": "realai/tools/find_lora_in_checkpoint_dir.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/find_lora_in_checkpoint_dir.py"
+   ]
+  },
+  {
+   "sha256": "2844e67bfe014809111924ac6e74a468c4b51ccb444c36d35581d79881f1b675",
+   "canonical": "realai/tools/full_training_scanner.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/full_training_scanner.py"
+   ]
+  },
+  {
+   "sha256": "dfe69ad0305ea84081879fe20f869382ffa4b4afac3e5fa6aef5653a378cd8f1",
+   "canonical": "realai/tools/lora_pipeline.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/lora_pipeline.py"
+   ]
+  },
+  {
+   "sha256": "c636f241ea579b3108f55bb7ce8192dc41dfdf829e8aeb3c51dc34d8280a5028",
+   "canonical": "realai/tools/realai_architect_autofix.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/realai_architect_autofix.py"
+   ]
+  },
+  {
+   "sha256": "bbc034d4be004619a3c2c1315a25f34f0c283ee6e4fb0ce09de4cc219820de61",
+   "canonical": "realai/tools/realai_architect_summarize.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/realai_architect_summarize.py"
+   ]
+  },
+  {
+   "sha256": "c64c4b7c4c956e1895f36b0a2f6112238922080525f1cc11ef087d4cff3f128e",
+   "canonical": "realai/tools/realai_build_model_registry.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/realai_build_model_registry.py"
+   ]
+  },
+  {
+   "sha256": "3d48d8eb63fcf738f7b4e938cd89cb733ad174f990497f132a2c3c9d896c462b",
+   "canonical": "realai/tools/realai_lora_training_pipeline.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/realai_lora_training_pipeline.py"
+   ]
+  },
+  {
+   "sha256": "f5a73eea5c5eede27eedf2b4671918128656c0a6df020ed014a9745b8640c761",
+   "canonical": "realai/tools/realai_run_architect.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/realai_run_architect.py"
+   ]
+  },
+  {
+   "sha256": "443638305536fe30785adfe8679ce29e895c4d946cd7705fca4c94a5308ec06e",
+   "canonical": "realai/tools/realai_run_architect3.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/realai_run_architect3.py"
+   ]
+  },
+  {
+   "sha256": "2f92d3dcc33cdfd50e5cb6091c3b8b5361e91d1ee670818e2df82fd83cb1a99e",
+   "canonical": "realai/tools/realai_run_architect_chunked.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/realai_run_architect_chunked.py"
+   ]
+  },
+  {
+   "sha256": "a0a6301dc332ce3a5c620f81b537e0dcf4049f9f4cdaf436dc67a52a6c8bd257",
+   "canonical": "realai/tools/walk_root.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "repo_tools/walk_root.py"
+   ]
+  },
+  {
+   "sha256": "11792a4258cd2a960c72bd113e41368d6ae6ff266546643098cd10792eb3af15",
+   "canonical": "realai/training/build_datasets.py",
+   "why": "heuristic: most imported (3 importers)",
+   "duplicates": [
+    "training/build_datasets.py"
+   ]
+  },
+  {
+   "sha256": "0d89ac10846696c568b0fd1c79e1ff2a6703211172ff8bc54fb7d16a5d00d39d",
+   "canonical": "realai/training/realai_hive_advanced.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai_training/realai_hive_advanced.py"
+   ]
+  },
+  {
+   "sha256": "b4ae8c87a2276f22ff2a520507103e60fb8d017d34f22848df81153b45e90c8f",
+   "canonical": "scripts/ability_matrix.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/ability_matrix.py"
+   ]
+  },
+  {
+   "sha256": "de062779bb16cdebb52945e149e1f772f70a96b5ee6ba050f38c153a90c3af0b",
+   "canonical": "scripts/archive_triage.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/archive_triage.py"
+   ]
+  },
+  {
+   "sha256": "e883166be4d0848e9d009e03fddbd852560812fbda3debb215b6511df731181d",
+   "canonical": "scripts/deep_gold.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/deep_gold.py"
+   ]
+  },
+  {
+   "sha256": "dd6aee4dd8a3ca18cd5896776a91f7d49b87c627402ce9ae774a418f8eaeb31a",
+   "canonical": "scripts/promote_eval.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/promote_eval.py"
+   ]
+  },
+  {
+   "sha256": "a6e35c95d8b297555b1f24e77d5908869cdddef71e412330311c209259ee8db0",
+   "canonical": "scripts/promote_queue.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/promote_queue.py"
+   ]
+  },
+  {
+   "sha256": "592635c9f3af6e94e5cc7c2642efe1d5ad9d1fa97e1a3ca8c1680884309b8576",
+   "canonical": "scripts/scan_messy_repo.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/scan_messy_repo.py"
+   ]
+  },
+  {
+   "sha256": "a87d709b0c9f0c5f39b3312702d62099652b18561bd6af209b5128fa51604a13",
+   "canonical": "scripts/training_data.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "scanners/training_data.py"
+   ]
+  }
+ ]
+}
