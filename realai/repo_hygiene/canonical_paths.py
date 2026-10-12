@@ -67,7 +67,7 @@ def duplicate_groups(root: Path = ROOT) -> Dict[str, List[str]]:
     for f in tracked_py(root):
         if f.endswith("__init__.py"):
             continue
-        b = (root / f).read_bytes()
+        b = (root / f).read_bytes().replace(b"\r\n", b"\n")  # same hash on Windows (core.autocrlf) and Linux
         if len(b) < MIN_BYTES:
             continue
         g[hashlib.sha256(b).hexdigest()].append(f)
