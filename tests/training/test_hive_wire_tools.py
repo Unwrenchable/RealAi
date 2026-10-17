@@ -25,7 +25,7 @@ ARGS = {
 
 
 def test_every_new_tool_registered_with_args_and_skips_documented():
-    assert set(ARGS) == set(H.NEW_TOOLS) and set(H.NEW_TOOLS) <= set(H.SPECS) and set(H.NEW_TOOLS) <= set(H.EXECUTORS)
+    assert set(ARGS) == set(E.SPECS) and set(H.NEW_TOOLS) <= set(H.SPECS) and set(H.NEW_TOOLS) <= set(H.EXECUTORS)
     assert "knowledge_query" in E.SKIPPED and "knowledge_query" not in H.SPECS
     assert not set(H.NEW_TOOLS) & H.NETWORK_TOOLS
 

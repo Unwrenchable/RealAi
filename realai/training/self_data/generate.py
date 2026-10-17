@@ -31,7 +31,11 @@ ACCEPT_TOOLS = {"list_agents": {"list_agents", "route_to_agent"}, "route_to_agen
                 "ability_lookup": {"ability_lookup", "list_agents", "route_to_agent"},
                 "plugin_lookup": {"plugin_lookup", "plugin_registry_list"},
                 "plugin_registry_list": {"plugin_registry_list", "plugin_lookup"},
-                "module_lookup": {"module_lookup", "organs_hive_status"}}
+                "module_lookup": {"module_lookup", "organs_hive_status"},
+                "memory_stats": {"memory_stats", "memory_search"},
+                "agent_pipeline_plan": {"agent_pipeline_plan", "hive_routes_status"},
+                "hive_routes_status": {"hive_routes_status", "agent_pipeline_plan"},
+                "tool_registry_lookup": {"tool_registry_lookup", "ability_lookup"}}
 _DISC = ("8-ball", "9-ball", "10-ball", "one pocket", "pyramid")
 
 
@@ -108,6 +112,25 @@ def seeds(tool: str, rng: random.Random, n: int) -> str:
         return "Ask RealAI to search its hive memory for a topic (chess, RackUp, training, a project name)."
     if tool == "approval_status":
         return "Ask what human approvals are pending/approved/rejected. Never ask to approve anything."
+    if tool == "memory_stats":
+        return "Ask how much is in RealAI's hive memory overall or in one namespace (default, chess, rackup, training)."
+    if tool == "agent_pipeline_plan":
+        return "Give a concrete task (code, design, summary, memory recall) and ask how the multi-agent pipeline would " \
+               "split it up / which model each stage uses. Never ask it to actually run anything."
+    if tool == "hive_routes_status":
+        return "Ask about the hive router: which routes exist, which model a role uses (coder, architect, overseer, " \
+               "analyst, memory, governor, router), whether hive mode is available, which hive agents are present."
+    if tool == "payout_check":
+        return "Each request lists final standings (2-4 names in order) and payout amounts in dollars per player, and asks " \
+               "whether the payouts line up. Never ask to send or release money."
+    if tool == "tool_registry_lookup":
+        return "Ask whether RealAI has a tool for something (ledger audit, rating update, image, translation, chess, " \
+               "memory) and what its source/status/parameters are."
+    if tool == "self_heal_status":
+        return "Ask for the self-heal status report: is it enabled, which artifacts are missing, promote queue size. " \
+               "Never ask it to heal or promote."
+    if tool == "executive_goals":
+        return "Ask about the executive loop's goals: how many, which are open, which watchers run. Never ask it to act."
     return ""
 
 
@@ -223,6 +246,28 @@ def new_tool_templates(tool: str, n: int, rng: random.Random) -> List[str]:
             out.append(f"Search your hive memory for anything about {rng.choice(['chess', 'RackUp', 'training', 'Atomic Fizz', '9dttt'])}.")
         elif tool == "approval_status":
             out.append(rng.choice(["Are there any pending approvals?", "How many approval requests are waiting on me?"]))
+        elif tool == "memory_stats":
+            out.append(rng.choice(["How many entries are in your hive memory?", "What namespaces does your memory have?",
+                                   f"How many memories are stored in the {rng.choice(['default', 'chess', 'rackup', 'training'])} namespace?"]))
+        elif tool == "agent_pipeline_plan":
+            t = rng.choice(["refactor the rating module", "design a multi-module league scheduler", "summarize last week's matches",
+                            "debug the shot-of-the-day checker", "recall what we stored about 9dttt", "plan a chess opening course"])
+            out.append(rng.choice([f"How would your agent pipeline handle: {t}?", f"Dry-run the multi-agent plan to {t}. Which model runs each stage?"]))
+        elif tool == "hive_routes_status":
+            out.append(rng.choice(["Is hive mode available, and which hive agents are present?", "What routes does the hive router know?",
+                                   f"Which model does the {rng.choice(['coder', 'architect', 'overseer', 'analyst', 'memory', 'governor', 'router'])} role use?"]))
+        elif tool == "payout_check":
+            names = rng.sample(["Ana", "Ben", "Cruz", "Dee", "Eli", "Fox"], rng.randint(2, 4))
+            amts = sorted((r(20, 300) for _ in names), reverse=True)
+            order = names if rng.random() < 0.6 else rng.sample(names, len(names))
+            pays = ", ".join(f"{n} ${a}" for n, a in zip(order, amts))
+            out.append(f"Final standings: {', '.join(names)}. Payouts: {pays}. Do the payouts line up with the standings?")
+        elif tool == "tool_registry_lookup":
+            out.append(f"Do you have a tool for {rng.choice(['ledger audit', 'rating update', 'image generation', 'translation', 'chess', 'memory search', 'code execution'])}? What's its status?")
+        elif tool == "self_heal_status":
+            out.append(rng.choice(["What's your self-heal status? Which artifacts are missing?", "Is self-heal enabled, and how many artifacts are present?"]))
+        elif tool == "executive_goals":
+            out.append(rng.choice(["What goals is your executive loop tracking?", "How many open executive goals are there, and which watchers run?"]))
     return list(dict.fromkeys(out))
 
 

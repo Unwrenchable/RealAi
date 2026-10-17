@@ -58,12 +58,32 @@ NETWORK_TOOLS = {"web_search", "solana_read"}
 
 from realai.hive_tools import extended as _ext  # noqa: E402  (read-only RackUp / self-knowledge / snapshot tools)
 
+from realai.hive_tools import wired as _wired  # noqa: E402  (2026-10-16 wire-in: memory, multi-agent, money audit, registry, dry-run)
+
 SPECS.update(_ext.SPECS)
-NEW_TOOLS = tuple(_ext.SPECS)  # added 2026-10-12 (wire audit); improve.py starts them as weak
+SPECS.update(_wired.SPECS)
+NEW_TOOLS = tuple(_ext.SPECS) + tuple(_wired.SPECS)  # wire audit 2026-10-12 / 2026-10-16; improve.py starts them as weak
+CORE_TOOLS = tuple(n for n in SPECS if n not in NEW_TOOLS)
+
+
+def hive_tools_enabled() -> bool:
+    """Live gate: the opt-in live tool loop offers the wire-audit tools only with REALAI_HIVE_TOOLS=1."""
+    return os.environ.get("REALAI_HIVE_TOOLS", "").strip().lower() in ("1", "true", "yes", "on")
+
+
+def key_facts(name: str, result: Dict[str, Any], args: Dict[str, Any]) -> List[List[str]]:
+    if name in _wired.SPECS:
+        return _wired.key_facts(name, result, args)
+    return _ext.key_facts(name, result, args)
 
 
 def specs(names: Optional[List[str]] = None) -> List[Dict[str, Any]]:
     return [SPECS[n] for n in (names or list(SPECS))]
+
+
+def live_specs() -> List[Dict[str, Any]]:
+    """Tools for the live (opt-in) tool loop: core tools, plus NEW_TOOLS only when REALAI_HIVE_TOOLS=1."""
+    return specs(list(SPECS) if hive_tools_enabled() else list(CORE_TOOLS))
 
 
 # ----------------------------------------------------------------------------- data sources
@@ -259,6 +279,7 @@ EXECUTORS: Dict[str, Callable[[Dict[str, Any], Dict[str, Any]], Dict[str, Any]]]
     "math_solver": _math, "data_analysis": _data, "ability_lookup": _ability, "list_agents": _list_agents,
     "route_to_agent": _route, "web_search": _web, "solana_read": _solana,
     **_ext.EXECUTORS,
+    **_wired.EXECUTORS,
 }
 
 

@@ -142,7 +142,6 @@ def recompute_check(ok_calls: List[Dict[str, Any]], ans: str) -> List[str]:
     """Wire-audit tools (and route_to_agent): re-run the SAME executor with the same arguments; the result must be
     identical (deterministic, grounded) and the answer must state the key fact(s) from it."""
     from realai import hive_tools
-    from realai.hive_tools import extended
 
     out: List[str] = []
     low = _norm(ans)
@@ -155,7 +154,7 @@ def recompute_check(ok_calls: List[Dict[str, Any]], ans: str) -> List[str]:
         if json.dumps(again, sort_keys=True, default=str) != json.dumps(c["result"], sort_keys=True, default=str):
             out.append(f"recompute_mismatch:{name}")
             continue
-        for group in extended.key_facts(str(name), c["result"], args):
+        for group in hive_tools.key_facts(str(name), c["result"], args):
             alts = [a for g in group if g and g != "None" for a in {_norm(g), _norm(g).replace("_", " ")}]
             if alts and not any(a in low for a in alts):
                 out.append(f"{name}_fact_missing")
