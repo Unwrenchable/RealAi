@@ -246,11 +246,20 @@ def default_commentary(state: Dict[str, Any], res: Dict[str, Any]) -> str:
             f"sending the opponent to board {mv['cell'] + 1}. Position looks {mood} (eval {ev:+.2f}).")
 
 
-def _log(path: Optional[str], record: Dict[str, Any]) -> Optional[str]:
-    p = path or os.environ.get("REALAI_TTT9D_LOG")
+def _log_path() -> Path:
+    """Where move logs go: REALAI_TTT9D_LOG, else REALAI_DATA_DIR/games/ttt9d_moves.jsonl.
+
+    Callers can only switch logging on; they can never choose the file, so an
+    ability call cannot be used to append to an arbitrary path.
+    """
+    p = os.environ.get("REALAI_TTT9D_LOG")
     if not p:
         p = str(Path(os.environ.get("REALAI_DATA_DIR", "data")) / "games" / "ttt9d_moves.jsonl")
-    pp = Path(p)
+    return Path(p)
+
+
+def _log(record: Dict[str, Any]) -> Optional[str]:
+    pp = _log_path()
     pp.parent.mkdir(parents=True, exist_ok=True)
     with pp.open("a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
@@ -286,7 +295,8 @@ def run(input: str = "", context: Dict[str, Any] | None = None, **kwargs: Any) -
     log = ctx.get("log")
     if log or os.environ.get("REALAI_TTT9D_LOG"):
         try:
-            out["logged_to"] = _log(log if isinstance(log, str) else None, {
+            # A truthy ctx["log"] only enables logging; a string value is NOT used as a path.
+            out["logged_to"] = _log({
                 "ts": time.time(), "state": state, "difficulty": res["difficulty"], "move": res["move"],
                 "eval": res["eval"], "iterations": res["iterations"]})
         except OSError as exc:

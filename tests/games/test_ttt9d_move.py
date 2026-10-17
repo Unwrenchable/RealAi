@@ -110,11 +110,38 @@ def test_commentary_hook(monkeypatch):
     assert T.run(context={"state": T.empty_state(), "commentary": True})["commentary"] == "custom"
 
 
-def test_logging(tmp_path):
+def test_logging(tmp_path, monkeypatch):
     p = tmp_path / "ttt.jsonl"
-    T.run(context={"state": T.empty_state(), "difficulty": "easy", "log": str(p)})
+    monkeypatch.setenv("REALAI_TTT9D_LOG", str(p))
+    out = T.run(context={"state": T.empty_state(), "difficulty": "easy"})
+    assert out["logged_to"] == str(p)
     rec = json.loads(p.read_text().splitlines()[0])
     assert rec["difficulty"] == "easy" and set(rec) >= {"state", "move", "eval", "iterations"}
+
+
+def test_logging_defaults_to_data_dir(tmp_path, monkeypatch):
+    monkeypatch.delenv("REALAI_TTT9D_LOG", raising=False)
+    monkeypatch.setenv("REALAI_DATA_DIR", str(tmp_path / "data"))
+    out = T.run(context={"state": T.empty_state(), "difficulty": "easy", "log": True})
+    expected = tmp_path / "data" / "games" / "ttt9d_moves.jsonl"
+    assert out["logged_to"] == str(expected) and expected.exists()
+
+
+def test_caller_log_path_is_ignored(tmp_path, monkeypatch):
+    """A caller-supplied log path must never be written (no arbitrary file append)."""
+    monkeypatch.delenv("REALAI_TTT9D_LOG", raising=False)
+    monkeypatch.setenv("REALAI_DATA_DIR", str(tmp_path / "data"))
+    evil = tmp_path / "elsewhere" / "evil.jsonl"
+    out = T.run(context={"state": T.empty_state(), "difficulty": "easy", "log": str(evil)})
+    assert not evil.exists() and not evil.parent.exists()
+    assert out["logged_to"] == str(tmp_path / "data" / "games" / "ttt9d_moves.jsonl")
+
+
+def test_no_logging_by_default(tmp_path, monkeypatch):
+    monkeypatch.delenv("REALAI_TTT9D_LOG", raising=False)
+    monkeypatch.setenv("REALAI_DATA_DIR", str(tmp_path / "data"))
+    out = T.run(context={"state": T.empty_state(), "difficulty": "easy"})
+    assert "logged_to" not in out and not (tmp_path / "data").exists()
 
 
 def test_tools_execute_routing():
