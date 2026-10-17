@@ -72,3 +72,11 @@ Twelve read-only tools were added to `realai/hive_tools/extended.py`. Each one i
 **improve.** Each new tool gets weight ≥ 2.5 until it has 40 accepted rows.
 
 **Spot-check.** Use `python -m realai.training.spotcheck --suite extended` to score the new tools. The default `core` suite, the `register --default` gate and the comparable MODELS.md score are unchanged. Extended scores are stored as `tools_extended`.
+
+### Wire-in batch 2026-10-16 (`realai/hive_tools/wired.py`)
+
+Seven more read-only / dry-run tools, in `NEW_TOOLS` (weak weighting until 40 accepted rows), with templates, seeds,
+`ACCEPT_TOOLS` routing, verifier key facts (`hive_tools.key_facts`) and `--suite extended` spot-checks:
+`memory_stats`, `agent_pipeline_plan`, `hive_routes_status`, `payout_check` (never authorizes a payout),
+`tool_registry_lookup`, `self_heal_status` (report only), `executive_goals` (snapshot; never ticks).
+The live tool loop only offers wire-audit tools with `REALAI_HIVE_TOOLS=1` (`hive_tools.live_specs()`).

@@ -350,3 +350,21 @@ If no rule matches: the copy most imported by tracked code wins, then the `reala
 | `scripts/promote_queue.py` | `scanners/promote_queue.py` | heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest |
 | `scripts/scan_messy_repo.py` | `scanners/scan_messy_repo.py` | heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest |
 | `scripts/training_data.py` | `scanners/training_data.py` | heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest |
+
+## Wired status (2026-10-16)
+
+See `docs/WIRING_STATUS.md` / `config/wiring_status.json` for the per-file table.
+
+| class | before | after |
+|---|---:|---:|
+| wired | 428 | 440 |
+| wired_dynamic | 52 | 52 |
+| wired_via_tool | 1 | 1 |
+| shim | 41 | 41 |
+| helper | 46 | 37 |
+| wire | 4 | 2 |
+| dry_run | 10 | 10 |
+| standalone | 262 | 262 |
+| superseded | 63 | 63 |
+| dead | 100 | 100 |
+| decision | 80 | 80 |
