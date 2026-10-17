@@ -2009,6 +2009,7 @@ def execute_registry_tool(
         "rating_intel",
         "sotd_contribute",
         "video_analysis",
+        "ttt9d_move",
     }
     if name in _BARE_ABILITY:
         name = "ability." + name
