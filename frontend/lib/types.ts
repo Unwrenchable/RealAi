@@ -1,6 +1,8 @@
 /** Shared chat UI types for RealAI frontend */
 
 export type Role = "system" | "user" | "assistant";
+/** Alias used by the realai/apps/frontend phase (merged 2026-10-17). */
+export type MessageRole = Role;
 
 export interface ChatMessage {
   id: string;

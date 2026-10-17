@@ -808,6 +808,12 @@ def _readonly_tools_catalog() -> List[Dict[str, Any]]:
 def _run_tool(name: str, arguments: Optional[Dict] = None) -> Dict[str, Any]:
     arguments = arguments or {}
     try:
+        # Write/exec tools: request -> human approval -> execute (realai.core.approval_gate). Deny by default.
+        from realai.core import approval_gate as _ag
+
+        _gate = _ag.gated_action(name)
+        if _gate:
+            return _ag.run_if_approved(_gate, _ag.normalize_tool_args(_gate, arguments), requested_by="hive")
         if name == "self_heal_status":
             from realai.self_heal import status
             return status()
@@ -871,7 +877,8 @@ def _run_tool(name: str, arguments: Optional[Dict] = None) -> Dict[str, Any]:
             from realai.providers.local_llama import local_llama_health
             return local_llama_health()
         if name in ("voice_health", "voice_inventory", "voice_speak", "voice_listen"):
-            from realai.voice.hive_tools import execute as voice_execute
+            # Lab-first shared client (Voice Lab :8890 if up, else in-process engine); trainer untouched.
+            from realai.voice_service.hive import execute as voice_execute
 
             args = dict(arguments or {})
             if name == "voice_speak" and not (args.get("text") or args.get("input")):
@@ -966,6 +973,21 @@ def _run_tool(name: str, arguments: Optional[Dict] = None) -> Dict[str, Any]:
             args.pop("action", None)
             args["ability"] = ability
             return _craft_run({"action": "rackup", **args})
+        # merged 2026-10-16 (MERGE_LEDGER: v3_orchestrator) from the 2026-08-28 archive phase
+        # (recovered/from_d_roots/realai_archive/_quarantine/v3_orchestrator.py): read-only tool names it served
+        # that this version did not. Write tools from that phase (search_replace) are NOT merged.
+        if name == "agent_info":
+            aid = str((arguments or {}).get("agent_id") or "").strip()
+            hit = _find_agent(aid) if aid else None
+            return {"ok": True, "agent": hit} if hit else {"ok": False, "error": "agent_not_found", "agent_id": aid}
+        if name in ("read_file", "list_dir"):
+            args = dict(arguments or {})
+            args.setdefault("path", args.get("target_file") or args.get("file_path") or args.get("target_directory") or
+                            ("." if name == "list_dir" else ""))
+            if "offset" in args and "start" not in args:
+                args["start"] = args["offset"]
+            name, arguments = ("workspace_read" if name == "read_file" else "workspace_list"), args
+        name = {"overseer_77": "overseer", "ability.overseer_77": "overseer", "world-brain": "world_brain"}.get(name, name)
         # Fall through to registry abilities (ability.*) + workspace tools (craft parity)
         from realai.v3_runtime_bridge import execute_registry_tool, workspace_tool
 
@@ -2774,6 +2796,17 @@ class Handler(BaseHTTPRequestHandler):
             except json.JSONDecodeError:
                 self._json(400, {"error": "invalid_json"})
                 return
+            # Opt-in hive tool loop (REALAI_TOOL_LOOP=1 / X-RealAI-Tool-Loop: 1 / realai_tool_loop): model routes to tools.
+            try:
+                from realai.hive_tools.orchestrator_hook import capture_chat, maybe_tool_loop
+
+                _tl = maybe_tool_loop(body, dict(self.headers), VULKAN_BASE)
+                if _tl is not None:
+                    capture_chat(body, dict(self.headers), _tl)
+                    self._json(200, _tl)
+                    return
+            except Exception as _tl_err:  # never break normal chat
+                body.setdefault("realai_tool_loop_error", str(_tl_err)[:200])
             # model=realai-overseer -> local model + OVERSEER-77 persona (PARTIAL)
             try:
                 from realai.atomic_fizz.overseer_route import apply_overseer_persona
@@ -3094,7 +3127,7 @@ class Handler(BaseHTTPRequestHandler):
                     "multi_agent", "multiAgent", "realai_multi_agent", "realai_multi_agent_error",
                     "realai_model", "realai_context_fit",
                     "realai_routing", "realai_memory_read", "realai_natural",
-                    "realai_natural_grounded", "realai_local_only",
+                    "realai_natural_grounded", "realai_local_only", "realai_tool_loop_error",
                 )
             }
             # Vulkan may not support tools — only send if client asked and we keep simple
@@ -3105,6 +3138,13 @@ class Handler(BaseHTTPRequestHandler):
                 proxy_body.pop("tools", None)
             out = json.dumps(proxy_body).encode("utf-8")
             code, hdrs, data = _proxy("POST", "/v1/chat/completions", out, dict(self.headers))
+            try:  # opt-in learning-loop capture (REALAI_CAPTURE=1); no-op otherwise
+                from realai.hive_tools.orchestrator_hook import capture_chat
+
+                if code == 200:
+                    capture_chat(body, dict(self.headers), json.loads(data.decode("utf-8")))
+            except Exception:
+                pass
             # annotate meta if json
             try:
                 obj = json.loads(data.decode("utf-8"))
@@ -3488,6 +3528,12 @@ class Handler(BaseHTTPRequestHandler):
                     done(aid, source="tool", tool=tool_name, ok=ok)
                 except Exception:
                     pass
+            try:  # opt-in learning-loop capture (REALAI_CAPTURE=1)
+                from realai.hive_tools.orchestrator_hook import capture_tool
+
+                capture_tool(tool_name, args, result, dict(self.headers))
+            except Exception:
+                pass
             self._json(200, {"tool": tool_name, "result": result})
             return
 

@@ -18,8 +18,12 @@ if not exist "%VENV%" (
   exit /b 1
 )
 
+REM Run from the repo root so "python -m realai..." resolves this checkout.
+pushd "%ROOT%.."
+
 echo Running health checks...
-"%VENV%" -m realai.cli.realai_cli doctor
+REM realai_cli has no "doctor" command; import-check the real server entry instead.
+"%VENV%" -c "import realai.server.app"
 if errorlevel 1 (
   echo.
   echo Health checks reported a problem. Continuing to start the server anyway.
@@ -32,6 +36,8 @@ echo.
 echo Starting RealAI server on %API_URL% ...
 echo Press Ctrl+C to stop.
 echo.
-"%VENV%" -m realai.cli.realai_cli serve --host 127.0.0.1 --port 8000
+REM Real server entry (pyproject realai-server = realai.server.app:main); realai_cli has no "serve".
+"%VENV%" -m realai.server.app --host 127.0.0.1 --port 8000
+popd
 
 endlocal

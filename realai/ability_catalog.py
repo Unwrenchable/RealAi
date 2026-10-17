@@ -785,6 +785,20 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "modules": ["abilities/chess_engine.py"],
     },
     {
+        "id": "ttt9d_move",
+        "name": "9D / Ultimate Tic-Tac-Toe engine (MCTS)",
+        "pillar": "local_intelligence",
+        "keywords": ["9dttt", "ultimate tic tac toe", "tic-tac-toe", "ttt9d", "game ai", "best move"],
+        "status": "LIVE",
+        "status_note": (
+            "abilities/ttt9d_move.py is a pure-Python MCTS port of 9dttt Public/js/ai/ttt9d-engine.js; "
+            "deterministic per seed, no LLM. Same schema as the JS getMove(state, difficulty) -> {move, eval}. "
+            "Optional template commentary (COMMENTARY_HOOK to plug an LLM) and JSONL move logging (REALAI_TTT9D_LOG)."
+        ),
+        "live_path": 'POST /v1/tools/execute {"name": "ttt9d_move", "arguments": {"state": {...}, "difficulty": "hard"}}',
+        "modules": ["abilities/ttt9d_move.py"],
+    },
+    {
         "id": "lora_adapters",
         "name": "Recovered PEFT LoRA adapters",
         "pillar": "model_family",

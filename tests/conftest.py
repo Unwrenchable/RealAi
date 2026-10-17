@@ -31,3 +31,32 @@ def _isolate_model_registry(tmp_path_factory):
         yield
     finally:
         mc._REGISTRY, mc._PRODUCT_REGISTRY = old
+
+
+@pytest.fixture(autouse=True, scope="session")
+def _isolate_approvals_store(tmp_path_factory):
+    """Pin the shared approvals store (realai.core.approvals_config) to a temp file on every OS.
+
+    The Windows default is the live queue C:\\RealAI-clean\\.approvals.json; both the env var and the config
+    file are redirected so a test that clears the env still lands in temp, never the live store.
+    """
+    import json
+    import os
+
+    tmp = tmp_path_factory.mktemp("approvals")
+    store = tmp / ".approvals.json"
+    cfg = tmp / "approvals_config.json"
+    cfg.write_text(json.dumps({"store": str(store), "store_posix": str(store)}), encoding="utf-8")
+    keys = ("REALAI_APPROVALS_STORE", "APPROVALS_STORE", "REALAI_APPROVALS_CONFIG")
+    old = {k: os.environ.get(k) for k in keys}
+    os.environ["REALAI_APPROVALS_STORE"] = str(store)
+    os.environ["APPROVALS_STORE"] = str(store)
+    os.environ["REALAI_APPROVALS_CONFIG"] = str(cfg)
+    try:
+        yield
+    finally:
+        for k, v in old.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
