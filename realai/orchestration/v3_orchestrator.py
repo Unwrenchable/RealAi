@@ -966,6 +966,21 @@ def _run_tool(name: str, arguments: Optional[Dict] = None) -> Dict[str, Any]:
             args.pop("action", None)
             args["ability"] = ability
             return _craft_run({"action": "rackup", **args})
+        # merged 2026-10-16 (MERGE_LEDGER: v3_orchestrator) from the 2026-08-28 archive phase
+        # (recovered/from_d_roots/realai_archive/_quarantine/v3_orchestrator.py): read-only tool names it served
+        # that this version did not. Write tools from that phase (search_replace) are NOT merged.
+        if name == "agent_info":
+            aid = str((arguments or {}).get("agent_id") or "").strip()
+            hit = _find_agent(aid) if aid else None
+            return {"ok": True, "agent": hit} if hit else {"ok": False, "error": "agent_not_found", "agent_id": aid}
+        if name in ("read_file", "list_dir"):
+            args = dict(arguments or {})
+            args.setdefault("path", args.get("target_file") or args.get("file_path") or args.get("target_directory") or
+                            ("." if name == "list_dir" else ""))
+            if "offset" in args and "start" not in args:
+                args["start"] = args["offset"]
+            name, arguments = ("workspace_read" if name == "read_file" else "workspace_list"), args
+        name = {"overseer_77": "overseer", "ability.overseer_77": "overseer", "world-brain": "world_brain"}.get(name, name)
         # Fall through to registry abilities (ability.*) + workspace tools (craft parity)
         from realai.v3_runtime_bridge import execute_registry_tool, workspace_tool
 
