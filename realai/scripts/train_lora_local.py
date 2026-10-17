@@ -157,6 +157,15 @@ def _port_up(port: int) -> bool:
 
 def _pause_vulkan_stack() -> list[str]:
     """Stop llama-server / free VRAM so DirectML can train on the same AMD GPU."""
+    try:
+        scripts_dir = Path(__file__).resolve().parent
+        if str(scripts_dir) not in sys.path:
+            sys.path.insert(0, str(scripts_dir))
+        from vulkan_runtime import pause_vulkan
+
+        return pause_vulkan()
+    except Exception:
+        pass
     stopped: list[str] = []
     try:
         import subprocess
@@ -177,6 +186,20 @@ def _pause_vulkan_stack() -> list[str]:
     except Exception as e:
         print(f"[train] pause-vulkan warning: {e}", flush=True)
     return stopped
+
+
+def _resume_vulkan_stack(gguf: str = "") -> dict:
+    """Bring llama-server back from C:\\llama-vulkan using C:\\models\\checkpoints_lora."""
+    try:
+        # scripts/ is cwd-adjacent; ensure importable
+        scripts_dir = Path(__file__).resolve().parent
+        if str(scripts_dir) not in sys.path:
+            sys.path.insert(0, str(scripts_dir))
+        from vulkan_runtime import resume_vulkan
+
+        return resume_vulkan(gguf or None, wait_s=120.0)
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
 
 
 def main(argv=None) -> int:
@@ -234,12 +257,30 @@ def main(argv=None) -> int:
         action="store_true",
         help="Do not stop Vulkan llama-server (may OOM on 12GB with 7B chat loaded)",
     )
+    ap.add_argument(
+        "--resume-vulkan",
+        action="store_true",
+        default=os.environ.get("REALAI_TRAIN_RESUME_VULKAN", "1") not in {"0", "false", "no"},
+        help="Auto-restart llama-server after train (default ON; uses 1.5B Q5 unless REALAI_GGUF set)",
+    )
+    ap.add_argument(
+        "--no-resume-vulkan",
+        action="store_true",
+        help="Leave chat offline after train (VRAM stays free)",
+    )
+    ap.add_argument(
+        "--resume-gguf",
+        default=os.environ.get("REALAI_TRAIN_RESUME_GGUF") or os.environ.get("REALAI_GGUF") or "",
+        help="GGUF path/name under C:\\models\\checkpoints_lora for post-train resume",
+    )
     ap.add_argument("--list-presets", action="store_true")
     args = ap.parse_args(argv)
     if args.no_vram_safe:
         args.vram_safe = False
     if args.keep_vulkan:
         args.pause_vulkan = False
+    if args.no_resume_vulkan:
+        args.resume_vulkan = False
 
     if args.list_presets:
         presets_path = Path(__file__).resolve().parents[1] / "config" / "train_presets.json"
@@ -289,11 +330,18 @@ def main(argv=None) -> int:
         )
         stopped = _pause_vulkan_stack()
         print(f"[train] paused: {stopped or ['(no llama-server process found)']}", flush=True)
-        print(
-            "[train] after training, restart chat with: "
-            "powershell -File scripts\\run_local_chat.ps1",
-            flush=True,
-        )
+        if args.resume_vulkan:
+            print(
+                "[train] will auto-resume llama-server after train "
+                "(C:\\llama-vulkan + C:\\models\\checkpoints_lora)",
+                flush=True,
+            )
+        else:
+            print(
+                "[train] after training, resume chat with: "
+                "python scripts\\vulkan_runtime.py resume   OR   /gpu in craft",
+                flush=True,
+            )
     elif backend == "directml" and vulkan_up and not args.pause_vulkan:
         print(
             "[train] WARNING: Vulkan :8080 still up — expect VRAM OOM on 12GB. "
@@ -440,9 +488,20 @@ def main(argv=None) -> int:
     (adapter_dir / "realai_train_meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
     print(f"[train] saved adapter → {adapter_dir}", flush=True)
     print(
-        "[train] next: keep using Vulkan chat (GGUF); adapter is PEFT under checkpoints_lora/",
+        "[train] next: adapter is PEFT under checkpoints_lora/; chat uses Vulkan GGUF",
         flush=True,
     )
+
+    # Craft/DirectML train kills llama-server for VRAM — bring it back unless opted out
+    if args.resume_vulkan and not args.keep_vulkan:
+        print("[train] auto-resuming Vulkan llama-server…", flush=True)
+        resumed = _resume_vulkan_stack(args.resume_gguf)
+        print(f"[train] resume: {resumed}", flush=True)
+        if not resumed.get("ok"):
+            print(
+                "[train] resume failed — manual: python scripts\\vulkan_runtime.py resume",
+                flush=True,
+            )
     return 0
 
 
