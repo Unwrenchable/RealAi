@@ -28,3 +28,13 @@ def test_root_entry_points_kept():
     cfg = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
     scripts = cfg["project"]["scripts"]
     assert scripts["realai-server"] == "realai.server.app:main" and scripts["realai-craft"] == "realai.cli.craft:main"
+
+
+def test_no_approvals_runtime_state_tracked():
+    import subprocess
+
+    out = subprocess.run(["git", "ls-files", "*.approvals.json*", ".approvals.json*"], cwd=ROOT,
+                         capture_output=True, text=True).stdout
+    assert out.strip() == ""
+    ignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
+    assert ".approvals.json.audit.jsonl" in ignore
