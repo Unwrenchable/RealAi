@@ -35,16 +35,58 @@ Sources: `C:\RealAI-clean (incl. _quarantine, archive, _parked, recovered, reala
 | `realai/plugins/rackup_coach/abilities/ledger_audit.py` | ABILITY metadata (read_only, authorize_payout=False) | abilities/rackup/ledger_audit.py | 3a2d7bd |
 | `realai/plugins/rackup_coach/abilities/money_anomaly.py` | ABILITY metadata (read_only, authorize_payout=False) | abilities/rackup/money_anomaly.py | 3a2d7bd |
 | `realai/plugins/rackup_coach/abilities/payout_sanity.py` | ABILITY metadata (read_only, authorize_payout=False) | abilities/rackup/payout_sanity.py | 3a2d7bd |
+| `realai/core/approval_gate.py (new)` | approval gate: request -> human approve -> execute once; dry-run diff/command/plan; workspace scope; protected paths; audit jsonl; money refused | Travis decision 5; replaces the unmerged 2026-08-28 search_replace / shell=True run_terminal_command | 421ba1c |
+| `realai/orchestration/v3_orchestrator.py` | _run_tool: search_replace/run_command/run_script/write_file/auto_wire/self_heal promote/self_extend/self_repair -> approval request (REALAI_EXEC_UNGATED=1 escape, default off) | archive phase write/shell tools (restored behind the gate) | 421ba1c |
+| `realai/core/tools/hive_executor.py` | _approval_confirm: model-supplied approved=True ignored (REALAI_APPROVAL_TRUST_FLAG=1 to trust); approval must match the tool | security fix | 421ba1c |
+| `realai/hive_tools/approvals.py (new)` | request_approval hive tool (request-only, sandbox store offline) + verify contract + spotcheck approval_command / approval_money_refuse | decision 5 self_data rule | 421ba1c |
+| `realai/core/self_heal.py (new canonical)` | full union: _probe_routes, run_curated_promote, run_deep_promote, roots ingest, discover modes; promote apply gated; realai/self_heal.py + realai/core/agents/self_heal.py -> alias shims | realai/self_heal.py (1.2-route-probe) + realai/core/agents/self_heal.py (1.1-5F) + 31 archive copies (no extra defs) | 421ba1c |
+| `realai/voice_service/ (new) + abilities/voice_service.py` | shared voice client: lab :8890 first, canonical engine fallback, optional :8891 front-end; agent_tools/tts_engine.py -> shim | realai/voice/tts_engine.py already the complete union (the .learn_cache copy is CRLF-identical; agent_tools copy is a subset and was unimportable) | 8f4c5dd |
+| `realai/craft.py -> shim of realai/cli/craft.py` | none needed: every realai/craft.py def exists in cli/craft.py (cli adds 23, refines 17) | realai/craft.py (2026-09-24 phase) | cc38c58 |
+| `realai/core/local_models.py` | LocalModelManager.get_llm, LocalLLMEngine._load_peft_transformers / _generate_peft_transformers + peft-transformers branches, qwen2.5-1.5b-lora fallback mapping; plugins/local_models.py + plugins/core/local_models.py -> shims | imports/promoted/local_models.py | cc38c58 |
+| `realai/core/training/extract_from_agent_tools.py` | sessions_to_instruction_samples, extract_all_training_sources, _read_jsonl, _repo_root (fixes closed_loop import), load_json, normalize_agent_tool_log, agent_tool_log_samples; realai/training copy -> shim | realai/training/extract_from_agent_tools.py + training/extract_from_agent_tools.py | cc38c58 |
+| `realai/server/legacy_api.py (new canonical)` | union of api_server phases + POST /v1/memory/recall + opt-in _log_request_row; old api_server paths -> shims; plugins/realai_local_server.py -> shim | realai/api_server.py, core/api_server.py, plugins/api_server.py, plugins/api_big_server.py, RealAI-gold clean_backup_20260708 | 806640f |
+| `realai/server/router.py + app.py + legacy_bridge.py` | REALAI_SERVER_MERGED_ROUTES=1 serves legacy-only routes on :8000 (default off); app.py logger fix | decision 1 | 806640f |
+| `realai/local_sdxl.py + abilities/image_generation.py` | SDXL-Turbo local images (REALAI_IMAGES_LOCAL_SDXL=1); image_generation local-only (xAI path removed) | origin/feat/local-image-sdxl-turbo 9314a7c (files only) | 806640f |
 
 ## Needs Travis's decision
 
-- v3_orchestrator write/shell tools from the 2026-08-28 archive phase: search_replace (writes files) and a shell=True run_terminal_command (side-effecting; not merged)
-- xAI image/video/vision paths in the quarantine phase of abilities image_generation / video_generation / image_analysis (need XAI_API_KEY; local-only policy; canonical (local) kept)
-- Voice: XTTS voice-lab proxy in parked orchestrator branches; abilities voice_streaming/audio_speech variants; agent_tools/tts_engine.py vs realai/voice/tts_engine.py (Kokoro/XTTS local synth, WindowsSAPI, _is_real_wav: 13 defs) (voice area left untouched (voice trainer is live))
-- Self-heal canonical location: realai/self_heal.py (wired) vs realai/core/agents/self_heal.py (AUTHORITY: self-heal lives in realai/core); the core copy lacks _probe_routes, run_curated_promote, run_deep_promote (canonical choice conflicts with prior rule)
-- Server twins realai/api_server.py vs realai/core/api_server.py (16 defs differ: _vulkan_healthy/_vulkan_chat, CORS, fusion UI) and realai/plugins/api_server.py (priority 9, not merged; which server is canonical?)
-- realai/craft.py vs realai/cli/craft.py (23 defs only in one: tool_learn, fingerprint_stack, is_protected_core_path...) (priority 9, not merged; same question as WIRING_STATUS)
-- realai/core/local_models.py: PEFT transformer path (get_llm, _load_peft_transformers, _generate_peft_transformers) only in imports/promoted/local_models.py (priority 9; adds a heavy runtime path)
+Resolved by Travis's decisions (2026-10-16, 11:46 PM):
+
+- ~~v3_orchestrator write/shell tools~~ -> restored behind the approval gate (docs/APPROVAL_GATE.md), 421ba1c
+- ~~xAI image/video/vision paths~~ -> stay out (local only); image_generation now SDXL-Turbo local, 806640f
+- ~~Voice tts_engine versions~~ -> realai/voice/tts_engine.py already complete; shared client realai/voice_service (docs/VOICE_SERVICE.md), 8f4c5dd
+- ~~Self-heal canonical location~~ -> realai/core/self_heal.py, old paths shims, 421ba1c
+- ~~Server twins~~ -> realai/server/legacy_api.py + shims + opt-in bridge (docs/SERVERS.md), 806640f
+- ~~realai/craft.py vs realai/cli/craft.py~~ -> cli/craft.py canonical, realai/craft.py shim, cc38c58
+- ~~local_models PEFT path~~ -> merged into realai/core/local_models.py, cc38c58
+
+Open:
+
+- REALAI_EXEC_UNGATED=1 escape hatch (restores ungated _run_tool exec for console sessions): keep or delete?
+- Approval store path: set APPROVALS_STORE once so the Flask approval UI, the gate and approval_status share one file (UI defaults to cwd .approvals.json)
+- craft CLI: tool_exec -> v3_orchestrator._run_tool write/exec now files approval requests too (human-operated CLI); exempt craft?
+- realai.plugins.tools package import pulls core.security (missing in some envs) -> hive_executor cannot reach approval_store and denies everything (safe, but no pending request is filed)
+- Point orchestrator voice_* tools / abilities/audio_speech at realai.voice_service (lab-first) instead of in-process provider?
+- Make REALAI_SERVER_MERGED_ROUTES / REALAI_IMAGES_LOCAL_SDXL default on :8000?
+- realai/start_realai.bat calls `realai.cli.realai_cli serve`, which does not exist in this tree
+- realai/core/training/finetune.py plan default data dir (realai/core/datasets/processed) vs RealAI-gold main-realai (<repo>/training/data)
+- agents/agents.py `AGENT_REGISTRY = property(...)` at module level (a property object, not a dict) was dropped by realai/core/agents/agents.py: confirm it stays dropped
+
+## Decision batch families (priority 9, analyzed 2026-10-16 late)
+
+| family | versions | missing defs found | outcome |
+|---|---:|---:|---|
+| `realai/api_server.py` (incl. core/plugins/big + gold stub) | 31 | 0 in family (+6 in the gold stub; 2 recovered, 4 superseded) + /v1/memory/recall route | realai/server/legacy_api.py |
+| `realai/server/router.py` / `app.py` | 23 / 4 | 0 | canonical, opt-in bridge + SDXL |
+| `realai/plugins/realai_local_server.py` | 3 | 8 (all in realai/server/realai_local_server.py) | server copy canonical; plugins -> shim |
+| `realai/cli/craft.py` | 4 | 0 (22 conflicts = older realai/craft.py phase) | realai/craft.py -> shim |
+| `realai/core/local_models.py` | 30 | 3 | recovered (PEFT) |
+| `realai/core/training/extract_from_agent_tools.py` | 7 | 6 | recovered (union) |
+| `realai/core/agents/agents.py` | 11 | 1 (module-level property bug) | not recovered (open item) |
+| `realai/core/training/finetune.py` | 2 | 2 constants (gold data dir) | open item |
+| `realai/core/{self_improvement,closed_loop,self_builder,audit,identity,inference/chat_pipeline}.py`, `realai/core/agents/{critic,executor,planner,synthesizer,worker,supervisor}.py`, `realai/core/tools/{code,file,registry,web3}.py`, `realai/plugins/tools/harden_repos.py`, `realai/training/eval.py`, `realai/core/web3/{evm,solana}_backend.py` | 1-12 each | 0 | canonical already complete (conflicts = older phases); web3 untouched (money paths stay locked) |
+| `realai/voice/tts_engine.py` | 3 | 0 | canonical complete; agent_tools copy -> shim |
+| `realai/self_heal.py` | 31 | 0 | realai/core/self_heal.py |
 
 ## Analyzed families (priorities 1-8)
 
