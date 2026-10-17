@@ -57,6 +57,12 @@ class Recipe:
     dml_adapter: str = "RX 6700"
     base_dtype: str = "fp32"  # frozen base weights; LoRA params, optimizer state and loss stay fp32
     ce_chunk: int = 256  # CE over target positions in checkpointed chunks (0 = all at once)
+    # speed knobs (defaults = the original one-row-at-a-time loop, bit for bit)
+    pack: bool = False  # pack several rows per sequence (block-diagonal attention, positions restart per row)
+    len_pct: float = 0.0  # >0: cap max_len at this length percentile of the encoded rows (rounded up to 64)
+    grad_checkpoint: bool = True  # False = faster, more VRAM
+    token_budget: int = 0  # >0: micro-batches hold <= this many padded tokens (batch_size is then a row cap)
+    select: str = "index"  # target-position gather: index (index_select) | matmul (one-hot matmul; no DML index_add fallback)
 
 
 def realai_home() -> Path:
@@ -387,6 +393,76 @@ def sft_loss(model, ids: List[int], labels: List[int], device, ce_chunk: int = 0
     return tot, len(pos)
 
 
+def sft_loss_unit(model, unit, device, ce_chunk: int = 0, select: str = "index", pad_id: int = 0):
+    """sft_loss for a micro-batch (see realai.training.sft_batching): right-padded to the batch's longest sequence
+    (not max_len); packed sequences get a block-diagonal causal mask and positions restarting at 0 per row.
+
+    Returns (row_weighted_loss, loss_sum, n_tokens): row_weighted_loss = sum over rows of that row's mean token
+    loss, so every row counts once exactly as in the one-row loop; divide by rows per optimizer step."""
+    import torch
+
+    backbone, head = _parts(model)
+    B = len(unit)
+    lens = [sum(len(i) for i, _ in seq) for seq in unit]
+    L = max(lens)
+    packed = any(len(seq) > 1 for seq in unit)
+    ids = torch.full((B, L), int(pad_id), dtype=torch.long)
+    flat, tgt, w = [], [], []
+    pos_ids = torch.zeros((B, L), dtype=torch.long) if packed else None
+    mask = None
+    if packed:
+        mdt = backbone.embed_tokens.weight.dtype
+        neg = torch.finfo(mdt).min
+        mask = torch.full((B, 1, L, L), neg, dtype=mdt)
+    for b, seq in enumerate(unit):
+        off = 0
+        for sids, slab in seq:
+            n = len(sids)
+            ids[b, off:off + n] = torch.tensor(sids, dtype=torch.long)
+            p = [t for t in range(n - 1) if slab[t + 1] != -100]
+            if p:
+                flat += [b * L + off + t for t in p]
+                tgt += [slab[t + 1] for t in p]
+                w += [1.0 / len(p)] * len(p)
+            if packed:
+                pos_ids[b, off:off + n] = torch.arange(n)
+                mask[b, 0, off:off + n, off:off + n] = torch.triu(torch.full((n, n), neg, dtype=mask.dtype), 1)
+            off += n
+        if packed and off < L:  # padding queries see only themselves (no all-masked softmax rows)
+            r = torch.arange(off, L)
+            mask[b, 0, r, r] = 0
+    if not flat:
+        return None, 0.0, 0
+    kw = {}
+    if packed:
+        kw = {"attention_mask": mask.to(device), "position_ids": pos_ids.to(device)}
+    elif B > 1:
+        kw = {"attention_mask": (torch.arange(L)[None, :] < torch.tensor(lens)[:, None]).long().to(device)}
+    h = backbone(input_ids=ids.to(device), **kw).last_hidden_state
+    h = h.reshape(B * L, h.shape[-1])
+    if select == "matmul":  # backward is a matmul (stays on the GPU) instead of index_add (CPU fallback on DirectML)
+        sel = torch.zeros((len(flat), B * L), dtype=h.dtype)
+        sel[torch.arange(len(flat)), torch.tensor(flat)] = 1
+        h = sel.to(device) @ h
+    else:
+        h = h.index_select(0, torch.tensor(flat, device=device))
+    tg = torch.tensor(tgt, device=device)
+    wt = torch.tensor(w, dtype=torch.float32, device=device)
+
+    def ce(hh, tt):
+        logits = head(hh).float()
+        return torch.logsumexp(logits, dim=-1) - logits.gather(1, tt[:, None]).squeeze(1)
+
+    if not ce_chunk or len(flat) <= ce_chunk or not torch.is_grad_enabled():
+        v = ce(h, tg)
+    else:
+        from torch.utils.checkpoint import checkpoint
+
+        v = torch.cat([checkpoint(ce, h[i:i + ce_chunk], tg[i:i + ce_chunk], use_reentrant=False)
+                       for i in range(0, len(flat), ce_chunk)])
+    return (v * wt).sum(), float(v.detach().sum().to("cpu")), len(flat)
+
+
 def _encode_all(rows, tok, max_len):
     out = []
     for r in rows:
@@ -575,7 +651,10 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
     bdt = choose_dtype(device, recipe.base_dtype, log)
     log(f"base={base_path} base_dtype={bdt} ce_chunk={recipe.ce_chunk}")
     model = AutoModelForCausalLM.from_pretrained(base_path, **dtype_kwargs(torch_dtype(bdt)))
-    model.gradient_checkpointing_enable()
+    if recipe.grad_checkpoint:
+        model.gradient_checkpointing_enable()
+    else:
+        log("gradient checkpointing OFF (faster, more VRAM)")
     model.enable_input_require_grads()
     model.config.use_cache = False
     model = get_peft_model(model, LoraConfig(r=recipe.lora_r, lora_alpha=recipe.lora_alpha,
@@ -588,10 +667,11 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
     model.train()
     params = [p for p in model.parameters() if p.requires_grad]
     opt = DmlAdamW(params, lr=recipe.lr, weight_decay=recipe.weight_decay)
-    total = math.ceil(len(train_rows) / recipe.grad_accum) * recipe.epochs
+    rows_per_step = max(1, recipe.batch_size) * recipe.grad_accum
+    total = math.ceil(len(train_rows) / rows_per_step) * recipe.epochs
     if args.max_steps:
         total = min(total, args.max_steps)
-    full_total = math.ceil(len(train_rows) / recipe.grad_accum) * recipe.epochs
+    full_total = math.ceil(len(train_rows) / rows_per_step) * recipe.epochs
     sched = CosineWarmup(opt, int(full_total * recipe.warmup_ratio), full_total)  # smoke uses the real curve
     out = _inside_home(Path(args.out))
     out.mkdir(parents=True, exist_ok=True)
@@ -611,54 +691,137 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
     win_loss, win_tok = 0.0, 0
     nonfinite = 0
     done = False
-    for ep in range(start_ep, recipe.epochs):
-        enc = _encode_all(train_rows, tok, max_len)
-        random.Random(recipe.seed + ep).shuffle(enc)
-        micro = 0
-        for ids, lab in enc:
-            for attempt_len in [n for n in LEN_BACKOFF if n <= max_len] + [None]:
-                if attempt_len is None:
-                    skipped += 1
-                    log(f"skip row (OOM even at 512 tokens), skipped={skipped}")
-                    break
-                i2, l2 = ids[:attempt_len], lab[:attempt_len]
-                try:
-                    loss, k = sft_loss(model, i2, l2, device, recipe.ce_chunk)
-                    if not k:
-                        break
-                    if not math.isfinite(float(loss.detach().to("cpu"))):
-                        nonfinite += 1
-                        opt.zero_grad()
-                        log(f"non-finite loss ({bdt}) on a {len(i2)}-token row; skipped (n={nonfinite})")
-                        if nonfinite >= 5 and nonfinite > 0.02 * max(micro, 1):
-                            raise RuntimeError(f"too many non-finite losses with base dtype {bdt}; rerun with --base-dtype fp32 "
-                                               "(or a shorter --max-len) - fp16 activations overflowed")
-                        break
-                    # mean over this row's target tokens, averaged over the accumulation window
-                    (loss / k / recipe.grad_accum).backward()
-                    win_loss += float(loss.detach().to("cpu"))
-                    win_tok += k
-                    break
-                except RuntimeError as exc:
-                    if not _is_oom(exc):
-                        raise
-                    loss = None
+    from realai.training import sft_batching as sb
+
+    legacy = recipe.batch_size <= 1 and not recipe.pack and recipe.select == "index" and not recipe.token_budget
+    enc_all = _encode_all(train_rows, tok, max_len)  # deterministic: encoded once, not once per epoch
+    if recipe.len_pct:
+        cap = sb.cap_from_percentile([len(i) for i, _ in enc_all], recipe.len_pct, max_len)
+        log(f"len cap p{recipe.len_pct:g} -> {cap} (max_len {max_len}); "
+            f"{sum(1 for i, _ in enc_all if len(i) > cap)} rows truncated")
+        enc_all = [(i[:cap], l[:cap]) for i, l in enc_all if any(x != -100 for x in l[1:cap])]
+        max_len = cap
+    log("lengths " + json.dumps(sb.length_stats([len(i) for i, _ in enc_all], max_len)))
+    mode = ("legacy one row per forward" if legacy else
+            f"{'packed' if recipe.pack else 'bucketed'} micro-batches <= {recipe.batch_size} rows"
+            f"{f' / {recipe.token_budget} tokens' if recipe.token_budget else ''}")
+    log(f"batching: {mode}; {rows_per_step} rows per optimizer step; select={recipe.select} "
+        f"grad_checkpoint={recipe.grad_checkpoint}")
+    pad_id = tok.pad_token_id if tok.pad_token_id is not None else 0
+    step_times, tok_seen, pad_seen = [], 0, 0
+    budget = recipe.token_budget
+    ooms = 0
+
+    def row_backward(ids, lab, divisor):
+        """The original per-row path with its OOM backoff (1024 -> 768 -> 512, then skip)."""
+        nonlocal skipped, nonfinite, win_loss, win_tok
+        for attempt_len in [n for n in LEN_BACKOFF if n <= max_len] + [None]:
+            if attempt_len is None:
+                skipped += 1
+                log(f"skip row (OOM even at 512 tokens), skipped={skipped}")
+                return
+            i2, l2 = ids[:attempt_len], lab[:attempt_len]
+            try:
+                loss, k = sft_loss(model, i2, l2, device, recipe.ce_chunk)
+                if not k:
+                    return
+                if not math.isfinite(float(loss.detach().to("cpu"))):
+                    nonfinite += 1
                     opt.zero_grad()
-                    gc.collect()
-                    log(f"OOM on a {len(ids)}-token row at len {attempt_len}: retrying shorter")
-            micro += 1
-            if micro % recipe.grad_accum == 0:
-                torch.nn.utils.clip_grad_norm_(params, recipe.max_grad_norm)
-                opt.step(); sched.step(); opt.zero_grad()
-                step += 1
+                    log(f"non-finite loss ({bdt}) on a {len(i2)}-token row; skipped (n={nonfinite})")
+                    if nonfinite >= 5 and nonfinite > 0.02 * max(rows_in_window + step * rows_per_step, 1):
+                        raise RuntimeError(f"too many non-finite losses with base dtype {bdt}; rerun with --base-dtype fp32 "
+                                           "(or a shorter --max-len) - fp16 activations overflowed")
+                    return
+                # mean over this row's target tokens, averaged over the accumulation window
+                (loss / k / divisor).backward()
+                win_loss += float(loss.detach().to("cpu"))
+                win_tok += k
+                return
+            except RuntimeError as exc:
+                if not _is_oom(exc):
+                    raise
+                loss = None
+                opt.zero_grad()
+                gc.collect()
+                log(f"OOM on a {len(ids)}-token row at len {attempt_len}: retrying shorter")
+
+    def run_unit(unit):
+        """Forward+backward one micro-batch; on OOM split it in half (down to the per-row path with its length
+        backoff) and shrink the token budget for the rest of the run. Gradients already accumulated in this
+        optimizer step are kept."""
+        nonlocal nonfinite, win_loss, win_tok, budget, ooms
+        _, L_, real_ = sb.unit_shape(unit)
+        try:
+            wl, lsum, k = sft_loss_unit(model, unit, device, recipe.ce_chunk, recipe.select, pad_id)
+            if k and not math.isfinite(lsum):
+                nonfinite += 1
+                log(f"non-finite loss ({bdt}) on a {len(unit)}x{L_} micro-batch; skipped (n={nonfinite})")
+                if nonfinite >= 5 and nonfinite > 0.02 * max(step + 1, 1):
+                    raise RuntimeError(f"too many non-finite losses with base dtype {bdt}; rerun with "
+                                       "--base-dtype fp32 (or a shorter --max-len)")
+            elif k:
+                (wl / rows_per_step).backward()
+                win_loss += lsum
+                win_tok += k
+        except RuntimeError as exc:
+            if not _is_oom(exc):
+                raise
+            wl = None
+            gc.collect()
+            ooms += 1
+            if len(unit) > 1:
+                budget = max(L_, int((budget or len(unit) * L_) * 0.75))
+                log(f"OOM on a {len(unit)}x{L_} micro-batch: splitting it; token budget now {budget} (ooms={ooms})")
+                half = len(unit) // 2
+                run_unit(unit[:half])
+                run_unit(unit[half:])
+            else:
+                log(f"OOM on a {L_}-token sequence: per-row path with length backoff (ooms={ooms})")
+                for ids, lab in unit[0]:
+                    row_backward(ids, lab, rows_per_step)
+
+    def opt_step(rows):
+        nonlocal step
+        if not legacy and rows != rows_per_step and rows:  # packed/partial window: same per-row weighting
+            for p_ in params:
+                if p_.grad is not None:
+                    p_.grad.mul_(rows_per_step / rows)
+        torch.nn.utils.clip_grad_norm_(params, recipe.max_grad_norm)
+        opt.step(); sched.step(); opt.zero_grad()
+        step += 1
+        step_times.append(time.time())
+
+    for ep in range(start_ep, recipe.epochs):
+        if recipe.pack:
+            units = sb.pack_rows(enc_all, max_len, recipe.seed + ep, recipe.batch_size, rows_per_step, budget)
+        else:
+            units = sb.bucket_batches(enc_all, recipe.batch_size, recipe.seed + ep, rows_per_step, budget)
+        if not legacy:
+            log(f"epoch {ep + 1}: {len(units)} forward passes, padding efficiency {sb.efficiency(units)}")
+        rows_in_window = 0
+        for unit in units:
+            n_rows = sb.unit_rows(unit)
+            _, L_, real_ = sb.unit_shape(unit)
+            tok_seen += real_
+            pad_seen += len(unit) * L_
+            if legacy:
+                ids, lab = unit[0][0]
+                row_backward(ids, lab, recipe.grad_accum)
+            else:
+                run_unit(unit)
+            rows_in_window += n_rows
+            if rows_in_window >= rows_per_step:
+                opt_step(rows_in_window)
+                rows_in_window = 0
                 if step in (1, 2, 5) or step % 5 == 0 or (args.max_steps and step <= args.max_steps):
                     rate = (time.time() - t0) / step
-                    full = math.ceil(len(train_rows) / recipe.grad_accum) * recipe.epochs
                     v = _vram_gb()
                     peak = max(peak or 0, v or 0) or None
+                    tps = tok_seen / max(time.time() - t0, 1e-9)
                     log(f"ep {ep + 1} step {step}/{total} loss {win_loss / max(win_tok, 1):.4f} "
-                        f"lr {sched.get_last_lr()[0]:.2e} {rate:.1f}s/step vram {v}GB "
-                        f"eta(full {full} steps) {rate * (full - step) / 60:.0f} min")
+                        f"lr {sched.get_last_lr()[0]:.2e} {rate:.1f}s/step {tps:.0f} tok/s vram {v}GB "
+                        f"eta(full {full_total} steps) {rate * (full_total - step) / 60:.0f} min")
                 win_loss, win_tok = 0.0, 0
                 if args.max_steps and step >= args.max_steps:
                     done = True
@@ -672,9 +835,8 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
                 log(f"smoke eval_loss {el:.4f}")
                 history.append({"epoch": ep + 1, "eval_loss": el, "step": step})
             break
-        if micro % recipe.grad_accum:
-            torch.nn.utils.clip_grad_norm_(params, recipe.max_grad_norm)
-            opt.step(); sched.step(); opt.zero_grad(); step += 1
+        if rows_in_window:
+            opt_step(rows_in_window)
         el = eval_loss(model, tok, eval_rows, max_len, device)
         history.append({"epoch": ep + 1, "eval_loss": el, "step": step})
         log(f"epoch {ep + 1} eval_loss {el:.4f}")
@@ -688,7 +850,14 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
         save_adapter(model, tok, out / "adapter_last")
     return {"device": dev_name, "max_len": max_len, "best_eval_loss": best, "history": history, "steps": step,
             "skipped_rows": skipped, "peak_vram_gb": peak, "sec_per_step": (time.time() - t0) / max(step, 1),
-            "smoke": bool(args.max_steps), "base_dtype": bdt, "nonfinite_rows": nonfinite}
+            "smoke": bool(args.max_steps), "base_dtype": bdt, "nonfinite_rows": nonfinite,
+            "rows_per_step": rows_per_step, "full_run_steps": full_total, "max_len_used": max_len,
+            "tokens_per_s": round(tok_seen / max(time.time() - t0, 1e-9), 1),
+            "padding_efficiency": round(tok_seen / max(pad_seen, 1), 3),
+            "sec_per_step_after_first": (round((step_times[-1] - step_times[0]) / (len(step_times) - 1), 2)
+                                         if len(step_times) > 1 else None),
+            "speed": {"batch_size": recipe.batch_size, "grad_accum": recipe.grad_accum, "pack": recipe.pack,
+                      "len_pct": recipe.len_pct, "token_budget": recipe.token_budget, "ooms": ooms, "grad_checkpoint": recipe.grad_checkpoint, "select": recipe.select}}
 
 
 def train(args, recipe: Recipe) -> int:
@@ -714,6 +883,16 @@ def train(args, recipe: Recipe) -> int:
             res.update(recipe=asdict(recipe), dataset=p["dataset"], base_license=BASE_LICENSE)
             name = "smoke_result.json" if args.max_steps else "train_result.json"
             (out / name).write_text(json.dumps(res, indent=2), encoding="utf-8")
+            if getattr(args, "bench", 0):
+                sps = res.get("sec_per_step_after_first") or res["sec_per_step"]
+                bench = {k: res.get(k) for k in ("steps", "sec_per_step", "sec_per_step_after_first", "tokens_per_s",
+                                                 "padding_efficiency", "peak_vram_gb", "max_len_used", "rows_per_step",
+                                                 "full_run_steps", "device", "base_dtype", "skipped_rows", "speed")}
+                bench["projected_full_run_min"] = round(sps * res["full_run_steps"] / 60, 1)
+                bench["note"] = ("sec_per_step_after_first excludes step 1 (warm-up); peak_vram_gb is the whole adapter "
+                                 "(close other GPU apps / llama-servers for a clean number)")
+                (out / "bench.json").write_text(json.dumps(bench, indent=2), encoding="utf-8")
+                log("BENCH " + json.dumps(bench))
             if args.max_steps:
                 log(f"smoke done ({res['steps']} steps, {res['sec_per_step']:.1f}s/step) -> {out / name}; no adapter saved")
             else:
@@ -856,6 +1035,17 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--save-smoke", action="store_true", help="with --max-steps: write a checkpoint (tests the save path)")
     ap.add_argument("--resume", default="", help="'auto' (latest ckpt in --out) or a ckpt-ep<N> dir")
     ap.add_argument("--eval-rows", type=int, default=0, help="limit eval rows (0 = all)")
+    sp = ap.add_argument_group("speed (defaults = original one-row loop)")
+    sp.add_argument("--pack", action="store_true", help="pack several rows per sequence up to max_len (block-diagonal "
+                    "attention, per-row positions and loss weights)")
+    sp.add_argument("--token-budget", type=int, default=0, help="max padded tokens per micro-batch (batch-size is "
+                    "then the row cap); rows of one optimizer step are length-sorted into micro-batches")
+    sp.add_argument("--len-pct", type=float, default=0.0, help="cap max_len at this percentile of row lengths, e.g. 99")
+    sp.add_argument("--no-grad-checkpoint", action="store_true", help="disable gradient checkpointing (faster, more VRAM)")
+    sp.add_argument("--select", default="index", choices=["index", "matmul"],
+                    help="target-position gather; matmul avoids DirectML's index_add CPU fallback in backward")
+    sp.add_argument("--bench", type=int, default=0, help="time N optimizer steps (no eval, no adapter), write "
+                    "bench.json with s/step, tok/s, peak VRAM and the projected full-run time")
     ap.add_argument("--model-id", default="realai-sft-1.5b")
     ap.add_argument("--quant", default="Q5_K_M")
     return ap
@@ -866,11 +1056,19 @@ def recipe_from(args) -> Recipe:
                   grad_accum=args.grad_accum, batch_size=args.batch_size, lora_r=args.lora_r,
                   lora_alpha=args.lora_alpha, device=args.device, dml_adapter=args.dml_adapter,
                   base_dtype=DTYPE_MAP[args.dtype] if getattr(args, "dtype", None) else args.base_dtype,
-                  ce_chunk=args.ce_chunk)
+                  ce_chunk=args.ce_chunk, pack=bool(getattr(args, "pack", False)),
+                  len_pct=float(getattr(args, "len_pct", 0.0) or 0.0),
+                  token_budget=int(getattr(args, "token_budget", 0) or 0),
+                  grad_checkpoint=not getattr(args, "no_grad_checkpoint", False),
+                  select=getattr(args, "select", "index") or "index")
 
 
 def main(argv=None) -> int:
     args = build_parser().parse_args(argv)
+    if getattr(args, "bench", 0):
+        args.max_steps, args.eval_smoke, args.save_smoke = args.bench, False, False
+        if args.out is None:  # never mix bench output into a real run dir
+            args.out = str(realai_home() / "runs" / f"bench-{Path(args.dataset).resolve().name}-{time.strftime('%Y%m%d-%H%M%S')}")
     if args.out is None:
         args.out = str(realai_home() / "runs" / f"sft-{Path(args.dataset).resolve().name}")
     _inside_home(Path(args.out))
