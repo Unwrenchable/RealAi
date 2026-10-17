@@ -48,7 +48,7 @@ def maybe_tool_loop(body: Dict[str, Any], headers: Dict[str, Any], default_base:
         from realai.training.dataset_builder.adapters_tools import TOOL_SYSTEM
 
         msgs = [{"role": "system", "content": TOOL_SYSTEM}] + msgs
-    res = tool_loop.run(chat, msgs, tools=hive_tools.specs(), offline=False, project=project_of(body, headers) or "realai")
+    res = tool_loop.run(chat, msgs, tools=hive_tools.live_specs(), offline=False, project=project_of(body, headers) or "realai")
     return {
         "id": "chatcmpl-" + uuid.uuid4().hex[:12], "object": "chat.completion", "created": int(time.time()),
         "model": str(body.get("model") or "realai"),
