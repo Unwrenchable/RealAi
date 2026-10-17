@@ -17,7 +17,13 @@ Module: `realai/core/approval_gate.py`. Hive tool: `request_approval` (`realai/h
 - **Audit log.** Every request, refusal, approval, rejection and execution is appended to `<store>.audit.jsonl`, or to `REALAI_APPROVALS_AUDIT` if set.
 - **Money stays separately locked.** Sends, transfers, payouts, wallet signing, keys and seed phrases are refused at request time, and again at execution. This gate never provides a money path.
 - **self_data.** Training sees only `request_approval`. It has no approve or execute tool. Offline (self_data, spotcheck, verify) it writes to a private temp store, never the real queue. The verifier (`recompute_check`) rejects any row whose result is not `pending`/`refused` or has `executed: true`. Spotcheck extended adds `approval_command` and `approval_money_refuse`.
-- **Escape hatch.** `REALAI_EXEC_UNGATED=1` (default **off**) restores the old ungated `_run_tool` behaviour for Travis's own console sessions. User-typed explicit live-exec in chat (`realai.bot.live_exec.try_live_exec`) is human-initiated and unchanged.
+- **No escape hatch** (Travis, 2026-10-17). `REALAI_EXEC_UNGATED` was removed; console sessions go through the gate like everything else, and so does Craft (no exemption). User-typed explicit live-exec in chat (`realai.bot.live_exec.try_live_exec`) is human-initiated and unchanged.
+- **No silent denials.** `hive_executor` files the approval request through `realai.plugins.tools.approval_store`, or loads that dependency-free file by path when the package `__init__` cannot import. The result carries `status: pending_approval` plus `approval_id`. If the store is unreachable, the result carries `approval_status: error` and the reason, instead of the bare "not confirmed" text.
 
-## Store path
-The gate uses `REALAI_APPROVALS_STORE`, then `APPROVALS_STORE`, then `<workspace>/.approvals.json`. This matches the `approval_status` tool. The Flask approval UI (`approval_store`) reads `APPROVALS_STORE`, falling back to cwd `.approvals.json`. Set `APPROVALS_STORE` once so the UI, the gate and `approval_status` all share one file.
+## Store path (one store)
+One resolver, `realai/core/approvals_config.py`, serves the approval UI (`approval_store`), the gate, `hive_executor` and `approval_status`. It checks, in order:
+1. env `REALAI_APPROVALS_STORE`, then `APPROVALS_STORE`
+2. `config/approvals.json` (or the file named by `REALAI_APPROVALS_CONFIG`): `store` on Windows, `store_posix` elsewhere
+3. a default: `C:\RealAI-clean\.approvals.json` on Windows, or `<tempdir>/realai-approvals/.approvals.json` on the box or CI
+
+`tests/conftest.py` points both the env and the config at a temp file for every test session, on every OS, so tests never touch the live queue. `self_data` keeps its private sandbox store (`request_approval` with `offline=True`). `approval_status` still reads a snapshot and never writes.

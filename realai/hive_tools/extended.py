@@ -308,7 +308,9 @@ def _load_approvals(path: Path) -> Dict[str, Any]:
 
 
 def approval_status(args, ctx):
-    src = Path(os.environ.get("REALAI_APPROVALS_STORE") or os.environ.get("APPROVALS_STORE") or _home() / ".approvals.json")
+    from realai.core.approvals_config import store_path as _approvals_store
+
+    src = _approvals_store()  # same file as the approval UI and gate (read via snapshot, never written)
     snap = snapshot("approvals", src, ctx)
     items = _load_approvals(snap).get("items", []) if snap.is_file() else []
     counts: Dict[str, int] = {}

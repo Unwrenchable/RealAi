@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -10,10 +11,9 @@ import pytest
 @pytest.fixture()
 def ws(tmp_path, monkeypatch):
     monkeypatch.setenv("REALAI_WORKSPACE", str(tmp_path))
-    monkeypatch.delenv("REALAI_APPROVALS_STORE", raising=False)
-    monkeypatch.delenv("APPROVALS_STORE", raising=False)
+    monkeypatch.setenv("REALAI_APPROVALS_STORE", str(tmp_path / ".approvals.json"))
+    monkeypatch.setenv("APPROVALS_STORE", str(tmp_path / ".approvals.json"))
     monkeypatch.delenv("REALAI_APPROVALS_AUDIT", raising=False)
-    monkeypatch.delenv("REALAI_EXEC_UNGATED", raising=False)
     (tmp_path / "README.md").write_text("# Title\nhello world\n", encoding="utf-8")
     return tmp_path
 
@@ -102,15 +102,75 @@ def test_orchestrator_exec_tools_are_gated(ws):
 def test_hive_executor_ignores_model_supplied_approved_flag(ws, monkeypatch):
     monkeypatch.chdir(ws)
     monkeypatch.delenv("REALAI_APPROVAL_TRUST_FLAG", raising=False)
-    from realai.core.tools.hive_executor import _approval_confirm
+    from realai.core.tools import hive_executor as hx
 
-    assert _approval_confirm("dangerous_tool_x", {"approved": True}) is False
-    try:
-        from realai.plugins.tools import approval_store as store
-    except Exception:  # package import chain unavailable here -> the gate already denied above
-        return
+    assert hx._approval_confirm("dangerous_tool_x", {"approved": True}) is False
+    info = hx._APPROVAL_STATE.info
+    assert info["approval_status"] == "pending" and info["approval_id"]
+    store = hx._load_approval_store()
     items = [i for i in store.list_requests() if (i.get("payload") or {}).get("tool") == "dangerous_tool_x"]
     assert items and items[-1]["status"] == "pending" and "approved" not in items[-1]["payload"]["arguments"]
+    assert (ws / ".approvals.json").exists()  # the one shared store (env-pinned to the test workspace)
+
+
+def test_hive_executor_files_request_even_when_plugins_tools_package_fails(ws, monkeypatch):
+    import builtins
+
+    from realai.core.tools import hive_executor as hx
+
+    real_import = builtins.__import__
+
+    def broken(name, *a, **k):
+        if name.startswith("realai.plugins.tools"):
+            raise ImportError("simulated: core.security missing")
+        return real_import(name, *a, **k)
+
+    monkeypatch.setattr(builtins, "__import__", broken)
+    assert hx._approval_confirm("dangerous_tool_y", {}) is False
+    monkeypatch.setattr(builtins, "__import__", real_import)
+    assert hx._APPROVAL_STATE.info["approval_status"] == "pending"
+    data = json.loads((ws / ".approvals.json").read_text(encoding="utf-8"))
+    assert any((i.get("payload") or {}).get("tool") == "dangerous_tool_y" for i in data["items"])
+
+
+def test_hive_executor_reports_clear_error_when_store_unreachable(ws, monkeypatch):
+    from realai.core.tools import hive_executor as hx
+
+    def boom():
+        raise RuntimeError("approvals store unavailable (simulated)")
+
+    monkeypatch.setattr(hx, "_load_approval_store", boom)
+    assert hx._approval_confirm("dangerous_tool_z", {}) is False
+    info = hx._APPROVAL_STATE.info
+    assert info["approval_status"] == "error" and "simulated" in info["approval_error"]
+
+
+def test_exec_ungated_escape_hatch_is_gone(monkeypatch):
+    monkeypatch.setenv("REALAI_EXEC_UNGATED", "1")
+    assert _gate().gated_action("run_command") == "run_terminal_command"
+    import inspect
+
+    assert "REALAI_EXEC_UNGATED" not in inspect.getsource(_gate())
+
+
+def test_single_store_resolution(monkeypatch, tmp_path):
+    from realai.core import approvals_config as ac
+
+    monkeypatch.delenv("REALAI_APPROVALS_STORE", raising=False)
+    monkeypatch.delenv("APPROVALS_STORE", raising=False)
+    cfg = tmp_path / "c.json"
+    cfg.write_text(json.dumps({"store": str(tmp_path / "w.json"), "store_posix": str(tmp_path / "p.json")}), encoding="utf-8")
+    monkeypatch.setenv("REALAI_APPROVALS_CONFIG", str(cfg))
+    assert ac.store_path().name == ("w.json" if os.name == "nt" else "p.json")
+    monkeypatch.setenv("REALAI_APPROVALS_CONFIG", str(tmp_path / "missing.json"))
+    if os.name == "nt":
+        assert str(ac.store_path()) == r"C:\RealAI-clean\.approvals.json"
+    else:
+        assert "realai-approvals" in str(ac.store_path())
+    monkeypatch.setenv("APPROVALS_STORE", str(tmp_path / "e.json"))
+    assert ac.store_path() == tmp_path / "e.json" == _gate().store_path()
+    repo_cfg = json.loads((Path(ac.__file__).resolve().parents[2] / "config" / "approvals.json").read_text(encoding="utf-8"))
+    assert repo_cfg["store"] == r"C:\RealAI-clean\.approvals.json"
 
 
 def test_hive_request_approval_tool_is_request_only_and_sandboxed(ws):

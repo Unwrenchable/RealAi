@@ -1,0 +1,5 @@
+{
+  "_doc": "Approvals store shared by approval UI, approval gate, hive_executor and approval_status. Env REALAI_APPROVALS_STORE / APPROVALS_STORE overrides. store_posix null = temp dir (box/CI).",
+  "store": "C:\\RealAI-clean\\.approvals.json",
+  "store_posix": null
+}

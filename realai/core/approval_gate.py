@@ -16,7 +16,7 @@ Guarantees
   * money stays separately locked: sends / transfers / payouts / wallet signing are refused outright here,
     approved or not (they need their own explicit path, which this module never provides)
 
-Env: REALAI_APPROVALS_STORE / APPROVALS_STORE (store path), REALAI_APPROVALS_AUDIT (audit path),
+Env: REALAI_APPROVALS_STORE / APPROVALS_STORE (store path; default from realai.core.approvals_config), REALAI_APPROVALS_AUDIT (audit path),
 REALAI_WORKSPACE / REALAI_HOME (workspace root).
 """
 from __future__ import annotations
@@ -48,8 +48,11 @@ def workspace() -> Path:
 
 
 def store_path() -> Path:
-    env = os.environ.get("REALAI_APPROVALS_STORE") or os.environ.get("APPROVALS_STORE")
-    return Path(env) if env else workspace() / ".approvals.json"
+    """The one approvals store (see realai.core.approvals_config): env, then config/approvals.json, then
+    C:\\RealAI-clean\\.approvals.json on Windows / a temp store elsewhere."""
+    from realai.core.approvals_config import store_path as _sp
+
+    return _sp()
 
 
 def audit_path() -> Path:
@@ -221,9 +224,7 @@ TOOL_TO_ACTION: Dict[str, str] = {
 
 
 def gated_action(tool_name: str) -> Optional[str]:
-    """Gate action for a tool name, or None. REALAI_EXEC_UNGATED=1 (default off) restores the old ungated path."""
-    if os.environ.get("REALAI_EXEC_UNGATED", "").strip() == "1":
-        return None
+    """Gate action for a tool name, or None. No escape hatch: console sessions go through the gate too."""
     return TOOL_TO_ACTION.get(tool_name)
 
 
