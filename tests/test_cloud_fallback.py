@@ -381,3 +381,18 @@ def test_request_skips_vulkan_for_custom_and_base_url():
     assert request_skips_vulkan("realai", None) is False
     assert request_skips_vulkan("local", "") is False
     assert request_skips_vulkan(None, None) is False
+
+
+def test_hosted_cloud_skips_local_http_fallback(monkeypatch):
+    """RENDER=true must not reach a loopback llama-server even when one is up (PC with :8080 live)."""
+    _clear_cloud_env(monkeypatch)
+    monkeypatch.setenv("RENDER", "true")
+    monkeypatch.setenv("REALAI_CLOUD_FALLBACK", "off")
+    monkeypatch.setattr("realai.cloud_fallback.local_default_llm_ready", lambda _manager=None: False)
+    calls = []
+    monkeypatch.setattr("realai.local_media.local_chat", lambda *a, **k: calls.append(1) or {"ok": True, "text": "live"})
+    model = RealAI(provider="local", model_name="realai-default-coder")
+    if model._llm_engine is not None:
+        monkeypatch.setattr(model._llm_engine, "is_loaded", lambda: False)
+    resp = model.chat_completion([{"role": "user", "content": "hey"}])
+    assert calls == [] and resp.get("realai_meta", {}).get("source") != "local_http"

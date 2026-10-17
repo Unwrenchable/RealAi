@@ -419,7 +419,7 @@ def choose_plan(round_num: int, gaps: dict, script_knowledge: dict) -> list:
 
     # Only keep scripts that actually exist
     # Match either the plain name or the relative path
-plan = [s for s in plan if s in script_knowledge or any(k.endswith(s) for k in script_knowledge)]
+    plan = [s for s in plan if s in script_knowledge or any(k.endswith(s) for k in script_knowledge)]
     return plan
 
 # ============================================================

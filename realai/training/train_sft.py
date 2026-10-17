@@ -7,6 +7,7 @@ Fixes the old runs (64-token seq, 40-60 steps, duplicated data, loss on prompt t
   * AdamW lr 1e-4, cosine, 3% warmup, 3 epochs, grad accumulation
   * eval loss on eval.jsonl every epoch, best adapter kept
   * DirectML adapter picked BY NAME (default "RX 6700"), never silently the Vega iGPU
+  * --dtype float32 (default, stable on DirectML) or float16/bfloat16 (for 3B on 12 GB); alias of --base-dtype
 
 Subcommands (all write only under REALAI_HOME):
   plan     validate dataset + print plan (also: train --dry-run)
@@ -54,6 +55,8 @@ class Recipe:
     seed: int = 1337
     device: str = "auto"
     dml_adapter: str = "RX 6700"
+    base_dtype: str = "fp32"  # frozen base weights; LoRA params, optimizer state and loss stay fp32
+    ce_chunk: int = 256  # CE over target positions in checkpointed chunks (0 = all at once)
 
 
 def realai_home() -> Path:
@@ -87,10 +90,12 @@ def load_rows(path: Path) -> List[Dict[str, Any]]:
         if not isinstance(msgs, list) or not msgs:
             raise ValueError(f"{path.name}:{i} has no messages")
         roles = [m.get("role") for m in msgs]
-        if "assistant" not in roles or any(x not in {"system", "user", "assistant"} for x in roles):
+        if "assistant" not in roles or any(x not in {"system", "user", "assistant", "tool"} for x in roles):
             raise ValueError(f"{path.name}:{i} bad roles {roles}")
-        if any(not str(m.get("content", "")).strip() for m in msgs):
+        if any(not str(m.get("content", "")).strip() and not m.get("tool_calls") for m in msgs):
             raise ValueError(f"{path.name}:{i} empty content")
+        if "tool" in roles and not r.get("tools"):
+            raise ValueError(f"{path.name}:{i} tool messages without row.tools")
         rows.append(r)
     return rows
 
@@ -117,28 +122,30 @@ def validate_dataset(ds_dir: Path) -> Dict[str, Any]:
             "manifest_sha256": sha256_file(man_p), "manifest_name": man.get("name"), "date": man.get("date")}
 
 
-def _tmpl(tok, msgs, gen=False) -> List[int]:
+def _tmpl(tok, msgs, gen=False, tools=None) -> List[int]:
     if not msgs:
         return []
-    r = tok.apply_chat_template(msgs, tokenize=True, add_generation_prompt=gen)
+    kw = {"tools": tools} if tools else {}
+    r = tok.apply_chat_template(msgs, tokenize=True, add_generation_prompt=gen, **kw)
     if hasattr(r, "keys") and "input_ids" in r:  # transformers >= 5 returns BatchEncoding
         r = r["input_ids"]
     return list(r)
 
 
-def encode_assistant_only(tok, messages: List[Dict[str, str]], max_len: int):
+def encode_assistant_only(tok, messages: List[Dict[str, Any]], max_len: int, tools=None):
     """input_ids + labels where only assistant-turn tokens are trained (-100 elsewhere).
 
-    Prefix rendering: tokens added by message i belong to message i. Truncated from the left
+    Tool rows: pass ``tools`` (row["tools"]); assistant tool-call turns are targets, role=tool output is
+    prompt (never trained). Prefix rendering: tokens added by message i belong to message i. Truncated from the left
     of the prompt is avoided; overly long rows are cut at max_len (labels kept aligned)."""
     ids: List[int] = []
     labels: List[int] = []
     prev: List[int] = []
     for i, m in enumerate(messages):
-        cur = _tmpl(tok, messages[: i + 1])
+        cur = _tmpl(tok, messages[: i + 1], tools=tools)
         if m["role"] == "assistant":
             # the "<|im_start|>assistant\n" header is prompt, not target
-            head = _tmpl(tok, messages[:i], gen=True)
+            head = _tmpl(tok, messages[:i], gen=True, tools=tools)
             n_head = len(head) if head[: len(prev)] == prev else len(prev)
             new = cur[len(prev):]
             hdr = n_head - len(prev)
@@ -184,6 +191,124 @@ def _is_oom(exc: BaseException) -> bool:
                                 "video memory", "e_outofmemory", "887a0005", "device removed"))
 
 
+# ----------------------------------------------------------------------------- dtype / memory
+DTYPE_BYTES = {"fp32": 4, "fp16": 2, "bf16": 2}
+# --dtype (PC launcher spelling, e.g. train_3b.bat --dtype float16) -> --base-dtype
+DTYPE_MAP = {"float32": "fp32", "float16": "fp16", "bfloat16": "bf16"}
+
+
+def torch_dtype(name: str):
+    import torch
+
+    return {"fp32": torch.float32, "fp16": torch.float16, "bf16": torch.bfloat16}[name]
+
+
+def dtype_probe(device, name: str) -> List[str]:
+    """Run the ops training needs at `name` precision on `device` and compare to CPU fp32.
+
+    Returns failures ([] = usable). Covers matmul/linear, RMSNorm (pow/mean/rsqrt), RoPE-style mul/cat,
+    softmax/SDPA, SiLU, embedding, index_select, fp32 upcast + logsumexp/gather CE, and a backward pass
+    through an fp32 LoRA branch over a frozen low-precision weight."""
+    import torch
+    import torch.nn.functional as F
+
+    if name == "fp32":
+        return []
+    dt = torch_dtype(name)
+    g = torch.Generator().manual_seed(0)
+    x = torch.randn(8, 64, generator=g)
+    W = torch.randn(96, 64, generator=g) * 0.1
+    A = torch.randn(4, 64, generator=g) * 0.1
+    B = torch.randn(96, 4, generator=g) * 0.1
+    emb = torch.randn(50, 64, generator=g)
+    tgt = torch.randint(0, 96, (8,), generator=g)
+
+    def run(dev, d):
+        xd, Wd, embd = x.to(dev, d), W.to(dev, d), emb.to(dev, d)
+        Ad = A.to(dev).clone().requires_grad_(True)
+        Bd = B.to(dev).clone().requires_grad_(True)
+        h = embd.index_select(0, torch.arange(8, device=dev)) + xd
+        h = h * torch.rsqrt(h.float().pow(2).mean(-1, keepdim=True) + 1e-6).to(d)
+        h = torch.cat([h[:, 32:] * -1, h[:, :32]], dim=-1) * 0.5 + h * 0.5
+        q = h.view(1, 2, 8, 32)
+        att = F.scaled_dot_product_attention(q, q, q, is_causal=True).reshape(8, 64)
+        y = F.linear(att, Wd) + (F.linear(F.linear(att.float(), Ad), Bd)).to(d)
+        y = F.silu(y)
+        lg = y.float()
+        nll = torch.logsumexp(lg, -1) - lg.gather(1, tgt.to(dev)[:, None]).squeeze(1)
+        loss = nll.mean()
+        loss.backward()
+        return float(loss.detach().to("cpu")), Ad.grad.detach().to("cpu"), Bd.grad.detach().to("cpu")
+
+    fails = []
+    try:
+        ref = run("cpu", torch.float32)
+        got = run(device, dt)
+    except Exception as exc:
+        return [f"{name}: {type(exc).__name__}: {str(exc)[:120]}"]
+    if not torch.isfinite(torch.tensor(got[0])) or abs(got[0] - ref[0]) > 0.05 * max(1.0, abs(ref[0])):
+        fails.append(f"{name}: loss {got[0]:.4f} vs cpu {ref[0]:.4f}")
+    for nm, a, b in (("grad_A", got[1], ref[1]), ("grad_B", got[2], ref[2])):
+        if not torch.isfinite(a).all():
+            fails.append(f"{name}: {nm} non-finite")
+        elif (a - b).norm() > 0.1 * (b.norm() + 1e-6):
+            fails.append(f"{name}: {nm} rel err {float((a - b).norm() / (b.norm() + 1e-6)):.3f}")
+    return fails
+
+
+def choose_dtype(device, wanted: str, log=print) -> str:
+    """wanted -> first of [wanted, fp16, fp32] that passes the probe on this device (CPU never uses fp16)."""
+    order = [wanted] + [d for d in ("fp16", "fp32") if d != wanted]
+    if str(device) == "cpu":
+        order = [d for d in order if d != "fp16"]
+    for d in order:
+        f = dtype_probe(device, d)
+        if not f:
+            if d != wanted:
+                log(f"base dtype {wanted} not usable on {device}; falling back to {d}")
+            return d
+        log(f"dtype probe failed: {'; '.join(f)}")
+    return "fp32"
+
+
+def read_model_config(base_model: str) -> Optional[Dict[str, Any]]:
+    from realai.training.hf_paths import resolve_model_path
+
+    p = Path(resolve_model_path(base_model)) / "config.json"
+    return json.loads(p.read_text(encoding="utf-8")) if p.is_file() else None
+
+
+# DirectML allocator caching + desktop on the same adapter: measured 1.5B fp32 @1024 peak 11.91 GB vs ~8.9 GB modelled.
+DML_OVERHEAD_GB = 3.0
+
+
+def estimate_memory(cfg: Dict[str, Any], base_dtype: str, max_len: int, lora_r: int, targets: List[str],
+                    ce_chunk: int = 256, vram_gb: float = 12.0) -> Dict[str, Any]:
+    h, L, I = cfg["hidden_size"], cfg["num_hidden_layers"], cfg["intermediate_size"]
+    V, nh = cfg["vocab_size"], cfg["num_attention_heads"]
+    kv = cfg.get("num_key_value_heads", nh) * (h // nh)
+    tied = cfg.get("tie_word_embeddings", False)
+    per_layer = h * h * 2 + h * kv * 2 + 3 * h * I + 2 * h
+    n_params = V * h * (1 if tied else 2) + L * per_layer + h
+    shapes = {"q_proj": (h, h), "k_proj": (h, kv), "v_proj": (h, kv), "o_proj": (h, h),
+              "gate_proj": (h, I), "up_proj": (h, I), "down_proj": (I, h)}
+    n_lora = L * sum(lora_r * (i + o) for t, (i, o) in shapes.items() if t in targets)
+    b = DTYPE_BYTES[base_dtype]
+    S = max_len
+    gb = 1e9
+    weights = n_params * b / gb
+    lora = n_lora * 16 / gb  # fp32 param + grad + adam m + v
+    act = (L * S * h * b + S * (12 * h + 6 * I) * b + nh * S * S * b * 3) / gb  # checkpointed layer inputs + one live layer
+    logits = (min(ce_chunk or S, S)) * V * 4 * 3 / gb  # fp32 logits, logsumexp, grad
+    model = weights + lora + act + logits
+    total = model + DML_OVERHEAD_GB
+    return {"params_b": round(n_params / 1e9, 2), "lora_params_m": round(n_lora / 1e6, 1), "base_dtype": base_dtype,
+            "max_len": S, "ce_chunk": ce_chunk, "weights_gb": round(weights, 2), "lora_optim_gb": round(lora, 2),
+            "activations_gb": round(act, 2), "logits_gb": round(logits, 2), "dml_overhead_gb": DML_OVERHEAD_GB,
+            "est_peak_gb": round(total, 1), "vram_gb": vram_gb, "fits": total <= vram_gb * 0.95,
+            "note": "estimate; peak calibrated on 1.5B fp32 DirectML run (11.9 GB). Needs :8080/:8081 stopped."}
+
+
 # ----------------------------------------------------------------------------- plan
 def plan(args, recipe: Recipe) -> Dict[str, Any]:
     info = validate_dataset(Path(args.dataset))
@@ -200,6 +325,14 @@ def plan(args, recipe: Recipe) -> Dict[str, Any]:
         "pass_bar": PASS_BAR,
         "base_license": BASE_LICENSE,
     }
+    cfg = read_model_config(recipe.base_model)
+    if cfg:
+        out["memory"] = {d: estimate_memory(cfg, d, recipe.max_len, recipe.lora_r, recipe.lora_targets, recipe.ce_chunk,
+                                            getattr(args, "vram_gb", 12.0)) for d in dict.fromkeys([recipe.base_dtype, "fp16", "fp32"])}
+        out["memory_note"] = (f"{recipe.base_dtype}: est. peak {out['memory'][recipe.base_dtype]['est_peak_gb']} GB of "
+                              f"{getattr(args, 'vram_gb', 12.0)} GB -> {'fits' if out['memory'][recipe.base_dtype]['fits'] else 'WILL LIKELY OOM'}")
+    else:
+        out["memory_note"] = f"no config.json for {recipe.base_model} (hub id or missing path); memory not estimated"
     if out["dataset"]["issues"]:
         out["ok"] = False
     else:
@@ -214,7 +347,7 @@ def _parts(model):
     return m.model, m.lm_head
 
 
-def sft_loss(model, ids: List[int], labels: List[int], device):
+def sft_loss(model, ids: List[int], labels: List[int], device, ce_chunk: int = 0):
     """Next-token CE on assistant positions only; returns (sum_loss_tensor, n_tokens).
 
     Labels are NOT pre-shifted: position t predicts labels[t+1]. We gather the hidden states of
@@ -230,16 +363,27 @@ def sft_loss(model, ids: List[int], labels: List[int], device):
     backbone, head = _parts(model)
     h = backbone(input_ids=torch.tensor([ids], device=device)).last_hidden_state[0]
     h = h.index_select(0, torch.tensor(pos, device=device))
-    logits = head(h).float()
     tgt = torch.tensor([labels[t + 1] for t in pos], device=device)
-    nll = torch.logsumexp(logits, dim=-1) - logits.gather(1, tgt[:, None]).squeeze(1)
-    return nll.sum(), len(pos)
+
+    def ce(hh, tt):
+        logits = head(hh).float()  # loss always in fp32, whatever the base dtype
+        return (torch.logsumexp(logits, dim=-1) - logits.gather(1, tt[:, None]).squeeze(1)).sum()
+
+    if not ce_chunk or len(pos) <= ce_chunk or not torch.is_grad_enabled():
+        return ce(h, tgt), len(pos)
+    from torch.utils.checkpoint import checkpoint
+
+    tot = None
+    for i in range(0, len(pos), ce_chunk):  # logits [chunk, vocab] recomputed in backward instead of held
+        part = checkpoint(ce, h[i:i + ce_chunk], tgt[i:i + ce_chunk], use_reentrant=False)
+        tot = part if tot is None else tot + part
+    return tot, len(pos)
 
 
 def _encode_all(rows, tok, max_len):
     out = []
     for r in rows:
-        ids, lab = encode_assistant_only(tok, r["messages"], max_len)
+        ids, lab = encode_assistant_only(tok, r["messages"], max_len, tools=r.get("tools"))
         if any(x != -100 for x in lab[1:]):
             out.append((ids, lab))
     return out
@@ -413,17 +557,26 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
     log(f"device={dev_name} max_len={max_len}")
     ds = Path(args.dataset)
     train_rows, eval_rows = load_rows(ds / "train.jsonl"), load_rows(ds / "eval.jsonl")
-    tok = AutoTokenizer.from_pretrained(recipe.base_model)
+    from realai.training.hf_paths import resolve_model_path
+
+    base_path = resolve_model_path(recipe.base_model)
+    tok = AutoTokenizer.from_pretrained(base_path)
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
-    # fp32 on every device: DirectML fp16 training is unstable and the 1.5B fits (6.2 GB) with :8080 stopped.
-    model = AutoModelForCausalLM.from_pretrained(recipe.base_model, torch_dtype=torch.float32)
+    # Frozen base in --base-dtype (probed on this device; falls back fp16 -> fp32). LoRA params, Adam state and
+    # the CE loss stay fp32. fp32 is the proven 1.5B setting; fp16 halves weight memory for 3B on 12 GB.
+    bdt = choose_dtype(device, recipe.base_dtype, log)
+    log(f"base={base_path} base_dtype={bdt} ce_chunk={recipe.ce_chunk}")
+    model = AutoModelForCausalLM.from_pretrained(base_path, torch_dtype=torch_dtype(bdt))
     model.gradient_checkpointing_enable()
     model.enable_input_require_grads()
     model.config.use_cache = False
     model = get_peft_model(model, LoraConfig(r=recipe.lora_r, lora_alpha=recipe.lora_alpha,
                                              lora_dropout=recipe.lora_dropout, target_modules=recipe.lora_targets,
                                              bias="none", task_type="CAUSAL_LM"))
+    for n_, p_ in model.named_parameters():  # trainable LoRA weights in fp32 regardless of base dtype
+        if p_.requires_grad and p_.dtype != torch.float32:
+            p_.data = p_.data.float()
     model.to(device)
     model.train()
     params = [p for p in model.parameters() if p.requires_grad]
@@ -449,6 +602,7 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
         else:
             log("resume requested but no checkpoint found; starting fresh")
     win_loss, win_tok = 0.0, 0
+    nonfinite = 0
     done = False
     for ep in range(start_ep, recipe.epochs):
         enc = _encode_all(train_rows, tok, max_len)
@@ -462,8 +616,16 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
                     break
                 i2, l2 = ids[:attempt_len], lab[:attempt_len]
                 try:
-                    loss, k = sft_loss(model, i2, l2, device)
+                    loss, k = sft_loss(model, i2, l2, device, recipe.ce_chunk)
                     if not k:
+                        break
+                    if not math.isfinite(float(loss.detach().to("cpu"))):
+                        nonfinite += 1
+                        opt.zero_grad()
+                        log(f"non-finite loss ({bdt}) on a {len(i2)}-token row; skipped (n={nonfinite})")
+                        if nonfinite >= 5 and nonfinite > 0.02 * max(micro, 1):
+                            raise RuntimeError(f"too many non-finite losses with base dtype {bdt}; rerun with --base-dtype fp32 "
+                                               "(or a shorter --max-len) - fp16 activations overflowed")
                         break
                     # mean over this row's target tokens, averaged over the accumulation window
                     (loss / k / recipe.grad_accum).backward()
@@ -519,7 +681,7 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
         save_adapter(model, tok, out / "adapter_last")
     return {"device": dev_name, "max_len": max_len, "best_eval_loss": best, "history": history, "steps": step,
             "skipped_rows": skipped, "peak_vram_gb": peak, "sec_per_step": (time.time() - t0) / max(step, 1),
-            "smoke": bool(args.max_steps)}
+            "smoke": bool(args.max_steps), "base_dtype": bdt, "nonfinite_rows": nonfinite}
 
 
 def train(args, recipe: Recipe) -> int:
@@ -534,6 +696,7 @@ def train(args, recipe: Recipe) -> int:
         print(line, flush=True); logf.write(line + "\n"); logf.flush()
 
     last = None
+    started = time.strftime("%Y-%m-%dT%H:%M:%S%z")
     for n in p["len_backoff"]:
         try:
             res = _train_once(args, recipe, n, log)
@@ -544,6 +707,8 @@ def train(args, recipe: Recipe) -> int:
                 log(f"smoke done ({res['steps']} steps, {res['sec_per_step']:.1f}s/step) -> {out / name}; no adapter saved")
             else:
                 log(f"done best_eval_loss={res['best_eval_loss']:.4f} -> {out / 'adapter_best'}")
+                from realai.training import ledger
+                ledger.safe(ledger.on_train, out, res, started=started, model_id=args.model_id)
             return 0
         except Exception as exc:  # DirectML OOM -> shorter sequences
             if not _is_oom(exc):
@@ -565,9 +730,12 @@ def evaluate(args, recipe: Recipe) -> int:
     max_len = res["max_len"]
     device, dev_name = pick_device(recipe.device, recipe.dml_adapter)
     rows = load_rows(Path(args.dataset) / "eval.jsonl")
-    tok = AutoTokenizer.from_pretrained(recipe.base_model)
-    dtype = torch.float32
-    base = AutoModelForCausalLM.from_pretrained(recipe.base_model, torch_dtype=dtype).to(device)
+    from realai.training.hf_paths import resolve_model_path
+
+    base_path = resolve_model_path(recipe.base_model)
+    tok = AutoTokenizer.from_pretrained(base_path)
+    dtype = torch_dtype(res.get("base_dtype") or DTYPE_MAP.get(res.get("dtype", ""), "") or recipe.base_dtype)
+    base = AutoModelForCausalLM.from_pretrained(base_path, torch_dtype=dtype).to(device)
     base_loss = eval_loss(base, tok, rows, max_len, device)
     base = base.to("cpu")  # attach LoRA on CPU (plain tensors), then move as one module
     tuned = PeftModel.from_pretrained(base, str(out / "adapter_best")).to(device)
@@ -578,6 +746,8 @@ def evaluate(args, recipe: Recipe) -> int:
            "pass_bar": PASS_BAR, "passed": passed, "eval_rows": len(rows), "max_len": max_len, "device": dev_name}
     (out / "eval_report.json").write_text(json.dumps(rep, indent=2), encoding="utf-8")
     print(json.dumps(rep, indent=2))
+    from realai.training import ledger
+    ledger.safe(ledger.on_eval, out, rep)
     return 0 if passed else 1
 
 
@@ -586,10 +756,15 @@ def export(args, recipe: Recipe) -> int:
     import train_to_chat_gguf as t2g  # existing merge/convert/quantize helpers
 
     out = _inside_home(Path(args.out))
-    merged = t2g.merge_adapter(recipe.base_model, out / "adapter_best", out / "merged")
+    from realai.training.hf_paths import resolve_model_path
+
+    merged = t2g.merge_adapter(resolve_model_path(recipe.base_model), out / "adapter_best", out / "merged")
     f16 = t2g.convert_to_gguf(merged, out / "gguf" / f"{args.model_id}-f16.gguf")
     q = t2g.quantize_gguf(f16, out / "gguf" / f"{args.model_id}-{args.quant}.gguf", args.quant)
-    print(json.dumps({"gguf": str(q), "sha256": sha256_file(q)}, indent=2))
+    sha = sha256_file(q)
+    print(json.dumps({"gguf": str(q), "sha256": sha}, indent=2))
+    from realai.training import ledger
+    ledger.safe(ledger.on_export, out, q, args.quant, args.model_id, sha)
     return 0
 
 
@@ -599,6 +774,21 @@ def register(args, recipe: Recipe) -> int:
     ev_p = out / "eval_report.json"
     ev = json.loads(ev_p.read_text(encoding="utf-8")) if ev_p.is_file() else None
     gguf = out / "gguf" / f"{args.model_id}-{args.quant}.gguf"
+    sc = None
+    sc_p = Path(args.spotcheck) if getattr(args, "spotcheck", None) else None
+    if sc_p is None:
+        cands = sorted((realai_home() / "runs").glob("spotcheck-*.json"), key=lambda p: p.stat().st_mtime) if (realai_home() / "runs").is_dir() else []
+        # the gate is the core suite only (extended wire-audit reports are informational)
+        cands = [p for p in cands if json.loads(p.read_text(encoding="utf-8")).get("suite", "core") == "core"]
+        sc_p = cands[-1] if cands else None
+    if sc_p and sc_p.is_file():
+        sc = json.loads(sc_p.read_text(encoding="utf-8"))
+    min_pass = float(getattr(args, "min_pass", 0.8))
+    want_default = bool(getattr(args, "default", False))
+    if want_default and (not sc or float(sc.get("pass_rate", 0)) < min_pass):
+        got = "no spot-check report" if not sc else f"spot-check pass rate {sc.get('pass_rate')}"
+        print(f"REFUSED: --default needs spot-check pass rate >= {min_pass} ({got}). Run python -m realai.training.spotcheck first.")
+        return 2
     entry = {
         "id": args.model_id, "base_model": recipe.base_model, "base_license": BASE_LICENSE,
         "trained": True, "method": "lora-sft merged", "quant": args.quant,
@@ -606,8 +796,11 @@ def register(args, recipe: Recipe) -> int:
         "gguf_sha256": sha256_file(gguf) if gguf.is_file() else None,
         "dataset": tr["dataset"]["dir"], "dataset_manifest_sha256": tr["dataset"]["manifest_sha256"],
         "best_eval_loss": tr["best_eval_loss"], "eval": ev,
-        "status": "candidate-passed" if ev and ev.get("passed") else "candidate-not-passed",
-        "default": False, "loaded_now": False,
+        "status": ("promoted" if want_default else "candidate-passed") if ev and ev.get("passed") and sc and float(sc.get("pass_rate", 0)) >= min_pass
+        else "candidate-not-passed",
+        "spotcheck": {"report": str(sc_p), "pass_rate": sc.get("pass_rate"), "passed": sc.get("passed"), "n": sc.get("n"),
+                      "min_pass": min_pass} if sc else None,
+        "default": want_default, "loaded_now": False,
         "registered_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
     }
     cat_p = _inside_home(realai_home() / "models" / "trained_catalog.json")
@@ -616,6 +809,8 @@ def register(args, recipe: Recipe) -> int:
     cat["models"] = [m for m in cat["models"] if m.get("id") != args.model_id] + [entry]
     cat_p.write_text(json.dumps(cat, indent=2), encoding="utf-8")
     print(json.dumps(entry, indent=2))
+    from realai.training import ledger
+    ledger.safe(ledger.on_register, out, entry)
     return 0
 
 
@@ -628,6 +823,12 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--dry-run", action="store_true", help="validate data and print plan; no model load")
     ap.add_argument("--base-model", default=BASE_MODEL)
     ap.add_argument("--max-len", type=int, default=1024, choices=LEN_BACKOFF)
+    ap.add_argument("--base-dtype", default="fp32", choices=["fp32", "fp16", "bf16"],
+                    help="frozen base precision (LoRA/optimizer/loss stay fp32); probed on device, falls back fp16 -> fp32")
+    ap.add_argument("--dtype", default=None, choices=list(DTYPE_MAP),
+                    help="alias of --base-dtype: float32 (stable on DirectML, fits 1.5B), float16/bfloat16 (needed for 3B on 12GB)")
+    ap.add_argument("--ce-chunk", type=int, default=256, help="CE over target tokens in checkpointed chunks (0 = off)")
+    ap.add_argument("--vram-gb", type=float, default=12.0, help="dry-run: GPU memory to plan against")
     ap.add_argument("--epochs", type=int, default=3)
     ap.add_argument("--lr", type=float, default=1e-4)
     ap.add_argument("--grad-accum", type=int, default=16)
@@ -636,6 +837,9 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--lora-alpha", type=int, default=32)
     ap.add_argument("--device", default="auto", choices=["auto", "directml", "cuda", "cpu"])
     ap.add_argument("--dml-adapter", default="RX 6700", help="substring of the DirectML adapter name")
+    ap.add_argument("--spotcheck", help="register: spot-check report (default newest REALAI_HOME/runs/spotcheck-*.json)")
+    ap.add_argument("--min-pass", type=float, default=0.8, help="register: spot-check pass rate needed for --default")
+    ap.add_argument("--default", action="store_true", help="register as default (refused unless spot-check >= --min-pass)")
     ap.add_argument("--max-steps", type=int, default=0, help="smoke: stop after N optimizer steps (no adapter saved)")
     ap.add_argument("--eval-smoke", action="store_true", help="with --max-steps: eval loss before/after on --eval-rows")
     ap.add_argument("--save-smoke", action="store_true", help="with --max-steps: write a checkpoint (tests the save path)")
@@ -649,7 +853,9 @@ def build_parser() -> argparse.ArgumentParser:
 def recipe_from(args) -> Recipe:
     return Recipe(base_model=args.base_model, max_len=args.max_len, epochs=args.epochs, lr=args.lr,
                   grad_accum=args.grad_accum, batch_size=args.batch_size, lora_r=args.lora_r,
-                  lora_alpha=args.lora_alpha, device=args.device, dml_adapter=args.dml_adapter)
+                  lora_alpha=args.lora_alpha, device=args.device, dml_adapter=args.dml_adapter,
+                  base_dtype=DTYPE_MAP[args.dtype] if getattr(args, "dtype", None) else args.base_dtype,
+                  ce_chunk=args.ce_chunk)
 
 
 def main(argv=None) -> int:

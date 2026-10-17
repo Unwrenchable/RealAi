@@ -42,6 +42,14 @@ exclude = [
   "recovered*",
   "apps*",
   "frontend*",
+  # 2026-10-17 build-leftover fixes (docs/BUILD_LEFTOVERS.md): stale trees never ship in the wheel.
+  "_parked*",
+  "logs*",
+  "results*",
+  "scan_results*",
+  "*.learn_cache*",
+  "*._archive_nest*",
+  "realai.tests*",
 ]
 
 [tool.setuptools.package-data]
