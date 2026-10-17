@@ -366,6 +366,12 @@ def dispatch_request(method, path, payload=None):
             return 200, handle_tasks_list(), 'application/json'
         if method == 'GET' and path.startswith('/v1/tasks/'):
             return 200, handle_task_read(path), 'application/json'
+        # Opt-in (REALAI_ROUTING_ROUTES=1): read-only /v1/providers/route + /v1/tools/route (routing_routes.py).
+        from . import routing_routes
+
+        routed = routing_routes.dispatch(method, path, payload)
+        if routed is not None:
+            return routed
         # Opt-in (REALAI_UNIFIED_ROUTES=1) promoted routes; existing routes win.
         from . import unified_routes
 
