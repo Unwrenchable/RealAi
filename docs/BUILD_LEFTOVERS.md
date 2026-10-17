@@ -21,3 +21,19 @@ Any move needs Travis's approval and goes to `D:\ARCHIVE`.
 
 `realai/realai-cli`, `realai/sdk-ts`, `realai/agent-tools-main`, `realai/realai-frontend__dup1` and `realai/realai-backend` on the PC
 hold only 1–2 json/yaml stubs and no code. The real CLI and SDK are `packages/cli` and `packages/sdk-ts`.
+
+## Status after Travis GO (2026-10-17 ~02:15 PT)
+The archive is at `D:\ARCHIVE\build-leftovers-20261017\`, with `MOVE_LOG.md` and `MOVE_LOG.json` alongside. Every file was SHA256-verified before the C: original was removed. Nothing was deleted.
+
+| # | Item | Done |
+|---|---|---|
+| 1 | nested `.git` (`realai/.learn_cache/realai`) | **Bundle only:** `realai\.learn_cache\realai.git-all-refs.bundle` (111 MB, `git bundle verify` OK, 73 heads = 72 refs + HEAD). **The `.git` was NOT moved:** `realai/learn/source.py` treats `.learn_cache/<slug>` as a clone cache and `shutil.rmtree()`s the folder when `.git` is missing, so moving it would let the next `realai learn Unwrenchable/RealAi` delete `.learn_cache/realai`. `.learn_cache` itself was not touched. |
+| 3, 4 | in-package `setup.py` / `pyproject.toml` | Removed on the branch (realai/, realai/plugins/, realai/examples/). They are tracked in live, so live was left as is. Root `pyproject.toml` keeps the only entry points. |
+| 5 | root `realai.egg-info` | **Skipped (live dependency).** User `PYTHONPATH=C:\RealAI-clean` puts it on sys.path for every Python. In `C:\venvs\realai-train` (where realai is not installed) it is the only `realai` distribution, and the `realai-server` / `realai-craft` entry points resolve from it. |
+| 5 | 36 `*.egg-info` under `recovered/` | **Moved** (472 KB, ignored, not on sys.path, no .pth/egg-link references). |
+| 6 | pyproject exclude | Added `_parked*`, `logs*`, `results*`, `scan_results*`, `*.learn_cache*`, `*._archive_nest*`, `realai.tests*`. |
+| 7 | `.next` package.json files | Skipped: console UI build output. |
+| 7 | `realai/packages/*` and the `realai/{cli,sdk-*,ui}`, `realai/models/*` package.json copies | Deferred. They are tracked; `realai/packages/cli/src/index.ts` differs from `packages/cli`, and `realai/scripts/recover_archive_gold.py` references `realai/packages`. They need a function-level merge first. |
+| 8 | `realai/world_model/*` dump | Left in place. It is tracked, `craft.py` runs `world_model_merger.py`, and `world_model.json` data lives there. Shadowing is already fixed in code. |
+
+Not part of this task, but found: `C:\Python314\Lib\site-packages\__editable__.realai-2.0.0.pth` is an orphan editable finder (it has no dist-info) mapping `realai` to `C:\Users\tsmit\realai`. It can shadow C:\RealAI-clean for Python 3.14 depending on sys.path order. Recommended fix: `pip uninstall realai` for Python 3.14, or delete that .pth and its finder (not done).
