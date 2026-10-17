@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from .adapters import ADAPTERS
-from .dedupe import NearDedupe, exact_key
+from .dedupe import NearDedupe, exact_key, normalize
 from .scrub import find_secrets, redact
 
 DEFAULTS: Dict[str, Any] = {
@@ -23,6 +23,10 @@ DEFAULTS: Dict[str, Any] = {
     "min_tokens": 8,
     "max_tokens": 1024,
     "near_dup_threshold": 0.85,
+    # opt-in: cap rows that share the same (normalised) first user prompt (0 = no cap)
+    "max_per_prompt": 0,
+    # opt-in: rows with the same first user prompt never straddle train/eval (no prompt leak into eval loss)
+    "split_by_prompt": False,
     "allow_vendor_chat": False,
     "redact_usernames": [],
     "roots": {},
@@ -100,6 +104,12 @@ def _msg_text(m: Dict[str, Any]) -> str:
     return t
 
 
+def _prompt_key(msgs: List[Dict[str, Any]]) -> str:
+    """Normalised first user message (the 'question' a row answers)."""
+    first = next((m for m in msgs if m.get("role") == "user"), None)
+    return normalize(_msg_text(first)) if first else ""
+
+
 def _row_text(msgs: List[Dict[str, Any]]) -> str:
     return "\n".join(f"{m['role']}: {_msg_text(m)}" for m in msgs if m["role"] != "system")
 
@@ -128,6 +138,8 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
     exact_seen: set = set()
     near = NearDedupe(threshold=float(cfg["near_dup_threshold"]))
     kept: List[Dict[str, Any]] = []
+    per_prompt: Counter = Counter()
+    cap = int(cfg.get("max_per_prompt") or 0)
 
     for spec in cfg["sources"]:
         name = spec.get("name") or spec["type"]
@@ -176,6 +188,12 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
             if spec.get("near_dedupe", True) and not near.add_if_new(text):
                 st["dropped_near_dup"] += 1
                 continue
+            if cap:
+                pk = _prompt_key(msgs)
+                if pk and per_prompt[pk] >= cap:
+                    st["dropped_prompt_cap"] += 1
+                    continue
+                per_prompt[pk] += 1
             st["kept"] += 1
             kept.append({
                 "messages": msgs,
@@ -194,16 +212,40 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
     for r in sorted(kept, key=lambda r: (r["source"], r["id"])):
         by_src[r["source"]].append(r)
     train, ev = [], []
+    by_prompt = bool(cfg.get("split_by_prompt"))
     for src in sorted(by_src):
         rows = by_src[src][:]
         rng.shuffle(rows)
         n_eval = int(round(len(rows) * float(cfg["eval_fraction"])))
         if len(rows) >= 10:
             n_eval = max(n_eval, int(cfg["min_eval_per_source"]))
+        if by_prompt:  # whole prompt groups go to eval until n_eval rows are reached
+            groups: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+            for r in rows:
+                groups[_prompt_key(r["messages"]) or r["id"]].append(r)
+            e_rows: List[Dict[str, Any]] = []
+            t_rows: List[Dict[str, Any]] = []
+            for g in groups.values():  # insertion order follows the seeded shuffle
+                (e_rows if len(e_rows) < n_eval else t_rows).extend(g)
+            ev += e_rows
+            train += t_rows
+            stats[src]["train"], stats[src]["eval"] = len(t_rows), len(e_rows)
+            continue
         ev += rows[:n_eval]
         train += rows[n_eval:]
         stats[src]["train"] = len(rows) - n_eval
         stats[src]["eval"] = n_eval
+    if by_prompt:  # same prompt from two different sources: keep it on the train side
+        seen = {_prompt_key(r["messages"]) for r in train}
+        moved = [r for r in ev if _prompt_key(r["messages"]) in seen and _prompt_key(r["messages"])]
+        if moved:
+            ids = {id(r) for r in moved}
+            ev = [r for r in ev if id(r) not in ids]
+            train += moved
+            for r in moved:
+                stats[r["source"]]["eval"] -= 1
+                stats[r["source"]]["train"] += 1
+                stats[r["source"]]["eval_moved_prompt_overlap"] += 1
 
     def _blob(rows):
         return "".join(json.dumps(r, ensure_ascii=False, sort_keys=True) + "\n" for r in rows)
@@ -221,6 +263,8 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
         "token_counter": tok.kind,
         "token_window": [cfg["min_tokens"], cfg["max_tokens"]],
         "near_dup_threshold": cfg["near_dup_threshold"],
+        "max_per_prompt": cfg.get("max_per_prompt", 0),
+        "split_by_prompt": bool(cfg.get("split_by_prompt")),
         "allow_vendor_chat": ctx["allow_vendor_chat"],
         "totals": {
             "kept": len(kept),
@@ -233,6 +277,7 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
             "dropped_long": sum(s["dropped_long"] for s in stats.values()),
             "dropped_short": sum(s["dropped_short"] for s in stats.values()),
             "dropped_quality_gate": sum(s["dropped_quality_gate"] for s in stats.values()),
+            "dropped_prompt_cap": sum(s["dropped_prompt_cap"] for s in stats.values()),
         },
         "secret_kinds_dropped": dict(secret_kinds),
         "sources": {k: dict(v) for k, v in stats.items()},

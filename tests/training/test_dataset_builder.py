@@ -211,3 +211,19 @@ def test_attribution_written(tmp_path, home):
     res = build(cfg)
     text = (res.out_dir / "ATTRIBUTION.md").read_text()
     assert "From X." in text and "Copyright (c) X" in text and "| p | 1 | MIT |" in text
+
+
+def test_prompt_cap_and_prompt_grouped_split(tmp_path, home):
+    rows = [_qa(f"question {i % 12}", f"distinct answer number {i} {i * 7919} " + "y" * (i % 5)) for i in range(60)]
+    plain = build(_cfg(tmp_path, rows), dry_run=True)
+    key = lambda r: next(m["content"] for m in r["messages"] if m["role"] == "user")
+    assert {key(r) for r in plain.eval} & {key(r) for r in plain.train}  # the old split leaks prompts into eval
+    res = build(_cfg(tmp_path, rows, max_per_prompt=3, split_by_prompt=True), dry_run=True)
+    from collections import Counter
+
+    c = Counter(key(r) for r in res.train + res.eval)
+    assert max(c.values()) == 3 and res.manifest["totals"]["dropped_prompt_cap"] == 60 - 36
+    assert not ({key(r) for r in res.eval} & {key(r) for r in res.train})
+    assert res.eval and res.manifest["split_by_prompt"] is True
+    again = build(_cfg(tmp_path, rows, max_per_prompt=3, split_by_prompt=True), dry_run=True)
+    assert [r["id"] for r in again.eval] == [r["id"] for r in res.eval]  # deterministic

@@ -5,6 +5,8 @@
   "min_tokens": 8,
   "max_tokens": 1024,
   "near_dup_threshold": 0.85,
+  "max_per_prompt": 3,
+  "split_by_prompt": true,
   "allow_vendor_chat": false,
   "tokenizer": "Qwen/Qwen2.5-1.5B-Instruct",
   "redact_usernames": [
