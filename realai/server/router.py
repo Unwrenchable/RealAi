@@ -160,6 +160,20 @@ def handle_embeddings_request(payload):
     }
 
 
+def _local_sdxl_enabled():
+    """Local SDXL-Turbo for /v1/images/generations: REALAI_IMAGES_LOCAL_SDXL=1 and weights present (default off)."""
+    import os
+
+    if os.environ.get('REALAI_IMAGES_LOCAL_SDXL', '').strip().lower() not in ('1', 'true', 'yes', 'on'):
+        return False
+    try:
+        from realai import local_sdxl
+
+        return bool(local_sdxl.weights_present())
+    except Exception:
+        return False
+
+
 def handle_images_request(payload):
     payload = _require_dict(payload)
     prompt = payload.get('prompt')
@@ -167,6 +181,10 @@ def handle_images_request(payload):
         raise RequestValidationError('prompt is required.')
     n = _coerce_int('n', payload.get('n', 1), 1)
     size = payload.get('size', '1024x1024')
+    if _local_sdxl_enabled():
+        from realai import local_sdxl
+
+        return local_sdxl.handle_images_generations(payload)
     return {
         'created': int(time.time()),
         'data': [
@@ -354,6 +372,12 @@ def dispatch_request(method, path, payload=None):
         extra = unified_routes.dispatch(method, path, payload)
         if extra is not None:
             return extra
+        # Opt-in (REALAI_SERVER_MERGED_ROUTES=1): merged legacy API routes (realai.server.legacy_api).
+        from . import legacy_bridge
+
+        merged = legacy_bridge.dispatch(method, path, payload)
+        if merged is not None:
+            return merged
         return 404, {'error': {'message': 'Not found'}}, 'application/json'
     except RequestValidationError as exc:
         return exc.status_code, {'error': {'message': str(exc)}}, 'application/json'
