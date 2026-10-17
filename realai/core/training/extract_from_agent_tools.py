@@ -161,6 +161,124 @@ def extract_all_training_sources(output_root: str | Path | None = None,
     }
 
 
+# --- Recovered 2026-10-17 from git (nested repo realai/.learn_cache/realai, unreachable commit c6237d4f
+# "Add structured realai package layout"). The old extractor also wrote code-diff and memory-summary pairs;
+# the current one only writes instructions.jsonl. Opt-in only: extract_all_training_sources()/main() are unchanged.
+_ARTIFACT_DATASET_FILENAMES = {
+    'code_pairs': 'code_pairs.jsonl',
+    'memory_pairs': 'memory_pairs.jsonl',
+}
+
+
+def _load_json_records(path):
+    suffix = path.suffix.lower()
+    if suffix == '.jsonl':
+        records = []
+        with path.open('r', encoding='utf-8') as handle:
+            for line in handle:
+                line = line.strip()
+                if not line:
+                    continue
+                records.append(json.loads(line))
+        return records
+    if suffix == '.json':
+        with path.open('r', encoding='utf-8') as handle:
+            payload = json.load(handle)
+        if isinstance(payload, list):
+            return payload
+        return [payload]
+    if suffix in ('.patch', '.diff', '.txt'):
+        return [{'content': path.read_text(encoding='utf-8')}]
+    return []
+
+
+def _collect_records(input_root):
+    categories = {
+        'logs': [],
+        'memory': [],
+        'traces': [],
+        'diffs': [],
+    }
+    patterns = {
+        'logs': ('**/*log*.json', '**/*log*.jsonl'),
+        'memory': ('**/*memory*.json', '**/*memory*.jsonl'),
+        'traces': ('**/*trace*.json', '**/*trace*.jsonl'),
+        'diffs': ('**/*.diff', '**/*.patch', '**/*diff*.txt'),
+    }
+    for category, globs in patterns.items():
+        for pattern in globs:
+            for path in sorted(input_root.glob(pattern)):
+                categories[category].extend(_load_json_records(path))
+    return categories
+
+
+def _instruction_examples(records):
+    examples = []
+    for item in records.get('logs', []) + records.get('traces', []):
+        prompt = item.get('prompt') or item.get('task') or item.get('query') or item.get('input')
+        response = item.get('response') or item.get('output') or item.get('result')
+        if not prompt or not response:
+            continue
+        examples.append({
+            'messages': [
+                {'role': 'user', 'content': str(prompt)},
+                {'role': 'assistant', 'content': str(response)},
+            ],
+            'source': item.get('source', 'agent-tools'),
+        })
+    return examples
+
+
+def _code_examples(records):
+    examples = []
+    for item in records.get('diffs', []):
+        diff_text = item.get('content', '').strip()
+        if not diff_text:
+            continue
+        examples.append({
+            'instruction': 'Apply the following code change faithfully.',
+            'input': diff_text,
+            'output': diff_text,
+            'source': 'code-diff',
+        })
+    return examples
+
+
+def _memory_examples(records):
+    examples = []
+    for item in records.get('memory', []):
+        raw_content = item.get('content') or item.get('memory') or item.get('summary') or item.get('input')
+        summary = item.get('summary') or item.get('output') or item.get('result')
+        if not raw_content or not summary:
+            continue
+        examples.append({
+            'input': str(raw_content),
+            'summary': str(summary),
+            'source': item.get('source', 'memory'),
+        })
+    return examples
+
+
+def _write_jsonl(path, rows):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open('w', encoding='utf-8') as handle:
+        for row in rows:
+            handle.write(json.dumps(row, sort_keys=True) + '\n')
+
+
+def extract_code_and_memory_pairs(input_root, output_root=None) -> Dict[str, Any]:
+    """Opt-in: write code_pairs.jsonl / memory_pairs.jsonl from agent-tool artifacts under input_root (read-only)."""
+    in_dir = Path(input_root)
+    output_dir = Path(output_root) if output_root else OUT_DIR
+    records = _collect_records(in_dir)
+    rows = {'code_pairs': _code_examples(records), 'memory_pairs': _memory_examples(records)}
+    out: Dict[str, Any] = {}
+    for key, name in _ARTIFACT_DATASET_FILENAMES.items():
+        _write_jsonl(output_dir / name, rows[key])
+        out[key] = {'path': str(output_dir / name), 'rows': len(rows[key])}
+    return out
+
+
 def extract_agent_tool_data(input_root=None, output_root=None):
     """Backward-compatible entry: merge all sources into instructions.jsonl."""
     return extract_all_training_sources(output_root=output_root, input_root=input_root)
