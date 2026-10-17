@@ -75,8 +75,15 @@ def test_serve_refuses_lab_and_live_ports():
 
 
 def test_agent_tools_tts_engine_is_canonical_shim_and_lab_untouched():
-    import agent_tools.tts_engine as shim
+    # load by path: some suites put another tree's agent_tools/ first on sys.path (see test_merge_versions)
+    import importlib.util
+
     from realai.voice import tts_engine
+
+    root = Path(__file__).resolve().parents[1]
+    spec = importlib.util.spec_from_file_location("_shim_agent_tools_tts_engine", root / "agent_tools" / "tts_engine.py")
+    shim = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(shim)
 
     assert shim.TTSEngine is tts_engine.TTSEngine and shim._is_real_wav is tts_engine._is_real_wav
     src = Path(tts_engine.__file__).read_text(encoding="utf-8")
