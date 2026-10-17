@@ -9,7 +9,7 @@ ABILITY = {
     "name": "hive_orchestrator",
     "type": "ability",
     "status": "LIVE",
-    "source": "core.orchestration.hive_router",
+    "source": "realai.orchestration.hive_router",  # merged 2026-10-16: gold location (core.* is the legacy fallback)
     "dest": "abilities/hive_orchestrator.py",
     "capabilities": ["routing", "nested_orchestrators", "planner_specialist_critic_executor"],
     "secrets_policy": "none",

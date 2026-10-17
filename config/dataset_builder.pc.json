@@ -121,6 +121,24 @@
       "limit": 1500
     },
     {
+      "name": "chess_selfplay_experience",
+      "type": "chess_selfplay_experience",
+      "enabled": true,
+      "license": "realai-own (own-data: RealAI's own games vs local Stockfish; targets are Stockfish analysis, engine used as a local tool)",
+      "origin": "scripts/chess_vs_stockfish.py experience logs",
+      "tags": [
+        "own-data",
+        "chess",
+        "selfplay"
+      ],
+      "paths": [
+        "C:/temp/chess-match/results/experience/*.jsonl",
+        "{realai}/datasets/_sources/chess_experience/*.jsonl"
+      ],
+      "only_mistakes": false,
+      "limit": 5000
+    },
+    {
       "name": "device_profiles",
       "type": "device_profiles",
       "license": "realai-own (computed by realai/core/device_profile.recommend)",

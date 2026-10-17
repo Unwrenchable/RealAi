@@ -1,0 +1,6573 @@
+{
+ "generated": "2026-10-16",
+ "branch": "feat/hive-wire-audit",
+ "counts_before": {
+  "decision": 80,
+  "superseded": 63,
+  "wired": 428,
+  "standalone": 262,
+  "dry_run": 10,
+  "helper": 46,
+  "wire": 4,
+  "shim": 41,
+  "wired_dynamic": 52,
+  "dead": 100,
+  "wired_via_tool": 1
+ },
+ "counts_after": {
+  "decision": 80,
+  "superseded": 63,
+  "wired": 440,
+  "standalone": 262,
+  "dry_run": 10,
+  "helper": 37,
+  "wire": 2,
+  "shim": 41,
+  "wired_dynamic": 52,
+  "dead": 100,
+  "wired_via_tool": 1
+ },
+ "classes": {
+  "wired": "statically reachable from an entry point, the ability catalog, or hive_tools/self_data",
+  "wired_dynamic": "loaded by name at runtime (organs loader create_organ; .github/agents script_path)",
+  "wired_via_tool": "state exposed read-only through a hive tool; module itself not run",
+  "shim": "compat re-export of a canonical module; nothing to wire",
+  "helper": "imported only by unwired code; follows its parent",
+  "wire": "intended feature, not wired yet (next batch)",
+  "dry_run": "side-effecting feature; wire only as dry-run/report (not done here)",
+  "standalone": "hand-run CLI / maintenance / example script; not a product surface",
+  "superseded": "older twin/variant of a canonical module",
+  "dead": "vendored third-party, placeholder, learned stub, or non-Python",
+  "decision": "needs Travis's decision"
+ },
+ "rows": [
+  {
+   "path": ".github/agents/coder.json.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 0
+  },
+  {
+   "path": "abilities/ability_catalog.py",
+   "class": "superseded",
+   "why": "older ability catalog; canonical is realai/ability_catalog.py (wired)",
+   "lines": 1307
+  },
+  {
+   "path": "abilities/agent_tools_surface.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 233
+  },
+  {
+   "path": "abilities/agents_surface.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 264
+  },
+  {
+   "path": "abilities/approval_store.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 55
+  },
+  {
+   "path": "abilities/approval_ui.py",
+   "class": "decision",
+   "why": "UI surface (Flask/web dashboard) \u2014 not a training target; wire or retire?",
+   "lines": 49
+  },
+  {
+   "path": "abilities/architect_mode.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 182
+  },
+  {
+   "path": "abilities/assemble_gold_index.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 599
+  },
+  {
+   "path": "abilities/atomic_fizz_hive_client.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 172
+  },
+  {
+   "path": "abilities/audio_speech.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 83
+  },
+  {
+   "path": "abilities/audio_transcription.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 189
+  },
+  {
+   "path": "abilities/auto_wire.py",
+   "class": "dry_run",
+   "why": "side-effecting (writes/pushes/applies); intended feature, expose only as dry-run/report",
+   "lines": 145
+  },
+  {
+   "path": "abilities/business_planning.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 48
+  },
+  {
+   "path": "abilities/chess_engine.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 96
+  },
+  {
+   "path": "abilities/cli_surface.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 68
+  },
+  {
+   "path": "abilities/code_engineer_agent.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 77
+  },
+  {
+   "path": "abilities/code_engineer_cli.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 85
+  },
+  {
+   "path": "abilities/console_verify_pack.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 311
+  },
+  {
+   "path": "abilities/core_surface.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 628
+  },
+  {
+   "path": "abilities/data_analysis.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 68
+  },
+  {
+   "path": "abilities/deep_promote.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 142
+  },
+  {
+   "path": "abilities/delta_extractor.py",
+   "class": "dry_run",
+   "why": "side-effecting (writes/pushes/applies); intended feature, expose only as dry-run/report",
+   "lines": 120
+  },
+  {
+   "path": "abilities/desktop_lambda_advanced.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 77
+  },
+  {
+   "path": "abilities/desktop_lambda_chat.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 77
+  },
+  {
+   "path": "abilities/desktop_lambda_image.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 77
+  },
+  {
+   "path": "abilities/desktop_lambda_video.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 77
+  },
+  {
+   "path": "abilities/device_selector.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 39
+  },
+  {
+   "path": "abilities/effective_engine_main_leads.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 35
+  },
+  {
+   "path": "abilities/game_world.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 118
+  },
+  {
+   "path": "abilities/harden_repos.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 39
+  },
+  {
+   "path": "abilities/hierarchical_specialists.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 83
+  },
+  {
+   "path": "abilities/hive_governance.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 115
+  },
+  {
+   "path": "abilities/hive_memory.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 98
+  },
+  {
+   "path": "abilities/hive_orchestrator.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 40
+  },
+  {
+   "path": "abilities/hominis_enterprise.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 31
+  },
+  {
+   "path": "abilities/image_analysis.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 78
+  },
+  {
+   "path": "abilities/image_generation.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 69
+  },
+  {
+   "path": "abilities/knowledge_synthesis.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 86
+  },
+  {
+   "path": "abilities/learn_git.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 50
+  },
+  {
+   "path": "abilities/math_solver.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 100
+  },
+  {
+   "path": "abilities/memory_learning.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 58
+  },
+  {
+   "path": "abilities/modules_surface.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 290
+  },
+  {
+   "path": "abilities/nest_orchestrators.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 35
+  },
+  {
+   "path": "abilities/notifier.py",
+   "class": "dry_run",
+   "why": "side-effecting (writes/pushes/applies); intended feature, expose only as dry-run/report",
+   "lines": 57
+  },
+  {
+   "path": "abilities/observability_self_improve.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 86
+  },
+  {
+   "path": "abilities/omnibrain.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 117
+  },
+  {
+   "path": "abilities/orchestration_surface.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 453
+  },
+  {
+   "path": "abilities/orchestration_worker.py",
+   "class": "dry_run",
+   "why": "side-effecting (writes/pushes/applies); intended feature, expose only as dry-run/report",
+   "lines": 57
+  },
+  {
+   "path": "abilities/organs_hive.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 55
+  },
+  {
+   "path": "abilities/overmind_runner.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 77
+  },
+  {
+   "path": "abilities/overseer.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 83
+  },
+  {
+   "path": "abilities/plugins_surface.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 678
+  },
+  {
+   "path": "abilities/quarantine_reconstruct.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 209
+  },
+  {
+   "path": "abilities/rackup/__init__.py",
+   "class": "superseded",
+   "why": "older flat copy of realai/plugins/rackup_coach module (canonical per ONE_TREE)",
+   "lines": 172
+  },
+  {
+   "path": "abilities/rackup/_player.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 39
+  },
+  {
+   "path": "abilities/rackup/ledger_audit.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 47
+  },
+  {
+   "path": "abilities/rackup/money_anomaly.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 43
+  },
+  {
+   "path": "abilities/rackup/payout_sanity.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 43
+  },
+  {
+   "path": "abilities/rackup/player_card_sync.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 48
+  },
+  {
+   "path": "abilities/rackup/sotd_contribute.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 127
+  },
+  {
+   "path": "abilities/realai_cli_bridge.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 91
+  },
+  {
+   "path": "abilities/repo_surface.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 98
+  },
+  {
+   "path": "abilities/rollout_all_repos.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 39
+  },
+  {
+   "path": "abilities/secure_tools.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 49
+  },
+  {
+   "path": "abilities/task_automation.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 13
+  },
+  {
+   "path": "abilities/therapy_counseling.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 50
+  },
+  {
+   "path": "abilities/translation.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 51
+  },
+  {
+   "path": "abilities/video_generation.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 73
+  },
+  {
+   "path": "abilities/voice_streaming.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 102
+  },
+  {
+   "path": "abilities/web3_integration.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 183
+  },
+  {
+   "path": "abilities/web_search.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 50
+  },
+  {
+   "path": "abilities/world_brain.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 65
+  },
+  {
+   "path": "adapters/agents.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 4
+  },
+  {
+   "path": "adapters/memory.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 4
+  },
+  {
+   "path": "adapters/organs.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 4
+  },
+  {
+   "path": "adapters/rackup_coach.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 4
+  },
+  {
+   "path": "adapters/self_improvement.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 4
+  },
+  {
+   "path": "adapters/training.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 4
+  },
+  {
+   "path": "agent_tools/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 31
+  },
+  {
+   "path": "agent_tools/agents_impl/code_engineer_agent.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 426
+  },
+  {
+   "path": "agent_tools/agents_impl/memory_summarizer_agent.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 185
+  },
+  {
+   "path": "agent_tools/amd_inference.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 65
+  },
+  {
+   "path": "agent_tools/anthropic.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 22
+  },
+  {
+   "path": "agent_tools/cli.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 419
+  },
+  {
+   "path": "agent_tools/crypto.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 31
+  },
+  {
+   "path": "agent_tools/dashboard.py",
+   "class": "decision",
+   "why": "UI surface (Flask/web dashboard) \u2014 not a training target; wire or retire?",
+   "lines": 1115
+  },
+  {
+   "path": "agent_tools/engine/__init__.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 16
+  },
+  {
+   "path": "agent_tools/engine/executor.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 216
+  },
+  {
+   "path": "agent_tools/engine/memory.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 406
+  },
+  {
+   "path": "agent_tools/engine/router.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 50
+  },
+  {
+   "path": "agent_tools/executor.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 160
+  },
+  {
+   "path": "agent_tools/filesystem.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 63
+  },
+  {
+   "path": "agent_tools/groq.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 22
+  },
+  {
+   "path": "agent_tools/http.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 27
+  },
+  {
+   "path": "agent_tools/importer.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 216
+  },
+  {
+   "path": "agent_tools/loader.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 146
+  },
+  {
+   "path": "agent_tools/local.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 22
+  },
+  {
+   "path": "agent_tools/logger.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 43
+  },
+  {
+   "path": "agent_tools/memory.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 364
+  },
+  {
+   "path": "agent_tools/models.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 37
+  },
+  {
+   "path": "agent_tools/openai.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 22
+  },
+  {
+   "path": "agent_tools/overmind_runner.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 179
+  },
+  {
+   "path": "agent_tools/persona.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 63
+  },
+  {
+   "path": "agent_tools/realai.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 72
+  },
+  {
+   "path": "agent_tools/registry.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 180
+  },
+  {
+   "path": "agent_tools/router.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 72
+  },
+  {
+   "path": "agent_tools/runtime.py",
+   "class": "decision",
+   "why": "UI surface (Flask/web dashboard) \u2014 not a training target; wire or retire?",
+   "lines": 305
+  },
+  {
+   "path": "agent_tools/solana.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 27
+  },
+  {
+   "path": "agent_tools/tooling/registry.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 75
+  },
+  {
+   "path": "agent_tools/tts_engine.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 157
+  },
+  {
+   "path": "agent_tools/voice__init__.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 17
+  },
+  {
+   "path": "agents/agent_protocol.py",
+   "class": "wire",
+   "why": "ReAct parser/prompt for weak local models (deterministic) \u2014 next batch: tool loop fallback parser",
+   "lines": 208
+  },
+  {
+   "path": "agents/agent_runtime.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 581
+  },
+  {
+   "path": "agents/agents.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 159
+  },
+  {
+   "path": "agents/base.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 16
+  },
+  {
+   "path": "agents/coding_agent.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 41
+  },
+  {
+   "path": "agents/critic.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 25
+  },
+  {
+   "path": "agents/executor.py",
+   "class": "wire",
+   "why": "TaskExecutor over planner/worker/critic/synth \u2014 next batch: dry-run plan (agent_pipeline_plan covers the pipeline view)",
+   "lines": 44
+  },
+  {
+   "path": "agents/hierarchical/__init__.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 50
+  },
+  {
+   "path": "agents/hierarchical/agency.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 121
+  },
+  {
+   "path": "agents/hierarchical/tools.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 131
+  },
+  {
+   "path": "agents/hierarchical_main.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 4
+  },
+  {
+   "path": "agents/hive/__init__.py",
+   "class": "wired_dynamic",
+   "why": "hive agent entry via .github/agents/*.json script_path",
+   "lines": 15
+  },
+  {
+   "path": "agents/hive/analyst.py",
+   "class": "wired_dynamic",
+   "why": "hive agent entry via .github/agents/*.json script_path",
+   "lines": 9
+  },
+  {
+   "path": "agents/hive/architect.py",
+   "class": "wired_dynamic",
+   "why": "hive agent entry via .github/agents/*.json script_path",
+   "lines": 9
+  },
+  {
+   "path": "agents/hive/coder.py",
+   "class": "wired_dynamic",
+   "why": "hive agent entry via .github/agents/*.json script_path",
+   "lines": 9
+  },
+  {
+   "path": "agents/hive/governor.py",
+   "class": "wired_dynamic",
+   "why": "hive agent entry via .github/agents/*.json script_path",
+   "lines": 9
+  },
+  {
+   "path": "agents/hive/memory.py",
+   "class": "wired_dynamic",
+   "why": "hive agent entry via .github/agents/*.json script_path",
+   "lines": 9
+  },
+  {
+   "path": "agents/hive/overseer.py",
+   "class": "wired_dynamic",
+   "why": "hive agent entry via .github/agents/*.json script_path",
+   "lines": 9
+  },
+  {
+   "path": "agents/hive/router.py",
+   "class": "wired_dynamic",
+   "why": "hive agent entry via .github/agents/*.json script_path",
+   "lines": 9
+  },
+  {
+   "path": "agents/orchestration/__init__.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 13
+  },
+  {
+   "path": "agents/planner.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 41
+  },
+  {
+   "path": "agents/queues.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 20
+  },
+  {
+   "path": "agents/rise_system.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 4
+  },
+  {
+   "path": "agents/router.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "agents/self_training_agent.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 19
+  },
+  {
+   "path": "agents/supervisor.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 4
+  },
+  {
+   "path": "agents/synthesizer.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 25
+  },
+  {
+   "path": "agents/training_pipeline.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 4
+  },
+  {
+   "path": "agents/types.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 16
+  },
+  {
+   "path": "agents/worker.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 78
+  },
+  {
+   "path": "apps/api/main.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 83
+  },
+  {
+   "path": "apps/api/routes/audio.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 29
+  },
+  {
+   "path": "apps/api/routes/chat.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 21
+  },
+  {
+   "path": "apps/api/routes/embeddings.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 14
+  },
+  {
+   "path": "apps/api/routes/health.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 18
+  },
+  {
+   "path": "apps/api/routes/models.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 21
+  },
+  {
+   "path": "apps/api/routes/tasks.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 25
+  },
+  {
+   "path": "apps/api/routes/voice_ws.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 24
+  },
+  {
+   "path": "apps/api/routes/web3.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 35
+  },
+  {
+   "path": "apps/api/state.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 47
+  },
+  {
+   "path": "apps/vscode/py/pydevd_extension_api.py",
+   "class": "dead",
+   "why": "vendored third-party code (pygments/mypy/pydevd/hypothesis/pydantic/pytest/setuptools)",
+   "lines": 107
+  },
+  {
+   "path": "apps/vscode/py/typing_extensions.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 4317
+  },
+  {
+   "path": "aura/main.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 4
+  },
+  {
+   "path": "aura/memory.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 4
+  },
+  {
+   "path": "aura/reasoning.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 4
+  },
+  {
+   "path": "billing/__init__.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 93
+  },
+  {
+   "path": "bootstrap.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 9
+  },
+  {
+   "path": "core/orchestration/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 17
+  },
+  {
+   "path": "core/orchestration/hive_router.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 21
+  },
+  {
+   "path": "core/plugins.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 4
+  },
+  {
+   "path": "core/world_model.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 4
+  },
+  {
+   "path": "desktop/voice_mode.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 15
+  },
+  {
+   "path": "docs/recovery/2026-09-13-final-gold/gold_scan.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 445
+  },
+  {
+   "path": "docs/recovery/2026-09-13-final-gold/promote_and_unlink.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 506
+  },
+  {
+   "path": "docs/recovery/_probe_backup_queue.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 14
+  },
+  {
+   "path": "docs/recovery/_probe_live_exec.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 24
+  },
+  {
+   "path": "docs/recovery/_run_learn_batch.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 93
+  },
+  {
+   "path": "models/__init__.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 22
+  },
+  {
+   "path": "modules/agents_skills/coding_agent.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 41
+  },
+  {
+   "path": "modules/desktop_unique/examples.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 194
+  },
+  {
+   "path": "modules/desktop_unique/examples_local_ai.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 279
+  },
+  {
+   "path": "modules/desktop_unique/examples_ultimate.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 152
+  },
+  {
+   "path": "modules/desktop_unique/lambda_advanced.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 109
+  },
+  {
+   "path": "modules/desktop_unique/local_model_cli.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 257
+  },
+  {
+   "path": "modules/desktop_unique/standalone_ai.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 6
+  },
+  {
+   "path": "modules/orchestrators/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 58
+  },
+  {
+   "path": "modules/orchestrators/orchestration_worker.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 211
+  },
+  {
+   "path": "modules/orchestrators/orchestrator_agent_runtime.py",
+   "class": "superseded",
+   "why": "twin of agents/agent_runtime.py (product-root agents/ wins)",
+   "lines": 370
+  },
+  {
+   "path": "modules/orchestrators/orchestrator_orchestration.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 69
+  },
+  {
+   "path": "modules/orchestrators/orchestrator_router.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 322
+  },
+  {
+   "path": "modules/orchestrators/realai__v3_orchestrator.py",
+   "class": "superseded",
+   "why": "twin of hive gold realai/orchestration/v3_orchestrator.py",
+   "lines": 387
+  },
+  {
+   "path": "modules/organs/base.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 47
+  },
+  {
+   "path": "modules/organs/body/device_walker_organ.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/body/synthetic_guardian_layer.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 83
+  },
+  {
+   "path": "modules/organs/body/synthetic_habitat_awareness.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/body/synthetic_muscular_system.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/body/synthetic_reflex_system.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/body/synthetic_sensory_system.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/body/synthetic_symbiosis_layer.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/cognitive/amygdala.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/cognitive/brainstem.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/cognitive/cerebellum.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/cognitive/corpus_callosum.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/cognitive/frontal_cortex.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/cognitive/hippocampus.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/cognitive/limbic_system.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/cognitive/prefrontal_cortex.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/dream/lucid_dream_mode.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/dream/nightmare_engine.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/dream/synthetic_dream_forge.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/dream/synthetic_shadow_architect.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/evolution/synthetic_dream_reproductive_system.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/evolution/synthetic_evolution_spiral.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/evolution/synthetic_mutation_engine.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/evolution/synthetic_organ_generator.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/hive.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 86
+  },
+  {
+   "path": "modules/organs/memory_ecosystem/architecture_memory.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/memory_ecosystem/dream_memory.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/memory_ecosystem/episodic_memory.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/memory_ecosystem/long_term_memory.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/memory_ecosystem/procedural_memory.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/memory_ecosystem/semantic_memory.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/memory_ecosystem/short_term_memory.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/meta/rackup_coach.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 80
+  },
+  {
+   "path": "modules/organs/meta/synthetic_consciousness_layer.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/meta/synthetic_creativity_furnace.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/meta/synthetic_inspiration_cortex.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/meta/synthetic_intuition_layer.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/meta/synthetic_paradox_engine.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/meta/synthetic_soul_layer.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/metabolic/synthetic_circulatory_system.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/metabolic/synthetic_digestive_system.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/metabolic/synthetic_lymphatic_system.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/metabolic/synthetic_respiratory_system.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/nervous/neural_pathway_builder.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/nervous/neuroplasticity_module.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 71
+  },
+  {
+   "path": "modules/organs/nervous/synaptic_pruning_engine.py",
+   "class": "wired_dynamic",
+   "why": "organ loaded by modules.organs.hive.load_all_organs (create_organ)",
+   "lines": 70
+  },
+  {
+   "path": "modules/organs/request_path.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 241
+  },
+  {
+   "path": "modules/organs/synthetic_organs.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 291
+  },
+  {
+   "path": "modules/self_improvement/closed_loop.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 177
+  },
+  {
+   "path": "modules/self_improvement/self_builder.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 312
+  },
+  {
+   "path": "packages/sdk-py/realai/__init__.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 54
+  },
+  {
+   "path": "packages/weakref_finalize.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 155
+  },
+  {
+   "path": "providers/local_llama.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 29
+  },
+  {
+   "path": "realai/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 68
+  },
+  {
+   "path": "realai/__main__.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 925
+  },
+  {
+   "path": "realai/_legacy_main.py",
+   "class": "superseded",
+   "why": "old server/lambda/vercel entrypoint; superseded by realai/server + realai/orchestration/v3_orchestrator (AUTHORITY.md)",
+   "lines": 829
+  },
+  {
+   "path": "realai/_v1_client.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 10173
+  },
+  {
+   "path": "realai/abilities/__init__.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 15
+  },
+  {
+   "path": "realai/ability_catalog.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 1497
+  },
+  {
+   "path": "realai/adapters/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 74
+  },
+  {
+   "path": "realai/adapters/agents.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 36
+  },
+  {
+   "path": "realai/adapters/memory.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 13
+  },
+  {
+   "path": "realai/adapters/organs.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 25
+  },
+  {
+   "path": "realai/adapters/rackup_coach.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 46
+  },
+  {
+   "path": "realai/adapters/self_improvement.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 16
+  },
+  {
+   "path": "realai/adapters/training.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 107
+  },
+  {
+   "path": "realai/agent_activity.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 547
+  },
+  {
+   "path": "realai/agent_runtime/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 37
+  },
+  {
+   "path": "realai/agent_runtime/agent_runtime/__init__.py",
+   "class": "superseded",
+   "why": "nested twin package of agents/agent_runtime.py",
+   "lines": 37
+  },
+  {
+   "path": "realai/agent_runtime/agent_runtime/agent_runtime.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 589
+  },
+  {
+   "path": "realai/agent_runtime/realai/agent_runtime.py",
+   "class": "superseded",
+   "why": "nested twin of agents/agent_runtime.py",
+   "lines": 543
+  },
+  {
+   "path": "realai/agent_tools/__init__.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 58
+  },
+  {
+   "path": "realai/agent_tools_gold/__init__.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 31
+  },
+  {
+   "path": "realai/agent_tools_gold/engine/__init__.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 16
+  },
+  {
+   "path": "realai/agent_tools_gold/engine/memory.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/api/autograd.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 892
+  },
+  {
+   "path": "realai/api/errors.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 14
+  },
+  {
+   "path": "realai/api/health.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 194
+  },
+  {
+   "path": "realai/api/index.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 149
+  },
+  {
+   "path": "realai/api/main.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 92
+  },
+  {
+   "path": "realai/api/remote_module.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 762
+  },
+  {
+   "path": "realai/api/signatures.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 358
+  },
+  {
+   "path": "realai/api/state.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 49
+  },
+  {
+   "path": "realai/api_server.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 1750
+  },
+  {
+   "path": "realai/app_framework.py",
+   "class": "decision",
+   "why": "app framework (376 lines), imported once; unclear product role",
+   "lines": 376
+  },
+  {
+   "path": "realai/atomic_fizz/overseer_prompt.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 48
+  },
+  {
+   "path": "realai/atomic_fizz/overseer_route.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 39
+  },
+  {
+   "path": "realai/atomic_fizz/world_brain.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 224
+  },
+  {
+   "path": "realai/audit.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 8
+  },
+  {
+   "path": "realai/aura/main.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 101
+  },
+  {
+   "path": "realai/aura/memory.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 62
+  },
+  {
+   "path": "realai/aura/reasoning.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 91
+  },
+  {
+   "path": "realai/aura_memory.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 9
+  },
+  {
+   "path": "realai/aura_pkg/memory/engine.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 81
+  },
+  {
+   "path": "realai/benchmarks/base.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 71
+  },
+  {
+   "path": "realai/benchmarks/bench_ability.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 68
+  },
+  {
+   "path": "realai/benchmarks/bench_agent.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 68
+  },
+  {
+   "path": "realai/benchmarks/bench_agent_eval.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 24
+  },
+  {
+   "path": "realai/benchmarks/bench_arit.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 43
+  },
+  {
+   "path": "realai/benchmarks/bench_coding.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 79
+  },
+  {
+   "path": "realai/benchmarks/bench_discrete_log.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 83
+  },
+  {
+   "path": "realai/benchmarks/bench_exp.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 11
+  },
+  {
+   "path": "realai/benchmarks/bench_galoispolys.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 66
+  },
+  {
+   "path": "realai/benchmarks/bench_integrate.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 21
+  },
+  {
+   "path": "realai/benchmarks/bench_limit.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 9
+  },
+  {
+   "path": "realai/benchmarks/bench_matrix.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 21
+  },
+  {
+   "path": "realai/benchmarks/bench_memory.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 90
+  },
+  {
+   "path": "realai/benchmarks/bench_promote.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 68
+  },
+  {
+   "path": "realai/benchmarks/bench_reasoning.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 106
+  },
+  {
+   "path": "realai/benchmarks/bench_safety.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 70
+  },
+  {
+   "path": "realai/benchmarks/bench_solvers.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 12
+  },
+  {
+   "path": "realai/benchmarks/bench_special.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 8
+  },
+  {
+   "path": "realai/benchmarks/bench_stack.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 68
+  },
+  {
+   "path": "realai/benchmarks/bench_stack_health.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 64
+  },
+  {
+   "path": "realai/benchmarks/bench_verify.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 68
+  },
+  {
+   "path": "realai/benchmarks/bench_world.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 68
+  },
+  {
+   "path": "realai/benchmarks/bench_world_model.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 88
+  },
+  {
+   "path": "realai/benchmarks/runner.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 90
+  },
+  {
+   "path": "realai/billing/__init__.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 93
+  },
+  {
+   "path": "realai/bot/__init__.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 25
+  },
+  {
+   "path": "realai/bot/boot.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 452
+  },
+  {
+   "path": "realai/bot/easy_tools.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 605
+  },
+  {
+   "path": "realai/bot/hat_routing.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 339
+  },
+  {
+   "path": "realai/bot/live_exec.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 460
+  },
+  {
+   "path": "realai/bot/live_manifest.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 268
+  },
+  {
+   "path": "realai/bot/natural_mode.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 1782
+  },
+  {
+   "path": "realai/bot/talk_easy.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 72
+  },
+  {
+   "path": "realai/bot/workspace_intent.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 143
+  },
+  {
+   "path": "realai/cli-hive-banner.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 162
+  },
+  {
+   "path": "realai/cli/craft.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 4113
+  },
+  {
+   "path": "realai/cli/hive/ability_runner.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 74
+  },
+  {
+   "path": "realai/cli/hive/agent_router.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 150
+  },
+  {
+   "path": "realai/cli/hive/app.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 153
+  },
+  {
+   "path": "realai/cli/hive/banner.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 172
+  },
+  {
+   "path": "realai/cli/hive/client.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 116
+  },
+  {
+   "path": "realai/cli/hive/commands/abilities.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 55
+  },
+  {
+   "path": "realai/cli/hive/commands/agents.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 125
+  },
+  {
+   "path": "realai/cli/hive/commands/chat.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 51
+  },
+  {
+   "path": "realai/cli/hive/commands/craft_cmd.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 17
+  },
+  {
+   "path": "realai/cli/hive/commands/heal.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 71
+  },
+  {
+   "path": "realai/cli/hive/commands/learn.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 64
+  },
+  {
+   "path": "realai/cli/hive/commands/models.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 62
+  },
+  {
+   "path": "realai/cli/hive/commands/multi.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 40
+  },
+  {
+   "path": "realai/cli/hive/commands/quarantine.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 148
+  },
+  {
+   "path": "realai/cli/hive/commands/route.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 88
+  },
+  {
+   "path": "realai/cli/hive/commands/run.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 60
+  },
+  {
+   "path": "realai/cli/hive/commands/stack.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 341
+  },
+  {
+   "path": "realai/cli/hive/commands/status.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 74
+  },
+  {
+   "path": "realai/cli/hive/commands/tasks.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 63
+  },
+  {
+   "path": "realai/cli/hive/commands/tools.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 67
+  },
+  {
+   "path": "realai/cli/hive/commands/world.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 170
+  },
+  {
+   "path": "realai/cli/hive/context.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 52
+  },
+  {
+   "path": "realai/cli/hive/format.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 56
+  },
+  {
+   "path": "realai/cli/hive/gpu_inspector.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 65
+  },
+  {
+   "path": "realai/cli/hive/world_inspector.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 124
+  },
+  {
+   "path": "realai/cli/realai_cli.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 100
+  },
+  {
+   "path": "realai/closed_loop.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 8
+  },
+  {
+   "path": "realai/cloud_fallback.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 362
+  },
+  {
+   "path": "realai/coding_agent.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 41
+  },
+  {
+   "path": "realai/config/amd_inference.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 79
+  },
+  {
+   "path": "realai/config/error_reporting.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 338
+  },
+  {
+   "path": "realai/config/expand.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 452
+  },
+  {
+   "path": "realai/config/types.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 16
+  },
+  {
+   "path": "realai/context/__init__.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 367
+  },
+  {
+   "path": "realai/core/agents/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 80
+  },
+  {
+   "path": "realai/core/agents/agent_runtime.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 34
+  },
+  {
+   "path": "realai/core/agents/agents.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 160
+  },
+  {
+   "path": "realai/core/agents/base.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 16
+  },
+  {
+   "path": "realai/core/agents/critic.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 41
+  },
+  {
+   "path": "realai/core/agents/executor.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 57
+  },
+  {
+   "path": "realai/core/agents/hierarchical_agent.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 158
+  },
+  {
+   "path": "realai/core/agents/hierarchical_main.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 189
+  },
+  {
+   "path": "realai/core/agents/llm.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 110
+  },
+  {
+   "path": "realai/core/agents/planner.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 57
+  },
+  {
+   "path": "realai/core/agents/safety.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 19
+  },
+  {
+   "path": "realai/core/agents/self_heal.py",
+   "class": "dry_run",
+   "why": "side-effecting (writes/pushes/applies); intended feature, expose only as dry-run/report",
+   "lines": 400
+  },
+  {
+   "path": "realai/core/agents/supervisor.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 198
+  },
+  {
+   "path": "realai/core/agents/synthesizer.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 41
+  },
+  {
+   "path": "realai/core/agents/tools.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 334
+  },
+  {
+   "path": "realai/core/agents/training_pipeline.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 340
+  },
+  {
+   "path": "realai/core/agents/worker.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 100
+  },
+  {
+   "path": "realai/core/api/errors.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 14
+  },
+  {
+   "path": "realai/core/api/schemas/audio.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 9
+  },
+  {
+   "path": "realai/core/api/schemas/chat.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 24
+  },
+  {
+   "path": "realai/core/api/schemas/embeddings.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 16
+  },
+  {
+   "path": "realai/core/api/schemas/models.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 16
+  },
+  {
+   "path": "realai/core/api/schemas/tasks.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 18
+  },
+  {
+   "path": "realai/core/api/schemas/web3.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 17
+  },
+  {
+   "path": "realai/core/api_server.py",
+   "class": "superseded",
+   "why": "old server/lambda/vercel entrypoint; superseded by realai/server + realai/orchestration/v3_orchestrator (AUTHORITY.md)",
+   "lines": 1340
+  },
+  {
+   "path": "realai/core/audit.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 616
+  },
+  {
+   "path": "realai/core/auto_model_detector.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 76
+  },
+  {
+   "path": "realai/core/bootstrap.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 9
+  },
+  {
+   "path": "realai/core/closed_loop.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 204
+  },
+  {
+   "path": "realai/core/config/loader.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 52
+  },
+  {
+   "path": "realai/core/config/types.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 16
+  },
+  {
+   "path": "realai/core/core_extensions.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 201
+  },
+  {
+   "path": "realai/core/critique.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 295
+  },
+  {
+   "path": "realai/core/deepen_cycle.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 507
+  },
+  {
+   "path": "realai/core/device_profile.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 294
+  },
+  {
+   "path": "realai/core/engine.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 791
+  },
+  {
+   "path": "realai/core/guardian.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 100
+  },
+  {
+   "path": "realai/core/identity.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 355
+  },
+  {
+   "path": "realai/core/inference/backend.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 26
+  },
+  {
+   "path": "realai/core/inference/chat_pipeline.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 174
+  },
+  {
+   "path": "realai/core/inference/llamacpp_backend.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 52
+  },
+  {
+   "path": "realai/core/inference/local_stub.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 67
+  },
+  {
+   "path": "realai/core/inference/registry.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 28
+  },
+  {
+   "path": "realai/core/inference/vllm_backend.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 2
+  },
+  {
+   "path": "realai/core/local_models.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 440
+  },
+  {
+   "path": "realai/core/logging/logger.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 14
+  },
+  {
+   "path": "realai/core/memory/base.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 13
+  },
+  {
+   "path": "realai/core/memory/bridge.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 3
+  },
+  {
+   "path": "realai/core/memory/json_engine.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 29
+  },
+  {
+   "path": "realai/core/memory/long_term_engine.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 3
+  },
+  {
+   "path": "realai/core/memory/sqlite_store.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 97
+  },
+  {
+   "path": "realai/core/memory/summarizer.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 28
+  },
+  {
+   "path": "realai/core/memory_store/bridge.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 45
+  },
+  {
+   "path": "realai/core/metrics/metrics.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 30
+  },
+  {
+   "path": "realai/core/models/base.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 24
+  },
+  {
+   "path": "realai/core/models/cache.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 17
+  },
+  {
+   "path": "realai/core/models/registry.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 71
+  },
+  {
+   "path": "realai/core/models/stub.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 29
+  },
+  {
+   "path": "realai/core/orchestration/hive_router.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 21
+  },
+  {
+   "path": "realai/core/orchestration/v3_orchestrator.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 11
+  },
+  {
+   "path": "realai/core/orchestrator.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 37
+  },
+  {
+   "path": "realai/core/plugins.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 28
+  },
+  {
+   "path": "realai/core/provider.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 48
+  },
+  {
+   "path": "realai/core/realai_promoter.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 35
+  },
+  {
+   "path": "realai/core/realai_retirement.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 39
+  },
+  {
+   "path": "realai/core/realai_root_flow.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 147
+  },
+  {
+   "path": "realai/core/realai_root_walker.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 849
+  },
+  {
+   "path": "realai/core/realai_self_healing_core.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 247
+  },
+  {
+   "path": "realai/core/realai_visualizer.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 37
+  },
+  {
+   "path": "realai/core/repo_engineer.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 162
+  },
+  {
+   "path": "realai/core/repo_organizer.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 464
+  },
+  {
+   "path": "realai/core/rise_system.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 218
+  },
+  {
+   "path": "realai/core/runtime.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 7
+  },
+  {
+   "path": "realai/core/safety.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 261
+  },
+  {
+   "path": "realai/core/security/python_sandbox.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 83
+  },
+  {
+   "path": "realai/core/security/sandbox.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 9
+  },
+  {
+   "path": "realai/core/self_builder.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 312
+  },
+  {
+   "path": "realai/core/self_improvement.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 381
+  },
+  {
+   "path": "realai/core/supervisor.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 198
+  },
+  {
+   "path": "realai/core/tools/base.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 11
+  },
+  {
+   "path": "realai/core/tools/code.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 21
+  },
+  {
+   "path": "realai/core/tools/file.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 41
+  },
+  {
+   "path": "realai/core/tools/hive_executor.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 200
+  },
+  {
+   "path": "realai/core/tools/permissions.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 9
+  },
+  {
+   "path": "realai/core/tools/registry.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 41
+  },
+  {
+   "path": "realai/core/tools/web.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 183
+  },
+  {
+   "path": "realai/core/tools/web3.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 51
+  },
+  {
+   "path": "realai/core/tracing/tracer.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 20
+  },
+  {
+   "path": "realai/core/training/directml_vram_safe.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 439
+  },
+  {
+   "path": "realai/core/training/eval.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 22
+  },
+  {
+   "path": "realai/core/training/extract_from_agent_tools.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 35
+  },
+  {
+   "path": "realai/core/training/finetune.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 26
+  },
+  {
+   "path": "realai/core/voice/asr_base.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 11
+  },
+  {
+   "path": "realai/core/voice/asr_whisper.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 27
+  },
+  {
+   "path": "realai/core/voice/registry.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 24
+  },
+  {
+   "path": "realai/core/voice/tts_base.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 11
+  },
+  {
+   "path": "realai/core/voice/tts_piper.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 37
+  },
+  {
+   "path": "realai/core/web3/base.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 20
+  },
+  {
+   "path": "realai/core/web3/evm_backend.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 78
+  },
+  {
+   "path": "realai/core/web3/policy.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 39
+  },
+  {
+   "path": "realai/core/web3/registry.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 15
+  },
+  {
+   "path": "realai/core/web3/solana_backend.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 57
+  },
+  {
+   "path": "realai/core/world_model.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 24
+  },
+  {
+   "path": "realai/core_hive_router.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 267
+  },
+  {
+   "path": "realai/craft.py",
+   "class": "decision",
+   "why": "realai-craft streaming agent (3,233 lines); console script points at realai/cli/craft.py \u2014 which is canonical?",
+   "lines": 3233
+  },
+  {
+   "path": "realai/critique.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 8
+  },
+  {
+   "path": "realai/datasets/glue.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 156
+  },
+  {
+   "path": "realai/deepen_cycle.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 13
+  },
+  {
+   "path": "realai/doctor.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 225
+  },
+  {
+   "path": "realai/engine.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 8
+  },
+  {
+   "path": "realai/engine/executor.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/engine/loader.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/engine/logger.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/engine/router.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 7
+  },
+  {
+   "path": "realai/examples/assume_constant_result.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 20
+  },
+  {
+   "path": "realai/examples/compare.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 99
+  },
+  {
+   "path": "realai/examples/examples_limitless.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 666
+  },
+  {
+   "path": "realai/examples/local_llama_example.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 284
+  },
+  {
+   "path": "realai/examples/setup.py",
+   "class": "dead",
+   "why": "vendored third-party code (pygments/mypy/pydevd/hypothesis/pydantic/pytest/setuptools)",
+   "lines": 24
+  },
+  {
+   "path": "realai/executive/__init__.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 10
+  },
+  {
+   "path": "realai/executive/daemon.py",
+   "class": "wired_via_tool",
+   "why": "executive state exposed read-only by hive tool executive_goals; daemon itself not run (it writes status/ticks goals)",
+   "lines": 117
+  },
+  {
+   "path": "realai/executive/evidence.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 43
+  },
+  {
+   "path": "realai/executive/goal.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 71
+  },
+  {
+   "path": "realai/executive/loop.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 61
+  },
+  {
+   "path": "realai/executive/watchers/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 27
+  },
+  {
+   "path": "realai/executive/watchers/caps_watch.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 79
+  },
+  {
+   "path": "realai/executive/watchers/rackup_health.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 77
+  },
+  {
+   "path": "realai/executive/watchers/repo_health.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 88
+  },
+  {
+   "path": "realai/guardian.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 8
+  },
+  {
+   "path": "realai/hive.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 48
+  },
+  {
+   "path": "realai/hive_orchestrator.py",
+   "class": "shim",
+   "why": "ability wrapper; catalog uses abilities/hive_orchestrator.py",
+   "lines": 44
+  },
+  {
+   "path": "realai/hive_tools/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 305
+  },
+  {
+   "path": "realai/hive_tools/extended.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 360
+  },
+  {
+   "path": "realai/hive_tools/orchestrator_hook.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 84
+  },
+  {
+   "path": "realai/hive_tools/tool_loop.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 86
+  },
+  {
+   "path": "realai/hive_tools/wired.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 278
+  },
+  {
+   "path": "realai/identity.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 8
+  },
+  {
+   "path": "realai/inference/_async_client.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 3454
+  },
+  {
+   "path": "realai/inference/_client.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 3396
+  },
+  {
+   "path": "realai/inference/agent.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 100
+  },
+  {
+   "path": "realai/inference/audio_classification.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 43
+  },
+  {
+   "path": "realai/inference/baseten.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 6
+  },
+  {
+   "path": "realai/inference/vllm_backend.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 2
+  },
+  {
+   "path": "realai/knowledge_graph.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 8
+  },
+  {
+   "path": "realai/lambda_embeddings_audio.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 212
+  },
+  {
+   "path": "realai/learn/__init__.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 34
+  },
+  {
+   "path": "realai/learn/http.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 516
+  },
+  {
+   "path": "realai/learn/packet.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 127
+  },
+  {
+   "path": "realai/learn/pipeline.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 178
+  },
+  {
+   "path": "realai/learn/scaffold.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 618
+  },
+  {
+   "path": "realai/learn/scan.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 330
+  },
+  {
+   "path": "realai/learn/score.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 196
+  },
+  {
+   "path": "realai/learn/scout.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 422
+  },
+  {
+   "path": "realai/learn/signals.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 436
+  },
+  {
+   "path": "realai/learn/skip.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 181
+  },
+  {
+   "path": "realai/learn/source.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 343
+  },
+  {
+   "path": "realai/learn_git.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 194
+  },
+  {
+   "path": "realai/limitless_wiring.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 490
+  },
+  {
+   "path": "realai/local_media.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 355
+  },
+  {
+   "path": "realai/local_models.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 8
+  },
+  {
+   "path": "realai/local_runtime.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 373
+  },
+  {
+   "path": "realai/mcp/mcp_server.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 343
+  },
+  {
+   "path": "realai/mcp_server.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 386
+  },
+  {
+   "path": "realai/mcp_vault77.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 279
+  },
+  {
+   "path": "realai/memory/__init__.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 39
+  },
+  {
+   "path": "realai/memory/assemble_gold_index.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 563
+  },
+  {
+   "path": "realai/memory/aura_memory.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 114
+  },
+  {
+   "path": "realai/memory/dds3_deep_gold_map.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 373
+  },
+  {
+   "path": "realai/memory/fabric.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 395
+  },
+  {
+   "path": "realai/memory/hive/memory.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 9
+  },
+  {
+   "path": "realai/memory/knowledge_graph.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 310
+  },
+  {
+   "path": "realai/memory/memory/__init__.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 25
+  },
+  {
+   "path": "realai/memory/memory/bridge.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 3
+  },
+  {
+   "path": "realai/memory/memory/long_term_engine.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 3
+  },
+  {
+   "path": "realai/memory/promote_gold.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 481
+  },
+  {
+   "path": "realai/memory/realai2_server/memory_store.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 90
+  },
+  {
+   "path": "realai/memory/reasoning/core.py",
+   "class": "decision",
+   "why": "AURA ReasoningEngine calls a local LLM over HTTP (non-deterministic) \u2014 keep as planner backend or retire? not groundable for self_data",
+   "lines": 81
+  },
+  {
+   "path": "realai/memory/recover_archive_gold.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 186
+  },
+  {
+   "path": "realai/memory/recycle_py/realai-ish_memory_summarizer_agent.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 185
+  },
+  {
+   "path": "realai/memory/scan_desktop_missing_gold.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 402
+  },
+  {
+   "path": "realai/memory/scan_local_keyword_gold.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 457
+  },
+  {
+   "path": "realai/memory/sqlite_memory.py",
+   "class": "decision",
+   "why": "per-user profile/interaction store (PII; init_db writes) \u2014 wire as a live memory backend, or retire? not training-safe",
+   "lines": 141
+  },
+  {
+   "path": "realai/memory/tools/memory_inspector_ui.py",
+   "class": "decision",
+   "why": "UI surface (Flask/web dashboard) \u2014 not a training target; wire or retire?",
+   "lines": 291
+  },
+  {
+   "path": "realai/memory/tools/memory_summarizer_cli.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 90
+  },
+  {
+   "path": "realai/meta_router.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 343
+  },
+  {
+   "path": "realai/metrics/api.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 216
+  },
+  {
+   "path": "realai/metrics/squad_metrics.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 779
+  },
+  {
+   "path": "realai/middleware/asyncexitstack.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 18
+  },
+  {
+   "path": "realai/middleware/authentication.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 52
+  },
+  {
+   "path": "realai/middleware/logging.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 20
+  },
+  {
+   "path": "realai/model_assets.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 233
+  },
+  {
+   "path": "realai/model_catalog.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 9
+  },
+  {
+   "path": "realai/model_registry.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 325
+  },
+  {
+   "path": "realai/models/__init__.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 22
+  },
+  {
+   "path": "realai/models/candidate.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 30
+  },
+  {
+   "path": "realai/models/loader.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 66
+  },
+  {
+   "path": "realai/models/model_catalog.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 884
+  },
+  {
+   "path": "realai/models/nested_realai_model_catalog.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 442
+  },
+  {
+   "path": "realai/nest_orchestrators.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 8
+  },
+  {
+   "path": "realai/nested_realai_model_catalog.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 8
+  },
+  {
+   "path": "realai/orchestration/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 41
+  },
+  {
+   "path": "realai/orchestration/agent.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 231
+  },
+  {
+   "path": "realai/orchestration/hive_router.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 212
+  },
+  {
+   "path": "realai/orchestration/legacy_orchestrator.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 197
+  },
+  {
+   "path": "realai/orchestration/memory.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 100
+  },
+  {
+   "path": "realai/orchestration/nest_orchestrators.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 7
+  },
+  {
+   "path": "realai/orchestration/orchestrator.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 283
+  },
+  {
+   "path": "realai/orchestration/pipeline.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 157
+  },
+  {
+   "path": "realai/orchestration/realai_orchestrator.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 17
+  },
+  {
+   "path": "realai/orchestration/surface.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 7
+  },
+  {
+   "path": "realai/orchestration/tools.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 140
+  },
+  {
+   "path": "realai/orchestration/tts_routing.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 66
+  },
+  {
+   "path": "realai/orchestration/unified_orchestrator.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 30
+  },
+  {
+   "path": "realai/orchestration/v3_orchestrator.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 3708
+  },
+  {
+   "path": "realai/orchestration/v3_runtime_bridge.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 2440
+  },
+  {
+   "path": "realai/orchestrators/__init__.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 58
+  },
+  {
+   "path": "realai/orchestrators/nest_orchestrators.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 7
+  },
+  {
+   "path": "realai/orchestrators/nested_realai_v3_orchestrator.py",
+   "class": "superseded",
+   "why": "nested twin of hive gold realai/orchestration/v3_orchestrator.py (AUTHORITY.md)",
+   "lines": 1113
+  },
+  {
+   "path": "realai/orchestrators/realai-ish_test_orchestration.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 63
+  },
+  {
+   "path": "realai/packages/makefile.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 51
+  },
+  {
+   "path": "realai/packages/sdk-py/realai/__init__.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 54
+  },
+  {
+   "path": "realai/packages/six.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 1076
+  },
+  {
+   "path": "realai/plugin_marketplace.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 8
+  },
+  {
+   "path": "realai/plugin_registry.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 51
+  },
+  {
+   "path": "realai/plugins/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 74
+  },
+  {
+   "path": "realai/plugins/_hypothesis_plugin.py",
+   "class": "dead",
+   "why": "vendored third-party code (pygments/mypy/pydevd/hypothesis/pydantic/pytest/setuptools)",
+   "lines": 391
+  },
+  {
+   "path": "realai/plugins/_loader.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 58
+  },
+  {
+   "path": "realai/plugins/_schema_validator.py",
+   "class": "dead",
+   "why": "vendored third-party code (pygments/mypy/pydevd/hypothesis/pydantic/pytest/setuptools)",
+   "lines": 143
+  },
+  {
+   "path": "realai/plugins/ability_catalog.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 13
+  },
+  {
+   "path": "realai/plugins/agent-tools-main/sanity_check.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 250
+  },
+  {
+   "path": "realai/plugins/api_big_server.py",
+   "class": "superseded",
+   "why": "old server/lambda/vercel entrypoint; superseded by realai/server + realai/orchestration/v3_orchestrator (AUTHORITY.md)",
+   "lines": 1267
+  },
+  {
+   "path": "realai/plugins/api_server.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 290
+  },
+  {
+   "path": "realai/plugins/api_server_backup.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 7
+  },
+  {
+   "path": "realai/plugins/api_server_cpu.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 55
+  },
+  {
+   "path": "realai/plugins/atomicfizz_coach/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 174
+  },
+  {
+   "path": "realai/plugins/atomicfizz_coach/abilities/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 34
+  },
+  {
+   "path": "realai/plugins/atomicfizz_coach/abilities/caps_context.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 41
+  },
+  {
+   "path": "realai/plugins/atomicfizz_coach/abilities/health.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 28
+  },
+  {
+   "path": "realai/plugins/atomicfizz_coach/abilities/wrist_ui_hint.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 32
+  },
+  {
+   "path": "realai/plugins/benchmarks/bench_tool_use.py",
+   "class": "superseded",
+   "why": "old server/lambda/vercel entrypoint; superseded by realai/server + realai/orchestration/v3_orchestrator (AUTHORITY.md)",
+   "lines": 74
+  },
+  {
+   "path": "realai/plugins/build_datasets.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 129
+  },
+  {
+   "path": "realai/plugins/chat_qwen_lora_directml.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 65
+  },
+  {
+   "path": "realai/plugins/client.py",
+   "class": "superseded",
+   "why": "old server/lambda/vercel entrypoint; superseded by realai/server + realai/orchestration/v3_orchestrator (AUTHORITY.md)",
+   "lines": 19
+  },
+  {
+   "path": "realai/plugins/coach_agent.py",
+   "class": "superseded",
+   "why": "older flat copy of realai/plugins/rackup_coach module (canonical per ONE_TREE)",
+   "lines": 130
+  },
+  {
+   "path": "realai/plugins/create_training_runs_json.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 106
+  },
+  {
+   "path": "realai/plugins/device_selector.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 58
+  },
+  {
+   "path": "realai/plugins/effective_engine_main_coach/__init__.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 123
+  },
+  {
+   "path": "realai/plugins/effective_engine_main_coach/abilities/__init__.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 48
+  },
+  {
+   "path": "realai/plugins/effective_engine_main_coach/abilities/agents_bridge.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/effective_engine_main_coach/abilities/fastify_context.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/effective_engine_main_coach/abilities/health.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/effective_engine_main_coach/abilities/node_context.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/effective_engine_main_coach/abilities/repo_map.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/effective_engine_main_learned/__init__.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 123
+  },
+  {
+   "path": "realai/plugins/effective_engine_main_learned/abilities/__init__.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 48
+  },
+  {
+   "path": "realai/plugins/effective_engine_main_learned/abilities/agents_bridge.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/effective_engine_main_learned/abilities/fastify_context.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/effective_engine_main_learned/abilities/health.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/effective_engine_main_learned/abilities/node_context.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/effective_engine_main_learned/abilities/repo_map.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/extract_agent_tool_data.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 20
+  },
+  {
+   "path": "realai/plugins/lambda_advanced.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 176
+  },
+  {
+   "path": "realai/plugins/lambda_chat.py",
+   "class": "superseded",
+   "why": "old server/lambda/vercel entrypoint; superseded by realai/server + realai/orchestration/v3_orchestrator (AUTHORITY.md)",
+   "lines": 82
+  },
+  {
+   "path": "realai/plugins/lambda_core.py",
+   "class": "superseded",
+   "why": "old server/lambda/vercel entrypoint; superseded by realai/server + realai/orchestration/v3_orchestrator (AUTHORITY.md)",
+   "lines": 166
+  },
+  {
+   "path": "realai/plugins/lambda_core_shared.py",
+   "class": "superseded",
+   "why": "old server/lambda/vercel entrypoint; superseded by realai/server + realai/orchestration/v3_orchestrator (AUTHORITY.md)",
+   "lines": 112
+  },
+  {
+   "path": "realai/plugins/lambda_embeddings_audio.py",
+   "class": "superseded",
+   "why": "old server/lambda/vercel entrypoint; superseded by realai/server + realai/orchestration/v3_orchestrator (AUTHORITY.md)",
+   "lines": 97
+  },
+  {
+   "path": "realai/plugins/lambda_image.py",
+   "class": "superseded",
+   "why": "old server/lambda/vercel entrypoint; superseded by realai/server + realai/orchestration/v3_orchestrator (AUTHORITY.md)",
+   "lines": 65
+  },
+  {
+   "path": "realai/plugins/lambda_video.py",
+   "class": "superseded",
+   "why": "old server/lambda/vercel entrypoint; superseded by realai/server + realai/orchestration/v3_orchestrator (AUTHORITY.md)",
+   "lines": 69
+  },
+  {
+   "path": "realai/plugins/local_models.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 435
+  },
+  {
+   "path": "realai/plugins/main.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 34
+  },
+  {
+   "path": "realai/plugins/mypy_plugin.py",
+   "class": "dead",
+   "why": "vendored third-party code (pygments/mypy/pydevd/hypothesis/pydantic/pytest/setuptools)",
+   "lines": 200
+  },
+  {
+   "path": "realai/plugins/organs_bridge.py",
+   "class": "superseded",
+   "why": "older flat copy of realai/plugins/rackup_coach module (canonical per ONE_TREE)",
+   "lines": 188
+  },
+  {
+   "path": "realai/plugins/plugin.py",
+   "class": "dead",
+   "why": "vendored third-party code (pygments/mypy/pydevd/hypothesis/pydantic/pytest/setuptools)",
+   "lines": 72
+  },
+  {
+   "path": "realai/plugins/plugin___init__.py",
+   "class": "dead",
+   "why": "9,640-line \"Grok mega __init__\" \u2014 ONE_TREE: never promote",
+   "lines": 9640
+  },
+  {
+   "path": "realai/plugins/plugin_marketplace.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 282
+  },
+  {
+   "path": "realai/plugins/plugin_memory.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 70
+  },
+  {
+   "path": "realai/plugins/plugin_registry.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 157
+  },
+  {
+   "path": "realai/plugins/plugin_registry_builder.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 175
+  },
+  {
+   "path": "realai/plugins/plugin_sample_plugin.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 34
+  },
+  {
+   "path": "realai/plugins/plugin_test_realai.py",
+   "class": "dead",
+   "why": "vendored third-party code (pygments/mypy/pydevd/hypothesis/pydantic/pytest/setuptools)",
+   "lines": 3566
+  },
+  {
+   "path": "realai/plugins/py/pydevd_plugin_numpy_types.py",
+   "class": "dead",
+   "why": "vendored third-party code (pygments/mypy/pydevd/hypothesis/pydantic/pytest/setuptools)",
+   "lines": 90
+  },
+  {
+   "path": "realai/plugins/py/pydevd_plugin_pandas_types.py",
+   "class": "dead",
+   "why": "vendored third-party code (pygments/mypy/pydevd/hypothesis/pydantic/pytest/setuptools)",
+   "lines": 178
+  },
+  {
+   "path": "realai/plugins/py/pydevd_plugin_utils.py",
+   "class": "dead",
+   "why": "vendored third-party code (pygments/mypy/pydevd/hypothesis/pydantic/pytest/setuptools)",
+   "lines": 208
+  },
+  {
+   "path": "realai/plugins/pytest_plugin.py",
+   "class": "dead",
+   "why": "vendored third-party code (pygments/mypy/pydevd/hypothesis/pydantic/pytest/setuptools)",
+   "lines": 363
+  },
+  {
+   "path": "realai/plugins/rackup_coach/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 171
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 172
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/coach.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 434
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/hall_context.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 100
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/league_validate.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 253
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/ledger_audit.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 17
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/matchmaking.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 284
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/moderation.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 168
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/money_anomaly.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 17
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/payout_sanity.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 16
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/player_card_sync.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 451
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/pyramid_rules.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 40
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/rating_convert.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 69
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/rating_intel.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 166
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/rating_update.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 533
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/shot_of_the_day.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 536
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/sotd_contribute.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 38
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/tournament.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 102
+  },
+  {
+   "path": "realai/plugins/rackup_coach/abilities/video_analysis.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 207
+  },
+  {
+   "path": "realai/plugins/rackup_coach/coach_agent.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 132
+  },
+  {
+   "path": "realai/plugins/rackup_coach/games.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 315
+  },
+  {
+   "path": "realai/plugins/rackup_coach/glicko2.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 491
+  },
+  {
+   "path": "realai/plugins/rackup_coach/leagues.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 496
+  },
+  {
+   "path": "realai/plugins/rackup_coach/money_audit.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 1372
+  },
+  {
+   "path": "realai/plugins/rackup_coach/organs_bridge.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 209
+  },
+  {
+   "path": "realai/plugins/rackup_coach/pyramid.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 343
+  },
+  {
+   "path": "realai/plugins/rackup_coach/roc.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 375
+  },
+  {
+   "path": "realai/plugins/rackup_coach/sotd_checker.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 1114
+  },
+  {
+   "path": "realai/plugins/rackup_coach/sotd_diagram.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 675
+  },
+  {
+   "path": "realai/plugins/rackup_coach/sotd_library.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 121
+  },
+  {
+   "path": "realai/plugins/rackup_coach/types.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 265
+  },
+  {
+   "path": "realai/plugins/rating_update.py",
+   "class": "superseded",
+   "why": "older flat copy of realai/plugins/rackup_coach module (canonical per ONE_TREE)",
+   "lines": 375
+  },
+  {
+   "path": "realai/plugins/realai_architect_agent.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 59
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/__init__.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 123
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/__init__.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 48
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/abilities_bridge.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/adapters_bridge.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/agents_bridge.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/docker_context.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/health.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/modules_bridge.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/node_context.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/packages_bridge.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/plugins_bridge.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/pnpm_context.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/python_context.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/repo_map.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/route_v1_audio_speech.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/route_v1_audio_transcriptions.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/route_v1_chat_completions.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_clean_backup_coach/abilities/typescript_context.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_full_autonomous.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 89
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/__init__.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 123
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/__init__.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 48
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/abilities_bridge.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/agents_bridge.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/health.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/modules_bridge.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/packages_bridge.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/plugins_bridge.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/repo_map.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/route_healthz.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/route_readyz.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/route_v1_audio_speech.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/route_v1_audio_transcriptions.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/route_v1_chat_completions.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/route_v1_embeddings.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/route_v1_models.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gold_coach/abilities/route_v1_models_reload.py",
+   "class": "dead",
+   "why": "learned stub (git-learn), no runtime",
+   "lines": 30
+  },
+  {
+   "path": "realai/plugins/realai_gui.py",
+   "class": "superseded",
+   "why": "old server/lambda/vercel entrypoint; superseded by realai/server + realai/orchestration/v3_orchestrator (AUTHORITY.md)",
+   "lines": 643
+  },
+  {
+   "path": "realai/plugins/realai_local_server.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 249
+  },
+  {
+   "path": "realai/plugins/realai_rebuilder.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 52
+  },
+  {
+   "path": "realai/plugins/realai_self_improving_agent.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 89
+  },
+  {
+   "path": "realai/plugins/registry.py",
+   "class": "superseded",
+   "why": "stale twin of agent_tools/registry.py (gold, wired); imports missing .models",
+   "lines": 137
+  },
+  {
+   "path": "realai/plugins/related/ability_catalog.py",
+   "class": "superseded",
+   "why": "older ability catalog; canonical is realai/ability_catalog.py (wired)",
+   "lines": 917
+  },
+  {
+   "path": "realai/plugins/sample_plugin.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 37
+  },
+  {
+   "path": "realai/plugins/self_evolving/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 160
+  },
+  {
+   "path": "realai/plugins/self_improvement.py",
+   "class": "dry_run",
+   "why": "side-effecting (writes/pushes/applies); intended feature, expose only as dry-run/report",
+   "lines": 407
+  },
+  {
+   "path": "realai/plugins/self_improving_agent.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 75
+  },
+  {
+   "path": "realai/plugins/setup.py",
+   "class": "dead",
+   "why": "vendored third-party code (pygments/mypy/pydevd/hypothesis/pydantic/pytest/setuptools)",
+   "lines": 60
+  },
+  {
+   "path": "realai/plugins/shot_of_the_day.py",
+   "class": "superseded",
+   "why": "older flat copy of realai/plugins/rackup_coach module (canonical per ONE_TREE)",
+   "lines": 531
+  },
+  {
+   "path": "realai/plugins/smart_merge_realai.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 141
+  },
+  {
+   "path": "realai/plugins/tool_router/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 95
+  },
+  {
+   "path": "realai/plugins/tools/_shared.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 25
+  },
+  {
+   "path": "realai/plugins/tools/approval_store.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 108
+  },
+  {
+   "path": "realai/plugins/tools/approval_ui.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 279
+  },
+  {
+   "path": "realai/plugins/tools/base.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 11
+  },
+  {
+   "path": "realai/plugins/tools/code.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 21
+  },
+  {
+   "path": "realai/plugins/tools/code_engineer_cli.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 143
+  },
+  {
+   "path": "realai/plugins/tools/file.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 41
+  },
+  {
+   "path": "realai/plugins/tools/from_aura_p0_hunt/device_selector.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 46
+  },
+  {
+   "path": "realai/plugins/tools/github_workflow_helper.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 185
+  },
+  {
+   "path": "realai/plugins/tools/harden_repos.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 940
+  },
+  {
+   "path": "realai/plugins/tools/notifier.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 161
+  },
+  {
+   "path": "realai/plugins/tools/orchestration_worker.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 201
+  },
+  {
+   "path": "realai/plugins/tools/permissions.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 9
+  },
+  {
+   "path": "realai/plugins/tools/registry.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 41
+  },
+  {
+   "path": "realai/plugins/tools/retry_rollout_pushes.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 68
+  },
+  {
+   "path": "realai/plugins/tools/rollout_all_repos.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 884
+  },
+  {
+   "path": "realai/plugins/tools/self_extend_tool.py",
+   "class": "dry_run",
+   "why": "side-effecting (writes/pushes/applies); intended feature, expose only as dry-run/report",
+   "lines": 56
+  },
+  {
+   "path": "realai/plugins/tools/self_repair_tool.py",
+   "class": "dry_run",
+   "why": "side-effecting (writes/pushes/applies); intended feature, expose only as dry-run/report",
+   "lines": 75
+  },
+  {
+   "path": "realai/plugins/tools/system_scan_tool.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 127
+  },
+  {
+   "path": "realai/plugins/tools/tools/base.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 11
+  },
+  {
+   "path": "realai/plugins/tools/tools/code_engineer_cli.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 140
+  },
+  {
+   "path": "realai/plugins/tools/tools/harden_repos.py",
+   "class": "dry_run",
+   "why": "side-effecting (writes/pushes/applies); intended feature, expose only as dry-run/report",
+   "lines": 938
+  },
+  {
+   "path": "realai/plugins/tools/tools/permissions.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 9
+  },
+  {
+   "path": "realai/plugins/tools/tools/rollout_all_repos.py",
+   "class": "dry_run",
+   "why": "side-effecting (writes/pushes/applies); intended feature, expose only as dry-run/report",
+   "lines": 878
+  },
+  {
+   "path": "realai/plugins/tools/web.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 42
+  },
+  {
+   "path": "realai/plugins/tools/web3.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 49
+  },
+  {
+   "path": "realai/plugins/train_directml.py",
+   "class": "superseded",
+   "why": "old training script; superseded by realai/training (train_sft, dataset_builder)",
+   "lines": 101
+  },
+  {
+   "path": "realai/plugins/train_from_agent_manifests.py",
+   "class": "superseded",
+   "why": "old training script; superseded by realai/training (train_sft, dataset_builder)",
+   "lines": 37
+  },
+  {
+   "path": "realai/plugins/train_qwen_lora_directml.py",
+   "class": "superseded",
+   "why": "old training script; superseded by realai/training (train_sft, dataset_builder)",
+   "lines": 226
+  },
+  {
+   "path": "realai/plugins/workspace_info/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 163
+  },
+  {
+   "path": "realai/provider_resolve.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 85
+  },
+  {
+   "path": "realai/providers/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 15
+  },
+  {
+   "path": "realai/providers/adapter_router.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 20
+  },
+  {
+   "path": "realai/providers/anthropic.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/providers/auto_loader.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 10
+  },
+  {
+   "path": "realai/providers/config.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 131
+  },
+  {
+   "path": "realai/providers/custom_model_provider.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 31
+  },
+  {
+   "path": "realai/providers/groq.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/providers/llama_cpp_gpu.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 35
+  },
+  {
+   "path": "realai/providers/local.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/providers/local_llama.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 105
+  },
+  {
+   "path": "realai/providers/openai.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/providers/provider_registry.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 79
+  },
+  {
+   "path": "realai/providers/realai.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/providers/realai_embeddings.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 36
+  },
+  {
+   "path": "realai/providers/router.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/providers/voice.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 42
+  },
+  {
+   "path": "realai/providers/xai_media.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 197
+  },
+  {
+   "path": "realai/realai_agent/__init__.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 67
+  },
+  {
+   "path": "realai/realai_gui.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 8
+  },
+  {
+   "path": "realai/realai_hive_orchestrator.py",
+   "class": "decision",
+   "why": "second hive orchestrator (292 lines) overlapping realai/orchestration; keep or retire?",
+   "lines": 292
+  },
+  {
+   "path": "realai/realai_local_server.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 8
+  },
+  {
+   "path": "realai/realai_orchestrator.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 21
+  },
+  {
+   "path": "realai/realai_self_improving_agent.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 8
+  },
+  {
+   "path": "realai/realai_training/unsloth_train.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 43
+  },
+  {
+   "path": "realai/recovery_registry.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 324
+  },
+  {
+   "path": "realai/repo_hygiene/canonical_paths.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 170
+  },
+  {
+   "path": "realai/repo_tools.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 213
+  },
+  {
+   "path": "realai/rise_system.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 8
+  },
+  {
+   "path": "realai/router.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 366
+  },
+  {
+   "path": "realai/routes/__init__.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 52
+  },
+  {
+   "path": "realai/routes/audio.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 29
+  },
+  {
+   "path": "realai/routes/chat.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 21
+  },
+  {
+   "path": "realai/routes/embeddings.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 14
+  },
+  {
+   "path": "realai/routes/health.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 18
+  },
+  {
+   "path": "realai/routes/metrics.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 19
+  },
+  {
+   "path": "realai/routes/models.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 21
+  },
+  {
+   "path": "realai/routes/tasks.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 25
+  },
+  {
+   "path": "realai/routes/voice_ws.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 24
+  },
+  {
+   "path": "realai/routes/web3.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 35
+  },
+  {
+   "path": "realai/runtime/autotune_cache.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 712
+  },
+  {
+   "path": "realai/runtime/config.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 167
+  },
+  {
+   "path": "realai/runtime/loader.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 67
+  },
+  {
+   "path": "realai/safety.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 8
+  },
+  {
+   "path": "realai/scanners/ingest_realai_roots.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 413
+  },
+  {
+   "path": "realai/scanners/promote_gold.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 484
+  },
+  {
+   "path": "realai/schemas/audio.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 9
+  },
+  {
+   "path": "realai/schemas/embeddings.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 16
+  },
+  {
+   "path": "realai/schemas/models.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 16
+  },
+  {
+   "path": "realai/schemas/web3.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 17
+  },
+  {
+   "path": "realai/scripts/_register_core_agents_promote.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 115
+  },
+  {
+   "path": "realai/scripts/_register_deep_promote.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 93
+  },
+  {
+   "path": "realai/scripts/_rewrite_module_wraps.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 108
+  },
+  {
+   "path": "realai/scripts/_smoke_craft_promote.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 57
+  },
+  {
+   "path": "realai/scripts/ability_inventory.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 55
+  },
+  {
+   "path": "realai/scripts/amd_stack_status.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 101
+  },
+  {
+   "path": "realai/scripts/apply_unification_results.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 48
+  },
+  {
+   "path": "realai/scripts/assemble_gold.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 20
+  },
+  {
+   "path": "realai/scripts/auto_update_pipeline.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 241
+  },
+  {
+   "path": "realai/scripts/bring_back_from.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 371
+  },
+  {
+   "path": "realai/scripts/catalog_good_code_roots.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 135
+  },
+  {
+   "path": "realai/scripts/cold_archive_recovered.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 125
+  },
+  {
+   "path": "realai/scripts/curated_promote.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 271
+  },
+  {
+   "path": "realai/scripts/dds3.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 20
+  },
+  {
+   "path": "realai/scripts/dds3_missing_files.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 1310
+  },
+  {
+   "path": "realai/scripts/deep_promote_scan.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 957
+  },
+  {
+   "path": "realai/scripts/deep_promote_wire.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 559
+  },
+  {
+   "path": "realai/scripts/deep_unify_walk.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 171
+  },
+  {
+   "path": "realai/scripts/diff_grok_export.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 250
+  },
+  {
+   "path": "realai/scripts/diff_imports_promote_allowlist.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 245
+  },
+  {
+   "path": "realai/scripts/dispatch_training.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 159
+  },
+  {
+   "path": "realai/scripts/era_map.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 99
+  },
+  {
+   "path": "realai/scripts/exportable/realai_server.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 33
+  },
+  {
+   "path": "realai/scripts/exportable/variants/grok_export_tools.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 529
+  },
+  {
+   "path": "realai/scripts/exportable/variants/nested_realai_audit.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 603
+  },
+  {
+   "path": "realai/scripts/exportable/variants/nested_realai_recovery_registry.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 288
+  },
+  {
+   "path": "realai/scripts/exportable/variants/nested_realai_v3_runtime_bridge.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 492
+  },
+  {
+   "path": "realai/scripts/find_self_improve_and_lost.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 221
+  },
+  {
+   "path": "realai/scripts/gold_index.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 20
+  },
+  {
+   "path": "realai/scripts/heal_cli.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 92
+  },
+  {
+   "path": "realai/scripts/import_external_trees.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 373
+  },
+  {
+   "path": "realai/scripts/live_gap_agent.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 611
+  },
+  {
+   "path": "realai/scripts/monitor_model.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 55
+  },
+  {
+   "path": "realai/scripts/organize_repo.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 66
+  },
+  {
+   "path": "realai/scripts/probe_chat.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 19
+  },
+  {
+   "path": "realai/scripts/promote_unified_realai.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 154
+  },
+  {
+   "path": "realai/scripts/quarantine_catalog.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 283
+  },
+  {
+   "path": "realai/scripts/realai_full_loop_integrator.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 63
+  },
+  {
+   "path": "realai/scripts/realai_full_loop_integrator_auto.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 163
+  },
+  {
+   "path": "realai/scripts/realai_full_loop_integrator_auto_final.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 181
+  },
+  {
+   "path": "realai/scripts/realai_full_loop_integrator_auto_fixed.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 168
+  },
+  {
+   "path": "realai/scripts/realai_full_loop_integrator_complete.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 93
+  },
+  {
+   "path": "realai/scripts/realai_full_loop_integrator_final.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 151
+  },
+  {
+   "path": "realai/scripts/realai_full_loop_integrator_total.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 153
+  },
+  {
+   "path": "realai/scripts/realai_full_loop_integrator_ultra.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 81
+  },
+  {
+   "path": "realai/scripts/realai_hive_dashboard.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 70
+  },
+  {
+   "path": "realai/scripts/realai_hive_dashboard_pro.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 115
+  },
+  {
+   "path": "realai/scripts/realai_hive_integrator_v2.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 199
+  },
+  {
+   "path": "realai/scripts/realai_hive_multi_root_integrator.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 135
+  },
+  {
+   "path": "realai/scripts/realai_smart_learn_controller.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 550
+  },
+  {
+   "path": "realai/scripts/register_realai_hive.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 121
+  },
+  {
+   "path": "realai/scripts/reregister_models.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 36
+  },
+  {
+   "path": "realai/scripts/roots_ingest.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 49
+  },
+  {
+   "path": "realai/scripts/run_all_repo_scripts.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 295
+  },
+  {
+   "path": "realai/scripts/scan_and_reconstruct.py",
+   "class": "decision",
+   "why": "PowerShell saved as .py (unparsable) \u2014 rename to .ps1 or retire? (not moved)",
+   "lines": 150
+  },
+  {
+   "path": "realai/scripts/scan_realai.ps1.py",
+   "class": "dead",
+   "why": "not Python (PowerShell saved as .py)",
+   "lines": 89
+  },
+  {
+   "path": "realai/scripts/scan_realai_roots.ps1.py",
+   "class": "dead",
+   "why": "not Python (PowerShell saved as .py)",
+   "lines": 0
+  },
+  {
+   "path": "realai/scripts/scan_repos_for_realai.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 224
+  },
+  {
+   "path": "realai/scripts/self_improve_loop_smoke.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 51
+  },
+  {
+   "path": "realai/scripts/setup_local_llama.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 269
+  },
+  {
+   "path": "realai/scripts/stack_health.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 61
+  },
+  {
+   "path": "realai/scripts/train_lora_local.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 450
+  },
+  {
+   "path": "realai/scripts/train_to_chat_gguf.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 329
+  },
+  {
+   "path": "realai/scripts/try_load_qwen.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 12
+  },
+  {
+   "path": "realai/scripts/unified_structure_validator.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 27
+  },
+  {
+   "path": "realai/scripts/universal_badass_engine_run.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 484
+  },
+  {
+   "path": "realai/scripts/verify_matrix.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 44
+  },
+  {
+   "path": "realai/scripts/verify_v3_matrix.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 256
+  },
+  {
+   "path": "realai/scripts/vulkan_chat.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 25
+  },
+  {
+   "path": "realai/scripts/vulkan_engine.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 54
+  },
+  {
+   "path": "realai/scripts/vulkan_runtime.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 246
+  },
+  {
+   "path": "realai/scripts/walk_root.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 19
+  },
+  {
+   "path": "realai/scripts/walk_training_sources.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 288
+  },
+  {
+   "path": "realai/scripts/wire_hive_agents.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 105
+  },
+  {
+   "path": "realai/scripts/wire_recovered.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 53
+  },
+  {
+   "path": "realai/scripts/wire_training.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 534
+  },
+  {
+   "path": "realai/scripts/wire_vulkan_backend.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 30
+  },
+  {
+   "path": "realai/scripts/world_model_merger.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 155
+  },
+  {
+   "path": "realai/sdk-py/__init__.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 54
+  },
+  {
+   "path": "realai/sdk/python/realai_client.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 116
+  },
+  {
+   "path": "realai/security/api_key.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 320
+  },
+  {
+   "path": "realai/security/sandbox.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 9
+  },
+  {
+   "path": "realai/self_builder.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 8
+  },
+  {
+   "path": "realai/self_heal.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 561
+  },
+  {
+   "path": "realai/self_heal_loop.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 201
+  },
+  {
+   "path": "realai/self_improvement.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 9
+  },
+  {
+   "path": "realai/self_improving_agent.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 8
+  },
+  {
+   "path": "realai/server/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 17
+  },
+  {
+   "path": "realai/server/api.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 1013
+  },
+  {
+   "path": "realai/server/app.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 272
+  },
+  {
+   "path": "realai/server/backends.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 199
+  },
+  {
+   "path": "realai/server/config.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 353
+  },
+  {
+   "path": "realai/server/embeddings.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 19
+  },
+  {
+   "path": "realai/server/embeddings_backend.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 109
+  },
+  {
+   "path": "realai/server/inference.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 53
+  },
+  {
+   "path": "realai/server/llama_cli_backend.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 175
+  },
+  {
+   "path": "realai/server/logging.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 16
+  },
+  {
+   "path": "realai/server/logging_utils.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 16
+  },
+  {
+   "path": "realai/server/memory_store.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 112
+  },
+  {
+   "path": "realai/server/metrics.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 67
+  },
+  {
+   "path": "realai/server/native_bootstrap.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 48
+  },
+  {
+   "path": "realai/server/orchestration.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 137
+  },
+  {
+   "path": "realai/server/persistence.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 104
+  },
+  {
+   "path": "realai/server/providers.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 121
+  },
+  {
+   "path": "realai/server/realai_local_server.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 299
+  },
+  {
+   "path": "realai/server/router.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 364
+  },
+  {
+   "path": "realai/server/server_settings.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 84
+  },
+  {
+   "path": "realai/server/tools_runtime.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 96
+  },
+  {
+   "path": "realai/server/unified_routes.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 103
+  },
+  {
+   "path": "realai/server/vercel_main.py",
+   "class": "superseded",
+   "why": "week-1/2 FastAPI provider app; live API is realai/server + v3_orchestrator (AUTHORITY.md)",
+   "lines": 28
+  },
+  {
+   "path": "realai/server_settings.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 8
+  },
+  {
+   "path": "realai/setup.py",
+   "class": "dead",
+   "why": "vendored third-party code (pygments/mypy/pydevd/hypothesis/pydantic/pytest/setuptools)",
+   "lines": 58
+  },
+  {
+   "path": "realai/skills/code.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 52
+  },
+  {
+   "path": "realai/skills/core.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 14
+  },
+  {
+   "path": "realai/skills/file_io.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 38
+  },
+  {
+   "path": "realai/skills/registry.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 56
+  },
+  {
+   "path": "realai/skills/web.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 19
+  },
+  {
+   "path": "realai/supervisor.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 8
+  },
+  {
+   "path": "realai/templates/remote_module_template.py",
+   "class": "dead",
+   "why": "vendored third-party library copy (huggingface_hub/torch/transformers/gradio/fastapi utils)",
+   "lines": 108
+  },
+  {
+   "path": "realai/tooling/crypto.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/tooling/filesystem.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/tooling/http.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/tooling/registry.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/tooling/solana.py",
+   "class": "dead",
+   "why": "placeholder: source missing",
+   "lines": 6
+  },
+  {
+   "path": "realai/tools.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 732
+  },
+  {
+   "path": "realai/tools/architect_mode.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 47
+  },
+  {
+   "path": "realai/tools/detect_models.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 15
+  },
+  {
+   "path": "realai/tools/find_all_lora_bits.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 78
+  },
+  {
+   "path": "realai/tools/find_lora_files.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 67
+  },
+  {
+   "path": "realai/tools/find_lora_in_checkpoint_dir.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 67
+  },
+  {
+   "path": "realai/tools/full_training_scanner.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 146
+  },
+  {
+   "path": "realai/tools/lora_pipeline.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 134
+  },
+  {
+   "path": "realai/tools/realai_architect_autofix.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 57
+  },
+  {
+   "path": "realai/tools/realai_architect_summarize.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 34
+  },
+  {
+   "path": "realai/tools/realai_build_model_registry.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 28
+  },
+  {
+   "path": "realai/tools/realai_lora_training_pipeline.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 118
+  },
+  {
+   "path": "realai/tools/realai_run_architect.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 111
+  },
+  {
+   "path": "realai/tools/realai_run_architect3.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 27
+  },
+  {
+   "path": "realai/tools/realai_run_architect_chunked.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 95
+  },
+  {
+   "path": "realai/tools/visualizer.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 420
+  },
+  {
+   "path": "realai/tools/walk_root.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 99
+  },
+  {
+   "path": "realai/training/__init__.py",
+   "class": "wired",
+   "why": "reachable: catalog,hive_tools",
+   "lines": 59
+  },
+  {
+   "path": "realai/training/bootstrap_weights.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 134
+  },
+  {
+   "path": "realai/training/build_datasets.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 45
+  },
+  {
+   "path": "realai/training/dataset_builder/__init__.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 16
+  },
+  {
+   "path": "realai/training/dataset_builder/__main__.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 26
+  },
+  {
+   "path": "realai/training/dataset_builder/adapters.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 550
+  },
+  {
+   "path": "realai/training/dataset_builder/adapters_extra.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 244
+  },
+  {
+   "path": "realai/training/dataset_builder/adapters_tools.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 350
+  },
+  {
+   "path": "realai/training/dataset_builder/dedupe.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 64
+  },
+  {
+   "path": "realai/training/dataset_builder/fetch_lichess_puzzles.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 54
+  },
+  {
+   "path": "realai/training/dataset_builder/pipeline.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 280
+  },
+  {
+   "path": "realai/training/dataset_builder/scrub.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 40
+  },
+  {
+   "path": "realai/training/directml_vram_safe.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 12
+  },
+  {
+   "path": "realai/training/eval.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 86
+  },
+  {
+   "path": "realai/training/export_gguf.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 241
+  },
+  {
+   "path": "realai/training/extract_from_agent_tools.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 129
+  },
+  {
+   "path": "realai/training/finetune.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 192
+  },
+  {
+   "path": "realai/training/hf_paths.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 92
+  },
+  {
+   "path": "realai/training/ledger.py",
+   "class": "wired",
+   "why": "reachable: hive_tools",
+   "lines": 330
+  },
+  {
+   "path": "realai/training/llama_tools.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 94
+  },
+  {
+   "path": "realai/training/pipeline.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 169
+  },
+  {
+   "path": "realai/training/realai_hive_advanced.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 235
+  },
+  {
+   "path": "realai/training/self_data/__main__.py",
+   "class": "wired",
+   "why": "reachable: hive_tools",
+   "lines": 88
+  },
+  {
+   "path": "realai/training/self_data/capture.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 114
+  },
+  {
+   "path": "realai/training/self_data/generate.py",
+   "class": "wired",
+   "why": "reachable: hive_tools",
+   "lines": 429
+  },
+  {
+   "path": "realai/training/self_data/improve.py",
+   "class": "wired",
+   "why": "reachable: hive_tools",
+   "lines": 99
+  },
+  {
+   "path": "realai/training/self_data/verify.py",
+   "class": "wired",
+   "why": "reachable: hive_tools",
+   "lines": 173
+  },
+  {
+   "path": "realai/training/spotcheck.py",
+   "class": "wired",
+   "why": "reachable: hive_tools",
+   "lines": 239
+  },
+  {
+   "path": "realai/training/train_sft.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 875
+  },
+  {
+   "path": "realai/training/unsloth_train.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 51
+  },
+  {
+   "path": "realai/ui/realai_gui.py",
+   "class": "decision",
+   "why": "UI surface (Flask/web dashboard) \u2014 not a training target; wire or retire?",
+   "lines": 648
+  },
+  {
+   "path": "realai/universe/__init__.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 11
+  },
+  {
+   "path": "realai/universe/architect.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 25
+  },
+  {
+   "path": "realai/universe/creative_engine.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 13
+  },
+  {
+   "path": "realai/universe/dispatcher.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 44
+  },
+  {
+   "path": "realai/universe/doctor.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 42
+  },
+  {
+   "path": "realai/universe/entities.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 34
+  },
+  {
+   "path": "realai/universe/hardening.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 13
+  },
+  {
+   "path": "realai/universe/hierarchy.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 19
+  },
+  {
+   "path": "realai/universe/knowledge_graph.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 40
+  },
+  {
+   "path": "realai/universe/memory_bridge.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 34
+  },
+  {
+   "path": "realai/universe/mode.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 73
+  },
+  {
+   "path": "realai/universe/pattern_engine.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 13
+  },
+  {
+   "path": "realai/universe/recipe_engine.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 13
+  },
+  {
+   "path": "realai/universe/registry.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 94
+  },
+  {
+   "path": "realai/universe/worlds.py",
+   "class": "wired",
+   "why": "reachable: live",
+   "lines": 99
+  },
+  {
+   "path": "realai/utilities/__init__.py",
+   "class": "helper",
+   "why": "imported by unwired code only (wired when its parent is)",
+   "lines": 122
+  },
+  {
+   "path": "realai/utilities/autowrap.py",
+   "class": "dead",
+   "why": "vendored sympy autowrap",
+   "lines": 1178
+  },
+  {
+   "path": "realai/utilities/availability.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 77
+  },
+  {
+   "path": "realai/utilities/dimacs.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 69
+  },
+  {
+   "path": "realai/v3_orchestrator.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 23
+  },
+  {
+   "path": "realai/v3_runtime_bridge.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 45
+  },
+  {
+   "path": "realai/voice/__init__.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 34
+  },
+  {
+   "path": "realai/voice/__main__.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 5
+  },
+  {
+   "path": "realai/voice/asr_base.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 11
+  },
+  {
+   "path": "realai/voice/hive_tools.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 133
+  },
+  {
+   "path": "realai/voice/lab_server.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 178
+  },
+  {
+   "path": "realai/voice/paths.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 174
+  },
+  {
+   "path": "realai/voice/provider.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 171
+  },
+  {
+   "path": "realai/voice/servers.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 113
+  },
+  {
+   "path": "realai/voice/tts_base.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 11
+  },
+  {
+   "path": "realai/voice/tts_engine.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 563
+  },
+  {
+   "path": "realai/web3/base.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 2
+  },
+  {
+   "path": "realai/web3/evm_backend.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 2
+  },
+  {
+   "path": "realai/web3/policy.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 2
+  },
+  {
+   "path": "realai/web3/registry.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 2
+  },
+  {
+   "path": "realai/web3/solana_backend.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 2
+  },
+  {
+   "path": "realai/workspace.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 465
+  },
+  {
+   "path": "realai/world_model.py",
+   "class": "wired",
+   "why": "reachable: live,catalog,hive_tools",
+   "lines": 355
+  },
+  {
+   "path": "realai_training/unsloth_train.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 44
+  },
+  {
+   "path": "repo_tools/orchestration_worker.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 17
+  },
+  {
+   "path": "scanners/alt_v4_autonomy_scan.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 63
+  },
+  {
+   "path": "scanners/backend_scan.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 28
+  },
+  {
+   "path": "scanners/build_puzzle_map.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 631
+  },
+  {
+   "path": "scanners/dds10_merge_plan_validator.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 117
+  },
+  {
+   "path": "scanners/dds1_dependency_doc_scan.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 116
+  },
+  {
+   "path": "scanners/dds2_dependency_crosscheck.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 174
+  },
+  {
+   "path": "scanners/dds4_orphan_modules.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 63
+  },
+  {
+   "path": "scanners/dds5_unused_features.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 78
+  },
+  {
+   "path": "scanners/dds6_config_mismatches.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 145
+  },
+  {
+   "path": "scanners/dds7_doc_code_consistency.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 121
+  },
+  {
+   "path": "scanners/dds8_runtime_path_integrity.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 95
+  },
+  {
+   "path": "scanners/dds9_subsystem_completeness_deep.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 115
+  },
+  {
+   "path": "scanners/fs1_full_spectrum_scan.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 155
+  },
+  {
+   "path": "scanners/fs2_module_scan.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 73
+  },
+  {
+   "path": "scanners/lora_scan.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 60
+  },
+  {
+   "path": "scanners/mcp_scan.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 60
+  },
+  {
+   "path": "scanners/npc_scan.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 58
+  },
+  {
+   "path": "scanners/rag_scan.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 59
+  },
+  {
+   "path": "scanners/scan_model_weights.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 529
+  },
+  {
+   "path": "scanners/solana_scan.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 58
+  },
+  {
+   "path": "scanners/stack_health.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 70
+  },
+  {
+   "path": "scanners/tri_v2_worldmodel_scan.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 61
+  },
+  {
+   "path": "scripts/_brand_agents_ui.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 114
+  },
+  {
+   "path": "scripts/_extract_agentx_dash.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 11
+  },
+  {
+   "path": "scripts/_merge_agent_tools_agents.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 80
+  },
+  {
+   "path": "scripts/_restore_quarantine_batch2.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 77
+  },
+  {
+   "path": "scripts/_restore_quarantine_batch3.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 91
+  },
+  {
+   "path": "scripts/_restore_quarantine_batch4.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 189
+  },
+  {
+   "path": "scripts/_smoke_all_abilities_tools_agents.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 335
+  },
+  {
+   "path": "scripts/_wide_hunt_abilities_agents.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 286
+  },
+  {
+   "path": "scripts/ability_matrix.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 45
+  },
+  {
+   "path": "scripts/archive_triage.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 46
+  },
+  {
+   "path": "scripts/calibrate_grader.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 248
+  },
+  {
+   "path": "scripts/catalog_good_code_roots.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 137
+  },
+  {
+   "path": "scripts/check_training.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 186
+  },
+  {
+   "path": "scripts/chess_vs_stockfish.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 469
+  },
+  {
+   "path": "scripts/cleanup.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 268
+  },
+  {
+   "path": "scripts/common.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 197
+  },
+  {
+   "path": "scripts/convert_dataset.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 260
+  },
+  {
+   "path": "scripts/dds3_missing_files.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 26
+  },
+  {
+   "path": "scripts/deep_gold.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 20
+  },
+  {
+   "path": "scripts/deep_promote_scan.py",
+   "class": "wired",
+   "why": "reachable: catalog",
+   "lines": 958
+  },
+  {
+   "path": "scripts/deploy_model.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 264
+  },
+  {
+   "path": "scripts/evaluate_model.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 295
+  },
+  {
+   "path": "scripts/exportable/orchestrator_overmind_runner.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 186
+  },
+  {
+   "path": "scripts/exportable/orchestrator_router.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 325
+  },
+  {
+   "path": "scripts/exportable/orchestrator_solana.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 43
+  },
+  {
+   "path": "scripts/find_self_improve_and_lost.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 234
+  },
+  {
+   "path": "scripts/generate_distillation_data.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 254
+  },
+  {
+   "path": "scripts/import_agency_agents_into_realai.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 249
+  },
+  {
+   "path": "scripts/import_vault77_overseer_agents.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 132
+  },
+  {
+   "path": "scripts/mine_staged_agents.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 199
+  },
+  {
+   "path": "scripts/monitor_training.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 136
+  },
+  {
+   "path": "scripts/overmind_runner.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 179
+  },
+  {
+   "path": "scripts/pkg_content_delta.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 402
+  },
+  {
+   "path": "scripts/promote_assemble_queue.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 185
+  },
+  {
+   "path": "scripts/promote_backup_unique.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 508
+  },
+  {
+   "path": "scripts/promote_eval.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 30
+  },
+  {
+   "path": "scripts/promote_gold.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 481
+  },
+  {
+   "path": "scripts/promote_gold_unique.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 280
+  },
+  {
+   "path": "scripts/promote_queue.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 69
+  },
+  {
+   "path": "scripts/register_local_models.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 59
+  },
+  {
+   "path": "scripts/scan_messy_repo.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 20
+  },
+  {
+   "path": "scripts/scan_realai_roots.ps1.py",
+   "class": "dead",
+   "why": "not Python (PowerShell saved as .py)",
+   "lines": 0
+  },
+  {
+   "path": "scripts/score_dataset.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 214
+  },
+  {
+   "path": "scripts/submit_training.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 265
+  },
+  {
+   "path": "scripts/sync_agency_registry.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 293
+  },
+  {
+   "path": "scripts/train_lora_local.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 506
+  },
+  {
+   "path": "scripts/train_to_chat_gguf.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 376
+  },
+  {
+   "path": "scripts/training_data.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 36
+  },
+  {
+   "path": "scripts/unified_stack.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 621
+  },
+  {
+   "path": "scripts/validate/data_stats.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 156
+  },
+  {
+   "path": "scripts/validate/validate_dpo.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 101
+  },
+  {
+   "path": "scripts/validate/validate_rft.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 204
+  },
+  {
+   "path": "scripts/validate/validate_sft.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 127
+  },
+  {
+   "path": "scripts/vulkan_runtime.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 270
+  },
+  {
+   "path": "scripts/wire_staged_d_roots.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 330
+  },
+  {
+   "path": "sdk/python/realai_client.py",
+   "class": "decision",
+   "why": "orphan with no clear owner; wire or retire?",
+   "lines": 103
+  },
+  {
+   "path": "server/llama_cli_backend.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 2
+  },
+  {
+   "path": "server/tools_runtime.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 2
+  },
+  {
+   "path": "tools/__init__.py",
+   "class": "shim",
+   "why": "import shim (re-exports canonical; keep, nothing to wire)",
+   "lines": 17
+  },
+  {
+   "path": "training/__init__.py",
+   "class": "standalone",
+   "why": "maintenance/CLI script, run by hand (not a product feature)",
+   "lines": 20
+  },
+  {
+   "path": "training/extract_from_agent_tools.py",
+   "class": "standalone",
+   "why": "example/demo or hand-run CLI (has __main__, nothing imports it)",
+   "lines": 58
+  }
+ ]
+}

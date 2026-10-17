@@ -33,7 +33,9 @@ def test_registered_ids_survive_missing_weights():
         assert "available" in got[mid]["realai"], mid
 
 
-def test_default_model_unchanged():
+def test_default_model_unchanged(monkeypatch):
+    # The PC user env sets REALAI_DEFAULT_MODEL; this test checks the built-in default, so clear it here.
+    monkeypatch.delenv("REALAI_DEFAULT_MODEL", raising=False)
     with patch.object(mc, "vulkan_loaded_model_ids", return_value=[]):
         cat = mc.build_catalog()
     assert cat["realai"]["default_model"] == "realai-hive"

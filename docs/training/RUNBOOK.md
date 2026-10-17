@@ -103,10 +103,32 @@ The merge runs on CPU (about 5 min, about 7 GB RAM). Output: `runs\sft-<dataset>
 # -> $env:REALAI_HOME\models\trained_catalog.json: base_model, trained:true, dataset_manifest_sha256,
 #    eval numbers, status candidate-passed / candidate-not-passed, default:false
 $G = "$((Get-ChildItem runs -Directory | Sort-Object LastWriteTime | Select-Object -Last 1).FullName)\gguf\realai-sft-1.5b-Q5_K_M.gguf"
-Start-Process C:\llama-vulkan\llama-server.exe -ArgumentList "-m `"$G`" --host 127.0.0.1 --port 8081 -c 4096 -ngl 99 --jinja"
+Start-Process C:\llama-vulkan\llama-server.exe -ArgumentList "-m `"$G`" --device Vulkan1 --host 127.0.0.1 --port 8081 -c 4096 -ngl 99 --jinja -fa off"
+# -fa off is REQUIRED for Qwen2.5-1.5B (stock or tuned) on this Vulkan build: with flash attention on it emits only "////".
 $body = @{ messages = @(@{ role='user'; content='How many points to win RackUp Pyramid at beginner level?' }); max_tokens = 120 } | ConvertTo-Json -Depth 4
 Invoke-RestMethod -Uri http://127.0.0.1:8081/v1/chat/completions -Method Post -ContentType 'application/json' -Body $body | % { $_.choices[0].message.content }
 # expect: 25 on a 7-foot table (10-ball rack), 40 on a 9-foot table (15-ball rack).
 ```
 `:8080` stays as it is. You can restart it after training; a 1.5B Q5 model on `:8081` fits alongside it.
 Only promote the model (edit `realai_models.json` / swap the chat GGUF) after the pass bar and the spot check both pass.
+
+## 8. Spot-check gate (tool loop) and promotion
+
+```powershell
+& $PY -m realai.training.spotcheck --base-url http://127.0.0.1:8081 --label realai-hive-1.5b
+# writes runs\spotcheck-<stamp>.json; pass = routed to the right tool AND the answer carries the tool's fact
+& $PY -m realai.training.train_sft register --dataset $DS --base-model Qwen/Qwen2.5-1.5B-Instruct --model-id realai-hive-1.5b --default
+# --default is REFUSED unless the newest spot-check pass rate >= 0.8 (--min-pass)
+& $PY -m realai.training.self_data improve      # failures -> weights for the next self-data run + improvement report
+```
+
+## Hive routing data (tool calls) and the self-data loop
+
+See `docs/training/SELF_DATA.md`. Short version:
+```powershell
+& $PY -m realai.training.self_data export-shots C:\Users\tsmit\Rack_em_up\rackup-backend\src\shots\shot-catalog.ts
+& $PY -m realai.training.self_data generate --base-url http://127.0.0.1:8080 --minutes 30 --max-rows 800 --sleep 1 --plan auto
+& $PY -m realai.training.dataset_builder --config config\dataset_builder.hive.pc.json
+$DS = (Get-ChildItem datasets -Directory -Filter 'realai-hive-sft-*' | Sort-Object LastWriteTime | Select-Object -Last 1).FullName
+& $PY -m realai.training.train_sft train --dataset $DS --dry-run --base-model $BASE
+```

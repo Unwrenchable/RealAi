@@ -123,3 +123,8 @@ imports/external/**/site-packages/
 
 
 
+
+# approval gate runtime state (never commit; live store is C:\RealAI-clean\.approvals.json)
+.approvals.json
+.approvals.json.audit.jsonl
+*.approvals.json.audit.jsonl

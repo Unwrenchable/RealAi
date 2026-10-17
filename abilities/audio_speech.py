@@ -10,7 +10,7 @@ ABILITY = {
     "name": "audio_speech",
     "type": "ability",
     "status": "LIVE",
-    "source": "realai.voice.provider + realai.voice.tts_engine",
+    "source": "realai.voice_service (Voice Lab API first, realai.voice.provider fallback)",
     "dest": "abilities/audio_speech.py",
     "capabilities": ["tts", "speech", "kokoro", "fish", "xtts", "windows_sapi", "piper"],
     "secrets_policy": "none",
@@ -32,15 +32,16 @@ def run(
     backend = ctx.get("backend") or ctx.get("engine")
 
     try:
-        from realai.voice.provider import get_voice_provider
+        from realai.voice_service import get_voice_client
 
-        result = get_voice_provider().speak(
+        result = get_voice_client().speak(
             text,
             voice=str(voice) if voice else None,
             backend=str(backend) if backend else None,
-            prepare=True,
-            as_base64=True,
+            save=False,
         )
+        if not result.get("ok") and result.get("route") == "none":
+            raise RuntimeError(result.get("error") or "voice_service unavailable")
         b64 = result.get("audio_b64") or ""
         return {
             "ok": bool(result.get("ok")),
@@ -57,6 +58,7 @@ def run(
             "live_path": "POST /v1/audio/speech (Voice Lab :8890 or Hive)",
             "error": result.get("error"),
             "provider": "realai-voice",
+            "route": result.get("route"),
         }
     except Exception as exc:
         # Last-resort stub so hive tools never hard-crash
