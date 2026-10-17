@@ -123,3 +123,18 @@ imports/external/**/site-packages/
 
 
 
+
+# --- secrets hardening (2026-10-17) ---
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.env.txt
+*.pem
+*.key
+id_rsa*
+*keypair*.json
+wallet*.json
+secrets/
+recovered/**/.env*
+scan_results/*gold_map*.json
