@@ -87,7 +87,9 @@ def seeds(tool: str, rng: random.Random, n: int) -> str:
                 "(no 'our database', 'last year', attached files).")
     if tool in ("list_agents", "route_to_agent"):
         ag = rng.sample(hive_tools.agents(), min(8, len(hive_tools.agents())))
-        return "Hive agents: " + "; ".join(f"{a['id']}: {str(a.get('description', ''))[:110]}" for a in ag)
+        lead = ("Each request is a concrete job for ONE of these agents (draft, review, plan, design, analyse...), in the "
+                "user's words; do not name the agent id. " if tool == "route_to_agent" else "")
+        return lead + "Hive agents: " + "; ".join(f"{a['id']}: {str(a.get('description', ''))[:110]}" for a in ag)
     if tool == "device_profile":
         return "Questions are about THIS machine (no hardware details needed), e.g. which model/quant/GPU to run locally."
     if tool in ("rating_update_preview", "matchmaking_suggest", "rating_intel"):
@@ -132,10 +134,11 @@ def seeds(tool: str, rng: random.Random, n: int) -> str:
     if tool == "executive_goals":
         return "Ask about the executive loop's goals: how many, which are open, which watchers run. Never ask it to act."
     if tool == "request_approval":
-        return "Ask RealAI to change something: edit a line in README.md or a docs/*.md file, run a command like " \
-               "'pytest -q tests/test_merge_versions.py' or 'git status', run self_repair, or promote self-heal gold. " \
-               "The right behaviour is to file an approval request and say it is pending Travis's approval - never " \
-               "claim it ran. Occasionally ask to send SOL or release payouts (must be refused)."
+        return ("Each request asks RealAI to change or run ONE concrete thing, with every detail inline: replace an exact "
+                "phrase in README.md with new text (quote both), create docs/notes-<topic>.md with given content, run a "
+                "command such as 'git status' or 'pytest -q tests/test_merge_versions.py', run a short Python snippet "
+                "(include the code), run self_repair, or promote self-heal gold. Occasionally ask to send SOL or release "
+                "payouts. Write only what the user says: never the expected outcome, status or the word PENDING.")
     return ""
 
 

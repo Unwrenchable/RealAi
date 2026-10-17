@@ -262,7 +262,9 @@ def key_facts(name: str, r: Dict[str, Any], args: Dict[str, Any]) -> List[List[s
     if name == "hive_routes_status":
         if r.get("role_model"):
             return [[str(r["role_model"])]]
-        return [num(r.get("route_count")) + [str(len(r.get("hive_agents") or []))]]
+        routes = [str(x) for x in r.get("routes") or []]
+        return [num(r.get("route_count")) + [str(len(r.get("hive_agents") or []))]
+                + ([routes] if routes else [])]  # listing every route name states the routes as well as the count
     if name == "payout_check":
         if r.get("error") and "status" not in r:
             return []  # argument-validation error (model retries with fixed args); the retried call is what gets checked
@@ -275,7 +277,11 @@ def key_facts(name: str, r: Dict[str, Any], args: Dict[str, Any]) -> List[List[s
         return [[str(t.get("id")) for t in r.get("tools") or []] + [str(t.get("id")).replace("_", " ").replace("ability.", "")
                                                                     for t in r.get("tools") or []]]
     if name == "self_heal_status":
-        return [num(r.get("artifacts_present")) + num(r.get("artifacts_total"))]
+        miss = r.get("missing") or []
+        alts = num(r.get("artifacts_present")) + num(r.get("artifacts_total")) + ([str(len(miss))] if miss else [])
+        if r.get("enabled") is False:  # "self-heal is not enabled" answers the status question too
+            alts += ["not enabled", "disabled", "isn't enabled", "is off", "turned off", "not turned on"]
+        return [alts]
     if name == "executive_goals":
         return [[str(r.get("total"))] + (none + ["no " + str(r.get("status"))] if not r.get("goals") else [])]
     return []
