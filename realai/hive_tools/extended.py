@@ -89,6 +89,8 @@ def rating_update_preview(args, ctx):
     pr, orr = _num(args.get("player_rating")), _num(args.get("opponent_rating"))
     if pr is None or orr is None or "won" not in args:
         return {"ok": False, "error": "need player_rating, opponent_rating and won"}
+    if pr <= 0 or orr <= 0:  # the plugin treats 0 as missing and crashed with a NoneType float error
+        return {"ok": False, "error": "player_rating and opponent_rating must be positive ROC ratings (typically 200-800)"}
     player = {"id": "player", "rating": pr, "rd": _num(args.get("player_rd"), 175.0)}
     payload = {"won": bool(args.get("won")), "opponent_rating": orr, "opponent_rd": _num(args.get("opponent_rd"), 175.0)}
     if args.get("discipline"):

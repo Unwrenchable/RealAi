@@ -118,7 +118,10 @@ def verify(messages: List[Dict[str, Any]], calls: List[Dict[str, Any]], judge: O
             if r.get("name") and _norm(r["name"]) not in _norm(ans) and r.get("id", "") not in ans:
                 reasons.append("shot_not_named")
         elif name == "route_to_agent":
-            if r["handoff"]["agent"] not in ans:
+            h = r["handoff"]
+            names = {str(h.get("agent") or ""), str(h.get("role") or "")}
+            names |= {re.sub(r"[-_]+", " ", n) for n in names}
+            if not any(n.strip() and n.lower() in ans.lower() for n in names):  # id or role ("Tax Strategist") counts
                 reasons.append("agent_not_named")
         elif name == "ability_lookup":
             # any returned match may be the one the user meant; it must be named (id or name) with its status
@@ -163,11 +166,26 @@ def recompute_check(ok_calls: List[Dict[str, Any]], ans: str) -> List[str]:
             out.append(f"recompute_mismatch:{name}")
             continue
         for group in hive_tools.key_facts(str(name), c["result"], args):
-            alts = [a for g in group if g and g != "None" for a in {_norm(g), _norm(g).replace("_", " ")}]
-            if alts and not any(a in low for a in alts):
+            alts = [g for g in group if g and g != "None"]
+            if alts and not any(fact_hit(g, low) for g in alts):
                 out.append(f"{name}_fact_missing")
                 break
     return out
+
+
+def fact_hit(fact: Any, low: str) -> bool:
+    """One key-fact alternative against a normalised answer.
+
+    str: the fact, or the fact with ``_`` read as spaces, appears; a multi-word snake_case fact
+    ("provisional_slipping") also counts when every word appears ("provisional and slipping").
+    list/tuple: ALL of its items must hit (e.g. every route name listed instead of the route count)."""
+    if isinstance(fact, (list, tuple)):
+        return bool(fact) and all(fact_hit(f, low) for f in fact)
+    f = _norm(fact)
+    if f in low or f.replace("_", " ") in low:
+        return True
+    words = [w for w in re.split(r"[_\s]+", f) if w]
+    return "_" in f and len(words) > 1 and all(re.search(r"\b" + re.escape(w) + r"\b", low) for w in words)
 
 
 def llm_judge(chat) -> Callable[..., bool]:

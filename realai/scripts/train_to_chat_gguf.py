@@ -44,6 +44,20 @@ CKPT = Path(os.environ.get("TRAIN_OUTPUT_DIR") or r"C:\models\checkpoints_lora")
 REPORT = ROOT / "scan_results" / "TRAIN_TO_CHAT_GGUF.json"
 
 
+def _dtype_kwargs(dtype):
+    """dtype= on transformers >= 4.56, torch_dtype= before (older releases silently ignore dtype=)."""
+    try:
+        from realai.training.hf_compat import dtype_kwargs
+    except ImportError:
+        import re
+
+        import transformers
+
+        v = tuple(int(x) for x in re.findall(r"\d+", transformers.__version__)[:2])
+        return {"dtype" if v >= (4, 56) else "torch_dtype": dtype}
+    return dtype_kwargs(dtype)
+
+
 def utc() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -101,7 +115,7 @@ def merge_adapter(base_model: str, adapter_dir: Path, merged_dir: Path) -> Path:
     base = AutoModelForCausalLM.from_pretrained(
         base_model,
         trust_remote_code=True,
-        torch_dtype=torch.float16,
+        **_dtype_kwargs(torch.float16),
         low_cpu_mem_usage=True,
         device_map="cpu",
     )

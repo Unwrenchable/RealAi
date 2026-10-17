@@ -197,6 +197,13 @@ DTYPE_BYTES = {"fp32": 4, "fp16": 2, "bf16": 2}
 DTYPE_MAP = {"float32": "fp32", "float16": "fp16", "bfloat16": "bf16"}
 
 
+def dtype_kwargs(dtype) -> Dict[str, Any]:
+    """dtype= on transformers >= 4.56, torch_dtype= before (see realai.training.hf_compat)."""
+    from realai.training.hf_compat import dtype_kwargs as _kw
+
+    return _kw(dtype)
+
+
 def torch_dtype(name: str):
     import torch
 
@@ -567,7 +574,7 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
     # the CE loss stay fp32. fp32 is the proven 1.5B setting; fp16 halves weight memory for 3B on 12 GB.
     bdt = choose_dtype(device, recipe.base_dtype, log)
     log(f"base={base_path} base_dtype={bdt} ce_chunk={recipe.ce_chunk}")
-    model = AutoModelForCausalLM.from_pretrained(base_path, torch_dtype=torch_dtype(bdt))
+    model = AutoModelForCausalLM.from_pretrained(base_path, **dtype_kwargs(torch_dtype(bdt)))
     model.gradient_checkpointing_enable()
     model.enable_input_require_grads()
     model.config.use_cache = False
@@ -685,6 +692,10 @@ def _train_once(args, recipe: Recipe, max_len: int, log) -> Dict[str, Any]:
 
 
 def train(args, recipe: Recipe) -> int:
+    import warnings
+
+    # torch internals (gradient checkpointing) call the deprecated torch.cpu.amp.autocast: noise, not ours to fix
+    warnings.filterwarnings("ignore", category=FutureWarning, message=r".*torch\.cpu\.amp\.autocast.*")
     p = plan(args, recipe)
     if not p["ok"]:
         print(json.dumps(p, indent=2)); return 2
@@ -735,7 +746,7 @@ def evaluate(args, recipe: Recipe) -> int:
     base_path = resolve_model_path(recipe.base_model)
     tok = AutoTokenizer.from_pretrained(base_path)
     dtype = torch_dtype(res.get("base_dtype") or DTYPE_MAP.get(res.get("dtype", ""), "") or recipe.base_dtype)
-    base = AutoModelForCausalLM.from_pretrained(base_path, torch_dtype=dtype).to(device)
+    base = AutoModelForCausalLM.from_pretrained(base_path, **dtype_kwargs(dtype)).to(device)
     base_loss = eval_loss(base, tok, rows, max_len, device)
     base = base.to("cpu")  # attach LoRA on CPU (plain tensors), then move as one module
     tuned = PeftModel.from_pretrained(base, str(out / "adapter_best")).to(device)

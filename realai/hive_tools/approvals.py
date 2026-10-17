@@ -24,14 +24,16 @@ _SANDBOX: Dict[str, Path] = {}
 SPECS: Dict[str, Dict[str, Any]] = {
     "request_approval": _fn(
         "request_approval",
-        "Ask Travis to approve a write/exec action: edit a file (search_replace: file_path, old_string, new_string), "
-        "write a file (write_file), run a shell command (run_terminal_command: command, cwd), run a script, or a "
-        "self-heal promote / auto_wire / self_extend / self_repair. Files a PENDING request with a dry-run preview "
-        "(diff or exact command); nothing runs until a human approves. Money sends/transfers/payouts are refused.",
+        "Ask Travis to approve a write/exec action on this workspace. Fields per action: search_replace: file_path, "
+        "old_string, new_string; write_file: file_path, content; run_terminal_command: command (cwd optional); "
+        "run_script: code (language optional, default python); auto_wire / self_heal_promote / self_extend / "
+        "self_repair: reason only. Files a PENDING request with a dry-run preview (diff or exact command); nothing "
+        "runs until a human approves. Say it is pending only if status is pending; if it is refused, say why. Money "
+        "sends/transfers/payouts are refused. Not for delegating work to agents (use route_to_agent).",
         {"action": {"type": "string", "enum": ["search_replace", "write_file", "run_terminal_command", "run_script",
                                                "auto_wire", "self_heal_promote", "self_extend", "self_repair"]},
          "file_path": _S, "old_string": _S, "new_string": _S, "content": _S, "command": _S, "cwd": _S,
-         "reason": _S},
+         "code": _S, "language": _S, "reason": _S},
         ["action", "reason"]),
 }
 

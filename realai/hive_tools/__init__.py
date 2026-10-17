@@ -42,14 +42,23 @@ SPECS: Dict[str, Dict[str, Any]] = {
                        {"query": _S}, ["query"]),
     "device_profile": _fn("device_profile", "Detect hardware (or take a given profile) and recommend model, quant, context and --device.",
                           {"profile": {"type": "object"}}, []),
-    "math_solver": _fn("math_solver", "Solve/verify math with sympy (equations, derivatives, integrals, arithmetic).",
+    "math_solver": _fn("math_solver", "Exact math with sympy, verified: equations and systems, identities "
+                       "('is (a+b)^2 = a^2+2ab+b^2 always true'), derivatives, integrals incl. definite "
+                       "('integral of 1/(x^2+4) dx from 0 to oo'), arithmetic, the average of a few numbers. Pass the "
+                       "math itself in problem, e.g. '3x + 4 = 19'. For statistics on a data list use data_analysis.",
                        {"problem": _S}, ["problem"]),
-    "data_analysis": _fn("data_analysis", "Descriptive statistics for a list of numbers or rows.",
+    "data_analysis": _fn("data_analysis", "Descriptive statistics for a list of numbers or rows: count, mean, "
+                         "median, stdev, quartiles, outliers, trend. Pass the numbers in data, e.g. [12, 15, 9].",
                          {"data": {"type": "array", "items": {}}}, ["data"]),
     "ability_lookup": _fn("ability_lookup", "RealAI's own ability catalog: id, status (LIVE/PARTIAL/STUB), how to call it.",
                           {"query": _S}, ["query"]),
-    "list_agents": _fn("list_agents", "Find hive agents (.agentx) matching a need.", {"query": _S}, ["query"]),
-    "route_to_agent": _fn("route_to_agent", "Hand a task to a named hive agent.", {"agent": _S, "task": _S}, ["agent", "task"]),
+    "list_agents": _fn("list_agents", "Find specialist hive agents (.agentx) for a need: writing, marketing, code, "
+                       "game dev, design, research, finance, security... Use it for any task RealAI's own tools "
+                       "don't cover instead of refusing; returns agent ids and roles.", {"query": _S}, ["query"]),
+    "route_to_agent": _fn("route_to_agent", "Delegate a task to a hive agent by its exact id from list_agents (call "
+                          "list_agents first if unsure). Use for doing work (drafting, coding help, analysis); name "
+                          "the agent in your answer. Not for file edits or commands: those need request_approval.",
+                          {"agent": _S, "task": _S}, ["agent", "task"]),
     "web_search": _fn("web_search", "Web search (network; disabled offline).", {"query": _S}, ["query"]),
     "solana_read": _fn("solana_read", "Read-only Solana RPC lookup (balance/account); never sends (network).",
                        {"address": _S, "method": _S}, ["address"]),
@@ -220,10 +229,12 @@ def _device(args, ctx):
 
 
 def _math(args, ctx):
-    from abilities.math_solver import solve
+    from abilities.math_solver import run as solve_safe
 
-    r = solve(str(args.get("problem", "")))
-    return {k: r.get(k) for k in ("ok", "kind", "answer", "verified", "method", "error") if r.get(k) is not None}
+    r = solve_safe(str(args.get("problem") or args.get("expression") or args.get("equation") or ""))
+    r.setdefault("ok", r.get("status") == "success")
+    return {k: r.get(k) for k in ("ok", "kind", "answer", "numeric", "bounds", "identity", "verified", "method", "error")
+            if r.get(k) is not None}
 
 
 def _data(args, ctx):
