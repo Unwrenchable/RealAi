@@ -2350,7 +2350,15 @@ class RealAI:
                    extra={"persona": self.persona, "source": "error", "error": _api_error})
 
         # Local OpenAI-compatible HTTP endpoint (llama-server / Hive), no key needed.
-        if os.environ.get("REALAI_LOCAL_HTTP_FALLBACK", "1").strip().lower() not in {"0", "false", "no"}:
+        # Hosted cloud (Render/Fly/...) never probes loopback llama-server: same unconditional deny as
+        # cloud_fallback.vulkan_forward_enabled(). Local :8000 is unaffected.
+        try:
+            from realai.cloud_fallback import is_hosted_cloud as _is_hosted_cloud
+
+            _hosted = bool(_is_hosted_cloud())
+        except Exception:
+            _hosted = False
+        if not _hosted and os.environ.get("REALAI_LOCAL_HTTP_FALLBACK", "1").strip().lower() not in {"0", "false", "no"}:
             try:
                 from realai.local_media import local_chat as _local_chat
 

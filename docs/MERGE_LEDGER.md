@@ -682,3 +682,6 @@ See docs/BUILD_LEFTOVERS.md. It covers the nested .git, in-package setup.py/pypr
 | `realai/widget` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
 | `realai/workflows` | 2 | 0 | 0 | 0 | 0 | 0 | 0 |  |
 | `realai/world_model` | 30 | 27 | 0 | 0 | 0 | 0 | 0 |  |
+
+### Fix found by the PC test run (2026-10-17)
+`tests/test_cloud_fallback.py::test_chat_completion_clear_cloud_error_without_keys` failed on the PC only, because the 14B on :8080 was up. With `RENDER=true`, `RealAI.chat_completion` still fell through to the `REALAI_LOCAL_HTTP_FALLBACK` path and answered from loopback `:8080`. That bypassed the documented "hosted cloud is an unconditional deny" rule, which predates this branch (introduced in c1186ae). The local-HTTP fallback is now skipped when `is_hosted_cloud()` is true. Local :8000 behaviour is unchanged. Regression test: `test_hosted_cloud_skips_local_http_fallback`.
