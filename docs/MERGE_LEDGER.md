@@ -685,3 +685,10 @@ See docs/BUILD_LEFTOVERS.md. It covers the nested .git, in-package setup.py/pypr
 
 ### Fix found by the PC test run (2026-10-17)
 `tests/test_cloud_fallback.py::test_chat_completion_clear_cloud_error_without_keys` failed on the PC only, because the 14B on :8080 was up. With `RENDER=true`, `RealAI.chat_completion` still fell through to the `REALAI_LOCAL_HTTP_FALLBACK` path and answered from loopback `:8080`. That bypassed the documented "hosted cloud is an unconditional deny" rule, which predates this branch (introduced in c1186ae). The local-HTTP fallback is now skipped when `is_hosted_cloud()` is true. Local :8000 behaviour is unchanged. Regression test: `test_hosted_cloud_skips_local_http_fallback`.
+
+
+### Decisions 2026-10-17 (Travis GO, ~02:12 PT)
+1. Chat UI: helper only (e029b01); no full merge of realai/apps/frontend.
+2. `/v1/providers/route` and `/v1/tools/route` added read-only behind `REALAI_ROUTING_ROUTES=1` (default off; 6676333). No execution path.
+3. Build leftovers: branch fixes in cb8e9a1. Archive at `D:\ARCHIVE\build-leftovers-20261017` (MOVE_LOG.md/json): 36 `recovered/**/*.egg-info` moved (472 KB, SHA256-verified); nested `.learn_cache/realai/.git` bundled and verified but **kept** (the learn pipeline would rmtree the cache without it); root `realai.egg-info` **kept** (the realai-train venv resolves the realai-server/realai-craft entry points from it via user PYTHONPATH). Details in docs/BUILD_LEFTOVERS.md.
+4. finetune.py keeps its current default data dir.

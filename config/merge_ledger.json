@@ -22,11 +22,8 @@
   "decision_batch_shims": 13
  },
  "needs_travis": [
-  "realai/core/training/finetune.py plan default data dir (realai/core/datasets/processed) vs RealAI-gold main-realai (<repo>/training/data)",
   "326 impl-level conflicts in the 130 priority-9 families (210 in copies with newer mtime, mostly .learn_cache / installer payload copies) were classified, not line-reviewed",
-  "realai/apps/frontend UI phase: merge whole newer chat UI or keep helper-only",
-  "RealAi-unified handle_provider_route/handle_tool_route: add as new read-only :8000 endpoints (off by default) or drop",
-  "Build leftovers (docs/BUILD_LEFTOVERS.md): approve archiving to D:\\ARCHIVE / pyproject exclude changes"
+  "realai/packages/* + realai/{cli,sdk-ts,sdk-py,ui} npm copies: function-level merge into packages/* before archiving (deferred)"
  ],
  "families": [
   {
@@ -14866,6 +14863,27 @@
    "needs_decision": 0,
    "note": "",
    "all_files": 30
+  }
+ ],
+ "decisions_20261017b": [
+  {
+   "item": "realai/apps/frontend UI phase",
+   "decision": "keep helper only (buildCompletionMessages, MessageRole); no full merge",
+   "commit": "e029b01"
+  },
+  {
+   "item": "RealAi-unified handle_provider_route/handle_tool_route",
+   "decision": "added read-only behind REALAI_ROUTING_ROUTES=1 (default off), tests",
+   "file": "realai/server/routing_routes.py"
+  },
+  {
+   "item": "build leftovers",
+   "decision": "branch fixes (in-package setup/pyproject removed, pyproject excludes) + archive to D:\\ARCHIVE\\build-leftovers-20261017 (36 recovered egg-info moved; nested .git bundled, not moved; root realai.egg-info skipped: live dep)",
+   "doc": "docs/BUILD_LEFTOVERS.md"
+  },
+  {
+   "item": "realai/core/training/finetune.py data dir",
+   "decision": "keep current default (realai/core/datasets/processed)"
   }
  ]
 }
