@@ -12,52 +12,20 @@
  "counts": {
   "divergent_families": 175,
   "archive_only_divergent": 4,
-  "analyzed": 72,
-  "merged_files": 20,
+  "analyzed": 175,
+  "merged_files": 23,
   "missing_defs_in_analyzed": 9,
-  "recovered_defs": 17,
+  "recovered_defs": 19,
   "recovered_impl_merges": 4,
   "divergent_impls_in_analyzed": 108,
   "conflicts_explained_by_git_history": 122,
   "decision_batch_shims": 13
  },
  "needs_travis": [
-  {
-   "item": "REALAI_EXEC_UNGATED=1 escape hatch (restores ungated _run_tool exec for console sessions): keep or delete?",
-   "why": "open after decision batch"
-  },
-  {
-   "item": "Approval store path: set APPROVALS_STORE once so the Flask approval UI, the gate and approval_status share one file (UI defaults to cwd .approvals.json)",
-   "why": "open after decision batch"
-  },
-  {
-   "item": "craft CLI: tool_exec -> v3_orchestrator._run_tool write/exec now files approval requests too (human-operated CLI); exempt craft?",
-   "why": "open after decision batch"
-  },
-  {
-   "item": "realai.plugins.tools package import pulls core.security (missing in some envs) -> hive_executor cannot reach approval_store and denies everything (safe, but no pending request is filed)",
-   "why": "open after decision batch"
-  },
-  {
-   "item": "Point orchestrator voice_* tools / abilities/audio_speech at realai.voice_service (lab-first) instead of in-process provider?",
-   "why": "open after decision batch"
-  },
-  {
-   "item": "Make REALAI_SERVER_MERGED_ROUTES / REALAI_IMAGES_LOCAL_SDXL default on :8000?",
-   "why": "open after decision batch"
-  },
-  {
-   "item": "realai/start_realai.bat calls `realai.cli.realai_cli serve`, which does not exist in this tree",
-   "why": "open after decision batch"
-  },
-  {
-   "item": "realai/core/training/finetune.py plan default data dir (realai/core/datasets/processed) vs RealAI-gold main-realai (<repo>/training/data)",
-   "why": "open after decision batch"
-  },
-  {
-   "item": "agents/agents.py `AGENT_REGISTRY = property(...)` at module level (a property object, not a dict) was dropped by realai/core/agents/agents.py: confirm it stays dropped",
-   "why": "open after decision batch"
-  }
+  "realai/core/training/finetune.py plan default data dir (realai/core/datasets/processed) vs RealAI-gold main-realai (<repo>/training/data)",
+  "agents/agents.py AGENT_REGISTRY = property(...) at module level was dropped by realai/core/agents/agents.py: confirm it stays dropped",
+  "326 impl-level conflicts in the 130 priority-9 families (210 in copies with newer mtime, mostly .learn_cache / installer payload copies) were classified, not line-reviewed",
+  "tests/test_model_catalog_persist.py::test_default_model_unchanged fails on the PC only because the user env sets REALAI_DEFAULT_MODEL=realai-default-coder (passes with it unset); make the test clear the env?"
  ],
  "families": [
   {
@@ -4574,8 +4542,74 @@
      "mtime": "2026-10-03"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "logger": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "CitationEngine": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "CitationEngine.__init__": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "CitationEngine.add_source": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "CitationEngine.get_citations": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "CitationEngine.check_rate_limit": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "CitationEngine.format_bibliography": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "RealAI._automate_email": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "RealAI._automate_search": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "RealAI._record_audio": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "RealAI.voice_session": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "RealAI._summarize_page": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "RealAI._fact_check": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "RealAI._estimate_funding_needs": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "RealAI.multi_agent_orchestration": {
+     "status": "recoverable",
+     "sources": 10
+    }
+   },
+   "conflicts": 8,
+   "conflicts_newer_mtime": 6,
+   "analyzed_on": "2026-10-17",
+   "resolution": "canonical is a quarantine twin; .learn_cache realai/__init__ CitationEngine/_automate_email/_estimate_funding_needs not merged (email automation = send path; package __init__ is the slim client export)"
   },
   {
    "family": "_quarantine/twins_20260921/realai__plugins__plugins/plugin_test_realai.py",
@@ -4601,8 +4635,13 @@
      "mtime": "2026-09-21"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "_quarantine/twins_20260924/realai_agents/router.py",
@@ -4635,8 +4674,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "_quarantine/twins_20260926/realai__apps/api/main.py",
@@ -4732,8 +4776,13 @@
      "mtime": "2026-08-30"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "_quarantine/twins_20260926/realai__apps/api/routes/audio.py",
@@ -4773,8 +4822,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "_quarantine/twins_20260926/realai__apps/api/routes/chat.py",
@@ -4856,8 +4910,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "_quarantine/twins_20260926/realai__apps/api/routes/embeddings.py",
@@ -4897,8 +4956,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "_quarantine/twins_20260926/realai__apps/api/routes/health.py",
@@ -4938,8 +5002,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "_quarantine/twins_20260926/realai__apps/api/routes/models.py",
@@ -4979,8 +5048,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "_quarantine/twins_20260926/realai__apps/api/routes/tasks.py",
@@ -5020,8 +5094,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "_quarantine/twins_20260926/realai__apps/api/routes/voice_ws.py",
@@ -5061,8 +5140,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "_quarantine/twins_20260926/realai__apps/api/routes/web3.py",
@@ -5102,8 +5186,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "_quarantine/twins_20260926/realai__modules__desktop_unique/examples_local_ai.py",
@@ -5157,8 +5246,22 @@
      "mtime": "2026-08-30"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "logger": {
+     "status": "recoverable",
+     "sources": 1
+    },
+    "create_client": {
+     "status": "recoverable",
+     "sources": 1
+    }
+   },
+   "conflicts": 8,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/__init__.py",
@@ -5177,8 +5280,13 @@
      "mtime": "2026-09-21"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/__main__.py",
@@ -5197,8 +5305,13 @@
      "mtime": "2026-08-28"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 5,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/_v1_client.py",
@@ -5217,8 +5330,34 @@
      "mtime": "2026-09-19"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "PROVIDER_CONFIGS": {
+     "status": "removed_in_git",
+     "sources": 1,
+     "removed_commit": "3dd1ed01"
+    },
+    "_KEY_PREFIX_TO_PROVIDER": {
+     "status": "removed_in_git",
+     "sources": 1,
+     "removed_commit": "3dd1ed01"
+    },
+    "PROVIDER_ENV_VARS": {
+     "status": "removed_in_git",
+     "sources": 1,
+     "removed_commit": "3dd1ed01"
+    },
+    "_detect_provider": {
+     "status": "removed_in_git",
+     "sources": 1,
+     "removed_commit": "3dd1ed01"
+    }
+   },
+   "conflicts": 2,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; removed-in-git defs not restored; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/agent_activity.py",
@@ -5237,8 +5376,13 @@
      "mtime": "2026-09-21"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/api/index.py",
@@ -5306,8 +5450,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/api_server.py",
@@ -5536,8 +5685,149 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "_DEFAULT_DB_PATH": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "init_db": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "_PROVIDER_META": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "_WEB_UI_HTML": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler._send_response": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler._send_html_response": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler._read_body": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler._get_model": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler.do_OPTIONS": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler.do_GET": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler.do_POST": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler.log_message": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "run_server": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "main": {
+     "status": "removed_in_git",
+     "sources": 29,
+     "removed_commit": "806640f7"
+    },
+    "_vulkan_healthy": {
+     "status": "removed_in_git",
+     "sources": 2,
+     "removed_commit": "806640f7"
+    },
+    "_vulkan_chat": {
+     "status": "removed_in_git",
+     "sources": 2,
+     "removed_commit": "806640f7"
+    },
+    "_looks_like_local_placeholder": {
+     "status": "removed_in_git",
+     "sources": 2,
+     "removed_commit": "806640f7"
+    },
+    "_REPO_ROOT": {
+     "status": "removed_in_git",
+     "sources": 4,
+     "removed_commit": "806640f7"
+    },
+    "_FUSION_UI_DIR": {
+     "status": "removed_in_git",
+     "sources": 4,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler._cors_allow_origin": {
+     "status": "removed_in_git",
+     "sources": 8,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler._set_cors_headers": {
+     "status": "removed_in_git",
+     "sources": 8,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler._send_bytes": {
+     "status": "removed_in_git",
+     "sources": 4,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler._fusion_config_js": {
+     "status": "removed_in_git",
+     "sources": 4,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler._serve_fusion_ui": {
+     "status": "removed_in_git",
+     "sources": 4,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler._resolve_user_id": {
+     "status": "removed_in_git",
+     "sources": 22,
+     "removed_commit": "806640f7"
+    },
+    "RealAIAPIHandler.do_DELETE": {
+     "status": "removed_in_git",
+     "sources": 17,
+     "removed_commit": "806640f7"
+    }
+   },
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "resolved earlier: shim of realai/server/legacy_api.py (806640f)"
   },
   {
    "family": "realai/aura/reasoning.py",
@@ -5556,8 +5846,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/bot/boot.py",
@@ -5576,8 +5871,13 @@
      "mtime": "2026-09-21"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/bot/live_exec.py",
@@ -5596,8 +5896,13 @@
      "mtime": "2026-09-21"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/bot/natural_mode.py",
@@ -5616,8 +5921,13 @@
      "mtime": "2026-09-21"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 9,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/bot/talk_easy.py",
@@ -5636,8 +5946,13 @@
      "mtime": "2026-09-21"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/cli/craft.py",
@@ -5691,8 +6006,13 @@
      "mtime": "2026-09-24"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 22,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "resolved earlier: canonical, realai/craft.py shim (cc38c58)"
   },
   {
    "family": "realai/cli/realai_cli.py",
@@ -5746,8 +6066,13 @@
      "mtime": "2026-10-03"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/coding_agent.py",
@@ -5997,8 +6322,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/config/amd_inference.py",
@@ -6045,8 +6375,13 @@
      "mtime": "2026-08-30"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/core/agents/agents.py",
@@ -6135,8 +6470,18 @@
      "mtime": "2026-08-01"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "AGENT_REGISTRY": {
+     "status": "recoverable",
+     "sources": 11
+    }
+   },
+   "conflicts": 10,
+   "conflicts_newer_mtime": 10,
+   "analyzed_on": "2026-10-17",
+   "resolution": "AGENT_REGISTRY = property(...) (module-level property object) stays dropped pending Travis"
   },
   {
    "family": "realai/core/agents/critic.py",
@@ -6211,8 +6556,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/core/agents/executor.py",
@@ -6287,8 +6637,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/core/agents/planner.py",
@@ -6363,8 +6718,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/core/agents/supervisor.py",
@@ -6460,8 +6820,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/core/agents/synthesizer.py",
@@ -6536,8 +6901,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/core/agents/worker.py",
@@ -6612,8 +6982,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/core/audit.py",
@@ -6702,8 +7077,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/core/closed_loop.py",
@@ -6778,8 +7158,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 4,
+   "conflicts_newer_mtime": 4,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/core/identity.py",
@@ -6840,8 +7225,13 @@
      "mtime": "2026-10-03"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/core/inference/chat_pipeline.py",
@@ -6888,8 +7278,13 @@
      "mtime": "2026-10-03"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/core/local_models.py",
@@ -7111,8 +7506,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 16,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "resolved earlier: PEFT merge + shims (cc38c58)"
   },
   {
    "family": "realai/core/metrics/metrics.py",
@@ -7131,8 +7531,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/core/security/python_sandbox.py",
@@ -7151,8 +7556,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/core/self_builder.py",
@@ -7220,8 +7630,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/core/self_improvement.py",
@@ -7289,8 +7704,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/core/tools/code.py",
@@ -7379,8 +7799,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/core/tools/file.py",
@@ -7469,8 +7894,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/core/tools/registry.py",
@@ -7559,8 +7989,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/core/tools/web3.py",
@@ -7649,8 +8084,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/core/training/extract_from_agent_tools.py",
@@ -7711,8 +8151,13 @@
      "mtime": "2026-08-31"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 7,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/core/training/finetune.py",
@@ -7738,8 +8183,22 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "_REPO_ROOT": {
+     "status": "recoverable",
+     "sources": 2
+    },
+    "_DEFAULT_DATA": {
+     "status": "recoverable",
+     "sources": 2
+    }
+   },
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "_DEFAULT_DATA (<repo>/training/data) vs canonical datasets/processed: pending Travis"
   },
   {
    "family": "realai/core/training/train_qwen_lora_directml.py",
@@ -7758,8 +8217,23 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": true,
+   "missing_from_canonical": {
+    "RUN_SUBDIR": {
+     "status": "recoverable",
+     "sources": 1
+    },
+    "GRAD_ACCUM": {
+     "status": "recoverable",
+     "sources": 1
+    }
+   },
+   "conflicts": 9,
+   "conflicts_newer_mtime": 9,
+   "analyzed_on": "2026-10-17",
+   "resolution": "merged GRAD_ACCUM (TRAIN_GRADIENT_ACCUMULATION_STEPS, default 1); RUN_SUBDIR already present as run_subdir",
+   "merge_commit": "bd79200"
   },
   {
    "family": "realai/core/web3/evm_backend.py",
@@ -7820,8 +8294,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/core/web3/solana_backend.py",
@@ -7882,8 +8361,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/doctor.py",
@@ -7909,8 +8393,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/engine/__init__.py",
@@ -7943,8 +8432,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/examples/examples_limitless.py",
@@ -7963,8 +8457,18 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "logger": {
+     "status": "recoverable",
+     "sources": 1
+    }
+   },
+   "conflicts": 19,
+   "conflicts_newer_mtime": 19,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/lambda_embeddings_audio.py",
@@ -7990,8 +8494,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/learn/pipeline.py",
@@ -8010,8 +8519,13 @@
      "mtime": "2026-09-21"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/learn/scaffold.py",
@@ -8037,8 +8551,13 @@
      "mtime": "2026-09-21"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 6,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/local_media.py",
@@ -8064,8 +8583,13 @@
      "mtime": "2026-09-02"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/mcp_server.py",
@@ -8105,8 +8629,13 @@
      "mtime": "2026-08-23"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 3,
+   "conflicts_newer_mtime": 3,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/model_assets.py",
@@ -8132,8 +8661,22 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "_REPO_ROOT": {
+     "status": "recoverable",
+     "sources": 2
+    },
+    "_MODELS_ROOT": {
+     "status": "recoverable",
+     "sources": 2
+    }
+   },
+   "conflicts": 3,
+   "conflicts_newer_mtime": 3,
+   "analyzed_on": "2026-10-17",
+   "resolution": "_REPO_ROOT/_MODELS_ROOT refactored into repo_root()/models_root(); no callers of the old names"
   },
   {
    "family": "realai/model_registry.py",
@@ -8152,8 +8695,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 17,
+   "conflicts_newer_mtime": 17,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/models/model_catalog.py",
@@ -8270,8 +8818,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 5,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/agent-tools-main/sanity_check.py",
@@ -8311,8 +8864,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 8,
+   "conflicts_newer_mtime": 8,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/atomicfizz_coach/__init__.py",
@@ -8394,8 +8952,13 @@
      "mtime": "2026-09-19"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 4,
+   "conflicts_newer_mtime": 4,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/atomicfizz_coach/abilities/__init__.py",
@@ -8477,8 +9040,18 @@
      "mtime": "2026-09-19"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "_load": {
+     "status": "recoverable",
+     "sources": 10
+    }
+   },
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "explicit ABILITY_RUNNERS registry kept; glob _load auto-discovery belongs to learned coaches"
   },
   {
    "family": "realai/plugins/atomicfizz_coach/abilities/health.py",
@@ -8560,8 +9133,22 @@
      "mtime": "2026-09-19"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "ABILITY_ID": {
+     "status": "recoverable",
+     "sources": 10
+    },
+    "ALIASES": {
+     "status": "recoverable",
+     "sources": 10
+    }
+   },
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "ABILITY_ID/ALIASES metadata from learned coaches; ping alias already registered explicitly"
   },
   {
    "family": "realai/plugins/device_selector.py",
@@ -8615,8 +9202,13 @@
      "mtime": "2026-08-01"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/effective_engine_main_coach/abilities/agents_bridge.py",
@@ -8684,8 +9276,13 @@
      "mtime": "2026-09-19"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/effective_engine_main_coach/abilities/fastify_context.py",
@@ -8711,8 +9308,13 @@
      "mtime": "2026-09-21"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/effective_engine_main_coach/abilities/node_context.py",
@@ -8759,8 +9361,13 @@
      "mtime": "2026-09-19"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/effective_engine_main_coach/abilities/repo_map.py",
@@ -8828,8 +9435,13 @@
      "mtime": "2026-09-19"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/realai_clean_backup_coach/abilities/abilities_bridge.py",
@@ -8862,8 +9474,13 @@
      "mtime": "2026-09-19"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/realai_clean_backup_coach/abilities/modules_bridge.py",
@@ -8896,8 +9513,13 @@
      "mtime": "2026-09-19"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/realai_clean_backup_coach/abilities/packages_bridge.py",
@@ -8930,8 +9552,13 @@
      "mtime": "2026-09-19"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/realai_clean_backup_coach/abilities/plugins_bridge.py",
@@ -8964,8 +9591,13 @@
      "mtime": "2026-09-19"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/realai_clean_backup_coach/abilities/route_v1_audio_speech.py",
@@ -8998,8 +9630,13 @@
      "mtime": "2026-09-19"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/realai_clean_backup_coach/abilities/route_v1_audio_transcriptions.py",
@@ -9032,8 +9669,13 @@
      "mtime": "2026-09-19"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/realai_clean_backup_coach/abilities/route_v1_chat_completions.py",
@@ -9066,8 +9708,13 @@
      "mtime": "2026-09-19"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/realai_local_server.py",
@@ -9100,8 +9747,86 @@
      "mtime": "2026-08-08"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "_ROOT": {
+     "status": "recoverable",
+     "sources": 3
+    },
+    "_MODELS": {
+     "status": "recoverable",
+     "sources": 3
+    },
+    "DEFAULT_MODEL_ID": {
+     "status": "recoverable",
+     "sources": 3
+    },
+    "_GGUF_CANDIDATES": {
+     "status": "recoverable",
+     "sources": 3
+    },
+    "_LLAMA_CANDIDATES": {
+     "status": "recoverable",
+     "sources": 3
+    },
+    "_find_llama_cli": {
+     "status": "recoverable",
+     "sources": 3
+    },
+    "_find_default_gguf": {
+     "status": "recoverable",
+     "sources": 3
+    },
+    "app": {
+     "status": "removed_in_git",
+     "sources": 3,
+     "removed_commit": "806640f7"
+    },
+    "ChatMessage": {
+     "status": "removed_in_git",
+     "sources": 3,
+     "removed_commit": "806640f7"
+    },
+    "ChatRequest": {
+     "status": "removed_in_git",
+     "sources": 3,
+     "removed_commit": "806640f7"
+    },
+    "CompletionRequest": {
+     "status": "removed_in_git",
+     "sources": 3,
+     "removed_commit": "806640f7"
+    },
+    "_run_llama": {
+     "status": "recoverable",
+     "sources": 3
+    },
+    "health": {
+     "status": "removed_in_git",
+     "sources": 3,
+     "removed_commit": "806640f7"
+    },
+    "list_models": {
+     "status": "removed_in_git",
+     "sources": 3,
+     "removed_commit": "806640f7"
+    },
+    "chat_completions": {
+     "status": "removed_in_git",
+     "sources": 3,
+     "removed_commit": "806640f7"
+    },
+    "completions": {
+     "status": "removed_in_git",
+     "sources": 3,
+     "removed_commit": "806640f7"
+    }
+   },
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "resolved earlier: shim of realai/server/realai_local_server.py (806640f)"
   },
   {
    "family": "realai/plugins/sample_plugin.py",
@@ -9295,8 +10020,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/smart_merge_realai.py",
@@ -9343,8 +10073,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 4,
+   "conflicts_newer_mtime": 4,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/tools/harden_repos.py",
@@ -9405,8 +10140,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/tools/rollout_all_repos.py",
@@ -9460,8 +10200,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/plugins/tools/self_extend_tool.py",
@@ -9480,8 +10225,18 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "extend_capability": {
+     "status": "recoverable",
+     "sources": 1
+    }
+   },
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "extend_capability (2026-08-04 gold orphan) not merged: no callers, writes proposal files outside the approval gate; run() is the gated entry"
   },
   {
    "family": "realai/plugins/tools/self_repair_tool.py",
@@ -9500,8 +10255,18 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "repair": {
+     "status": "recoverable",
+     "sources": 1
+    }
+   },
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "repair(mode) (2026-08-04 gold orphan) not merged: no callers; cycle/assemble modes write; run() is the gated entry"
   },
   {
    "family": "realai/recovery_registry.py",
@@ -9562,8 +10327,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 3,
+   "conflicts_newer_mtime": 3,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/router.py",
@@ -9624,8 +10394,13 @@
      "mtime": "2026-10-03"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/scanners/promote_gold.py",
@@ -9707,8 +10482,13 @@
      "mtime": "2026-09-24"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 3,
+   "conflicts_newer_mtime": 3,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/scripts/catalog_good_code_roots.py",
@@ -9741,8 +10521,13 @@
      "mtime": "2026-08-28"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/scripts/exportable/realai_server.py",
@@ -9761,8 +10546,18 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "_is_enabled": {
+     "status": "recoverable",
+     "sources": 1
+    }
+   },
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "_is_enabled helper inlined in canonical; no behaviour lost"
   },
   {
    "family": "realai/scripts/find_self_improve_and_lost.py",
@@ -9795,8 +10590,13 @@
      "mtime": "2026-08-28"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/scripts/heal_cli.py",
@@ -9822,8 +10622,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/scripts/realai_full_loop_integrator_auto_fixed.py",
@@ -9877,8 +10682,13 @@
      "mtime": "2026-08-12"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/scripts/setup_local_llama.py",
@@ -9925,8 +10735,13 @@
      "mtime": "2026-10-03"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 4,
+   "conflicts_newer_mtime": 4,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/scripts/stack_health.py",
@@ -9973,8 +10788,18 @@
      "mtime": "2026-08-30"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "_HERE": {
+     "status": "recoverable",
+     "sources": 5
+    }
+   },
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "_HERE constant only (scanners/ copy); no behaviour lost"
   },
   {
    "family": "realai/scripts/train_lora_local.py",
@@ -10007,8 +10832,19 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": true,
+   "missing_from_canonical": {
+    "_resume_vulkan_stack": {
+     "status": "recoverable",
+     "sources": 3
+    }
+   },
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "merged: product-root scripts/train_lora_local.py vulkan pause/resume (_resume_vulkan_stack, --resume-vulkan)",
+   "merge_commit": "bd79200"
   },
   {
    "family": "realai/scripts/train_to_chat_gguf.py",
@@ -10041,8 +10877,13 @@
      "mtime": "2026-08-28"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 3,
+   "conflicts_newer_mtime": 3,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/scripts/vulkan_runtime.py",
@@ -10075,8 +10916,13 @@
      "mtime": "2026-09-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/sdk/python/realai_client.py",
@@ -10144,8 +10990,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/server/app.py",
@@ -10185,8 +11036,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/server/backends.py",
@@ -10268,8 +11124,13 @@
      "mtime": "2026-10-03"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 5,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/server/config.py",
@@ -10309,8 +11170,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 6,
+   "conflicts_newer_mtime": 6,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/server/embeddings_backend.py",
@@ -10343,8 +11209,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 3,
+   "conflicts_newer_mtime": 3,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/server/inference.py",
@@ -10363,8 +11234,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/server/llama_cli_backend.py",
@@ -10411,8 +11287,13 @@
      "mtime": "2026-10-03"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/server/memory_store.py",
@@ -10515,8 +11396,26 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "MemoryRecord": {
+     "status": "recoverable",
+     "sources": 13
+    },
+    "MemoryStore.__init__": {
+     "status": "recoverable",
+     "sources": 13
+    },
+    "MemoryStore._key": {
+     "status": "recoverable",
+     "sources": 13
+    }
+   },
+   "conflicts": 4,
+   "conflicts_newer_mtime": 4,
+   "analyzed_on": "2026-10-17",
+   "resolution": "in-memory MemoryRecord/MemoryStore phase superseded by SQLite persistence; not merged"
   },
   {
    "family": "realai/server/orchestration.py",
@@ -10633,8 +11532,18 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {
+    "TaskOrchestrator.__init__": {
+     "status": "recoverable",
+     "sources": 15
+    }
+   },
+   "conflicts": 6,
+   "conflicts_newer_mtime": 6,
+   "analyzed_on": "2026-10-17",
+   "resolution": "in-memory TaskOrchestrator.__init__ phase superseded by SQLite persistence (.persistence); not merged"
   },
   {
    "family": "realai/server/router.py",
@@ -10807,8 +11716,13 @@
      "mtime": "2026-08-31"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 5,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/server/server_settings.py",
@@ -10855,8 +11769,13 @@
      "mtime": "2026-10-03"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/server/tools_runtime.py",
@@ -10903,8 +11822,13 @@
      "mtime": "2026-10-03"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/tools.py",
@@ -11014,8 +11938,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 5,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/training/eval.py",
@@ -11097,8 +12026,13 @@
      "mtime": "2026-08-30"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/training/llama_tools.py",
@@ -11124,8 +12058,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/training/self_data/__main__.py",
@@ -11144,8 +12083,13 @@
      "mtime": null
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/training/unsloth_train.py",
@@ -11206,8 +12150,13 @@
      "mtime": "2026-08-31"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 3,
+   "conflicts_newer_mtime": 3,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/ui/realai_gui.py",
@@ -11373,8 +12322,13 @@
      "mtime": "2026-08-07"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 4,
+   "conflicts_newer_mtime": 4,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/universe/dispatcher.py",
@@ -11393,8 +12347,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/universe/doctor.py",
@@ -11413,8 +12372,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/universe/hierarchy.py",
@@ -11433,8 +12397,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/universe/knowledge_graph.py",
@@ -11453,8 +12422,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/universe/mode.py",
@@ -11473,8 +12447,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/universe/recipe_engine.py",
@@ -11493,8 +12472,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/universe/registry.py",
@@ -11513,8 +12497,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 0,
+   "conflicts_newer_mtime": 0,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; versions are subsets"
   },
   {
    "family": "realai/voice/lab_server.py",
@@ -11540,8 +12529,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/voice/paths.py",
@@ -11560,8 +12554,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/voice/tts_engine.py",
@@ -11608,8 +12607,13 @@
      "mtime": "2026-08-30"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 9,
+   "conflicts_newer_mtime": 9,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "realai/workspace.py",
@@ -11635,8 +12639,13 @@
      "mtime": "2026-09-25"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 2,
+   "conflicts_newer_mtime": 2,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   },
   {
    "family": "scripts/deep_promote_scan.py",
@@ -11669,8 +12678,13 @@
      "mtime": "2026-08-24"
     }
    ],
-   "analyzed": false,
-   "merged": null
+   "analyzed": true,
+   "merged": null,
+   "missing_from_canonical": {},
+   "conflicts": 1,
+   "conflicts_newer_mtime": 1,
+   "analyzed_on": "2026-10-17",
+   "resolution": "no recoverable defs; impl conflicts not line-reviewed this pass"
   }
  ],
  "decisions_20261016": {
@@ -11765,5 +12779,21 @@
    "REALAI_LOG_REQUESTS": "default off",
    "REALAI_VOICE_MODE": "auto|lab|engine (default auto)"
   }
+ },
+ "counts_20261017": {
+  "families_analyzed_this_pass": 130,
+  "recoverable_defs": 45,
+  "removed_in_git_defs": 39,
+  "impl_conflicts": 326,
+  "impl_conflicts_newer_mtime": 210,
+  "merged_this_pass": 3
+ },
+ "decisions_20261017": {
+  "exec_ungated": "removed; console sessions and craft go through the approval gate (2577edb)",
+  "approvals_store": "one store via realai/core/approvals_config.py: env > config/approvals.json > C:\\RealAI-clean\\.approvals.json (Windows) / temp (elsewhere); tests pinned to temp (2577edb)",
+  "hive_executor": "files the request via approval_store (by-path fallback when realai.plugins.tools fails); pending_approval + approval_id or a clear approval_error (2577edb)",
+  "voice": "orchestrator voice_* and ability audio_speech -> realai.voice_service (lab-first) (b8b0325)",
+  "merged_routes_sdxl": "stay off by default on :8000; test asserts no launcher/config enables them (59eb6aa)",
+  "start_realai_bat": "python -m realai.server.app --host 127.0.0.1 --port 8000 (59eb6aa)"
  }
 }

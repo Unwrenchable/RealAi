@@ -1,4 +1,4 @@
-# Merge ledger: version families (2026-10-16)
+# Merge ledger: version families (2026-10-16, updated 2026-10-17)
 
 Duplicate modules are merged into one canonical file (union of unique functions and fixes) instead of picking a copy.
 Sources were read read-only; nothing was moved or deleted. Machine-readable: `config/merge_ledger.json`.
@@ -15,8 +15,8 @@ Sources: `C:\RealAI-clean (incl. _quarantine, archive, _parked, recovered, reala
 |---|---:|
 | divergent families | 175 |
 | archive only divergent | 4 |
-| analyzed | 45 |
-| merged files | 8 |
+| analyzed | 175 (45 function-level 10-16, 130 priority-9 classified 10-17) |
+| merged files | 23 |
 | missing defs in analyzed | 9 |
 | recovered defs | 5 |
 | recovered impl merges | 4 |
@@ -36,7 +36,7 @@ Sources: `C:\RealAI-clean (incl. _quarantine, archive, _parked, recovered, reala
 | `realai/plugins/rackup_coach/abilities/money_anomaly.py` | ABILITY metadata (read_only, authorize_payout=False) | abilities/rackup/money_anomaly.py | 3a2d7bd |
 | `realai/plugins/rackup_coach/abilities/payout_sanity.py` | ABILITY metadata (read_only, authorize_payout=False) | abilities/rackup/payout_sanity.py | 3a2d7bd |
 | `realai/core/approval_gate.py (new)` | approval gate: request -> human approve -> execute once; dry-run diff/command/plan; workspace scope; protected paths; audit jsonl; money refused | Travis decision 5; replaces the unmerged 2026-08-28 search_replace / shell=True run_terminal_command | 421ba1c |
-| `realai/orchestration/v3_orchestrator.py` | _run_tool: search_replace/run_command/run_script/write_file/auto_wire/self_heal promote/self_extend/self_repair -> approval request (REALAI_EXEC_UNGATED=1 escape, default off) | archive phase write/shell tools (restored behind the gate) | 421ba1c |
+| `realai/orchestration/v3_orchestrator.py` | _run_tool: search_replace/run_command/run_script/write_file/auto_wire/self_heal promote/self_extend/self_repair -> approval request (REALAI_EXEC_UNGATED escape removed 2026-10-17, 2577edb) | archive phase write/shell tools (restored behind the gate) | 421ba1c |
 | `realai/core/tools/hive_executor.py` | _approval_confirm: model-supplied approved=True ignored (REALAI_APPROVAL_TRUST_FLAG=1 to trust); approval must match the tool | security fix | 421ba1c |
 | `realai/hive_tools/approvals.py (new)` | request_approval hive tool (request-only, sandbox store offline) + verify contract + spotcheck approval_command / approval_money_refuse | decision 5 self_data rule | 421ba1c |
 | `realai/core/self_heal.py (new canonical)` | full union: _probe_routes, run_curated_promote, run_deep_promote, roots ingest, discover modes; promote apply gated; realai/self_heal.py + realai/core/agents/self_heal.py -> alias shims | realai/self_heal.py (1.2-route-probe) + realai/core/agents/self_heal.py (1.1-5F) + 31 archive copies (no extra defs) | 421ba1c |
@@ -47,6 +47,12 @@ Sources: `C:\RealAI-clean (incl. _quarantine, archive, _parked, recovered, reala
 | `realai/server/legacy_api.py (new canonical)` | union of api_server phases + POST /v1/memory/recall + opt-in _log_request_row; old api_server paths -> shims; plugins/realai_local_server.py -> shim | realai/api_server.py, core/api_server.py, plugins/api_server.py, plugins/api_big_server.py, RealAI-gold clean_backup_20260708 | 806640f |
 | `realai/server/router.py + app.py + legacy_bridge.py` | REALAI_SERVER_MERGED_ROUTES=1 serves legacy-only routes on :8000 (default off); app.py logger fix | decision 1 | 806640f |
 | `realai/local_sdxl.py + abilities/image_generation.py` | SDXL-Turbo local images (REALAI_IMAGES_LOCAL_SDXL=1); image_generation local-only (xAI path removed) | origin/feat/local-image-sdxl-turbo 9314a7c (files only) | 806640f |
+| `realai/core/approvals_config.py (new)` + approval_store / gate / hive_executor / approval_status | one approvals store (env > config/approvals.json > C:\RealAI-clean\.approvals.json on Windows, temp elsewhere); REALAI_EXEC_UNGATED removed; hive_executor never denies silently | Travis 2026-10-17 items 1, 2, 3, 7 | 2577edb |
+| `realai/voice_service/hive.py (new)` + v3_orchestrator voice_* + abilities/audio_speech.py | voice tools and audio_speech routed through realai.voice_service (lab-first) | Travis 2026-10-17 item 4 | b8b0325 |
+| `realai/start_realai.bat` + `realai/server/app.py` __main__ | real server entry `python -m realai.server.app --host 127.0.0.1 --port 8000` (no realai_cli serve/doctor) | Travis 2026-10-17 item 6 | 59eb6aa |
+| `realai/scripts/train_lora_local.py` | _resume_vulkan_stack, vulkan_runtime pause, --resume-vulkan / --no-resume-vulkan / --resume-gguf | scripts/train_lora_local.py (product-root runner) | bd79200 |
+| `realai/scripts/vulkan_runtime.py` | resume_vulkan start via WMI Win32_Process.Create (outlives job object) / POSIX start_new_session | scripts/vulkan_runtime.py | bd79200 |
+| `realai/core/training/train_qwen_lora_directml.py` | GRAD_ACCUM (TRAIN_GRADIENT_ACCUMULATION_STEPS, default 1 = unchanged) | RealAI-gold orphans/grok-realai2-clean-2026-07-31 draft | bd79200 |
 
 ## Needs Travis's decision
 
@@ -60,17 +66,22 @@ Resolved by Travis's decisions (2026-10-16, 11:46 PM):
 - ~~realai/craft.py vs realai/cli/craft.py~~ -> cli/craft.py canonical, realai/craft.py shim, cc38c58
 - ~~local_models PEFT path~~ -> merged into realai/core/local_models.py, cc38c58
 
+Resolved by Travis's decisions (2026-10-17, 12:21 AM):
+
+- ~~REALAI_EXEC_UNGATED~~ -> removed; console sessions use the gate (2577edb)
+- ~~Approval store path~~ -> one store, realai/core/approvals_config.py + config/approvals.json (2577edb)
+- ~~craft exemption~~ -> none; craft goes through the gate
+- ~~hive_executor silent deny~~ -> files the request (by-path fallback) or returns a clear approval_error (2577edb)
+- ~~voice_* / audio_speech~~ -> realai.voice_service (b8b0325)
+- ~~merged routes / local SDXL default~~ -> stay off on :8000 (test added, 59eb6aa)
+- ~~start_realai.bat realai_cli serve~~ -> python -m realai.server.app (59eb6aa)
+
 Open:
 
-- REALAI_EXEC_UNGATED=1 escape hatch (restores ungated _run_tool exec for console sessions): keep or delete?
-- Approval store path: set APPROVALS_STORE once so the Flask approval UI, the gate and approval_status share one file (UI defaults to cwd .approvals.json)
-- craft CLI: tool_exec -> v3_orchestrator._run_tool write/exec now files approval requests too (human-operated CLI); exempt craft?
-- realai.plugins.tools package import pulls core.security (missing in some envs) -> hive_executor cannot reach approval_store and denies everything (safe, but no pending request is filed)
-- Point orchestrator voice_* tools / abilities/audio_speech at realai.voice_service (lab-first) instead of in-process provider?
-- Make REALAI_SERVER_MERGED_ROUTES / REALAI_IMAGES_LOCAL_SDXL default on :8000?
-- realai/start_realai.bat calls `realai.cli.realai_cli serve`, which does not exist in this tree
 - realai/core/training/finetune.py plan default data dir (realai/core/datasets/processed) vs RealAI-gold main-realai (<repo>/training/data)
-- agents/agents.py `AGENT_REGISTRY = property(...)` at module level (a property object, not a dict) was dropped by realai/core/agents/agents.py: confirm it stays dropped
+- agents/agents.py AGENT_REGISTRY = property(...) at module level was dropped by realai/core/agents/agents.py: confirm it stays dropped
+- 326 impl-level conflicts in the 130 priority-9 families (210 in copies with newer mtime, mostly .learn_cache / installer payload copies) were classified, not line-reviewed
+- tests/test_model_catalog_persist.py::test_default_model_unchanged fails on the PC only because the user env sets REALAI_DEFAULT_MODEL=realai-default-coder (passes with it unset); make the test clear the env?
 
 ## Decision batch families (priority 9, analyzed 2026-10-16 late)
 
@@ -323,137 +334,139 @@ Versions: branch x9, .learn_cache x9, _quarantine x5, realai-gold x1, installer-
 - `run_full_cycle`: reviewed: canonical newer (variants lack 10-24 lines per function; extras are older docstrings/steps)
 - `abilities_manifest`: reviewed: canonical newer (variants lack 10-24 lines per function; extras are older docstrings/steps)
 
-## Not analyzed this pass (priority 9)
+## Priority-9 families classified (2026-10-17)
 
-| canonical | other versions |
-|---|---:|
-| `realai/coding_agent.py` | 34 |
-| `realai/api_server.py` | 31 |
-| `realai/core/local_models.py` | 30 |
-| `realai/plugins/sample_plugin.py` | 26 |
-| `realai/server/router.py` | 23 |
-| `realai/ui/realai_gui.py` | 22 |
-| `realai/models/model_catalog.py` | 15 |
-| `realai/server/orchestration.py` | 15 |
-| `realai/tools.py` | 14 |
-| `realai/server/memory_store.py` | 13 |
-| `_quarantine/twins_20260926/realai__apps/api/main.py` | 12 |
-| `realai/core/agents/supervisor.py` | 12 |
-| `realai/core/agents/agents.py` | 11 |
-| `realai/core/audit.py` | 11 |
-| `realai/core/tools/code.py` | 11 |
-| `realai/core/tools/file.py` | 11 |
-| `realai/core/tools/registry.py` | 11 |
-| `realai/core/tools/web3.py` | 11 |
-| `_quarantine/twins_20260921/realai__plugins__plugins/plugin___init__.py` | 10 |
-| `_quarantine/twins_20260926/realai__apps/api/routes/chat.py` | 10 |
-| `realai/plugins/atomicfizz_coach/__init__.py` | 10 |
-| `realai/plugins/atomicfizz_coach/abilities/__init__.py` | 10 |
-| `realai/plugins/atomicfizz_coach/abilities/health.py` | 10 |
-| `realai/scanners/promote_gold.py` | 10 |
-| `realai/server/backends.py` | 10 |
-| `realai/training/eval.py` | 10 |
-| `realai/core/agents/critic.py` | 9 |
-| `realai/core/agents/executor.py` | 9 |
-| `realai/core/agents/planner.py` | 9 |
-| `realai/core/agents/synthesizer.py` | 9 |
-| `realai/core/agents/worker.py` | 9 |
-| `realai/core/closed_loop.py` | 9 |
-| `realai/api/index.py` | 8 |
-| `realai/core/self_builder.py` | 8 |
-| `realai/core/self_improvement.py` | 8 |
-| `realai/plugins/effective_engine_main_coach/abilities/agents_bridge.py` | 8 |
-| `realai/plugins/effective_engine_main_coach/abilities/repo_map.py` | 8 |
-| `realai/sdk/python/realai_client.py` | 8 |
-| `realai/core/identity.py` | 7 |
-| `realai/core/training/extract_from_agent_tools.py` | 7 |
-| `realai/core/web3/evm_backend.py` | 7 |
-| `realai/core/web3/solana_backend.py` | 7 |
-| `realai/plugins/tools/harden_repos.py` | 7 |
-| `realai/recovery_registry.py` | 7 |
-| `realai/router.py` | 7 |
-| `realai/training/unsloth_train.py` | 7 |
-| `_quarantine/twins_20260926/realai__modules__desktop_unique/examples_local_ai.py` | 6 |
-| `realai/cli/craft.py` | 6 |
-| `realai/cli/realai_cli.py` | 6 |
-| `realai/plugins/device_selector.py` | 6 |
-| `realai/plugins/tools/rollout_all_repos.py` | 6 |
-| `realai/scripts/realai_full_loop_integrator_auto_fixed.py` | 6 |
-| `realai/config/amd_inference.py` | 5 |
-| `realai/core/inference/chat_pipeline.py` | 5 |
-| `realai/plugins/effective_engine_main_coach/abilities/node_context.py` | 5 |
-| `realai/plugins/smart_merge_realai.py` | 5 |
-| `realai/scripts/setup_local_llama.py` | 5 |
-| `realai/scripts/stack_health.py` | 5 |
-| `realai/server/llama_cli_backend.py` | 5 |
-| `realai/server/server_settings.py` | 5 |
-| `realai/server/tools_runtime.py` | 5 |
-| `realai/voice/tts_engine.py` | 5 |
-| `_quarantine/twins_20260926/realai__apps/api/routes/audio.py` | 4 |
-| `_quarantine/twins_20260926/realai__apps/api/routes/embeddings.py` | 4 |
-| `_quarantine/twins_20260926/realai__apps/api/routes/health.py` | 4 |
-| `_quarantine/twins_20260926/realai__apps/api/routes/models.py` | 4 |
-| `_quarantine/twins_20260926/realai__apps/api/routes/tasks.py` | 4 |
-| `_quarantine/twins_20260926/realai__apps/api/routes/voice_ws.py` | 4 |
-| `_quarantine/twins_20260926/realai__apps/api/routes/web3.py` | 4 |
-| `realai/mcp_server.py` | 4 |
-| `realai/plugins/agent-tools-main/sanity_check.py` | 4 |
-| `realai/server/app.py` | 4 |
-| `realai/server/config.py` | 4 |
-| `_quarantine/twins_20260924/realai_agents/router.py` | 3 |
-| `realai/engine/__init__.py` | 3 |
-| `realai/plugins/realai_clean_backup_coach/abilities/abilities_bridge.py` | 3 |
-| `realai/plugins/realai_clean_backup_coach/abilities/modules_bridge.py` | 3 |
-| `realai/plugins/realai_clean_backup_coach/abilities/packages_bridge.py` | 3 |
-| `realai/plugins/realai_clean_backup_coach/abilities/plugins_bridge.py` | 3 |
-| `realai/plugins/realai_clean_backup_coach/abilities/route_v1_audio_speech.py` | 3 |
-| `realai/plugins/realai_clean_backup_coach/abilities/route_v1_audio_transcriptions.py` | 3 |
-| `realai/plugins/realai_clean_backup_coach/abilities/route_v1_chat_completions.py` | 3 |
-| `realai/plugins/realai_local_server.py` | 3 |
-| `realai/scripts/catalog_good_code_roots.py` | 3 |
-| `realai/scripts/find_self_improve_and_lost.py` | 3 |
-| `realai/scripts/train_lora_local.py` | 3 |
-| `realai/scripts/train_to_chat_gguf.py` | 3 |
-| `realai/scripts/vulkan_runtime.py` | 3 |
-| `realai/server/embeddings_backend.py` | 3 |
-| `scripts/deep_promote_scan.py` | 3 |
-| `_quarantine/twins_20260921/realai__plugins__plugins/plugin_test_realai.py` | 2 |
-| `realai/core/training/finetune.py` | 2 |
-| `realai/doctor.py` | 2 |
-| `realai/lambda_embeddings_audio.py` | 2 |
-| `realai/learn/scaffold.py` | 2 |
-| `realai/local_media.py` | 2 |
-| `realai/model_assets.py` | 2 |
-| `realai/plugins/effective_engine_main_coach/abilities/fastify_context.py` | 2 |
-| `realai/scripts/heal_cli.py` | 2 |
-| `realai/training/llama_tools.py` | 2 |
-| `realai/voice/lab_server.py` | 2 |
-| `realai/workspace.py` | 2 |
-| `realai/__init__.py` | 1 |
-| `realai/__main__.py` | 1 |
-| `realai/_v1_client.py` | 1 |
-| `realai/agent_activity.py` | 1 |
-| `realai/aura/reasoning.py` | 1 |
-| `realai/bot/boot.py` | 1 |
-| `realai/bot/live_exec.py` | 1 |
-| `realai/bot/natural_mode.py` | 1 |
-| `realai/bot/talk_easy.py` | 1 |
-| `realai/core/metrics/metrics.py` | 1 |
-| `realai/core/security/python_sandbox.py` | 1 |
-| `realai/core/training/train_qwen_lora_directml.py` | 1 |
-| `realai/examples/examples_limitless.py` | 1 |
-| `realai/learn/pipeline.py` | 1 |
-| `realai/model_registry.py` | 1 |
-| `realai/plugins/tools/self_extend_tool.py` | 1 |
-| `realai/plugins/tools/self_repair_tool.py` | 1 |
-| `realai/scripts/exportable/realai_server.py` | 1 |
-| `realai/server/inference.py` | 1 |
-| `realai/training/self_data/__main__.py` | 1 |
-| `realai/universe/dispatcher.py` | 1 |
-| `realai/universe/doctor.py` | 1 |
-| `realai/universe/hierarchy.py` | 1 |
-| `realai/universe/knowledge_graph.py` | 1 |
-| `realai/universe/mode.py` | 1 |
-| `realai/universe/recipe_engine.py` | 1 |
-| `realai/universe/registry.py` | 1 |
-| `realai/voice/paths.py` | 1 |
+130 families: 45 recoverable defs, 39 removed in git (not restored), 326 impl conflicts (210 in copies with newer mtime, mostly .learn_cache / installer payload / gold orphans; not line-reviewed). Recovered defs were reviewed one by one; 3 merged (bd79200), the rest are explained below.
+
+| canonical | versions | missing (rec/removed) | conflicts | resolution |
+|---|---:|---:|---:|---|
+| `realai/scripts/train_lora_local.py` | 3 | 1/0 | 2 | merged: product-root scripts/train_lora_local.py vulkan pause/resume (_resume_vulkan_stack, --resume-vulkan) |
+| `realai/core/training/train_qwen_lora_directml.py` | 1 | 2/0 | 9 | merged GRAD_ACCUM (TRAIN_GRADIENT_ACCUMULATION_STEPS, default 1); RUN_SUBDIR already present as run_subdir |
+| `realai/coding_agent.py` | 34 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/api_server.py` | 31 | 0/27 | 0 | resolved earlier: shim of realai/server/legacy_api.py (806640f) |
+| `realai/core/local_models.py` | 30 | 0/0 | 16 | resolved earlier: PEFT merge + shims (cc38c58) |
+| `realai/plugins/sample_plugin.py` | 26 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/server/router.py` | 23 | 0/0 | 5 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/ui/realai_gui.py` | 22 | 0/0 | 4 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/models/model_catalog.py` | 15 | 0/0 | 5 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/server/orchestration.py` | 15 | 1/0 | 6 | in-memory TaskOrchestrator.__init__ phase superseded by SQLite persistence (.persistence); not merged |
+| `realai/tools.py` | 14 | 0/0 | 5 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/server/memory_store.py` | 13 | 3/0 | 4 | in-memory MemoryRecord/MemoryStore phase superseded by SQLite persistence; not merged |
+| `_quarantine/twins_20260926/realai__apps/api/main.py` | 12 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/core/agents/supervisor.py` | 12 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/core/agents/agents.py` | 11 | 1/0 | 10 | AGENT_REGISTRY = property(...) (module-level property object) stays dropped pending Travis |
+| `realai/core/audit.py` | 11 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/core/tools/code.py` | 11 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/core/tools/file.py` | 11 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/core/tools/registry.py` | 11 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/core/tools/web3.py` | 11 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `_quarantine/twins_20260921/realai__plugins__plugins/plugin___init__.py` | 10 | 15/0 | 8 | canonical is a quarantine twin; .learn_cache realai/__init__ CitationEngine/_automate_email/_estimate_funding_needs not merged (email automation = send path; package __init__ is the slim client export) |
+| `_quarantine/twins_20260926/realai__apps/api/routes/chat.py` | 10 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/atomicfizz_coach/__init__.py` | 10 | 0/0 | 4 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/atomicfizz_coach/abilities/__init__.py` | 10 | 1/0 | 1 | explicit ABILITY_RUNNERS registry kept; glob _load auto-discovery belongs to learned coaches |
+| `realai/plugins/atomicfizz_coach/abilities/health.py` | 10 | 2/0 | 2 | ABILITY_ID/ALIASES metadata from learned coaches; ping alias already registered explicitly |
+| `realai/scanners/promote_gold.py` | 10 | 0/0 | 3 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/server/backends.py` | 10 | 0/0 | 5 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/training/eval.py` | 10 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/core/agents/critic.py` | 9 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/core/agents/executor.py` | 9 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/core/agents/planner.py` | 9 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/core/agents/synthesizer.py` | 9 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/core/agents/worker.py` | 9 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/core/closed_loop.py` | 9 | 0/0 | 4 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/api/index.py` | 8 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/core/self_builder.py` | 8 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/core/self_improvement.py` | 8 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/effective_engine_main_coach/abilities/agents_bridge.py` | 8 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/effective_engine_main_coach/abilities/repo_map.py` | 8 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/sdk/python/realai_client.py` | 8 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/core/identity.py` | 7 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/core/training/extract_from_agent_tools.py` | 7 | 0/0 | 7 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/core/web3/evm_backend.py` | 7 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/core/web3/solana_backend.py` | 7 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/plugins/tools/harden_repos.py` | 7 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/recovery_registry.py` | 7 | 0/0 | 3 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/router.py` | 7 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/training/unsloth_train.py` | 7 | 0/0 | 3 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `_quarantine/twins_20260926/realai__modules__desktop_unique/examples_local_ai.py` | 6 | 2/0 | 8 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/cli/craft.py` | 6 | 0/0 | 22 | resolved earlier: canonical, realai/craft.py shim (cc38c58) |
+| `realai/cli/realai_cli.py` | 6 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/device_selector.py` | 6 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/tools/rollout_all_repos.py` | 6 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/scripts/realai_full_loop_integrator_auto_fixed.py` | 6 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/config/amd_inference.py` | 5 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/core/inference/chat_pipeline.py` | 5 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/effective_engine_main_coach/abilities/node_context.py` | 5 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/smart_merge_realai.py` | 5 | 0/0 | 4 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/scripts/setup_local_llama.py` | 5 | 0/0 | 4 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/scripts/stack_health.py` | 5 | 1/0 | 2 | _HERE constant only (scanners/ copy); no behaviour lost |
+| `realai/server/llama_cli_backend.py` | 5 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/server/server_settings.py` | 5 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/server/tools_runtime.py` | 5 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/voice/tts_engine.py` | 5 | 0/0 | 9 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `_quarantine/twins_20260926/realai__apps/api/routes/audio.py` | 4 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `_quarantine/twins_20260926/realai__apps/api/routes/embeddings.py` | 4 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `_quarantine/twins_20260926/realai__apps/api/routes/health.py` | 4 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `_quarantine/twins_20260926/realai__apps/api/routes/models.py` | 4 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `_quarantine/twins_20260926/realai__apps/api/routes/tasks.py` | 4 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `_quarantine/twins_20260926/realai__apps/api/routes/voice_ws.py` | 4 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `_quarantine/twins_20260926/realai__apps/api/routes/web3.py` | 4 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/mcp_server.py` | 4 | 0/0 | 3 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/agent-tools-main/sanity_check.py` | 4 | 0/0 | 8 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/server/app.py` | 4 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/server/config.py` | 4 | 0/0 | 6 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `_quarantine/twins_20260924/realai_agents/router.py` | 3 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/engine/__init__.py` | 3 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/realai_clean_backup_coach/abilities/abilities_bridge.py` | 3 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/realai_clean_backup_coach/abilities/modules_bridge.py` | 3 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/realai_clean_backup_coach/abilities/packages_bridge.py` | 3 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/realai_clean_backup_coach/abilities/plugins_bridge.py` | 3 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/realai_clean_backup_coach/abilities/route_v1_audio_speech.py` | 3 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/realai_clean_backup_coach/abilities/route_v1_audio_transcriptions.py` | 3 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/realai_clean_backup_coach/abilities/route_v1_chat_completions.py` | 3 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/realai_local_server.py` | 3 | 8/8 | 0 | resolved earlier: shim of realai/server/realai_local_server.py (806640f) |
+| `realai/scripts/catalog_good_code_roots.py` | 3 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/scripts/find_self_improve_and_lost.py` | 3 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/scripts/train_to_chat_gguf.py` | 3 | 0/0 | 3 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/scripts/vulkan_runtime.py` | 3 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/server/embeddings_backend.py` | 3 | 0/0 | 3 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `scripts/deep_promote_scan.py` | 3 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `_quarantine/twins_20260921/realai__plugins__plugins/plugin_test_realai.py` | 2 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/core/training/finetune.py` | 2 | 2/0 | 2 | _DEFAULT_DATA (<repo>/training/data) vs canonical datasets/processed: pending Travis |
+| `realai/doctor.py` | 2 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/lambda_embeddings_audio.py` | 2 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/learn/scaffold.py` | 2 | 0/0 | 6 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/local_media.py` | 2 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/model_assets.py` | 2 | 2/0 | 3 | _REPO_ROOT/_MODELS_ROOT refactored into repo_root()/models_root(); no callers of the old names |
+| `realai/plugins/effective_engine_main_coach/abilities/fastify_context.py` | 2 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/scripts/heal_cli.py` | 2 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/training/llama_tools.py` | 2 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/voice/lab_server.py` | 2 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/workspace.py` | 2 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/__init__.py` | 1 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/__main__.py` | 1 | 0/0 | 5 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/_v1_client.py` | 1 | 0/4 | 2 | no recoverable defs; removed-in-git defs not restored; impl conflicts not line-reviewed this pass |
+| `realai/agent_activity.py` | 1 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/aura/reasoning.py` | 1 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/bot/boot.py` | 1 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/bot/live_exec.py` | 1 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/bot/natural_mode.py` | 1 | 0/0 | 9 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/bot/talk_easy.py` | 1 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/core/metrics/metrics.py` | 1 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/core/security/python_sandbox.py` | 1 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/examples/examples_limitless.py` | 1 | 1/0 | 19 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/learn/pipeline.py` | 1 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/model_registry.py` | 1 | 0/0 | 17 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/plugins/tools/self_extend_tool.py` | 1 | 1/0 | 1 | extend_capability (2026-08-04 gold orphan) not merged: no callers, writes proposal files outside the approval gate; run() is the gated entry |
+| `realai/plugins/tools/self_repair_tool.py` | 1 | 1/0 | 1 | repair(mode) (2026-08-04 gold orphan) not merged: no callers; cycle/assemble modes write; run() is the gated entry |
+| `realai/scripts/exportable/realai_server.py` | 1 | 1/0 | 1 | _is_enabled helper inlined in canonical; no behaviour lost |
+| `realai/server/inference.py` | 1 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/training/self_data/__main__.py` | 1 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/universe/dispatcher.py` | 1 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/universe/doctor.py` | 1 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/universe/hierarchy.py` | 1 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/universe/knowledge_graph.py` | 1 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/universe/mode.py` | 1 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/universe/recipe_engine.py` | 1 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+| `realai/universe/registry.py` | 1 | 0/0 | 0 | no recoverable defs; versions are subsets |
+| `realai/voice/paths.py` | 1 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
