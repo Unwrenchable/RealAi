@@ -134,8 +134,8 @@ def _ds(tmp_path, n=24):
                                   {"role": "assistant", "content": f"answer {i} " + "y" * rng.randint(1, 30)}]}
     tr = "".join(json.dumps(row(i)) + "\n" for i in range(n))
     ev = "".join(json.dumps(row(1000 + i)) + "\n" for i in range(3))
-    (d / "train.jsonl").write_text(tr)
-    (d / "eval.jsonl").write_text(ev)
+    (d / "train.jsonl").write_bytes(tr.encode())
+    (d / "eval.jsonl").write_bytes(ev.encode())
     (d / "manifest.json").write_text(json.dumps({"name": "t", "sha256": {
         "train.jsonl": hashlib.sha256(tr.encode()).hexdigest(), "eval.jsonl": hashlib.sha256(ev.encode()).hexdigest()}}))
     return d
