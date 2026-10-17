@@ -23,7 +23,10 @@
  },
  "needs_travis": [
   "realai/core/training/finetune.py plan default data dir (realai/core/datasets/processed) vs RealAI-gold main-realai (<repo>/training/data)",
-  "326 impl-level conflicts in the 130 priority-9 families (210 in copies with newer mtime, mostly .learn_cache / installer payload copies) were classified, not line-reviewed"
+  "326 impl-level conflicts in the 130 priority-9 families (210 in copies with newer mtime, mostly .learn_cache / installer payload copies) were classified, not line-reviewed",
+  "realai/apps/frontend UI phase: merge whole newer chat UI or keep helper-only",
+  "RealAi-unified handle_provider_route/handle_tool_route: add as new read-only :8000 endpoints (off by default) or drop",
+  "Build leftovers (docs/BUILD_LEFTOVERS.md): approve archiving to D:\\ARCHIVE / pyproject exclude changes"
  ],
  "families": [
   {
@@ -12795,5 +12798,2074 @@
   "start_realai_bat": "python -m realai.server.app --host 127.0.0.1 --port 8000 (59eb6aa)",
   "agent_registry_property": "stays dropped (Travis 2026-10-17 12:41 AM): module-level property object was a bug",
   "test_default_model_unchanged": "test clears REALAI_DEFAULT_MODEL itself (Travis 2026-10-17 12:41 AM)"
- }
+ },
+ "smoke_20261017": {
+  "server": "14B on :8080 (health ok)",
+  "rows_per_tool": 3,
+  "approvals_store": "temp (live store untouched)",
+  "results": {
+   "memory_stats": [
+    3,
+    0
+   ],
+   "agent_pipeline_plan": [
+    3,
+    0
+   ],
+   "hive_routes_status": [
+    3,
+    0
+   ],
+   "tool_registry_lookup": [
+    3,
+    0
+   ],
+   "self_heal_status": [
+    3,
+    0
+   ],
+   "executive_goals": [
+    3,
+    0
+   ],
+   "payout_check": {
+    "first": [
+     0,
+     1
+    ],
+    "reason": "payout_check_fact_missing (parser kept 1 of 3 single-element arrays; key_facts read failed first call; wording list too narrow)",
+    "rerun_after_fix": [
+     3,
+     0
+    ]
+   },
+   "request_approval": {
+    "first": [
+     2,
+     1
+    ],
+    "reason": "all_tools_failed_but_answer_claims_success (verifier lacked \"refused\"; answer honestly reported refusal)",
+    "offline_reverify": "pass"
+   }
+  },
+  "real_model_mistakes": 0,
+  "fix_commits": [
+   "f8ecec7",
+   "e950fa0"
+  ]
+ },
+ "git_mining_20261017": {
+  "method": "read-only: for-each-ref (local+remote), stash list incl ^2/^3, reflog, fsck --unreachable --no-reflogs (not --lost-found: it writes into .git), ls-tree/cat-file; no checkout/reset/gc/prune/stash pop",
+  "repos": [
+   {
+    "repo": "C:\\RealAI-clean",
+    "refs": 117,
+    "commits_scanned": 236,
+    "unreachable_blobs": 27205,
+    "unique_blobs": 17099
+   },
+   {
+    "repo": "realai/.learn_cache/realai (nested)",
+    "refs": 72,
+    "commits_scanned": 704,
+    "unreachable_blobs": 1024,
+    "unique_blobs": 647
+   }
+  ],
+  "dangling_py_blobs_with_unique_defs": 6937,
+  "dangling_realai_specific": 0,
+  "dangling_note": "none of the 6937 mention realai; all vendored/third-party (venv) code. Def-name level only.",
+  "merged": [
+   {
+    "from": "origin/RealAi-unified 22cde35d63",
+    "to": "realai/world_model.py",
+    "defs": [
+     "BeliefUpdater._normalize_key (article-stripping fact keys)"
+    ]
+   },
+   {
+    "from": "nested unreachable c6237d4f blob 055edbed54",
+    "to": "realai/core/training/extract_from_agent_tools.py",
+    "defs": [
+     "_load_json_records",
+     "_collect_records",
+     "_instruction_examples",
+     "_code_examples",
+     "_memory_examples",
+     "_write_jsonl",
+     "extract_code_and_memory_pairs (opt-in; default main unchanged)"
+    ]
+   }
+  ],
+  "already_present_renamed": {
+   "hat_routing._rack_flags": "= _smoke_flags in realai/bot/hat_routing.py",
+   "api_server._vulkan_forward_enabled": "moved to realai/cloud_fallback.py (auto/off/force, loopback-only)",
+   "rackup_coach matchmaking._candidate_rating": "inlined in matchmaking.py (resolve_effective_rating)",
+   "rackup_coach rating_update._expected_score": "Elo math inside compute_rating_update"
+  },
+  "not_merged": {
+   "server/tools_runtime ToolRuntime.execute": "fake executor: returns ok without running anything, and invents manifests for unknown tools. Unsafe to wire.",
+   "server/router handle_tool_execute": "wraps the fake executor. Exec must go through the approval gate.",
+   "server/router handle_provider_route, handle_tool_route": "read-only routing introspection, but would add new :8000 endpoints: NEEDS DECISION",
+   "server/config _discover_local_model_candidates/_resolve_model_path": "rglob over ~/Downloads, /mnt/c/Users etc. (heavy IO, WSL paths). Superseded by model_assets resolver.",
+   "unified_server.create_unified_app": "WSGI demo app from RealAi-unified. Superseded by realai.server.app.",
+   "server/inference _get_vllm_engine/_build_model, embeddings _get_embed_model": "old in-process vLLM/sentence-transformers path. Superseded by provider routing; reintroducing would change :8000.",
+   "realai/__init__ ExecutionRuntime/AgentRegistry, orchestrator.py phases": "old monolith. Superseded by agents/ and realai/orchestration/legacy_orchestrator.py.",
+   "realai_cli _git_info/_run_tests (.backup on analysis-clean)": "backup copy; _run_tests is an exec path",
+   "js (git-only): agent-tools registry service (TS), VS Code extension providers, Atomic Fizz game scripts": "other projects carried in branches; no RealAI canonical to merge into. Atomic Fizz belongs to its own repo."
+  }
+ },
+ "js_families_20261017": {
+  "files": 2069,
+  "families": 41,
+  "with_missing_exports": 2,
+  "merged": [
+   "frontend/lib/realai.ts buildCompletionMessages",
+   "frontend/lib/types.ts MessageRole"
+  ],
+  "needs_decision": "realai/apps/frontend (untracked+gitignored newer chat-UI: agent personas, computeMode, MODEL_META, modelOptionsFromIds, buildAgentSystemPrefix, mergeSystemPrompt); a full merge changes UI Settings shape/defaults"
+ },
+ "shadowing_fixes_20261017": [
+  "realai/world_model/__init__.py loads canonical realai/world_model.py (package dir was shadowing it)",
+  "realai/engine/__init__.py lazy fallback to realai.core.engine (placeholder package shadowed the shim)"
+ ],
+ "coverage_20261017": [
+  {
+   "folder": "(root files)",
+   "py": 5,
+   "js_ts": 2,
+   "families": 2,
+   "merged": 1,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 90
+  },
+  {
+   "folder": "_parked",
+   "py": 1138,
+   "js_ts": 381,
+   "families": 14,
+   "merged": 1,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2285
+  },
+  {
+   "folder": "_quarantine",
+   "py": 374,
+   "js_ts": 33,
+   "families": 57,
+   "merged": 3,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 601
+  },
+  {
+   "folder": ".agentx",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 5
+  },
+  {
+   "folder": ".git",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": ".github",
+   "py": 1,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 35
+  },
+  {
+   "folder": ".grok",
+   "py": 5,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 95
+  },
+  {
+   "folder": ".hive",
+   "py": 3,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 3
+  },
+  {
+   "folder": ".kilo",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": ".pytest_cache",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": ".tanstack",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 0
+  },
+  {
+   "folder": ".venv-xtts",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": ".vercel",
+   "py": 0,
+   "js_ts": 43,
+   "families": 4,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 60
+  },
+  {
+   "folder": ".vscode",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "abilities",
+   "py": 97,
+   "js_ts": 0,
+   "families": 25,
+   "merged": 4,
+   "functions_recovered": 1,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 98
+  },
+  {
+   "folder": "adapters",
+   "py": 7,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 7
+  },
+  {
+   "folder": "agent_tools",
+   "py": 61,
+   "js_ts": 0,
+   "families": 13,
+   "merged": 1,
+   "functions_recovered": 1,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 71
+  },
+  {
+   "folder": "agents",
+   "py": 42,
+   "js_ts": 8,
+   "families": 12,
+   "merged": 2,
+   "functions_recovered": 2,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 264
+  },
+  {
+   "folder": "agents-ui",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "apps",
+   "py": 50,
+   "js_ts": 48,
+   "families": 12,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 216
+  },
+  {
+   "folder": "archive",
+   "py": 56,
+   "js_ts": 0,
+   "families": 5,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 61
+  },
+  {
+   "folder": "artifacts",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "attachments",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "aura",
+   "py": 4,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 9
+  },
+  {
+   "folder": "autopilot",
+   "py": 0,
+   "js_ts": 2,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "benchmarks",
+   "py": 43,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 43
+  },
+  {
+   "folder": "billing",
+   "py": 1,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "bin",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 24
+  },
+  {
+   "folder": "config",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 7
+  },
+  {
+   "folder": "core",
+   "py": 5,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 5
+  },
+  {
+   "folder": "datasets",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "desktop",
+   "py": 2,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "docs",
+   "py": 5,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 139
+  },
+  {
+   "folder": "examples",
+   "py": 1,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "frontend",
+   "py": 0,
+   "js_ts": 29,
+   "families": 11,
+   "merged": 2,
+   "functions_recovered": 2,
+   "needs_decision": 1,
+   "note": "",
+   "all_files": 45,
+   "decision_items": [
+    "realai/apps/frontend newer chat-UI phase (whole-UI merge would change Settings shape/defaults)"
+   ]
+  },
+  {
+   "folder": "fusion-ui",
+   "py": 0,
+   "js_ts": 2,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 4
+  },
+  {
+   "folder": "imports",
+   "py": 4,
+   "js_ts": 0,
+   "families": 2,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 5
+  },
+  {
+   "folder": "logs",
+   "py": 84,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "marketplace",
+   "py": 0,
+   "js_ts": 1,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "memory",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "migrations",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "models",
+   "py": 1,
+   "js_ts": 2,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 19
+  },
+  {
+   "folder": "modules",
+   "py": 116,
+   "js_ts": 8,
+   "families": 11,
+   "merged": 2,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 145
+  },
+  {
+   "folder": "node_modules",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "normalized_datasets",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "notes",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "orchestrator",
+   "py": 0,
+   "js_ts": 1,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "packages",
+   "py": 5,
+   "js_ts": 88,
+   "families": 6,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 113
+  },
+  {
+   "folder": "personas",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 5
+  },
+  {
+   "folder": "plugins",
+   "py": 3,
+   "js_ts": 0,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 4
+  },
+  {
+   "folder": "prompts",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 7
+  },
+  {
+   "folder": "providers",
+   "py": 2,
+   "js_ts": 3,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 7
+  },
+  {
+   "folder": "public",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 11
+  },
+  {
+   "folder": "realai_training",
+   "py": 2,
+   "js_ts": 0,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai.egg-info",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "recovered",
+   "py": 1233,
+   "js_ts": 517,
+   "families": 91,
+   "merged": 7,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 3685
+  },
+  {
+   "folder": "registry",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 9
+  },
+  {
+   "folder": "repo_tools",
+   "py": 17,
+   "js_ts": 32,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 49
+  },
+  {
+   "folder": "requirements",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "results",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "scan_results",
+   "py": 14,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "scanners",
+   "py": 46,
+   "js_ts": 0,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 46
+  },
+  {
+   "folder": "schema",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "screenshots",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "scripts",
+   "py": 143,
+   "js_ts": 25,
+   "families": 17,
+   "merged": 1,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 239
+  },
+  {
+   "folder": "sdk",
+   "py": 3,
+   "js_ts": 0,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 3
+  },
+  {
+   "folder": "server",
+   "py": 2,
+   "js_ts": 1,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 4
+  },
+  {
+   "folder": "src",
+   "py": 0,
+   "js_ts": 76,
+   "families": 13,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 78
+  },
+  {
+   "folder": "state",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "templates",
+   "py": 0,
+   "js_ts": 2,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "tests",
+   "py": 24,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 24
+  },
+  {
+   "folder": "tools",
+   "py": 1,
+   "js_ts": 3,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 6
+  },
+  {
+   "folder": "training",
+   "py": 5,
+   "js_ts": 0,
+   "families": 2,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 30
+  },
+  {
+   "folder": "ui",
+   "py": 0,
+   "js_ts": 2,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 3
+  },
+  {
+   "folder": "voice-lab",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "realai/(files)",
+   "py": 75,
+   "js_ts": 1,
+   "families": 21,
+   "merged": 2,
+   "functions_recovered": 1,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 125
+  },
+  {
+   "folder": "realai/__pycache__",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "realai/.continue",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/.github",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 15
+  },
+  {
+   "folder": "realai/.hive",
+   "py": 26,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 26
+  },
+  {
+   "folder": "realai/.kilo",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 3
+  },
+  {
+   "folder": "realai/.learn_cache",
+   "py": 2085,
+   "js_ts": 538,
+   "families": 156,
+   "merged": 11,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 3727
+  },
+  {
+   "folder": "realai/.pytest_cache__dup1",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "realai/.realai",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/.vs",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "realai/abilities",
+   "py": 1,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 3
+  },
+  {
+   "folder": "realai/adapters",
+   "py": 7,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 8
+  },
+  {
+   "folder": "realai/agent_runtime",
+   "py": 52,
+   "js_ts": 0,
+   "families": 1,
+   "merged": 1,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 52
+  },
+  {
+   "folder": "realai/agent_tools",
+   "py": 1,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/agent_tools_gold",
+   "py": 27,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 27
+  },
+  {
+   "folder": "realai/agent-tools-main",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/api",
+   "py": 14,
+   "js_ts": 0,
+   "families": 2,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 14
+  },
+  {
+   "folder": "realai/app",
+   "py": 1,
+   "js_ts": 3,
+   "families": 2,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 4
+  },
+  {
+   "folder": "realai/apps",
+   "py": 0,
+   "js_ts": 7,
+   "families": 3,
+   "merged": 2,
+   "functions_recovered": 0,
+   "needs_decision": 1,
+   "note": "",
+   "all_files": 12,
+   "decision_items": [
+    "realai/apps/frontend newer chat-UI phase (untracked, gitignored)"
+   ]
+  },
+  {
+   "folder": "realai/archive",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/atomic_fizz",
+   "py": 4,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 4
+  },
+  {
+   "folder": "realai/aura",
+   "py": 9,
+   "js_ts": 0,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 18
+  },
+  {
+   "folder": "realai/aura_pkg",
+   "py": 2,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/autopilot",
+   "py": 0,
+   "js_ts": 2,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/backend_realai",
+   "py": 0,
+   "js_ts": 13,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 13
+  },
+  {
+   "folder": "realai/benchmarks",
+   "py": 28,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 28
+  },
+  {
+   "folder": "realai/billing",
+   "py": 1,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/bin",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 23
+  },
+  {
+   "folder": "realai/bot",
+   "py": 9,
+   "js_ts": 0,
+   "families": 4,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 9
+  },
+  {
+   "folder": "realai/catalog",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 12
+  },
+  {
+   "folder": "realai/chat",
+   "py": 0,
+   "js_ts": 1,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/cli",
+   "py": 30,
+   "js_ts": 0,
+   "families": 2,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 33
+  },
+  {
+   "folder": "realai/commands",
+   "py": 0,
+   "js_ts": 1,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/components",
+   "py": 0,
+   "js_ts": 9,
+   "families": 3,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 9
+  },
+  {
+   "folder": "realai/config",
+   "py": 6,
+   "js_ts": 0,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 14
+  },
+  {
+   "folder": "realai/context",
+   "py": 1,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/core",
+   "py": 139,
+   "js_ts": 2,
+   "families": 30,
+   "merged": 2,
+   "functions_recovered": 6,
+   "needs_decision": 2,
+   "note": "",
+   "all_files": 141,
+   "decision_items": [
+    "realai/core/training/finetune.py default data dir"
+   ]
+  },
+  {
+   "folder": "realai/data",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/datasets",
+   "py": 2,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 9
+  },
+  {
+   "folder": "realai/docs",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 31
+  },
+  {
+   "folder": "realai/engine",
+   "py": 7,
+   "js_ts": 0,
+   "families": 2,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 7
+  },
+  {
+   "folder": "realai/examples",
+   "py": 6,
+   "js_ts": 0,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 6
+  },
+  {
+   "folder": "realai/executive",
+   "py": 9,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 12
+  },
+  {
+   "folder": "realai/fusion-ui",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/inference",
+   "py": 12,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 12
+  },
+  {
+   "folder": "realai/learn",
+   "py": 11,
+   "js_ts": 0,
+   "families": 2,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 11
+  },
+  {
+   "folder": "realai/logs",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "realai/marketplace",
+   "py": 0,
+   "js_ts": 1,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/mcp",
+   "py": 2,
+   "js_ts": 1,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 4
+  },
+  {
+   "folder": "realai/memory",
+   "py": 79,
+   "js_ts": 1,
+   "families": 4,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 121
+  },
+  {
+   "folder": "realai/metrics",
+   "py": 4,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 4
+  },
+  {
+   "folder": "realai/middleware",
+   "py": 4,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 4
+  },
+  {
+   "folder": "realai/models",
+   "py": 7,
+   "js_ts": 2,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 30
+  },
+  {
+   "folder": "realai/modules",
+   "py": 1,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 4
+  },
+  {
+   "folder": "realai/orchestration",
+   "py": 15,
+   "js_ts": 0,
+   "families": 3,
+   "merged": 2,
+   "functions_recovered": 4,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 17
+  },
+  {
+   "folder": "realai/orchestrator",
+   "py": 0,
+   "js_ts": 1,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/orchestrators",
+   "py": 14,
+   "js_ts": 0,
+   "families": 3,
+   "merged": 1,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 15
+  },
+  {
+   "folder": "realai/Output",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "realai/packages",
+   "py": 3,
+   "js_ts": 4,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 22
+  },
+  {
+   "folder": "realai/plugins",
+   "py": 262,
+   "js_ts": 50,
+   "families": 43,
+   "merged": 4,
+   "functions_recovered": 3,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 361
+  },
+  {
+   "folder": "realai/profiles",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/prompts",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 7
+  },
+  {
+   "folder": "realai/providers",
+   "py": 17,
+   "js_ts": 4,
+   "families": 2,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 26
+  },
+  {
+   "folder": "realai/python",
+   "py": 2,
+   "js_ts": 0,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/realai_agent",
+   "py": 1,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/realai_training",
+   "py": 1,
+   "js_ts": 0,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/realai-backend",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/realai-cli",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/realai-frontend__dup1",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/registry",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/results",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "realai/routes",
+   "py": 10,
+   "js_ts": 0,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 10
+  },
+  {
+   "folder": "realai/runtime",
+   "py": 3,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 3
+  },
+  {
+   "folder": "realai/scan_results",
+   "py": 3,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "skipped (junk/live/data)",
+   "all_files": null
+  },
+  {
+   "folder": "realai/scanners",
+   "py": 5,
+   "js_ts": 0,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 5
+  },
+  {
+   "folder": "realai/schema",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/schemas",
+   "py": 7,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 7
+  },
+  {
+   "folder": "realai/scripts",
+   "py": 102,
+   "js_ts": 0,
+   "families": 18,
+   "merged": 1,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 121
+  },
+  {
+   "folder": "realai/sdk",
+   "py": 3,
+   "js_ts": 0,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 3
+  },
+  {
+   "folder": "realai/sdk-py",
+   "py": 1,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/sdk-ts",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/security",
+   "py": 4,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 4
+  },
+  {
+   "folder": "realai/server",
+   "py": 27,
+   "js_ts": 0,
+   "families": 12,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 1,
+   "note": "",
+   "all_files": 29,
+   "decision_items": [
+    "RealAi-unified router handle_provider_route/handle_tool_route (would add new :8000 endpoints)"
+   ]
+  },
+  {
+   "folder": "realai/skills",
+   "py": 6,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 6
+  },
+  {
+   "folder": "realai/static",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/templates",
+   "py": 1,
+   "js_ts": 2,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 3
+  },
+  {
+   "folder": "realai/tests",
+   "py": 26,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 26
+  },
+  {
+   "folder": "realai/tooling",
+   "py": 6,
+   "js_ts": 0,
+   "families": 1,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 6
+  },
+  {
+   "folder": "realai/tools",
+   "py": 19,
+   "js_ts": 0,
+   "families": 3,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 19
+  },
+  {
+   "folder": "realai/tools_realai",
+   "py": 0,
+   "js_ts": 1,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/tracing",
+   "py": 2,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/training",
+   "py": 25,
+   "js_ts": 0,
+   "families": 5,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 30
+  },
+  {
+   "folder": "realai/ui",
+   "py": 1,
+   "js_ts": 2,
+   "families": 2,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 5
+  },
+  {
+   "folder": "realai/universe",
+   "py": 15,
+   "js_ts": 0,
+   "families": 7,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 16
+  },
+  {
+   "folder": "realai/utilities",
+   "py": 4,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 6
+  },
+  {
+   "folder": "realai/voice",
+   "py": 19,
+   "js_ts": 114,
+   "families": 19,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 274
+  },
+  {
+   "folder": "realai/web3",
+   "py": 6,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 6
+  },
+  {
+   "folder": "realai/widget",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 1
+  },
+  {
+   "folder": "realai/workflows",
+   "py": 0,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 2
+  },
+  {
+   "folder": "realai/world_model",
+   "py": 27,
+   "js_ts": 0,
+   "families": 0,
+   "merged": 0,
+   "functions_recovered": 0,
+   "needs_decision": 0,
+   "note": "",
+   "all_files": 30
+  }
+ ]
 }

@@ -470,3 +470,215 @@ Versions: branch x9, .learn_cache x9, _quarantine x5, realai-gold x1, installer-
 | `realai/universe/recipe_engine.py` | 1 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
 | `realai/universe/registry.py` | 1 | 0/0 | 0 | no recoverable defs; versions are subsets |
 | `realai/voice/paths.py` | 1 | 0/0 | 1 | no recoverable defs; impl conflicts not line-reviewed this pass |
+
+
+## 2026-10-17: smoke, full folder pass, git mining
+
+### self_data smoke (14B on :8080, 3 rows/tool, temp approvals store)
+| tool | accepted | rejected | reason / fix |
+|---|---|---|---|
+| memory_stats, agent_pipeline_plan, hive_routes_status, tool_registry_lookup, self_heal_status, executive_goals | 3 each | 0 | none |
+| payout_check | 0 → **3 after fix** | 1 → 0 | `payout_check_fact_missing`. Parser and verifier bugs, not the model: extract_questions now collects all decoded arrays; key_facts skips failed-validation calls; wording list widened (f8ecec7) |
+| request_approval | 2 | 1 → 0 | `all_tools_failed_but_answer_claims_success`. Verifier bug: the answer honestly reported the refusal, but `_FAIL` lacked "refused". Now passes offline re-verify (f8ecec7) |
+
+Real model mistakes: 0. Travis picks: e950fa0 (AGENT_REGISTRY property bug stays dropped; test_default_model_unchanged clears REALAI_DEFAULT_MODEL).
+
+### Git history (read-only)
+- C:\RealAI-clean: 117 refs, 236 commits, 27,205 unreachable blobs (17,099 unique).
+- Nested `realai/.learn_cache/realai`: 72 refs, 704 commits, 647 unique.
+- Only `git fsck --unreachable --no-reflogs` was used (`--lost-found` writes into .git).
+- Dangling Python blobs with defs not in the tree: 6,937, of which 0 mention RealAI (all vendored venv code).
+- **Merged:** `BeliefUpdater._normalize_key` (origin/RealAi-unified) into realai/world_model.py. The old extractor's code/memory pair helpers (nested unreachable c6237d4f) went into realai/core/training/extract_from_agent_tools.py as opt-in `extract_code_and_memory_pairs`.
+- **Already present under a new name:** hat_routing `_rack_flags` (now `_smoke_flags`), `_vulkan_forward_enabled` (now in cloud_fallback), rackup_coach `_candidate_rating` / `_expected_score` (now inlined).
+- **Not merged (reasons in merge_ledger.json → git_mining_20261017.not_merged):** fake ToolRuntime.execute / handle_tool_execute (unsafe), heavy model discovery, the WSGI unified_server, old vLLM/embedding paths, and the old monolith.
+- **Needs decision:** handle_provider_route / handle_tool_route would add new :8000 endpoints.
+
+### Build leftovers
+See docs/BUILD_LEFTOVERS.md. It covers the nested .git, in-package setup.py/pyproject, 37 egg-info dirs, 13 duplicate npm names / .next standalone package.json, the missing `_parked*` exclude, and 5 module-vs-package shadowings. Two of the shadowings were fixed without moving anything (realai.world_model, realai.engine).
+
+### Per-folder coverage
+- **families** = divergent version families with a member in that folder. A family that spans several folders counts in each one.
+- **merged** = families with merged code.
+- **all files** = PC file count excluding junk dirs.
+- Skipped folders are listed but not read.
+- The `.git` row is covered by the git-mining section above.
+- Every C:\RealAI-clean module name has a branch counterpart: there are 0 off-branch families with ≥2 versions besides `__init__` and logs/_fix.
+- 326 impl-level conflicts in priority-9 families were classified, not line-reviewed (still open).
+
+| folder | all files | .py | js/ts | families | merged | functions recovered | needs-decision | note |
+|---|---|---|---|---|---|---|---|---|
+| `(root files)` | 90 | 5 | 2 | 2 | 1 | 0 | 0 |  |
+| `_parked` | 2285 | 1138 | 381 | 14 | 1 | 0 | 0 |  |
+| `_quarantine` | 601 | 374 | 33 | 57 | 3 | 0 | 0 |  |
+| `.agentx` | 5 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `.git` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `.github` | 35 | 1 | 0 | 0 | 0 | 0 | 0 |  |
+| `.grok` | 95 | 5 | 0 | 0 | 0 | 0 | 0 |  |
+| `.hive` | 3 | 3 | 0 | 0 | 0 | 0 | 0 |  |
+| `.kilo` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `.pytest_cache` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `.tanstack` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `.venv-xtts` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `.vercel` | 60 | 0 | 43 | 4 | 0 | 0 | 0 |  |
+| `.vscode` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `abilities` | 98 | 97 | 0 | 25 | 4 | 1 | 0 |  |
+| `adapters` | 7 | 7 | 0 | 0 | 0 | 0 | 0 |  |
+| `agent_tools` | 71 | 61 | 0 | 13 | 1 | 1 | 0 |  |
+| `agents` | 264 | 42 | 8 | 12 | 2 | 2 | 0 |  |
+| `agents-ui` | 2 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `apps` | 216 | 50 | 48 | 12 | 0 | 0 | 0 |  |
+| `archive` | 61 | 56 | 0 | 5 | 0 | 0 | 0 |  |
+| `artifacts` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `attachments` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `aura` | 9 | 4 | 0 | 0 | 0 | 0 | 0 |  |
+| `autopilot` | 2 | 0 | 2 | 0 | 0 | 0 | 0 |  |
+| `benchmarks` | 43 | 43 | 0 | 0 | 0 | 0 | 0 |  |
+| `billing` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |  |
+| `bin` | 24 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `config` | 7 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `core` | 5 | 5 | 0 | 0 | 0 | 0 | 0 |  |
+| `datasets` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `desktop` | 2 | 2 | 0 | 0 | 0 | 0 | 0 |  |
+| `docs` | 139 | 5 | 0 | 0 | 0 | 0 | 0 |  |
+| `examples` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |  |
+| `frontend` | 45 | 0 | 29 | 11 | 2 | 2 | 1 | realai/apps/frontend newer chat-UI phase (whole-UI merge would change Settings shape/defaults) |
+| `fusion-ui` | 4 | 0 | 2 | 1 | 0 | 0 | 0 |  |
+| `imports` | 5 | 4 | 0 | 2 | 0 | 0 | 0 |  |
+| `logs` | — | 84 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `marketplace` | 1 | 0 | 1 | 0 | 0 | 0 | 0 |  |
+| `memory` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `migrations` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `models` | 19 | 1 | 2 | 0 | 0 | 0 | 0 |  |
+| `modules` | 145 | 116 | 8 | 11 | 2 | 0 | 0 |  |
+| `node_modules` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `normalized_datasets` | 2 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `notes` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `orchestrator` | 1 | 0 | 1 | 0 | 0 | 0 | 0 |  |
+| `packages` | 113 | 5 | 88 | 6 | 0 | 0 | 0 |  |
+| `personas` | 5 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `plugins` | 4 | 3 | 0 | 1 | 0 | 0 | 0 |  |
+| `prompts` | 7 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `providers` | 7 | 2 | 3 | 1 | 0 | 0 | 0 |  |
+| `public` | 11 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai_training` | 2 | 2 | 0 | 1 | 0 | 0 | 0 |  |
+| `realai.egg-info` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `recovered` | 3685 | 1233 | 517 | 91 | 7 | 0 | 0 |  |
+| `registry` | 9 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `repo_tools` | 49 | 17 | 32 | 1 | 0 | 0 | 0 |  |
+| `requirements` | 2 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `results` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `scan_results` | — | 14 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `scanners` | 46 | 46 | 0 | 1 | 0 | 0 | 0 |  |
+| `schema` | 2 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `screenshots` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `scripts` | 239 | 143 | 25 | 17 | 1 | 0 | 0 |  |
+| `sdk` | 3 | 3 | 0 | 1 | 0 | 0 | 0 |  |
+| `server` | 4 | 2 | 1 | 0 | 0 | 0 | 0 |  |
+| `src` | 78 | 0 | 76 | 13 | 0 | 0 | 0 |  |
+| `state` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `templates` | 2 | 0 | 2 | 0 | 0 | 0 | 0 |  |
+| `tests` | 24 | 24 | 0 | 0 | 0 | 0 | 0 |  |
+| `tools` | 6 | 1 | 3 | 0 | 0 | 0 | 0 |  |
+| `training` | 30 | 5 | 0 | 2 | 0 | 0 | 0 |  |
+| `ui` | 3 | 0 | 2 | 1 | 0 | 0 | 0 |  |
+| `voice-lab` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `realai/(files)` | 125 | 75 | 1 | 21 | 2 | 1 | 0 |  |
+| `realai/__pycache__` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `realai/.continue` | 2 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/.github` | 15 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/.hive` | 26 | 26 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/.kilo` | 3 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/.learn_cache` | 3727 | 2085 | 538 | 156 | 11 | 0 | 0 |  |
+| `realai/.pytest_cache__dup1` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `realai/.realai` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/.vs` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `realai/abilities` | 3 | 1 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/adapters` | 8 | 7 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/agent_runtime` | 52 | 52 | 0 | 1 | 1 | 0 | 0 |  |
+| `realai/agent_tools` | 2 | 1 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/agent_tools_gold` | 27 | 27 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/agent-tools-main` | 2 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/api` | 14 | 14 | 0 | 2 | 0 | 0 | 0 |  |
+| `realai/app` | 4 | 1 | 3 | 2 | 0 | 0 | 0 |  |
+| `realai/apps` | 12 | 0 | 7 | 3 | 2 | 0 | 1 | realai/apps/frontend newer chat-UI phase (untracked, gitignored) |
+| `realai/archive` | 2 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/atomic_fizz` | 4 | 4 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/aura` | 18 | 9 | 0 | 1 | 0 | 0 | 0 |  |
+| `realai/aura_pkg` | 2 | 2 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/autopilot` | 2 | 0 | 2 | 0 | 0 | 0 | 0 |  |
+| `realai/backend_realai` | 13 | 0 | 13 | 1 | 0 | 0 | 0 |  |
+| `realai/benchmarks` | 28 | 28 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/billing` | 1 | 1 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/bin` | 23 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/bot` | 9 | 9 | 0 | 4 | 0 | 0 | 0 |  |
+| `realai/catalog` | 12 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/chat` | 1 | 0 | 1 | 1 | 0 | 0 | 0 |  |
+| `realai/cli` | 33 | 30 | 0 | 2 | 0 | 0 | 0 |  |
+| `realai/commands` | 1 | 0 | 1 | 0 | 0 | 0 | 0 |  |
+| `realai/components` | 9 | 0 | 9 | 3 | 0 | 0 | 0 |  |
+| `realai/config` | 14 | 6 | 0 | 1 | 0 | 0 | 0 |  |
+| `realai/context` | 2 | 1 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/core` | 141 | 139 | 2 | 30 | 2 | 6 | 2 | realai/core/training/finetune.py default data dir |
+| `realai/data` | 2 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/datasets` | 9 | 2 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/docs` | 31 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/engine` | 7 | 7 | 0 | 2 | 0 | 0 | 0 |  |
+| `realai/examples` | 6 | 6 | 0 | 1 | 0 | 0 | 0 |  |
+| `realai/executive` | 12 | 9 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/fusion-ui` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/inference` | 12 | 12 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/learn` | 11 | 11 | 0 | 2 | 0 | 0 | 0 |  |
+| `realai/logs` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `realai/marketplace` | 1 | 0 | 1 | 0 | 0 | 0 | 0 |  |
+| `realai/mcp` | 4 | 2 | 1 | 1 | 0 | 0 | 0 |  |
+| `realai/memory` | 121 | 79 | 1 | 4 | 0 | 0 | 0 |  |
+| `realai/metrics` | 4 | 4 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/middleware` | 4 | 4 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/models` | 30 | 7 | 2 | 1 | 0 | 0 | 0 |  |
+| `realai/modules` | 4 | 1 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/orchestration` | 17 | 15 | 0 | 3 | 2 | 4 | 0 |  |
+| `realai/orchestrator` | 1 | 0 | 1 | 0 | 0 | 0 | 0 |  |
+| `realai/orchestrators` | 15 | 14 | 0 | 3 | 1 | 0 | 0 |  |
+| `realai/Output` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `realai/packages` | 22 | 3 | 4 | 1 | 0 | 0 | 0 |  |
+| `realai/plugins` | 361 | 262 | 50 | 43 | 4 | 3 | 0 |  |
+| `realai/profiles` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/prompts` | 7 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/providers` | 26 | 17 | 4 | 2 | 0 | 0 | 0 |  |
+| `realai/python` | 2 | 2 | 0 | 1 | 0 | 0 | 0 |  |
+| `realai/realai_agent` | 2 | 1 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/realai_training` | 1 | 1 | 0 | 1 | 0 | 0 | 0 |  |
+| `realai/realai-backend` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/realai-cli` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/realai-frontend__dup1` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/registry` | 2 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/results` | — | 0 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `realai/routes` | 10 | 10 | 0 | 1 | 0 | 0 | 0 |  |
+| `realai/runtime` | 3 | 3 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/scan_results` | — | 3 | 0 | 0 | 0 | 0 | 0 | skipped (junk/live/data) |
+| `realai/scanners` | 5 | 5 | 0 | 1 | 0 | 0 | 0 |  |
+| `realai/schema` | 2 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/schemas` | 7 | 7 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/scripts` | 121 | 102 | 0 | 18 | 1 | 0 | 0 |  |
+| `realai/sdk` | 3 | 3 | 0 | 1 | 0 | 0 | 0 |  |
+| `realai/sdk-py` | 2 | 1 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/sdk-ts` | 2 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/security` | 4 | 4 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/server` | 29 | 27 | 0 | 12 | 0 | 0 | 1 | RealAi-unified router handle_provider_route/handle_tool_route (would add new :8000 endpoints) |
+| `realai/skills` | 6 | 6 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/static` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/templates` | 3 | 1 | 2 | 0 | 0 | 0 | 0 |  |
+| `realai/tests` | 26 | 26 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/tooling` | 6 | 6 | 0 | 1 | 0 | 0 | 0 |  |
+| `realai/tools` | 19 | 19 | 0 | 3 | 0 | 0 | 0 |  |
+| `realai/tools_realai` | 1 | 0 | 1 | 0 | 0 | 0 | 0 |  |
+| `realai/tracing` | 2 | 2 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/training` | 30 | 25 | 0 | 5 | 0 | 0 | 0 |  |
+| `realai/ui` | 5 | 1 | 2 | 2 | 0 | 0 | 0 |  |
+| `realai/universe` | 16 | 15 | 0 | 7 | 0 | 0 | 0 |  |
+| `realai/utilities` | 6 | 4 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/voice` | 274 | 19 | 114 | 19 | 0 | 0 | 0 |  |
+| `realai/web3` | 6 | 6 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/widget` | 1 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/workflows` | 2 | 0 | 0 | 0 | 0 | 0 | 0 |  |
+| `realai/world_model` | 30 | 27 | 0 | 0 | 0 | 0 | 0 |  |
