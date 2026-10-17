@@ -24,6 +24,6 @@ The Voice Lab / voice trainer (`realai/voice/`: `lab_server.py` API on :8890, Vi
 | CLI | `python -m realai.voice_service health` / `speak "text" --voice laura --out x.wav` |
 | UI | optional `python -m realai.voice_service serve` on **127.0.0.1:8891**: `GET /v1/voice-service/health`, `POST /v1/voice-service/speak`. It refuses 8890/8787/8000/8001/8080 and is never auto-started. |
 
-The existing orchestrator `voice_*` tools and `abilities/audio_speech.py` are unchanged. Pointing them at the service (lab-first) is an open decision for Travis.
+**Routed (Travis, 2026-10-17).** The orchestrator `voice_health`, `voice_inventory`, `voice_speak` and `voice_listen` tools (`v3_orchestrator._run_tool`) now dispatch through `realai/voice_service/hive.py`, and `abilities/audio_speech.py` calls `get_voice_client().speak(save=False)`. Both are lab-first (Voice Lab API on :8890 when it is up) with an in-process engine fallback. Tool names, argument shapes and result keys are unchanged, plus a `route` field. `voice_listen` keeps the vosk `audio_transcription` ability as a last resort. The voice trainer and lab (`realai/voice/`) are untouched; `realai.voice.hive_tools` stays as the schema source and as the legacy direct path.
 
 Note: `VoiceProvider.speak()` sets `REALAI_TTS_BACKEND`/`REALAI_KOKORO_VOICE` in `os.environ`, which is process-global. That is one more reason the service prefers the lab over in-process calls when several callers share a process.

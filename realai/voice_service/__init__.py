@@ -132,6 +132,16 @@ class VoiceClient:
         return {"ok": False, "route": "none", "error": "voice lab not reachable"}
 
 
+    def inventory(self) -> Dict[str, Any]:
+        """Local TTS weight packs (read-only filesystem listing; same on lab and engine hosts)."""
+        try:
+            from realai.voice.provider import get_voice_provider
+
+            return {**get_voice_provider().inventory(), "route": "engine"}
+        except Exception as e:
+            return {"ok": False, "route": "engine", "error": f"{type(e).__name__}: {e}"[:300]}
+
+
 def _out_dir() -> Path:
     env = os.environ.get("REALAI_VOICE_OUT")
     if env:
@@ -158,4 +168,12 @@ def health() -> Dict[str, Any]:
     return get_voice_client().health()
 
 
-__all__ = ["VoiceClient", "get_voice_client", "speak", "health", "DEFAULT_PORT", "DEFAULT_LAB_URL"]
+def transcribe(audio: bytes) -> Dict[str, Any]:
+    return get_voice_client().transcribe(audio)
+
+
+def inventory() -> Dict[str, Any]:
+    return get_voice_client().inventory()
+
+
+__all__ = ["VoiceClient", "get_voice_client", "speak", "health", "transcribe", "inventory", "DEFAULT_PORT", "DEFAULT_LAB_URL"]

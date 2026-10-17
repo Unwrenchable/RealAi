@@ -91,3 +91,34 @@ def test_agent_tools_tts_engine_is_canonical_shim_and_lab_untouched():
                  "def _synthesize_local", "def _ensure_local", "def _synthesize_http", "MIN_REAL_WAV"):
         assert name in src
     assert "voice_service" not in src  # the lab/engine does not depend on the new client
+
+
+def test_orchestrator_voice_tools_and_audio_speech_route_through_voice_service(monkeypatch):
+    import realai.voice_service as vs
+
+    srv = ThreadingHTTPServer(("127.0.0.1", 0), _Lab)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    try:
+        monkeypatch.setenv("REALAI_VOICE_LAB_URL", f"http://127.0.0.1:{srv.server_port}")
+        monkeypatch.setenv("REALAI_VOICE_MODE", "auto")
+        monkeypatch.setattr(vs, "_CLIENT", None, raising=False)
+        from realai.voice_service.hive import execute
+
+        n = len(_Lab.seen)
+        r = execute("voice_speak", {"text": "hi travis"})
+        assert r["ok"] and r["route"] == "lab" and _Lab.seen[n][0] == "/v1/audio/speech"
+        assert execute("voice_health", {})["route"] == "lab"
+        src = Path(__file__).resolve().parents[1] / "realai" / "orchestration" / "v3_orchestrator.py"
+        text = src.read_text(encoding="utf-8")
+        assert "from realai.voice_service.hive import execute as voice_execute" in text
+        assert "from realai.voice.hive_tools import execute as voice_execute" not in text
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location(
+            "_audio_speech_t", Path(__file__).resolve().parents[1] / "abilities" / "audio_speech.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        a = mod.run(input="hello")
+        assert a["ok"] and a["route"] == "lab" and a["bytes"] == len(WAV) and a["ability"] == "audio_speech"
+    finally:
+        srv.shutdown()

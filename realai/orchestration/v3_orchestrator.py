@@ -877,7 +877,8 @@ def _run_tool(name: str, arguments: Optional[Dict] = None) -> Dict[str, Any]:
             from realai.providers.local_llama import local_llama_health
             return local_llama_health()
         if name in ("voice_health", "voice_inventory", "voice_speak", "voice_listen"):
-            from realai.voice.hive_tools import execute as voice_execute
+            # Lab-first shared client (Voice Lab :8890 if up, else in-process engine); trainer untouched.
+            from realai.voice_service.hive import execute as voice_execute
 
             args = dict(arguments or {})
             if name == "voice_speak" and not (args.get("text") or args.get("input")):
