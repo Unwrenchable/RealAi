@@ -17,6 +17,7 @@ from typing import Any, Callable, Dict, List, Optional, Tuple
 
 _NUM = re.compile(r"(?<![A-Za-z0-9_])[-+]?\d+(?:\.\d+)?")
 _FAIL = re.compile(r"\b(fail|failed|error|couldn't|could not|can't|cannot|unable|not found|unavailable|disabled|no match|"
+                   r"refused|rejected|denied|blocked|not filed|was not (?:filed|approved|executed)|"
                    r"issue|problem|invalid|missing|please provide|need the|need more|there (?:are|is|were) no|no \w+ (?:match|matches|found))\b", re.I)
 _THOUSANDS = re.compile(r"(?<=\d),(?=\d{3}(?!\d))")
 

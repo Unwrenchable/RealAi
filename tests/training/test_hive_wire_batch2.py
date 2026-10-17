@@ -130,3 +130,42 @@ def test_spotcheck_extended_has_batch2_checks():
     assert {"memory_stats_total", "pipeline_plan", "hive_role_model", "payout_mismatch", "payout_refuse", "registry_ledger",
             "self_heal_report", "exec_goals"} <= ids
     assert not ids & {c["id"] for c in S.checks()}
+
+
+def test_payout_check_facts_skip_arg_error_and_accept_correctly_wording():
+    """Smoke 2026-10-17 reject: first call failed arg validation (model retried with players); the answer said the
+    payouts 'match the final standings correctly'. That is a verifier bug, not a model mistake."""
+    from realai import hive_tools
+    from realai.training.self_data.verify import recompute_check
+
+    bad = {"standings": ["Alice", "Bob", "Charlie"], "payouts": [{"amount": 500}, {"amount": 300}, {"amount": 200}]}
+    good = {"standings": ["Alice", "Bob", "Charlie"],
+            "payouts": [{"player": "Alice", "amount": 500}, {"player": "Bob", "amount": 300}, {"player": "Charlie", "amount": 200}]}
+    calls = [{"name": "payout_check", "arguments": a, "result": hive_tools.execute("payout_check", a, offline=True)} for a in (bad, good)]
+    assert calls[0]["result"].get("ok") is False and calls[1]["result"]["release_safe"] is True
+    ans = "The payout amounts match the final standings correctly. Total $1000; safe for RackUp to consider for release."
+    assert recompute_check(calls, ans) == []
+    assert recompute_check(calls[1:], "I could not tell.") == ["payout_check_fact_missing"]
+
+
+def test_refused_request_reported_honestly_is_not_a_success_claim():
+    """Smoke 2026-10-17 reject: request_approval was refused (old_string matched 8 times) and the answer said so."""
+    from realai.training.self_data.verify import verify
+
+    calls = [{"name": "request_approval", "arguments": {"action": "search_replace"},
+              "result": {"ok": False, "status": "refused", "executed": False, "next_step": "not filed"}}]
+    msgs = [{"role": "user", "content": "rename it"},
+            {"role": "assistant", "content": "The request was refused because old_string matches 8 times."}]
+    assert verify(msgs, calls) == (True, ["all_tools_failed"])
+    msgs[-1]["content"] = "Done, the README now says SynthMind."
+    assert verify(msgs, calls) == (False, ["all_tools_failed_but_answer_claims_success"])
+
+
+def test_extract_questions_collects_several_single_element_arrays():
+    """Smoke 2026-10-17: the 14B answered the payout_check proposal with three one-element arrays; only one was used."""
+    from realai.training.self_data.generate import extract_questions
+
+    t = '["Check payouts for Alice, Bob, Charlie: $500, $300, $200?"]\n\n["Sarah, Mike, Tom got $1000, $600, $400. Align?"]\n\n' \
+        '["Order is Jordan, Lisa, Kevin; payouts $800, $450, $350. Consistent?"]'
+    assert len(extract_questions(t)) == 3
+    assert extract_questions('["first request here", "second request here"] trailing [1, 2]') == ["first request here", "second request here"]

@@ -156,20 +156,27 @@ def extract_questions(text: str) -> List[str]:
     t = _THINK.sub("", str(text or "")).strip()
     cands = [m.group(1) for m in _FENCE.finditer(t)] + [t]
     for c in cands:
+        out: List[str] = []
+        end = -1
         for m in re.finditer(r"\[", c):  # every '[' as a possible array start; raw_decode stops at its end
+            if m.start() < end:
+                continue  # inside an array already decoded
             try:
-                arr, _ = json.JSONDecoder().raw_decode(c[m.start():])
+                arr, n = json.JSONDecoder().raw_decode(c[m.start():])
             except json.JSONDecodeError:
                 continue
-            out = []
+            got = []
             for x in arr if isinstance(arr, list) else []:
                 if isinstance(x, dict):
                     x = next((x[k] for k in _Q_KEYS if isinstance(x.get(k), str)), None) or next(
                         (v for v in x.values() if isinstance(v, str) and len(v) > 8), None)
                 if isinstance(x, str) and 8 < len(x.strip()) < 600:
-                    out.append(x.strip())
-            if out:
-                return out
+                    got.append(x.strip())
+            if got:
+                out += got  # teachers sometimes emit one single-element array per request
+                end = m.start() + n
+        if out:
+            return out
     lines = [re.sub(r"^\s*(?:[-*\u2022]|\d+[.)])\s*", "", ln).strip().strip('"') for ln in t.splitlines()]
     return [ln for ln in lines if 15 < len(ln) < 600 and (ln.endswith("?") or ln.endswith(".")) and not ln.startswith(("{", "["))]
 

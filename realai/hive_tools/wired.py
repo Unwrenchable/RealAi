@@ -264,8 +264,11 @@ def key_facts(name: str, r: Dict[str, Any], args: Dict[str, Any]) -> List[List[s
             return [[str(r["role_model"])]]
         return [num(r.get("route_count")) + [str(len(r.get("hive_agents") or []))]]
     if name == "payout_check":
+        if r.get("error") and "status" not in r:
+            return []  # argument-validation error (model retries with fixed args); the retried call is what gets checked
         if r.get("release_safe"):
-            return [[str(r.get("status")), "checks out", "check out", "consistent", "safe to release", "align"]]
+            return [[str(r.get("status")), "checks out", "check out", "consistent", "safe to release", "align",
+                     "correctly", "is correct", "are correct", "line up", "lines up", "safe for rackup"]]
         return [[str(r.get("status")), "not safe", "mismatch", "block", "issue", "problem", "wrong", "don't match",
                  "doesn't match", "not match"]]
     if name == "tool_registry_lookup":
