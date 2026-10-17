@@ -23,9 +23,7 @@
  },
  "needs_travis": [
   "realai/core/training/finetune.py plan default data dir (realai/core/datasets/processed) vs RealAI-gold main-realai (<repo>/training/data)",
-  "agents/agents.py AGENT_REGISTRY = property(...) at module level was dropped by realai/core/agents/agents.py: confirm it stays dropped",
-  "326 impl-level conflicts in the 130 priority-9 families (210 in copies with newer mtime, mostly .learn_cache / installer payload copies) were classified, not line-reviewed",
-  "tests/test_model_catalog_persist.py::test_default_model_unchanged fails on the PC only because the user env sets REALAI_DEFAULT_MODEL=realai-default-coder (passes with it unset); make the test clear the env?"
+  "326 impl-level conflicts in the 130 priority-9 families (210 in copies with newer mtime, mostly .learn_cache / installer payload copies) were classified, not line-reviewed"
  ],
  "families": [
   {
@@ -6481,7 +6479,7 @@
    "conflicts": 10,
    "conflicts_newer_mtime": 10,
    "analyzed_on": "2026-10-17",
-   "resolution": "AGENT_REGISTRY = property(...) (module-level property object) stays dropped pending Travis"
+   "resolution": "AGENT_REGISTRY = property(...) stays dropped (Travis decision 2026-10-17: it was a bug)"
   },
   {
    "family": "realai/core/agents/critic.py",
@@ -12794,6 +12792,8 @@
   "hive_executor": "files the request via approval_store (by-path fallback when realai.plugins.tools fails); pending_approval + approval_id or a clear approval_error (2577edb)",
   "voice": "orchestrator voice_* and ability audio_speech -> realai.voice_service (lab-first) (b8b0325)",
   "merged_routes_sdxl": "stay off by default on :8000; test asserts no launcher/config enables them (59eb6aa)",
-  "start_realai_bat": "python -m realai.server.app --host 127.0.0.1 --port 8000 (59eb6aa)"
+  "start_realai_bat": "python -m realai.server.app --host 127.0.0.1 --port 8000 (59eb6aa)",
+  "agent_registry_property": "stays dropped (Travis 2026-10-17 12:41 AM): module-level property object was a bug",
+  "test_default_model_unchanged": "test clears REALAI_DEFAULT_MODEL itself (Travis 2026-10-17 12:41 AM)"
  }
 }

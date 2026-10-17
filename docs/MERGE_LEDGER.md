@@ -76,12 +76,12 @@ Resolved by Travis's decisions (2026-10-17, 12:21 AM):
 - ~~merged routes / local SDXL default~~ -> stay off on :8000 (test added, 59eb6aa)
 - ~~start_realai.bat realai_cli serve~~ -> python -m realai.server.app (59eb6aa)
 
+Resolved (2026-10-17, 12:41 AM): ~~AGENT_REGISTRY property~~ stays dropped (it was a bug); ~~test_default_model_unchanged~~ clears REALAI_DEFAULT_MODEL itself.
+
 Open:
 
 - realai/core/training/finetune.py plan default data dir (realai/core/datasets/processed) vs RealAI-gold main-realai (<repo>/training/data)
-- agents/agents.py AGENT_REGISTRY = property(...) at module level was dropped by realai/core/agents/agents.py: confirm it stays dropped
 - 326 impl-level conflicts in the 130 priority-9 families (210 in copies with newer mtime, mostly .learn_cache / installer payload copies) were classified, not line-reviewed
-- tests/test_model_catalog_persist.py::test_default_model_unchanged fails on the PC only because the user env sets REALAI_DEFAULT_MODEL=realai-default-coder (passes with it unset); make the test clear the env?
 
 ## Decision batch families (priority 9, analyzed 2026-10-16 late)
 
@@ -354,7 +354,7 @@ Versions: branch x9, .learn_cache x9, _quarantine x5, realai-gold x1, installer-
 | `realai/server/memory_store.py` | 13 | 3/0 | 4 | in-memory MemoryRecord/MemoryStore phase superseded by SQLite persistence; not merged |
 | `_quarantine/twins_20260926/realai__apps/api/main.py` | 12 | 0/0 | 0 | no recoverable defs; versions are subsets |
 | `realai/core/agents/supervisor.py` | 12 | 0/0 | 0 | no recoverable defs; versions are subsets |
-| `realai/core/agents/agents.py` | 11 | 1/0 | 10 | AGENT_REGISTRY = property(...) (module-level property object) stays dropped pending Travis |
+| `realai/core/agents/agents.py` | 11 | 1/0 | 10 | AGENT_REGISTRY = property(...) stays dropped (Travis decision 2026-10-17: it was a bug) |
 | `realai/core/audit.py` | 11 | 0/0 | 2 | no recoverable defs; impl conflicts not line-reviewed this pass |
 | `realai/core/tools/code.py` | 11 | 0/0 | 0 | no recoverable defs; versions are subsets |
 | `realai/core/tools/file.py` | 11 | 0/0 | 0 | no recoverable defs; versions are subsets |
