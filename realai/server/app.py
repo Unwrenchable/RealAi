@@ -288,4 +288,11 @@ def main(host='0.0.0.0', port=8000):
 
 
 if __name__ == '__main__':
-    main()
+    # Optional --host/--port (start_realai.bat binds 127.0.0.1:8000); no flags = unchanged default 0.0.0.0:8000.
+    import argparse
+
+    _ap = argparse.ArgumentParser(description='RealAI structured server (:8000)')
+    _ap.add_argument('--host', default='0.0.0.0')
+    _ap.add_argument('--port', type=int, default=8000)
+    _a = _ap.parse_args()
+    main(_a.host, _a.port)

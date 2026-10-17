@@ -68,3 +68,30 @@ def test_local_sdxl_module_is_local_only():
 def test_app_logger_defined():
     app = pytest.importorskip("realai.server.app")
     assert app.logger is not None
+
+
+def test_merged_routes_and_sdxl_not_enabled_by_any_launcher_or_config():
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    hits = []
+    for pat in ("*.bat", "*.cmd", "*.ps1", "*.env", ".env*", "*.toml", "*.yaml", "*.yml"):
+        for p in root.glob(pat):
+            t = p.read_text(encoding="utf-8", errors="ignore")
+            if "REALAI_SERVER_MERGED_ROUTES" in t or "REALAI_IMAGES_LOCAL_SDXL" in t:
+                hits.append(str(p))
+    for p in (root / "realai").glob("*.bat"):
+        t = p.read_text(encoding="utf-8", errors="ignore")
+        if "REALAI_SERVER_MERGED_ROUTES" in t or "REALAI_IMAGES_LOCAL_SDXL" in t:
+            hits.append(str(p))
+    assert not hits, hits
+
+
+def test_start_realai_bat_points_at_real_server_entry():
+    from pathlib import Path
+
+    bat = (Path(__file__).resolve().parents[1] / "realai" / "start_realai.bat").read_text(encoding="utf-8")
+    assert "realai_cli serve" not in bat and "realai_cli doctor" not in bat
+    assert '-m realai.server.app --host 127.0.0.1 --port 8000' in bat
+    src = (Path(__file__).resolve().parents[1] / "realai" / "server" / "app.py").read_text(encoding="utf-8")
+    assert "_ap.add_argument('--host', default='0.0.0.0')" in src and "main(_a.host, _a.port)" in src
