@@ -150,6 +150,13 @@ def recompute_check(ok_calls: List[Dict[str, Any]], ans: str) -> List[str]:
         if name not in hive_tools.NEW_TOOLS and name != "route_to_agent":
             continue
         args = c.get("arguments") if isinstance(c.get("arguments"), dict) else {}
+        if name == "request_approval":
+            from realai.hive_tools.approvals import contract_violation
+
+            bad = contract_violation(c.get("result") or {})
+            if bad:
+                out.append(bad)
+                continue
         again = hive_tools.execute(str(name), args, offline=True)
         if json.dumps(again, sort_keys=True, default=str) != json.dumps(c["result"], sort_keys=True, default=str):
             out.append(f"recompute_mismatch:{name}")

@@ -20,28 +20,31 @@ HIGH_RISK = frozenset(
 
 
 def _approval_confirm(tool_name: str, arguments: Dict[str, Any]) -> bool:
-    """Create a pending approval and deny until explicitly approved.
+    """Create a pending approval and deny until a human approves it (deny by default).
 
-    Auto-approve only when arguments contain ``approved=True`` or
-    ``approval_id`` pointing at an approved request.
+    Passes only when ``approval_id`` names an approved request for this same tool. The model-supplied
+    ``approved=True`` shortcut is ignored unless REALAI_APPROVAL_TRUST_FLAG=1 (default off), because any caller,
+    including the model, could set it.
     """
+    import os
+
+    trust_flag = os.environ.get("REALAI_APPROVAL_TRUST_FLAG", "").strip() == "1"
     try:
         from realai.plugins.tools import approval_store as store
     except Exception:
-        # If approval store missing, deny high-risk by default
-        return bool(arguments.get("approved") is True)
+        return bool(trust_flag and arguments.get("approved") is True)
 
-    if arguments.get("approved") is True:
+    if trust_flag and arguments.get("approved") is True:
         return True
     approval_id = arguments.get("approval_id")
     if approval_id:
         item = store.get_request(str(approval_id))
-        return bool(item and item.get("status") == "approved")
+        return bool(item and item.get("status") == "approved"
+                    and (item.get("payload") or {}).get("tool") in (None, tool_name))
 
-    # Create pending request for human review
     store.create_request(
         action=f"tool:{tool_name}",
-        payload={"tool": tool_name, "arguments": arguments},
+        payload={"tool": tool_name, "arguments": {k: v for k, v in arguments.items() if k != "approved"}},
     )
     return False
 

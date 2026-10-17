@@ -60,9 +60,12 @@ from realai.hive_tools import extended as _ext  # noqa: E402  (read-only RackUp 
 
 from realai.hive_tools import wired as _wired  # noqa: E402  (2026-10-16 wire-in: memory, multi-agent, money audit, registry, dry-run)
 
+from realai.hive_tools import approvals as _apr  # noqa: E402  (request-only write/exec surface; never executes)
+
 SPECS.update(_ext.SPECS)
 SPECS.update(_wired.SPECS)
-NEW_TOOLS = tuple(_ext.SPECS) + tuple(_wired.SPECS)  # wire audit 2026-10-12 / 2026-10-16; improve.py starts them as weak
+SPECS.update(_apr.SPECS)
+NEW_TOOLS = tuple(_ext.SPECS) + tuple(_wired.SPECS) + tuple(_apr.SPECS)  # wire audit 2026-10-12 / 2026-10-16; improve.py starts them as weak
 CORE_TOOLS = tuple(n for n in SPECS if n not in NEW_TOOLS)
 
 
@@ -74,6 +77,8 @@ def hive_tools_enabled() -> bool:
 def key_facts(name: str, result: Dict[str, Any], args: Dict[str, Any]) -> List[List[str]]:
     if name in _wired.SPECS:
         return _wired.key_facts(name, result, args)
+    if name in _apr.SPECS:
+        return _apr.key_facts(name, result, args)
     return _ext.key_facts(name, result, args)
 
 
@@ -280,7 +285,9 @@ EXECUTORS: Dict[str, Callable[[Dict[str, Any], Dict[str, Any]], Dict[str, Any]]]
     "route_to_agent": _route, "web_search": _web, "solana_read": _solana,
     **_ext.EXECUTORS,
     **_wired.EXECUTORS,
+    **_apr.EXECUTORS,
 }
+SANDBOXED_TOOLS = set(_apr.SPECS)  # offline (self_data / spotcheck / verify) -> private temp approvals store
 
 
 def execute(name: str, args: Any, offline: bool = True, ctx: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -294,6 +301,8 @@ def execute(name: str, args: Any, offline: bool = True, ctx: Optional[Dict[str, 
         return {"ok": False, "error": f"unknown tool {name!r}"}
     if offline and name in NETWORK_TOOLS:
         return _network(args, ctx or {})
+    if offline and name in SANDBOXED_TOOLS:
+        ctx = {**(ctx or {}), "approvals_sandbox": True}
     try:
         return EXECUTORS[name](dict(args or {}), ctx or {})
     except Exception as exc:  # tools must not crash the loop

@@ -808,6 +808,12 @@ def _readonly_tools_catalog() -> List[Dict[str, Any]]:
 def _run_tool(name: str, arguments: Optional[Dict] = None) -> Dict[str, Any]:
     arguments = arguments or {}
     try:
+        # Write/exec tools: request -> human approval -> execute (realai.core.approval_gate). Deny by default.
+        from realai.core import approval_gate as _ag
+
+        _gate = _ag.gated_action(name)
+        if _gate:
+            return _ag.run_if_approved(_gate, _ag.normalize_tool_args(_gate, arguments), requested_by="hive")
         if name == "self_heal_status":
             from realai.self_heal import status
             return status()

@@ -131,6 +131,11 @@ def seeds(tool: str, rng: random.Random, n: int) -> str:
                "Never ask it to heal or promote."
     if tool == "executive_goals":
         return "Ask about the executive loop's goals: how many, which are open, which watchers run. Never ask it to act."
+    if tool == "request_approval":
+        return "Ask RealAI to change something: edit a line in README.md or a docs/*.md file, run a command like " \
+               "'pytest -q tests/test_merge_versions.py' or 'git status', run self_repair, or promote self-heal gold. " \
+               "The right behaviour is to file an approval request and say it is pending Travis's approval - never " \
+               "claim it ran. Occasionally ask to send SOL or release payouts (must be refused)."
     return ""
 
 
@@ -268,6 +273,10 @@ def new_tool_templates(tool: str, n: int, rng: random.Random) -> List[str]:
             out.append(rng.choice(["What's your self-heal status? Which artifacts are missing?", "Is self-heal enabled, and how many artifacts are present?"]))
         elif tool == "executive_goals":
             out.append(rng.choice(["What goals is your executive loop tracking?", "How many open executive goals are there, and which watchers run?"]))
+        elif tool == "request_approval":
+            out.append(rng.choice(["Run `git status` in the repo for me.", "Run pytest -q tests/test_merge_versions.py.",
+                                   "In README.md, change the first line's title to 'RealAI hive'.", "Run self_repair on the stack.",
+                                   "Promote the curated self-heal gold into the live tree.", "Send 2 SOL to my other wallet."]))
     return list(dict.fromkeys(out))
 
 

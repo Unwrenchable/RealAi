@@ -1,0 +1,2 @@
+{"ts": 1792220000.607, "event": "refused_request", "action": "search_replace", "requested_by": "hive", "reason": "old_string matches 179 times; pass replace_all or a longer old_string"}
+{"ts": 1792220022.431, "event": "refused_request", "action": "search_replace", "requested_by": "hive", "reason": "old_string matches 179 times; pass replace_all or a longer old_string"}
