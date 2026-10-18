@@ -408,9 +408,10 @@ def hive_selfplay_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterator[
             if not r.get("verified"):
                 continue
             teacher = r.get("teacher")
-            if only and teacher not in only:
+            names = {teacher, (teacher or "").split("@")[0]}  # self_data tags "model@base_url"
+            if only and not names & only:
                 continue
-            if teacher in skip:
+            if names & skip:
                 continue
             yield {"messages": r["messages"], "tools": r.get("tools"),
                    "meta": {"kind": "tool_call" if r.get("tools") else "plain", "tool": r.get("tool"), "origin": r.get("origin"),

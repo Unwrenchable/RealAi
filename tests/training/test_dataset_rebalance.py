@@ -66,12 +66,12 @@ def test_tool_coverage_lists_missing_tools():
 def test_teacher_split(tmp_path):
     p = tmp_path / "selfplay-x.jsonl"
     rows = [{"messages": [{"role": "user", "content": f"q{i}"}, {"role": "assistant", "content": "a"}], "verified": True,
-             "teacher": "qwen3-30b-a3b" if i % 2 else "qwen3-14b"} for i in range(6)]
+             "teacher": "qwen3-30b-a3b@http://127.0.0.1:8081" if i % 2 else "qwen3-14b@http://127.0.0.1:8081"} for i in range(6)]
     p.write_text("\n".join(json.dumps(r) for r in rows), encoding="utf-8")
     ctx = {"roots": {"realai": str(tmp_path)}}
     only = list(A.hive_selfplay_source({"paths": [str(p)], "teachers": ["qwen3-30b-a3b"]}, ctx))
     rest = list(A.hive_selfplay_source({"paths": [str(p)], "exclude_teachers": ["qwen3-30b-a3b"]}, ctx))
-    assert len(only) == 3 and len(rest) == 3 and {r["meta"]["teacher"] for r in only} == {"qwen3-30b-a3b"}
+    assert len(only) == 3 and len(rest) == 3 and {r["meta"]["teacher"] for r in only} == {"qwen3-30b-a3b@http://127.0.0.1:8081"}
 
 
 def test_league_rows_quote_validator(monkeypatch):
