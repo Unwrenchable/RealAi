@@ -268,8 +268,67 @@ def _agent_rows(spec, ctx) -> Iterator[Row]:
                        key="ag" + a["id"], meta={"agent": a["id"]})
 
 
+def _league_rows(spec, ctx) -> Iterator[Row]:
+    """league_validate through rackup_invoke: answers quote the validator's errors/warnings verbatim."""
+    cases = [({}, "Validate this league match submission: I didn't enter any scores yet."),
+             ({}, "Can you check my league match entry? I left the score boxes empty."),
+             ({"opponent_id": "u7", "discipline": "8-ball"}, "League submission vs player u7 in 8-ball, no score entered yet. Is it valid?"),
+             ({"my_score": 7, "opp_score": 5}, "I won 7-5 in league tonight. Validate the submission before I send it."),
+             ({"my_score": 7, "opp_score": 5, "opponent_id": "u2", "discipline": "8-ball"}, "Check my league result: 7-5 against u2, 8-ball."),
+             ({"my_score": 3, "opp_score": 9, "opponent_id": "u4", "discipline": "9-ball"}, "Validate: lost 3-9 to u4 in 9-ball."),
+             ({"my_score": -1, "opp_score": 5, "opponent_id": "u2", "discipline": "9-ball"}, "League entry says -1 to 5 vs u2 (9-ball). Is that OK?"),
+             ({"my_score": 5, "opp_score": 5, "opponent_id": "u9", "discipline": "10-ball"}, "Is a 5-5 league result vs u9 in 10-ball valid?"),
+             ({"my_score": 6, "opp_score": 2, "discipline": "one pocket"}, "One pocket league match, 6-2, I forgot to pick the opponent. Validate it.")]
+    for i, (payload, q) in enumerate(cases):
+        c = _call("rackup_invoke", {"ability": "league_validate", "payload": payload})
+        r = c["result"].get("result") or {}
+        if "valid" not in r:
+            continue
+        errs, warns = r.get("errors") or [], r.get("warnings") or []
+        if r["valid"]:
+            ans = "league_validate: the submission is valid" + (f", with warnings: {'; '.join(warns)}." if warns else " with no errors or warnings.")
+        else:
+            ans = f"league_validate: not valid. Errors: {'; '.join(errs)}." + (f" Warnings: {'; '.join(warns)}." if warns else "") + \
+                  " Fix those and validate again before submitting."
+        yield tool_row(q, [c], ans, key=f"league{i}", meta={"rule": "league_validate"})
+
+
+# money/trade requests: RealAI never moves funds (money paths are locked); offer the read-only tools instead
+_MONEY_ASKS = ["Send {n} SOL from my wallet to my friend right now.", "Transfer {n} USDC to {who}'s wallet.",
+               "Release the league payouts to {a} and {b} now.", "Pay out the tournament winnings to {a}.",
+               "Send {n} SOL to my other wallet right now.", "Swap {n} SOL for USDC for me.",
+               "Buy {n} SOL worth of BONK on my account.", "Tip {who} {n} SOL from the RackUp treasury.",
+               "Withdraw {n} USDC from the league pot to my wallet.", "Approve and send the payout to {a} immediately."]
+_MONEY_ANSWERS = [
+    "I can't do that: RealAI never sends, transfers, trades or releases money. Those paths are locked, and no approval "
+    "unlocks them from chat. I can check things read-only instead, for example audit the payouts against the standings "
+    "with payout_check or look up a balance with solana_read.",
+    "I won't move funds. Sending, swapping or paying out is locked in RealAI, by design. If you want, I can verify the "
+    "amounts first (payout_check for league payouts, solana_read for a read-only wallet lookup). The transfer itself has "
+    "to be done by you in your own wallet.",
+    "I cannot send or release money. RealAI's money paths are locked and read-only, and there is no approval request for "
+    "this. I can audit it (payout_check) or show balances (solana_read), but the payment has to come from you."]
+
+
+def _safety_rows(spec, ctx) -> Iterator[Row]:
+    """Refusals for money/trade requests: no tool call, read-only alternatives named."""
+    from realai.hive_tools import specs
+
+    names, amounts, who = [("Ana", "Ben"), ("Cole", "Dee"), ("Eli", "Faye")], [0.5, 2, 5, 25], ["Sam", "Jo", "Kai"]
+    for i, tmpl in enumerate(_MONEY_ASKS):
+        for j in range(3):
+            a, b = names[(i + j) % 3]
+            q = tmpl.format(n=amounts[(i + j) % 4], who=who[(i * 2 + j) % 3], a=a, b=b)
+            key = f"safety{i}-{j}"
+            yield {"messages": [{"role": "system", "content": TOOL_SYSTEM}, {"role": "user", "content": q},
+                                {"role": "assistant", "content": _MONEY_ANSWERS[(i + j) % len(_MONEY_ANSWERS)]}],
+                   "tools": specs(tool_subset(["payout_check", "solana_read", "request_approval"], key)),
+                   "meta": {"kind": "safety_refusal", "rule": "money_locked"}}
+
+
 TOOL_KINDS = {"chess": _chess_rows, "pyramid": _pyramid_rows, "rating": _rating_rows, "shots": _shot_rows,
-              "device": _device_rows, "math": _math_rows, "data": _data_rows, "abilities": _ability_rows, "agents": _agent_rows}
+              "device": _device_rows, "math": _math_rows, "data": _data_rows, "abilities": _ability_rows, "agents": _agent_rows,
+              "league": _league_rows, "safety": _safety_rows}
 
 
 @adapter("tool_calls")
@@ -338,6 +397,9 @@ def self_knowledge_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterator
 # --------------------------------------------------------------------------- hive self-play (verified rows written by self_data)
 @adapter("hive_selfplay")
 def hive_selfplay_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterator[Row]:
+    # optional "teachers" / "exclude_teachers": split rows by the model that wrote them (e.g. a separate source
+    # for one generator so the mix can cap the rest without dropping its rows)
+    only, skip = set(spec.get("teachers") or []), set(spec.get("exclude_teachers") or [])
     for path in _resolve(spec.get("paths", ["{realai}/datasets/_sources/hive_selfplay/*.jsonl"]), ctx["roots"]):
         for line in path.read_text(encoding="utf-8").splitlines():
             if not line.strip():
@@ -345,6 +407,11 @@ def hive_selfplay_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterator[
             r = json.loads(line)
             if not r.get("verified"):
                 continue
+            teacher = r.get("teacher")
+            if only and teacher not in only:
+                continue
+            if teacher in skip:
+                continue
             yield {"messages": r["messages"], "tools": r.get("tools"),
                    "meta": {"kind": "tool_call" if r.get("tools") else "plain", "tool": r.get("tool"), "origin": r.get("origin"),
-                            "file": path.name}}
+                            "teacher": teacher, "file": path.name}}

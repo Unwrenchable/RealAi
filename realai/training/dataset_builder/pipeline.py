@@ -27,6 +27,12 @@ DEFAULTS: Dict[str, Any] = {
     "max_per_prompt": 0,
     # opt-in: rows with the same first user prompt never straddle train/eval (no prompt leak into eval loss)
     "split_by_prompt": False,
+    # opt-in rebalancing (applied after dedupe, before the split; seeded):
+    #   per-source "max_rows" in a source spec; {"source": share} caps a source to that share of the final mix;
+    #   max_rows_per_tool caps rows by their first tool call (tools in tool_cap_exempt and plain rows are never capped)
+    "max_source_share": {},
+    "max_rows_per_tool": 0,
+    "tool_cap_exempt": ["request_approval", "payout_check", "solana_read"],
     "allow_vendor_chat": False,
     "redact_usernames": [],
     "roots": {},
@@ -108,6 +114,87 @@ def _prompt_key(msgs: List[Dict[str, Any]]) -> str:
     """Normalised first user message (the 'question' a row answers)."""
     first = next((m for m in msgs if m.get("role") == "user"), None)
     return normalize(_msg_text(first)) if first else ""
+
+
+def _row_tools(msgs: List[Dict[str, Any]]) -> List[str]:
+    """Tool names called by the assistant, in order."""
+    out: List[str] = []
+    for m in msgs:
+        for c in m.get("tool_calls") or []:
+            name = (c.get("function") or {}).get("name") or c.get("name")
+            if name:
+                out.append(name)
+    return out
+
+
+def _sample(rows: List[Dict[str, Any]], n: int, rng: random.Random) -> List[Dict[str, Any]]:
+    """Seeded subset of n rows (stable: order by id, shuffle with rng), returned in id order."""
+    if n >= len(rows):
+        return rows
+    pool = sorted(rows, key=lambda r: r["id"])
+    rng.shuffle(pool)
+    return sorted(pool[: max(0, n)], key=lambda r: r["id"])
+
+
+def rebalance(kept: List[Dict[str, Any]], cfg: Dict[str, Any], stats: Dict[str, Counter]) -> List[Dict[str, Any]]:
+    """Per-source row caps, per-source share caps and per-tool caps (all opt-in, deterministic)."""
+    rng = random.Random(int(cfg["seed"]) + 101)
+    caps = {(s.get("name") or s["type"]): int(s["max_rows"]) for s in cfg.get("sources", []) if s.get("max_rows")}
+    by_src: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+    for r in kept:
+        by_src[r["source"]].append(r)
+    for src, n in caps.items():
+        rows = by_src.get(src) or []
+        if len(rows) > n:
+            stats[src]["dropped_source_cap"] += len(rows) - n
+            by_src[src] = _sample(rows, n, rng)
+    shares = {k: float(v) for k, v in (cfg.get("max_source_share") or {}).items() if 0 < float(v) < 1}
+    if shares:
+        # rows outside the capped sources fix the size of the mix; each capped source gets share/(1-sum(shares)) of them
+        rest = sum(len(v) for k, v in by_src.items() if k not in shares)
+        free = max(1e-9, 1.0 - sum(shares.values()))
+        for src, share in shares.items():
+            rows = by_src.get(src) or []
+            n = int(rest * share / free)
+            if len(rows) > n:
+                stats[src]["dropped_share_cap"] += len(rows) - n
+                by_src[src] = _sample(rows, n, rng)
+    out = [r for src in sorted(by_src) for r in by_src[src]]
+    per_tool = int(cfg.get("max_rows_per_tool") or 0)
+    if per_tool:
+        exempt = set(cfg.get("tool_cap_exempt") or [])
+        groups: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+        free_rows = []
+        for r in out:
+            t = _row_tools(r["messages"])
+            if not t or t[0] in exempt or any(x in exempt for x in t):
+                free_rows.append(r)
+            else:
+                groups[t[0]].append(r)
+        out = list(free_rows)
+        for tool in sorted(groups):
+            rows = groups[tool]
+            if len(rows) > per_tool:
+                pick = _sample(rows, per_tool, rng)
+                ids = {id(r) for r in pick}
+                for r in rows:
+                    if id(r) not in ids:
+                        stats[r["source"]]["dropped_tool_cap"] += 1
+                rows = pick
+            out += rows
+    return out
+
+
+def tool_coverage(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """Rows per called tool, plus registered hive tools no row calls."""
+    cov = Counter(t for r in rows for t in set(_row_tools(r["messages"])))
+    try:
+        from realai.hive_tools import SPECS
+
+        missing = sorted(set(SPECS) - set(cov))
+    except Exception:  # hive tools unavailable (CI): skip the missing list
+        missing = []
+    return {"rows_per_tool": dict(sorted(cov.items(), key=lambda kv: -kv[1])), "tools_without_rows": missing}
 
 
 def _row_text(msgs: List[Dict[str, Any]]) -> str:
@@ -206,6 +293,8 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
                 "meta": {k: v for k, v in (row.get("meta") or {}).items() if v is not None},
             })
 
+    kept = rebalance(kept, cfg, stats)
+
     # Stratified split by source, fixed seed, stable order (sort by id first).
     rng = random.Random(int(cfg["seed"]))
     by_src: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
@@ -265,6 +354,8 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
         "near_dup_threshold": cfg["near_dup_threshold"],
         "max_per_prompt": cfg.get("max_per_prompt", 0),
         "split_by_prompt": bool(cfg.get("split_by_prompt")),
+        "max_source_share": cfg.get("max_source_share") or {},
+        "max_rows_per_tool": cfg.get("max_rows_per_tool", 0),
         "allow_vendor_chat": ctx["allow_vendor_chat"],
         "totals": {
             "kept": len(kept),
@@ -278,7 +369,12 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
             "dropped_short": sum(s["dropped_short"] for s in stats.values()),
             "dropped_quality_gate": sum(s["dropped_quality_gate"] for s in stats.values()),
             "dropped_prompt_cap": sum(s["dropped_prompt_cap"] for s in stats.values()),
+            "dropped_source_cap": sum(s["dropped_source_cap"] for s in stats.values()),
+            "dropped_share_cap": sum(s["dropped_share_cap"] for s in stats.values()),
+            "dropped_tool_cap": sum(s["dropped_tool_cap"] for s in stats.values()),
         },
+        "source_mix": dict(Counter(r["source"] for r in kept)),
+        "tool_coverage": tool_coverage(kept),
         "secret_kinds_dropped": dict(secret_kinds),
         "sources": {k: dict(v) for k, v in stats.items()},
         "licenses": dict(Counter(r["license"] for r in kept)),
