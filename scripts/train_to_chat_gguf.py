@@ -74,12 +74,27 @@ def load_preset(name: str) -> Dict[str, Any]:
     return presets[name]
 
 
-def run(cmd: list[str], timeout: int = 0) -> None:
+def converter_env() -> Dict[str, str]:
+    """Environment for llama.cpp's convert_hf_to_gguf.py.
+
+    The training launchers set PYTHONSAFEPATH=1 (so ``python -m`` never imports a stale realai copy from
+    the data folder). That also stops Python from putting the script's own folder on sys.path, and newer
+    llama.cpp converters import their sibling ``conversion`` package from there
+    (ModuleNotFoundError: No module named 'conversion'). Drop it for the converter only.
+    """
+    env = dict(os.environ)
+    env.pop("PYTHONSAFEPATH", None)
+    return env
+
+
+def run(cmd: list[str], timeout: int = 0, env: Optional[Dict[str, str]] = None) -> None:
     log("RUN " + " ".join(cmd))
     kwargs: Dict[str, Any] = {
         "cwd": str(ROOT),
         "check": True,
     }
+    if env is not None:
+        kwargs["env"] = env
     if timeout > 0:
         kwargs["timeout"] = timeout
     subprocess.run(cmd, **kwargs)
@@ -165,12 +180,13 @@ def convert_to_gguf(merged_dir: Path, out_gguf: Path) -> Path:
         "f16",
     ]
     log("converting HF → GGUF f16 (slow for 7B)…")
+    env = converter_env()
     try:
-        run(cmd)
+        run(cmd, env=env)
     except subprocess.CalledProcessError:
         # older CLI variants
         cmd2 = [py, str(convert), str(merged_dir), "--outtype", "f16"]
-        run(cmd2)
+        run(cmd2, env=env)
         # find produced gguf beside merged_dir
         produced = list(merged_dir.glob("*.gguf")) + list(merged_dir.parent.glob("*.gguf"))
         if not produced:
