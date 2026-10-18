@@ -35,7 +35,9 @@
         "math",
         "data",
         "abilities",
-        "agents"
+        "agents",
+        "league",
+        "safety"
       ],
       "chess_paths": [
         "{realai}/datasets/_sources/lichess_puzzles_sample.csv"
@@ -56,12 +58,27 @@
       "origin": "live ability_catalog/hive_tools/agents/modules at build time"
     },
     {
+      "name": "hive_selfplay_30b",
+      "type": "hive_selfplay",
+      "teachers": [
+        "qwen3-30b-a3b"
+      ],
+      "paths": [
+        "{realai}/datasets/_sources/hive_selfplay/*.jsonl"
+      ],
+      "license": "own",
+      "origin": "self_data rows written by Qwen3-30B-A3B (local), tool-verified; not share-capped"
+    },
+    {
       "name": "hive_selfplay",
       "type": "hive_selfplay",
       "license": "realai-own (verified self-play + captured traffic)",
       "origin": "realai.training.self_data",
       "paths": [
         "{realai}/datasets/_sources/hive_selfplay/*.jsonl"
+      ],
+      "exclude_teachers": [
+        "qwen3-30b-a3b"
       ]
     },
     {
@@ -310,6 +327,16 @@
   "notes": [
     "Licences checked 2026-10-10: agency-agents MIT (attribution in ATTRIBUTION.md); agent-tools is Travis's own non-commercial/proprietary repo; RealAi MIT.",
     "Travis's PC config. roots.realai = the C:/temp clone (REALAI_HOME). Other roots are read-only. Persona dump: git show origin/feature/ui-desktop-promote:dataset.jsonl > datasets/_sources/persona_dump.jsonl (see docs/training/RUNBOOK.md).",
-    "Hive config (2026-10-10): factual sources become tool-call rows; old plain fact sources kept but disabled. Build: python -m realai.training.dataset_builder --config config/dataset_builder.hive.pc.json"
+    "Hive config (2026-10-10): factual sources become tool-call rows; old plain fact sources kept but disabled. Build: python -m realai.training.dataset_builder --config config/dataset_builder.hive.pc.json",
+    "Rebalance 2026-10-18: hive_selfplay capped at 30% of the mix (max_source_share), max 180 rows per first tool (approval/payout/solana rows exempt), 30B-written rows are their own source, tool_calls adds league_validate and money-refusal (safety) rows."
+  ],
+  "max_source_share": {
+    "hive_selfplay": 0.3
+  },
+  "max_rows_per_tool": 180,
+  "tool_cap_exempt": [
+    "request_approval",
+    "payout_check",
+    "solana_read"
   ]
 }
