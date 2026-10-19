@@ -2,13 +2,14 @@
 from __future__ import annotations
 
 import json
+import re
 from collections import Counter
 from pathlib import Path
 
 import pytest
 
 from realai.training.dataset_builder.adapters import ADAPTERS
-from realai.training.dataset_builder.adapters_repo import MONEY_ASKS, cap_per_repo
+from realai.training.dataset_builder.adapters_repo import MONEY_ASKS, _exempt, cap_per_repo
 
 FAKE_TOKEN = "ghp_" + "K3" * 18  # runtime-built github_token look-alike (not a credential)
 ROOT = Path(__file__).resolve().parents[2]
@@ -65,7 +66,7 @@ def test_rows_are_tool_grounded_and_verify(mirror):
     assert {"overview", "list", "locate", "read", "edit_gated", "repo_money_locked"} <= set(rules)
     for r in rows:
         calls = _calls(r)
-        if r["meta"].get("rule") == "repo_money_locked":
+        if _exempt(r):  # money asks: covered by test_money_repos_trade_mode
             continue
         assert calls and {c["name"] for c in calls} <= {"repo_search", "request_approval"}
         if r["meta"]["rule"] == "edit_gated":
@@ -81,19 +82,29 @@ def test_no_secrets_no_excluded_repos(mirror):
     assert FAKE_TOKEN not in blob and "LustLink" not in blob and "keys.ts" not in blob and "buy_token" not in blob
 
 
-def test_money_repos_are_refusal_only(mirror):
+def test_money_repos_trade_mode(mirror):
+    """Trade mode (2026-10-19): in-cap swaps become trade_execute cards (PENDING); everything else stays a refusal."""
+    from realai.training.self_data.filter import reject_reason
+
     rows = rows_for(mirror, per_repo_share=1.0)
-    money = [r for r in rows if r["meta"].get("rule") == "repo_money_locked"]
+    money = [r for r in rows if str(r["meta"].get("rule")).startswith(("repo_money_locked", "repo_trade_"))]
     assert len(money) == sum(len(v) for v in MONEY_ASKS.values())
     for r in money:
         names = [c["name"] for c in _calls(r)]
-        assert "request_approval" not in names and set(names) <= {"repo_search"}
-        assert "won't" in r["messages"][-1]["content"] and "never" in r["messages"][-1]["content"]
-    ts = [r for r in rows if r["meta"].get("repo") == "Token-scalper"]
-    assert ts and all(r["meta"]["rule"] == "repo_money_locked" for r in ts)
-    for r in ts:
-        for c in _calls(r):
-            assert c["result"]["ok"] is False  # never opened
+        assert "repo_search" not in names and "run_terminal_command" not in json.dumps(r["messages"])
+        assert reject_reason(r) is None, r["meta"]
+        last = r["messages"][-1]["content"]
+        if r["meta"]["rule"] == "repo_trade_approval":
+            apr = [c for c in _calls(r) if c["name"] == "request_approval"][0]
+            assert apr["arguments"]["action"] == "trade_execute" and apr["result"]["status"] == "pending"
+            assert "PENDING" in last and "Nothing has been bought" in last
+        else:
+            assert "request_approval" not in names
+            assert re.search(r"won't|can't", last)
+    rules = {r["meta"]["rule"] for r in money}
+    assert {"repo_money_locked", "repo_trade_approval", "repo_trade_over_cap", "repo_trade_safety"} <= rules
+    ts = [r for r in money if r["meta"].get("repo") == "Token-scalper"]
+    assert ts and not any(r["meta"]["rule"] == "repo_trade_approval" for r in ts)  # the scalper bot itself never runs
 
 
 def test_edit_rows_gated(mirror):
@@ -107,7 +118,7 @@ def test_edit_rows_gated(mirror):
 
 def test_per_repo_cap(mirror):
     rows = rows_for(mirror)  # default per_repo_share 0.25
-    capped = [r for r in rows if r["meta"].get("rule") != "repo_money_locked"]
+    capped = [r for r in rows if not _exempt(r)]
     n = Counter(r["meta"]["repo"] for r in capped)
     assert max(n.values()) <= max(1, int(len(rows_for(mirror, per_repo_share=1.0)) * 0.25))
     fake = [{"messages": [{}, {"content": str(i)}], "meta": {"repo": "A" if i < 8 else "B"}} for i in range(10)]
@@ -133,7 +144,8 @@ def test_holdout_repo_goes_to_eval_only(mirror, tmp_path, monkeypatch):
 def test_no_mirror_only_plain_refusals(monkeypatch, tmp_path):
     monkeypatch.setenv("REALAI_REPO_MIRROR", str(tmp_path / "none"))
     rows = list(ADAPTERS["repo_corpus"]({}, {"roots": {}}))
-    assert rows and all(r["meta"]["rule"] == "repo_money_locked" and not _calls(r) for r in rows)
+    # no mirror: only the money asks (trade-mode answers need no mirror: sim backend, no repo_search)
+    assert rows and all(_exempt(r) and "repo_search" not in [c["name"] for c in _calls(r)] for r in rows)
 
 
 def test_pc_config_entry_off_and_capped():

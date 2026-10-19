@@ -51,21 +51,27 @@ READ_Q = ["Show me the start of `{sym}` in {repo} ({path}).", "What do the first
 ROUTE_Q = ["Which of my repos has the {kind} `{sym}`?", "I remember a `{sym}` somewhere in my projects. Which repo is it in?"]
 EDIT_Q = ["In my {repo} repo, change the README title '{old}' to '{new}'.", "Rename the README heading of {repo} from '{old}' to '{new}'."]
 
-MONEY_ASKS: Dict[str, List[str]] = {
-    "Token-scalper": ["Start my Token-scalper bot and buy {n} SOL of BONK with it.", "Run Token-scalper's scalper bot on my wallet for the next hour.",
-                      "Use Token-scalper to snipe the next new token launch with {n} SOL.",
-                      "Generate a fresh wallet with Token-scalper and move {n} SOL into it."],
-    "FizzSwap": ["Swap {n} SOL to USDC through FizzSwap for me.", "Add {n} SOL of liquidity to my FizzSwap pool now.",
-                 "Execute a FizzSwap trade: sell {n} SOL at market."],
-    "cookbook": ["Deploy the cookbook TokenFactory contract to mainnet and mint a million tokens.",
-                 "Bridge {n} ETH to Solana with the cookbook bridge contracts.", "Lock my LP tokens with the cookbook LPLocker on mainnet."],
-    "ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main": ["Send {n} CAPS from the vault treasury to {who}.",
-                                                     "Mint a CAPS reward to {who}'s wallet from the Atomic Fizz backend."],
-    "Cue-guard": ["Charge {who}'s card ${n} with Cue-guard tap-to-pay.", "Run a Cue-guard NFC payment of ${n} for {who} right now."],
+# money asks per repo (trade mode, 2026-10-19): (template, class, trade_propose args or None). Classes:
+#   approval  in-cap Solana swap -> trade_propose -> request_approval(trade_execute) -> PENDING
+#   over_cap  proposal over a cap -> explain, offer an in-cap size (no card)
+#   safety    proposal into a token that fails the safety check -> refuse
+#   direct_send / outside_mode -> refusal (adapters_trade.REFUSE_ANS); no approval unlocks these from chat
+MONEY_ASKS: Dict[str, List[tuple]] = {
+    "Token-scalper": [("Start my Token-scalper bot and buy {n} SOL of BONK with it.", "safety", {"from": "SOL", "to": "BONK", "amount": "{n}"}),
+                      ("Run Token-scalper's scalper bot on my wallet for the next hour.", "outside_mode", None),
+                      ("Use Token-scalper to snipe the next new token launch with {n} SOL.", "outside_mode", None),
+                      ("Generate a fresh wallet with Token-scalper and move {n} SOL into it.", "direct_send", None)],
+    "FizzSwap": [("Swap {small} SOL to USDC for me, like FizzSwap would.", "approval", {"from": "SOL", "to": "USDC", "amount": "{small}"}),
+                 ("Add {n} SOL of liquidity to my FizzSwap pool now.", "outside_mode", None),
+                 ("Execute a FizzSwap-style trade: sell {n} SOL at market.", "over_cap", {"from": "SOL", "to": "USDC", "amount": "{n}"})],
+    "cookbook": [("Deploy the cookbook TokenFactory contract to mainnet and mint a million tokens.", "outside_mode", None),
+                 ("Bridge {n} ETH to Solana with the cookbook bridge contracts.", "outside_mode", None),
+                 ("Lock my LP tokens with the cookbook LPLocker on mainnet.", "outside_mode", None)],
+    "ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS-main": [("Send {n} CAPS from the vault treasury to {who}.", "direct_send", None),
+                                                     ("Mint a CAPS reward to {who}'s wallet from the Atomic Fizz backend.", "outside_mode", None)],
+    "Cue-guard": [("Charge {who}'s card ${n} with Cue-guard tap-to-pay.", "outside_mode", None),
+                  ("Run a Cue-guard NFC payment of ${n} for {who} right now.", "outside_mode", None)],
 }
-MONEY_REFUSE = ("I won't do that: {what} RealAI never buys, sells, swaps, bridges, mints, deploys to mainnet, charges cards "
-                "or moves money, and no approval unlocks it from chat. {extra}Run it yourself from your own wallet or account "
-                "if you choose to; I can explain the code read-only.")
 
 
 def _h(s: str) -> int:
@@ -230,35 +236,50 @@ def _edit_row(root: Path, repo: str, rd_name: str, heading: str, meta: Dict[str,
 
 
 def _money_rows(root: Optional[Path], repos: List[str]) -> Iterator[Row]:
+    """Money asks about the trading/wallet/payment repos, answered the trade-mode way (see MONEY_ASKS)."""
     from realai.hive_tools import specs
-    from realai.hive_tools import repo_search as R
 
-    from .adapters_tools import tool_subset
+    from . import adapters_trade as AT
+    from .adapters_tools import tool_row, tool_subset
 
-    amounts, who = [0.5, 2, 5, 25, 50], ["Sam", "Jo", "Kai", "Ana"]
+    amounts, small, who = [0.5, 2, 5, 25, 50], [0.01, 0.02, 0.025, 0.03], ["Sam", "Jo", "Kai", "Ana"]
     for repo, asks in MONEY_ASKS.items():
         if repo not in repos:
             continue
-        for i, tmpl in enumerate(asks):
-            q = tmpl.format(n=amounts[(i + _h(repo)) % 5], who=who[(i + _h(repo)) % 4])
+        for i, (tmpl, cls, pargs) in enumerate(asks):
+            fill = {"n": amounts[(i + _h(repo)) % 5], "small": small[(i + _h(repo)) % 4], "who": who[(i + _h(repo)) % 4]}
+            q = tmpl.format(**fill)
             key = f"repo-money-{repo}-{i}"
-            meta = {"kind": "safety_refusal", "rule": "repo_money_locked", "repo": repo}
-            what = (f"{repo} is trading/wallet code, and " if repo == "Token-scalper" else f"that would move real money through {repo}, and ")
-            if root is not None and i % 2 == 0:
-                c = _call("repo_search", {"action": "list", "repo": repo}, root)
-                if repo == "Token-scalper" and not c["result"].get("ok"):
-                    extra = "repo_search can't open Token-scalper either (it isn't in the searchable allowlist). "
-                elif c["result"].get("ok"):
-                    extra = f"I can look at {repo}'s code read-only (repo_search), but I won't run it. "
-                else:
-                    extra = ""
-                if repo == "Token-scalper" or c["result"].get("ok"):
-                    yield tool_row(q, [c], MONEY_REFUSE.format(what=what, extra=extra), key=key, meta=meta)
+            meta = {"kind": "safety_refusal" if cls in ("safety", "direct_send", "outside_mode") else "trade_approval",
+                    "rule": "repo_money_locked" if cls in ("direct_send", "outside_mode") else f"repo_trade_{cls}", "repo": repo}
+            if pargs:
+                args = {k: (float(v.format(**fill)) if k == "amount" else v) for k, v in pargs.items()}
+                c1 = AT._call("trade_propose", args)
+                res = c1["result"]
+                if cls == "approval" and res.get("ok"):
+                    c2 = AT._call("request_approval", {"action": "trade_execute", "proposal_id": res["proposalId"], "reason": q[:80]})
+                    if c2["result"].get("status") == "pending":
+                        ans = f"{repo} itself isn't run from chat; trade mode routes through the trading CLI. " + AT.pending_answer(res, c2["result"])
+                        r = tool_row(q, [c1, c2], ans, key=key, meta=meta)
+                        r["tools"] = specs(AT.TRADE_TOOLSET)
+                        yield r
+                        continue
+                if res.get("problems"):
+                    probs = "; ".join(res["problems"])
+                    if cls == "safety" or any("safety" in p for p in res["problems"]):
+                        ans = (f"I won't do that: I don't run {repo}'s bot, and the trade itself is refused ({probs}). "
+                               "No approval card was filed and nothing was sent.")
+                    else:
+                        ans = (f"I can't file that: {probs}. Nothing was sent. The caps are $5 per trade, $15 and 5 trades per day; "
+                               "I can propose a trade of up to $5 for your approval instead.")
+                    r = tool_row(q, [c1], ans, key=key, meta=meta)
+                    r["tools"] = specs(AT.TRADE_TOOLSET)
+                    yield r
                     continue
+                cls = "outside_mode"
             yield {"messages": [{"role": "system", "content": TOOL_SYSTEM}, {"role": "user", "content": q},
-                                {"role": "assistant", "content": MONEY_REFUSE.format(what=what, extra="")}],
+                                {"role": "assistant", "content": AT.REFUSE_ANS[cls]}],
                    "tools": specs(tool_subset(["repo_search", "request_approval", "solana_read"], key)), "meta": meta}
-    _ = R  # keep import (allowlist owner)
 
 
 def cap_per_repo(rows: List[Row], share: float, seed: int = 0) -> List[Row]:
@@ -278,7 +299,8 @@ def cap_per_repo(rows: List[Row], share: float, seed: int = 0) -> List[Row]:
 
 
 def _exempt(r: Row) -> bool:
-    return (r.get("meta") or {}).get("rule") == "repo_money_locked"
+    rule = str((r.get("meta") or {}).get("rule") or "")
+    return rule == "repo_money_locked" or rule.startswith("repo_trade_")
 
 
 @adapter("repo_corpus")

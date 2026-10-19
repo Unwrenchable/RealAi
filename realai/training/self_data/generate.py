@@ -25,6 +25,8 @@ from .verify import verify
 
 TARGETS = ("chess_engine", "rackup_invoke", "shot_lookup", "math_solver", "data_analysis", "ability_lookup",
            "list_agents", "route_to_agent", "device_profile") + tuple(hive_tools.NEW_TOOLS) + ("repo_search",)
+# trade mode (opt-in targets; plan must name them): offered with the trade tools, executed offline on the sim backend
+TRADE_TARGETS = ("trade_propose", "trade_research")
 # what a correct routing looks like per target (a row that routes elsewhere is rejected)
 ACCEPT_TOOLS = {"list_agents": {"list_agents", "route_to_agent"}, "route_to_agent": {"route_to_agent", "list_agents"},
                 # "can RealAI do X?" may legitimately be answered by an ability OR an agent; both are hive routing
@@ -36,7 +38,8 @@ ACCEPT_TOOLS = {"list_agents": {"list_agents", "route_to_agent"}, "route_to_agen
                 "agent_pipeline_plan": {"agent_pipeline_plan", "hive_routes_status"},
                 "hive_routes_status": {"hive_routes_status", "agent_pipeline_plan"},
                 "tool_registry_lookup": {"tool_registry_lookup", "ability_lookup"},
-                "repo_search": {"repo_search"}}
+                "repo_search": {"repo_search"},
+                "trade_propose": {"trade_propose", "request_approval"}, "trade_research": {"trade_research"}}
 _DISC = ("8-ball", "9-ball", "10-ball", "one pocket", "pyramid")
 
 
@@ -142,6 +145,15 @@ def seeds(tool: str, rng: random.Random, n: int) -> str:
                 "what a repo's README says, what is in a folder, or which repo has some code. Repos: "
                 + (", ".join(have) if have else "Rack_em_up, overseer-bot-ai, agent-tools, RealAi")
                 + ". Never ask to run, deploy, trade, edit or show secret files (.env, keys).")
+    if tool == "trade_propose":
+        return ("Each request asks RealAI to buy or swap a SMALL amount on Solana with the bot wallet: $1-$5 of JUP (or its mint "
+                "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN), paid in USDC or SOL, sometimes with a slippage limit (50-300 bps). "
+                "Occasionally ask for more than $5 or more slippage than 300 bps. Never ask to send or transfer funds, change caps, "
+                "touch the kill switch or reveal keys. Write only what the user says: never the outcome or the word PENDING.")
+    if tool == "trade_research":
+        return ("Each request is READ-ONLY trading research: a spot price (SOL, JUP, BTC, ETH, BONK), whether a Solana token mint is "
+                "safe (JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN or a random mint), the paper account status, the kill switch / caps "
+                "status, feed health, or a backtest (dca, grid, momentum, meanReversion, dipBuy on SOL or JUP). Never ask to trade.")
     if tool == "request_approval":
         return ("Each request asks RealAI to change or run ONE concrete thing, with every detail inline: replace an exact "
                 "phrase in README.md with new text (quote both), create docs/notes-<topic>.md with given content, run a "
@@ -297,6 +309,13 @@ def new_tool_templates(tool: str, n: int, rng: random.Random) -> List[str]:
             out.append(rng.choice(["What's your self-heal status? Which artifacts are missing?", "Is self-heal enabled, and how many artifacts are present?"]))
         elif tool == "executive_goals":
             out.append(rng.choice(["What goals is your executive loop tracking?", "How many open executive goals are there, and which watchers run?"]))
+        elif tool == "trade_propose":
+            usd = rng.choice([1, 2, 3, 4, 5, 5, 12, 40])
+            out.append(rng.choice([f"Buy ${usd} of JUP from the bot wallet.", f"Swap {usd} USDC into JUP, slippage {rng.choice([50, 100, 300])} bps.",
+                                   f"Queue a ${usd} JUP buy on Solana for my approval."]))
+        elif tool == "trade_research":
+            out.append(rng.choice(["What's SOL at?", f"Is {rng.choice(['JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN', '9zXf3hQpLm2WvT8rKcYb6nE4sJd1uGaHkPq5RtVwXyZo'])} safe to buy?",
+                                   "How's my paper account?", "Is the trading kill switch on?", f"Backtest {rng.choice(['dca', 'grid'])} on SOL."]))
         elif tool == "request_approval":
             out.append(rng.choice(["Run `git status` in the repo for me.", "Run pytest -q tests/test_merge_versions.py.",
                                    "In README.md, change the first line's title to 'RealAI hive'.", "Run self_repair on the stack.",
@@ -366,7 +385,7 @@ def topic_focus(topics: List[str], rng: random.Random, k: int = 6) -> str:
 
 
 def propose(chat, tool: str, n: int, rng: random.Random, focus: str = "", why: Optional[Counter] = None) -> List[str]:
-    spec = hive_tools.SPECS[tool]["function"]
+    spec = (hive_tools.SPECS.get(tool) or hive_tools.specs([tool])[0])["function"]
     prompt = (f"/no_think\nWrite {n} diverse, realistic user requests that RealAI should answer by calling the `{tool}` tool "
               f"({spec['description']}). Vary tone and length; write only the requests, no answers.{(' Focus: ' + focus) if focus else ''}\n"
               f"{seeds(tool, rng, n)}\nReturn ONLY a JSON array of strings, e.g. [\"...\", \"...\"].")
@@ -410,7 +429,8 @@ def run(chat, model: str = "local", plan: Optional[Dict[str, int]] = None, minut
     eval_qs = eval_prompts()  # spot-check questions are never generated as training rows
 
     plan = plan or {t: 1 for t in TARGETS}
-    weights = [(t, w) for t, w in plan.items() if t in TARGETS and w > 0]
+    weights = [(t, w) for t, w in plan.items() if (t in TARGETS or t in TRADE_TARGETS) and w > 0]
+    trade_specs = hive_tools.specs(list(hive_tools.SPECS) + list(hive_tools.TRADE_TOOLS))
     rng = random.Random(seed or int(time.time()))
     stamp = _dt.datetime.now().strftime("%Y%m%d-%H%M%S")
     ok_p, rej_p = out_dir() / f"selfplay-{stamp}.jsonl", out_dir() / f"rejects-{stamp}.jsonl"
@@ -451,8 +471,10 @@ def run(chat, model: str = "local", plan: Optional[Dict[str, int]] = None, minut
                 if time.time() >= deadline or accepted >= max_rows:
                     break
                 try:
+                    trade = tool in TRADE_TARGETS
                     res = tool_loop.run(chat, [{"role": "system", "content": TOOL_SYSTEM}, {"role": "user", "content": q}],
-                                        offline=True, ctx=ctx, project="hive")
+                                        tools=trade_specs if trade else None, offline=True,
+                                        ctx=dict(ctx, trade_backend="sim") if trade else ctx, project="hive")
                 except Exception as exc:
                     st["exec_error"] += 1
                     reasons[f"exec_error:{type(exc).__name__}"] += 1
