@@ -88,8 +88,10 @@ if (-not $SkipStart) {
     }
   }
 
+  # localhost by default; set REALAI_LLAMA_HOST=0.0.0.0 to expose to WSL/LAN.
+  $LlamaHost = if ($env:REALAI_LLAMA_HOST) { $env:REALAI_LLAMA_HOST } else { "127.0.0.1" }
   $vArgs = @(
-    "-m", $Model, "--host", "0.0.0.0", "--port", "$VulkanPort",
+    "-m", $Model, "--host", $LlamaHost, "--port", "$VulkanPort",
     "-c", "16384", "-ngl", "99", "--jinja"
   )
   Start-Process -FilePath $Llama -ArgumentList $vArgs -WorkingDirectory (Split-Path $Llama -Parent) `

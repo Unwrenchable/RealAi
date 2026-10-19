@@ -280,19 +280,22 @@ def _reason_phrase(status_code):
     return 'Internal Server Error'
 
 
-def main(host='0.0.0.0', port=8000):
-    """Run the structured WSGI server."""
+def main(host=None, port=8000):
+    """Run the structured WSGI server (default 127.0.0.1; set REALAI_SERVER_HOST=0.0.0.0 to expose)."""
+    if not host:
+        host = os.environ.get('REALAI_SERVER_HOST') or '127.0.0.1'
     httpd = make_server(host, int(port), wsgi_app)
     print('Structured RealAI server listening on http://{0}:{1}'.format(host, port))
     httpd.serve_forever()
 
 
 if __name__ == '__main__':
-    # Optional --host/--port (start_realai.bat binds 127.0.0.1:8000); no flags = unchanged default 0.0.0.0:8000.
+    # Optional --host/--port. Default is localhost only (127.0.0.1:8000); opt in to LAN with
+    # --host 0.0.0.0 or REALAI_SERVER_HOST=0.0.0.0.
     import argparse
 
     _ap = argparse.ArgumentParser(description='RealAI structured server (:8000)')
-    _ap.add_argument('--host', default='0.0.0.0')
+    _ap.add_argument('--host', default=os.environ.get('REALAI_SERVER_HOST') or '127.0.0.1')
     _ap.add_argument('--port', type=int, default=8000)
     _a = _ap.parse_args()
     main(_a.host, _a.port)

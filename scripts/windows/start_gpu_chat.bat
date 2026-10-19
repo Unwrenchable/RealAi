@@ -31,6 +31,8 @@ REM ------------------------------------------------------------
 REM START GPU SERVER (llama-server.exe)
 REM ------------------------------------------------------------
 echo Starting GPU server: llama-server.exe
+REM localhost by default; set REALAI_LLAMA_HOST=0.0.0.0 to expose to WSL/LAN.
+if not defined REALAI_LLAMA_HOST set "REALAI_LLAMA_HOST=127.0.0.1"
 
 REM NOTE: llama-server has no "--vulkan" flag (Vulkan backend is compiled in
 REM and auto-selected; ggml-vulkan.dll next to the exe is enough).
@@ -38,7 +40,7 @@ REM "--gpu-layers"/"-ngl" requires a NUMBER, not "all" -> use 999 to offload eve
 start "RealAI-Vulkan-GPU" cmd /c ^
     "C:\llama-vulkan\llama-server.exe ^
         -m %REALAI_GGUF% ^
-        --host 0.0.0.0 ^
+        --host %REALAI_LLAMA_HOST% ^
         --port 8080 ^
         -ngl %REALAI_NGL% ^
         -c %REALAI_CTX% ^
