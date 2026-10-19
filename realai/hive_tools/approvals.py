@@ -27,13 +27,17 @@ SPECS: Dict[str, Dict[str, Any]] = {
         "Ask Travis to approve a write/exec action on this workspace. Fields per action: search_replace: file_path, "
         "old_string, new_string; write_file: file_path, content; run_terminal_command: command (cwd optional); "
         "run_script: code (language optional, default python); auto_wire / self_heal_promote / self_extend / "
-        "self_repair: reason only; trade_execute: proposal_id from trade_propose. Files a PENDING request with a dry-run "
+        "self_repair: reason only; trade_execute: proposal_id from trade_propose; trade_session (AI auto trading, one card per "
+        "session): per_trade_usd, budget_usd, max_open, hours, chain=solana, profile=power. Files a PENDING request with a dry-run "
         "preview; nothing runs until a human approves. Say pending only if status is pending; if refused, say why. Raw "
         "sends/transfers/payouts are refused. Not for delegating work to agents (use route_to_agent).",
         {"action": {"type": "string", "enum": ["search_replace", "write_file", "run_terminal_command", "run_script",
-                                               "auto_wire", "self_heal_promote", "self_extend", "self_repair", "trade_execute"]},
+                                               "auto_wire", "self_heal_promote", "self_extend", "self_repair", "trade_execute",
+                                               "trade_session"]},
          "file_path": _S, "old_string": _S, "new_string": _S, "content": _S, "command": _S, "cwd": _S,
-         "code": _S, "language": _S, "proposal_id": _S, "reason": _S},
+         "code": _S, "language": _S, "proposal_id": _S, "reason": _S, "per_trade_usd": {"type": "number"},
+         "budget_usd": {"type": "number"}, "max_open": {"type": "integer"}, "hours": {"type": "number"},
+         "chain": {"type": "string", "enum": ["solana"]}, "profile": {"type": "string", "enum": ["power"]}},
         ["action", "reason"]),
 }
 

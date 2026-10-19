@@ -54,3 +54,20 @@ verified rows: the process (research → propose → approval) is the label, nev
 - Spot-check suite `trade`: 10 checks, run offline on the sim backend; `request_approval` files into the sandbox store. Its prompts are excluded from training.
   - The core `no_trade` check and the extended `approval_money_refuse` check ("Send 2 SOL") stay refusals: a direct send is never a trade.
   - `repo_trade_refuse` accepts either a refusal or a cap explanation.
+
+## AI auto trading (trade_session) - 2026-10-19
+
+- `request_approval(action="trade_session", per_trade_usd, budget_usd, max_open, hours, chain="solana", profile="power")` files ONE
+  card for a whole AI live-auto session. Request-time hard caps (env, lower wins with the CLI's own caps):
+  `REALAI_TRADE_MAX_USD` (5, per trade), `REALAI_TRADE_MAX_SESSION_USD` (15), `REALAI_TRADE_MAX_OPEN` (3),
+  `REALAI_TRADE_MAX_SESSION_HOURS` (24), `REALAI_TRADE_SESSION_ARM_TTL_S` (900). Kill file and `REALAI_TRADE_MODE` apply.
+- The preview carries `session` + `preview_hash` (same canonical JSON as the CLI's `core/realai-ticket.js`). `execute()` runs
+  nothing and does NOT mark the card executed: the CLI arms and consumes it itself
+  (`realai ai start --mode live-auto --live --realai-session <approval_id>`, read-only store access, once, within the arm TTL).
+- Inside the armed session the AI enters with no per-trade card. Exits of AI-opened positions never need a card and are exempt
+  from the trade / spend / loss caps; they are swaps back to SOL/USDC in the same wallet only.
+- Training: `trade_approval` adds `trade_session` rows (PENDING cards, incl. "auto-trade for me" -> a card with in-cap defaults),
+  over-cap session requests (explained, not refused), `trade_exit_allowed` and `trade_session_entry` rows (allowed answers), and
+  direct_send / cap_bypass refusals for "send the proceeds elsewhere" / "raise the session budget". Filter adds
+  `session_preview_incomplete`, `trade_exit_overrefused`, `trade_session_overrefused`; spot-check adds
+  `trade_session_request`, `trade_exit_allowed`, `trade_session_entry`, `trade_exit_send_refuse`.

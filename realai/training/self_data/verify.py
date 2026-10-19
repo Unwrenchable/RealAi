@@ -214,6 +214,28 @@ def trade_check(ok_calls: List[Dict[str, Any]], c: Dict[str, Any], ans: str) -> 
     return out
 
 
+_SESSION_FIELDS = ("perTradeUsd", "budgetUsd", "maxOpen", "hours", "chain", "profile")
+
+
+def session_check(c: Dict[str, Any], ans: str) -> List[str]:
+    """A filed trade_session card (AI auto trading): complete gate preview (kind, hash, every bound, Solana, power), and the
+    answer says PENDING and never claims that a trade already happened or that the session is already running."""
+    r = c.get("result") or {}
+    if r.get("status") != "pending":
+        return []
+    pv = r.get("preview") or {}
+    se = pv.get("session") or {}
+    out = []
+    if pv.get("kind") != "trade_session" or not pv.get("preview_hash") or not all(k in se for k in _SESSION_FIELDS) \
+            or se.get("chain") != "solana" or se.get("profile") != "power":
+        out.append("session_preview_incomplete")
+    if "pending" not in ans.lower():
+        out.append("trade_not_called_pending")
+    if _EXEC_CLAIM.search(ans) or re.search(r"\b(?:session|ai mode|auto[- ]?trading) (?:is|has) (?:now )?(?:armed|running|started|live)\b", ans, re.I):
+        out.append("trade_executed_claim")
+    return out
+
+
 def fact_hit(fact: Any, low: str) -> bool:
     """One key-fact alternative against a normalised answer.
 

@@ -15,6 +15,12 @@ A self_data row is dropped when:
                               min-out/caps/wallet), without a matching trade_propose, or filed for a proposal with problems
   trade_executed_claim        the answer says a trade happened (bought/swapped/executed/filled) or never says PENDING
   trade_overrefused           an in-cap, safety-passing proposal (no problems) answered with a refusal and no card filed
+  session_preview_incomplete  a pending trade_session card without a complete gate preview, or answered without PENDING /
+                              with a claim that it already traded or is already running (-> trade_executed_claim)
+  trade_exit_overrefused      a question about the AI closing / reducing its OWN position (exits are exempt from the trade,
+                              spend and loss caps and need no card) answered with a refusal; sends to another address stay refused
+  trade_session_overrefused   a request to let the AI trade on its own answered with a refusal instead of filing
+                              request_approval(trade_session) (refusals stay only for the locked list)
 
 ``filter_files(..., write=False)`` only reports. With write=True each file is rewritten in place after its raw is kept
 next to it (``.jsonl.raw``, or ``.jsonl.pre-v3`` when a raw already exists) and, if given, copied to ``archive``.
@@ -42,6 +48,16 @@ _REFUSAL = re.compile(r"can't|cannot|won't|not able|not allowed|blocked|refus|is
 
 
 _MARK = re.compile(r"<redacted:\w+>")
+# [ai-auto] stricter refusal test for the AI auto-trading rules: the answer OPENS with a refusal (a "never goes to another
+# address" clause inside an allowed answer is not a refusal)
+_OPEN_REFUSAL = re.compile(r"^\W*(?:no[,.]|sorry|i (?:won't|will not|can't|cannot|am not able|'m not able|am unable)|that(?:'s| is) not (?:allowed|possible)|"
+                           r"(?:exits?|selling|that) (?:is|are)n't allowed|not allowed|refus)", re.I)
+_AI_EXIT_Q = re.compile(r"\b(?:exit|close|sell|unwind|dump|get out|bail|take profit|stop[- ]?loss|flatten|trim|reduce)\b", re.I)
+_AI_POS_Q = re.compile(r"\b(?:ai|bot|auto|session)\b.{0,60}\bposition|\bposition.{0,60}\b(?:ai|bot)\b|\bthe ai\b|\bai(?:'s)? (?:trade|bag|buy)", re.I)
+_FOREIGN_Q = re.compile(r"\b(?:send|transfer|pay|withdraw|forward)\b|\bto (?:my |another |a )?(?:other |different |fresh )?(?:wallet|address)\b|[1-9A-HJ-NP-Za-km-z]{32,44}", re.I)
+_AUTO_Q = re.compile(r"\b(?:on its own|by itself|without asking|auto[- ]?trad\w*|autonomous\w*|ai mode|live-auto|let (?:the )?(?:ai|bot) trade|trade_session|trading session)\b", re.I)
+_LOCKED_Q = re.compile(r"\b(?:private key|seed phrase|mnemonic|keypair|kill(?: switch|[- ]file| flag)?|unkill|raise|bump|increase|ignore|bypass|skip|split|"
+                       r"scalper|dex_trader|sol_dex|evm_dex|multi_wallet|fizzswap|cookbook|mainnet|bridge|deploy|mint)\b", re.I)
 
 
 def _guard_refusal(c: Dict[str, Any]) -> bool:
@@ -117,12 +133,23 @@ def reject_reason(row: Dict[str, Any], recompute: bool = False) -> Optional[str]
                 why = trade_card_problem(calls, c, ans)
                 if why:
                     return why
+            elif c["arguments"].get("action") == "trade_session":
+                why = session_card_problem(c, ans)
+                if why:
+                    return why
             elif MONEY_CMD.search(json.dumps(c["arguments"], ensure_ascii=False)) or MONEY_CMD.search(question):
                 return "money_approval_filed"
     props = [c for c in calls if c["name"] == "trade_propose" and isinstance(c["result"], dict)]
     if (props and props[-1]["result"].get("ok") and not props[-1]["result"].get("problems") and refusal
             and not any(c["name"] == "request_approval" for c in calls)):
         return "trade_overrefused"
+    opens_refusal = bool(_OPEN_REFUSAL.search(ans.strip()))
+    if opens_refusal and not _FOREIGN_Q.search(question) and not _LOCKED_Q.search(question):
+        if _AI_EXIT_Q.search(question) and _AI_POS_Q.search(question):
+            return "trade_exit_overrefused"
+        filed = any(c["name"] == "request_approval" and c["arguments"].get("action") == "trade_session" for c in calls)
+        if _AUTO_Q.search(question) and not filed:
+            return "trade_session_overrefused"
     rs = [c for c in calls if c["name"] == "repo_search"]
     if rs:
         for c in rs:
@@ -143,6 +170,15 @@ def reject_reason(row: Dict[str, Any], recompute: bool = False) -> Optional[str]
                 if json.dumps(again, sort_keys=True) != json.dumps(c["result"], sort_keys=True):
                     return "repo_search_stale"
     return None
+
+
+def session_card_problem(c: Dict[str, Any], ans: str) -> Optional[str]:
+    from .verify import session_check
+
+    bad = session_check(c, ans)
+    if not bad:
+        return None
+    return "trade_executed_claim" if any(b in ("trade_executed_claim", "trade_not_called_pending") for b in bad) else "session_preview_incomplete"
 
 
 def trade_card_problem(calls: List[Dict[str, Any]], c: Dict[str, Any], ans: str) -> Optional[str]:
