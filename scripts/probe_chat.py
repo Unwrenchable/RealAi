@@ -1,3 +1,5 @@
+import os
+
 import requests
 
 m = [
@@ -9,9 +11,12 @@ m = [
         "content": 'OBSERVATION: {"entries": [{"name": "self_builder.py"}]}\nNow read self_builder.py limit 5',
     },
 ]
+_key = (os.environ.get("REALAI_API_KEY") or "").split(",")[0].strip()
+_headers = {"Authorization": "Bearer " + _key} if _key else None
 r = requests.post(
     "http://127.0.0.1:8000/v1/chat/completions",
     json={"model": "qwen-coder-7b", "messages": m, "max_tokens": 256},
+    headers=_headers,
     timeout=300,
 )
 r.raise_for_status()

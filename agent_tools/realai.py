@@ -21,7 +21,7 @@ class RealAIProvider:
             }
 
         api_url = os.getenv("REALAI_API_URL")
-        api_key = os.getenv("REALAI_API_KEY")
+        api_key = (os.getenv("REALAI_API_KEY") or "").split(",")[0].strip()
         model = os.getenv("REALAI_MODEL", "realai-psi")
 
         if not api_url or not api_key:

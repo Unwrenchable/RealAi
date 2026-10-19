@@ -32,6 +32,12 @@ def test_router_default_unchanged(monkeypatch):
 def test_router_merged_routes_opt_in(monkeypatch):
     router = pytest.importorskip("realai.server.router")
     monkeypatch.setenv("REALAI_SERVER_MERGED_ROUTES", "1")
+    # Routing test, not the service gate. Production with no key would 401.
+    monkeypatch.setenv("ENV", "development")
+    monkeypatch.setenv("REALAI_API_KEY", "")
+    from realai.cloud_fallback import _HOSTED_ENV_MARKERS
+    for name in _HOSTED_ENV_MARKERS:
+        monkeypatch.delenv(name, raising=False)
     status, data, ctype = router.dispatch_request("GET", "/ui/providers")
     assert status == 200 and ctype.startswith("application/json") and data and data[0]["id"] == "openai"
     status, data, _ = router.dispatch_request("GET", "/health")  # structured route still wins

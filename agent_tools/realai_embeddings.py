@@ -15,7 +15,7 @@ class RealAIEmbeddings:
 
     def __init__(self) -> None:
         self._api_url = os.getenv("REALAI_API_URL", "")
-        self._api_key = os.getenv("REALAI_API_KEY", "")
+        self._api_key = (os.getenv("REALAI_API_KEY") or "").split(",")[0].strip()
         self._model = os.getenv("REALAI_EMBED_MODEL", "realai-embed")
         if not self._api_url or not self._api_key:
             raise RuntimeError("RealAIEmbeddings requires REALAI_API_URL and REALAI_API_KEY")

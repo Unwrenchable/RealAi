@@ -10,7 +10,7 @@ Canonical hosts for RealAI and the product shells that call it as an **intellige
 | Local Hive (orchestrator) | `http://127.0.0.1:8001` | `POST /v1/tools/execute` + Hive tools |
 | Render (example) | `https://realai-api.onrender.com` | Public intelligence host — **plugin-first** |
 
-Set `REALAI_BASE_URL` to the host the product should call. Optional service token: `REALAI_API_KEY` (Bearer).
+Set `REALAI_BASE_URL` to the host the product should call. Service token: `REALAI_API_KEY` (`Authorization: Bearer` or `X-API-Key`). The Render `api_server` requires it whenever the key is set, and also when it is unset in production (fail closed). `GET /health` stays open.
 
 **Hive vs Render dualism:** local Hive may expose product tools (`rackup_invoke` today; a future `atomicfizz_invoke` later). Product integration should still treat **plugin HTTP on Render / `api_server`** as canonical. See the wiring contracts below.
 
