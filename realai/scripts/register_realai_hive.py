@@ -112,7 +112,7 @@ def main() -> int:
     print()
     print("Craft:  /model RealAI Hive")
     print("Chat:   ensure Vulkan loaded with the hive GGUF, then:")
-    print(f'  C:\\llama-vulkan\\llama-server.exe -m "{gguf}" --host 0.0.0.0 --port 8080 -c 16384 -ngl 99 --jinja')
+    print(f'  C:\\llama-vulkan\\llama-server.exe -m "{gguf}" --host 127.0.0.1 --port 8080 -c 16384 -ngl 99 --jinja')
     print("  or: powershell -File scripts\\run_local_chat.ps1")
     return 0
 

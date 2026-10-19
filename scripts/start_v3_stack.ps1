@@ -16,10 +16,11 @@ Start-Sleep -Seconds 1
 # Vulkan llama-server
 if (-not (Test-Path $Llama)) { throw "Missing $Llama" }
 if (-not (Test-Path $Model)) { throw "Missing $Model" }
-# Bind 0.0.0.0 so WSL and LAN tools can reach Vulkan (not only Windows localhost)
+# localhost by default. Set REALAI_LLAMA_HOST=0.0.0.0 if WSL/LAN tools must reach Vulkan.
+$LlamaHost = if ($env:REALAI_LLAMA_HOST) { $env:REALAI_LLAMA_HOST } else { "127.0.0.1" }
 $vArgs = @(
   "-m", $Model,
-  "--host", "0.0.0.0",
+  "--host", $LlamaHost,
   "--port", "8080",
   "-c", "8192",
   "-ngl", "99",
