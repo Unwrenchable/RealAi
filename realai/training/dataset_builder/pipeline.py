@@ -139,13 +139,16 @@ def _sample(rows: List[Dict[str, Any]], n: int, rng: random.Random) -> List[Dict
 
 
 def eval_prompts() -> set:
-    """Normalised spot-check questions (core + extended); empty if the suite cannot be built here."""
-    try:
-        from realai.training.spotcheck import SUITES
+    """Normalised spot-check questions (core + extended + repos); empty if the suite cannot be built here."""
+    out: set = set()
+    for suite in ("all", "repos"):
+        try:
+            from realai.training.spotcheck import SUITES
 
-        return {normalize(c["q"]) for c in SUITES["all"]()}
-    except Exception:
-        return set()
+            out |= {normalize(c["q"]) for c in SUITES[suite]()}
+        except Exception:
+            continue
+    return out
 
 
 def _user_prompt(msgs: List[Dict[str, Any]]) -> str:

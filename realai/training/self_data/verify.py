@@ -151,7 +151,7 @@ def recompute_check(ok_calls: List[Dict[str, Any]], ans: str) -> List[str]:
     low = _norm(ans)
     for c in ok_calls:
         name = c.get("name")
-        if name not in hive_tools.NEW_TOOLS and name != "route_to_agent":
+        if name not in hive_tools.NEW_TOOLS and name not in ("route_to_agent", "repo_search"):
             continue
         args = c.get("arguments") if isinstance(c.get("arguments"), dict) else {}
         if name == "request_approval":

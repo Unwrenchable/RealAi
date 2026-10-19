@@ -41,17 +41,19 @@ CONFUSABLE: Dict[str, List[str]] = {
     "device_profile": ["hive_routes_status", "self_heal_status", "web_search"],
     "payout_check": ["rackup_invoke", "solana_read", "request_approval"],
     "approval_status": ["request_approval", "self_heal_status"],
-    "request_approval": ["approval_status", "solana_read"],
+    "request_approval": ["approval_status", "solana_read", "repo_search"],
     "solana_read": ["payout_check", "request_approval"],
     "shot_lookup": ["coach_drill", "game_rules"],
     "coach_drill": ["shot_lookup", "matchmaking_suggest"],
     "math_solver": ["data_analysis"],
     "data_analysis": ["math_solver"],
-    "memory_search": ["memory_stats"],
+    "memory_search": ["memory_stats", "repo_search"],
     "memory_stats": ["memory_search"],
-    "plugin_lookup": ["plugin_registry_list", "module_lookup"],
+    "plugin_lookup": ["plugin_registry_list", "module_lookup", "repo_search"],
     "plugin_registry_list": ["plugin_lookup"],
-    "module_lookup": ["plugin_lookup", "ability_lookup"],
+    "module_lookup": ["plugin_lookup", "ability_lookup", "repo_search"],
+    # tool 32 (2026-10-19): code questions about Travis's other repos vs RealAI self-knowledge / memory / web / edits
+    "repo_search": ["module_lookup", "plugin_lookup", "memory_search", "web_search", "request_approval", "list_agents"],
 }
 
 
@@ -83,7 +85,7 @@ def tool_row(question: str, calls: List[Dict[str, Any]], answer: str, *, key: st
     for c in calls:
         msgs.append({"role": "assistant", "content": "",
                      "tool_calls": [{"type": "function", "function": {"name": c["name"], "arguments": c["arguments"]}}]})
-        msgs.append({"role": "tool", "name": c["name"], "content": tool_json(c["result"])})
+        msgs.append({"role": "tool", "name": c["name"], "content": tool_json(c["result"], name=c["name"])})
     msgs.append({"role": "assistant", "content": answer})
     return {"messages": msgs, "tools": specs(tool_subset([c["name"] for c in calls], key)),
             "meta": dict(meta or {}, tools_called=[c["name"] for c in calls], kind="tool_call")}

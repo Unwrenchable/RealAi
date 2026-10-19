@@ -7,7 +7,7 @@ One registry serves three places so they cannot drift:
 
 Safety: every tool here is read-only. Network tools (web_search, solana_read) are refused when
 ``offline=True`` (dataset generation always runs offline). Nothing here sends transactions,
-trades, or writes files; RackUp is limited to read-only abilities.
+trades, or writes files (repo_search only reads the local repo mirror); RackUp is limited to read-only abilities.
 """
 from __future__ import annotations
 
@@ -73,7 +73,10 @@ from realai.hive_tools import approvals as _apr  # noqa: E402  (request-only wri
 
 SPECS.update(_ext.SPECS)
 SPECS.update(_wired.SPECS)
+from realai.hive_tools import repo_search as _repo  # noqa: E402  (tool 32: read-only search of the local repo mirror)
+
 SPECS.update(_apr.SPECS)
+SPECS.update(_repo.SPECS)  # live catalog, default on (REALAI_REPO_SEARCH=0 removes it); not a NEW_TOOLS (not hive-tools gated)
 NEW_TOOLS = tuple(_ext.SPECS) + tuple(_wired.SPECS) + tuple(_apr.SPECS)  # wire audit 2026-10-12 / 2026-10-16; improve.py starts them as weak
 CORE_TOOLS = tuple(n for n in SPECS if n not in NEW_TOOLS)
 
@@ -88,6 +91,8 @@ def key_facts(name: str, result: Dict[str, Any], args: Dict[str, Any]) -> List[L
         return _wired.key_facts(name, result, args)
     if name in _apr.SPECS:
         return _apr.key_facts(name, result, args)
+    if name in _repo.SPECS:
+        return _repo.key_facts(name, result, args)
     return _ext.key_facts(name, result, args)
 
 
@@ -96,8 +101,10 @@ def specs(names: Optional[List[str]] = None) -> List[Dict[str, Any]]:
 
 
 def live_specs() -> List[Dict[str, Any]]:
-    """Tools for the live (opt-in) tool loop: core tools, plus NEW_TOOLS only when REALAI_HIVE_TOOLS=1."""
-    return specs(list(SPECS) if hive_tools_enabled() else list(CORE_TOOLS))
+    """Tools for the live (opt-in) tool loop: core tools (incl. repo_search unless REALAI_REPO_SEARCH=0), plus NEW_TOOLS
+    only when REALAI_HIVE_TOOLS=1."""
+    names = list(SPECS) if hive_tools_enabled() else list(CORE_TOOLS)
+    return specs([n for n in names if n not in _repo.SPECS or _repo.enabled()])
 
 
 # ----------------------------------------------------------------------------- data sources
@@ -297,6 +304,7 @@ EXECUTORS: Dict[str, Callable[[Dict[str, Any], Dict[str, Any]], Dict[str, Any]]]
     **_ext.EXECUTORS,
     **_wired.EXECUTORS,
     **_apr.EXECUTORS,
+    **_repo.EXECUTORS,
 }
 SANDBOXED_TOOLS = set(_apr.SPECS)  # offline (self_data / spotcheck / verify) -> private temp approvals store
 
@@ -320,6 +328,10 @@ def execute(name: str, args: Any, offline: bool = True, ctx: Optional[Dict[str, 
         return {"ok": False, "error": f"{type(exc).__name__}: {exc}"[:300]}
 
 
-def tool_json(result: Dict[str, Any], limit: int = 1400) -> str:
+TOOL_JSON_LIMITS = {"repo_search": _repo.OUT_LIMIT}  # repo_search output is already capped/redacted at ~4 KB
+
+
+def tool_json(result: Dict[str, Any], limit: Optional[int] = None, name: Optional[str] = None) -> str:
+    limit = limit or TOOL_JSON_LIMITS.get(str(name or ""), 1400)
     s = json.dumps(result, ensure_ascii=False, separators=(",", ":"))
     return s if len(s) <= limit else s[: limit - 1] + "…"
