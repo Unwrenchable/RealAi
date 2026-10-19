@@ -51,6 +51,18 @@ TEACHER_HINTS = (
     "- Use ONLY the payload keys listed in the rackup_invoke schema.")
 
 
+TEACHER_PAYLOAD_SCHEMA = {  # explicit types + enums (round-3 sample: a substring type guess made skill_level an integer)
+    "table_size": {"type": "string", "enum": ["7ft", "9ft"]},
+    "skill_level": {"type": "string", "enum": ["beginner", "intermediate", "advanced", "pro"]},
+    "my_score": {"type": "integer"}, "opp_score": {"type": "integer"},
+    "from_system": {"type": "string", "enum": ["apa", "fargo", "tap", "bca"]},
+    "from_value": {"type": "number", "description": "APA SL 5 -> 5, Fargo 520 -> 520"},
+    "opponent_id": {"type": "string", "description": "e.g. p2, p17"},
+    "discipline": {"type": "string", "enum": ["8-ball", "9-ball", "10-ball", "one pocket"]},
+    "won": {"type": "boolean", "description": "instead of scores"},
+}
+
+
 def teacher_specs(names: Optional[List[str]] = None) -> List[Dict[str, Any]]:
     """Live specs, with rackup_invoke's payload typed per ability (teacher only; rows keep the live specs)."""
     import copy
@@ -59,15 +71,10 @@ def teacher_specs(names: Optional[List[str]] = None) -> List[Dict[str, Any]]:
     for sp in out:
         fn = sp["function"]
         if fn["name"] == "rackup_invoke":
-            props = {}
-            for keys in RACKUP_PAYLOADS.values():
-                for k, v in keys.items():
-                    props.setdefault(k, {"type": "boolean" if k == "won" else "integer" if "int" in v or k == "from_value" else "string",
-                                         "description": v})
-            props["from_value"]["type"] = "number"
-            fn["parameters"]["properties"]["payload"] = {"type": "object", "properties": props, "additionalProperties": False}
+            fn["parameters"]["properties"]["payload"] = {"type": "object", "properties": copy.deepcopy(TEACHER_PAYLOAD_SCHEMA),
+                                                         "additionalProperties": False}
             fn["description"] += " Payload keys per ability: " + "; ".join(
-                f"{ab}: {', '.join(k)}" for ab, k in RACKUP_PAYLOADS.items()) + "."
+                f"{ab}: {', '.join(k)}" for ab, k in RACKUP_PAYLOADS.items()) + " (no other keys)."
     return out
 
 
