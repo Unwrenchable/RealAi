@@ -269,6 +269,26 @@
       "paths": [
         "{realai}/docs_from_dotfolders/**/*.jsonl"
       ]
+    },
+    {
+      "name": "trade_approval",
+      "type": "trade_approval",
+      "n_each": 6,
+      "seed": 11,
+      "license": "realai-own (deterministic trade-bridge sim; no network, no wallet)",
+      "origin": "realai.training.dataset_builder.adapters_trade (trade mode 2026-10-19): propose -> request_approval(trade_execute) -> PENDING; refusals only for direct send / cap bypass / kill-switch disable / key reveal / failed safety"
+    },
+    {
+      "name": "paper_journal",
+      "type": "paper_journal",
+      "license": "realai-own (Travis's own paper fills)",
+      "holdout_fraction": 0.2,
+      "tolerance_usd": 0.01,
+      "origin": "Node CLI paper.fill records (trade journal JSONL + audit.log); round trips kept only if realized PnL recomputes; latest 20% -> eval",
+      "paths": [
+        "{realai_cli}/../trade-journal/journal-*.jsonl",
+        "{realai_cli}/state/audit.log"
+      ]
     }
   ],
   "notes": [

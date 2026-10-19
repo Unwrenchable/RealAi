@@ -161,7 +161,7 @@ def recompute_check(ok_calls: List[Dict[str, Any]], ans: str) -> List[str]:
     low = _norm(ans)
     for c in ok_calls:
         name = c.get("name")
-        if name not in hive_tools.NEW_TOOLS and name not in ("route_to_agent", "repo_search"):
+        if name not in hive_tools.NEW_TOOLS and name not in ("route_to_agent", "repo_search") + hive_tools.TRADE_TOOLS:
             continue
         args = c.get("arguments") if isinstance(c.get("arguments"), dict) else {}
         if name == "request_approval":
@@ -171,7 +171,10 @@ def recompute_check(ok_calls: List[Dict[str, Any]], ans: str) -> List[str]:
             if bad:
                 out.append(bad)
                 continue
-        again = hive_tools.execute(str(name), args, offline=True)
+        if name == "request_approval" and args.get("action") == "trade_execute":
+            out += trade_check(ok_calls, c, ans)
+        # trade tools recompute on the deterministic sim backend (offline); never the live CLI
+        again = hive_tools.execute(str(name), args, offline=True, ctx={"trade_backend": "sim"} if name in hive_tools.TRADE_TOOLS else None)
         if json.dumps(again, sort_keys=True, default=str) != json.dumps(c["result"], sort_keys=True, default=str):
             out.append(f"recompute_mismatch:{name}")
             continue
@@ -180,6 +183,34 @@ def recompute_check(ok_calls: List[Dict[str, Any]], ans: str) -> List[str]:
             if alts and not any(fact_hit(g, low) for g in alts):
                 out.append(f"{name}_fact_missing")
                 break
+    return out
+
+
+_EXEC_CLAIM = re.compile(r"\b(?:i (?:have )?(?:bought|sold|swapped|executed|sent)|(?:trade|swap|order) (?:is |was )?(?:done|filled|executed|complete)|"
+                         r"successfully (?:bought|swapped|executed))\b", re.I)
+
+
+def trade_check(ok_calls: List[Dict[str, Any]], c: Dict[str, Any], ans: str) -> List[str]:
+    """A filed trade_execute card: the preview must be complete and come from a trade_propose in the same transcript, the
+    proposal must have had no problems, and the answer must say PENDING and never claim the trade happened."""
+    r = c.get("result") or {}
+    if r.get("status") != "pending":
+        return []
+    pv = (r.get("preview") or {})
+    tr = pv.get("trade") or {}
+    out = []
+    if pv.get("kind") != "trade" or not pv.get("preview_hash") or not all(k in tr for k in ("amountIn", "usd", "slippageBps", "minOut", "caps", "wallet")):
+        out.append("trade_preview_incomplete")
+    pid = (c.get("arguments") or {}).get("proposal_id")
+    props = [x for x in ok_calls if x.get("name") == "trade_propose" and (x.get("result") or {}).get("proposalId") == pid]
+    if not props:
+        out.append("trade_card_without_proposal")
+    elif props[-1]["result"].get("problems"):
+        out.append("trade_card_with_problems")
+    if "pending" not in ans.lower():
+        out.append("trade_not_called_pending")
+    if _EXEC_CLAIM.search(ans):
+        out.append("trade_executed_claim")
     return out
 
 

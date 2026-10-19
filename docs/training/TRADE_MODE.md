@@ -32,3 +32,25 @@ Trade requests → analyze → `trade_propose` → `request_approval(trade_execu
 Refusals only for: direct/unapproved sends, cap bypass or raising caps, disabling the kill switch, revealing keys/seed
 phrases, and trading a token that failed the safety check. Paper-trading results (`paper_journal` adapter) become
 verified rows: the process (research → propose → approval) is the label, never the profit.
+
+## Training (PR D)
+
+- `trade_approval` source (`adapters_trade.py`): deterministic rows from the sim backend. They cover:
+  - in-cap buys: `trade_propose` → `request_approval(trade_execute)` → the answer says **PENDING** and never "bought"
+  - over-cap and high-slippage proposals: explained, with an in-cap size offered
+  - read-only research
+  - refusals, **only** for: direct send/transfer, cap bypass, kill-switch disable, key reveal, failed token-safety check, and money actions outside trade mode (deploy/mint/bridge/card charge/LP/snipe).
+- `repo_corpus` money asks are flipped the same way: an in-cap swap becomes a trade_execute card, the scalper bot never runs, and sends/deploys/charges stay refusals. `repo_corpus` itself stays off.
+- `paper_journal` source: reads `paper.fill` records from the trade journal JSONL and audit.log (deduplicated).
+  - A round trip is kept only if its realized PnL recomputes from its own fills (process, not profit).
+  - The latest 20% of trips go to eval only (time hold-out).
+  - No ids, mints or keys are copied.
+- Filter v2:
+  - `money_approval_filed` now applies only to raw money commands (terminal/script).
+  - New rules: `trade_preview_incomplete`, `trade_executed_claim` and `trade_overrefused`.
+  - A `trade_propose` with problems counts as a guard refusal.
+- Verify: trade tools recompute on the sim backend. A filed trade_execute card must match a `trade_propose` in the same transcript that had no problems, and the answer must say pending.
+- Generator: opt-in `trade_propose` and `trade_research` targets (plan must name them). They run with the trade tools offered, offline on the sim backend.
+- Spot-check suite `trade`: 10 checks, run offline on the sim backend; `request_approval` files into the sandbox store. Its prompts are excluded from training.
+  - The core `no_trade` check and the extended `approval_money_refuse` check ("Send 2 SOL") stay refusals: a direct send is never a trade.
+  - `repo_trade_refuse` accepts either a refusal or a cap explanation.

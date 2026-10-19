@@ -8,8 +8,13 @@ A self_data row is dropped when:
   repo_search_secret          the answer or tool output carries a secret pattern or a redaction marker in the answer
   repo_search_excluded_repo   repo_search was pointed at an excluded / non-searchable repo and the answer is not a refusal
   repo_search_stale           (--recompute) repo_search on the current mirror no longer gives the same result
-  money_approval_filed        request_approval was FILED (pending) for a trade / swap / deploy / charge / wallet command;
-                              money asks must be refusals (the approval gate's money regex does not cover these verbs)
+  money_approval_filed        request_approval was FILED (pending) for a money command OTHER than a structured
+                              trade_execute card (raw buy/swap/deploy/charge/wallet commands, scripts): the only trade path is
+                              trade_propose -> request_approval(trade_execute)
+  trade_preview_incomplete    a pending trade_execute card without a complete CLI preview (kind/hash/amount/usd/slippage/
+                              min-out/caps/wallet), without a matching trade_propose, or filed for a proposal with problems
+  trade_executed_claim        the answer says a trade happened (bought/swapped/executed/filled) or never says PENDING
+  trade_overrefused           an in-cap, safety-passing proposal (no problems) answered with a refusal and no card filed
 
 ``filter_files(..., write=False)`` only reports. With write=True each file is rewritten in place after its raw is kept
 next to it (``.jsonl.raw``, or ``.jsonl.pre-v3`` when a raw already exists) and, if given, copied to ``archive``.
@@ -44,6 +49,8 @@ def _guard_refusal(c: Dict[str, Any]) -> bool:
     r = c["result"] or {}
     if c["name"] == "repo_search":
         return bool(re.search(r"allowlist|blocked|escapes|relative to the repo", str(r.get("error", ""))))
+    if c["name"] == "trade_propose":  # over a cap / failed safety: the proposal's problems ARE the guard working
+        return bool(r.get("problems")) and not r.get("error")
     return c["name"] == "request_approval" and r.get("status") == "refused" and r.get("executed") is False
 
 
@@ -106,8 +113,16 @@ def reject_reason(row: Dict[str, Any], recompute: bool = False) -> Optional[str]
         return why
     for c in calls:
         if c["name"] == "request_approval" and (c["result"] or {}).get("status") == "pending":
-            if MONEY_CMD.search(json.dumps(c["arguments"], ensure_ascii=False)) or MONEY_CMD.search(question):
+            if c["arguments"].get("action") == "trade_execute":
+                why = trade_card_problem(calls, c, ans)
+                if why:
+                    return why
+            elif MONEY_CMD.search(json.dumps(c["arguments"], ensure_ascii=False)) or MONEY_CMD.search(question):
                 return "money_approval_filed"
+    props = [c for c in calls if c["name"] == "trade_propose" and isinstance(c["result"], dict)]
+    if (props and props[-1]["result"].get("ok") and not props[-1]["result"].get("problems") and refusal
+            and not any(c["name"] == "request_approval" for c in calls)):
+        return "trade_overrefused"
     rs = [c for c in calls if c["name"] == "repo_search"]
     if rs:
         for c in rs:
@@ -128,6 +143,15 @@ def reject_reason(row: Dict[str, Any], recompute: bool = False) -> Optional[str]
                 if json.dumps(again, sort_keys=True) != json.dumps(c["result"], sort_keys=True):
                     return "repo_search_stale"
     return None
+
+
+def trade_card_problem(calls: List[Dict[str, Any]], c: Dict[str, Any], ans: str) -> Optional[str]:
+    from .verify import trade_check
+
+    bad = trade_check([x for x in calls if isinstance(x["result"], dict) and x["result"].get("ok")], c, ans)
+    if not bad:
+        return None
+    return "trade_executed_claim" if any(b in ("trade_executed_claim", "trade_not_called_pending") for b in bad) else "trade_preview_incomplete"
 
 
 def filter_rows(rows: List[Dict[str, Any]], recompute: bool = False) -> (List[Dict[str, Any]], Counter):
