@@ -15,6 +15,14 @@ Guarantees
   * audit log: every request / refusal / approval / execution appends a JSON line (``<store>.audit.jsonl``)
   * money stays separately locked: sends / transfers / payouts / wallet signing are refused outright here,
     approved or not (they need their own explicit path, which this module never provides)
+  * trade_execute (trade mode) is that one explicit path, and only for a stored DRY-RUN swap proposal of the local
+    Node CLI (C:\tools\realai): the card shows the CLI's preview (amount, USD, slippage, min-out, route, impact, caps,
+    safety verdict) and is refused at request time when anything breaks a cap, the bot wallet / Solana rule, the
+    safety check, or the kill switch. Executing an approved card hands a one-time ticket (the approval id) to
+    ``realai trade execute <proposal> --live --realai-ticket <id>``; the CLI re-reads this store (read-only), checks
+    status/TTL (60-120 s from the approval)/hash/caps/kill switch, re-quotes and aborts on drift, then applies all of
+    its own live gates (profile, trading.live, risk engine, DEX guards, pre-flight). Free-form commands, raw sends,
+    transfers and key access stay refused/pending exactly as before.
 
 Env: REALAI_APPROVALS_STORE / APPROVALS_STORE (store path; default from realai.core.approvals_config), REALAI_APPROVALS_AUDIT (audit path),
 REALAI_WORKSPACE / REALAI_HOME (workspace root).
@@ -28,12 +36,13 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 import time
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 ACTIONS = ("search_replace", "write_file", "run_terminal_command", "run_script", "auto_wire", "self_heal_promote",
-           "self_heal_curated_promote", "self_heal_deep_promote", "self_extend", "self_repair")
+           "self_heal_curated_promote", "self_heal_deep_promote", "self_extend", "self_repair", "trade_execute")
 EXEC_TIMEOUT_S = 300
 MONEY = re.compile(r"(send[_ -]?(sol|transaction|tx|funds|payment)|sign[_ -]?and[_ -]?send|transfer[_ -]?(sol|token|funds)|"
                    r"spl-token\s+transfer|solana\s+transfer|stripe|payout|release[_ -]?payment|private[_ -]?key|"
@@ -196,9 +205,112 @@ def _preview_script(args: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any
     return norm, {"kind": "script", "language": lang, "filename": fn or "(scratch)", "argv": argv, "code": code[:20000]}
 
 
+# ----------------------------------------------------------------------------- trade mode (trade_execute)
+PROPOSAL_ID = re.compile(r"^prop_[0-9a-f]{10}$")
+TRADE_CHAINS = ("solana",)
+
+
+def trade_mode_enabled() -> bool:
+    return os.environ.get("REALAI_TRADE_MODE", "").strip().lower() in ("1", "true", "yes", "on")
+
+
+def trade_kill_file() -> Path:
+    env = os.environ.get("REALAI_TRADE_KILL_FILE")
+    if env:
+        return Path(env)
+    return Path(r"D:\ARCHIVE\trade-journal\KILL") if os.name == "nt" else Path(tempfile.gettempdir()) / "realai-trade-KILL"
+
+
+def trade_limits() -> Dict[str, float]:
+    """Hard ceilings on the Python side (the CLI config caps apply too; the lower one wins)."""
+    def f(name: str, default: float) -> float:
+        try:
+            return float(os.environ.get(name, default))
+        except ValueError:
+            return default
+    return {"max_usd": f("REALAI_TRADE_MAX_USD", 5.0), "max_slippage_bps": f("REALAI_TRADE_MAX_SLIPPAGE_BPS", 300.0)}
+
+
+def _trade_backend_preview(pid: str) -> Dict[str, Any]:
+    from realai.hive_tools import trade as _trade
+
+    if _trade.backend() == "sim":
+        return _trade.sim_preview(pid)
+    return _trade.run_cli(["trade", "preview", pid, "--json"])
+
+
+def _preview_trade(args: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    pid = str(args.get("proposal_id") or "").strip()
+    if not PROPOSAL_ID.match(pid):
+        raise Refused("trade_execute needs proposal_id from trade_propose (prop_xxxxxxxxxx)")
+    extra = sorted(k for k in args if k not in ("proposal_id", "reason"))
+    if extra:
+        raise Refused(f"trade_execute takes only proposal_id (the preview comes from the trading CLI); got {', '.join(extra)}")
+    if not trade_mode_enabled():
+        raise Refused("trade mode is off (REALAI_TRADE_MODE=1 enables trade_execute cards)")
+    if trade_kill_file().exists():
+        raise Refused("kill switch is set: no trade cards")
+    pv = _trade_backend_preview(pid)
+    t = pv.get("preview") or {}
+    if not pv.get("previewHash") or not t:
+        raise Refused(f"no preview for {pid}: {str(pv.get('error') or 'trading CLI unavailable')[:200]}")
+    problems = list(pv.get("problems") or [])
+    lim = trade_limits()
+    if t.get("chain") not in TRADE_CHAINS:
+        problems.append(f"chain {t.get('chain')} not allowed (Solana only)")
+    if not (t.get("caps") or {}).get("wallet") or t.get("wallet") != (t.get("caps") or {}).get("wallet"):
+        problems.append("bot wallet only")
+    usd = t.get("usd")
+    if not isinstance(usd, (int, float)) or usd <= 0:
+        problems.append("trade cannot be valued in USD")
+    elif usd > lim["max_usd"]:
+        problems.append(f"usd {usd} > hard cap {lim['max_usd']:g}")
+    slip = t.get("slippageBps")
+    if not isinstance(slip, (int, float)) or slip > lim["max_slippage_bps"]:
+        problems.append(f"slippage {slip} bps > hard cap {lim['max_slippage_bps']:g}")
+    if (t.get("safety") or {}).get("required") and (t.get("safety") or {}).get("verdict") != "pass":
+        problems.append("token safety check failed")
+    if problems:
+        raise Refused("trade refused: " + "; ".join(dict.fromkeys(str(p) for p in problems)))
+    summary = (f"{t.get('amountIn')} {t.get('inSymbol') or t.get('from')} -> {t.get('outSymbol') or t.get('to')} "
+               f"(~${usd:g}) on {t.get('chain')} via {t.get('dex')} [{t.get('route')}], slippage {slip} bps, "
+               f"min-out {t.get('minOut')}, impact {t.get('priceImpactBps')} bps, wallet {t.get('wallet')}; caps "
+               f"${(t.get('caps') or {}).get('maxTradeUsd')}/trade, ${(t.get('caps') or {}).get('maxDailyUsd')}/day, "
+               f"{(t.get('caps') or {}).get('maxDailyTrades')} trades/day; used today {t.get('usedToday')}")
+    ttl = max(60, min(120, int(t.get("ticketTtlSec") or 90)))
+    return {"proposal_id": pid}, {"kind": "trade", "summary": summary, "trade": t, "preview_hash": pv["previewHash"],
+                                  "ticket_ttl_s": ttl, "note": "LIVE trade with real funds on approval. Execute within "
+                                  f"{ttl}s of approving; the CLI re-quotes and aborts if the price moved."}
+
+
+def _run_trade(req_id: str, item: Dict[str, Any], norm: Dict[str, Any], prev: Dict[str, Any]) -> Dict[str, Any]:
+    from realai.hive_tools import trade as _trade
+
+    if not trade_mode_enabled():
+        raise Refused("trade mode is off")
+    if trade_kill_file().exists():
+        raise Refused("kill switch is set")
+    ttl = int(prev.get("ticket_ttl_s") or 90)
+    age = time.time() - float(item.get("decided_at") or 0)
+    if age > ttl:
+        raise Refused(f"ticket expired ({int(age)}s > {ttl}s since approval); re-propose and re-approve")
+    if _trade.backend() == "sim":
+        return {"ok": False, "mode": "sim", "error": "simulator: nothing is ever sent"}
+    keep = os.environ.get("REALAI_APPROVALS_STORE")
+    os.environ["REALAI_APPROVALS_STORE"] = str(store_path())  # the CLI re-reads THIS store (read-only) to verify the ticket
+    try:
+        res = _trade.run_cli(["trade", "execute", norm["proposal_id"], "--live", "--realai-ticket", req_id, "--json"], timeout=150)
+    finally:
+        if keep is None:
+            os.environ.pop("REALAI_APPROVALS_STORE", None)
+        else:
+            os.environ["REALAI_APPROVALS_STORE"] = keep
+    return {k: res.get(k) for k in ("ok", "mode", "error", "proposalId", "notionalUsd", "txHash", "explorer") if k in res}
+
+
 PREVIEW: Dict[str, Callable[[Dict[str, Any]], Tuple[Dict[str, Any], Dict[str, Any]]]] = {
     "search_replace": _preview_edit, "write_file": _preview_write, "run_terminal_command": _preview_command,
-    "run_script": _preview_script}
+    "run_script": _preview_script, "trade_execute": _preview_trade}
 
 
 def preview(action: str, args: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
@@ -358,6 +470,8 @@ def execute(req_id: str, *, executor: str = "human") -> Dict[str, Any]:
             res = _run_edit(norm, prev)
         elif action == "run_terminal_command":
             res = _run_command(norm, prev)
+        elif action == "trade_execute":
+            res = _run_trade(req_id, item, norm, prev)
         elif action == "run_script":
             from realai.bot.live_exec import run_script
 

@@ -27,13 +27,13 @@ SPECS: Dict[str, Dict[str, Any]] = {
         "Ask Travis to approve a write/exec action on this workspace. Fields per action: search_replace: file_path, "
         "old_string, new_string; write_file: file_path, content; run_terminal_command: command (cwd optional); "
         "run_script: code (language optional, default python); auto_wire / self_heal_promote / self_extend / "
-        "self_repair: reason only. Files a PENDING request with a dry-run preview (diff or exact command); nothing "
-        "runs until a human approves. Say it is pending only if status is pending; if it is refused, say why. Money "
+        "self_repair: reason only; trade_execute: proposal_id from trade_propose. Files a PENDING request with a dry-run "
+        "preview; nothing runs until a human approves. Say pending only if status is pending; if refused, say why. Raw "
         "sends/transfers/payouts are refused. Not for delegating work to agents (use route_to_agent).",
         {"action": {"type": "string", "enum": ["search_replace", "write_file", "run_terminal_command", "run_script",
-                                               "auto_wire", "self_heal_promote", "self_extend", "self_repair"]},
+                                               "auto_wire", "self_heal_promote", "self_extend", "self_repair", "trade_execute"]},
          "file_path": _S, "old_string": _S, "new_string": _S, "content": _S, "command": _S, "cwd": _S,
-         "code": _S, "language": _S, "reason": _S},
+         "code": _S, "language": _S, "proposal_id": _S, "reason": _S},
         ["action", "reason"]),
 }
 
@@ -53,10 +53,15 @@ def request_approval(args: Dict[str, Any], ctx: Dict[str, Any]) -> Dict[str, Any
     if not ctx.get("approvals_sandbox"):
         r = approval_gate.request(action, payload, requested_by="hive", reason=reason)
     else:
-        keep = {k: os.environ.get(k) for k in ("REALAI_APPROVALS_STORE", "REALAI_APPROVALS_AUDIT")}
+        keep = {k: os.environ.get(k) for k in ("REALAI_APPROVALS_STORE", "REALAI_APPROVALS_AUDIT", "REALAI_TRADE_BACKEND",
+                                               "REALAI_TRADE_MODE", "REALAI_TRADE_KILL_FILE")}
         store = _sandbox_store()
         os.environ["REALAI_APPROVALS_STORE"] = str(store)
         os.environ["REALAI_APPROVALS_AUDIT"] = str(store.with_suffix(".audit.jsonl"))
+        # trade cards in the sandbox: simulator previews only, never the real CLI, never the real kill file
+        os.environ["REALAI_TRADE_BACKEND"] = "sim"
+        os.environ["REALAI_TRADE_MODE"] = "1"
+        os.environ["REALAI_TRADE_KILL_FILE"] = str(store.with_name("KILL"))
         try:
             r = approval_gate.request(action, payload, requested_by="hive-sandbox", reason=reason)
         finally:
