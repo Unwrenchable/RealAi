@@ -177,7 +177,8 @@ def rebalance(kept: List[Dict[str, Any]], cfg: Dict[str, Any], stats: Dict[str, 
         if len(rows) > n:
             stats[src]["dropped_source_cap"] += len(rows) - n
             by_src[src] = _sample(rows, n, rng)
-    shares = {k: float(v) for k, v in (cfg.get("max_source_share") or {}).items() if 0 < float(v) < 1}
+    # only sources that produced rows count (a disabled/empty capped source must not loosen the other caps)
+    shares = {k: float(v) for k, v in (cfg.get("max_source_share") or {}).items() if 0 < float(v) < 1 and by_src.get(k)}
     if shares:
         # rows outside the capped sources fix the size of the mix; each capped source gets share/(1-sum(shares)) of them
         rest = sum(len(v) for k, v in by_src.items() if k not in shares)
@@ -322,6 +323,14 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
                 "meta": {k: v for k, v in (row.get("meta") or {}).items() if v is not None},
             })
 
+    # hold-out by source/repo: rows tagged meta.split == "eval" (e.g. repo_corpus rows about held-out repos) go to eval
+    # only; they skip the caps (they never reach training) but still respect exclude_eval_prompts
+    holdout = [r for r in kept if (r.get("meta") or {}).get("split") == "eval"]
+    if holdout:
+        kept = [r for r in kept if (r.get("meta") or {}).get("split") != "eval"]
+        if cfg.get("exclude_eval_prompts"):
+            ev_q = cfg["_eval_prompts"] if "_eval_prompts" in cfg else eval_prompts()
+            holdout = [r for r in holdout if normalize(_user_prompt(r["messages"])) not in ev_q]
     kept = rebalance(kept, cfg, stats)
 
     # Stratified split by source, fixed seed, stable order (sort by id first).
@@ -353,9 +362,15 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
         train += rows[n_eval:]
         stats[src]["train"] = len(rows) - n_eval
         stats[src]["eval"] = n_eval
+    for r in holdout:
+        ev.append(r)
+        stats[r["source"]]["eval"] += 1
+        stats[r["source"]]["eval_holdout"] += 1
+    kept = kept + holdout
     if by_prompt:  # same prompt from two different sources: keep it on the train side
         seen = {_prompt_key(r["messages"]) for r in train}
-        moved = [r for r in ev if _prompt_key(r["messages"]) in seen and _prompt_key(r["messages"])]
+        moved = [r for r in ev if _prompt_key(r["messages"]) in seen and _prompt_key(r["messages"])
+                 and (r.get("meta") or {}).get("split") != "eval"]
         if moved:
             ids = {id(r) for r in moved}
             ev = [r for r in ev if id(r) not in ids]
@@ -402,6 +417,7 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
             "dropped_share_cap": sum(s["dropped_share_cap"] for s in stats.values()),
             "dropped_tool_cap": sum(s["dropped_tool_cap"] for s in stats.values()),
             "dropped_eval_prompt": sum(s["dropped_eval_prompt"] for s in stats.values()),
+            "eval_holdout": sum(s["eval_holdout"] for s in stats.values()),
         },
         "source_mix": dict(Counter(r["source"] for r in kept)),
         "tool_coverage": tool_coverage(kept),

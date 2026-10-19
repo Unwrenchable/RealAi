@@ -17,7 +17,8 @@
     "realai": "C:/temp/realai-dsb-sources",
     "repos": "C:/Users/tsmit",
     "clean": "C:/RealAI-clean",
-    "agent_tools": "C:/Users/tsmit/agent-tools-main/agent-tools-main"
+    "agent_tools": "C:/Users/tsmit/agent-tools-main/agent-tools-main",
+    "repo_mirror": "D:/ARCHIVE/repo-mirror"
   },
   "sources": [
     {
@@ -57,6 +58,17 @@
       "near_dedupe": false,
       "license": "realai-own",
       "origin": "live ability_catalog/hive_tools/agents/modules at build time"
+    },
+    {
+      "name": "repo_corpus",
+      "type": "repo_corpus",
+      "enabled": false,
+      "disabled_reason": "off until the mirror + training run is approved (repo corpus plan 2026-10-19)",
+      "mirror": "{repo_mirror}",
+      "per_repo_share": 0.25,
+      "seed": 7,
+      "license": "unwrenchable-own: Travis's own repos (unlicensed; internal training only, do not redistribute the dataset); RealAi MIT",
+      "origin": "repo_search over the read-only mirror built by tools/repo_mirror.py (D:/ARCHIVE/repo-mirror)"
     },
     {
       "name": "hive_selfplay_30b",
@@ -332,10 +344,12 @@
     "Travis's PC config. roots.realai = the C:/temp clone (REALAI_HOME). Other roots are read-only. Persona dump: git show origin/feature/ui-desktop-promote:dataset.jsonl > datasets/_sources/persona_dump.jsonl (see docs/training/RUNBOOK.md).",
     "Hive config (2026-10-10): factual sources become tool-call rows; old plain fact sources kept but disabled. Build: python -m realai.training.dataset_builder --config config/dataset_builder.hive.pc.json",
     "Rebalance 2026-10-18: hive_selfplay capped at 30% of the mix (max_source_share), max 180 rows per first tool (approval/payout/solana rows exempt), 30B-written rows are their own source, tool_calls adds league_validate and money-refusal (safety) rows.",
-    "Round 2 2026-10-19: tool rows use hard-negative distractors (CONFUSABLE look-alikes; hive_selfplay rows re-subset at build time), safety refusals check with the read-only tool first (payout_check / approval_status / request_approval refusal), hive_meta kind (hive role models, registry status, ability status), spot-check prompts excluded from training."
+    "Round 2 2026-10-19: tool rows use hard-negative distractors (CONFUSABLE look-alikes; hive_selfplay rows re-subset at build time), safety refusals check with the read-only tool first (payout_check / approval_status / request_approval refusal), hive_meta kind (hive role models, registry status, ability status), spot-check prompts excluded from training.",
+    "Repo corpus 2026-10-19 (off): repo_corpus rows come from repo_search over D:/ARCHIVE/repo-mirror; capped at 15% of the mix (max_source_share) and 25% per repo (per_repo_share, money refusals exempt); held-out repos (crispy-octo-guacamole, BlueScreenHelp) go to eval only; Token-scalper/FizzSwap/cookbook/Atomic Fizz/Cue-guard money asks are refusal rows only."
   ],
   "max_source_share": {
-    "hive_selfplay": 0.3
+    "hive_selfplay": 0.3,
+    "repo_corpus": 0.15
   },
   "max_rows_per_tool": 180,
   "tool_cap_exempt": [
