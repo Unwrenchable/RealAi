@@ -548,3 +548,4 @@ def hive_run_dir_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterator[R
 
 from . import adapters_extra  # noqa: E402,F401  (registers chess_stockfish, device_profiles)
 from . import adapters_tools  # noqa: E402,F401  (registers tool_calls, self_knowledge, hive_selfplay)
+from . import adapters_repo  # noqa: E402,F401  (registers repo_corpus: rows from the read-only repo mirror)

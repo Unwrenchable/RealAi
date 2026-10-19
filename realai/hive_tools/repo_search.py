@@ -83,10 +83,8 @@ _S = {"type": "string"}
 SPECS: Dict[str, Dict[str, Any]] = {
     "repo_search": _fn(
         "repo_search",
-        "Read-only search of a local mirror of Travis's own GitHub repos (RackUp, Atomic Fizz, Overseer, agent-tools, "
-        "RealAi...). action list: repos (no repo) or a directory; grep: find a literal text in one repo or all; read: "
-        "lines of one file. Answer only from what it returns and cite repo:path:line. Never edits files (edits go through "
-        "request_approval); secret files are blocked. For RealAI's own modules/plugins prefer module_lookup/plugin_lookup.",
+        "Read-only search of the local mirror of Travis's own repos (RackUp, Atomic Fizz, Overseer, agent-tools, RealAi...): "
+        "list (repos, or a folder), grep (literal text), read (file lines). Cite repo:path:line. Never edits; secret files blocked.",
         {"action": {"type": "string", "enum": ["list", "grep", "read"]}, "repo": _S, "path": _S, "query": _S,
          "start_line": {"type": "integer"}, "end_line": {"type": "integer"}},
         ["action"]),

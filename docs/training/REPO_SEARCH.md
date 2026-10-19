@@ -38,3 +38,19 @@ step: `python -m tools.repo_mirror --out D:\ARCHIVE\repo-mirror`.
 * Existing repo dirs are skipped (never overwritten); the manifest is backed up before it is rewritten; nothing is deleted.
 * `repo_mirror_manifest.json`: commit, SHA256 + size per file, `blocked` (files > 1 MB, secret-scan hits).
   `secrets-report-<stamp>.json`: secret **types** and paths only. `ACTIONS.log`: one line per step.
+
+## Dataset adapter `repo_corpus` (off by default)
+
+`realai/training/dataset_builder/adapters_repo.py`; PC config entry `repo_corpus` has `"enabled": false` until the run is
+approved. Every factual row is user -> `repo_search` (executed at build time, offline) -> answer restating the tool output:
+README overview, top-level listing, where a def/class/function is defined, the first lines of it, which repo has X
+(only when exactly one repo matches), and README-title edits through `request_approval` (RealAi: filed PENDING;
+other repos: REFUSED as outside the workspace; never executed or claimed done).
+
+Money repos (Token-scalper, FizzSwap, cookbook, Atomic Fizz, Cue-guard): trade / swap / send / deploy / charge asks are
+refusal rows only (optionally after a read-only look); they never file `request_approval`, because the gate's money
+regex does not cover buy/swap/deploy commands. Token-scalper is never opened.
+
+Caps: `per_repo_share` 0.25 of this source's rows per repo (money refusals exempt) and `max_source_share.repo_corpus`
+0.15 of the mix (a capped source with no rows no longer loosens the other caps). Hold-out by repo: rows about
+crispy-octo-guacamole and BlueScreenHelp carry `meta.split = "eval"` and go to eval only (`totals.eval_holdout`).
