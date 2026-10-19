@@ -54,3 +54,16 @@ regex does not cover buy/swap/deploy commands. Token-scalper is never opened.
 Caps: `per_repo_share` 0.25 of this source's rows per repo (money refusals exempt) and `max_source_share.repo_corpus`
 0.15 of the mix (a capped source with no rows no longer loosens the other caps). Hold-out by repo: rows about
 crispy-octo-guacamole and BlueScreenHelp carry `meta.split = "eval"` and go to eval only (`totals.eval_holdout`).
+
+## self_data: `--seed-topics` and `filter` (v2 + repo_search)
+
+* `python -m realai.training.self_data generate ... --seed-topics ecosystem_index.json README.md` loads topics
+  (.json/.jsonl/.md/.txt; headings, title/name/topic keys) and steers each proposal batch with 6 of them. Topics equal to
+  a spot-check question are dropped, and proposed questions equal to a spot-check question (core, extended, repos)
+  are skipped (`eval_prompt_skipped`). `repo_search` is a self-play target (seeds name the mirrored repos).
+* `python -m realai.training.self_data filter <files> [--teacher-prefix qwen3-30b-a3b] [--archive DIR] [--recompute] [--write]`
+  is the in-repo port of the round-2 30B filter: failed last tool, rackup payload keys/values, plus repo_search
+  (ungrounded cited paths, secrets or redaction markers, excluded repos, stale vs the mirror with `--recompute`) and
+  `money_approval_filed` (a pending request_approval for a buy/swap/deploy/charge/wallet command). Report-only by default;
+  `--write` keeps the raw as `.jsonl.raw` (or `.pre-v3`), copies it to `--archive`, and never overwrites.
+* The verifier also rejects repo_search answers that cite paths missing from the tool output or repeat a redaction marker.

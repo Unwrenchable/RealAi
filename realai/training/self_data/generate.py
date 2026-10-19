@@ -24,7 +24,7 @@ from realai.hive_tools import tool_loop
 from .verify import verify
 
 TARGETS = ("chess_engine", "rackup_invoke", "shot_lookup", "math_solver", "data_analysis", "ability_lookup",
-           "list_agents", "route_to_agent", "device_profile") + tuple(hive_tools.NEW_TOOLS)
+           "list_agents", "route_to_agent", "device_profile") + tuple(hive_tools.NEW_TOOLS) + ("repo_search",)
 # what a correct routing looks like per target (a row that routes elsewhere is rejected)
 ACCEPT_TOOLS = {"list_agents": {"list_agents", "route_to_agent"}, "route_to_agent": {"route_to_agent", "list_agents"},
                 # "can RealAI do X?" may legitimately be answered by an ability OR an agent; both are hive routing
@@ -35,7 +35,8 @@ ACCEPT_TOOLS = {"list_agents": {"list_agents", "route_to_agent"}, "route_to_agen
                 "memory_stats": {"memory_stats", "memory_search"},
                 "agent_pipeline_plan": {"agent_pipeline_plan", "hive_routes_status"},
                 "hive_routes_status": {"hive_routes_status", "agent_pipeline_plan"},
-                "tool_registry_lookup": {"tool_registry_lookup", "ability_lookup"}}
+                "tool_registry_lookup": {"tool_registry_lookup", "ability_lookup"},
+                "repo_search": {"repo_search"}}
 _DISC = ("8-ball", "9-ball", "10-ball", "one pocket", "pyramid")
 
 
@@ -133,6 +134,14 @@ def seeds(tool: str, rng: random.Random, n: int) -> str:
                "Never ask it to heal or promote."
     if tool == "executive_goals":
         return "Ask about the executive loop's goals: how many, which are open, which watchers run. Never ask it to act."
+    if tool == "repo_search":
+        from realai.hive_tools import repo_search as R
+
+        have = R.available(R.mirror_root())
+        return ("Each request is about ONE of Travis's own repos, named in the request: where a function/class is defined, "
+                "what a repo's README says, what is in a folder, or which repo has some code. Repos: "
+                + (", ".join(have) if have else "Rack_em_up, overseer-bot-ai, agent-tools, RealAi")
+                + ". Never ask to run, deploy, trade, edit or show secret files (.env, keys).")
     if tool == "request_approval":
         return ("Each request asks RealAI to change or run ONE concrete thing, with every detail inline: replace an exact "
                 "phrase in README.md with new text (quote both), create docs/notes-<topic>.md with given content, run a "
@@ -212,6 +221,11 @@ def fallback_questions(tool: str, n: int, rng: random.Random) -> List[str]:
         out = [f"Who in the hive should handle this: {str(a.get('description', ''))[:140]}" for a in hive_tools.agents() if a.get("description")]
     elif tool == "device_profile":
         out = ["What model and quant should you run on this PC?", "Which GPU should llama-server use on this machine?"]
+    elif tool == "repo_search":
+        from realai.hive_tools import repo_search as R
+
+        have = R.available(R.mirror_root()) or ["Rack_em_up", "overseer-bot-ai", "agent-tools"]
+        out = [t.format(r=r) for r in have for t in ("What's at the top level of my {r} repo?", "What does the README of {r} say it is?")]
     else:
         out = new_tool_templates(tool, n, rng)
     rng.shuffle(out)
@@ -290,6 +304,67 @@ def new_tool_templates(tool: str, n: int, rng: random.Random) -> List[str]:
     return list(dict.fromkeys(out))
 
 
+def load_seed_topics(paths: List[str], exclude: Optional[set] = None) -> List[str]:
+    """Topics for the teacher's questions (30B seed hook): .txt/.md lines or markdown headings, .json (list of strings,
+    or objects/dicts with title/name/topic/heading/question keys, nested), .jsonl (same keys per row). Deduplicated;
+    anything that equals a spot-check question (``exclude``, normalised) is dropped so eval prompts never leak in."""
+    from realai.training.dataset_builder.dedupe import normalize
+
+    keys = ("topic", "title", "name", "heading", "question", "instruction", "prompt", "summary")
+    out: List[str] = []
+
+    def walk(x):
+        if isinstance(x, str):
+            out.append(x)
+        elif isinstance(x, list):
+            for y in x:
+                walk(y)
+        elif isinstance(x, dict):
+            hit = [x[k] for k in keys if isinstance(x.get(k), str)]
+            if hit:
+                out.append(hit[0])
+            for v in x.values():
+                if isinstance(v, (list, dict)):
+                    walk(v)
+
+    for raw in paths:
+        p = Path(raw)
+        if not p.is_file():
+            continue
+        text = p.read_text(encoding="utf-8", errors="replace")
+        if p.suffix.lower() == ".json":
+            try:
+                walk(json.loads(text))
+            except ValueError:
+                pass
+        elif p.suffix.lower() == ".jsonl":
+            for line in text.splitlines():
+                try:
+                    walk(json.loads(line))
+                except ValueError:
+                    continue
+        else:
+            heads = [ln.lstrip("#").strip() for ln in text.splitlines() if ln.startswith("#")]
+            out += heads or [ln.strip("-* ").strip() for ln in text.splitlines() if ln.strip()]
+    ex = exclude or set()
+    seen, topics = set(), []
+    for t in out:
+        t = re.sub(r"\s+", " ", str(t)).strip()[:160]
+        k = normalize(t)
+        if len(t) < 4 or k in seen or k in ex:
+            continue
+        seen.add(k)
+        topics.append(t)
+    return topics
+
+
+def topic_focus(topics: List[str], rng: random.Random, k: int = 6) -> str:
+    if not topics:
+        return ""
+    pick = rng.sample(topics, min(k, len(topics)))
+    return "where they fit this tool, draw on these RealAI ecosystem topics: " + "; ".join(pick)
+
+
 def propose(chat, tool: str, n: int, rng: random.Random, focus: str = "", why: Optional[Counter] = None) -> List[str]:
     spec = hive_tools.SPECS[tool]["function"]
     prompt = (f"/no_think\nWrite {n} diverse, realistic user requests that RealAI should answer by calling the `{tool}` tool "
@@ -327,8 +402,12 @@ def make_row(tool: str, res: Dict[str, Any], model: str) -> Dict[str, Any]:
 
 def run(chat, model: str = "local", plan: Optional[Dict[str, int]] = None, minutes: float = 30, max_rows: int = 800,
         per_batch: int = 6, sleep: float = 0.0, seed: int = 0, judge: Optional[Callable[..., bool]] = None, propose_chat=None,
-        log: Callable[[str], None] = print) -> Dict[str, Any]:
+        log: Callable[[str], None] = print, seed_topics: Optional[List[str]] = None) -> Dict[str, Any]:
     from realai.training.dataset_builder.adapters_tools import TOOL_SYSTEM
+    from realai.training.dataset_builder.dedupe import normalize
+    from realai.training.dataset_builder.pipeline import eval_prompts
+
+    eval_qs = eval_prompts()  # spot-check questions are never generated as training rows
 
     plan = plan or {t: 1 for t in TARGETS}
     weights = [(t, w) for t, w in plan.items() if t in TARGETS and w > 0]
@@ -357,7 +436,11 @@ def run(chat, model: str = "local", plan: Optional[Dict[str, int]] = None, minut
             tool = rng.choices([t for t, _ in weights], [w for _, w in weights])[0]
             st = stats.setdefault(tool, Counter())
             why: Counter = Counter()
-            qs = propose(propose_chat or chat, tool, per_batch, rng, why=why)
+            qs = propose(propose_chat or chat, tool, per_batch, rng, focus=topic_focus(seed_topics or [], rng), why=why)
+            n_q = len(qs)
+            qs = [q for q in qs if normalize(q) not in eval_qs]
+            if len(qs) < n_q:
+                st["eval_prompt_skipped"] += n_q - len(qs)
             st.update({"propose_" + k: v for k, v in why.items() if v})
             st["proposed"] += len(qs)
             if not qs:
@@ -401,7 +484,7 @@ def run(chat, model: str = "local", plan: Optional[Dict[str, int]] = None, minut
             eng.quit()
     summary = {"stamp": stamp, "accepted": accepted, "per_tool": {k: dict(v) for k, v in stats.items()},
                "reject_reasons": dict(reasons), "accepted_file": str(ok_p), "rejects_file": str(rej_p), "teacher": model,
-               "plan": plan}
+               "plan": plan, "seed_topics": len(seed_topics or [])}
     (out_dir() / f"summary-{stamp}.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     return summary
 
