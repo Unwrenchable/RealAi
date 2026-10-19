@@ -23,6 +23,11 @@ Guarantees
     status/TTL (60-120 s from the approval)/hash/caps/kill switch, re-quotes and aborts on drift, then applies all of
     its own live gates (profile, trading.live, risk engine, DEX guards, pre-flight). Free-form commands, raw sends,
     transfers and key access stay refused/pending exactly as before.
+  * trade_session (AI auto trading) arms ONE bounded live-auto session of the CLI's AI mode: per-trade max, session
+    budget, max open positions, hours, chain=solana, profile=power, all within hard caps. Executing it runs nothing
+    and does not consume it: the CLI arms it itself (``realai ai start --mode live-auto --live --realai-session <id>``,
+    read-only store access, within arm_ttl_s of the approval, once). Inside that session the AI enters without a
+    per-trade card; exits of AI-opened positions (swap back to SOL/USDC in the same wallet) never need a card.
 
 Env: REALAI_APPROVALS_STORE / APPROVALS_STORE (store path; default from realai.core.approvals_config), REALAI_APPROVALS_AUDIT (audit path),
 REALAI_WORKSPACE / REALAI_HOME (workspace root).
@@ -42,7 +47,8 @@ from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 ACTIONS = ("search_replace", "write_file", "run_terminal_command", "run_script", "auto_wire", "self_heal_promote",
-           "self_heal_curated_promote", "self_heal_deep_promote", "self_extend", "self_repair", "trade_execute")
+           "self_heal_curated_promote", "self_heal_deep_promote", "self_extend", "self_repair", "trade_execute",
+           "trade_session")
 EXEC_TIMEOUT_S = 300
 MONEY = re.compile(r"(send[_ -]?(sol|transaction|tx|funds|payment)|sign[_ -]?and[_ -]?send|transfer[_ -]?(sol|token|funds)|"
                    r"spl-token\s+transfer|solana\s+transfer|stripe|payout|release[_ -]?payment|private[_ -]?key|"
@@ -283,6 +289,107 @@ def _preview_trade(args: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]
                                   f"{ttl}s of approving; the CLI re-quotes and aborts if the price moved."}
 
 
+# ----------------------------------------------------------------------------- AI auto trading (trade_session)
+SESSION_KEYS = ("per_trade_usd", "budget_usd", "max_open", "hours", "chain", "profile", "wallet", "reason")
+
+
+def session_limits() -> Dict[str, float]:
+    """Hard ceilings for one AI trading session (the CLI clamps to its own caps too; the lower one wins)."""
+    def f(name: str, default: float) -> float:
+        try:
+            return float(os.environ.get(name, default))
+        except ValueError:
+            return default
+    return {"max_per_trade_usd": trade_limits()["max_usd"], "max_budget_usd": f("REALAI_TRADE_MAX_SESSION_USD", 15.0),
+            "max_open": f("REALAI_TRADE_MAX_OPEN", 3.0), "max_hours": f("REALAI_TRADE_MAX_SESSION_HOURS", 24.0),
+            "arm_ttl_s": max(60.0, min(3600.0, f("REALAI_TRADE_SESSION_ARM_TTL_S", 900.0)))}
+
+
+def _num(v: Any) -> Any:
+    """JSON number in the form JavaScript prints it (5.0 -> 5) so the CLI's canonical hash matches."""
+    x = round(float(v), 6)
+    return int(x) if x == int(x) else x
+
+
+def canonical(v: Any) -> str:
+    """Same canonical JSON as the CLI (core/realai-ticket.js canonical()): sorted keys, no spaces, None keys dropped."""
+    if isinstance(v, dict):
+        return "{" + ",".join(json.dumps(k) + ":" + canonical(v[k]) for k in sorted(v) if v[k] is not None) + "}"
+    if isinstance(v, list):
+        return "[" + ",".join(canonical(x) for x in v) + "]"
+    if isinstance(v, bool) or v is None:
+        return json.dumps(v)
+    if isinstance(v, (int, float)):
+        return json.dumps(_num(v))
+    return json.dumps(v, ensure_ascii=False)
+
+
+def _preview_trade_session(args: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    extra = sorted(k for k in args if k not in SESSION_KEYS)
+    if extra:
+        raise Refused(f"trade_session takes only {', '.join(SESSION_KEYS[:-1])}; got {', '.join(extra)}")
+    if not trade_mode_enabled():
+        raise Refused("trade mode is off (REALAI_TRADE_MODE=1 enables trade cards)")
+    if trade_kill_file().exists():
+        raise Refused("kill switch is set: no trade cards")
+    lim = session_limits()
+    problems: List[str] = []
+
+    def num(k: str) -> float:
+        try:
+            x = float(args.get(k))
+        except (TypeError, ValueError):
+            problems.append(f"{k} must be a number")
+            return 0.0
+        if not x > 0:
+            problems.append(f"{k} must be > 0")
+        return x
+    per, budget, max_open, hours = num("per_trade_usd"), num("budget_usd"), num("max_open"), num("hours")
+    chain = str(args.get("chain") or "solana").strip().lower()
+    profile = str(args.get("profile") or "power").strip().lower()
+    wallet = str(args.get("wallet") or "").strip()
+    if per > lim["max_per_trade_usd"]:
+        problems.append(f"per_trade_usd {per:g} > hard cap {lim['max_per_trade_usd']:g}")
+    if budget > lim["max_budget_usd"]:
+        problems.append(f"budget_usd {budget:g} > hard cap {lim['max_budget_usd']:g}")
+    if 0 < budget < per:
+        problems.append("budget_usd must be >= per_trade_usd")
+    if max_open != int(max_open) or max_open > lim["max_open"]:
+        problems.append(f"max_open must be a whole number <= {lim['max_open']:g}")
+    if hours > lim["max_hours"]:
+        problems.append(f"hours {hours:g} > hard cap {lim['max_hours']:g}")
+    if chain not in TRADE_CHAINS:
+        problems.append(f"chain {chain} not allowed (Solana only)")
+    if profile != "power":
+        problems.append("profile must be power (the only profile in which the AI may trade live)")
+    if wallet and not re.match(r"^[A-Za-z0-9_.-]{1,40}$", wallet):
+        problems.append("wallet must be the bot wallet's configured NAME")
+    if problems:
+        raise Refused("trade session refused: " + "; ".join(dict.fromkeys(problems)))
+    session = {"v": 1, "kind": "trade_session", "perTradeUsd": _num(per), "budgetUsd": _num(budget), "maxOpen": int(max_open),
+               "hours": _num(hours), "chain": chain, "profile": profile}
+    if wallet:
+        session["wallet"] = wallet
+    norm = {"per_trade_usd": session["perTradeUsd"], "budget_usd": session["budgetUsd"], "max_open": session["maxOpen"],
+            "hours": session["hours"], "chain": chain, "profile": profile, **({"wallet": wallet} if wallet else {})}
+    ttl = int(lim["arm_ttl_s"])
+    summary = (f"AI auto trading session on {chain}: up to ${session['perTradeUsd']} per entry, ${session['budgetUsd']} total, "
+               f"max {session['maxOpen']} open, {session['hours']} h, profile {profile}, bot wallet only. Exits of AI positions "
+               "(swap back to SOL/USDC in the same wallet) are always allowed; transfers to other addresses never.")
+    return norm, {"kind": "trade_session", "summary": summary, "session": session,
+                  "preview_hash": hashlib.sha256(canonical(session).encode()).hexdigest(), "arm_ttl_s": ttl,
+                  "note": f"LIVE autonomous trading with real funds once armed. Arm within {ttl}s of approving: "
+                          "realai ai start --mode live-auto --live --realai-session <approval_id> (one card = one session)."}
+
+
+def _run_trade_session(req_id: str, item: Dict[str, Any], prev: Dict[str, Any]) -> Dict[str, Any]:
+    ttl = int(prev.get("arm_ttl_s") or 900)
+    age = time.time() - float(item.get("decided_at") or 0)
+    return {"ok": age <= ttl, "armed": False, "approval_id": req_id, "arm_ttl_s": ttl, "age_s": int(age),
+            "note": ("approved: arm it in the terminal with realai ai start --mode live-auto --live --realai-session "
+                     f"{req_id}") if age <= ttl else f"arm window expired ({int(age)}s > {ttl}s); file a new trade_session card"}
+
+
 def _run_trade(req_id: str, item: Dict[str, Any], norm: Dict[str, Any], prev: Dict[str, Any]) -> Dict[str, Any]:
     from realai.hive_tools import trade as _trade
 
@@ -310,7 +417,7 @@ def _run_trade(req_id: str, item: Dict[str, Any], norm: Dict[str, Any], prev: Di
 
 PREVIEW: Dict[str, Callable[[Dict[str, Any]], Tuple[Dict[str, Any], Dict[str, Any]]]] = {
     "search_replace": _preview_edit, "write_file": _preview_write, "run_terminal_command": _preview_command,
-    "run_script": _preview_script, "trade_execute": _preview_trade}
+    "run_script": _preview_script, "trade_execute": _preview_trade, "trade_session": _preview_trade_session}
 
 
 def preview(action: str, args: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
@@ -462,6 +569,14 @@ def execute(req_id: str, *, executor: str = "human") -> Dict[str, Any]:
         return {"ok": False, "error": f"not approved (status={item.get('status')})"}
     pl = item["payload"]
     action, norm, prev = pl["gate"], pl["args"], pl["preview"]
+    if action == "trade_session":
+        # nothing runs here and the card is NOT marked executed: the CLI arms (and consumes) it itself, read-only
+        if _sha(prev) != pl.get("preview_sha"):
+            audit("refused_execute", id=req_id, reason="preview hash mismatch")
+            return {"ok": False, "error": "preview hash mismatch"}
+        res = _run_trade_session(req_id, item, prev)
+        audit("session_arm_info", id=req_id, ok=res["ok"])
+        return {"ok": res["ok"], "approval_id": req_id, "action": action, "result": res}
     try:
         if _sha(prev) != pl.get("preview_sha"):
             raise Refused("preview hash mismatch")

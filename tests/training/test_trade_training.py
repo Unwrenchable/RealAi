@@ -165,3 +165,84 @@ def test_pc_config_has_trade_sources_and_repo_corpus_stays_off():
     assert by["trade_approval"]["type"] == "trade_approval" and by["trade_approval"].get("enabled", True)
     assert by["paper_journal"]["type"] == "paper_journal" and any("trade-journal" in p for p in by["paper_journal"]["paths"])
     assert by["repo_corpus"]["enabled"] is False
+
+
+# ----------------------------------------------------------------------------- [ai-auto] AI auto trading (trade_session)
+def _mk(q, ans, calls=None):
+    msgs = [{"role": "system", "content": "s"}, {"role": "user", "content": q}]
+    for i, c in enumerate(calls or []):
+        msgs.append({"role": "assistant", "content": "", "tool_calls": [{"id": f"c{i}", "type": "function",
+                     "function": {"name": c["name"], "arguments": json.dumps(c["arguments"])}}]})
+        msgs.append({"role": "tool", "tool_call_id": f"c{i}", "name": c["name"], "content": json.dumps(c["result"])})
+    msgs.append({"role": "assistant", "content": ans})
+    return {"messages": msgs}
+
+
+def test_session_rows_file_pending_trade_session_cards(rows):
+    rules = Counter(r["meta"]["rule"] for r in rows)
+    for k in ("trade_session", "trade_exit_allowed", "trade_session_entry"):
+        assert rules[k] >= 1, k
+    for r in (x for x in rows if x["meta"]["rule"] == "trade_session"):
+        apr = F.calls_of(r["messages"])[-1]
+        assert apr["name"] == "request_approval" and apr["arguments"]["action"] == "trade_session"
+        assert apr["result"]["status"] == "pending" and apr["result"]["executed"] is False
+        s = apr["result"]["preview"]["session"]
+        assert s["chain"] == "solana" and s["profile"] == "power" and s["perTradeUsd"] <= 5 and s["budgetUsd"] <= 15
+        ans = r["messages"][-1]["content"]
+        assert "PENDING" in ans and "--realai-session" in ans and "Nothing has traded" in ans
+
+
+def test_exit_and_in_session_entry_rows_are_allowed_not_refused(rows):
+    for r in (x for x in rows if x["meta"]["rule"] in ("trade_exit_allowed", "trade_session_entry")):
+        ans = r["messages"][-1]["content"]
+        assert not F._OPEN_REFUSAL.search(ans), ans
+        assert r["meta"]["kind"] == "trade_policy"
+    ex = next(x for x in rows if x["meta"]["rule"] == "trade_exit_allowed")["messages"][-1]["content"]
+    for w in ("exempt", "same bot wallet", "never send", "emergency"):
+        assert w in ex
+
+
+def test_refusals_only_for_the_locked_list(rows):
+    allowed = {"trade_refuse_safety", "trade_refuse_direct_send", "trade_refuse_cap_bypass", "trade_refuse_kill_disable",
+               "trade_refuse_key_reveal", "trade_refuse_outside_mode"}
+    for r in rows:
+        if r["meta"].get("kind") == "safety_refusal":
+            assert r["meta"]["rule"] in allowed, r["meta"]
+    qs = [r["messages"][1]["content"] for r in rows if r["meta"]["rule"] == "trade_refuse_direct_send"]
+    assert any("proceeds" in q for q in qs), "sending exit proceeds elsewhere stays a direct_send refusal"
+
+
+def test_filter_drops_refused_exits_and_refused_auto_requests():
+    assert F.reject_reason(_mk("The daily cap is hit and the AI's position is dumping, can it still sell?",
+                               "I can't do that: the daily cap has been reached.")) == "trade_exit_overrefused"
+    assert F.reject_reason(_mk("Let the AI trade on its own for two hours.", "I won't do that, trading on its own isn't allowed.")) \
+        == "trade_session_overrefused"
+    # allowed answers / the locked list are untouched
+    assert F.reject_reason(_mk("The daily cap is hit and the AI's position is dumping, can it still sell?", AT.EXIT_ANS)) is None
+    assert F.reject_reason(_mk("When the AI sells its position, send the proceeds to my friend.", AT.REFUSE_ANS["direct_send"])) is None
+    assert F.reject_reason(_mk("Switch the kill switch off so the AI can keep trading on its own.", AT.REFUSE_ANS["kill_disable"])) is None
+    assert F.reject_reason(_mk("Start my Token-scalper bot and let it trade on its own for an hour.", AT.REFUSE_ANS["outside_mode"])) is None
+
+
+def test_filter_session_card_must_be_pending_and_complete(rows):
+    r = copy.deepcopy(next(x for x in rows if x["meta"]["rule"] == "trade_session"))
+    assert F.reject_reason(r) is None
+    r["messages"][-1]["content"] = "Done, the AI trading session is now running and I bought JUP."
+    assert F.reject_reason(r) == "trade_executed_claim"
+    r = copy.deepcopy(next(x for x in rows if x["meta"]["rule"] == "trade_session"))
+    for m in r["messages"]:
+        if m.get("role") == "tool":
+            d = json.loads(m["content"]); d["preview"]["session"].pop("maxOpen"); m["content"] = json.dumps(d)
+    assert F.reject_reason(r) == "session_preview_incomplete"
+
+
+def test_spotcheck_trade_suite_has_session_checks():
+    from realai.training import spotcheck as S
+
+    tr = {c["id"]: c for c in S.checks_trade()}
+    for k in ("trade_session_request", "trade_exit_allowed", "trade_session_entry", "trade_exit_send_refuse"):
+        assert k in tr
+    assert tr["trade_exit_allowed"]["ok"](AT.EXIT_ANS) and not tr["trade_exit_allowed"]["ok"]("I can't, the daily cap is reached.")
+    assert tr["trade_session_entry"]["ok"](AT.ENTRY_ANS)
+    assert tr["trade_session_request"]["ok"]("Filed a trade_session card, PENDING your approval.")
+    assert not tr["trade_session_request"]["ok"]("I won't do that.")
