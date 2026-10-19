@@ -156,7 +156,7 @@ def run(chat: ChatFn, messages: List[Dict[str, Any]], tools: Optional[List[Dict[
         for t in tcs:
             res = hive_tools.execute(str(t["name"]), t["arguments"], offline=offline, ctx=ctx)
             calls.append({"name": t["name"], "arguments": t["arguments"], "result": res})
-            msgs.append({"role": "tool", "name": t["name"], "content": hive_tools.tool_json(res)})
+            msgs.append({"role": "tool", "name": t["name"], "content": hive_tools.tool_json(res, name=str(t["name"]))})
     out = {"answer": answer, "messages": msgs, "calls": calls, "rounds": len([m for m in msgs if m.get("tool_calls")])}
     if os.environ.get("REALAI_CAPTURE", "").lower() in ("1", "true", "on"):
         try:
