@@ -1,4 +1,4 @@
-"""python -m realai.training.self_data {generate,verify-traffic,improve,export-shots,stats}"""
+"""python -m realai.training.self_data {generate,filter,verify-traffic,improve,export-shots}"""
 from __future__ import annotations
 
 import argparse
@@ -23,6 +23,14 @@ def main(argv=None) -> int:
     g.add_argument("--shot-catalog")
     g.add_argument("--seed", type=int, default=0)
     g.add_argument("--exec-max-tokens", type=int, default=900, help="executor max_tokens (tool-call JSON with inline data needs room)")
+    g.add_argument("--seed-topics", nargs="*", default=[], help="topic files (.json/.jsonl/.md/.txt, e.g. ecosystem_index.json, "
+                   "README headings) that steer the teacher's questions; spot-check questions are filtered out")
+    f = sub.add_parser("filter", help="filter v2: drop failed-tool / bad-payload / ungrounded repo_search / money-approval rows")
+    f.add_argument("paths", nargs="+", help="hive_selfplay jsonl files (globs ok)")
+    f.add_argument("--teacher-prefix", default="", help="only files whose rows come from this teacher (e.g. qwen3-30b-a3b)")
+    f.add_argument("--archive", help="copy each raw file here first (e.g. D:\\ARCHIVE\\<run>\\gen-raw)")
+    f.add_argument("--recompute", action="store_true", help="re-run repo_search against the current mirror (drop stale rows)")
+    f.add_argument("--write", action="store_true", help="rewrite the files (raw kept as .jsonl.raw / .pre-v3); default: report only")
     sub.add_parser("verify-traffic", help="captured real traffic -> verifier -> hive_selfplay")
     i = sub.add_parser("improve", help="spot-check + self-play failures -> plan + report")
     i.add_argument("--spotcheck")
@@ -31,6 +39,13 @@ def main(argv=None) -> int:
     a = ap.parse_args(argv)
 
     from . import generate as gen
+
+    if a.cmd == "filter":
+        from .filter import filter_files
+
+        rep = filter_files(a.paths, teacher_prefix=a.teacher_prefix, archive=a.archive, recompute=a.recompute, write=a.write)
+        print(json.dumps(rep, indent=1))
+        return 0
 
     if a.cmd == "export-shots":
         from realai.training.dataset_builder.adapters import load_shot_catalog
@@ -78,8 +93,15 @@ def main(argv=None) -> int:
         from .verify import llm_judge
 
         judge = llm_judge(tool_loop.http_chat(a.base_url, a.model, temperature=0.0, max_tokens=8))
+    topics = []
+    if a.seed_topics:
+        from realai.training.dataset_builder.pipeline import eval_prompts
+
+        topics = gen.load_seed_topics(a.seed_topics, exclude=eval_prompts())
+        print(f"seed topics: {len(topics)} from {len(a.seed_topics)} file(s)", flush=True)
     s = gen.run(chat, model=f"{a.model}@{a.base_url}", plan=plan, minutes=a.minutes, max_rows=a.max_rows,
-                per_batch=a.per_batch, sleep=a.sleep, seed=a.seed, judge=judge, propose_chat=propose_chat, log=lambda m: print(m, flush=True))
+                per_batch=a.per_batch, sleep=a.sleep, seed=a.seed, judge=judge, propose_chat=propose_chat, log=lambda m: print(m, flush=True),
+                seed_topics=topics)
     print(json.dumps(s, indent=1))
     return 0
 

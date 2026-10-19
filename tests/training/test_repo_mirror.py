@@ -8,7 +8,19 @@ import subprocess
 
 import pytest
 
-from tools import repo_mirror as M
+def _load():
+    """Load by path: some suites put realai/ first on sys.path, where realai/tools.py shadows the top-level tools package."""
+    import importlib.util
+    from pathlib import Path
+
+    p = Path(__file__).resolve().parents[2] / "tools" / "repo_mirror.py"
+    spec = importlib.util.spec_from_file_location("repo_mirror_under_test", p)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+M = _load()
 
 FAKE_TOKEN = "ghp_" + "Z9" * 18  # runtime-built github_token look-alike (not a credential)
 

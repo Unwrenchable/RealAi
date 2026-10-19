@@ -6,7 +6,9 @@ Programmatic checks (no model needed):
   * numbers: every number in the answer appears in the tool output or the question,
   * shots: a quoted route must match the catalogue route text,
   * agents: the answer names the agent that received the handoff,
-  * abilities: the answer's ability id and status match the catalog.
+  * abilities: the answer's ability id and status match the catalog,
+  * repo_search: every file path the answer cites appears in the repo_search output (or the question), and the
+    answer never repeats a redaction marker.
 Optional LLM judge (``judge`` callable returning True/False) runs last.
 """
 from __future__ import annotations
@@ -132,6 +134,14 @@ def verify(messages: List[Dict[str, Any]], calls: List[Dict[str, Any]], judge: O
                 reasons.append("ability_not_named")
             elif named and not any(str(m.get("status", "")).lower() in low for m in named if m.get("status")):
                 reasons.append("ability_status_missing")
+        elif name == "repo_search":
+            from realai.hive_tools.repo_search import ungrounded_citations
+
+            bad_p = ungrounded_citations(ans, [x["result"] for x in calls if x.get("name") == "repo_search"], question)
+            if bad_p:
+                reasons.append("repo_search_ungrounded_path:" + ",".join(bad_p[:4]))
+            if "<redacted" in ans.lower():
+                reasons.append("repo_search_redaction_in_answer")
     reasons += recompute_check(ok_calls, ans)
     if not reasons and judge is not None:
         try:

@@ -87,7 +87,11 @@ def _root(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Optional[Path]:
 def _call(name: str, args: Dict[str, Any], root: Path) -> Dict[str, Any]:
     from realai.hive_tools import execute
 
-    return {"name": name, "arguments": args, "result": execute(name, args, offline=True, ctx={"repo_mirror": str(root)})}
+    res = execute(name, args, offline=True, ctx={"repo_mirror": str(root)})
+    if name == "repo_search" and res.get("redacted"):
+        # never train on redaction markers: treat a redacted result as unusable (rows built on it are skipped)
+        res = {"ok": False, "error": "redacted content skipped for training"}
+    return {"name": name, "arguments": args, "result": res}
 
 
 def _symbols(root: Path, repo: str, limit_files: int = 600) -> List[Dict[str, Any]]:
