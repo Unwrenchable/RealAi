@@ -23,14 +23,53 @@ def _h(s: str) -> int:
     return int(hashlib.sha1(s.encode()).hexdigest()[:8], 16)
 
 
-def tool_subset(right: List[str], key: str, k: int = 4) -> List[str]:
-    """The right tool(s) + seeded distractors, so the model learns to choose (keeps rows short)."""
+# Look-alike tools the model confuses when it sees the full live catalog (spotcheck 2026-10-18: pyramid -> hall_context,
+# rating_convert/league -> rating_update_preview, agents -> web_search/tool_registry_lookup, hive role -> route_to_agent).
+# Rows show these as distractors first, so a 4-tool row still teaches the hard choice.
+CONFUSABLE: Dict[str, List[str]] = {
+    "rackup_invoke": ["hall_context", "rating_update_preview", "rating_intel", "game_rules", "payout_check", "tool_registry_lookup"],
+    "hall_context": ["rackup_invoke", "game_rules"],
+    "game_rules": ["rackup_invoke", "hall_context"],
+    "rating_update_preview": ["rackup_invoke", "rating_intel"],
+    "rating_intel": ["rating_update_preview", "rackup_invoke"],
+    "route_to_agent": ["list_agents", "web_search", "tool_registry_lookup", "hive_routes_status", "agent_pipeline_plan"],
+    "list_agents": ["route_to_agent", "web_search", "tool_registry_lookup", "plugin_lookup"],
+    "ability_lookup": ["rackup_invoke", "tool_registry_lookup", "module_lookup", "plugin_lookup"],
+    "tool_registry_lookup": ["ability_lookup", "rackup_invoke", "plugin_registry_list"],
+    "hive_routes_status": ["route_to_agent", "agent_pipeline_plan", "organs_hive_status"],
+    "agent_pipeline_plan": ["hive_routes_status", "route_to_agent"],
+    "device_profile": ["hive_routes_status", "self_heal_status", "web_search"],
+    "payout_check": ["rackup_invoke", "solana_read", "request_approval"],
+    "approval_status": ["request_approval", "self_heal_status"],
+    "request_approval": ["approval_status", "solana_read"],
+    "solana_read": ["payout_check", "request_approval"],
+    "shot_lookup": ["coach_drill", "game_rules"],
+    "coach_drill": ["shot_lookup", "matchmaking_suggest"],
+    "math_solver": ["data_analysis"],
+    "data_analysis": ["math_solver"],
+    "memory_search": ["memory_stats"],
+    "memory_stats": ["memory_search"],
+    "plugin_lookup": ["plugin_registry_list", "module_lookup"],
+    "plugin_registry_list": ["plugin_lookup"],
+    "module_lookup": ["plugin_lookup", "ability_lookup"],
+}
+
+
+def tool_subset(right: List[str], key: str, k: int = 4, hard: int = 2) -> List[str]:
+    """The right tool(s) + seeded distractors, so the model learns to choose (keeps rows short).
+    Up to `hard` distractors come from the right tools' look-alikes (CONFUSABLE), the rest are random."""
     from realai.hive_tools import SPECS
 
     rng = random.Random(_h(key))
-    others = [n for n in SPECS if n not in right]
+    right = [n for n in dict.fromkeys(right)]
+    slots = max(0, k - len(right))
+    near = [n for r in right for n in CONFUSABLE.get(r, []) if n in SPECS and n not in right]
+    near = list(dict.fromkeys(near))
+    rng.shuffle(near)
+    picked = near[: min(hard, slots)]
+    others = [n for n in SPECS if n not in right and n not in picked]
     rng.shuffle(others)
-    names = list(dict.fromkeys(right)) + others[: max(0, k - len(set(right)))]
+    names = right + picked + others[: slots - len(picked)]
     rng.shuffle(names)
     return names
 
@@ -293,42 +332,113 @@ def _league_rows(spec, ctx) -> Iterator[Row]:
         yield tool_row(q, [c], ans, key=f"league{i}", meta={"rule": "league_validate"})
 
 
-# money/trade requests: RealAI never moves funds (money paths are locked); offer the read-only tools instead
-_MONEY_ASKS = ["Send {n} SOL from my wallet to my friend right now.", "Transfer {n} USDC to {who}'s wallet.",
-               "Release the league payouts to {a} and {b} now.", "Pay out the tournament winnings to {a}.",
-               "Send {n} SOL to my other wallet right now.", "Swap {n} SOL for USDC for me.",
-               "Buy {n} SOL worth of BONK on my account.", "Tip {who} {n} SOL from the RackUp treasury.",
-               "Withdraw {n} USDC from the league pot to my wallet.", "Approve and send the payout to {a} immediately."]
-_MONEY_ANSWERS = [
-    "I can't do that: RealAI never sends, transfers, trades or releases money. Those paths are locked, and no approval "
-    "unlocks them from chat. I can check things read-only instead, for example audit the payouts against the standings "
-    "with payout_check or look up a balance with solana_read.",
-    "I won't move funds. Sending, swapping or paying out is locked in RealAI, by design. If you want, I can verify the "
-    "amounts first (payout_check for league payouts, solana_read for a read-only wallet lookup). The transfer itself has "
-    "to be done by you in your own wallet.",
-    "I cannot send or release money. RealAI's money paths are locked and read-only, and there is no approval request for "
-    "this. I can audit it (payout_check) or show balances (solana_read), but the payment has to come from you."]
+# money/trade/approval requests: RealAI never moves funds or approves for the user. The rows check first with the read-only
+# tool the live suite expects (payout_check for payouts, approval_status for "approve it", request_approval for a send,
+# which the gate refuses), then refuse; one in three refuses without a tool call.
+_SEND_ASKS = [("Send {n} SOL from my wallet to my friend right now.", "send_sol"), ("Transfer {n} USDC to {who}'s wallet.", "transfer_usdc"),
+              ("Send {n} SOL to my backup wallet now.", "send_sol"), ("Swap {n} SOL for USDC for me.", "swap_tokens"),
+              ("Buy {n} SOL worth of BONK on my account.", "buy_token"), ("Tip {who} {n} SOL from the RackUp treasury.", "send_sol"),
+              ("Move {n} SOL into my trading account right away.", "send_sol")]
+_PAYOUT_ASKS = ["Release the payouts to {a} and {b} right now.", "Pay out tonight's league winnings to {a} and {b}.",
+                "Send the tournament prize money to {a} and {b}.", "Go ahead and release {a}'s and {b}'s payouts.",
+                "Withdraw the league pot and pay {a} and {b}."]
+_APPROVE_ASKS = ["Approve everything in my approval queue.", "Just approve the pending requests for me.",
+                 "Mark all my approval requests as approved.", "Approve the latest write request yourself.",
+                 "Can you auto-approve whatever is waiting?"]
+_SEND_REFUSE = ["I can't do that: RealAI never sends, transfers, swaps or buys anything. Money paths are locked, and the approval "
+                "gate refused this action (not filed). I can look things up read-only (solana_read for a balance, payout_check to audit "
+                "payouts); the transfer itself has to come from you, in your own wallet.",
+                "I won't move funds. That action is locked in RealAI by design, and request_approval refused it: nothing was filed and no money moved. "
+                "If it helps, I can check a balance read-only or audit payouts first."]
+_SEND_PLAIN = "I can't send or move money. RealAI's money paths are locked and read-only; no approval unlocks them from chat. " \
+              "I can check a balance (solana_read) or audit payouts (payout_check) instead."
 
 
 def _safety_rows(spec, ctx) -> Iterator[Row]:
-    """Refusals for money/trade requests: no tool call, read-only alternatives named."""
     from realai.hive_tools import specs
 
     names, amounts, who = [("Ana", "Ben"), ("Cole", "Dee"), ("Eli", "Faye")], [0.5, 2, 5, 25], ["Sam", "Jo", "Kai"]
-    for i, tmpl in enumerate(_MONEY_ASKS):
+    for i, (tmpl, action) in enumerate(_SEND_ASKS):
+        for j in range(3):
+            q = tmpl.format(n=amounts[(i + j) % 4], who=who[(i * 2 + j) % 3])
+            key = f"safety-send{i}-{j}"
+            if j == 2:
+                yield {"messages": [{"role": "system", "content": TOOL_SYSTEM}, {"role": "user", "content": q},
+                                    {"role": "assistant", "content": _SEND_PLAIN}],
+                       "tools": specs(tool_subset(["request_approval", "solana_read", "payout_check"], key)),
+                       "meta": {"kind": "safety_refusal", "rule": "money_locked"}}
+                continue
+            c = _call("request_approval", {"action": action, "reason": q})
+            if c["result"].get("executed") or c["result"].get("status") != "refused":
+                continue  # only rows where the gate really refused
+            yield tool_row(q, [c], _SEND_REFUSE[(i + j) % 2], key=key, meta={"kind": "safety_refusal", "rule": "money_locked"})
+    for i, tmpl in enumerate(_PAYOUT_ASKS):
         for j in range(3):
             a, b = names[(i + j) % 3]
-            q = tmpl.format(n=amounts[(i + j) % 4], who=who[(i * 2 + j) % 3], a=a, b=b)
-            key = f"safety{i}-{j}"
-            yield {"messages": [{"role": "system", "content": TOOL_SYSTEM}, {"role": "user", "content": q},
-                                {"role": "assistant", "content": _MONEY_ANSWERS[(i + j) % len(_MONEY_ANSWERS)]}],
-                   "tools": specs(tool_subset(["payout_check", "solana_read", "request_approval"], key)),
-                   "meta": {"kind": "safety_refusal", "rule": "money_locked"}}
+            q = tmpl.format(a=a, b=b)
+            if j == 2:  # amounts given: audit passes, still no release
+                q += f" Standings: {a} 1st, {b} 2nd. Payouts: {a} $120, {b} $60."
+                c = _call("payout_check", {"standings": [a, b], "payouts": [{"player": a, "amount": 120}, {"player": b, "amount": 60}]})
+                summ = c["result"].get("summary") or "audit done"
+                ans = (f"payout_check: {summ} But I can't release payouts: RealAI only audits, it never moves money. RackUp releases "
+                       f"payouts after a human signs off.")
+            else:
+                c = _call("payout_check", {"standings": [a, b], "payouts": []})
+                ans = ("I can't release payouts: RealAI only audits them (payout_check), it never pays anyone. RackUp releases payouts "
+                       "after a human approves. Send me the final standings and each payout (player, amount) and I'll check they line up.")
+            yield tool_row(q, [c], ans, key=f"safety-pay{i}-{j}", meta={"kind": "safety_refusal", "rule": "payout_release"})
+    for i, q in enumerate(_APPROVE_ASKS):
+        c = _call("approval_status", {})
+        r = c["result"]
+        n = r.get("total", len(r.get("items") or []))
+        ans = (f"I can't approve requests for you: approving happens only in the approval UI, by you. approval_status shows "
+               f"{n} pending request{'s' if n != 1 else ''}" + (", so there is nothing waiting." if not n else "; open the approval UI to review them."))
+        yield tool_row(q, [c], ans, key=f"safety-appr{i}", meta={"kind": "safety_refusal", "rule": "approve_self"})
+
+
+def _hive_meta_rows(spec, ctx) -> Iterator[Row]:
+    """hive_routes_status (role -> model), tool_registry_lookup (is there a tool + status), ability_lookup (is an ability live)."""
+    hr = _call("hive_routes_status", {})
+    roles = (hr["result"].get("role_models") or {}) if hr["result"].get("ok") else {}
+    qs = ["What model runs the {r} role in the hive?", "Which LLM is assigned to the {r} hive role?", "Hive check: what's the {r} role running on?"]
+    for role, model in sorted(roles.items()):
+        for i, q in enumerate(qs):
+            c = _call("hive_routes_status", {"role": role})
+            m = (c["result"].get("role_models") or {}).get(role) or c["result"].get("role_model") or model
+            yield tool_row(q.format(r=role), [c], f"hive_routes_status: the {role} role uses `{m}`.", key=f"hr{role}{i}",
+                           meta={"rule": "hive_role_model"})
+    for i, (term, q) in enumerate([("ledger audit", "Is there a ledger audit tool, and is it live?"),
+                                   ("ledger", "What's the status of your ledger tooling?"),
+                                   ("payout sanity", "Do you have a payout sanity checker? Status?"),
+                                   ("money anomaly", "Is the money anomaly detector available?"),
+                                   ("league validate", "Do you have something to validate league submissions, and is it on?"),
+                                   ("pyramid rules", "Is there a pyramid rules tool in your registry?"),
+                                   ("rating convert", "Do you have a rating conversion tool, what's its status?"),
+                                   ("shot", "Which shot tools are registered?")]):
+        c = _call("tool_registry_lookup", {"query": term})
+        tools = c["result"].get("tools") or []
+        if not tools:
+            continue
+        t = tools[0]
+        st = str(t.get("status") or "unknown").lower()
+        desc = str(t.get("description") or "").split("]", 1)[-1].strip()[:140]
+        yield tool_row(q, [c], f"Yes: `{t['id']}` is {st}. {desc}", key=f"reg{i}", meta={"rule": "registry"})
+    from realai.hive_tools import abilities
+
+    for i, ab in enumerate(sorted(abilities(), key=lambda x: x["id"])[:40]):
+        name = ab.get("name") or ab["id"].replace("_", " ")
+        q = ["Is the {n} ability available right now?", "What's the status of your {n} ability?", "Can I use {n} today?"][i % 3].format(n=name)
+        c = _call("ability_lookup", {"query": name})
+        m = next((x for x in c["result"].get("matches") or [] if x.get("id") == ab["id"]), None)
+        if not m:
+            continue
+        yield tool_row(q, [c], f"ability_lookup: {m['id']} ({m.get('name', name)}) is {str(m.get('status', '')).upper()}. "
+                               f"Call path: {m.get('live_path', 'n/a')}.", key=f"abst{ab['id']}", meta={"rule": "ability_status"})
 
 
 TOOL_KINDS = {"chess": _chess_rows, "pyramid": _pyramid_rows, "rating": _rating_rows, "shots": _shot_rows,
               "device": _device_rows, "math": _math_rows, "data": _data_rows, "abilities": _ability_rows, "agents": _agent_rows,
-              "league": _league_rows, "safety": _safety_rows}
+              "league": _league_rows, "safety": _safety_rows, "hive_meta": _hive_meta_rows}
 
 
 @adapter("tool_calls")
@@ -400,6 +510,9 @@ def hive_selfplay_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterator[
     # optional "teachers" / "exclude_teachers": split rows by the model that wrote them (e.g. a separate source
     # for one generator so the mix can cap the rest without dropping its rows)
     only, skip = set(spec.get("teachers") or []), set(spec.get("exclude_teachers") or [])
+    # optional "resubset_tools": rebuild each tool row's tool list with the current tool_subset (hard distractors)
+    resub = bool(spec.get("resubset_tools"))
+    from realai.hive_tools import specs
     for path in _resolve(spec.get("paths", ["{realai}/datasets/_sources/hive_selfplay/*.jsonl"]), ctx["roots"]):
         for line in path.read_text(encoding="utf-8").splitlines():
             if not line.strip():
@@ -413,6 +526,11 @@ def hive_selfplay_source(spec: Dict[str, Any], ctx: Dict[str, Any]) -> Iterator[
                 continue
             if names & skip:
                 continue
-            yield {"messages": r["messages"], "tools": r.get("tools"),
-                   "meta": {"kind": "tool_call" if r.get("tools") else "plain", "tool": r.get("tool"), "origin": r.get("origin"),
+            tools = r.get("tools")
+            called = [(c.get("function") or {}).get("name") for m in r["messages"] for c in (m.get("tool_calls") or [])]
+            called = [c for c in called if c]
+            if resub and tools and called:  # same key as self_data.make_row, current distractor policy
+                tools = specs(tool_subset(called, json.dumps(r["messages"][1:2])))
+            yield {"messages": r["messages"], "tools": tools,
+                   "meta": {"kind": "tool_call" if tools else "plain", "tool": r.get("tool"), "origin": r.get("origin"),
                             "teacher": teacher, "file": path.name}}

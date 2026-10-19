@@ -33,6 +33,8 @@ DEFAULTS: Dict[str, Any] = {
     "max_source_share": {},
     "max_rows_per_tool": 0,
     "tool_cap_exempt": ["request_approval", "payout_check", "solana_read"],
+    # drop rows whose user prompt is a spot-check question (core + extended), so the live eval is never trained on
+    "exclude_eval_prompts": False,
     "allow_vendor_chat": False,
     "redact_usernames": [],
     "roots": {},
@@ -136,9 +138,33 @@ def _sample(rows: List[Dict[str, Any]], n: int, rng: random.Random) -> List[Dict
     return sorted(pool[: max(0, n)], key=lambda r: r["id"])
 
 
+def eval_prompts() -> set:
+    """Normalised spot-check questions (core + extended); empty if the suite cannot be built here."""
+    try:
+        from realai.training.spotcheck import SUITES
+
+        return {normalize(c["q"]) for c in SUITES["all"]()}
+    except Exception:
+        return set()
+
+
+def _user_prompt(msgs: List[Dict[str, Any]]) -> str:
+    return next((str(m.get("content") or "") for m in msgs if m.get("role") == "user"), "")
+
+
 def rebalance(kept: List[Dict[str, Any]], cfg: Dict[str, Any], stats: Dict[str, Counter]) -> List[Dict[str, Any]]:
-    """Per-source row caps, per-source share caps and per-tool caps (all opt-in, deterministic)."""
+    """Eval-prompt exclusion, per-source row caps, per-source share caps and per-tool caps (all opt-in, deterministic)."""
     rng = random.Random(int(cfg["seed"]) + 101)
+    if cfg.get("exclude_eval_prompts"):
+        ev = cfg["_eval_prompts"] if "_eval_prompts" in cfg else eval_prompts()
+        if ev:
+            out0 = []
+            for r in kept:
+                if normalize(_user_prompt(r["messages"])) in ev:
+                    stats[r["source"]]["dropped_eval_prompt"] += 1
+                else:
+                    out0.append(r)
+            kept = out0
     caps = {(s.get("name") or s["type"]): int(s["max_rows"]) for s in cfg.get("sources", []) if s.get("max_rows")}
     by_src: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
     for r in kept:
@@ -372,6 +398,7 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
             "dropped_source_cap": sum(s["dropped_source_cap"] for s in stats.values()),
             "dropped_share_cap": sum(s["dropped_share_cap"] for s in stats.values()),
             "dropped_tool_cap": sum(s["dropped_tool_cap"] for s in stats.values()),
+            "dropped_eval_prompt": sum(s["dropped_eval_prompt"] for s in stats.values()),
         },
         "source_mix": dict(Counter(r["source"] for r in kept)),
         "tool_coverage": tool_coverage(kept),

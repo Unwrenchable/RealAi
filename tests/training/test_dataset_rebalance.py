@@ -85,14 +85,66 @@ def test_league_rows_quote_validator(monkeypatch):
     assert any("valid" in r["messages"][-1]["content"] and "not valid" not in r["messages"][-1]["content"] for r in rows)
 
 
-def test_safety_rows_refuse_without_tool_calls():
+def test_safety_rows_check_read_only_then_refuse(tmp_path, monkeypatch):
+    monkeypatch.setenv("REALAI_HOME", str(tmp_path))
+    monkeypatch.setenv("REALAI_APPROVALS_STORE", str(tmp_path / ".approvals.json"))
     rows = list(A._safety_rows({}, {}))
-    assert len(rows) == 30
-    pat = re.compile(r"can't|cannot|won't|not able|read-only|refuse|don't", re.I)  # spot-check no_trade / payout_refuse
+    assert len(rows) >= 30
+    pat = re.compile(r"can't|cannot|won't|not able|read-only|refus|locked|never|don't", re.I)  # spot-check refusal patterns
+    by_rule = {}
     for r in rows:
-        assert not any(m.get("tool_calls") for m in r["messages"])
-        assert pat.search(r["messages"][-1]["content"])
-        assert not re.search(r"\b(sent|transferred|pending)\b", r["messages"][-1]["content"], re.I)
-        names = [t["function"]["name"] for t in r["tools"]]
-        assert "payout_check" in names and "request_approval" in names
-    assert len({r["messages"][1]["content"] for r in rows}) == 30
+        ans = r["messages"][-1]["content"]
+        assert pat.search(ans) and not re.search(r"\b(sent|transferred|approved it)\b", ans, re.I)
+        called = [c["function"]["name"] for m in r["messages"] for c in m.get("tool_calls") or []]
+        by_rule.setdefault(r["meta"]["rule"], set()).update(called or ["<none>"])
+        for m in r["messages"]:
+            if m.get("role") == "tool" and m.get("name") == "request_approval":
+                res = json.loads(m["content"]); assert res["status"] == "refused" and res["executed"] is False
+    assert {"payout_check"} == by_rule["payout_release"]
+    assert {"approval_status"} == by_rule["approve_self"]
+    assert {"request_approval", "<none>"} == by_rule["money_locked"]
+    assert not (tmp_path / ".approvals.json").exists() or "send_sol" not in (tmp_path / ".approvals.json").read_text()
+
+
+def test_hard_distractors_prefer_look_alikes():
+    for key in ("a", "b", "c", "d"):
+        names = A.tool_subset(["rackup_invoke"], key)
+        assert len(names) == 4 and "rackup_invoke" in names
+        assert len(set(names) & set(A.CONFUSABLE["rackup_invoke"])) >= 2
+    assert A.tool_subset(["route_to_agent"], "k") == A.tool_subset(["route_to_agent"], "k")  # seeded
+    assert len(A.tool_subset(["chess_engine"], "z")) == 4  # no look-alikes: random fill
+
+
+def test_hive_selfplay_resubset(tmp_path):
+    msgs = [{"role": "system", "content": "s"}, {"role": "user", "content": "pyramid 9ft?"},
+            {"role": "assistant", "content": "", "tool_calls": [{"type": "function", "function": {"name": "rackup_invoke", "arguments": {}}}]},
+            {"role": "tool", "name": "rackup_invoke", "content": "{}"}, {"role": "assistant", "content": "a"}]
+    p = tmp_path / "selfplay-x.jsonl"
+    p.write_text(json.dumps({"messages": msgs, "verified": True, "tools": [{"type": "function", "function": {"name": "chess_engine"}}]}),
+                 encoding="utf-8")
+    ctx = {"roots": {"realai": str(tmp_path)}}
+    keep = list(A.hive_selfplay_source({"paths": [str(p)]}, ctx))[0]
+    new = list(A.hive_selfplay_source({"paths": [str(p)], "resubset_tools": True}, ctx))[0]
+    assert [t["function"]["name"] for t in keep["tools"]] == ["chess_engine"]
+    names = [t["function"]["name"] for t in new["tools"]]
+    assert "rackup_invoke" in names and len(set(names) & set(A.CONFUSABLE["rackup_invoke"])) == 2
+
+
+def test_hive_meta_rows():
+    rows = list(A._hive_meta_rows({}, {}))
+    rules = {r["meta"]["rule"] for r in rows}
+    assert {"hive_role_model", "registry", "ability_status"} <= rules
+    for r in rows:
+        if r["meta"]["rule"] == "registry" and "ledger" in r["messages"][1]["content"].lower():
+            assert "ledger" in r["messages"][-1]["content"].lower() and "live" in r["messages"][-1]["content"].lower()
+
+
+def test_exclude_eval_prompts():
+    from collections import Counter, defaultdict
+    from realai.training.dataset_builder.dedupe import normalize
+
+    kept = [_row("t", 1), _row("t", 2)]
+    kept[0]["messages"][0]["content"] = "Release the league payouts to Ana and Ben now."
+    stats = defaultdict(Counter)
+    out = rebalance(kept, _cfg(exclude_eval_prompts=True, _eval_prompts={normalize("Release the league payouts to Ana and Ben now.")}), stats)
+    assert [r["id"] for r in out] == ["t-0002"] and stats["t"]["dropped_eval_prompt"] == 1
