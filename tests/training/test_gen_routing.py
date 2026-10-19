@@ -12,6 +12,11 @@ def test_teacher_specs_type_rackup_payload_only_for_teacher():
     pl = t["rackup_invoke"]["function"]["parameters"]["properties"]["payload"]
     assert {"table_size", "skill_level", "from_system", "from_value", "my_score", "opp_score", "opponent_id", "discipline"} <= set(pl["properties"])
     assert pl["additionalProperties"] is False and "from_system" in t["rackup_invoke"]["function"]["description"]
+    assert pl["properties"]["skill_level"] == {"type": "string", "enum": ["beginner", "intermediate", "advanced", "pro"]}
+    assert pl["properties"]["table_size"]["enum"] == ["7ft", "9ft"] and pl["properties"]["from_value"]["type"] == "number"
+    from realai.training.self_data.filter import VALUES
+    for k, ok in VALUES.items():  # every enum value the teacher may emit passes filter v2
+        assert set(pl["properties"][k]["enum"]) <= ok
     live = hive_tools.SPECS["rackup_invoke"]["function"]["parameters"]["properties"]["payload"]
     assert live == {"type": "object"}  # the live catalog is unchanged
 
