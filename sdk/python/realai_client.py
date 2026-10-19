@@ -13,10 +13,13 @@ class RealAIClient(object):
         self.timeout = timeout
 
     def _request(self, method, path, payload=None):
+        raw = (os.environ.get('REALAI_API_KEY') or '').split(',')[0].strip()
+        headers = {'Authorization': 'Bearer {0}'.format(raw)} if raw else None
         response = requests.request(
             method,
             '{0}{1}'.format(self.api_url, path),
             json=payload,
+            headers=headers,
             timeout=self.timeout,
         )
         response.raise_for_status()

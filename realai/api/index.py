@@ -139,7 +139,7 @@ def app(environ, start_response):
             resp_headers.append((name.strip(), val.strip()))
     resp_headers.append(("Access-Control-Allow-Origin", "*"))
     resp_headers.append(("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"))
-    resp_headers.append(("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Provider, X-Base-URL"))
+    resp_headers.append(("Access-Control-Allow-Headers", "Content-Type, Authorization, X-API-Key, X-Provider, X-Base-URL"))
 
     start_response(status, resp_headers)
     return [body_part]

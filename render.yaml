@@ -7,6 +7,8 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11
+      # REALAI_API_KEY is required in production. Set it in the Render dashboard
+      # (secret). Comma-separate multiple keys. Do not commit the value.
     healthCheckPath: /health
     routes:
       - type: rewrite

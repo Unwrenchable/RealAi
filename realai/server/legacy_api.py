@@ -16,10 +16,18 @@ Run with: python -m realai.api_server
 
 API Key handling
 ----------------
-Pass your provider API key in the standard ``Authorization: Bearer <key>``
-header.  RealAI auto-detects the provider from the key prefix and forwards
-requests to the real AI service.  You can also supply ``X-Provider`` to pick
-the provider explicitly, and ``X-Base-URL`` to override the endpoint.
+Service gate: every API route except ``GET /health`` requires ``REALAI_API_KEY``
+(comma-separated for more than one). Send it as ``Authorization: Bearer <key>``
+or ``X-API-Key``. Comparison is constant-time. Missing and wrong keys return
+401 with an OpenAI-style ``{"error": {...}}`` body. The value is never logged.
+When no key is configured, production and hosted (Render) processes fail closed;
+``ENV=development`` (also ``dev`` / ``local`` / ``test``) stays open for local use.
+
+Provider key: a *different* upstream key (OpenAI, Anthropic, …) may still be
+sent as ``Authorization: Bearer <provider-key>`` when the service key is in
+``X-API-Key``. A bearer value that matches ``REALAI_API_KEY`` and has no cloud
+prefix is the gate only — it is not forwarded upstream. ``X-Provider`` picks
+the provider explicitly, and ``X-Base-URL`` overrides the endpoint.
 
 Self-host: unrecognized keys (no ``sk-`` / ``xai-`` / … prefix) default to
 provider ``realai`` (override with ``REALAI_PROVIDER``) instead of 400.
@@ -358,7 +366,7 @@ header {
 
   <label for="api-key-input">API Key</label>
   <input type="password" id="api-key-input"
-         placeholder="Paste provider API key (optional for Local mode)&#x2026;"
+         placeholder="Paste REALAI_API_KEY&#x2026;"
          oninput="onKeyInput()"
          onkeydown="if(event.key==='Enter')saveKey()">
   <button class="btn btn-sm btn-secondary" onclick="toggleKeyVis()" title="Show / hide key">&#x1F441;</button>
@@ -371,7 +379,7 @@ header {
   <div id="welcome">
     <div class="big-icon">&#x1F916;</div>
     <h2>Welcome to RealAI</h2>
-    <p>Pick Local RealAI for no-key local mode, or paste an API key for cloud providers.</p>
+    <p>Paste the REALAI_API_KEY service key. Provider keys stay on the server unless you also send X-API-Key.</p>
     <div class="cap-grid">
       <span class="cap-pill">&#x1F4AC; Chat</span>
       <span class="cap-pill">&#x1F517; Chain-of-thought</span>
@@ -432,7 +440,10 @@ function loadSettings() {
 }
 
 function loadModels() {
-  fetch('/v1/models').then(function(r){ return r.json(); }).then(function(data) {
+  var apiKey = sessionStorage.getItem(KEY_STORE) || localStorage.getItem(KEY_STORE) || '';
+  var headers = {};
+  if (apiKey) headers['Authorization'] = 'Bearer ' + apiKey;
+  fetch('/v1/models', { headers: headers }).then(function(r){ return r.json(); }).then(function(data) {
     var select = document.getElementById('model-select');
     select.innerHTML = '';
     (data.data || []).forEach(function(m) {
@@ -548,7 +559,7 @@ function clearChat() {
   var c = document.getElementById('chat-messages');
   c.innerHTML = '<div id="welcome"><div class="big-icon">&#x1F916;</div>'
     + '<h2>Welcome to RealAI</h2>'
-    + '<p>Pick Local RealAI for no-key local mode, or paste an API key for cloud providers.</p>'
+    + '<p>Paste the REALAI_API_KEY service key. Provider keys stay on the server unless you also send X-API-Key.</p>'
     + '<div class="cap-grid">'
     + '<span class="cap-pill">&#x1F4AC; Chat</span>'
     + '<span class="cap-pill">&#x1F517; Chain-of-thought</span>'
@@ -615,7 +626,9 @@ function sendMessage() {
   .then(function(res) {
     removeLoading(loadingId);
     if (!res.ok) {
-      appendMessage('error', '\\u26A0 ' + (res.data.error || 'HTTP error'));
+      var errObj = res.data && res.data.error;
+      var errMsg = (errObj && errObj.message) || (typeof errObj === 'string' ? errObj : '') || 'HTTP error';
+      appendMessage('error', '\\u26A0 ' + errMsg);
     } else {
       var content = (res.data.choices || [{}])[0].message
                     ? res.data.choices[0].message.content
@@ -708,15 +721,42 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
         self.send_header('Vary', 'Origin')
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
         self.send_header('Access-Control-Allow-Headers',
-                         'Content-Type, Authorization, X-Provider, X-Base-URL')
+                         'Content-Type, Authorization, X-API-Key, X-Provider, X-Base-URL')
 
-    def _send_response(self, status_code: int, data):
+    def _send_response(self, status_code: int, data, extra_headers=None):
         """Send JSON response."""
         self.send_response(status_code)
         self.send_header('Content-Type', 'application/json')
+        if extra_headers:
+            for name, value in extra_headers:
+                self.send_header(name, value)
         self._set_cors_headers()
         self.end_headers()
         self.wfile.write(json.dumps(data).encode())
+
+    def _require_api_key(self) -> bool:
+        """Return True when the request may proceed. Otherwise send 401.
+
+        Does not log header values. Closes the connection so an unread body
+        cannot desynchronize the next request.
+        """
+        from realai.server.api_auth import authorize
+
+        decision = authorize(
+            getattr(self, "command", None) or "GET",
+            urlparse(self.path).path,
+            authorization=self.headers.get("Authorization", "") or "",
+            x_api_key=self.headers.get("X-API-Key", "") or "",
+        )
+        if decision.allowed:
+            return True
+        self.close_connection = True
+        self._send_response(
+            decision.status,
+            decision.body,
+            extra_headers=(("WWW-Authenticate", 'Bearer realm="realai"'),),
+        )
+        return False
 
     def _send_html_response(self, status_code: int, html: str):
         """Send an HTML response."""
@@ -737,17 +777,21 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def _fusion_config_js(self) -> bytes:
-        """Emit live Fusion UI config from the same settings the API uses."""
-        api_key = settings.REALAI_API_KEY or ""
+        """Emit live Fusion UI config from the same settings the API uses.
+
+        ``API_KEY`` is always blank. ``REALAI_API_KEY`` must not be copied into
+        a browser response; clients that have the key in their own env send it.
+        """
         payload = {
             "BACKEND_BASE": settings.api_base_url(),
-            "API_KEY": api_key,
+            "API_KEY": "",
             "PORT": settings.PORT,
         }
         # When served by this process, prefer same-origin (empty BACKEND_BASE signal via path).
         # Keep absolute BACKEND_BASE for file:// / static hosts; browser script still prefers
         # same-origin under /fusion-ui/.
         return (
+            "/* API_KEY is intentionally blank. The server never echoes REALAI_API_KEY. */\n"
             "window.__REALAI_CONFIG__ = {0};\n".format(json.dumps(payload))
         ).encode("utf-8")
 
@@ -836,21 +880,25 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
 
         Resolution order
         ----------------
-        1. If an ``Authorization: Bearer <key>`` header is present, return
+        1. If ``X-API-Key`` or ``Authorization: Bearer <key>`` is present, return
            ``key:<first-16-hex-chars-of-sha256(key)>``.  This gives a
            consistent, non-reversible identity without storing the raw key.
+           ``X-API-Key`` wins when both are set, so the service key is the
+           identity and a provider bearer is not.
         2. Otherwise return ``anon:<client_ip>``, where ``client_ip`` is read
            from ``X-Forwarded-For`` (first entry) or ``X-Real-IP`` before
            falling back to the TCP connection address.  This ensures the
            correct address is used when the server runs behind a reverse proxy
            or load balancer.
         """
-        auth = self.headers.get("Authorization", "")
-        if auth.startswith("Bearer "):
-            raw_key = auth[len("Bearer "):].strip()
-            if raw_key:
-                digest = hashlib.sha256(raw_key.encode()).hexdigest()
-                return f"key:{digest[:16]}"
+        from realai.server.api_auth import bearer_token
+
+        raw_key = (self.headers.get("X-API-Key") or "").strip() or bearer_token(
+            self.headers.get("Authorization", "")
+        )
+        if raw_key:
+            digest = hashlib.sha256(raw_key.encode()).hexdigest()
+            return f"key:{digest[:16]}"
         # Prefer forwarded-for headers so the anonymous identity reflects the
         # real client rather than the address of an intermediate proxy.
         forwarded_for = self.headers.get("X-Forwarded-For", "")
@@ -878,8 +926,10 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
         if not model_name:
             model_name = settings.REALAI_MODEL
 
+        from realai.server.api_auth import bearer_for_provider
+
         auth = self.headers.get("Authorization", "")
-        api_key = auth[len("Bearer "):].strip() if auth.startswith("Bearer ") else None
+        api_key = bearer_for_provider(auth)
         # Explicit X-Provider wins; unknown Bearer keys default to self-host
         # realai (REALAI_PROVIDER). Do not mutate headers.__dict__.
         provider = resolve_request_provider(
@@ -911,6 +961,8 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         """Handle GET requests."""
+        if not self._require_api_key():
+            return
         parsed_path = urlparse(self.path)
 
         if parsed_path.path == '/health':
@@ -1108,6 +1160,8 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         """Handle POST requests."""
+        if not self._require_api_key():
+            return
         parsed_path = urlparse(self.path)
 
         try:
@@ -1715,6 +1769,8 @@ class RealAIAPIHandler(BaseHTTPRequestHandler):
 
     def do_DELETE(self):
         """Handle DELETE requests."""
+        if not self._require_api_key():
+            return
         parsed_path = urlparse(self.path)
         try:
             body = self._read_body()
@@ -1792,7 +1848,10 @@ def run_server(host: str = "0.0.0.0", port=None):
     print("  POST /v1/plugins/<slug>-coach   (learned git-learn stubs)")
     print("  POST /v1/learned/<slug>_coach")
     print("  POST /v1/self-improve/cycle")
-    print("\nPass your API key via:  Authorization: Bearer <key>")
+    from realai.server.api_auth import auth_startup_message
+    print("\n" + auth_startup_message())
+    print("Service key:  Authorization: Bearer <REALAI_API_KEY>   or   X-API-Key: <REALAI_API_KEY>")
+    print("Provider key (optional, with X-API-Key):  Authorization: Bearer <provider key>")
     print("Override provider via:  X-Provider: realai|openai|anthropic|grok|gemini|openrouter|mistral|together|deepseek|perplexity")
     print("Self-host default (no X-Provider, unrecognized key): REALAI_PROVIDER (realai)")
     print("Override base URL via:  X-Base-URL: https://...")

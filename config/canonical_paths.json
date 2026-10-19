@@ -506,7 +506,7 @@
    ]
   },
   {
-   "sha256": "0ad8b4ca50d569e5aa2952085fb87c1d761f02cf811b551dae9c3769cc7d40ba",
+   "sha256": "10296daa5c743f4b7854afc6dfdc80fbeb08387f0c637ff310d130132f2e9bf6",
    "canonical": "agent_tools/realai.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
@@ -515,7 +515,7 @@
    ]
   },
   {
-   "sha256": "f12b66a8f900982b49c9ceeca8c609749338fc2facfcfdf82e09ea176a4238b6",
+   "sha256": "23a02d2fa95e1d379907d89b94f3099c7bae67e1e8ae816c7a257941954de071",
    "canonical": "realai/providers/realai_embeddings.py",
    "why": "prior: AUTHORITY.md: provider config gold is realai/providers",
    "duplicates": [
@@ -1146,7 +1146,7 @@
    ]
   },
   {
-   "sha256": "63cd96769567a5193890bdbb7d850418378e55d0ab7bbb102f308a97cad7a67d",
+   "sha256": "ae7879df2c3825733ce46a3cf2478abedf17377a910caf3d101670cc8817cd4a",
    "canonical": "realai/sdk/python/realai_client.py",
    "why": "heuristic: most imported (6 importers)",
    "duplicates": [
@@ -1937,7 +1937,7 @@
    ]
   },
   {
-   "sha256": "24a2d64934ba50a6ec53023e3d95bb57ab7b7d9fb3539e217a7479b2c6255e10",
+   "sha256": "1b82d3453219a6ebb1996835a660c410ff739e262e1a7650d5844e366077640a",
    "canonical": "sdk/python/realai_client.py",
    "why": "heuristic: most imported (1 importers)",
    "duplicates": [

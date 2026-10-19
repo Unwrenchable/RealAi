@@ -76,7 +76,7 @@ Local Hive (`http://127.0.0.1:8001`) already exposes `POST /v1/tools/execute` an
 
 ```http
 Content-Type: application/json
-Authorization: Bearer <REALAI_API_KEY>   # optional; required only if the host enforces a service token
+Authorization: Bearer <REALAI_API_KEY>   # or X-API-Key. Required on Render api_server in production
 X-Request-Id: <uuid>                      # product correlation id (recommended)
 X-Product-Tenant: <tenant-or-env>         # optional multi-env (generic form of X-RackUp-Tenant)
 X-AtomicFizz-Tenant: <tenant-or-env>      # optional alias of X-Product-Tenant
@@ -314,8 +314,7 @@ export async function realaiAtomicFizz(
 
 - Send only **necessary** player fields (no passwords, no payment PANs, no wallet seeds).  
 - Caps location, if ever sent, is product-supplied context — TLS only in production.  
-- RealAI service should not be public without an auth gateway.  
-- Optional Bearer `REALAI_API_KEY` when the host is exposed.
+- Render `api_server` requires `REALAI_API_KEY` in production (`Authorization: Bearer` or `X-API-Key`). `GET /health` stays open.
 
 ---
 
