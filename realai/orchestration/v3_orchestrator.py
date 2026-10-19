@@ -31,6 +31,24 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import parse_qs, unquote, urlparse
 
+
+def _load_hive_guard():
+    """Load the stdlib inbound guard by file path (avoids heavy package __init__ imports)."""
+    import importlib.util
+
+    here = Path(__file__).resolve().parent / "hive_guard.py"
+    name = "realai_hive_guard"
+    if name in sys.modules:
+        return sys.modules[name]
+    spec = importlib.util.spec_from_file_location(name, str(here))
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[name] = mod
+    spec.loader.exec_module(mod)  # type: ignore[union-attr]
+    return mod
+
+
+_hive_guard = _load_hive_guard()
+
 # Repo root: .../realai package parent
 _PKG = Path(__file__).resolve().parent
 _ROOT = _PKG.parent
@@ -1784,17 +1802,75 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self, fmt: str, *args) -> None:
         sys.stderr.write("[v3-orch] %s - %s\n" % (self.address_string(), fmt % args))
 
+    # ---- inbound guard (realai/server/hive_guard.py) -------------------------
+    def _guard_cfg(self):
+        cfg = getattr(self.server, "_realai_guard_cfg", None)
+        if cfg is None:
+            port = getattr(self.server, "server_port", None) or int(os.environ.get("ORCH_PORT", "8001") or "8001")
+            bind = ""
+            try:
+                bind = str(self.server.server_address[0])
+            except Exception:
+                pass
+            cfg = _hive_guard.GuardConfig(server_port=int(port), bind_host=bind)
+            try:
+                self.server._realai_guard_cfg = cfg
+            except Exception:
+                pass
+        return cfg
+
+    def _guard(self, method: str, path: str) -> bool:
+        """Return True when the request may proceed; otherwise reply and return False."""
+        try:
+            cfg = self._guard_cfg()
+            decision = _hive_guard.check_request(
+                cfg, method, path, self.headers, (self.client_address or ("?",))[0]
+            )
+        except Exception as exc:  # fail closed on POST, open on reads
+            sys.stderr.write("[v3-orch] guard error: %s\n" % type(exc).__name__)
+            if method.upper() != "POST":
+                return True
+            decision = _hive_guard.Decision(False, 500, "guard_error", "")
+        if decision.ok:
+            if method.upper() == "GET":
+                self._guard_set_cookie = _hive_guard.wants_cookie(cfg, path)
+            return True
+        self.close_connection = True
+        self._json(decision.status, decision.body())
+        return False
+
+    def _guard_authorized(self) -> bool:
+        try:
+            return _hive_guard.is_authorized(self._guard_cfg(), self.headers)
+        except Exception:
+            return False
+
+    def end_headers(self) -> None:
+        if getattr(self, "_guard_set_cookie", False):
+            self._guard_set_cookie = False
+            try:
+                self.send_header("Set-Cookie", _hive_guard.cookie_header_value())
+            except Exception:
+                pass
+        super().end_headers()
+
     def _cors(self) -> None:
-        # Browser must only talk to RealAI (:8001). Organs stay internal.
+        # Browser talks to RealAI (:8001) plus the allowlisted local UIs (:3000, :8787, ...).
         origin = (self.headers.get("Origin") or "").strip()
-        if origin in ("http://127.0.0.1:8001", "http://localhost:8001"):
+        allowed = False
+        try:
+            allowed = bool(origin) and self._guard_cfg().origin_allowed(origin)
+        except Exception:
+            allowed = origin in ("http://127.0.0.1:8001", "http://localhost:8001")
+        if allowed:
             self.send_header("Access-Control-Allow-Origin", origin)
+            self.send_header("Vary", "Origin")
         else:
             self.send_header("Access-Control-Allow-Origin", "http://127.0.0.1:8001")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.send_header(
             "Access-Control-Allow-Headers",
-            "Content-Type, Authorization, x-realai-voice, X-RealAI-Voice, X-Request-Id, X-Provider, X-RealAI-Tools",
+            "Content-Type, Authorization, x-realai-voice, X-RealAI-Voice, X-Request-Id, X-Provider, X-RealAI-Tools, X-RealAI-Token",
         )
         self.send_header("Access-Control-Max-Age", "86400")
 
@@ -2052,12 +2128,16 @@ class Handler(BaseHTTPRequestHandler):
         return self.rfile.read(n) if n else b""
 
     def do_OPTIONS(self) -> None:
+        if not self._guard("OPTIONS", urlparse(self.path).path):
+            return
         self.send_response(204)
         self._cors()
         self.end_headers()
 
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
+        if not self._guard("GET", parsed.path):
+            return
         path = parsed.path.rstrip("/") or "/"
         qs = parse_qs(parsed.query)
 
@@ -2572,6 +2652,8 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path.rstrip("/") or "/"
+        if not self._guard("POST", path):
+            return
         raw = self._read_body()
 
         if path == "/v1/embeddings":
@@ -2934,6 +3016,10 @@ class Handler(BaseHTTPRequestHandler):
                 self._json(200, obj)
                 return
 
+            if tools_on and not self._guard_authorized():
+                # Token mode on and caller unauthenticated: chat still works, but no
+                # operator / live-exec dispatch (that path can run commands).
+                tools_on = False
             if tools_on:
                 dispatch = _chat_operator_dispatch(user_text)
                 if dispatch is not None:
@@ -3023,7 +3109,8 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 from realai.bot.natural_mode import apply_natural_grounding
 
-                ground = apply_natural_grounding(body, user_text)
+                # Token mode: unauthenticated chat gets no Craft inspect/write grounding.
+                ground = apply_natural_grounding(body, user_text) if self._guard_authorized() else {}
                 if ground.get("should_ground"):
                     body["realai_natural"] = ground
                     if not (
