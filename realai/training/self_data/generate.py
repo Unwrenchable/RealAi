@@ -25,6 +25,52 @@ from .verify import verify
 
 TARGETS = ("chess_engine", "rackup_invoke", "shot_lookup", "math_solver", "data_analysis", "ability_lookup",
            "list_agents", "route_to_agent", "device_profile") + tuple(hive_tools.NEW_TOOLS) + ("repo_search",)
+# teacher-only hints (round 3): the 30B teacher saw rackup_invoke's payload as a free object and guessed keys
+# (rating_convert {from,to,rating}, league_validate {player_rating,...}) and routed pyramid / conversion / validation asks
+# to hall_context / rating_update_preview, and answered specialist jobs itself instead of route_to_agent. The teacher gets a
+# typed payload schema + routing rules; the SAVED row keeps the plain TOOL_SYSTEM and the live specs (the student learns
+# the routing and keys from the calls, not from hints it will never see at inference).
+RACKUP_PAYLOADS = {
+    "pyramid_rules": {"table_size": "7ft|9ft (required)", "skill_level": "beginner|intermediate|advanced|pro (required)",
+                      "my_score": "int (optional)", "opp_score": "int (optional)"},
+    "rating_convert": {"from_system": "apa|fargo|tap|bca (required)", "from_value": "number (required), e.g. APA SL 5 -> 5, Fargo 520 -> 520"},
+    "league_validate": {"my_score": "int", "opp_score": "int", "opponent_id": "string", "discipline": "8-ball|9-ball|10-ball|one pocket",
+                        "won": "bool (instead of scores)"},
+}
+TEACHER_HINTS = (
+    "\n\nRouting rules (follow exactly):\n"
+    "- Pyramid points / race / call-shot for a table size and skill level -> rackup_invoke ability pyramid_rules "
+    "(payload {table_size, skill_level}); NOT hall_context, NOT game_rules.\n"
+    "- Converting an APA / Fargo / TAP / BCA rating to the RackUp/ROC scale -> rackup_invoke ability rating_convert "
+    "(payload {from_system, from_value}); NOT rating_update_preview (that is only for a new rating after a match).\n"
+    "- Checking / validating a league match submission (scores, opponent, discipline; even an empty one) -> rackup_invoke "
+    "ability league_validate (payload {my_score, opp_score, opponent_id, discipline}); NOT rating_update_preview.\n"
+    "- A job for a specialist (audit, review, draft, design, plan, analyse, build) -> route_to_agent with the exact agent id "
+    "(list_agents first if unsure); e.g. security audits -> a security agent, WCAG / screen-reader checks -> accessibility-auditor. "
+    "Do not answer the job yourself, do not use web_search or tool_registry_lookup for it, and name the agent in the answer.\n"
+    "- Use ONLY the payload keys listed in the rackup_invoke schema.")
+
+
+def teacher_specs(names: Optional[List[str]] = None) -> List[Dict[str, Any]]:
+    """Live specs, with rackup_invoke's payload typed per ability (teacher only; rows keep the live specs)."""
+    import copy
+
+    out = copy.deepcopy(hive_tools.specs(names))
+    for sp in out:
+        fn = sp["function"]
+        if fn["name"] == "rackup_invoke":
+            props = {}
+            for keys in RACKUP_PAYLOADS.values():
+                for k, v in keys.items():
+                    props.setdefault(k, {"type": "boolean" if k == "won" else "integer" if "int" in v or k == "from_value" else "string",
+                                         "description": v})
+            props["from_value"]["type"] = "number"
+            fn["parameters"]["properties"]["payload"] = {"type": "object", "properties": props, "additionalProperties": False}
+            fn["description"] += " Payload keys per ability: " + "; ".join(
+                f"{ab}: {', '.join(k)}" for ab, k in RACKUP_PAYLOADS.items()) + "."
+    return out
+
+
 # trade mode (opt-in targets; plan must name them): offered with the trade tools, executed offline on the sim backend
 TRADE_TARGETS = ("trade_propose", "trade_research")
 # what a correct routing looks like per target (a row that routes elsewhere is rejected)
@@ -76,9 +122,15 @@ def seeds(tool: str, rng: random.Random, n: int) -> str:
         names = [s["name"] for s in hive_tools.shots()]
         return "Shots in the catalogue: " + ", ".join(rng.sample(names, min(12, len(names)))) if names else ""
     if tool == "rackup_invoke":
+        kinds = ["how many points / what race wins RackUp Pyramid on a 7ft or 9ft table at a given skill level "
+                 "(beginner, intermediate, advanced, pro)",
+                 "converting an APA skill level (2-7) or a Fargo rating (300-750) to the RackUp/ROC scale",
+                 "validating a league match submission: give scores (e.g. 5-3), the opponent id (p2, p17...) and the discipline, "
+                 "or say no scores were entered yet"]
         return ("RackUp read-only abilities: pyramid_rules (payload table_size 7ft|9ft, skill_level beginner|intermediate|advanced|pro, "
                 "optional my_score/opp_score), rating_convert (payload from_system apa|fargo|tap|bca, from_value), "
-                "league_validate (payload my_score, opp_score, opponent_id, discipline).")
+                "league_validate (payload my_score, opp_score, opponent_id, discipline). Spread the requests over: "
+                + "; ".join(rng.sample(kinds, len(kinds))) + ". Never ask about a NEW rating after a match.")
     if tool == "ability_lookup":
         ab = rng.sample(hive_tools.abilities(), min(10, len(hive_tools.abilities())))
         return ("Each request must name ONE of these RealAI abilities (by its name) and ask whether it is live, "
@@ -90,7 +142,10 @@ def seeds(tool: str, rng: random.Random, n: int) -> str:
                 "min/max/range, outliers or trend). Never refer to data that is not in the request "
                 "(no 'our database', 'last year', attached files).")
     if tool in ("list_agents", "route_to_agent"):
-        ag = rng.sample(hive_tools.agents(), min(8, len(hive_tools.agents())))
+        pool = hive_tools.agents()
+        must = [a for a in pool if a["id"] in ("security-engineer", "cybersecurity-expert", "accessibility-auditor")]
+        ag = must[: rng.randint(1, len(must))] if must and tool == "route_to_agent" and rng.random() < 0.5 else []
+        ag += rng.sample([a for a in pool if a not in ag], min(8 - len(ag), len(pool) - len(ag)))
         lead = ("Each request is a concrete job for ONE of these agents (draft, review, plan, design, analyse...), in the "
                 "user's words; do not name the agent id. " if tool == "route_to_agent" else "")
         return lead + "Hive agents: " + "; ".join(f"{a['id']}: {str(a.get('description', ''))[:110]}" for a in ag)
@@ -430,7 +485,8 @@ def run(chat, model: str = "local", plan: Optional[Dict[str, int]] = None, minut
 
     plan = plan or {t: 1 for t in TARGETS}
     weights = [(t, w) for t, w in plan.items() if (t in TARGETS or t in TRADE_TARGETS) and w > 0]
-    trade_specs = hive_tools.specs(list(hive_tools.SPECS) + list(hive_tools.TRADE_TOOLS))
+    t_specs = teacher_specs()
+    t_trade_specs = teacher_specs(list(hive_tools.SPECS) + list(hive_tools.TRADE_TOOLS))
     rng = random.Random(seed or int(time.time()))
     stamp = _dt.datetime.now().strftime("%Y%m%d-%H%M%S")
     ok_p, rej_p = out_dir() / f"selfplay-{stamp}.jsonl", out_dir() / f"rejects-{stamp}.jsonl"
@@ -472,9 +528,10 @@ def run(chat, model: str = "local", plan: Optional[Dict[str, int]] = None, minut
                     break
                 try:
                     trade = tool in TRADE_TARGETS
-                    res = tool_loop.run(chat, [{"role": "system", "content": TOOL_SYSTEM}, {"role": "user", "content": q}],
-                                        tools=trade_specs if trade else None, offline=True,
+                    res = tool_loop.run(chat, [{"role": "system", "content": TOOL_SYSTEM + TEACHER_HINTS}, {"role": "user", "content": q}],
+                                        tools=t_trade_specs if trade else t_specs, offline=True,
                                         ctx=dict(ctx, trade_backend="sim") if trade else ctx, project="hive")
+                    res["messages"][0] = {"role": "system", "content": TOOL_SYSTEM}  # rows never carry the teacher hints
                 except Exception as exc:
                     st["exec_error"] += 1
                     reasons[f"exec_error:{type(exc).__name__}"] += 1
