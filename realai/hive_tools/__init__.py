@@ -77,6 +77,9 @@ from realai.hive_tools import repo_search as _repo  # noqa: E402  (tool 32: read
 
 SPECS.update(_apr.SPECS)
 SPECS.update(_repo.SPECS)  # live catalog, default on (REALAI_REPO_SEARCH=0 removes it); not a NEW_TOOLS (not hive-tools gated)
+from realai.hive_tools import trade as _trade  # noqa: E402  (trade mode bridge; OFF unless REALAI_TRADE_TOOLS=1, never in SPECS)
+
+TRADE_TOOLS = tuple(_trade.SPECS)  # not in the default catalog: live_specs() adds them only with REALAI_TRADE_TOOLS=1
 NEW_TOOLS = tuple(_ext.SPECS) + tuple(_wired.SPECS) + tuple(_apr.SPECS)  # wire audit 2026-10-12 / 2026-10-16; improve.py starts them as weak
 CORE_TOOLS = tuple(n for n in SPECS if n not in NEW_TOOLS)
 
@@ -93,18 +96,24 @@ def key_facts(name: str, result: Dict[str, Any], args: Dict[str, Any]) -> List[L
         return _apr.key_facts(name, result, args)
     if name in _repo.SPECS:
         return _repo.key_facts(name, result, args)
+    if name in _trade.SPECS:
+        return _trade.key_facts(name, result, args)
     return _ext.key_facts(name, result, args)
 
 
 def specs(names: Optional[List[str]] = None) -> List[Dict[str, Any]]:
-    return [SPECS[n] for n in (names or list(SPECS))]
+    """Default = the live catalog (SPECS). Named lists may also pick the opt-in trade tools."""
+    return [SPECS.get(n) or _trade.SPECS[n] for n in (names or list(SPECS))]
 
 
 def live_specs() -> List[Dict[str, Any]]:
     """Tools for the live (opt-in) tool loop: core tools (incl. repo_search unless REALAI_REPO_SEARCH=0), plus NEW_TOOLS
     only when REALAI_HIVE_TOOLS=1."""
     names = list(SPECS) if hive_tools_enabled() else list(CORE_TOOLS)
-    return specs([n for n in names if n not in _repo.SPECS or _repo.enabled()])
+    names = [n for n in names if n not in _repo.SPECS or _repo.enabled()]
+    if _trade.enabled():  # trade mode bridge: opt-in only (default off)
+        names += list(TRADE_TOOLS)
+    return specs(names)
 
 
 # ----------------------------------------------------------------------------- data sources
@@ -305,6 +314,7 @@ EXECUTORS: Dict[str, Callable[[Dict[str, Any], Dict[str, Any]], Dict[str, Any]]]
     **_wired.EXECUTORS,
     **_apr.EXECUTORS,
     **_repo.EXECUTORS,
+    **_trade.EXECUTORS,
 }
 SANDBOXED_TOOLS = set(_apr.SPECS)  # offline (self_data / spotcheck / verify) -> private temp approvals store
 
@@ -322,13 +332,15 @@ def execute(name: str, args: Any, offline: bool = True, ctx: Optional[Dict[str, 
         return _network(args, ctx or {})
     if offline and name in SANDBOXED_TOOLS:
         ctx = {**(ctx or {}), "approvals_sandbox": True}
+    if offline and name in _trade.SPECS:  # self_data / tests: deterministic simulator, never the real CLI
+        ctx = {**(ctx or {}), "trade_backend": "sim"}
     try:
         return EXECUTORS[name](dict(args or {}), ctx or {})
     except Exception as exc:  # tools must not crash the loop
         return {"ok": False, "error": f"{type(exc).__name__}: {exc}"[:300]}
 
 
-TOOL_JSON_LIMITS = {"repo_search": _repo.OUT_LIMIT}  # repo_search output is already capped/redacted at ~4 KB
+TOOL_JSON_LIMITS = {"repo_search": _repo.OUT_LIMIT, "trade_propose": 2200, "trade_research": 1800}  # repo_search output is already capped/redacted at ~4 KB
 
 
 def tool_json(result: Dict[str, Any], limit: Optional[int] = None, name: Optional[str] = None) -> str:
