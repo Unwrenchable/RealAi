@@ -45,8 +45,12 @@ class PlaytestLoop:
         prov, fallback = pick_provider(["qa"], self.use_hive)
         out = prov.complete(case.get("input", ""), {"role": "playtester"}, self.dry_run if fallback else False)
         content = str(out.get("content") or out.get("response") or "")
+        if out.get("error"):
+            return False, f"provider error: {out['error']}"
         exp = case.get("expected_contains")
         ok = exp is None or exp in content
+        if case.get("expect_nonempty"):
+            ok = ok and bool(content.strip())
         return ok, content[:300]
 
     def run(self, cases: list[dict[str, Any]] | None = None) -> dict[str, Any]:
