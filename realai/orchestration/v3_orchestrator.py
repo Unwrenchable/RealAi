@@ -1882,6 +1882,13 @@ class Handler(BaseHTTPRequestHandler):
             return False
         if not _hx.handles(path):
             return False
+        if method == "GET" and path.rstrip("/") == _hx.SSE_PATH:
+            denied = _hx.authorize(self.client_address[0], self.headers)
+            if denied:
+                self._json(denied[0], {"error": denied[1]})
+                return True
+            self._agentx_hive_sse(qs)
+            return True
         body: Any = {}
         if method == "POST" and raw:
             try:
@@ -1897,6 +1904,39 @@ class Handler(BaseHTTPRequestHandler):
             code, obj = 500, {"error": "hive_error", "detail": type(e).__name__}
         self._json(code, obj)
         return True
+
+    def _agentx_hive_sse(self, qs: Any) -> None:
+        """SSE of realai.agentx.hive.events (paths/tool names only, never file contents)."""
+        import queue as _queue
+
+        from realai.agentx.hive import events as _ev
+
+        try:
+            after = int(((qs or {}).get("after") or ["0"])[0])
+        except ValueError:
+            after = 0
+        self.send_response(200)
+        self.send_header("Content-Type", "text/event-stream")
+        self.send_header("Cache-Control", "no-cache")
+        self.send_header("X-Accel-Buffering", "no")
+        self.end_headers()
+        q = _ev.subscribe()
+        try:
+            self.wfile.write(b'data: {"type":"connected"}\n\n')
+            for e in _ev.recent(300, after=after):
+                self.wfile.write(f"data: {json.dumps(e, default=str)}\n\n".encode("utf-8"))
+            self.wfile.flush()
+            while True:
+                try:
+                    e = q.get(timeout=15)
+                    self.wfile.write(f"data: {json.dumps(e, default=str)}\n\n".encode("utf-8"))
+                except _queue.Empty:
+                    self.wfile.write(b": ping\n\n")
+                self.wfile.flush()
+        except (OSError, ConnectionAbortedError, ConnectionResetError, BrokenPipeError):
+            pass
+        finally:
+            _ev.unsubscribe(q)
 
     def _json(self, code: int, obj: Any) -> None:
         def _default(o: Any) -> Any:

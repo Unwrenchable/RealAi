@@ -37,13 +37,33 @@ class PlaytestLoop:
     dry_run: bool = True
     use_hive: bool | None = None
     findings_log: Path | None = None  # default: findings_path()
+    last_run: dict[str, Any] | None = None
+    run_id: str = ""
 
     def _run_case(self, case: dict[str, Any]) -> tuple[bool, str]:
         check: Callable[[dict[str, Any]], tuple[bool, str]] | None = case.get("check")
         if callable(check):
             return check(case)
         prov, fallback = pick_provider(["qa"], self.use_hive)
-        out = prov.complete(case.get("input", ""), {"role": "playtester"}, self.dry_run if fallback else False)
+        root = self.team.workspace_root()
+        if not fallback and root and hasattr(prov, "chat") and case.get("tools", True):
+            from .agent_loop import run_agent
+            from .fs_tools import SafeFS
+
+            from functools import partial
+            from . import events
+
+            res = run_agent(prov.chat, SafeFS(root), case.get("input", ""), role=f"{self.qa_agent} playtester",
+                            emit=partial(events.emit, run=self.run_id, team=self.team.id), agent=self.qa_agent,
+                            max_steps=int(os.environ.get("REALAI_AGENT_MAX_STEPS", "8")))
+            self.last_run = res
+            if getattr(prov, "last_error", None) and not res["answer"].strip():
+                return False, f"provider error: {prov.last_error}"
+            out = {"content": res["answer"]}
+            if res["cited_invented"]:
+                return False, "invented paths: " + ", ".join(res["cited_invented"][:5]) + " | " + res["answer"][:200]
+        else:
+            out = prov.complete(case.get("input", ""), {"role": "playtester"}, self.dry_run if fallback else False)
         content = str(out.get("content") or out.get("response") or "")
         if out.get("error"):
             return False, f"provider error: {out['error']}"
@@ -55,9 +75,16 @@ class PlaytestLoop:
 
     def run(self, cases: list[dict[str, Any]] | None = None) -> dict[str, Any]:
         cases = cases if cases is not None else load_cases(self.team)
+        from . import events
+
+        self.run_id = self.run_id or f"pt-{int(time.time() * 1000)}"
+        events.emit("run.started", run=self.run_id, team=self.team.id, kind="playtest", cases=len(cases))
         findings = []
         for case in cases:
+            events.emit("step.started", run=self.run_id, team=self.team.id, agent=self.qa_agent, step=str(case.get("id")))
             ok, detail = self._run_case(case)
+            events.emit("step.finished", run=self.run_id, team=self.team.id, agent=self.qa_agent, step=str(case.get("id")),
+                        ok=ok, output=detail[:600], files_read=(self.last_run or {}).get("files_read", []))
             if ok:
                 continue
             own = self.team.owner_for(case.get("area", "") + " " + case.get("input", ""))
@@ -72,7 +99,11 @@ class PlaytestLoop:
             if own and own.reviewer:
                 self.bus.send(self.qa_agent, own.reviewer, event, metadata={"type": "qa.finding.cc", "team": self.team.id})
             findings.append(event)
+            events.emit("qa.finding", run=self.run_id, team=self.team.id, agent=self.qa_agent, owner=owner,
+                        reviewer=own.reviewer if own else None, task=event["task"], summary=event["summary"],
+                        observed=str(detail)[:400])
         record_findings(findings, self.findings_log)
+        events.emit("run.finished", run=self.run_id, team=self.team.id, kind="playtest", failed=len(findings), total=len(cases))
         return {"team": self.team.id, "total": len(cases), "failed": len(findings), "findings": findings}
 
 

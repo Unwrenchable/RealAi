@@ -12,6 +12,8 @@ Team file (JSON), e.g. data/teams/vault77/team.json::
 from __future__ import annotations
 
 import json
+import os
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -41,6 +43,19 @@ class Team:
     handoffs: list[dict[str, Any]]
     path: Path
     memory: str | None = None
+    root: str | None = None  # read-only workspace root for fs tools (team.json "workspace.root")
+
+    def workspace_root(self) -> str | None:
+        """Env REALAI_TEAM_ROOT_<ID> overrides team.json; None when unset or missing."""
+        env = os.environ.get("REALAI_TEAM_ROOT_" + re.sub(r"\W", "_", self.id).upper())
+        r = env or self.root
+        return r if r and Path(r).is_dir() else None
+
+    def areas(self) -> list[str]:
+        return [o.area for o in self.ownership]
+
+    def owner_for_area(self, area: str) -> Ownership | None:
+        return next((o for o in self.ownership if o.area == area), None)
 
     def owner_for(self, text: str) -> Ownership | None:
         low = text.lower()
@@ -97,6 +112,7 @@ def load_team(path: Path, registry: HiveRegistry | None = None) -> Team:
         ownership=[Ownership(o["area"], o["owner"], o.get("reviewer"), list(o.get("keywords", [])))
                    for o in data.get("ownership", [])],
         handoffs=list(data.get("handoffs", [])), path=path, memory=data.get("memory"),
+        root=(data.get("workspace") or {}).get("root") if isinstance(data.get("workspace"), dict) else None,
     )
 
 

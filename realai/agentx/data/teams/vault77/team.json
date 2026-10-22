@@ -1,6 +1,10 @@
 {
   "id": "vault77",
   "source": "Unwrenchable/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS .github/agents + agent-network.md",
+  "workspace": {
+    "root": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+    "access": "read-only"
+  },
   "lead": "vault-77-overseer",
   "lead_file": "agents/my-agent.agent.md",
   "memory": "memory.md",

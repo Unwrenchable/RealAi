@@ -48,12 +48,48 @@ def local_token() -> str:
 
 
 def _headers() -> dict[str, str]:
-    h = {"Content-Type": "application/json"}
+    # X-RealAI-Tools: off = the sanctioned IDE-client switch: the hive must not run its own
+    # natural-mode tools / live_exec / model-write hooks on agent turns (our tools are read-only fs).
+    h = {"Content-Type": "application/json", "X-RealAI-Tools": "off", "X-RealAI-Memory": "off"}
     tok = local_token()
     if tok:
         h["X-RealAI-Token"] = tok
         h["Authorization"] = f"Bearer {tok}"
     return h
+
+
+NEUTRAL_TURN = "Reply now with exactly one JSON object as specified above, and nothing else."
+NEUTRAL_TURN_ARRAY = "Output only the JSON array described above."
+# Both fixed strings were checked against the hive natural-mode triggers (repo/write/patch/agent asks): no match.
+
+
+def fold_messages(messages: list[dict[str, str]]) -> list[dict[str, str]]:
+    """Put the whole agent transcript in the system message and end on a neutral user turn.
+
+    The live hive runs "natural mode" on the LAST user message (Craft inspect, and for
+    fix/patch/write asks it can apply model /write blocks to its own workspace). Tool results
+    contain arbitrary file text, so they must never be the last user message. A fixed neutral
+    turn ("Continue.") never triggers natural grounding, keeping agent turns read-only.
+    """
+    if len(messages) == 1 and messages[0].get("role") == "user" and len(messages[0].get("content", "")) < 4000:
+        lines = [f"{m.get('role', 'user').upper()}: {m.get('content', '')}" for m in messages]
+    else:
+        lines = []
+        for m in messages:
+            role = m.get("role", "user")
+            lines.append(m.get("content", "") if role == "system" else f"[{role}] {m.get('content', '')}")
+    last = messages[-1].get("content", "") if messages else ""
+    turn = NEUTRAL_TURN_ARRAY if "JSON array" in last else NEUTRAL_TURN
+    return [{"role": "system", "content": "\n\n".join(lines)}, {"role": "user", "content": turn}]
+
+
+def is_degenerate(text: str) -> bool:
+    """True for broken model output such as '??????' (seen when the backend is unhealthy)."""
+    t = "".join((text or "").split())
+    if len(t) < 8:
+        return False
+    junk = sum(1 for ch in t if ch in "?\ufffd")
+    return junk / len(t) > 0.6
 
 
 class HiveProvider:
@@ -63,6 +99,7 @@ class HiveProvider:
         self.base = base or hive_base()
         self.timeout = timeout or float(os.environ.get("REALAI_HIVE_TIMEOUT", "120"))
         self._up: bool | None = None
+        self.last_error: str | None = None
 
     def available(self, refresh: bool = False) -> bool:
         if self._up is not None and not refresh:
@@ -73,6 +110,28 @@ class HiveProvider:
         except Exception:
             self._up = False
         return self._up
+
+    def chat(self, messages: list[dict[str, str]], max_tokens: int | None = None) -> str:
+        """Raw multi-turn chat for the tool loop. Returns assistant text ('' on error)."""
+        body: dict[str, Any] = {"messages": fold_messages(messages), "stream": False, "temperature": 0.2}
+        if max_tokens:
+            body["max_tokens"] = max_tokens
+        if os.environ.get("REALAI_DEFAULT_MODEL"):
+            body["model"] = os.environ["REALAI_DEFAULT_MODEL"]
+        req = urllib.request.Request(self.base + "/v1/chat/completions", data=json.dumps(body).encode("utf-8"),
+                                     headers=_headers(), method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=self.timeout) as r:
+                data = json.loads(r.read().decode("utf-8") or "{}")
+            text = str(data["choices"][0]["message"]["content"] or "")
+        except Exception:  # noqa: BLE001
+            self.last_error = "hive_unreachable"
+            return ""
+        if is_degenerate(text):
+            self.last_error = "degenerate_output"
+            return ""
+        self.last_error = None
+        return text
 
     def complete(self, prompt: str, context: dict[str, Any] | None = None, dry_run: bool = False) -> dict[str, Any]:
         ctx = context or {}
@@ -99,6 +158,8 @@ class HiveProvider:
             content = data["choices"][0]["message"]["content"]
         except Exception:
             content = data.get("content") or data.get("response") or ""
+        if is_degenerate(str(content)):
+            return {"provider": self.name, "error": "degenerate model output", "content": ""}
         return {"provider": self.name, "content": content, "model": data.get("model")}
 
 
