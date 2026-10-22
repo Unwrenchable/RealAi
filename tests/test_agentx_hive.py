@@ -10,6 +10,12 @@ from realai.agentx.hive.converters import agent_md_to_manifest, hive_role_json_t
 from realai.agentx.hive.registry import load_registry
 
 
+@pytest.fixture(autouse=True)
+def _no_live_hive(monkeypatch):
+    """Keep these unit tests offline even when a real hive is up on :8001."""
+    monkeypatch.setenv("REALAI_AGENTX_USE_HIVE", "0")
+
+
 def test_front_matter_parser_handles_folded_and_lists(tmp_path):
     p = tmp_path / "x.agent.md"
     p.write_text("---\nname: WastlandQA\ndescription: >\n  Master QA tester\n  for the wasteland\n"
