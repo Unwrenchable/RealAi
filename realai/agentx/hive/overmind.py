@@ -12,6 +12,7 @@ from realai.agentx.engine.router import AgentRouter
 from realai.agentx.providers.router import ProviderRouter
 
 from .governance import CapabilityGuardian
+from .hive_client import HiveProvider, pick_provider
 from .registry import HiveRegistry, load_registry
 from .teams import Team, load_teams
 
@@ -53,6 +54,8 @@ class Overmind:
     teams: dict[str, Team] | None = None
     guardian: CapabilityGuardian = field(default_factory=CapabilityGuardian)
     dry_run: bool = True
+    use_hive: bool | None = None  # None -> REALAI_AGENTX_USE_HIVE (default on)
+    hive: HiveProvider | None = None
 
     def __post_init__(self) -> None:
         if self.teams is None:
@@ -81,10 +84,18 @@ class Overmind:
             raw = self.registry.raw.get(r["agent"], {"id": r["agent"]})
             access = self.guardian.check(raw)
             m = self.registry.manifests.get(r["agent"])
-            prov = self.providers.select_provider(list(m.routing_tags) if m else [], ["local"])
-            out = prov.complete(step, {"role": raw.get("role", ""), "tools": []}, self.dry_run)
+            tags = list(m.routing_tags) if m else []
+            prov, fallback = pick_provider(tags, self.use_hive, self.hive)
+            if fallback and self.hive is None and self.use_hive is not False:
+                self.use_hive = False  # hive down: stop probing for the rest of this run
+            # Placeholder stays dry-run; a live hive call is real (local model, no cloud keys).
+            out = prov.complete(step, {"role": raw.get("role", ""), "tools": []}, self.dry_run if fallback else False)
+            if out.get("error") and not fallback:
+                prov = self.providers.select_provider(tags, ["local"])
+                out = prov.complete(step, {"role": raw.get("role", ""), "tools": []}, self.dry_run)
+                fallback = True
             results.append({"step": step, **r, "profile": access.profile, "provider": prov.name,
-                            "output": out.get("content") or out.get("response")})
+                            "fallback": fallback, "output": out.get("content") or out.get("response")})
         summary = summarize(results)
         mem = remember(memory_ns, summary, {"goal": goal[:200], "team": team_id, "ts": time.time()})
         return {"goal": goal, "team": team_id, "steps": results, "summary": summary, "memory": mem}

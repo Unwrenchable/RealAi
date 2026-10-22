@@ -24,15 +24,6 @@
    ]
   },
   {
-   "sha256": "7417624e0dac55da460c8452b630af18af6a2a66a5dd57cef7a311ae15e06266",
-   "canonical": "abilities/hive_memory.py",
-   "why": "prior: ONE_TREE winner: product-root abilities/ (realai/abilities is a compat shim, DO_NOT_PARK)",
-   "duplicates": [
-    "realai/memory/hive_memory.py",
-    "realai/memory/memory/hive_memory.py"
-   ]
-  },
-  {
    "sha256": "cd48fe36d80504e44f0e31dc6dd537335c4b7444ab1361499aa1dd641801dbfd",
    "canonical": "abilities/memory_learning.py",
    "why": "prior: ONE_TREE winner: product-root abilities/ (realai/abilities is a compat shim, DO_NOT_PARK)",
@@ -306,7 +297,7 @@
   },
   {
    "sha256": "0ff695d2f38facac2863ab97a58b649ae43c7956fcddbffcd6af8200194b1ea8",
-   "canonical": "agent_tools/agents_impl/code_engineer_agent.py",
+   "canonical": "agent_tools/agents_impl/code_engineer_agent_legacy.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
     "modules/agents_advanced/code_engineer_agent.py"
@@ -314,7 +305,7 @@
   },
   {
    "sha256": "7c6a8d36c2334894efa799f712b4c0dec21e8b7ab89e00e02a95b8b2d4d79af5",
-   "canonical": "agent_tools/agents_impl/memory_summarizer_agent.py",
+   "canonical": "agent_tools/agents_impl/memory_summarizer_agent_legacy.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
     "realai/memory/agents_impl/memory_summarizer_agent.py"
@@ -325,14 +316,14 @@
    "canonical": "agent_tools/anthropic.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
-    "agent_tools/providers/anthropic.py",
+    "agent_tools/providers/anthropic_legacy.py",
     "realai/agent_tools_gold/providers/anthropic.py",
     "realai/agentx/providers/anthropic.py"
    ]
   },
   {
    "sha256": "55119795fa9ad5a0c0b6ee29ef0648d16cc21e02fb7673261917fcbaa7649e88",
-   "canonical": "agent_tools/cli.py",
+   "canonical": "agent_tools/cli_legacy.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
     "realai/agent_tools_gold/cli.py",
@@ -344,14 +335,14 @@
    "canonical": "agent_tools/crypto.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
-    "agent_tools/tooling/crypto.py",
+    "agent_tools/tooling/crypto_legacy.py",
     "realai/agent_tools_gold/tooling/crypto.py",
     "realai/agentx/tooling/crypto.py"
    ]
   },
   {
    "sha256": "8e99f16ef9fb6f0b8eff0b253832e9c79d8cc91cdb90bd8bd612348a8887a7e5",
-   "canonical": "agent_tools/dashboard.py",
+   "canonical": "agent_tools/dashboard_legacy.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
     "realai/agent_tools_gold/dashboard.py"
@@ -359,7 +350,7 @@
   },
   {
    "sha256": "016fbcfff1e0ded031d5151961f7f2ac07ee640d3283d54725649e63954458d9",
-   "canonical": "agent_tools/engine/executor.py",
+   "canonical": "agent_tools/engine/executor_legacy.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
     "realai/agent_tools_gold/engine/executor_legacy.py",
@@ -367,35 +358,67 @@
    ]
   },
   {
-   "sha256": "2692ba50185acfb6b6cc72e93a6ec8d94077abb1a1b5638c7b8f713d9717b123",
+   "sha256": "f35281ec5ec4366b971718b7b32e1d7ea10656ddf04f2d63bfc22a3d41e0ab9c",
    "canonical": "agent_tools/loader.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
-    "agent_tools/engine/loader.py",
+    "agent_tools/engine/loader.py"
+   ]
+  },
+  {
+   "sha256": "2692ba50185acfb6b6cc72e93a6ec8d94077abb1a1b5638c7b8f713d9717b123",
+   "canonical": "agent_tools/loader_legacy.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/engine/loader_legacy.py",
     "realai/agent_tools_gold/engine/loader_legacy.py"
    ]
   },
   {
-   "sha256": "c61b571013ea33197dcc9337a9e878eca8869f344f4011e3cda610970e2ef870",
+   "sha256": "ee484f832a8a29426b5742f4034df7784bffe2497c663aa51aa9cff0c55b9eda",
    "canonical": "agent_tools/logger.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
-    "agent_tools/engine/logger.py",
+    "agent_tools/engine/logger.py"
+   ]
+  },
+  {
+   "sha256": "c61b571013ea33197dcc9337a9e878eca8869f344f4011e3cda610970e2ef870",
+   "canonical": "agent_tools/logger_legacy.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/engine/logger_legacy.py",
     "realai/agent_tools_gold/engine/logger_legacy.py",
     "realai/agentx/engine/logger.py"
    ]
   },
   {
+   "sha256": "ad320f219f7273199b3d25e4fdb4f26a6b8e3d777de360bfa7b5ef9fab13c8cc",
+   "canonical": "agent_tools/memory.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/engine/memory.py"
+   ]
+  },
+  {
    "sha256": "1e0da88ba3496c52c4536bfbf5d908df8f7afcee1be15f6599ae1a337274a1c0",
-   "canonical": "agent_tools/engine/memory.py",
+   "canonical": "agent_tools/engine/memory_legacy.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
     "realai/memory/engine/memory.py"
    ]
   },
   {
+   "sha256": "cf0366c788129da21b465deff3d3b07536f24f89ba675a2c414d134d24f7194d",
+   "canonical": "agent_tools/router.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/engine/router.py"
+   ]
+  },
+  {
    "sha256": "ec0a7630058f70fbcb2a03645c29709669384b3ed1f93771c6a66c391787791e",
-   "canonical": "agent_tools/engine/router.py",
+   "canonical": "agent_tools/engine/router_legacy.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
     "realai/agent_tools_gold/engine/router_legacy.py",
@@ -404,7 +427,7 @@
   },
   {
    "sha256": "23567ab9728634b4cabe591ed0bf0cdc16068f4b3701e6b33122723b1da9f35a",
-   "canonical": "agent_tools/executor.py",
+   "canonical": "agent_tools/executor_legacy.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
     "realai/agent_tools_gold/executor_legacy.py",
@@ -425,7 +448,7 @@
    "canonical": "agent_tools/filesystem.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
-    "agent_tools/tooling/filesystem.py",
+    "agent_tools/tooling/filesystem_legacy.py",
     "realai/agent_tools_gold/tooling/filesystem.py"
    ]
   },
@@ -434,7 +457,7 @@
    "canonical": "agent_tools/groq.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
-    "agent_tools/providers/groq.py",
+    "agent_tools/providers/groq_legacy.py",
     "realai/agent_tools_gold/providers/groq.py",
     "realai/agentx/providers/groq.py"
    ]
@@ -444,14 +467,14 @@
    "canonical": "agent_tools/http.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
-    "agent_tools/tooling/http.py",
+    "agent_tools/tooling/http_legacy.py",
     "realai/agent_tools_gold/tooling/http.py",
     "realai/agentx/tooling/http.py"
    ]
   },
   {
    "sha256": "38a2ad666056fffeb33fcb7496df29dba3d54564ce6460fad2c9fde931669742",
-   "canonical": "agent_tools/importer.py",
+   "canonical": "agent_tools/importer_legacy.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
     "agent_tools/realai-ish_importer.py",
@@ -465,14 +488,14 @@
    "canonical": "agent_tools/local.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
-    "agent_tools/providers/local.py",
+    "agent_tools/providers/local_legacy.py",
     "realai/agent_tools_gold/providers/local.py",
     "realai/agentx/providers/local.py"
    ]
   },
   {
    "sha256": "be07156650dd5da949d68ac76b5d0a4f2ebaa0cf2717e9f86a7bed3827d8ea69",
-   "canonical": "agent_tools/memory.py",
+   "canonical": "agent_tools/memory_legacy.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
     "realai/engine/memory_legacy.py"
@@ -480,7 +503,7 @@
   },
   {
    "sha256": "0f7234dcef38bf39f41283cab4af81f7cd1a661d04b235c44266417d534a6211",
-   "canonical": "agent_tools/models.py",
+   "canonical": "agent_tools/models_legacy.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
     "realai/agent_tools_gold/models.py",
@@ -492,7 +515,7 @@
    "canonical": "agent_tools/openai.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
-    "agent_tools/providers/openai.py",
+    "agent_tools/providers/openai_legacy.py",
     "realai/agent_tools_gold/providers/openai.py",
     "realai/agentx/providers/openai.py"
    ]
@@ -518,35 +541,35 @@
    ]
   },
   {
-   "sha256": "10296daa5c743f4b7854afc6dfdc80fbeb08387f0c637ff310d130132f2e9bf6",
-   "canonical": "agent_tools/realai.py",
-   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
-   "duplicates": [
-    "agent_tools/providers/realai.py",
-    "realai/agent_tools_gold/providers/realai.py"
-   ]
-  },
-  {
    "sha256": "23a02d2fa95e1d379907d89b94f3099c7bae67e1e8ae816c7a257941954de071",
    "canonical": "realai/providers/realai_embeddings.py",
    "why": "prior: AUTHORITY.md: provider config gold is realai/providers",
    "duplicates": [
-    "agent_tools/providers/realai_embeddings.py",
+    "agent_tools/providers/realai_embeddings_legacy.py",
     "agent_tools/realai_embeddings.py"
    ]
   },
   {
-   "sha256": "1aba736ea9258b3db31d681121d30a93dc643085a55308714f2293d92a9e2a5a",
-   "canonical": "agent_tools/router.py",
+   "sha256": "10296daa5c743f4b7854afc6dfdc80fbeb08387f0c637ff310d130132f2e9bf6",
+   "canonical": "agent_tools/realai.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
-    "agent_tools/providers/router.py",
+    "agent_tools/providers/realai_legacy.py",
+    "realai/agent_tools_gold/providers/realai.py"
+   ]
+  },
+  {
+   "sha256": "1aba736ea9258b3db31d681121d30a93dc643085a55308714f2293d92a9e2a5a",
+   "canonical": "agent_tools/router_legacy.py",
+   "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
+   "duplicates": [
+    "agent_tools/providers/router_legacy.py",
     "realai/agent_tools_gold/providers/router_legacy.py"
    ]
   },
   {
    "sha256": "f54d8a6d5d8e695bd0b3d0a36714406320aa4e2764a097878e6912539135c872",
-   "canonical": "agent_tools/runtime.py",
+   "canonical": "agent_tools/runtime_legacy.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
     "realai/agent_tools_gold/runtime_legacy.py",
@@ -558,7 +581,7 @@
    "canonical": "agent_tools/solana.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
-    "agent_tools/tooling/solana.py",
+    "agent_tools/tooling/solana_legacy.py",
     "modules/orchestrators/orchestrator_solana.py",
     "modules/orchestrators/orchestrator_solana_127.py",
     "realai/agentx/tooling/solana.py",
@@ -567,7 +590,7 @@
   },
   {
    "sha256": "9f3adf257fbf92802d1c5658eaea30b90127ae861e8be154443e3ea4fb68ffa6",
-   "canonical": "agent_tools/tooling/registry.py",
+   "canonical": "agent_tools/tooling/registry_legacy.py",
    "why": "prior: NESTED_REALAI_PARK_AUDIT: live imports use agent_tools.* (realai/agent_tools_gold is the gold shelf twin)",
    "duplicates": [
     "realai/agent_tools_gold/tooling/registry_legacy.py"
@@ -1640,6 +1663,14 @@
     "realai/scanners/dds3_deep_gold_map.py",
     "scanners/dds3_deep_gold_map.py",
     "scripts/dds3_deep_gold_map.py"
+   ]
+  },
+  {
+   "sha256": "7417624e0dac55da460c8452b630af18af6a2a66a5dd57cef7a311ae15e06266",
+   "canonical": "realai/memory/hive_memory.py",
+   "why": "heuristic: no prior decision and no importers; non-snapshot, realai package, shallowest",
+   "duplicates": [
+    "realai/memory/memory/hive_memory.py"
    ]
   },
   {

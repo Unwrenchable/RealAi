@@ -1,37 +1,19 @@
-from dataclasses import dataclass, field
-from typing import Any
+"""DEPRECATED shim (2026-10-22): forwards to the canonical engine `realai.agentx.models`.
+
+The previous fork is kept unchanged as `models_legacy.py` for anything that
+needs a name only it defines. New code should import `realai.agentx.models` directly.
+"""
+from realai.agentx.models import *  # noqa: F401,F403
+import importlib as _importlib
+
+_canon = _importlib.import_module("realai.agentx.models")
 
 
-@dataclass(slots=True)
-class AccessProfile:
-    name: str
-    tools: list[str]
-    write: bool
-    network: bool
-    secrets: str
-    notes: str = ""
-
-
-@dataclass(slots=True)
-class AgentDefinition:
-    id: str
-    role: str
-    description: str
-    tags: list[str] = field(default_factory=list)
-    capabilities: list[str] = field(default_factory=list)
-    required_tools: list[str] = field(default_factory=list)
-    preferred_profile: str = "balanced"
-    risk_level: str = "medium"
-
-    @classmethod
-    def from_dict(cls, value: dict[str, Any]) -> "AgentDefinition":
-        return cls(
-            id=value["id"],
-            role=value["role"],
-            description=value.get("description", ""),
-            tags=value.get("tags", []),
-            capabilities=value.get("capabilities", []),
-            required_tools=value.get("required_tools", []),
-            preferred_profile=value.get("preferred_profile", "balanced"),
-            risk_level=value.get("risk_level", "medium"),
-        )
+def __getattr__(name):
+    if name.startswith("__"):
+        raise AttributeError(name)
+    try:
+        return getattr(_canon, name)
+    except AttributeError:
+        _legacy = _importlib.import_module(__name__ + "_legacy")
+        return getattr(_legacy, name)
