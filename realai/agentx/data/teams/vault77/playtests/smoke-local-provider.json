@@ -1,0 +1,6 @@
+{
+  "id": "smoke-local-provider",
+  "area": "qa",
+  "input": "playtest wrist ui boot",
+  "expected_contains": "local"
+}
