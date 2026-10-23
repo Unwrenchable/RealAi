@@ -11,7 +11,7 @@ ABILITY = {
     "name": "hive_memory",
     "type": "ability",
     "status": "LIVE",
-    "source": "agent_tools.engine.memory",
+    "source": "realai.agentx.engine.memory",  # was agent_tools.engine.memory (now a shim)
     "dest": "abilities/hive_memory.py",
     "capabilities": ["kv_memory", "vector_memory", "agent_state", "world_model_deltas"],
     "secrets_policy": "none — no wallet keys in memory payloads",
@@ -23,7 +23,8 @@ def _root() -> Path:
 
 
 def _adapter(kind: str):
-    from agent_tools.engine.memory import (
+    # Canonical engine; agent_tools.engine.memory is a deprecated shim forwarding here.
+    from realai.agentx.engine.memory import (
         ChromaVectorMemoryAdapter,
         JsonFileMemoryAdapter,
         RedisMemoryAdapter,

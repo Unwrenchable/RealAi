@@ -1,0 +1,120 @@
+{
+  "id": "guns-gear",
+  "source": "Unwrenchable/Guns-gear .github/agents",
+  "lead": "lrp-website-builder",
+  "lead_file": "agents/LRP_Website_Builder.md",
+  "members": [
+    {
+      "id": "catalog-data",
+      "file": "agents/catalog-data.agent.md"
+    },
+    {
+      "id": "performance",
+      "file": "agents/performance.agent.md"
+    },
+    {
+      "id": "qa-validator",
+      "file": "agents/qa-validator.agent.md"
+    },
+    {
+      "id": "seo-content",
+      "file": "agents/seo-content.agent.md"
+    },
+    {
+      "id": "ui-ux",
+      "file": "agents/ui-ux.agent.md"
+    }
+  ],
+  "ownership": [
+    {
+      "area": "catalog",
+      "owner": "catalog-data",
+      "reviewer": "qa-validator",
+      "keywords": [
+        "catalog",
+        "product",
+        "inventory",
+        "data"
+      ]
+    },
+    {
+      "area": "performance",
+      "owner": "performance",
+      "reviewer": "qa-validator",
+      "keywords": [
+        "performance",
+        "speed",
+        "lighthouse"
+      ]
+    },
+    {
+      "area": "seo",
+      "owner": "seo-content",
+      "reviewer": "lrp-website-builder",
+      "keywords": [
+        "seo",
+        "content",
+        "meta"
+      ]
+    },
+    {
+      "area": "ui",
+      "owner": "ui-ux",
+      "reviewer": "qa-validator",
+      "keywords": [
+        "ui",
+        "ux",
+        "layout",
+        "design"
+      ]
+    },
+    {
+      "area": "qa",
+      "owner": "qa-validator",
+      "reviewer": "lrp-website-builder",
+      "keywords": [
+        "test",
+        "validate",
+        "qa"
+      ]
+    }
+  ],
+  "handoffs": [
+    {
+      "from": "lrp-website-builder",
+      "to": "catalog-data"
+    },
+    {
+      "from": "lrp-website-builder",
+      "to": "performance"
+    },
+    {
+      "from": "lrp-website-builder",
+      "to": "seo-content"
+    },
+    {
+      "from": "lrp-website-builder",
+      "to": "ui-ux"
+    },
+    {
+      "from": "catalog-data",
+      "to": "qa-validator",
+      "condition": "review"
+    },
+    {
+      "from": "performance",
+      "to": "qa-validator",
+      "condition": "review"
+    },
+    {
+      "from": "seo-content",
+      "to": "qa-validator",
+      "condition": "review"
+    },
+    {
+      "from": "ui-ux",
+      "to": "qa-validator",
+      "condition": "review"
+    }
+  ]
+}

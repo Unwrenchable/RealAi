@@ -42,7 +42,19 @@ def _product_root() -> Path:
 
 
 def load_github_hive_agents() -> List[Dict[str, Any]]:
-    """Load `.github/agents/*.json` hive manifests."""
+    """Load hive role manifests via the canonical agentx loader (AgentManifestLoader + converters).
+
+    Returns the legacy dict shape (``{"id": ..., ...}``) so register_routes keeps working.
+    Falls back to the previous bridge / glob loader if agentx is unavailable.
+    """
+    try:
+        from realai.agentx.hive.registry import load_registry
+
+        roles = load_registry(include_catalog=False).hive_role_dicts()
+        if roles:
+            return roles
+    except Exception:
+        pass
     try:
         from realai.v3_runtime_bridge import hive_agents_status
 

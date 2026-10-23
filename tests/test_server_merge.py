@@ -100,4 +100,6 @@ def test_start_realai_bat_points_at_real_server_entry():
     assert "realai_cli serve" not in bat and "realai_cli doctor" not in bat
     assert '-m realai.server.app --host 127.0.0.1 --port 8000' in bat
     src = (Path(__file__).resolve().parents[1] / "realai" / "server" / "app.py").read_text(encoding="utf-8")
-    assert "_ap.add_argument('--host', default='0.0.0.0')" in src and "main(_a.host, _a.port)" in src
+    # Since #177 the :8000 server defaults to loopback (REALAI_SERVER_HOST may override).
+    assert "_ap.add_argument('--host', default=os.environ.get('REALAI_SERVER_HOST') or '127.0.0.1')" in src
+    assert "default='0.0.0.0'" not in src and "main(_a.host, _a.port)" in src

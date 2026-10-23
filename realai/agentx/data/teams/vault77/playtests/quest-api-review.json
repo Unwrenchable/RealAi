@@ -1,0 +1,6 @@
+{
+  "id": "quest-api-review",
+  "area": "mechanics",
+  "input": "Playtest the quest system by reading its code: find the backend quest API and the frontend quest module, check how quest data is loaded and validated, and report concrete bugs citing real file paths.",
+  "expect_nonempty": true
+}
