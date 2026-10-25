@@ -21,6 +21,9 @@ class RequestValidationError(Exception):
     def __init__(self, message, status_code=400):
         super(RequestValidationError, self).__init__(message)
         self.status_code = status_code
+        # Caller-safe text we wrote ourselves; returned instead of str(exc)
+        # so no exception internals reach the client (CodeQL py/stack-trace-exposure).
+        self.public_message = '{0}'.format(message)
 
 
 def _require_dict(payload):
@@ -391,9 +394,10 @@ def dispatch_request(method, path, payload=None):
             return merged
         return 404, {'error': {'message': 'Not found'}}, 'application/json'
     except RequestValidationError as exc:
-        return exc.status_code, {'error': {'message': str(exc)}}, 'application/json'
+        return exc.status_code, {'error': {'message': exc.public_message}}, 'application/json'
     except ValueError as exc:
-        return 404, {'error': {'message': str(exc)}}, 'application/json'
+        logger.info('Router lookup failed for %s %s: %s', method, path, exc)
+        return 404, {'error': {'message': 'Not found'}}, 'application/json'
     except Exception as exc:
         logger.exception('Unhandled server router exception: %s', exc)
         return 500, {'error': {'message': 'Internal server error'}}, 'application/json'

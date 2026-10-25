@@ -39,8 +39,9 @@ def handle_provider_route(payload: Dict[str, Any]) -> Tuple[int, Dict[str, Any],
     try:
         model_cfg = get_model_config(model_name)
         provider = provider_for_model(model_name)
-    except ValueError as exc:
-        return 404, {"error": {"message": str(exc)}}, JSON
+    except ValueError:
+        # Generic text (no exception internals in responses, CodeQL py/stack-trace-exposure).
+        return 404, {"error": {"message": "Unknown model"}}, JSON
     health = provider.get("health") or {}
     return 200, {
         "model": model_name,

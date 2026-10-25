@@ -23,6 +23,7 @@ Routes:
 """
 from __future__ import annotations
 
+import logging
 import os
 from typing import Any, Dict, Optional, Tuple
 
@@ -198,7 +199,9 @@ def _dispatch_runtime(method: str, path: str, body: Dict[str, Any]):
                 doc = (mod.__doc__ or "").strip().splitlines()
                 data.append({"name": name, "metadata": {"description": doc[0] if doc else "", "module": mod.__name__}})
             except Exception as exc:  # report, don't hide, broken plugins
-                data.append({"name": name, "metadata": {"error": str(exc)}})
+                # Report the failure class only; details go to the server log.
+                logging.getLogger(__name__).warning("plugin %s failed to load: %s", name, exc)
+                data.append({"name": name, "metadata": {"error": "plugin failed to load ({0})".format(type(exc).__name__)}})
         return 200, {"object": "list", "data": data}, JSON
 
     if method == "POST" and path == "/v1/plugins/execute":

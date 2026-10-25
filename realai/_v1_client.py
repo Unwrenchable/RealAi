@@ -2319,9 +2319,11 @@ class RealAI:
             except Exception as e:
                 # Log the error so operators can diagnose key/network problems.
                 print(f"[RealAI] API call failed ({self.provider}): {e}")
-                _api_error = str(e)
+                # Return only the exception class to callers; the full message
+                # (may carry URLs, key fragments, tracebacks) stays in the log above.
+                _api_error = f"{type(e).__name__} from upstream provider"
                 placeholder_content = (
-                    f"API call to {self.provider} failed: {_api_error}. "
+                    f"API call to {self.provider} failed ({type(e).__name__}). "
                     "Check that your API key is correct and that you have network access."
                 )
                 _prompt_tokens = sum(len(msg.get("content", "").split()) for msg in messages_to_send)

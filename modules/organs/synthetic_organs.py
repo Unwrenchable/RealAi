@@ -186,9 +186,14 @@ class SyntheticOrgansRuntime:
         return None
 
     def curate_curiosity(self, target: Optional[str] = None, prompt: Optional[str] = None) -> Dict[str, Any]:
-        root = Path(target or str(self.root)).expanduser().resolve()
-        if not root.exists() or not within_home(root, self.root):
-            root = self.root
+        # Normalize, then confine to the runtime root before touching the FS
+        # (CodeQL py/path-injection): anything outside falls back to the root.
+        home = os.path.realpath(str(self.root))
+        root = Path(home)
+        if target:
+            cand = os.path.realpath(os.path.expanduser(target))
+            if cand.startswith(home + os.sep) and os.path.exists(cand):
+                root = Path(cand)
 
         items: List[Dict[str, Any]] = []
         for path in _iter_files(root):
@@ -234,9 +239,14 @@ class SyntheticOrgansRuntime:
         }
 
     def archeology(self, target: Optional[str] = None) -> Dict[str, Any]:
-        root = Path(target or str(self.root)).expanduser().resolve()
-        if not root.exists() or not within_home(root, self.root):
-            root = self.root
+        # Normalize, then confine to the runtime root before touching the FS
+        # (CodeQL py/path-injection): anything outside falls back to the root.
+        home = os.path.realpath(str(self.root))
+        root = Path(home)
+        if target:
+            cand = os.path.realpath(os.path.expanduser(target))
+            if cand.startswith(home + os.sep) and os.path.exists(cand):
+                root = Path(cand)
 
         artifacts = []
         for path in _iter_files(root):
