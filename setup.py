@@ -18,14 +18,12 @@ setup(
         # because they live under realai-core/ (hyphenated) via package_dir
         # aliasing.  They must be listed explicitly.
         'realai_core',
-        'realai_core.agents_impl',
         'realai_core.engine',
         'realai_core.providers',
         'realai_core.tooling',
     ],
     package_dir={
         'realai_core':               'realai-core/agent_tools',
-        'realai_core.agents_impl':   'realai-core/agent_tools/agents_impl',
         'realai_core.engine':        'realai-core/agent_tools/engine',
         'realai_core.providers':     'realai-core/agent_tools/providers',
         'realai_core.tooling':       'realai-core/agent_tools/tooling',

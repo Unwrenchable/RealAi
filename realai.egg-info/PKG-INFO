@@ -4,6 +4,7 @@ Version: 2.0.0
 Summary: The limitless AI that can truly do anything - from Web3 to groceries, therapy to business building
 Home-page: https://github.com/Unwrenchable/realai
 Author: RealAI Team
+License: MIT
 Classifier: Development Status :: 4 - Beta
 Classifier: Intended Audience :: Developers
 Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
@@ -14,19 +15,13 @@ Classifier: Programming Language :: Python :: 3.9
 Classifier: Programming Language :: Python :: 3.10
 Classifier: Programming Language :: Python :: 3.11
 Classifier: Programming Language :: Python :: 3.12
-Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
-Requires-Python: >=3.7
+Requires-Python: >=3.12,<4.0
 Description-Content-Type: text/markdown
 License-File: LICENSE
-Dynamic: author
-Dynamic: classifier
-Dynamic: description
-Dynamic: description-content-type
 Dynamic: home-page
 Dynamic: license-file
 Dynamic: requires-python
-Dynamic: summary
 
 # RealAI - The Limitless AI That Can Do Anything
 
@@ -58,7 +53,9 @@ response = client.chat.create(
 # Powered by YOUR local AI model! 🎉
 ```
 
-**[📖 Local AI Setup Guide](LOCAL_AI_GUIDE.md)** - Be your own AI in 5 minutes!
+**[📖 See QUICKSTART.md for full local AI setup](QUICKSTART.md)**
+
+**[🏗️ See docs/architecture.md for the RealAI Architecture Blueprint](docs/architecture.md)**
 
 ### Why Run Your Own AI?
 
@@ -137,27 +134,28 @@ pip install -e .   # -e = editable/development mode; the dot (.) means "install 
 pip install git+https://github.com/Unwrenchable/realai.git
 ```
 
-## One-Command Local Start
-
-On Windows, from the repository root:
-
-```powershell
-.\start_realai.bat
-```
-
-That launcher:
-
-- checks the local Python environment
-- runs `realai doctor`
-- starts the RealAI server at `http://127.0.0.1:8000`
-
-If you want to run the server manually instead:
-
-```powershell
-.\.venv\Scripts\python.exe -m realai.cli.realai_cli serve
-```
-
 ## Quick Start
+
+## Repository Structure
+
+```text
+realai/
+  server/      # structured inference server entrypoints
+  models/      # model registry + placeholder weight directories
+  training/    # extraction, dataset, fine-tune, and eval pipeline helpers
+  sdk/python/  # Python SDK facade
+  cli/         # structured CLI entrypoints
+  datasets/    # raw and processed training artifacts
+```
+
+## Structured Server Entry Points
+
+- `python -m realai.server.app` starts the minimal structured inference server with no extra dependencies.
+- If you prefer an ASGI stack, install `uvicorn` and point it at `realai.server.app:app`.
+- The structured server exposes `POST /v1/chat/completions`, `POST /v1/embeddings`, `GET /health`, and `GET /metrics`.
+- `realai/models/registry.json` is the provider model registry; it now maps chat models to vLLM backends and embeddings to Hugging Face sentence-transformers, with graceful local fallbacks when optional ML packages are not installed.
+- `realai/sdk/python/realai_client.py` and `realai/cli/realai_cli.py` call the structured server over HTTP so the SDK, CLI, and frontend can share the same provider surface.
+- To run the provider stack locally, install the optional server dependencies (`fastapi`, `uvicorn`, `vllm`, `sentence-transformers`, `prometheus_client`, `click`) and start `uvicorn realai.server.app:app --reload --port 8000`.
 
 ```python
 from realai import RealAIClient
@@ -595,7 +593,7 @@ pip install pyinstaller
 cd realai
 
 # Build the executable
-pyinstaller realai_launcher.spec
+pyinstaller --onefile --windowed realai_gui.py --name RealAI
 
 # Output: dist\RealAI.exe — double-click to launch
 ```
@@ -718,6 +716,36 @@ The repository includes working implementations (or safe, local integrations) fo
 
 Note: Some capabilities in the README (real-world payments, ordering groceries, production-grade Web3 interactions, hosted ASR/TTS pipelines) are simulated and require implementing external integrations to perform real effects. I can implement those integrations incrementally — tell me which to prioritize next.
 
+## 📊 Capability Status Matrix
+
+| Capability | Status | Notes |
+|---|---|---|
+| Chat Completion | ✅ Implemented | Full AI + fallback stub |
+| Text Generation | ✅ Implemented | Full AI + fallback stub |
+| Image Generation | ✅ Implemented | DALL-E + stub fallback |
+| Video Generation | 🔄 Partial | Stub with metadata |
+| Image Analysis | ✅ Implemented | Vision + stub fallback |
+| Code Generation | ✅ Implemented | AI + syntax highlighting |
+| Code Execution | ✅ Implemented | Sandboxed Python subprocess |
+| Embeddings | ✅ Implemented | sentence-transformers or stub |
+| Audio Transcription | ✅ Implemented | OpenAI Whisper + stub |
+| Audio Generation | ✅ Implemented | TTS API + stub |
+| Translation | ✅ Implemented | AI-powered + stub |
+| Web Research | ✅ Implemented | DuckDuckGo HTML + BeautifulSoup |
+| Task Automation | ✅ Implemented | AI planning + web execution |
+| Voice Interaction | ✅ Implemented | pyaudio + AI pipeline |
+| Business Planning | ✅ Implemented | AI consultant + JSON parsing |
+| Therapy & Counseling | ✅ Implemented | CBT-based + disclaimer |
+| Web3 Integration | ✅ Implemented | web3.py + GPG signing |
+| Plugin System | ✅ Implemented | Dynamic load from plugins/ |
+| Memory & Learning | ✅ Implemented | Multi-tier memory engine |
+| Chain-of-Thought | ✅ Implemented | Step-by-step reasoning |
+| Knowledge Synthesis | ✅ Implemented | Cross-domain analysis |
+| Self-Reflection | ✅ Implemented | Meta-analysis capability |
+| Multi-Agent Orchestration | 📅 Planned | Week 3 implementation |
+| Intelligent Routing | 📅 Planned | Week 9 implementation |
+| Audit & Compliance | 📅 Planned | Week 10 implementation |
+
 ## Capabilities
 
 RealAI supports **17 comprehensive capabilities** out of the box:
@@ -743,6 +771,99 @@ RealAI supports **17 comprehensive capabilities** out of the box:
 | **Plugin System** | **Extend anywhere with plugins** | **WordPress, VSCode** |
 | **Learning/Memory** | **Learns from every interaction** | **Adaptive AI** |
 
+## 🔌 Running Offline (No API Key Required)
+
+RealAI is designed to be useful even without any API keys. Many capabilities work immediately out of the box with intelligent stub responses that mirror the real response schema.
+
+### ✅ Works Fully Offline (No API Key)
+
+| Capability | How It Works Offline |
+|---|---|
+| Chat Completion | Returns stub conversational responses |
+| Web Research | Returns structured stub findings |
+| Task Automation | AI planning with stub execution |
+| Business Planning | Returns a complete 10-section stub business plan |
+| Therapy & Counseling | Evidence-based stub support with safety disclaimers |
+| Embeddings | Uses `sentence-transformers` locally, or returns zero vectors |
+| Code Generation | Returns stub code with explanation |
+| Code Execution | Executes Python locally in a subprocess |
+| Translation | Returns stub translated text |
+| Chain-of-Thought | Returns stub reasoning steps |
+| Knowledge Synthesis | Returns stub cross-domain insights |
+| Self-Reflection | Returns stub meta-analysis |
+| Multi-Agent Orchestration | Returns stub stage outputs |
+| Plugin System | Local plugins load and run without a network |
+| Memory & Learning | Fully local multi-tier memory engine |
+
+### 🔄 Partial Offline Support
+
+| Capability | What's Needed |
+|---|---|
+| Image Generation | `OPENAI_API_KEY` for real images; stub URL returned otherwise |
+| Audio Transcription | `OPENAI_API_KEY` or local Whisper model |
+| Audio Generation (TTS) | `OPENAI_API_KEY` for cloud TTS; stub URL returned otherwise |
+| Web Research (live) | `requests` + `beautifulsoup4` for real web fetching |
+| Web3 Integration | `web3` library + `WEB3_PROVIDER_URL` |
+
+### 🏠 Local Model Support
+
+Use `provider="local"` to route all requests to a locally running model server (e.g. Ollama, LM Studio, llama.cpp):
+
+```python
+from realai import RealAI
+model = RealAI(provider="local", base_url="http://localhost:11434/v1")
+r = model.chat_completion([{"role": "user", "content": "Hello!"}])
+```
+
+Set `REALAI_LOCAL_BASE_URL` to make this the default without changing code.
+
+---
+
+## 🚀 Quick Demo Scripts
+
+All five examples below run **without any API key**:
+
+```python
+from realai import RealAI
+model = RealAI()
+
+# Example 1: Chat (no API key)
+r = model.chat_completion([{"role": "user", "content": "Hello, RealAI!"}])
+print(r["choices"][0]["message"]["content"])
+
+# Example 2: Web Research (no API key, no network needed for stub)
+r = model.web_research("quantum computing breakthroughs")
+print(r["summary"])
+
+# Example 3: Task Automation (no API key)
+r = model.automate_task("research", {"topic": "machine learning"})
+print(r["plan"])
+
+# Example 4: Business Planning (no API key)
+r = model.business_planning("tech startup")
+print(r["business_plan"]["executive_summary"])
+
+# Example 5: Therapy Support (no API key)
+r = model.therapy_counseling("support", "I feel stressed about work")
+print(r["response"])
+```
+
+Run them all at once:
+
+```bash
+python -c "
+from realai import RealAI
+m = RealAI()
+print('Chat:',       m.chat_completion([{'role':'user','content':'Hi!'}])['choices'][0]['message']['content'][:60])
+print('Research:',   m.web_research('AI trends')['summary'][:60])
+print('Task:',       m.automate_task('research', {'topic':'ML'})['plan'][:60])
+print('Business:',   m.business_planning('tech startup')['business_plan']['executive_summary'][:60])
+print('Therapy:',    m.therapy_counseling('support', 'stressed')['response'][:60])
+"
+```
+
+---
+
 ## Why RealAI?
 
 - ✅ **NO LIMITS**: Truly can do anything - the sky is the limit!
@@ -767,7 +888,6 @@ See **[DEPLOYMENT.md](DEPLOYMENT.md)** for comprehensive deployment instructions
 - 🏠 **Local Development** - Quick setup for development and testing
 - 💻 **Desktop Application** - Windows .exe with GUI and built-in server
 - 🌐 **API Server** - Deploy on any server (VPS, cloud, on-premises)
-- ☁️ **AWS Lambda** - Serverless deployment with split architecture
 - 🔧 **Configuration** - Environment variables and provider setup
 - ✅ **Testing** - Verify your deployment
 - 🛠️ **Troubleshooting** - Common issues and solutions
@@ -784,17 +904,25 @@ python -m realai.api_server
 # or: python api_server.py
 ```
 
-**AWS Lambda (Serverless):**
-```bash
-sam build
-sam deploy --guided
-```
+**Vercel (Python backend):**
+1. Import repo on [vercel.com/new](https://vercel.com/new)
+2. Set **Framework Preset** → `Other` or `Python`
+3. Leave **Root Directory** at the repo root so Vercel picks up `vercel.json`, `api/index.py`, and `requirements.txt`
+4. Add backend env vars in Vercel (for example your provider API keys)
+5. Deploy — the backend serves `/health` and `/v1/chat/completions`
+
+**Render (static frontend):**
+1. Connect the repo on Render
+2. Use the included `render.yaml`
+3. Set `NEXT_PUBLIC_REALAI_API_BASE=https://your-vercel-backend.vercel.app`
+4. Deploy the `realai-frontend` static site
 
 **Desktop App (Windows):**
 ```bash
 python realai_gui.py
 # Or build standalone .exe:
-pyinstaller realai_launcher.spec
+pip install pyinstaller
+pyinstaller --onefile --windowed realai_gui.py --name RealAI
 ```
 
 For detailed instructions, see **[DEPLOYMENT.md](DEPLOYMENT.md)**.
