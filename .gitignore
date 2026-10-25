@@ -140,3 +140,11 @@ scan_results/*gold_map*.json
 .approvals.json
 .approvals.json.audit.jsonl
 *.approvals.json.audit.jsonl
+
+# Local-only artifacts (from C:\RealAI-clean WIP sort, Oct 2026)
+*.bak-*
+_backup-*/
+realai/aura/memory_store/
+realai/memory/hive/findings.jsonl
+docs/_tmp_*
+docs/_local_*

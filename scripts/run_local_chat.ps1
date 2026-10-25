@@ -229,10 +229,13 @@ if (-not $SkipStart) {
         Log "  model: $Model  ngl=$ngl ctx=$ctx" "DarkGray"
         $vLogOut = Join-Path $Logs "vulkan.out.log"
         $vLogErr = Join-Path $Logs "vulkan.err.log"
-        Start-Detached -FilePath $Llama -ArgumentList @(
+        # Optional GPU pick for multi-GPU boxes, e.g. $env:REALAI_VULKAN_DEVICE = "Vulkan1"
+        $vDevArgs = @()
+        if ($env:REALAI_VULKAN_DEVICE) { $vDevArgs = @("--device", $env:REALAI_VULKAN_DEVICE) }
+        Start-Detached -FilePath $Llama -ArgumentList (@(
             "-m", $Model, "--host", "127.0.0.1", "--port", "$VulkanPort",
             "-c", "$ctx", "-ngl", "$ngl", "--jinja"
-        ) -WorkingDirectory (Split-Path $Llama -Parent) `
+        ) + $vDevArgs) -WorkingDirectory (Split-Path $Llama -Parent) `
           -StdoutLog $vLogOut -StderrLog $vLogErr -Title "RealAI-Vulkan"
 
         if (Wait-Url "http://127.0.0.1:$VulkanPort/health" 90 2) {

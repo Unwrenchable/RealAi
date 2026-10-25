@@ -1,22 +1,22 @@
 # RealAI Ability Surface (Phase 5F)
 
-Generated: `2026-09-19T17:49:53.974982+00:00`
+Generated: `2026-09-27T15:15:44.978245+00:00`
 
-**Coverage vs technical rundown:** **100.0%** weighted (64 LIVE, 0 PARTIAL, 0 CODE/GOLD/STUB, 0 MISSING/SOFT)
+**Coverage vs technical rundown:** **99.3%** weighted (66 LIVE, 1 PARTIAL, 0 CODE/GOLD/STUB, 0 MISSING/SOFT)
 
 > `verify_v3_matrix` pass counts = stack health, not full product ability completeness.
 
-## External gold roots (32/60 present)
+## External gold roots (24/60 present)
 
 - `OK` `C:\tools\realai` — external_scan_roots_for_abilities
-- `OK` `C:\Users\tsmit\realai` — external_scan_roots_for_abilities
+- `MISSING` `C:\Users\tsmit\realai` — external_scan_roots_for_abilities
 - `MISSING` `C:\Users\tsmit\realai\agent-tools\agent-tools-main` — external_scan_roots_for_abilities
 - `MISSING` `C:\Users\tsmit\realai\archive\agent-tools-main` — external_scan_roots_for_abilities
 - `MISSING` `C:\Users\tsmit\realai\agents` — external_scan_roots_for_abilities
 - `MISSING` `C:\Users\tsmit\realai-clean` — external_scan_roots_for_abilities
 - `MISSING` `C:\Users\tsmit\realai-clean\agents` — external_scan_roots_for_abilities
-- `OK` `C:\Users\tsmit\realai_historical_backups` — external_scan_roots_for_abilities
-- `OK` `C:\Users\tsmit\backups\realai-sync-20260508-090605` — external_scan_roots_for_abilities
+- `MISSING` `C:\Users\tsmit\realai_historical_backups` — external_scan_roots_for_abilities
+- `MISSING` `C:\Users\tsmit\backups\realai-sync-20260508-090605` — external_scan_roots_for_abilities
 - `OK` `C:\Users\tsmit\.realai` — external_scan_roots_for_abilities
 - `OK` `C:\Users\tsmit\.agentx` — external_scan_roots_for_abilities
 - `OK` `C:\Users\tsmit\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS` — external_scan_roots_for_abilities
@@ -24,8 +24,8 @@ Generated: `2026-09-19T17:49:53.974982+00:00`
 - `MISSING` `C:\Users\tsmit\atomic-fizz-backup-2026-05-30` — external_scan_roots_for_abilities
 - `OK` `C:\Users\tsmit\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS\backend\realai` — external_scan_roots_for_abilities
 - `MISSING` `C:\Users\tsmit\ATOMIC-FIZZ-CAPS-OLD\ai\realai` — external_scan_roots_for_abilities
-- `OK` `C:\Users\tsmit\Documents\GitHub\realai` — external_scan_roots_for_abilities
-- `OK` `C:\Users\tsmit\Documents\GitHub\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS` — external_scan_roots_for_abilities
+- `MISSING` `C:\Users\tsmit\Documents\GitHub\realai` — external_scan_roots_for_abilities
+- `MISSING` `C:\Users\tsmit\Documents\GitHub\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS` — external_scan_roots_for_abilities
 - `MISSING` `C:\Users\tsmit\OneDrive\Desktop\realai` — external_scan_roots_for_abilities
 - `MISSING` `C:\Users\tsmit\OneDrive\Desktop\realai - Copy` — external_scan_roots_for_abilities
 - `MISSING` `C:\Users\tsmit\OneDrive\Desktop\realai-cli` — external_scan_roots_for_abilities
@@ -38,7 +38,7 @@ Generated: `2026-09-19T17:49:53.974982+00:00`
 - `OK` `C:\Users\tsmit\AppData\Roaming\RealAi` — external_scan_roots_for_abilities
 - `MISSING` `C:\Users\tsmit\realai\models\realai-1.0` — external_scan_roots_for_abilities
 - `MISSING` `C:\Users\tsmit\realai\models\realai-overseer` — external_scan_roots_for_abilities
-- `OK` `C:\Unwrenchable` — external_scan_roots_for_abilities
+- `MISSING` `C:\Unwrenchable` — external_scan_roots_for_abilities
 - `OK` `C:\temp` — external_scan_roots_for_abilities
 - `OK` `C:\llama-vulkan` — external_scan_roots_for_abilities
 - `OK` `C:\llama` — external_scan_roots_for_abilities
@@ -58,14 +58,14 @@ Generated: `2026-09-19T17:49:53.974982+00:00`
 - `OK` `C:\Users\tsmit\Downloads\realai_finetune_dataset.jsonl` — gold_archive_files
 - `MISSING` `C:\Users\tsmit\realai.tar.gz` — gold_archive_files
 - `OK` `C:\temp\realai_ui.html` — gold_archive_files
-- `OK` `C:\llama.cpp` — inference_siblings
+- `MISSING` `C:\llama.cpp` — inference_siblings
 - `OK` `C:\models` — inference_siblings
 - `OK` `C:\Users\tsmit\.realai\models` — assets_models
 - `OK` `C:\Users\tsmit\models` — assets_models
 - `OK` `C:\Users\tsmit\.ollama\models` — assets_models
 - `MISSING` `C:\Users\tsmit\realai\agent-tools-main` — gold_agent_tools
 - `MISSING` `C:\Users\tsmit\realai_historical_backups\realai_versions_20260612\agent-tools-main` — gold_agent_tools
-- `OK` `C:\Unwrenchable\agent-tools` — gold_agent_tools
+- `MISSING` `C:\Unwrenchable\agent-tools` — gold_agent_tools
 - `OK` `C:\Users\tsmit\.env.local` — gold_users_dotfiles
 - `OK` `C:\Users\tsmit\.env.local.fizz` — gold_users_dotfiles
 
@@ -134,6 +134,8 @@ Generated: `2026-09-19T17:49:53.974982+00:00`
 | `knowledge_synthesis` | Knowledge synthesis | **LIVE** | `POST /v1/tools/execute ability.knowledge_synthesis + knowledge_graph + world_model` |
 | `multi_agent` | Multi-agent orchestration | **LIVE** | `POST /v1/multi-agent/run + chat multi_agent=true + GET /v1/agents` |
 | `game_world` | Game-world integration (Atomic Fizz) | **LIVE** | `POST tools game_world|omnibrain|world_brain + MCP vault77` |
+| `atomic_fizz_hive_client` | Atomic Fizz hive HTTP client | **LIVE** | `POST /v1/tools/execute ability.atomic_fizz_hive_client action=paths|health|chat` |
+| `console_verify_pack` | Console operator verify pack | **LIVE** | `POST /v1/tools/execute ability.console_verify_pack` |
 | `organs_hive` | Synthetic organs hive | **LIVE** | `POST tools organs_task + abilities/organs_hive.py` |
 | `observability_self_improve` | Observability, auditing, self-improvement | **LIVE** | `POST /v1/tools/execute ability.observability_self_improve + /v1/self-heal/* + /v1/self-improve/*` |
 | `local_inference` | Local inference (Vulkan / GGUF) | **LIVE** | `http://127.0.0.1:8080 via orchestrator` |
@@ -143,6 +145,7 @@ Generated: `2026-09-19T17:49:53.974982+00:00`
 | `frontend_ui` | Next.js operator UI | **LIVE** | `http://127.0.0.1:3000` |
 | `cli_surface` | CLI surface (tools install) | **LIVE** | `bin/realai*.cmd + realai.cli.craft (in-tree; not C:\tools\realai husk)` |
 | `hive_governance` | Hive governance | **LIVE** | `POST /v1/tools/execute ability.hive_governance (local agents + coverage)` |
+| `effective_engine_main_leads` | effective_engine_main_leads | **PARTIAL** | `POST /v1/tools/execute ability.effective_engine_main_leads (learned bridge)` |
 
 ## Keyword learning
 

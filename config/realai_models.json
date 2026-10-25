@@ -631,6 +631,279 @@
       "gguf_filename": null,
       "family": "tts",
       "loaded_now": false
+    },
+    {
+      "id": "local-nomic-embed-text-v1-5-q4-k-m",
+      "gguf_path": "C:\\models\\checkpoints_lora\\nomic-embed-text-v1.5.Q4_K_M.gguf",
+      "gguf_filename": "nomic-embed-text-v1.5.Q4_K_M.gguf",
+      "family": "local",
+      "loaded_now": false
+    },
+    {
+      "id": "local-qwen3-14b-q4-k-m",
+      "gguf_path": "C:\\models\\checkpoints_lora\\Qwen3-14B-Q4_K_M.gguf",
+      "gguf_filename": "Qwen3-14B-Q4_K_M.gguf",
+      "family": "local",
+      "loaded_now": true
+    },
+    {
+      "id": "local-qwen2-5-1-5b-expand-b2-20260927-q5-k-m",
+      "gguf_path": "C:\\models\\checkpoints_lora\\gguf\\qwen2.5-1.5b-expand-b2-20260927-Q5_K_M.gguf",
+      "gguf_filename": "qwen2.5-1.5b-expand-b2-20260927-Q5_K_M.gguf",
+      "family": "local",
+      "loaded_now": false
+    },
+    {
+      "id": "local-qwen2-5-1-5b-expand-ports-b3-20260927-q5-k-m",
+      "gguf_path": "C:\\models\\checkpoints_lora\\gguf\\qwen2.5-1.5b-expand-ports-b3-20260927-Q5_K_M.gguf",
+      "gguf_filename": "qwen2.5-1.5b-expand-ports-b3-20260927-Q5_K_M.gguf",
+      "family": "local",
+      "loaded_now": false
+    },
+    {
+      "id": "local-qwen2-5-1-5b-hive-expand-29-20260927-q5-k-m",
+      "gguf_path": "C:\\models\\checkpoints_lora\\gguf\\qwen2.5-1.5b-hive-expand-29-20260927-Q5_K_M.gguf",
+      "gguf_filename": "qwen2.5-1.5b-hive-expand-29-20260927-Q5_K_M.gguf",
+      "family": "local",
+      "loaded_now": false
+    },
+    {
+      "id": "local-qwen2-5-1-5b-hive-expand-32-20260927-q5-k-m",
+      "gguf_path": "C:\\models\\checkpoints_lora\\gguf\\qwen2.5-1.5b-hive-expand-32-20260927-Q5_K_M.gguf",
+      "gguf_filename": "qwen2.5-1.5b-hive-expand-32-20260927-Q5_K_M.gguf",
+      "family": "local",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-llama-3.2-1b-lora-realai",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-0.5b-lora-realai",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-0.5b-lora-realai-dml",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-0.5b-lora-realai-smoke",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-20260925",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-20260925-frozen",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-1k-20260926",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-1k-b-20260926",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-1k-c-20260926",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-20260925",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-20260925-200",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-2k-20260926",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-ability-20260926",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-ability-20260929-r2",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-agents-20260926",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-coder-20260926",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-hive-expand-29-20260927",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-hive-expand-32-20260927",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-hiveops-20260926",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-packa-20260927",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-plus409-20260926",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-provider-20260927",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-provider-expand-20260927",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-provider-expand-b2-20260927",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-provider-expand-ports-b3-20260927",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-provider-ports-b3-len256-20260927",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-provider-ports-b3-len256-probe-20260927",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-1.5b-lora-realai-dml-repair-20260926",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-lora-qwen2.5-coder-1.5b-lora-realai",
+      "gguf_path": null,
+      "gguf_filename": null,
+      "family": "lora",
+      "loaded_now": false
+    },
+    {
+      "id": "realai-sft-1.5b",
+      "gguf_path": "C:\\models\\checkpoints_lora\\gguf\\realai-sft-1.5b-20261010-Q5_K_M.gguf",
+      "gguf_filename": "realai-sft-1.5b-20261010-Q5_K_M.gguf",
+      "family": "local",
+      "loaded_now": false,
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "trained": true,
+      "adapter_path": "C:\\temp\\realai-dsb-sources\\runs\\sft-realai-sft-v2-2026-10-10\\adapter_best",
+      "merged_path": "C:\\temp\\realai-dsb-sources\\runs\\sft-realai-sft-v2-2026-10-10\\merged",
+      "dataset": "realai-sft-v2-2026-10-10 (manifest sha256 eef128c01a742e23f49063d0813b7c1af675da1e9021d9e4dbc194cece946f01)",
+      "created": "2026-10-10",
+      "note": "Oct 10 dataset-builder SFT (LoRA r16, 3 ep) merged + Q5_K_M. Base Qwen2.5-1.5B-Instruct (Apache-2.0). Eval loss 3.0024 -> 1.2217 (passes loss bar) but spot-check 1/15 correct; hallucinates chess/rules facts. Candidate only, not default, not live. Serve with -fa off on Vulkan."
     }
   ],
   "note": "RealAI public model IDs. backend_filename is what llama-server currently expects when that GGUF is loaded. Only one GGUF is hot on :8080 at a time. trained=true marks RealAI fine-tunes; base_model/stock_copy_of label stock weights. available is computed at runtime, not stored here."
