@@ -7,6 +7,7 @@ This plugin exposes a small, safe capability for inspecting a workspace root
 and returning metadata that is useful for local agent workflows.
 """
 
+import os
 import re
 
 from modules.organs.synthetic_organs import _iter_files, realai_home, within_home
@@ -146,10 +147,16 @@ def register(model, config=None):
 
 def workspace_catalog(root: Optional[str] = None, max_items: int = 10) -> Dict[str, Any]:
     """Standalone catalog (backs POST /v1/workspace/catalog when opted in)."""
-    home = realai_home()
-    base = Path(root).expanduser().resolve() if root else home
-    if not within_home(base, home) or not base.is_dir():
-        return {"ok": False, "error": "root must be an existing directory inside REALAI_HOME", "root": str(base)}
+    home = os.path.realpath(str(realai_home()))
+    cand = os.path.realpath(os.path.expanduser(root)) if root else home
+    # Normalize + prefix check before any filesystem access (CodeQL py/path-injection).
+    if cand != home and not cand.startswith(home + os.sep):
+        return {"ok": False, "error": "root must be an existing directory inside REALAI_HOME", "root": cand}
+    if not cand.startswith(home):
+        return {"ok": False, "error": "root must be an existing directory inside REALAI_HOME", "root": cand}
+    base = Path(cand)
+    if not base.is_dir():
+        return {"ok": False, "error": "root must be an existing directory inside REALAI_HOME", "root": cand}
     out = _build_catalog(base, max_items=max_items)
     out.update({"ok": True, "root": str(base)})
     out.update(_story_view(out))
