@@ -29,6 +29,12 @@ import webbrowser
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+
+def _vulkan_device_args():
+    """Optional llama-server --device (e.g. Vulkan1 on multi-GPU boxes) via REALAI_VULKAN_DEVICE."""
+    dev = os.environ.get("REALAI_VULKAN_DEVICE", "").strip()
+    return ["--device", dev] if dev else []
+
 def _detect_root() -> Path:
     """Prefer the monorepo root that owns console.html + scripts/."""
     here = Path(__file__).resolve().parents[1]  # .../RealAI-clean
@@ -316,7 +322,7 @@ def start_vulkan(env: Dict[str, str], force: bool = False) -> Dict[str, Any]:
             "-ngl",
             str(ngl),
             "--jinja",
-        ],
+        ] + _vulkan_device_args(),
         str(VULKAN_DIR),
         env,
         LOGS / "vulkan.out.log",

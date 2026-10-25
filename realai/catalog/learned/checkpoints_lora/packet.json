@@ -1,0 +1,4165 @@
+{
+  "schema": "realai.learn.packet/v1",
+  "slug": "checkpoints_lora",
+  "source": {
+    "input": "C:\\models\\checkpoints_lora",
+    "kind": "local",
+    "resolved_path": "C:\\models\\checkpoints_lora",
+    "url": null,
+    "cloned": false,
+    "reused_cache": false,
+    "git": {
+      "head": "",
+      "branch": "",
+      "remote": "",
+      "branches": []
+    }
+  },
+  "summary": {
+    "title": "RealAI model root (canonical)",
+    "description": "**Path:** `C:\\models\\checkpoints_lora`",
+    "file_count": 677,
+    "truncated": false,
+    "branches_seen": [],
+    "branch_counts": {},
+    "branches_truncated": false,
+    "all_branch_names": [],
+    "branches_omitted": 0,
+    "languages": {
+      "json": 399,
+      "markdown": 127,
+      "yaml": 1
+    },
+    "frameworks": [
+      "python"
+    ],
+    "domain_keywords": [
+      "agent_lora_runs",
+      "json",
+      "agent",
+      "tools",
+      "tokenizer_config",
+      "adapter_config",
+      "adapter_model",
+      "chat_template",
+      "jinja",
+      "engineer",
+      "architect",
+      "pilot",
+      "orchestrator",
+      "qwen3",
+      "analytics",
+      "reporter",
+      "backend",
+      "guardian",
+      "data",
+      "qwen2",
+      "coder",
+      "model",
+      "kokoro",
+      "repo"
+    ],
+    "readme": "# RealAI model root (canonical)\n\n**Path:** `C:\\models\\checkpoints_lora`\n\n## Layout\n- `*.gguf` at this root \u00e2\u20ac\u201d chat/inference weights referenced by `config/realai_models.json`\n- `qwen*/llama*/realai-*/` \u00e2\u20ac\u201d LoRA adapter / export folders\n- `agent_lora_runs/` \u00e2\u20ac\u201d per-agent LoRA training runs (`*-default-run`)\n- `datasets/` \u00e2\u20ac\u201d `normalized_datasets`, `realai_training_data`\n- `safetensors/adapters/` \u00e2\u20ac\u201d deduped loose adapter weights\n- `safetensors/hf_shards/` \u00e2\u20ac\u201d multi-shard HF base weights + tokenizer\n- `_junk_pip/` \u00e2\u20ac\u201d accidental pip package debris (safe to delete)\n- `_deleted_gguf_dupes/` \u00e2\u20ac\u201d tombstones for removed GGUF backups/dupes\n\n## Env\n```\nREALAI_MODELS_DIR=C:\\models\\checkpoints_lora\nREALAI_LORA_ROOT=C:\\models\\checkpoints_lora\n```\n\nRepo `C:\\RealAI-clean\\models` holds manifests/cards only \u00e2\u20ac\u201d not primary weights.\n\n",
+    "api_routes": [],
+    "plugin_like_folders": [
+      "safetensors/adapters"
+    ]
+  },
+  "fingerprints": [
+    {
+      "path": "README.md",
+      "sha1": "7d37c365974ed6ba",
+      "bytes": 877,
+      "ext": ".md"
+    },
+    {
+      "path": "finetune_pipeline.json",
+      "sha1": "a203e05971999a8b",
+      "bytes": 315,
+      "ext": ".json"
+    },
+    {
+      "path": "gguf_merge_list.txt",
+      "sha1": "03805ae20f62fd19",
+      "bytes": 532,
+      "ext": ".txt"
+    },
+    {
+      "path": "memory_store.json",
+      "sha1": "61e4f0b4550f9ce6",
+      "bytes": 4042,
+      "ext": ".json"
+    },
+    {
+      "path": "metadata.json",
+      "sha1": "1f0340f10aca5236",
+      "bytes": 11834,
+      "ext": ".json"
+    },
+    {
+      "path": "peft_merge_list.txt",
+      "sha1": "da39a3ee5e6b4b0d",
+      "bytes": 0,
+      "ext": ".txt"
+    },
+    {
+      "path": "realai_model_registry_stub.json",
+      "sha1": "3bd6c184b2ea29a2",
+      "bytes": 365,
+      "ext": ".json"
+    },
+    {
+      "path": "registry.json",
+      "sha1": "52a2dafb888b29dd",
+      "bytes": 930,
+      "ext": ".json"
+    },
+    {
+      "path": "registry.json.bak-20260915035813",
+      "sha1": "d6b1b65a83019571",
+      "bytes": 892,
+      "ext": ".bak-20260915035813"
+    },
+    {
+      "path": "requirements.txt",
+      "sha1": "215ff899b70bd096",
+      "bytes": 1368,
+      "ext": ".txt"
+    },
+    {
+      "path": "training_report.txt",
+      "sha1": "befdc04efcd94798",
+      "bytes": 44944,
+      "ext": ".txt"
+    },
+    {
+      "path": "world_model.json",
+      "sha1": "cd28fc7b53689b5d",
+      "bytes": 451,
+      "ext": ".json"
+    },
+    {
+      "path": "Kokoro/.gitattributes",
+      "sha1": "9db62a917dd972f3",
+      "bytes": 1954,
+      "ext": ""
+    },
+    {
+      "path": "Kokoro/DONATE.md",
+      "sha1": "76773bfba8117948",
+      "bytes": 2609,
+      "ext": ".md"
+    },
+    {
+      "path": "Kokoro/EVAL.md",
+      "sha1": "3d574e8a01d77c78",
+      "bytes": 549,
+      "ext": ".md"
+    },
+    {
+      "path": "Kokoro/README.md",
+      "sha1": "44d77bd4f4d1c404",
+      "bytes": 6465,
+      "ext": ".md"
+    },
+    {
+      "path": "Kokoro/SAMPLES.md",
+      "sha1": "66ed84e54225b476",
+      "bytes": 6004,
+      "ext": ".md"
+    },
+    {
+      "path": "Kokoro/VOICES.md",
+      "sha1": "bed7110d79df58c0",
+      "bytes": 7786,
+      "ext": ".md"
+    },
+    {
+      "path": "Kokoro/config.json",
+      "sha1": "1b8fc726d3785a80",
+      "bytes": 2500,
+      "ext": ".json"
+    },
+    {
+      "path": "Qwen2.5-Coder-1.5B/.gitattributes",
+      "sha1": "81614316b0f0061d",
+      "bytes": 1554,
+      "ext": ""
+    },
+    {
+      "path": "Qwen2.5-Coder-1.5B/LICENSE",
+      "sha1": "f0cc6e1751f1e351",
+      "bytes": 11544,
+      "ext": ""
+    },
+    {
+      "path": "Qwen2.5-Coder-1.5B/README.md",
+      "sha1": "731ae22b3c754be1",
+      "bytes": 4125,
+      "ext": ".md"
+    },
+    {
+      "path": "Qwen2.5-Coder-1.5B/config.json",
+      "sha1": "398830d8824c8be9",
+      "bytes": 687,
+      "ext": ".json"
+    },
+    {
+      "path": "Qwen2.5-Coder-1.5B/generation_config.json",
+      "sha1": "106bae31a7a21067",
+      "bytes": 123,
+      "ext": ".json"
+    },
+    {
+      "path": "Qwen2.5-Coder-1.5B/tokenizer_config.json",
+      "sha1": "2415baea86e6534a",
+      "bytes": 7515,
+      "ext": ".json"
+    },
+    {
+      "path": "Qwen3-30B-A3B/.gitattributes",
+      "sha1": "c1e79c71d8e18aa8",
+      "bytes": 1570,
+      "ext": ""
+    },
+    {
+      "path": "Qwen3-30B-A3B/LICENSE",
+      "sha1": "9e28aa4d67d00824",
+      "bytes": 11343,
+      "ext": ""
+    },
+    {
+      "path": "Qwen3-30B-A3B/README.md",
+      "sha1": "48b97a901bc396ac",
+      "bytes": 16798,
+      "ext": ".md"
+    },
+    {
+      "path": "Qwen3-30B-A3B/config.json",
+      "sha1": "be026a27babda5d5",
+      "bytes": 963,
+      "ext": ".json"
+    },
+    {
+      "path": "Qwen3-30B-A3B/generation_config.json",
+      "sha1": "1b73c94f968b61f2",
+      "bytes": 239,
+      "ext": ".json"
+    },
+    {
+      "path": "Qwen3-30B-A3B/tokenizer_config.json",
+      "sha1": "bd4e561fe854ab65",
+      "bytes": 9732,
+      "ext": ".json"
+    },
+    {
+      "path": "Qwen3-30B-A3B/qwen3.8-27b/README.md",
+      "sha1": "2538b01e072687aa",
+      "bytes": 797,
+      "ext": ".md"
+    },
+    {
+      "path": "Qwen3-30B-A3B/qwen3.8-27b/manifest.json",
+      "sha1": "71876b7edb25b621",
+      "bytes": 1149,
+      "ext": ".json"
+    },
+    {
+      "path": "Qwen3-30B-A3B/qwen3.8-27b/model.yaml",
+      "sha1": "7e3cb8bd713feb8c",
+      "bytes": 2700,
+      "ext": ".yaml"
+    },
+    {
+      "path": "_deleted_gguf_dupes/qwen2.5-coder-1.5b-instruct-q5_k_m.bak_20260824_140548.gguf.DELETED.txt",
+      "sha1": "c9b139cc24a44192",
+      "bytes": 164,
+      "ext": ".txt"
+    },
+    {
+      "path": "_deleted_gguf_dupes/qwen2.5-coder-1.5b-instruct-q5_k_m.bak_20260825_052521.gguf.DELETED.txt",
+      "sha1": "a57b65b2c836de22",
+      "bytes": 164,
+      "ext": ".txt"
+    },
+    {
+      "path": "agent_lora_runs/agent-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/agent-default-run/adapter_config.json",
+      "sha1": "6b4152372e8d02dc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-default-run/adapter_model.json",
+      "sha1": "2812a56f0b910caf",
+      "bytes": 224,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/agent-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-evals-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/agent-evals-engineer-default-run/adapter_config.json",
+      "sha1": "6b4152372e8d02dc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-evals-engineer-default-run/adapter_model.json",
+      "sha1": "54fc320c0846935c",
+      "bytes": 239,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-evals-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/agent-evals-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-observability-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/agent-observability-engineer-default-run/adapter_config.json",
+      "sha1": "9abe75a57471e3f0",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-observability-engineer-default-run/adapter_model.json",
+      "sha1": "6f78cdb977c2a725",
+      "bytes": 247,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-observability-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/agent-observability-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-documentation-pilot-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-documentation-pilot-default-run/adapter_config.json",
+      "sha1": "5e8934292c5f78c8",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-documentation-pilot-default-run/adapter_model.json",
+      "sha1": "f51e07d7ea9d0663",
+      "bytes": 250,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-documentation-pilot-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-documentation-pilot-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-implementation-pilot-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-implementation-pilot-default-run/adapter_config.json",
+      "sha1": "e0b7374c34923fa9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-implementation-pilot-default-run/adapter_model.json",
+      "sha1": "20b8c3e198067f1c",
+      "bytes": 251,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-implementation-pilot-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-implementation-pilot-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-orchestrator-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-orchestrator-default-run/adapter_config.json",
+      "sha1": "9abe75a57471e3f0",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-orchestrator-default-run/adapter_model.json",
+      "sha1": "731bb019cb5b64cf",
+      "bytes": 243,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-orchestrator-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-orchestrator-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-performance-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-performance-engineer-default-run/adapter_config.json",
+      "sha1": "ac33bf1b36333f4e",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-performance-engineer-default-run/adapter_model.json",
+      "sha1": "124aaa3d84ed3221",
+      "bytes": 251,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-performance-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-performance-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-qa-pilot-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-qa-pilot-default-run/adapter_config.json",
+      "sha1": "e0b7374c34923fa9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-qa-pilot-default-run/adapter_model.json",
+      "sha1": "8ee381a74a0a1aa1",
+      "bytes": 239,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-qa-pilot-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-qa-pilot-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-repo-architect-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-repo-architect-default-run/adapter_config.json",
+      "sha1": "6b4152372e8d02dc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-repo-architect-default-run/adapter_model.json",
+      "sha1": "0f548e93de04fede",
+      "bytes": 245,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-repo-architect-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-repo-architect-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-security-hardener-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-security-hardener-default-run/adapter_config.json",
+      "sha1": "8ea934c6f3bbfffc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-security-hardener-default-run/adapter_model.json",
+      "sha1": "e385daaa63a1536a",
+      "bytes": 248,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-security-hardener-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/agent-tools-security-hardener-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agents-orchestrator-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/agents-orchestrator-default-run/adapter_config.json",
+      "sha1": "638ac08822afe427",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agents-orchestrator-default-run/adapter_model.json",
+      "sha1": "7d2fae1263652fc8",
+      "bytes": 238,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/agents-orchestrator-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/agents-orchestrator-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-agent-developer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/ai-agent-developer-default-run/adapter_config.json",
+      "sha1": "f0e2660f3f76df87",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-agent-developer-default-run/adapter_model.json",
+      "sha1": "7aa580159dac2c8b",
+      "bytes": 237,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-agent-developer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/ai-agent-developer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-expansion-architect-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/ai-expansion-architect-default-run/adapter_config.json",
+      "sha1": "c8ebd17dc8fe12c9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-expansion-architect-default-run/adapter_model.json",
+      "sha1": "6a52a27115e0b6da",
+      "bytes": 241,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-expansion-architect-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/ai-expansion-architect-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-incident-responder-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/ai-incident-responder-default-run/adapter_config.json",
+      "sha1": "bec8a455bd67becf",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-incident-responder-default-run/adapter_model.json",
+      "sha1": "19adca055957edc3",
+      "bytes": 240,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-incident-responder-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/ai-incident-responder-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-model-manager-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/ai-model-manager-default-run/adapter_config.json",
+      "sha1": "a29a73b1f7e314e6",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-model-manager-default-run/adapter_model.json",
+      "sha1": "c84ad2939df3e2db",
+      "bytes": 235,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-model-manager-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/ai-model-manager-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-orchestrator-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/ai-orchestrator-default-run/adapter_config.json",
+      "sha1": "8ea934c6f3bbfffc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-orchestrator-default-run/adapter_model.json",
+      "sha1": "bf4bf4b77c30ba26",
+      "bytes": 234,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-orchestrator-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/ai-orchestrator-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-self-builder-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/ai-self-builder-default-run/adapter_config.json",
+      "sha1": "c8ebd17dc8fe12c9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-self-builder-default-run/adapter_model.json",
+      "sha1": "c372a0752aa892a1",
+      "bytes": 234,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ai-self-builder-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/ai-self-builder-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/analytics-reporter-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/analytics-reporter-default-run/adapter_config.json",
+      "sha1": "e0b7374c34923fa9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/analytics-reporter-default-run/adapter_model.json",
+      "sha1": "9ef7d06e66263d05",
+      "bytes": 237,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/analytics-reporter-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/analytics-reporter-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/api-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/api-default-run/adapter_config.json",
+      "sha1": "d0d04d77b1195590",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/api-default-run/adapter_model.json",
+      "sha1": "c7bec58d0c8f5b99",
+      "bytes": 222,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/api-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/api-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/api-designer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/api-designer-default-run/adapter_config.json",
+      "sha1": "faf698671508cf42",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/api-designer-default-run/adapter_model.json",
+      "sha1": "8b4718454f80bea0",
+      "bytes": 231,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/api-designer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/api-designer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/api-tester-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/api-tester-default-run/adapter_config.json",
+      "sha1": "bf107e4176acbb6b",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/api-tester-default-run/adapter_model.json",
+      "sha1": "7e6ef095f23e0af0",
+      "bytes": 229,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/api-tester-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/api-tester-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/app-store-optimizer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/app-store-optimizer-default-run/adapter_config.json",
+      "sha1": "79e62da21ef95edc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/app-store-optimizer-default-run/adapter_model.json",
+      "sha1": "2a21d056f26b8efc",
+      "bytes": 238,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/app-store-optimizer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/app-store-optimizer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/architectux-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/architectux-default-run/adapter_config.json",
+      "sha1": "efea1deec1c12fcc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/architectux-default-run/adapter_model.json",
+      "sha1": "c671cb96eeac2204",
+      "bytes": 230,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/architectux-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/architectux-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/backend-architect-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/backend-architect-default-run/adapter_config.json",
+      "sha1": "d0d04d77b1195590",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/backend-architect-default-run/adapter_model.json",
+      "sha1": "a63120c88738fdee",
+      "bytes": 236,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/backend-architect-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/backend-architect-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/backend-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/backend-engineer-default-run/adapter_config.json",
+      "sha1": "c8ebd17dc8fe12c9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/backend-engineer-default-run/adapter_model.json",
+      "sha1": "9907f99949583b8d",
+      "bytes": 235,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/backend-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/backend-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/brand-guardian-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/brand-guardian-default-run/adapter_config.json",
+      "sha1": "79e62da21ef95edc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/brand-guardian-default-run/adapter_model.json",
+      "sha1": "eddebf683ee9a847",
+      "bytes": 233,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/brand-guardian-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/brand-guardian-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/browser-test-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/browser-test-engineer-default-run/adapter_config.json",
+      "sha1": "79e62da21ef95edc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/browser-test-engineer-default-run/adapter_model.json",
+      "sha1": "b3c9b698a75ca3b6",
+      "bytes": 240,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/browser-test-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/browser-test-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/capability-guardian-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/capability-guardian-default-run/adapter_config.json",
+      "sha1": "774fffcbf53f5f8c",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/capability-guardian-default-run/adapter_model.json",
+      "sha1": "541d9cf01f3e5a6c",
+      "bytes": 238,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/capability-guardian-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/capability-guardian-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/cloud-architect-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/cloud-architect-default-run/adapter_config.json",
+      "sha1": "e0b7374c34923fa9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/cloud-architect-default-run/adapter_model.json",
+      "sha1": "e80809bc719a0cc4",
+      "bytes": 234,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/cloud-architect-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/cloud-architect-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/contributing-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/contributing-default-run/adapter_config.json",
+      "sha1": "a29a73b1f7e314e6",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/contributing-default-run/adapter_model.json",
+      "sha1": "96c40186cc06fbe0",
+      "bytes": 231,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/contributing-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/contributing-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/cybersecurity-expert-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/cybersecurity-expert-default-run/adapter_config.json",
+      "sha1": "d574e1626fa93a05",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/cybersecurity-expert-default-run/adapter_model.json",
+      "sha1": "4074826254a39e8f",
+      "bytes": 239,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/cybersecurity-expert-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/cybersecurity-expert-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/data-analytics-reporter-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/data-analytics-reporter-default-run/adapter_config.json",
+      "sha1": "d0d04d77b1195590",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/data-analytics-reporter-default-run/adapter_model.json",
+      "sha1": "ff3962890d8e6227",
+      "bytes": 242,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/data-analytics-reporter-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/data-analytics-reporter-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/data-scientist-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/data-scientist-default-run/adapter_config.json",
+      "sha1": "79e62da21ef95edc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/data-scientist-default-run/adapter_model.json",
+      "sha1": "c495f46da1f58520",
+      "bytes": 233,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/data-scientist-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/data-scientist-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/database-architect-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/database-architect-default-run/adapter_config.json",
+      "sha1": "d574e1626fa93a05",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/database-architect-default-run/adapter_model.json",
+      "sha1": "849329d7dc79bb52",
+      "bytes": 237,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/database-architect-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/database-architect-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/deployment-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/deployment-default-run/adapter_config.json",
+      "sha1": "79e62da21ef95edc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/deployment-default-run/adapter_model.json",
+      "sha1": "8405c8f751aef38d",
+      "bytes": 229,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/deployment-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/deployment-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/design-visual-storyteller-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/design-visual-storyteller-default-run/adapter_config.json",
+      "sha1": "8ea934c6f3bbfffc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/design-visual-storyteller-default-run/adapter_model.json",
+      "sha1": "c171f5856e975d94",
+      "bytes": 244,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/design-visual-storyteller-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/design-visual-storyteller-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/devops-automator-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/devops-automator-default-run/adapter_config.json",
+      "sha1": "5e8934292c5f78c8",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/devops-automator-default-run/adapter_model.json",
+      "sha1": "d186caec03570a45",
+      "bytes": 235,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/devops-automator-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/devops-automator-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/devops-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/devops-engineer-default-run/adapter_config.json",
+      "sha1": "9abe75a57471e3f0",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/devops-engineer-default-run/adapter_model.json",
+      "sha1": "07499388cbe4886d",
+      "bytes": 234,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/devops-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/devops-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/devsecops-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/devsecops-engineer-default-run/adapter_config.json",
+      "sha1": "638ac08822afe427",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/devsecops-engineer-default-run/adapter_model.json",
+      "sha1": "256dc6207befb80a",
+      "bytes": 237,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/devsecops-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/devsecops-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/documentation-specialist-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/documentation-specialist-default-run/adapter_config.json",
+      "sha1": "d0d04d77b1195590",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/documentation-specialist-default-run/adapter_model.json",
+      "sha1": "b7da0e99302679f9",
+      "bytes": 243,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/documentation-specialist-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/documentation-specialist-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/dynamic-agent-loader-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/dynamic-agent-loader-default-run/adapter_config.json",
+      "sha1": "d574e1626fa93a05",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/dynamic-agent-loader-default-run/adapter_model.json",
+      "sha1": "596b6a5f2a908fd3",
+      "bytes": 239,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/dynamic-agent-loader-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/dynamic-agent-loader-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/engineering-ai-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/engineering-ai-engineer-default-run/adapter_config.json",
+      "sha1": "c8ebd17dc8fe12c9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/engineering-ai-engineer-default-run/adapter_model.json",
+      "sha1": "fadb30b37f83aca9",
+      "bytes": 242,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/engineering-ai-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/engineering-ai-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/engineering-senior-developer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/engineering-senior-developer-default-run/adapter_config.json",
+      "sha1": "638ac08822afe427",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/engineering-senior-developer-default-run/adapter_model.json",
+      "sha1": "6ffc96136ff66b9e",
+      "bytes": 247,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/engineering-senior-developer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/engineering-senior-developer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/evidenceqa-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/evidenceqa-default-run/adapter_config.json",
+      "sha1": "79e62da21ef95edc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/evidenceqa-default-run/adapter_model.json",
+      "sha1": "71cbe54a7db34ce2",
+      "bytes": 229,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/evidenceqa-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/evidenceqa-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/executive-summary-generator-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/executive-summary-generator-default-run/adapter_config.json",
+      "sha1": "faf698671508cf42",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/executive-summary-generator-default-run/adapter_model.json",
+      "sha1": "97c3165d727ebafe",
+      "bytes": 246,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/executive-summary-generator-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/executive-summary-generator-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/expansion-coordinator-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/expansion-coordinator-default-run/adapter_config.json",
+      "sha1": "f0e2660f3f76df87",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/expansion-coordinator-default-run/adapter_model.json",
+      "sha1": "372f08366b767458",
+      "bytes": 240,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/expansion-coordinator-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/expansion-coordinator-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/experiment-tracker-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/experiment-tracker-default-run/adapter_config.json",
+      "sha1": "8ea934c6f3bbfffc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/experiment-tracker-default-run/adapter_model.json",
+      "sha1": "8f73aab44cd79063",
+      "bytes": 237,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/experiment-tracker-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/experiment-tracker-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/feedback-learning-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/feedback-learning-engineer-default-run/adapter_config.json",
+      "sha1": "faf698671508cf42",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/feedback-learning-engineer-default-run/adapter_model.json",
+      "sha1": "87627e2892df34a0",
+      "bytes": 245,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/feedback-learning-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/feedback-learning-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/finance-tracker-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/finance-tracker-default-run/adapter_config.json",
+      "sha1": "9abe75a57471e3f0",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/finance-tracker-default-run/adapter_model.json",
+      "sha1": "c372d53dcf20cdc3",
+      "bytes": 234,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/finance-tracker-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/finance-tracker-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/frontend-developer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/frontend-developer-default-run/adapter_config.json",
+      "sha1": "5e8934292c5f78c8",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/frontend-developer-default-run/adapter_model.json",
+      "sha1": "a3e0bbc282f6731c",
+      "bytes": 237,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/frontend-developer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/frontend-developer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/frontend-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/frontend-engineer-default-run/adapter_config.json",
+      "sha1": "e291ca6f1f4e3f3e",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/frontend-engineer-default-run/adapter_model.json",
+      "sha1": "7b3a2dacc972e0de",
+      "bytes": 236,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/frontend-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/frontend-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/fullstack-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/fullstack-engineer-default-run/adapter_config.json",
+      "sha1": "79e62da21ef95edc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/fullstack-engineer-default-run/adapter_model.json",
+      "sha1": "4d4c6c45ffb6eb22",
+      "bytes": 237,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/fullstack-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/fullstack-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-creative-director-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/game-creative-director-default-run/adapter_config.json",
+      "sha1": "8ea934c6f3bbfffc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-creative-director-default-run/adapter_model.json",
+      "sha1": "91118d5a5c35c087",
+      "bytes": 241,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-creative-director-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/game-creative-director-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-designer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/game-designer-default-run/adapter_config.json",
+      "sha1": "e291ca6f1f4e3f3e",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-designer-default-run/adapter_model.json",
+      "sha1": "99c336ce2a2a484b",
+      "bytes": 232,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-designer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/game-designer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-producer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/game-producer-default-run/adapter_config.json",
+      "sha1": "d574e1626fa93a05",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-producer-default-run/adapter_model.json",
+      "sha1": "b5672954ec0da051",
+      "bytes": 232,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-producer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/game-producer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-qa-lead-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/game-qa-lead-default-run/adapter_config.json",
+      "sha1": "5e8934292c5f78c8",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-qa-lead-default-run/adapter_model.json",
+      "sha1": "21b022f2676e7dbd",
+      "bytes": 231,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-qa-lead-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/game-qa-lead-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-technical-director-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/game-technical-director-default-run/adapter_config.json",
+      "sha1": "d0d04d77b1195590",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-technical-director-default-run/adapter_model.json",
+      "sha1": "cf2f69d91a120763",
+      "bytes": 242,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/game-technical-director-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/game-technical-director-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/gameplay-programmer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/gameplay-programmer-default-run/adapter_config.json",
+      "sha1": "8ea934c6f3bbfffc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/gameplay-programmer-default-run/adapter_model.json",
+      "sha1": "1cb18ae4d7adbaa9",
+      "bytes": 238,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/gameplay-programmer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/gameplay-programmer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/grounding-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/grounding-engineer-default-run/adapter_config.json",
+      "sha1": "f0e2660f3f76df87",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/grounding-engineer-default-run/adapter_model.json",
+      "sha1": "b30c05632709486a",
+      "bytes": 237,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/grounding-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/grounding-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/hive-mind-coordinator-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/hive-mind-coordinator-default-run/adapter_config.json",
+      "sha1": "8ea934c6f3bbfffc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/hive-mind-coordinator-default-run/adapter_model.json",
+      "sha1": "51e75e3c5431aec6",
+      "bytes": 240,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/hive-mind-coordinator-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/hive-mind-coordinator-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/implementation-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/implementation-engineer-default-run/adapter_config.json",
+      "sha1": "79e62da21ef95edc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/implementation-engineer-default-run/adapter_model.json",
+      "sha1": "bdaded1a42e480c7",
+      "bytes": 242,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/implementation-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/implementation-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/infrastructure-maintainer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/infrastructure-maintainer-default-run/adapter_config.json",
+      "sha1": "8ea934c6f3bbfffc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/infrastructure-maintainer-default-run/adapter_model.json",
+      "sha1": "00326def6793f7d7",
+      "bytes": 244,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/infrastructure-maintainer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/infrastructure-maintainer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/lambda-deployment-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/lambda-deployment-default-run/adapter_config.json",
+      "sha1": "8ea934c6f3bbfffc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/lambda-deployment-default-run/adapter_model.json",
+      "sha1": "358b79a446af1ce5",
+      "bytes": 236,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/lambda-deployment-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/lambda-deployment-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/lambda-size-optimization-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/lambda-size-optimization-default-run/adapter_config.json",
+      "sha1": "c8ebd17dc8fe12c9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/lambda-size-optimization-default-run/adapter_model.json",
+      "sha1": "654370888d442f04",
+      "bytes": 243,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/lambda-size-optimization-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/lambda-size-optimization-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/legal-compliance-checker-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/legal-compliance-checker-default-run/adapter_config.json",
+      "sha1": "bf107e4176acbb6b",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/legal-compliance-checker-default-run/adapter_model.json",
+      "sha1": "2b96b9099570b757",
+      "bytes": 243,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/legal-compliance-checker-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/legal-compliance-checker-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/local-ai-guide-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/local-ai-guide-default-run/adapter_config.json",
+      "sha1": "a29a73b1f7e314e6",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/local-ai-guide-default-run/adapter_model.json",
+      "sha1": "20f85489a7bdcaf1",
+      "bytes": 233,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/local-ai-guide-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/local-ai-guide-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/local-ai-summary-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/local-ai-summary-default-run/adapter_config.json",
+      "sha1": "e0b7374c34923fa9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/local-ai-summary-default-run/adapter_model.json",
+      "sha1": "697694e84cf5b853",
+      "bytes": 235,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/local-ai-summary-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/local-ai-summary-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/lsp-index-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/lsp-index-engineer-default-run/adapter_config.json",
+      "sha1": "f280af98cc62d3c1",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/lsp-index-engineer-default-run/adapter_model.json",
+      "sha1": "19308777abd6d596",
+      "bytes": 237,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/lsp-index-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/lsp-index-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/macos-spatial-metal-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/macos-spatial-metal-engineer-default-run/adapter_config.json",
+      "sha1": "ac33bf1b36333f4e",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/macos-spatial-metal-engineer-default-run/adapter_model.json",
+      "sha1": "766fc9993421b881",
+      "bytes": 247,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/macos-spatial-metal-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/macos-spatial-metal-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/marketing-content-creator-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/marketing-content-creator-default-run/adapter_config.json",
+      "sha1": "1febc56d9c418a62",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/marketing-content-creator-default-run/adapter_model.json",
+      "sha1": "6d957c58d8f9662b",
+      "bytes": 244,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/marketing-content-creator-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/marketing-content-creator-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/marketing-growth-hacker-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/marketing-growth-hacker-default-run/adapter_config.json",
+      "sha1": "9abe75a57471e3f0",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/marketing-growth-hacker-default-run/adapter_model.json",
+      "sha1": "5aa0fceda4706ee5",
+      "bytes": 242,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/marketing-growth-hacker-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/marketing-growth-hacker-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/marketing-social-media-strategist-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/marketing-social-media-strategist-default-run/adapter_config.json",
+      "sha1": "5e8934292c5f78c8",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/marketing-social-media-strategist-default-run/adapter_model.json",
+      "sha1": "a7988e8cdc9aa4ab",
+      "bytes": 252,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/marketing-social-media-strategist-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/marketing-social-media-strategist-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/memory-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/memory-default-run/adapter_config.json",
+      "sha1": "6b4152372e8d02dc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/memory-default-run/adapter_model.json",
+      "sha1": "350ae47a5d91b190",
+      "bytes": 225,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/memory-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/memory-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/meta-agent-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/meta-agent-engineer-default-run/adapter_config.json",
+      "sha1": "d0d04d77b1195590",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/meta-agent-engineer-default-run/adapter_model.json",
+      "sha1": "57992858e69958f0",
+      "bytes": 238,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/meta-agent-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/meta-agent-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/mobile-app-builder-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/mobile-app-builder-default-run/adapter_config.json",
+      "sha1": "e291ca6f1f4e3f3e",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/mobile-app-builder-default-run/adapter_model.json",
+      "sha1": "ce760d2ab7f8bea1",
+      "bytes": 237,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/mobile-app-builder-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/mobile-app-builder-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/model-trainer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/model-trainer-default-run/adapter_config.json",
+      "sha1": "bec8a455bd67becf",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/model-trainer-default-run/adapter_model.json",
+      "sha1": "fcb8217f65f318a2",
+      "bytes": 232,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/model-trainer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/model-trainer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/orchestrator-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/orchestrator-default-run/adapter_config.json",
+      "sha1": "efea1deec1c12fcc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/orchestrator-default-run/adapter_model.json",
+      "sha1": "8849a945f8f1a212",
+      "bytes": 231,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/orchestrator-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/orchestrator-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/performance-benchmarker-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/performance-benchmarker-default-run/adapter_config.json",
+      "sha1": "1febc56d9c418a62",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/performance-benchmarker-default-run/adapter_model.json",
+      "sha1": "e489dd01c138476a",
+      "bytes": 242,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/performance-benchmarker-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/performance-benchmarker-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/performance-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/performance-engineer-default-run/adapter_config.json",
+      "sha1": "5e8934292c5f78c8",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/performance-engineer-default-run/adapter_model.json",
+      "sha1": "bd5a6fb608acc9f8",
+      "bytes": 239,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/performance-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/performance-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/plugin-manager-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/plugin-manager-default-run/adapter_config.json",
+      "sha1": "d574e1626fa93a05",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/plugin-manager-default-run/adapter_model.json",
+      "sha1": "df26193aa3782221",
+      "bytes": 233,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/plugin-manager-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/plugin-manager-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/product-feedback-synthesizer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/product-feedback-synthesizer-default-run/adapter_config.json",
+      "sha1": "c8ebd17dc8fe12c9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/product-feedback-synthesizer-default-run/adapter_model.json",
+      "sha1": "5662d637e108ecb1",
+      "bytes": 247,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/product-feedback-synthesizer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/product-feedback-synthesizer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/product-manager-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/product-manager-default-run/adapter_config.json",
+      "sha1": "d0d04d77b1195590",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/product-manager-default-run/adapter_model.json",
+      "sha1": "9748d4dd6569b2c3",
+      "bytes": 234,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/product-manager-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/product-manager-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/product-sprint-prioritizer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/product-sprint-prioritizer-default-run/adapter_config.json",
+      "sha1": "ac33bf1b36333f4e",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/product-sprint-prioritizer-default-run/adapter_model.json",
+      "sha1": "f7e3ccb85986437f",
+      "bytes": 245,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/product-sprint-prioritizer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/product-sprint-prioritizer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/product-trend-researcher-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/product-trend-researcher-default-run/adapter_config.json",
+      "sha1": "bf107e4176acbb6b",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/product-trend-researcher-default-run/adapter_model.json",
+      "sha1": "0e3b43b350a441dc",
+      "bytes": 243,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/product-trend-researcher-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/product-trend-researcher-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/project-manager-senior-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/project-manager-senior-default-run/adapter_config.json",
+      "sha1": "cfbb818214bc3aad",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/project-manager-senior-default-run/adapter_model.json",
+      "sha1": "6147a64c232a299e",
+      "bytes": 241,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/project-manager-senior-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/project-manager-senior-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/project-shepherd-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/project-shepherd-default-run/adapter_config.json",
+      "sha1": "d574e1626fa93a05",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/project-shepherd-default-run/adapter_model.json",
+      "sha1": "17510b55d562d1d0",
+      "bytes": 235,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/project-shepherd-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/project-shepherd-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/project-summary-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/project-summary-default-run/adapter_config.json",
+      "sha1": "faf698671508cf42",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/project-summary-default-run/adapter_model.json",
+      "sha1": "ea44a39e6a9a4ce3",
+      "bytes": 234,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/project-summary-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/project-summary-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/qa-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/qa-engineer-default-run/adapter_config.json",
+      "sha1": "9abe75a57471e3f0",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/qa-engineer-default-run/adapter_model.json",
+      "sha1": "193c68d1cae2d09e",
+      "bytes": 230,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/qa-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/qa-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/rapid-prototyper-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/rapid-prototyper-default-run/adapter_config.json",
+      "sha1": "9abe75a57471e3f0",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/rapid-prototyper-default-run/adapter_model.json",
+      "sha1": "878cc5afb6b10fea",
+      "bytes": 235,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/rapid-prototyper-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/rapid-prototyper-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/readme-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/readme-default-run/adapter_config.json",
+      "sha1": "79e62da21ef95edc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/readme-default-run/adapter_model.json",
+      "sha1": "438ea9e84bbac6d2",
+      "bytes": 225,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/readme-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/readme-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/realai-fullstack-dev-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/realai-fullstack-dev-default-run/adapter_config.json",
+      "sha1": "c8ebd17dc8fe12c9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/realai-fullstack-dev-default-run/adapter_model.json",
+      "sha1": "605170f436b7022a",
+      "bytes": 239,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/realai-fullstack-dev-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/realai-fullstack-dev-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/realai-integrator-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/realai-integrator-default-run/adapter_config.json",
+      "sha1": "316b7985429b8ac6",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/realai-integrator-default-run/adapter_model.json",
+      "sha1": "5ff04e5abc1d96ed",
+      "bytes": 236,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/realai-integrator-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/realai-integrator-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/repo-auditor-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/repo-auditor-default-run/adapter_config.json",
+      "sha1": "efea1deec1c12fcc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/repo-auditor-default-run/adapter_model.json",
+      "sha1": "441d13e884072e12",
+      "bytes": 231,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/repo-auditor-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/repo-auditor-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/solana-payment-engineer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/solana-payment-engineer-default-run/adapter_config.json",
+      "sha1": "6b4152372e8d02dc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/solana-payment-engineer-default-run/adapter_model.json",
+      "sha1": "fa3c9ec4569580bf",
+      "bytes": 242,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/solana-payment-engineer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/solana-payment-engineer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/studio-operations-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/studio-operations-default-run/adapter_config.json",
+      "sha1": "e0b7374c34923fa9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/studio-operations-default-run/adapter_model.json",
+      "sha1": "c3664bf26e628ac2",
+      "bytes": 236,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/studio-operations-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/studio-operations-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/studio-producer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/studio-producer-default-run/adapter_config.json",
+      "sha1": "5e8934292c5f78c8",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/studio-producer-default-run/adapter_model.json",
+      "sha1": "efae730c721c98c4",
+      "bytes": 234,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/studio-producer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/studio-producer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/support-responder-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/support-responder-default-run/adapter_config.json",
+      "sha1": "638ac08822afe427",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/support-responder-default-run/adapter_model.json",
+      "sha1": "249b5dcd125eae52",
+      "bytes": 236,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/support-responder-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/support-responder-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/test-results-analyzer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/test-results-analyzer-default-run/adapter_config.json",
+      "sha1": "f280af98cc62d3c1",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/test-results-analyzer-default-run/adapter_model.json",
+      "sha1": "f031c7f33f9e727c",
+      "bytes": 240,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/test-results-analyzer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/test-results-analyzer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/testing-reality-checker-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/testing-reality-checker-default-run/adapter_config.json",
+      "sha1": "cfbb818214bc3aad",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/testing-reality-checker-default-run/adapter_model.json",
+      "sha1": "14fb67e51ec0ab6e",
+      "bytes": 242,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/testing-reality-checker-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/testing-reality-checker-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/tool-evaluator-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/tool-evaluator-default-run/adapter_config.json",
+      "sha1": "bec8a455bd67becf",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/tool-evaluator-default-run/adapter_model.json",
+      "sha1": "d780a8c56c2c2754",
+      "bytes": 233,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/tool-evaluator-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/tool-evaluator-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ui-designer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/ui-designer-default-run/adapter_config.json",
+      "sha1": "1febc56d9c418a62",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ui-designer-default-run/adapter_model.json",
+      "sha1": "505b5cad908178ae",
+      "bytes": 230,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ui-designer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/ui-designer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ux-researcher-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/ux-researcher-default-run/adapter_config.json",
+      "sha1": "bec8a455bd67becf",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ux-researcher-default-run/adapter_model.json",
+      "sha1": "a9692b39c5cebd84",
+      "bytes": 232,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ux-researcher-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/ux-researcher-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ux-ui-designer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/ux-ui-designer-default-run/adapter_config.json",
+      "sha1": "e0b7374c34923fa9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ux-ui-designer-default-run/adapter_model.json",
+      "sha1": "6790019349d55cdf",
+      "bytes": 233,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/ux-ui-designer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/ux-ui-designer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/whimsy-injector-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/whimsy-injector-default-run/adapter_config.json",
+      "sha1": "a29a73b1f7e314e6",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/whimsy-injector-default-run/adapter_model.json",
+      "sha1": "4ff8a245caf6e742",
+      "bytes": 234,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/whimsy-injector-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/whimsy-injector-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/workflow-optimizer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/workflow-optimizer-default-run/adapter_config.json",
+      "sha1": "d574e1626fa93a05",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/workflow-optimizer-default-run/adapter_model.json",
+      "sha1": "fa0117dd2bfdd81b",
+      "bytes": 237,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/workflow-optimizer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/workflow-optimizer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/xr-cockpit-interaction-specialist-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/xr-cockpit-interaction-specialist-default-run/adapter_config.json",
+      "sha1": "e291ca6f1f4e3f3e",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/xr-cockpit-interaction-specialist-default-run/adapter_model.json",
+      "sha1": "9c1010b23cf17c1f",
+      "bytes": 252,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/xr-cockpit-interaction-specialist-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/xr-cockpit-interaction-specialist-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/xr-immersive-developer-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/xr-immersive-developer-default-run/adapter_config.json",
+      "sha1": "efea1deec1c12fcc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/xr-immersive-developer-default-run/adapter_model.json",
+      "sha1": "280b09e331443f18",
+      "bytes": 241,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/xr-immersive-developer-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/xr-immersive-developer-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/xr-interface-architect-default-run/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "agent_lora_runs/xr-interface-architect-default-run/adapter_config.json",
+      "sha1": "e0b7374c34923fa9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/xr-interface-architect-default-run/adapter_model.json",
+      "sha1": "002d62c1701c7280",
+      "bytes": 241,
+      "ext": ".json"
+    },
+    {
+      "path": "agent_lora_runs/xr-interface-architect-default-run/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "agent_lora_runs/xr-interface-architect-default-run/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "checkpoints_lora/peft_merge_list.txt",
+      "sha1": "da39a3ee5e6b4b0d",
+      "bytes": 0,
+      "ext": ".txt"
+    },
+    {
+      "path": "checkpoints_lora/realai_training_data/ability_surface.jsonl",
+      "sha1": "fe40d4a9d96a0ecf",
+      "bytes": 21867,
+      "ext": ".jsonl"
+    },
+    {
+      "path": "checkpoints_lora/realai_training_data/agent_manifests_for_finetuning.json",
+      "sha1": "261cb6a9d2bc16a3",
+      "bytes": 76554,
+      "ext": ".json"
+    },
+    {
+      "path": "datasets/realai_training_data/ability_surface.jsonl",
+      "sha1": "4f438615097a5a1a",
+      "bytes": 20211,
+      "ext": ".jsonl"
+    },
+    {
+      "path": "datasets/realai_training_data/agent_manifests_for_finetuning.json",
+      "sha1": "261cb6a9d2bc16a3",
+      "bytes": 76554,
+      "ext": ".json"
+    },
+    {
+      "path": "datasets/realai_training_data/realai_finetune_dataset.jsonl",
+      "sha1": "f1319d3d0ae617cc",
+      "bytes": 36267,
+      "ext": ".jsonl"
+    },
+    {
+      "path": "fish_speech_s1/.gitattributes",
+      "sha1": "76a1cf73d1706f53",
+      "bytes": 1710,
+      "ext": ""
+    },
+    {
+      "path": "fish_speech_s1/README.md",
+      "sha1": "70c1fdaee9137653",
+      "bytes": 1515,
+      "ext": ".md"
+    },
+    {
+      "path": "fish_speech_s1/special_tokens_map.json",
+      "sha1": "32ada290b4013e5a",
+      "bytes": 112,
+      "ext": ".json"
+    },
+    {
+      "path": "fish_speech_s1/tokenizer.json",
+      "sha1": "34ef27f81dea1955",
+      "bytes": 6738,
+      "ext": ".json"
+    },
+    {
+      "path": "fish_speech_s1/tokenizer_config.json",
+      "sha1": "67c64840c7393cb0",
+      "bytes": 1573,
+      "ext": ".json"
+    },
+    {
+      "path": "llama-3.2-1b-lora-realai/README.md",
+      "sha1": "8cf246bf69f265fc",
+      "bytes": 5106,
+      "ext": ".md"
+    },
+    {
+      "path": "llama-3.2-1b-lora-realai/adapter_config.json",
+      "sha1": "5c9b7f2a904a8602",
+      "bytes": 715,
+      "ext": ".json"
+    },
+    {
+      "path": "llama-3.2-1b-lora-realai/realai_train_meta.json",
+      "sha1": "fe22e79c91726e3c",
+      "bytes": 334,
+      "ext": ".json"
+    },
+    {
+      "path": "llama-3.2-1b-lora-realai/special_tokens_map.json",
+      "sha1": "749eb36af9a817ad",
+      "bytes": 342,
+      "ext": ".json"
+    },
+    {
+      "path": "llama-3.2-1b-lora-realai/tokenizer_config.json",
+      "sha1": "29872fd47be48547",
+      "bytes": 56620,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai/README.md",
+      "sha1": "72134311a2ff5040",
+      "bytes": 5100,
+      "ext": ".md"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai/adapter_config.json",
+      "sha1": "94df8eda20ad76d3",
+      "bytes": 710,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai/added_tokens.json",
+      "sha1": "eff8f8c970503d9f",
+      "bytes": 629,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai/realai_train_meta.json",
+      "sha1": "a6e3d4e45ed7e5a7",
+      "bytes": 330,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai/special_tokens_map.json",
+      "sha1": "9b70c2dde502a22e",
+      "bytes": 644,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai/tokenizer_config.json",
+      "sha1": "fd1cb059532ee525",
+      "bytes": 7513,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai-dml/README.md",
+      "sha1": "72134311a2ff5040",
+      "bytes": 5100,
+      "ext": ".md"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai-dml/adapter_config.json",
+      "sha1": "205ecf3691a847b5",
+      "bytes": 709,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai-dml/added_tokens.json",
+      "sha1": "eff8f8c970503d9f",
+      "bytes": 629,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai-dml/realai_train_meta.json",
+      "sha1": "94610b0033f770fc",
+      "bytes": 327,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai-dml/special_tokens_map.json",
+      "sha1": "9b70c2dde502a22e",
+      "bytes": 644,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai-dml/tokenizer_config.json",
+      "sha1": "fd1cb059532ee525",
+      "bytes": 7513,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai-smoke/README.md",
+      "sha1": "b9299bcde07e82c0",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai-smoke/adapter_config.json",
+      "sha1": "bbf68dfb728e0f24",
+      "bytes": 1099,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai-smoke/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai-smoke/realai_train_meta.json",
+      "sha1": "d8392fd04ab128c7",
+      "bytes": 310,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-0.5b-lora-realai-smoke/tokenizer_config.json",
+      "sha1": "39d609ea0730f151",
+      "bytes": 694,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora/adapter_config.json",
+      "sha1": "79e62da21ef95edc",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora/adapter_model.json",
+      "sha1": "3f409f10de8c7c88",
+      "bytes": 224,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora/chat_template.jinja",
+      "sha1": "2cf43b95aebf1b25",
+      "bytes": 2561,
+      "ext": ".jinja"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora/tokenizer_config.json",
+      "sha1": "d020a8017d2ea85b",
+      "bytes": 724,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-realai/README.md",
+      "sha1": "8098b876b4045d72",
+      "bytes": 5100,
+      "ext": ".md"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-realai/adapter_config.json",
+      "sha1": "1a19a75b09db128c",
+      "bytes": 709,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-realai/added_tokens.json",
+      "sha1": "eff8f8c970503d9f",
+      "bytes": 629,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-realai/realai_train_meta.json",
+      "sha1": "986f97fe537a328a",
+      "bytes": 329,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-realai/special_tokens_map.json",
+      "sha1": "9b70c2dde502a22e",
+      "bytes": 644,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-realai/tokenizer_config.json",
+      "sha1": "fd1cb059532ee525",
+      "bytes": 7513,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-realai-export/merged/added_tokens.json",
+      "sha1": "eff8f8c970503d9f",
+      "bytes": 629,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-realai-export/merged/config.json",
+      "sha1": "4680232066682e88",
+      "bytes": 735,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-realai-export/merged/generation_config.json",
+      "sha1": "6161c8a019fe9b72",
+      "bytes": 256,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-realai-export/merged/realai_merge_meta.json",
+      "sha1": "a2d3aca658399022",
+      "bytes": 174,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-realai-export/merged/special_tokens_map.json",
+      "sha1": "9b70c2dde502a22e",
+      "bytes": 644,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-realai-export/merged/tokenizer_config.json",
+      "sha1": "e2770ccaeb63ef1a",
+      "bytes": 7710,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-smoke-test/checkpoint-4/README.md",
+      "sha1": "c3ac90c9be30e348",
+      "bytes": 5206,
+      "ext": ".md"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-smoke-test/checkpoint-4/adapter_config.json",
+      "sha1": "e0b7374c34923fa9",
+      "bytes": 1100,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-smoke-test/checkpoint-4/adapter_model.json",
+      "sha1": "29725c8aadd4c528",
+      "bytes": 249,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-smoke-test/checkpoint-4/optimizer.json",
+      "sha1": "44f4da1900d15be6",
+      "bytes": 236,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-smoke-test/checkpoint-4/rng_state.json",
+      "sha1": "182fd28821fa9c98",
+      "bytes": 237,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-smoke-test/checkpoint-4/scheduler.json",
+      "sha1": "ea1b64b7088fd0a7",
+      "bytes": 236,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-smoke-test/checkpoint-4/trainer_state.json",
+      "sha1": "15eb7472ccd96e25",
+      "bytes": 1183,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-1.5b-lora-smoke-test/checkpoint-4/training_args.json",
+      "sha1": "0adf41860a1b22cf",
+      "bytes": 241,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-coder-1.5b-lora-realai/README.md",
+      "sha1": "cfb562f73b1d13d1",
+      "bytes": 5106,
+      "ext": ".md"
+    },
+    {
+      "path": "qwen2.5-coder-1.5b-lora-realai/adapter_config.json",
+      "sha1": "88f8505d106e840a",
+      "bytes": 715,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-coder-1.5b-lora-realai/added_tokens.json",
+      "sha1": "eff8f8c970503d9f",
+      "bytes": 629,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-coder-1.5b-lora-realai/realai_train_meta.json",
+      "sha1": "516ee24d6eb04d1b",
+      "bytes": 334,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-coder-1.5b-lora-realai/special_tokens_map.json",
+      "sha1": "9b70c2dde502a22e",
+      "bytes": 644,
+      "ext": ".json"
+    },
+    {
+      "path": "qwen2.5-coder-1.5b-lora-realai/tokenizer_config.json",
+      "sha1": "4a11709c1214a8eb",
+      "bytes": 7512,
+      "ext": ".json"
+    },
+    {
+      "path": "realai-1.0/manifest.json",
+      "sha1": "dfb5afc6ed0cb7f7",
+      "bytes": 361,
+      "ext": ".json"
+    },
+    {
+      "path": "realai-1.0/package.json",
+      "sha1": "8719bb1e6a6e0595",
+      "bytes": 84,
+      "ext": ".json"
+    },
+    {
+      "path": "realai-1.0-instruct/weights/artifact.json",
+      "sha1": "9e3e8c2ae6e72300",
+      "bytes": 657,
+      "ext": ".json"
+    },
+    {
+      "path": "realai-hive/ACTIVE_GGUF.txt",
+      "sha1": "6ceb4fef593add5e",
+      "bytes": 64,
+      "ext": ".txt"
+    },
+    {
+      "path": "realai-hive/manifest.json",
+      "sha1": "46a2d1635695cfb7",
+      "bytes": 683,
+      "ext": ".json"
+    },
+    {
+      "path": "realai-overseer/manifest.json",
+      "sha1": "3d063a0d30db94b8",
+      "bytes": 386,
+      "ext": ".json"
+    },
+    {
+      "path": "realai-overseer/package.json",
+      "sha1": "13e335147530d906",
+      "bytes": 89,
+      "ext": ".json"
+    },
+    {
+      "path": "realai-vision/manifest.json",
+      "sha1": "78bd9df8a08334f7",
+      "bytes": 350,
+      "ext": ".json"
+    },
+    {
+      "path": "realai-vision/package.json",
+      "sha1": "a6c06736f821aec5",
+      "bytes": 87,
+      "ext": ".json"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/.gitattributes",
+      "sha1": "c1e79c71d8e18aa8",
+      "bytes": 1570,
+      "ext": ""
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/LICENSE",
+      "sha1": "9e28aa4d67d00824",
+      "bytes": 11343,
+      "ext": ""
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/config.json",
+      "sha1": "be026a27babda5d5",
+      "bytes": 963,
+      "ext": ".json"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/generation_config.json",
+      "sha1": "1b73c94f968b61f2",
+      "bytes": 239,
+      "ext": ".json"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00001-of-00016.safetensors.metadata",
+      "sha1": "b6e7fc253644a253",
+      "bytes": 127,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00002-of-00016.safetensors.metadata",
+      "sha1": "55cd80a4b4504004",
+      "bytes": 128,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00003-of-00016.safetensors.metadata",
+      "sha1": "9bd20d7e3912b9d9",
+      "bytes": 128,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00004-of-00016.safetensors.metadata",
+      "sha1": "7b75fd1f7361a9c7",
+      "bytes": 128,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00005-of-00016.safetensors.metadata",
+      "sha1": "fec29b7ee368bfb6",
+      "bytes": 128,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00006-of-00016.safetensors.metadata",
+      "sha1": "afcaaf7ff8165127",
+      "bytes": 128,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00007-of-00016.safetensors.metadata",
+      "sha1": "86ae7025df855c97",
+      "bytes": 128,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00008-of-00016.safetensors.metadata",
+      "sha1": "9644180de6c47b2b",
+      "bytes": 128,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00009-of-00016.safetensors.metadata",
+      "sha1": "6272829ccefcd4da",
+      "bytes": 128,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00010-of-00016.safetensors.metadata",
+      "sha1": "d4121c7ce760ce08",
+      "bytes": 128,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00011-of-00016.safetensors.metadata",
+      "sha1": "34471e1d6a9245ff",
+      "bytes": 128,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00012-of-00016.safetensors.metadata",
+      "sha1": "5213cab7dd2cea4c",
+      "bytes": 128,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00013-of-00016.safetensors.metadata",
+      "sha1": "4243e7c2c15086e6",
+      "bytes": 127,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00014-of-00016.safetensors.metadata",
+      "sha1": "b80f3fb96310217b",
+      "bytes": 128,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00015-of-00016.safetensors.metadata",
+      "sha1": "c97d0c4d0fecbabb",
+      "bytes": 128,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model-00016-of-00016.safetensors.metadata",
+      "sha1": "5341a745c6fcaebb",
+      "bytes": 128,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/model.safetensors.index.json.metadata",
+      "sha1": "2205ef2223ef423b",
+      "bytes": 103,
+      "ext": ".metadata"
+    },
+    {
+      "path": "safetensors/hf_shards/qwen3_or_base/tokenizer_config.json",
+      "sha1": "bd4e561fe854ab65",
+      "bytes": 9732,
+      "ext": ".json"
+    },
+    {
+      "path": "xtts_v2/.gitattributes",
+      "sha1": "81614316b0f0061d",
+      "bytes": 1554,
+      "ext": ""
+    },
+    {
+      "path": "xtts_v2/LICENSE.txt",
+      "sha1": "15d4c88d6c5060d6",
+      "bytes": 4097,
+      "ext": ".txt"
+    },
+    {
+      "path": "xtts_v2/README.md",
+      "sha1": "af53522197f81bef",
+      "bytes": 4366,
+      "ext": ".md"
+    },
+    {
+      "path": "xtts_v2/config.json",
+      "sha1": "049da34853605634",
+      "bytes": 4526,
+      "ext": ".json"
+    },
+    {
+      "path": "xtts_v2/hash.md5",
+      "sha1": "5517233dd8eadfa3",
+      "bytes": 32,
+      "ext": ".md5"
+    },
+    {
+      "path": "xtts_v2/vocab.json",
+      "sha1": "ec5dbf1bbc79d8fc",
+      "bytes": 376645,
+      "ext": ".json"
+    }
+  ],
+  "proposed_abilities": [
+    {
+      "id": "health",
+      "description": "Stub liveness / contract discovery (no runtime heal)"
+    },
+    {
+      "id": "repo_map",
+      "description": "Summarize learned tree layout and stack"
+    },
+    {
+      "id": "python_context",
+      "description": "Placeholder context hints for python (product owns runtime)"
+    },
+    {
+      "id": "adapters_bridge",
+      "description": "Bridge stub for existing safetensors/adapters/ surface"
+    },
+    {
+      "id": "orchestrator",
+      "description": "Domain stub from source keyword 'orchestrator'"
+    }
+  ],
+  "plugin_proposal": {
+    "id": "checkpoints-lora-coach",
+    "package": "checkpoints_lora_coach",
+    "path": "C:\\RealAI-clean\\realai\\plugins\\checkpoints_lora_coach",
+    "http": {
+      "canonical": "/v1/plugins/checkpoints-lora-coach",
+      "alias": "/v1/learned/checkpoints_lora_coach"
+    }
+  },
+  "learned_at": "2026-09-21T09:38:21.687687+00:00",
+  "heal": false
+}
