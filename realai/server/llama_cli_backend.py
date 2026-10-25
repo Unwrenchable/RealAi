@@ -60,7 +60,11 @@ class LlamaCliBackend(InferenceBackend):
             if path.exists():
                 return path
 
-        return None
+        # POSIX locations + REALAI_LLAMA_CLI_PATH (ported from RealAi-unified).
+        from .local_discovery import discover_llama_cli
+
+        found = discover_llama_cli()
+        return Path(found) if found else None
 
     def available(self) -> bool:
         """Check if llama-cli is available."""

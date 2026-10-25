@@ -84,13 +84,18 @@ def _coerce_int(name, value, default, min_value=1):
 def health_response():
     """Return a health payload for the structured server."""
     settings = load_settings()
-    return {
+    payload = {
         'status': 'ok',
         'provider': settings.provider,
         'profile': settings.profile,
         'available_models': list_models(),
         'providers': list_providers(),
     }
+    from . import unified_routes
+
+    if unified_routes.enabled():
+        payload['runtime'] = unified_routes.runtime_summary()
+    return payload
 
 
 def handle_chat_request(payload):
