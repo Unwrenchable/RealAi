@@ -13,6 +13,13 @@ Routes:
   POST /v1/archeology
   POST /v1/workspace/catalog
   POST /v1/tools/route
+  POST /v1/tools/execute               (audited envelope; does not run the tool)
+  GET  /v1/skills, GET /v1/agents
+  GET  /v1/plugins, POST /v1/plugins/execute  (first-party allow-list only)
+  GET  /v1/world/state, POST /v1/world/observe
+  POST /v1/reflection/analyze
+  POST /v1/synthesis/knowledge, POST /v1/agents/orchestrate  (local RealAI, no network)
+/health gains a ``runtime`` block when enabled (see ``runtime_summary``).
 """
 from __future__ import annotations
 
@@ -100,4 +107,152 @@ def dispatch(method: str, path: str, payload: Any = None) -> Optional[Tuple[int,
         allowed = body.get("allowed_tools") if isinstance(body.get("allowed_tools"), list) else None
         return 200, route(text, allowed, _str(body, "provider") or "local"), JSON
 
-    return None
+    return _dispatch_runtime(method, path, body)
+
+
+
+# --- Ported from RealAi-unified router.py (handlers live lacked) -----------------
+
+RUNTIME_ROLES = ("critic", "executor", "planner", "safety", "synthesizer", "worker")
+EXTRA_PLUGINS = ("workspace_info", "tool_router")
+_BELIEF = None
+
+
+def _plugin_names():
+    from realai.plugins import list_first_party
+
+    return list(list_first_party()) + [p for p in EXTRA_PLUGINS]
+
+
+def _load_plugin(name: str):
+    from realai.plugins import load_first_party
+
+    return load_first_party(name)
+
+
+def _world():
+    global _BELIEF
+    from realai import world_model as wm
+
+    if _BELIEF is None:
+        _BELIEF = wm.BeliefUpdater()
+    return wm, _BELIEF
+
+
+def _world_facts():
+    wm, _ = _world()
+    out = {}
+    for key, entry in wm.WORLD_STATE.all_facts().items():
+        out[key] = entry["value"] if isinstance(entry, dict) and "value" in entry else entry
+    return out
+
+
+def _world_payload():
+    wm, _ = _world()
+    return {"facts": _world_facts(), "observations": len(getattr(wm.WORLD_STATE, "_observations", []))}
+
+
+def _local_model():
+    from realai import RealAI
+
+    return RealAI(model_name="realai-1.0", provider="local", use_local=True)
+
+
+def runtime_summary() -> Dict[str, Any]:
+    from .tools_runtime import TOOLS
+
+    plugins = _plugin_names()
+    return {
+        "memory": {"enabled": True},
+        "plugins": {"enabled": True, "count": len(plugins), "names": plugins},
+        "world": {"enabled": True, "facts": _world_facts()},
+        "tools": {"enabled": True, "count": len(TOOLS.list_tools())},
+        "skills": {"enabled": True, "count": len(RUNTIME_ROLES), "names": list(RUNTIME_ROLES)},
+        "agents": {"enabled": True, "count": len(RUNTIME_ROLES), "names": list(RUNTIME_ROLES)},
+    }
+
+
+def _dispatch_runtime(method: str, path: str, body: Dict[str, Any]):
+    if method == "POST" and path == "/v1/tools/execute":
+        from .tools_runtime import TOOLS
+
+        name = _str(body, "name")
+        if not name:
+            return _bad("name is required.")
+        params = body.get("params", {})
+        if not isinstance(params, dict):
+            return _bad("params must be an object when provided.")
+        result = TOOLS.execute(name, params=params, actor=_str(body, "actor") or "system")
+        return 200, {"ok": True, "tool": name, "result": result}, JSON
+
+    if method == "GET" and path in {"/v1/skills", "/v1/agents"}:
+        kind = "skill" if path.endswith("skills") else "agent"
+        data = [{"name": n, "kind": kind, "description": f"{n} runtime {kind}"} for n in RUNTIME_ROLES]
+        return 200, {"object": "list", "data": data}, JSON
+
+    if method == "GET" and path == "/v1/plugins":
+        data = []
+        for name in _plugin_names():
+            try:
+                mod = _load_plugin(name)
+                doc = (mod.__doc__ or "").strip().splitlines()
+                data.append({"name": name, "metadata": {"description": doc[0] if doc else "", "module": mod.__name__}})
+            except Exception as exc:  # report, don't hide, broken plugins
+                data.append({"name": name, "metadata": {"error": str(exc)}})
+        return 200, {"object": "list", "data": data}, JSON
+
+    if method == "POST" and path == "/v1/plugins/execute":
+        name = _str(body, "name")
+        if not name:
+            return _bad("name is required.")
+        if name not in _plugin_names():
+            return _bad("Unknown plugin.")
+        mod = _load_plugin(name)
+        register = getattr(mod, "register", None)
+        metadata = register(type("DummyModel", (), {})()) if callable(register) else {}
+        return 200, {"ok": True, "plugin": name, "metadata": metadata if isinstance(metadata, dict) else {}, "data": body.get("data", {})}, JSON
+
+    if method == "GET" and path == "/v1/world/state":
+        return 200, {"object": "world_state", "world": _world_payload()}, JSON
+
+    if method == "POST" and path == "/v1/world/observe":
+        content = _str(body, "content")
+        if not content:
+            return _bad("content is required.")
+        wm, belief = _world()
+        obs = wm.WORLD_STATE.observe(content, source=_str(body, "source") or "api")
+        belief.update(wm.WORLD_STATE, obs)
+        plan = wm.PLANNING_ENGINE.plan(content, wm.WORLD_STATE, max_steps=3)
+        wm.GOAL_TRACKER.add_goal(content)
+        return 200, {"observed": True, "world": _world_payload(), "plan": plan}, JSON
+
+    if method == "POST" and path == "/v1/reflection/analyze":
+        text = _str(body, "text")
+        if not text:
+            return _bad("text is required.")
+        words = " ".join(seg.strip() for seg in text.split(".") if seg.strip()).split()
+        summary = " ".join(words[:20]) + ("..." if len(words) > 20 else "")
+        return 200, {"reflection": {"summary": summary, "goal": _str(body, "goal") or "improve understanding",
+                                    "model": "realai-1.0", "focus": "local-runtime-reflection"}}, JSON
+
+    if method == "POST" and path == "/v1/synthesis/knowledge":
+        facts = body.get("facts")
+        if not isinstance(facts, list) or not facts:
+            return _bad("facts must be a non-empty list.")
+        result = _local_model().synthesize_knowledge(facts)
+        result = result if isinstance(result, dict) else {"synthesis": str(result)}
+        return 200, {"synthesis": {"summary": result.get("synthesis") or result.get("summary") or str(result),
+                                   "connections": result.get("connections", []),
+                                   "topics": result.get("topics", facts)}}, JSON
+
+    if method == "POST" and path == "/v1/agents/orchestrate":
+        task = _str(body, "task")
+        if not task:
+            return _bad("task is required.")
+        agents = body.get("agents") or ["planner", "executor"]
+        if not isinstance(agents, list):
+            return _bad("agents must be a non-empty list when provided.")
+        result = _local_model().orchestrate_agents(task, agent_roles=agents)
+        result = result if isinstance(result, dict) else {}
+        return 200, {"orchestration": {"task": task, "agents": agents, "status": result.get("status", "success"),
+                                       "result": result}}, JSON

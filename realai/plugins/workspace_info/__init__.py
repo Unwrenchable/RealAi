@@ -152,7 +152,37 @@ def workspace_catalog(root: Optional[str] = None, max_items: int = 10) -> Dict[s
         return {"ok": False, "error": "root must be an existing directory inside REALAI_HOME", "root": str(base)}
     out = _build_catalog(base, max_items=max_items)
     out.update({"ok": True, "root": str(base)})
+    out.update(_story_view(out))
     return out
+
+
+def _story_view(catalog: Dict[str, Any]) -> Dict[str, Any]:
+    """RealAi-unified's snapshot/story/buckets shape, derived from live's highlights.
+
+    Additive: ``summary``/``highlights`` are unchanged; upstream callers that read
+    ``snapshot``/``story``/``buckets`` keep working.
+    """
+    items = list(catalog.get("highlights") or [])
+    summary = catalog.get("summary") or {}
+    buckets: Dict[str, List[Dict[str, Any]]] = {"priority": [], "tests": [], "repair": [], "other": []}
+    for it in items:
+        notes = it.get("notes") or []
+        if "repair-like wording" in notes:
+            buckets["repair"].append(it)
+        elif "test-like path" in notes or "/test" in it.get("path", ""):
+            buckets["tests"].append(it)
+        elif it.get("score", 0) >= 4:
+            buckets["priority"].append(it)
+        else:
+            buckets["other"].append(it)
+    return {
+        "snapshot": {
+            "files_considered": summary.get("files_scanned", len(items)),
+            "top_weight": summary.get("top_score", items[0].get("score", 0) if items else 0),
+        },
+        "story": [{"path": it.get("path"), "weight": it.get("score", 0), "notes": it.get("notes", [])} for it in items[:10]],
+        "buckets": {k: v[:8] for k, v in buckets.items()},
+    }
 
 
 def invoke(ability: str, payload: Dict[str, Any], context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
