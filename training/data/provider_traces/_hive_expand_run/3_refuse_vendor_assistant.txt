@@ -1,0 +1,6 @@
+Mode: One-Tree
+Action: Mode: One-Tree Refuse / Action / Results (2-3 facts) / Next Refuse: Coach stays POST rackup-coach / rackup_invoke only; no vendor into Nest. Next: Confirm no RealAI files or plugins are copied into Nest.
+Results:
+- ability.coach
+- no write this turn; hive smoke not run
+Next: Continue from the result facts.

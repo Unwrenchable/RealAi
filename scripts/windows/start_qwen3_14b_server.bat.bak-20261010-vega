@@ -1,0 +1,38 @@
+@echo off
+REM RealAI-clean - Qwen3-14B Q4_K_M llama-server on :8082 (does NOT touch the 7B on :8080)
+REM Stop the 7B first: 12 GB VRAM cannot hold both.
+setlocal
+set "LLAMA=C:\llama-vulkan\llama-server.exe"
+set "MODEL=C:\models\checkpoints_lora\Qwen3-14B-Q4_K_M.gguf"
+if not defined QWEN3_PORT set "QWEN3_PORT=8082"
+if not defined QWEN3_CTX set "QWEN3_CTX=16384"
+
+if not exist "%LLAMA%" (
+  echo ERROR: Missing %LLAMA%
+  pause
+  exit /b 1
+)
+if not exist "%MODEL%" (
+  echo ERROR: Missing model %MODEL%
+  pause
+  exit /b 1
+)
+echo Starting Qwen3-14B Q4_K_M on http://127.0.0.1:%QWEN3_PORT%  ctx=%QWEN3_CTX%
+echo Press Ctrl+C to stop
+echo.
+
+"%LLAMA%" ^
+  -m "%MODEL%" ^
+  --alias qwen3-14b ^
+  --host 127.0.0.1 ^
+  --port %QWEN3_PORT% ^
+  -c %QWEN3_CTX% ^
+  -ngl 99 ^
+  --jinja ^
+  --reasoning off ^
+  -fa on ^
+  -ctk q8_0 -ctv q8_0 ^
+  --temp 0.7 --top-p 0.8 --top-k 20 --min-p 0
+
+pause
+endlocal

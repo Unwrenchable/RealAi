@@ -156,6 +156,8 @@ def resume_vulkan(
         str(ctx_v),
         "-ngl",
         str(ngl_v),
+        "--device",
+        "Vulkan1",
         "--jinja",
     ]
     log(f"starting {SERVER_EXE.name} model={model.name} ngl={ngl_v} ctx={ctx_v}")

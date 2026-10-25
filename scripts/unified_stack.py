@@ -315,6 +315,8 @@ def start_vulkan(env: Dict[str, str], force: bool = False) -> Dict[str, Any]:
             str(ctx),
             "-ngl",
             str(ngl),
+            "--device",
+            "Vulkan1",
             "--jinja",
         ],
         str(VULKAN_DIR),

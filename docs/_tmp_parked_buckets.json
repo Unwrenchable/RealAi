@@ -1,0 +1,50 @@
+[
+  {
+    "Name": "2026-09-07-gpu-ctx",
+    "FileCount": 2
+  },
+  {
+    "Name": "2026-09-07-orch2",
+    "FileCount": 2
+  },
+  {
+    "Name": "2026-09-07-universe",
+    "FileCount": 8
+  },
+  {
+    "Name": "2026-09-07-voice-exec",
+    "FileCount": 1
+  },
+  {
+    "Name": "2026-09-08-cors-voice",
+    "FileCount": 1
+  },
+  {
+    "Name": "2026-09-08-hive-agents-ui",
+    "FileCount": 2
+  },
+  {
+    "Name": "2026-09-08-multi-agent-liveexec",
+    "FileCount": 1
+  },
+  {
+    "Name": "2026-09-08-multi-agent-worker",
+    "FileCount": 1
+  },
+  {
+    "Name": "2026-09-08-next-level",
+    "FileCount": 5
+  },
+  {
+    "Name": "2026-09-08-realai-gateway",
+    "FileCount": 1
+  },
+  {
+    "Name": "2026-09-08-voice-cors",
+    "FileCount": 1
+  },
+  {
+    "Name": "2026-09-08-xtts-console",
+    "FileCount": 1
+  }
+]

@@ -1,0 +1,17 @@
+@echo off
+REM Start Qwen3-14B live server on 127.0.0.1:8080 (llama.cpp Vulkan build).
+REM Refuses to start if anything already listens on port 8080.
+setlocal
+
+powershell -NoProfile -Command "if (Get-NetTCPConnection -LocalPort 8080 -State Listen -ErrorAction SilentlyContinue) { exit 1 } else { exit 0 }"
+if errorlevel 1 (
+  echo.
+  echo Port 8080 is already in use. Not starting Qwen3-14B.
+  echo Stop the current server first ^(see stop_qwen3_14b_live.bat^).
+  echo.
+  pause
+  exit /b 1
+)
+
+start "RealAI Qwen3-14B :8080" cmd /k ""C:\llama-vulkan\llama-server.exe" -m "C:\models\checkpoints_lora\Qwen3-14B-Q4_K_M.gguf" --alias qwen3-14b --host 127.0.0.1 --port 8080 -c 16384 -ngl 99 --jinja --reasoning off -fa on -ctk q8_0 -ctv q8_0 --temp 0.7 --top-p 0.8 --top-k 20 --min-p 0"
+endlocal

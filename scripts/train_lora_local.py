@@ -347,7 +347,13 @@ def main(argv=None) -> int:
         )
 
     # Universal VRAM-safe plan (Qwen/LLaMA/Mistral/Phi/Gemma/Yi/…)
-    from core.training.directml_vram_safe import (
+    import importlib.util
+    _dml_path = Path(r'C:\RealAI-clean\realai\core\training\directml_vram_safe.py')
+    _spec = importlib.util.spec_from_file_location('directml_vram_safe', _dml_path)
+    _m = importlib.util.module_from_spec(_spec)
+    sys.modules['directml_vram_safe'] = _m
+    _spec.loader.exec_module(_m)
+    from directml_vram_safe import (
         apply_directml_vram_safe,
         forward_with_oom_backoff,
         suggest_vram_plan,

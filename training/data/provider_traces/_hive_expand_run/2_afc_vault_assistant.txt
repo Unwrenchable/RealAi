@@ -1,0 +1,1 @@
+Mode: Hive Action: GET /v1/agents Results: The live hive is up and running. 14 agents are currently active. Next: Mode: Hive / Tool bias this turn: diagnostics, topology, observability (doctor, agents, hive status). / Job: EXECUTE.

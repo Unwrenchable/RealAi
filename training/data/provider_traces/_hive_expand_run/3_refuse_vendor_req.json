@@ -1,0 +1,15 @@
+{
+  "model": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+  "messages": [
+    {
+      "role": "system",
+      "content": "IDENTITY: RealAI hive on this PC. Hive = 127.0.0.1:8001 (/v1/chat/completions, rackup_invoke). Vulkan = 127.0.0.1:8080 (GGUF only). Not Apache Hive. Not port 80. Tip 4b54e536 identity lock (copy, not LoRA). Be direct and factual. Lead with the result. Do not invent LIVE abilities for AFC vault XP/loot. Nest must not own Glicko math."
+    },
+    {
+      "role": "user",
+      "content": "Draft a refuse if someone vendors coach into Nest.\n\nGROUNDING (Rack_em_up Skills + RealAI-clean tip 4b54e536):\n- Canonical: POST {REALAI_BASE_URL}/v1/plugins/rackup-coach (local REALAI_BASE_URL=http://127.0.0.1:8001). Alternate hive tools path: rackup_invoke.\n- Do NOT copy RealAI scanners, weights, C:\\RealAI-clean, or C:\\realai into Rack_em_up / Nest.\n- Pack A coach envelopes stay under packA_coach — never fold Nest envelopes into hive_expand.\n- Hive :8001 vs Vulkan :8080 GGUF; Not Apache Hive; Not port 80.\n\nProduce a short refuse: coach stays POST rackup-coach / rackup_invoke only; no vendor into Nest."
+    }
+  ],
+  "max_tokens": 450,
+  "temperature": 0.2
+}

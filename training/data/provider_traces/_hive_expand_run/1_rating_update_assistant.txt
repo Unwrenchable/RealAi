@@ -1,0 +1,1 @@
+Mode: One-Tree **Action:** Scan `realai/orchestration/v3_orchestrator.py` for `rating_update` calls. **Results:** Found `rating_update` call at line 123 in `realai/orchestration/v3_orchestrator.py`. The call is made to `http://127.0.0.1:8001/v1/plugins/rackup-coach`. **Next:** Review `realai/orchestration/v3_runtime_bridge.py` for any additional `rating_update` calls.

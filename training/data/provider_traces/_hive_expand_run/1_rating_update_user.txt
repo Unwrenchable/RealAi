@@ -1,0 +1,10 @@
+Review RackUp rating_update call sites — they must hit RealAI, not Nest Glicko.
+
+GROUNDING (grepped on C:\Users\tsmit\Rack_em_up + RealAI-clean @ 4b54e536):
+- REALAI_BASE_URL=http://127.0.0.1:8001; REALAI_COACH_PATH=/v1/plugins/rackup-coach
+- Nest realai-coach.client.ts ability 'rating_update' → POST {REALAI_BASE_URL}/v1/plugins/rackup-coach
+- RatingService persists rating_after; RealAI owns Glicko-2 math. REALAI_FALLBACK_LOCAL_ELO is dev-only, NOT production Glicko authority.
+- Hive LIVE: ability.rating_update + rackup_invoke on :8001. Vulkan :8080 is GGUF only (qwen2.5-coder-7b-instruct-q5_k_m.gguf).
+- Refuse teaching Nest-local RatingService / 'ROC Glicko-2' as the math owner.
+
+Answer: who owns rating_update math, exact HTTP path/port, and why Nest Glicko invent is wrong.

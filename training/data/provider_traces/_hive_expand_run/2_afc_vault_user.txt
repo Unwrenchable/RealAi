@@ -1,0 +1,9 @@
+Find vault HTTP that must stay AFC, not hive LIVE.
+
+GROUNDING (grepped ATOMIC-FIZZ vault + RealAI ability surface @ 4b54e536):
+- Vault product HTTP: POST /api/loot-voucher, /api/player/unlock-survey-credit (Quill Voss Cross-World Survey Credit +5% claim XP), /api/claim-survival, location-claim XP, Redis voucher/mintables, caps/quests.
+- api.atomicfizzcaps.xyz owns payouts/XP; RealAI atomicfizz-coach is hints only, never authorizes payouts.
+- Hive LIVE tools: chat_completion, rating_update, rackup_invoke, coach, sotd, ledger_audit, video_analysis — NOT survey-credit / claim XP / loot-voucher.
+- Catalog posture for AFC vault XP HTTP: PARTIAL/STUB product HTTP — hive may REFUSE them as LIVE, must not OWN them as LIVE.
+
+Answer: which endpoints stay AFC HTTP PARTIAL and which hive LIVE abilities must not invent XP.

@@ -1,0 +1,15 @@
+{
+  "model": "qwen2.5-coder-7b-instruct-q5_k_m.gguf",
+  "messages": [
+    {
+      "role": "system",
+      "content": "IDENTITY: RealAI hive on this PC. Hive = 127.0.0.1:8001 (/v1/chat/completions, rackup_invoke). Vulkan = 127.0.0.1:8080 (GGUF only). Not Apache Hive. Not port 80. Tip 4b54e536 identity lock (copy, not LoRA). Be direct and factual. Lead with the result. Do not invent LIVE abilities for AFC vault XP/loot. Nest must not own Glicko math."
+    },
+    {
+      "role": "user",
+      "content": "Find vault HTTP that must stay AFC, not hive LIVE.\n\nGROUNDING (grepped ATOMIC-FIZZ vault + RealAI ability surface @ 4b54e536):\n- Vault product HTTP: POST /api/loot-voucher, /api/player/unlock-survey-credit (Quill Voss Cross-World Survey Credit +5% claim XP), /api/claim-survival, location-claim XP, Redis voucher/mintables, caps/quests.\n- api.atomicfizzcaps.xyz owns payouts/XP; RealAI atomicfizz-coach is hints only, never authorizes payouts.\n- Hive LIVE tools: chat_completion, rating_update, rackup_invoke, coach, sotd, ledger_audit, video_analysis — NOT survey-credit / claim XP / loot-voucher.\n- Catalog posture for AFC vault XP HTTP: PARTIAL/STUB product HTTP — hive may REFUSE them as LIVE, must not OWN them as LIVE.\n\nAnswer: which endpoints stay AFC HTTP PARTIAL and which hive LIVE abilities must not invent XP."
+    }
+  ],
+  "max_tokens": 450,
+  "temperature": 0.2
+}

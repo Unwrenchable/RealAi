@@ -231,7 +231,7 @@ if (-not $SkipStart) {
         $vLogErr = Join-Path $Logs "vulkan.err.log"
         Start-Detached -FilePath $Llama -ArgumentList @(
             "-m", $Model, "--host", "127.0.0.1", "--port", "$VulkanPort",
-            "-c", "$ctx", "-ngl", "$ngl", "--jinja"
+            "-c", "$ctx", "-ngl", "$ngl", "--device", "Vulkan1", "--jinja"
         ) -WorkingDirectory (Split-Path $Llama -Parent) `
           -StdoutLog $vLogOut -StderrLog $vLogErr -Title "RealAI-Vulkan"
 
