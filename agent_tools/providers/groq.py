@@ -1,22 +1,19 @@
-from __future__ import annotations
+"""DEPRECATED shim (2026-10-22): forwards to the canonical engine `realai.agentx.providers.groq`.
 
-import os
-from typing import Any
+The previous fork is kept unchanged as `groq_legacy.py` for anything that
+needs a name only it defines. New code should import `realai.agentx.providers.groq` directly.
+"""
+from realai.agentx.providers.groq import *  # noqa: F401,F403
+import importlib as _importlib
+
+_canon = _importlib.import_module("realai.agentx.providers.groq")
 
 
-class GroqProvider:
-    name = "groq"
-    cost_score = 4
-    speed_score = 5
-    context_score = 3
-
-    def available(self) -> bool:
-        return bool(os.getenv("GROQ_API_KEY"))
-
-    def complete(self, prompt: str, context: dict[str, Any], dry_run: bool) -> dict[str, Any]:
-        suffix = " (dry-run)" if dry_run else ""
-        return {
-            "content": f"groq{suffix}: processed prompt '{prompt[:80]}'",
-            "tokens": max(1, len(prompt.split())),
-            "raw": {"context": context},
-        }
+def __getattr__(name):
+    if name.startswith("__"):
+        raise AttributeError(name)
+    try:
+        return getattr(_canon, name)
+    except AttributeError:
+        _legacy = _importlib.import_module(__name__ + "_legacy")
+        return getattr(_legacy, name)

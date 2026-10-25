@@ -1874,6 +1874,70 @@ class Handler(BaseHTTPRequestHandler):
         )
         self.send_header("Access-Control-Max-Age", "86400")
 
+    def _agentx_hive(self, method: str, path: str, qs: Any, raw: bytes = b"") -> bool:
+        """Hive team routes (realai.agentx.hive.http_api): guard already ran; adds loopback + token."""
+        try:
+            from realai.agentx.hive import http_api as _hx
+        except Exception:
+            return False
+        if not _hx.handles(path):
+            return False
+        if method == "GET" and path.rstrip("/") == _hx.SSE_PATH:
+            denied = _hx.authorize(self.client_address[0], self.headers)
+            if denied:
+                self._json(denied[0], {"error": denied[1]})
+                return True
+            self._agentx_hive_sse(qs)
+            return True
+        body: Any = {}
+        if method == "POST" and raw:
+            try:
+                body = json.loads(raw.decode("utf-8") or "{}")
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                self._json(400, {"error": "invalid_json"})
+                return True
+            if not isinstance(body, dict):
+                body = {}
+        try:
+            code, obj = _hx.handle(method, path, qs, body, self.client_address[0], self.headers)
+        except Exception as e:  # noqa: BLE001
+            code, obj = 500, {"error": "hive_error", "detail": type(e).__name__}
+        self._json(code, obj)
+        return True
+
+    def _agentx_hive_sse(self, qs: Any) -> None:
+        """SSE of realai.agentx.hive.events (paths/tool names only, never file contents)."""
+        import queue as _queue
+
+        from realai.agentx.hive import events as _ev
+
+        try:
+            after = int(((qs or {}).get("after") or ["0"])[0])
+        except ValueError:
+            after = 0
+        self.send_response(200)
+        self.send_header("Content-Type", "text/event-stream")
+        self.send_header("Cache-Control", "no-cache")
+        self.send_header("X-Accel-Buffering", "no")
+        self.end_headers()
+        q = _ev.subscribe()
+        try:
+            self.wfile.write(b'data: {"type":"connected"}\n\n')
+            for e in _ev.recent(300, after=after):
+                self.wfile.write(f"data: {json.dumps(e, default=str)}\n\n".encode("utf-8"))
+            self.wfile.flush()
+            while True:
+                try:
+                    e = q.get(timeout=15)
+                    self.wfile.write(f"data: {json.dumps(e, default=str)}\n\n".encode("utf-8"))
+                except _queue.Empty:
+                    self.wfile.write(b": ping\n\n")
+                self.wfile.flush()
+        except (OSError, ConnectionAbortedError, ConnectionResetError, BrokenPipeError):
+            pass
+        finally:
+            _ev.unsubscribe(q)
+
     def _json(self, code: int, obj: Any) -> None:
         def _default(o: Any) -> Any:
             if isinstance(o, (bytes, bytearray)):
@@ -2140,6 +2204,8 @@ class Handler(BaseHTTPRequestHandler):
             return
         path = parsed.path.rstrip("/") or "/"
         qs = parse_qs(parsed.query)
+        if path.startswith("/v1/hive/") and self._agentx_hive("GET", path, qs):
+            return
 
         # RealAI brand assets (public/)
         if parsed.path in ("/favicon.ico", "/favicon.svg", "/og.jpg", "/site.webmanifest"):
@@ -2655,6 +2721,8 @@ class Handler(BaseHTTPRequestHandler):
         if not self._guard("POST", path):
             return
         raw = self._read_body()
+        if path.startswith("/v1/hive/") and self._agentx_hive("POST", path, parse_qs(parsed.query), raw):
+            return
 
         if path == "/v1/embeddings":
             try:
@@ -3795,6 +3863,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     print("  GET  /v1/abilities        -> ability catalog")
     print("  POST /v1/abilities/run    -> run ability.<id>")
     print("  GET|POST /v1/hive         -> hive status / cycle / multi")
+    print("  GET  /v1/hive/teams | /v1/hive/findings ; POST /v1/hive/teams/<id>/run | /v1/hive/playtest (token)")
     print("  GET|POST /v1/craft        -> craft TOOLS / craft_chat")
     print("  POST /v1/multi-agent/run  -> planner/worker/critic (Vulkan)")
     print("  POST /v1/chat/completions multi_agent=true · /craft|/hive|/ability intents")

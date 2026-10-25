@@ -1,0 +1,7 @@
+{
+  "id": "smoke-local-provider",
+  "area": "qa",
+  "input": "playtest wrist ui boot: in one sentence, what should a player see first?",
+  "expect_nonempty": true,
+  "note": "Reachability smoke: passes when the hive (or placeholder) returns any text. Was expected_contains=local, which only the placeholder emits, so a live hive always produced a false finding."
+}

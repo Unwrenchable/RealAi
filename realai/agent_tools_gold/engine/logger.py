@@ -1,43 +1,19 @@
-from __future__ import annotations
+"""DEPRECATED shim (2026-10-22): forwards to the canonical engine `realai.agentx.engine.logger`.
 
-import json
-from dataclasses import dataclass, field
-from pathlib import Path
-from time import time
-from typing import Any
+The previous fork is kept unchanged as `logger_legacy.py` for anything that
+needs a name only it defines. New code should import `realai.agentx.engine.logger` directly.
+"""
+from realai.agentx.engine.logger import *  # noqa: F401,F403
+import importlib as _importlib
 
-
-@dataclass(slots=True)
-class LogEvent:
-    kind: str
-    timestamp_ms: int
-    data: dict[str, Any] = field(default_factory=dict)
-
-    def to_dict(self) -> dict[str, Any]:
-        return {
-            "kind": self.kind,
-            "timestamp_ms": self.timestamp_ms,
-            "data": self.data,
-        }
+_canon = _importlib.import_module("realai.agentx.engine.logger")
 
 
-class ExecutionLogger:
-    def __init__(self, sink_file: Path | None = None) -> None:
-        self._sink_file = sink_file
-        self._events: list[LogEvent] = []
-
-    @property
-    def events(self) -> list[LogEvent]:
-        return list(self._events)
-
-    def log(self, kind: str, **data: Any) -> None:
-        event = LogEvent(kind=kind, timestamp_ms=int(time() * 1000), data=dict(data))
-        self._events.append(event)
-        if self._sink_file is None:
-            return
-        self._sink_file.parent.mkdir(parents=True, exist_ok=True)
-        with self._sink_file.open("a", encoding="utf-8") as handle:
-            handle.write(json.dumps(event.to_dict()) + "\n")
-
-    def to_jsonable(self) -> list[dict[str, Any]]:
-        return [event.to_dict() for event in self._events]
+def __getattr__(name):
+    if name.startswith("__"):
+        raise AttributeError(name)
+    try:
+        return getattr(_canon, name)
+    except AttributeError:
+        _legacy = _importlib.import_module(__name__ + "_legacy")
+        return getattr(_legacy, name)

@@ -1,6 +1,19 @@
-"""Placeholder for agent_tools/engine/logger.py — listed in SOURCES.txt, source missing from disk.
-Recover from git history or bytecode when available.
-RECOVERY_STATUS = "missing_source"
+"""DEPRECATED shim (2026-10-22): forwards to the canonical engine `realai.agentx.engine.logger`.
+
+The previous fork is kept unchanged as `logger_legacy.py` for anything that
+needs a name only it defines. New code should import `realai.agentx.engine.logger` directly.
 """
-RECOVERY_STATUS = "missing_source"
-MODULE = 'agent_tools/engine/logger.py'
+from realai.agentx.engine.logger import *  # noqa: F401,F403
+import importlib as _importlib
+
+_canon = _importlib.import_module("realai.agentx.engine.logger")
+
+
+def __getattr__(name):
+    if name.startswith("__"):
+        raise AttributeError(name)
+    try:
+        return getattr(_canon, name)
+    except AttributeError:
+        _legacy = _importlib.import_module(__name__ + "_legacy")
+        return getattr(_legacy, name)

@@ -1,22 +1,19 @@
-from __future__ import annotations
+"""DEPRECATED shim (2026-10-22): forwards to the canonical engine `realai.agentx.providers.local`.
 
-from typing import Any
+The previous fork is kept unchanged as `local_legacy.py` for anything that
+needs a name only it defines. New code should import `realai.agentx.providers.local` directly.
+"""
+from realai.agentx.providers.local import *  # noqa: F401,F403
+import importlib as _importlib
+
+_canon = _importlib.import_module("realai.agentx.providers.local")
 
 
-class LocalProvider:
-    name = "local"
-    cost_score = 5
-    speed_score = 5
-    context_score = 2
-
-    def available(self) -> bool:
-        return True
-
-    def complete(self, prompt: str, context: dict[str, Any], dry_run: bool) -> dict[str, Any]:
-        suffix = " (dry-run)" if dry_run else ""
-        tool_count = len(context.get("tools", []))
-        return {
-            "content": f"local{suffix}: executed with {tool_count} tool calls for '{prompt[:80]}'",
-            "tokens": max(1, len(prompt.split())),
-            "raw": {"context": context},
-        }
+def __getattr__(name):
+    if name.startswith("__"):
+        raise AttributeError(name)
+    try:
+        return getattr(_canon, name)
+    except AttributeError:
+        _legacy = _importlib.import_module(__name__ + "_legacy")
+        return getattr(_legacy, name)
