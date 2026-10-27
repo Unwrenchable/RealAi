@@ -1,7 +1,9 @@
 """Llama CLI backend for local GGUF model inference via llama-cli.exe."""
 
 import json
+import os
 import subprocess
+import tempfile
 import shutil
 from pathlib import Path
 from typing import Optional
@@ -11,6 +13,45 @@ from .logging_utils import setup_logging
 
 logger = setup_logging()
 
+
+
+MODEL_SUFFIXES = ('.gguf', '.bin')
+
+
+def _allowed_model_files():
+    """Model files the server may hand to llama-cli: registry paths + discovered files.
+
+    Built only from server-side config and the filesystem, never from request data.
+    """
+    allowed = []
+    try:
+        from .config import load_registry
+        from .local_discovery import resolve_model_path
+
+        for cfg in load_registry().values():
+            resolved = resolve_model_path(cfg.get('path')) if isinstance(cfg, dict) else None
+            if resolved:
+                allowed.append(os.path.realpath(resolved))
+    except Exception as exc:  # registry problems must not crash inference
+        logger.warning('Could not read model registry for allow-list: %s', exc)
+    from .local_discovery import discover_local_model_candidates
+
+    allowed.extend(os.path.realpath(str(p)) for p in discover_local_model_candidates())
+    env = os.environ.get('REALAI_MODEL_PATH')
+    if env and os.path.isfile(env):
+        allowed.append(os.path.realpath(env))
+    return [p for p in dict.fromkeys(allowed) if p.lower().endswith(MODEL_SUFFIXES) and os.path.isfile(p)]
+
+
+def _allowed_model_file(model_path):
+    """Return the allow-listed path equal to ``model_path`` (the list's own string), else None."""
+    if not model_path:
+        return None
+    wanted = os.path.realpath(str(model_path))
+    for candidate in _allowed_model_files():
+        if candidate == wanted:
+            return candidate
+    return None
 
 class LlamaCliBackend(InferenceBackend):
     """Backend that calls llama-cli.exe for local inference with GGUF models.
@@ -60,7 +101,11 @@ class LlamaCliBackend(InferenceBackend):
             if path.exists():
                 return path
 
-        return None
+        # POSIX locations + REALAI_LLAMA_CLI_PATH (ported from RealAi-unified).
+        from .local_discovery import discover_llama_cli
+
+        found = discover_llama_cli()
+        return Path(found) if found else None
 
     def available(self) -> bool:
         """Check if llama-cli is available."""
@@ -83,26 +128,29 @@ class LlamaCliBackend(InferenceBackend):
             logger.error('llama-cli backend not available')
             return None
 
-        model_file = Path(model_path)
-        if not model_file.exists():
-            logger.error('Model file not found: %s', model_path)
+        model_file = _allowed_model_file(model_path)
+        if model_file is None:
+            logger.error('Model file not found or not an allowed model: %s', model_path)
             return None
 
-        # Build command line arguments
-        cmd = [
-            str(self._resolved_path),
-            '--model', str(model_file),
-            '--prompt', prompt,
-            '--n-predict', str(sampling.max_tokens),
-            '--temp', str(sampling.temperature),
-            '--top-p', str(sampling.top_p),
-            '--repeat-penalty', str(sampling.repetition_penalty),
-            '--log-disable',  # Disable llama.cpp internal logging
-            '--simple-io',  # Use simple I/O mode for easier parsing
-        ]
-
+        # The prompt goes through a temp file (--file), never argv, so request
+        # text can't be read as llama-cli flags (CodeQL py/command-line-injection).
+        prompt_fd, prompt_path = tempfile.mkstemp(prefix='realai-prompt-', suffix='.txt')
         try:
-            logger.info('Invoking llama-cli: %s', ' '.join(cmd[:4]))  # Log first few args
+            with os.fdopen(prompt_fd, 'w', encoding='utf-8') as fh:
+                fh.write(prompt)
+            cmd = [
+                str(self._resolved_path),
+                '--model', model_file,
+                '--file', prompt_path,
+                '--n-predict', str(int(sampling.max_tokens)),
+                '--temp', str(float(sampling.temperature)),
+                '--top-p', str(float(sampling.top_p)),
+                '--repeat-penalty', str(float(sampling.repetition_penalty)),
+                '--log-disable',  # Disable llama.cpp internal logging
+                '--simple-io',  # Use simple I/O mode for easier parsing
+            ]
+            logger.info('Invoking llama-cli: %s', ' '.join(cmd[:3]))
             result = subprocess.run(
                 cmd,
                 capture_output=True,
@@ -131,6 +179,11 @@ class LlamaCliBackend(InferenceBackend):
         except Exception as exc:
             logger.error('llama-cli execution failed: %s', exc)
             return None
+        finally:
+            try:
+                os.unlink(prompt_path)
+            except OSError:
+                pass
 
 
 class LlamaCliChatBackend(LlamaCliBackend):

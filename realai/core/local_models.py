@@ -141,8 +141,32 @@ class LocalModelManager:
         self._save_config()
 
     def get_model_info(self, name: str) -> Optional[Dict[str, Any]]:
-        """Get information about a registered model."""
-        return self.config.get("models", {}).get(name)
+        """Get information about a registered model.
+
+        Merged from imports/promoted/local_models.py: unregistered ``qwen2.5-1.5b-lora`` / ``qwen2.5-1.5b`` fall back
+        to the PEFT LoRA mapping (adapter path overridable via REALAI_QWEN_LORA_ADAPTER). Registrations win.
+        """
+        info = self.config.get("models", {}).get(name)
+        if info is None and name in {"qwen2.5-1.5b-lora", "qwen2.5-1.5b"}:
+            return {
+                "backend": "peft-transformers",
+                "base_model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+                "adapter_path": os.environ.get("REALAI_QWEN_LORA_ADAPTER", "./checkpoints_lora/qwen2.5-1.5b-lora"),
+                "context_length": 4096,
+            }
+        return info
+
+    def get_llm(self, model_name: Optional[str] = None):
+        """Load ``model_name`` (default: config ``default_llm``) on the shared engine; engine or None.
+
+        Recovered from imports/promoted/local_models.py.
+        """
+        if model_name is None:
+            model_name = self.config.get("default_llm")
+        engine = get_llm_engine()
+        if model_name and engine.load_model(model_name):
+            return engine
+        return None
 
     def is_model_available(self, name: str) -> bool:
         """Check if a model is available (downloaded and configured)."""
@@ -215,6 +239,8 @@ class LocalLLMEngine:
             return self._load_llama_cpp(model_name, info)
         elif backend == "transformers":
             return self._load_transformers(model_name, info)
+        elif backend == "peft-transformers":
+            return self._load_peft_transformers(model_name, info)
 
         return False
 
@@ -300,8 +326,100 @@ class LocalLLMEngine:
             return self._generate_llama_cpp(prompt, max_tokens, temperature, top_p, stop)
         elif self._current_backend == "transformers" and self._transformers:
             return self._generate_transformers(prompt, max_tokens, temperature, top_p, stop)
+        elif self._current_backend == "peft-transformers" and self._transformers:
+            return self._generate_peft_transformers(prompt, max_tokens, temperature, top_p, stop)
 
         return ""
+
+    # --- recovered from imports/promoted/local_models.py (PEFT LoRA adapters on a HF base) ---
+    def _load_peft_transformers(self, model_name: str, info: Dict[str, Any]) -> bool:
+        try:
+            import torch
+            from transformers import AutoModelForCausalLM, AutoTokenizer
+            from peft import PeftModel
+
+            base_model_id = info.get("base_model_id")
+            adapter_path = info.get("adapter_path")
+            context_length = info.get("context_length", 4096)
+
+            if not base_model_id or not adapter_path:
+                print(f"Missing base_model_id/adapter_path for {model_name}")
+                return False
+
+            print(f"Loading PEFT model: base={base_model_id}, adapter={adapter_path}")
+            tokenizer = AutoTokenizer.from_pretrained(base_model_id, trust_remote_code=True)
+            base_model = AutoModelForCausalLM.from_pretrained(
+                base_model_id,
+                trust_remote_code=True,
+                device_map="auto",
+                torch_dtype=getattr(torch, info.get("dtype", "bfloat16"), torch.bfloat16),
+            )
+
+            model = PeftModel.from_pretrained(base_model, adapter_path)
+            model.eval()
+
+            # Store for generation
+            self._transformers = {
+                "model": model,
+                "tokenizer": tokenizer,
+                "context_length": context_length,
+            }
+            self._current_model = model_name
+            self._current_backend = "peft-transformers"
+            return True
+        except Exception as e:
+            print(f"Failed to load peft-transformers model: {e}")
+            return False
+
+    def _generate_peft_transformers(
+        self,
+        prompt: str,
+        max_tokens: int,
+        temperature: float,
+        top_p: float,
+        stop: Optional[List[str]],
+    ) -> str:
+        try:
+            import torch
+
+            pack = self._transformers or {}
+            model = pack.get("model")
+            tokenizer = pack.get("tokenizer")
+            if not model or not tokenizer:
+                return ""
+
+            inputs = tokenizer(
+                prompt,
+                return_tensors="pt",
+                truncation=True,
+                max_length=pack.get("context_length", 4096),
+            )
+
+            gen_kwargs = {
+                "max_new_tokens": max_tokens,
+                "temperature": temperature,
+                "top_p": top_p,
+                "do_sample": temperature is not None and temperature > 0,
+            }
+
+            with torch.no_grad():
+                output_ids = model.generate(**inputs, **gen_kwargs)
+
+            generated = tokenizer.decode(
+                output_ids[0][inputs["input_ids"].shape[-1] :],
+                skip_special_tokens=True,
+            )
+
+            # naive stop support
+            if stop:
+                for s in stop:
+                    if s in generated:
+                        generated = generated.split(s, 1)[0]
+
+            return generated.strip()
+        except Exception as e:
+            print(f"PEFT generation error: {e}")
+            return ""
 
     def _generate_llama_cpp(self, prompt: str, max_tokens: int,
                            temperature: float, top_p: float,

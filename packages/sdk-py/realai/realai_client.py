@@ -26,10 +26,17 @@ class RealAIClient(object):
         self.timeout = timeout
 
     def _request(self, method, path, payload=None):
+        from realai.server.api_auth import client_key
+
+        headers = {}
+        key = client_key()
+        if key:
+            headers['Authorization'] = 'Bearer {0}'.format(key)
         response = requests.request(
             method,
             '{0}{1}'.format(self.api_url, path),
             json=payload,
+            headers=headers or None,
             timeout=self.timeout,
         )
         response.raise_for_status()

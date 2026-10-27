@@ -3,7 +3,7 @@ services:
     name: realai-api
     runtime: python
     pythonVersion: 3.11
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements-render.txt
     startCommand: python -m realai.api_server
     envVars:
       - key: WEB_CONCURRENCY
@@ -14,6 +14,8 @@ services:
         value: realai-1.0
       - key: ENV
         value: production
+      - key: REALAI_API_KEY
+        sync: false
       - key: CORS_ALLOWED_ORIGINS
         value: "https://realai.vercel.app,https://your-custom-domain.com"
     healthCheckPath: /health

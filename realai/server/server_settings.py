@@ -64,6 +64,7 @@ class ServerSettings(BaseModel):
             "REALAI_API_BASE": self.api_base_url(),
             "CORS_ALLOWED_ORIGINS": self.cors_allowed_origins(),
             "OPENAI_API_KEY_SET": bool(self.OPENAI_API_KEY),
+            "REALAI_API_KEY_SET": bool(self.REALAI_API_KEY),
         }
 
 

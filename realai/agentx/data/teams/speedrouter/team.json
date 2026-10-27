@@ -1,0 +1,116 @@
+{
+  "id": "speedrouter",
+  "source": "Unwrenchable/speedRouter .github/agents",
+  "lead": "speedrouter-coordinator",
+  "lead_file": "agents/my-agent.agent.md",
+  "members": [
+    {
+      "id": "speedrouter-orchestrator",
+      "file": "agents/speedrouter-orchestrator.agent.md"
+    },
+    {
+      "id": "speedrouter-implementation-pilot",
+      "file": "agents/speedrouter-implementation-pilot.agent.md"
+    },
+    {
+      "id": "speedrouter-network-engineer",
+      "file": "agents/speedrouter-network-engineer.agent.md"
+    },
+    {
+      "id": "speedrouter-security-auditor",
+      "file": "agents/speedrouter-security-auditor.agent.md"
+    },
+    {
+      "id": "speedrouter-speed-analyst",
+      "file": "agents/speedrouter-speed-analyst.agent.md"
+    },
+    {
+      "id": "speedrouter-vpn-specialist",
+      "file": "agents/speedrouter-vpn-specialist.agent.md"
+    }
+  ],
+  "ownership": [
+    {
+      "area": "network",
+      "owner": "speedrouter-network-engineer",
+      "reviewer": "speedrouter-security-auditor",
+      "keywords": [
+        "modem",
+        "gateway",
+        "dns",
+        "mtu"
+      ]
+    },
+    {
+      "area": "vpn",
+      "owner": "speedrouter-vpn-specialist",
+      "reviewer": "speedrouter-security-auditor",
+      "keywords": [
+        "vpn",
+        "wireguard"
+      ]
+    },
+    {
+      "area": "speed",
+      "owner": "speedrouter-speed-analyst",
+      "reviewer": "speedrouter-orchestrator",
+      "keywords": [
+        "speed",
+        "ping",
+        "benchmark"
+      ]
+    },
+    {
+      "area": "security",
+      "owner": "speedrouter-security-auditor",
+      "reviewer": "speedrouter-orchestrator",
+      "keywords": [
+        "security",
+        "session",
+        "validation"
+      ]
+    },
+    {
+      "area": "code",
+      "owner": "speedrouter-implementation-pilot",
+      "reviewer": "speedrouter-security-auditor",
+      "keywords": [
+        "patch",
+        "flask",
+        "implement",
+        "code"
+      ]
+    }
+  ],
+  "handoffs": [
+    {
+      "from": "speedrouter-coordinator",
+      "to": "speedrouter-orchestrator"
+    },
+    {
+      "from": "speedrouter-orchestrator",
+      "to": "speedrouter-implementation-pilot"
+    },
+    {
+      "from": "speedrouter-orchestrator",
+      "to": "speedrouter-network-engineer"
+    },
+    {
+      "from": "speedrouter-orchestrator",
+      "to": "speedrouter-security-auditor"
+    },
+    {
+      "from": "speedrouter-orchestrator",
+      "to": "speedrouter-speed-analyst"
+    },
+    {
+      "from": "speedrouter-orchestrator",
+      "to": "speedrouter-vpn-specialist"
+    },
+    {
+      "from": "speedrouter-implementation-pilot",
+      "to": "speedrouter-security-auditor",
+      "condition": "review"
+    }
+  ]
+}

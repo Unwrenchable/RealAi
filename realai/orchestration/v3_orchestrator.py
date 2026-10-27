@@ -31,6 +31,24 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import parse_qs, unquote, urlparse
 
+
+def _load_hive_guard():
+    """Load the stdlib inbound guard by file path (avoids heavy package __init__ imports)."""
+    import importlib.util
+
+    here = Path(__file__).resolve().parent / "hive_guard.py"
+    name = "realai_hive_guard"
+    if name in sys.modules:
+        return sys.modules[name]
+    spec = importlib.util.spec_from_file_location(name, str(here))
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[name] = mod
+    spec.loader.exec_module(mod)  # type: ignore[union-attr]
+    return mod
+
+
+_hive_guard = _load_hive_guard()
+
 # Repo root: .../realai package parent
 _PKG = Path(__file__).resolve().parent
 _ROOT = _PKG.parent
@@ -808,6 +826,12 @@ def _readonly_tools_catalog() -> List[Dict[str, Any]]:
 def _run_tool(name: str, arguments: Optional[Dict] = None) -> Dict[str, Any]:
     arguments = arguments or {}
     try:
+        # Write/exec tools: request -> human approval -> execute (realai.core.approval_gate). Deny by default.
+        from realai.core import approval_gate as _ag
+
+        _gate = _ag.gated_action(name)
+        if _gate:
+            return _ag.run_if_approved(_gate, _ag.normalize_tool_args(_gate, arguments), requested_by="hive")
         if name == "self_heal_status":
             from realai.self_heal import status
             return status()
@@ -871,7 +895,8 @@ def _run_tool(name: str, arguments: Optional[Dict] = None) -> Dict[str, Any]:
             from realai.providers.local_llama import local_llama_health
             return local_llama_health()
         if name in ("voice_health", "voice_inventory", "voice_speak", "voice_listen"):
-            from realai.voice.hive_tools import execute as voice_execute
+            # Lab-first shared client (Voice Lab :8890 if up, else in-process engine); trainer untouched.
+            from realai.voice_service.hive import execute as voice_execute
 
             args = dict(arguments or {})
             if name == "voice_speak" and not (args.get("text") or args.get("input")):
@@ -966,6 +991,21 @@ def _run_tool(name: str, arguments: Optional[Dict] = None) -> Dict[str, Any]:
             args.pop("action", None)
             args["ability"] = ability
             return _craft_run({"action": "rackup", **args})
+        # merged 2026-10-16 (MERGE_LEDGER: v3_orchestrator) from the 2026-08-28 archive phase
+        # (recovered/from_d_roots/realai_archive/_quarantine/v3_orchestrator.py): read-only tool names it served
+        # that this version did not. Write tools from that phase (search_replace) are NOT merged.
+        if name == "agent_info":
+            aid = str((arguments or {}).get("agent_id") or "").strip()
+            hit = _find_agent(aid) if aid else None
+            return {"ok": True, "agent": hit} if hit else {"ok": False, "error": "agent_not_found", "agent_id": aid}
+        if name in ("read_file", "list_dir"):
+            args = dict(arguments or {})
+            args.setdefault("path", args.get("target_file") or args.get("file_path") or args.get("target_directory") or
+                            ("." if name == "list_dir" else ""))
+            if "offset" in args and "start" not in args:
+                args["start"] = args["offset"]
+            name, arguments = ("workspace_read" if name == "read_file" else "workspace_list"), args
+        name = {"overseer_77": "overseer", "ability.overseer_77": "overseer", "world-brain": "world_brain"}.get(name, name)
         # Fall through to registry abilities (ability.*) + workspace tools (craft parity)
         from realai.v3_runtime_bridge import execute_registry_tool, workspace_tool
 
@@ -1762,19 +1802,141 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self, fmt: str, *args) -> None:
         sys.stderr.write("[v3-orch] %s - %s\n" % (self.address_string(), fmt % args))
 
+    # ---- inbound guard (realai/server/hive_guard.py) -------------------------
+    def _guard_cfg(self):
+        cfg = getattr(self.server, "_realai_guard_cfg", None)
+        if cfg is None:
+            port = getattr(self.server, "server_port", None) or int(os.environ.get("ORCH_PORT", "8001") or "8001")
+            bind = ""
+            try:
+                bind = str(self.server.server_address[0])
+            except Exception:
+                pass
+            cfg = _hive_guard.GuardConfig(server_port=int(port), bind_host=bind)
+            try:
+                self.server._realai_guard_cfg = cfg
+            except Exception:
+                pass
+        return cfg
+
+    def _guard(self, method: str, path: str) -> bool:
+        """Return True when the request may proceed; otherwise reply and return False."""
+        try:
+            cfg = self._guard_cfg()
+            decision = _hive_guard.check_request(
+                cfg, method, path, self.headers, (self.client_address or ("?",))[0]
+            )
+        except Exception as exc:  # fail closed on POST, open on reads
+            sys.stderr.write("[v3-orch] guard error: %s\n" % type(exc).__name__)
+            if method.upper() != "POST":
+                return True
+            decision = _hive_guard.Decision(False, 500, "guard_error", "")
+        if decision.ok:
+            if method.upper() == "GET":
+                self._guard_set_cookie = _hive_guard.wants_cookie(cfg, path)
+            return True
+        self.close_connection = True
+        self._json(decision.status, decision.body())
+        return False
+
+    def _guard_authorized(self) -> bool:
+        try:
+            return _hive_guard.is_authorized(self._guard_cfg(), self.headers)
+        except Exception:
+            return False
+
+    def end_headers(self) -> None:
+        if getattr(self, "_guard_set_cookie", False):
+            self._guard_set_cookie = False
+            try:
+                self.send_header("Set-Cookie", _hive_guard.cookie_header_value())
+            except Exception:
+                pass
+        super().end_headers()
+
     def _cors(self) -> None:
-        # Browser must only talk to RealAI (:8001). Organs stay internal.
+        # Browser talks to RealAI (:8001) plus the allowlisted local UIs (:3000, :8787, ...).
         origin = (self.headers.get("Origin") or "").strip()
-        if origin in ("http://127.0.0.1:8001", "http://localhost:8001"):
+        allowed = False
+        try:
+            allowed = bool(origin) and self._guard_cfg().origin_allowed(origin)
+        except Exception:
+            allowed = origin in ("http://127.0.0.1:8001", "http://localhost:8001")
+        if allowed:
             self.send_header("Access-Control-Allow-Origin", origin)
+            self.send_header("Vary", "Origin")
         else:
             self.send_header("Access-Control-Allow-Origin", "http://127.0.0.1:8001")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.send_header(
             "Access-Control-Allow-Headers",
-            "Content-Type, Authorization, x-realai-voice, X-RealAI-Voice, X-Request-Id, X-Provider, X-RealAI-Tools",
+            "Content-Type, Authorization, x-realai-voice, X-RealAI-Voice, X-Request-Id, X-Provider, X-RealAI-Tools, X-RealAI-Token",
         )
         self.send_header("Access-Control-Max-Age", "86400")
+
+    def _agentx_hive(self, method: str, path: str, qs: Any, raw: bytes = b"") -> bool:
+        """Hive team routes (realai.agentx.hive.http_api): guard already ran; adds loopback + token."""
+        try:
+            from realai.agentx.hive import http_api as _hx
+        except Exception:
+            return False
+        if not _hx.handles(path):
+            return False
+        if method == "GET" and path.rstrip("/") == _hx.SSE_PATH:
+            denied = _hx.authorize(self.client_address[0], self.headers)
+            if denied:
+                self._json(denied[0], {"error": denied[1]})
+                return True
+            self._agentx_hive_sse(qs)
+            return True
+        body: Any = {}
+        if method == "POST" and raw:
+            try:
+                body = json.loads(raw.decode("utf-8") or "{}")
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                self._json(400, {"error": "invalid_json"})
+                return True
+            if not isinstance(body, dict):
+                body = {}
+        try:
+            code, obj = _hx.handle(method, path, qs, body, self.client_address[0], self.headers)
+        except Exception as e:  # noqa: BLE001
+            code, obj = 500, {"error": "hive_error", "detail": type(e).__name__}
+        self._json(code, obj)
+        return True
+
+    def _agentx_hive_sse(self, qs: Any) -> None:
+        """SSE of realai.agentx.hive.events (paths/tool names only, never file contents)."""
+        import queue as _queue
+
+        from realai.agentx.hive import events as _ev
+
+        try:
+            after = int(((qs or {}).get("after") or ["0"])[0])
+        except ValueError:
+            after = 0
+        self.send_response(200)
+        self.send_header("Content-Type", "text/event-stream")
+        self.send_header("Cache-Control", "no-cache")
+        self.send_header("X-Accel-Buffering", "no")
+        self.end_headers()
+        q = _ev.subscribe()
+        try:
+            self.wfile.write(b'data: {"type":"connected"}\n\n')
+            for e in _ev.recent(300, after=after):
+                self.wfile.write(f"data: {json.dumps(e, default=str)}\n\n".encode("utf-8"))
+            self.wfile.flush()
+            while True:
+                try:
+                    e = q.get(timeout=15)
+                    self.wfile.write(f"data: {json.dumps(e, default=str)}\n\n".encode("utf-8"))
+                except _queue.Empty:
+                    self.wfile.write(b": ping\n\n")
+                self.wfile.flush()
+        except (OSError, ConnectionAbortedError, ConnectionResetError, BrokenPipeError):
+            pass
+        finally:
+            _ev.unsubscribe(q)
 
     def _json(self, code: int, obj: Any) -> None:
         def _default(o: Any) -> Any:
@@ -2030,14 +2192,20 @@ class Handler(BaseHTTPRequestHandler):
         return self.rfile.read(n) if n else b""
 
     def do_OPTIONS(self) -> None:
+        if not self._guard("OPTIONS", urlparse(self.path).path):
+            return
         self.send_response(204)
         self._cors()
         self.end_headers()
 
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
+        if not self._guard("GET", parsed.path):
+            return
         path = parsed.path.rstrip("/") or "/"
         qs = parse_qs(parsed.query)
+        if path.startswith("/v1/hive/") and self._agentx_hive("GET", path, qs):
+            return
 
         # RealAI brand assets (public/)
         if parsed.path in ("/favicon.ico", "/favicon.svg", "/og.jpg", "/site.webmanifest"):
@@ -2550,7 +2718,11 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path.rstrip("/") or "/"
+        if not self._guard("POST", path):
+            return
         raw = self._read_body()
+        if path.startswith("/v1/hive/") and self._agentx_hive("POST", path, parse_qs(parsed.query), raw):
+            return
 
         if path == "/v1/embeddings":
             try:
@@ -2774,6 +2946,42 @@ class Handler(BaseHTTPRequestHandler):
             except json.JSONDecodeError:
                 self._json(400, {"error": "invalid_json"})
                 return
+            # Opt-in hive tool loop (REALAI_TOOL_LOOP=1 / X-RealAI-Tool-Loop: 1 / realai_tool_loop): model routes to tools.
+            try:
+                from realai.hive_tools.orchestrator_hook import capture_chat, maybe_tool_loop
+
+                _tl = maybe_tool_loop(body, dict(self.headers), VULKAN_BASE)
+                if _tl is not None:
+                    capture_chat(body, dict(self.headers), _tl)
+                    self._json(200, _tl)
+                    return
+            except Exception as _tl_err:  # never break normal chat
+                body.setdefault("realai_tool_loop_error", str(_tl_err)[:200])
+            # model=realai-overseer -> local model + OVERSEER-77 persona (PARTIAL)
+            try:
+                from realai.atomic_fizz.overseer_route import apply_overseer_persona
+
+                _ov_msgs, _ov_meta = apply_overseer_persona(body.get("messages") or [], body.get("model"))
+                if _ov_meta:
+                    # Persona chat goes straight to the local model (no hive/tool routing).
+                    _ov_body = {k: v for k, v in body.items() if not str(k).startswith("realai_")}
+                    _ov_body["messages"] = _ov_msgs
+                    _ov_code, _ov_hdrs, _ov_data = _proxy(
+                        "POST", "/v1/chat/completions", json.dumps(_ov_body).encode("utf-8"), dict(self.headers)
+                    )
+                    try:
+                        _ov_obj = json.loads(_ov_data.decode("utf-8"))
+                    except Exception:
+                        _ov_obj = {"error": "upstream_non_json", "raw": _ov_data[:300].decode("utf-8", "replace")}
+                    if isinstance(_ov_obj, dict):
+                        _ov_obj["model"] = str(body.get("model"))
+                        _ov_obj.setdefault("realai_meta", {}).update(
+                            {"orchestrator": "v3", "overseer": _ov_meta, "vulkan_base": VULKAN_BASE}
+                        )
+                    self._json(_ov_code, _ov_obj)
+                    return
+            except Exception:
+                pass
             hdrs_in = {k: self.headers.get(k) for k in self.headers.keys()}
             # Normalize header keys for our helpers
             hdrs_norm = {str(k): str(v) for k, v in hdrs_in.items() if v is not None}
@@ -2876,6 +3084,10 @@ class Handler(BaseHTTPRequestHandler):
                 self._json(200, obj)
                 return
 
+            if tools_on and not self._guard_authorized():
+                # Token mode on and caller unauthenticated: chat still works, but no
+                # operator / live-exec dispatch (that path can run commands).
+                tools_on = False
             if tools_on:
                 dispatch = _chat_operator_dispatch(user_text)
                 if dispatch is not None:
@@ -2965,7 +3177,8 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 from realai.bot.natural_mode import apply_natural_grounding
 
-                ground = apply_natural_grounding(body, user_text)
+                # Token mode: unauthenticated chat gets no Craft inspect/write grounding.
+                ground = apply_natural_grounding(body, user_text) if self._guard_authorized() else {}
                 if ground.get("should_ground"):
                     body["realai_natural"] = ground
                     if not (
@@ -3069,7 +3282,7 @@ class Handler(BaseHTTPRequestHandler):
                     "multi_agent", "multiAgent", "realai_multi_agent", "realai_multi_agent_error",
                     "realai_model", "realai_context_fit",
                     "realai_routing", "realai_memory_read", "realai_natural",
-                    "realai_natural_grounded", "realai_local_only",
+                    "realai_natural_grounded", "realai_local_only", "realai_tool_loop_error",
                 )
             }
             # Vulkan may not support tools — only send if client asked and we keep simple
@@ -3080,6 +3293,13 @@ class Handler(BaseHTTPRequestHandler):
                 proxy_body.pop("tools", None)
             out = json.dumps(proxy_body).encode("utf-8")
             code, hdrs, data = _proxy("POST", "/v1/chat/completions", out, dict(self.headers))
+            try:  # opt-in learning-loop capture (REALAI_CAPTURE=1); no-op otherwise
+                from realai.hive_tools.orchestrator_hook import capture_chat
+
+                if code == 200:
+                    capture_chat(body, dict(self.headers), json.loads(data.decode("utf-8")))
+            except Exception:
+                pass
             # annotate meta if json
             try:
                 obj = json.loads(data.decode("utf-8"))
@@ -3463,6 +3683,12 @@ class Handler(BaseHTTPRequestHandler):
                     done(aid, source="tool", tool=tool_name, ok=ok)
                 except Exception:
                     pass
+            try:  # opt-in learning-loop capture (REALAI_CAPTURE=1)
+                from realai.hive_tools.orchestrator_hook import capture_tool
+
+                capture_tool(tool_name, args, result, dict(self.headers))
+            except Exception:
+                pass
             self._json(200, {"tool": tool_name, "result": result})
             return
 
@@ -3637,6 +3863,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     print("  GET  /v1/abilities        -> ability catalog")
     print("  POST /v1/abilities/run    -> run ability.<id>")
     print("  GET|POST /v1/hive         -> hive status / cycle / multi")
+    print("  GET  /v1/hive/teams | /v1/hive/findings ; POST /v1/hive/teams/<id>/run | /v1/hive/playtest (token)")
     print("  GET|POST /v1/craft        -> craft TOOLS / craft_chat")
     print("  POST /v1/multi-agent/run  -> planner/worker/critic (Vulkan)")
     print("  POST /v1/chat/completions multi_agent=true · /craft|/hive|/ability intents")

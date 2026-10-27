@@ -286,14 +286,20 @@ class TestConsoleHasNoHatToggle(unittest.TestCase):
 
 class TestOrchestratorHatHook(unittest.TestCase):
     def test_enrich_puts_hat_on_the_system_prefix(self):
+        from unittest.mock import patch
+
+        from realai.models import model_catalog
         from realai.orchestration.v3_orchestrator import _enrich_chat_body
 
-        body = _enrich_chat_body(
-            {
-                "messages": [{"role": "user", "content": "smoke GET /health"}],
-                "realai_hat": "Smoke",
-            }
-        )
+        # The catalog must never write config/realai_models.json from a test.
+        with patch.object(model_catalog, "save_registry") as save:
+            body = _enrich_chat_body(
+                {
+                    "messages": [{"role": "user", "content": "smoke GET /health"}],
+                    "realai_hat": "Smoke",
+                }
+            )
+            save.assert_not_called()
         self.assertEqual(body.get("realai_hat"), "Smoke")
         system = body["messages"][0]["content"]
         self.assertIn("Mode: RackUp", system)

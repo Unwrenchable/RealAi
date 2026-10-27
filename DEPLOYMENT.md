@@ -87,7 +87,7 @@ Copy from `.env.example` and `frontend/.env.example`. Prefer dashboard secrets o
 |----------|----------|---------|
 | `NEXT_PUBLIC_API_URL` | **Yes (prod)** | Public API base, e.g. `https://realai-api.onrender.com` — **never** `127.0.0.1` on Vercel |
 | `REALAI_API_BASE` | optional | Same as above for server-side routes |
-| `REALAI_API_KEY` | optional | If API expects a bearer |
+| `REALAI_API_KEY` | **Yes, when the API is locked** | Service key for `realai.api_server`. Same name on Render and Vercel. Sent as `Authorization: Bearer` or `X-API-Key`. |
 
 ### Hive / local orchestrator
 
@@ -115,7 +115,8 @@ Copy from `.env.example` and `frontend/.env.example`. Prefer dashboard secrets o
 | `REALAI_PERPLEXITY_API_KEY` | Perplexity |
 | `REALAI_MODEL` | Default model id (e.g. `realai-1.0`) |
 | `CORS_ALLOWED_ORIGINS` | Comma list incl. your `*.vercel.app` |
-| `ENV` | `production` |
+| `ENV` | `production` (default). Fail closed when `REALAI_API_KEY` is unset. Set `development`, `dev`, `local`, or `test` to leave a local process open |
+| `REALAI_API_KEY` | **Service gate.** Required on Render. Comma-separated list of accepted keys. Compared in constant time. Never logged. `GET /health` does not require it |
 | `WEB_CONCURRENCY` | `1` recommended on free tiers |
 | `PORT` | Provided by host |
 | `REALAI_DB_PATH` | SQLite file path |
@@ -124,7 +125,11 @@ Copy from `.env.example` and `frontend/.env.example`. Prefer dashboard secrets o
 | `REALAI_VULKAN_FORWARD` | `auto` (Hive) / `off` / `force` (loopback Hive only). Hosted Cloud API (Render) is an unconditional deny — `force` does not override. |
 | `REALAI_CLOUD_FALLBACK` | `auto` (default) / `off` / `<provider>` (e.g. `openai`). When `X-Provider: realai` and no GGUF is loaded, use a cloud key instead of “register default_llm”. |
 
-Provider keys can also be sent per-request as `Authorization: Bearer ...` (prefix auto-detect) or `X-Provider` / `X-Base-URL` overrides — see `realai/api_server.py`. Self-host declares provider **`realai`**: Bearer + no `X-Provider` + unrecognized key prefix defaults to `REALAI_PROVIDER` (`realai`) instead of 400. Details: [`docs/selfhost-provider.md`](./docs/selfhost-provider.md).
+`REALAI_API_KEY` is the **service** key (who may call this API). Provider keys (`OPENAI_API_KEY`, `REALAI_*_API_KEY`) are separate. A request may send the service key as `Authorization: Bearer` or `X-API-Key`. To pass a provider key on the same request, put the service key in `X-API-Key` and the provider key in `Authorization: Bearer`. A bearer value that matches `REALAI_API_KEY` and has no cloud prefix is not forwarded upstream.
+
+If `REALAI_API_KEY` is unset, the process **fails closed** when `ENV` is `production` (the default, including Render) or when a hosted-platform marker such as `RENDER` is set: every API route returns 401 and the boot log says the key is missing. `GET /health` stays open for the Render health check. Local open mode is `ENV=development` (also `dev`, `local`, `test`) and only when no service key is configured. Startup logs whether the key is set and how many keys were loaded. They do not print key values.
+
+Provider keys can also be sent per-request as `Authorization: Bearer ...` (prefix auto-detect) when the service key is in `X-API-Key`, or via `X-Provider` / `X-Base-URL` overrides — see `realai/api_server.py`. Self-host declares provider **`realai`**: Bearer + no `X-Provider` + unrecognized key prefix defaults to `REALAI_PROVIDER` (`realai`) instead of 400. Details: [`docs/selfhost-provider.md`](./docs/selfhost-provider.md).
 
 ---
 
@@ -259,6 +264,7 @@ Config is already fixed for `frontend/` (not `apps/frontend`):
 4. Framework: Next.js (detected)
 5. Env → Production:
    - `NEXT_PUBLIC_API_URL` = your Render URL (https)
+   - `REALAI_API_KEY` = the same service key set on Render (server-side; not `NEXT_PUBLIC_`)
 6. Deploy
 
 ### CLI steps
@@ -295,6 +301,7 @@ npm run build
 3. Runtime: Python 3.11
 4. Build / start as above (or Blueprint from `render.yml`)
 5. Set env:
+   - `REALAI_API_KEY` — **required.** This is the service key callers must send. Comma-separate more than one. Do not put the value in git.
    - `OPENAI_API_KEY` (or other provider keys)
    - `REALAI_MODEL`
    - `CORS_ALLOWED_ORIGINS=https://<your-app>.vercel.app,https://your.domain`

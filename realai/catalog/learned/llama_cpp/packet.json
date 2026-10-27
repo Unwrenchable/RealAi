@@ -1,0 +1,7922 @@
+{
+  "schema": "realai.learn.packet/v1",
+  "slug": "llama_cpp",
+  "source": {
+    "input": "C:\\llama.cpp",
+    "kind": "local",
+    "resolved_path": "C:\\llama.cpp",
+    "url": "https://github.com/ggerganov/llama.cpp",
+    "cloned": false,
+    "reused_cache": false,
+    "git": {
+      "head": "f3e8d149ce174d615cbf6b96a83314ba6e00bd0c",
+      "branch": "master",
+      "remote": "https://github.com/ggerganov/llama.cpp",
+      "branches": [
+        "master",
+        "0cc4m/cpu-arm-nvfp4-fix",
+        "0cc4m/cuda-get-memory-contextless",
+        "0cc4m/model-backend-compare",
+        "0cc4m/server-api-thinking-budget",
+        "0cc4m/server-memory-limit",
+        "0cc4m/server-router-fix-reload-deadlock",
+        "0cc4m/test-backend-copy",
+        "0cc4m/vulkan-async-fixes2",
+        "0cc4m/vulkan-async-p2p",
+        "0cc4m/vulkan-check-results-async",
+        "0cc4m/vulkan-coopmat-amd-windows",
+        "0cc4m/vulkan-coopmat-int8",
+        "0cc4m/vulkan-device-architecture",
+        "0cc4m/vulkan-device-cpy-benchmark",
+        "0cc4m/vulkan-fa-mask-opt-gcn",
+        "0cc4m/vulkan-fix-mm-tests",
+        "0cc4m/vulkan-graph-reuse",
+        "0cc4m/vulkan-instance-cleanup",
+        "0cc4m/vulkan-intel-mmv-fix",
+        "0cc4m/vulkan-mm-pipeline-selection",
+        "0cc4m/vulkan-mmq-bk-step-tuning",
+        "0cc4m/vulkan-op-opt-step-sgd",
+        "0cc4m/vulkan-print-coopmat-shapes",
+        "0cc4m/vulkan-renderdoc",
+        "0cc4m/vulkan-repack",
+        "0cc4m/vulkan-slang-flash-attention",
+        "0cc4m/vulkan-subgroup-size-control-amd",
+        "7507-main-intel-dockerfile",
+        "JohannesGaessler/ggml-meta-backend-8-tmp",
+        "SVE-vector-length-agnostic-VLA-gg",
+        "add-gemma2-soft-capping",
+        "add-long-debug-prompt",
+        "add-pidfile",
+        "alloc-assert-fix",
+        "apply-3585",
+        "assert-restore-abort",
+        "avoid-gnu-source",
+        "b7739",
+        "batched-bench",
+        "build-metal-default",
+        "cam-simple-fix",
+        "ceb/bert",
+        "ceb/bert-tokenizer-fixes",
+        "ceb/convert-hf-refactor",
+        "ceb/convert-vocab-fallback",
+        "ceb/fix-badspecial-silentfail",
+        "ceb/fix-cmake-typo",
+        "ceb/fix-cuda-warning-flags",
+        "ceb/fix-draft-model-default",
+        "ceb/fix-logit-check",
+        "ceb/fix-msvc-build",
+        "ceb/fix-win-unicode-fpaths",
+        "ceb/fix-yarn-neox",
+        "ceb/libstdcpp-assertions",
+        "ceb/nomic-bert",
+        "ceb/nomic-vulkan-fix-add",
+        "ceb/perf-faster-multigpu",
+        "ceb/restore-convert",
+        "ceb/wpm-portable-tolower",
+        "cedo/add-outetts-v0.3",
+        "cedo/fix-q25vl",
+        "chunks",
+        "ci-android",
+        "ci-tmp",
+        "ci/server/fix-slow-test",
+        "ci_cublas",
+        "cisc/test-tokenizers-remote",
+        "codeplay/dequant_q4_K_improvements",
+        "codeplay/fix-matmul-arith",
+        "codeplay/revert-host-alloc",
+        "codeplay/sycl-main",
+        "codeplay/tg-warmup",
+        "cohere2moe-chat-parser",
+        "compilade/batch-splits",
+        "compilade/bitnet-ternary",
+        "compilade/convert-hf-refactor",
+        "compilade/convert-prequant",
+        "compilade/convert-prequant-compressed-tensors",
+        "compilade/convert-reflinks",
+        "compilade/convert-safetensors-parse",
+        "compilade/cuda-falcon-h1",
+        "compilade/cuda-tq2_0",
+        "compilade/faster-lazy-safetensors",
+        "compilade/faster-session-sizes",
+        "compilade/fix-batch-reserve-rwkv",
+        "compilade/fix-command-r",
+        "compilade/fix-convert-gemma-1-instruct",
+        "compilade/fix-metadata-name-extraction",
+        "compilade/fix-mpt-pretok",
+        "compilade/fix-output-overflow",
+        "compilade/fix-prequant-mxfp4-gpt-oss",
+        "compilade/fix-pydantic-example",
+        "compilade/fix-qp-iq1-problems",
+        "compilade/fix-recurrent-batch-init",
+        "compilade/fix-safetensors-unaligned",
+        "compilade/fix-server-long-system-prompt",
+        "compilade/fix-server-tests-penalty",
+        "compilade/fix-ssm-scan-groups",
+        "compilade/gguf-py-dequant",
+        "compilade/gguf-py-fix-old-numpy",
+        "compilade/gguf-py-fix-q-shape",
+        "compilade/gguf-py-mxfp4",
+        "compilade/gguf-py-quants-class",
+        "compilade/hybrid-kv_unified",
+        "compilade/imatrix-batched-chunks",
+        "compilade/imatrix-gguf-default",
+        "compilade/imatrix-gguf-warning",
+        "compilade/imatrix-mxfp4",
+        "compilade/imatrix-neutral-prior",
+        "compilade/imatrix-saner-3d",
+        "compilade/lazier-moe-convert-hf",
+        "compilade/lazy-bfloat16-convert-hf",
+        "compilade/lazy-convert-hf",
+        "compilade/lazy-tuples",
+        "compilade/mamba2",
+        "compilade/nul-str-token",
+        "compilade/optimal-rounding",
+        "compilade/output-reorder-lazy-sort",
+        "compilade/parallel-convert",
+        "compilade/pyright-fix-ignores",
+        "compilade/pyright-tests",
+        "compilade/q8_0-convert-hf",
+        "compilade/readonly-recurrent-inputs",
+        "compilade/refactor-kv-cache",
+        "compilade/refactor-kv-cache-gg",
+        "compilade/refactor-session-files",
+        "compilade/requirements-cpu-torch",
+        "compilade/superbpe",
+        "compilade/test-model-random",
+        "compilade/tokenize-example-parse-special",
+        "copilot/compare-kv-shifting-implementation",
+        "copilot/plan-semantic-versioning-libllama",
+        "copilot/sub-pr-18695",
+        "copilot/test-branch",
+        "cross-profiler",
+        "cuda-batched-gemm",
+        "cuda-batched-gemm-deq",
+        "cuda-cublas-opts",
+        "cuda-multi-gpu",
+        "cuda-quantum-batch",
+        "custom-attention-mask",
+        "custom-attention-mask-no-roped-cache",
+        "danbev/gpu-sampling-rev-0",
+        "deploy",
+        "dequantize-matmul-3-gg",
+        "dev",
+        "dev-metal",
+        "enhance_fa",
+        "f16c",
+        "fairydreaming/t5-clean-3-gg",
+        "fix-convert-modelname",
+        "fix-eos",
+        "fix-gbnf-until",
+        "fix-kv-cache-access",
+        "fix-ninja-metallib-build",
+        "fix-refact",
+        "fix-sessions",
+        "fix-tensor-split-zero",
+        "fix-whitespace-parser-probs",
+        "fix_clblast",
+        "fix_cmd_name",
+        "fix_ctx_default",
+        "fix_q_xxs_mul_mat",
+        "fix_sycl_ci",
+        "flash-attn",
+        "flash-attn-cuda",
+        "gabe-l-hart/HybridRecurrentCache",
+        "gg/add-phi-3-support",
+        "gg/add-phixtral",
+        "gg/alloc-skip-unassigned-leafs",
+        "gg/allow-kv-overrides",
+        "gg/arch-add-desc",
+        "gg/arg-silence-warnings",
+        "gg/arm-try-fix-msvc",
+        "gg/attn-rot-rand",
+        "gg/attn-rot-wip",
+        "gg/authors",
+        "gg/avoid-mutex",
+        "gg/batch-simplify-output",
+        "gg/bench-handle-decode-errors",
+        "gg/bert-f16",
+        "gg/bitnet",
+        "gg/bpe-preprocess",
+        "gg/build-linux-static",
+        "gg/build-pack-lib-include",
+        "gg/cache-token-to-piece",
+        "gg/cast-remove-src",
+        "gg/cb-naming",
+        "gg/check-python-version",
+        "gg/ci-add-arm-msvc-toolchain",
+        "gg/ci-build-cro",
+        "gg/ci-fix-save-load",
+        "gg/ci-loongson",
+        "gg/ci-python",
+        "gg/ci-remove-tag",
+        "gg/ci-rename-job",
+        "gg/ci-req-editor-config",
+        "gg/ci-sanitize-less-threads",
+        "gg/ci-ui-self-hosted",
+        "gg/ci-ui-sh",
+        "gg/ci-ui-test",
+        "gg/clang-tidy-disable-bugprone",
+        "gg/clip-fa",
+        "gg/cmake-dedup-link",
+        "gg/compare-change-path",
+        "gg/compare-mlx",
+        "gg/context-fix-enc-attn-type",
+        "gg/context-remove-logits-all",
+        "gg/context-sync-upon-output-reorder",
+        "gg/contrib-stale",
+        "gg/convert-fix-byte-tokens",
+        "gg/cpu-fix-cpy-iq",
+        "gg/cublas-f32",
+        "gg/disable-sgemm",
+        "gg/download-prefer-q8",
+        "gg/encode-pad-equal",
+        "gg/fa-no-kq-pad",
+        "gg/fa-no-kq-pad-save",
+        "gg/fa-req-kq-hs",
+        "gg/fit-params-ngl",
+        "gg/fit-wrap-dmd",
+        "gg/fix-amx",
+        "gg/fix-android",
+        "gg/fix-build-gf",
+        "gg/fix-cpu-blas",
+        "gg/fix-devops",
+        "gg/fix-embeddings-wip",
+        "gg/fix-fa-q-non-cont",
+        "gg/fix-logits-type",
+        "gg/fix-min-max",
+        "gg/fix-python-names",
+        "gg/fix-spm-added-tokens-dict-4958",
+        "gg/fix-starcoder2",
+        "gg/fix-sve",
+        "gg/fix-vld1q_s8_x4-4872",
+        "gg/flash-attn",
+        "gg/flash-attn-32x8",
+        "gg/flash-attn-a",
+        "gg/flash-attn-cuda",
+        "gg/flash-attn-interleave-cc",
+        "gg/flash-attn-mask-f16",
+        "gg/flash-attn-online",
+        "gg/flash-attn-rebase",
+        "gg/flash-attn-simd",
+        "gg/flash-attn-sync",
+        "gg/flash-attn-wip",
+        "gg/flash-attn-wip2",
+        "gg/flash-attn-wip3",
+        "gg/flash-attn-wip4",
+        "gg/float-pos",
+        "gg/gdn-optimize",
+        "gg/ggml-alloc-refactor-meta",
+        "gg/ggml-atomic-int",
+        "gg/ggml-cont",
+        "gg/ggml-fix-zero-blocks",
+        "gg/ggml-rework-cgraph",
+        "gg/ggml_scale",
+        "gg/gguf-fix-division-by-zero",
+        "gg/gguf-fix-null-defer",
+        "gg/gguf-py-0.11.0",
+        "gg/gpu-prec-tests",
+        "gg/grammar-refactor",
+        "gg/graph-avoid-branches-2",
+        "gg/graph-prec",
+        "gg/graph-reuse-reset-fix",
+        "gg/hf",
+        "gg/hf-args",
+        "gg/hf-auto-dl",
+        "gg/hf-test",
+        "gg/hparams-swa-rope",
+        "gg/http-threads",
+        "gg/imatrix-gpu-4931",
+        "gg/imatrix-remove-assert",
+        "gg/indent",
+        "gg/infill-better-stop",
+        "gg/iq2-refactor-and-tests",
+        "gg/kv-cache-prepare-separation",
+        "gg/kv-compress",
+        "gg/kv-determinism",
+        "gg/kv-fix-shift",
+        "gg/kv-mask-opt-verify",
+        "gg/lfm-fix-tensors",
+        "gg/lfs",
+        "gg/llama-add-log",
+        "gg/llama-disambiguate",
+        "gg/llama-extract-embeddings",
+        "gg/llama-high-throughput-rebase",
+        "gg/llama-high-throughput-save",
+        "gg/llama-high-throughput-save2",
+        "gg/llama-kv-cache",
+        "gg/llama-quant-fix-sanity-checks",
+        "gg/llama-refactor-sampling",
+        "gg/llama-reorganize",
+        "gg/llama-shadow-on",
+        "gg/llama3-support",
+        "gg/logits-slowdown",
+        "gg/mamba-fix-squeeze",
+        "gg/media-add-svg-logo",
+        "gg/metal-alloc-size",
+        "gg/metal-async",
+        "gg/metal-async-save-global-queue",
+        "gg/metal-batched",
+        "gg/metal-bin-mod",
+        "gg/metal-capture-env-cont",
+        "gg/metal-dequant-align",
+        "gg/metal-disable-fa-256",
+        "gg/metal-embed",
+        "gg/metal-f16",
+        "gg/metal-fa-f16",
+        "gg/metal-fa-f16-save",
+        "gg/metal-fa-vec-bs20",
+        "gg/metal-fattn-reqs",
+        "gg/metal-fix-build",
+        "gg/metal-fix-fa",
+        "gg/metal-fix-fa-2",
+        "gg/metal-fix-thread-safety",
+        "gg/metal-fuse-add-rms",
+        "gg/metal-gdn-partial-rollback",
+        "gg/metal-implement-async-2d",
+        "gg/metal-mm-pad",
+        "gg/metal-mmid-max-rows",
+        "gg/metal-mul-mat-f16",
+        "gg/metal-mul-mat-write-opt",
+        "gg/metal-mul-mv-new",
+        "gg/metal-mul-mv-new-save2",
+        "gg/metal-mul-mv-new-save3",
+        "gg/metal-mul-mv-opt-2",
+        "gg/metal-opt-mul-mat-id",
+        "gg/metal-q4_0-opt",
+        "gg/metal-refactor-mv-2",
+        "gg/metal-reuse-graphs",
+        "gg/metal-set-rows-threads",
+        "gg/metal-use-virtual-gpu-address",
+        "gg/min-p-fix",
+        "gg/model-cards",
+        "gg/ngram-mod",
+        "gg/nix-remove-opencl",
+        "gg/no-char32_t",
+        "gg/ops-update-blas",
+        "gg/ot-cpu-repack",
+        "gg/pad-kv-cache",
+        "gg/per-layer-kv",
+        "gg/phi-2",
+        "gg/phi-2-2",
+        "gg/pi-gh-tool-rule",
+        "gg/plamo-test",
+        "gg/pr/23398-save",
+        "gg/py-minor-fixes",
+        "gg/quant-manual-overrides",
+        "gg/quantize-fallback",
+        "gg/quantum-k-cache",
+        "gg/qwen3-next-opt-tmp",
+        "gg/qwen3next-fix-chunking",
+        "gg/refactor-alibi-2",
+        "gg/release-disable-s390x",
+        "gg/remove-gqa-check-4657",
+        "gg/remove-instruct",
+        "gg/remove-k-quants-per-iter",
+        "gg/rename-n_ctx",
+        "gg/repack-fix-mul-mat-id",
+        "gg/repack-fix-wsize",
+        "gg/repack-opt-mm-id",
+        "gg/repeng",
+        "gg/replace-all",
+        "gg/rmse_quantization",
+        "gg/rpc-fix-misaligned",
+        "gg/scripts-eval",
+        "gg/security-update",
+        "gg/server-chunked-prefill",
+        "gg/server-consolidate-slot-selection",
+        "gg/server-debug-win",
+        "gg/server-eos-pre-calc",
+        "gg/server-fix-ignore-eos",
+        "gg/server-fix-infill",
+        "gg/server-fix-prompt",
+        "gg/server-fix-spec",
+        "gg/server-fix-spec-ctx-shift",
+        "gg/server-fix-vision-tests",
+        "gg/server-infill-empty-prompt-4027",
+        "gg/server-infill-end-on-nl",
+        "gg/server-logs",
+        "gg/server-models-loading",
+        "gg/server-reenable-swa-spec",
+        "gg/server-refactor",
+        "gg/server-remove-api",
+        "gg/server-test-fix-race",
+        "gg/server-test-lru",
+        "gg/server-update-js",
+        "gg/server-v1-completion",
+        "gg/soft-max-ext",
+        "gg/spec-ckpt-test",
+        "gg/spec-mtp-experiments",
+        "gg/spec-refactor-ctx",
+        "gg/speculative-experiments",
+        "gg/speculative-fix-oob",
+        "gg/speculative-infill",
+        "gg/speculative-update",
+        "gg/survey-nvidia",
+        "gg/swa-fix-kv-shift",
+        "gg/swiftui-bench",
+        "gg/system-info-llamafile",
+        "gg/test-arm",
+        "gg/test-bench",
+        "gg/test-embd",
+        "gg/test-fp16",
+        "gg/test-mmap",
+        "gg/tests-better-unary-range",
+        "gg/tfs-ob1",
+        "gg/tmp",
+        "gg/tmp-ci",
+        "gg/tokenizer-cleanup",
+        "gg/try-fix-sycl-iq1_s",
+        "gg/ttfb",
+        "gg/tts-fix-ubatch",
+        "gg/ui-fix-ci-errors",
+        "gg/unary-non-cont",
+        "gg/unicode-refactor",
+        "gg/unified-fix-k-shift",
+        "gg/update-phi2-convert",
+        "gg/vocab-fix-no-vocab",
+        "gg/winget-update",
+        "ggml-backends",
+        "ggml-backends-metal",
+        "ggml-impl",
+        "ggml-quants",
+        "gguf",
+        "gguf-64bit",
+        "gguf-fix-publish",
+        "gguf-pip",
+        "gguf-publish-ci",
+        "gguf-python",
+        "gguf-write-single-pass",
+        "gguf-write-tensor",
+        "graph-profiler",
+        "gritlm-pr",
+        "hp/tmp/kv-cache-defrag",
+        "ik/better_q2_k_s",
+        "ik/even_better_iq1s",
+        "ik/faster_hellaswag",
+        "ik/fix_hellaswag",
+        "ik/fix_iq3xxs_metal",
+        "ik/fix_k_cache_backend_tests",
+        "ik/fix_warnings",
+        "ik/ggml-quants-cpp",
+        "ik/i-quants-64",
+        "ik/imatrix_legacy_quants",
+        "ik/iq1_s",
+        "ik/iq2_2.31bpw",
+        "ik/iq3_s_faster",
+        "ik/iq3_s_multiplier",
+        "ik/quantize_not_repeating",
+        "ik/quantize_with_kv_overrides",
+        "ik/test_quantize_fns",
+        "ik/try_fix_iq1s_sycl",
+        "ik/try_fix_rocm_k_cache",
+        "jared/permit-causal-encode",
+        "jed/spm-clblast",
+        "jg/cuda-fa-np-runtime",
+        "jg/gguf-refactor",
+        "jg/llama-opt-3",
+        "jg/llama-sanitize",
+        "kv-cache-opts",
+        "llama-metadata",
+        "llama-pull",
+        "llama-refactor",
+        "llama-refactor-norm",
+        "llama_server_completions",
+        "llama_server_timings",
+        "llava-fix-offloading",
+        "llm-build-context",
+        "llm-reuse-constants",
+        "lookahead",
+        "lto",
+        "maxk/sched-debug-use-op-desc",
+        "maxk/sched-prio-updates",
+        "metal-cont-bug",
+        "metal-fix-norm",
+        "metal-improve-batching",
+        "metal-soft-max",
+        "mixtral",
+        "mlx-challenge",
+        "mmap",
+        "mmap-pages-stats",
+        "mtmd-video-api",
+        "mul-mat-pad",
+        "norm-quants",
+        "norm-quants-rebase",
+        "opencl-add-mul-mat-f16-f32-image",
+        "opt_arc770_q4_0",
+        "passkey",
+        "patch-1",
+        "perf-study",
+        "podman",
+        "pr/17795-test-ci",
+        "pr/18039-gg",
+        "pr/18490",
+        "pr/18626",
+        "pr/19378",
+        "pr/19378-test-tp",
+        "pr/19802-test",
+        "pr/20394",
+        "pr/22340-gg",
+        "pr/4484",
+        "pr_add_intel_amx_support",
+        "prepare-PR-of-minicpm-v2.5-gg",
+        "q4_0-q4_2-range-fix",
+        "q4_1_more_accel",
+        "q4_1_more_accel_kahan",
+        "q4_1_more_accel_loopsplit",
+        "q4_3-range-fix",
+        "quant-attn",
+        "refactor-mpi",
+        "remove-vzip",
+        "rev-sampling",
+        "revert-11820-vers_fix",
+        "revert-12734-fix_code_in_ggmlsycl",
+        "revert-24253-ngram-map-k-name-fix",
+        "revert-5901-fix_set_gpu",
+        "revert-7777-host-usm-context-fix",
+        "revert-pool",
+        "rewrite-llama-run-to-be-llama-server-based",
+        "rpc-hash-readme",
+        "sampling-greedy-with-probs",
+        "sampling-refactor",
+        "scratch",
+        "server-cfg",
+        "server-oai-compat",
+        "server-parallel",
+        "server-rev",
+        "shards-lang/gio/visionos-ci",
+        "sl/aligned-alloc-no-abort",
+        "sl/async-weight-copy",
+        "sl/auto-flash-attn",
+        "sl/cuda-f16-fix3",
+        "sl/cuda-fattn-par-test",
+        "sl/cuda-uma",
+        "sl/detect-imatrix-nan",
+        "sl/dio-test",
+        "sl/disable-pp-nkvo",
+        "sl/dump-allocs",
+        "sl/fix-docker-main-server-build",
+        "sl/fix-docker-omp",
+        "sl/fix-omp-one-thread",
+        "sl/fix-ppl-seq-max",
+        "sl/fix-quant-kv-shift",
+        "sl/fix-rpc-nkvo",
+        "sl/fix-sched-reserve",
+        "sl/llama-bench-headers",
+        "sl/pr-releases",
+        "sl/prepare-next-graph",
+        "sl/realloc-error-cont",
+        "sl/rpc-backend-cpy",
+        "sl/sched-copy-incr-fix",
+        "sl/test-mul-mat-backend",
+        "sl/zero-max-size",
+        "speculative",
+        "speculative-grammar",
+        "speculative-tree",
+        "steering",
+        "support-starcoder-fix",
+        "support_device_reg",
+        "sycl-cmake-append",
+        "sycl-conv-op",
+        "sycl-global-variables",
+        "sycl-mul-mat-id",
+        "sycl-onednn-convolution",
+        "sycl/disable_reorder_opt",
+        "sycl_q3s_q1s",
+        "sync-ggml-25-04-03-try-fix",
+        "sync-ggml-25-05-01",
+        "sync-ggml-25-07-19",
+        "sync-ggml-25-07-25",
+        "sync-ggml-26-05-02",
+        "tarek/feat/lfm2-asr-upstream",
+        "tcp_server",
+        "test-bench",
+        "test-mac-os-ci",
+        "test-mmv",
+        "try-fix-metal",
+        "upd-issue-templates",
+        "update_sycl_doc",
+        "vb/add-smollm3",
+        "xd/ops-musa",
+        "xsn/ai_policy_private_repo",
+        "xsn/ci_legacy_gg",
+        "xsn/contrib_tighter_ai_policy",
+        "xsn/fix_grammar_1",
+        "xsn/ggml_scale_bias",
+        "xsn/llama4_scaling_offset",
+        "xsn/lora_keep_track",
+        "xsn/mtmd_custom_min_max_tokens",
+        "xsn/mtmd_ds_ocr_tiles",
+        "xsn/mtmd_shared_sched",
+        "xsn/preset_fix_neg_arg",
+        "xsn/private_batch_api",
+        "xsn/private_batch_api_pooling_none",
+        "xsn/qwen3next_experiment",
+        "xsn/server_checkpoint_on_cancel",
+        "xsn/server_input_file_schema",
+        "xsn/server_refactor_batch",
+        "xsn/server_schema",
+        "xsn/server_verbose_field",
+        "xsn/tmp_jinja_safer",
+        "xsn/tmp_smpl_parallel",
+        "xsn/update_guidelines_for_ai",
+        "xsn/vertexai",
+        "xsn/video_args",
+        "xsn/webui_fix_eta"
+      ]
+    }
+  },
+  "summary": {
+    "title": "DirectML Redistributable NuGet Package",
+    "description": "This package contains a copy of the DirectML redistributable runtime library and its associated development headers. The included licenses apply to the following files:",
+    "file_count": 800,
+    "truncated": true,
+    "branches_seen": [
+      "master"
+    ],
+    "branch_counts": {
+      "master": 800
+    },
+    "branches_truncated": false,
+    "all_branch_names": [
+      "master"
+    ],
+    "branches_omitted": 0,
+    "languages": {
+      "yaml": 107,
+      "c": 105,
+      "cpp": 96,
+      "markdown": 94,
+      "python": 30,
+      "shell": 28,
+      "json": 15,
+      "kotlin": 11,
+      "swift": 9,
+      "toml": 5,
+      "html": 2
+    },
+    "frameworks": [
+      "python",
+      "cmake"
+    ],
+    "domain_keywords": [
+      "cmake",
+      "llama",
+      "github",
+      "devops",
+      "workflows",
+      "build",
+      "dockerfile",
+      "issue_template",
+      "actions",
+      "action",
+      "license",
+      "json",
+      "package",
+      "clang",
+      "setup",
+      "benches",
+      "spark",
+      "cann",
+      "cuda",
+      "python",
+      "linux",
+      "config",
+      "toml",
+      "srpm"
+    ],
+    "readme": "# DirectML Redistributable NuGet Package\n\nThis package contains a copy of the DirectML redistributable runtime library and its associated development headers. The included licenses apply to the following files:\n\n- **LICENSE.txt** : applies to all files under `bin/`\n- **LICENSE-CODE.txt** : applies to all files under `include/` and `build/`",
+    "api_routes": [],
+    "plugin_like_folders": []
+  },
+  "fingerprints": [
+    {
+      "path": ".clang-format",
+      "sha1": "a6dbaaf11964068c",
+      "bytes": 5132,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".clang-tidy",
+      "sha1": "5fcc23a8b53a458b",
+      "bytes": 959,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".dockerignore",
+      "sha1": "8acf70cdd5a602ec",
+      "bytes": 257,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".ecrc",
+      "sha1": "cb66ffc4b1122ad9",
+      "bytes": 103,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".editorconfig",
+      "sha1": "8853629d36f07cec",
+      "bytes": 1462,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".flake8",
+      "sha1": "6a96cb842606ffee",
+      "bytes": 583,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".gitattributes",
+      "sha1": "13fd75f5228cdb2e",
+      "bytes": 263,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".gitignore",
+      "sha1": "7da78ace5b6ca43f",
+      "bytes": 2027,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".gitmodules",
+      "sha1": "da39a3ee5e6b4b0d",
+      "bytes": 0,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "sha1": "4cb22c89ea20b8ff",
+      "bytes": 463,
+      "ext": ".yaml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".signature.p7s",
+      "sha1": "c48b49dd5bd0b189",
+      "bytes": 25609,
+      "ext": ".p7s",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "sha1": "a9caf427d3eebc69",
+      "bytes": 6967,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "AUTHORS",
+      "sha1": "e16627a326a40c2a",
+      "bytes": 67337,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha1": "e935b350d4208d25",
+      "bytes": 107,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "CMakeLists.txt",
+      "sha1": "7becdd00964c59cb",
+      "bytes": 9319,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "CMakePresets.json",
+      "sha1": "9d430f50a0d9d6f2",
+      "bytes": 4665,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "CODEOWNERS",
+      "sha1": "e12fd7772fb3f1c0",
+      "bytes": 6559,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha1": "222df78e4ffbd8a3",
+      "bytes": 12093,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "LICENSE",
+      "sha1": "d0b8072b454f73ba",
+      "bytes": 1099,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "LICENSE-CODE.txt",
+      "sha1": "18b993cdf002a154",
+      "bytes": 1093,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha1": "a9178478c6e8d72a",
+      "bytes": 10439,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "Makefile",
+      "sha1": "a0ee52dd294a4ab6",
+      "bytes": 266,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "Microsoft.AI.DirectML.nuspec",
+      "sha1": "63708576b1e96198",
+      "bytes": 806,
+      "ext": ".nuspec",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "README.md",
+      "sha1": "e18793db0ebcc2b6",
+      "bytes": 346,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "SECURITY.md",
+      "sha1": "ea02f4758ec0e328",
+      "bytes": 6804,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "ThirdPartyNotices.txt",
+      "sha1": "7f3fdde9f1f6a54e",
+      "bytes": 4577,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "[Content_Types].xml",
+      "sha1": "b12fd03aab030f4a",
+      "bytes": 1034,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "build-xcframework.sh",
+      "sha1": "af10834fb0f4a9f0",
+      "bytes": 22056,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "convert_hf_to_gguf.py",
+      "sha1": "b4a9c96ac807487b",
+      "bytes": 682970,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "convert_hf_to_gguf_update.py",
+      "sha1": "70b5be6f8bd76bbb",
+      "bytes": 27466,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "convert_llama_ggml_to_gguf.py",
+      "sha1": "83860abfd34cf7b0",
+      "bytes": 19562,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "convert_lora_to_gguf.py",
+      "sha1": "8e6209260e0c36d0",
+      "bytes": 21453,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "fix_all_ports.py",
+      "sha1": "f4fcdde3ecbdfd54",
+      "bytes": 1041,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "flake.lock",
+      "sha1": "10fb8c5c6d9723e2",
+      "bytes": 1614,
+      "ext": ".lock",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "flake.nix",
+      "sha1": "45f9861a2d93682c",
+      "bytes": 7423,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "mypy.ini",
+      "sha1": "c819a2ae4c678162",
+      "bytes": 170,
+      "ext": ".ini",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "sha1": "1756e7cf01fda032",
+      "bytes": 1900,
+      "ext": ".toml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "pyrightconfig.json",
+      "sha1": "babf7d9c6005340d",
+      "bytes": 718,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "sha1": "d014bf73a18dd36d",
+      "bytes": 564,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "ty.toml",
+      "sha1": "c6289cd447e04116",
+      "bytes": 651,
+      "ext": ".toml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/cann.Dockerfile",
+      "sha1": "ec1fb8388ad24c4e",
+      "bytes": 4967,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/cpu.Dockerfile",
+      "sha1": "0bc46885c8b09eff",
+      "bytes": 2303,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/cuda.Dockerfile",
+      "sha1": "3c4655d63bb8ef6c",
+      "bytes": 2790,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/intel.Dockerfile",
+      "sha1": "c316f56c04888407",
+      "bytes": 4180,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/llama-cli-cann.Dockerfile",
+      "sha1": "efce1a4c72dc6852",
+      "bytes": 2428,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/llama-cpp-cuda.srpm.spec",
+      "sha1": "1dba61f1d5b7d4e8",
+      "bytes": 2809,
+      "ext": ".spec",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/llama-cpp.srpm.spec",
+      "sha1": "b65bff05ab786c11",
+      "bytes": 2868,
+      "ext": ".spec",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/musa.Dockerfile",
+      "sha1": "32ce58bb107acfcf",
+      "bytes": 2734,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/openvino.Dockerfile",
+      "sha1": "e5e4b4d6e6d87515",
+      "bytes": 6854,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/rocm.Dockerfile",
+      "sha1": "39fbadcd7f00a494",
+      "bytes": 3286,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/s390x.Dockerfile",
+      "sha1": "e374afe1aaa77ac5",
+      "bytes": 3947,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/tools.sh",
+      "sha1": "73ce299714605e2c",
+      "bytes": 2520,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/vulkan.Dockerfile",
+      "sha1": "c9b3c9a7abfe101b",
+      "bytes": 2569,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/nix/apps.nix",
+      "sha1": "416727ef22f010d9",
+      "bytes": 455,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/nix/devshells.nix",
+      "sha1": "022013b53748cbc8",
+      "bytes": 1503,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/nix/docker.nix",
+      "sha1": "b51602605ea446ae",
+      "bytes": 887,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/nix/jetson-support.nix",
+      "sha1": "25c5bd650496bbfe",
+      "bytes": 1119,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/nix/nixpkgs-instances.nix",
+      "sha1": "f2c20173639f7362",
+      "bytes": 1730,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/nix/package-gguf-py.nix",
+      "sha1": "31c6044f2c1776f0",
+      "bytes": 729,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/nix/package.nix",
+      "sha1": "2a13d3f369cb6b79",
+      "bytes": 7636,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/nix/python-scripts.nix",
+      "sha1": "5a1f8a18a8bac8d3",
+      "bytes": 1366,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/nix/scope.nix",
+      "sha1": "304f09ac1409d3d0",
+      "bytes": 935,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".devops/nix/sif.nix",
+      "sha1": "06c2157b9682b8e1",
+      "bytes": 756,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".gemini/settings.json",
+      "sha1": "0318103cea8407b9",
+      "bytes": 36,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/labeler.yml",
+      "sha1": "5331fb16b3b372f4",
+      "bytes": 3620,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "sha1": "d509b529aaa2a0e9",
+      "bytes": 758,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/010-bug-compilation.yml",
+      "sha1": "12728112a647896d",
+      "bytes": 3499,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/011-bug-results.yml",
+      "sha1": "57b23a1ac2eccc39",
+      "bytes": 4676,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/019-bug-misc.yml",
+      "sha1": "244e59ad05eddd0b",
+      "bytes": 3922,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/020-enhancement.yml",
+      "sha1": "3538904ab711b02c",
+      "bytes": 2652,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/030-research.yml",
+      "sha1": "281d11bc95b2a302",
+      "bytes": 1978,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/040-refactor.yml",
+      "sha1": "06b3a4681978f5dc",
+      "bytes": 1446,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "sha1": "27108e80cc3de06a",
+      "bytes": 532,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/actions/get-tag-name/action.yml",
+      "sha1": "fb3624a751815c07",
+      "bytes": 714,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/actions/install-exe/action.yml",
+      "sha1": "2bfc971459dfff07",
+      "bytes": 1162,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/actions/linux-setup-openvino/action.yml",
+      "sha1": "32fe2f002e3e1028",
+      "bytes": 777,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/actions/linux-setup-spacemit/action.yml",
+      "sha1": "1a3fedb8b2062a9c",
+      "bytes": 575,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/actions/linux-setup-vulkan/action.yml",
+      "sha1": "3d13cade8cf50b96",
+      "bytes": 518,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/actions/unarchive-tar/action.yml",
+      "sha1": "302bfbd83c6b3c4a",
+      "bytes": 720,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/actions/windows-setup-cuda/action.yml",
+      "sha1": "8e235887b8aa8a09",
+      "bytes": 12172,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/actions/windows-setup-rocm/action.yml",
+      "sha1": "3d9ce70c810b6bb3",
+      "bytes": 416,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/ai-issues.yml",
+      "sha1": "ffd0d249135c6aeb",
+      "bytes": 2993,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/bench.yml.disabled",
+      "sha1": "aa2f9efe80fc840f",
+      "bytes": 10777,
+      "ext": ".disabled",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-3rd-party.yml",
+      "sha1": "7979bd925c90fb7d",
+      "bytes": 1258,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-and-test-snapdragon.yml",
+      "sha1": "2e501232556f306f",
+      "bytes": 3744,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-android.yml",
+      "sha1": "4a221948b77c5ab4",
+      "bytes": 2298,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-apple.yml",
+      "sha1": "f2bf1a9b376f77c1",
+      "bytes": 6539,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-cache.yml",
+      "sha1": "22737ee78dc544f4",
+      "bytes": 3466,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-cann.yml",
+      "sha1": "c48b1b254cec4d5d",
+      "bytes": 3131,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-cmake-pkg.yml",
+      "sha1": "e46214d63592716d",
+      "bytes": 1832,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-cross.yml",
+      "sha1": "3ca5795989d8ce35",
+      "bytes": 13950,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-msys.yml",
+      "sha1": "4a10380c3e140c1c",
+      "bytes": 2022,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-openvino.yml",
+      "sha1": "cbae98b1969f75ac",
+      "bytes": 3809,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-riscv.yml",
+      "sha1": "342788eb16896316",
+      "bytes": 3464,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-sanitize.yml",
+      "sha1": "e7f9a0cc8781eb61",
+      "bytes": 2334,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-self-hosted.yml",
+      "sha1": "d3980289fbc22ff5",
+      "bytes": 8660,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-sycl.yml",
+      "sha1": "ed3b430474db0813",
+      "bytes": 4187,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build-vulkan.yml",
+      "sha1": "1c2d1e6dd10dac4d",
+      "bytes": 2743,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/build.yml",
+      "sha1": "0a2b86bcf840bce3",
+      "bytes": 37277,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/check-vendor.yml",
+      "sha1": "55f1d2316376c260",
+      "bytes": 1276,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/close-issue.yml",
+      "sha1": "06ee0c0eac5d956b",
+      "bytes": 982,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "sha1": "2b81485b0b94fd87",
+      "bytes": 2236,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/docker.yml",
+      "sha1": "ad55e5766d226409",
+      "bytes": 19704,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/editorconfig.yml",
+      "sha1": "c5f3c23484f7a935",
+      "bytes": 719,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/gguf-publish.yml",
+      "sha1": "187e3166eadd0dc0",
+      "bytes": 1316,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/hip-quality-check.yml",
+      "sha1": "4a02b57f57f2d07b",
+      "bytes": 2392,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/labeler.yml",
+      "sha1": "b895d4d940a3f81e",
+      "bytes": 369,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/pre-tokenizer-hashes.yml",
+      "sha1": "a4a28a8045b881c0",
+      "bytes": 1651,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/python-check-requirements.yml",
+      "sha1": "0ddae866512819f2",
+      "bytes": 947,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/python-lint.yml",
+      "sha1": "e445ad200e8df02a",
+      "bytes": 869,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/python-type-check.yml",
+      "sha1": "71f3b925a8972988",
+      "bytes": 1177,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "sha1": "66c036f0bf70cf88",
+      "bytes": 49641,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/server-sanitize.yml",
+      "sha1": "9569858343c0ad60",
+      "bytes": 3131,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/server-self-hosted.yml",
+      "sha1": "8f334ef8ff96e880",
+      "bytes": 3848,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/server-webui.yml",
+      "sha1": "4462c76445a298bb",
+      "bytes": 3375,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/server.yml",
+      "sha1": "797b677a78d3f05a",
+      "bytes": 4615,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/update-ops-docs.yml",
+      "sha1": "c96163f02be63952",
+      "bytes": 1393,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".github/workflows/winget.yml",
+      "sha1": "832a5c324667bb34",
+      "bytes": 1600,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": ".pi/gg/SYSTEM.md",
+      "sha1": "cb139ee3afd8bf0d",
+      "bytes": 1562,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "_rels/.rels",
+      "sha1": "f098c5dce63f427f",
+      "bytes": 515,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "benches/dgx-spark/aime25_openai__gpt-oss-120b-high_temp1.0_20251109_094547.html",
+      "sha1": "5e9265af63f6d259",
+      "bytes": 810367,
+      "ext": ".html",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "benches/dgx-spark/aime25_openai__gpt-oss-120b-high_temp1.0_20251109_094547.json",
+      "sha1": "5f37bb7fcaab61e0",
+      "bytes": 125,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "benches/dgx-spark/dgx-spark.md",
+      "sha1": "c61384d94ac4dbe3",
+      "bytes": 26527,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "benches/dgx-spark/run-aime-120b-t8-x8-high.log",
+      "sha1": "84a2da6ef5252114",
+      "bytes": 17072,
+      "ext": ".log",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "benches/mac-m2-ultra/mac-m2-ultra.md",
+      "sha1": "bcd75c8b33175705",
+      "bytes": 24939,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "benches/nemotron/nemotron-dgx-spark.md",
+      "sha1": "888add4065d137f8",
+      "bytes": 9133,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "ci/README-MUSA.md",
+      "sha1": "9a3384131b5a7517",
+      "bytes": 1087,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "ci/README.md",
+      "sha1": "5f04241d3073d133",
+      "bytes": 1330,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "ci/run.sh",
+      "sha1": "3675e60f284a1187",
+      "bytes": 29982,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/arm64-apple-clang.cmake",
+      "sha1": "57039ec7cbbb66bd",
+      "bytes": 571,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/arm64-linux-clang.cmake",
+      "sha1": "f87dafa50185cf93",
+      "bytes": 604,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/arm64-windows-llvm.cmake",
+      "sha1": "0d482489ec8bcac2",
+      "bytes": 608,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/build-info.cmake",
+      "sha1": "db81e789caa2c411",
+      "bytes": 1367,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/common.cmake",
+      "sha1": "1e3fa43a859ece60",
+      "bytes": 2102,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/download-models.cmake",
+      "sha1": "9fc47784c2065091",
+      "bytes": 526,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/git-vars.cmake",
+      "sha1": "8f36b5f70d6f392d",
+      "bytes": 739,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/license.cmake",
+      "sha1": "28b2dd1e12868d57",
+      "bytes": 1485,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama-config.cmake.in",
+      "sha1": "b304f367187953f4",
+      "bytes": 1009,
+      "ext": ".in",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.pc.in",
+      "sha1": "0da4034e5710689f",
+      "bytes": 321,
+      "ext": ".in",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/riscv64-spacemit-linux-gnu-gcc.cmake",
+      "sha1": "64e9559ed83da627",
+      "bytes": 1386,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/x64-windows-llvm.cmake",
+      "sha1": "464813a916ccf85f",
+      "bytes": 144,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.clang-format",
+      "sha1": "a6dbaaf11964068c",
+      "bytes": 5132,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.clang-tidy",
+      "sha1": "5fcc23a8b53a458b",
+      "bytes": 959,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.dockerignore",
+      "sha1": "8acf70cdd5a602ec",
+      "bytes": 257,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.ecrc",
+      "sha1": "cb66ffc4b1122ad9",
+      "bytes": 103,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.editorconfig",
+      "sha1": "8853629d36f07cec",
+      "bytes": 1462,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.flake8",
+      "sha1": "6a96cb842606ffee",
+      "bytes": 583,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.gitattributes",
+      "sha1": "13fd75f5228cdb2e",
+      "bytes": 263,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.gitignore",
+      "sha1": "c657b1e1594de3a9",
+      "bytes": 2039,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.gitmodules",
+      "sha1": "da39a3ee5e6b4b0d",
+      "bytes": 0,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.pre-commit-config.yaml",
+      "sha1": "4cb22c89ea20b8ff",
+      "bytes": 463,
+      "ext": ".yaml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/AGENTS.md",
+      "sha1": "a9caf427d3eebc69",
+      "bytes": 6967,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/AUTHORS",
+      "sha1": "e16627a326a40c2a",
+      "bytes": 67337,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/CLAUDE.md",
+      "sha1": "e935b350d4208d25",
+      "bytes": 107,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/CMakeLists.txt",
+      "sha1": "7becdd00964c59cb",
+      "bytes": 9319,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/CMakePresets.json",
+      "sha1": "9d430f50a0d9d6f2",
+      "bytes": 4665,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/CODEOWNERS",
+      "sha1": "e12fd7772fb3f1c0",
+      "bytes": 6559,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/CONTRIBUTING.md",
+      "sha1": "222df78e4ffbd8a3",
+      "bytes": 12093,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/LICENSE",
+      "sha1": "d0b8072b454f73ba",
+      "bytes": 1099,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/Makefile",
+      "sha1": "a0ee52dd294a4ab6",
+      "bytes": 266,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/README.md",
+      "sha1": "8d2ee3997533e60b",
+      "bytes": 30826,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/SECURITY.md",
+      "sha1": "ea02f4758ec0e328",
+      "bytes": 6804,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/build-xcframework.sh",
+      "sha1": "af10834fb0f4a9f0",
+      "bytes": 22056,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/convert_hf_to_gguf.py",
+      "sha1": "5343e30dd3df2ddf",
+      "bytes": 690681,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/convert_hf_to_gguf_update.py",
+      "sha1": "faf398f1725e20fc",
+      "bytes": 27585,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/convert_llama_ggml_to_gguf.py",
+      "sha1": "83860abfd34cf7b0",
+      "bytes": 19562,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/convert_lora_to_gguf.py",
+      "sha1": "5b982d1e3d5cddb6",
+      "bytes": 22613,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/flake.nix",
+      "sha1": "45f9861a2d93682c",
+      "bytes": 7423,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/mypy.ini",
+      "sha1": "c819a2ae4c678162",
+      "bytes": 170,
+      "ext": ".ini",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/pyproject.toml",
+      "sha1": "1756e7cf01fda032",
+      "bytes": 1900,
+      "ext": ".toml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/pyrightconfig.json",
+      "sha1": "babf7d9c6005340d",
+      "bytes": 718,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/requirements.txt",
+      "sha1": "d014bf73a18dd36d",
+      "bytes": 564,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ty.toml",
+      "sha1": "c6289cd447e04116",
+      "bytes": 651,
+      "ext": ".toml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/cann.Dockerfile",
+      "sha1": "ec1fb8388ad24c4e",
+      "bytes": 4967,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/cpu.Dockerfile",
+      "sha1": "0bc46885c8b09eff",
+      "bytes": 2303,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/cuda.Dockerfile",
+      "sha1": "3c4655d63bb8ef6c",
+      "bytes": 2790,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/intel.Dockerfile",
+      "sha1": "0543f986258373ab",
+      "bytes": 4180,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/llama-cli-cann.Dockerfile",
+      "sha1": "efce1a4c72dc6852",
+      "bytes": 2428,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/llama-cpp-cuda.srpm.spec",
+      "sha1": "1dba61f1d5b7d4e8",
+      "bytes": 2809,
+      "ext": ".spec",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/llama-cpp.srpm.spec",
+      "sha1": "b65bff05ab786c11",
+      "bytes": 2868,
+      "ext": ".spec",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/musa.Dockerfile",
+      "sha1": "32ce58bb107acfcf",
+      "bytes": 2734,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/openvino.Dockerfile",
+      "sha1": "e5e4b4d6e6d87515",
+      "bytes": 6854,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/rocm.Dockerfile",
+      "sha1": "39fbadcd7f00a494",
+      "bytes": 3286,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/s390x.Dockerfile",
+      "sha1": "e374afe1aaa77ac5",
+      "bytes": 3947,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/tools.sh",
+      "sha1": "73ce299714605e2c",
+      "bytes": 2520,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/vulkan.Dockerfile",
+      "sha1": "c9b3c9a7abfe101b",
+      "bytes": 2569,
+      "ext": ".dockerfile",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/nix/apps.nix",
+      "sha1": "416727ef22f010d9",
+      "bytes": 455,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/nix/devshells.nix",
+      "sha1": "022013b53748cbc8",
+      "bytes": 1503,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/nix/docker.nix",
+      "sha1": "b51602605ea446ae",
+      "bytes": 887,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/nix/jetson-support.nix",
+      "sha1": "25c5bd650496bbfe",
+      "bytes": 1119,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/nix/nixpkgs-instances.nix",
+      "sha1": "f2c20173639f7362",
+      "bytes": 1730,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/nix/package-gguf-py.nix",
+      "sha1": "31c6044f2c1776f0",
+      "bytes": 729,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/nix/package.nix",
+      "sha1": "107f4e47a3fa1f38",
+      "bytes": 7634,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/nix/python-scripts.nix",
+      "sha1": "5a1f8a18a8bac8d3",
+      "bytes": 1366,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/nix/scope.nix",
+      "sha1": "304f09ac1409d3d0",
+      "bytes": 935,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.devops/nix/sif.nix",
+      "sha1": "06c2157b9682b8e1",
+      "bytes": 756,
+      "ext": ".nix",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.gemini/settings.json",
+      "sha1": "0318103cea8407b9",
+      "bytes": 36,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/labeler.yml",
+      "sha1": "5331fb16b3b372f4",
+      "bytes": 3620,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/pull_request_template.md",
+      "sha1": "d509b529aaa2a0e9",
+      "bytes": 758,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/ISSUE_TEMPLATE/010-bug-compilation.yml",
+      "sha1": "12728112a647896d",
+      "bytes": 3499,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/ISSUE_TEMPLATE/011-bug-results.yml",
+      "sha1": "57b23a1ac2eccc39",
+      "bytes": 4676,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/ISSUE_TEMPLATE/019-bug-misc.yml",
+      "sha1": "244e59ad05eddd0b",
+      "bytes": 3922,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/ISSUE_TEMPLATE/020-enhancement.yml",
+      "sha1": "3538904ab711b02c",
+      "bytes": 2652,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/ISSUE_TEMPLATE/030-research.yml",
+      "sha1": "281d11bc95b2a302",
+      "bytes": 1978,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/ISSUE_TEMPLATE/040-refactor.yml",
+      "sha1": "06b3a4681978f5dc",
+      "bytes": 1446,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/ISSUE_TEMPLATE/config.yml",
+      "sha1": "27108e80cc3de06a",
+      "bytes": 532,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/actions/get-tag-name/action.yml",
+      "sha1": "fb3624a751815c07",
+      "bytes": 714,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/actions/install-exe/action.yml",
+      "sha1": "2bfc971459dfff07",
+      "bytes": 1162,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/actions/linux-setup-openvino/action.yml",
+      "sha1": "32fe2f002e3e1028",
+      "bytes": 777,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/actions/linux-setup-spacemit/action.yml",
+      "sha1": "1a3fedb8b2062a9c",
+      "bytes": 575,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/actions/linux-setup-vulkan/action.yml",
+      "sha1": "3d13cade8cf50b96",
+      "bytes": 518,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/actions/unarchive-tar/action.yml",
+      "sha1": "302bfbd83c6b3c4a",
+      "bytes": 720,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/actions/windows-setup-cuda/action.yml",
+      "sha1": "8e235887b8aa8a09",
+      "bytes": 12172,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/actions/windows-setup-rocm/action.yml",
+      "sha1": "3d9ce70c810b6bb3",
+      "bytes": 416,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/ai-issues.yml",
+      "sha1": "ffd0d249135c6aeb",
+      "bytes": 2993,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/bench.yml.disabled",
+      "sha1": "aa2f9efe80fc840f",
+      "bytes": 10777,
+      "ext": ".disabled",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-3rd-party.yml",
+      "sha1": "7979bd925c90fb7d",
+      "bytes": 1258,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-and-test-snapdragon.yml",
+      "sha1": "2e501232556f306f",
+      "bytes": 3744,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-android.yml",
+      "sha1": "4a221948b77c5ab4",
+      "bytes": 2298,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-apple.yml",
+      "sha1": "f2bf1a9b376f77c1",
+      "bytes": 6539,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-cache.yml",
+      "sha1": "22737ee78dc544f4",
+      "bytes": 3466,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-cann.yml",
+      "sha1": "c48b1b254cec4d5d",
+      "bytes": 3131,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-cmake-pkg.yml",
+      "sha1": "e46214d63592716d",
+      "bytes": 1832,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-cross.yml",
+      "sha1": "3ca5795989d8ce35",
+      "bytes": 13950,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-msys.yml",
+      "sha1": "4a10380c3e140c1c",
+      "bytes": 2022,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-openvino.yml",
+      "sha1": "cbae98b1969f75ac",
+      "bytes": 3809,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-riscv.yml",
+      "sha1": "342788eb16896316",
+      "bytes": 3464,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-sanitize.yml",
+      "sha1": "e7f9a0cc8781eb61",
+      "bytes": 2334,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-self-hosted.yml",
+      "sha1": "d3980289fbc22ff5",
+      "bytes": 8660,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-sycl.yml",
+      "sha1": "ed3b430474db0813",
+      "bytes": 4187,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-virtgpu.yml",
+      "sha1": "bdf159df66fcebf5",
+      "bytes": 1184,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build-vulkan.yml",
+      "sha1": "1c2d1e6dd10dac4d",
+      "bytes": 2743,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/build.yml",
+      "sha1": "0a2b86bcf840bce3",
+      "bytes": 37277,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/check-vendor.yml",
+      "sha1": "55f1d2316376c260",
+      "bytes": 1276,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/close-issue.yml",
+      "sha1": "06ee0c0eac5d956b",
+      "bytes": 982,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/copilot-setup-steps.yml",
+      "sha1": "2b81485b0b94fd87",
+      "bytes": 2236,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/docker.yml",
+      "sha1": "ad55e5766d226409",
+      "bytes": 19704,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/editorconfig.yml",
+      "sha1": "c5f3c23484f7a935",
+      "bytes": 719,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/gguf-publish.yml",
+      "sha1": "187e3166eadd0dc0",
+      "bytes": 1316,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/hip-quality-check.yml",
+      "sha1": "4a02b57f57f2d07b",
+      "bytes": 2392,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/labeler.yml",
+      "sha1": "b895d4d940a3f81e",
+      "bytes": 369,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/pre-tokenizer-hashes.yml",
+      "sha1": "a4a28a8045b881c0",
+      "bytes": 1651,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/python-check-requirements.yml",
+      "sha1": "0ddae866512819f2",
+      "bytes": 947,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/python-lint.yml",
+      "sha1": "e445ad200e8df02a",
+      "bytes": 869,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/python-type-check.yml",
+      "sha1": "54efe12fdab8a700",
+      "bytes": 1177,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/release.yml",
+      "sha1": "66c036f0bf70cf88",
+      "bytes": 49641,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/server-sanitize.yml",
+      "sha1": "9569858343c0ad60",
+      "bytes": 3131,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/server-self-hosted.yml",
+      "sha1": "8f334ef8ff96e880",
+      "bytes": 3848,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/server-webui.yml",
+      "sha1": "4462c76445a298bb",
+      "bytes": 3375,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/server.yml",
+      "sha1": "797b677a78d3f05a",
+      "bytes": 4615,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/update-ops-docs.yml",
+      "sha1": "c96163f02be63952",
+      "bytes": 1393,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.github/workflows/winget.yml",
+      "sha1": "832a5c324667bb34",
+      "bytes": 1600,
+      "ext": ".yml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/.pi/gg/SYSTEM.md",
+      "sha1": "cb139ee3afd8bf0d",
+      "bytes": 1562,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/benches/dgx-spark/aime25_openai__gpt-oss-120b-high_temp1.0_20251109_094547.html",
+      "sha1": "5e9265af63f6d259",
+      "bytes": 810367,
+      "ext": ".html",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/benches/dgx-spark/aime25_openai__gpt-oss-120b-high_temp1.0_20251109_094547.json",
+      "sha1": "5f37bb7fcaab61e0",
+      "bytes": 125,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/benches/dgx-spark/dgx-spark.md",
+      "sha1": "c61384d94ac4dbe3",
+      "bytes": 26527,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/benches/dgx-spark/run-aime-120b-t8-x8-high.log",
+      "sha1": "84a2da6ef5252114",
+      "bytes": 17072,
+      "ext": ".log",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/benches/mac-m2-ultra/mac-m2-ultra.md",
+      "sha1": "bcd75c8b33175705",
+      "bytes": 24939,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/benches/nemotron/nemotron-dgx-spark.md",
+      "sha1": "888add4065d137f8",
+      "bytes": 9133,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ci/README-MUSA.md",
+      "sha1": "9a3384131b5a7517",
+      "bytes": 1087,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ci/README.md",
+      "sha1": "5f04241d3073d133",
+      "bytes": 1330,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ci/run.sh",
+      "sha1": "3675e60f284a1187",
+      "bytes": 29982,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/cmake/arm64-apple-clang.cmake",
+      "sha1": "57039ec7cbbb66bd",
+      "bytes": 571,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/cmake/arm64-linux-clang.cmake",
+      "sha1": "f87dafa50185cf93",
+      "bytes": 604,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/cmake/arm64-windows-llvm.cmake",
+      "sha1": "0d482489ec8bcac2",
+      "bytes": 608,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/cmake/build-info.cmake",
+      "sha1": "db81e789caa2c411",
+      "bytes": 1367,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/cmake/common.cmake",
+      "sha1": "1e3fa43a859ece60",
+      "bytes": 2102,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/cmake/download-models.cmake",
+      "sha1": "9fc47784c2065091",
+      "bytes": 526,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/cmake/git-vars.cmake",
+      "sha1": "8f36b5f70d6f392d",
+      "bytes": 739,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/cmake/license.cmake",
+      "sha1": "28b2dd1e12868d57",
+      "bytes": 1485,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/cmake/llama-config.cmake.in",
+      "sha1": "b304f367187953f4",
+      "bytes": 1009,
+      "ext": ".in",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/cmake/llama.pc.in",
+      "sha1": "0da4034e5710689f",
+      "bytes": 321,
+      "ext": ".in",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/cmake/riscv64-spacemit-linux-gnu-gcc.cmake",
+      "sha1": "64e9559ed83da627",
+      "bytes": 1386,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/cmake/x64-windows-llvm.cmake",
+      "sha1": "464813a916ccf85f",
+      "bytes": 144,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/CMakeLists.txt",
+      "sha1": "3d3f4d6f96406b1a",
+      "bytes": 4864,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/arg.cpp",
+      "sha1": "f49104e5499db7be",
+      "bytes": 191235,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/arg.h",
+      "sha1": "3ed68ad5f01526f8",
+      "bytes": 5528,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/base64.hpp",
+      "sha1": "b708eeee7b023770",
+      "bytes": 13270,
+      "ext": ".hpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/build-info.cpp.in",
+      "sha1": "3ede54ec198ca4ac",
+      "bytes": 957,
+      "ext": ".in",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/build-info.h",
+      "sha1": "9bb34e0643fcc84b",
+      "bytes": 237,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/chat-auto-parser-generator.cpp",
+      "sha1": "cc0aa804b1240d55",
+      "bytes": 22162,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/chat-auto-parser-helpers.cpp",
+      "sha1": "371e22429367cfec",
+      "bytes": 13304,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/chat-auto-parser-helpers.h",
+      "sha1": "bbee65079adc1f24",
+      "bytes": 4592,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/chat-auto-parser.h",
+      "sha1": "f71821047ae0a459",
+      "bytes": 17871,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/chat-diff-analyzer.cpp",
+      "sha1": "9aeb186cfaab7f5b",
+      "bytes": 65860,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/chat-peg-parser.cpp",
+      "sha1": "951585822752c9a4",
+      "bytes": 41592,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/chat-peg-parser.h",
+      "sha1": "b75858258a224da6",
+      "bytes": 10976,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/chat.cpp",
+      "sha1": "ee7b775919822476",
+      "bytes": 105873,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/chat.h",
+      "sha1": "512c74a28294073e",
+      "bytes": 12825,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/common.cpp",
+      "sha1": "d53fc10fd929bb7b",
+      "bytes": 71068,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/common.h",
+      "sha1": "228a2e3d7bbfec12",
+      "bytes": 45964,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/console.cpp",
+      "sha1": "59fd2d0b92dc4752",
+      "bytes": 42793,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/console.h",
+      "sha1": "ee7f0c9d69f8b25b",
+      "bytes": 1216,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/debug.cpp",
+      "sha1": "4e292de2c21c1a13",
+      "bytes": 6728,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/debug.h",
+      "sha1": "980e3e47db401674",
+      "bytes": 1306,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/download.cpp",
+      "sha1": "f1f6d667b49ff07e",
+      "bytes": 31921,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/download.h",
+      "sha1": "9e90cf95f242cf3c",
+      "bytes": 3890,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/fit.cpp",
+      "sha1": "c5be74012cde4718",
+      "bytes": 46575,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/fit.h",
+      "sha1": "ceb08d39b3cb19a9",
+      "bytes": 2086,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/hf-cache.cpp",
+      "sha1": "17ce5e6cd63760c5",
+      "bytes": 24904,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/hf-cache.h",
+      "sha1": "1e4df713fb071f9e",
+      "bytes": 837,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/http.h",
+      "sha1": "74b3f430c0353917",
+      "bytes": 2998,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/json-partial.cpp",
+      "sha1": "d85fadc184800f35",
+      "bytes": 16274,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/json-partial.h",
+      "sha1": "a7903a79b8fb0aec",
+      "bytes": 1855,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/json-schema-to-grammar.cpp",
+      "sha1": "0c27df77f16cc938",
+      "bytes": 51349,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/json-schema-to-grammar.h",
+      "sha1": "eac28187d0280c8a",
+      "bytes": 1477,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/llguidance.cpp",
+      "sha1": "d5f73b0e9c7ba688",
+      "bytes": 8960,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/log.cpp",
+      "sha1": "56656dd05e6233fa",
+      "bytes": 12480,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/log.h",
+      "sha1": "7023e16e6b251071",
+      "bytes": 5508,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/ngram-cache.cpp",
+      "sha1": "67fa68c621b1a7c9",
+      "bytes": 11937,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/ngram-cache.h",
+      "sha1": "5c0c458db1d64d6c",
+      "bytes": 4248,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/ngram-map.cpp",
+      "sha1": "4cc9bab4703c2866",
+      "bytes": 20431,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/ngram-map.h",
+      "sha1": "457c3bdbf01119d4",
+      "bytes": 4984,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/ngram-mod.cpp",
+      "sha1": "9aa472d228d41605",
+      "bytes": 1170,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/ngram-mod.h",
+      "sha1": "57e64494cb9d15eb",
+      "bytes": 766,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/peg-parser.cpp",
+      "sha1": "f76e6519e241813d",
+      "bytes": 84072,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/peg-parser.h",
+      "sha1": "e3a723b3fe2d49a5",
+      "bytes": 20050,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/preset.cpp",
+      "sha1": "a4d2109a2c4bfe28",
+      "bytes": 16953,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/preset.h",
+      "sha1": "a2fa0be1f5c02e4c",
+      "bytes": 2908,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/reasoning-budget.cpp",
+      "sha1": "61f022551cf7f3f5",
+      "bytes": 9300,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/reasoning-budget.h",
+      "sha1": "d0d586074d44737c",
+      "bytes": 1945,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/regex-partial.cpp",
+      "sha1": "6e57e7a0faf6afc6",
+      "bytes": 8567,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/regex-partial.h",
+      "sha1": "52f1a0068cc12c1f",
+      "bytes": 1563,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/sampling.cpp",
+      "sha1": "d5fac9c41ff2e71e",
+      "bytes": 32631,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/sampling.h",
+      "sha1": "1350427ca8dfe09a",
+      "bytes": 5424,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/speculative.cpp",
+      "sha1": "c3209d339bec61bb",
+      "bytes": 41846,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/speculative.h",
+      "sha1": "941d01bbd9f2f270",
+      "bytes": 2869,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/unicode.cpp",
+      "sha1": "b00bf153aceb2584",
+      "bytes": 4284,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/unicode.h",
+      "sha1": "86f058f819dc3c80",
+      "bytes": 1113,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/jinja/README.md",
+      "sha1": "cec09e5c826dde35",
+      "bytes": 4276,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/jinja/caps.cpp",
+      "sha1": "4a0aba69a81fbd23",
+      "bytes": 16863,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/jinja/caps.h",
+      "sha1": "10bc2574e295b284",
+      "bytes": 769,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/jinja/lexer.cpp",
+      "sha1": "89fae69e95c08477",
+      "bytes": 13191,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/jinja/lexer.h",
+      "sha1": "24edad7f80008841",
+      "bytes": 5511,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/jinja/parser.cpp",
+      "sha1": "bae95126fb90a64c",
+      "bytes": 23475,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/jinja/parser.h",
+      "sha1": "cd0d46391c339061",
+      "bytes": 554,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/jinja/runtime.cpp",
+      "sha1": "1e05c8417d94f5b4",
+      "bytes": 38120,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/jinja/runtime.h",
+      "sha1": "9f4dfc3fec40f9e2",
+      "bytes": 21866,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/jinja/string.cpp",
+      "sha1": "539071586cb06ef8",
+      "bytes": 5612,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/jinja/string.h",
+      "sha1": "4f7ab5d4dbeb4d87",
+      "bytes": 1824,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/jinja/utils.h",
+      "sha1": "e4e88bfa5dc9f20d",
+      "bytes": 5303,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/jinja/value.cpp",
+      "sha1": "04363dbbc0079bd2",
+      "bytes": 63249,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/common/jinja/value.h",
+      "sha1": "962f764193b0d214",
+      "bytes": 30391,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/android.md",
+      "sha1": "f567df27b73f22cf",
+      "bytes": 6185,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/autoparser.md",
+      "sha1": "411d9d631ec905a4",
+      "bytes": 32479,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/build-riscv64-spacemit.md",
+      "sha1": "1cee0f83fbc612ec",
+      "bytes": 4209,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/build-s390x.md",
+      "sha1": "7187a76b6dcf3bdb",
+      "bytes": 11267,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/build.md",
+      "sha1": "c12f0c4175fa80f5",
+      "bytes": 38608,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/docker.md",
+      "sha1": "2c8ad93a4b3b7a8b",
+      "bytes": 10026,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/function-calling.md",
+      "sha1": "8350d777b17cc099",
+      "bytes": 21387,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/install.md",
+      "sha1": "4bcf40a947714914",
+      "bytes": 1210,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/llguidance.md",
+      "sha1": "e9156a7db668671f",
+      "bytes": 3836,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/multi-gpu.md",
+      "sha1": "2f698ec51fbb3824",
+      "bytes": 10275,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/multimodal.md",
+      "sha1": "dfdfc1dde0e8adab",
+      "bytes": 5178,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/ops.md",
+      "sha1": "c04e8bc312959ce1",
+      "bytes": 11858,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/preset.md",
+      "sha1": "22aa40b8d53e998f",
+      "bytes": 2946,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/speculative.md",
+      "sha1": "701aa616415bede6",
+      "bytes": 13115,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/BLIS.md",
+      "sha1": "3fa77395c0010170",
+      "bytes": 1717,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/CANN.md",
+      "sha1": "5b4534c8ad718582",
+      "bytes": 14371,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/CUDA-FEDORA.md",
+      "sha1": "909a25196606f2f3",
+      "bytes": 10840,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/OPENCL.md",
+      "sha1": "d902cad9c87c6c6d",
+      "bytes": 10549,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/OPENVINO.md",
+      "sha1": "9a387ab36e5e9c3a",
+      "bytes": 19845,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/SYCL.md",
+      "sha1": "681466d133e0fbf1",
+      "bytes": 35321,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/VirtGPU.md",
+      "sha1": "d201c55c980ea574",
+      "bytes": 6409,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/ZenDNN.md",
+      "sha1": "7a0750ed5c9e57f6",
+      "bytes": 9390,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/zDNN.md",
+      "sha1": "b88295d3ae749fc6",
+      "bytes": 2367,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/VirtGPU/configuration.md",
+      "sha1": "cb63a5b3293d4448",
+      "bytes": 6994,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/VirtGPU/development.md",
+      "sha1": "bff745280d582699",
+      "bytes": 6391,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/snapdragon/CMakeUserPresets.json",
+      "sha1": "a993a88afd9dec25",
+      "bytes": 4612,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/snapdragon/README.md",
+      "sha1": "9723abbb3ac013be",
+      "bytes": 14120,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/snapdragon/developer.md",
+      "sha1": "4f2e99b69b9059f6",
+      "bytes": 6587,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/snapdragon/linux.md",
+      "sha1": "5c899a0ff9f494be",
+      "bytes": 2157,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/backend/snapdragon/windows.md",
+      "sha1": "4320fb3e44187972",
+      "bytes": 5844,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/development/HOWTO-add-model.md",
+      "sha1": "297b760c44ae689e",
+      "bytes": 9351,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/development/debugging-tests.md",
+      "sha1": "ee0de439f9c4eea8",
+      "bytes": 3283,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/development/parsing.md",
+      "sha1": "b62868b4faa0fbf1",
+      "bytes": 10802,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/development/token_generation_performance_tips.md",
+      "sha1": "5cc19707d5f3b133",
+      "bytes": 2342,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/development/llama-star/idea-arch.key",
+      "sha1": "9d82128bf07ece04",
+      "bytes": 488591,
+      "ext": ".key",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/multimodal/MobileVLM.md",
+      "sha1": "c894c105c842ecf0",
+      "bytes": 18909,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/multimodal/gemma3.md",
+      "sha1": "7a788b88f7eea709",
+      "bytes": 1204,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/multimodal/glmedge.md",
+      "sha1": "913e58372415d18b",
+      "bytes": 1561,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/multimodal/granitevision.md",
+      "sha1": "35a8a9a719812c0f",
+      "bytes": 6541,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/multimodal/llava.md",
+      "sha1": "7a563f917fce596b",
+      "bytes": 5291,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/multimodal/minicpmo2.6.md",
+      "sha1": "48042983a5c183c8",
+      "bytes": 1862,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/multimodal/minicpmo4.0.md",
+      "sha1": "b71fa886df7eab29",
+      "bytes": 1693,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/multimodal/minicpmv2.5.md",
+      "sha1": "b398256a6d1f4db6",
+      "bytes": 1842,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/multimodal/minicpmv2.6.md",
+      "sha1": "a8c2566f22c6cd04",
+      "bytes": 1727,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/multimodal/minicpmv4.0.md",
+      "sha1": "0b001f1f5030728e",
+      "bytes": 1693,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/multimodal/minicpmv4.5.md",
+      "sha1": "39c409d59bdf20f5",
+      "bytes": 1725,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/docs/multimodal/minicpmv4.6.md",
+      "sha1": "bce71d9f556037e4",
+      "bytes": 2067,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/CMakeLists.txt",
+      "sha1": "b0c25debf93834ac",
+      "bytes": 1088,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/convert_legacy_llama.py",
+      "sha1": "e3f3e2bba5e79a2c",
+      "bytes": 62458,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/json_schema_pydantic_example.py",
+      "sha1": "1fd8463be16946a0",
+      "bytes": 3296,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/json_schema_to_grammar.py",
+      "sha1": "17b06d22441e3bc0",
+      "bytes": 36127,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.vim",
+      "sha1": "6ebe0e84810ce1d0",
+      "bytes": 27046,
+      "ext": ".vim",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/pydantic_models_to_grammar.py",
+      "sha1": "5fdeb4573dd4dd06",
+      "bytes": 57588,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/pydantic_models_to_grammar_examples.py",
+      "sha1": "ac86d5023153a124",
+      "bytes": 14031,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/reason-act.sh",
+      "sha1": "997bdad49afc3f09",
+      "bytes": 379,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/regex_to_grammar.py",
+      "sha1": "77f46928b8e85bc4",
+      "bytes": 451,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/server-llama2-13B.sh",
+      "sha1": "83136e5789514fa4",
+      "bytes": 824,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/server_embd.py",
+      "sha1": "ddf70c36220c4965",
+      "bytes": 1004,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/ts-type-to-grammar.sh",
+      "sha1": "d693ac5d9a6b3bc2",
+      "bytes": 956,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/batched/CMakeLists.txt",
+      "sha1": "059f17584c9ab6db",
+      "bytes": 244,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/batched/README.md",
+      "sha1": "96f5098c267b53af",
+      "bytes": 1479,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/batched/batched.cpp",
+      "sha1": "79abb44b17fe9664",
+      "bytes": 8393,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/batched.swift/.gitignore",
+      "sha1": "e56916be6aef2ecf",
+      "bytes": 182,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/batched.swift/Makefile",
+      "sha1": "930bebdbcc3f03ab",
+      "bytes": 236,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/batched.swift/Package.swift",
+      "sha1": "974fc6551c9d6334",
+      "bytes": 788,
+      "ext": ".swift",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/batched.swift/README.md",
+      "sha1": "b4a732e2c8186eeb",
+      "bytes": 118,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/batched.swift/Sources/main.swift",
+      "sha1": "d7fd04ab1be1458f",
+      "bytes": 7716,
+      "ext": ".swift",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/convert-llama2c-to-ggml/CMakeLists.txt",
+      "sha1": "ca3cefa5a0e1dad5",
+      "bytes": 276,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/convert-llama2c-to-ggml/README.md",
+      "sha1": "2979dcba48fe820d",
+      "bytes": 1500,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/convert-llama2c-to-ggml/convert-llama2c-to-ggml.cpp",
+      "sha1": "6be75af23e7057f8",
+      "bytes": 36403,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/debug/CMakeLists.txt",
+      "sha1": "aee26336f9fd3cf1",
+      "bytes": 240,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/debug/README.md",
+      "sha1": "ff45d1f5c89360d6",
+      "bytes": 2140,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/debug/debug.cpp",
+      "sha1": "3bb6be8baf69ce6e",
+      "bytes": 8903,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/deprecation-warning/README.md",
+      "sha1": "996d63a1ea08cd96",
+      "bytes": 1730,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/deprecation-warning/deprecation-warning.cpp",
+      "sha1": "620f075b97cc4b55",
+      "bytes": 1270,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/diffusion/CMakeLists.txt",
+      "sha1": "1e63b31612942f27",
+      "bytes": 500,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/diffusion/README.md",
+      "sha1": "25b0f1499f697516",
+      "bytes": 2392,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/diffusion/diffusion-cli.cpp",
+      "sha1": "2f10592a65b13707",
+      "bytes": 10362,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/diffusion/diffusion.cpp",
+      "sha1": "0f95ea0f725bec7d",
+      "bytes": 17545,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/diffusion/diffusion.h",
+      "sha1": "93cdb598f5a71d16",
+      "bytes": 2634,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/embedding/CMakeLists.txt",
+      "sha1": "ad6fd13f4241dd21",
+      "bytes": 248,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/embedding/README.md",
+      "sha1": "952abd3e3bc4e899",
+      "bytes": 2372,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/embedding/embedding.cpp",
+      "sha1": "4583ecd8cddc02f3",
+      "bytes": 16142,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/eval-callback/CMakeLists.txt",
+      "sha1": "a4665bb6bf64c1e6",
+      "bytes": 1346,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/eval-callback/README.md",
+      "sha1": "84e860a0853bbca2",
+      "bytes": 4819,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/eval-callback/eval-callback.cpp",
+      "sha1": "b6acf6f1c4df48d2",
+      "bytes": 2232,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gen-docs/CMakeLists.txt",
+      "sha1": "636ce0f73ee7b0b4",
+      "bytes": 246,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gen-docs/gen-docs.cpp",
+      "sha1": "c4a79c3bccbf1e11",
+      "bytes": 4732,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf/CMakeLists.txt",
+      "sha1": "d448113eeb1ed37d",
+      "bytes": 224,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf/gguf.cpp",
+      "sha1": "ad23334b9a5f555c",
+      "bytes": 9034,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf-hash/CMakeLists.txt",
+      "sha1": "1feef119c2422e24",
+      "bytes": 750,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf-hash/README.md",
+      "sha1": "de30c4e3c05c61e8",
+      "bytes": 10868,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf-hash/gguf-hash.cpp",
+      "sha1": "b7f7922f3028eab1",
+      "bytes": 24710,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf-hash/deps/rotate-bits/package.json",
+      "sha1": "b3f33bd235d7bbde",
+      "bytes": 268,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf-hash/deps/rotate-bits/rotate-bits.h",
+      "sha1": "9f3d65ec161cc0eb",
+      "bytes": 1063,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf-hash/deps/sha1/package.json",
+      "sha1": "4ee45154181567c3",
+      "bytes": 209,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf-hash/deps/sha1/sha1.c",
+      "sha1": "46fb9a146507261c",
+      "bytes": 7918,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf-hash/deps/sha1/sha1.h",
+      "sha1": "eb4c8f36984d426a",
+      "bytes": 769,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf-hash/deps/sha256/package.json",
+      "sha1": "5c8c784fe26e23bf",
+      "bytes": 298,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf-hash/deps/sha256/sha256.c",
+      "sha1": "c243739742b52a84",
+      "bytes": 5503,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf-hash/deps/sha256/sha256.h",
+      "sha1": "68fb9f168e555f14",
+      "bytes": 573,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf-hash/deps/xxhash/clib.json",
+      "sha1": "52091ae0a4407f32",
+      "bytes": 267,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf-hash/deps/xxhash/xxhash.c",
+      "sha1": "90ef65bc1832c8dd",
+      "bytes": 1897,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/gguf-hash/deps/xxhash/xxhash.h",
+      "sha1": "3934a5392e10ebf0",
+      "bytes": 271843,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/idle/CMakeLists.txt",
+      "sha1": "fb429c275fbdd95a",
+      "bytes": 238,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/idle/README.md",
+      "sha1": "ec5abcd2960d9610",
+      "bytes": 78,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/idle/idle.cpp",
+      "sha1": "3adbbaee4377e27a",
+      "bytes": 3221,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/.gitignore",
+      "sha1": "02b69e5660b2b427",
+      "bytes": 464,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/build.gradle.kts",
+      "sha1": "6edccab1ada96ea0",
+      "bytes": 287,
+      "ext": ".kts",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/gradle.properties",
+      "sha1": "a362392e0040b183",
+      "bytes": 1418,
+      "ext": ".properties",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/gradlew",
+      "sha1": "9bda1a2991cd050c",
+      "bytes": 5951,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/settings.gradle.kts",
+      "sha1": "b1f7f2963c6296ef",
+      "bytes": 359,
+      "ext": ".kts",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/.gitignore",
+      "sha1": "4031ed2beaab11dd",
+      "bytes": 8,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/build.gradle.kts",
+      "sha1": "e6e7f82bd050e3a5",
+      "bytes": 1484,
+      "ext": ".kts",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/proguard-rules.pro",
+      "sha1": "2b4a82b966ee316f",
+      "bytes": 967,
+      "ext": ".pro",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/AndroidManifest.xml",
+      "sha1": "cb1136fc8f24ec76",
+      "bytes": 941,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/java/com/example/llama/MainActivity.kt",
+      "sha1": "5b1e5288aab0fbfa",
+      "bytes": 10388,
+      "ext": ".kt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/java/com/example/llama/MessageAdapter.kt",
+      "sha1": "975d898fd0d7a006",
+      "bytes": 1814,
+      "ext": ".kt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/drawable/bg_assistant_message.xml",
+      "sha1": "04611122ae7bcc88",
+      "bytes": 182,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/drawable/bg_user_message.xml",
+      "sha1": "d5ef6c7d04d3a576",
+      "bytes": 182,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/drawable/ic_launcher_background.xml",
+      "sha1": "8e1cdeb4b5539914",
+      "bytes": 5776,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/drawable/ic_launcher_foreground.xml",
+      "sha1": "0806d8df870042dc",
+      "bytes": 1733,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/drawable/outline_folder_open_24.xml",
+      "sha1": "dd3ac6b54690ea31",
+      "bytes": 463,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/drawable/outline_send_24.xml",
+      "sha1": "85538b5d7eda784b",
+      "bytes": 477,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/layout/activity_main.xml",
+      "sha1": "336808e107afae88",
+      "bytes": 3117,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/layout/item_message_assistant.xml",
+      "sha1": "93a6a6330f7820eb",
+      "bytes": 622,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/layout/item_message_user.xml",
+      "sha1": "76c92188fd442498",
+      "bytes": 615,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/mipmap-anydpi/ic_launcher.xml",
+      "sha1": "afe92b4cffe6a69e",
+      "bytes": 350,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/mipmap-anydpi/ic_launcher_round.xml",
+      "sha1": "afe92b4cffe6a69e",
+      "bytes": 350,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/values/colors.xml",
+      "sha1": "3de57cc9df4a952c",
+      "bytes": 389,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/values/strings.xml",
+      "sha1": "b3850059746b58f3",
+      "bytes": 86,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/values/themes.xml",
+      "sha1": "a814014fa8778f9b",
+      "bytes": 375,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/xml/backup_rules.xml",
+      "sha1": "1d5aedcd0a7d805b",
+      "bytes": 492,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/app/src/main/res/xml/data_extraction_rules.xml",
+      "sha1": "ec6a03edfe737b7d",
+      "bytes": 571,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/gradle/libs.versions.toml",
+      "sha1": "3c73cb784219297b",
+      "bytes": 1757,
+      "ext": ".toml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/gradle/wrapper/gradle-wrapper.jar",
+      "sha1": "2685e1a923d4c79d",
+      "bytes": 59203,
+      "ext": ".jar",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/gradle/wrapper/gradle-wrapper.properties",
+      "sha1": "781370b01790eb62",
+      "bytes": 239,
+      "ext": ".properties",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/.gitignore",
+      "sha1": "4031ed2beaab11dd",
+      "bytes": 8,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/build.gradle.kts",
+      "sha1": "8d31c398305b51ce",
+      "bytes": 2043,
+      "ext": ".kts",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/consumer-rules.pro",
+      "sha1": "1de4a01be79b7efa",
+      "bytes": 184,
+      "ext": ".pro",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/proguard-rules.pro",
+      "sha1": "d9670750e1120012",
+      "bytes": 772,
+      "ext": ".pro",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/src/androidTest/java/android/llama/cpp/ExampleInstrumentedTest.kt",
+      "sha1": "b7063a95aa93dcd0",
+      "bytes": 691,
+      "ext": ".kt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/src/main/AndroidManifest.xml",
+      "sha1": "f427beb64e1caac5",
+      "bytes": 126,
+      "ext": ".xml",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/src/main/cpp/CMakeLists.txt",
+      "sha1": "b37f584711d95e53",
+      "bytes": 1714,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/src/main/cpp/ai_chat.cpp",
+      "sha1": "2c82dc3ed58840a8",
+      "bytes": 20219,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/src/main/cpp/logging.h",
+      "sha1": "34f9984e1f5919d6",
+      "bytes": 2132,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/src/main/java/com/arm/aichat/AiChat.kt",
+      "sha1": "bb6195786c496490",
+      "bytes": 347,
+      "ext": ".kt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/src/main/java/com/arm/aichat/InferenceEngine.kt",
+      "sha1": "5140d1120af0278d",
+      "bytes": 2457,
+      "ext": ".kt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/src/main/java/com/arm/aichat/gguf/FileType.kt",
+      "sha1": "dd49475af1c7639f",
+      "bytes": 2220,
+      "ext": ".kt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/src/main/java/com/arm/aichat/gguf/GgufMetadata.kt",
+      "sha1": "8b6b5c45bdb0fa51",
+      "bytes": 4022,
+      "ext": ".kt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/src/main/java/com/arm/aichat/gguf/GgufMetadataReader.kt",
+      "sha1": "2d84414231305a8e",
+      "bytes": 2856,
+      "ext": ".kt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/src/main/java/com/arm/aichat/internal/InferenceEngineImpl.kt",
+      "sha1": "42602e790d22be07",
+      "bytes": 12403,
+      "ext": ".kt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/src/main/java/com/arm/aichat/internal/gguf/GgufMetadataReaderImpl.kt",
+      "sha1": "30ddae2ef59f936e",
+      "bytes": 29107,
+      "ext": ".kt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.android/lib/src/test/java/android/llama/cpp/ExampleUnitTest.kt",
+      "sha1": "14745480bc374d78",
+      "bytes": 359,
+      "ext": ".kt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/.gitignore",
+      "sha1": "e0d65c4444a368f9",
+      "bytes": 26,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/README.md",
+      "sha1": "1440451079ac12f5",
+      "bytes": 1195,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/llama.cpp.swift/LibLlama.swift",
+      "sha1": "5abd8a4a5612adbf",
+      "bytes": 11919,
+      "ext": ".swift",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/llama.swiftui/llama_swiftuiApp.swift",
+      "sha1": "b25e4a0f6773b924",
+      "bytes": 156,
+      "ext": ".swift",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/llama.swiftui/Assets.xcassets/Contents.json",
+      "sha1": "e06c56f0417f6630",
+      "bytes": 69,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/llama.swiftui/Assets.xcassets/AppIcon.appiconset/Contents.json",
+      "sha1": "bc194756bf302408",
+      "bytes": 190,
+      "ext": ".json",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/llama.swiftui/Models/LlamaState.swift",
+      "sha1": "d08373786d450bf8",
+      "bytes": 7355,
+      "ext": ".swift",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/llama.swiftui/Resources/models/.gitignore",
+      "sha1": "da39a3ee5e6b4b0d",
+      "bytes": 0,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/llama.swiftui/UI/ContentView.swift",
+      "sha1": "dd8bb27bd16c47f2",
+      "bytes": 5470,
+      "ext": ".swift",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/llama.swiftui/UI/DownloadButton.swift",
+      "sha1": "47554861722459c8",
+      "bytes": 4638,
+      "ext": ".swift",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/llama.swiftui/UI/InputButton.swift",
+      "sha1": "6d8fdce82b8367d9",
+      "bytes": 4988,
+      "ext": ".swift",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/llama.swiftui/UI/LoadCustomButton.swift",
+      "sha1": "4930a6a1d2734ac8",
+      "bytes": 1367,
+      "ext": ".swift",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/llama.swiftui.xcodeproj/project.pbxproj",
+      "sha1": "8b0e507479450da6",
+      "bytes": 19624,
+      "ext": ".pbxproj",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/llama.swiftui.xcodeproj/project.xcworkspace/contents.xcworkspacedata",
+      "sha1": "65aeb28cd7f7c596",
+      "bytes": 142,
+      "ext": ".xcworkspacedata",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/llama.swiftui/llama.swiftui.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+      "sha1": "485e41196831c321",
+      "bytes": 252,
+      "ext": ".plist",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/lookahead/CMakeLists.txt",
+      "sha1": "c2c0fe832aa5076d",
+      "bytes": 248,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/lookahead/README.md",
+      "sha1": "2586baedcb64e240",
+      "bytes": 406,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/lookahead/lookahead.cpp",
+      "sha1": "fe18e5797ae6e7c2",
+      "bytes": 16629,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/lookup/CMakeLists.txt",
+      "sha1": "14fa768881756ab1",
+      "bytes": 1012,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/lookup/README.md",
+      "sha1": "a58db0827bbcb347",
+      "bytes": 497,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/lookup/lookup-create.cpp",
+      "sha1": "3c6bacbdf483f2cb",
+      "bytes": 1246,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/lookup/lookup-merge.cpp",
+      "sha1": "804162564c2108a7",
+      "bytes": 1490,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/lookup/lookup-stats.cpp",
+      "sha1": "92f575b643785120",
+      "bytes": 5947,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/lookup/lookup.cpp",
+      "sha1": "a8a36febbd78e3d6",
+      "bytes": 8432,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/.gitignore",
+      "sha1": "87beb4b77d19a3aa",
+      "bytes": 24,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/Makefile",
+      "sha1": "38bdc10f1d49ce95",
+      "bytes": 9107,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/README.md",
+      "sha1": "12a1b968d82ccfbb",
+      "bytes": 16164,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/requirements.txt",
+      "sha1": "bfa3df8bf737d055",
+      "bytes": 142,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/causal/compare-embeddings-logits.sh",
+      "sha1": "be5fe666056413df",
+      "bytes": 1294,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/causal/compare-logits.py",
+      "sha1": "24d096b746eb4517",
+      "bytes": 3320,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/causal/convert-model.sh",
+      "sha1": "e5d106dacffbe65a",
+      "bytes": 1443,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/causal/modelcard.template",
+      "sha1": "3feb7c3d51cfb735",
+      "bytes": 198,
+      "ext": ".template",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/causal/run-casual-gen-embeddings-org.py",
+      "sha1": "ca6f86a4ac726a3b",
+      "bytes": 4783,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/causal/run-converted-model-embeddings-logits.sh",
+      "sha1": "6e378468c64e6d91",
+      "bytes": 659,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/causal/run-converted-model.sh",
+      "sha1": "e148e2ce18805508",
+      "bytes": 853,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/causal/run-org-model.py",
+      "sha1": "1eb3ffe1446ddc37",
+      "bytes": 6658,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/embedding/compare-embeddings-logits.sh",
+      "sha1": "ef44cbb0f8ad7065",
+      "bytes": 2301,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/embedding/convert-model.sh",
+      "sha1": "6552e142ef95c339",
+      "bytes": 1114,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/embedding/modelcard.template",
+      "sha1": "8c7a15b566a1b381",
+      "bytes": 1378,
+      "ext": ".template",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/embedding/run-converted-model.sh",
+      "sha1": "47753428b31096e1",
+      "bytes": 1448,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/embedding/run-original-model.py",
+      "sha1": "52eeb1cefe34303b",
+      "bytes": 9104,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/__init__.py",
+      "sha1": "da39a3ee5e6b4b0d",
+      "bytes": 0,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/check-nmse.py",
+      "sha1": "898a0494751cc503",
+      "bytes": 6395,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/common.py",
+      "sha1": "8e2391f6d190d46b",
+      "bytes": 10914,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/compare_tokens.py",
+      "sha1": "b12e5947e5a3301a",
+      "bytes": 2091,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/create-collection-add-model.sh",
+      "sha1": "c12d4184354b6332",
+      "bytes": 240,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/curl-embedding-server.sh",
+      "sha1": "60a66b573e9f93aa",
+      "bytes": 199,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/hf-add-model-to-collection.py",
+      "sha1": "a799ae4adc4cf27d",
+      "bytes": 2505,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/hf-create-collection.py",
+      "sha1": "2a561a5bff044816",
+      "bytes": 3560,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/hf-create-model.py",
+      "sha1": "20313230ce1010db",
+      "bytes": 2708,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/hf-upload-gguf-model.py",
+      "sha1": "4a602e7c11ceea35",
+      "bytes": 2030,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/inspect-converted-model.sh",
+      "sha1": "cad1670cdd2c013d",
+      "bytes": 456,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/inspect-org-model.py",
+      "sha1": "2d24da6184b374ac",
+      "bytes": 9802,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/perplexity-gen.sh",
+      "sha1": "a50b7981fa5bbb7c",
+      "bytes": 1027,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/perplexity-run-simple.sh",
+      "sha1": "63b6ca3649f2802e",
+      "bytes": 802,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/perplexity-run.sh",
+      "sha1": "88ce4cd1a13c4881",
+      "bytes": 839,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/quantize.sh",
+      "sha1": "440eeba5a5b941bc",
+      "bytes": 1525,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/run-embedding-server.sh",
+      "sha1": "a2c687fa5a660ff7",
+      "bytes": 673,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/model-conversion/scripts/utils/semantic_check.py",
+      "sha1": "4b47cccdf6efc406",
+      "bytes": 10677,
+      "ext": ".py",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/parallel/CMakeLists.txt",
+      "sha1": "34e5bbf1589589ac",
+      "bytes": 246,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/parallel/README.md",
+      "sha1": "da015fbe8b0cb5f5",
+      "bytes": 694,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/parallel/parallel.cpp",
+      "sha1": "84cb9c92b2c8f7cf",
+      "bytes": 20128,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/passkey/CMakeLists.txt",
+      "sha1": "6693ff300e25b29e",
+      "bytes": 244,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/passkey/README.md",
+      "sha1": "c518975665b496de",
+      "bytes": 409,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/passkey/passkey.cpp",
+      "sha1": "74c086ebee10bfbb",
+      "bytes": 8612,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/retrieval/CMakeLists.txt",
+      "sha1": "806f1dc1e12d04a4",
+      "bytes": 248,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/retrieval/README.md",
+      "sha1": "256e77d0ee1d79d4",
+      "bytes": 2192,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/retrieval/retrieval.cpp",
+      "sha1": "dd9b160586708b9e",
+      "bytes": 10704,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/save-load-state/CMakeLists.txt",
+      "sha1": "9e12ec5f9a222245",
+      "bytes": 260,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/save-load-state/save-load-state.cpp",
+      "sha1": "a8c02321b2a2f2ad",
+      "bytes": 10580,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/simple/CMakeLists.txt",
+      "sha1": "e31237bbf805bebb",
+      "bytes": 229,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/simple/README.md",
+      "sha1": "0d4090d9f43785da",
+      "bytes": 933,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/simple/simple.cpp",
+      "sha1": "f5ac31e646c3cf99",
+      "bytes": 7004,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/simple-chat/CMakeLists.txt",
+      "sha1": "c54c9b1915ff0a01",
+      "bytes": 239,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/simple-chat/README.md",
+      "sha1": "7ceb03d2894d3494",
+      "bytes": 267,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/simple-chat/simple-chat.cpp",
+      "sha1": "6f119118dec750df",
+      "bytes": 7406,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/simple-cmake-pkg/.gitignore",
+      "sha1": "9de4af642a62d747",
+      "bytes": 437,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/simple-cmake-pkg/CMakeLists.txt",
+      "sha1": "147bc2249b4fb68b",
+      "bytes": 392,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/simple-cmake-pkg/README.md",
+      "sha1": "51a17b18687ed83e",
+      "bytes": 1281,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/speculative/CMakeLists.txt",
+      "sha1": "b272839cd6b16e2f",
+      "bytes": 252,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/speculative/README.md",
+      "sha1": "6b7c684048833613",
+      "bytes": 291,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/speculative/speculative.cpp",
+      "sha1": "89b9063425629643",
+      "bytes": 26855,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/speculative-simple/CMakeLists.txt",
+      "sha1": "701fa1a10df7d41c",
+      "bytes": 266,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/speculative-simple/README.md",
+      "sha1": "8afad5b55c9eafd3",
+      "bytes": 460,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/speculative-simple/speculative-simple.cpp",
+      "sha1": "6c2f401588d2e15f",
+      "bytes": 13011,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/sycl/CMakeLists.txt",
+      "sha1": "5a5db4a736d3ad2f",
+      "bytes": 350,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/sycl/README.md",
+      "sha1": "9199c566650d973c",
+      "bytes": 1502,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/sycl/build.sh",
+      "sha1": "10de4c5a10e8d9e7",
+      "bytes": 683,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/sycl/ls-sycl-device.cpp",
+      "sha1": "ba61e7c3e73a3f94",
+      "bytes": 266,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/sycl/run-llama2.sh",
+      "sha1": "77074b910d32f342",
+      "bytes": 1152,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/sycl/start-svr.sh",
+      "sha1": "ee60b4aaa8a82c28",
+      "bytes": 4099,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/sycl/test.sh",
+      "sha1": "368ae3d1e8cdf229",
+      "bytes": 4417,
+      "ext": ".sh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/sycl/win-build-sycl.bat",
+      "sha1": "1d80dfaf576ed1eb",
+      "bytes": 872,
+      "ext": ".bat",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/sycl/win-run-llama2.bat",
+      "sha1": "3b76c20ad72a81dc",
+      "bytes": 482,
+      "ext": ".bat",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/sycl/win-start-svr.bat",
+      "sha1": "b1df446b662ab733",
+      "bytes": 4647,
+      "ext": ".bat",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/sycl/win-test.bat",
+      "sha1": "31cdf30a786740a0",
+      "bytes": 5169,
+      "ext": ".bat",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/training/CMakeLists.txt",
+      "sha1": "a1886dd28d2bde2f",
+      "bytes": 246,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/training/README.md",
+      "sha1": "05b5cf2c3ca65b8f",
+      "bytes": 928,
+      "ext": ".md",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/examples/training/finetune.cpp",
+      "sha1": "4f6fed63462c32cf",
+      "bytes": 3456,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/.gitignore",
+      "sha1": "d385eca5cc10e779",
+      "bytes": 58,
+      "ext": "",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/CMakeLists.txt",
+      "sha1": "b6b78fc219e18b01",
+      "bytes": 21967,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/cmake/FindNCCL.cmake",
+      "sha1": "44d7d298e4bcc47a",
+      "bytes": 1000,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/cmake/GitVars.cmake",
+      "sha1": "8f36b5f70d6f392d",
+      "bytes": 739,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/cmake/common.cmake",
+      "sha1": "8200f420809d8ea6",
+      "bytes": 2175,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/cmake/ggml-config.cmake.in",
+      "sha1": "056d83b018597ff7",
+      "bytes": 7105,
+      "ext": ".in",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-alloc.h",
+      "sha1": "e2abafda97bb2e32",
+      "bytes": 3709,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-backend.h",
+      "sha1": "01204278dba0672f",
+      "bytes": 25386,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-blas.h",
+      "sha1": "b3d768c74af4e518",
+      "bytes": 611,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-cann.h",
+      "sha1": "8dd6a01a8f32b814",
+      "bytes": 4676,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-cpp.h",
+      "sha1": "d63b5fee17eab9b9",
+      "bytes": 1691,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-cpu.h",
+      "sha1": "2530a5bf63b05ecb",
+      "bytes": 7847,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-cuda.h",
+      "sha1": "f32c2cfb768cabaa",
+      "bytes": 1818,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-hexagon.h",
+      "sha1": "ec2fa5677e1ef536",
+      "bytes": 370,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-metal.h",
+      "sha1": "e6619d308d698efa",
+      "bytes": 2202,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-opencl.h",
+      "sha1": "eff57a17324c2376",
+      "bytes": 607,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-openvino.h",
+      "sha1": "28c3dd0c11372497",
+      "bytes": 1071,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-opt.h",
+      "sha1": "19a1f09b14aa11b0",
+      "bytes": 14296,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-rpc.h",
+      "sha1": "24537ea6ad01e4bb",
+      "bytes": 1218,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-sycl.h",
+      "sha1": "d65ec199b2f40cb8",
+      "bytes": 1812,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-virtgpu.h",
+      "sha1": "347fc59bfa4f2a41",
+      "bytes": 208,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-vulkan.h",
+      "sha1": "5b6f76cfbcddba53",
+      "bytes": 981,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-webgpu.h",
+      "sha1": "be7d95ef85ef3686",
+      "bytes": 347,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-zdnn.h",
+      "sha1": "8df6f4b693811569",
+      "bytes": 309,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml-zendnn.h",
+      "sha1": "28f927d070cd542c",
+      "bytes": 520,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/ggml.h",
+      "sha1": "56c8691335af01ce",
+      "bytes": 110498,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/include/gguf.h",
+      "sha1": "b2bb803cb6d356b4",
+      "bytes": 10637,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/CMakeLists.txt",
+      "sha1": "21a1baf1c8b38f88",
+      "bytes": 19587,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-alloc.c",
+      "sha1": "5156b1a974ff0651",
+      "bytes": 49063,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-backend-dl.cpp",
+      "sha1": "efbd0bedec61b9e5",
+      "bytes": 1099,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-backend-dl.h",
+      "sha1": "2a16c33fbc0424c1",
+      "bytes": 836,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-backend-impl.h",
+      "sha1": "9773a80708696827",
+      "bytes": 13918,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-backend-meta.cpp",
+      "sha1": "5411eef58c6e44fe",
+      "bytes": 100565,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-backend-reg.cpp",
+      "sha1": "fb76746071df4ab5",
+      "bytes": 18465,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-backend.cpp",
+      "sha1": "e02aee23c9393760",
+      "bytes": 95700,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-common.h",
+      "sha1": "10e85e376cbe5b70",
+      "bytes": 136677,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-impl.h",
+      "sha1": "080bf8dfd818e54c",
+      "bytes": 26387,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-opt.cpp",
+      "sha1": "488d5444bc78e988",
+      "bytes": 43175,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-quants.c",
+      "sha1": "bef1ee95d657761c",
+      "bytes": 228070,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-quants.h",
+      "sha1": "f0af9a848e61a0d6",
+      "bytes": 9552,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-threading.cpp",
+      "sha1": "f0f4e915b3bc5e70",
+      "bytes": 262,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-threading.h",
+      "sha1": "a03848000d6f7e3a",
+      "bytes": 212,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml.c",
+      "sha1": "48e7a3423a053b89",
+      "bytes": 256119,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml.cpp",
+      "sha1": "fb2ed79a0e173722",
+      "bytes": 764,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/gguf.cpp",
+      "sha1": "bf57c143193934ba",
+      "bytes": 54570,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-blas/CMakeLists.txt",
+      "sha1": "73b205b3b2ab1d27",
+      "bytes": 4269,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-blas/ggml-blas.cpp",
+      "sha1": "dd0ab49568b050b7",
+      "bytes": 17786,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cann/CMakeLists.txt",
+      "sha1": "5bc03c54710de2b6",
+      "bytes": 3565,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cann/acl_tensor.cpp",
+      "sha1": "524cf4f545d29ebc",
+      "bytes": 8422,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cann/acl_tensor.h",
+      "sha1": "2b7dd5b3033cbca4",
+      "bytes": 17835,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cann/aclnn_ops.cpp",
+      "sha1": "535ed6a24da73a04",
+      "bytes": 219491,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cann/aclnn_ops.h",
+      "sha1": "5dbe3f64b85499f0",
+      "bytes": 55323,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cann/common.h",
+      "sha1": "f680357c9f8e9882",
+      "bytes": 23992,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cann/ggml-cann.cpp",
+      "sha1": "9b0d8547e583c115",
+      "bytes": 118699,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/CMakeLists.txt",
+      "sha1": "cb9057e01fc9bf72",
+      "bytes": 34627,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch-fallback.h",
+      "sha1": "2720106a076c6edd",
+      "bytes": 21694,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/binary-ops.cpp",
+      "sha1": "bac7f1db166063a2",
+      "bytes": 6863,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/binary-ops.h",
+      "sha1": "95691737b182e974",
+      "bytes": 534,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/common.h",
+      "sha1": "fd4b0393c8337502",
+      "bytes": 2428,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/ggml-cpu-impl.h",
+      "sha1": "4f19a6319d636d31",
+      "bytes": 14262,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/ggml-cpu.c",
+      "sha1": "468a2ff7a0ef5bb3",
+      "bytes": 131427,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/ggml-cpu.cpp",
+      "sha1": "b04df56d4e500ecd",
+      "bytes": 24831,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/hbm.cpp",
+      "sha1": "856442fad837b139",
+      "bytes": 2058,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/hbm.h",
+      "sha1": "116fb196edecffe6",
+      "bytes": 163,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/ops.cpp",
+      "sha1": "f2f90110717cdcf8",
+      "bytes": 398202,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/ops.h",
+      "sha1": "09c134bf28e65a26",
+      "bytes": 9676,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/quants.c",
+      "sha1": "3856814a4cddb7c8",
+      "bytes": 44735,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/quants.h",
+      "sha1": "3b605e63568c3db1",
+      "bytes": 10537,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/repack.cpp",
+      "sha1": "9f23a37485ebd9ac",
+      "bytes": 200754,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/repack.h",
+      "sha1": "76ab744725d58717",
+      "bytes": 20150,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/simd-gemm.h",
+      "sha1": "b9a9cd15968fe864",
+      "bytes": 7693,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/simd-mappings.h",
+      "sha1": "39fcdbe31d7a7986",
+      "bytes": 55691,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/traits.cpp",
+      "sha1": "54e9f07c0c00d21d",
+      "bytes": 1267,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/traits.h",
+      "sha1": "0ef9d4c9d0dd5134",
+      "bytes": 1195,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/unary-ops.cpp",
+      "sha1": "0ef6826937a1cb20",
+      "bytes": 11892,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/unary-ops.h",
+      "sha1": "250fb7e1842b6f45",
+      "bytes": 2477,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/vec.cpp",
+      "sha1": "c7e479aeba760136",
+      "bytes": 25929,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/vec.h",
+      "sha1": "21969f8512d26b14",
+      "bytes": 68376,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/amx/amx.cpp",
+      "sha1": "9485b6eaf370a207",
+      "bytes": 8514,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/amx/amx.h",
+      "sha1": "3fba53328ff11a72",
+      "bytes": 210,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/amx/common.h",
+      "sha1": "5c6730ab37df3d02",
+      "bytes": 2790,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/amx/mmq.cpp",
+      "sha1": "21fbd8faa7732158",
+      "bytes": 110729,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/amx/mmq.h",
+      "sha1": "2b508ba9a8005e4f",
+      "bytes": 407,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/arm/cpu-feats.cpp",
+      "sha1": "c124ccd83a965b3d",
+      "bytes": 2485,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/arm/quants.c",
+      "sha1": "4f56c08cf3c90c0e",
+      "bytes": 218466,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/arm/repack.cpp",
+      "sha1": "654aff0abe26d064",
+      "bytes": 260752,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/loongarch/quants.c",
+      "sha1": "f4c022b95c2ff3b4",
+      "bytes": 89325,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/powerpc/cpu-feats.cpp",
+      "sha1": "a25423bd98fb4959",
+      "bytes": 2156,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/powerpc/quants.c",
+      "sha1": "463aef4542c88a9b",
+      "bytes": 100289,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/riscv/cpu-feats.cpp",
+      "sha1": "d10c7ffd1c6376d0",
+      "bytes": 845,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/riscv/quants.c",
+      "sha1": "4f333fa8087bd29c",
+      "bytes": 200289,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/riscv/repack.cpp",
+      "sha1": "c3941d476c8c1fa7",
+      "bytes": 99592,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/s390/cpu-feats.cpp",
+      "sha1": "3157c404069a8484",
+      "bytes": 1067,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/s390/quants.c",
+      "sha1": "c67a05cd68df84af",
+      "bytes": 55512,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/wasm/quants.c",
+      "sha1": "8c6898faa7e15c87",
+      "bytes": 45509,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/x86/cpu-feats.cpp",
+      "sha1": "52d27b5ac3ebdf03",
+      "bytes": 11054,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/x86/quants.c",
+      "sha1": "d02b7e7dcca9223a",
+      "bytes": 195169,
+      "ext": ".c",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/arch/x86/repack.cpp",
+      "sha1": "481e81c4e5af3992",
+      "bytes": 671445,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/cmake/FindSIMD.cmake",
+      "sha1": "2ea4c36ec4891175",
+      "bytes": 2751,
+      "ext": ".cmake",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/kleidiai/kernels.cpp",
+      "sha1": "d4aeee5edcfa1204",
+      "bytes": 62821,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/kleidiai/kernels.h",
+      "sha1": "71613aac834954c9",
+      "bytes": 3195,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/kleidiai/kleidiai.cpp",
+      "sha1": "d6a2606955d1bf4c",
+      "bytes": 62112,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/kleidiai/kleidiai.h",
+      "sha1": "4e3b015e850992eb",
+      "bytes": 340,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/llamafile/sgemm.cpp",
+      "sha1": "5195a6d24e63edae",
+      "bytes": 161966,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/llamafile/sgemm.h",
+      "sha1": "389c779b4a07a78d",
+      "bytes": 549,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/spacemit/ime.cpp",
+      "sha1": "47dbda59d9583085",
+      "bytes": 43968,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/spacemit/ime.h",
+      "sha1": "03180c1ea30dcc52",
+      "bytes": 201,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/spacemit/ime1_kernels.cpp",
+      "sha1": "232d047e056e6c3c",
+      "bytes": 179987,
+      "ext": ".cpp",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cpu/spacemit/ime_kernels.h",
+      "sha1": "94ee349bb146a0b1",
+      "bytes": 1066,
+      "ext": ".h",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/CMakeLists.txt",
+      "sha1": "49ad7105e6ec6bac",
+      "bytes": 11447,
+      "ext": ".txt",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/acc.cu",
+      "sha1": "a95f4ebf34dcb5c9",
+      "bytes": 2487,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/acc.cuh",
+      "sha1": "cc400b6b3f31d295",
+      "bytes": 136,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/add-id.cu",
+      "sha1": "081b0c68a3e286b1",
+      "bytes": 1959,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/add-id.cuh",
+      "sha1": "51b4d58b8bc1a1ca",
+      "bytes": 104,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/allreduce.cu",
+      "sha1": "27ff9575ab852431",
+      "bytes": 46122,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/allreduce.cuh",
+      "sha1": "b7df83cfca3fae7b",
+      "bytes": 1043,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/arange.cu",
+      "sha1": "878f6e7cdbb2e967",
+      "bytes": 1249,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/arange.cuh",
+      "sha1": "08548327ce69b440",
+      "bytes": 142,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/argmax.cu",
+      "sha1": "4dcafc08d048d7c4",
+      "bytes": 2945,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/argmax.cuh",
+      "sha1": "6a85a9e135fd39c4",
+      "bytes": 101,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/argsort.cu",
+      "sha1": "b814280086df19e5",
+      "bytes": 12413,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/argsort.cuh",
+      "sha1": "fd78ce0d4f3419b4",
+      "bytes": 887,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/binbcast.cu",
+      "sha1": "f9fb29749bf06d02",
+      "bytes": 23368,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/binbcast.cuh",
+      "sha1": "a84cc6ba014eb865",
+      "bytes": 684,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/clamp.cu",
+      "sha1": "2b56983d6aac84d3",
+      "bytes": 1633,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/clamp.cuh",
+      "sha1": "d0a9b594bddbd8f4",
+      "bytes": 140,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/common.cuh",
+      "sha1": "7d478e53c0a4cc9b",
+      "bytes": 55930,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/concat.cu",
+      "sha1": "26847a282ba1f0c9",
+      "bytes": 8289,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/concat.cuh",
+      "sha1": "c1c5d8e79b63407f",
+      "bytes": 142,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/conv-transpose-1d.cu",
+      "sha1": "8dea3a4117cd4f73",
+      "bytes": 3405,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/conv-transpose-1d.cuh",
+      "sha1": "3c47df53247e6aa5",
+      "bytes": 163,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/conv2d-dw.cu",
+      "sha1": "1af36d98f57a9426",
+      "bytes": 7551,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/conv2d-dw.cuh",
+      "sha1": "657fd34d428e665a",
+      "bytes": 160,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/conv2d-transpose.cu",
+      "sha1": "bf9dfdef1d669d3b",
+      "bytes": 4933,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/conv2d-transpose.cuh",
+      "sha1": "c17d2509f1f80da1",
+      "bytes": 163,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/conv2d.cu",
+      "sha1": "e1732ea6700789a1",
+      "bytes": 6687,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/conv2d.cuh",
+      "sha1": "6c855152847c1b29",
+      "bytes": 154,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/convert.cu",
+      "sha1": "3b56660ff4336969",
+      "bytes": 34866,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/convert.cuh",
+      "sha1": "815417547dfba081",
+      "bytes": 2452,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/count-equal.cu",
+      "sha1": "2c4a62f810d4f9fd",
+      "bytes": 2125,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/count-equal.cuh",
+      "sha1": "06a80bb886be15e5",
+      "bytes": 149,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/cp-async.cuh",
+      "sha1": "a8632b0a65243cff",
+      "bytes": 2188,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/cpy-utils.cuh",
+      "sha1": "b7ebcfee94848e93",
+      "bytes": 6549,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/cpy.cu",
+      "sha1": "dc806ba69d1fff41",
+      "bytes": 28844,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/cpy.cuh",
+      "sha1": "81ed77e874579c37",
+      "bytes": 234,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/cross-entropy-loss.cu",
+      "sha1": "a5d06f5bc0658306",
+      "bytes": 6253,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/cross-entropy-loss.cuh",
+      "sha1": "be724f6910872962",
+      "bytes": 258,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/cumsum.cu",
+      "sha1": "1cbf18dcdfd93ca5",
+      "bytes": 11294,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/cumsum.cuh",
+      "sha1": "c26749c7a92eab84",
+      "bytes": 142,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/dequantize.cuh",
+      "sha1": "e24febad1c941498",
+      "bytes": 2871,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/diag.cu",
+      "sha1": "83d35d4d712993b2",
+      "bytes": 2745,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/diag.cuh",
+      "sha1": "894037c42a206039",
+      "bytes": 138,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/diagmask.cu",
+      "sha1": "7ac71aafb434ba78",
+      "bytes": 1800,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/diagmask.cuh",
+      "sha1": "a243a9668bf93ddc",
+      "bytes": 155,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/fattn-common.cuh",
+      "sha1": "6892e70528676b68",
+      "bytes": 46291,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/fattn-mma-f16.cuh",
+      "sha1": "e9fce1197c9c361a",
+      "bytes": 92807,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/fattn-tile.cu",
+      "sha1": "bb99a6454e46b60c",
+      "bytes": 2237,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/fattn-tile.cuh",
+      "sha1": "4e9a0c11bbfcf4ae",
+      "bytes": 63920,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/fattn-vec.cuh",
+      "sha1": "8ca5633929f6f62e",
+      "bytes": 25125,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/fattn-wmma-f16.cu",
+      "sha1": "9de3533016ccf7ea",
+      "bytes": 29994,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/fattn-wmma-f16.cuh",
+      "sha1": "e60de97216aa8fd8",
+      "bytes": 2140,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/fattn.cu",
+      "sha1": "6ed74036f2a085f5",
+      "bytes": 23884,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/fattn.cuh",
+      "sha1": "9ed70dfed2bbd695",
+      "bytes": 190,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/fill.cu",
+      "sha1": "56d03c8cb6ce4d1f",
+      "bytes": 1147,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/fill.cuh",
+      "sha1": "b54873621e85e8a4",
+      "bytes": 102,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/gated_delta_net.cu",
+      "sha1": "5fd6ab5b32ee398e",
+      "bytes": 11308,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/gated_delta_net.cuh",
+      "sha1": "6e7570fa10027d4d",
+      "bytes": 132,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/getrows.cu",
+      "sha1": "d06e583409810c6b",
+      "bytes": 13738,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/getrows.cuh",
+      "sha1": "480716921e6062ef",
+      "bytes": 637,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/ggml-cuda.cu",
+      "sha1": "7e9a8915330e97e1",
+      "bytes": 238534,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/gla.cu",
+      "sha1": "d4c6b89746d300e7",
+      "bytes": 3202,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/gla.cuh",
+      "sha1": "f0d0f4e5ebdb8e1e",
+      "bytes": 115,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/im2col.cu",
+      "sha1": "d4c2b92d2b08b4d5",
+      "bytes": 12996,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/im2col.cuh",
+      "sha1": "aeed0cc27d7d03e3",
+      "bytes": 224,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/mean.cu",
+      "sha1": "15c45446cd173263",
+      "bytes": 2929,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/mean.cuh",
+      "sha1": "e1c50e0654828657",
+      "bytes": 102,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/mma.cuh",
+      "sha1": "90a15ff2cf1fbb8e",
+      "bytes": 59067,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/mmf.cu",
+      "sha1": "212e307d659a6089",
+      "bytes": 8047,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/mmf.cuh",
+      "sha1": "ff359b430925da80",
+      "bytes": 46001,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/mmid.cu",
+      "sha1": "50e01d076662f12f",
+      "bytes": 8118,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/mmid.cuh",
+      "sha1": "b76cbc6d81748a22",
+      "bytes": 263,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/mmq.cu",
+      "sha1": "de4e097ef4830285",
+      "bytes": 15035,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/mmq.cuh",
+      "sha1": "3daafd6d2ce019f2",
+      "bytes": 181396,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/mmvf.cu",
+      "sha1": "5677cb9319aa7fa0",
+      "bytes": 40878,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/mmvf.cuh",
+      "sha1": "426886544a6b8078",
+      "bytes": 840,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/mmvq.cu",
+      "sha1": "2b4c24c5463bdeda",
+      "bytes": 57320,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/mmvq.cuh",
+      "sha1": "40c68fe51a04550a",
+      "bytes": 928,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/norm.cu",
+      "sha1": "cf09040eb6e39ab0",
+      "bytes": 29072,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/norm.cuh",
+      "sha1": "a90ef1f0f0245bc7",
+      "bytes": 856,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/opt-step-adamw.cu",
+      "sha1": "c5b9365499e87681",
+      "bytes": 3072,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/opt-step-adamw.cuh",
+      "sha1": "f6cdcb4c5c6dd0d9",
+      "bytes": 155,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/opt-step-sgd.cu",
+      "sha1": "32fbb912d1197c21",
+      "bytes": 1808,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/opt-step-sgd.cuh",
+      "sha1": "aefe1e6f65f5bc64",
+      "bytes": 151,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/out-prod.cu",
+      "sha1": "b8ab9a3ef09cb859",
+      "bytes": 3335,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/out-prod.cuh",
+      "sha1": "23833925c881f57b",
+      "bytes": 103,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/pad.cu",
+      "sha1": "7965e5c74a245913",
+      "bytes": 4569,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/pad.cuh",
+      "sha1": "ed64d823d055050c",
+      "bytes": 136,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/pad_reflect_1d.cu",
+      "sha1": "ce5e966fbd5a7a33",
+      "bytes": 3592,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/pad_reflect_1d.cuh",
+      "sha1": "428432ce3c436d2a",
+      "bytes": 158,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/pool2d.cu",
+      "sha1": "c026b1a68b52e520",
+      "bytes": 3400,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/pool2d.cuh",
+      "sha1": "b7ff94d699169739",
+      "bytes": 142,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/quantize.cu",
+      "sha1": "3497e5d583384b28",
+      "bytes": 16812,
+      "ext": ".cu",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/quantize.cuh",
+      "sha1": "73e7e1adca871747",
+      "bytes": 1830,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    },
+    {
+      "path": "cmake/llama.cpp/ggml/src/ggml-cuda/reduce_rows.cuh",
+      "sha1": "5d093e225d170268",
+      "bytes": 1143,
+      "ext": ".cuh",
+      "seen_on_branches": [
+        "master"
+      ]
+    }
+  ],
+  "proposed_abilities": [
+    {
+      "id": "health",
+      "description": "Stub liveness / contract discovery (no runtime heal)"
+    },
+    {
+      "id": "repo_map",
+      "description": "Summarize learned tree layout and stack"
+    },
+    {
+      "id": "python_context",
+      "description": "Placeholder context hints for python (product owns runtime)"
+    },
+    {
+      "id": "cmake_context",
+      "description": "Placeholder context hints for cmake (product owns runtime)"
+    }
+  ],
+  "plugin_proposal": {
+    "id": "llama-cpp-coach",
+    "package": "llama_cpp_coach",
+    "path": "C:\\RealAI-clean\\realai\\plugins\\llama_cpp_coach",
+    "http": {
+      "canonical": "/v1/plugins/llama-cpp-coach",
+      "alias": "/v1/learned/llama_cpp_coach"
+    }
+  },
+  "learned_at": "2026-09-21T15:05:05.600133+00:00",
+  "heal": false
+}

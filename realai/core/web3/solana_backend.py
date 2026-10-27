@@ -2,8 +2,8 @@
 
 from typing import Any, Dict, List
 
-from core.logging.logger import log
-from core.tracing.tracer import tracer
+from ..logging.logger import log
+from ..tracing.tracer import tracer
 
 try:
     import requests

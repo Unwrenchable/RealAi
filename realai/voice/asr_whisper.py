@@ -1,12 +1,14 @@
 """Whisper-compatible ASR backend with graceful fallback."""
 
+import io
+import os
 from typing import Any, Dict
 
 
 class WhisperASR:
     name = "whisper-asr"
 
-    def __init__(self, model_path: str = "models/whisper-small"):
+    def __init__(self, model_path: str = os.environ.get("REALAI_WHISPER_DIR", "models/whisper-small")):
         self.model_path = model_path
         self._model = None
         try:
@@ -18,7 +20,7 @@ class WhisperASR:
     def transcribe(self, audio_bytes: bytes, **kwargs: Any) -> Dict[str, Any]:
         if self._model is not None:
             try:
-                segments, _info = self._model.transcribe(audio_bytes)
+                segments, _info = self._model.transcribe(io.BytesIO(audio_bytes))
                 text = " ".join(segment.text for segment in segments).strip()
                 return {"text": text}
             except Exception:

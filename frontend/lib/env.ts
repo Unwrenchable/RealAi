@@ -11,6 +11,40 @@ export type AppEnv = {
   REALAI_API_KEY: string;
 };
 
+/** First ``REALAI_API_KEY`` segment. Do not log the return value. */
+export function serviceApiKey(): string {
+  const raw = process.env.REALAI_API_KEY || "";
+  let part = raw.split(",")[0]?.trim() || "";
+  if (
+    part.length >= 2 &&
+    (part[0] === '"' || part[0] === "'") &&
+    part[0] === part[part.length - 1]
+  ) {
+    part = part.slice(1, -1).trim();
+  }
+  return part;
+}
+
+/**
+ * Headers for the Render API.
+ * The service key goes out as Bearer when it is the only key.
+ * A different user-supplied provider key stays on Authorization, and the
+ * service key moves to X-API-Key so both can be sent together.
+ */
+export function backendAuthHeaders(userKey?: string): Record<string, string> {
+  const serviceKey = serviceApiKey();
+  const pasted = (userKey || "").trim();
+  if (serviceKey && pasted && pasted !== serviceKey) {
+    return {
+      "X-API-Key": serviceKey,
+      Authorization: `Bearer ${pasted}`,
+    };
+  }
+  const key = serviceKey || pasted;
+  if (!key) return {};
+  return { Authorization: `Bearer ${key}` };
+}
+
 export function getEnv(): AppEnv {
   const base =
     process.env.NEXT_PUBLIC_API_URL ||

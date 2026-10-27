@@ -6,6 +6,21 @@ export type ChatRequest = {
 };
 
 /**
+ * Drop failed turns (trailing user messages that never got an assistant reply) before a new send.
+ * Merged 2026-10-17 from the realai/apps/frontend chat phase.
+ */
+export function buildCompletionMessages(
+  history: ChatMessage[],
+  newUser: ChatMessage
+): Array<{ role: string; content: string }> {
+  const trimmed = [...history];
+  while (trimmed.length > 0 && trimmed[trimmed.length - 1].role === "user") {
+    trimmed.pop();
+  }
+  return [...trimmed, newUser].map((m) => ({ role: m.role, content: m.content }));
+}
+
+/**
  * Browser → Next.js /api/chat → orchestrator :8001 → Vulkan :8080
  */
 export async function sendMessage(
@@ -13,8 +28,12 @@ export async function sendMessage(
   settings: Settings,
   signal?: AbortSignal
 ): Promise<string> {
+  const last = messages[messages.length - 1];
   const payload: ChatRequest = {
-    messages: messages.map((m) => ({ role: m.role, content: m.content })),
+    messages:
+      last?.role === "user"
+        ? buildCompletionMessages(messages.slice(0, -1), last)
+        : messages.map((m) => ({ role: m.role, content: m.content })),
     settings,
   };
 

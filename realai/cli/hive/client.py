@@ -15,12 +15,19 @@ class HiveClient(RealAIClient):
         super().__init__(api_url=api_url or _default_api_url(), timeout=timeout)
 
     def _request_raw(self, method: str, path: str, payload: Any = None, timeout: Optional[float] = None):
+        from realai.server.api_auth import client_key
+
         url = "{0}{1}".format(self.api_url.rstrip("/"), path)
+        headers = {}
+        key = client_key()
+        if key:
+            headers["Authorization"] = "Bearer {0}".format(key)
         try:
             response = requests.request(
                 method,
                 url,
                 json=payload,
+                headers=headers or None,
                 timeout=timeout if timeout is not None else self.timeout,
             )
         except requests.RequestException as e:

@@ -1,0 +1,206 @@
+{
+  "id": "vault77",
+  "source": "Unwrenchable/ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS .github/agents + agent-network.md",
+  "workspace": {
+    "root": "C:\\Users\\tsmit\\ATOMIC-FIZZ-CAPS-VAULT-77-WASTELAND-GPS",
+    "access": "read-only"
+  },
+  "lead": "vault-77-overseer",
+  "lead_file": "agents/my-agent.agent.md",
+  "memory": "memory.md",
+  "members": [
+    {
+      "id": "fullstack-dev",
+      "file": "agents/fullstack-dev.md"
+    },
+    {
+      "id": "wasteland-assistant",
+      "file": "agents/wasteland-assistant.md"
+    },
+    {
+      "id": "wastlandqa",
+      "file": "agents/game-tester.md"
+    },
+    {
+      "id": "web3-specialist",
+      "file": "agents/web3-specialist.md"
+    },
+    {
+      "id": "game-creative-director",
+      "file": "agents/game-creative-director.agent.md"
+    },
+    {
+      "id": "game-designer",
+      "file": "agents/game-designer.agent.md"
+    },
+    {
+      "id": "game-technical-director",
+      "file": "agents/game-technical-director.agent.md"
+    },
+    {
+      "id": "gameplay-programmer",
+      "file": "agents/gameplay-programmer.agent.md"
+    },
+    {
+      "id": "cybersecurity-expert",
+      "file": "agents/cybersecurity-expert.agent.md"
+    },
+    {
+      "id": "game-qa-lead"
+    }
+  ],
+  "ownership": [
+    {
+      "area": "backend",
+      "owner": "fullstack-dev",
+      "reviewer": "vault-77-overseer",
+      "keywords": [
+        "express",
+        "api",
+        "server",
+        "redis",
+        "route"
+      ]
+    },
+    {
+      "area": "frontend",
+      "owner": "fullstack-dev",
+      "reviewer": "wastlandqa",
+      "keywords": [
+        "ui",
+        "pip",
+        "html",
+        "css",
+        "dom",
+        "frontend"
+      ]
+    },
+    {
+      "area": "solana",
+      "owner": "vault-77-overseer",
+      "reviewer": "fullstack-dev",
+      "keywords": [
+        "solana",
+        "anchor",
+        "token",
+        "wallet",
+        "web3",
+        "fizz"
+      ]
+    },
+    {
+      "area": "mechanics",
+      "owner": "wasteland-assistant",
+      "reviewer": "wastlandqa",
+      "keywords": [
+        "battle",
+        "loot",
+        "quest",
+        "xp",
+        "combat",
+        "craft"
+      ]
+    },
+    {
+      "area": "qa",
+      "owner": "wastlandqa",
+      "reviewer": "game-qa-lead",
+      "keywords": [
+        "playtest",
+        "test",
+        "bug",
+        "regression"
+      ]
+    },
+    {
+      "area": "security",
+      "owner": "cybersecurity-expert",
+      "reviewer": "fullstack-dev",
+      "keywords": [
+        "security",
+        "xss",
+        "auth",
+        "vulnerab",
+        "secret"
+      ]
+    },
+    {
+      "area": "lore",
+      "owner": "wasteland-assistant",
+      "reviewer": "wastlandqa",
+      "keywords": [
+        "lore",
+        "npc",
+        "dialogue",
+        "story"
+      ]
+    },
+    {
+      "area": "design",
+      "owner": "game-designer",
+      "reviewer": "game-creative-director",
+      "keywords": [
+        "design",
+        "balance",
+        "mechanic design",
+        "economy"
+      ]
+    },
+    {
+      "area": "devops",
+      "owner": "fullstack-dev",
+      "reviewer": "vault-77-overseer",
+      "keywords": [
+        "vercel",
+        "render",
+        "deploy",
+        "workflow",
+        "ci"
+      ]
+    }
+  ],
+  "handoffs": [
+    {
+      "from": "vault-77-overseer",
+      "to": "fullstack-dev",
+      "condition": "backend|frontend|devops"
+    },
+    {
+      "from": "vault-77-overseer",
+      "to": "wasteland-assistant",
+      "condition": "mechanics|lore"
+    },
+    {
+      "from": "vault-77-overseer",
+      "to": "cybersecurity-expert",
+      "condition": "security"
+    },
+    {
+      "from": "game-creative-director",
+      "to": "game-designer"
+    },
+    {
+      "from": "game-designer",
+      "to": "game-technical-director"
+    },
+    {
+      "from": "game-technical-director",
+      "to": "gameplay-programmer"
+    },
+    {
+      "from": "gameplay-programmer",
+      "to": "wastlandqa",
+      "condition": "review"
+    },
+    {
+      "from": "fullstack-dev",
+      "to": "wastlandqa",
+      "condition": "review"
+    },
+    {
+      "from": "wastlandqa",
+      "to": "game-qa-lead",
+      "condition": "triage"
+    }
+  ]
+}

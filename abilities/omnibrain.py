@@ -20,26 +20,16 @@ ABILITY = {
 
 def _hive_chat_json(prompt: str, system: str) -> dict[str, Any] | None:
     try:
-        body = json.dumps(
-            {
-                "model": "realai-default-coder",
-                "messages": [
-                    {"role": "system", "content": system},
-                    {"role": "user", "content": prompt},
-                ],
-                "max_tokens": 400,
-                "temperature": 0.4,
-            }
-        ).encode()
-        req = urllib.request.Request(
-            "http://127.0.0.1:8001/v1/chat/completions",
-            data=body,
-            headers={"Content-Type": "application/json"},
-            method="POST",
+        from realai.local_media import local_chat
+
+        out = local_chat(
+            [{"role": "system", "content": system}, {"role": "user", "content": prompt}],
+            max_tokens=400,
+            temperature=0.4,
         )
-        with urllib.request.urlopen(req, timeout=45) as resp:
-            data = json.loads(resp.read().decode("utf-8", errors="replace"))
-        content = ((data.get("choices") or [{}])[0].get("message") or {}).get("content") or ""
+        if not out.get("ok"):
+            return None
+        content = out.get("text") or ""
         try:
             return json.loads(content)
         except Exception:

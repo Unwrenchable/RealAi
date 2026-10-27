@@ -1,0 +1,1 @@
+user_preferences: {"response_style": "concise", "technical_level": "advanced", "topics_of_interest": ["AI", "quantum computing", "startups"]} | context: User is a technical founder | feedback: positive

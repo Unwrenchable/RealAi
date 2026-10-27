@@ -1,0 +1,146 @@
+{
+  "id": "goon",
+  "source": "Unwrenchable/cookbook .github/agents",
+  "lead": "goonoverlord",
+  "lead_file": "agents/GoonOverlord.agent.md",
+  "members": [
+    {
+      "id": "buildfixgoon",
+      "file": "agents/BuildFixGoon.agent.md"
+    },
+    {
+      "id": "frenfrontendgoon",
+      "file": "agents/FrenFrontendGoon.agent.md"
+    },
+    {
+      "id": "goonsoliditymaster",
+      "file": "agents/GoonSolidityMaster.agent.md"
+    },
+    {
+      "id": "solanapaymentgoon",
+      "file": "agents/SolanaPaymentGoon.agent.md"
+    },
+    {
+      "id": "memelordagent",
+      "file": "agents/MemeLordAgent.agent.md"
+    },
+    {
+      "id": "trenchtester",
+      "file": "agents/TrenchTester.agent.md"
+    },
+    {
+      "id": "tokenforgeagent",
+      "file": "agents/my-agent.agent.md"
+    }
+  ],
+  "ownership": [
+    {
+      "area": "ci",
+      "owner": "buildfixgoon",
+      "reviewer": "goonoverlord",
+      "keywords": [
+        "build",
+        "vercel",
+        "turbo",
+        "type error",
+        "ci"
+      ]
+    },
+    {
+      "area": "frontend",
+      "owner": "frenfrontendgoon",
+      "reviewer": "trenchtester",
+      "keywords": [
+        "next",
+        "wagmi",
+        "ui",
+        "frontend"
+      ]
+    },
+    {
+      "area": "evm",
+      "owner": "goonsoliditymaster",
+      "reviewer": "trenchtester",
+      "keywords": [
+        "solidity",
+        "evm",
+        "erc20",
+        "contract"
+      ]
+    },
+    {
+      "area": "solana",
+      "owner": "solanapaymentgoon",
+      "reviewer": "trenchtester",
+      "keywords": [
+        "solana",
+        "spl",
+        "payment"
+      ]
+    },
+    {
+      "area": "content",
+      "owner": "memelordagent",
+      "reviewer": "goonoverlord",
+      "keywords": [
+        "meme",
+        "thread",
+        "copy",
+        "logo"
+      ]
+    },
+    {
+      "area": "qa",
+      "owner": "trenchtester",
+      "reviewer": "goonoverlord",
+      "keywords": [
+        "test",
+        "foundry",
+        "hardhat",
+        "slither",
+        "security"
+      ]
+    }
+  ],
+  "handoffs": [
+    {
+      "from": "goonoverlord",
+      "to": "buildfixgoon"
+    },
+    {
+      "from": "goonoverlord",
+      "to": "frenfrontendgoon"
+    },
+    {
+      "from": "goonoverlord",
+      "to": "goonsoliditymaster"
+    },
+    {
+      "from": "goonoverlord",
+      "to": "solanapaymentgoon"
+    },
+    {
+      "from": "goonoverlord",
+      "to": "memelordagent"
+    },
+    {
+      "from": "goonoverlord",
+      "to": "tokenforgeagent"
+    },
+    {
+      "from": "frenfrontendgoon",
+      "to": "trenchtester",
+      "condition": "review"
+    },
+    {
+      "from": "goonsoliditymaster",
+      "to": "trenchtester",
+      "condition": "review"
+    },
+    {
+      "from": "solanapaymentgoon",
+      "to": "trenchtester",
+      "condition": "review"
+    }
+  ]
+}

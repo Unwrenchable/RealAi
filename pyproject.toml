@@ -9,6 +9,13 @@ description = "RealAI Hive — unified orchestrator, agents, abilities, GPU stac
 readme = "README.md"
 requires-python = ">=3.12,<4.0"
 
+[project.optional-dependencies]
+cli = ["click>=8"]
+test = ["pytest>=8", "click>=8", "pyyaml>=6", "setuptools>=68"]
+web = ["requests>=2.31", "beautifulsoup4>=4.12"]
+math = ["sympy>=1.12"]
+limitless = ["requests>=2.31", "beautifulsoup4>=4.12", "sympy>=1.12"]
+
 [project.scripts]
 realai = "realai.cli.hive.app:main"
 realai-cli = "realai.cli.hive.app:main"
@@ -35,6 +42,14 @@ exclude = [
   "recovered*",
   "apps*",
   "frontend*",
+  # 2026-10-17 build-leftover fixes (docs/BUILD_LEFTOVERS.md): stale trees never ship in the wheel.
+  "_parked*",
+  "logs*",
+  "results*",
+  "scan_results*",
+  "*.learn_cache*",
+  "*._archive_nest*",
+  "realai.tests*",
 ]
 
 [tool.setuptools.package-data]

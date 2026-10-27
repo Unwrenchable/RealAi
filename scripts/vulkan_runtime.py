@@ -39,6 +39,12 @@ _RESUME_CANDIDATES = [
 ]
 
 
+
+def _vulkan_device_args():
+    """Optional llama-server --device (e.g. Vulkan1 on multi-GPU boxes) via REALAI_VULKAN_DEVICE."""
+    dev = os.environ.get("REALAI_VULKAN_DEVICE", "").strip()
+    return ["--device", dev] if dev else []
+
 def log(msg: str) -> None:
     print(f"[vulkan] {msg}", flush=True)
 
@@ -157,7 +163,7 @@ def resume_vulkan(
         "-ngl",
         str(ngl_v),
         "--jinja",
-    ]
+    ] + _vulkan_device_args()
     log(f"starting {SERVER_EXE.name} model={model.name} ngl={ngl_v} ctx={ctx_v}")
 
     try:

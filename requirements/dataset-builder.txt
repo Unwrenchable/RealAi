@@ -1,0 +1,5 @@
+# realai.training.dataset_builder extras
+chess>=1.10        # python-chess (GPLv3; tool only): SAN/FEN validation + UCI engine driver
+zstandard          # streaming the Lichess puzzle CSV sample (fetch_lichess_puzzles)
+pyyaml
+# Stockfish binary: official build in C:\tools\stockfish (or set REALAI_STOCKFISH); not a pip package

@@ -347,7 +347,13 @@ def main(argv=None) -> int:
         )
 
     # Universal VRAM-safe plan (Qwen/LLaMA/Mistral/Phi/Gemma/Yi/…)
-    from core.training.directml_vram_safe import (
+    # Repo layout moved core/ under realai/; support both without hardcoded paths.
+    try:
+        import core.training.directml_vram_safe as _dml  # noqa: F401
+    except ImportError:
+        import realai.core.training.directml_vram_safe as _dml
+    sys.modules.setdefault("directml_vram_safe", _dml)
+    from directml_vram_safe import (
         apply_directml_vram_safe,
         forward_with_oom_backoff,
         suggest_vram_plan,
