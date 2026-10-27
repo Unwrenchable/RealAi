@@ -50,7 +50,7 @@ echo CTX=%REALAI_CTX%  NGL=%REALAI_NGL%
   -c %REALAI_CTX% ^
   -ngl %REALAI_NGL% ^
   --device Vulkan1 ^
-  --jinja
+  --jinja -fa off
 
 pause
 endlocal
