@@ -1,23 +1,35 @@
 """9D (Ultimate) Tic-Tac-Toe move engine as a RealAI ability.
 
-Pure-Python Monte-Carlo tree search port of 9dttt's ``Public/js/ai/ttt9d-engine.js``. No LLM,
-no network, no third-party deps; deterministic for a given (state, difficulty, seed).
+Pure-Python Monte-Carlo tree search. No LLM, no network, no third-party deps; deterministic
+for a given (state, difficulty, seed).
+
+Board rules (nine local boards, active board, section points equal to the filled count,
+meta-line win, then points when every board is complete) match the public 9dttt client:
+
+    https://github.com/9dtictactoe/9dttt/blob/cad17a9641e24f03bb8f1acfdbd5603866e951af/Public/js/ultimate-tictactoe.js
+
+That commit (``cad17a9641e24f03bb8f1acfdbd5603866e951af``) is the last change to
+``Public/js/ultimate-tictactoe.js``. The repository has no ``Public/js/ai`` directory and
+no ``ttt9d-engine.js``. ``getMove`` and the search live in this module.
 
 Call:  POST /v1/tools/execute {"name": "ttt9d_move", "arguments": {"state": {...}, "difficulty": "hard"}}
        or abilities.ttt9d_move.run(context={"state": ..., "difficulty": ...}) in-process.
 
-Input (same schema as the JS engine's getMove(state, difficulty)):
+Input:
     state = {"boards": [[9 x "X"|"O"|null] x 9], "activeBoard": 0..8 | null, "currentPlayer": "X"|"O"}
     difficulty = "easy" | "medium" | "hard" | "expert"   (default "medium")
-    optional: seed (int), iterations (int), commentary (bool), log (bool | path)
+    optional: seed (int), iterations (int), commentary (bool), log (bool)
 Output:
     {"ok": true, "ability": "ttt9d_move", "move": {"board": b, "cell": c}, "eval": float in [-1, 1]
      (side-to-move perspective), "difficulty": ..., "iterations": n, "source": "realai",
      "legal_moves": n, ["commentary": str]}
 
-Optional training-data logging (off by default): set ``log`` true or REALAI_TTT9D_LOG=<path.jsonl>.
-Each call appends {"ts", "state", "difficulty", "move", "eval", "iterations"} — a position→engine-move
-record in the same spirit as the chess_stockfish dataset cache (``*.stockfish_d{depth}.jsonl``).
+Optional training-data logging (off by default): set ``log`` true, or set the operator
+environment variable ``REALAI_TTT9D_LOG``. A caller-supplied ``log`` string is never a file
+path. Absolute paths and ``..`` traversal are rejected and not opened. The file is
+``REALAI_TTT9D_LOG`` when the operator sets it, otherwise
+``REALAI_DATA_DIR/games/ttt9d_moves.jsonl`` (``data/games`` when ``REALAI_DATA_DIR`` is unset).
+Each call appends {"ts", "state", "difficulty", "move", "eval", "iterations"}.
 """
 from __future__ import annotations
 
@@ -34,7 +46,12 @@ ABILITY = {
     "name": "ttt9d_move",
     "type": "ability",
     "status": "LIVE",
-    "source": "pure-Python MCTS port of 9dttt Public/js/ai/ttt9d-engine.js",
+    "source": (
+        "pure-Python MCTS; board rules from github.com/9dtictactoe/9dttt "
+        "commit cad17a9641e24f03bb8f1acfdbd5603866e951af "
+        "path Public/js/ultimate-tictactoe.js "
+        "(that repo has no Public/js/ai/ttt9d-engine.js)"
+    ),
     "dest": "abilities/ttt9d_move.py",
     "capabilities": ["ultimate_tic_tac_toe", "9dttt", "best_move", "evaluation", "game_ai"],
     "secrets_policy": "none",
@@ -91,16 +108,30 @@ def _compute_result(s: State) -> int:
     return 1 if s.pts[1] > s.pts[2] else 2 if s.pts[2] > s.pts[1] else 3
 
 
+def _cell_code(v: Any, board: int, cell: int) -> int:
+    """Map a schema cell to 0/1/2. Anything else is an input error, not an empty square."""
+    if v is None:
+        return 0
+    if v == "X":
+        return 1
+    if v == "O":
+        return 2
+    raise ValueError(f'state.boards[{board}][{cell}] must be "X", "O", or null (got {v!r})')
+
+
 def parse_state(state: Dict[str, Any]) -> State:
     boards = state.get("boards") if isinstance(state, dict) else None
     if not isinstance(boards, list) or len(boards) != 9 or any(not isinstance(b, list) or len(b) != 9 for b in boards):
         raise ValueError("state.boards must be 9 arrays of 9")
     s = State.__new__(State)
-    s.cells = [1 if v == "X" else 2 if v == "O" else 0 for bd in boards for v in bd]
+    s.cells = [_cell_code(v, b, i) for b, bd in enumerate(boards) for i, v in enumerate(bd)]
     s.meta, s.pts = [0] * 9, [0, 0, 0]
     for b in range(9):
         _update_meta(s, b)
-    s.player = 2 if state.get("currentPlayer") == "O" else 1
+    player = state.get("currentPlayer")
+    if player not in ("X", "O"):
+        raise ValueError('state.currentPlayer must be "X" or "O"')
+    s.player = 2 if player == "O" else 1
     ab = state.get("activeBoard")
     s.active = int(ab) if ab is not None else -1
     if s.active >= 0 and (s.active > 8 or s.meta[s.active] != 0):
@@ -216,7 +247,12 @@ def get_move(state: Dict[str, Any], difficulty: str = "medium", seed: Optional[i
                 "difficulty": level, "iterations": iters, "legal_moves": len(legal)}
 
     if len(legal) == 1:
-        return done(legal[0], 0.0, 0)
+        # A forced move can still finish the game (meta-line or points). Score that
+        # terminal result from the side to move; a non-terminal sole move stays 0.
+        m = legal[0]
+        after = s.copy()
+        _play(after, m)
+        return done(m, _side_eval(s.player, after.result), 0)
     if cfg["tactics"]:
         w = _winning_move(s, s.player)
         if w >= 0:
@@ -238,24 +274,93 @@ def get_move(state: Dict[str, Any], difficulty: str = "medium", seed: Optional[i
     return done(pick[1], ev, iters)
 
 
+def _side_eval(player: int, result: int) -> float:
+    """Side-to-move eval of a terminal result. 0 when the game is still going or drawn."""
+    if result == player:
+        return 1.0
+    if result == 3 - player:
+        return -1.0
+    return 0.0
+
+
+def _commentary_follow(state: Dict[str, Any], mv: Dict[str, Any]) -> str:
+    """Describe the opponent's situation from the position after the move.
+
+    ``_play`` sends the opponent to the cell's board only when that board is still
+    open. A completed destination, a move that completes it, or a finished game
+    leaves free choice or a terminal result instead.
+    """
+    try:
+        s = parse_state(state)
+        mover = s.player
+        _play(s, int(mv["board"]) * 9 + int(mv["cell"]))
+    except (ValueError, TypeError, KeyError):
+        return f"sending the opponent to board {int(mv['cell']) + 1}."
+    if s.result == mover:
+        return "and the game is over: that move wins."
+    if s.result == 3 - mover:
+        return "and the game is over: that move loses."
+    if s.result == 3:
+        return "and the game is over in a draw."
+    if s.active < 0:
+        return "and the opponent may play on any open board."
+    return f"sending the opponent to board {s.active + 1}."
+
+
 def default_commentary(state: Dict[str, Any], res: Dict[str, Any]) -> str:
     mv, ev = res["move"], res["eval"]
+    who = state.get("currentPlayer") if state.get("currentPlayer") in ("X", "O") else "X"
     mood = ("winning" if ev > 0.6 else "better" if ev > 0.15 else "roughly level" if ev > -0.15
             else "worse" if ev > -0.6 else "losing")
-    return (f"{state.get('currentPlayer', 'X')} plays board {mv['board'] + 1}, cell {mv['cell'] + 1}, "
-            f"sending the opponent to board {mv['cell'] + 1}. Position looks {mood} (eval {ev:+.2f}).")
+    return (f"{who} plays board {mv['board'] + 1}, cell {mv['cell'] + 1}, "
+            f"{_commentary_follow(state, mv)} Position looks {mood} (eval {ev:+.2f}).")
+
+
+_LOG_FILENAME = "ttt9d_moves.jsonl"
+
+
+def _safe_log_dir() -> Path:
+    """Fixed directory for move logs: ``REALAI_DATA_DIR/games`` (default ``data/games``)."""
+    base = Path(os.environ.get("REALAI_DATA_DIR", "data"))
+    return (base / "games").resolve()
+
+
+def _caller_log_path_error(raw: str) -> Optional[str]:
+    """Reject a caller-supplied log path. The string is never opened.
+
+    Absolute paths (POSIX, drive-letter, UNC) and any ``..`` segment are rejected.
+    A relative name that would resolve outside the fixed log directory is rejected too.
+    """
+    if "\x00" in raw:
+        return "log path rejected: invalid path"
+    normalized = raw.strip().replace("\\", "/")
+    if normalized.startswith("/") or normalized.startswith("//"):
+        return "log path rejected: absolute paths are not allowed"
+    if len(normalized) >= 2 and normalized[1] == ":":
+        return "log path rejected: absolute paths are not allowed"
+    parts = [p for p in normalized.split("/") if p not in ("", ".")]
+    if ".." in parts:
+        return "log path rejected: path traversal is not allowed"
+    try:
+        safe = _safe_log_dir()
+        candidate = (safe / raw).resolve()
+        if os.path.commonpath([str(safe), str(candidate)]) != str(safe):
+            return "log path rejected: path escapes the log directory"
+    except (OSError, ValueError):
+        return "log path rejected: invalid path"
+    return None
 
 
 def _log_path() -> Path:
-    """Where move logs go: REALAI_TTT9D_LOG, else REALAI_DATA_DIR/games/ttt9d_moves.jsonl.
+    """Where move logs go.
 
-    Callers can only switch logging on; they can never choose the file, so an
-    ability call cannot be used to append to an arbitrary path.
+    Operators may set ``REALAI_TTT9D_LOG``. Otherwise the file is the fixed name
+    inside ``_safe_log_dir``. Callers cannot choose the file.
     """
-    p = os.environ.get("REALAI_TTT9D_LOG")
-    if not p:
-        p = str(Path(os.environ.get("REALAI_DATA_DIR", "data")) / "games" / "ttt9d_moves.jsonl")
-    return Path(p)
+    override = os.environ.get("REALAI_TTT9D_LOG")
+    if override:
+        return Path(override)
+    return _safe_log_dir() / _LOG_FILENAME
 
 
 def _log(record: Dict[str, Any]) -> Optional[str]:
@@ -293,9 +398,13 @@ def run(input: str = "", context: Dict[str, Any] | None = None, **kwargs: Any) -
         except Exception as exc:  # hook must never break move generation
             out["commentary_error"] = str(exc)
     log = ctx.get("log")
+    if isinstance(log, str):
+        rejected = _caller_log_path_error(log)
+        if rejected:
+            # Do not open the caller path. A truthy log still records to the fixed file.
+            out["log_rejected"] = rejected
     if log or os.environ.get("REALAI_TTT9D_LOG"):
         try:
-            # A truthy ctx["log"] only enables logging; a string value is NOT used as a path.
             out["logged_to"] = _log({
                 "ts": time.time(), "state": state, "difficulty": res["difficulty"], "move": res["move"],
                 "eval": res["eval"], "iterations": res["iterations"]})

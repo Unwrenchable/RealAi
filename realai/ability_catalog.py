@@ -791,9 +791,13 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "keywords": ["9dttt", "ultimate tic tac toe", "tic-tac-toe", "ttt9d", "game ai", "best move"],
         "status": "LIVE",
         "status_note": (
-            "abilities/ttt9d_move.py is a pure-Python MCTS port of 9dttt Public/js/ai/ttt9d-engine.js; "
-            "deterministic per seed, no LLM. Same schema as the JS getMove(state, difficulty) -> {move, eval}. "
-            "Optional template commentary (COMMENTARY_HOOK to plug an LLM) and JSONL move logging (REALAI_TTT9D_LOG)."
+            "abilities/ttt9d_move.py is a pure-Python MCTS for ultimate tic-tac-toe, deterministic per seed, no LLM. "
+            "Board rules match https://github.com/9dtictactoe/9dttt/blob/cad17a9641e24f03bb8f1acfdbd5603866e951af/Public/js/ultimate-tictactoe.js "
+            "(commit cad17a9641e24f03bb8f1acfdbd5603866e951af, path Public/js/ultimate-tictactoe.js). "
+            "That repository has no Public/js/ai/ttt9d-engine.js; getMove and the search are implemented here. "
+            "Optional template commentary (COMMENTARY_HOOK to plug an LLM). "
+            "JSONL logging is off unless log is true or REALAI_TTT9D_LOG is set; caller log paths are not opened, "
+            "and absolute paths and '..' traversal are rejected."
         ),
         "live_path": 'POST /v1/tools/execute {"name": "ttt9d_move", "arguments": {"state": {...}, "difficulty": "hard"}}',
         "modules": ["abilities/ttt9d_move.py"],

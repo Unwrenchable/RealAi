@@ -2,7 +2,7 @@
 
 Generated: `2026-09-19T17:49:53.974982+00:00`
 
-**Coverage vs technical rundown:** **100.0%** weighted (64 LIVE, 0 PARTIAL, 0 CODE/GOLD/STUB, 0 MISSING/SOFT)
+**Coverage vs technical rundown:** **100.0%** weighted (65 LIVE, 0 PARTIAL, 0 CODE/GOLD/STUB, 0 MISSING/SOFT)
 
 > `verify_v3_matrix` pass counts = stack health, not full product ability completeness.
 
@@ -138,6 +138,7 @@ Generated: `2026-09-19T17:49:53.974982+00:00`
 | `observability_self_improve` | Observability, auditing, self-improvement | **LIVE** | `POST /v1/tools/execute ability.observability_self_improve + /v1/self-heal/* + /v1/self-improve/*` |
 | `local_inference` | Local inference (Vulkan / GGUF) | **LIVE** | `http://127.0.0.1:8080 via orchestrator` |
 | `training_pipeline` | Training + fine-tune pipeline | **LIVE** | `GET /v1/training/* GET /v1/lora` |
+| `ttt9d_move` | 9D / Ultimate Tic-Tac-Toe engine (MCTS) | **LIVE** | `POST /v1/tools/execute {"name": "ttt9d_move", "arguments": {"state": {...}, "difficulty": "hard"}}` |
 | `lora_adapters` | Recovered PEFT LoRA adapters | **LIVE** | `GET /v1/lora` |
 | `kilo_recovery` | Kilo-era gold recovery wiring | **LIVE** | `GET /v1/recovery` |
 | `frontend_ui` | Next.js operator UI | **LIVE** | `http://127.0.0.1:3000` |
