@@ -148,3 +148,6 @@ realai/aura/memory_store/
 realai/memory/hive/findings.jsonl
 docs/_tmp_*
 docs/_local_*
+
+# hive ingest staging (raw-derived candidates; promoted rows go to training/data/hive_ops.jsonl via PR)
+training/data/_staging/
