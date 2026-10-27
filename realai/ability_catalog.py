@@ -57,7 +57,12 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "name": "Image generation",
         "pillar": "core_ai",
         "keywords": ["image", "images/generations", "dall-e", "image gen"],
-        "status": "LIVE",
+        "status": "PARTIAL",
+        "status_note": (
+            "Not a generative image model. Default path is realai/local_media.py: a deterministic procedural "
+            "Pillow PNG (seeded gradient + shapes from prompt tokens + title plate). xAI image gen only runs when "
+            "backend=xai and XAI_API_KEY is set; otherwise it falls back to the Pillow PNG."
+        ),
         "live_path": "POST /v1/tools/execute ability.image_generation (local Pillow PNG; no API key)",
         "modules": ["abilities/image_generation.py", "realai/local_media.py"],
         "gold_paths": [
@@ -70,7 +75,12 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "name": "Video generation",
         "pillar": "core_ai",
         "keywords": ["video", "video generation", "video.js"],
-        "status": "LIVE",
+        "status": "PARTIAL",
+        "status_note": (
+            "Not a generative video model. Default path is realai/local_media.py: a procedural animated GIF "
+            "(moving gradient + circle, 4-36 frames, up to 640x480) used as a stand-in for cloud video. "
+            "xAI video only runs when backend=xai and XAI_API_KEY is set; otherwise it falls back to the GIF."
+        ),
         "live_path": "POST /v1/tools/execute ability.video_generation (local animated GIF; no API key)",
         "modules": ["abilities/video_generation.py", "realai/local_media.py"],
         "gold_paths": [
@@ -84,7 +94,12 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "name": "Image analysis (vision)",
         "pillar": "core_ai",
         "keywords": ["vision", "image analysis", "multimodal", "image_url"],
-        "status": "LIVE",
+        "status": "PARTIAL",
+        "status_note": (
+            "Not a vision model. Default path is realai/local_media.py: Pillow pixel statistics only "
+            "(size/mode/format, mean+stddev RGB, extrema, top colors, brightness); no object, scene or text "
+            "recognition. Real vision only via xAI when backend=xai and XAI_API_KEY is set."
+        ),
         "live_path": "POST /v1/tools/execute ability.image_analysis (local Pillow; no API key)",
         "modules": ["abilities/image_analysis.py", "realai/local_media.py"],
     },
@@ -582,7 +597,13 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "name": "Git-learn (offline packet + coach stub)",
         "pillar": "advanced",
         "keywords": ["learn_git", "git-learn", "/learn", "learning packet", "learned plugin"],
-        "status": "LIVE",
+        "status": "PARTIAL",
+        "status_note": (
+            "Static scan only: walks a local folder/git URL, fingerprints files and writes a learning packet "
+            "(realai/catalog/learned/<slug>/packet.json + docs/learning). With --write it scaffolds a "
+            "REALAI_LEARNED_STUB coach plugin whose abilities are placeholders (contract discovery, no runtime). "
+            "It does not train, ingest into memory, or execute the learned code."
+        ),
         "live_path": "python -m realai.learn_git --all-branches + Craft /learn (no heal)",
         "modules": [
             "realai/learn_git.py",
