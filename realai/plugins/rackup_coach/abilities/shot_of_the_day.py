@@ -523,6 +523,11 @@ def recommend_shot_of_the_day(
 
 def run(player: PlayerProfile, payload: dict[str, Any] | None = None) -> dict[str, Any]:
     payload = payload or {}
+    if str(payload.get("mode") or "").strip().lower() == "sotd_validate":
+        # Deterministic map checker + diagram-prompt renderer (no LLM).
+        from plugins.rackup_coach.sotd_checker import run_validate
+
+        return run_validate(player, payload)
     return recommend_shot_of_the_day(
         player,
         seed_hint=str(payload.get("hint") or payload.get("focus") or ""),

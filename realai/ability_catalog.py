@@ -165,6 +165,33 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "modules": ["abilities/audio_speech.py", "realai/voice/provider.py", "realai/voice/tts_engine.py"],
     },
     {
+        "id": "realai_cli_bridge",
+        "name": "realai-cli bridge (markets, rug-watch, paper trading)",
+        "pillar": "advanced",
+        "keywords": ["realai-cli", "paper trading", "rug watch", "dexscreener", "token scan", "backtest"],
+        "status": "PARTIAL",
+        "live_path": "ability.realai_cli_bridge -> installed C:\\tools\\realai CLI (read-only/paper; live blocked)",
+        "modules": ["abilities/realai_cli_bridge.py"],
+    },
+    {
+        "id": "math_solver",
+        "name": "Math solver (SymPy, verified)",
+        "pillar": "core_ai",
+        "keywords": ["math", "solve", "equation", "algebra", "calculus", "sympy"],
+        "status": "LIVE",
+        "live_path": "ability.math_solver (sympy; solutions verified by substitution)",
+        "modules": ["abilities/math_solver.py"],
+    },
+    {
+        "id": "data_analysis",
+        "name": "Data analysis (descriptive statistics)",
+        "pillar": "core_ai",
+        "keywords": ["data analysis", "statistics", "outliers", "trend", "correlation"],
+        "status": "LIVE",
+        "live_path": "ability.data_analysis (stdlib statistics)",
+        "modules": ["abilities/data_analysis.py"],
+    },
+    {
         "id": "translation",
         "name": "Translation",
         "pillar": "core_ai",
@@ -766,6 +793,33 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         ],
     },
     {
+        "id": "chess_engine",
+        "name": "Chess engine (local Stockfish)",
+        "pillar": "local_intelligence",
+        "keywords": ["chess", "stockfish", "best move", "fen", "chess engine"],
+        "status": "PARTIAL",
+        "status_note": (
+            "abilities/chess_engine.py calls a local Stockfish (REALAI_STOCKFISH or C:\\tools\\stockfish) via python-chess; "
+            "the model defers strong play to it. Operator installs the engine (GPLv3, not bundled); no HTTP route yet."
+        ),
+        "live_path": "abilities.chess_engine.run(fen) (in-process)",
+        "modules": ["abilities/chess_engine.py"],
+    },
+    {
+        "id": "ttt9d_move",
+        "name": "9D / Ultimate Tic-Tac-Toe engine (MCTS)",
+        "pillar": "local_intelligence",
+        "keywords": ["9dttt", "ultimate tic tac toe", "tic-tac-toe", "ttt9d", "game ai", "best move"],
+        "status": "LIVE",
+        "status_note": (
+            "abilities/ttt9d_move.py is a pure-Python MCTS port of 9dttt Public/js/ai/ttt9d-engine.js; "
+            "deterministic per seed, no LLM. Same schema as the JS getMove(state, difficulty) -> {move, eval}. "
+            "Optional template commentary (COMMENTARY_HOOK to plug an LLM) and JSONL move logging (REALAI_TTT9D_LOG)."
+        ),
+        "live_path": 'POST /v1/tools/execute {"name": "ttt9d_move", "arguments": {"state": {...}, "difficulty": "hard"}}',
+        "modules": ["abilities/ttt9d_move.py"],
+    },
+    {
         "id": "lora_adapters",
         "name": "Recovered PEFT LoRA adapters",
         "pillar": "model_family",
@@ -825,6 +879,46 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "modules": ["abilities/hive_governance.py", "realai/agent_activity.py"],
         "status_note": "Local Hive governance — agent roster, profiles, coverage; no external API. Formerly hominis_enterprise.",
         "aliases": ["hominis_enterprise"],
+    },
+    {
+        "id": "synthetic_organs_runtime",
+        "name": "Synthetic organs runtime (organisms, curiosity, archeology)",
+        "pillar": "advanced",
+        "keywords": ["synthetic organism", "curiosity", "archeology"],
+        "status": "PARTIAL",
+        "status_note": "Promoted from RealAi-unified 763a4c2. Opt-in: not in FIRST_PARTY; HTTP route only with REALAI_UNIFIED_ROUTES=1. No network, no outside keys.",
+        "live_path": "POST /v1/synthetic/organisms POST /v1/curiosity POST /v1/archeology (opt-in)",
+        "modules": ["modules/organs/synthetic_organs.py"],
+    },
+    {
+        "id": "self_evolving",
+        "name": "Self-evolving diagnose/critic/proposal loop",
+        "pillar": "advanced",
+        "keywords": ["self evolve", "self-evolving", "shadow critic"],
+        "status": "PARTIAL",
+        "status_note": "Promoted from RealAi-unified 763a4c2. Opt-in: not in FIRST_PARTY; HTTP route only with REALAI_UNIFIED_ROUTES=1. No network, no outside keys.",
+        "live_path": "POST /v1/self/evolve (opt-in; dry-run unless REALAI_SELF_EVOLVING=1)",
+        "modules": ["realai/plugins/self_evolving/__init__.py"],
+    },
+    {
+        "id": "tool_router_plugins",
+        "name": "Tool router heuristics (provider/cost/latency)",
+        "pillar": "advanced",
+        "keywords": ["tool route", "router plugin"],
+        "status": "PARTIAL",
+        "status_note": "Promoted from RealAi-unified 763a4c2. Opt-in: not in FIRST_PARTY; HTTP route only with REALAI_UNIFIED_ROUTES=1. No network, no outside keys.",
+        "live_path": "POST /v1/tools/route (opt-in)",
+        "modules": ["realai/plugins/tool_router/__init__.py"],
+    },
+    {
+        "id": "workspace_info",
+        "name": "Workspace info / catalog (read-only, REALAI_HOME)",
+        "pillar": "advanced",
+        "keywords": ["workspace info", "workspace catalog"],
+        "status": "PARTIAL",
+        "status_note": "Promoted from RealAi-unified 763a4c2. Opt-in: not in FIRST_PARTY; HTTP route only with REALAI_UNIFIED_ROUTES=1. No network, no outside keys.",
+        "live_path": "POST /v1/workspace/catalog (opt-in)",
+        "modules": ["realai/plugins/workspace_info/__init__.py"],
     },
 ]
 

@@ -33,12 +33,28 @@ _ARCHETYPES = (
 )
 
 
+# Stage order of the multi-agent pipeline run_multi_agent executes (agents/agent_runtime.MultiAgentPipeline.STAGES).
+PIPELINE_STAGES = ("planner", "researcher", "critic", "executor", "synthesizer")
+
+
 def _product_root() -> Path:
     return Path(__file__).resolve().parents[2]
 
 
 def load_github_hive_agents() -> List[Dict[str, Any]]:
-    """Load `.github/agents/*.json` hive manifests."""
+    """Load hive role manifests via the canonical agentx loader (AgentManifestLoader + converters).
+
+    Returns the legacy dict shape (``{"id": ..., ...}``) so register_routes keeps working.
+    Falls back to the previous bridge / glob loader if agentx is unavailable.
+    """
+    try:
+        from realai.agentx.hive.registry import load_registry
+
+        roles = load_registry(include_catalog=False).hive_role_dicts()
+        if roles:
+            return roles
+    except Exception:
+        pass
     try:
         from realai.v3_runtime_bridge import hive_agents_status
 
@@ -112,8 +128,13 @@ def run_cycle(
     task: str,
     agent: str = "researcher",
     persist: bool = True,
+    dry_run: bool = False,
 ) -> Dict[str, Any]:
-    """Run a hive cycle: prefer multi-agent pipeline, fall back to single chat."""
+    """Run a hive cycle: prefer multi-agent pipeline, fall back to single chat.
+
+    ``dry_run=True`` resolves routes and the model exactly as a real cycle would, then returns the plan
+    (pipeline stages, model, routes) WITHOUT calling the pipeline, the network, or persisting anything.
+    Default False keeps live behaviour unchanged."""
     task = (task or "hive status").strip()
     agent = (agent or "researcher").strip()
     routes = register_routes()
@@ -129,6 +150,19 @@ def run_cycle(
             "routes": routes,
             "nests": list_nest_orchestrators(),
             "persist": persist,
+        }
+
+    if dry_run:
+        return {
+            "ok": True,
+            "action": "dry_run",
+            "agent": agent,
+            "model": model,
+            "persist": False,
+            "routes": {"hive_mode": routes.get("hive_mode"), "fallback": "multi_agent",
+                       "missing": routes.get("missing")},
+            "plan": {"would_call": "run_multi_agent", "mode": "pipeline", "stages": list(PIPELINE_STAGES),
+                     "task": f"[hive:{agent}] {task}"[:300]},
         }
 
     try:

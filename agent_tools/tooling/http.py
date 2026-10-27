@@ -1,27 +1,19 @@
-from __future__ import annotations
+"""DEPRECATED shim (2026-10-22): forwards to the canonical engine `realai.agentx.tooling.http`.
 
-import urllib.request
-from typing import Any
+The previous fork is kept unchanged as `http_legacy.py` for anything that
+needs a name only it defines. New code should import `realai.agentx.tooling.http` directly.
+"""
+from realai.agentx.tooling.http import *  # noqa: F401,F403
+import importlib as _importlib
 
-from .registry import ToolDefinition
-
-
-def get_tool_definition() -> ToolDefinition:
-    return ToolDefinition(
-        name="http",
-        description="Perform simple HTTP requests",
-        input_schema={"required": ["url", "method"]},
-        output_schema={"required": ["status", "body"]},
-        safety="guarded",
-        handler=_handle_http,
-    )
+_canon = _importlib.import_module("realai.agentx.tooling.http")
 
 
-def _handle_http(payload: dict[str, Any], dry_run: bool) -> dict[str, Any]:
-    if dry_run:
-        return {"status": 0, "body": f"DRY_RUN: would request {payload['url']}"}
-
-    req = urllib.request.Request(url=str(payload["url"]), method=str(payload["method"]).upper())
-    with urllib.request.urlopen(req, timeout=5) as resp:  # noqa: S310
-        body = resp.read(256).decode("utf-8", errors="replace")
-        return {"status": int(resp.status), "body": body}
+def __getattr__(name):
+    if name.startswith("__"):
+        raise AttributeError(name)
+    try:
+        return getattr(_canon, name)
+    except AttributeError:
+        _legacy = _importlib.import_module(__name__ + "_legacy")
+        return getattr(_legacy, name)

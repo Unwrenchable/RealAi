@@ -526,6 +526,17 @@ class MultiAgentPipeline:
 
             output = self._run_stage(stage, user_content)
             stage_outputs[stage] = output
+            # merged 2026-10-16 (MERGE_LEDGER: agent_runtime) from the "single MessageBus hot path" phase:
+            # publish each stage to the shared bus (Craft /multi and Hive /v1/multi-agent/run). Never breaks the run.
+            try:
+                MESSAGE_BUS.send(
+                    from_agent=stage,
+                    to_agent="orchestrator",
+                    content={"stage": stage, "output": output},
+                    metadata={"task": task, "pipeline": "MultiAgentPipeline"},
+                )
+            except Exception as exc:  # pragma: no cover - bus is in-process
+                logger.debug("MultiAgentPipeline bus publish failed: %s", exc)
 
         final_synthesis = stage_outputs.get("synthesizer", "")
         duration_ms = (_time.time() - started) * 1000.0
@@ -536,6 +547,7 @@ class MultiAgentPipeline:
             "stage_outputs": stage_outputs,
             "final_synthesis": final_synthesis,
             "duration_ms": duration_ms,
+            "message_bus_id": id(MESSAGE_BUS),
         }
         if organ_trace is not None:
             result["organs"] = organ_trace

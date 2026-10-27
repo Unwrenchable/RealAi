@@ -16,11 +16,15 @@ export const realaiProvider: Provider = {
     { name: "realai-overseer", context: 256000, type: "text" },
   ],
   async call({ model, messages, temperature, maxTokens }) {
+    const apiKey = (process.env.REALAI_API_KEY || "").split(",")[0].trim();
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+    };
+    if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
+
     const response = await fetch(`${getRealAIBaseUrl()}/v1/chat/completions`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
       body: JSON.stringify({
         model,
         messages,

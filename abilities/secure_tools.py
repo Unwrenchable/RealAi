@@ -21,7 +21,7 @@ def run(
     context: dict[str, Any] | None = None,
     **kwargs: Any,
 ) -> dict[str, Any]:
-    from core.tools.hive_executor import execute_secure, get_executor
+    from realai.core.tools.hive_executor import execute_secure, get_executor
 
     ctx = dict(context or {})
     ctx.update(kwargs)

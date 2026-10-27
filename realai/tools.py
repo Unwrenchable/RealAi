@@ -13,6 +13,7 @@ Usage::
 
 from __future__ import annotations
 
+import os
 import threading as _threading
 import time as _time
 from collections import deque as _deque
@@ -718,3 +719,14 @@ try:
     TOOL_REGISTRY.ensure_ability_catalog_loaded()
 except Exception:
     pass
+
+# Wire-audit 2026-10-16: merge read-only hive_tools (RackUp, self-knowledge, memory, multi-agent dry-run,
+# money audit, registry, dry-run reports) into the unified registry ONLY when REALAI_HIVE_TOOLS=1.
+# Default off, so live behaviour is unchanged.
+if os.environ.get("REALAI_HIVE_TOOLS", "").strip().lower() in ("1", "true", "yes", "on"):
+    try:
+        from realai.hive_tools.wired import register_into as _register_hive_tools
+
+        _register_hive_tools(TOOL_REGISTRY)
+    except Exception:
+        pass

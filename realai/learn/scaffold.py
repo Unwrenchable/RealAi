@@ -265,8 +265,13 @@ def plugin_package_name(slug: str) -> str:
     if base in coach_ok or stem in coach_ok:
         # Protected product surface — keep coach package id, scaffold will refuse overwrite.
         if base in PROTECTED_PLUGIN_PACKAGES or base.replace("_", "-") in PROTECTED_PLUGIN_PACKAGES:
-            return base if base.endswith("_coach") else f"{base}_coach"
-        return f"{stem}_coach" if stem in {"rackup", "rack_em_up", "rackemup", "atomicfizz", "atomic_fizz"} else f"{stem}_learned"
+            # Learning a repo named like a gold coach must not target the gold package.
+            return f"{stem}_learned_coach"
+        pkg = f"{stem}_coach" if stem in {"rackup", "rack_em_up", "rackemup", "atomicfizz", "atomic_fizz"} else f"{stem}_learned"
+        # Never resolve a learned scaffold onto a hand-written gold coach (e.g. rackup_coach).
+        if pkg in PROTECTED_PLUGIN_PACKAGES or pkg.replace("_", "-") in PROTECTED_PLUGIN_PACKAGES:
+            pkg = f"{stem}_learned_coach"
+        return pkg
 
     pkg = f"{stem}_learned"
     if pkg in PROTECTED_PLUGIN_PACKAGES or pkg.replace("_", "-") in PROTECTED_PLUGIN_PACKAGES:

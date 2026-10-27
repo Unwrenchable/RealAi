@@ -1,17 +1,22 @@
 """Structured RealAI inference server."""
 
 import json
+import logging
+import os
 from wsgiref.simple_server import make_server
 
 from .router import dispatch_request
 
+logger = logging.getLogger(__name__)  # was referenced in _dispatch_json but never defined
+
 try:
-    from fastapi import FastAPI, HTTPException
+    from fastapi import FastAPI, HTTPException, Request
     from fastapi.responses import Response
     from pydantic import BaseModel
 except ImportError:
     FastAPI = None
     HTTPException = None
+    Request = None
     Response = None
     BaseModel = None
 
@@ -214,6 +219,20 @@ if FastAPI is not None and BaseModel is not None:
         if Response is not None:
             return Response(content=data, media_type=content_type)
         return data
+
+    if os.environ.get('REALAI_SERVER_MERGED_ROUTES', '').strip().lower() in ('1', 'true', 'yes', 'on'):
+        # Opt-in catch-all (registered last, so every structured route above wins) -> router -> legacy bridge.
+        @app.api_route('/{full_path:path}', methods=['GET', 'POST', 'DELETE'])
+        async def merged_routes(full_path: str, request: Request):
+            raw = await request.body()
+            try:
+                payload = json.loads(raw.decode('utf-8')) if raw else None
+            except ValueError:
+                return Response(content=json.dumps({'error': {'message': 'Request body must be valid JSON.'}}),
+                                status_code=400, media_type='application/json')
+            status, data, ctype = dispatch_request(request.method, '/' + full_path, payload)
+            body = json.dumps(data) if ctype.startswith('application/json') else data
+            return Response(content=body, status_code=status, media_type=ctype)
 else:
     app = _ASGIApplication()
 
@@ -261,12 +280,22 @@ def _reason_phrase(status_code):
     return 'Internal Server Error'
 
 
-def main(host='0.0.0.0', port=8000):
-    """Run the structured WSGI server."""
+def main(host=None, port=8000):
+    """Run the structured WSGI server (default 127.0.0.1; set REALAI_SERVER_HOST=0.0.0.0 to expose)."""
+    if not host:
+        host = os.environ.get('REALAI_SERVER_HOST') or '127.0.0.1'
     httpd = make_server(host, int(port), wsgi_app)
     print('Structured RealAI server listening on http://{0}:{1}'.format(host, port))
     httpd.serve_forever()
 
 
 if __name__ == '__main__':
-    main()
+    # Optional --host/--port. Default is localhost only (127.0.0.1:8000); opt in to LAN with
+    # --host 0.0.0.0 or REALAI_SERVER_HOST=0.0.0.0.
+    import argparse
+
+    _ap = argparse.ArgumentParser(description='RealAI structured server (:8000)')
+    _ap.add_argument('--host', default=os.environ.get('REALAI_SERVER_HOST') or '127.0.0.1')
+    _ap.add_argument('--port', type=int, default=8000)
+    _a = _ap.parse_args()
+    main(_a.host, _a.port)

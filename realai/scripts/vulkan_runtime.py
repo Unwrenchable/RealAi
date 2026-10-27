@@ -7,6 +7,9 @@ Weights  : C:\\models\\checkpoints_lora\\*.gguf
 
 Craft / DirectML LoRA train kills llama-server to free VRAM.
 Call resume_vulkan() after training so chat (:8080) comes back.
+
+Package-local copy of scripts/vulkan_runtime.py (merged 2026-10-17: Windows start via WMI Win32_Process.Create
+so llama-server outlives the launching job object; POSIX start_new_session).
 """
 from __future__ import annotations
 
@@ -38,6 +41,12 @@ _RESUME_CANDIDATES = [
     str(MODELS_DIR / "Llama-3.2-1B-Instruct-Q4_K_M.gguf"),
 ]
 
+
+
+def _vulkan_device_args():
+    """Optional llama-server --device (e.g. Vulkan1 on multi-GPU boxes) via REALAI_VULKAN_DEVICE."""
+    dev = os.environ.get("REALAI_VULKAN_DEVICE", "").strip()
+    return ["--device", dev] if dev else []
 
 def log(msg: str) -> None:
     print(f"[vulkan] {msg}", flush=True)
@@ -157,26 +166,50 @@ def resume_vulkan(
         "-ngl",
         str(ngl_v),
         "--jinja",
-    ]
+    ] + _vulkan_device_args()
     log(f"starting {SERVER_EXE.name} model={model.name} ngl={ngl_v} ctx={ctx_v}")
 
-    flags = 0
-    if hasattr(subprocess, "DETACHED_PROCESS"):
-        flags |= subprocess.DETACHED_PROCESS  # type: ignore[attr-defined]
-    if hasattr(subprocess, "CREATE_NEW_PROCESS_GROUP"):
-        flags |= subprocess.CREATE_NEW_PROCESS_GROUP  # type: ignore[attr-defined]
-
     try:
-        subprocess.Popen(
-            args,
-            cwd=str(VULKAN_DIR),
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            creationflags=flags or 0,
-        )
+        if os.name == "nt":
+            # WMI Win32_Process.Create starts outside the parent Job Object.
+            # Start-Process/Popen children are still reaped when tooling shells exit.
+            cmdline = subprocess.list2cmdline(args)
+            ps = (
+                "$r = ([wmiclass]'Win32_Process').Create({cmd!r}, {cwd!r}); "
+                "if ($r.ReturnValue -ne 0) {{ exit $r.ReturnValue }} "
+                "Write-Output $r.ProcessId"
+            ).format(cmd=cmdline, cwd=str(VULKAN_DIR))
+            completed = subprocess.run(
+                [
+                    "powershell",
+                    "-NoProfile",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-Command",
+                    ps,
+                ],
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+            if completed.returncode != 0:
+                return {
+                    "ok": False,
+                    "error": f"wmi_start_failed:rc={completed.returncode}",
+                    "stderr": (completed.stderr or "")[-500:],
+                    "model": str(model),
+                }
+        else:
+            subprocess.Popen(
+                args,
+                cwd=str(VULKAN_DIR),
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                start_new_session=True,
+                close_fds=True,
+            )
     except Exception as e:
         return {"ok": False, "error": f"start_failed: {e}", "model": str(model)}
-
     deadline = time.time() + max(10.0, wait_s)
     while time.time() < deadline:
         if port_up():

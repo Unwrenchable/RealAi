@@ -1,50 +1,19 @@
-from __future__ import annotations
+"""DEPRECATED shim (2026-10-22): forwards to the canonical engine `realai.agentx.engine.router`.
 
-from dataclasses import dataclass
+The previous fork is kept unchanged as `router_legacy.py` for anything that
+needs a name only it defines. New code should import `realai.agentx.engine.router` directly.
+"""
+from realai.agentx.engine.router import *  # noqa: F401,F403
+import importlib as _importlib
 
-from .loader import AgentManifest
-
-
-@dataclass(slots=True)
-class RouteDecision:
-    agent_id: str
-    reason: str
+_canon = _importlib.import_module("realai.agentx.engine.router")
 
 
-class AgentRouter:
-    def route(
-        self,
-        agents: dict[str, AgentManifest],
-        text: str,
-        preferred_agent_id: str | None = None,
-    ) -> RouteDecision:
-        if not agents:
-            raise ValueError("No agent manifests available")
-
-        if preferred_agent_id and preferred_agent_id in agents:
-            return RouteDecision(agent_id=preferred_agent_id, reason="explicit selection")
-
-        lowered = text.lower()
-        best_agent_id: str | None = None
-        best_score = -1
-
-        for agent_id, manifest in sorted(agents.items()):
-            score = 0
-            for tag in manifest.routing_tags:
-                if tag.lower() in lowered:
-                    score += 3
-            for goal in manifest.goals:
-                for word in goal.lower().split():
-                    if word in lowered:
-                        score += 1
-
-            if score > best_score:
-                best_agent_id = agent_id
-                best_score = score
-
-        if best_agent_id is None:
-            fallback = sorted(agents)[0]
-            return RouteDecision(agent_id=fallback, reason="fallback first agent")
-
-        reason = "tag/goal match" if best_score > 0 else "fallback deterministic order"
-        return RouteDecision(agent_id=best_agent_id, reason=reason)
+def __getattr__(name):
+    if name.startswith("__"):
+        raise AttributeError(name)
+    try:
+        return getattr(_canon, name)
+    except AttributeError:
+        _legacy = _importlib.import_module(__name__ + "_legacy")
+        return getattr(_legacy, name)

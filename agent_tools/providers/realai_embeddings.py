@@ -1,36 +1,19 @@
-from __future__ import annotations
+"""DEPRECATED shim (2026-10-22): forwards to the canonical engine `realai.agentx.providers.realai_embeddings`.
 
-import os
-from typing import Any
+The previous fork is kept unchanged as `realai_embeddings_legacy.py` for anything that
+needs a name only it defines. New code should import `realai.agentx.providers.realai_embeddings` directly.
+"""
+from realai.agentx.providers.realai_embeddings import *  # noqa: F401,F403
+import importlib as _importlib
 
-import requests
+_canon = _importlib.import_module("realai.agentx.providers.realai_embeddings")
 
 
-class RealAIEmbeddings:
-    """Thin client for the RealAI embeddings endpoint.
-
-    Swap this in wherever you need vectors — e.g. as a custom embedding
-    function for Chroma instead of its built-in defaults.
-    """
-
-    def __init__(self) -> None:
-        self._api_url = os.getenv("REALAI_API_URL", "")
-        self._api_key = os.getenv("REALAI_API_KEY", "")
-        self._model = os.getenv("REALAI_EMBED_MODEL", "realai-embed")
-        if not self._api_url or not self._api_key:
-            raise RuntimeError("RealAIEmbeddings requires REALAI_API_URL and REALAI_API_KEY")
-
-    def embed(self, texts: list[str]) -> list[list[float]]:
-        """Return one embedding vector per input text."""
-        headers = {
-            "Authorization": f"Bearer {self._api_key}",
-            "Content-Type": "application/json",
-        }
-        payload: dict[str, Any] = {
-            "model": self._model,
-            "input": texts,
-        }
-        r = requests.post(f"{self._api_url}/v1/embeddings", json=payload, headers=headers)
-        r.raise_for_status()
-        data = r.json()
-        return [item["embedding"] for item in data["data"]]
+def __getattr__(name):
+    if name.startswith("__"):
+        raise AttributeError(name)
+    try:
+        return getattr(_canon, name)
+    except AttributeError:
+        _legacy = _importlib.import_module(__name__ + "_legacy")
+        return getattr(_legacy, name)

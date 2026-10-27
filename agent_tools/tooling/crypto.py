@@ -1,31 +1,19 @@
-from __future__ import annotations
+"""DEPRECATED shim (2026-10-22): forwards to the canonical engine `realai.agentx.tooling.crypto`.
 
-import hashlib
-from typing import Any
+The previous fork is kept unchanged as `crypto_legacy.py` for anything that
+needs a name only it defines. New code should import `realai.agentx.tooling.crypto` directly.
+"""
+from realai.agentx.tooling.crypto import *  # noqa: F401,F403
+import importlib as _importlib
 
-from .registry import ToolDefinition
-
-
-def get_tool_definition() -> ToolDefinition:
-    return ToolDefinition(
-        name="crypto",
-        description="Compute cryptographic hashes",
-        input_schema={"required": ["operation", "text"]},
-        output_schema={"required": ["algorithm", "digest"]},
-        safety="safe",
-        handler=_handle_crypto,
-    )
+_canon = _importlib.import_module("realai.agentx.tooling.crypto")
 
 
-def _handle_crypto(payload: dict[str, Any], dry_run: bool) -> dict[str, Any]:
-    operation = str(payload["operation"]).lower()
-    text = str(payload["text"])
-
-    if operation != "sha256":
-        raise ValueError("crypto tool supports only sha256")
-
-    if dry_run:
-        return {"algorithm": "sha256", "digest": "DRY_RUN"}
-
-    digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
-    return {"algorithm": "sha256", "digest": digest}
+def __getattr__(name):
+    if name.startswith("__"):
+        raise AttributeError(name)
+    try:
+        return getattr(_canon, name)
+    except AttributeError:
+        _legacy = _importlib.import_module(__name__ + "_legacy")
+        return getattr(_legacy, name)

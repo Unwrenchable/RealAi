@@ -87,7 +87,7 @@ Do **not** call `POST /v1/tools/execute` + `rackup_invoke` against Render as a f
 | Variable | Required | Notes |
 |----------|----------|-------|
 | `REALAI_BASE_URL` | **yes** | Hive `http://127.0.0.1:8001` **or** Render `https://…onrender.com`. Never the Vercel UI. |
-| `REALAI_API_KEY` | optional | Sent as `Authorization: Bearer <key>` when the host requires a service token. |
+| `REALAI_API_KEY` | **required on Render `api_server` in production** | Service token. Send `Authorization: Bearer <key>` or `X-API-Key`. Comma-separate multiple keys on the server; clients send one of them. `GET /health` does not use it. |
 | `REALAI_TENANT` | optional | Tenant / env id. |
 | `RACKUP_TENANT` | optional | Alias of `REALAI_TENANT` on RackUp. |
 | `X-RackUp-Tenant` | optional header | Same value on the wire (`X-RackUp-Tenant: <tenant-or-env>`). |

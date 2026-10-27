@@ -123,3 +123,28 @@ imports/external/**/site-packages/
 
 
 
+
+# --- secrets hardening (2026-10-17) ---
+.env.*
+!.env.example
+!.env.*.example
+*.env.txt
+id_rsa*
+*keypair*.json
+wallet*.json
+secrets/
+recovered/**/.env*
+scan_results/*gold_map*.json
+
+# approval gate runtime state (never commit; live store is C:\RealAI-clean\.approvals.json)
+.approvals.json
+.approvals.json.audit.jsonl
+*.approvals.json.audit.jsonl
+
+# Local-only artifacts (from C:\RealAI-clean WIP sort, Oct 2026)
+*.bak-*
+_backup-*/
+realai/aura/memory_store/
+realai/memory/hive/findings.jsonl
+docs/_tmp_*
+docs/_local_*

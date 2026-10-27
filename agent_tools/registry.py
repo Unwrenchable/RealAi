@@ -137,6 +137,23 @@ def assess_agent_access(agent: AgentDefinition, profile: AccessProfile) -> dict:
     }
 
 
+
+# merged 2026-10-16 (MERGE_LEDGER: agent_tools/registry) from the agents/registry.py + realai/plugins/registry.py
+# phase (2026-08-07); used by realai/agent_tools_gold/cli.py. Pure function, no I/O.
+def recommend_profile(agent: AgentDefinition, profiles: dict[str, AccessProfile]) -> AccessProfile:
+    if agent.preferred_profile in profiles:
+        return profiles[agent.preferred_profile]
+
+    fallback_order = ["safe", "balanced", "power"]
+    for name in fallback_order:
+        profile = profiles.get(name)
+        if profile is None:
+            continue
+        if not set(agent.required_tools) - set(profile.tools):
+            return profile
+
+    return next(iter(profiles.values()))
+
 def package_status() -> dict:
     """Lightweight health of the living agent_tools package."""
     tools_ok = False

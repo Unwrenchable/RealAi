@@ -1,0 +1,7 @@
+# Render API server (python -m realai.api_server) - CPU host, no GPU.
+# api_server uses stdlib http.server; runtime deps are only:
+#   pydantic  -> realai.server.server_settings (PORT/env validation)
+#   requests  -> cloud fallback (_call_openai_compat / _call_anthropic)
+# torch/transformers/numpy are NOT needed here (they pulled ~3 GB of CUDA 13 wheels).
+pydantic>=2.7
+requests>=2.31

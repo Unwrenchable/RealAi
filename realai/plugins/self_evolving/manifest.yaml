@@ -1,0 +1,18 @@
+# RealAI plugin — self-evolving (promoted from RealAi-unified 763a4c2). Status: PARTIAL.
+# Opt-in: NOT in realai.plugins.FIRST_PARTY; load with load_first_party("self_evolving").
+
+name: self-evolving
+version: 0.1.0
+author: RealAI
+kind: plugin
+status: PARTIAL
+opt_in: true
+provider_level: true
+homepage: https://github.com/Unwrenchable/RealAi
+
+permissions:
+  - none   # no network, no outside API keys
+
+entrypoints:
+  register: realai.plugins.self_evolving:register
+  invoke: realai.plugins.self_evolving:invoke

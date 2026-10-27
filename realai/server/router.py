@@ -21,6 +21,9 @@ class RequestValidationError(Exception):
     def __init__(self, message, status_code=400):
         super(RequestValidationError, self).__init__(message)
         self.status_code = status_code
+        # Caller-safe text we wrote ourselves; returned instead of str(exc)
+        # so no exception internals reach the client (CodeQL py/stack-trace-exposure).
+        self.public_message = '{0}'.format(message)
 
 
 def _require_dict(payload):
@@ -84,13 +87,18 @@ def _coerce_int(name, value, default, min_value=1):
 def health_response():
     """Return a health payload for the structured server."""
     settings = load_settings()
-    return {
+    payload = {
         'status': 'ok',
         'provider': settings.provider,
         'profile': settings.profile,
         'available_models': list_models(),
         'providers': list_providers(),
     }
+    from . import unified_routes
+
+    if unified_routes.enabled():
+        payload['runtime'] = unified_routes.runtime_summary()
+    return payload
 
 
 def handle_chat_request(payload):
@@ -160,6 +168,20 @@ def handle_embeddings_request(payload):
     }
 
 
+def _local_sdxl_enabled():
+    """Local SDXL-Turbo for /v1/images/generations: REALAI_IMAGES_LOCAL_SDXL=1 and weights present (default off)."""
+    import os
+
+    if os.environ.get('REALAI_IMAGES_LOCAL_SDXL', '').strip().lower() not in ('1', 'true', 'yes', 'on'):
+        return False
+    try:
+        from realai import local_sdxl
+
+        return bool(local_sdxl.weights_present())
+    except Exception:
+        return False
+
+
 def handle_images_request(payload):
     payload = _require_dict(payload)
     prompt = payload.get('prompt')
@@ -167,6 +189,10 @@ def handle_images_request(payload):
         raise RequestValidationError('prompt is required.')
     n = _coerce_int('n', payload.get('n', 1), 1)
     size = payload.get('size', '1024x1024')
+    if _local_sdxl_enabled():
+        from realai import local_sdxl
+
+        return local_sdxl.handle_images_generations(payload)
     return {
         'created': int(time.time()),
         'data': [
@@ -348,11 +374,30 @@ def dispatch_request(method, path, payload=None):
             return 200, handle_tasks_list(), 'application/json'
         if method == 'GET' and path.startswith('/v1/tasks/'):
             return 200, handle_task_read(path), 'application/json'
+        # Opt-in (REALAI_ROUTING_ROUTES=1): read-only /v1/providers/route + /v1/tools/route (routing_routes.py).
+        from . import routing_routes
+
+        routed = routing_routes.dispatch(method, path, payload)
+        if routed is not None:
+            return routed
+        # Opt-in (REALAI_UNIFIED_ROUTES=1) promoted routes; existing routes win.
+        from . import unified_routes
+
+        extra = unified_routes.dispatch(method, path, payload)
+        if extra is not None:
+            return extra
+        # Opt-in (REALAI_SERVER_MERGED_ROUTES=1): merged legacy API routes (realai.server.legacy_api).
+        from . import legacy_bridge
+
+        merged = legacy_bridge.dispatch(method, path, payload)
+        if merged is not None:
+            return merged
         return 404, {'error': {'message': 'Not found'}}, 'application/json'
     except RequestValidationError as exc:
-        return exc.status_code, {'error': {'message': str(exc)}}, 'application/json'
+        return exc.status_code, {'error': {'message': exc.public_message}}, 'application/json'
     except ValueError as exc:
-        return 404, {'error': {'message': str(exc)}}, 'application/json'
+        logger.info('Router lookup failed for %s %s: %s', method, path, exc)
+        return 404, {'error': {'message': 'Not found'}}, 'application/json'
     except Exception as exc:
         logger.exception('Unhandled server router exception: %s', exc)
         return 500, {'error': {'message': 'Internal server error'}}, 'application/json'

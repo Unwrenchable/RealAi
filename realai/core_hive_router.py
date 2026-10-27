@@ -25,6 +25,7 @@ ROUTING_TABLE: Dict[str, str] = {
     "world_model": "core.world_model",
     "nests": "abilities.nest_orchestrators",
     "critic_executor": "core.orchestration.hive_router",
+    "hive_tools": "realai.hive_tools",  # read-only tool registry (live loop gated by REALAI_HIVE_TOOLS=1)
 }
 
 # nextgen_hive role -> model id (ProviderRouter)
@@ -51,7 +52,13 @@ HIVE_ARCHETYPES = (
 
 
 def _root() -> Path:
-    return Path(__file__).resolve().parents[2]
+    # product root: this file lives at <root>/realai/core_hive_router.py (was parents[2] from core/, which pointed
+    # above the repo here and found no .github/agents manifests)
+    here = Path(__file__).resolve()
+    for cand in (here.parents[1], here.parents[2]):
+        if (cand / ".github" / "agents").is_dir() or (cand / "scripts").is_dir():
+            return cand
+    return here.parents[1]
 
 
 def list_nest_orchestrators() -> List[Dict[str, str]]:

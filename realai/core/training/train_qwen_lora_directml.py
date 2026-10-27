@@ -30,6 +30,8 @@ DATASET_PATH = (
 )
 
 BATCH_SIZE = int(float(os.environ.get("TRAIN_BATCH_SIZE", "1")))
+# Gradient accumulation (recovered from the 2026-07-31 Unsloth/QLoRA draft). Default 1 = previous behaviour.
+GRAD_ACCUM = max(1, int(float(os.environ.get("TRAIN_GRADIENT_ACCUMULATION_STEPS", "1"))))
 LR = float(os.environ.get("TRAIN_LR", "5e-5"))
 MAX_STEPS = int(float(os.environ.get("TRAIN_MAX_STEPS", "10")))
 MAX_LENGTH = int(float(os.environ.get("TRAIN_MAX_LENGTH", "128")))
@@ -181,6 +183,7 @@ optimizer = torch.optim.SGD(model.parameters(), lr=LR)
 # -----------------------------
 model.train()
 step = 0
+micro = 0
 
 for batch in cycle(loader):
     if step >= MAX_STEPS:
@@ -201,7 +204,10 @@ for batch in cycle(loader):
         print(f"[train_qwen_lora_directml] Non-finite loss detected at step={step} loss={loss_val}. Stopping run.")
         break
 
-    loss.backward()
+    (loss / GRAD_ACCUM).backward()
+    micro += 1
+    if micro % GRAD_ACCUM:
+        continue  # accumulate; MAX_STEPS counts optimizer steps
     optimizer.step()
     optimizer.zero_grad()
 

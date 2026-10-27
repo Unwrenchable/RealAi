@@ -1001,86 +1001,13 @@ _distributed_coordinator = DistributedComputingCoordinator(_deployment_manager)
 _auto_scaler = AutoScaler(_deployment_manager, _distributed_coordinator)
 
 
-# ---------------------------------------------------------------------------
-# Provider configuration for real AI API routing
-# ---------------------------------------------------------------------------
-
-#: Configuration for supported external AI providers.
-PROVIDER_CONFIGS: Dict[str, Dict[str, str]] = {
-    "openai": {
-        "base_url": "https://api.openai.com/v1",
-        "default_model": "gpt-4o-mini",
-        "api_format": "openai",
-    },
-    "anthropic": {
-        "base_url": "https://api.anthropic.com",
-        "default_model": "claude-3-5-haiku-20241022",
-        "api_format": "anthropic",
-    },
-    "grok": {
-        "base_url": "https://api.x.ai/v1",
-        "default_model": "grok-beta",
-        "api_format": "openai",
-    },
-    "gemini": {
-        # Google exposes an OpenAI-compatible endpoint for Gemini models.
-        "base_url": "https://generativelanguage.googleapis.com/v1beta/openai",
-        "default_model": "gemini-1.5-flash",
-        "api_format": "openai",
-    },
-    "openrouter": {
-        # OpenRouter aggregates hundreds of models via a single OpenAI-compatible API.
-        "base_url": "https://openrouter.ai/api/v1",
-        "default_model": "openai/gpt-4o-mini",
-        "api_format": "openai",
-    },
-    "mistral": {
-        "base_url": "https://api.mistral.ai/v1",
-        "default_model": "mistral-small-latest",
-        "api_format": "openai",
-    },
-    "together": {
-        "base_url": "https://api.together.xyz/v1",
-        "default_model": "meta-llama/Llama-3-8b-chat-hf",
-        "api_format": "openai",
-    },
-    "deepseek": {
-        "base_url": "https://api.deepseek.com/v1",
-        "default_model": "deepseek-chat",
-        "api_format": "openai",
-    },
-    "perplexity": {
-        "base_url": "https://api.perplexity.ai",
-        "default_model": "llama-3.1-sonar-small-128k-online",
-        "api_format": "openai",
-    },
-}
-
-#: Maps API key prefixes to provider names for auto-detection.
-_KEY_PREFIX_TO_PROVIDER: Dict[str, str] = {
-    "sk-ant-": "anthropic",
-    "sk-or-v1-": "openrouter",
-    "sk-proj-": "openai",
-    "sk-": "openai",
-    "xai-": "grok",
-    "AIza": "gemini",
-    "pplx-": "perplexity",
-}
-
-#: Maps provider names to the environment variable used to pass their API key
-#: via the process environment (e.g. set by the GUI launcher).
-#: The insertion order defines the fallback priority used by the API server.
-PROVIDER_ENV_VARS: Dict[str, str] = {
-    "openai": "REALAI_OPENAI_API_KEY",
-    "anthropic": "REALAI_ANTHROPIC_API_KEY",
-    "grok": "REALAI_GROK_API_KEY",
-    "gemini": "REALAI_GEMINI_API_KEY",
-    "openrouter": "REALAI_OPENROUTER_API_KEY",
-    "mistral": "REALAI_MISTRAL_API_KEY",
-    "together": "REALAI_TOGETHER_API_KEY",
-    "deepseek": "REALAI_DEEPSEEK_API_KEY",
-    "perplexity": "REALAI_PERPLEXITY_API_KEY",
-}
+# Provider config gold: realai/providers/config.py (re-exported here).
+from realai.providers.config import (  # noqa: E402,F401
+    PROVIDER_CONFIGS,
+    PROVIDER_ENV_VARS,
+    _KEY_PREFIX_TO_PROVIDER,
+    _detect_provider,
+)
 
 #: Environment variables for task automation services
 TASK_AUTOMATION_ENV_VARS: Dict[str, str] = {
@@ -1253,38 +1180,6 @@ PERSONA_PROFILES: Dict[str, Dict[str, str]] = {
         ),
     },
 }
-
-
-def _detect_provider(api_key: Optional[str], provider: Optional[str]) -> Optional[str]:
-    """Detect the AI provider from an explicit name or API key prefix.
-
-    Args:
-        api_key: The raw API key string (may be ``None``).
-        provider: An explicit provider name that overrides key-based detection.
-
-    Returns:
-        The lower-cased provider name, or ``None`` if it cannot be determined.
-        When ``REALAI_BOT_LOCAL_ONLY`` is on (default), chat detection is forced
-        to ``local`` and cloud key prefixes are ignored.
-    """
-    local_only = os.environ.get("REALAI_BOT_LOCAL_ONLY", "1").strip().lower() in (
-        "1",
-        "true",
-        "yes",
-        "on",
-        "",
-    )
-    if local_only and (provider is None or str(provider).lower() in ("", "auto", "default")):
-        return "local"
-    if provider:
-        return provider.lower()
-    if local_only:
-        return "local"
-    if api_key:
-        for prefix, name in _KEY_PREFIX_TO_PROVIDER.items():
-            if api_key.startswith(prefix):
-                return name
-    return None
 
 
 class ModelCapability(Enum):
@@ -2424,9 +2319,11 @@ class RealAI:
             except Exception as e:
                 # Log the error so operators can diagnose key/network problems.
                 print(f"[RealAI] API call failed ({self.provider}): {e}")
-                _api_error = str(e)
+                # Return only the exception class to callers; the full message
+                # (may carry URLs, key fragments, tracebacks) stays in the log above.
+                _api_error = f"{type(e).__name__} from upstream provider"
                 placeholder_content = (
-                    f"API call to {self.provider} failed: {_api_error}. "
+                    f"API call to {self.provider} failed ({type(e).__name__}). "
                     "Check that your API key is correct and that you have network access."
                 )
                 _prompt_tokens = sum(len(msg.get("content", "").split()) for msg in messages_to_send)
@@ -2453,6 +2350,42 @@ class RealAI:
                     "error": {"message": _api_error, "type": "upstream_api_error"},
                 }, capability=ModelCapability.TEXT_GENERATION.value, modality="text",
                    extra={"persona": self.persona, "source": "error", "error": _api_error})
+
+        # Local OpenAI-compatible HTTP endpoint (llama-server / Hive), no key needed.
+        # Hosted cloud (Render/Fly/...) never probes loopback llama-server: same unconditional deny as
+        # cloud_fallback.vulkan_forward_enabled(). Local :8000 is unaffected.
+        try:
+            from realai.cloud_fallback import is_hosted_cloud as _is_hosted_cloud
+
+            _hosted = bool(_is_hosted_cloud())
+        except Exception:
+            _hosted = False
+        if not _hosted and os.environ.get("REALAI_LOCAL_HTTP_FALLBACK", "1").strip().lower() not in {"0", "false", "no"}:
+            try:
+                from realai.local_media import local_chat as _local_chat
+
+                _lc = _local_chat(
+                    messages_to_send,
+                    max_tokens=int(max_tokens or 512),
+                    temperature=float(temperature if temperature is not None else 0.7),
+                )
+            except Exception:
+                _lc = {"ok": False}
+            if _lc.get("ok"):
+                _raw = _lc.get("raw") or {}
+                return self._with_metadata({
+                    "id": _raw.get("id") or f"chatcmpl-http-{int(time.time())}",
+                    "object": "chat.completion",
+                    "created": int(time.time()),
+                    "model": _lc.get("model") or self.model_name,
+                    "choices": [{
+                        "index": 0,
+                        "message": {"role": "assistant", "content": _lc.get("text") or ""},
+                        "finish_reason": "stop",
+                    }],
+                    "usage": _raw.get("usage") or {},
+                }, capability=ModelCapability.TEXT_GENERATION.value, modality="text",
+                   extra={"persona": self.persona, "source": "local_http", "endpoint": _lc.get("endpoint")})
 
         # Placeholder when neither local GGUF nor cloud fallback can generate.
         missing_credentials_msg = _cloud_fallback.missing_generation_message(
@@ -9155,7 +9088,6 @@ class RealAIClient:
         self.reasoning = self.Reasoning(self.model)
         self.synthesis = self.Synthesis(self.model)
         self.reflection = self.Reflection(self.model)
-        self.agents = self.Agents(self.model)
 
         # Advanced capabilities
         self.math = self.Math(self.model)
@@ -9201,6 +9133,11 @@ class RealAIClient:
 
         # Agent Orchestration and Hive Mind System
         self.agents = self.Agents(self.model)
+
+        # Route capabilities to real local abilities where they exist; label the rest honestly.
+        from realai.limitless_wiring import wire_client
+
+        wire_client(self)
 
     class ChatCompletions:
         """Chat completions interface."""
@@ -9434,19 +9371,6 @@ class RealAIClient:
         def improve(self, focus: str = "general") -> Dict[str, Any]:
             """Return targeted improvement suggestions for the given focus area."""
             return self.model.self_reflect(focus=focus)
-
-    class Agents:
-        """Multi-agent orchestration interface."""
-        def __init__(self, model: RealAI):
-            self.model = model
-
-        def run(self, task: str, **kwargs) -> Dict[str, Any]:
-            """Run multiple specialised agents on a complex task."""
-            return self.model.orchestrate_agents(task=task, **kwargs)
-
-        def coordinate(self, task: str, roles: Optional[List[str]] = None) -> Dict[str, Any]:
-            """Coordinate a specific set of agent roles for a task."""
-            return self.model.orchestrate_agents(task=task, agent_roles=roles)
 
     class Personas:
         """Persona profile management interface."""
@@ -9869,6 +9793,28 @@ class RealAIClient:
         """Agent orchestration and hive mind interface."""
         def __init__(self, model: RealAI):
             self.model = model
+
+        def run(self, task: str, **kwargs) -> Dict[str, Any]:
+            """Run a task through the hive planner/specialist/critic cycle.
+
+            Uses ``abilities.hive_orchestrator`` (real router + specialist cycle);
+            falls back to the in-process multi-agent coordinator.
+            """
+            from realai.limitless_wiring import call_ability
+
+            res = call_ability("hive_orchestrator", task, {"agent": kwargs.pop("agent", "researcher"), **kwargs})
+            inner = (res or {}).get("result") if isinstance((res or {}).get("result"), dict) else {}
+            if res is not None and res.get("ok", True) and not res.get("error") and inner.get("ok", True):
+                res.setdefault("status", "success")
+                return res
+            out = self.model.orchestrate_agents(task=task, agent_roles=kwargs.get("agent_roles"))
+            if isinstance(out, dict):
+                out.setdefault("hive_error", (res or {}).get("error") or inner.get("error"))
+            return out
+
+        def coordinate(self, task: str, roles: Optional[List[str]] = None) -> Dict[str, Any]:
+            """Coordinate specific agent roles on a task."""
+            return self.model.orchestrate_agents(task=task, agent_roles=roles)
 
         def orchestrate(self, task: str, agents: Optional[List[str]] = None,
                        workflow_type: str = "sequential", **kwargs) -> Dict[str, Any]:

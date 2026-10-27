@@ -9,7 +9,8 @@
 
 Env:
   REALAI_HIVE_URL   default http://127.0.0.1:8001
-  REALAI_API_KEY    optional Bearer token
+  REALAI_API_KEY    Bearer token for hosts that require it (Render api_server).
+                    Never logged. First comma-separated segment is sent.
 """
 
 from __future__ import annotations
@@ -28,7 +29,18 @@ SERVER_VERSION = "1.0.0"
 PROTOCOL_VERSION = "2024-11-05"
 
 HIVE_URL = (os.environ.get("REALAI_HIVE_URL") or "http://127.0.0.1:8001").rstrip("/")
-API_KEY = (os.environ.get("REALAI_API_KEY") or "").strip()
+
+
+def _service_key() -> str:
+    """First REALAI_API_KEY segment. The value is never logged."""
+    raw = os.environ.get("REALAI_API_KEY") or ""
+    part = raw.split(",")[0].strip()
+    if len(part) >= 2 and part[0] == part[-1] and part[0] in ("'", '"'):
+        part = part[1:-1].strip()
+    return part
+
+
+API_KEY = _service_key()
 
 
 def _configure_stdio() -> None:
@@ -67,8 +79,9 @@ def _hive_request(
         raw = json.dumps(body).encode("utf-8")
         data = raw
         headers["Content-Type"] = "application/json"
-    if API_KEY:
-        headers["Authorization"] = "Bearer " + API_KEY
+    service_key = _service_key()
+    if service_key:
+        headers["Authorization"] = "Bearer " + service_key
     req = urllib.request.Request(url, data=data, headers=headers, method=method.upper())
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:

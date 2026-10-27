@@ -12,6 +12,7 @@ Single answers. If two files disagree, this table wins.
 | Where is hive gold? | `realai/orchestration/v3_orchestrator.py` (~153 KB) |
 | Where is bridge gold? | `realai/orchestration/v3_runtime_bridge.py` (~81 KB) |
 | Where are plugins? | `realai/plugins` |
+| Where is provider config? | `realai/providers/config.py` (gold: `PROVIDER_CONFIGS`, `PROVIDER_ENV_VARS`, `_detect_provider`). Local Vulkan first; cloud entries are optional and need no key by default. `realai`, `realai._v1_client`, `realai.sdk` only re-export. |
 | Where are organs? | `modules/organs` |
 | Where is the honesty map? | `realai/ability_catalog.py` |
 | Where are weights? | Local disks only. Never git. |

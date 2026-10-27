@@ -15,6 +15,9 @@ from realai._v1_client import RealAI, RealAIClient
 __all__ = [
     "RealAI",
     "RealAIClient",
+    "LOCAL_PROVIDER",
+    "PROVIDER_CONFIGS",
+    "PROVIDER_ENV_VARS",
     "coverage",
     "hive_status",
     "register_plugins",
@@ -46,8 +49,18 @@ def coverage() -> dict[str, Any]:
     return _coverage()
 
 
+_PROVIDER_CONFIG_NAMES = frozenset(
+    {"LOCAL_PROVIDER", "PROVIDER_CONFIGS", "PROVIDER_ENV_VARS", "_detect_provider"}
+)
+
+
 def __getattr__(name: str) -> Any:
     # Lazy escape hatch for rarely used dump symbols without importing orch at import time.
+    if name in _PROVIDER_CONFIG_NAMES:
+        # Gold: realai/providers/config.py (provider config authority).
+        from realai.providers import config as _provider_config
+
+        return getattr(_provider_config, name)
     if name in {"RealAI", "RealAIClient"}:
         from realai import _v1_client
 

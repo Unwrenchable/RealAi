@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getEnv } from "@/lib/env";
+import { backendAuthHeaders, getEnv } from "@/lib/env";
 import { rateLimit } from "@/lib/ratelimit";
 import type { ChatRequest } from "@/lib/realai";
 
@@ -45,13 +45,8 @@ export async function POST(req: NextRequest) {
 
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
+      ...backendAuthHeaders(settings.apiKey),
     };
-
-    // Prefer the server-side env key; fall back to the user-supplied one.
-    const apiKey = process.env.REALAI_API_KEY || settings.apiKey;
-    if (apiKey) {
-      headers["Authorization"] = `Bearer ${apiKey}`;
-    }
 
     const backendRes = await fetch(`${env.NEXT_PUBLIC_API_URL}/v1/chat/completions`, {
       method: "POST",

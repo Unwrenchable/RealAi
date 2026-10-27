@@ -44,6 +44,20 @@ CKPT = Path(os.environ.get("TRAIN_OUTPUT_DIR") or r"C:\models\checkpoints_lora")
 REPORT = ROOT / "scan_results" / "TRAIN_TO_CHAT_GGUF.json"
 
 
+def _dtype_kwargs(dtype):
+    """dtype= on transformers >= 4.56, torch_dtype= before (older releases silently ignore dtype=)."""
+    try:
+        from realai.training.hf_compat import dtype_kwargs
+    except ImportError:
+        import re
+
+        import transformers
+
+        v = tuple(int(x) for x in re.findall(r"\d+", transformers.__version__)[:2])
+        return {"dtype" if v >= (4, 56) else "torch_dtype": dtype}
+    return dtype_kwargs(dtype)
+
+
 def utc() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -60,12 +74,27 @@ def load_preset(name: str) -> Dict[str, Any]:
     return presets[name]
 
 
-def run(cmd: list[str], timeout: int = 0) -> None:
+def converter_env() -> Dict[str, str]:
+    """Environment for llama.cpp's convert_hf_to_gguf.py.
+
+    The training launchers set PYTHONSAFEPATH=1 (so ``python -m`` never imports a stale realai copy from
+    the data folder). That also stops Python from putting the script's own folder on sys.path, and newer
+    llama.cpp converters import their sibling ``conversion`` package from there
+    (ModuleNotFoundError: No module named 'conversion'). Drop it for the converter only.
+    """
+    env = dict(os.environ)
+    env.pop("PYTHONSAFEPATH", None)
+    return env
+
+
+def run(cmd: list[str], timeout: int = 0, env: Optional[Dict[str, str]] = None) -> None:
     log("RUN " + " ".join(cmd))
     kwargs: Dict[str, Any] = {
         "cwd": str(ROOT),
         "check": True,
     }
+    if env is not None:
+        kwargs["env"] = env
     if timeout > 0:
         kwargs["timeout"] = timeout
     subprocess.run(cmd, **kwargs)
@@ -111,7 +140,7 @@ def merge_adapter(base_model: str, adapter_dir: Path, merged_dir: Path) -> Path:
     base = AutoModelForCausalLM.from_pretrained(
         base_model,
         trust_remote_code=True,
-        torch_dtype=torch.float16,
+        **_dtype_kwargs(torch.float16),
         low_cpu_mem_usage=True,
         device_map="cpu",
     )
@@ -151,12 +180,13 @@ def convert_to_gguf(merged_dir: Path, out_gguf: Path) -> Path:
         "f16",
     ]
     log("converting HF → GGUF f16 (slow for 7B)…")
+    env = converter_env()
     try:
-        run(cmd)
+        run(cmd, env=env)
     except subprocess.CalledProcessError:
         # older CLI variants
         cmd2 = [py, str(convert), str(merged_dir), "--outtype", "f16"]
-        run(cmd2)
+        run(cmd2, env=env)
         # find produced gguf beside merged_dir
         produced = list(merged_dir.glob("*.gguf")) + list(merged_dir.parent.glob("*.gguf"))
         if not produced:

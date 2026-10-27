@@ -2,11 +2,13 @@ services:
   - type: web
     name: realai-api
     runtime: python3
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements-render.txt
     startCommand: python -m realai.api_server
     envVars:
       - key: PYTHON_VERSION
         value: 3.11
+      # REALAI_API_KEY is required in production. Set it in the Render dashboard
+      # (secret). Comma-separate multiple keys. Do not commit the value.
     healthCheckPath: /health
     routes:
       - type: rewrite

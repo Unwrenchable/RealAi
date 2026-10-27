@@ -49,7 +49,8 @@ echo CTX=%REALAI_CTX%  NGL=%REALAI_NGL%
   --port 8080 ^
   -c %REALAI_CTX% ^
   -ngl %REALAI_NGL% ^
-  --jinja
+  --device Vulkan1 ^
+  --jinja -fa off
 
 pause
 endlocal
