@@ -296,9 +296,6 @@ importers:
       remark-gfm:
         specifier: ^4.0.0
         version: 4.0.1
-      zod:
-        specifier: ^4.6.6
-        version: 4.6.6
     devDependencies:
       '@types/node':
         specifier: ^20
