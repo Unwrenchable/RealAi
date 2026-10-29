@@ -20,7 +20,7 @@ ABILITY = {
     "id": "ci_failure_classify",
     "name": "ci_failure_classify",
     "type": "ability",
-    "status": "PARTIAL",
+    "status": "LIVE",
     "source": "RealAI hive: recurring bot CI-fix work",
     "dest": "abilities/ci_failure_classify.py",
     "capabilities": ["ci_failure_classify", "ci_triage", "read_only"],
@@ -46,17 +46,28 @@ _RULES: List[Tuple[str, str, "re.Pattern[str]", str]] = [
      "a dependency is missing in CI: add it to requirements-ci.txt / the test extras, then re-run"),
     ("env-missing", "command_missing", re.compile(r"command not found|is not recognized as an internal or external command|ENOENT.{0,60}spawn", re.I),
      "a tool is missing on the runner: add the setup step or install it in the workflow, then re-run"),
-    ("env-missing", "env_var_missing", re.compile(r"(?:missing|undefined|unset|not set)[^\n]{0,40}(?:environment variable|env var|\benv\b)|(?:environment variable|env var)[^\n]{0,60}(?:missing|not set|required|undefined)|KeyError: ['\"][A-Z][A-Z0-9_]{2,}['\"]", re.I),
+    ("env-missing", "env_var_missing", re.compile(r"(?:missing|undefined|unset|not set)[^\n]{0,40}(?:environment variable|env var|\benv\b)|(?:environment variable|env var)[^\n]{0,60}(?:missing|not set|required|undefined)|(?-i:KeyError: ['\"][A-Z][A-Z0-9_]{2,}['\"])", re.I),
      "a required env var/secret is not set in CI: add a safe test value or mock in the workflow (never commit real values)"),
     ("test-failure", "pytest_failed", re.compile(r"=+ .*\b\d+ failed\b|^FAILED [\w/.\-]+::|AssertionError", re.M),
      "reproduce with the failing test id locally, fix the code or the test, push"),
+    ("test-failure", "repo_runner_failed", re.compile(r"^Test Results: \d+ passed, [1-9]\d* failed|^\u2717 test_\w+", re.M),
+     "find the \u2717 test lines in the log, reproduce that test locally, fix, push"),
     ("test-failure", "js_test_failed", re.compile(r"Tests?:\s+\d+ failed|✕|ELIFECYCLE.{0,40}test|npm ERR! (?:code ELIFECYCLE|Test failed)|● .+ › ", re.I),
      "run the failing test file locally, fix, push"),
 ]
 
 
+# GitHub Actions `gh run view --log[-failed]` prefixes every line with "job<TAB>step<TAB>timestamp ";
+# raw step logs prefix "2026-10-29T12:23:47.6418363Z ". Strip both so ^-anchored rules (pytest FAILED) see the line.
+_GHA_PREFIX = re.compile(r"^(?:[^\t\n]*\t[^\t\n]*\t)?\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z ?", re.M)
+
+
+def _strip_ci_prefixes(text: str) -> str:
+    return _GHA_PREFIX.sub("", text)
+
+
 def classify(log: str, branch_behind: bool = False) -> Dict[str, Any]:
-    text = (log or "")[-MAX_LOG_CHARS:]
+    text = _strip_ci_prefixes((log or "")[-MAX_LOG_CHARS:])
     for cls, rule, rx, step in _RULES:
         if rx.search(text):
             return {"ok": True, "ability": "ci_failure_classify", "read_only": True,
