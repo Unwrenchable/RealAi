@@ -656,7 +656,8 @@ def execute(req_id: str, *, executor: str = "human") -> Dict[str, Any]:
     try:
         if _sha(prev) != pl.get("preview_sha"):
             raise Refused("preview hash mismatch")
-        if "args_sha" in pl and _sha({"action": action, "args": norm}) != pl["args_sha"]:
+        # fail closed: a missing args_sha (stripped from the store, or a pre-#210 card) is a mismatch
+        if not pl.get("args_sha") or _sha({"action": action, "args": norm}) != pl["args_sha"]:
             raise Refused("args hash mismatch")
         _money_check(action, norm)
         if action in ("search_replace", "write_file"):

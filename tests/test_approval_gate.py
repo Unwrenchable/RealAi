@@ -304,3 +304,21 @@ def test_large_diff_preview_is_cut_with_notice(ws):
     assert prev["notice"] == f"diff truncated, {prev['diff_bytes']} bytes total" and prev["diff_bytes"] > 20000
     small = g.request("write_file", {"file_path": "s.txt", "content": "hi\n"})["preview"]
     assert "notice" not in small and "diff_truncated" not in small
+
+
+@pytest.mark.parametrize("strip", ["pop", "empty", "none"])
+def test_missing_args_sha_fails_closed_even_with_untampered_args(ws, strip):
+    g = _gate()
+    rid = g.request("search_replace", {"file_path": "README.md", "old_string": "hello", "new_string": "bye"})["approval_id"]
+    assert g.set_status(rid, "approved", by="travis")
+
+    def drop(pl):
+        if strip == "pop":
+            pl.pop("args_sha", None)
+        else:
+            pl["args_sha"] = "" if strip == "empty" else None
+
+    _tamper(ws, rid, drop)
+    out = g.execute(rid)
+    assert out["ok"] is False and "args hash mismatch" in json.dumps(out)
+    assert (ws / "README.md").read_text() == "# Title\nhello world\n"
