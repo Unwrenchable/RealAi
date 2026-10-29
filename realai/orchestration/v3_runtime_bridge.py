@@ -2552,12 +2552,22 @@ def _ws_err(e: OSError, default: str = "io_error") -> WorkspacePathError:
     return WorkspacePathError(default)
 
 
+def _ws_guard(root: Path, parts: List[str]) -> str:
+    """Normalized absolute path for root/parts, guaranteed under root (also the sanitizer CodeQL recognizes)."""
+    root_s = os.path.normpath(str(root))
+    full = os.path.normpath(os.path.join(root_s, *parts))
+    if full != root_s and not full.startswith(root_s.rstrip("\\/") + os.sep):
+        raise WorkspacePathError("outside_workspace")
+    return full
+
+
 # ---- POSIX fd walk -------------------------------------------------------------
 def _px_open_dir(root: Path, parts: List[str], *, create: bool = False) -> int:
     flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0)
-    dfd = os.open(str(root), os.O_RDONLY | os.O_DIRECTORY | getattr(os, "O_CLOEXEC", 0))
+    dfd = os.open(_ws_guard(root, []), os.O_RDONLY | os.O_DIRECTORY | getattr(os, "O_CLOEXEC", 0))
     try:
-        for comp in parts:
+        for i in range(len(parts)):
+            comp = os.path.basename(_ws_guard(root, parts[: i + 1]))
             try:
                 nfd = os.open(comp, flags, dir_fd=dfd)
             except FileNotFoundError:
@@ -2580,7 +2590,8 @@ def _px_open_dir(root: Path, parts: List[str], *, create: bool = False) -> int:
         raise
 
 
-def _px_open_leaf(dfd: int, name: str, flags: int, mode: int = 0o644) -> int:
+def _px_open_leaf(dfd: int, root: Path, parts: List[str], flags: int, mode: int = 0o644) -> int:
+    name = os.path.basename(_ws_guard(root, parts))
     try:
         return os.open(name, flags | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0), mode, dir_fd=dfd)
     except OSError as e:
@@ -2604,9 +2615,9 @@ def _nt_is_reparse(p: Path) -> bool:
 
 
 def _nt_walk(root: Path, parts: List[str], *, create_parents: bool = False) -> Path:
-    cur = root
-    for i, comp in enumerate(parts):
-        cur = cur / comp
+    cur = Path(_ws_guard(root, []))
+    for i in range(len(parts)):
+        cur = Path(_ws_guard(root, parts[: i + 1]))
         try:
             if _nt_is_reparse(cur):
                 raise WorkspacePathError("symlink_not_allowed")
@@ -2677,7 +2688,7 @@ def ws_open_read(root: Path, parts: List[str]) -> int:
     if _WS_POSIX:
         dfd = _px_open_dir(root, parts[:-1])
         try:
-            fd = _px_open_leaf(dfd, parts[-1], os.O_RDONLY | getattr(os, "O_NONBLOCK", 0))
+            fd = _px_open_leaf(dfd, root, parts, os.O_RDONLY | getattr(os, "O_NONBLOCK", 0))
         finally:
             os.close(dfd)
     else:
@@ -2736,14 +2747,14 @@ def ws_resolve(root: Path, rel: Any) -> Path:
         if parts:
             dfd = _px_open_dir(root, parts[:-1])
             try:
-                st = os.stat(parts[-1], dir_fd=dfd, follow_symlinks=False)
+                st = os.stat(os.path.basename(_ws_guard(root, parts)), dir_fd=dfd, follow_symlinks=False)
                 if _stat.S_ISLNK(st.st_mode):
                     raise WorkspacePathError("symlink_not_allowed")
             except FileNotFoundError:
                 pass
             finally:
                 os.close(dfd)
-        return root.joinpath(*parts)
+        return Path(_ws_guard(root, parts))
     return _nt_walk(root, parts) if parts else root
 
 
@@ -2784,7 +2795,7 @@ def _ws_scandir(root: Path, parts: List[str]):
         finally:
             os.close(dfd)
         return ents
-    d = _nt_walk(root, parts) if parts else root
+    d = _nt_walk(root, parts) if parts else Path(_ws_guard(root, []))
     try:
         if not _stat.S_ISDIR(os.lstat(str(d)).st_mode):
             raise WorkspacePathError("not_a_directory")
@@ -2901,7 +2912,7 @@ def ws_write_bytes(root: Path, parts: List[str], data: bytes, *, append: bool = 
     if _WS_POSIX:
         dfd = _px_open_dir(root, parts[:-1], create=True)
         try:
-            fd = _px_open_leaf(dfd, parts[-1], flags | getattr(os, "O_NONBLOCK", 0))
+            fd = _px_open_leaf(dfd, root, parts, flags | getattr(os, "O_NONBLOCK", 0))
         finally:
             os.close(dfd)
     else:
