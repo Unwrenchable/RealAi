@@ -3640,12 +3640,21 @@ class Handler(BaseHTTPRequestHandler):
             except json.JSONDecodeError:
                 self._json(400, {"error": "invalid_json"})
                 return
-            name = body.get("name") or body.get("tool")
+            name = body.get("name") if isinstance(body, dict) else None
+            if name is None and isinstance(body, dict):
+                name = body.get("tool")
             if not name:
                 self._json(400, {"error": "missing_tool_name"})
                 return
+            if not isinstance(name, str):
+                self._json(400, {"error": "bad_request"})
+                return
+            try:
+                _bind = str(self.server.server_address[0])
+            except Exception:
+                _bind = None
             denied = _tool_auth.check(
-                str(name), self.headers, (self.client_address or ("?",))[0]
+                name, self.headers, (self.client_address or ("?",))[0], bind_host=_bind
             )
             if denied is not None:
                 self._json(denied[0], denied[1])
@@ -3835,6 +3844,9 @@ def main(argv: Optional[List[str]] = None) -> int:
     ap.add_argument("--host", default=os.environ.get("HOST", "127.0.0.1"))
     ap.add_argument("--port", type=int, default=int(os.environ.get("ORCH_PORT", "8001")))
     args = ap.parse_args(argv)
+    # Fail closed: production or non-loopback bind forces the tools gate on.
+    _tool_auth.set_bind_host(args.host)
+    _tool_auth.startup_check(args.host)
 
     try:
         from realai.bot.boot import ensure_bot_registered, resolve_local_model

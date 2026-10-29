@@ -5,7 +5,7 @@ The route lives in `realai/orchestration/v3_orchestrator.py` (`Handler.do_POST`,
 `modules/orchestrators/nested_realai_v3_orchestrator.py` and `realai/orchestrators/nested_realai_v3_orchestrator.py` are older copies that serve their own `/v1/tools/execute`; they are **not** gated by this change (follow-up).
 `realai/server/unified_routes.py` has its own audited envelope for the same path, which does not run tools, so it is not gated here.
 
-The gate is `realai/orchestration/tool_auth.py`. It is **off by default**, so nothing changes until you turn it on.
+The gate is `realai/orchestration/tool_auth.py`. It is **off by default on a loopback bind**. It is **forced on** (fail closed) when `REALAI_ENV=production` or the orchestrator binds a non-loopback host; in that case the orchestrator refuses to start unless `REALAI_TOOLS_TOKEN` is set.
 
 ## Settings
 
@@ -13,25 +13,27 @@ The gate is `realai/orchestration/tool_auth.py`. It is **off by default**, so no
 |---|---|---|
 | `REALAI_TOOLS_AUTH` | off | `1`/`true`/`yes`/`on` turns the gate on |
 | `REALAI_TOOLS_TOKEN` | unset | Shared secret. Callers send `Authorization: Bearer <token>`. Compared with `hmac.compare_digest`. Never logged. |
-| `REALAI_TOOLS_ALLOW` | read-only core tools + every `PARTIAL` ability | Comma-separated tool names. Replaces the default list. |
-| `REALAI_TOOLS_RATE` / `REALAI_TOOLS_RATE_WINDOW` | 60 / 60 s | Per-client (by remote IP) fixed-window limit |
+| `REALAI_TOOLS_ALLOW` | unset (default allowlist = read-only core tools only) | Comma-separated extra tool names, added to the read-only core set. No other tool (e.g. `realai_cli_bridge`, image/video generation, `self_evolving`, `training_pipeline`, `learn_git`) is allowed unless listed here. |
+| `REALAI_ENV` | unset | `production` forces the gate on |
+| `REALAI_TOOLS_RATE` / `REALAI_TOOLS_RATE_WINDOW` | 60 / 60 s | Per-client (by remote IP) fixed-window limit; unauthenticated calls use a separate pre-auth bucket; at most 4096 tracked clients (oldest evicted) |
 
 Responses when the gate is on:
 
-* `503 tools_auth_misconfigured`: flag on but no token set (fail closed).
+* `400 bad_request`: tool name is not a string.
+* `503 unavailable`: gate on but no token set (fail closed).
 * `429 rate_limited`: client over the limit.
 * `401 unauthorized`: missing, malformed or wrong bearer token.
-* `403 tool_not_allowed`: tool not on the allowlist.
+* `403 forbidden`: tool not on the allowlist. (401/403/503 bodies are generic.)
 
 Every call writes one line to the `realai.tools_audit` logger:
-`tools_execute ability=<name> result=<code_reason> client=<ip>`. No token, no arguments, no results.
+`tools_execute ability=<name> result=<code_reason> client=<ip>`. Name and client are stripped to `[A-Za-z0-9._:-]` and capped (120 / 64 chars) to stop log injection. No token, no arguments, no results.
 
 Default read-only core tools: `list_agents`, `agent_tools_assess`, `ability.pr_triage`, `ability.vuln_triage`,
 `ability.ci_failure_classify`, `ability.coach`, `rackup_invoke`. Anything else (for example `aura_memory`,
 `hive_run`, `multi_agent_run`, `self_heal_*`) must be added through `REALAI_TOOLS_ALLOW`.
 
 **Bind host:** the orchestrator already takes `--host` / `HOST` and defaults to `127.0.0.1`. Keep it on `127.0.0.1`.
-This change does not touch the bind host.
+Binding anything else forces the gate on and requires `REALAI_TOOLS_TOKEN` at startup.
 
 ## Caller list (Step A, 2026-10-29)
 

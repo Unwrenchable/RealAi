@@ -55,7 +55,7 @@ def test_right_token_allowed():
 
 def test_non_allowlisted_403():
     code, body = tool_auth.check("self_heal_promote", hdr(), "c", env=env())
-    assert code == 403 and body["error"] == "tool_not_allowed"
+    assert code == 403 and body["error"] == "forbidden"
 
 
 def test_default_allowlist_has_partial_abilities():
@@ -67,12 +67,12 @@ def test_default_allowlist_has_partial_abilities():
 def test_allow_override():
     e = env(REALAI_TOOLS_ALLOW="foo, bar")
     assert tool_auth.check("foo", hdr(), "c", env=e) is None
-    assert tool_auth.check(ALLOWED, hdr(), "c", env=e)[0] == 403
+    assert tool_auth.check("self_heal_promote", hdr(), "c", env=e)[0] == 403
 
 
 def test_flag_on_no_token_configured_503():
     code, body = tool_auth.check(ALLOWED, hdr(), "c", env=env(REALAI_TOOLS_TOKEN=None))
-    assert code == 503 and "REALAI_TOOLS_TOKEN" in body["message"]
+    assert code == 503 and body == {"error": "unavailable"}
     code, _ = tool_auth.check(ALLOWED, hdr(), "c", env=env(REALAI_TOOLS_TOKEN=""))
     assert code == 503
 
@@ -110,3 +110,84 @@ def test_route_is_wired():
     )
     i = src.index('if path == "/v1/tools/execute":')
     assert "_tool_auth.check(" in src[i : i + 1500]
+
+
+# --- Security review of #195: fail-closed, sanitizing, limiter cap ---
+
+
+def test_default_allowlist_is_read_only_only():
+    assert tool_auth.default_allowlist() == tool_auth.READ_ONLY_TOOLS
+    for t in ("ability.realai_cli_bridge", "ability.self_evolving", "ability.training_pipeline", "ability.learn_git"):
+        assert t not in tool_auth.allowlist({})
+
+
+def test_allow_env_adds_extras():
+    e = env(REALAI_TOOLS_ALLOW="foo")
+    assert tool_auth.check("foo", hdr(), "c", env=e) is None
+    assert tool_auth.check(ALLOWED, hdr(), "c", env=e) is None
+
+
+def test_forced_on_in_production():
+    e = {"REALAI_ENV": "production"}
+    code, _ = tool_auth.check(ALLOWED, {}, "c", env=e)
+    assert code == 503
+    e["REALAI_TOOLS_TOKEN"] = FAKE
+    assert tool_auth.check(ALLOWED, {}, "c", env=e)[0] == 401
+    assert tool_auth.check(ALLOWED, hdr(), "c", env=e) is None
+
+
+@pytest.mark.parametrize("host", ["0.0.0.0", "192.168.1.5", "", "::"])
+def test_forced_on_non_loopback_bind(host):
+    assert tool_auth.enabled({}, bind_host=host)
+    assert tool_auth.check(ALLOWED, {}, "c", env={"REALAI_TOOLS_TOKEN": FAKE}, bind_host=host)[0] == 401
+
+
+@pytest.mark.parametrize("host", ["127.0.0.1", "localhost", "::1"])
+def test_loopback_bind_not_forced(host):
+    assert not tool_auth.enabled({}, bind_host=host)
+
+
+def test_startup_refuses_without_token():
+    with pytest.raises(SystemExit):
+        tool_auth.startup_check("0.0.0.0", env={})
+    with pytest.raises(SystemExit):
+        tool_auth.startup_check("127.0.0.1", env={"REALAI_ENV": "production"})
+    tool_auth.startup_check("0.0.0.0", env={"REALAI_TOOLS_TOKEN": FAKE})
+    tool_auth.startup_check("127.0.0.1", env={})
+
+
+def test_audit_log_injection_sanitized(caplog):
+    caplog.set_level(logging.INFO)
+    tool_auth.check("x\nresult=200_allowed client=1.2.3.4" + "A" * 500, hdr(), "evil\r\nclient=9", env=env())
+    lines = [r.getMessage() for r in caplog.records]
+    assert len(lines) == 1 and "\n" not in lines[0] and "\r" not in lines[0]
+    ability = lines[0].split("ability=", 1)[1].split(" ", 1)[0]
+    assert len(ability) <= 120
+    assert lines[0].count("result=") == 1 and lines[0].count("client=") == 1
+    assert tool_auth.safe("a b\n<c>;d") == "abcd"
+
+
+def test_non_string_tool_400():
+    assert tool_auth.check(["shell"], hdr(), "c", env=env())[0] == 400
+
+
+def test_generic_bodies():
+    assert tool_auth.check(ALLOWED, {}, "c", env=env())[1] == {"error": "unauthorized"}
+    assert tool_auth.check("shell", hdr(), "c", env=env())[1] == {"error": "forbidden"}
+    assert tool_auth.check(ALLOWED, hdr(), "c", env=env(REALAI_TOOLS_TOKEN=""))[1] == {"error": "unavailable"}
+
+
+def test_limiter_cap_and_eviction():
+    rl = tool_auth.RateLimiter(limit=5, window=60)
+    for i in range(50000):
+        rl.allow("10.0.%d.%d" % (i // 256, i % 256), now=0)
+    assert len(rl._hits) <= tool_auth.MAX_CLIENTS
+    assert "10.0.0.0" not in rl._hits
+
+
+def test_pre_auth_bucket_separate():
+    e = env(REALAI_TOOLS_RATE="2")
+    for _ in range(2):
+        assert tool_auth.check(ALLOWED, {}, "a", env=e)[0] == 401
+    assert tool_auth.check(ALLOWED, {}, "a", env=e)[0] == 429
+    assert tool_auth.check(ALLOWED, hdr(), "a", env=e) is None
