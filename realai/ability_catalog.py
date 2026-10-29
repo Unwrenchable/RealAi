@@ -824,9 +824,9 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "name": "PR triage (hive, read-only)",
         "pillar": "ops",
         "keywords": ["pr triage", "merge readiness", "pull request", "mergeable", "needs rebase"],
-        "status": "PARTIAL",
+        "status": "LIVE",
         "status_note": (
-            "abilities/pr_triage.py turns PR facts (state, mergeable, checks) into mergeable | needs-rebase | failing-check | needs-owner plus a reason. Pure function: read-only, no network, no file writes, no merge or approve powers. PARTIAL until the owner promotes it."
+            "abilities/pr_triage.py turns PR facts (state, mergeable, checks) into mergeable | needs-rebase | failing-check | needs-owner plus a reason. Pure function: read-only, no network, no file writes, no merge or approve powers. LIVE: golden fixtures + HTTP integration test (tests/hive_triage/test_pr_triage_live.py)."
         ),
         "live_path": 'POST /v1/tools/execute {"name": "pr_triage", "arguments": {"pr": {...}}}',
         "modules": ["abilities/pr_triage.py"],
@@ -836,9 +836,9 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "name": "Vulnerability triage (hive, read-only)",
         "pillar": "ops",
         "keywords": ["vuln triage", "npm audit", "dependabot", "override", "major bump"],
-        "status": "PARTIAL",
+        "status": "LIVE",
         "status_note": (
-            "abilities/vuln_triage.py groups npm-audit JSON by package and suggests an override or a major bump (majors flagged for the owner). Pure function: read-only, no network, no file writes, no merge or approve powers. PARTIAL until the owner promotes it."
+            "abilities/vuln_triage.py groups npm-audit JSON by package and suggests an override or a major bump (majors flagged for the owner). Pure function: read-only, no network, no file writes, no merge or approve powers. LIVE: golden fixtures + HTTP integration test (tests/hive_triage/test_vuln_triage_live.py)."
         ),
         "live_path": 'POST /v1/tools/execute {"name": "vuln_triage", "arguments": {"audit": {...}}}',
         "modules": ["abilities/vuln_triage.py"],
@@ -948,13 +948,19 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
     },
     {
         "id": "workspace_info",
-        "name": "Workspace info / catalog (read-only, REALAI_HOME)",
+        "name": "Workspace info / file tools (confined, read-only by default)",
         "pillar": "advanced",
-        "keywords": ["workspace info", "workspace catalog"],
+        "keywords": ["workspace info", "workspace catalog", "workspace_read", "workspace_list", "workspace_grep"],
         "status": "PARTIAL",
-        "status_note": "Promoted from RealAi-unified 763a4c2. Opt-in: not in FIRST_PARTY; HTTP route only with REALAI_UNIFIED_ROUTES=1. No network, no outside keys.",
-        "live_path": "POST /v1/workspace/catalog (opt-in)",
-        "modules": ["realai/plugins/workspace_info/__init__.py"],
+        "status_note": (
+            "PARTIAL until Security re-approves #210 (HIGH finding fixed, re-review pending). B3 piece 1: workspace_list/read/grep via POST /v1/tools/execute, confined to the workspace root "
+            "(no traversal, absolute/UNC paths or symlink hops), size-capped, behind REALAI_TOOLS_AUTH "
+            "auth/allowlist/audit. workspace_write only when listed in REALAI_TOOLS_ALLOW. "
+            "Integration test: tests/test_workspace_tools_integration.py. The /v1/workspace/catalog route "
+            "stays opt-in (REALAI_UNIFIED_ROUTES=1)."
+        ),
+        "live_path": "POST /v1/tools/execute workspace_list|workspace_read|workspace_grep",
+        "modules": ["realai/orchestration/v3_runtime_bridge.py", "realai/plugins/workspace_info/__init__.py"],
     },
 ]
 

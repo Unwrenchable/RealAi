@@ -51,6 +51,9 @@ READ_ONLY_TOOLS: FrozenSet[str] = frozenset(
         "ability.ci_failure_classify",
         "ability.coach",
         "rackup_invoke",
+        "workspace_list",
+        "workspace_read",
+        "workspace_grep",
     }
 )
 

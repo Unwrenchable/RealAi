@@ -11,6 +11,9 @@ import pytest
 @pytest.fixture()
 def ws(tmp_path, monkeypatch):
     monkeypatch.setenv("REALAI_WORKSPACE", str(tmp_path))
+    # edits go through the workspace tools' controls (Security #210 MED 6)
+    monkeypatch.setenv("REALAI_TOOLS_WORKSPACE_ROOT", str(tmp_path))
+    monkeypatch.setenv("REALAI_TOOLS_ALLOW", "workspace_write")
     monkeypatch.setenv("REALAI_APPROVALS_STORE", str(tmp_path / ".approvals.json"))
     monkeypatch.setenv("APPROVALS_STORE", str(tmp_path / ".approvals.json"))
     monkeypatch.delenv("REALAI_APPROVALS_AUDIT", raising=False)
@@ -215,3 +218,89 @@ def test_self_heal_canonical_in_core_with_shims(ws, monkeypatch):
     r = core.run_curated_promote(apply=True)
     assert r["status"] == "pending" and r["action"] == "self_heal_curated_promote" and not called
     assert core.run_promote(apply=True)["status"] == "pending" and not called
+
+
+# ----------------------------------------------------------------------------- Security #210 follow-ups (a)-(c)
+def _tamper(ws, rid, fn):
+    store = ws / ".approvals.json"
+    data = json.loads(store.read_text())
+    for it in data["items"]:
+        if it["id"] == rid:
+            fn(it["payload"])
+    store.write_text(json.dumps(data))
+
+
+@pytest.mark.parametrize("drop_args_sha", [False, True])
+def test_redirected_file_path_in_store_is_refused(ws, drop_args_sha):
+    g = _gate()
+    (ws / "other.md").write_text("# Title\nhello world\n", encoding="utf-8")  # same sha -> stale check alone would pass
+    rid = g.request("search_replace", {"file_path": "README.md", "old_string": "hello", "new_string": "bye"})["approval_id"]
+    assert g.set_status(rid, "approved", by="travis")
+
+    def redirect(pl):
+        pl["args"]["file_path"] = "other.md"
+        if drop_args_sha:
+            pl.pop("args_sha", None)
+
+    _tamper(ws, rid, redirect)
+    out = g.execute(rid)
+    assert out["ok"] is False and "mismatch" in json.dumps(out)
+    assert (ws / "other.md").read_text() == "# Title\nhello world\n"
+    assert (ws / "README.md").read_text() == "# Title\nhello world\n"
+
+
+def test_tampered_new_string_in_store_is_refused(ws):
+    g = _gate()
+    rid = g.request("search_replace", {"file_path": "README.md", "old_string": "hello", "new_string": "bye"})["approval_id"]
+    assert g.set_status(rid, "approved", by="travis")
+    _tamper(ws, rid, lambda pl: pl["args"].__setitem__("new_string", "evil"))
+    assert g.execute(rid)["ok"] is False
+    assert (ws / "README.md").read_text() == "# Title\nhello world\n"
+
+
+def test_approvals_store_is_not_an_edit_target(ws):
+    g = _gate()
+    r = g.request("write_file", {"file_path": ".approvals.json", "content": "{}"})
+    assert r["ok"] is False and r["status"] == "refused"
+
+
+@pytest.mark.parametrize("name", [".ssh/config", ".AWS/credentials", ".docker/config.json", "vault.KDBX",
+                                  "infra/terraform.tfstate", ".htpasswd", "keypair-main.json", "Keypair.JSON",
+                                  "my_wallet_backup.json", "WALLET.json", ".approvals.json", "sub/.Approvals.Json"])
+def test_new_denylist_entries_refused(ws, name):
+    from realai.orchestration import v3_runtime_bridge as B
+
+    assert any(B.ws_denied_name(p) for p in name.split("/"))
+    r = _gate().request("write_file", {"file_path": name, "content": "x"})
+    assert r["ok"] is False and r["status"] == "refused"
+
+
+@pytest.mark.parametrize("name", ["wallet.md", "keypair.txt", "notes.json", "docs/aws.md"])
+def test_denylist_does_not_overreach(name):
+    from realai.orchestration import v3_runtime_bridge as B
+
+    assert not any(B.ws_denied_name(p) for p in name.split("/"))
+
+
+def test_size_cap_enforced_at_request_time(ws):
+    from realai.orchestration.v3_runtime_bridge import WS_MAX_WRITE_BYTES
+
+    g = _gate()
+    big = "a" * (WS_MAX_WRITE_BYTES + 1)
+    r = g.request("write_file", {"file_path": "big.txt", "content": big})
+    assert r["ok"] is False and "content_too_large" in r["error"]
+    r = g.request("search_replace", {"file_path": "README.md", "old_string": "hello", "new_string": big})
+    assert r["ok"] is False and "content_too_large" in r["error"]
+    assert not (ws / ".approvals.json").exists() or json.loads((ws / ".approvals.json").read_text())["items"] == []
+    ok = g.request("write_file", {"file_path": "fits.txt", "content": "a" * WS_MAX_WRITE_BYTES})
+    assert ok["ok"] is True and ok["status"] == "pending"
+
+
+def test_large_diff_preview_is_cut_with_notice(ws):
+    g = _gate()
+    content = "".join(f"line {i}\n" for i in range(5000))
+    prev = g.request("write_file", {"file_path": "long.txt", "content": content})["preview"]
+    assert len(prev["diff"]) == 20000 and prev["diff_truncated"] is True
+    assert prev["notice"] == f"diff truncated, {prev['diff_bytes']} bytes total" and prev["diff_bytes"] > 20000
+    small = g.request("write_file", {"file_path": "s.txt", "content": "hi\n"})["preview"]
+    assert "notice" not in small and "diff_truncated" not in small
