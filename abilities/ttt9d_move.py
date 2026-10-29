@@ -9,13 +9,13 @@ Call:  POST /v1/tools/execute {"name": "ttt9d_move", "arguments": {"state": {...
 Input (same schema as the JS engine's getMove(state, difficulty)):
     state = {"boards": [[9 x "X"|"O"|null] x 9], "activeBoard": 0..8 | null, "currentPlayer": "X"|"O"}
     difficulty = "easy" | "medium" | "hard" | "expert"   (default "medium")
-    optional: seed (int), iterations (int), commentary (bool), log (bool | path)
+    optional: seed (int), iterations (int, clamped), max_seconds (float, clamped), commentary (bool)
 Output:
     {"ok": true, "ability": "ttt9d_move", "move": {"board": b, "cell": c}, "eval": float in [-1, 1]
      (side-to-move perspective), "difficulty": ..., "iterations": n, "source": "realai",
      "legal_moves": n, ["commentary": str]}
 
-Optional training-data logging (off by default): set ``log`` true or REALAI_TTT9D_LOG=<path.jsonl>.
+Optional training-data logging (off by default): operator sets REALAI_TTT9D_LOG=1 (or a path); callers cannot enable it.
 Each call appends {"ts", "state", "difficulty", "move", "eval", "iterations"} — a position→engine-move
 record in the same spirit as the chess_stockfish dataset cache (``*.stockfish_d{depth}.jsonl``).
 """
@@ -49,6 +49,13 @@ DIFFICULTY = {
     "expert": {"iterations": 8000, "blunder": 0.0, "tactics": True},
 }
 MAX_ITERATIONS = 20000
+MIN_ITERATIONS = 1
+MIN_SECONDS = 0.05
+MAX_SECONDS = 10.0
+# Move log limits (M1): logging needs the operator flag, the path is server-side only.
+MAX_LOG_BYTES = 5 * 1024 * 1024
+MAX_RECORD_BYTES = 16 * 1024
+_LOG_FLAG_VALUES = {"1", "true", "yes", "on"}
 DEFAULT_SEED = 0x9D77
 
 # Optional commentary hook: callable(state, result) -> str. Default is a template (no LLM).
@@ -201,6 +208,33 @@ def _mcts(root: State, iterations: int, rng: random.Random, deadline: float):
     return kids, it
 
 
+def _number(name: str, v: Any) -> float:
+    if isinstance(v, bool) or not isinstance(v, (int, float, str)):
+        raise TypeError(f"{name} must be a number")
+    try:
+        f = float(v)
+    except ValueError:
+        raise ValueError(f"{name} must be a number") from None
+    if not math.isfinite(f):
+        raise ValueError(f"{name} must be finite")
+    return f
+
+
+def clamp_iterations(v: Any) -> int:
+    """Clamp a caller iteration budget to [MIN_ITERATIONS, MAX_ITERATIONS]; reject non-numbers."""
+    return int(max(MIN_ITERATIONS, min(MAX_ITERATIONS, _number("iterations", v))))
+
+
+def clamp_seconds(v: Any) -> Optional[float]:
+    """None/0 = no time limit; otherwise clamp to [MIN_SECONDS, MAX_SECONDS]; reject non-numbers."""
+    if v is None:
+        return None
+    f = _number("max_seconds", v)
+    if f == 0:
+        return None
+    return max(MIN_SECONDS, min(MAX_SECONDS, f))
+
+
 def get_move(state: Dict[str, Any], difficulty: str = "medium", seed: Optional[int] = None,
              iterations: Optional[int] = None, max_seconds: Optional[float] = None) -> Dict[str, Any]:
     level = difficulty if difficulty in DIFFICULTY else "medium"
@@ -223,9 +257,10 @@ def get_move(state: Dict[str, Any], difficulty: str = "medium", seed: Optional[i
             return done(w, 1.0, 0)
     if cfg["blunder"] and rng.random() < cfg["blunder"]:
         return done(legal[int(rng.random() * len(legal))], 0.0, 0)
-    n = min(int(iterations if iterations is not None else cfg["iterations"]), MAX_ITERATIONS)
-    deadline = time.monotonic() + float(max_seconds) if max_seconds else 0.0
-    kids, iters = _mcts(s, max(1, n), rng, deadline)
+    n = clamp_iterations(iterations if iterations is not None else cfg["iterations"])
+    secs = clamp_seconds(max_seconds)
+    deadline = time.monotonic() + secs if secs else 0.0
+    kids, iters = _mcts(s, n, rng, deadline)
     pick = kids[0]
     if cfg["tactics"]:
         for ch in kids:  # avoid handing the opponent an immediate game win
@@ -246,24 +281,40 @@ def default_commentary(state: Dict[str, Any], res: Dict[str, Any]) -> str:
             f"sending the opponent to board {mv['cell'] + 1}. Position looks {mood} (eval {ev:+.2f}).")
 
 
-def _log_path() -> Path:
-    """Where move logs go: REALAI_TTT9D_LOG, else REALAI_DATA_DIR/games/ttt9d_moves.jsonl.
+def _log_enabled() -> bool:
+    """Logging is an operator decision: only the REALAI_TTT9D_LOG env var turns it on."""
+    return bool(os.environ.get("REALAI_TTT9D_LOG", "").strip())
 
-    Callers can only switch logging on; they can never choose the file, so an
-    ability call cannot be used to append to an arbitrary path.
+
+def _log_path() -> Path:
+    """Server-side log path, never from the caller.
+
+    REALAI_TTT9D_LOG=1/true/yes/on -> REALAI_DATA_DIR/games/ttt9d_moves.jsonl;
+    any other non-empty value is an operator-chosen path.
     """
-    p = os.environ.get("REALAI_TTT9D_LOG")
-    if not p:
+    p = os.environ.get("REALAI_TTT9D_LOG", "").strip()
+    if not p or p.lower() in _LOG_FLAG_VALUES:
         p = str(Path(os.environ.get("REALAI_DATA_DIR", "data")) / "games" / "ttt9d_moves.jsonl")
     return Path(p)
 
 
-def _log(record: Dict[str, Any]) -> Optional[str]:
+def _log(record: Dict[str, Any]) -> Dict[str, Any]:
+    """Append one record. Returns {"logged_to": path} or {"log_skipped": reason}."""
+    line = json.dumps(record, ensure_ascii=False) + "\n"
+    data = line.encode("utf-8")
+    if len(data) > MAX_RECORD_BYTES:
+        return {"log_skipped": "record_too_large"}
     pp = _log_path()
+    try:
+        size = pp.stat().st_size
+    except FileNotFoundError:
+        size = 0
+    if size + len(data) > MAX_LOG_BYTES:
+        return {"log_skipped": "log_full"}
     pp.parent.mkdir(parents=True, exist_ok=True)
-    with pp.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(record, ensure_ascii=False) + "\n")
-    return str(pp)
+    with pp.open("ab") as f:
+        f.write(data)
+    return {"logged_to": str(pp)}
 
 
 def run(input: str = "", context: Dict[str, Any] | None = None, **kwargs: Any) -> Dict[str, Any]:
@@ -292,13 +343,12 @@ def run(input: str = "", context: Dict[str, Any] | None = None, **kwargs: Any) -
             out["commentary"] = hook(state, res)
         except Exception as exc:  # hook must never break move generation
             out["commentary_error"] = str(exc)
-    log = ctx.get("log")
-    if log or os.environ.get("REALAI_TTT9D_LOG"):
+    # ctx["log"] is ignored: callers can neither enable logging nor pick the file (M1).
+    if _log_enabled():
         try:
-            # A truthy ctx["log"] only enables logging; a string value is NOT used as a path.
-            out["logged_to"] = _log({
+            out.update(_log({
                 "ts": time.time(), "state": state, "difficulty": res["difficulty"], "move": res["move"],
-                "eval": res["eval"], "iterations": res["iterations"]})
+                "eval": res["eval"], "iterations": res["iterations"]}))
         except OSError as exc:
             out["log_error"] = str(exc)
     return out
