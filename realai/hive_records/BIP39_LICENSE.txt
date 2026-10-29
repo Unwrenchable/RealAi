@@ -1,0 +1,7 @@
+bip39_english.txt is the BIP-0039 English wordlist, copied unmodified from
+https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt
+(SHA256 2f5eed53a4727b4bf8880d8f3f199efc90e58503646d9ff8eff3a2ed3b24dbda).
+
+BIP-0039 is licensed under the MIT License (see the bip-0039.mediawiki header,
+"License: MIT"), authors Marek Palatinus, Pavol Rusnak, Aaron Voisine, Sean Bowe.
+It is used here only to detect seed phrases so records containing them are rejected.

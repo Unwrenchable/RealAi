@@ -1,0 +1,395 @@
+"""Redaction scanner tests. Every 'secret' below is synthetic and assembled at runtime so no
+real-looking credential literal is committed to git."""
+import pytest
+
+from realai.hive_records.redact import SCANNER_VERSION, scan_record, scan_text
+
+B58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+
+
+def b58encode(data: bytes) -> str:
+    n = int.from_bytes(data, "big")
+    out = ""
+    while n:
+        n, r = divmod(n, 58)
+        out = B58[r] + out
+    return "1" * (len(data) - len(data.lstrip(b"\0"))) + out
+
+
+FAKE = {
+    "sk": "sk-" + "FAKE" * 6,
+    "ghp": "ghp_" + "FAKE" * 6,
+    "gho": "gho_" + "FAKE" * 6,
+    "github_pat": "github_pat_" + "FAKE" * 8,
+    "slack": "xo" + "xb-" + "FAKE" * 4,
+    "akia": "AK" + "IA" + "FAKE" * 4,
+    "bearer": "Bearer " + "FAKE1234" * 3,
+}
+
+
+@pytest.mark.parametrize("name", sorted(FAKE))
+def test_token_prefixes_rejected(name):
+    codes = scan_text(f"used {FAKE[name]} in the call")
+    assert codes, name
+    assert all(FAKE[name] not in c for c in codes)
+
+
+def test_pem_block_rejected():
+    txt = "-----BEGIN " + "RSA PRIVATE KEY-----\nFAKEFAKE\n-----END " + "RSA PRIVATE KEY-----"
+    assert "pem_private_key" in scan_text(txt)
+    assert "pem_private_key" in scan_text("-----BEGIN " + "PRIVATE KEY-----")
+    assert "pem_private_key" not in scan_text("-----BEGIN " + "CERTIFICATE-----")
+
+
+@pytest.mark.parametrize("url", [
+    "postgres://user:pw@db.example.test:5432/app",
+    "postgresql://db.example.test/app",
+    "mysql://root:pw@localhost/x",
+    "mongodb://u:p@host/db",
+    "mongodb+srv://u:p@cluster.example.test/db",
+    "redis://:pw@cache.example.test:6379/0",
+    "https://user:pass@example.test/path",
+    "ftp://alice:hunter2@files.example.test/",
+])
+def test_connection_urls_rejected(url):
+    assert "connection_url" in scan_text("connect with " + url)
+
+
+def test_plain_https_url_is_fine():
+    assert scan_text("see https://github.com/example/repo/pull/12 for details") == []
+
+
+@pytest.mark.parametrize("line", [
+    "DATABASE_URL=something-fake",
+    "export API_KEY=fakevalue123",
+    "GITHUB_TOKEN=fake",
+    "STRIPE_SECRET_KEY = fake-fake",
+    "password=notarealpass",
+])
+def test_env_secret_lines_rejected(line):
+    assert "env_secret_line" in scan_text("ran:\n" + line + "\ndone")
+
+
+def test_env_placeholders_allowed():
+    assert scan_text("set API_KEY=<redacted> and TOKEN=${TOKEN}") == []
+    assert scan_text("REALAI_DATA_DIR=C:/data pytest -q") == []
+
+
+def test_high_entropy_string_rejected():
+    fake = "Zx9Qm2Lp7Vd4Rt8Ys3Hn6Kc1Wb5Jf0Gq"  # synthetic random-looking, not a credential
+    assert "high_entropy" in scan_text("value " + fake)
+
+
+def test_digests_uuids_and_identifiers_allowed():
+    assert scan_text("commit 9c10e0c8f1a2b3c4d5e6f708192a3b4c5d6e7f80") == []
+    assert scan_text("sha256 41D31FEE78AD299FAE359409805D2C5ECC2C4101342978270E04212CD6A12CE0") == []
+    assert scan_text("id 123e4567-e89b-12d3-a456-426614174000") == []
+    assert scan_text("training/data/_staging/hive_candidates_2026-10-27.jsonl") == []
+    assert scan_text("hive_candidates_ability_surface_catalog_honesty_pr") == []
+
+
+def test_solana_base58_64_byte_key_rejected():
+    fake_key = b58encode(bytes(range(1, 65)))  # synthetic 64 bytes
+    assert 85 <= len(fake_key) <= 90
+    assert "solana_key_base58" in scan_text("key " + fake_key)
+
+
+def test_solana_pubkey_32_byte_allowed():
+    pub = b58encode(bytes(range(1, 33)))
+    assert "solana_key_base58" not in scan_text("wallet " + pub)
+
+
+def test_solana_byte_array_rejected():
+    arr = "[" + ",".join(str(i) for i in range(64)) + "]"
+    assert "solana_key_bytes" in scan_text("keypair " + arr)
+
+
+def test_hex_private_key_context_rejected():
+    assert "hex_private_key" in scan_text("private key: " + "ab" * 32)
+    assert "hex_private_key" in scan_text("0x" + "cd" * 32)
+
+
+@pytest.mark.parametrize("n", [12, 24])
+def test_seed_phrase_rejected(n):
+    words = ("abandon ability able about above absent absorb abstract absurd abuse access accident "
+             "account accuse achieve acid acoustic acquire across action actor actress actual adapt").split()[:n]
+    assert "seed_phrase" in scan_text(" ".join(words))
+    assert "seed_phrase" in scan_text("mnemonic: " + ", ".join(words))
+
+
+def test_ordinary_prose_not_seed_phrase():
+    assert scan_text("the build passed after the fix was merged into the base branch today and checks were green") == []
+
+
+def test_scan_record_walks_nested_values_and_keys():
+    rec = {"a": {"b": [{"c": FAKE["ghp"]}]}}
+    assert scan_record(rec)
+    assert scan_record({FAKE["sk"]: 1})
+    words = ("abandon ability able about above absent absorb abstract absurd abuse access accident").split()
+    assert "seed_phrase" in scan_record({"w": words})
+
+
+def test_clean_record_passes_and_reasons_never_echo_content():
+    assert scan_record({"ask": "triage PR 5", "links": ["https://example.test/pr/5"]}) == []
+    codes = scan_record({"x": FAKE["akia"]})
+    assert codes and all(FAKE["akia"] not in c for c in codes)
+    assert SCANNER_VERSION.startswith("hive-redact-")
+
+
+# ---------------------------------------------------------------------------------------
+# Security review of PR #191: every probe from review191_probes.py (43 cases), all FAKE.
+# ---------------------------------------------------------------------------------------
+import base64 as _b64
+import json as _json
+import time as _time
+
+_F = "FAKEfake0123456789abcdEFGH"
+_FAKE64 = [i % 250 + 1 for i in range(64)]
+_WORDS = "apple brave cider delta eagle fable giant hover ivory joker koala lemon".split()
+
+PROBE_TEXT = {
+    "BEARER upper": "BEARER " + _F,
+    "Bearer letters-only": "Authorization: Bearer " + "abcdefghijklmnopqrstuvwxyz",
+    "Sk- mixed": "Sk-" + _F,
+    "SK_live stripe": "sk_" + "live_" + _F,
+    "sk-ant": "sk-" + "ant-api03-" + _F,
+    "sk-proj": "sk-" + "proj-" + _F,
+    "glpat": "glp" + "at-" + "aB3dE5gH7jK9mN1pQ2rS",
+    "AIza": "AI" + "za" + "SyFAKEfakeFAKEfake12345678901234",
+    "hf_": "hf" + "_" + "aBcDeFgHiJkLmNoPqRsTuVwXyZ12",
+    "npm_": "np" + "m_" + "aBcDeFgHiJkLmNoPqRsTuVwXyZ1234567890",
+    "xai-": "xa" + "i-" + "aBcDeFgHiJkLmNoPqRsTuVwX",
+    "slack webhook": "https://hooks." + "slack.com/services/T0FAKE/B0FAKE/abcdefghijklmnopqrstuvwx",
+    "short lowercase key (low entropy)": "token is xa" + "i-abcdefghabcdefghabcdefgh",
+    "zero-width sk": "s\u200bk-" + _F,
+    "zero-width ghp": "gh\u200bp_" + "aBcDeFgHiJkLmNoPqRsT12",
+    "fullwidth AKIA": "\uff21KIA" + "ABCDEFGHIJ123456",
+    "url-encoded userpass": "postgres%3A%2F%2Fu%3Ap%40h/db",
+    "base64 wrapped sk": _b64.b64encode(("sk-" + _F).encode()).decode(),
+    "base64 short PEM header": _b64.b64encode(b"-----BEGIN " + b"PRIVATE KEY-----").decode(),
+    "split across lines": "sk-\nFAKEfake0123",
+    "JWT": "ey" + "JhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.c2lnbmF0dXJlZmFrZQ",
+    "env lower other word": "db_pass=hunter2xyz",
+    "env json style": '"password": "hunter2xyz"',
+    "env yaml": "API_KEY: abcd1234wxyz",
+    "export with spaces": "export GITHUB_TOKEN = 'abc'",
+    "solana bytes": _json.dumps(_FAKE64),
+    "solana bytes no spaces": str(_FAKE64).replace(" ", ""),
+    "solana bytes 32": _json.dumps(_FAKE64[:32]),
+    "seed comma sep": ",".join(_WORDS),
+    "seed dash sep": "-".join(_WORDS),
+    "seed numbered": " ".join(f"{i+1}.{w}" for i, w in enumerate(_WORDS)),
+    "seed with real bip39 stopword-ish words": " ".join(_WORDS[:6] + ["all"] + _WORDS[6:]),
+    "seed 12 caps": " ".join(w.upper() for w in _WORDS),
+    "ssh openssh": "-----BEGIN " + "OPENSSH PRIVATE KEY-----",
+    "pgp": "-----BEGIN " + "PGP PRIVATE KEY BLOCK-----",
+    "https userpass": "https://user:pa55word@example.com",
+}
+
+PROBE_RECORDS = {
+    "secret in key": {"sk-" + _F: 1},
+    "seed split over list": {"x": _WORDS},
+    "seed split over nested lists 6+6": {"x": [_WORDS[:6], _WORDS[6:]]},
+    "seed split across fields": {"a": " ".join(_WORDS[:6]), "b": " ".join(_WORDS[6:])},
+    "sk split across fields": {"a": "sk-", "b": _F},
+    "bytes as list of ints": {"k": _FAKE64},
+    "bytes as nested ints dict": {"k": {str(i): v for i, v in enumerate(_FAKE64)}},
+}
+
+
+def test_probe_count_is_43():
+    assert len(PROBE_TEXT) + len(PROBE_RECORDS) == 43
+
+
+@pytest.mark.parametrize("name", sorted(PROBE_TEXT))
+def test_review_probe_text_rejected(name):
+    codes = scan_record({"t": PROBE_TEXT[name]})
+    assert codes, name
+    assert all(PROBE_TEXT[name] not in c for c in codes)
+
+
+@pytest.mark.parametrize("name", sorted(PROBE_RECORDS))
+def test_review_probe_record_rejected(name):
+    assert scan_record(PROBE_RECORDS[name]), name
+
+
+@pytest.mark.parametrize("text", [
+    "id 3f2b1c9e-1a2b-4c3d-9e8f-0a1b2c3d4e5f",
+    "test_hive_ingest_rejects_records_with_42_fields",
+    "https://github.com/Unwrenchable/RealAi/pull/191",
+    "deploy staging build passed after rebase fixed lint config cache tests green ship today",
+    "tests passed: 91, checks: green",
+    "Key findings: redact misses lowercase tokens",
+    "the task risk - management note",
+])
+def test_review_false_positive_checks(text):
+    assert scan_record({"t": text}) == []
+
+
+def test_plain_12_word_prose_not_seed_phrase():
+    prose = "deploy staging build passed after rebase fixed lint config cache tests green"
+    assert len(prose.split()) == 12
+    assert "seed_phrase" not in scan_text(prose)
+
+
+def test_bip39_wordlist_run_flagged():
+    words = ("abandon ability able about above absent absorb abstract absurd abuse access accident").split()
+    assert "seed_phrase" in scan_text("|".join(words))
+
+
+def test_zero_width_and_bidi_rejected_as_obfuscation():
+    assert "obfuscation" in scan_text("hello\u200bworld")
+    assert "obfuscation" in scan_text("abc\u202edef")
+    assert "obfuscation" in scan_record({"t": "x\u2066y"})
+
+
+_REDOS = {
+    "env": lambda: "A" * 50000 + "KEY",
+    "cand": lambda: "a" * 60000,
+    "b58": lambda: "1" * 60000,
+    "userpass": lambda: "a://" + "a:" * 30000,
+    "bearer": lambda: "bearer " + "a" * 60000,
+    "b64": lambda: "QUJD" * 15000,
+}
+
+
+@pytest.mark.parametrize("label", sorted(_REDOS))
+def test_redos_60k_under_half_second(label):
+    text = _REDOS[label]()
+    t = _time.perf_counter()
+    scan_text(text)
+    assert _time.perf_counter() - t < 0.5, label
+
+
+# ---------------------------------------------------------------------------------------
+# Security re-review of #191 @ e16dc1a: review191_probes2.py (20 probes + 12 clean samples).
+# ---------------------------------------------------------------------------------------
+import random as _random
+import urllib.parse as _up
+from pathlib import Path as _Path
+
+import realai.hive_records.redact as _redact_mod
+
+_BIP = _Path(_redact_mod.__file__).with_name("bip39_english.txt").read_text(encoding="utf-8").split()
+_rng = _random.Random(1)
+_W24 = _rng.sample(_BIP, 24)
+_NONW = "qzx vbn wrtk plm frob gnarl zibb quux".split()
+_MIX = [x for p in zip(_rng.sample(_BIP, 6), _NONW[:6]) for x in p]
+
+PROBE2_TEXT = {
+    "JWT alg none (empty sig)": "ey" + "JhbGciOiJub25lIn0.eyJzdWIiOiIxMjMifQ.",
+    "JWE 5-part": "ey" + "JhbGciOiJSU0EiLCJlbmMiOiJBMjU2In0.ZmFrZWtleWZha2Vr.aXZpdml2aXY.Y2lwaGVydGV4dA.dGFndGFn",
+    "sk- short body": "sk-" + "abc123XYZ",
+    "Cyrillic AKIA": "\u0410KIA" + "ABCDEFGHIJ123456",
+    "Greek/Cyrillic in ghp": "gh\u0440_" + "ABCDEFGHIJKLMNOPqrst12",
+    "RTL override around key": "\u202esk-" + "ABCDEFGHIJKLmnop1234\u202c",
+    "6 BIP39 + 6 nonwords": " ".join(_MIX),
+    "hex-encoded sk": ("sk-" + "ABCDEFGHIJKLmnop1234").encode().hex(),
+    "double url-encoded pg": _up.quote(_up.quote("postgres://u:p@h/db")),
+    "solana base58 32-byte": b58encode(bytes(range(1, 33))),
+    "PEM CRLF": "-----BEGIN " + "RSA PRIVATE KEY-----\r\nMIIfake\r\n-----END " + "RSA PRIVATE KEY-----",
+    "export KEY=": "export AWS_SECRET_ACCESS_KEY=" + "fakefakefake",
+    "export KEY= quoted": 'export STRIPE_KEY="' + 'fakefakefake"',
+    "Authorization: token": "Authorization: token " + "ghfakefakefakefake12",
+    "base64 of userpass url": _b64.b64encode(b"mysql://u:p@host/db").decode(),
+    "24 words newline sep": "\n".join(_W24),
+    "kv password spaced": "password : " + "hunter2",
+}
+PROBE2_RECORDS = {
+    "24 words across 3 fields": {"a": " ".join(_W24[:8]), "b": " ".join(_W24[8:16]), "c": " ".join(_W24[16:])},
+    "secret as dict key json": {"API_KEY=" + "fakefakefake": True},
+    "bytes 32 as list": {"k": list(range(1, 33))},
+}
+CLEAN2 = {
+    "prose": "The release went out after QA confirmed the build passed and the cache was warmed.",
+    "prose bip39-heavy": "please review the open issue about the deploy script and fix the cache logic today",
+    "git sha": "fixed in 3df8906a1b2c3d4e5f60718293a4b5c6d7e8f901",
+    "python kwargs": "fn(key=value_name, token_count=12)",
+    "yaml config": "max_tokens: 2048\npassword_min_length: 12",
+    "json schema": '{"type":"string","key":"user_id"}',
+    "sk word": "risk-assessment and task-tracking done",
+    "pr url": "https://github.com/Unwrenchable/RealAi/pull/191#discussion_r1234567890",
+    "pytest cmd": "python3 -m pytest tests/test_hive_redact.py -q -> 94 passed",
+    "camel id": "HiveIngestRejectsRecordsWithSecretsTest",
+    "docker digest": "sha256:2f5eed53a4727b4bf8880d8f3f199efc90e58503646d9ff8eff3a2ed3b24dbda",
+}
+
+
+def test_probe2_counts():
+    assert len(PROBE2_TEXT) + len(PROBE2_RECORDS) == 20
+    assert len(CLEAN2) == 11
+
+
+@pytest.mark.parametrize("name", sorted(PROBE2_TEXT))
+def test_review2_probe_text_rejected(name):
+    assert scan_record({"t": PROBE2_TEXT[name]}), name
+
+
+@pytest.mark.parametrize("name", sorted(PROBE2_RECORDS))
+def test_review2_probe_record_rejected(name):
+    assert scan_record(PROBE2_RECORDS[name]), name
+
+
+@pytest.mark.parametrize("name", sorted(CLEAN2))
+def test_review2_clean_samples_pass(name):
+    assert scan_record({"t": CLEAN2[name]}) == [], name
+
+
+def test_homoglyph_tokens_mapped_and_flagged():
+    akia = scan_text("\u0410KIA" + "ABCDEFGHIJ123456")
+    assert "token:aws_akia" in akia and "obfuscation" in akia
+    ghp = scan_text("gh\u0440_" + "ABCDEFGHIJKLMNOPqrst12")
+    assert "token:github" in ghp and "obfuscation" in ghp
+
+
+def test_pure_greek_or_cyrillic_prose_not_obfuscation():
+    assert "obfuscation" not in scan_text("\u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03ac \u03ba\u03b5\u03af\u03bc\u03b5\u03bd\u03bf")
+    assert "obfuscation" not in scan_text("\u041f\u0440\u0438\u0432\u0435\u0442 \u043c\u0438\u0440")
+
+
+def test_scanner_version_is_current():
+    assert SCANNER_VERSION == "hive-redact-5"
+
+
+_REDOS2 = {
+    "assign": lambda: "a=" * 30000,
+    "assign2": lambda: "k:" * 30000,
+    "b64": lambda: "A" * 200000,
+    "seed": lambda: " ".join(["abandon"] * 50000),
+    "userpass": lambda: "a://" + "b" * 300 + ":" * 5000,
+    "int": lambda: "[" + "1," * 80000 + "]",
+    "quote": lambda: '"' * 60000,
+    "kv": lambda: "key = " * 20000,
+    "hex": lambda: "ab" * 30000,
+    "dblquote": lambda: "%2525" * 12000,
+}
+
+
+@pytest.mark.parametrize("label", sorted(_REDOS2))
+def test_redos2_fast(label):
+    text = _REDOS2[label]()
+    t = _time.perf_counter()
+    scan_text(text)
+    assert _time.perf_counter() - t < 0.5, label
+
+
+# Security ruling on #191: quoted word arrays of 12+ BIP39 words are rejected (hive-redact-4).
+def test_word_list_code_sample_now_rejected():
+    # Security ruling: quoted word arrays dominated by BIP39 words are rejected (10 of 12 here).
+    code = "allowed = ['apple','table','river','stone','house','water','light','music','paper','glass','green','money']"
+    assert "seed_phrase" in scan_record({"t": code})
+
+
+def test_json_array_seed_with_one_non_bip39_word_rejected():
+    words = _random.Random(11).sample(_BIP, 12)
+    words.insert(5, "qzxv")  # one non-wordlist token inside the seed
+    assert "qzxv" not in _BIP
+    assert "seed_phrase" in scan_text(_json.dumps(words))
+    assert "seed_phrase" in scan_record({"t": _json.dumps(words)})
+
+
+def test_quoted_array_seed_probe_rejected():
+    words = _random.Random(7).sample(_BIP, 12)
+    quoted = "[" + ",".join("'" + w + "'" for w in words) + "]"
+    assert "seed_phrase" in scan_text(quoted)
+    assert "seed_phrase" in scan_text(_json.dumps(words))
