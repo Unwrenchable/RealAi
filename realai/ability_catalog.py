@@ -836,9 +836,9 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "name": "Vulnerability triage (hive, read-only)",
         "pillar": "ops",
         "keywords": ["vuln triage", "npm audit", "dependabot", "override", "major bump"],
-        "status": "PARTIAL",
+        "status": "LIVE",
         "status_note": (
-            "abilities/vuln_triage.py groups npm-audit JSON by package and suggests an override or a major bump (majors flagged for the owner). Pure function: read-only, no network, no file writes, no merge or approve powers. PARTIAL until the owner promotes it."
+            "abilities/vuln_triage.py groups npm-audit JSON by package and suggests an override or a major bump (majors flagged for the owner). Pure function: read-only, no network, no file writes, no merge or approve powers. LIVE: golden fixtures + HTTP integration test (tests/hive_triage/test_vuln_triage_live.py)."
         ),
         "live_path": 'POST /v1/tools/execute {"name": "vuln_triage", "arguments": {"audit": {...}}}',
         "modules": ["abilities/vuln_triage.py"],
