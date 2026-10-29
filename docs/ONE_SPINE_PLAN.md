@@ -1,8 +1,8 @@
 # RealAI One-Spine Plan
 
-> **WARNING: two servers, one default port.** The orchestrator and `realai/server/legacy_api.py` (via the `realai/api_server.py` shim) both default to **8001**. Until phase 6c, run `legacy_api` with `PORT=8000`; the orchestrator / `api_server` default stays 8001. Easy to miss in local testing.
+> **WARNING: two servers, one default port.** The orchestrator and `realai/server/legacy_api.py` (via the `realai/api_server.py` shim) is the second server. `api_server` defaults to `PORT` **8001** (the orchestrator also serves on :8001); `legacy_api` runs on **8000** until phase 6c. Easy to miss in local testing.
 
-Status: **PLAN ONLY**. No code moves until travis approves it. Every path below was checked against `origin/main` @ `7a74abd`. Paths marked *(PR #210)* exist only on that open PR. Target paths (`realai/core/brain/`, `realai/core/permissions/`, `realai/core/memory/`, `realai/core/tasks/`, `packages/sdk`, `tests/catalog_evals/`, `docs/spine/*.csv`) are proposals and do not exist yet. Bare filenames in a row are relative to the directory named in that row.
+Status: **PLAN ONLY**. No code moves until travis approves it. Every path below was checked against `origin/main` @ `7a74abd`; main has since moved to `2f445c7`. Paths marked *(PR #210)* exist only on that open PR. Target paths (`realai/core/brain/`, `realai/core/permissions/`, `realai/core/memory/`, `realai/core/tasks/`, `packages/sdk`, `tests/catalog_evals/`, `docs/spine/*.csv`) are proposals and do not exist yet. Bare filenames in a row are relative to the directory named in that row.
 
 **Goal:** RealAI should feel like one integrated assistant: one brain, one ability registry, one permission gate, one memory, one task system, one API/SDK. Right now it is a set of separate modules.
 
@@ -45,7 +45,7 @@ Status: **PLAN ONLY**. No code moves until travis approves it. Every path below 
 | `modules/orchestrators/*` (about 30 files incl. `_19/_71/_100/_101/_127/_128/_29/_81` numbered variants, `orchestration_gold__orchestrator.py`, `v3_orchestrator__realai.py`) | recovery dump | archive all |
 | `scripts/exportable/orchestrator_{overmind_runner,router,solana}.py`, `scripts/exportable/variants/nested_realai_v3_runtime_bridge.py`, `realai/scripts/exportable/variants/nested_realai_v3_runtime_bridge.py` | exported variants | archive |
 | `realai/orchestrator/run.ts` | TS runner | review; likely archive |
-| `realai/server/legacy_api.py` (via the `realai/api_server.py` shim; `PORT=8001` default) | second server (chat, models) | keep as the Render/Vercel entry until §6 phase 6c, then make it a thin proxy to the core |
+| `realai/server/legacy_api.py` (via the `realai/api_server.py` shim; runs on `PORT=8000` until phase 6c; `api_server` defaults to 8001) | second server (chat, models) | keep as the Render/Vercel entry until §6 phase 6c, then make it a thin proxy to the core |
 
 **Phases**
 - **1a** Inventory PR: add `docs/spine/orchestrators.csv` (path, sha256, importers, verdict). *Acceptance:* a script reproduces the CSV from the tree, and every path in it exists.
@@ -63,7 +63,7 @@ Status: **PLAN ONLY**. No code moves until travis approves it. Every path below 
 name, title, version
 inputs: JSON Schema       outputs: JSON Schema
 permission: read | write | approval     # approval = files/network/money mutations
-status: LIVE | PARTIAL | STUB           # LIVE only with an end-to-end proof (Chief's rule)
+status: LIVE | PARTIAL | STUB           # LIVE only with an end-to-end proof (team rule relayed by Chief; adopted here as this plan's proposed rule)
 handler: callable         eval: path to catalog eval case(s)
 ```
 
@@ -141,8 +141,8 @@ handler: callable         eval: path to catalog eval case(s)
 
 - **#210** workspace tools / approval hardening: with Security for the final check. It is the base for §3.
 - **#213-216** PR triage, vuln triage, CI failure classifier, tool router: open. Each changes the README LIVE count line (expect one-line rebases; ends at 68/78).
-- **PARTIAL-to-LIVE plan:** `C:\Users\tsmit\agent-stage\partial_to_live_plan.md` (chess, synthetic organs, git-learn, CLI bridge, self-evolving, image gen and analysis). Video generation and the training pipeline stay PARTIAL.
-- **Known PC-only test failures:** 13 in `tests/unified/*` plus `test_codeql_hardening` ("No module named modules.organs.synthetic_organs"). These are test-order issues that pass in isolation and in CI. Phases 1b and 4a must not "fix" them by moving `modules/`.
+- **PARTIAL-to-LIVE plan:** `C:\Users\tsmit\agent-stage\partial_to_live_plan.md` (local-only, not in repo) (chess, synthetic organs, git-learn, CLI bridge, self-evolving, image gen and analysis). Video generation and the training pipeline stay PARTIAL.
+- **Known local-only test failures:** 13 tests in `tests/unified/*` and `test_codeql_hardening` fail only in full local runs on travis's PC (test order). They pass in isolation and in CI. Phases 1b and 4a must not "fix" them by moving `modules/`.
 
 ## Risks
 
@@ -151,7 +151,7 @@ handler: callable         eval: path to catalog eval case(s)
 3. **Permission regression:** routing everything through one gate can block real workflows. Mitigation: an allow-list with Security review, and fail closed.
 4. **Two servers drifting:** the OpenAPI snapshot test (6a).
 5. **Memory migration data loss:** read-only facade first, with a backup before any DB merge.
-6. **Port confusion (see warning at top):** the orchestrator and `legacy_api` both default to 8001. `legacy_api` runs on `PORT=8000` until 6c; `api_server`'s default is 8001.
+6. **Port confusion (see warning at top):** `api_server` defaults to `PORT` 8001; `legacy_api` runs on 8000 until phase 6c.
 7. **PC vs CI differences:** the known test-order failures can mask real regressions. Compare CI and isolated runs.
 
 ## What this is NOT
@@ -183,7 +183,7 @@ Each Security review is scoped to these named artifacts:
 - **D7** When may the console and voice adopt the SDK (6e)?
 - **D8** Network policy for §3c: local-only by default, with a per-ability allow-list?
 
-## Decisions (travis, final, 2026-10-29)
+## Decisions (travis, final, 2026-10-29) — approved in writing by travis in his chat with the RealAI owner bot on 2026-10-29 at 6:03 AM PT: he reviewed the proposed answers and replied "final".
 
 All of D1-D8 below are **decided**; they supersede the open questions above.
 
