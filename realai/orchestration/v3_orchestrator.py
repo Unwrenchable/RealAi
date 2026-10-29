@@ -20,10 +20,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import mimetypes
 import os
 import sys
 import traceback
+import uuid
 import urllib.error
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -65,6 +67,26 @@ def _load_tool_auth():
 
 
 _tool_auth = _load_tool_auth()
+
+
+_err_log = logging.getLogger("realai.v3_orchestrator")
+
+
+def _internal_error(where: str, exc: BaseException, **extra: Any) -> Dict[str, Any]:
+    """Log full detail server-side; return only a generic error with a correlation id.
+
+    Callers never see the exception message or traceback. REALAI_DEBUG_ERRORS=1 adds
+    only the exception type name.
+    """
+    eid = uuid.uuid4().hex[:12]
+    _err_log.error(
+        "internal_error id=%s where=%s type=%s", eid, where, type(exc).__name__,
+        exc_info=(type(exc), exc, exc.__traceback__),
+    )
+    out: Dict[str, Any] = {"ok": False, "error": "internal_error", "error_id": eid, **extra}
+    if str(os.environ.get("REALAI_DEBUG_ERRORS", "")).strip() == "1":
+        out["error_type"] = type(exc).__name__
+    return out
 
 # Repo root: .../realai package parent
 _PKG = Path(__file__).resolve().parent
@@ -459,7 +481,7 @@ def _self_improve_evaluate() -> Dict[str, Any]:
         scores["training_ready"] = 1.0 if st.get("finetune_dataset") else 0.0
         return {"ok": True, "scores": scores}
     except Exception as e:
-        return {"ok": False, "error": str(e), "trace": traceback.format_exc()[-800:]}
+        return _internal_error("_self_improve_evaluate", e)
 
 
 
@@ -1036,7 +1058,7 @@ def _run_tool(name: str, arguments: Optional[Dict] = None) -> Dict[str, Any]:
             return out
         return {"error": f"unknown_tool:{name}"}
     except Exception as e:
-        return {"error": str(e), "trace": traceback.format_exc()[-500:]}
+        return _internal_error("_run_tool", e)
 
 
 def _craft_run(arguments: Optional[Dict] = None) -> Dict[str, Any]:
@@ -1080,7 +1102,7 @@ def _craft_run(arguments: Optional[Dict] = None) -> Dict[str, Any]:
             return result
         return {"ok": True, "craft_action": action, "result": result}
     except Exception as e:
-        return {"ok": False, "error": str(e), "craft_action": action, "trace": traceback.format_exc()[-500:]}
+        return _internal_error("_craft_run", e, craft_action=action)
 
 
 def _craft_chat(arguments: Optional[Dict] = None) -> Dict[str, Any]:
@@ -1098,7 +1120,7 @@ def _craft_chat(arguments: Optional[Dict] = None) -> Dict[str, Any]:
         reply = session.handle_stream(prompt)
         return {"ok": True, "surface": "craft_chat", "prompt": prompt, "reply": reply}
     except Exception as e:
-        return {"ok": False, "error": str(e), "trace": traceback.format_exc()[-500:]}
+        return _internal_error("_craft_chat", e)
 
 
 def _hive_status(arguments: Optional[Dict] = None) -> Dict[str, Any]:
@@ -1110,22 +1132,22 @@ def _hive_status(arguments: Optional[Dict] = None) -> Dict[str, Any]:
 
         out["agents"] = hive_agents_status()
     except Exception as e:
-        out["agents"] = {"ok": False, "error": str(e)}
+        out["agents"] = _internal_error("hive_status.agents", e)
     try:
         from realai.ability_catalog import coverage_summary
 
         out["coverage"] = coverage_summary()
     except Exception as e:
-        out["coverage"] = {"error": str(e)}
+        out["coverage"] = _internal_error("hive_status.coverage", e)
     try:
         out["organs"] = _craft_run({"action": "organs"})
     except Exception as e:
-        out["organs"] = {"error": str(e)}
+        out["organs"] = _internal_error("hive_status.organs", e)
     try:
         result = _run_tool("ability.hive_orchestrator", {"action": "routes"})
         out["hive_orchestrator"] = result
     except Exception as e:
-        out["hive_orchestrator"] = {"error": str(e)}
+        out["hive_orchestrator"] = _internal_error("hive_status.hive_orchestrator", e)
     action = str(arguments.get("action") or "").lower()
     if action in ("memory", "hive_memory"):
         out["memory"] = _run_tool(
@@ -1224,12 +1246,7 @@ def _craft_file_dispatch(action: str, extra: str = "") -> Optional[Dict[str, Any
         return {
             "surface": "craft",
             "tool": action,
-            "result": {
-                "ok": False,
-                "error": str(exc),
-                "craft_action": action,
-                "trace": traceback.format_exc()[-500:],
-            },
+            "result": _internal_error("craft_dispatch", exc, craft_action=action),
         }
 
 
@@ -2437,7 +2454,7 @@ class Handler(BaseHTTPRequestHandler):
                 ensure_simulation(HIVE_CORE_AGENTS)
                 self._json(200, build_graph(agents))
             except Exception as e:
-                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
+                self._json(500, _internal_error("route:/v1/agents/graph", e))
             return
 
         if path == "/v1/agents/profiles":
@@ -2548,7 +2565,7 @@ class Handler(BaseHTTPRequestHandler):
                 else:
                     self._json(200, rec)
             except Exception as e:
-                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
+                self._json(500, _internal_error("route:/v1/learn/packets", e))
             return
 
         if path == "/v1/tools":
@@ -2577,7 +2594,7 @@ class Handler(BaseHTTPRequestHandler):
                     "tools_execute": "POST /v1/tools/execute {name: ability.<id>, arguments}",
                 })
             except Exception as e:
-                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
+                self._json(500, _internal_error("route:/v1/abilities", e))
             return
 
         if path == "/v1/hive":
@@ -2651,7 +2668,7 @@ class Handler(BaseHTTPRequestHandler):
                 from realai.recovery_registry import inventory
                 self._json(200, inventory())
             except Exception as e:
-                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
+                self._json(500, _internal_error("route:/v1/recovery", e))
             return
 
         if path == "/v1/lora":
@@ -2727,7 +2744,7 @@ class Handler(BaseHTTPRequestHandler):
                 code, payload, _ctype = dispatch_request("GET", path, None)
                 self._json(code, payload)
             except Exception as e:
-                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
+                self._json(500, _internal_error("route:/v1/tasks", e))
             return
 
         self._json(404, {"error": "not_found", "path": path})
@@ -2940,7 +2957,7 @@ class Handler(BaseHTTPRequestHandler):
                 from realai.recovery_registry import promote_core
                 self._json(200, promote_core(dry_run=bool(body.get("dry_run"))))
             except Exception as e:
-                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
+                self._json(500, _internal_error("route:/v1/recovery/promote", e))
             return
 
         if path == "/v1/tasks":
@@ -2954,7 +2971,7 @@ class Handler(BaseHTTPRequestHandler):
                 code, payload, _ctype = dispatch_request("POST", path, body)
                 self._json(code, payload)
             except Exception as e:
-                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
+                self._json(500, _internal_error("route:/v1/tasks", e))
             return
 
         if path == "/v1/chat/completions":
@@ -3533,7 +3550,7 @@ class Handler(BaseHTTPRequestHandler):
                     ),
                 )
             except Exception as e:
-                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
+                self._json(500, _internal_error("route:/v1/agents/run", e))
             return
 
         if path == "/v1/multi-agent/run":
@@ -3557,7 +3574,7 @@ class Handler(BaseHTTPRequestHandler):
                 )
                 self._json(200, result)
             except Exception as e:
-                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
+                self._json(500, _internal_error("route:/v1/multi-agent/run", e))
             return
 
 
@@ -3580,7 +3597,7 @@ class Handler(BaseHTTPRequestHandler):
                 else:
                     self._json(200, rec)
             except Exception as e:
-                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
+                self._json(500, _internal_error("route:/v1/learn/promote|wire|queue", e))
             return
 
         if path == "/v1/deepen":
@@ -3597,7 +3614,7 @@ class Handler(BaseHTTPRequestHandler):
                 )
                 self._json(200, rec)
             except Exception as e:
-                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
+                self._json(500, _internal_error("route:/v1/deepen", e))
             return
 
         if path == "/v1/weights/scan":
@@ -3631,7 +3648,7 @@ class Handler(BaseHTTPRequestHandler):
                     },
                 })
             except Exception as e:
-                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-600:]})
+                self._json(500, _internal_error("route:/v1/weights/scan", e))
             return
 
         if path == "/v1/tools/execute":
@@ -3782,7 +3799,7 @@ class Handler(BaseHTTPRequestHandler):
                 publish_complete("overseer", source="hive", ok=ok, action=action)
                 self._json(200, out)
             except Exception as e:
-                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-500:]})
+                self._json(500, _internal_error("route:/v1/hive", e))
             return
 
         if path == "/v1/self-improve/evaluate":
@@ -3833,7 +3850,7 @@ class Handler(BaseHTTPRequestHandler):
                 self._json(403, {"error": str(e)})
                 return
             except Exception as e:
-                self._json(500, {"error": str(e), "trace": traceback.format_exc()[-600:]})
+                self._json(500, _internal_error("route:/v1/self-heal/cycle", e))
                 return
 
         self._json(404, {"error": "not_found", "path": path})
