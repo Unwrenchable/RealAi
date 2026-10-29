@@ -1,6 +1,6 @@
 # RealAI One-Spine Plan
 
-> **WARNING: two servers, one default port.** The orchestrator and `realai/server/legacy_api.py` (via the `realai/api_server.py` shim) is the second server. `api_server` defaults to `PORT` **8001** (the orchestrator also serves on :8001); `legacy_api` runs on **8000** until phase 6c. Easy to miss in local testing.
+> **WARNING: two servers, one default port.** The orchestrator and `realai/server/legacy_api.py` (started as `python -m realai.api_server`) both default to **8001**. Until phase 6c, start the API server with `PORT=8000`. Easy to miss in local testing.
 
 Status: **PLAN ONLY**. No code moves until travis approves it. Every path below was checked against `origin/main` @ `7a74abd`; main has since moved to `2f445c7`. Paths marked *(PR #210)* exist only on that open PR. Target paths (`realai/core/brain/`, `realai/core/permissions/`, `realai/core/memory/`, `realai/core/tasks/`, `packages/sdk`, `tests/catalog_evals/`, `docs/spine/*.csv`) are proposals and do not exist yet. Bare filenames in a row are relative to the directory named in that row.
 
@@ -45,7 +45,7 @@ Status: **PLAN ONLY**. No code moves until travis approves it. Every path below 
 | `modules/orchestrators/*` (about 30 files incl. `_19/_71/_100/_101/_127/_128/_29/_81` numbered variants, `orchestration_gold__orchestrator.py`, `v3_orchestrator__realai.py`) | recovery dump | archive all |
 | `scripts/exportable/orchestrator_{overmind_runner,router,solana}.py`, `scripts/exportable/variants/nested_realai_v3_runtime_bridge.py`, `realai/scripts/exportable/variants/nested_realai_v3_runtime_bridge.py` | exported variants | archive |
 | `realai/orchestrator/run.ts` | TS runner | review; likely archive |
-| `realai/server/legacy_api.py` (via the `realai/api_server.py` shim; runs on `PORT=8000` until phase 6c; `api_server` defaults to 8001) | second server (chat, models) | keep as the Render/Vercel entry until §6 phase 6c, then make it a thin proxy to the core |
+| `realai/server/legacy_api.py` (started via the `realai/api_server.py` shim; defaults to `PORT=8001`, so run it with `PORT=8000` until phase 6c) | second server (chat, models) | keep as the Render/Vercel entry until §6 phase 6c, then make it a thin proxy to the core |
 
 **Phases**
 - **1a** Inventory PR: add `docs/spine/orchestrators.csv` (path, sha256, importers, verdict). *Acceptance:* a script reproduces the CSV from the tree, and every path in it exists.
@@ -151,7 +151,7 @@ handler: callable         eval: path to catalog eval case(s)
 3. **Permission regression:** routing everything through one gate can block real workflows. Mitigation: an allow-list with Security review, and fail closed.
 4. **Two servers drifting:** the OpenAPI snapshot test (6a).
 5. **Memory migration data loss:** read-only facade first, with a backup before any DB merge.
-6. **Port confusion (see warning at top):** `api_server` defaults to `PORT` 8001; `legacy_api` runs on 8000 until phase 6c.
+6. **Port confusion (see warning at top):** the orchestrator and `api_server`/`legacy_api` both default to 8001. Set `PORT=8000` for the API server until phase 6c.
 7. **PC vs CI differences:** the known test-order failures can mask real regressions. Compare CI and isolated runs.
 
 ## What this is NOT
@@ -183,7 +183,7 @@ Each Security review is scoped to these named artifacts:
 - **D7** When may the console and voice adopt the SDK (6e)?
 - **D8** Network policy for §3c: local-only by default, with a per-ability allow-list?
 
-## Decisions (travis, final, 2026-10-29) — approved in writing by travis in his chat with the RealAI owner bot on 2026-10-29 at 6:03 AM PT: he reviewed the proposed answers and replied "final". He re-confirmed D1-D8 as final to Chief at 6:12 AM PT on 2026-10-29.
+## Decisions (travis, final, 2026-10-29) — DECIDED: travis confirmed D1-D8 as his final decisions to Chief at 6:12 AM PT on 2026-10-29.
 
 All of D1-D8 below are **decided**; they supersede the open questions above.
 
