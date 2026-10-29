@@ -39,5 +39,7 @@ jobs:
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
+      - name: Auth plugin guard (no magicLink/oAuthProxy)
+        run: pnpm run check:auth:plugins
       - name: Root node tests
         run: pnpm run test
