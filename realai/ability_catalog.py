@@ -848,9 +848,9 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "name": "CI failure classifier (hive, read-only)",
         "pillar": "ops",
         "keywords": ["ci failure", "ci triage", "lockfile conflict", "stale branch", "test failure"],
-        "status": "PARTIAL",
+        "status": "LIVE",
         "status_note": (
-            "abilities/ci_failure_classify.py classifies a CI log as stale-branch | lockfile-conflict | test-failure | env-missing | unknown plus a next step. Pure function: read-only, no network, no file writes, no merge or approve powers. PARTIAL until the owner promotes it."
+            "abilities/ci_failure_classify.py classifies a CI log as stale-branch | lockfile-conflict | test-failure | env-missing | unknown plus a next step. Pure function: read-only, no network, no file writes, no merge or approve powers. LIVE: golden fixtures + HTTP integration test (tests/hive_triage/test_ci_failure_classify_live.py)."
         ),
         "live_path": 'POST /v1/tools/execute {"name": "ci_failure_classify", "arguments": {"log": "..."}}',
         "modules": ["abilities/ci_failure_classify.py"],
