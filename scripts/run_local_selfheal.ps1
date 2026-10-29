@@ -92,7 +92,7 @@ if (-not $SkipStart) {
   $LlamaHost = if ($env:REALAI_LLAMA_HOST) { $env:REALAI_LLAMA_HOST } else { "127.0.0.1" }
   $vArgs = @(
     "-m", $Model, "--host", $LlamaHost, "--port", "$VulkanPort",
-    "-c", "16384", "-ngl", "99", "--jinja"
+    "-c", "16384", "-ngl", "99", "--device", "Vulkan1", "--jinja", "-fa", "off"
   )
   Start-Process -FilePath $Llama -ArgumentList $vArgs -WorkingDirectory (Split-Path $Llama -Parent) `
     -RedirectStandardOutput (Join-Path $Logs "vulkan.out.log") `

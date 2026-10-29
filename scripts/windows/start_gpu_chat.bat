@@ -44,7 +44,8 @@ start "RealAI-Vulkan-GPU" cmd /c ^
         --port 8080 ^
         -ngl %REALAI_NGL% ^
         -c %REALAI_CTX% ^
-        --jinja"
+        --device Vulkan1 ^
+        --jinja -fa off"
 
 REM ------------------------------------------------------------
 REM WAIT FOR GPU SERVER TO COME ONLINE
