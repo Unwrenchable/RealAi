@@ -2944,7 +2944,7 @@ class Handler(BaseHTTPRequestHandler):
                     return
             except Exception as eng_exc:
                 body = dict(body or {})
-                body["_tts_engine_error"] = str(eng_exc)
+                body["_tts_engine_error"] = _internal_error_ref("route:/v1/audio/speech.tts_engine", eng_exc)
             try:
                 from realai.lambda_embeddings_audio import create_speech_response
 
