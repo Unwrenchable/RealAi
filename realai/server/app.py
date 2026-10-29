@@ -9,6 +9,56 @@ from .router import dispatch_request
 
 logger = logging.getLogger(__name__)  # was referenced in _dispatch_json but never defined
 
+# Request body cap (Security LOW): anything larger gets 413 before it is read or parsed.
+MAX_BODY_BYTES = 1024 * 1024
+_TOO_LARGE = json.dumps({'error': {'message': 'Request body too large.'}}).encode('utf-8')
+
+
+async def _send_413(send):
+    await send({'type': 'http.response.start', 'status': 413, 'headers': [
+        (b'content-type', b'application/json'), (b'content-length', str(len(_TOO_LARGE)).encode('ascii'))]})
+    await send({'type': 'http.response.body', 'body': _TOO_LARGE})
+
+
+class _BodyLimitASGI(object):
+    """ASGI wrapper: 413 when Content-Length or the streamed body exceeds MAX_BODY_BYTES."""
+
+    def __init__(self, app):
+        self.inner = app
+
+    async def __call__(self, scope, receive, send):
+        if scope.get('type') != 'http':
+            return await self.inner(scope, receive, send)
+        for key, value in scope.get('headers') or []:
+            if key.lower() == b'content-length':
+                try:
+                    if int(value) > MAX_BODY_BYTES:
+                        return await _send_413(send)
+                except ValueError:
+                    pass
+        chunks, total, more = [], 0, True
+        while more:
+            message = await receive()
+            if message.get('type') == 'http.disconnect':
+                return
+            if message.get('type') != 'http.request':
+                continue
+            chunk = message.get('body', b'')
+            total += len(chunk)
+            if total > MAX_BODY_BYTES:
+                return await _send_413(send)
+            chunks.append(chunk)
+            more = message.get('more_body', False)
+        body, sent = b''.join(chunks), [False]
+
+        async def replay():
+            if not sent[0]:
+                sent[0] = True
+                return {'type': 'http.request', 'body': body, 'more_body': False}
+            return await receive()
+
+        return await self.inner(scope, replay, send)
+
 try:
     from fastapi import FastAPI, HTTPException, Request
     from fastapi.responses import Response
@@ -35,6 +85,8 @@ class _ASGIApplication(object):
             if message.get('type') != 'http.request':
                 continue
             body += message.get('body', b'')
+            if len(body) > MAX_BODY_BYTES:
+                return await _send_413(send)
             more_body = message.get('more_body', False)
 
         payload = None
@@ -127,6 +179,7 @@ if FastAPI is not None and BaseModel is not None:
 
 
     app = FastAPI(title='RealAI Provider')
+    app.add_middleware(_BodyLimitASGI)
 
     def _dispatch_json(method, path, payload=None):
         try:
@@ -247,6 +300,12 @@ def wsgi_app(environ, start_response):
         body_size = int(content_length)
     except ValueError:
         body_size = 0
+    if body_size > MAX_BODY_BYTES:
+        start_response('413 Payload Too Large', [
+            ('Content-Type', 'application/json'),
+            ('Content-Length', str(len(_TOO_LARGE))),
+        ])
+        return [_TOO_LARGE]
     if body_size > 0:
         raw_body = environ['wsgi.input'].read(body_size)
         if raw_body:
@@ -277,6 +336,8 @@ def _reason_phrase(status_code):
         return 'Bad Request'
     if status_code == 404:
         return 'Not Found'
+    if status_code == 413:
+        return 'Payload Too Large'
     return 'Internal Server Error'
 
 
