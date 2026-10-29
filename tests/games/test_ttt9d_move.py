@@ -120,7 +120,7 @@ def test_logging(tmp_path, monkeypatch):
 
 
 def test_logging_defaults_to_data_dir(tmp_path, monkeypatch):
-    monkeypatch.delenv("REALAI_TTT9D_LOG", raising=False)
+    monkeypatch.setenv("REALAI_TTT9D_LOG", "1")
     monkeypatch.setenv("REALAI_DATA_DIR", str(tmp_path / "data"))
     out = T.run(context={"state": T.empty_state(), "difficulty": "easy", "log": True})
     expected = tmp_path / "data" / "games" / "ttt9d_moves.jsonl"
@@ -129,7 +129,7 @@ def test_logging_defaults_to_data_dir(tmp_path, monkeypatch):
 
 def test_caller_log_path_is_ignored(tmp_path, monkeypatch):
     """A caller-supplied log path must never be written (no arbitrary file append)."""
-    monkeypatch.delenv("REALAI_TTT9D_LOG", raising=False)
+    monkeypatch.setenv("REALAI_TTT9D_LOG", "1")
     monkeypatch.setenv("REALAI_DATA_DIR", str(tmp_path / "data"))
     evil = tmp_path / "elsewhere" / "evil.jsonl"
     out = T.run(context={"state": T.empty_state(), "difficulty": "easy", "log": str(evil)})
@@ -142,6 +142,69 @@ def test_no_logging_by_default(tmp_path, monkeypatch):
     monkeypatch.setenv("REALAI_DATA_DIR", str(tmp_path / "data"))
     out = T.run(context={"state": T.empty_state(), "difficulty": "easy"})
     assert "logged_to" not in out and not (tmp_path / "data").exists()
+
+
+def test_m1_caller_log_true_alone_does_not_log(tmp_path, monkeypatch):
+    monkeypatch.delenv("REALAI_TTT9D_LOG", raising=False)
+    monkeypatch.setenv("REALAI_DATA_DIR", str(tmp_path / "data"))
+    for v in (True, "1", str(tmp_path / "evil.jsonl")):
+        out = T.run(context={"state": T.empty_state(), "difficulty": "easy", "log": v})
+        assert "logged_to" not in out
+    assert not (tmp_path / "data").exists() and not (tmp_path / "evil.jsonl").exists()
+
+
+def test_m1_log_file_size_cap(tmp_path, monkeypatch):
+    p = tmp_path / "ttt.jsonl"
+    monkeypatch.setenv("REALAI_TTT9D_LOG", str(p))
+    monkeypatch.setattr(T, "MAX_LOG_BYTES", 2000)
+    for _ in range(40):
+        T.run(context={"state": T.empty_state(), "difficulty": "easy"})
+    size = p.stat().st_size
+    assert 0 < size <= 2000
+    out = T.run(context={"state": T.empty_state(), "difficulty": "easy"})
+    assert out.get("log_skipped") == "log_full" and p.stat().st_size == size
+
+
+def test_m1_record_size_cap(tmp_path, monkeypatch):
+    p = tmp_path / "ttt.jsonl"
+    monkeypatch.setenv("REALAI_TTT9D_LOG", str(p))
+    monkeypatch.setattr(T, "MAX_RECORD_BYTES", 100)
+    out = T.run(context={"state": T.empty_state(), "difficulty": "easy"})
+    assert out["ok"] and out.get("log_skipped") == "record_too_large" and not p.exists()
+
+
+def test_m1_default_caps():
+    assert T.MAX_LOG_BYTES == 5 * 1024 * 1024 and 0 < T.MAX_RECORD_BYTES <= 64 * 1024
+
+
+def test_m2_iterations_clamped():
+    assert T.clamp_iterations(10**12) == T.MAX_ITERATIONS
+    assert T.clamp_iterations(-5) == T.MIN_ITERATIONS
+    assert T.clamp_iterations(0) == T.MIN_ITERATIONS
+    assert T.clamp_iterations("50") == 50
+    r = T.get_move(T.empty_state(), "hard", seed=1, iterations=10**9, max_seconds=0.2)
+    assert r["iterations"] <= T.MAX_ITERATIONS
+
+
+def test_m2_seconds_clamped():
+    assert T.clamp_seconds(10**9) == T.MAX_SECONDS
+    assert T.clamp_seconds(0.0001) == T.MIN_SECONDS
+    assert T.clamp_seconds(-3) == T.MIN_SECONDS
+    assert T.clamp_seconds(None) is None and T.clamp_seconds(0) is None
+
+
+@pytest.mark.parametrize("field", ["iterations", "max_seconds"])
+@pytest.mark.parametrize("bad", [True, "abc", float("nan"), float("inf"), [1], {"a": 1}])
+def test_m2_bad_types_rejected(field, bad):
+    out = T.run(context={"state": T.empty_state(), "difficulty": "hard", field: bad})
+    assert out["ok"] is False and field in out["error"]
+
+
+def test_m2_huge_budget_is_bounded_in_time():
+    t0 = time.monotonic()
+    out = T.run(context={"state": T.empty_state(), "difficulty": "expert", "seed": 3,
+                         "iterations": 10**9, "max_seconds": 0.3})
+    assert out["ok"] and time.monotonic() - t0 < 5
 
 
 def test_tools_execute_routing():
