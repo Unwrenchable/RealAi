@@ -318,10 +318,11 @@ def test_probe_limit_huge(ws):
     assert len(rd("sub/a.txt", limit=10**9)["lines"]) == 1
 
 
-def test_write_cap_is_64k(ws, monkeypatch):
+def test_write_cap_is_256k(ws, monkeypatch):
     monkeypatch.setenv("REALAI_TOOLS_ALLOW", "workspace_write")
-    assert b.WS_MAX_WRITE_BYTES == 64 * 1024
-    assert W("workspace_write", {"path": "w.txt", "content": "x" * (64 * 1024 + 1)})["error"] == "content_too_large"
+    assert b.WS_MAX_WRITE_BYTES == 256 * 1024
+    assert W("workspace_write", {"path": "w.txt", "content": "x" * (256 * 1024 + 1)})["error"] == "content_too_large"
+    assert W("workspace_write", {"path": "w.txt", "content": "x" * (256 * 1024)})["ok"] is True
 
 
 # ---- errors never echo server paths ---------------------------------------------

@@ -73,7 +73,7 @@ Status: PARTIAL until Security re-approves #210.
 - **Paths:** absolute, drive, UNC, `:` and `..` paths are refused. Every component is checked against a case-insensitive denylist (`denied_path`): `.env`, `.env.*`, `*.pem`, `*.key`, `id_*`, `*.p12`, `*.pfx`, `*.keystore`, `.git`, `.npmrc`, `.pypirc`, `.netrc`, `credentials*`, `*secret*`, `.realai` (trailing dots/spaces ignored). `list` and `grep` hide denied entries.
 - **Links:** no symlink, junction or other reparse point on the path; only regular files with `st_nlink == 1` are read or written (`hardlink_not_allowed`).
 - **Caps:** files over 1 MB are not opened; a read returns at most 200 lines, 64 KB of content and 4 KB per line; files with a NUL byte in the first 8 KB are refused (`binary_not_allowed`). Grep is literal (no regex), 2000 files / 40 hits / 1 MB per file / 20 MB total / 5 s / 20 directory levels, and skips non-regular files.
-- **Writes:** `workspace_write` (and the bridge `search_replace`) only when `workspace_write` is in `REALAI_TOOLS_ALLOW`; 64 KB per write. Approval-gate edits (`search_replace` / `write_file`) are refused before queueing unless that allow is set, and on execute they go through the same `_ws_write`.
+- **Writes:** `workspace_write` (and the bridge `search_replace`) only when `workspace_write` is in `REALAI_TOOLS_ALLOW`; 256 KB per write (reads stay capped at 64 KB). Approval-gate edits (`search_replace` / `write_file`) are refused before queueing unless that allow is set, and on execute they go through the same `_ws_write`.
 
 ### Platform notes (TOCTOU)
 

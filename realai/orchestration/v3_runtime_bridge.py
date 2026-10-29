@@ -2440,7 +2440,7 @@ import time as _time
 WS_MAX_READ_BYTES = 1_000_000      # largest file we will open for read/grep
 WS_MAX_CONTENT = 64 * 1024         # bytes of content returned per read
 WS_MAX_LINE = 4096                 # chars per returned line
-WS_MAX_WRITE_BYTES = 64 * 1024     # bytes accepted per write
+WS_MAX_WRITE_BYTES = 256 * 1024    # bytes accepted per write
 WS_MAX_LINES = 200
 WS_MAX_LIST = 200
 WS_MAX_GREP_FILES = 2000
