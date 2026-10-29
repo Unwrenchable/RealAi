@@ -62,9 +62,10 @@ export async function handleAuthPopupRequest(request: Request): Promise<Response
   // Stay first-party for the callback so the session cookie lands in THIS popup.
   const back = `${url.origin}/auth/popup?done=1`;
   try {
-    const apiRes = await auth.api.signInWithOAuth2({
+    const apiRes = await auth.api.signInSocial({
       body: {
-        providerId,
+        // better-auth 1.7: generic-oauth providers use the core social endpoint.
+        provider: providerId,
         callbackURL: back,
         errorCallbackURL: `${back}&error=1`,
       },
