@@ -5,6 +5,20 @@ import pytest
 
 from realai.training import train_sft as T
 
+def _importorskip_transformers_torch():
+    """Skip when transformers is missing or cannot use the installed torch.
+
+    transformers 5.x needs torch >= 2.5; with an older torch it imports fine but
+    every model class raises ImportError ("requires the PyTorch library").
+    """
+    tr = pytest.importorskip("transformers")
+    from transformers.utils import is_torch_available
+
+    if not is_torch_available():
+        pytest.skip("transformers cannot use the installed torch (needs torch >= 2.5)")
+    return tr
+
+
 
 class FakeTok:
     """Char-level stand-in for a chat template: <r>content</r> blocks."""
@@ -94,7 +108,7 @@ def test_oom_detection():
 
 def test_sft_loss_matches_reference_ce():
     torch = pytest.importorskip("torch")
-    tr = pytest.importorskip("transformers")
+    tr = _importorskip_transformers_torch()
     cfg = tr.Qwen2Config(vocab_size=64, hidden_size=32, intermediate_size=64, num_hidden_layers=2,
                          num_attention_heads=4, num_key_value_heads=2, max_position_embeddings=64)
     torch.manual_seed(0)
@@ -133,7 +147,7 @@ def test_cosine_warmup_curve():
 
 def _tiny_peft(seed=0):
     torch = pytest.importorskip("torch")
-    tr = pytest.importorskip("transformers")
+    tr = _importorskip_transformers_torch()
     peft = pytest.importorskip("peft")
     cfg = tr.Qwen2Config(vocab_size=64, hidden_size=32, intermediate_size=64, num_hidden_layers=2,
                          num_attention_heads=4, num_key_value_heads=2, max_position_embeddings=64)
@@ -156,7 +170,7 @@ def test_save_adapter_reloads_with_peft(tmp_path, monkeypatch):
     ids = torch.tensor([[1, 2, 3, 4, 5]])
     with torch.no_grad():
         want = m(input_ids=ids).logits
-    tr = pytest.importorskip("transformers")
+    tr = _importorskip_transformers_torch()
     torch.manual_seed(0)  # same seed -> identical base weights, no LoRA
     base2 = tr.Qwen2ForCausalLM(base.config).eval()
     re = peft.PeftModel.from_pretrained(base2, str(d)).eval()
