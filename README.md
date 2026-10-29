@@ -2,14 +2,14 @@
 
 RealAI is a local-first AI hive: an orchestrator (`python -m realai.v3_orchestrator`, port `8001`) plus local GGUF models served by `llama-server` on Vulkan (port `8080`). On top of that it runs tools and agents, serves a browser console at `/console`, ships a VS Code extension (`apps/vscode/`) and a Next.js UI (`frontend/`).
 
-There is also a separate cloud API, `python -m realai.api_server`, used for the Render deploy. It is its own server with its own routes and SQLite chat history; it does not proxy to the orchestrator. It reads `PORT` and defaults to `8001`, the same port as the orchestrator, so set `PORT` (for example `8000`) if you run both on one machine.
+There is also a separate cloud API, `python -m realai.api_server`, used for the Render deploy. It is its own server with its own routes and SQLite chat history; it does not proxy to the orchestrator. It reads `PORT` and defaults to `8001`, the same port as the orchestrator, so set `PORT` if you run both on one machine: `$env:PORT = 8000; python -m realai.api_server`.
 
-**Product root:** `C:\RealAI-clean`  
+**Product root:** the repo checkout (on the maintainer's machine, `C:\RealAI-clean`).  
 **Git branch:** `main` (https://github.com/Unwrenchable/RealAi). The old `main` is `archive/main-legacy`.  
 **Architecture contract:** [ARCHITECTURE.md](./ARCHITECTURE.md): v1 and v2 live *inside* this tree, not as version folders.  
 **Recovery / history branches** are libraries; do not mega-merge them into `main`.
 
-> **Source of truth:** [`realai/ability_catalog.py`](realai/ability_catalog.py) (LIVE / PARTIAL / STUB). If this README and the catalog disagree, the catalog wins. `ABILITIES.md` has the longer tool surface.
+> **Source of truth:** [`realai/ability_catalog.py`](realai/ability_catalog.py) (LIVE / PARTIAL). If this README and the catalog disagree, the catalog wins. `ABILITIES.md` has the longer tool surface.
 
 ---
 
@@ -33,18 +33,23 @@ Only abilities the catalog marks **LIVE** (64 of 78). Many are reached through `
 | Task automation & infra ops (`task_automation`) | POST /v1/self-heal/* + tools self_heal_* |
 | Voice interaction (streaming) (`voice_streaming`) | ability.voice_streaming oneshot (local TTS↔Hive chat) + optional WS |
 | Business planning (`business_planning`) | POST /v1/tools/execute ability.business_planning → local Hive chat |
-| Therapy & counseling (`therapy_counseling`) | POST /v1/tools/execute ability.therapy_counseling → local Hive chat |
+| Therapy & counseling (general conversation, not professional care) (`therapy_counseling`) | POST /v1/tools/execute ability.therapy_counseling → local Hive chat |
 | Web3 integration (`web3_integration`) | POST /v1/tools/execute ability.web3_integration + core.tools.web3 |
+
+### RackUp (pool app)
+
+| Ability (catalog id) | How to reach it |
+|---|---|
 | RackUp professional coach (`coach`) | POST /v1/tools/execute ability.coach + rackup_invoke |
 | Shot of the Day (`shot_of_the_day`) | POST /v1/tools/execute ability.shot_of_the_day + rackup_invoke |
 | Post-match rating update (`rating_update`) | POST /v1/tools/execute ability.rating_update + rackup_invoke |
 | Tournament / league insights (`tournament`) | POST /v1/tools/execute ability.tournament + rackup_invoke |
 | ROC ledger audit (`ledger_audit`) | POST /v1/tools/execute ability.ledger_audit + rackup_invoke |
 | Matchmaking advice (`matchmaking`) | POST /v1/tools/execute ability.matchmaking + rackup_invoke |
-| hall context (`hall_context`) | POST /v1/tools/execute ability.hall_context + rackup_invoke |
+| Hall Context (`hall_context`) | POST /v1/tools/execute ability.hall_context + rackup_invoke |
 | league validate (`league_validate`) | POST /v1/tools/execute ability.league_validate + rackup_invoke |
 | moderation (`moderation`) | POST /v1/tools/execute ability.moderation + rackup_invoke |
-| money anomaly (`money_anomaly`) | POST /v1/tools/execute ability.money_anomaly + rackup_invoke |
+| Money Anomaly (`money_anomaly`) | POST /v1/tools/execute ability.money_anomaly + rackup_invoke |
 | payout sanity (`payout_sanity`) | POST /v1/tools/execute ability.payout_sanity + rackup_invoke |
 | pyramid rules (`pyramid_rules`) | POST /v1/tools/execute ability.pyramid_rules + rackup_invoke |
 | rating convert (`rating_convert`) | POST /v1/tools/execute ability.rating_convert + rackup_invoke |
@@ -52,14 +57,24 @@ Only abilities the catalog marks **LIVE** (64 of 78). Many are reached through `
 | unified player card sync (`player_card_sync`) | POST /v1/tools/execute ability.player_card_sync + rackup_invoke |
 | sotd contribute (`sotd_contribute`) | POST /v1/tools/execute ability.sotd_contribute + rackup_invoke |
 | video analysis (`video_analysis`) | POST /v1/tools/execute ability.video_analysis + rackup_invoke |
+
+### Desktop Lambda
+
+| Ability (catalog id) | How to reach it |
+|---|---|
 | desktop lambda chat (`desktop_lambda_chat`) | POST /v1/tools/execute ability.desktop_lambda_chat |
 | desktop lambda image (`desktop_lambda_image`) | POST /v1/tools/execute ability.desktop_lambda_image |
 | desktop lambda video (`desktop_lambda_video`) | POST /v1/tools/execute ability.desktop_lambda_video |
 | desktop lambda advanced (`desktop_lambda_advanced`) | POST /v1/tools/execute ability.desktop_lambda_advanced |
+
+### Hive, tools and runtime
+
+| Ability (catalog id) | How to reach it |
+|---|---|
 | overmind runner (`overmind_runner`) | POST /v1/tools/execute ability.overmind_runner |
 | code engineer agent (`code_engineer_agent`) | POST /v1/tools/execute ability.code_engineer_agent |
 | Deep promote (named roots + nests) (`deep_promote`) | abilities/deep_promote.py + craft /promote |
-| hierarchical_specialists (`hierarchical_specialists`) | POST /v1/tools/execute ability.hierarchical_specialists |
+| Hierarchical Specialists (`hierarchical_specialists`) | POST /v1/tools/execute ability.hierarchical_specialists |
 | approval_store (`approval_store`) | POST /v1/tools/execute ability.approval_store |
 | device_selector (`device_selector`) | POST /v1/tools/execute device_selector + ability.device_selector |
 | Code Engineer CLI (`code_engineer_cli`) | abilities/code_engineer_cli.py + realai.plugins.tools.code_engineer_cli |
@@ -81,10 +96,10 @@ Only abilities the catalog marks **LIVE** (64 of 78). Many are reached through `
 | Recovered PEFT LoRA adapters (`lora_adapters`) | GET /v1/lora |
 | Kilo-era gold recovery wiring (`kilo_recovery`) | GET /v1/recovery |
 | Next.js operator UI (`frontend_ui`) | http://127.0.0.1:3000 |
-| CLI surface (tools install) (`cli_surface`) | bin/realai*.cmd + realai.cli.craft (in-tree; not C:\tools\realai husk) |
+| CLI surface (tools install) (`cli_surface`) | bin/realai*.cmd + realai.cli.craft |
 | Hive governance (`hive_governance`) | POST /v1/tools/execute ability.hive_governance (local agents + coverage) |
 
-## Partial and stub abilities
+## Partial abilities
 
 These exist in some form but are not finished. Do not rely on them yet.
 
@@ -103,8 +118,7 @@ These exist in some form but are not finished. Do not rely on them yet.
 - **PARTIAL:** Tool router heuristics (provider/cost/latency) (`tool_router_plugins`)
 - **PARTIAL:** Workspace info / catalog (read-only, REALAI_HOME) (`workspace_info`)
 
-
-Every catalog entry is currently LIVE or PARTIAL; none are STUB, CODE, SOFT, GOLD or MISSING. At runtime, `_enrich_status_from_disk` can upgrade a CODE or MISSING entry to GOLD when its recovered "gold" files are found on disk. GOLD still means recovered material, not a working feature.
+Every catalog entry is currently LIVE or PARTIAL. (`_enrich_status_from_disk` can upgrade CODE or MISSING entries to GOLD at runtime; none exist today.)
 
 ---
 
@@ -145,10 +159,6 @@ POST /v1/audio/speech
 - `/repo` — workspace listing
 - `/tools` `/agents` `/multi` — via Craft / console Ops when stack is up
 
-### Ability catalog (honesty map)
-
-See `realai/ability_catalog.py` and `ABILITIES.md`. Trust LIVE / PARTIAL / STUB in the catalog over marketing lists.
-
 ---
 
 ## Install
@@ -167,6 +177,7 @@ For local inference you also need a `llama-server` build with Vulkan and a GGUF 
 
 Tested on Windows with an AMD RX 6700 XT.
 
+Paths below are examples (this machine uses `C:\RealAI-clean`; `start_v3_stack.ps1` assumes `C:\realai`). Adjust to your checkout.
 
 ```powershell
 # 1) Vulkan model server (7B GGUF). -fa off is required on the RX 6700 XT (flash attention garbles output).
@@ -179,11 +190,16 @@ cd C:\RealAI-clean
 $env:PYTHONPATH = "C:\RealAI-clean;C:\RealAI-clean\realai"
 $env:REALAI_VULKAN_BASE = "http://127.0.0.1:8080"
 python -m realai.v3_orchestrator --host 127.0.0.1 --port 8001
+
+# 3) Operator UI (Next.js) on http://127.0.0.1:3000
+#    REALAI_API_BASE also works if NEXT_PUBLIC_API_URL is unset.
+cd frontend
+$env:NEXT_PUBLIC_API_URL = "http://127.0.0.1:8001"
+pnpm install
+pnpm dev
 ```
 
 `scripts/start_v3_stack.ps1` runs the same stack but uses `-c 8192`. It binds `llama-server` to `127.0.0.1` unless `REALAI_LLAMA_HOST` is set.
-
-Paths are examples (the launcher assumes `C:\realai`). Adjust to your install.
 
 Open **http://127.0.0.1:8001/console**
 
