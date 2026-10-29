@@ -2033,28 +2033,27 @@ def execute_registry_tool(
     if name in ("list_dir", "workspace_list"):
         return workspace_tool("workspace_list", arguments)
     if name == "search_replace":
-        path = str(arguments.get("path") or arguments.get("file") or "")
+        # Same confinement as workspace_write (Security #210): no craft fallback, REALAI_TOOLS_ALLOW required.
+        path = arguments.get("path") or arguments.get("file") or ""
         old = arguments.get("old_string") or arguments.get("old")
         new = arguments.get("new_string") or arguments.get("new") or arguments.get("content")
         if old is not None and new is not None and path:
+            if not _ws_write_allowed():
+                return {"ok": False, "error": "write_not_allowed", "tool": name}
             try:
-                from realai.cli import craft
-
-                cur = craft.tool_read(path, start=1, limit=50000)
-                text = ""
-                if isinstance(cur, dict):
-                    text = str(cur.get("content") or cur.get("text") or "")
+                root = workspace_root()
+                parts = ws_parts(path)
+                data = ws_read_bytes(root, parts, WS_MAX_READ_BYTES)
+                if _ws_is_binary(data):
+                    return {"ok": False, "error": "binary_not_allowed", "tool": name}
+                text = data.decode("utf-8", errors="replace")
                 if str(old) not in text:
-                    return {
-                        "ok": False,
-                        "error": "old_string_not_found",
-                        "path": path,
-                        "tool": name,
-                    }
-                updated = text.replace(str(old), str(new), 1)
-                return craft.tool_write(path, content=updated, mode="overwrite")
-            except Exception as e:
-                return {"ok": False, "error": str(e), "tool": name}
+                    return {"ok": False, "error": "old_string_not_found", "tool": name}
+                return workspace_tool("workspace_write", {"path": path, "content": text.replace(str(old), str(new), 1)})
+            except WorkspacePathError as e:
+                return {"ok": False, "error": e.code, "tool": name}
+            except OSError:
+                return {"ok": False, "error": "io_error", "tool": name}
         return workspace_tool(
             "workspace_write",
             {
@@ -2418,19 +2417,49 @@ def _web_research(query: str, max_results: int = 5) -> Dict[str, Any]:
 
 # ---------------------------------------------------------------------------
 # Workspace file tools (B3 piece 1): confined, capped, read-only by default.
+#
+# Platform notes (Security #210 MED 3):
+#   POSIX: every path is walked component by component with directory fds
+#     (O_DIRECTORY|O_NOFOLLOW + dir_fd); the leaf is opened with O_NOFOLLOW
+#     (and O_NONBLOCK for reads) and checked with fstat (S_ISREG, st_nlink == 1)
+#     before a single byte is read or written. Data is read/written through
+#     that fd, so a component swapped for a symlink after the check cannot be
+#     followed (no TOCTOU window).
+#   Windows: dir_fd and O_NOFOLLOW do not exist. Each component is lstat'ed and
+#     refused if it is a reparse point (symlink, junction, mount point:
+#     FILE_ATTRIBUTE_REPARSE_POINT); after the leaf is opened, the handle's
+#     final path (GetFinalPathNameByHandleW) must still be inside the root and
+#     must not hit the denylist (this also defeats 8.3 short names), then fstat
+#     checks S_ISREG and st_nlink == 1. Data goes through the checked handle.
+#     The remaining window is a directory swapped between lstat and open; the
+#     final-path check after open catches that case.
 # ---------------------------------------------------------------------------
-WS_MAX_READ_BYTES = 1_000_000
-WS_MAX_WRITE_BYTES = 256_000
+import stat as _stat
+import time as _time
+
+WS_MAX_READ_BYTES = 1_000_000      # largest file we will open for read/grep
+WS_MAX_CONTENT = 64 * 1024         # bytes of content returned per read
+WS_MAX_LINE = 4096                 # chars per returned line
+WS_MAX_WRITE_BYTES = 64 * 1024     # bytes accepted per write
 WS_MAX_LINES = 200
 WS_MAX_LIST = 200
 WS_MAX_GREP_FILES = 2000
 WS_MAX_GREP_HITS = 40
 WS_MAX_GREP_FILE_BYTES = 1_000_000
+WS_MAX_GREP_TOTAL_BYTES = 20_000_000
+WS_GREP_DEADLINE_S = 5.0
+WS_GREP_MAX_DEPTH = 20
 WS_MAX_PATTERN = 200
 WS_MAX_PATH = 1024
+WS_BINARY_SNIFF = 8192
 WS_READ_TOOLS = ("workspace_list", "workspace_read", "workspace_grep")
 WS_WRITE_TOOLS = ("workspace_write",)
-_WS_SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv", ".mypy_cache", ".pytest_cache"}
+_WS_SKIP_DIRS = {"node_modules", "__pycache__", ".venv", "venv", ".mypy_cache", ".pytest_cache"}
+_WS_DENY_EXACT = {".env", ".git", ".npmrc", ".pypirc", ".netrc", ".realai"}
+_WS_DENY_SUFFIX = (".pem", ".key", ".p12", ".pfx", ".keystore")
+_WS_DENY_PREFIX = (".env.", "id_", "credentials")
+_FILE_ATTRIBUTE_REPARSE_POINT = 0x400
+_WS_POSIX = os.name != "nt" and os.open in getattr(os, "supports_dir_fd", set()) and hasattr(os, "O_NOFOLLOW")
 
 
 class WorkspacePathError(ValueError):
@@ -2441,30 +2470,51 @@ class WorkspacePathError(ValueError):
         self.code = code
 
 
+def ws_denied_name(name: str) -> bool:
+    """Case-insensitive secret/credential denylist for ONE path component."""
+    n = name.lower().rstrip(" .")  # Windows ignores trailing dots/spaces
+    if not n:
+        return False
+    return (
+        n in _WS_DENY_EXACT
+        or n.startswith(_WS_DENY_PREFIX)
+        or n.endswith(_WS_DENY_SUFFIX)
+        or "secret" in n
+    )
+
+
+def _ws_forbidden_roots() -> List[Path]:
+    out = []
+    for p in (Path.home(), Path(__file__).resolve().parents[2]):
+        try:
+            out.append(p.resolve())
+        except OSError:
+            pass
+    return out
+
+
 def workspace_root() -> Path:
-    """Confinement root: REALAI_TOOLS_WORKSPACE_ROOT, else craft's project workspace."""
+    """Confinement root: REALAI_TOOLS_WORKSPACE_ROOT only. Fail closed (no fallback).
+
+    Refuses /, a drive root, the user's home, the product (repo) root, or any ancestor of those.
+    """
     raw = os.environ.get("REALAI_TOOLS_WORKSPACE_ROOT", "").strip()
-    if raw:
-        root = Path(raw)
-    else:
-        from realai.cli import craft
-
-        root = craft._ws()
-    return root.resolve(strict=True)
-
-
-def _ws_is_link(p: Path) -> bool:
+    if not raw:
+        raise WorkspacePathError("workspace_unavailable")
     try:
-        if p.is_symlink():
-            return True
-        is_junction = getattr(p, "is_junction", None)
-        return bool(is_junction and is_junction())
-    except OSError:
-        return True
+        root = Path(raw).resolve(strict=True)
+    except (OSError, RuntimeError):
+        raise WorkspacePathError("workspace_unavailable") from None
+    if not root.is_dir() or root.parent == root:
+        raise WorkspacePathError("workspace_unavailable")
+    for bad in _ws_forbidden_roots():
+        if root == bad or root in bad.parents:
+            raise WorkspacePathError("workspace_unavailable")
+    return root
 
 
-def ws_resolve(root: Path, rel: Any) -> Path:
-    """Resolve a caller path inside root. Rejects absolute/UNC/drive paths, '..', NUL and any symlink hop."""
+def ws_parts(rel: Any) -> List[str]:
+    """Validate a caller path and split it into components (no I/O)."""
     from pathlib import PurePosixPath, PureWindowsPath
 
     s = "." if rel is None or rel == "" else rel
@@ -2480,22 +2530,221 @@ def ws_resolve(root: Path, rel: Any) -> Path:
     parts = [x for x in re.split(r"[\\/]+", s) if x not in ("", ".")]
     if any(x == ".." for x in parts):
         raise WorkspacePathError("path_traversal_not_allowed")
-    cur = root
-    for part in parts:
-        cur = cur / part
-        if _ws_is_link(cur):
-            raise WorkspacePathError("symlink_not_allowed")
-    resolved = cur.resolve(strict=False)
+    if os.name == "nt" and any(x.rstrip(" .") in ("", "..") for x in parts):
+        raise WorkspacePathError("bad_path")  # "... " / ".. " collapse to dots on Windows
+    for x in parts:
+        if ws_denied_name(x):
+            raise WorkspacePathError("denied_path")
+    return parts
+
+
+def _ws_err(e: OSError, default: str = "io_error") -> WorkspacePathError:
+    import errno
+
+    if e.errno == errno.ELOOP:
+        return WorkspacePathError("symlink_not_allowed")
+    if e.errno == errno.ENOENT:
+        return WorkspacePathError("not_found")
+    if e.errno in (errno.ENOTDIR,):
+        return WorkspacePathError("not_a_directory")
+    if e.errno in (errno.EISDIR,):
+        return WorkspacePathError("not_a_file")
+    return WorkspacePathError(default)
+
+
+# ---- POSIX fd walk -------------------------------------------------------------
+def _px_open_dir(root: Path, parts: List[str], *, create: bool = False) -> int:
+    flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0)
+    dfd = os.open(str(root), os.O_RDONLY | os.O_DIRECTORY | getattr(os, "O_CLOEXEC", 0))
     try:
-        resolved.relative_to(root)
+        for comp in parts:
+            try:
+                nfd = os.open(comp, flags, dir_fd=dfd)
+            except FileNotFoundError:
+                if not create:
+                    raise WorkspacePathError("not_found") from None
+                os.mkdir(comp, 0o755, dir_fd=dfd)
+                nfd = os.open(comp, flags, dir_fd=dfd)
+            except OSError as e:
+                try:
+                    st = os.stat(comp, dir_fd=dfd, follow_symlinks=False)
+                    code = "symlink_not_allowed" if _stat.S_ISLNK(st.st_mode) else "not_a_directory"
+                except OSError:
+                    code = _ws_err(e).code
+                raise WorkspacePathError(code) from None
+            os.close(dfd)
+            dfd = nfd
+        return dfd
+    except BaseException:
+        os.close(dfd)
+        raise
+
+
+def _px_open_leaf(dfd: int, name: str, flags: int, mode: int = 0o644) -> int:
+    try:
+        return os.open(name, flags | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0), mode, dir_fd=dfd)
+    except OSError as e:
+        try:
+            st = os.stat(name, dir_fd=dfd, follow_symlinks=False)
+            if _stat.S_ISLNK(st.st_mode):
+                raise WorkspacePathError("symlink_not_allowed") from None
+        except FileNotFoundError:
+            pass
+        except WorkspacePathError:
+            raise
+        except OSError:
+            pass
+        raise _ws_err(e) from None
+
+
+# ---- Windows checks ------------------------------------------------------------
+def _nt_is_reparse(p: Path) -> bool:
+    st = os.lstat(str(p))
+    return bool(getattr(st, "st_file_attributes", 0) & _FILE_ATTRIBUTE_REPARSE_POINT) or _stat.S_ISLNK(st.st_mode)
+
+
+def _nt_walk(root: Path, parts: List[str], *, create_parents: bool = False) -> Path:
+    cur = root
+    for i, comp in enumerate(parts):
+        cur = cur / comp
+        try:
+            if _nt_is_reparse(cur):
+                raise WorkspacePathError("symlink_not_allowed")
+        except FileNotFoundError:
+            if create_parents and i < len(parts) - 1:
+                os.mkdir(str(cur))
+                continue
+            if i == len(parts) - 1:
+                return cur
+            raise WorkspacePathError("not_found") from None
+    return cur
+
+
+def _nt_final_path(fd: int) -> Optional[str]:
+    try:
+        import ctypes
+        import msvcrt
+        from ctypes import wintypes
+
+        h = msvcrt.get_osfhandle(fd)
+        fn = ctypes.windll.kernel32.GetFinalPathNameByHandleW
+        fn.argtypes = [wintypes.HANDLE, wintypes.LPWSTR, wintypes.DWORD, wintypes.DWORD]
+        fn.restype = wintypes.DWORD
+        buf = ctypes.create_unicode_buffer(32768)
+        n = fn(h, buf, 32768, 0)
+        if not n or n >= 32768:
+            return None
+        s = buf.value
+        if s.startswith("\\\\?\\UNC\\"):
+            s = "\\\\" + s[8:]
+        elif s.startswith("\\\\?\\"):
+            s = s[4:]
+        return s
+    except Exception:
+        return None
+
+
+def _nt_check_final(root: Path, fd: int) -> None:
+    final = _nt_final_path(fd)
+    if final is None:
+        raise WorkspacePathError("io_error")
+    fp = Path(final)
+    try:
+        rel = fp.relative_to(root)
     except ValueError:
-        raise WorkspacePathError("outside_workspace") from None
-    return resolved
+        try:
+            rel = Path(os.path.normcase(final)).relative_to(Path(os.path.normcase(str(root))))
+        except ValueError:
+            raise WorkspacePathError("outside_workspace") from None
+    if any(ws_denied_name(x) for x in rel.parts):
+        raise WorkspacePathError("denied_path")
 
 
-def _ws_rel(root: Path, p: Path) -> str:
-    r = p.relative_to(root).as_posix()
-    return r or "."
+# ---- secure open (both platforms) ----------------------------------------------
+def _ws_check_regular(fd: int) -> os.stat_result:
+    st = os.fstat(fd)
+    if not _stat.S_ISREG(st.st_mode):
+        raise WorkspacePathError("not_a_file")
+    if st.st_nlink > 1:
+        raise WorkspacePathError("hardlink_not_allowed")
+    return st
+
+
+def ws_open_read(root: Path, parts: List[str]) -> int:
+    """Open a regular, single-link file under root for reading; returns an fd."""
+    if not parts:
+        raise WorkspacePathError("not_a_file")
+    if _WS_POSIX:
+        dfd = _px_open_dir(root, parts[:-1])
+        try:
+            fd = _px_open_leaf(dfd, parts[-1], os.O_RDONLY | getattr(os, "O_NONBLOCK", 0))
+        finally:
+            os.close(dfd)
+    else:
+        p = _nt_walk(root, parts)
+        if p.is_dir():
+            raise WorkspacePathError("not_a_file")
+        try:
+            fd = os.open(str(p), os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOINHERIT", 0))
+        except OSError as e:
+            raise _ws_err(e) from None
+        try:
+            _nt_check_final(root, fd)
+        except BaseException:
+            os.close(fd)
+            raise
+    try:
+        _ws_check_regular(fd)
+    except BaseException:
+        os.close(fd)
+        raise
+    return fd
+
+
+def _ws_read_fd(fd: int, limit: int) -> bytes:
+    chunks, total = [], 0
+    while total <= limit:
+        b = os.read(fd, min(65536, limit + 1 - total))
+        if not b:
+            break
+        chunks.append(b)
+        total += len(b)
+    return b"".join(chunks)
+
+
+def ws_read_bytes(root: Path, parts: List[str], limit: int) -> bytes:
+    fd = ws_open_read(root, parts)
+    try:
+        if os.fstat(fd).st_size > limit:
+            raise WorkspacePathError("file_too_large")
+        data = _ws_read_fd(fd, limit)
+        if len(data) > limit:
+            raise WorkspacePathError("file_too_large")
+        return data
+    finally:
+        os.close(fd)
+
+
+def _ws_is_binary(data: bytes) -> bool:
+    return b"\x00" in data[:WS_BINARY_SNIFF]
+
+
+def ws_resolve(root: Path, rel: Any) -> Path:
+    """Back-compat: validate a caller path and return root/parts (refuses links on the way)."""
+    parts = ws_parts(rel)
+    if _WS_POSIX:
+        if parts:
+            dfd = _px_open_dir(root, parts[:-1])
+            try:
+                st = os.stat(parts[-1], dir_fd=dfd, follow_symlinks=False)
+                if _stat.S_ISLNK(st.st_mode):
+                    raise WorkspacePathError("symlink_not_allowed")
+            except FileNotFoundError:
+                pass
+            finally:
+                os.close(dfd)
+        return root.joinpath(*parts)
+    return _nt_walk(root, parts) if parts else root
 
 
 def _ws_int(v: Any, default: int, lo: int, hi: int) -> int:
@@ -2515,36 +2764,75 @@ def _ws_write_allowed() -> bool:
     return "workspace_write" in allow
 
 
+def _ws_entry_kind(st: os.stat_result) -> str:
+    if _stat.S_ISLNK(st.st_mode) or getattr(st, "st_file_attributes", 0) & _FILE_ATTRIBUTE_REPARSE_POINT:
+        return "link"
+    if _stat.S_ISDIR(st.st_mode):
+        return "dir"
+    if _stat.S_ISREG(st.st_mode):
+        return "file"
+    return "other"
+
+
+def _ws_scandir(root: Path, parts: List[str]):
+    """Yield (name, lstat) for a directory under root, opened safely."""
+    if _WS_POSIX:
+        dfd = _px_open_dir(root, parts)
+        try:
+            with os.scandir(dfd) as it:
+                ents = [(e.name, e.stat(follow_symlinks=False)) for e in it]
+        finally:
+            os.close(dfd)
+        return ents
+    d = _nt_walk(root, parts) if parts else root
+    try:
+        if not _stat.S_ISDIR(os.lstat(str(d)).st_mode):
+            raise WorkspacePathError("not_a_directory")
+        with os.scandir(str(d)) as it:
+            return [(e.name, e.stat(follow_symlinks=False)) for e in it]
+    except FileNotFoundError:
+        raise WorkspacePathError("not_found") from None
+
+
 def _ws_list(root: Path, a: Dict[str, Any]) -> Dict[str, Any]:
-    p = ws_resolve(root, a.get("path"))
-    if not p.exists():
-        return {"ok": False, "error": "not_found"}
-    if p.is_file():
-        return {"ok": True, "path": _ws_rel(root, p), "type": "file", "size": p.stat().st_size}
-    entries = []
-    truncated = False
-    for child in sorted(p.iterdir(), key=lambda x: (not x.is_dir(), x.name.lower())):
-        if child.name in _WS_SKIP_DIRS:
-            continue
-        if len(entries) >= WS_MAX_LIST:
-            truncated = True
-            break
-        kind = "link" if _ws_is_link(child) else ("dir" if child.is_dir() else "file")
-        entries.append({"name": child.name, "type": kind})
-    return {"ok": True, "path": _ws_rel(root, p), "entries": entries, "truncated": truncated}
+    parts = ws_parts(a.get("path"))
+    rel = "/".join(parts) or "."
+    try:
+        ents = _ws_scandir(root, parts)
+    except WorkspacePathError as e:
+        if e.code != "not_a_directory" or not parts:
+            raise
+        fd = ws_open_read(root, parts)
+        try:
+            return {"ok": True, "path": rel, "type": "file", "size": os.fstat(fd).st_size}
+        finally:
+            os.close(fd)
+    ents = [(n, st) for n, st in ents if n not in _WS_SKIP_DIRS and not ws_denied_name(n)]
+    ents.sort(key=lambda x: (_ws_entry_kind(x[1]) != "dir", x[0].lower()))
+    entries = [{"name": n, "type": _ws_entry_kind(st)} for n, st in ents[:WS_MAX_LIST]]
+    return {"ok": True, "path": rel, "entries": entries, "truncated": len(ents) > WS_MAX_LIST}
 
 
 def _ws_read(root: Path, a: Dict[str, Any]) -> Dict[str, Any]:
-    p = ws_resolve(root, a.get("path"))
-    if not p.is_file():
-        return {"ok": False, "error": "not_a_file"}
-    if p.stat().st_size > WS_MAX_READ_BYTES:
-        return {"ok": False, "error": "file_too_large", "max_bytes": WS_MAX_READ_BYTES}
+    parts = ws_parts(a.get("path"))
     start = _ws_int(a.get("start"), 1, 1, 10_000_000)
     limit = _ws_int(a.get("limit"), 80, 1, WS_MAX_LINES)
-    lines = p.read_text(encoding="utf-8", errors="replace").splitlines()
-    chunk = lines[start - 1 : start - 1 + limit]
-    return {"ok": True, "path": _ws_rel(root, p), "start": start, "lines": chunk, "content": "\n".join(chunk), "total_lines": len(lines)}
+    data = ws_read_bytes(root, parts, WS_MAX_READ_BYTES)
+    if _ws_is_binary(data):
+        return {"ok": False, "error": "binary_not_allowed"}
+    lines = data.decode("utf-8", errors="replace").splitlines()
+    chunk, used, truncated = [], 0, False
+    for line in lines[start - 1 : start - 1 + limit]:
+        if len(line) > WS_MAX_LINE:
+            line, truncated = line[:WS_MAX_LINE], True
+        cost = len(line.encode("utf-8")) + 1
+        if used + cost > WS_MAX_CONTENT:
+            truncated = True
+            break
+        chunk.append(line)
+        used += cost
+    return {"ok": True, "path": "/".join(parts), "start": start, "lines": chunk,
+            "content": "\n".join(chunk), "total_lines": len(lines), "truncated": truncated}
 
 
 def _ws_grep(root: Path, a: Dict[str, Any]) -> Dict[str, Any]:
@@ -2554,33 +2842,91 @@ def _ws_grep(root: Path, a: Dict[str, Any]) -> Dict[str, Any]:
     if not isinstance(pattern, str) or not pattern or len(pattern) > WS_MAX_PATTERN:
         return {"ok": False, "error": "bad_pattern"}
     glob = str(a.get("glob") or "*")[:100]
-    base = ws_resolve(root, a.get("path"))
+    base = ws_parts(a.get("path"))
+    deadline = _time.monotonic() + WS_GREP_DEADLINE_S
     hits: List[Dict[str, Any]] = []
     scanned = 0
-    for dirpath, dirnames, filenames in os.walk(base, followlinks=False):
-        d = Path(dirpath)
-        dirnames[:] = [x for x in dirnames if x not in _WS_SKIP_DIRS and not _ws_is_link(d / x)]
-        for fn in filenames:
-            if not fnmatch.fnmatch(fn, glob):
+    budget = WS_MAX_GREP_TOTAL_BYTES
+    stack: List[List[str]] = [base]
+    while stack:
+        if _time.monotonic() > deadline:
+            return {"ok": True, "hits": hits, "truncated": True, "reason": "deadline"}
+        parts = stack.pop()
+        try:
+            ents = _ws_scandir(root, parts)
+        except WorkspacePathError:
+            if parts is base:
+                raise
+            continue
+        except OSError:
+            continue
+        subdirs = []
+        for name, st in sorted(ents, key=lambda x: x[0]):
+            if name in _WS_SKIP_DIRS or ws_denied_name(name):
                 continue
-            f = d / fn
-            if _ws_is_link(f):
+            kind = _ws_entry_kind(st)
+            if kind == "dir":
+                if len(parts) - len(base) < WS_GREP_MAX_DEPTH:
+                    subdirs.append(parts + [name])
+                continue
+            if kind != "file" or st.st_nlink > 1 or not fnmatch.fnmatch(name, glob):
+                continue
+            if st.st_size > WS_MAX_GREP_FILE_BYTES:
                 continue
             scanned += 1
-            if scanned > WS_MAX_GREP_FILES:
+            if scanned > WS_MAX_GREP_FILES or budget <= 0 or _time.monotonic() > deadline:
                 return {"ok": True, "hits": hits, "truncated": True}
             try:
-                if f.stat().st_size > WS_MAX_GREP_FILE_BYTES:
-                    continue
-                text = f.read_text(encoding="utf-8", errors="ignore")
-            except OSError:
+                data = ws_read_bytes(root, parts + [name], WS_MAX_GREP_FILE_BYTES)
+            except (WorkspacePathError, OSError):
                 continue
-            for i, line in enumerate(text.splitlines(), 1):
+            budget -= len(data)
+            if _ws_is_binary(data):
+                continue
+            rel = "/".join(parts + [name])
+            for i, line in enumerate(data.decode("utf-8", errors="ignore").splitlines(), 1):
                 if pattern in line:  # literal match: no regex, no ReDoS
-                    hits.append({"path": _ws_rel(root, f), "line": i, "text": line[:300]})
+                    hits.append({"path": rel, "line": i, "text": line[:300]})
                     if len(hits) >= WS_MAX_GREP_HITS:
                         return {"ok": True, "hits": hits, "truncated": True}
+        stack.extend(reversed(subdirs))
     return {"ok": True, "hits": hits, "truncated": False}
+
+
+def ws_write_bytes(root: Path, parts: List[str], data: bytes, *, append: bool = False) -> None:
+    """Write through a checked fd: no symlink/junction hop, regular file, st_nlink == 1."""
+    if not parts:
+        raise WorkspacePathError("not_a_file")
+    flags = os.O_WRONLY | os.O_CREAT | (os.O_APPEND if append else 0)
+    if _WS_POSIX:
+        dfd = _px_open_dir(root, parts[:-1], create=True)
+        try:
+            fd = _px_open_leaf(dfd, parts[-1], flags | getattr(os, "O_NONBLOCK", 0))
+        finally:
+            os.close(dfd)
+    else:
+        p = _nt_walk(root, parts, create_parents=True)
+        try:
+            fd = os.open(str(p), flags | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOINHERIT", 0), 0o644)
+        except OSError as e:
+            raise _ws_err(e) from None
+        try:
+            _nt_check_final(root, fd)
+        except BaseException:
+            os.close(fd)
+            raise
+    try:
+        st = _ws_check_regular(fd)
+        if append and st.st_size + len(data) > WS_MAX_READ_BYTES:
+            raise WorkspacePathError("file_too_large")
+        if not append:
+            os.ftruncate(fd, 0)
+        view = memoryview(data)
+        while view:
+            n = os.write(fd, view)
+            view = view[n:]
+    finally:
+        os.close(fd)
 
 
 def _ws_write(root: Path, a: Dict[str, Any]) -> Dict[str, Any]:
@@ -2593,26 +2939,16 @@ def _ws_write(root: Path, a: Dict[str, Any]) -> Dict[str, Any]:
     data = content.encode("utf-8")
     if len(data) > WS_MAX_WRITE_BYTES:
         return {"ok": False, "error": "content_too_large", "max_bytes": WS_MAX_WRITE_BYTES}
+    if "\x00" in content:
+        return {"ok": False, "error": "binary_not_allowed"}
     mode = str(a.get("mode") or "overwrite")
     if mode not in ("overwrite", "append"):
         return {"ok": False, "error": "bad_mode"}
     if not a.get("path"):
         return {"ok": False, "error": "bad_path"}
-    p = ws_resolve(root, a.get("path"))
-    if p == root or p.is_dir():
-        return {"ok": False, "error": "not_a_file"}
-    if mode == "append" and p.exists() and p.stat().st_size + len(data) > WS_MAX_READ_BYTES:
-        return {"ok": False, "error": "file_too_large", "max_bytes": WS_MAX_READ_BYTES}
-    p.parent.mkdir(parents=True, exist_ok=True)
-    ws_resolve(root, _ws_rel(root, p))  # re-check after mkdir (no link raced in)
-    flags = os.O_WRONLY | os.O_CREAT | (os.O_APPEND if mode == "append" else os.O_TRUNC)
-    flags |= getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_BINARY", 0)
-    fd = os.open(str(p), flags, 0o644)
-    try:
-        os.write(fd, data)
-    finally:
-        os.close(fd)
-    return {"ok": True, "path": _ws_rel(root, p), "bytes": len(data), "mode": mode}
+    parts = ws_parts(a.get("path"))
+    ws_write_bytes(root, parts, data, append=(mode == "append"))
+    return {"ok": True, "path": "/".join(parts), "bytes": len(data), "mode": mode}
 
 
 def workspace_tool(
@@ -2631,8 +2967,8 @@ def workspace_tool(
         return {"ok": False, "error": f"unknown_workspace_tool:{name}"}
     try:
         root = workspace_root()
-    except OSError:
-        return {"ok": False, "error": "workspace_unavailable"}
+    except WorkspacePathError as e:
+        return {"ok": False, "error": e.code}
     try:
         return fn(root, a)
     except WorkspacePathError as e:

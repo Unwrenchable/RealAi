@@ -65,7 +65,17 @@ No caller sends a bearer token yet. Turning the flag on breaks every row above u
 
 ## Workspace tools (B3 piece 1)
 
-`workspace_list`, `workspace_read` and `workspace_grep` are in the default allowlist. They are confined to the workspace root (`REALAI_TOOLS_WORKSPACE_ROOT`, else the craft project workspace): absolute, drive, UNC and `..` paths are refused, and any symlink or junction on the path is refused. Caps: read 1 MB per file and 200 lines per call, list 200 entries, grep 2000 files / 40 hits / 1 MB per file, literal patterns up to 200 chars.
+Status: PARTIAL until Security re-approves #210.
 
-`workspace_write` is off by default. It runs only when `workspace_write` is listed in `REALAI_TOOLS_ALLOW` (and over HTTP it still goes through the approval gate). Writes are capped at 256 KB and opened with O_NOFOLLOW where the OS has it.
+`workspace_list`, `workspace_read` and `workspace_grep` are in the default allowlist.
 
+- **Root (fail closed):** only `REALAI_TOOLS_WORKSPACE_ROOT`. Unset, blank or missing gives `workspace_unavailable`; there is no craft fallback. `/`, a drive root, the user's home, the product (repo) root, or any directory that contains home or the product root are refused.
+- **Paths:** absolute, drive, UNC, `:` and `..` paths are refused. Every component is checked against a case-insensitive denylist (`denied_path`): `.env`, `.env.*`, `*.pem`, `*.key`, `id_*`, `*.p12`, `*.pfx`, `*.keystore`, `.git`, `.npmrc`, `.pypirc`, `.netrc`, `credentials*`, `*secret*`, `.realai` (trailing dots/spaces ignored). `list` and `grep` hide denied entries.
+- **Links:** no symlink, junction or other reparse point on the path; only regular files with `st_nlink == 1` are read or written (`hardlink_not_allowed`).
+- **Caps:** files over 1 MB are not opened; a read returns at most 200 lines, 64 KB of content and 4 KB per line; files with a NUL byte in the first 8 KB are refused (`binary_not_allowed`). Grep is literal (no regex), 2000 files / 40 hits / 1 MB per file / 20 MB total / 5 s / 20 directory levels, and skips non-regular files.
+- **Writes:** `workspace_write` (and the bridge `search_replace`) only when `workspace_write` is in `REALAI_TOOLS_ALLOW`; 64 KB per write. Approval-gate edits (`search_replace` / `write_file`) are refused before queueing unless that allow is set, and on execute they go through the same `_ws_write`.
+
+### Platform notes (TOCTOU)
+
+- **POSIX:** the path is walked with directory fds (`O_DIRECTORY|O_NOFOLLOW`, `dir_fd`), the leaf is opened with `O_NOFOLLOW` (`O_NONBLOCK` for reads), `fstat` checks `S_ISREG` and `st_nlink`, and all I/O uses that fd. A component swapped for a symlink after the check cannot be followed.
+- **Windows:** `dir_fd` and `O_NOFOLLOW` do not exist. Each component is `lstat`ed and refused if it has `FILE_ATTRIBUTE_REPARSE_POINT`; after opening, the handle's final path (`GetFinalPathNameByHandleW`) must still be under the root and pass the denylist (which also covers 8.3 short names), then `fstat` checks `S_ISREG` and `st_nlink`. I/O uses that handle.

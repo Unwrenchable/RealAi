@@ -25,7 +25,7 @@ def ws(tmp_path, monkeypatch):
     (root / "sub" / "a.py").write_text("x = 1\n# needle\n", encoding="utf-8")
     outside = tmp_path / "outside"
     outside.mkdir()
-    (outside / "secret.txt").write_text("TOP SECRET needle", encoding="utf-8")
+    (outside / "hidden.txt").write_text("TOP SECRET needle", encoding="utf-8")
     monkeypatch.setenv("REALAI_TOOLS_WORKSPACE_ROOT", str(root))
     monkeypatch.delenv("REALAI_TOOLS_ALLOW", raising=False)
     return root, outside
@@ -99,7 +99,7 @@ def test_http_write_not_in_default_allowlist(server, ws):
 
 
 def test_http_traversal_blocked(server, ws):
-    st, body = _post(server, {"name": "workspace_read", "arguments": {"path": "../outside/secret.txt"}})
+    st, body = _post(server, {"name": "workspace_read", "arguments": {"path": "../outside/hidden.txt"}})
     assert "TOP SECRET" not in json.dumps(body)
     assert _find(body, "error") == "path_traversal_not_allowed"
 
@@ -113,8 +113,8 @@ def test_default_allowlist_has_read_tools_only():
 
 # ---- security: direct ------------------------------------------------------
 
-@pytest.mark.parametrize("p", ["..", "../outside/secret.txt", "sub/../../outside/secret.txt",
-                               "sub\\..\\..\\outside\\secret.txt", "./../outside"])
+@pytest.mark.parametrize("p", ["..", "../outside/hidden.txt", "sub/../../outside/hidden.txt",
+                               "sub\\..\\..\\outside\\hidden.txt", "./../outside"])
 def test_traversal(ws, p):
     r = bridge.workspace_tool("workspace_read", {"path": p})
     assert r["ok"] is False and r["error"] == "path_traversal_not_allowed"
@@ -122,8 +122,8 @@ def test_traversal(ws, p):
 
 def test_absolute_paths(ws):
     root, outside = ws
-    for p in [str(outside / "secret.txt"), str(root / "hello.txt"), "/etc/passwd", "\\Windows\\win.ini",
-              "C:\\Windows\\win.ini", "C:secret.txt", "c:/x"]:
+    for p in [str(outside / "hidden.txt"), str(root / "hello.txt"), "/etc/passwd", "\\Windows\\win.ini",
+              "C:\\Windows\\win.ini", "C:hidden.txt", "c:/x"]:
         r = bridge.workspace_tool("workspace_read", {"path": p})
         assert r["ok"] is False, p
         assert r["error"] in ("absolute_path_not_allowed", "unc_path_not_allowed"), (p, r)
@@ -151,7 +151,7 @@ def _symlink(link, target, is_dir):
 
 def test_symlink_file_escape(ws):
     root, outside = ws
-    _symlink(root / "leak.txt", outside / "secret.txt", False)
+    _symlink(root / "leak.txt", outside / "hidden.txt", False)
     r = bridge.workspace_tool("workspace_read", {"path": "leak.txt"})
     assert r == {"ok": False, "error": "symlink_not_allowed"}
 
@@ -159,7 +159,7 @@ def test_symlink_file_escape(ws):
 def test_symlink_dir_escape(ws):
     root, outside = ws
     _symlink(root / "out", outside, True)
-    assert bridge.workspace_tool("workspace_read", {"path": "out/secret.txt"})["error"] == "symlink_not_allowed"
+    assert bridge.workspace_tool("workspace_read", {"path": "out/hidden.txt"})["error"] == "symlink_not_allowed"
     assert bridge.workspace_tool("workspace_list", {"path": "out"})["error"] == "symlink_not_allowed"
     g = bridge.workspace_tool("workspace_grep", {"pattern": "SECRET"})
     assert g["ok"] and g["hits"] == []
@@ -180,7 +180,7 @@ def test_junction_escape_windows(ws):
     rc = subprocess.run(["cmd", "/c", "mklink", "/J", str(root / "jn"), str(outside)], capture_output=True)
     if rc.returncode != 0:
         pytest.skip("mklink /J failed")
-    assert bridge.workspace_tool("workspace_read", {"path": "jn/secret.txt"})["error"] == "symlink_not_allowed"
+    assert bridge.workspace_tool("workspace_read", {"path": "jn/hidden.txt"})["error"] == "symlink_not_allowed"
     g = bridge.workspace_tool("workspace_grep", {"pattern": "SECRET"})
     assert g["hits"] == []
 
@@ -260,7 +260,7 @@ def test_write_through_symlink_refused(ws, monkeypatch):
 
 def test_errors_do_not_leak_paths(ws):
     root, outside = ws
-    for p in ["../outside/secret.txt", str(outside / "secret.txt"), "missing.txt"]:
+    for p in ["../outside/hidden.txt", str(outside / "hidden.txt"), "missing.txt"]:
         out = json.dumps(bridge.workspace_tool("workspace_read", {"path": p}))
         assert str(root) not in out.replace("\\\\", "\\")
         assert "TOP SECRET" not in out
@@ -270,8 +270,8 @@ def test_unknown_tool(ws):
     assert bridge.workspace_tool("workspace_rm", {})["error"] == "unknown_workspace_tool:workspace_rm"
 
 
-def test_catalog_flipped():
+def test_catalog_partial_until_security_approves():
     from realai.ability_catalog import RUNDOWN_ABILITIES
 
     row = {r["id"]: r for r in RUNDOWN_ABILITIES}["workspace_info"]
-    assert row["status"] == "LIVE"
+    assert row["status"] == "PARTIAL"

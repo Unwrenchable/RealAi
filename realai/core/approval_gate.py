@@ -125,17 +125,52 @@ def resolve_in_workspace(rel: str) -> Path:
     return p
 
 
+EDIT_ACTIONS = ("search_replace", "write_file")
+
+
+def _edit_target(rel: Any):
+    """Edits use the workspace tools' confinement (Security #210 MED 6): REALAI_TOOLS_WORKSPACE_ROOT (fail closed),
+    path validation + secret denylist, and later an fd-checked write through v3_runtime_bridge._ws_write."""
+    from realai.orchestration import v3_runtime_bridge as B
+
+    if not str(rel or "").strip():
+        raise Refused("path required")
+    if PROTECTED.search(str(rel).replace("\\", "/")):
+        raise Refused("protected path")
+    try:
+        root = B.workspace_root()
+        parts = B.ws_parts(rel)
+    except B.WorkspacePathError as e:
+        raise Refused(e.code) from None
+    if not parts:
+        raise Refused("path required")
+    return B, root, parts
+
+
+def _edit_read(B: Any, root: Path, parts: List[str]) -> Optional[str]:
+    """Current text of the target (None if it does not exist), read through the checked fd."""
+    try:
+        data = B.ws_read_bytes(root, parts, B.WS_MAX_READ_BYTES)
+    except B.WorkspacePathError as e:
+        if e.code == "not_found":
+            return None
+        raise Refused(e.code) from None
+    if B._ws_is_binary(data):
+        raise Refused("binary_not_allowed")
+    return data.decode("utf-8", errors="replace")
+
+
 def _money_check(action: str, args: Dict[str, Any]) -> None:
     if MONEY.search(action) or MONEY.search(json.dumps(args, default=str)):
         raise Refused("money_locked: sends/transfers/payouts/wallet signing are not available through approvals")
 
 
 def _preview_edit(args: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
-    path = resolve_in_workspace(str(args.get("file_path") or args.get("path") or ""))
+    B, root, parts = _edit_target(args.get("file_path") or args.get("path") or "")
     old, new = str(args.get("old_string") or ""), str(args.get("new_string") or "")
-    if not path.is_file():
+    raw = _edit_read(B, root, parts)
+    if raw is None:
         raise Refused("not a file")
-    raw = path.read_text(encoding="utf-8", errors="replace")
     if not old:
         raise Refused("old_string required")
     n = raw.count(old)
@@ -144,7 +179,7 @@ def _preview_edit(args: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]
     if n > 1 and not args.get("replace_all"):
         raise Refused(f"old_string matches {n} times; pass replace_all or a longer old_string")
     updated = raw.replace(old, new) if args.get("replace_all") else raw.replace(old, new, 1)
-    rel = path.relative_to(workspace()).as_posix()
+    rel = "/".join(parts)
     diff = "".join(difflib.unified_diff(raw.splitlines(True), updated.splitlines(True), f"a/{rel}", f"b/{rel}"))
     norm = {"file_path": rel, "old_string": old, "new_string": new, "replace_all": bool(args.get("replace_all"))}
     return norm, {"kind": "diff", "file": rel, "diff": diff[:20000], "matches": n,
@@ -152,12 +187,13 @@ def _preview_edit(args: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]
 
 
 def _preview_write(args: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
-    path = resolve_in_workspace(str(args.get("file_path") or args.get("path") or ""))
+    B, root, parts = _edit_target(args.get("file_path") or args.get("path") or "")
     content = str(args.get("content") or "")
-    rel = path.relative_to(workspace()).as_posix()
-    raw = path.read_text(encoding="utf-8", errors="replace") if path.is_file() else ""
+    rel = "/".join(parts)
+    cur = _edit_read(B, root, parts)
+    raw = cur or ""
     diff = "".join(difflib.unified_diff(raw.splitlines(True), content.splitlines(True), f"a/{rel}", f"b/{rel}"))
-    return {"file_path": rel, "content": content}, {"kind": "diff", "file": rel, "diff": diff[:20000], "creates": not path.exists(),
+    return {"file_path": rel, "content": content}, {"kind": "diff", "file": rel, "diff": diff[:20000], "creates": cur is None,
                                                      "file_sha256": hashlib.sha256(raw.encode()).hexdigest()}
 
 
@@ -465,6 +501,13 @@ def request(action: str, args: Optional[Dict[str, Any]] = None, *, requested_by:
             reason: str = "") -> Dict[str, Any]:
     """Create (or return the identical existing) pending request. Never executes anything."""
     args = dict(args or {})
+    if action in EDIT_ACTIONS:
+        from realai.orchestration.v3_runtime_bridge import _ws_write_allowed
+
+        if not _ws_write_allowed():  # checked before anything is queued
+            audit("refused_request", action=action, requested_by=requested_by, reason="write_not_allowed")
+            return {"ok": False, "status": "refused", "action": action, "error": "write_not_allowed",
+                    "executed": False}
     try:
         norm, prev = preview(action, args)
     except Refused as e:
@@ -511,8 +554,8 @@ def set_status(req_id: str, status: str, *, by: str) -> bool:
 
 
 def _run_edit(norm: Dict[str, Any], prev: Dict[str, Any]) -> Dict[str, Any]:
-    path = resolve_in_workspace(norm["file_path"])
-    raw = path.read_text(encoding="utf-8", errors="replace") if path.is_file() else ""
+    B, root, parts = _edit_target(norm["file_path"])
+    raw = _edit_read(B, root, parts) or ""
     if hashlib.sha256(raw.encode()).hexdigest() != prev.get("file_sha256"):
         raise Refused("stale: file changed since the request; re-request")
     if "content" in norm:
@@ -520,8 +563,10 @@ def _run_edit(norm: Dict[str, Any], prev: Dict[str, Any]) -> Dict[str, Any]:
     else:
         updated = raw.replace(norm["old_string"], norm["new_string"]) if norm.get("replace_all") else \
             raw.replace(norm["old_string"], norm["new_string"], 1)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(updated, encoding="utf-8")
+    # Same write path and controls as workspace_write (allowlist, caps, no link hop, regular file, nlink == 1).
+    res = B._ws_write(root, {"path": "/".join(parts), "content": updated})
+    if not res.get("ok"):
+        raise Refused(str(res.get("error") or "write_failed"))
     return {"ok": True, "file": norm["file_path"], "bytes": len(updated.encode())}
 
 

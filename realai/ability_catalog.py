@@ -951,9 +951,9 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "name": "Workspace info / file tools (confined, read-only by default)",
         "pillar": "advanced",
         "keywords": ["workspace info", "workspace catalog", "workspace_read", "workspace_list", "workspace_grep"],
-        "status": "LIVE",
+        "status": "PARTIAL",
         "status_note": (
-            "B3 piece 1: workspace_list/read/grep via POST /v1/tools/execute, confined to the workspace root "
+            "PARTIAL until Security re-approves #210 (HIGH finding fixed, re-review pending). B3 piece 1: workspace_list/read/grep via POST /v1/tools/execute, confined to the workspace root "
             "(no traversal, absolute/UNC paths or symlink hops), size-capped, behind REALAI_TOOLS_AUTH "
             "auth/allowlist/audit. workspace_write only when listed in REALAI_TOOLS_ALLOW. "
             "Integration test: tests/test_workspace_tools_integration.py. The /v1/workspace/catalog route "
