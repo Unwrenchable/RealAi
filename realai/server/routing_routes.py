@@ -25,6 +25,8 @@ FLAG = "REALAI_ROUTING_ROUTES"
 TOOLS_ROUTE_FLAG = "REALAI_TOOLS_ROUTE"
 MAX_TEXT_CHARS = 20_000
 MAX_ALLOWED_TOOLS = 500
+MAX_TOOL_NAME_CHARS = 128
+MAX_PROVIDER_CHARS = 64
 
 
 def enabled() -> bool:
@@ -86,7 +88,11 @@ def handle_tool_route(payload: Dict[str, Any]) -> Tuple[int, Dict[str, Any], str
     if len(allowed) > MAX_ALLOWED_TOOLS:
         return _bad("too many allowed_tools.")
     allowed = [a for a in allowed if isinstance(a, str)]
+    if any(len(a) > MAX_TOOL_NAME_CHARS for a in allowed):
+        return _bad("allowed_tools entry is too long.")
     provider = payload.get("provider") if isinstance(payload.get("provider"), str) else "local"
+    if len(provider) > MAX_PROVIDER_CHARS:
+        return _bad("provider is too long.")
 
     ranked = route(text, allowed, provider)
     # RealAi-unified fell back to the first allowed tool when nothing matched.
@@ -113,7 +119,6 @@ def handle_tool_route(payload: Dict[str, Any]) -> Tuple[int, Dict[str, Any], str
 
     return 200, {
         "ok": True,
-        "text": text,
         "selected": selected,
         "candidates": ranked.get("candidates", []),
         "provider": provider,

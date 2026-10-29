@@ -105,3 +105,29 @@ def test_fastapi_app_serves_route(clean_env):
     assert r.status_code == 200 and r.json()["selected"] == "web3_solana_rpc" and r.json()["routing"]["executes"] is False
     clean_env.setenv("REALAI_TOOLS_ROUTE", "0")
     assert client.post("/v1/tools/route", json={"text": "search"}).status_code == 404
+
+
+# --- Security LOW follow-up: input caps + no text echo (handler-level) ---
+def test_route_does_not_echo_text(clean_env):
+    from realai.server.routing_routes import handle_tool_route
+
+    code, body, _ = handle_tool_route({"text": "please read SECRET-MARKER-xyz file", "allowed_tools": ["file_read"]})
+    assert code == 200
+    assert "text" not in body
+    assert "SECRET-MARKER-xyz" not in json.dumps(body)
+
+
+def test_route_caps_allowed_tool_name_length(clean_env):
+    from realai.server.routing_routes import handle_tool_route
+
+    assert handle_tool_route({"text": "hi", "allowed_tools": ["a" * 128]})[0] == 200
+    code, body, _ = handle_tool_route({"text": "hi", "allowed_tools": ["a" * 129]})
+    assert code == 400 and "a" * 129 not in json.dumps(body)
+
+
+def test_route_caps_provider_length(clean_env):
+    from realai.server.routing_routes import handle_tool_route
+
+    assert handle_tool_route({"text": "hi", "allowed_tools": ["x"], "provider": "p" * 64})[0] == 200
+    code, body, _ = handle_tool_route({"text": "hi", "allowed_tools": ["x"], "provider": "p" * 65})
+    assert code == 400 and "p" * 65 not in json.dumps(body)
