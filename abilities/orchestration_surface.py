@@ -29,7 +29,6 @@ ABILITY = {
         "memory",
         "tools",
         "tts",
-        "legacy_scan",
         "nests",
     ],
     "secrets_policy": "none",
@@ -119,13 +118,6 @@ ORCH_REGISTRY: Dict[str, Dict[str, Any]] = {
         "kind": "SHIM",
         "aliases": ["realai_orchestrator"],
         "do_not_start_extra_server": True,
-    },
-    "legacy_scan": {
-        "module": "realai.orchestration.legacy_orchestrator",
-        "file": "legacy_orchestrator.py",
-        "role": "Manifest scan/patch-target engine (legacy)",
-        "kind": "LEGACY",
-        "aliases": ["legacy", "scan_patch", "legacy_orchestrator"],
     },
     "unified_blueprint": {
         # spine 1b: blueprint logic inlined below (_unified_blueprint); was unified_orchestrator.py (archive verdict)
@@ -359,35 +351,6 @@ def _run_module(oid: str, raw_input: str = "", ctx: Optional[Dict[str, Any]] = N
         out["via"] = meta["module"]
         return out
 
-    if oid == "legacy_scan":
-        import os
-
-        manifest = _ROOT / "realai" / "manifest.json"
-        mod = importlib.import_module("realai.orchestration.legacy_orchestrator")
-        if not manifest.is_file():
-            out["result"] = {
-                "ok": True,
-                "skipped_full_scan": True,
-                "class": "RealAIOrchestrator",
-                "methods": [n for n in dir(mod.RealAIOrchestrator) if n.startswith("phase_")][:20],
-                "hint": "realai/manifest.json missing",
-            }
-            out["via"] = "legacy_orchestrator (introspect)"
-            return out
-        prev = os.getcwd()
-        try:
-            os.chdir(str(_ROOT))
-            orch = mod.RealAIOrchestrator()
-            active = orch.phase_scan()
-        finally:
-            os.chdir(prev)
-        out["result"] = {
-            "ok": True,
-            "active_keys": list(active.keys())[:40] if isinstance(active, dict) else type(active).__name__,
-        }
-        out["via"] = "legacy_orchestrator.phase_scan"
-        return out
-
     if oid == "unified_blueprint":
         # look for a scan manifest; otherwise return blueprint class info
         candidates = [
@@ -459,7 +422,7 @@ def run(
                 "ok": False,
                 "error": "orch_id_required",
                 "known": sorted(ORCH_REGISTRY.keys()),
-                "hint": "action=run orch=v3|bridge|hive_router|sdk_orchestrator|nests|tts|legacy_scan|…",
+                "hint": "action=run orch=v3|bridge|hive_router|sdk_orchestrator|nests|tts|…",
             }
         # when cycling hive_router, force cycle action
         if action == "cycle":
