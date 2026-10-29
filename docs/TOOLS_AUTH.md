@@ -62,3 +62,22 @@ Searched `C:\RealAI-clean`, `C:\tools\realai`, `C:\Users\tsmit\realai_unified_ap
 
 No caller sends a bearer token yet. Turning the flag on breaks every row above until that caller sends
 `Authorization: Bearer $REALAI_TOOLS_TOKEN` and its tools are on the allowlist. Roll out caller by caller, then flip the flag.
+
+## Workspace tools (B3 piece 1)
+
+Status: PARTIAL until Security re-approves #210.
+
+`workspace_list`, `workspace_read` and `workspace_grep` are in the default allowlist.
+
+- **Root (fail closed):** only `REALAI_TOOLS_WORKSPACE_ROOT`. Unset, blank or missing gives `workspace_unavailable`; there is no craft fallback. `/`, a drive root, the user's home, the product (repo) root, or any directory that contains home or the product root are refused.
+- **Paths:** absolute, drive, UNC, `:` and `..` paths are refused. Every component is checked against a case-insensitive denylist (`denied_path`): `.env`, `.env.*`, `*.pem`, `*.key`, `id_*`, `*.p12`, `*.pfx`, `*.keystore`, `.git`, `.npmrc`, `.pypirc`, `.netrc`, `credentials*`, `*secret*`, `.realai`, `.approvals.json`, `.ssh`, `.aws`, `.docker`, `*.kdbx`, `*.tfstate`, `.htpasswd`, `keypair*.json`, `*wallet*.json` (trailing dots/spaces ignored). `list` and `grep` hide denied entries.
+- **Links:** no symlink, junction or other reparse point on the path; only regular files with `st_nlink == 1` are read or written (`hardlink_not_allowed`).
+- **Caps:** files over 1 MB are not opened; a read returns at most 200 lines, 64 KB of content and 4 KB per line; files with a NUL byte in the first 8 KB are refused (`binary_not_allowed`). Grep is literal (no regex), 2000 files / 40 hits / 1 MB per file / 20 MB total / 5 s / 20 directory levels, and skips non-regular files.
+- **Writes:** `workspace_write` (and the bridge `search_replace`) only when `workspace_write` is in `REALAI_TOOLS_ALLOW`; 256 KB per write (reads stay capped at 64 KB). Approval-gate edits (`search_replace` / `write_file`) are refused before queueing unless that allow is set, and on execute they go through the same `_ws_write`.
+- **Console and hive edits (breaking):** approval-gate edits from the console and hive now need both `REALAI_TOOLS_WORKSPACE_ROOT` (set to the workspace) and `REALAI_TOOLS_ALLOW` containing `workspace_write`. Without them the edit is refused before it is queued (`workspace_unavailable` / `write_not_allowed`).
+- **Edit approvals:** the 256 KB cap is checked when the edit is requested (`content_too_large`, nothing queued) and again at execute. The card diff is cut at 20 KB and then shows `diff truncated, N bytes total`. At execute the stored `file_path` must equal the approved preview's `file` and the stored args must match `args_sha`; otherwise it is refused (`target mismatch` / `args hash mismatch`).
+
+### Platform notes (TOCTOU)
+
+- **POSIX:** the path is walked with directory fds (`O_DIRECTORY|O_NOFOLLOW`, `dir_fd`), the leaf is opened with `O_NOFOLLOW` (`O_NONBLOCK` for reads), `fstat` checks `S_ISREG` and `st_nlink`, and all I/O uses that fd. A component swapped for a symlink after the check cannot be followed.
+- **Windows:** `dir_fd` and `O_NOFOLLOW` do not exist. Each component is `lstat`ed and refused if it has `FILE_ATTRIBUTE_REPARSE_POINT`; after opening, the handle's final path (`GetFinalPathNameByHandleW`) must still be under the root and pass the denylist (which also covers 8.3 short names), then `fstat` checks `S_ISREG` and `st_nlink`. I/O uses that handle.

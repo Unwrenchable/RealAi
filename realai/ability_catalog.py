@@ -948,13 +948,19 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
     },
     {
         "id": "workspace_info",
-        "name": "Workspace info / catalog (read-only, REALAI_HOME)",
+        "name": "Workspace info / file tools (confined, read-only by default)",
         "pillar": "advanced",
-        "keywords": ["workspace info", "workspace catalog"],
+        "keywords": ["workspace info", "workspace catalog", "workspace_read", "workspace_list", "workspace_grep"],
         "status": "PARTIAL",
-        "status_note": "Promoted from RealAi-unified 763a4c2. Opt-in: not in FIRST_PARTY; HTTP route only with REALAI_UNIFIED_ROUTES=1. No network, no outside keys.",
-        "live_path": "POST /v1/workspace/catalog (opt-in)",
-        "modules": ["realai/plugins/workspace_info/__init__.py"],
+        "status_note": (
+            "PARTIAL until Security re-approves #210 (HIGH finding fixed, re-review pending). B3 piece 1: workspace_list/read/grep via POST /v1/tools/execute, confined to the workspace root "
+            "(no traversal, absolute/UNC paths or symlink hops), size-capped, behind REALAI_TOOLS_AUTH "
+            "auth/allowlist/audit. workspace_write only when listed in REALAI_TOOLS_ALLOW. "
+            "Integration test: tests/test_workspace_tools_integration.py. The /v1/workspace/catalog route "
+            "stays opt-in (REALAI_UNIFIED_ROUTES=1)."
+        ),
+        "live_path": "POST /v1/tools/execute workspace_list|workspace_read|workspace_grep",
+        "modules": ["realai/orchestration/v3_runtime_bridge.py", "realai/plugins/workspace_info/__init__.py"],
     },
 ]
 
