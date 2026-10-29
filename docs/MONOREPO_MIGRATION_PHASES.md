@@ -1,7 +1,7 @@
 # Monorepo migration phases — Unwrenchable/RealAi
 
 **Layout contract:** [`MONOREPO_TARGET_LAYOUT.md`](MONOREPO_TARGET_LAYOUT.md)
-**Branch each phase merges into:** `live/realai-clean-20260911`
+**Branch each phase merges into:** `main`
 **Product home:** `C:\RealAI-clean`
 
 Live stays runnable after every phase. A phase is one PR. Moves are `git mv` plus a dest-empty re-export shim when an import path still exists. Copy-paste duplicates are not a move.
@@ -157,7 +157,7 @@ Shelves are read-only until a single file beats live gold:
 - `recovered/`, `imports/`
 - branches `recovery/*`, `local/*`
 - `C:\RealAI-gold`, `C:\RealAI-clean-backup`
-- `main` and any unified dump
+- `archive/main-legacy` and any unified dump
 
 Tool: `scanners/promote_gold.py`. Accept a file only when it beats the live gold file on size **and** unique top-level symbols, and the live file is not an intentional shim.
 
@@ -174,7 +174,7 @@ Prior deltas already recorded **zero promotions**:
 
 Out of scope for this plan and for every phase above:
 
-1. **No dump absorption.** Do not merge `recovery/*`, `local/*`, `main`, `C:\RealAI-gold`, `C:\RealAI-clean-backup`, `D:\RealAI-archive`, `recovered/`, or `imports/` onto `live/realai-clean-20260911`. Do not xcopy a shelf over the product tree.
+1. **No dump absorption.** Do not merge `recovery/*`, `local/*`, `archive/main-legacy`, `C:\RealAI-gold`, `C:\RealAI-clean-backup`, `D:\RealAI-archive`, `recovered/`, or `imports/` onto `main`. Do not xcopy a shelf over the product tree.
 2. **No second product tree.** Do not create `v1/`, `v2/`, `v4/`, `unified/`, or a nested `.git` under `realai/`.
 3. **No gold relocation.** Hive, bridge, plugins, organs, fusion, and console stay on the paths in the hard-rules table. `packages/realai-core` is not a destination for `realai/`. `packages/console` is not a destination for `console.html`.
 4. **No shim deletion as cleanup.** Dest-empty re-exports (`realai/v3_orchestrator.py`, `realai/v3_runtime_bridge.py`, root `plugins/`, root `core/`, `self_builder.py`, and the other "do not put logic here" modules) stay while any launcher or import uses them.

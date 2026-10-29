@@ -4,7 +4,7 @@ Single answers. If two files disagree, this table wins.
 
 | Question | Answer |
 |----------|--------|
-| What branch do we run? | `live/realai-clean-20260911` |
+| What branch do we run? | `main` |
 | What is `main`? | Older unified dump. Archive. Not the hive. |
 | What are `recovery/*` and `local/*`? | Snapshot / protect libraries. Diff source only. |
 | What is product home? | `C:\\RealAI-clean` (`REALAI_HOME`) |

@@ -1,6 +1,6 @@
 # Wiring + surface (live as of 2026-09-21)
 
-Merged to `live/realai-clean-20260911`:
+Merged to `main`:
 
 - PR #127 — product-root `core/` shims, `realai.plugins` host, RackUp alias, pyproject 3.0.0
 - PR #126 — `ARCHITECTURE.md` contract
@@ -19,7 +19,7 @@ This pass adds:
 
 ```powershell
 cd C:\RealAI-clean
-git checkout live/realai-clean-20260911
+git checkout main
 git pull
 python -c "from realai.hive import hive_status, register_plugins; print(hive_status().get('ok')); print(register_plugins())"
 python -m realai.v3_orchestrator --help

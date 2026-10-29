@@ -3,7 +3,7 @@
 How to run and ship **frontend**, **backend**, **model providers**, and the **database**.
 
 Canonical tree: `C:\RealAI-clean`  
-Live branch: `live/realai-clean-20260911`
+Live branch: `main`
 
 There are **two backends**:
 
@@ -259,7 +259,7 @@ Config is already fixed for `frontend/` (not `apps/frontend`):
 ### Dashboard steps
 
 1. Import **Unwrenchable/RealAi**
-2. Branch: **`live/realai-clean-20260911`**
+2. Branch: **`main`**
 3. Root Directory: **repo root** (recommended) *or* `frontend`
 4. Framework: Next.js (detected)
 5. Env → Production:
@@ -297,7 +297,7 @@ npm run build
 ### Dashboard steps
 
 1. New → Web Service → connect `Unwrenchable/RealAi`
-2. Branch: `live/realai-clean-20260911`
+2. Branch: `main`
 3. Runtime: Python 3.11
 4. Build / start as above (or Blueprint from `render.yml`)
 5. Set env:
@@ -369,7 +369,7 @@ Frontend: open the Vercel URL → chat once → DevTools Network should show `NE
 
 | Symptom | Fix |
 |---------|-----|
-| Vercel build looks for `apps/frontend` | Use latest `live/realai-clean-20260911` (path fix landed) |
+| Vercel build looks for `apps/frontend` | Use latest `main` (path fix landed) |
 | Chat on Vercel hits localhost | Set `NEXT_PUBLIC_API_URL` to https API and redeploy |
 | CORS errors | Add Vercel origin to Render `CORS_ALLOWED_ORIGINS` |
 | SQLite empty after Render restart | Ephemeral disk — add persistent disk + `REALAI_DB_PATH` |

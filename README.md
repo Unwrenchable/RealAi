@@ -3,7 +3,7 @@
 Local-first AI hive: GPU chat (Vulkan), multi-agent orchestration, tools, voice, and a console UI that also runs in VS Code.
 
 **Canonical product root:** `C:\RealAI-clean`  
-**Live Git branch:** `live/realai-clean-20260911` → https://github.com/Unwrenchable/RealAi  
+**Live Git branch:** `main` → https://github.com/Unwrenchable/RealAi  
 **Architecture contract:** [ARCHITECTURE.md](./ARCHITECTURE.md) — v1 and v2 live *inside* this tree, not as version folders.  
 **Recovery / history branches** on GitHub are libraries — do not mega-merge them into live.
 
