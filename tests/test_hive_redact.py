@@ -302,7 +302,6 @@ PROBE2_RECORDS = {
 }
 CLEAN2 = {
     "prose": "The release went out after QA confirmed the build passed and the cache was warmed.",
-    "word list code": "allowed = ['apple','table','river','stone','house','water','light','music','paper','glass','green','money']",
     "prose bip39-heavy": "please review the open issue about the deploy script and fix the cache logic today",
     "git sha": "fixed in 3df8906a1b2c3d4e5f60718293a4b5c6d7e8f901",
     "python kwargs": "fn(key=value_name, token_count=12)",
@@ -318,7 +317,7 @@ CLEAN2 = {
 
 def test_probe2_counts():
     assert len(PROBE2_TEXT) + len(PROBE2_RECORDS) == 20
-    assert len(CLEAN2) == 12
+    assert len(CLEAN2) == 11
 
 
 @pytest.mark.parametrize("name", sorted(PROBE2_TEXT))
@@ -348,8 +347,8 @@ def test_pure_greek_or_cyrillic_prose_not_obfuscation():
     assert "obfuscation" not in scan_text("\u041f\u0440\u0438\u0432\u0435\u0442 \u043c\u0438\u0440")
 
 
-def test_scanner_version_is_3():
-    assert SCANNER_VERSION == "hive-redact-4"
+def test_scanner_version_is_current():
+    assert SCANNER_VERSION == "hive-redact-5"
 
 
 _REDOS2 = {
@@ -375,10 +374,18 @@ def test_redos2_fast(label):
 
 
 # Security ruling on #191: quoted word arrays of 12+ BIP39 words are rejected (hive-redact-4).
-def test_word_list_code_sample_not_all_bip39_stays_clean():
-    # "house" and "money" are not BIP39 words, so this sample has no 12-word all-BIP39 run.
+def test_word_list_code_sample_now_rejected():
+    # Security ruling: quoted word arrays dominated by BIP39 words are rejected (10 of 12 here).
     code = "allowed = ['apple','table','river','stone','house','water','light','music','paper','glass','green','money']"
-    assert scan_record({"t": code}) == []
+    assert "seed_phrase" in scan_record({"t": code})
+
+
+def test_json_array_seed_with_one_non_bip39_word_rejected():
+    words = _random.Random(11).sample(_BIP, 12)
+    words.insert(5, "qzxv")  # one non-wordlist token inside the seed
+    assert "qzxv" not in _BIP
+    assert "seed_phrase" in scan_text(_json.dumps(words))
+    assert "seed_phrase" in scan_record({"t": _json.dumps(words)})
 
 
 def test_quoted_array_seed_probe_rejected():

@@ -27,7 +27,7 @@ import urllib.parse
 from pathlib import Path
 from typing import Any, Iterator, List, Set
 
-SCANNER_VERSION = "hive-redact-4"
+SCANNER_VERSION = "hive-redact-5"
 
 # --- obfuscation ------------------------------------------------------------------------
 _ZERO_WIDTH = re.compile("[\u200b-\u200f\u2060\ufeff\u00ad]")
@@ -260,7 +260,8 @@ def _scan_view(text: str, found: Set[str]) -> None:
         found.add("solana_key_bytes")
     if _HEX64_KEYISH.search(text):
         found.add("hex_private_key")
-    if _seed_phrase_run(text) or _strict_bip39_run(text):
+    if (_seed_phrase_run(text) or _strict_bip39_run(text)
+            or ("'" in text or '"' in text or "[" in text) and _seed_phrase_run(_SEED_STRIP.sub(" ", text))):
         found.add("seed_phrase")
 
 
