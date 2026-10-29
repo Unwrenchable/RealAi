@@ -302,8 +302,8 @@ PROBE2_RECORDS = {
 }
 CLEAN2 = {
     "prose": "The release went out after QA confirmed the build passed and the cache was warmed.",
-    "prose bip39-heavy": "please review the open issue about the deploy script and fix the cache logic today",
     "word list code": "allowed = ['apple','table','river','stone','house','water','light','music','paper','glass','green','money']",
+    "prose bip39-heavy": "please review the open issue about the deploy script and fix the cache logic today",
     "git sha": "fixed in 3df8906a1b2c3d4e5f60718293a4b5c6d7e8f901",
     "python kwargs": "fn(key=value_name, token_count=12)",
     "yaml config": "max_tokens: 2048\npassword_min_length: 12",
@@ -349,7 +349,7 @@ def test_pure_greek_or_cyrillic_prose_not_obfuscation():
 
 
 def test_scanner_version_is_3():
-    assert SCANNER_VERSION == "hive-redact-3"
+    assert SCANNER_VERSION == "hive-redact-4"
 
 
 _REDOS2 = {
@@ -372,3 +372,17 @@ def test_redos2_fast(label):
     t = _time.perf_counter()
     scan_text(text)
     assert _time.perf_counter() - t < 0.5, label
+
+
+# Security ruling on #191: quoted word arrays of 12+ BIP39 words are rejected (hive-redact-4).
+def test_word_list_code_sample_not_all_bip39_stays_clean():
+    # "house" and "money" are not BIP39 words, so this sample has no 12-word all-BIP39 run.
+    code = "allowed = ['apple','table','river','stone','house','water','light','music','paper','glass','green','money']"
+    assert scan_record({"t": code}) == []
+
+
+def test_quoted_array_seed_probe_rejected():
+    words = _random.Random(7).sample(_BIP, 12)
+    quoted = "[" + ",".join("'" + w + "'" for w in words) + "]"
+    assert "seed_phrase" in scan_text(quoted)
+    assert "seed_phrase" in scan_text(_json.dumps(words))

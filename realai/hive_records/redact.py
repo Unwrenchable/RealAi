@@ -27,7 +27,7 @@ import urllib.parse
 from pathlib import Path
 from typing import Any, Iterator, List, Set
 
-SCANNER_VERSION = "hive-redact-3"
+SCANNER_VERSION = "hive-redact-4"
 
 # --- obfuscation ------------------------------------------------------------------------
 _ZERO_WIDTH = re.compile("[\u200b-\u200f\u2060\ufeff\u00ad]")
@@ -195,6 +195,23 @@ def _seed_phrase_run(text: str) -> bool:
     return False
 
 
+_SEED_STRIP = re.compile(r"[\"'\[\](){},]+")
+
+
+def _strict_bip39_run(text: str) -> bool:
+    """Second pass: strip quotes, brackets and commas, then flag 12+ consecutive tokens
+    that are ALL BIP39 words (catches quoted arrays like ['w1','w2',...])."""
+    run = 0
+    for tok in _SEED_STRIP.sub(" ", text.lower()).split():
+        if tok in _BIP39:
+            run += 1
+            if run >= SEED_RUN:
+                return True
+        else:
+            run = 0
+    return False
+
+
 def _int_array_text(text: str) -> bool:
     for m in _INT_ARRAY.finditer(text):
         if all(int(x) <= 255 for x in re.findall(r"\d+", m.group(1))):
@@ -243,7 +260,7 @@ def _scan_view(text: str, found: Set[str]) -> None:
         found.add("solana_key_bytes")
     if _HEX64_KEYISH.search(text):
         found.add("hex_private_key")
-    if _seed_phrase_run(text):
+    if _seed_phrase_run(text) or _strict_bip39_run(text):
         found.add("seed_phrase")
 
 
