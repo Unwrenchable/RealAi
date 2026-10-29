@@ -1,7 +1,7 @@
 # Monorepo target layout — Unwrenchable/RealAi
 
 **Status:** plan only. This document does not move, delete, or rewrite product code.
-**Branch authority:** `live/realai-clean-20260911`
+**Branch authority:** `main`
 **Product home:** `C:\RealAI-clean` (`REALAI_HOME` / `REALAI_PRODUCT_ROOT` / `REALAI_WORKSPACE`)
 **Python package:** `C:\RealAI-clean\realai` (`import realai`)
 

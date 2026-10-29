@@ -35,7 +35,7 @@ class TestOperatorMemoryLoad(unittest.TestCase):
         self.assertTrue(path.is_file())
         mem = load_operator_memory()
         self.assertIn("REALAI_HOME = C:\\RealAI-clean", mem)
-        self.assertIn("live/realai-clean-20260911", mem)
+        self.assertIn("main", mem)
         self.assertIn("realai/orchestration/v3_orchestrator.py", mem)
         self.assertIn("realai/orchestration/v3_runtime_bridge.py", mem)
         self.assertIn("dest-empty shims", mem)
@@ -50,7 +50,7 @@ class TestOperatorMemoryLoad(unittest.TestCase):
         self.assertIn(HARD_IDENTITY_LOCK, prefix)
         self.assertIn("Console Operator", prefix)
         self.assertIn("REALAI_HOME = C:\\RealAI-clean", prefix)
-        self.assertIn("live/realai-clean-20260911", prefix)
+        self.assertIn("main", prefix)
         # Tail fact must survive the directive's 480-char clip.
         self.assertIn("GET /v1/agents stays ~14 hive roles", prefix)
         self.assertIn("rackup_coach", prefix)

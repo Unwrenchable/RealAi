@@ -1,5 +1,5 @@
 OPERATOR MEMORY:
-- REALAI_HOME = C:\RealAI-clean (product home). Branch: live/realai-clean-20260911.
+- REALAI_HOME = C:\RealAI-clean (product home). Branch: main.
 - Hive gold: realai/orchestration/v3_orchestrator.py. Bridge gold: realai/orchestration/v3_runtime_bridge.py.
 - Edit gold, not shims. Keep package-root dest-empty shims.
 - One product tree. No v1/v2/v3 dirs. No mega-merge.

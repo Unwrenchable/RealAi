@@ -2,9 +2,9 @@ name: CodeQL
 
 on:
   push:
-    branches: [ live/realai-clean-20260911 ]
+    branches: [ main ]
   pull_request:
-    branches: [ live/realai-clean-20260911 ]
+    branches: [ main ]
   schedule:
     - cron: "17 6 * * 1"
 

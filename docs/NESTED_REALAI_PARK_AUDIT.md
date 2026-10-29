@@ -1,6 +1,6 @@
 # Nested parks, `recovered/`, and gold-shelf audit (2026-09-26)
 
-Did phase 2–3 parking of the old nested `realai/`, or the in-repo `recovered/` and `imports/` shelves, leave unique product code off live Unwrenchable/RealAi (`live/realai-clean-20260911`)?
+Did phase 2–3 parking of the old nested `realai/`, or the in-repo `recovered/` and `imports/` shelves, leave unique product code off live Unwrenchable/RealAi (`main`)?
 
 **No product implementation needs to come back from what this checkout can read.** 243 of 253 parked Python files under `_quarantine/` are byte-identical to a file already on live. The other 10 do not beat live gold: they are strict subsets, older `realai_core` import paths, a one-line package docstring, SymPy/NumPy debris, or pytest modules whose functions already live under `agent_tools/`, `agents/`, and `realai/plugins/tools/`. In-repo `recovered/` is a placeholder with no Python. `imports/` has four Python files; none beat live gold. This pass copied nothing.
 
@@ -113,7 +113,7 @@ Operator follow-up, on the box that has the disks:
 
 1. Inventory `C:\RealAI-gold` (especially `orphans\` and any `.before` orchestrator copies) with the same bar: promote a file only when it beats the live file on size and unique top-level symbols, and the live file is not an intentional shim.
 2. Inventory `D:\RealAI-archive\recovered` the same way. Git `recovered/` is the placeholder, not the archive.
-3. Do not xcopy either tree onto `live/realai-clean-20260911`.
+3. Do not xcopy either tree onto `main`.
 
 What the repo already records:
 

@@ -3,7 +3,7 @@
 **Document version:** 0.1.0  
 **Date:** 2026-09-15  
 **Audience:** Atomic Fizz / Caps engineers (integration) + RealAI maintainers  
-**RealAI branch:** `live/realai-clean-20260911` (atomicfizz-coach **v0.1.0** — stub)  
+**RealAI branch:** `main` (atomicfizz-coach **v0.1.0** — stub)  
 **Related:** `REALAI_RACKUP_WIRING_CONTRACT.md` (same boundary pattern), [`ECOSYSTEM_BASE_URLS.md`](../ECOSYSTEM_BASE_URLS.md)  
 **Purpose:** Production bridge so Atomic Fizz can run **player-level intelligence** on RealAI as its **Intelligence Provider** — same shape as RackUp / `rackup-coach`. **This revision is a stub:** abilities return structured placeholders. No Caps GPS, no Wrist UI chrome, no vault lookup, no runtime heal.
 
