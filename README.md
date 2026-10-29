@@ -46,38 +46,38 @@ Only abilities the catalog marks **LIVE** (64 of 78). Many are reached through `
 | Tournament / league insights (`tournament`) | POST /v1/tools/execute ability.tournament + rackup_invoke |
 | ROC ledger audit (`ledger_audit`) | POST /v1/tools/execute ability.ledger_audit + rackup_invoke |
 | Matchmaking advice (`matchmaking`) | POST /v1/tools/execute ability.matchmaking + rackup_invoke |
-| Hall Context (`hall_context`) | POST /v1/tools/execute ability.hall_context + rackup_invoke |
-| league validate (`league_validate`) | POST /v1/tools/execute ability.league_validate + rackup_invoke |
-| moderation (`moderation`) | POST /v1/tools/execute ability.moderation + rackup_invoke |
-| Money Anomaly (`money_anomaly`) | POST /v1/tools/execute ability.money_anomaly + rackup_invoke |
-| payout sanity (`payout_sanity`) | POST /v1/tools/execute ability.payout_sanity + rackup_invoke |
-| pyramid rules (`pyramid_rules`) | POST /v1/tools/execute ability.pyramid_rules + rackup_invoke |
-| rating convert (`rating_convert`) | POST /v1/tools/execute ability.rating_convert + rackup_invoke |
-| rating intel (`rating_intel`) | POST /v1/tools/execute ability.rating_intel + rackup_invoke |
-| unified player card sync (`player_card_sync`) | POST /v1/tools/execute ability.player_card_sync + rackup_invoke |
-| sotd contribute (`sotd_contribute`) | POST /v1/tools/execute ability.sotd_contribute + rackup_invoke |
-| video analysis (`video_analysis`) | POST /v1/tools/execute ability.video_analysis + rackup_invoke |
+| Hall context (`hall_context`) | POST /v1/tools/execute ability.hall_context + rackup_invoke |
+| League validate (`league_validate`) | POST /v1/tools/execute ability.league_validate + rackup_invoke |
+| Moderation (`moderation`) | POST /v1/tools/execute ability.moderation + rackup_invoke |
+| Money anomaly (`money_anomaly`) | POST /v1/tools/execute ability.money_anomaly + rackup_invoke |
+| Payout sanity (`payout_sanity`) | POST /v1/tools/execute ability.payout_sanity + rackup_invoke |
+| Pyramid rules (`pyramid_rules`) | POST /v1/tools/execute ability.pyramid_rules + rackup_invoke |
+| Rating convert (`rating_convert`) | POST /v1/tools/execute ability.rating_convert + rackup_invoke |
+| Rating intel (`rating_intel`) | POST /v1/tools/execute ability.rating_intel + rackup_invoke |
+| Unified player card sync (`player_card_sync`) | POST /v1/tools/execute ability.player_card_sync + rackup_invoke |
+| SOTD contribute (`sotd_contribute`) | POST /v1/tools/execute ability.sotd_contribute + rackup_invoke |
+| Video analysis (`video_analysis`) | POST /v1/tools/execute ability.video_analysis + rackup_invoke |
 
 ### Desktop Lambda
 
 | Ability (catalog id) | How to reach it |
 |---|---|
-| desktop lambda chat (`desktop_lambda_chat`) | POST /v1/tools/execute ability.desktop_lambda_chat |
-| desktop lambda image (`desktop_lambda_image`) | POST /v1/tools/execute ability.desktop_lambda_image |
-| desktop lambda video (`desktop_lambda_video`) | POST /v1/tools/execute ability.desktop_lambda_video |
-| desktop lambda advanced (`desktop_lambda_advanced`) | POST /v1/tools/execute ability.desktop_lambda_advanced |
+| Desktop lambda chat (`desktop_lambda_chat`) | POST /v1/tools/execute ability.desktop_lambda_chat |
+| Desktop lambda image (`desktop_lambda_image`) | POST /v1/tools/execute ability.desktop_lambda_image |
+| Desktop lambda video (`desktop_lambda_video`) | POST /v1/tools/execute ability.desktop_lambda_video |
+| Desktop lambda advanced (`desktop_lambda_advanced`) | POST /v1/tools/execute ability.desktop_lambda_advanced |
 
 ### Hive, tools and runtime
 
 | Ability (catalog id) | How to reach it |
 |---|---|
-| overmind runner (`overmind_runner`) | POST /v1/tools/execute ability.overmind_runner |
-| code engineer agent (`code_engineer_agent`) | POST /v1/tools/execute ability.code_engineer_agent |
+| Overmind runner (`overmind_runner`) | POST /v1/tools/execute ability.overmind_runner |
+| Code engineer agent (`code_engineer_agent`) | POST /v1/tools/execute ability.code_engineer_agent |
 | Deep promote (named roots + nests) (`deep_promote`) | abilities/deep_promote.py + craft /promote |
-| Hierarchical Specialists (`hierarchical_specialists`) | POST /v1/tools/execute ability.hierarchical_specialists |
-| approval_store (`approval_store`) | POST /v1/tools/execute ability.approval_store |
-| device_selector (`device_selector`) | POST /v1/tools/execute device_selector + ability.device_selector |
-| Code Engineer CLI (`code_engineer_cli`) | abilities/code_engineer_cli.py + realai.plugins.tools.code_engineer_cli |
+| Hierarchical specialists (`hierarchical_specialists`) | POST /v1/tools/execute ability.hierarchical_specialists |
+| Approval store (`approval_store`) | POST /v1/tools/execute ability.approval_store |
+| Device selector (`device_selector`) | POST /v1/tools/execute device_selector + ability.device_selector |
+| Code engineer CLI (`code_engineer_cli`) | abilities/code_engineer_cli.py + realai.plugins.tools.code_engineer_cli |
 | Harden repos (`harden_repos`) | abilities/harden_repos.py + realai.plugins.tools.harden_repos |
 | Rollout all repos (`rollout_all_repos`) | abilities/rollout_all_repos.py + realai.plugins.tools.rollout_all_repos |
 | Quarantine reconstruct (`quarantine_reconstruct`) | abilities/quarantine_reconstruct.py |
@@ -179,6 +179,8 @@ Tested on Windows with an AMD RX 6700 XT.
 
 Paths below are examples (this machine uses `C:\RealAI-clean`; `start_v3_stack.ps1` assumes `C:\realai`). Adjust to your checkout.
 
+Run each numbered step in its own terminal.
+
 ```powershell
 # 1) Vulkan model server (7B GGUF). -fa off is required on the RX 6700 XT (flash attention garbles output).
 C:\llama-vulkan\llama-server.exe `
@@ -192,8 +194,8 @@ $env:REALAI_VULKAN_BASE = "http://127.0.0.1:8080"
 python -m realai.v3_orchestrator --host 127.0.0.1 --port 8001
 
 # 3) Operator UI (Next.js) on http://127.0.0.1:3000
-#    REALAI_API_BASE also works if NEXT_PUBLIC_API_URL is unset.
-cd frontend
+#    Optional locally (defaults to http://127.0.0.1:8001). Also reads NEXT_PUBLIC_REALAI_API or REALAI_API_BASE.
+cd C:\RealAI-clean\frontend
 $env:NEXT_PUBLIC_API_URL = "http://127.0.0.1:8001"
 pnpm install
 pnpm dev
