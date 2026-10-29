@@ -15,7 +15,7 @@ There is also a separate cloud API, `python -m realai.api_server`, used for the 
 
 ## What works today
 
-Only abilities the catalog marks **LIVE** (67 of 78). Many are reached through `POST /v1/tools/execute`; the RackUp ones that go through `rackup_invoke` are for the RackUp pool app.
+Only abilities the catalog marks **LIVE** (68 of 78). Many are reached through `POST /v1/tools/execute`; the RackUp ones that go through `rackup_invoke` are for the RackUp pool app.
 
 | Ability (catalog id) | How to reach it |
 |---|---|
@@ -101,6 +101,7 @@ Only abilities the catalog marks **LIVE** (67 of 78). Many are reached through `
 | PR triage (hive, read-only) (`pr_triage`) | POST /v1/tools/execute ability.pr_triage |
 | Vulnerability triage (hive, read-only) (`vuln_triage`) | POST /v1/tools/execute ability.vuln_triage |
 | CI failure classifier (hive, read-only) (`ci_failure_classify`) | POST /v1/tools/execute ability.ci_failure_classify |
+| Tool router heuristics (provider/cost/latency) (`tool_router_plugins`) | POST /v1/tools/route (routes only, never executes) |
 
 ## Partial abilities
 
@@ -115,7 +116,6 @@ These exist in some form but are not finished. Do not rely on them yet.
 - **PARTIAL:** Chess engine (local Stockfish) (`chess_engine`)
 - **PARTIAL:** Synthetic organs runtime (organisms, curiosity, archeology) (`synthetic_organs_runtime`)
 - **PARTIAL:** Self-evolving diagnose/critic/proposal loop (`self_evolving`)
-- **PARTIAL:** Tool router heuristics (provider/cost/latency) (`tool_router_plugins`)
 - **PARTIAL:** Workspace info / catalog (read-only, REALAI_HOME) (`workspace_info`)
 
 Every catalog entry is currently LIVE or PARTIAL. (`_enrich_status_from_disk` can upgrade CODE or MISSING entries to GOLD at runtime; none exist today.)
