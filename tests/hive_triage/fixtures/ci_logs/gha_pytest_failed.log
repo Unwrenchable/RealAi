@@ -1,0 +1,120 @@
+python-tests	Run pytest (config in pyproject.toml)	∩╗┐2026-10-29T12:22:23.3981294Z ##[group]Run python -m pytest -q
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:23.3982086Z ^[[36;1mpython -m pytest -q^[[0m
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:23.4002908Z shell: /usr/bin/bash -e {0}
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:23.4003159Z env:
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:23.4003615Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:23.4004082Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:23.4004542Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:23.4004937Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:23.4005330Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:23.4005729Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:23.4006062Z ##[endgroup]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:28.7242909Z ........................................................................ [  5%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:39.3093886Z ........................................................................ [ 11%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:41.6211358Z ........................................................................ [ 16%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:42.5117002Z ........................................................................ [ 22%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:42.8317794Z ........................................................................ [ 28%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:22:47.2664680Z FF...................................................................... [ 33%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:11.5459818Z ........................................................................ [ 39%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:11.7141907Z ........................................................................ [ 45%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:12.0198332Z ........................................................................ [ 50%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:15.7681267Z ........................................................................ [ 56%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:18.1240653Z ........F............................................................... [ 62%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:37.0297826Z .............................s.......................................... [ 67%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:38.1598933Z ...........................s..................................s......... [ 73%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:39.2935158Z ........................................................................ [ 78%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:40.0232584Z ........................................................................ [ 84%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:41.5179973Z ...........F..F.......................................................ss [ 90%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:41.9922058Z sssssssssssssssssss..................................................... [ 95%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6376224Z ..............s...ss..............s.....s............                    [100%]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6377069Z =================================== FAILURES ===================================
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6377784Z ____________ test_patch_gate_requires_profile_approval_and_sandbox _____________
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6378261Z 
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6378627Z ws = PosixPath('/tmp/pytest-of-runner/pytest-0/test_patch_gate_requires_profi0')
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6379182Z 
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6379450Z     def test_patch_gate_requires_profile_approval_and_sandbox(ws):
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6380121Z         from realai.agentx.hive.governance import PatchGate
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6380629Z     
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6380906Z         calls = []
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6381414Z         gate = PatchGate(sandbox=lambda item: calls.append(item) or {"ok": True})
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6382466Z         assert gate.propose({"id": "ro"}, "README.md", "hello", "bye")["status"] == "denied"
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6383152Z         writer = {"id": "coder", "profile": "balanced"}
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6383700Z         req = gate.propose(writer, "README.md", "hello", "bye")
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6384223Z >       assert req["status"] == "pending"
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6384705Z E       AssertionError: assert 'refused' == 'pending'
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6385150Z E         
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6385433Z E         - pending
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6385738Z E         + refused
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6386452Z 
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6386642Z tests/test_agentx_hive.py:119: AssertionError
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6387257Z _________________ test_patch_gate_fails_closed_without_sandbox _________________
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6387946Z 
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6388290Z ws = PosixPath('/tmp/pytest-of-runner/pytest-0/test_patch_gate_fails_closed_w0')
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6389146Z monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f7775c965d0>
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6389602Z 
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6389875Z     def test_patch_gate_fails_closed_without_sandbox(ws, monkeypatch):
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6390523Z         monkeypatch.delenv("REALAI_SANDBOX_CMD", raising=False)
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6391111Z         from realai.agentx.hive.governance import PatchGate
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6391801Z     
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6392090Z         gate = PatchGate()
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6392636Z         req = gate.propose({"id": "coder", "profile": "balanced"}, "README.md", "hello", "bye")
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6393369Z >       gate.gate.set_status(req["approval_id"], "approved", by="travis")
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6393921Z                              ^^^^^^^^^^^^^^^^^^
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6394333Z E       KeyError: 'approval_id'
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6394574Z 
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6394725Z tests/test_agentx_hive.py:133: KeyError
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6395280Z _______________ test_orchestrator_recovered_read_only_tool_names _______________
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6395734Z 
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6395960Z     def test_orchestrator_recovered_read_only_tool_names():
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6396501Z         import realai.orchestration.v3_orchestrator as v
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6396946Z     
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6397500Z         assert v._run_tool("agent_info", {"agent_id": "definitely-missing"})["error"] == "agent_not_found"
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6398405Z >       assert "entries" in v._run_tool("list_dir", {"target_directory": "abilities"})
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6399209Z E       AssertionError: assert 'entries' in {'ok': False, 'error': 'workspace_unavailable'}
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6400354Z E        +  where {'ok': False, 'error': 'workspace_unavailable'} = <function _run_tool at 0x7f7775f97b00>('list_dir', {'target_directory': 'abilities'})
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6402314Z E        +    where <function _run_tool at 0x7f7775f97b00> = <module 'realai.orchestration.v3_orchestrator' from '/home/runner/work/RealAi/RealAi/realai/orchestration/v3_orchestrator.py'>._run_tool
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6403427Z 
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6403643Z tests/test_merge_versions.py:67: AssertionError
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6404283Z ____________________ test_rows_are_tool_grounded_and_verify ____________________
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6404743Z 
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6405179Z mirror = PosixPath('/tmp/pytest-of-runner/pytest-0/test_rows_are_tool_grounded_an0/repo-mirror')
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6405777Z 
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6405986Z     def test_rows_are_tool_grounded_and_verify(mirror):
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6406553Z         from realai.training.self_data.verify import verify
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6407024Z     
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6407360Z         rows = rows_for(mirror, per_repo_share=1.0)
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6407902Z         rules = Counter(r["meta"].get("rule") for r in rows)
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6408627Z >       assert {"overview", "list", "locate", "read", "edit_gated", "repo_money_locked"} <= set(rules)
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6409587Z E       AssertionError: assert {'edit_gated'...money_locked'} <= {'list', 'loc...pproval', ...}
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6410302Z E         
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6410607Z E         Extra items in the left set:
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6411014Z E         'edit_gated'
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6411222Z 
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6411616Z tests/training/test_repo_corpus.py:66: AssertionError
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6412260Z _____________________________ test_edit_rows_gated _____________________________
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6412670Z 
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6413034Z mirror = PosixPath('/tmp/pytest-of-runner/pytest-0/test_edit_rows_gated0/repo-mirror')
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6413545Z 
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6413692Z     def test_edit_rows_gated(mirror):
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6414638Z         rows = {r["meta"]["repo"]: r for r in rows_for(mirror, per_repo_share=1.0) if r["meta"].get("rule") == "edit_gated"}
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6415605Z >       real = _calls(rows["RealAi"])[0]["result"]
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6416041Z                       ^^^^^^^^^^^^^^
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6416410Z E       KeyError: 'RealAi'
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6416630Z 
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6416810Z tests/training/test_repo_corpus.py:112: KeyError
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6417328Z =========================== short test summary info ============================
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6418363Z FAILED tests/test_agentx_hive.py::test_patch_gate_requires_profile_approval_and_sandbox - AssertionError: assert 'refused' == 'pending'
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6419251Z   
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6419560Z   - pending
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6419980Z   + refused
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6420606Z FAILED tests/test_agentx_hive.py::test_patch_gate_fails_closed_without_sandbox - KeyError: 'approval_id'
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6422271Z FAILED tests/test_merge_versions.py::test_orchestrator_recovered_read_only_tool_names - AssertionError: assert 'entries' in {'ok': False, 'error': 'workspace_unavailable'}
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6423838Z  +  where {'ok': False, 'error': 'workspace_unavailable'} = <function _run_tool at 0x7f7775f97b00>('list_dir', {'target_directory': 'abilities'})
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6425468Z  +    where <function _run_tool at 0x7f7775f97b00> = <module 'realai.orchestration.v3_orchestrator' from '/home/runner/work/RealAi/RealAi/realai/orchestration/v3_orchestrator.py'>._run_tool
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6427327Z FAILED tests/training/test_repo_corpus.py::test_rows_are_tool_grounded_and_verify - AssertionError: assert {'edit_gated'...money_locked'} <= {'list', 'loc...pproval', ...}
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6428379Z   
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6428667Z   Extra items in the left set:
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6429039Z   'edit_gated'
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6429705Z FAILED tests/training/test_repo_corpus.py::test_edit_rows_gated - KeyError: 'RealAi'
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.6430440Z 5 failed, 1243 passed, 32 skipped in 83.87s (0:01:23)
+python-tests	Run pytest (config in pyproject.toml)	2026-10-29T12:23:47.8305583Z ##[error]Process completed with exit code 1.
