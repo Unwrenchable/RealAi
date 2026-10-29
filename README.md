@@ -62,8 +62,9 @@ Everything else in the catalog is CODE, SOFT, GOLD or MISSING: present as code o
 git clone https://github.com/Unwrenchable/RealAi.git
 cd RealAi
 pip install -r requirements.txt
-pip install -e .
 ```
+
+`pip install -e .` does not work on `main` yet: `setup.py` lists a package directory that is missing (`realai-core/agent_tools/agents_impl`). Run from the repo root instead.
 
 You also need a `llama-server` build with Vulkan and a GGUF model for local inference.
 
