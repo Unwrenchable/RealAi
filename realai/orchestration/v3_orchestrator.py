@@ -49,6 +49,23 @@ def _load_hive_guard():
 
 _hive_guard = _load_hive_guard()
 
+
+def _load_tool_auth():
+    """Load the /v1/tools/execute auth gate by file path (REALAI_TOOLS_AUTH, default off)."""
+    import importlib.util
+
+    name = "realai_tool_auth"
+    if name in sys.modules:
+        return sys.modules[name]
+    spec = importlib.util.spec_from_file_location(name, str(Path(__file__).resolve().parent / "tool_auth.py"))
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[name] = mod
+    spec.loader.exec_module(mod)  # type: ignore[union-attr]
+    return mod
+
+
+_tool_auth = _load_tool_auth()
+
 # Repo root: .../realai package parent
 _PKG = Path(__file__).resolve().parent
 _ROOT = _PKG.parent
@@ -3623,9 +3640,24 @@ class Handler(BaseHTTPRequestHandler):
             except json.JSONDecodeError:
                 self._json(400, {"error": "invalid_json"})
                 return
-            name = body.get("name") or body.get("tool")
+            name = body.get("name") if isinstance(body, dict) else None
+            if name is None and isinstance(body, dict):
+                name = body.get("tool")
             if not name:
                 self._json(400, {"error": "missing_tool_name"})
+                return
+            if not isinstance(name, str):
+                self._json(400, {"error": "bad_request"})
+                return
+            try:
+                _bind = str(self.server.server_address[0])
+            except Exception:
+                _bind = None
+            denied = _tool_auth.check(
+                name, self.headers, (self.client_address or ("?",))[0], bind_host=_bind
+            )
+            if denied is not None:
+                self._json(denied[0], denied[1])
                 return
             # Read-only tools always; mutating assemble/promote need self-improve
             mutating = name in ("self_heal_assemble", "self_heal_promote_dry") or name.startswith("self_heal_promote")
@@ -3812,6 +3844,9 @@ def main(argv: Optional[List[str]] = None) -> int:
     ap.add_argument("--host", default=os.environ.get("HOST", "127.0.0.1"))
     ap.add_argument("--port", type=int, default=int(os.environ.get("ORCH_PORT", "8001")))
     args = ap.parse_args(argv)
+    # Fail closed: production or non-loopback bind forces the tools gate on.
+    _tool_auth.set_bind_host(args.host)
+    _tool_auth.startup_check(args.host)
 
     try:
         from realai.bot.boot import ensure_bot_registered, resolve_local_model
