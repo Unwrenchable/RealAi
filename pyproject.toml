@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "realai"
 version = "2.0.0"
-description = "The limitless AI that can truly do anything - from Web3 to groceries, therapy to business building"
+description = "Local-first AI hive: orchestrator plus local GGUF models on Vulkan."
 readme = "README.md"
 requires-python = ">=3.11,<4.0"
 authors = [{ name = "RealAI Team" }]

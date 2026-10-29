@@ -2551,6 +2551,17 @@ class RealAI:
                 }, capability=ModelCapability.TEXT_GENERATION.value, modality="text",
                    extra={"persona": self.persona, "source": "error", "error": _api_error})
 
+        # Placeholder when neither local nor API generation produced text.
+        if self._use_local:
+            missing_credentials_msg = (
+                "Local RealAI is selected, but no local model is configured/loaded yet. "
+                "Register a local model and set it as default_llm, then retry."
+            )
+        else:
+            missing_credentials_msg = (
+                "No API key configured. Select Local RealAI to run locally without a key, "
+                "or paste a provider API key in the settings bar."
+            )
         return self._with_metadata({
             "id": f"cmpl-{int(time.time())}",
             "object": "text_completion",
