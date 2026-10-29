@@ -31,8 +31,10 @@ from typing import Any, Dict, List, Optional
 
 
 def _vulkan_device_args():
-    """Optional llama-server --device (e.g. Vulkan1 on multi-GPU boxes) via REALAI_VULKAN_DEVICE."""
-    dev = os.environ.get("REALAI_VULKAN_DEVICE", "").strip()
+    """llama-server --device: defaults to Vulkan1 (RX 6700 XT). Override with REALAI_VULKAN_DEVICE, or "none" to omit."""
+    dev = os.environ.get("REALAI_VULKAN_DEVICE", "Vulkan1").strip()
+    if dev.lower() == "none":
+        dev = ""
     return ["--device", dev] if dev else []
 
 def _detect_root() -> Path:
@@ -322,6 +324,8 @@ def start_vulkan(env: Dict[str, str], force: bool = False) -> Dict[str, Any]:
             "-ngl",
             str(ngl),
             "--jinja",
+            "-fa",
+            "off",  # flash attention garbles output on the RX 6700 XT Vulkan build
         ] + _vulkan_device_args(),
         str(VULKAN_DIR),
         env,

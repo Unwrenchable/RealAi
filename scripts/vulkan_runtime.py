@@ -41,8 +41,10 @@ _RESUME_CANDIDATES = [
 
 
 def _vulkan_device_args():
-    """Optional llama-server --device (e.g. Vulkan1 on multi-GPU boxes) via REALAI_VULKAN_DEVICE."""
-    dev = os.environ.get("REALAI_VULKAN_DEVICE", "").strip()
+    """llama-server --device: defaults to Vulkan1 (RX 6700 XT). Override with REALAI_VULKAN_DEVICE, or "none" to omit."""
+    dev = os.environ.get("REALAI_VULKAN_DEVICE", "Vulkan1").strip()
+    if dev.lower() == "none":
+        dev = ""
     return ["--device", dev] if dev else []
 
 def log(msg: str) -> None:
@@ -163,6 +165,8 @@ def resume_vulkan(
         "-ngl",
         str(ngl_v),
         "--jinja",
+        "-fa",
+        "off",  # flash attention garbles output on the RX 6700 XT Vulkan build
     ] + _vulkan_device_args()
     log(f"starting {SERVER_EXE.name} model={model.name} ngl={ngl_v} ctx={ctx_v}")
 

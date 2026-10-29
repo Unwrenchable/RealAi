@@ -24,7 +24,9 @@ $vArgs = @(
   "--port", "8080",
   "-c", "8192",
   "-ngl", "99",
-  "--jinja"
+  "--device", "Vulkan1",
+  "--jinja",
+  "-fa", "off"
 )
 Start-Process -FilePath $Llama -ArgumentList $vArgs -WorkingDirectory "C:\llama-vulkan" `
   -RedirectStandardOutput (Join-Path $Logs "vulkan.out.log") `
