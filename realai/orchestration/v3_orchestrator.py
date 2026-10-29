@@ -83,10 +83,15 @@ def _internal_error(where: str, exc: BaseException, **extra: Any) -> Dict[str, A
         "internal_error id=%s where=%s type=%s", eid, where, type(exc).__name__,
         exc_info=(type(exc), exc, exc.__traceback__),
     )
-    out: Dict[str, Any] = {"ok": False, "error": "internal_error", "error_id": eid, **extra}
+    out: Dict[str, Any] = {**extra, "ok": False, "error": "internal_error", "error_id": eid}
     if str(os.environ.get("REALAI_DEBUG_ERRORS", "")).strip() == "1":
         out["error_type"] = type(exc).__name__
     return out
+
+
+def _internal_error_ref(where: str, exc: BaseException) -> str:
+    """Like _internal_error, for nested string fields: returns 'internal_error:<id>' only."""
+    return "internal_error:" + _internal_error(where, exc)["error_id"]
 
 # Repo root: .../realai package parent
 _PKG = Path(__file__).resolve().parent
@@ -355,7 +360,7 @@ def orchestrator_handler(msg):
             vulkan_output = json.loads(resp.read().decode("utf-8"))
     except Exception as e:
         logger.error(f"[orchestrator_handler] Vulkan error: {e}")
-        return {"error": "Vulkan inference failed", "details": str(e)}
+        return _internal_error("orchestrator_handler.vulkan", e, stage="vulkan_inference")
 
     # 6. Plugin post-processing (optional)
     if ability in PLUGINS:
@@ -439,7 +444,7 @@ def _finetune_plan() -> Dict[str, Any]:
         from realai.training.finetune import build_finetune_plan
         plan["legacy_stub"] = build_finetune_plan(data_dir=str(TRAINING_DATA))
     except Exception as e:
-        plan["legacy_stub_error"] = str(e)
+        plan["legacy_stub_error"] = _internal_error_ref("training_plan.legacy_stub", e)
     return plan
 
 
@@ -455,7 +460,7 @@ def _self_improve_status() -> Dict[str, Any]:
             "VersionManager": hasattr(si, "VersionManager"),
         }
     except Exception as e:
-        modules = {"import_error": str(e)}
+        modules = {"import_error": _internal_error_ref("self_improve_status.import", e)}
     return {
         "enabled": enabled,
         "env": "REALAI_SELF_IMPROVE",
@@ -968,7 +973,7 @@ def _run_tool(name: str, arguments: Optional[Dict] = None) -> Dict[str, Any]:
                 from realai.plugins.tools.device_selector import get_device_name
                 return {"device": get_device_name()}
             except Exception as e:
-                return {"device": "cpu", "note": str(e)}
+                return {"device": "cpu", "note": _internal_error_ref("_run_tool.device_selector", e)}
         if name == "agent_tools_list_tools":
             from realai.v3_runtime_bridge import list_agent_tools_tools
             return list_agent_tools_tools()
@@ -1282,7 +1287,7 @@ def _apply_natural_model_writes(reply: str) -> List[Dict[str, Any]]:
         apply_workspace()
         return apply_suggested_writes(reply)
     except Exception as exc:
-        return [{"tool": "write", "error": str(exc)}]
+        return [{"tool": "write", **_internal_error("_apply_natural_model_writes", exc)}]
 
 
 def _operator_intent_dispatch(user_text: str) -> Optional[Dict[str, Any]]:
@@ -1535,7 +1540,7 @@ def _operator_intent_dispatch(user_text: str) -> Optional[Dict[str, Any]]:
                 },
             }
         except Exception as e:
-            return {"surface": "abilities", "result": {"ok": False, "error": str(e)}}
+            return {"surface": "abilities", "result": _internal_error("operator_intent.abilities", e)}
     return None
 
 
@@ -1824,7 +1829,7 @@ def _enrich_chat_body(body: Dict[str, Any], headers: Optional[Dict[str, str]] = 
         body["realai_model"] = model_meta
         body["model"] = backend_id  # what Vulkan understands
     except Exception as e:
-        body["realai_model"] = {"error": str(e), "requested": body.get("model")}
+        body["realai_model"] = {"error": _internal_error_ref("resolve_model_for_backend", e), "requested": body.get("model")}
         if not body.get("model") or str(body.get("model")).startswith("realai"):
             body["model"] = DEFAULT_BACKEND_MODEL
     return body
@@ -1992,7 +1997,7 @@ class Handler(BaseHTTPRequestHandler):
             data = json.dumps(
                 {
                     "error": "json_encode_failed",
-                    "detail": str(exc),
+                    "detail": _internal_error_ref("_json.encode", exc),
                     "orchestrator": "v3",
                 }
             ).encode("utf-8")
@@ -2353,7 +2358,7 @@ class Handler(BaseHTTPRequestHandler):
                 except Exception:
                     vulkan_body = data.decode("utf-8", errors="ignore")[:200]
             except Exception as e:
-                vulkan_body = str(e)
+                vulkan_body = _internal_error_ref("route:/health.vulkan", e)
             # Orchestrator is up even when Vulkan is down (embeddings/recovery still work).
             # Use HTTP 200 + status=degraded so clients can keep using non-chat routes.
             health_payload = {
@@ -2407,7 +2412,7 @@ class Handler(BaseHTTPRequestHandler):
                     },
                 )
             except Exception as exc:
-                self._json(500, {"ok": False, "error": str(exc)})
+                self._json(500, _internal_error("route:/v1/workspace", exc))
             return
 
         if path == "/v1/models":
@@ -2426,7 +2431,7 @@ class Handler(BaseHTTPRequestHandler):
                     self.end_headers()
                     self.wfile.write(data)
                 except Exception as e2:
-                    self._json(500, {"error": str(e), "fallback_error": str(e2)})
+                    self._json(500, _internal_error("route:/v1/models", e2, primary_error=_internal_error_ref("route:/v1/models.primary", e)))
             return
 
         if path == "/v1/training/status":
@@ -2463,7 +2468,7 @@ class Handler(BaseHTTPRequestHandler):
 
                 self._json(200, load_profiles())
             except Exception as e:
-                self._json(500, {"error": str(e)})
+                self._json(500, _internal_error("route:/v1/agents/profiles", e))
             return
 
         if path in ("/v1/agents/executions", "/v1/agents/executions/active"):
@@ -2476,7 +2481,7 @@ class Handler(BaseHTTPRequestHandler):
                     recent = BUS.recent(50)
                     self._json(200, {"data": recent, "count": len(recent)})
             except Exception as e:
-                self._json(500, {"error": str(e)})
+                self._json(500, _internal_error("route:/v1/agents/executions", e))
             return
 
         if path == "/v1/agents/simulation":
@@ -2485,7 +2490,7 @@ class Handler(BaseHTTPRequestHandler):
 
                 self._json(200, {"ok": True, "enabled": bool(simulation_enabled())})
             except Exception as e:
-                self._json(500, {"error": str(e)})
+                self._json(500, _internal_error("route:/v1/agents/simulation", e))
             return
 
         if path == "/v1/agents":
@@ -2540,7 +2545,7 @@ class Handler(BaseHTTPRequestHandler):
                 from realai.self_heal import status as heal_status
                 self._json(200, heal_status())
             except Exception as e:
-                self._json(500, {"error": str(e)})
+                self._json(500, _internal_error("route:/v1/self-heal/status", e))
             return
 
         if path == "/v1/self-heal/abilities":
@@ -2548,7 +2553,7 @@ class Handler(BaseHTTPRequestHandler):
                 from realai.self_heal import abilities_manifest
                 self._json(200, abilities_manifest())
             except Exception as e:
-                self._json(500, {"error": str(e)})
+                self._json(500, _internal_error("route:/v1/self-heal/abilities", e))
             return
 
 
@@ -2618,7 +2623,7 @@ class Handler(BaseHTTPRequestHandler):
                 from realai.v3_runtime_bridge import agent_tools_status
                 self._json(200, agent_tools_status())
             except Exception as e:
-                self._json(500, {"error": str(e)})
+                self._json(500, _internal_error("route:/v1/agent-tools/status", e))
             return
 
         if path == "/v1/deepen/status":
@@ -2640,7 +2645,7 @@ class Handler(BaseHTTPRequestHandler):
                 try:
                     payload["last"] = json.loads(last.read_text(encoding="utf-8"))
                 except Exception as e:
-                    payload["last_error"] = str(e)
+                    payload["last_error"] = _internal_error_ref("route:/v1/deepen/status.last", e)
             self._json(200, payload)
             return
 
@@ -2655,7 +2660,7 @@ class Handler(BaseHTTPRequestHandler):
                     data["rescan"] = "POST /v1/weights/scan or python scanners/scan_model_weights.py"
                     self._json(200, data)
                 except Exception as e:
-                    self._json(500, {"error": str(e)})
+                    self._json(500, _internal_error("route:/v1/weights", e))
             else:
                 self._json(200, {
                     "candidates": [],
@@ -2686,7 +2691,7 @@ class Handler(BaseHTTPRequestHandler):
                     ),
                 })
             except Exception as e:
-                self._json(500, {"error": str(e)})
+                self._json(500, _internal_error("route:/v1/lora", e))
             return
 
         if path == "/v1/capabilities":
@@ -2731,7 +2736,7 @@ class Handler(BaseHTTPRequestHandler):
                         "operator-system-prompt",
                     ],
                     "inference": VULKAN_BASE,
-                    "error_note": str(e),
+                    "error_note": _internal_error_ref("route:/v1/capabilities", e),
                     "ui_hint": "Point REALAI_API_BASE at this orchestrator (default :8001)",
                     "self_heal": "GET /v1/self-heal/abilities — discover/assemble/promote/verify loop",
                 })
@@ -2773,7 +2778,7 @@ class Handler(BaseHTTPRequestHandler):
                     from realai.server.router import handle_embeddings_request
                     self._json(200, handle_embeddings_request(body))
                 except Exception as e2:
-                    self._json(500, {"error": str(e), "fallback_error": str(e2)})
+                    self._json(500, _internal_error("route:/v1/embeddings", e2, primary_error=_internal_error_ref("route:/v1/embeddings.primary", e)))
             return
 
         if path == "/v1/audio/transcriptions":
@@ -2785,7 +2790,7 @@ class Handler(BaseHTTPRequestHandler):
                 from realai.lambda_embeddings_audio import create_transcription_response
                 self._json(200, create_transcription_response(body))
             except Exception as e:
-                self._json(500, {"error": str(e)})
+                self._json(500, _internal_error("route:/v1/audio/transcriptions", e))
             return
 
         if path == "/v1/audio/speech":
@@ -2945,7 +2950,7 @@ class Handler(BaseHTTPRequestHandler):
 
                 self._json(200, create_speech_response(body))
             except Exception as e:
-                self._json(500, {"error": str(e)})
+                self._json(500, _internal_error("route:/v1/audio/speech", e))
             return
 
         if path == "/v1/recovery/promote":
@@ -3306,7 +3311,7 @@ class Handler(BaseHTTPRequestHandler):
                     return
                 except Exception as e:
                     # fall through to normal chat with error note in system? just proxy with note
-                    body.setdefault("realai_multi_agent_error", str(e))
+                    body.setdefault("realai_multi_agent_error", _internal_error_ref("chat.multi_agent", e))
 
             # Strip non-OpenAI fields before proxy
             proxy_body = {
@@ -3518,7 +3523,7 @@ class Handler(BaseHTTPRequestHandler):
                     enabled = simulation_enabled()
                 self._json(200, {"ok": True, "enabled": enabled})
             except Exception as e:
-                self._json(500, {"error": str(e)})
+                self._json(500, _internal_error("route:/v1/agents/simulation", e))
             return
 
         if path == "/v1/agents/run":
@@ -3738,7 +3743,12 @@ class Handler(BaseHTTPRequestHandler):
                 capture_tool(tool_name, args, result, dict(self.headers))
             except Exception:
                 pass
-            self._json(200, {"tool": tool_name, "result": result})
+            internal = (
+                isinstance(result, dict)
+                and result.get("error") == "internal_error"
+                and "error_id" in result
+            )
+            self._json(500 if internal else 200, {"tool": tool_name, "result": result})
             return
 
         if path == "/v1/abilities/run":
@@ -3847,7 +3857,7 @@ class Handler(BaseHTTPRequestHandler):
                     self._json(200, heal.run_full_cycle(apply_promote=bool(body.get("apply"))))
                     return
             except PermissionError as e:
-                self._json(403, {"error": str(e)})
+                self._json(403, _internal_error("route:/v1/self-heal.forbidden", e, forbidden=True))
                 return
             except Exception as e:
                 self._json(500, _internal_error("route:/v1/self-heal/cycle", e))
