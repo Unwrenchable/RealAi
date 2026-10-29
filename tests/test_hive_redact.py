@@ -259,3 +259,116 @@ def test_redos_60k_under_half_second(label):
     t = _time.perf_counter()
     scan_text(text)
     assert _time.perf_counter() - t < 0.5, label
+
+
+# ---------------------------------------------------------------------------------------
+# Security re-review of #191 @ e16dc1a: review191_probes2.py (20 probes + 12 clean samples).
+# ---------------------------------------------------------------------------------------
+import random as _random
+import urllib.parse as _up
+from pathlib import Path as _Path
+
+import realai.hive_records.redact as _redact_mod
+
+_BIP = _Path(_redact_mod.__file__).with_name("bip39_english.txt").read_text(encoding="utf-8").split()
+_rng = _random.Random(1)
+_W24 = _rng.sample(_BIP, 24)
+_NONW = "qzx vbn wrtk plm frob gnarl zibb quux".split()
+_MIX = [x for p in zip(_rng.sample(_BIP, 6), _NONW[:6]) for x in p]
+
+PROBE2_TEXT = {
+    "JWT alg none (empty sig)": "ey" + "JhbGciOiJub25lIn0.eyJzdWIiOiIxMjMifQ.",
+    "JWE 5-part": "ey" + "JhbGciOiJSU0EiLCJlbmMiOiJBMjU2In0.ZmFrZWtleWZha2Vr.aXZpdml2aXY.Y2lwaGVydGV4dA.dGFndGFn",
+    "sk- short body": "sk-" + "abc123XYZ",
+    "Cyrillic AKIA": "\u0410KIA" + "ABCDEFGHIJ123456",
+    "Greek/Cyrillic in ghp": "gh\u0440_" + "ABCDEFGHIJKLMNOPqrst12",
+    "RTL override around key": "\u202esk-" + "ABCDEFGHIJKLmnop1234\u202c",
+    "6 BIP39 + 6 nonwords": " ".join(_MIX),
+    "hex-encoded sk": ("sk-" + "ABCDEFGHIJKLmnop1234").encode().hex(),
+    "double url-encoded pg": _up.quote(_up.quote("postgres://u:p@h/db")),
+    "solana base58 32-byte": b58encode(bytes(range(1, 33))),
+    "PEM CRLF": "-----BEGIN " + "RSA PRIVATE KEY-----\r\nMIIfake\r\n-----END " + "RSA PRIVATE KEY-----",
+    "export KEY=": "export AWS_SECRET_ACCESS_KEY=" + "fakefakefake",
+    "export KEY= quoted": 'export STRIPE_KEY="' + 'fakefakefake"',
+    "Authorization: token": "Authorization: token " + "ghfakefakefakefake12",
+    "base64 of userpass url": _b64.b64encode(b"mysql://u:p@host/db").decode(),
+    "24 words newline sep": "\n".join(_W24),
+    "kv password spaced": "password : " + "hunter2",
+}
+PROBE2_RECORDS = {
+    "24 words across 3 fields": {"a": " ".join(_W24[:8]), "b": " ".join(_W24[8:16]), "c": " ".join(_W24[16:])},
+    "secret as dict key json": {"API_KEY=" + "fakefakefake": True},
+    "bytes 32 as list": {"k": list(range(1, 33))},
+}
+CLEAN2 = {
+    "prose": "The release went out after QA confirmed the build passed and the cache was warmed.",
+    "prose bip39-heavy": "please review the open issue about the deploy script and fix the cache logic today",
+    "word list code": "allowed = ['apple','table','river','stone','house','water','light','music','paper','glass','green','money']",
+    "git sha": "fixed in 3df8906a1b2c3d4e5f60718293a4b5c6d7e8f901",
+    "python kwargs": "fn(key=value_name, token_count=12)",
+    "yaml config": "max_tokens: 2048\npassword_min_length: 12",
+    "json schema": '{"type":"string","key":"user_id"}',
+    "sk word": "risk-assessment and task-tracking done",
+    "pr url": "https://github.com/Unwrenchable/RealAi/pull/191#discussion_r1234567890",
+    "pytest cmd": "python3 -m pytest tests/test_hive_redact.py -q -> 94 passed",
+    "camel id": "HiveIngestRejectsRecordsWithSecretsTest",
+    "docker digest": "sha256:2f5eed53a4727b4bf8880d8f3f199efc90e58503646d9ff8eff3a2ed3b24dbda",
+}
+
+
+def test_probe2_counts():
+    assert len(PROBE2_TEXT) + len(PROBE2_RECORDS) == 20
+    assert len(CLEAN2) == 12
+
+
+@pytest.mark.parametrize("name", sorted(PROBE2_TEXT))
+def test_review2_probe_text_rejected(name):
+    assert scan_record({"t": PROBE2_TEXT[name]}), name
+
+
+@pytest.mark.parametrize("name", sorted(PROBE2_RECORDS))
+def test_review2_probe_record_rejected(name):
+    assert scan_record(PROBE2_RECORDS[name]), name
+
+
+@pytest.mark.parametrize("name", sorted(CLEAN2))
+def test_review2_clean_samples_pass(name):
+    assert scan_record({"t": CLEAN2[name]}) == [], name
+
+
+def test_homoglyph_tokens_mapped_and_flagged():
+    akia = scan_text("\u0410KIA" + "ABCDEFGHIJ123456")
+    assert "token:aws_akia" in akia and "obfuscation" in akia
+    ghp = scan_text("gh\u0440_" + "ABCDEFGHIJKLMNOPqrst12")
+    assert "token:github" in ghp and "obfuscation" in ghp
+
+
+def test_pure_greek_or_cyrillic_prose_not_obfuscation():
+    assert "obfuscation" not in scan_text("\u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03ac \u03ba\u03b5\u03af\u03bc\u03b5\u03bd\u03bf")
+    assert "obfuscation" not in scan_text("\u041f\u0440\u0438\u0432\u0435\u0442 \u043c\u0438\u0440")
+
+
+def test_scanner_version_is_3():
+    assert SCANNER_VERSION == "hive-redact-3"
+
+
+_REDOS2 = {
+    "assign": lambda: "a=" * 30000,
+    "assign2": lambda: "k:" * 30000,
+    "b64": lambda: "A" * 200000,
+    "seed": lambda: " ".join(["abandon"] * 50000),
+    "userpass": lambda: "a://" + "b" * 300 + ":" * 5000,
+    "int": lambda: "[" + "1," * 80000 + "]",
+    "quote": lambda: '"' * 60000,
+    "kv": lambda: "key = " * 20000,
+    "hex": lambda: "ab" * 30000,
+    "dblquote": lambda: "%2525" * 12000,
+}
+
+
+@pytest.mark.parametrize("label", sorted(_REDOS2))
+def test_redos2_fast(label):
+    text = _REDOS2[label]()
+    t = _time.perf_counter()
+    scan_text(text)
+    assert _time.perf_counter() - t < 0.5, label

@@ -8,7 +8,9 @@ Each string is scanned in several views (security review of PR #191):
   * NFKC-normalized text with zero-width characters stripped (all checks)
   * ``urllib.parse.unquote`` of that text (all checks)
   * a whitespace-stripped copy (token / PEM patterns only; catches secrets split over lines)
-  * bounded base64 decodes of candidate substrings (all checks, one level deep)
+  * bounded base64 and hex (32+ chars) decodes of candidate substrings (one level deep)
+  * Cyrillic/Greek confusables mapped to ASCII; mixed-script tokens -> ``obfuscation``
+  * ``unquote`` is applied twice (double URL-encoding)
 
 Heuristics here are a safety net, not a guarantee: bots must also keep secrets out of records
 at the source.
@@ -25,16 +27,39 @@ import urllib.parse
 from pathlib import Path
 from typing import Any, Iterator, List, Set
 
-SCANNER_VERSION = "hive-redact-2"
+SCANNER_VERSION = "hive-redact-3"
 
 # --- obfuscation ------------------------------------------------------------------------
 _ZERO_WIDTH = re.compile("[\u200b-\u200f\u2060\ufeff\u00ad]")
+# Cyrillic / Greek letters that render like ASCII (mapped before token matching)
+_CONFUSABLES = str.maketrans({
+    "\u0410": "A", "\u0412": "B", "\u0415": "E", "\u041a": "K", "\u041c": "M", "\u041d": "H",
+    "\u041e": "O", "\u0420": "P", "\u0421": "C", "\u0422": "T", "\u0425": "X", "\u0405": "S",
+    "\u0406": "I", "\u0408": "J", "\u0430": "a", "\u0435": "e", "\u043e": "o", "\u0440": "p",
+    "\u0441": "c", "\u0443": "y", "\u0445": "x", "\u0455": "s", "\u0456": "i", "\u0458": "j",
+    "\u04bb": "h", "\u0501": "d",
+    "\u0391": "A", "\u0392": "B", "\u0395": "E", "\u0396": "Z", "\u0397": "H", "\u0399": "I",
+    "\u039a": "K", "\u039c": "M", "\u039d": "N", "\u039f": "O", "\u03a1": "P", "\u03a4": "T",
+    "\u03a5": "Y", "\u03a7": "X", "\u03b1": "a", "\u03b9": "i", "\u03ba": "k", "\u03bd": "v",
+    "\u03bf": "o", "\u03c1": "p", "\u03c4": "t", "\u03c5": "u", "\u03c7": "x",
+})
+_WORDTOK = re.compile(r"\w{2,}")
+_LATIN = re.compile(r"[A-Za-z]")
+_CYR_GREEK = re.compile("[\u0370-\u03ff\u0400-\u052f]")
+
+
+def _mixed_script(text: str) -> bool:
+    if not _CYR_GREEK.search(text):
+        return False
+    return any(_LATIN.search(t) and _CYR_GREEK.search(t) for t in _WORDTOK.findall(text))
+
+
 _OBFUSCATION = re.compile("[\u200b-\u200f\u2060-\u2064\ufeff\u00ad\u061c\u202a-\u202e\u2066-\u2069]")
 
 # --- token prefixes (all case-insensitive) ------------------------------------------------
 _NB = r"(?<![A-Za-z0-9])"
 _TOKEN_PATTERNS = [
-    ("token:sk", re.compile(r"(?i)\bsk[-_](?:live|test|ant|proj)?[-_]?[A-Za-z0-9_-]{10,}")),
+    ("token:sk", re.compile(r"(?i)\bsk[-_](?:live|test|ant|proj)?[-_]?[A-Za-z0-9_-]{8,}")),
     ("token:github", re.compile(r"(?i)" + _NB + r"gh[pousr]_[A-Za-z0-9]{16,}")),
     ("token:github_pat", re.compile(r"(?i)" + _NB + r"github_pat_[A-Za-z0-9_]{16,}")),
     ("token:slack", re.compile(r"(?i)" + _NB + r"xox[a-z]-[A-Za-z0-9\-]{8,}")),
@@ -47,8 +72,8 @@ _TOKEN_PATTERNS = [
     ("token:huggingface", re.compile(r"(?i)" + _NB + r"hf_[A-Za-z0-9]{20,}")),
     ("token:npm", re.compile(r"(?i)" + _NB + r"npm_[A-Za-z0-9]{36}")),
     ("token:xai", re.compile(r"(?i)" + _NB + r"xai-[A-Za-z0-9]{20,}")),
-    ("token:jwt", re.compile(r"\beyJ[\w-]{5,}\.eyJ[\w-]{5,}\.[\w-]{5,}")),
-    ("token:bearer", re.compile(r"(?i)\bBearer\s+[A-Za-z0-9._~+/=\-]{16,}")),
+    ("token:jwt", re.compile(r"\beyJ[\w-]{5,}\.eyJ[\w-]{5,}\.[\w-]*")),
+    ("token:bearer", re.compile(r"(?i)\b(?:Bearer|token|Basic)\s+[A-Za-z0-9._~+/=\-]{16,}")),
 ]
 
 # --- PEM / private key blocks -----------------------------------------------------------
@@ -68,6 +93,10 @@ _ASSIGN = re.compile(
     r"(?<![A-Za-z0-9_.\-])([\"']?)([A-Za-z][A-Za-z0-9_.\-]{0,63})\1\s{0,8}[:=]\s{0,8}"
     r"(?=([\"']?)([^\s\"',;}\]]{3,64}))"
 )
+_SNAKE_ID = re.compile(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)+$")
+_NON_SECRET_KEY = re.compile(
+    r"(?:_count|_counts|_length|_len|_size|_limit|_ttl|_timeout)$|^(?:max|min|num)_|_(?:min|max)_"
+)
 _PLACEHOLDER = re.compile(r"^(?:<|\$|\*{3}|x{3,}$|null$|none$|true$|false$|redacted|\.\.\.)", re.I)
 
 
@@ -82,7 +111,9 @@ def _env_secret(text: str) -> bool:
         # quoted, or ALL CAPS
         if len(parts) == 1 and lk not in _STRONG_SINGLE and not quoted and not key.isupper():
             continue
-        if _PLACEHOLDER.match(value) or value.isdigit():
+        if _PLACEHOLDER.match(value) or value.isdigit() or _SNAKE_ID.match(value):
+            continue
+        if _NON_SECRET_KEY.search(lk):
             continue
         return True
     return False
@@ -103,6 +134,7 @@ B64_MAX_CANDIDATES = 32
 # --- wallets ----------------------------------------------------------------------------
 _B58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 _B58_CAND = re.compile(r"(?<![1-9A-HJ-NP-Za-km-z])[1-9A-HJ-NP-Za-km-z]{85,90}(?![1-9A-HJ-NP-Za-km-z])")
+_B58_CAND32 = re.compile(r"(?<![1-9A-HJ-NP-Za-km-z])[1-9A-HJ-NP-Za-km-z]{43,44}(?![1-9A-HJ-NP-Za-km-z])")
 _INT_ARRAY = re.compile(r"\[\s*((?:\d{1,3}\s*,\s*){31}\d{1,3}|(?:\d{1,3}\s*,\s*){63}\d{1,3})\s*\]")
 _HEX64_KEYISH = re.compile(r"(?i)(?:0x|key|secret|private|seed|mnemonic)[\s:=\"']{0,6}[0-9a-f]{64}(?![0-9a-fA-F])")
 
@@ -118,7 +150,7 @@ _STOPWORDS = frozenset(
     ).split() if w not in _BIP39
 )
 _WORD = re.compile(r"[a-z]{3,8}")
-_SEED_SPLIT = re.compile(r"[\s,;\-_|/.\d\"'\[\]():{}]+")
+_SEED_SPLIT = re.compile(r"[\s,;\-_|/.\d]+")
 SEED_RUN = 12
 SEED_MIN_BIP39 = 6  # in a 12-word run: all-BIP39, or a word-list-shaped run with >= half BIP39
 
@@ -201,6 +233,12 @@ def _scan_view(text: str, found: Set[str]) -> None:
                 break
         except ValueError:
             pass
+    for m in _B58_CAND32.finditer(text):
+        tok = m.group(0)
+        if (any(c.isdigit() for c in tok) and any(c.isupper() for c in tok)
+                and any(c.islower() for c in tok) and _b58_decode_len(tok) == 32):
+            found.add("solana_key_base58_32")
+            break
     if _int_array_text(text):
         found.add("solana_key_bytes")
     if _HEX64_KEYISH.search(text):
@@ -229,8 +267,26 @@ def _b64_views(text: str) -> Iterator[str]:
             yield dec
 
 
+_HEX_RUN = re.compile(r"(?<![0-9a-fA-F])[0-9a-fA-F]{32,4096}(?![0-9a-fA-F])")
+
+
+def _hex_views(text: str) -> Iterator[str]:
+    for i, m in enumerate(_HEX_RUN.finditer(text)):
+        if i >= B64_MAX_CANDIDATES:
+            return
+        h = m.group(0)
+        if len(h) % 2:
+            h = h[:-1]
+        try:
+            dec = bytes.fromhex(h).decode("utf-8")
+        except (ValueError, UnicodeDecodeError):
+            continue
+        if dec and sum(c.isprintable() or c in "\r\n\t" for c in dec) >= 0.9 * len(dec):
+            yield dec
+
+
 def _normalize(text: str) -> str:
-    return _ZERO_WIDTH.sub("", unicodedata.normalize("NFKC", text))
+    return _ZERO_WIDTH.sub("", unicodedata.normalize("NFKC", text)).translate(_CONFUSABLES)
 
 
 def scan_text(text: str, _depth: int = 0) -> List[str]:
@@ -238,11 +294,17 @@ def scan_text(text: str, _depth: int = 0) -> List[str]:
     found: Set[str] = set()
     if _OBFUSCATION.search(text):
         found.add("obfuscation")
+    if _mixed_script(unicodedata.normalize("NFKC", text)):
+        found.add("obfuscation")
     norm = _normalize(text)
     _scan_view(norm, found)
     unq = urllib.parse.unquote(norm)
     if unq != norm:
         _scan_view(unq, found)
+        unq2 = urllib.parse.unquote(unq)
+        if unq2 != unq:
+            _scan_view(unq2, found)
+            unq = unq2
     squeezed = re.sub(r"\s+", "", unq)
     if squeezed != unq:
         for code, rx in _TOKEN_PATTERNS:
@@ -256,6 +318,11 @@ def scan_text(text: str, _depth: int = 0) -> List[str]:
             if inner:
                 found.update(inner)
                 found.add("base64_encoded")
+        for dec in _hex_views(norm):
+            inner = scan_text(dec, _depth=1)
+            if inner:
+                found.update(inner)
+                found.add("hex_encoded")
     return sorted(found)
 
 
