@@ -22,12 +22,7 @@ CSV = g.ROOT / "docs" / "spine" / "orchestrators.csv"
 
 KNOWN_DYNAMIC = {
     # orchestrator surface catalogue + importlib.import_module dispatch
-    "abilities/orchestration_surface.py -> realai/orchestration/realai_orchestrator.py",
     "abilities/orchestration_surface.py -> realai/orchestration/legacy_orchestrator.py",
-    "abilities/orchestration_surface.py -> realai/orchestration/unified_orchestrator.py",
-    # hive routing tables ("domain"/"hive" -> abilities.hive_orchestrator)
-    "realai/core_hive_router.py -> abilities/hive_orchestrator.py",
-    "realai/orchestration/v3_runtime_bridge.py -> abilities/hive_orchestrator.py",
 }
 
 
