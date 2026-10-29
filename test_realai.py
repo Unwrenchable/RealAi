@@ -153,8 +153,8 @@ def test_structured_server_routes():
     assert 'realai-1.0' in models
     config = get_model_config('realai-1.0')
     assert config['id'] == 'realai-1.0'
-    assert config['backend'] == 'vllm'
-    assert config['path'] == 'meta-llama/Meta-Llama-3-8B-Instruct'
+    assert config['backend'] == 'realai-gguf'
+    assert config['path'] == 'realai-1.0'
 
     status, response, content_type = dispatch_request(
         'POST',
@@ -287,8 +287,8 @@ def test_structured_server_config_files():
     registry = load_registry()
     assert 'realai-1.0' in registry
     assert 'realai-overseer' in registry
-    assert 'realai-default-8b' in registry
-    assert registry['realai-embed']['embedding_dimensions'] == 384
+    assert 'realai-1.0-instruct' in registry
+    assert registry['realai-embed']['embedding_dimensions'] == 64
     print("✓ Structured server config loading test passed")
 
 
