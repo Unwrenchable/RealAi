@@ -820,6 +820,42 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "modules": ["abilities/ttt9d_move.py"],
     },
     {
+        "id": "pr_triage",
+        "name": "PR triage (hive, read-only)",
+        "pillar": "ops",
+        "keywords": ["pr triage", "merge readiness", "pull request", "mergeable", "needs rebase"],
+        "status": "PARTIAL",
+        "status_note": (
+            "abilities/pr_triage.py turns PR facts (state, mergeable, checks) into mergeable | needs-rebase | failing-check | needs-owner plus a reason. Pure function: read-only, no network, no file writes, no merge or approve powers. PARTIAL until the owner promotes it."
+        ),
+        "live_path": 'POST /v1/tools/execute {"name": "pr_triage", "arguments": {"pr": {...}}}',
+        "modules": ["abilities/pr_triage.py"],
+    },
+    {
+        "id": "vuln_triage",
+        "name": "Vulnerability triage (hive, read-only)",
+        "pillar": "ops",
+        "keywords": ["vuln triage", "npm audit", "dependabot", "override", "major bump"],
+        "status": "PARTIAL",
+        "status_note": (
+            "abilities/vuln_triage.py groups npm-audit JSON by package and suggests an override or a major bump (majors flagged for the owner). Pure function: read-only, no network, no file writes, no merge or approve powers. PARTIAL until the owner promotes it."
+        ),
+        "live_path": 'POST /v1/tools/execute {"name": "vuln_triage", "arguments": {"audit": {...}}}',
+        "modules": ["abilities/vuln_triage.py"],
+    },
+    {
+        "id": "ci_failure_classify",
+        "name": "CI failure classifier (hive, read-only)",
+        "pillar": "ops",
+        "keywords": ["ci failure", "ci triage", "lockfile conflict", "stale branch", "test failure"],
+        "status": "PARTIAL",
+        "status_note": (
+            "abilities/ci_failure_classify.py classifies a CI log as stale-branch | lockfile-conflict | test-failure | env-missing | unknown plus a next step. Pure function: read-only, no network, no file writes, no merge or approve powers. PARTIAL until the owner promotes it."
+        ),
+        "live_path": 'POST /v1/tools/execute {"name": "ci_failure_classify", "arguments": {"log": "..."}}',
+        "modules": ["abilities/ci_failure_classify.py"],
+    },
+    {
         "id": "lora_adapters",
         "name": "Recovered PEFT LoRA adapters",
         "pillar": "model_family",

@@ -2010,6 +2010,9 @@ def execute_registry_tool(
         "sotd_contribute",
         "video_analysis",
         "ttt9d_move",
+        "pr_triage",
+        "vuln_triage",
+        "ci_failure_classify",
     }
     if name in _BARE_ABILITY:
         name = "ability." + name
