@@ -58,7 +58,7 @@ See `realai/ability_catalog.py` and `ABILITIES.md`. Trust LIVE / PARTIAL / STUB 
 # 1) Vulkan model server (7B GGUF). -fa off is required on the RX 6700 XT (flash attention garbles output).
 C:\llama-vulkan\llama-server.exe `
   -m "C:\models\checkpoints_lora\qwen2.5-coder-7b-instruct-q5_k_m.gguf" `
-  --host 127.0.0.1 --port 8080 -ngl 99 -c 16384 -fa off
+  --host 127.0.0.1 --port 8080 -ngl 99 -c 16384 -fa off --jinja
 
 # 2) Hive gateway
 cd C:\RealAI-clean
@@ -66,6 +66,10 @@ $env:PYTHONPATH = "C:\RealAI-clean;C:\RealAI-clean\realai"
 $env:REALAI_VULKAN_BASE = "http://127.0.0.1:8080"
 python -m realai.v3_orchestrator --host 127.0.0.1 --port 8001
 ```
+
+`scripts/start_v3_stack.ps1` runs the same stack but uses `-c 8192`. It binds `llama-server` to `127.0.0.1` unless `REALAI_LLAMA_HOST` is set.
+
+Paths are examples (the launcher assumes `C:\realai`). Adjust to your install.
 
 Open **http://127.0.0.1:8001/console**
 
