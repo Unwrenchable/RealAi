@@ -134,3 +134,128 @@ def test_clean_record_passes_and_reasons_never_echo_content():
     codes = scan_record({"x": FAKE["akia"]})
     assert codes and all(FAKE["akia"] not in c for c in codes)
     assert SCANNER_VERSION.startswith("hive-redact-")
+
+
+# ---------------------------------------------------------------------------------------
+# Security review of PR #191: every probe from review191_probes.py (43 cases), all FAKE.
+# ---------------------------------------------------------------------------------------
+import base64 as _b64
+import json as _json
+import time as _time
+
+_F = "FAKEfake0123456789abcdEFGH"
+_FAKE64 = [i % 250 + 1 for i in range(64)]
+_WORDS = "apple brave cider delta eagle fable giant hover ivory joker koala lemon".split()
+
+PROBE_TEXT = {
+    "BEARER upper": "BEARER " + _F,
+    "Bearer letters-only": "Authorization: Bearer " + "abcdefghijklmnopqrstuvwxyz",
+    "Sk- mixed": "Sk-" + _F,
+    "SK_live stripe": "sk_" + "live_" + _F,
+    "sk-ant": "sk-" + "ant-api03-" + _F,
+    "sk-proj": "sk-" + "proj-" + _F,
+    "glpat": "glp" + "at-" + "aB3dE5gH7jK9mN1pQ2rS",
+    "AIza": "AI" + "za" + "SyFAKEfakeFAKEfake12345678901234",
+    "hf_": "hf" + "_" + "aBcDeFgHiJkLmNoPqRsTuVwXyZ12",
+    "npm_": "np" + "m_" + "aBcDeFgHiJkLmNoPqRsTuVwXyZ1234567890",
+    "xai-": "xa" + "i-" + "aBcDeFgHiJkLmNoPqRsTuVwX",
+    "slack webhook": "https://hooks." + "slack.com/services/T0FAKE/B0FAKE/abcdefghijklmnopqrstuvwx",
+    "short lowercase key (low entropy)": "token is xa" + "i-abcdefghabcdefghabcdefgh",
+    "zero-width sk": "s\u200bk-" + _F,
+    "zero-width ghp": "gh\u200bp_" + "aBcDeFgHiJkLmNoPqRsT12",
+    "fullwidth AKIA": "\uff21KIA" + "ABCDEFGHIJ123456",
+    "url-encoded userpass": "postgres%3A%2F%2Fu%3Ap%40h/db",
+    "base64 wrapped sk": _b64.b64encode(("sk-" + _F).encode()).decode(),
+    "base64 short PEM header": _b64.b64encode(b"-----BEGIN " + b"PRIVATE KEY-----").decode(),
+    "split across lines": "sk-\nFAKEfake0123",
+    "JWT": "ey" + "JhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.c2lnbmF0dXJlZmFrZQ",
+    "env lower other word": "db_pass=hunter2xyz",
+    "env json style": '"password": "hunter2xyz"',
+    "env yaml": "API_KEY: abcd1234wxyz",
+    "export with spaces": "export GITHUB_TOKEN = 'abc'",
+    "solana bytes": _json.dumps(_FAKE64),
+    "solana bytes no spaces": str(_FAKE64).replace(" ", ""),
+    "solana bytes 32": _json.dumps(_FAKE64[:32]),
+    "seed comma sep": ",".join(_WORDS),
+    "seed dash sep": "-".join(_WORDS),
+    "seed numbered": " ".join(f"{i+1}.{w}" for i, w in enumerate(_WORDS)),
+    "seed with real bip39 stopword-ish words": " ".join(_WORDS[:6] + ["all"] + _WORDS[6:]),
+    "seed 12 caps": " ".join(w.upper() for w in _WORDS),
+    "ssh openssh": "-----BEGIN " + "OPENSSH PRIVATE KEY-----",
+    "pgp": "-----BEGIN " + "PGP PRIVATE KEY BLOCK-----",
+    "https userpass": "https://user:pa55word@example.com",
+}
+
+PROBE_RECORDS = {
+    "secret in key": {"sk-" + _F: 1},
+    "seed split over list": {"x": _WORDS},
+    "seed split over nested lists 6+6": {"x": [_WORDS[:6], _WORDS[6:]]},
+    "seed split across fields": {"a": " ".join(_WORDS[:6]), "b": " ".join(_WORDS[6:])},
+    "sk split across fields": {"a": "sk-", "b": _F},
+    "bytes as list of ints": {"k": _FAKE64},
+    "bytes as nested ints dict": {"k": {str(i): v for i, v in enumerate(_FAKE64)}},
+}
+
+
+def test_probe_count_is_43():
+    assert len(PROBE_TEXT) + len(PROBE_RECORDS) == 43
+
+
+@pytest.mark.parametrize("name", sorted(PROBE_TEXT))
+def test_review_probe_text_rejected(name):
+    codes = scan_record({"t": PROBE_TEXT[name]})
+    assert codes, name
+    assert all(PROBE_TEXT[name] not in c for c in codes)
+
+
+@pytest.mark.parametrize("name", sorted(PROBE_RECORDS))
+def test_review_probe_record_rejected(name):
+    assert scan_record(PROBE_RECORDS[name]), name
+
+
+@pytest.mark.parametrize("text", [
+    "id 3f2b1c9e-1a2b-4c3d-9e8f-0a1b2c3d4e5f",
+    "test_hive_ingest_rejects_records_with_42_fields",
+    "https://github.com/Unwrenchable/RealAi/pull/191",
+    "deploy staging build passed after rebase fixed lint config cache tests green ship today",
+    "tests passed: 91, checks: green",
+    "Key findings: redact misses lowercase tokens",
+    "the task risk - management note",
+])
+def test_review_false_positive_checks(text):
+    assert scan_record({"t": text}) == []
+
+
+def test_plain_12_word_prose_not_seed_phrase():
+    prose = "deploy staging build passed after rebase fixed lint config cache tests green"
+    assert len(prose.split()) == 12
+    assert "seed_phrase" not in scan_text(prose)
+
+
+def test_bip39_wordlist_run_flagged():
+    words = ("abandon ability able about above absent absorb abstract absurd abuse access accident").split()
+    assert "seed_phrase" in scan_text("|".join(words))
+
+
+def test_zero_width_and_bidi_rejected_as_obfuscation():
+    assert "obfuscation" in scan_text("hello\u200bworld")
+    assert "obfuscation" in scan_text("abc\u202edef")
+    assert "obfuscation" in scan_record({"t": "x\u2066y"})
+
+
+_REDOS = {
+    "env": lambda: "A" * 50000 + "KEY",
+    "cand": lambda: "a" * 60000,
+    "b58": lambda: "1" * 60000,
+    "userpass": lambda: "a://" + "a:" * 30000,
+    "bearer": lambda: "bearer " + "a" * 60000,
+    "b64": lambda: "QUJD" * 15000,
+}
+
+
+@pytest.mark.parametrize("label", sorted(_REDOS))
+def test_redos_60k_under_half_second(label):
+    text = _REDOS[label]()
+    t = _time.perf_counter()
+    scan_text(text)
+    assert _time.perf_counter() - t < 0.5, label

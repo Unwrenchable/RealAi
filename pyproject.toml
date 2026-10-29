@@ -54,6 +54,7 @@ exclude = [
 
 [tool.setuptools.package-data]
 "*" = ["*.json", "*.md", "*.yaml", "*.yml", "*.toml"]
+"realai.hive_records" = ["bip39_english.txt", "BIP39_LICENSE.txt"]
 
 [tool.pytest.ini_options]
 testpaths = [
