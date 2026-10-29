@@ -7,7 +7,7 @@ name = "realai"
 version = "2.0.0"
 description = "The limitless AI that can truly do anything - from Web3 to groceries, therapy to business building"
 readme = "README.md"
-requires-python = ">=3.12,<4.0"
+requires-python = ">=3.11,<4.0"
 authors = [{ name = "RealAI Team" }]
 license = { text = "MIT" }
 classifiers = [
