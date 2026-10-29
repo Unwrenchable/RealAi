@@ -2271,8 +2271,9 @@ def execute_registry_tool(
             "knowledge_synthesis": "abilities.knowledge_synthesis",
             "observability_self_improve": "abilities.observability_self_improve",
             "cli_surface": "abilities.cli_surface",
-            "hive_orchestrator": "abilities.hive_orchestrator",
-            "hive": "abilities.hive_orchestrator",
+            # spine 1b: canonical hive plugin (was abilities.hive_orchestrator, archive verdict)
+            "hive_orchestrator": "realai.orchestration.hive_router",
+            "hive": "realai.orchestration.hive_router",
             "hive_memory": "abilities.hive_memory",
             "nest_orchestrators": "abilities.nest_orchestrators",
             "nests": "abilities.nest_orchestrators",

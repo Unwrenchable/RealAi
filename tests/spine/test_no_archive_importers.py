@@ -31,15 +31,9 @@ import test_import_graph as g  # noqa: E402  (shared static walker)
 
 CSV = g.ROOT / "docs" / "spine" / "orchestrators.csv"
 
-KNOWN_DYNAMIC = {
-    # orchestrator surface catalogue + importlib.import_module dispatch
-    "abilities/orchestration_surface.py -> realai/orchestration/realai_orchestrator.py",
-    "abilities/orchestration_surface.py -> realai/orchestration/legacy_orchestrator.py",
-    "abilities/orchestration_surface.py -> realai/orchestration/unified_orchestrator.py",
-    # hive routing tables ("domain"/"hive" -> abilities.hive_orchestrator)
-    "realai/core_hive_router.py -> abilities/hive_orchestrator.py",
-    "realai/orchestration/v3_runtime_bridge.py -> abilities/hive_orchestrator.py",
-}
+KNOWN_DYNAMIC: set = set()
+    # spine 1b (#222): all five former edges rewired or dropped (legacy_scan removed per travis
+    # 6:48 AM PT). Empty means any new dynamic load of an archive-verdict file fails this test.
 
 # Probes the static walker cannot see (see "Static limits"). Same "src -> target" format.
 # Each entry maps to a literal snippet that must still be present in src; the test fails when

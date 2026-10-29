@@ -29,7 +29,6 @@ ABILITY = {
         "memory",
         "tools",
         "tts",
-        "legacy_scan",
         "nests",
     ],
     "secrets_policy": "none",
@@ -112,23 +111,18 @@ ORCH_REGISTRY: Dict[str, Dict[str, Any]] = {
         "aliases": ["nest_orchestrators", "nest"],
     },
     "entry_shim": {
-        "module": "realai.orchestration.realai_orchestrator",
-        "file": "realai_orchestrator.py",
-        "role": "Launcher shim → v3 (realai_orchestrator name)",
+        # spine 1b: points at the canonical core, not the realai_orchestrator shim (archive verdict)
+        "module": "realai.orchestration.v3_orchestrator",
+        "file": "v3_orchestrator.py",
+        "role": "Launcher alias -> v3 core (realai_orchestrator name)",
         "kind": "SHIM",
         "aliases": ["realai_orchestrator"],
         "do_not_start_extra_server": True,
     },
-    "legacy_scan": {
-        "module": "realai.orchestration.legacy_orchestrator",
-        "file": "legacy_orchestrator.py",
-        "role": "Manifest scan/patch-target engine (legacy)",
-        "kind": "LEGACY",
-        "aliases": ["legacy", "scan_patch", "legacy_orchestrator"],
-    },
     "unified_blueprint": {
-        "module": "realai.orchestration.unified_orchestrator",
-        "file": "unified_orchestrator.py",
+        # spine 1b: blueprint logic inlined below (_unified_blueprint); was unified_orchestrator.py (archive verdict)
+        "module": "abilities.orchestration_surface",
+        "file": "orchestration_surface.py",
         "role": "Scan-manifest blueprint aggregator (not a server)",
         "kind": "BLUEPRINT",
         "aliases": ["unified", "unified_orchestrator", "blueprint"],
@@ -141,6 +135,25 @@ ORCH_REGISTRY: Dict[str, Dict[str, Any]] = {
         "aliases": ["init", "__init__"],
     },
 }
+
+
+def _unified_blueprint(scan_manifest: Path) -> Dict[str, Any]:
+    """Same output as the former ``UnifiedOrchestrator(root, manifest).build()`` (spine 1b inline)."""
+    import json
+
+    data = json.loads(scan_manifest.read_text(encoding="utf-8"))
+    flows = data.get("flows", {})
+    providers = flows.get("providers", [])
+    memory = flows.get("memory", [])
+    world = flows.get("world", [])
+    return {
+        "orchestrators": flows.get("orchestrators", []),
+        "provider": providers[0] if providers else None,
+        "memory": memory[0] if memory else None,
+        "world": world[0] if world else None,
+        "plugins": flows.get("plugins", []),
+        "note": "This is the unified orchestrator blueprint. You can now assemble it manually.",
+    }
 
 
 def _resolve(name: str) -> Optional[str]:
@@ -166,6 +179,8 @@ def _inventory() -> Dict[str, Any]:
         # nests ability lives under abilities/
         if oid == "nests":
             path = _ROOT / "abilities" / "nest_orchestrators.py"
+        if oid == "unified_blueprint":
+            path = Path(__file__).resolve()
         modules.append(
             {
                 "id": oid,
@@ -336,37 +351,7 @@ def _run_module(oid: str, raw_input: str = "", ctx: Optional[Dict[str, Any]] = N
         out["via"] = meta["module"]
         return out
 
-    if oid == "legacy_scan":
-        import os
-
-        manifest = _ROOT / "realai" / "manifest.json"
-        mod = importlib.import_module("realai.orchestration.legacy_orchestrator")
-        if not manifest.is_file():
-            out["result"] = {
-                "ok": True,
-                "skipped_full_scan": True,
-                "class": "RealAIOrchestrator",
-                "methods": [n for n in dir(mod.RealAIOrchestrator) if n.startswith("phase_")][:20],
-                "hint": "realai/manifest.json missing",
-            }
-            out["via"] = "legacy_orchestrator (introspect)"
-            return out
-        prev = os.getcwd()
-        try:
-            os.chdir(str(_ROOT))
-            orch = mod.RealAIOrchestrator()
-            active = orch.phase_scan()
-        finally:
-            os.chdir(prev)
-        out["result"] = {
-            "ok": True,
-            "active_keys": list(active.keys())[:40] if isinstance(active, dict) else type(active).__name__,
-        }
-        out["via"] = "legacy_orchestrator.phase_scan"
-        return out
-
     if oid == "unified_blueprint":
-        mod = importlib.import_module("realai.orchestration.unified_orchestrator")
         # look for a scan manifest; otherwise return blueprint class info
         candidates = [
             _ROOT / "scan_results" / "unify_manifest.json",
@@ -383,8 +368,7 @@ def _run_module(oid: str, raw_input: str = "", ctx: Optional[Dict[str, Any]] = N
             }
             out["via"] = "unified_orchestrator (introspect)"
             return out
-        uo = mod.UnifiedOrchestrator(_ROOT, manifest)
-        out["result"] = uo.build()
+        out["result"] = _unified_blueprint(manifest)
         out["via"] = f"unified_orchestrator.build:{manifest.name}"
         return out
 
@@ -438,7 +422,7 @@ def run(
                 "ok": False,
                 "error": "orch_id_required",
                 "known": sorted(ORCH_REGISTRY.keys()),
-                "hint": "action=run orch=v3|bridge|hive_router|sdk_orchestrator|nests|tts|legacy_scan|…",
+                "hint": "action=run orch=v3|bridge|hive_router|sdk_orchestrator|nests|tts|…",
             }
         # when cycling hive_router, force cycle action
         if action == "cycle":
