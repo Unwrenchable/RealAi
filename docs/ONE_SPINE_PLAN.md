@@ -1,5 +1,7 @@
 # RealAI One-Spine Plan
 
+> **WARNING: two servers, one default port.** The orchestrator and `realai/server/legacy_api.py` (via the `realai/api_server.py` shim) both default to **8001**. Until phase 6c, run `legacy_api` with `PORT=8000`; the orchestrator / `api_server` default stays 8001. Easy to miss in local testing.
+
 Status: **PLAN ONLY**. No code moves until travis approves it. Every path below was checked against `origin/main` @ `7a74abd`. Paths marked *(PR #210)* exist only on that open PR. Target paths (`realai/core/brain/`, `realai/core/permissions/`, `realai/core/memory/`, `realai/core/tasks/`, `packages/sdk`, `tests/catalog_evals/`, `docs/spine/*.csv`) are proposals and do not exist yet. Bare filenames in a row are relative to the directory named in that row.
 
 **Goal:** RealAI should feel like one integrated assistant: one brain, one ability registry, one permission gate, one memory, one task system, one API/SDK. Right now it is a set of separate modules.
@@ -47,7 +49,7 @@ Status: **PLAN ONLY**. No code moves until travis approves it. Every path below 
 
 **Phases**
 - **1a** Inventory PR: add `docs/spine/orchestrators.csv` (path, sha256, importers, verdict). *Acceptance:* a script reproduces the CSV from the tree, and every path in it exists.
-- **1b** Import-graph test: a test asserts that no production module imports an archive-verdict file. *Acceptance:* the test passes on main (fix importers first, or keep shims).
+- **1b** **CRITICAL PATH.** Import-graph test (many duplicates are `import *` or path-based imports). It must land and stay green **before ANY archive batch**, in every section; otherwise broken importers surface only after a GO. Import-graph test: a test asserts that no production module imports an archive-verdict file. *Acceptance:* the test passes on main (fix importers first, or keep shims).
 - **1c** Move the core to `realai/core/brain/`, leaving shims at the old paths. *Acceptance:* the full suite passes in CI, `python -m realai.v3_orchestrator` boots on :8001, and `/v1/abilities` returns the same JSON as before.
 - **1d** Archive batch (needs GO): move to `D:\ARCHIVE`, write a sha256 manifest, verify, then remove from the tree in a PR. *Acceptance:* the hash manifest verifies and CI is green.
 
@@ -92,7 +94,7 @@ handler: callable         eval: path to catalog eval case(s)
 **Target:** `realai/core/memory/` with one store (`realai/memory/sqlite_memory.py` is the candidate) and four namespaces: `profile`, `journal`, `hive`, `world`. One API: `put/get/search/forget`, routed through permissions for writes.
 
 **Phases**
-- **4a** Inventory with sha256 values. Identical copies are marked archive. *Acceptance:* the CSV reproduces.
+- **4a** Inventory with sha256 values. Identical copies are marked archive. The inventory also flags **schema and semantic divergence** (sqlite tables, columns, keys; JSON/dict keys; differing read/write semantics) between the candidate store and every world-model/memory copy, not just identical hashes. *Acceptance:* the CSV reproduces.
 - **4b** Facade `realai/core/memory/__init__.py` over the existing sqlite store. *Acceptance:* round-trip tests per namespace.
 - **4c** Point the orchestrator memory calls at the facade. *Acceptance:* the existing memory tests pass, and there's one DB file.
 - **4d** World model: pick the canonical one (`realai/core/world_model.py`) and archive the copies (GO). *Acceptance:* `benchmarks/bench_world_model.py` is unchanged.
@@ -131,7 +133,7 @@ handler: callable         eval: path to catalog eval case(s)
 **Phases**
 - **7a** Eval runner plus cases for the 4 abilities in #213-216. *Acceptance:* green in CI.
 - **7b** Cover every LIVE entry. *Acceptance:* a coverage check reports 100% of LIVE.
-- **7c** Gate: a status change to LIVE requires an eval. *Acceptance:* a negative test PR fails.
+- **7c** Gate: a status change to LIVE requires an eval. A temporary status `LIVE-pending-eval` is allowed while the first evals are written: it fails the eval-coverage check but blocks no other work (other PRs and phases proceed). *Acceptance:* a negative test PR fails; a `LIVE-pending-eval` entry shows as a coverage failure only.
 
 ---
 
@@ -149,7 +151,7 @@ handler: callable         eval: path to catalog eval case(s)
 3. **Permission regression:** routing everything through one gate can block real workflows. Mitigation: an allow-list with Security review, and fail closed.
 4. **Two servers drifting:** the OpenAPI snapshot test (6a).
 5. **Memory migration data loss:** read-only facade first, with a backup before any DB merge.
-6. **Port confusion:** the orchestrator and `legacy_api` both default to 8001, so run with `PORT=8000` until 6c.
+6. **Port confusion (see warning at top):** the orchestrator and `legacy_api` both default to 8001. `legacy_api` runs on `PORT=8000` until 6c; `api_server`'s default is 8001.
 7. **PC vs CI differences:** the known test-order failures can mask real regressions. Compare CI and isolated runs.
 
 ## What this is NOT
@@ -161,6 +163,15 @@ handler: callable         eval: path to catalog eval case(s)
 - Not training. No adapter goes LIVE without Q1∧Q4 plus GO, and weights never go in git.
 - Not deletion. Archives only, to `D:\ARCHIVE`, hash-verified, with GO.
 
+## Security review artifacts (phases 3b-3d, 6d)
+
+Each Security review is scoped to these named artifacts:
+
+- **3b:** the permissions `check(ability, action, args)` entry point in `realai/core/permissions`.
+- **3c:** the network egress proxy (the only path for outbound requests).
+- **3d:** the money path (wallet signing / payouts; always `approval`, `trading.live` locked false).
+- **6d:** the `/v1/approvals` contract (request, list, approve, deny schema and auth).
+
 ## Open decisions for travis
 
 - **D1** Approve this plan and its phase order (1→2→3→7 first, then 4, 5, 6)?
@@ -171,3 +182,14 @@ handler: callable         eval: path to catalog eval case(s)
 - **D6** SDK package name: `packages/sdk` (new), or keep `@realai/sdk` from `packages/realai-sdk`?
 - **D7** When may the console and voice adopt the SDK (6e)?
 - **D8** Network policy for §3c: local-only by default, with a per-ability allow-list?
+
+## Proposed answers (travis, for discussion, not final)
+
+- **D1:** order 1 -> 2 -> 3 -> 7, then 4, 5, 6. Permission and eval work de-risks the rest.
+- **D2:** one GO per section, or per archive batch inside a section. No blanket GO.
+- **D3:** the core serves /v1 directly once the OpenAPI snapshot is stable; `apps/api` stays a thin proxy only while external deploys still need it. Avoid two long-lived implementations.
+- **D4:** no journal module yet (a minimal stub in the memory facade at most); add one only when a concrete ability needs it.
+- **D5:** `realai/memory/sqlite_memory.py` is the candidate, pending the 4a inventory confirming it is the most complete and least divergent.
+- **D6:** a new `packages/sdk` that re-exports the old names.
+- **D7:** console and voice adopt the SDK after 6e (VS Code and the widget first).
+- **D8:** local-only by default, explicit per-ability allowlist, fail closed.
