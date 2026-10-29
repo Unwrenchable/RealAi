@@ -158,3 +158,23 @@ def test_tools_execute_internal_error_is_500(server, caplog, monkeypatch):
     code, text = _req(server, "POST", "/v1/tools/execute", {"name": "ability.definitely_not_special_xyz"})
     assert code == 500 and FAKE not in text
     _check(json.loads(text)["result"], caplog)
+
+
+def test_speech_engine_error_does_not_leak(server, caplog, monkeypatch):
+    caplog.set_level(logging.ERROR, logger="realai.v3_orchestrator")
+    import realai.lambda_embeddings_audio as L
+    import realai.voice.tts_engine as T
+
+    monkeypatch.setattr(T, "get_tts_engine", _boom)
+    # echo the body back so any value the route put in it would show up in the response
+    monkeypatch.setattr(L, "create_speech_response", lambda body: dict(body))
+    code, text = _req(server, "POST", "/v1/audio/speech", {"input": "hello", "voice": "laura"})
+    assert code == 200 and FAKE not in text
+    out = json.loads(text)
+    ref = out["_tts_engine_error"]
+    assert re.fullmatch(r"internal_error:[0-9a-f]{12}", ref)
+    assert ref.split(":")[1] in _ids(caplog) and FAKE in caplog.text
+
+
+def test_no_bare_tts_engine_exc_in_source():
+    assert not re.search(r"str\(eng_exc\)", SRC)
