@@ -1060,7 +1060,21 @@ class Handler(BaseHTTPRequestHandler):
         self._json(404, {"error": "not_found", "path": path})
 
 
+QUARANTINE_MESSAGE = (
+    "This nested orchestrator copy is quarantined (hygiene phase 1, ARCHITECTURE.md). "
+    "It does not have the /v1/tools/execute auth gate or error redaction. "
+    "Run the gated orchestrator instead: python -m realai.orchestration.v3_orchestrator "
+    "(realai/orchestration/v3_orchestrator.py)."
+)
+
+
 def main(argv: Optional[List[str]] = None) -> int:
+    """Quarantined: never starts a server. Exits nonzero and points at the gated orchestrator."""
+    sys.stderr.write(QUARANTINE_MESSAGE + "\n")
+    return 2
+
+
+def _legacy_main(argv: Optional[List[str]] = None) -> int:  # kept for reference; not called
     ap = argparse.ArgumentParser(description="RealAI v3 orchestrator (UI → Vulkan + training/self-improve)")
     ap.add_argument("--host", default=os.environ.get("HOST", "127.0.0.1"))
     ap.add_argument("--port", type=int, default=int(os.environ.get("ORCH_PORT", "8001")))
