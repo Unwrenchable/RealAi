@@ -110,7 +110,7 @@ def test_catalog_rows_partial():
 
     rows = {r["id"]: r for r in RUNDOWN_ABILITIES}
     for rid in ("synthetic_organs_runtime", "self_evolving", "workspace_info"):
-        assert rows[rid]["status"] == "PARTIAL"
+        assert rows[rid]["status"] == "PARTIAL"  # workspace_info: PARTIAL until Security approves #210
     assert rows["tool_router_plugins"]["status"] == "LIVE"  # tests/test_tool_router_live.py
 
 

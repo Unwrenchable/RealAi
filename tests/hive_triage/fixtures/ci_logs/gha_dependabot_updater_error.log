@@ -1,0 +1,300 @@
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1349444Z   proxy | 2026/10/29 11:46:27 [145] 200 https://registry.npmjs.org:443/language-tags
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1350510Z   proxy | 2026/10/29 11:46:27 [165] GET https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-x64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1352516Z   proxy | 2026/10/29 11:46:27 [166] GET https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-s390x-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1356675Z   proxy | 2026/10/29 11:46:27 [167] GET https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-loong64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1496630Z   proxy | 2026/10/29 11:46:27 [144] 200 https://registry.npmjs.org:443/reflect.getprototypeof
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1498278Z   proxy | 2026/10/29 11:46:27 [168] GET https://registry.npmjs.org:443/@unrs%2Fresolver-binding-wasm32-wasi
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1499783Z   proxy | 2026/10/29 11:46:27 [142] 200 https://registry.npmjs.org:443/possible-typed-array-names
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1501241Z   proxy | 2026/10/29 11:46:27 [169] GET https://registry.npmjs.org:443/@unrs%2Fresolver-binding-win32-arm64-msvc
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1502664Z   proxy | 2026/10/29 11:46:27 [170] GET https://registry.npmjs.org:443/@unrs%2Fresolver-binding-win32-ia32-msvc
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1504078Z   proxy | 2026/10/29 11:46:27 [149] 200 https://registry.npmjs.org:443/@next%2Feslint-plugin-next
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1505485Z   proxy | 2026/10/29 11:46:27 [175] GET https://registry.npmjs.org:443/@unrs%2Fresolver-binding-android-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1507082Z   proxy | 2026/10/29 11:46:27 [171] GET https://registry.npmjs.org:443/side-channel-map
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1508233Z   proxy | 2026/10/29 11:46:27 [172] GET https://registry.npmjs.org:443/side-channel-list
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1509523Z   proxy | 2026/10/29 11:46:27 [176] GET https://registry.npmjs.org:443/@unrs%2Fresolver-binding-win32-x64-msvc
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1511646Z   proxy | 2026/10/29 11:46:27 [173] GET https://registry.npmjs.org:443/language-subtag-registry
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1512943Z   proxy | 2026/10/29 11:46:27 [161] 200 https://registry.npmjs.org:443/napi-postinstall
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1514077Z   proxy | 2026/10/29 11:46:27 [174] GET https://registry.npmjs.org:443/is-bigint
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1515509Z   proxy | 2026/10/29 11:46:27 [174] 200 https://registry.npmjs.org:443/is-bigint (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1517161Z   proxy | 2026/10/29 11:46:27 [177] GET https://registry.npmjs.org:443/is-async-function
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1540705Z   proxy | 2026/10/29 11:46:27 [150] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-ppc64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1545603Z   proxy | 2026/10/29 11:46:27 [160] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-arm64-musl
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1554180Z   proxy | 2026/10/29 11:46:27 [152] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-arm-musleabihf
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1578661Z   proxy | 2026/10/29 11:46:27 [178] GET https://registry.npmjs.org:443/side-channel-weakmap
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1590614Z   proxy | 2026/10/29 11:46:27 [162] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-riscv64-musl
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1592068Z 2026/10/29 11:46:27 [151] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-arm64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1607014Z   proxy | 2026/10/29 11:46:27 [177] 200 https://registry.npmjs.org:443/is-async-function (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1636810Z   proxy | 2026/10/29 11:46:27 [173] 200 https://registry.npmjs.org:443/language-subtag-registry (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1738279Z   proxy | 2026/10/29 11:46:27 [166] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-s390x-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1787388Z   proxy | 2026/10/29 11:46:27 [164] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-riscv64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1832178Z   proxy | 2026/10/29 11:46:27 [179] GET https://registry.npmjs.org:443/strip-bom
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1841669Z   proxy | 2026/10/29 11:46:27 [180] GET https://registry.npmjs.org:443/minimist
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1877376Z   proxy | 2026/10/29 11:46:27 [165] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-x64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1927595Z   proxy | 2026/10/29 11:46:27 [167] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-loong64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1929311Z   proxy | 2026/10/29 11:46:27 [153] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-arm-gnueabihf
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1947186Z   proxy | 2026/10/29 11:46:27 [170] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-win32-ia32-msvc
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1958918Z   proxy | 2026/10/29 11:46:27 [163] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-x64-musl
+Dependabot	Run Dependabot	2026-10-29T11:46:27.1978470Z   proxy | 2026/10/29 11:46:27 [157] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-android-arm-eabi
+Dependabot	Run Dependabot	2026-10-29T11:46:27.2003234Z   proxy | 2026/10/29 11:46:27 [172] 200 https://registry.npmjs.org:443/side-channel-list
+Dependabot	Run Dependabot	2026-10-29T11:46:27.2014240Z   proxy | 2026/10/29 11:46:27 [176] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-win32-x64-msvc
+Dependabot	Run Dependabot	2026-10-29T11:46:27.2025889Z   proxy | 2026/10/29 11:46:27 [178] 200 https://registry.npmjs.org:443/side-channel-weakmap
+Dependabot	Run Dependabot	2026-10-29T11:46:27.2044258Z   proxy | 2026/10/29 11:46:27 [159] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-linux-loong64-musl
+Dependabot	Run Dependabot	2026-10-29T11:46:27.2057042Z   proxy | 2026/10/29 11:46:27 [154] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-freebsd-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.2064675Z   proxy | 2026/10/29 11:46:27 [158] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-openharmony-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.2067477Z 2026/10/29 11:46:27 [179] 200 https://registry.npmjs.org:443/strip-bom
+Dependabot	Run Dependabot	2026-10-29T11:46:27.2068633Z 2026/10/29 11:46:27 [171] 200 https://registry.npmjs.org:443/side-channel-map
+Dependabot	Run Dependabot	2026-10-29T11:46:27.2069881Z 2026/10/29 11:46:27 [169] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-win32-arm64-msvc
+Dependabot	Run Dependabot	2026-10-29T11:46:27.2108769Z   proxy | 2026/10/29 11:46:27 [168] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-wasm32-wasi
+Dependabot	Run Dependabot	2026-10-29T11:46:27.2110854Z 2026/10/29 11:46:27 [155] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-darwin-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.2112224Z 2026/10/29 11:46:27 [180] 200 https://registry.npmjs.org:443/minimist
+Dependabot	Run Dependabot	2026-10-29T11:46:27.2113876Z 2026/10/29 11:46:27 [156] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-darwin-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.2115317Z 2026/10/29 11:46:27 [175] 200 https://registry.npmjs.org:443/@unrs%2Fresolver-binding-android-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.3764530Z   proxy | 2026/10/29 11:46:27 [181] GET https://registry.npmjs.org:443/ora
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4003936Z   proxy | 2026/10/29 11:46:27 [181] 200 https://registry.npmjs.org:443/ora
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4042422Z   proxy | 2026/10/29 11:46:27 [182] GET https://registry.npmjs.org:443/stdin-discarder
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4052927Z   proxy | 2026/10/29 11:46:27 [183] GET https://registry.npmjs.org:443/restore-cursor
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4058030Z 2026/10/29 11:46:27 [184] GET https://registry.npmjs.org:443/log-symbols
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4059169Z 2026/10/29 11:46:27 [185] GET https://registry.npmjs.org:443/string-width
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4252835Z   proxy | 2026/10/29 11:46:27 [182] 200 https://registry.npmjs.org:443/stdin-discarder
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4260158Z   proxy | 2026/10/29 11:46:27 [184] 200 https://registry.npmjs.org:443/log-symbols
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4451652Z   proxy | 2026/10/29 11:46:27 [183] 200 https://registry.npmjs.org:443/restore-cursor
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4501694Z   proxy | 2026/10/29 11:46:27 [186] GET https://registry.npmjs.org:443/onetime
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4517487Z   proxy | 2026/10/29 11:46:27 [187] GET https://registry.npmjs.org:443/signal-exit
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4518732Z 2026/10/29 11:46:27 [185] 200 https://registry.npmjs.org:443/string-width
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4657149Z   proxy | 2026/10/29 11:46:27 [186] 200 https://registry.npmjs.org:443/onetime
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4679441Z   proxy | 2026/10/29 11:46:27 [188] GET https://registry.npmjs.org:443/mimic-function
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4776707Z   proxy | 2026/10/29 11:46:27 [187] 200 https://registry.npmjs.org:443/signal-exit
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4843047Z   proxy | 2026/10/29 11:46:27 [188] 200 https://registry.npmjs.org:443/mimic-function
+Dependabot	Run Dependabot	2026-10-29T11:46:27.4926688Z   proxy | 2026/10/29 11:46:27 [189] GET https://registry.npmjs.org:443/tsup
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5387346Z   proxy | 2026/10/29 11:46:27 [189] 200 https://registry.npmjs.org:443/tsup
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5523165Z   proxy | 2026/10/29 11:46:27 [190] GET https://registry.npmjs.org:443/esbuild
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5526613Z   proxy | 2026/10/29 11:46:27 [190] 200 https://registry.npmjs.org:443/esbuild (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5539275Z   proxy | 2026/10/29 11:46:27 [191] GET https://registry.npmjs.org:443/mlly
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5549495Z   proxy | 2026/10/29 11:46:27 [192] GET https://registry.npmjs.org:443/rollup
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5560390Z   proxy | 2026/10/29 11:46:27 [193] GET https://registry.npmjs.org:443/tinyexec
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5569416Z   proxy | 2026/10/29 11:46:27 [194] GET https://registry.npmjs.org:443/load-tsconfig
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5577912Z   proxy | 2026/10/29 11:46:27 [195] GET https://registry.npmjs.org:443/tree-kill
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5652802Z   proxy | 2026/10/29 11:46:27 [196] GET https://registry.npmjs.org:443/@esbuild%2Flinux-mips64el
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5662253Z   proxy | 2026/10/29 11:46:27 [197] GET https://registry.npmjs.org:443/@esbuild%2Fnetbsd-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5670085Z   proxy | 2026/10/29 11:46:27 [198] GET https://registry.npmjs.org:443/@esbuild%2Fopenbsd-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5676688Z   proxy | 2026/10/29 11:46:27 [199] GET https://registry.npmjs.org:443/@esbuild%2Fsunos-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5690615Z   proxy | 2026/10/29 11:46:27 [200] GET https://registry.npmjs.org:443/@esbuild%2Fandroid-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5702017Z   proxy | 2026/10/29 11:46:27 [201] GET https://registry.npmjs.org:443/@esbuild%2Fandroid-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5711529Z   proxy | 2026/10/29 11:46:27 [202] GET https://registry.npmjs.org:443/@esbuild%2Flinux-ia32
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5740345Z   proxy | 2026/10/29 11:46:27 [205] GET https://registry.npmjs.org:443/@esbuild%2Fwin32-ia32
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5744811Z   proxy | 2026/10/29 11:46:27 [203] GET https://registry.npmjs.org:443/@esbuild%2Flinux-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5756891Z   proxy | 2026/10/29 11:46:27 [206] GET https://registry.npmjs.org:443/@esbuild%2Fnetbsd-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5775968Z   proxy | 2026/10/29 11:46:27 [207] GET https://registry.npmjs.org:443/@esbuild%2Flinux-riscv64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5777289Z   proxy | 2026/10/29 11:46:27 [204] GET https://registry.npmjs.org:443/@esbuild%2Flinux-loong64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5816922Z   proxy | 2026/10/29 11:46:27 [191] 200 https://registry.npmjs.org:443/mlly
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5826008Z   proxy | 2026/10/29 11:46:27 [208] GET https://registry.npmjs.org:443/@esbuild%2Flinux-ppc64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5844803Z   proxy | 2026/10/29 11:46:27 [209] GET https://registry.npmjs.org:443/@esbuild%2Fdarwin-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5859848Z   proxy | 2026/10/29 11:46:27 [210] GET https://registry.npmjs.org:443/@esbuild%2Fdarwin-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5868877Z   proxy | 2026/10/29 11:46:27 [211] GET https://registry.npmjs.org:443/@esbuild%2Fopenbsd-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5887269Z   proxy | 2026/10/29 11:46:27 [212] GET https://registry.npmjs.org:443/@esbuild%2Fandroid-arm
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5904934Z   proxy | 2026/10/29 11:46:27 [213] GET https://registry.npmjs.org:443/@esbuild%2Flinux-arm
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5926562Z   proxy | 2026/10/29 11:46:27 [214] GET https://registry.npmjs.org:443/@esbuild%2Ffreebsd-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.5944049Z   proxy | 2026/10/29 11:46:27 [215] GET https://registry.npmjs.org:443/@esbuild%2Faix-ppc64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6017874Z   proxy | 2026/10/29 11:46:27 [216] GET https://registry.npmjs.org:443/@esbuild%2Ffreebsd-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6019876Z   proxy | 2026/10/29 11:46:27 [217] GET https://registry.npmjs.org:443/@esbuild%2Fwin32-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6023674Z   proxy | 2026/10/29 11:46:27 [218] GET https://registry.npmjs.org:443/@esbuild%2Fwin32-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6069580Z   proxy | 2026/10/29 11:46:27 [219] GET https://registry.npmjs.org:443/@esbuild%2Fopenharmony-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6070867Z 2026/10/29 11:46:27 [220] GET https://registry.npmjs.org:443/@esbuild%2Flinux-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6072624Z 2026/10/29 11:46:27 [221] GET https://registry.npmjs.org:443/@esbuild%2Flinux-s390x
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6086857Z   proxy | 2026/10/29 11:46:27 [222] GET https://registry.npmjs.org:443/load-tsconfig
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6128720Z   proxy | 2026/10/29 11:46:27 [223] GET https://registry.npmjs.org:443/log-symbols
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6129899Z 2026/10/29 11:46:27 [223] 200 https://registry.npmjs.org:443/log-symbols (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6137498Z   proxy | 2026/10/29 11:46:27 [224] GET https://registry.npmjs.org:443/-/npm/v1/attestations/lodash@4.18.1
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6157115Z   proxy | 2026/10/29 11:46:27 [225] GET https://registry.npmjs.org:443/-/npm/v1/attestations/lucide-react@0.510.0
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6158471Z   proxy | 2026/10/29 11:46:27 [226] GET https://registry.npmjs.org:443/math-intrinsics
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6162913Z   proxy | 2026/10/29 11:46:27 [192] 200 https://registry.npmjs.org:443/rollup
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6250980Z   proxy | 2026/10/29 11:46:27 [227] GET https://registry.npmjs.org:443/pkg-types
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6252957Z 2026/10/29 11:46:27 [228] GET https://registry.npmjs.org:443/-/npm/v1/attestations/minimatch@10.2.6
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6328051Z   proxy | 2026/10/29 11:46:27 [229] GET https://registry.npmjs.org:443/-/npm/v1/attestations/minimatch@3.1.5
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6342169Z   proxy | 2026/10/29 11:46:27 [226] 200 https://registry.npmjs.org:443/math-intrinsics (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6416172Z   proxy | 2026/10/29 11:46:27 [194] 200 https://registry.npmjs.org:443/load-tsconfig
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6418799Z 2026/10/29 11:46:27 [195] 200 https://registry.npmjs.org:443/tree-kill
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6419966Z 2026/10/29 11:46:27 [193] 200 https://registry.npmjs.org:443/tinyexec
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6452067Z   proxy | 2026/10/29 11:46:27 [196] 200 https://registry.npmjs.org:443/@esbuild%2Flinux-mips64el
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6516693Z   proxy | 2026/10/29 11:46:27 [199] 200 https://registry.npmjs.org:443/@esbuild%2Fsunos-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6550737Z   proxy | 2026/10/29 11:46:27 [230] GET https://registry.npmjs.org:443/-/npm/v1/attestations/lucide-react@0.468.0
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6585198Z   proxy | 2026/10/29 11:46:27 [202] 200 https://registry.npmjs.org:443/@esbuild%2Flinux-ia32
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6669963Z   proxy | 2026/10/29 11:46:27 [198] 200 https://registry.npmjs.org:443/@esbuild%2Fopenbsd-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6708929Z   proxy | 2026/10/29 11:46:27 [204] 200 https://registry.npmjs.org:443/@esbuild%2Flinux-loong64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6741329Z   proxy | 2026/10/29 11:46:27 [197] 200 https://registry.npmjs.org:443/@esbuild%2Fnetbsd-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.6749183Z   proxy | 2026/10/29 11:46:27 [200] 200 https://registry.npmjs.org:443/@esbuild%2Fandroid-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7033033Z   proxy | 2026/10/29 11:46:27 [201] 200 https://registry.npmjs.org:443/@esbuild%2Fandroid-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7034543Z 2026/10/29 11:46:27 [215] 200 https://registry.npmjs.org:443/@esbuild%2Faix-ppc64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7036425Z 2026/10/29 11:46:27 [212] 200 https://registry.npmjs.org:443/@esbuild%2Fandroid-arm
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7037730Z 2026/10/29 11:46:27 [205] 200 https://registry.npmjs.org:443/@esbuild%2Fwin32-ia32
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7038954Z 2026/10/29 11:46:27 [211] 200 https://registry.npmjs.org:443/@esbuild%2Fopenbsd-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7040409Z 2026/10/29 11:46:27 [203] 200 https://registry.npmjs.org:443/@esbuild%2Flinux-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7041627Z 2026/10/29 11:46:27 [207] 200 https://registry.npmjs.org:443/@esbuild%2Flinux-riscv64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7042870Z 2026/10/29 11:46:27 [213] 200 https://registry.npmjs.org:443/@esbuild%2Flinux-arm
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7044104Z 2026/10/29 11:46:27 [208] 200 https://registry.npmjs.org:443/@esbuild%2Flinux-ppc64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7045319Z 2026/10/29 11:46:27 [209] 200 https://registry.npmjs.org:443/@esbuild%2Fdarwin-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7046784Z 2026/10/29 11:46:27 [206] 200 https://registry.npmjs.org:443/@esbuild%2Fnetbsd-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7048010Z 2026/10/29 11:46:27 [217] 200 https://registry.npmjs.org:443/@esbuild%2Fwin32-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7049237Z 2026/10/29 11:46:27 [219] 200 https://registry.npmjs.org:443/@esbuild%2Fopenharmony-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7051026Z 2026/10/29 11:46:27 [210] 200 https://registry.npmjs.org:443/@esbuild%2Fdarwin-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7052497Z 2026/10/29 11:46:27 [214] 200 https://registry.npmjs.org:443/@esbuild%2Ffreebsd-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7053732Z 2026/10/29 11:46:27 [216] 200 https://registry.npmjs.org:443/@esbuild%2Ffreebsd-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7062107Z   proxy | 2026/10/29 11:46:27 [222] 200 https://registry.npmjs.org:443/load-tsconfig
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7063808Z 2026/10/29 11:46:27 [224] 404 https://registry.npmjs.org:443/-/npm/v1/attestations/lodash@4.18.1
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7065131Z 2026/10/29 11:46:27 [225] 200 https://registry.npmjs.org:443/-/npm/v1/attestations/lucide-react@0.510.0
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7066733Z 2026/10/29 11:46:27 [229] 404 https://registry.npmjs.org:443/-/npm/v1/attestations/minimatch@3.1.5
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7109757Z   proxy | 2026/10/29 11:46:27 [228] 404 https://registry.npmjs.org:443/-/npm/v1/attestations/minimatch@10.2.6
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7116929Z   proxy | 2026/10/29 11:46:27 [227] 200 https://registry.npmjs.org:443/pkg-types
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7123428Z   proxy | 2026/10/29 11:46:27 [230] 404 https://registry.npmjs.org:443/-/npm/v1/attestations/lucide-react@0.468.0
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7148737Z   proxy | 2026/10/29 11:46:27 [220] 200 https://registry.npmjs.org:443/@esbuild%2Flinux-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7264461Z   proxy | 2026/10/29 11:46:27 [221] 200 https://registry.npmjs.org:443/@esbuild%2Flinux-s390x
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7296880Z   proxy | 2026/10/29 11:46:27 [218] 200 https://registry.npmjs.org:443/@esbuild%2Fwin32-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7328301Z   proxy | 2026/10/29 11:46:27 [231] GET https://registry.npmjs.org:443/confbox
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7500668Z   proxy | 2026/10/29 11:46:27 [232] GET https://registry.npmjs.org:443/rollup
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7580771Z   proxy | 2026/10/29 11:46:27 [231] 304 https://registry.npmjs.org:443/confbox
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7586324Z   proxy | 2026/10/29 11:46:27 [233] GET https://registry.npmjs.org:443/confbox
+Dependabot	Run Dependabot	2026-10-29T11:46:27.7594613Z   proxy | 2026/10/29 11:46:27 [233] 200 https://registry.npmjs.org:443/confbox (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:27.8167573Z   proxy | 2026/10/29 11:46:27 [232] 200 https://registry.npmjs.org:443/rollup
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9083367Z   proxy | 2026/10/29 11:46:27 [234] GET https://registry.npmjs.org:443/pkg-types
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9102288Z   proxy | 2026/10/29 11:46:27 [234] 200 https://registry.npmjs.org:443/pkg-types (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9264145Z   proxy | 2026/10/29 11:46:27 [235] GET https://registry.npmjs.org:443/@rollup%2Frollup-darwin-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9267904Z   proxy | 2026/10/29 11:46:27 [236] GET https://registry.npmjs.org:443/@rollup%2Frollup-freebsd-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9272028Z   proxy | 2026/10/29 11:46:27 [237] GET https://registry.npmjs.org:443/@rollup%2Frollup-linux-riscv64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9312089Z   proxy | 2026/10/29 11:46:27 [238] GET https://registry.npmjs.org:443/@napi-rs%2Flzma-linux-x64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9313534Z 2026/10/29 11:46:27 [239] GET https://registry.npmjs.org:443/@rollup%2Frollup-linux-arm64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9316758Z 2026/10/29 11:46:27 [240] GET https://registry.npmjs.org:443/@rollup%2Frollup-linux-arm-musleabihf
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9319617Z 2026/10/29 11:46:27 [241] GET https://registry.npmjs.org:443/@rollup%2Frollup-linux-arm-gnueabihf
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9322317Z   proxy | 2026/10/29 11:46:27 [242] GET https://registry.npmjs.org:443/@rollup%2Frollup-win32-ia32-msvc
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9325124Z   proxy | 2026/10/29 11:46:27 [243] GET https://registry.npmjs.org:443/@rollup%2Frollup-linux-riscv64-musl
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9329185Z   proxy | 2026/10/29 11:46:27 [244] GET https://registry.npmjs.org:443/@rollup%2Frollup-openbsd-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9331954Z   proxy | 2026/10/29 11:46:27 [245] GET https://registry.npmjs.org:443/@rollup%2Frollup-linux-x64-musl
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9336208Z   proxy | 2026/10/29 11:46:27 [246] GET https://registry.npmjs.org:443/@rollup%2Frollup-linux-x64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9344136Z   proxy | 2026/10/29 11:46:27 [247] GET https://registry.npmjs.org:443/@rollup%2Frollup-freebsd-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9348675Z   proxy | 2026/10/29 11:46:27 [248] GET https://registry.npmjs.org:443/@rollup%2Frollup-linux-s390x-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9351318Z   proxy | 2026/10/29 11:46:27 [256] GET https://registry.npmjs.org:443/@rollup%2Frollup-android-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9357016Z   proxy | 2026/10/29 11:46:27 [257] GET https://registry.npmjs.org:443/@rollup%2Frollup-linux-loong64-musl
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9371047Z   proxy | 2026/10/29 11:46:27 [249] GET https://registry.npmjs.org:443/@rollup%2Frollup-linux-ppc64-musl
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9372471Z 2026/10/29 11:46:27 [250] GET https://registry.npmjs.org:443/@rollup%2Frollup-win32-x64-msvc
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9373601Z 2026/10/29 11:46:27 [251] GET https://registry.npmjs.org:443/@rollup%2Frollup-win32-x64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9376185Z   proxy | 2026/10/29 11:46:27 [252] GET https://registry.npmjs.org:443/@rollup%2Frollup-linux-ppc64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9378438Z   proxy | 2026/10/29 11:46:27 [253] GET https://registry.npmjs.org:443/@rollup%2Frollup-openharmony-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9391126Z   proxy | 2026/10/29 11:46:27 [255] GET https://registry.npmjs.org:443/@rollup%2Frollup-darwin-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9392708Z   proxy | 2026/10/29 11:46:27 [254] GET https://registry.npmjs.org:443/@rollup%2Frollup-linux-arm64-musl
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9394240Z   proxy | 2026/10/29 11:46:27 [258] GET https://registry.npmjs.org:443/@rollup%2Frollup-android-arm-eabi
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9395449Z 2026/10/29 11:46:27 [259] GET https://registry.npmjs.org:443/@rollup%2Frollup-win32-arm64-msvc
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9403425Z   proxy | 2026/10/29 11:46:27 [260] GET https://registry.npmjs.org:443/@rollup%2Frollup-linux-loong64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9647148Z   proxy | 2026/10/29 11:46:27 [236] 200 https://registry.npmjs.org:443/@rollup%2Frollup-freebsd-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9718669Z   proxy | 2026/10/29 11:46:27 [235] 200 https://registry.npmjs.org:443/@rollup%2Frollup-darwin-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:27.9922936Z   proxy | 2026/10/29 11:46:27 [245] 200 https://registry.npmjs.org:443/@rollup%2Frollup-linux-x64-musl
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0061935Z   proxy | 2026/10/29 11:46:28 [256] 200 https://registry.npmjs.org:443/@rollup%2Frollup-android-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0064219Z 2026/10/29 11:46:28 [237] 200 https://registry.npmjs.org:443/@rollup%2Frollup-linux-riscv64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0083559Z   proxy | 2026/10/29 11:46:28 [241] 200 https://registry.npmjs.org:443/@rollup%2Frollup-linux-arm-gnueabihf
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0087230Z   proxy | 2026/10/29 11:46:28 [244] 200 https://registry.npmjs.org:443/@rollup%2Frollup-openbsd-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0101151Z   proxy | 2026/10/29 11:46:28 [238] 200 https://registry.npmjs.org:443/@napi-rs%2Flzma-linux-x64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0119488Z   proxy | 2026/10/29 11:46:28 [249] 200 https://registry.npmjs.org:443/@rollup%2Frollup-linux-ppc64-musl
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0122879Z   proxy | 2026/10/29 11:46:28 [242] 200 https://registry.npmjs.org:443/@rollup%2Frollup-win32-ia32-msvc
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0220689Z   proxy | 2026/10/29 11:46:28 [248] 200 https://registry.npmjs.org:443/@rollup%2Frollup-linux-s390x-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0222375Z 2026/10/29 11:46:28 [240] 200 https://registry.npmjs.org:443/@rollup%2Frollup-linux-arm-musleabihf
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0287812Z   proxy | 2026/10/29 11:46:28 [260] 200 https://registry.npmjs.org:443/@rollup%2Frollup-linux-loong64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0289471Z 2026/10/29 11:46:28 [255] 200 https://registry.npmjs.org:443/@rollup%2Frollup-darwin-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0290876Z 2026/10/29 11:46:28 [251] 200 https://registry.npmjs.org:443/@rollup%2Frollup-win32-x64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0300717Z   proxy | 2026/10/29 11:46:28 [246] 200 https://registry.npmjs.org:443/@rollup%2Frollup-linux-x64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0302730Z 2026/10/29 11:46:28 [259] 200 https://registry.npmjs.org:443/@rollup%2Frollup-win32-arm64-msvc
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0304233Z 2026/10/29 11:46:28 [239] 200 https://registry.npmjs.org:443/@rollup%2Frollup-linux-arm64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0306165Z 2026/10/29 11:46:28 [247] 200 https://registry.npmjs.org:443/@rollup%2Frollup-freebsd-x64
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0307501Z 2026/10/29 11:46:28 [258] 200 https://registry.npmjs.org:443/@rollup%2Frollup-android-arm-eabi
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0330450Z   proxy | 2026/10/29 11:46:28 [253] 200 https://registry.npmjs.org:443/@rollup%2Frollup-openharmony-arm64
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0364991Z   proxy | 2026/10/29 11:46:28 [257] 200 https://registry.npmjs.org:443/@rollup%2Frollup-linux-loong64-musl
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0377657Z   proxy | 2026/10/29 11:46:28 [254] 200 https://registry.npmjs.org:443/@rollup%2Frollup-linux-arm64-musl
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0384989Z   proxy | 2026/10/29 11:46:28 [252] 200 https://registry.npmjs.org:443/@rollup%2Frollup-linux-ppc64-gnu
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0432205Z   proxy | 2026/10/29 11:46:28 [250] 200 https://registry.npmjs.org:443/@rollup%2Frollup-win32-x64-msvc
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0448276Z   proxy | 2026/10/29 11:46:28 [243] 200 https://registry.npmjs.org:443/@rollup%2Frollup-linux-riscv64-musl
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0871438Z   proxy | 2026/10/29 11:46:28 [261] GET https://registry.npmjs.org:443/minimatch
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0872809Z 2026/10/29 11:46:28 [261] 200 https://registry.npmjs.org:443/minimatch (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:28.0942230Z   proxy | 2026/10/29 11:46:28 [262] GET https://registry.npmjs.org:443/tsx
+Dependabot	Run Dependabot	2026-10-29T11:46:28.1179780Z   proxy | 2026/10/29 11:46:28 [262] 200 https://registry.npmjs.org:443/tsx
+Dependabot	Run Dependabot	2026-10-29T11:46:28.2852637Z   proxy | 2026/10/29 11:46:28 [263] GET https://registry.npmjs.org:443/-/npm/v1/attestations/playwright-core@1.63.0
+Dependabot	Run Dependabot	2026-10-29T11:46:28.2863583Z   proxy | 2026/10/29 11:46:28 [264] GET https://registry.npmjs.org:443/lodash
+Dependabot	Run Dependabot	2026-10-29T11:46:28.2872551Z   proxy | 2026/10/29 11:46:28 [264] 200 https://registry.npmjs.org:443/lodash (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:28.2887847Z   proxy | 2026/10/29 11:46:28 [265] GET https://registry.npmjs.org:443/mlly
+Dependabot	Run Dependabot	2026-10-29T11:46:28.2894448Z   proxy | 2026/10/29 11:46:28 [265] 200 https://registry.npmjs.org:443/mlly (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:28.3060026Z   proxy | 2026/10/29 11:46:28 [263] 200 https://registry.npmjs.org:443/-/npm/v1/attestations/playwright-core@1.63.0
+Dependabot	Run Dependabot	2026-10-29T11:46:28.3238172Z   proxy | 2026/10/29 11:46:28 [266] GET https://registry.npmjs.org:443/-/npm/v1/attestations/playwright@1.63.0
+Dependabot	Run Dependabot	2026-10-29T11:46:28.3242517Z   proxy | 2026/10/29 11:46:28 [267] GET https://registry.npmjs.org:443/lucide-react
+Dependabot	Run Dependabot	2026-10-29T11:46:28.3251476Z   proxy | 2026/10/29 11:46:28 [267] 200 https://registry.npmjs.org:443/lucide-react (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:28.3418884Z   proxy | 2026/10/29 11:46:28 [266] 200 https://registry.npmjs.org:443/-/npm/v1/attestations/playwright@1.63.0
+Dependabot	Run Dependabot	2026-10-29T11:46:28.3427152Z   proxy | 2026/10/29 11:46:28 [268] GET https://registry.npmjs.org:443/-/npm/v1/attestations/seroval@1.6.7
+Dependabot	Run Dependabot	2026-10-29T11:46:28.3435330Z   proxy | 2026/10/29 11:46:28 [269] GET https://registry.npmjs.org:443/-/npm/v1/attestations/react-resizable-panels@4.12.4
+Dependabot	Run Dependabot	2026-10-29T11:46:28.3606969Z   proxy | 2026/10/29 11:46:28 [268] 404 https://registry.npmjs.org:443/-/npm/v1/attestations/seroval@1.6.7
+Dependabot	Run Dependabot	2026-10-29T11:46:28.3642547Z   proxy | 2026/10/29 11:46:28 [269] 404 https://registry.npmjs.org:443/-/npm/v1/attestations/react-resizable-panels@4.12.4
+Dependabot	Run Dependabot	2026-10-29T11:46:28.4580689Z   proxy | 2026/10/29 11:46:28 [270] GET https://registry.npmjs.org:443/-/npm/v1/attestations/rollup@4.63.5
+Dependabot	Run Dependabot	2026-10-29T11:46:28.4619118Z   proxy | 2026/10/29 11:46:28 [271] GET https://registry.npmjs.org:443/-/npm/v1/attestations/seroval-plugins@1.6.7
+Dependabot	Run Dependabot	2026-10-29T11:46:28.4810709Z   proxy | 2026/10/29 11:46:28 [271] 404 https://registry.npmjs.org:443/-/npm/v1/attestations/seroval-plugins@1.6.7
+Dependabot	Run Dependabot	2026-10-29T11:46:28.4814001Z   proxy | 2026/10/29 11:46:28 [270] 200 https://registry.npmjs.org:443/-/npm/v1/attestations/rollup@4.63.5
+Dependabot	Run Dependabot	2026-10-29T11:46:28.4837947Z   proxy | 2026/10/29 11:46:28 [272] GET https://registry.npmjs.org:443/seroval-plugins
+Dependabot	Run Dependabot	2026-10-29T11:46:28.4844060Z   proxy | 2026/10/29 11:46:28 [272] 200 https://registry.npmjs.org:443/seroval-plugins (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:28.7356666Z   proxy | 2026/10/29 11:46:28 [273] GET https://registry.npmjs.org:443/-/npm/v1/attestations/typescript@5.9.3
+Dependabot	Run Dependabot	2026-10-29T11:46:28.7359671Z   proxy | 2026/10/29 11:46:28 [274] GET https://registry.npmjs.org:443/-/npm/v1/attestations/typescript-eslint@8.70.0
+Dependabot	Run Dependabot	2026-10-29T11:46:28.7550614Z   proxy | 2026/10/29 11:46:28 [273] 404 https://registry.npmjs.org:443/-/npm/v1/attestations/typescript@5.9.3
+Dependabot	Run Dependabot	2026-10-29T11:46:28.7569746Z   proxy | 2026/10/29 11:46:28 [274] 200 https://registry.npmjs.org:443/-/npm/v1/attestations/typescript-eslint@8.70.0
+Dependabot	Run Dependabot	2026-10-29T11:46:28.7872838Z   proxy | 2026/10/29 11:46:28 [275] GET https://registry.npmjs.org:443/seroval
+Dependabot	Run Dependabot	2026-10-29T11:46:28.7876558Z   proxy | 2026/10/29 11:46:28 [275] 200 https://registry.npmjs.org:443/seroval (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:28.7924904Z   proxy | 2026/10/29 11:46:28 [276] GET https://registry.npmjs.org:443/react-resizable-panels
+Dependabot	Run Dependabot	2026-10-29T11:46:28.7929835Z   proxy | 2026/10/29 11:46:28 [276] 200 https://registry.npmjs.org:443/react-resizable-panels (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:28.8405578Z   proxy | 2026/10/29 11:46:28 [277] GET https://registry.npmjs.org:443/-/npm/v1/attestations/@next/eslint-plugin-next@15.5.27
+Dependabot	Run Dependabot	2026-10-29T11:46:28.8411341Z   proxy | 2026/10/29 11:46:28 [278] GET https://registry.npmjs.org:443/typescript
+Dependabot	Run Dependabot	2026-10-29T11:46:28.8415628Z   proxy | 2026/10/29 11:46:28 [278] 200 https://registry.npmjs.org:443/typescript (cached)
+Dependabot	Run Dependabot	2026-10-29T11:46:28.8600856Z   proxy | 2026/10/29 11:46:28 [277] 200 https://registry.npmjs.org:443/-/npm/v1/attestations/@next/eslint-plugin-next@15.5.27
+Dependabot	Run Dependabot	2026-10-29T11:46:28.8728700Z   proxy | 2026/10/29 11:46:28 [279] GET https://registry.npmjs.org:443/-/npm/v1/attestations/next@15.5.28
+Dependabot	Run Dependabot	2026-10-29T11:46:28.8761715Z   proxy | 2026/10/29 11:46:28 [280] GET https://registry.npmjs.org:443/-/npm/v1/attestations/node-releases@2.0.53
+Dependabot	Run Dependabot	2026-10-29T11:46:28.9030553Z   proxy | 2026/10/29 11:46:28 [280] 200 https://registry.npmjs.org:443/-/npm/v1/attestations/node-releases@2.0.53
+Dependabot	Run Dependabot	2026-10-29T11:46:28.9049863Z   proxy | 2026/10/29 11:46:28 [279] 200 https://registry.npmjs.org:443/-/npm/v1/attestations/next@15.5.28
+Dependabot	Run Dependabot	2026-10-29T11:46:29.0172461Z   proxy | 2026/10/29 11:46:29 [281] GET https://registry.npmjs.org:443/-/npm/v1/attestations/eslint-config-next@15.5.27
+Dependabot	Run Dependabot	2026-10-29T11:46:29.0371815Z   proxy | 2026/10/29 11:46:29 [281] 200 https://registry.npmjs.org:443/-/npm/v1/attestations/eslint-config-next@15.5.27
+Dependabot	Run Dependabot	2026-10-29T11:46:30.8593555Z updater | 2026/10/29 11:46:30 INFO <job_1663015315> Process PID: 2604 completed with status: pid 2604 exit 0
+Dependabot	Run Dependabot	2026-10-29T11:46:30.8594589Z 2026/10/29 11:46:30 INFO <job_1663015315> Total execution time: 11.84 seconds
+Dependabot	Run Dependabot	2026-10-29T11:46:30.8652968Z updater | 2026/10/29 11:46:30 INFO <job_1663015315> Started process PID: 2673 with command: node /opt/npm_and_yarn/dist/run.js
+Dependabot	Run Dependabot	2026-10-29T11:46:31.6106247Z updater | 2026/10/29 11:46:31 INFO <job_1663015315> Process PID: 2673 completed with status: pid 2673 exit 0
+Dependabot	Run Dependabot	2026-10-29T11:46:31.6107284Z 2026/10/29 11:46:31 INFO <job_1663015315> Total execution time: 0.75 seconds
+Dependabot	Run Dependabot	2026-10-29T11:46:32.0033562Z updater | 2026/10/29 11:46:32 INFO <job_1663015315> Requirements to unlock update_not_possible
+Dependabot	Run Dependabot	2026-10-29T11:46:32.0035007Z 2026/10/29 11:46:32 INFO <job_1663015315> Requirements update strategy bump_versions
+Dependabot	Run Dependabot	2026-10-29T11:46:32.0079929Z updater | 2026/10/29 11:46:32 INFO <job_1663015315> Started process PID: 2686 with command: node /opt/npm_and_yarn/dist/run.js
+Dependabot	Run Dependabot	2026-10-29T11:46:32.6941214Z updater | 2026/10/29 11:46:32 INFO <job_1663015315> Process PID: 2686 completed with status: pid 2686 exit 1
+Dependabot	Run Dependabot	2026-10-29T11:46:32.6942347Z 2026/10/29 11:46:32 INFO <job_1663015315> Total execution time: 0.69 seconds
+Dependabot	Run Dependabot	2026-10-29T11:46:32.6996977Z updater | 2026/10/29 11:46:32 INFO <job_1663015315> Started process PID: 2695 with command: node /opt/npm_and_yarn/dist/run.js
+Dependabot	Run Dependabot	2026-10-29T11:46:33.3797680Z updater | 2026/10/29 11:46:33 INFO <job_1663015315> Process PID: 2695 completed with status: pid 2695 exit 1
+Dependabot	Run Dependabot	2026-10-29T11:46:33.3798988Z 2026/10/29 11:46:33 INFO <job_1663015315> Total execution time: 0.68 seconds
+Dependabot	Run Dependabot	2026-10-29T11:46:33.3806657Z updater | 2026/10/29 11:46:33 INFO <job_1663015315> The latest possible version of @better-auth/kysely-adapter that can be installed is 1.6.31
+Dependabot	Run Dependabot	2026-10-29T11:46:33.3808101Z updater | 2026/10/29 11:46:33 INFO <job_1663015315> The earliest fixed version is 1.7.0.
+Dependabot	Run Dependabot	2026-10-29T11:46:33.4682959Z   proxy | 2026/10/29 11:46:33 [283] POST /update_jobs/1663015315/record_update_job_error
+Dependabot	Run Dependabot	2026-10-29T11:46:33.9136230Z   proxy | 2026/10/29 11:46:33 [283] 204 /update_jobs/1663015315/record_update_job_error
+Dependabot	Run Dependabot	2026-10-29T11:46:33.9973701Z   proxy | 2026/10/29 11:46:33 [285] POST /update_jobs/1663015315/record_ecosystem_meta
+Dependabot	Run Dependabot	2026-10-29T11:46:34.0754524Z   proxy | 2026/10/29 11:46:34 [285] 204 /update_jobs/1663015315/record_ecosystem_meta
+Dependabot	Run Dependabot	2026-10-29T11:46:34.1594099Z   proxy | 2026/10/29 11:46:34 [287] PATCH /update_jobs/1663015315/mark_as_processed
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8768621Z   proxy | 2026/10/29 11:46:34 [287] 204 /update_jobs/1663015315/mark_as_processed
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8773003Z updater | 2026/10/29 11:46:34 INFO <job_1663015315> Finished job processing
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8787098Z updater | 2026/10/29 11:46:34 INFO Results:
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8787940Z Dependabot encountered '1' error(s) during execution, please check the logs for more details.
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8788828Z +------------------------------------------------------------------------------------+
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8789519Z |                                       Errors                                       |
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8790169Z +------------------------------+-----------------------------------------------------+
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8790866Z | Type                         | Details                                             |
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8791966Z +------------------------------+-----------------------------------------------------+
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8792709Z | security_update_not_possible | {                                                   |
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8793471Z |                              |   "dependency-name": "@better-auth/kysely-adapter", |
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8794159Z |                              |   "latest-resolvable-version": "1.6.31",            |
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8794834Z |                              |   "lowest-non-vulnerable-version": "1.7.0",         |
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8795501Z |                              |   "conflicting-dependencies": []                    |
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8796368Z |                              | }                                                   |
+Dependabot	Run Dependabot	2026-10-29T11:46:34.8796992Z +------------------------------+-----------------------------------------------------+
+Dependabot	Run Dependabot	2026-10-29T11:46:35.0124370Z Failure running container 7b64595e8278c282db98d4a01c5f881824d1d051199a2a11d0fc14d810aa6d83: Error: Command failed with exit code 1: /bin/sh -c $DEPENDABOT_HOME/dependabot-updater/bin/run update_files
+Dependabot	Run Dependabot	2026-10-29T11:46:36.3340948Z Cleaned up container 7b64595e8278c282db98d4a01c5f881824d1d051199a2a11d0fc14d810aa6d83
+Dependabot	Run Dependabot	2026-10-29T11:46:36.3485176Z   proxy | 2026/10/29 11:46:36 70/1194 calls cached (5%)
+Dependabot	Run Dependabot	2026-10-29T11:46:36.3486676Z   proxy | 2026/10/29 11:46:36 Posting metrics to remote API endpoint
+Dependabot	Run Dependabot	2026-10-29T11:46:36.4299305Z   proxy | 2026/10/29 11:46:36 Successfully posted metrics data via api client
+Dependabot	Run Dependabot	2026-10-29T11:46:37.7710219Z ##[error]Dependabot encountered an error performing the update
+Dependabot	Run Dependabot	
+Dependabot	Run Dependabot	Error: The updater encountered one or more errors.
+Dependabot	Run Dependabot	
+Dependabot	Run Dependabot	For more information see: https://github.com/Unwrenchable/RealAi/network/updates/1663015315 (write access to the repository is required to view the log)
+Dependabot	Run Dependabot	2026-10-29T11:46:37.7720182Z ≡ƒñû ~ finished: error reported to Dependabot ~
