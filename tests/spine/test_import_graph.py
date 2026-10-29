@@ -7,7 +7,7 @@ tests/spine/import_graph_baseline.txt, so this passes today and fails on any NEW
 Regenerate the baseline (only when intentionally shrinking it):
     REALAI_SPINE_WRITE_BASELINE=1 python -m pytest tests/spine/test_import_graph.py
 """
-import ast, os, subprocess
+import ast, os, subprocess, warnings
 from pathlib import Path
 
 import pytest
@@ -78,3 +78,6 @@ def test_repo_local_imports_resolve():
     known = {l.strip() for l in BASELINE.read_text(encoding="utf-8").splitlines() if l.strip()} if BASELINE.exists() else set()
     new = sorted(bad - known)
     assert not new, "New unresolved repo-local imports (fix importers or keep a shim):\n" + "\n".join(new[:50])
+    stale = sorted(known - bad)
+    if stale:
+        warnings.warn(f"{len(stale)} stale baseline entries now resolve (shrink baseline): " + "; ".join(stale[:20]))

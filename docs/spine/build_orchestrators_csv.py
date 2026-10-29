@@ -1,7 +1,9 @@
 """Regenerate docs/spine/orchestrators.csv (Phase 1a). Read-only: parses with ast, never imports.
 
-Run from the repo root:  python docs/spine/build_orchestrators_csv.py
-An "orchestrator copy" is any git-tracked .py whose filename contains "orchestrat".
+Run from the repo root:  python docs/spine/build_orchestrators_csv.py [--out PATH]
+An "orchestrator copy" is any git-tracked .py whose filename contains "orchestrat"
+(the spine tooling in docs/spine/ and tests/spine/ is excluded). All content (hashes, sizes, parsing) is read from the
+git index blobs, never the working tree, so CRLF/LF checkouts give byte-identical output.
 """
 import ast, csv, hashlib, re, subprocess, sys
 from collections import defaultdict
@@ -11,9 +13,31 @@ ROOT = Path(__file__).resolve().parents[2]
 CORE = "realai/orchestration/v3_orchestrator.py"
 
 
+EXCLUDE = ("docs/spine/", "tests/spine/")
+_BLOBS = {}
+
+
 def tracked_py():
-    out = subprocess.run(["git", "ls-files", "*.py"], cwd=ROOT, capture_output=True, text=True, check=True).stdout
-    return [p for p in out.splitlines() if (ROOT / p).is_file()]
+    """Map path -> blob bytes for every tracked .py (from the index, not the worktree)."""
+    out = subprocess.run(["git", "ls-files", "-s", "-z", "--", "*.py"], cwd=ROOT, capture_output=True, check=True).stdout
+    ent = {}
+    for rec in out.decode("utf-8").split("\0"):
+        if not rec:
+            continue
+        meta, path = rec.split("\t", 1)
+        mode, oid, stage = meta.split()
+        if mode.startswith("100") and stage == "0":
+            ent[path] = oid
+    paths = sorted(ent)
+    req = "".join(ent[p] + "\n" for p in paths).encode()
+    raw = subprocess.run(["git", "cat-file", "--batch"], cwd=ROOT, input=req, capture_output=True, check=True).stdout
+    i = 0
+    for p in paths:
+        nl = raw.index(b"\n", i)
+        size = int(raw[i:nl].split()[2])
+        _BLOBS[p] = raw[nl + 1: nl + 1 + size]
+        i = nl + 1 + size + 1
+    return paths
 
 
 def modname(path):
@@ -23,8 +47,8 @@ def modname(path):
 
 def parse(path):
     try:
-        return ast.parse((ROOT / path).read_text(encoding="utf-8", errors="replace"))
-    except SyntaxError:
+        return ast.parse(_BLOBS[path].decode("utf-8", errors="replace"))
+    except (SyntaxError, ValueError):
         return None
 
 
@@ -53,9 +77,13 @@ def imports_of(path, tree):
 PATH_RE = re.compile(r"(sys\.path\.(insert|append)|importlib\.util\.spec_from_file_location|runpy\.run_path|__import__\()")
 
 
-def main():
+def main(argv=None):
+    args = list(sys.argv[1:] if argv is None else argv)
+    out = ROOT / "docs/spine/orchestrators.csv"
+    if args[:1] == ["--out"] and len(args) == 2:
+        out = Path(args[1]).resolve()
     files = tracked_py()
-    targets = [p for p in files if "orchestrat" in Path(p).name.lower()]
+    targets = [p for p in files if "orchestrat" in Path(p).name.lower() and not p.startswith(EXCLUDE)]
     tmod = {modname(p): p for p in targets}
     importers = defaultdict(set)
     style = {}
@@ -68,7 +96,7 @@ def main():
                 importers[tmod[mod]].add(f)
     hashes = {}
     for t in targets:
-        data = (ROOT / t).read_bytes()
+        data = _BLOBS[t]
         hashes[t] = (hashlib.sha256(data).hexdigest(), len(data))
         tree = parse(t)
         src = data.decode("utf-8", "replace")
@@ -97,12 +125,11 @@ def main():
             fate = "archive"
         dup = "" if first_by_hash[sha] == t else first_by_hash[sha]
         rows.append([t, sha, size, len(imp), "; ".join(imp[:3]), style[t], fate, dup])
-    out = ROOT / "docs/spine/orchestrators.csv"
     with out.open("w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh, lineterminator="\n")
         w.writerow(["path", "sha256", "size", "imported_by_count", "imported_by_examples", "import_style", "proposed_fate", "duplicate_of"])
         w.writerows(rows)
-    print(f"{len(rows)} orchestrator copies -> {out.relative_to(ROOT)}")
+    print(f"{len(rows)} orchestrator copies -> {out}")
 
 
 if __name__ == "__main__":
