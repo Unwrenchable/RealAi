@@ -172,7 +172,7 @@ Each Security review is scoped to these named artifacts:
 - **3d:** the money path (wallet signing / payouts; always `approval`, `trading.live` locked false).
 - **6d:** the `/v1/approvals` contract (request, list, approve, deny schema and auth).
 
-## Open decisions for travis
+## Open decisions for travis (all decided 2026-10-29; see Decisions below)
 
 - **D1** Approve this plan and its phase order (1→2→3→7 first, then 4, 5, 6)?
 - **D2** Archive batches: GO per batch, or one GO per section?
@@ -183,13 +183,15 @@ Each Security review is scoped to these named artifacts:
 - **D7** When may the console and voice adopt the SDK (6e)?
 - **D8** Network policy for §3c: local-only by default, with a per-ability allow-list?
 
-## Proposed answers (travis, for discussion, not final)
+## Decisions (travis, final, 2026-10-29)
 
-- **D1:** order 1 -> 2 -> 3 -> 7, then 4, 5, 6. Permission and eval work de-risks the rest.
-- **D2:** one GO per section, or per archive batch inside a section. No blanket GO.
-- **D3:** the core serves /v1 directly once the OpenAPI snapshot is stable; `apps/api` stays a thin proxy only while external deploys still need it. Avoid two long-lived implementations.
-- **D4:** no journal module yet (a minimal stub in the memory facade at most); add one only when a concrete ability needs it.
-- **D5:** `realai/memory/sqlite_memory.py` is the candidate, pending the 4a inventory confirming it is the most complete and least divergent.
-- **D6:** a new `packages/sdk` that re-exports the old names.
-- **D7:** console and voice adopt the SDK after 6e (VS Code and the widget first).
-- **D8:** local-only by default, explicit per-ability allowlist, fail closed.
+All of D1-D8 below are **decided**; they supersede the open questions above.
+
+- **D1 (DECIDED):** order 1 -> 2 -> 3 -> 7, then 4, 5, 6. Permission and eval work de-risks the rest.
+- **D2 (DECIDED):** one GO per section, or per archive batch inside a section. No blanket GO.
+- **D3 (DECIDED):** the core serves /v1 directly once the OpenAPI snapshot is stable; `apps/api` stays a thin proxy only while external deploys still need it. Avoid two long-lived implementations.
+- **D4 (DECIDED):** no journal module yet (a minimal stub in the memory facade at most); add one only when a concrete ability needs it.
+- **D5 (DECIDED):** `realai/memory/sqlite_memory.py` is the candidate, pending the 4a inventory confirming it is the most complete and least divergent.
+- **D6 (DECIDED):** a new `packages/sdk` that re-exports the old names.
+- **D7 (DECIDED):** console and voice adopt the SDK after 6e (VS Code and the widget first).
+- **D8 (DECIDED):** local-only by default, explicit per-ability allowlist, fail closed.
