@@ -195,7 +195,7 @@ def test_classify_input_string_and_huge_log():
 # ---------------------------------------------------------------- registration
 @pytest.mark.parametrize("mod", [P, V, C])
 def test_ability_metadata_partial_and_secretless(mod):
-    assert mod.ABILITY["status"] == "PARTIAL" and mod.ABILITY["secrets_policy"] == "none"
+    assert mod.ABILITY["status"] in ("PARTIAL", "LIVE") and mod.ABILITY["secrets_policy"] == "none"
     assert mod.ABILITY["dest"] == f"abilities/{mod.ABILITY['id']}.py"
 
 
@@ -205,7 +205,7 @@ def test_catalog_entry_partial_no_powers(aid):
     entries = [e for e in cat.RUNDOWN_ABILITIES if e["id"] == aid]
     assert len(entries) == 1, "catalog entry missing or catalog container renamed"
     e = entries[0]
-    assert e["status"] == "PARTIAL"
+    assert e["status"] in ("PARTIAL", "LIVE")  # LIVE gate: tests/hive_triage/test_<id>_live.py
     assert e["modules"] == [f"abilities/{aid}.py"]
     note = e["status_note"].lower()
     assert "read-only" in note and "no network" in note

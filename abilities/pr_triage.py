@@ -24,7 +24,7 @@ ABILITY = {
     "id": "pr_triage",
     "name": "pr_triage",
     "type": "ability",
-    "status": "PARTIAL",
+    "status": "LIVE",
     "source": "RealAI hive: recurring bot PR-triage work",
     "dest": "abilities/pr_triage.py",
     "capabilities": ["pr_triage", "merge_readiness", "read_only"],

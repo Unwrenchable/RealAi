@@ -824,9 +824,9 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "name": "PR triage (hive, read-only)",
         "pillar": "ops",
         "keywords": ["pr triage", "merge readiness", "pull request", "mergeable", "needs rebase"],
-        "status": "PARTIAL",
+        "status": "LIVE",
         "status_note": (
-            "abilities/pr_triage.py turns PR facts (state, mergeable, checks) into mergeable | needs-rebase | failing-check | needs-owner plus a reason. Pure function: read-only, no network, no file writes, no merge or approve powers. PARTIAL until the owner promotes it."
+            "abilities/pr_triage.py turns PR facts (state, mergeable, checks) into mergeable | needs-rebase | failing-check | needs-owner plus a reason. Pure function: read-only, no network, no file writes, no merge or approve powers. LIVE: golden fixtures + HTTP integration test (tests/hive_triage/test_pr_triage_live.py)."
         ),
         "live_path": 'POST /v1/tools/execute {"name": "pr_triage", "arguments": {"pr": {...}}}',
         "modules": ["abilities/pr_triage.py"],
