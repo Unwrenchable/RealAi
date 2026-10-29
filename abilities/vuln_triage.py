@@ -20,7 +20,7 @@ ABILITY = {
     "id": "vuln_triage",
     "name": "vuln_triage",
     "type": "ability",
-    "status": "PARTIAL",
+    "status": "LIVE",
     "source": "RealAI hive: recurring bot vulnerability-triage work",
     "dest": "abilities/vuln_triage.py",
     "capabilities": ["vuln_triage", "dependency_audit", "read_only"],
