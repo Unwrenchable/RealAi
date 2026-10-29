@@ -108,7 +108,9 @@ try {
   verdict.error = String(err);
   try {
     await page.screenshot({ path: join(OUT, "console-error.png"), fullPage: true });
-  } catch (_) {}
+  } catch (_) {
+    /* best-effort screenshot; ignore failures */
+  }
 } finally {
   await browser.close();
 }

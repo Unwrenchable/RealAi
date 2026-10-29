@@ -43,3 +43,43 @@ jobs:
         run: pnpm run check:auth:plugins
       - name: Root node tests
         run: pnpm run test
+      - name: Root typecheck (tsc --noEmit)
+        run: pnpm run typecheck
+      - name: Root lint (app sources; legacy tools/ and ui/ are out of scope)
+        run: pnpm run lint:app
+      - name: Root vite build
+        run: pnpm exec vite build
+
+  # realai/voice has no lockfile or workspace entry. It is checked against the
+  # ROOT install (same better-auth / TanStack / React versions as root; Node
+  # resolves realai/voice imports up to ../../node_modules), so no second,
+  # unpinned install is introduced.
+  voice-app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - name: Voice auth tests
+        working-directory: realai/voice
+        run: node --experimental-strip-types --test src/lib/auth/gate-identity.test.ts src/lib/auth/credentials.test.ts src/lib/auth/plugin-guard.test.ts
+      - name: Voice vite build
+        working-directory: realai/voice
+        run: ../../node_modules/.bin/vite build
+      # Non-blocking until the pre-existing errors are fixed: they are in the
+      # voice trainer UI (studio.tsx, tts.ts, error-component.tsx,
+      # app-data/client.server.ts), which is off-limits without travis's GO.
+      - name: Voice typecheck (non-blocking, pre-existing errors)
+        continue-on-error: true
+        run: node_modules/.bin/tsc -p realai/voice/tsconfig.json --noEmit
+      - name: Voice lint (non-blocking, pre-existing errors)
+        continue-on-error: true
+        working-directory: realai/voice
+        run: ../../node_modules/.bin/eslint .
