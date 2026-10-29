@@ -2455,8 +2455,9 @@ WS_BINARY_SNIFF = 8192
 WS_READ_TOOLS = ("workspace_list", "workspace_read", "workspace_grep")
 WS_WRITE_TOOLS = ("workspace_write",)
 _WS_SKIP_DIRS = {"node_modules", "__pycache__", ".venv", "venv", ".mypy_cache", ".pytest_cache"}
-_WS_DENY_EXACT = {".env", ".git", ".npmrc", ".pypirc", ".netrc", ".realai"}
-_WS_DENY_SUFFIX = (".pem", ".key", ".p12", ".pfx", ".keystore")
+_WS_DENY_EXACT = {".env", ".git", ".npmrc", ".pypirc", ".netrc", ".realai", ".approvals.json", ".ssh", ".aws",
+                  ".docker", ".htpasswd"}
+_WS_DENY_SUFFIX = (".pem", ".key", ".p12", ".pfx", ".keystore", ".kdbx", ".tfstate")
 _WS_DENY_PREFIX = (".env.", "id_", "credentials")
 _FILE_ATTRIBUTE_REPARSE_POINT = 0x400
 _WS_POSIX = os.name != "nt" and os.open in getattr(os, "supports_dir_fd", set()) and hasattr(os, "O_NOFOLLOW")
@@ -2480,6 +2481,7 @@ def ws_denied_name(name: str) -> bool:
         or n.startswith(_WS_DENY_PREFIX)
         or n.endswith(_WS_DENY_SUFFIX)
         or "secret" in n
+        or (n.endswith(".json") and (n.startswith("keypair") or "wallet" in n))  # Solana keypairs / wallet files
     )
 
 

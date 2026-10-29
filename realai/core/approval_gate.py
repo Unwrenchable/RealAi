@@ -168,6 +168,26 @@ def _money_check(action: str, args: Dict[str, Any]) -> None:
         raise Refused("money_locked: sends/transfers/payouts/wallet signing are not available through approvals")
 
 
+PREVIEW_DIFF_MAX = 20000  # chars of diff shown on the approval card
+
+
+def _diff_preview(diff: str) -> Dict[str, Any]:
+    """Cut the card diff at PREVIEW_DIFF_MAX and say so (the full edit is still hash-bound via file_sha256 + args_sha)."""
+    out: Dict[str, Any] = {"diff": diff[:PREVIEW_DIFF_MAX]}
+    if len(diff) > PREVIEW_DIFF_MAX:
+        n = len(diff.encode())
+        out.update({"diff_truncated": True, "diff_bytes": n, "notice": f"diff truncated, {n} bytes total"})
+    return out
+
+
+def _check_write_size(text: str) -> None:
+    """Security #210 (c): enforce the write cap when the edit is requested, not only at execute."""
+    from realai.orchestration.v3_runtime_bridge import WS_MAX_WRITE_BYTES
+
+    if len(text.encode("utf-8")) > WS_MAX_WRITE_BYTES:
+        raise Refused(f"content_too_large (max {WS_MAX_WRITE_BYTES} bytes)")
+
+
 def _preview_edit(args: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     B, root, parts = _edit_target(args.get("file_path") or args.get("path") or "")
     old, new = str(args.get("old_string") or ""), str(args.get("new_string") or "")
@@ -182,21 +202,23 @@ def _preview_edit(args: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]
     if n > 1 and not args.get("replace_all"):
         raise Refused(f"old_string matches {n} times; pass replace_all or a longer old_string")
     updated = raw.replace(old, new) if args.get("replace_all") else raw.replace(old, new, 1)
+    _check_write_size(updated)
     rel = "/".join(parts)
     diff = "".join(difflib.unified_diff(raw.splitlines(True), updated.splitlines(True), f"a/{rel}", f"b/{rel}"))
     norm = {"file_path": rel, "old_string": old, "new_string": new, "replace_all": bool(args.get("replace_all"))}
-    return norm, {"kind": "diff", "file": rel, "diff": diff[:20000], "matches": n,
+    return norm, {"kind": "diff", "file": rel, **_diff_preview(diff), "matches": n,
                   "file_sha256": hashlib.sha256(raw.encode()).hexdigest()}
 
 
 def _preview_write(args: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     B, root, parts = _edit_target(args.get("file_path") or args.get("path") or "")
     content = str(args.get("content") or "")
+    _check_write_size(content)
     rel = "/".join(parts)
     cur = _edit_read(B, root, parts)
     raw = cur or ""
     diff = "".join(difflib.unified_diff(raw.splitlines(True), content.splitlines(True), f"a/{rel}", f"b/{rel}"))
-    return {"file_path": rel, "content": content}, {"kind": "diff", "file": rel, "diff": diff[:20000], "creates": cur is None,
+    return {"file_path": rel, "content": content}, {"kind": "diff", "file": rel, **_diff_preview(diff), "creates": cur is None,
                                                      "file_sha256": hashlib.sha256(raw.encode()).hexdigest()}
 
 
@@ -522,6 +544,7 @@ def request(action: str, args: Optional[Dict[str, Any]] = None, *, requested_by:
     if item is None:
         item = {"id": rid, "action": f"gate:{action}", "status": "pending",
                 "payload": {"gate": action, "args": norm, "preview": prev, "preview_sha": _sha(prev),
+                            "args_sha": _sha({"action": action, "args": norm}),
                             "workspace": str(workspace()), "requested_by": requested_by, "reason": reason[:500],
                             "created_at": round(time.time(), 3)}}
         data["items"].append(item)
@@ -557,7 +580,12 @@ def set_status(req_id: str, status: str, *, by: str) -> bool:
 
 
 def _run_edit(norm: Dict[str, Any], prev: Dict[str, Any]) -> Dict[str, Any]:
+    # Security #210 (a): the approved card names prev["file"]; a store edit of args.file_path must not redirect it.
+    if str(norm.get("file_path") or "") != str(prev.get("file") or ""):
+        raise Refused("target mismatch: file_path differs from the approved preview")
     B, root, parts = _edit_target(norm["file_path"])
+    if "/".join(parts) != prev.get("file"):
+        raise Refused("target mismatch: file_path differs from the approved preview")
     raw = _edit_read(B, root, parts) or ""
     if hashlib.sha256(raw.encode()).hexdigest() != prev.get("file_sha256"):
         raise Refused("stale: file changed since the request; re-request")
@@ -628,6 +656,8 @@ def execute(req_id: str, *, executor: str = "human") -> Dict[str, Any]:
     try:
         if _sha(prev) != pl.get("preview_sha"):
             raise Refused("preview hash mismatch")
+        if "args_sha" in pl and _sha({"action": action, "args": norm}) != pl["args_sha"]:
+            raise Refused("args hash mismatch")
         _money_check(action, norm)
         if action in ("search_replace", "write_file"):
             res = _run_edit(norm, prev)
@@ -693,6 +723,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     if a.cmd in ("approve", "reject"):
         pv = it["payload"]["preview"]
         print(pv.get("diff") or " ".join(pv.get("argv") or []) or json.dumps(pv, indent=2)[:4000])
+        if pv.get("notice"):
+            print(f"[{pv['notice']}]")
         if not sys.stdin.isatty() or input(f"Type the id to {a.cmd}: ").strip() != a.id:
             print("not confirmed")
             return 2
