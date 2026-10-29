@@ -183,7 +183,7 @@ Each Security review is scoped to these named artifacts:
 - **D7** When may the console and voice adopt the SDK (6e)?
 - **D8** Network policy for §3c: local-only by default, with a per-ability allow-list?
 
-## Decisions (travis, final, 2026-10-29) — approved in writing by travis in his chat with the RealAI owner bot on 2026-10-29 at 6:03 AM PT: he reviewed the proposed answers and replied "final".
+## Decisions (travis, final, 2026-10-29) — approved in writing by travis in his chat with the RealAI owner bot on 2026-10-29 at 6:03 AM PT: he reviewed the proposed answers and replied "final". He re-confirmed D1-D8 as final to Chief at 6:12 AM PT on 2026-10-29.
 
 All of D1-D8 below are **decided**; they supersede the open questions above.
 
