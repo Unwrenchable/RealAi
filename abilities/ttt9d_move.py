@@ -9,7 +9,7 @@ Call:  POST /v1/tools/execute {"name": "ttt9d_move", "arguments": {"state": {...
 Input (same schema as the JS engine's getMove(state, difficulty)):
     state = {"boards": [[9 x "X"|"O"|null] x 9], "activeBoard": 0..8 | null, "currentPlayer": "X"|"O"}
     difficulty = "easy" | "medium" | "hard" | "expert"   (default "medium")
-    optional: seed (int), iterations (int, clamped), max_seconds (float, clamped), commentary (bool)
+    optional: seed (int, 0 <= seed < 2**63), iterations (int, clamped), max_seconds (float, clamped), commentary (bool)
 Output:
     {"ok": true, "ability": "ttt9d_move", "move": {"board": b, "cell": c}, "eval": float in [-1, 1]
      (side-to-move perspective), "difficulty": ..., "iterations": n, "source": "realai",
@@ -26,6 +26,15 @@ import math
 import os
 import random
 import time
+
+try:  # file locking for the move log (fix 4)
+    import msvcrt  # type: ignore
+except ImportError:  # pragma: no cover - non-Windows
+    msvcrt = None  # type: ignore
+try:
+    import fcntl  # type: ignore
+except ImportError:  # pragma: no cover - Windows
+    fcntl = None  # type: ignore
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 
@@ -235,6 +244,23 @@ def clamp_seconds(v: Any) -> Optional[float]:
     return max(MIN_SECONDS, min(MAX_SECONDS, f))
 
 
+MAX_SEED = 2 ** 63
+
+
+def validate_seed(v: Any) -> int:
+    """Seed must be an integer with 0 <= seed < 2**63 (bools, floats with fractions, NaN rejected)."""
+    if isinstance(v, int) and not isinstance(v, bool):
+        n = v
+    else:
+        f = _number("seed", v)
+        if not f.is_integer():
+            raise ValueError("seed must be an integer")
+        n = int(f)
+    if not 0 <= n < MAX_SEED:
+        raise ValueError("seed must be in [0, 2**63)")
+    return n
+
+
 def get_move(state: Dict[str, Any], difficulty: str = "medium", seed: Optional[int] = None,
              iterations: Optional[int] = None, max_seconds: Optional[float] = None) -> Dict[str, Any]:
     level = difficulty if difficulty in DIFFICULTY else "medium"
@@ -243,7 +269,7 @@ def get_move(state: Dict[str, Any], difficulty: str = "medium", seed: Optional[i
     legal = _moves(s)
     if not legal:
         raise ValueError("no legal moves: game is over")
-    rng = random.Random(DEFAULT_SEED if seed is None else int(seed))
+    rng = random.Random(DEFAULT_SEED if seed is None else validate_seed(seed))
 
     def done(m: int, ev: float, iters: int) -> Dict[str, Any]:
         return {"move": {"board": m // 9, "cell": m % 9}, "eval": round(max(-1.0, min(1.0, ev)), 3),
@@ -298,23 +324,51 @@ def _log_path() -> Path:
     return Path(p)
 
 
+def _lock_fd(fd: int) -> None:
+    if msvcrt is not None:
+        os.lseek(fd, 0, os.SEEK_SET)
+        msvcrt.locking(fd, msvcrt.LK_LOCK, 1)
+    elif fcntl is not None:
+        fcntl.flock(fd, fcntl.LOCK_EX)
+
+
+def _unlock_fd(fd: int) -> None:
+    if msvcrt is not None:
+        os.lseek(fd, 0, os.SEEK_SET)
+        msvcrt.locking(fd, msvcrt.LK_UNLCK, 1)
+    elif fcntl is not None:
+        fcntl.flock(fd, fcntl.LOCK_UN)
+
+
+def _log_open_flags() -> int:
+    flags = os.O_WRONLY | os.O_APPEND | os.O_CREAT
+    flags |= getattr(os, "O_NOFOLLOW", 0)  # refuse symlinks where the OS supports it
+    flags |= getattr(os, "O_BINARY", 0)
+    return flags
+
+
 def _log(record: Dict[str, Any]) -> Dict[str, Any]:
-    """Append one record. Returns {"logged_to": path} or {"log_skipped": reason}."""
-    line = json.dumps(record, ensure_ascii=False) + "\n"
-    data = line.encode("utf-8")
+    """Append one record. Returns {"logged_to": "enabled"} or {"log_skipped": reason}.
+
+    Never returns a server path. Size comes from fstat on the open fd, under a lock.
+    """
+    data = (json.dumps(record, ensure_ascii=False) + "\n").encode("utf-8")
     if len(data) > MAX_RECORD_BYTES:
         return {"log_skipped": "record_too_large"}
     pp = _log_path()
-    try:
-        size = pp.stat().st_size
-    except FileNotFoundError:
-        size = 0
-    if size + len(data) > MAX_LOG_BYTES:
-        return {"log_skipped": "log_full"}
     pp.parent.mkdir(parents=True, exist_ok=True)
-    with pp.open("ab") as f:
-        f.write(data)
-    return {"logged_to": str(pp)}
+    fd = os.open(str(pp), _log_open_flags(), 0o600)
+    try:
+        _lock_fd(fd)
+        try:
+            if os.fstat(fd).st_size + len(data) > MAX_LOG_BYTES:
+                return {"log_skipped": "log_full"}
+            os.write(fd, data)
+        finally:
+            _unlock_fd(fd)
+    finally:
+        os.close(fd)
+    return {"logged_to": "enabled"}
 
 
 def run(input: str = "", context: Dict[str, Any] | None = None, **kwargs: Any) -> Dict[str, Any]:
@@ -346,9 +400,10 @@ def run(input: str = "", context: Dict[str, Any] | None = None, **kwargs: Any) -
     # ctx["log"] is ignored: callers can neither enable logging nor pick the file (M1).
     if _log_enabled():
         try:
+            board = to_public(parse_state(state))  # normalized board, not the raw caller state
             out.update(_log({
-                "ts": time.time(), "state": state, "difficulty": res["difficulty"], "move": res["move"],
+                "ts": time.time(), "state": board, "difficulty": res["difficulty"], "move": res["move"],
                 "eval": res["eval"], "iterations": res["iterations"]}))
-        except OSError as exc:
-            out["log_error"] = str(exc)
+        except (Exception, RecursionError):  # logging must never break the move
+            out["log_error"] = "log_failed"
     return out

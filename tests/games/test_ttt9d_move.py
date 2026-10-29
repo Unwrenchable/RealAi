@@ -114,7 +114,7 @@ def test_logging(tmp_path, monkeypatch):
     p = tmp_path / "ttt.jsonl"
     monkeypatch.setenv("REALAI_TTT9D_LOG", str(p))
     out = T.run(context={"state": T.empty_state(), "difficulty": "easy"})
-    assert out["logged_to"] == str(p)
+    assert out["logged_to"] == "enabled"
     rec = json.loads(p.read_text().splitlines()[0])
     assert rec["difficulty"] == "easy" and set(rec) >= {"state", "move", "eval", "iterations"}
 
@@ -124,7 +124,7 @@ def test_logging_defaults_to_data_dir(tmp_path, monkeypatch):
     monkeypatch.setenv("REALAI_DATA_DIR", str(tmp_path / "data"))
     out = T.run(context={"state": T.empty_state(), "difficulty": "easy", "log": True})
     expected = tmp_path / "data" / "games" / "ttt9d_moves.jsonl"
-    assert out["logged_to"] == str(expected) and expected.exists()
+    assert out["logged_to"] == "enabled" and expected.exists()
 
 
 def test_caller_log_path_is_ignored(tmp_path, monkeypatch):
@@ -134,7 +134,7 @@ def test_caller_log_path_is_ignored(tmp_path, monkeypatch):
     evil = tmp_path / "elsewhere" / "evil.jsonl"
     out = T.run(context={"state": T.empty_state(), "difficulty": "easy", "log": str(evil)})
     assert not evil.exists() and not evil.parent.exists()
-    assert out["logged_to"] == str(tmp_path / "data" / "games" / "ttt9d_moves.jsonl")
+    assert out["logged_to"] == "enabled" and (tmp_path / "data" / "games" / "ttt9d_moves.jsonl").exists()
 
 
 def test_no_logging_by_default(tmp_path, monkeypatch):
@@ -205,6 +205,116 @@ def test_m2_huge_budget_is_bounded_in_time():
     out = T.run(context={"state": T.empty_state(), "difficulty": "expert", "seed": 3,
                          "iterations": 10**9, "max_seconds": 0.3})
     assert out["ok"] and time.monotonic() - t0 < 5
+
+
+def test_low1_open_flags_and_mode(tmp_path, monkeypatch):
+    import os
+
+    p = tmp_path / "ttt.jsonl"
+    monkeypatch.setenv("REALAI_TTT9D_LOG", str(p))
+    seen = {}
+    real_open = os.open
+
+    def spy(path, flags, mode=0o777, *a, **k):
+        seen["flags"], seen["mode"] = flags, mode
+        return real_open(path, flags, mode, *a, **k)
+
+    monkeypatch.setattr(T.os, "open", spy)
+    T.run(context={"state": T.empty_state(), "difficulty": "easy"})
+    for f in ("O_WRONLY", "O_APPEND", "O_CREAT"):
+        assert seen["flags"] & getattr(os, f)
+    if hasattr(os, "O_NOFOLLOW"):
+        assert seen["flags"] & os.O_NOFOLLOW
+    assert seen["mode"] == 0o600
+
+
+@pytest.mark.skipif(not hasattr(__import__("os"), "O_NOFOLLOW"), reason="O_NOFOLLOW not available")
+def test_low1_symlink_refused(tmp_path, monkeypatch):
+    import os
+
+    target = tmp_path / "target.txt"
+    target.write_text("x")
+    link = tmp_path / "ttt.jsonl"
+    os.symlink(target, link)
+    monkeypatch.setenv("REALAI_TTT9D_LOG", str(link))
+    out = T.run(context={"state": T.empty_state(), "difficulty": "easy"})
+    assert out["ok"] and out["log_error"] == "log_failed" and target.read_text() == "x"
+
+
+def test_low1_size_from_fstat(tmp_path, monkeypatch):
+    p = tmp_path / "ttt.jsonl"
+    monkeypatch.setenv("REALAI_TTT9D_LOG", str(p))
+    calls = []
+    real = T.os.fstat
+    monkeypatch.setattr(T.os, "fstat", lambda fd: calls.append(fd) or real(fd))
+    T.run(context={"state": T.empty_state(), "difficulty": "easy"})
+    assert calls
+
+
+@pytest.mark.parametrize("bad", [-1, 2 ** 63, 1.5, True, "abc", float("nan"), [1]])
+def test_low2_bad_seed_rejected(bad):
+    out = T.run(context={"state": T.empty_state(), "difficulty": "hard", "seed": bad})
+    assert out["ok"] is False and "seed" in out["error"]
+
+
+def test_low2_good_seeds():
+    assert T.validate_seed(0) == 0 and T.validate_seed(2 ** 63 - 1) == 2 ** 63 - 1
+    assert T.validate_seed("42") == 42 and T.validate_seed(7.0) == 7
+
+
+def test_low3_logs_normalized_board(tmp_path, monkeypatch):
+    p = tmp_path / "ttt.jsonl"
+    monkeypatch.setenv("REALAI_TTT9D_LOG", str(p))
+    st = T.empty_state()
+    st["junk"] = "FAKE-extra-" + "z" * 50
+    st["boards"][0][0] = "X"
+    T.run(context={"state": st, "difficulty": "easy"})
+    rec = json.loads(p.read_text().splitlines()[0])
+    assert "junk" not in rec["state"] and "FAKE-extra" not in p.read_text()
+    assert rec["state"]["boards"][0][0] == "X"
+
+
+@pytest.mark.parametrize("exc", [RecursionError("deep"), OSError("disk"), ValueError("x")])
+def test_low3_log_failure_never_breaks_move(tmp_path, monkeypatch, exc):
+    monkeypatch.setenv("REALAI_TTT9D_LOG", str(tmp_path / "ttt.jsonl"))
+
+    def boom(_):
+        raise exc
+
+    monkeypatch.setattr(T, "_log", boom)
+    out = T.run(context={"state": T.empty_state(), "difficulty": "easy"})
+    assert out["ok"] and "move" in out and out["log_error"] == "log_failed"
+
+
+def test_low4_lock_held_around_fstat_and_write(tmp_path, monkeypatch):
+    p = tmp_path / "ttt.jsonl"
+    monkeypatch.setenv("REALAI_TTT9D_LOG", str(p))
+    events = []
+    real_fstat, real_write = T.os.fstat, T.os.write
+    monkeypatch.setattr(T, "_lock_fd", lambda fd: events.append("lock"))
+    monkeypatch.setattr(T, "_unlock_fd", lambda fd: events.append("unlock"))
+    monkeypatch.setattr(T.os, "fstat", lambda fd: events.append("fstat") or real_fstat(fd))
+    monkeypatch.setattr(T.os, "write", lambda fd, d: events.append("write") or real_write(fd, d))
+    T.run(context={"state": T.empty_state(), "difficulty": "easy"})
+    assert events == ["lock", "fstat", "write", "unlock"]
+
+
+def test_low4_real_lock_roundtrip(tmp_path, monkeypatch):
+    p = tmp_path / "ttt.jsonl"
+    monkeypatch.setenv("REALAI_TTT9D_LOG", str(p))
+    for _ in range(3):
+        assert T.run(context={"state": T.empty_state(), "difficulty": "easy"})["logged_to"] == "enabled"
+    assert len(p.read_text().splitlines()) == 3
+
+
+def test_low5_no_server_paths_in_output(tmp_path, monkeypatch):
+    p = tmp_path / "secretdir" / "ttt.jsonl"
+    monkeypatch.setenv("REALAI_TTT9D_LOG", str(p))
+    out = T.run(context={"state": T.empty_state(), "difficulty": "easy"})
+    assert out["logged_to"] == "enabled" and "secretdir" not in json.dumps(out)
+    monkeypatch.setattr(T, "_log", lambda r: (_ for _ in ()).throw(OSError(str(p))))
+    out = T.run(context={"state": T.empty_state(), "difficulty": "easy"})
+    assert out["log_error"] == "log_failed" and "secretdir" not in json.dumps(out)
 
 
 def test_tools_execute_routing():
