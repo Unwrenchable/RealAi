@@ -27,7 +27,7 @@ cd RealAi
 pip install -r requirements.txt
 ```
 
-`pip install -e .` does not work on `main` yet: `setup.py` lists a package directory that is missing (`realai-core/agent_tools/agents_impl`). Run from the repo root instead.
+`pip install -e .` installs the package (Python 3.11+).
 
 You also need a `llama-server` build with Vulkan and a GGUF model for local inference, and Node.js with `pnpm` for the UI.
 
