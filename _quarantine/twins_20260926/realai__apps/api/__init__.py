@@ -1,2 +1,0 @@
-"""ASGI API application package."""
-
