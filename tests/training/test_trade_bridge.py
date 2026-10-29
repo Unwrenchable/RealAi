@@ -68,8 +68,10 @@ def test_propose_preview_and_caps():
     assert not T.trade_propose({"from": "USDC", "to": "JUP", "amount": -1}, SIM)["ok"]
 
 
-def test_cli_missing():
-    os.environ.pop("REALAI_TRADE_CLI", None)
+def test_cli_missing(monkeypatch, tmp_path):
+    # Do not depend on whether this machine has the real CLI at the Windows default path.
+    monkeypatch.delenv("REALAI_TRADE_CLI", raising=False)
+    monkeypatch.setattr(T, "cli_path", lambda: tmp_path / "missing" / "realai.js")
     r = T.trade_research({"op": "health"}, {"trade_backend": "cli"})
     assert not r["ok"]
 
