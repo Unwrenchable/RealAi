@@ -20,7 +20,7 @@ ROUTING_TABLE: Dict[str, str] = {
     "specialists": "abilities.hierarchical_specialists",
     "secure_tools": "abilities.secure_tools",
     "memory": "abilities.hive_memory",
-    "domain": "abilities.hive_orchestrator",
+    "domain": "realai.orchestration.hive_router",  # spine 1b: was abilities.hive_orchestrator (archive verdict)
     "plugin": "core.plugins",
     "world_model": "core.world_model",
     "nests": "abilities.nest_orchestrators",
