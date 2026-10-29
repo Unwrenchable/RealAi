@@ -41,6 +41,9 @@ def mirror(tmp_path, monkeypatch):
     _w(ws / "README.md", "# RealAI\n\nworkspace copy\n")
     monkeypatch.setenv("REALAI_REPO_MIRROR", str(m))
     monkeypatch.setenv("REALAI_WORKSPACE", str(ws))
+    # approval-gated edits use the workspace tools' root + allowlist (Security #210 MED 6)
+    monkeypatch.setenv("REALAI_TOOLS_WORKSPACE_ROOT", str(ws))
+    monkeypatch.setenv("REALAI_TOOLS_ALLOW", "workspace_write")
     return m
 
 

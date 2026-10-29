@@ -15,7 +15,7 @@ There is also a separate cloud API, `python -m realai.api_server`, used for the 
 
 ## What works today
 
-Only abilities the catalog marks **LIVE** (65 of 78). Many are reached through `POST /v1/tools/execute`; the RackUp ones that go through `rackup_invoke` are for the RackUp pool app.
+Only abilities the catalog marks **LIVE** (66 of 78). Many are reached through `POST /v1/tools/execute`; the RackUp ones that go through `rackup_invoke` are for the RackUp pool app.
 
 | Ability (catalog id) | How to reach it |
 |---|---|
@@ -98,6 +98,7 @@ Only abilities the catalog marks **LIVE** (65 of 78). Many are reached through `
 | Next.js operator UI (`frontend_ui`) | http://127.0.0.1:3000 |
 | CLI surface (tools install) (`cli_surface`) | bin/realai*.cmd + realai.cli.craft |
 | Hive governance (`hive_governance`) | POST /v1/tools/execute ability.hive_governance (local agents + coverage) |
+| PR triage (hive, read-only) (`pr_triage`) | POST /v1/tools/execute ability.pr_triage |
 | Vulnerability triage (hive, read-only) (`vuln_triage`) | POST /v1/tools/execute ability.vuln_triage |
 
 ## Partial abilities
@@ -111,7 +112,6 @@ These exist in some form but are not finished. Do not rely on them yet.
 - **PARTIAL:** Git-learn (offline packet + coach stub) (`learn_git`)
 - **PARTIAL:** Training + fine-tune pipeline (`training_pipeline`)
 - **PARTIAL:** Chess engine (local Stockfish) (`chess_engine`)
-- **PARTIAL:** PR triage (hive, read-only) (`pr_triage`)
 - **PARTIAL:** CI failure classifier (hive, read-only) (`ci_failure_classify`)
 - **PARTIAL:** Synthetic organs runtime (organisms, curiosity, archeology) (`synthetic_organs_runtime`)
 - **PARTIAL:** Self-evolving diagnose/critic/proposal loop (`self_evolving`)

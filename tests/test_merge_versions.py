@@ -60,8 +60,14 @@ def test_rackup_money_abilities_carry_read_only_metadata():
         assert m.ABILITY["source"] == f"realai.plugins.rackup_coach.abilities.{ab}"
 
 
-def test_orchestrator_recovered_read_only_tool_names():
+def test_orchestrator_recovered_read_only_tool_names(tmp_path, monkeypatch):
     import realai.orchestration.v3_orchestrator as v
+
+    # workspace tools fail closed without REALAI_TOOLS_WORKSPACE_ROOT and refuse the repo root (Security #210)
+    (tmp_path / "abilities").mkdir()
+    (tmp_path / "abilities" / "x.py").write_text("x = 1\n", encoding="utf-8")
+    (tmp_path / "README.md").write_text("# RealAI\nline two\n", encoding="utf-8")
+    monkeypatch.setenv("REALAI_TOOLS_WORKSPACE_ROOT", str(tmp_path))
 
     assert v._run_tool("agent_info", {"agent_id": "definitely-missing"})["error"] == "agent_not_found"
     assert "entries" in v._run_tool("list_dir", {"target_directory": "abilities"})
