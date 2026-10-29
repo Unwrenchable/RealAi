@@ -209,6 +209,15 @@ if FastAPI is not None and BaseModel is not None:
     def tasks_get(task_id: str):
         return _dispatch_json('GET', '/v1/tasks/{0}'.format(task_id))
 
+    @app.post('/v1/tools/route')
+    async def tools_route(request: Request):
+        # Routes only (ranks tool names); never executes a tool. REALAI_TOOLS_ROUTE=0 disables (-> 404).
+        try:
+            payload = await request.json()
+        except ValueError:
+            payload = None
+        return _dispatch_json('POST', '/v1/tools/route', payload if isinstance(payload, dict) else {})
+
     @app.get('/health')
     def health():
         return _dispatch_json('GET', '/health')

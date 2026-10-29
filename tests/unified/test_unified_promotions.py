@@ -109,8 +109,9 @@ def test_catalog_rows_partial():
     from realai.ability_catalog import RUNDOWN_ABILITIES
 
     rows = {r["id"]: r for r in RUNDOWN_ABILITIES}
-    for rid in ("synthetic_organs_runtime", "self_evolving", "tool_router_plugins", "workspace_info"):
+    for rid in ("synthetic_organs_runtime", "self_evolving", "workspace_info"):
         assert rows[rid]["status"] == "PARTIAL"
+    assert rows["tool_router_plugins"]["status"] == "LIVE"  # tests/test_tool_router_live.py
 
 
 def test_unified_routes_off_by_default(home):

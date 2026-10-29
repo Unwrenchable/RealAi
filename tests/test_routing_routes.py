@@ -2,11 +2,15 @@
 from realai.server.router import dispatch_request
 
 
-def test_routing_routes_off_by_default(monkeypatch):
+def test_routing_routes_defaults(monkeypatch):
     monkeypatch.delenv("REALAI_ROUTING_ROUTES", raising=False)
     monkeypatch.delenv("REALAI_UNIFIED_ROUTES", raising=False)
     monkeypatch.delenv("REALAI_SERVER_MERGED_ROUTES", raising=False)
-    assert dispatch_request("POST", "/v1/providers/route", {})[0] == 404
+    monkeypatch.delenv("REALAI_TOOLS_ROUTE", raising=False)
+    assert dispatch_request("POST", "/v1/providers/route", {})[0] == 404  # still opt-in
+    code, body, _ = dispatch_request("POST", "/v1/tools/route", {"text": "search the web"})
+    assert code == 200 and body["selected"] == "web_search" and body["routing"]["executes"] is False
+    monkeypatch.setenv("REALAI_TOOLS_ROUTE", "0")  # opt out
     assert dispatch_request("POST", "/v1/tools/route", {"text": "search the web"})[0] == 404
 
 

@@ -941,9 +941,9 @@ RUNDOWN_ABILITIES: List[Dict[str, Any]] = [
         "name": "Tool router heuristics (provider/cost/latency)",
         "pillar": "advanced",
         "keywords": ["tool route", "router plugin"],
-        "status": "PARTIAL",
-        "status_note": "Promoted from RealAi-unified 763a4c2. Opt-in: not in FIRST_PARTY; HTTP route only with REALAI_UNIFIED_ROUTES=1. No network, no outside keys.",
-        "live_path": "POST /v1/tools/route (opt-in)",
+        "status": "LIVE",
+        "status_note": "Promoted from RealAi-unified 763a4c2. LIVE: POST /v1/tools/route is on by default (REALAI_TOOLS_ROUTE=0 disables); it ranks tool names only and never executes a tool. Not a FIRST_PARTY plugin. No network, no outside keys. HTTP integration test: tests/test_tool_router_live.py.",
+        "live_path": "POST /v1/tools/route (routes only, never executes)",
         "modules": ["realai/plugins/tool_router/__init__.py"],
     },
     {
