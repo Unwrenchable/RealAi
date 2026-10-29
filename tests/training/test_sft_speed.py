@@ -7,6 +7,20 @@ import pytest
 from realai.training import sft_batching as sb
 from realai.training import train_sft as T
 
+def _importorskip_transformers_torch():
+    """Skip when transformers is missing or cannot use the installed torch.
+
+    transformers 5.x needs torch >= 2.5; with an older torch it imports fine but
+    every model class raises ImportError ("requires the PyTorch library").
+    """
+    tr = pytest.importorskip("transformers")
+    from transformers.utils import is_torch_available
+
+    if not is_torch_available():
+        pytest.skip("transformers cannot use the installed torch (needs torch >= 2.5)")
+    return tr
+
+
 
 def _rows(n=23, seed=0):
     rng = random.Random(seed)
@@ -75,7 +89,7 @@ def test_length_stats_and_cap():
 
 def _tiny(attn="eager", seed=0, vocab=64):
     torch = pytest.importorskip("torch")
-    tr = pytest.importorskip("transformers")
+    tr = _importorskip_transformers_torch()
     cfg = tr.Qwen2Config(vocab_size=vocab, hidden_size=32, intermediate_size=64, num_hidden_layers=2,
                          num_attention_heads=4, num_key_value_heads=2, max_position_embeddings=256)
     cfg._attn_implementation = attn
@@ -147,7 +161,7 @@ def _ds(tmp_path, n=24):
                                     "--no-grad-checkpoint", "--len-pct", "99"]])
 def test_bench_end_to_end_on_cpu(tmp_path, monkeypatch, extra):
     torch, model = _tiny(vocab=128)
-    tr = pytest.importorskip("transformers")
+    tr = _importorskip_transformers_torch()
     pytest.importorskip("peft")
     monkeypatch.setenv("REALAI_HOME", str(tmp_path))
     monkeypatch.setattr(tr.AutoTokenizer, "from_pretrained", classmethod(lambda cls, *a, **k: _Tok()))
@@ -171,7 +185,7 @@ def test_bench_end_to_end_on_cpu(tmp_path, monkeypatch, extra):
 
 def test_oom_splits_micro_batch_and_keeps_training(tmp_path, monkeypatch):
     torch, model = _tiny(vocab=128)
-    tr = pytest.importorskip("transformers")
+    tr = _importorskip_transformers_torch()
     pytest.importorskip("peft")
     monkeypatch.setenv("REALAI_HOME", str(tmp_path))
     monkeypatch.setattr(tr.AutoTokenizer, "from_pretrained", classmethod(lambda cls, *a, **k: _Tok()))
