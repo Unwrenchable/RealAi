@@ -11,5 +11,5 @@ if errorlevel 1 (
   echo Port 8081 is already in use. Not starting.
   exit /b 1
 )
-start "RealAI hive :8081" cmd /k ""C:\llama-vulkan\llama-server.exe" -m "%REALAI_8081_GGUF%" --alias realai-hive-3b --host 127.0.0.1 --port 8081 -c 4096 -ngl 99 --device Vulkan1 --jinja -fa off"
+start "RealAI hive :8081" cmd /k ""C:\llama-vulkan\llama-server.exe" -m "%REALAI_8081_GGUF%" --alias realai-hive-3b --host 127.0.0.1 --port 8081 -c 16384 -ngl 99 --device Vulkan1 --jinja -fa off"
 echo Started %REALAI_8081_GGUF% on http://127.0.0.1:8081 (check /health)
