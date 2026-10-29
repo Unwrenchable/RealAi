@@ -2544,7 +2544,7 @@ def _ws_read(root: Path, a: Dict[str, Any]) -> Dict[str, Any]:
     limit = _ws_int(a.get("limit"), 80, 1, WS_MAX_LINES)
     lines = p.read_text(encoding="utf-8", errors="replace").splitlines()
     chunk = lines[start - 1 : start - 1 + limit]
-    return {"ok": True, "path": _ws_rel(root, p), "start": start, "lines": chunk, "total_lines": len(lines)}
+    return {"ok": True, "path": _ws_rel(root, p), "start": start, "lines": chunk, "content": "\n".join(chunk), "total_lines": len(lines)}
 
 
 def _ws_grep(root: Path, a: Dict[str, Any]) -> Dict[str, Any]:
