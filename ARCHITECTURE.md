@@ -1,6 +1,6 @@
 # RealAI architecture — one product, one tree
 
-**Branch authority:** `live/realai-clean-20260911` is the product.
+**Branch authority:** `main` is the product.
 This file is the layout contract. Older docs (`docs/architecture.md`, `docs/structure.md`, root `AGENTS.md`) describe earlier eras. When they disagree, this file wins.
 
 v1, v2, and v3 are **layers of one intelligence**, not sibling repos and not version folders. Code from every era that is still useful lives *inside* the live package under a stable name.

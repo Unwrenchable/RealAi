@@ -1,6 +1,6 @@
 # Reorg phases — live stays runnable the whole time
 
-Never merge `recovery/*` or `main` onto live. Each phase is one PR into `live/realai-clean-20260911`.
+Never merge `recovery/*` or `archive/main-legacy` onto `main`. Each phase is one PR into `main`.
 
 ## Phase 0 — contract (this branch)
 

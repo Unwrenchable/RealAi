@@ -12,17 +12,17 @@
 
 | Repo | Default integration branch | Treat as |
 |------|----------------------------|----------|
-| **RealAI** (`Unwrenchable/RealAi`) | `live/realai-clean-20260911` | **main** for merges |
+| **RealAI** (`Unwrenchable/RealAi`) | `main` | `main` for merges |
 | Foreign product repos (Rack_em_up, Atomic Fizz, Caps, …) | **That repo’s GitHub default** (usually `main`) | Same rule, their default |
 
-RealAI PRs **must** open against `live/realai-clean-20260911`.  
-Do not open RealAI work against `main` unless the task is an **explicit** `main` ↔ live sync.
+RealAI PRs **must** open against `main`.  
+Do not open RealAI work against `archive/main-legacy` unless the task is an **explicit** `archive/main-legacy` ↔ live sync.
 
 ---
 
 ## 1. Cloud / Craft PRs
 
-1. Branch from `live/realai-clean-20260911` (or the foreign repo’s default).
+1. Branch from `main` (or the foreign repo’s default).
 2. Open the PR **against that same default**.
 3. After merge, **delete the head branch**.
 4. Do not leave `cursor/*` (or other agent) branches after close, hold, or merge.
@@ -31,14 +31,14 @@ Orphan head branches break the “always contribute into live” contract. Close
 
 ---
 
-## 2. `main` is legacy here
+## 2. `archive/main-legacy` is legacy here
 
-On RealAI, `main` is **legacy** unless a task explicitly syncs it with live.
+On RealAI, `archive/main-legacy` (the old `main`) is **legacy** unless a task explicitly syncs it with live.
 
 | Do | Do not |
 |----|--------|
-| Merge features into `live/realai-clean-20260911` | Treat `main` as the daily integration branch |
-| Sync `main` only when asked | Open Cloud/Craft PRs at `main` “because that’s usual” |
+| Merge features into `main` | Treat `archive/main-legacy` as the daily integration branch |
+| Sync `archive/main-legacy` only when asked | Open Cloud/Craft PRs at `main` “because that’s usual” |
 | Prefer live in docs, CI, and agent base-branch settings | Leave work sitting on `cursor/*` after the PR is done |
 
 ---

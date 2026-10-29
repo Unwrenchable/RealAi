@@ -1,5 +1,5 @@
 # Park nested dumps out of the live package.
-# Run from C:\RealAI-clean AFTER pulling live/realai-clean-20260911.
+# Run from C:\RealAI-clean AFTER pulling main.
 # Does not delete. Moves trees into _quarantine so import realai stays clean.
 # One copier: extend $Candidates. Do not add a second script.
 # Does not write shims. Leave a dest-empty shim by hand only when rg finds a live importer.
