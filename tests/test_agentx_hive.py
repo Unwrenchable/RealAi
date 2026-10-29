@@ -101,6 +101,9 @@ def test_guardian_defaults_to_safe_and_blocks_writes():
 @pytest.fixture()
 def ws(tmp_path, monkeypatch):
     monkeypatch.setenv("REALAI_WORKSPACE", str(tmp_path))
+    # approval-gated edits use the workspace tools' root + allowlist (Security #210 MED 6)
+    monkeypatch.setenv("REALAI_TOOLS_WORKSPACE_ROOT", str(tmp_path))
+    monkeypatch.setenv("REALAI_TOOLS_ALLOW", "workspace_write")
     monkeypatch.setenv("REALAI_APPROVALS_STORE", str(tmp_path / ".approvals.json"))
     monkeypatch.setenv("APPROVALS_STORE", str(tmp_path / ".approvals.json"))
     monkeypatch.delenv("REALAI_APPROVALS_AUDIT", raising=False)

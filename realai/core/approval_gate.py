@@ -141,6 +141,9 @@ def _edit_target(rel: Any):
         root = B.workspace_root()
         parts = B.ws_parts(rel)
     except B.WorkspacePathError as e:
+        if e.code in ("absolute_path_not_allowed", "unc_path_not_allowed", "path_traversal_not_allowed",
+                      "outside_workspace"):
+            raise Refused(f"path outside workspace ({e.code})") from None  # message kept for existing callers
         raise Refused(e.code) from None
     if not parts:
         raise Refused("path required")
