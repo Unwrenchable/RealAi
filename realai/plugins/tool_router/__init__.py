@@ -1,5 +1,5 @@
 """Plugin-based tool router heuristics (promoted from RealAi-unified 763a4c2,
-realai/server/router_plug.py). Status: PARTIAL, opt-in plugin. Pure scoring, no I/O."""
+realai/server/router_plug.py). Status: LIVE via POST /v1/tools/route (default on, routes only). Pure scoring, no I/O."""
 
 from __future__ import annotations
 
@@ -84,7 +84,7 @@ def route(text: str, allowed_tools: Optional[List[str]] = None, provider: Option
 def register(model: Any = None, config: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     if model is not None:
         setattr(model, 'route_tool', route)
-    return {'name': 'tool_router', 'ok': True, 'status': 'PARTIAL', 'methods': ['route_tool']}
+    return {'name': 'tool_router', 'ok': True, 'status': 'LIVE', 'methods': ['route_tool']}
 
 
 def invoke(ability: str, payload: Dict[str, Any], context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:

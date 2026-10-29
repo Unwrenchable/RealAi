@@ -1,8 +1,11 @@
 """Read-only routing introspection for :8000, recovered from git ref origin/RealAi-unified
 (realai/server/router.py handle_provider_route / handle_tool_route, blob 4d823814b3; never merged).
 
-OFF by default. Enabled only with REALAI_ROUTING_ROUTES=1, and consulted by ``dispatch_request`` after
-every built-in route misses. Default :8000 behaviour (404 for these paths) is unchanged.
+Consulted by ``dispatch_request`` after every built-in route misses.
+
+  * POST /v1/tools/route is ON by default (tool_router_plugins LIVE). Opt out with REALAI_TOOLS_ROUTE=0.
+    It only ranks tool names; it never executes a tool, calls a provider, or touches files.
+  * POST /v1/providers/route stays OFF unless REALAI_ROUTING_ROUTES=1.
 
   POST /v1/providers/route  {"model": "<id>"?}               -> which provider/backend would serve the model
   POST /v1/tools/route      {"text": "...", "allowed_tools": [...]?, "provider": "...",
@@ -19,10 +22,22 @@ from typing import Any, Dict, Optional, Tuple
 
 JSON = "application/json"
 FLAG = "REALAI_ROUTING_ROUTES"
+TOOLS_ROUTE_FLAG = "REALAI_TOOLS_ROUTE"
+MAX_TEXT_CHARS = 20_000
+MAX_ALLOWED_TOOLS = 500
+MAX_TOOL_NAME_CHARS = 128
+MAX_PROVIDER_CHARS = 64
 
 
 def enabled() -> bool:
     return os.environ.get(FLAG, "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+def tools_route_enabled() -> bool:
+    """Default ON; REALAI_TOOLS_ROUTE=0/false/no/off disables. REALAI_ROUTING_ROUTES=1 also enables it."""
+    if enabled():
+        return True
+    return os.environ.get(TOOLS_ROUTE_FLAG, "1").strip().lower() not in {"0", "false", "no", "off"}
 
 
 def _bad(msg: str) -> Tuple[int, Dict[str, Any], str]:
@@ -65,11 +80,19 @@ def handle_tool_route(payload: Dict[str, Any]) -> Tuple[int, Dict[str, Any], str
     text = payload.get("text")
     if not isinstance(text, str) or not text.strip():
         return _bad("text is required.")
+    if len(text) > MAX_TEXT_CHARS:
+        return _bad("text is too long.")
     allowed = payload.get("allowed_tools")
     if not isinstance(allowed, list) or not allowed:
         allowed = [t["name"] for t in TOOLS.list_tools() if isinstance(t, dict) and t.get("name")]
+    if len(allowed) > MAX_ALLOWED_TOOLS:
+        return _bad("too many allowed_tools.")
     allowed = [a for a in allowed if isinstance(a, str)]
+    if any(len(a) > MAX_TOOL_NAME_CHARS for a in allowed):
+        return _bad("allowed_tools entry is too long.")
     provider = payload.get("provider") if isinstance(payload.get("provider"), str) else "local"
+    if len(provider) > MAX_PROVIDER_CHARS:
+        return _bad("provider is too long.")
 
     ranked = route(text, allowed, provider)
     # RealAi-unified fell back to the first allowed tool when nothing matched.
@@ -96,7 +119,6 @@ def handle_tool_route(payload: Dict[str, Any]) -> Tuple[int, Dict[str, Any], str
 
     return 200, {
         "ok": True,
-        "text": text,
         "selected": selected,
         "candidates": ranked.get("candidates", []),
         "provider": provider,
@@ -112,11 +134,11 @@ def handle_tool_route(payload: Dict[str, Any]) -> Tuple[int, Dict[str, Any], str
 
 
 def dispatch(method: str, path: str, payload: Any = None) -> Optional[Tuple[int, Dict[str, Any], str]]:
-    if not enabled() or method != "POST":
+    if method != "POST":
         return None
     body = payload if isinstance(payload, dict) else {}
-    if path == "/v1/providers/route":
-        return handle_provider_route(body)
-    if path == "/v1/tools/route":
+    if path == "/v1/tools/route" and tools_route_enabled():
         return handle_tool_route(body)
+    if path == "/v1/providers/route" and enabled():
+        return handle_provider_route(body)
     return None
