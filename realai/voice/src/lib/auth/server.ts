@@ -40,6 +40,7 @@ import { emailAndPasswordEnabled } from "./email-password";
 import { GATE_PROVIDER_ID, gateIdentitySessions } from "./gate-session.server";
 import { GROK_PROVIDERS } from "./providers";
 import { pgliteDialect } from "./pglite-dialect";
+import { assertNoForbiddenPlugins } from "./plugin-guard";
 import { GROK_ISSUER_DEFAULT, PREVIEW_ALLOWED_HOSTS } from "./preview";
 import { resolveGrokCredentials } from "./credentials";
 
@@ -193,9 +194,11 @@ export const auth = betterAuth({
         ...GROK_PROVIDERS.map((p) => p.providerId),
         GATE_PROVIDER_ID,
       ],
-      // X's synthetic email is never "verified", so don't gate linking on the
-      // local user's email-verified state.
-      requireLocalEmailVerified: false,
+      // Only link a federated identity onto an existing local user whose email
+      // is verified (prevents pre-registration takeover of unverified accounts).
+      // New users signing in via the broker (incl. X's synthetic email) are
+      // unaffected; only linking onto an UNVERIFIED existing user is refused.
+      requireLocalEmailVerified: true,
     },
   },
 
@@ -246,6 +249,10 @@ export const auth = betterAuth({
     tanstackStartCookies(),
   ],
 });
+
+// Fail closed at startup if a forbidden plugin (magic-link / oauth-proxy) is
+// ever registered, whatever the source says.
+assertNoForbiddenPlugins(auth.options.plugins);
 
 export function readSessionToken(): string | null {
   return getCookie(SESSION_TOKEN_COOKIE) ?? null;

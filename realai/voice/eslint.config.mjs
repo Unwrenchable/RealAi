@@ -42,6 +42,26 @@ export default tseslint.config(
       "@typescript-eslint/no-explicit-any": "off",
     },
   },
+  // Ban Better Auth plugins behind Dependabot criticals (OAuth-state account
+  // takeover). Also enforced in CI by scripts/check-auth-plugins.mjs and at
+  // startup by src/lib/auth/plugin-guard.ts.
+  {
+    files: ["**/*.{ts,tsx,js,jsx,mjs,cjs}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            { name: "better-auth/plugins", importNames: ["magicLink", "oAuthProxy"], message: "magic-link / oauth-proxy are banned (security)." },
+            { name: "better-auth/client/plugins", importNames: ["magicLinkClient"], message: "magic-link is banned (security)." },
+          ],
+          patterns: [
+            { group: ["better-auth/plugins/magic-link", "better-auth/plugins/magic-link/*", "better-auth/plugins/oauth-proxy", "better-auth/plugins/oauth-proxy/*"], message: "magic-link / oauth-proxy are banned (security)." },
+          ],
+        },
+      ],
+    },
+  },
   // Disable rules that conflict with Prettier formatting.
   prettier,
 );
