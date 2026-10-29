@@ -2416,34 +2416,226 @@ def _web_research(query: str, max_results: int = 5) -> Dict[str, Any]:
         }
 
 
+# ---------------------------------------------------------------------------
+# Workspace file tools (B3 piece 1): confined, capped, read-only by default.
+# ---------------------------------------------------------------------------
+WS_MAX_READ_BYTES = 1_000_000
+WS_MAX_WRITE_BYTES = 256_000
+WS_MAX_LINES = 200
+WS_MAX_LIST = 200
+WS_MAX_GREP_FILES = 2000
+WS_MAX_GREP_HITS = 40
+WS_MAX_GREP_FILE_BYTES = 1_000_000
+WS_MAX_PATTERN = 200
+WS_MAX_PATH = 1024
+WS_READ_TOOLS = ("workspace_list", "workspace_read", "workspace_grep")
+WS_WRITE_TOOLS = ("workspace_write",)
+_WS_SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv", ".mypy_cache", ".pytest_cache"}
+
+
+class WorkspacePathError(ValueError):
+    """Rejected path; .code is a stable, path-free reason."""
+
+    def __init__(self, code: str) -> None:
+        super().__init__(code)
+        self.code = code
+
+
+def workspace_root() -> Path:
+    """Confinement root: REALAI_TOOLS_WORKSPACE_ROOT, else craft's project workspace."""
+    raw = os.environ.get("REALAI_TOOLS_WORKSPACE_ROOT", "").strip()
+    if raw:
+        root = Path(raw)
+    else:
+        from realai.cli import craft
+
+        root = craft._ws()
+    return root.resolve(strict=True)
+
+
+def _ws_is_link(p: Path) -> bool:
+    try:
+        if p.is_symlink():
+            return True
+        is_junction = getattr(p, "is_junction", None)
+        return bool(is_junction and is_junction())
+    except OSError:
+        return True
+
+
+def ws_resolve(root: Path, rel: Any) -> Path:
+    """Resolve a caller path inside root. Rejects absolute/UNC/drive paths, '..', NUL and any symlink hop."""
+    from pathlib import PurePosixPath, PureWindowsPath
+
+    s = "." if rel is None or rel == "" else rel
+    if not isinstance(s, str):
+        raise WorkspacePathError("bad_path_type")
+    if len(s) > WS_MAX_PATH or "\x00" in s:
+        raise WorkspacePathError("bad_path")
+    if s.startswith(("\\\\", "//")):
+        raise WorkspacePathError("unc_path_not_allowed")
+    w = PureWindowsPath(s)
+    if s.startswith(("/", "\\")) or w.drive or w.is_absolute() or PurePosixPath(s).is_absolute() or ":" in s:
+        raise WorkspacePathError("absolute_path_not_allowed")
+    parts = [x for x in re.split(r"[\\/]+", s) if x not in ("", ".")]
+    if any(x == ".." for x in parts):
+        raise WorkspacePathError("path_traversal_not_allowed")
+    cur = root
+    for part in parts:
+        cur = cur / part
+        if _ws_is_link(cur):
+            raise WorkspacePathError("symlink_not_allowed")
+    resolved = cur.resolve(strict=False)
+    try:
+        resolved.relative_to(root)
+    except ValueError:
+        raise WorkspacePathError("outside_workspace") from None
+    return resolved
+
+
+def _ws_rel(root: Path, p: Path) -> str:
+    r = p.relative_to(root).as_posix()
+    return r or "."
+
+
+def _ws_int(v: Any, default: int, lo: int, hi: int) -> int:
+    if v is None or v == "":
+        return default
+    if isinstance(v, bool):
+        raise WorkspacePathError("bad_number")
+    try:
+        n = int(v)
+    except (TypeError, ValueError):
+        raise WorkspacePathError("bad_number") from None
+    return max(lo, min(hi, n))
+
+
+def _ws_write_allowed() -> bool:
+    allow = {x.strip() for x in os.environ.get("REALAI_TOOLS_ALLOW", "").split(",") if x.strip()}
+    return "workspace_write" in allow
+
+
+def _ws_list(root: Path, a: Dict[str, Any]) -> Dict[str, Any]:
+    p = ws_resolve(root, a.get("path"))
+    if not p.exists():
+        return {"ok": False, "error": "not_found"}
+    if p.is_file():
+        return {"ok": True, "path": _ws_rel(root, p), "type": "file", "size": p.stat().st_size}
+    entries = []
+    truncated = False
+    for child in sorted(p.iterdir(), key=lambda x: (not x.is_dir(), x.name.lower())):
+        if child.name in _WS_SKIP_DIRS:
+            continue
+        if len(entries) >= WS_MAX_LIST:
+            truncated = True
+            break
+        kind = "link" if _ws_is_link(child) else ("dir" if child.is_dir() else "file")
+        entries.append({"name": child.name, "type": kind})
+    return {"ok": True, "path": _ws_rel(root, p), "entries": entries, "truncated": truncated}
+
+
+def _ws_read(root: Path, a: Dict[str, Any]) -> Dict[str, Any]:
+    p = ws_resolve(root, a.get("path"))
+    if not p.is_file():
+        return {"ok": False, "error": "not_a_file"}
+    if p.stat().st_size > WS_MAX_READ_BYTES:
+        return {"ok": False, "error": "file_too_large", "max_bytes": WS_MAX_READ_BYTES}
+    start = _ws_int(a.get("start"), 1, 1, 10_000_000)
+    limit = _ws_int(a.get("limit"), 80, 1, WS_MAX_LINES)
+    lines = p.read_text(encoding="utf-8", errors="replace").splitlines()
+    chunk = lines[start - 1 : start - 1 + limit]
+    return {"ok": True, "path": _ws_rel(root, p), "start": start, "lines": chunk, "total_lines": len(lines)}
+
+
+def _ws_grep(root: Path, a: Dict[str, Any]) -> Dict[str, Any]:
+    import fnmatch
+
+    pattern = a.get("pattern")
+    if not isinstance(pattern, str) or not pattern or len(pattern) > WS_MAX_PATTERN:
+        return {"ok": False, "error": "bad_pattern"}
+    glob = str(a.get("glob") or "*")[:100]
+    base = ws_resolve(root, a.get("path"))
+    hits: List[Dict[str, Any]] = []
+    scanned = 0
+    for dirpath, dirnames, filenames in os.walk(base, followlinks=False):
+        d = Path(dirpath)
+        dirnames[:] = [x for x in dirnames if x not in _WS_SKIP_DIRS and not _ws_is_link(d / x)]
+        for fn in filenames:
+            if not fnmatch.fnmatch(fn, glob):
+                continue
+            f = d / fn
+            if _ws_is_link(f):
+                continue
+            scanned += 1
+            if scanned > WS_MAX_GREP_FILES:
+                return {"ok": True, "hits": hits, "truncated": True}
+            try:
+                if f.stat().st_size > WS_MAX_GREP_FILE_BYTES:
+                    continue
+                text = f.read_text(encoding="utf-8", errors="ignore")
+            except OSError:
+                continue
+            for i, line in enumerate(text.splitlines(), 1):
+                if pattern in line:  # literal match: no regex, no ReDoS
+                    hits.append({"path": _ws_rel(root, f), "line": i, "text": line[:300]})
+                    if len(hits) >= WS_MAX_GREP_HITS:
+                        return {"ok": True, "hits": hits, "truncated": True}
+    return {"ok": True, "hits": hits, "truncated": False}
+
+
+def _ws_write(root: Path, a: Dict[str, Any]) -> Dict[str, Any]:
+    if not _ws_write_allowed():
+        return {"ok": False, "error": "write_not_allowed",
+                "message": "workspace_write is off; add it to REALAI_TOOLS_ALLOW to enable."}
+    content = a.get("content", "")
+    if not isinstance(content, str):
+        return {"ok": False, "error": "bad_content"}
+    data = content.encode("utf-8")
+    if len(data) > WS_MAX_WRITE_BYTES:
+        return {"ok": False, "error": "content_too_large", "max_bytes": WS_MAX_WRITE_BYTES}
+    mode = str(a.get("mode") or "overwrite")
+    if mode not in ("overwrite", "append"):
+        return {"ok": False, "error": "bad_mode"}
+    if not a.get("path"):
+        return {"ok": False, "error": "bad_path"}
+    p = ws_resolve(root, a.get("path"))
+    if p == root or p.is_dir():
+        return {"ok": False, "error": "not_a_file"}
+    if mode == "append" and p.exists() and p.stat().st_size + len(data) > WS_MAX_READ_BYTES:
+        return {"ok": False, "error": "file_too_large", "max_bytes": WS_MAX_READ_BYTES}
+    p.parent.mkdir(parents=True, exist_ok=True)
+    ws_resolve(root, _ws_rel(root, p))  # re-check after mkdir (no link raced in)
+    flags = os.O_WRONLY | os.O_CREAT | (os.O_APPEND if mode == "append" else os.O_TRUNC)
+    flags |= getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_BINARY", 0)
+    fd = os.open(str(p), flags, 0o644)
+    try:
+        os.write(fd, data)
+    finally:
+        os.close(fd)
+    return {"ok": True, "path": _ws_rel(root, p), "bytes": len(data), "mode": mode}
+
+
 def workspace_tool(
     name: str, arguments: Optional[Dict[str, Any]] = None
 ) -> Dict[str, Any]:
-    """File tools rooted at REALAI_WORKSPACE (portable projects)."""
-    arguments = arguments or {}
-    try:
-        from realai.cli import craft
+    """Confined file tools. Read-only by default; workspace_write needs REALAI_TOOLS_ALLOW.
 
-        if name == "workspace_list":
-            return craft.tool_list(str(arguments.get("path") or "."))
-        if name == "workspace_read":
-            return craft.tool_read(
-                str(arguments.get("path") or ""),
-                start=int(arguments.get("start") or 1),
-                limit=int(arguments.get("limit") or 80),
-            )
-        if name == "workspace_grep":
-            return craft.tool_grep(
-                str(arguments.get("pattern") or ""),
-                path=str(arguments.get("path") or "."),
-                glob=str(arguments.get("glob") or "*"),
-            )
-        if name == "workspace_write":
-            return craft.tool_write(
-                str(arguments.get("path") or ""),
-                content=str(arguments.get("content") or ""),
-                mode=str(arguments.get("mode") or "overwrite"),
-            )
-    except Exception as e:
-        return {"ok": False, "error": str(e)}
-    return {"ok": False, "error": f"unknown_workspace_tool:{name}"}
+    Auth, allowlist, rate limit and audit come from /v1/tools/execute (tool_auth, #195).
+    Errors are stable codes and never echo server paths.
+    """
+    a = arguments if isinstance(arguments, dict) else {}
+    handlers = {"workspace_list": _ws_list, "workspace_read": _ws_read,
+                "workspace_grep": _ws_grep, "workspace_write": _ws_write}
+    fn = handlers.get(name)
+    if fn is None:
+        return {"ok": False, "error": f"unknown_workspace_tool:{name}"}
+    try:
+        root = workspace_root()
+    except OSError:
+        return {"ok": False, "error": "workspace_unavailable"}
+    try:
+        return fn(root, a)
+    except WorkspacePathError as e:
+        return {"ok": False, "error": e.code}
+    except OSError:
+        return {"ok": False, "error": "io_error"}

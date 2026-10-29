@@ -62,3 +62,10 @@ Searched `C:\RealAI-clean`, `C:\tools\realai`, `C:\Users\tsmit\realai_unified_ap
 
 No caller sends a bearer token yet. Turning the flag on breaks every row above until that caller sends
 `Authorization: Bearer $REALAI_TOOLS_TOKEN` and its tools are on the allowlist. Roll out caller by caller, then flip the flag.
+
+## Workspace tools (B3 piece 1)
+
+`workspace_list`, `workspace_read` and `workspace_grep` are in the default allowlist. They are confined to the workspace root (`REALAI_TOOLS_WORKSPACE_ROOT`, else the craft project workspace): absolute, drive, UNC and `..` paths are refused, and any symlink or junction on the path is refused. Caps: read 1 MB per file and 200 lines per call, list 200 entries, grep 2000 files / 40 hits / 1 MB per file, literal patterns up to 200 chars.
+
+`workspace_write` is off by default. It runs only when `workspace_write` is listed in `REALAI_TOOLS_ALLOW` (and over HTTP it still goes through the approval gate). Writes are capped at 256 KB and opened with O_NOFOLLOW where the OS has it.
+
