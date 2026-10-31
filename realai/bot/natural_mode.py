@@ -255,6 +255,13 @@ def named_workspace_paths(text: str) -> List[str]:
         canon = canonicalize_named_path(token, remap_readme=remap_readme)
         if not canon or not _looks_like_file(canon):
             return
+        try:
+            from realai.orchestration.v3_runtime_bridge import _auto_read_allowed
+
+            if not _auto_read_allowed(canon):
+                return  # denylisted or non-code bare name: never auto-read
+        except Exception:
+            return
         key = canon.lower()
         # Prefer the critic's README alias over a second root README read.
         if key == "readme.md" and "apps/vscode/readme.md" in seen:

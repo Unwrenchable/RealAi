@@ -1234,12 +1234,55 @@ def _extract_workspace_paths(task: str) -> List[str]:
 
         for p in mentioned_paths(task):
             low = p.lower().rstrip("/")
+            if not _auto_read_allowed(p):
+                continue  # tagged unverified in the reply, never auto-read
             if any(f.lower() == low or f.lower().endswith("/" + low) for f in found):
                 continue
             _add(p)
     except Exception:
         pass
-    return found[:5]
+    return [p for p in found if not _path_denied(p)][:5]
+
+
+# Bare filenames are auto-read only for these deliberate code/doc extensions.
+# Data, logs, configs (.ini/.env/.yaml/...) and binaries are never auto-read.
+AUTO_READ_BARE_EXTS = frozenset(
+    {".py", ".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".md", ".txt", ".rst",
+     ".html", ".css", ".json"}
+)
+
+
+def _path_denied(path: str) -> bool:
+    parts = [c for c in (path or "").replace("\\", "/").split("/") if c]
+    return any(ws_denied_name(c) for c in parts)
+
+
+def _auto_read_allowed(path: str) -> bool:
+    """Folders and slashed paths follow the denylist; bare names need the allowlist."""
+    p = (path or "").replace("\\", "/")
+    if _path_denied(p):
+        return False
+    if p.endswith("/") or "/" in p.strip("/"):
+        return True
+    ext = ("." + p.rsplit(".", 1)[-1].lower()) if "." in p else ""
+    return ext in AUTO_READ_BARE_EXTS
+
+
+def _redact_snippet(text: str) -> str:
+    """Run auto-read content through hive_records/redact.py before any prompt."""
+    from realai.hive_records.redact import scan_text
+
+    if not text:
+        return ""
+    out = []
+    for line in text.splitlines():
+        hits = scan_text(line)
+        out.append(f"[redacted line: {', '.join(sorted(set(hits)))}]" if hits else line)
+    joined = "\n".join(out)
+    hits = scan_text(joined)
+    if hits:  # multi-line secrets (seed phrases, key arrays) survive per-line scan
+        return f"[redacted: content withheld ({', '.join(sorted(set(hits)))})]"
+    return joined
 
 
 def _task_names_a_path(task: str) -> bool:
@@ -1290,6 +1333,7 @@ def _workspace_reads_for_task(task: str) -> Dict[str, Any]:
                 or ""
             )[:2000]
         ok_any = ok_any or ok
+        snippet = _redact_snippet(snippet)
         reads.append({"path": path, "ok": ok, "result": result, "snippet": snippet})
     named = bool(paths) or _task_names_a_path(task)
     return {
@@ -1497,7 +1541,7 @@ def _run_planner_worker_critic(
         for r in file_reads["reads"]:
             parts.append(
                 f"### workspace_read path={r.get('path')} ok={r.get('ok')}\n"
-                f"{(r.get('snippet') or '')[:1500]}"
+                f"{_redact_snippet((r.get('snippet') or '')[:1500])}"
             )
         read_blob = "\n\nFILE READS (real disk):\n" + "\n\n".join(parts)
     ctx_blob = (ctx_blob or "") + read_blob
@@ -2478,6 +2522,23 @@ _WS_DENY_EXACT = {".env", ".git", ".npmrc", ".pypirc", ".netrc", ".realai", ".ap
                   ".docker", ".htpasswd"}
 _WS_DENY_SUFFIX = (".pem", ".key", ".p12", ".pfx", ".keystore", ".kdbx", ".tfstate")
 _WS_DENY_PREFIX = (".env.", "id_", "credentials")
+# 2026-10-30 (#233 Security): credential/secret shapes found by the auto-read
+# probe. Matched case-insensitively against ONE path component.
+_WS_DENY_RE = re.compile(
+    r"(?:service[-_]?account"            # *service-account*
+    r"|token[^/]*\.json$"               # *token*.json
+    r"|api[_-]?key"                      # *api[_-]?key*
+    r"|keystore"                         # *keystore*
+    r"|mnemonic"                         # *mnemonic*
+    r"|seed"                             # *seed*
+    r"|private[_-]?key"                  # *private[_-]?key*
+    r"|\.env\."                        # *.env.* (prod.env.txt)
+    r"|^firebase-adminsdk"               # firebase-adminsdk*
+    r"|\.local\.json$"                 # *.local.json
+    r"|^(?:aws|credentials?|creds?|boto|s3cfg|secrets?|auth|tokens?|keys?)[^/]*\.ini$"  # credential-style *.ini
+    r"|^auth\.log$)",                   # auth.log
+    re.I,
+)
 _FILE_ATTRIBUTE_REPARSE_POINT = 0x400
 _WS_POSIX = os.name != "nt" and os.open in getattr(os, "supports_dir_fd", set()) and hasattr(os, "O_NOFOLLOW")
 
@@ -2500,6 +2561,7 @@ def ws_denied_name(name: str) -> bool:
         or n.startswith(_WS_DENY_PREFIX)
         or n.endswith(_WS_DENY_SUFFIX)
         or "secret" in n
+        or bool(_WS_DENY_RE.search(n))
         or (n.endswith(".json") and (n.startswith("keypair") or "wallet" in n))  # Solana keypairs / wallet files
     )
 

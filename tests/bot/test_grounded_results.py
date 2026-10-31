@@ -1,7 +1,6 @@
 """Console must not invent Results or unread paths (chess transcript, 2026-10-30)."""
 import json
 import os
-import tempfile
 import unittest
 
 from realai.bot import natural_mode as nm
@@ -84,9 +83,9 @@ class GroundedResultsTests(unittest.TestCase):
     def test_bridge_extracts_folder_and_bare_file(self):
         from realai.orchestration.v3_runtime_bridge import _extract_workspace_paths
 
-        paths = _extract_workspace_paths("scan realai/data/chess/ and read games.pgn")
+        paths = _extract_workspace_paths("scan realai/data/chess/ and read runner.py")
         self.assertIn("realai/data/chess/", paths)
-        self.assertIn("games.pgn", paths)
+        self.assertIn("runner.py", paths)
 
     def test_bridge_missing_folder_fails_critic_reads(self):
         from realai.orchestration import v3_runtime_bridge as br
@@ -106,9 +105,10 @@ class GroundedResultsTests(unittest.TestCase):
         self.assertFalse(out["ok"])
 
     def test_turn_log_has_no_content(self):
-        with tempfile.TemporaryDirectory() as d:
-            os.environ["REALAI_CONSOLE_TURN_LOG_DIR"] = d
-            self.addCleanup(lambda: os.environ.pop("REALAI_CONSOLE_TURN_LOG_DIR", None))
+        # REALAI_CONSOLE_TURN_LOG_DIR -> tmp_path via the autouse fixture below.
+        d = os.environ["REALAI_CONSOLE_TURN_LOG_DIR"]
+        self.assertNotIn("logs" + os.sep + "console_turns", d)
+        if True:
             nat = {"tool_results": [{"tool": "workspace_read",
                                      "args": {"path": "secret/notes.txt", "token": "sk-abc"},
                                      "result": {"ok": True}}]}
@@ -127,3 +127,100 @@ class GroundedResultsTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# --- #233 Security: secret auto-read denylist + redaction -----------------
+import pytest
+
+from realai.orchestration import v3_runtime_bridge as br
+
+PROBE_NAMES = [
+    "service-account.json", "token.json", "api_keys.yaml", "keystore.json",
+    "mnemonic.txt", "seed.txt", "private_key.txt", "firebase-adminsdk.json",
+    "aws.ini", "prod.env.txt", "settings.local.json", "auth.log",
+]
+SECRET = "sk-live-" + "Zx9Qw7Er5Ty3Ui1Op8As6Df4Gh2Jk0Lz"
+
+
+@pytest.fixture(autouse=True)
+def _turn_log_tmp(tmp_path, monkeypatch):
+    monkeypatch.setenv("REALAI_CONSOLE_TURN_LOG_DIR", str(tmp_path / "turn_logs"))
+
+
+class _FakeClient:
+    def __init__(self):
+        self.prompts = []
+
+    def chat_completion(self, messages, **_):
+        self.prompts.append("\n".join(str(m.get("content")) for m in messages))
+        return {"choices": [{"message": {"content": "plan: ok"}}]}
+
+
+def _fake_ws(calls):
+    def fake(tool, args):
+        calls.append((tool, args.get("path")))
+        return {"ok": True, "path": args.get("path"), "content": f"api_key = {SECRET}\nhello\n"}
+    return fake
+
+
+@pytest.mark.parametrize("name", PROBE_NAMES)
+def test_probe_name_denied(name):
+    assert br.ws_denied_name(name)
+    assert br.ws_denied_name(name.upper())
+
+
+@pytest.mark.parametrize("name", PROBE_NAMES)
+@pytest.mark.parametrize("shape", ["{n}", "realai/{n}", r"C:\RealAI-clean\{n}"])
+def test_probe_name_not_read_and_not_in_prompt(name, shape, monkeypatch):
+    calls = []
+    monkeypatch.setattr(br, "workspace_tool", _fake_ws(calls))
+    task = "read " + shape.format(n=name) + " and summarize it"
+    reads = br._workspace_reads_for_task(task)
+    assert not any(name.lower() in str(p).lower() for _, p in calls)
+    assert all(name.lower() not in str(r.get("path")).lower() for r in reads["reads"])
+    client = _FakeClient()
+    try:
+        br._run_planner_worker_critic(task, client, max_tokens=16)
+    except Exception:
+        pass
+    joined = "\n".join(client.prompts)
+    assert SECRET not in joined
+    assert "### workspace_read path=" + name not in joined
+    # Still tagged unverified in a reply that names it.
+    tagged = nm.mark_unverified_paths(f"I checked {name} for you.", set())
+    assert "[unverified" in tagged
+
+
+@pytest.mark.parametrize("name", ["games.pgn", "data.csv", "notes.yaml", "run.log"])
+def test_non_allowlisted_bare_names_not_auto_read(name):
+    assert name not in br._extract_workspace_paths(f"open {name}")
+    assert name in nm.mentioned_paths(f"open {name}")
+
+
+@pytest.mark.parametrize("name", ["runner.py", "guide.md", "notes.txt", "pkg.json"])
+def test_allowlisted_bare_names_auto_read(name):
+    assert name in br._extract_workspace_paths(f"open {name} please")
+
+
+def test_read_blob_redacted_before_prompt(monkeypatch):
+    calls = []
+    monkeypatch.setattr(br, "workspace_tool", _fake_ws(calls))
+    reads = br._workspace_reads_for_task("read realai/bot/notes.py")
+    assert calls and reads["reads"]
+    snip = reads["reads"][0]["snippet"]
+    assert SECRET not in snip
+    assert "[redacted" in snip
+    assert "hello" in snip
+    client = _FakeClient()
+    try:
+        br._run_planner_worker_critic("read realai/bot/notes.py", client, max_tokens=16)
+    except Exception:
+        pass
+    assert client.prompts, "planner was never prompted"
+    assert SECRET not in "\n".join(client.prompts)
+
+
+def test_redact_snippet_withholds_seed_phrase():
+    words = "abandon ability able about above absent absorb abstract absurd abuse access accident"
+    out = br._redact_snippet(words.replace(" ", "\n"))
+    assert "abandon" not in out
