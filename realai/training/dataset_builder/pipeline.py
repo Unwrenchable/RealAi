@@ -33,6 +33,8 @@ DEFAULTS: Dict[str, Any] = {
     "max_source_share": {},
     "max_rows_per_tool": 0,
     "tool_cap_exempt": ["request_approval", "payout_check", "solana_read"],
+    #   tool_cap_exempt_sources: rows from these sources are never tool-capped (e.g. travis's own chess games)
+    "tool_cap_exempt_sources": [],
     # drop rows whose user prompt is a spot-check question (core + extended), so the live eval is never trained on
     "exclude_eval_prompts": False,
     "allow_vendor_chat": False,
@@ -193,11 +195,12 @@ def rebalance(kept: List[Dict[str, Any]], cfg: Dict[str, Any], stats: Dict[str, 
     per_tool = int(cfg.get("max_rows_per_tool") or 0)
     if per_tool:
         exempt = set(cfg.get("tool_cap_exempt") or [])
+        exempt_src = set(cfg.get("tool_cap_exempt_sources") or [])
         groups: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
         free_rows = []
         for r in out:
             t = _row_tools(r["messages"])
-            if not t or t[0] in exempt or any(x in exempt for x in t):
+            if not t or r.get("source") in exempt_src or t[0] in exempt or any(x in exempt for x in t):
                 free_rows.append(r)
             else:
                 groups[t[0]].append(r)
@@ -400,6 +403,7 @@ def build(cfg: Dict[str, Any], dry_run: bool = False, today: Optional[str] = Non
         "split_by_prompt": bool(cfg.get("split_by_prompt")),
         "max_source_share": cfg.get("max_source_share") or {},
         "max_rows_per_tool": cfg.get("max_rows_per_tool", 0),
+        "tool_cap_exempt_sources": cfg.get("tool_cap_exempt_sources") or [],
         "allow_vendor_chat": ctx["allow_vendor_chat"],
         "totals": {
             "kept": len(kept),
