@@ -112,8 +112,22 @@
         "{realai}/datasets/_sources/hive_selfplay/*.jsonl"
       ],
       "exclude_teachers": [
-        "qwen3-30b-a3b"
+        "qwen3-30b-a3b",
+        "human-games@play_realai"
       ],
+      "resubset_tools": true
+    },
+    {
+      "name": "hive_selfplay_human_chess",
+      "type": "hive_selfplay",
+      "teachers": [
+        "human-games@play_realai"
+      ],
+      "paths": [
+        "{realai}/datasets/_sources/hive_selfplay/selfplay-chess-human-*.jsonl"
+      ],
+      "license": "realai-own (Travis's own games vs RealAI; targets are local Stockfish output via the chess_engine tool)",
+      "origin": "C:/temp/chess-match/chess_to_selfplay.py (verified chess_engine tool rows from play_realai.py games)",
       "resubset_tools": true
     },
     {
@@ -365,7 +379,8 @@
     "Hive config (2026-10-10): factual sources become tool-call rows; old plain fact sources kept but disabled. Build: python -m realai.training.dataset_builder --config config/dataset_builder.hive.pc.json",
     "Rebalance 2026-10-18: hive_selfplay capped at 30% of the mix (max_source_share), max 180 rows per first tool (approval/payout/solana rows exempt), 30B-written rows are their own source, tool_calls adds league_validate and money-refusal (safety) rows.",
     "Round 2 2026-10-19: tool rows use hard-negative distractors (CONFUSABLE look-alikes; hive_selfplay rows re-subset at build time), safety refusals check with the read-only tool first (payout_check / approval_status / request_approval refusal), hive_meta kind (hive role models, registry status, ability status), spot-check prompts excluded from training.",
-    "Repo corpus 2026-10-19 (off): repo_corpus rows come from repo_search over D:/ARCHIVE/repo-mirror; capped at 15% of the mix (max_source_share) and 25% per repo (per_repo_share, money refusals exempt); held-out repos (crispy-octo-guacamole, BlueScreenHelp) go to eval only; Token-scalper/FizzSwap/cookbook/Atomic Fizz/Cue-guard money asks are refusal rows only."
+    "Repo corpus 2026-10-19 (off): repo_corpus rows come from repo_search over D:/ARCHIVE/repo-mirror; capped at 15% of the mix (max_source_share) and 25% per repo (per_repo_share, money refusals exempt); held-out repos (crispy-octo-guacamole, BlueScreenHelp) go to eval only; Token-scalper/FizzSwap/cookbook/Atomic Fizz/Cue-guard money asks are refusal rows only.",
+    "Human chess 2026-10-30: travis's play_realai.py games become verified chess_engine tool rows (selfplay-chess-human-*.jsonl, teacher human-games@play_realai) in their own source hive_selfplay_human_chess: not share-capped and exempt from max_rows_per_tool (tool_cap_exempt_sources)."
   ],
   "max_source_share": {
     "hive_selfplay": 0.3,
@@ -377,5 +392,8 @@
     "payout_check",
     "solana_read"
   ],
-  "exclude_eval_prompts": true
+  "exclude_eval_prompts": true,
+  "tool_cap_exempt_sources": [
+    "hive_selfplay_human_chess"
+  ]
 }

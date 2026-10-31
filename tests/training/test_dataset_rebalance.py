@@ -50,6 +50,31 @@ def test_source_max_rows_and_tool_cap_with_exempt_tools():
     assert stats["tools"]["dropped_tool_cap"] == 40 and stats["self"]["dropped_source_cap"] == 10
 
 
+def test_tool_cap_exempt_sources_keep_human_chess_rows():
+    from collections import Counter, defaultdict
+
+    kept = [_row("tools", i, "chess_engine") for i in range(50)] + [_row("human", i, "chess_engine") for i in range(30)]
+    cfg = {"seed": 42, "sources": [{"name": "tools"}, {"name": "human"}], "max_rows_per_tool": 10,
+           "tool_cap_exempt_sources": ["human"]}
+    stats = defaultdict(Counter)
+    out = rebalance(kept, cfg, stats)
+    by = Counter(r["source"] for r in out)
+    assert by["human"] == 30 and by["tools"] == 10  # exempt source kept whole, the rest still capped
+    assert stats["human"]["dropped_tool_cap"] == 0 and stats["tools"]["dropped_tool_cap"] == 40
+
+
+def test_hive_pc_config_human_chess_source():
+    from pathlib import Path
+
+    c = json.loads((Path(__file__).resolve().parents[2] / "config" / "dataset_builder.hive.pc.json").read_text(encoding="utf-8"))
+    src = {s["name"]: s for s in c["sources"]}
+    h = src["hive_selfplay_human_chess"]
+    assert h["type"] == "hive_selfplay" and h["teachers"] == ["human-games@play_realai"]
+    assert "human-games@play_realai" in src["hive_selfplay"]["exclude_teachers"]  # no double counting
+    assert "hive_selfplay_human_chess" in c["tool_cap_exempt_sources"]
+    assert "hive_selfplay_human_chess" not in c["max_source_share"]
+
+
 def test_no_caps_is_identity():
     from collections import Counter, defaultdict
 
