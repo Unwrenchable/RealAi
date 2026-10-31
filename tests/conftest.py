@@ -60,3 +60,18 @@ def _isolate_approvals_store(tmp_path_factory):
                 os.environ.pop(k, None)
             else:
                 os.environ[k] = v
+
+
+@pytest.fixture(autouse=True, scope="session")
+def _isolate_console_turn_log(tmp_path_factory):
+    """Console turn logs (#233) go to a tmp dir, never the repo's logs/."""
+    import os
+
+    key = "REALAI_CONSOLE_TURN_LOG_DIR"
+    prev = os.environ.get(key)
+    os.environ[key] = str(tmp_path_factory.mktemp("console_turns"))
+    yield
+    if prev is None:
+        os.environ.pop(key, None)
+    else:
+        os.environ[key] = prev

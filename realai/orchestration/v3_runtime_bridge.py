@@ -1226,8 +1226,109 @@ def _extract_workspace_paths(task: str) -> List[str]:
         _add(m.group(1))
     if not found and re.search(r"apps[/\\]vscode[/\\]README\.md", text, re.I):
         _add("apps/vscode/README.md")
-    return found[:5]
+    # Folders (trailing slash or known repo dir) and bare filenames with an
+    # extension, e.g. realai/data/chess/ or games.pgn. A folder is listed,
+    # not read (see _workspace_reads_for_task).
+    try:
+        from realai.bot.natural_mode import mentioned_paths
 
+        for p in mentioned_paths(task):
+            low = p.lower().rstrip("/")
+            if not _auto_read_allowed(p):
+                continue  # tagged unverified in the reply, never auto-read
+            if any(f.lower() == low or f.lower().endswith("/" + low) for f in found):
+                continue
+            _add(p)
+    except Exception:
+        pass
+    return [p for p in found if not _path_denied(p)][:5]
+
+
+# Bare filenames are auto-read only for these deliberate code/doc extensions.
+# Data, logs, configs (.ini/.env/.yaml/...) and binaries are never auto-read.
+AUTO_READ_BARE_EXTS = frozenset(
+    {".py", ".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".md", ".txt", ".rst",
+     ".html", ".css", ".json"}
+)
+
+
+# 2026-10-30 (#233 Security): broad secret shapes from the auto-read probe.
+# AUTO-READ ONLY (named-path / bare-name auto-reads in the bridge and
+# natural_mode). Explicit workspace tools keep ws_denied_name (#210).
+_AUTO_READ_DENY_RE = re.compile(
+    r"(?:token|key|seed|secret|auth|credential|mnemonic|keystore|keypair"
+    r"|service[-_]?account|firebase-adminsdk|private|passw|phrase|wallet"
+    r"|recovery|backup[-_]?codes?|\.env\.|\.local\.json$|\.log$)",
+    re.I,
+)
+
+def _path_denied(path: str) -> bool:
+    """Auto-read gate: #210 denylist plus the broad Security shapes."""
+    parts = [c for c in (path or "").replace("\\", "/").split("/") if c]
+    return any(ws_denied_name(c) or _AUTO_READ_DENY_RE.search(_norm_name(c)) for c in parts)
+
+
+def _auto_read_allowed(path: str) -> bool:
+    """Folders and slashed paths follow the denylist; bare names need the allowlist."""
+    p = (path or "").replace("\\", "/")
+    if _path_denied(p):
+        return False
+    if p.endswith("/") or "/" in p.strip("/"):
+        return True
+    ext = ("." + p.rsplit(".", 1)[-1].lower()) if "." in p else ""
+    if ext not in AUTO_READ_BARE_EXTS:
+        return False
+    # Prose lookalikes: Node.js / Next.js (capitalized bare .js) and 1.2.3.txt.
+    if p[:1].isdigit():
+        return False
+    if ext == ".js" and p[:1].isupper():
+        return False
+    return True
+
+
+_HEX64_RE = re.compile(r"(?<![0-9A-Za-z])(?:0x)?[0-9a-fA-F]{64}(?![0-9A-Za-z])")
+
+
+def _redact_snippet(text: str) -> str:
+    """Run auto-read content through hive_records/redact.py before any prompt.
+
+    Call on the FULL text, then truncate, so a cut cannot split a secret past
+    the scanner.
+    """
+    from realai.hive_records.redact import scan_text
+
+    if not text:
+        return ""
+    out = []
+    for line in str(text).splitlines():
+        hits = set(scan_text(line))
+        if _HEX64_RE.search(line):
+            hits.add("hex64_private_key")
+        out.append(f"[redacted line: {', '.join(sorted(hits))}]" if hits else line)
+    joined = "\n".join(out)
+    hits = scan_text(joined)
+    if hits:  # multi-line secrets (seed phrases, key arrays) survive per-line scan
+        return f"[redacted: content withheld ({', '.join(sorted(set(hits)))})]"
+    return joined
+
+
+redact_text = _redact_snippet
+
+
+def redact_tool_result(obj: Any) -> Any:
+    """Redacted copy of a workspace/craft tool result (strings and line lists)."""
+    if isinstance(obj, str):
+        return _redact_snippet(obj)
+    if isinstance(obj, list):
+        if obj and all(isinstance(x, str) for x in obj):
+            red = _redact_snippet("\n".join(obj))
+            if red.startswith("[redacted: content withheld"):
+                return [red]
+            return red.split("\n") if len(red.split("\n")) == len(obj) else [red]
+        return [redact_tool_result(x) for x in obj]
+    if isinstance(obj, dict):
+        return {k: redact_tool_result(v) for k, v in obj.items()}
+    return obj
 
 def _task_names_a_path(task: str) -> bool:
     """True when the task mentions a file path (even if extraction missed)."""
@@ -1253,7 +1354,10 @@ def _workspace_reads_for_task(task: str) -> Dict[str, Any]:
     reads: List[Dict[str, Any]] = []
     ok_any = False
     for path in paths:
-        result = workspace_tool("workspace_read", {"path": path, "start": 1, "limit": 40})
+        if path.endswith("/"):
+            result = workspace_tool("workspace_list", {"path": path.rstrip("/")})
+        else:
+            result = workspace_tool("workspace_read", {"path": path, "start": 1, "limit": 40})
         ok = False
         snippet = ""
         if isinstance(result, dict):
@@ -1263,16 +1367,23 @@ def _workspace_reads_for_task(task: str) -> Dict[str, Any]:
                 ok = False
             elif result.get("content") or result.get("text") or result.get("lines"):
                 ok = True
+            elif path.endswith("/") and isinstance(result.get("entries") or result.get("files"), list):
+                ok = True
             elif result.get("ok") is True:
                 ok = True
+            raw_lines = result.get("lines") or []
             snippet = str(
                 result.get("content")
                 or result.get("text")
-                or "\n".join(result.get("lines") or [])
+                or "\n".join(str(x) for x in raw_lines)
                 or ""
-            )[:2000]
+            )
         ok_any = ok_any or ok
-        reads.append({"path": path, "ok": ok, "result": result, "snippet": snippet})
+        # Redact the full text BEFORE the 2000-char cut, and never keep the raw
+        # tool result (it reaches probes.file_reads and the response).
+        snippet = _redact_snippet(snippet)[:2000]
+        safe_result = redact_tool_result(result) if isinstance(result, dict) else result
+        reads.append({"path": path, "ok": ok, "result": safe_result, "snippet": snippet})
     named = bool(paths) or _task_names_a_path(task)
     return {
         "paths": paths,
@@ -1479,7 +1590,7 @@ def _run_planner_worker_critic(
         for r in file_reads["reads"]:
             parts.append(
                 f"### workspace_read path={r.get('path')} ok={r.get('ok')}\n"
-                f"{(r.get('snippet') or '')[:1500]}"
+                f"{_redact_snippet((r.get('snippet') or '')[:1500])}"
             )
         read_blob = "\n\nFILE READS (real disk):\n" + "\n\n".join(parts)
     ctx_blob = (ctx_blob or "") + read_blob
@@ -2459,7 +2570,26 @@ _WS_SKIP_DIRS = {"node_modules", "__pycache__", ".venv", "venv", ".mypy_cache", 
 _WS_DENY_EXACT = {".env", ".git", ".npmrc", ".pypirc", ".netrc", ".realai", ".approvals.json", ".ssh", ".aws",
                   ".docker", ".htpasswd"}
 _WS_DENY_SUFFIX = (".pem", ".key", ".p12", ".pfx", ".keystore", ".kdbx", ".tfstate")
-_WS_DENY_PREFIX = (".env.", "id_", "credentials")
+_WS_DENY_PREFIX = (".env.", "id_")
+# .env* is denied except these committed templates.
+_WS_ENV_TEMPLATES = {".env.example", ".env.sample", ".env.template"}
+# 2026-10-30 (#233) tier 1: names that are only ever secrets. Gates every
+# workspace read/list/grep, so keep it to unambiguous names. Broad token
+# shapes (token/key/seed/secret/auth) live in _AUTO_READ_DENY_RE instead.
+_WS_DENY_SECRET_RE = re.compile(
+    r"(?:^\.env"                                          # .env*
+    r"|\.env\."                                          # *.env.* (prod.env.txt)
+    r"|\.pem$"
+    r"|^wallet\.json$"
+    r"|^keystore"                                         # keystore*
+    r"|^mnemonic"                                         # mnemonic*
+    r"|^seed[-_ ]?(?:phrase)?\.txt$"                     # seed.txt / seedphrase.txt
+    r"|^service[-_]?account[^/]*\.json$"                 # service-account*.json
+    r"|^firebase-adminsdk"                                # firebase-adminsdk*
+    r"|^credentials?$"                                    # ~/.aws/credentials style
+    r"|^(?:aws|credentials?|boto|s3cfg)[^/]*\.(?:ini|ya?ml|cfg|json|txt|csv)$)",  # credential .ini/.yml/.json (#210 kept credentials.json)
+    re.I,
+)
 _FILE_ATTRIBUTE_REPARSE_POINT = 0x400
 _WS_POSIX = os.name != "nt" and os.open in getattr(os, "supports_dir_fd", set()) and hasattr(os, "O_NOFOLLOW")
 
@@ -2472,16 +2602,26 @@ class WorkspacePathError(ValueError):
         self.code = code
 
 
+def _norm_name(name: str) -> str:
+    """NFKC + casefold so fullwidth/compat letters cannot dodge the lists."""
+    import unicodedata
+
+    return unicodedata.normalize("NFKC", name or "").casefold().rstrip(" .")
+
+
 def ws_denied_name(name: str) -> bool:
     """Case-insensitive secret/credential denylist for ONE path component."""
-    n = name.lower().rstrip(" .")  # Windows ignores trailing dots/spaces
+    n = _norm_name(name)  # Windows ignores trailing dots/spaces
     if not n:
+        return False
+    if n in _WS_ENV_TEMPLATES:
         return False
     return (
         n in _WS_DENY_EXACT
         or n.startswith(_WS_DENY_PREFIX)
         or n.endswith(_WS_DENY_SUFFIX)
         or "secret" in n
+        or bool(_WS_DENY_SECRET_RE.search(n))
         or (n.endswith(".json") and (n.startswith("keypair") or "wallet" in n))  # Solana keypairs / wallet files
     )
 
