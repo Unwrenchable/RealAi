@@ -997,6 +997,12 @@ _NAMED_ANY_FILE_RE = re.compile(
     r"(?<![\w./:\\-])((?:[\w.\-]+/)*[\w\-][\w.\-]*\.(?:" + _KNOWN_FILE_EXTS + r"))(?![\w/])",
     re.I,
 )
+_CMD_WORDS = (
+    r"(?:\$\s*)?(?:python3?|py|pytest|pip|git|npm|npx|pnpm|yarn|node|cd|ls|dir|rm|cp|mv|mkdir|"
+    r"cat|grep|rg|find|ruff|black|mypy|tsc|eslint|make|bash|sh|powershell|pwsh|uv)\b"
+)
+_CMD_SPAN_RE = re.compile(r"`{1,3}\s*" + _CMD_WORDS + r"[^`]*`{1,3}", re.I)
+_CMD_LINE_RE = re.compile(r"(?im)^[ \t]*(?:\$|>|PS>|PS [^>]*>)?[ \t]*" + _CMD_WORDS + r".*$")
 _LIST_READ_TOOLS = {
     "read", "list", "ls", "workspace_read", "workspace_list", "workspace_grep",
     "list_dir", "read_file", "grep", "inspect",
@@ -1046,13 +1052,36 @@ def mentioned_paths(text: str) -> List[str]:
         seen.add(tok.lower())
         out.append(tok)
 
-    for m in _NAMED_DIR_RE.finditer(norm):
+    # Folders inside a shell command (`pytest tests/ -q`, `$ ls docs/`) are
+    # command arguments, not claims about the workspace.
+    dir_text = _CMD_SPAN_RE.sub(" ", norm)
+    dir_text = _CMD_LINE_RE.sub(" ", dir_text)
+    for m in _NAMED_DIR_RE.finditer(dir_text):
         _add(m.group(1))
-    for m in _NAMED_DIR_NOSLASH_RE.finditer(norm):
+    for m in _NAMED_DIR_NOSLASH_RE.finditer(dir_text):
         _add(m.group(1).rstrip("/") + "/")
     for m in _NAMED_ANY_FILE_RE.finditer(norm):
-        _add(m.group(1))
+        tok = m.group(1)
+        if not looks_like_bare_file(tok, backticked=m.start() > 0 and norm[m.start() - 1] == "`"):
+            continue
+        _add(tok)
     return out
+
+
+def looks_like_bare_file(token: str, *, backticked: bool = False) -> bool:
+    """Reject prose that only looks like a filename.
+
+    ``Node.js`` / ``Next.js`` (a bare ``.js`` name counts only when backticked
+    or slashed), and version strings like ``1.2.3.txt``.
+    """
+    tok = (token or "").strip()
+    if "/" in tok:
+        return True
+    if tok[:1].isdigit():
+        return False
+    if tok.lower().endswith(".js") and not backticked:
+        return False
+    return True
 
 
 def _row_ok(row: Dict[str, Any]) -> bool:

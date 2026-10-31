@@ -224,3 +224,52 @@ def test_redact_snippet_withholds_seed_phrase():
     words = "abandon ability able about above absent absorb abstract absurd abuse access accident"
     out = br._redact_snippet(words.replace(" ", "\n"))
     assert "abandon" not in out
+
+
+# --- #233 QA Lead: prose false positives ---------------------------------
+FRAMEWORKS = ["Node.js", "Next.js", "Vue.js", "Express.js", "D3.js"]
+
+
+@pytest.mark.parametrize("name", FRAMEWORKS)
+def test_framework_names_not_flagged_in_reply(name):
+    reply = f"Install {name} first, then run the app with {name}."
+    assert name not in nm.mentioned_paths(reply)
+    assert "[unverified" not in nm.mark_unverified_paths(reply, set())
+
+
+@pytest.mark.parametrize("name", FRAMEWORKS)
+def test_framework_names_not_extracted(name):
+    assert br._extract_workspace_paths(f"How do I install {name} on Windows?") == []
+    assert name not in nm.named_workspace_paths(f"How do I install {name} on Windows?")
+
+
+def test_bare_js_counts_when_backticked_or_slashed():
+    assert "server.js" in nm.mentioned_paths("edit `server.js` now")
+    assert "apps/web/server.js" in nm.mentioned_paths("edit apps/web/server.js now")
+    assert "server.js" not in nm.mentioned_paths("edit server.js now")
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Run `pytest tests/ -q` to check.",
+        "Run `python -m pytest tests/bot/` next.",
+        "$ pytest tests/ -q",
+        "pytest tests/ -q",
+    ],
+)
+def test_folder_inside_shell_command_not_flagged(text):
+    assert not any(p.startswith("tests") for p in nm.mentioned_paths(text))
+    assert "[unverified" not in nm.mark_unverified_paths(text, set())
+
+
+def test_folder_in_prose_still_flagged():
+    assert "tests/" in nm.mentioned_paths("I added cases under tests/ for this.")
+
+
+def test_version_string_not_a_file():
+    text = "Version 1.2.3.txt is out."
+    assert "1.2.3.txt" not in nm.mentioned_paths(text)
+    assert br._extract_workspace_paths(text) == []
+    assert "1.2.3.txt" not in nm.named_workspace_paths(text)
+    assert "[unverified" not in nm.mark_unverified_paths(text, set())

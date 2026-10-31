@@ -1265,7 +1265,14 @@ def _auto_read_allowed(path: str) -> bool:
     if p.endswith("/") or "/" in p.strip("/"):
         return True
     ext = ("." + p.rsplit(".", 1)[-1].lower()) if "." in p else ""
-    return ext in AUTO_READ_BARE_EXTS
+    if ext not in AUTO_READ_BARE_EXTS:
+        return False
+    # Prose lookalikes: Node.js / Next.js (capitalized bare .js) and 1.2.3.txt.
+    if p[:1].isdigit():
+        return False
+    if ext == ".js" and p[:1].isupper():
+        return False
+    return True
 
 
 def _redact_snippet(text: str) -> str:
