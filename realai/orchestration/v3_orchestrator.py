@@ -3415,6 +3415,34 @@ class Handler(BaseHTTPRequestHandler):
                     # Natural Mode reply contract + one post-write health GET (not a tool storm).
                     try:
                         nat = body.get("realai_natural") or {}
+                        if not (isinstance(nat, dict) and nat.get("should_ground")):
+                            # No grounding ran: a contract reply still may not
+                            # invent Results or unread paths (2026-10-30).
+                            from realai.bot.natural_mode import ground_reply_results
+
+                            nat_plain = nat if isinstance(nat, dict) else {}
+                            for ch in obj.get("choices") or []:
+                                msg = ch.get("message") if isinstance(ch, dict) else None
+                                if isinstance(msg, dict) and msg.get("content"):
+                                    msg["content"] = ground_reply_results(
+                                        str(msg.get("content") or ""),
+                                        nat_plain,
+                                        meta.get("applied_writes") or [],
+                                    )
+                                    break
+                    except Exception:
+                        pass
+                    try:
+                        from realai.bot.natural_mode import log_console_turn
+
+                        log_console_turn(
+                            body.get("realai_natural") if isinstance(body.get("realai_natural"), dict) else {},
+                            meta.get("applied_writes") or [],
+                        )
+                    except Exception:
+                        pass
+                    try:
+                        nat = body.get("realai_natural") or {}
                         if isinstance(nat, dict) and nat.get("should_ground"):
                             from realai.bot.natural_mode import finalize_natural_choice_text
 

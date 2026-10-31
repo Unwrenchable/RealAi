@@ -1226,6 +1226,19 @@ def _extract_workspace_paths(task: str) -> List[str]:
         _add(m.group(1))
     if not found and re.search(r"apps[/\\]vscode[/\\]README\.md", text, re.I):
         _add("apps/vscode/README.md")
+    # Folders (trailing slash or known repo dir) and bare filenames with an
+    # extension, e.g. realai/data/chess/ or games.pgn. A folder is listed,
+    # not read (see _workspace_reads_for_task).
+    try:
+        from realai.bot.natural_mode import mentioned_paths
+
+        for p in mentioned_paths(task):
+            low = p.lower().rstrip("/")
+            if any(f.lower() == low or f.lower().endswith("/" + low) for f in found):
+                continue
+            _add(p)
+    except Exception:
+        pass
     return found[:5]
 
 
@@ -1253,7 +1266,10 @@ def _workspace_reads_for_task(task: str) -> Dict[str, Any]:
     reads: List[Dict[str, Any]] = []
     ok_any = False
     for path in paths:
-        result = workspace_tool("workspace_read", {"path": path, "start": 1, "limit": 40})
+        if path.endswith("/"):
+            result = workspace_tool("workspace_list", {"path": path.rstrip("/")})
+        else:
+            result = workspace_tool("workspace_read", {"path": path, "start": 1, "limit": 40})
         ok = False
         snippet = ""
         if isinstance(result, dict):
@@ -1262,6 +1278,8 @@ def _workspace_reads_for_task(task: str) -> Dict[str, Any]:
             elif result.get("ok") is False:
                 ok = False
             elif result.get("content") or result.get("text") or result.get("lines"):
+                ok = True
+            elif path.endswith("/") and isinstance(result.get("entries") or result.get("files"), list):
                 ok = True
             elif result.get("ok") is True:
                 ok = True

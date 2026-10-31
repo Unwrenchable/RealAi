@@ -40,7 +40,10 @@ CHAT_ABORT_SECONDS = 180
 NATURAL_REPLY_CONTRACT = (
     "REPLY CONTRACT: one ROLE hat and one job class per turn. No pills, no hat switcher.\n"
     "Mode: Hive | One-Tree | Builder | RackUp (automatic).\n"
-    "EXECUTE (one concrete act): Mode / Action / Results (2-3 facts) / Next.\n"
+    "EXECUTE (one concrete act): Mode / Action / Results / Next. "
+    "Results come only from tool output this turn; the runtime writes the Results "
+    "section from real tool results. Never invent file counts, folders, or files. "
+    "If no tool ran, Results: not run (no tool called).\n"
     "PHASE (open or architectural): Mode / Goal / Now / Then "
     "(2-4 of See, Change, Prove, Keep). Blockers only if real.\n"
     "Mixed: short PHASE, then one EXECUTE next step. No 12-item roadmap unless asked.\n"
@@ -48,7 +51,7 @@ NATURAL_REPLY_CONTRACT = (
     "Failed probe: one warning line. Never raw JSON in the card.\n"
     "CAPS: MAX_TOOLS_THIS_TURN=3. Chat abort 180s. Do not loosen.\n"
     "Never say LANDED or shipped unless a write tool succeeded. Propose is not a write. "
-    "Named paths need workspace_read. No raw JSON in the main reply. "
+    "Named paths and folders need workspace_read or workspace_list, else say unverified. No raw JSON in the main reply. "
     "Service down: say Service Unavailable and retry. No silent learn POST."
 )
 
@@ -957,6 +960,273 @@ def _operator_failure(
     )
 
 
+# --- Grounded Results (2026-10-30) -------------------------------------
+# The model never writes Results. They are rebuilt from real tool rows.
+NO_TOOL_RESULTS = "not run (no tool called)"
+_RESULTS_STOP_RE = re.compile(
+    r"(?im)^\s*(?:Next|Mode(?:\s+Active)?|Action|Goal|Now|Then|Blockers|Summary|What changed|Verify)\s*:"
+)
+_KNOWN_REPO_DIRS = (
+    "apps", "realai", "modules", "abilities", "docs", "scripts", "frontend",
+    "agents", "fusion-ui", "tests", "data", "logs", "training", ".github",
+)
+_KNOWN_FILE_EXTS = (
+    "py|ts|tsx|js|jsx|mjs|cjs|html|css|md|json|jsonl|yml|yaml|toml|go|rs|java|kt|"
+    "swift|sql|sh|bat|ps1|txt|pgn|csv|gguf|safetensors|bin|ini|cfg|log|parquet"
+)
+# Folder shapes: known repo dir prefix ending in a slash, or a known repo dir
+# with sub-folders (no extension), e.g. realai/data/chess/.
+_NAMED_DIR_RE = re.compile(
+    r"(?<![\w./-])((?:" + "|".join(re.escape(d) for d in _KNOWN_REPO_DIRS) + r")"
+    r"(?:/[\w\-]+)*/)(?![\w.\-])",
+    re.I,
+)
+_NAMED_DIR_NOSLASH_RE = re.compile(
+    r"(?<![\w./-])((?:" + "|".join(re.escape(d) for d in _KNOWN_REPO_DIRS) + r")"
+    r"(?:/[\w\-]+)+)(?![\w./\-])",
+    re.I,
+)
+_NAMED_ANY_FILE_RE = re.compile(
+    r"(?<![\w./:\\-])((?:[\w.\-]+/)*[\w\-][\w.\-]*\.(?:" + _KNOWN_FILE_EXTS + r"))(?![\w/])",
+    re.I,
+)
+_LIST_READ_TOOLS = {
+    "read", "list", "ls", "workspace_read", "workspace_list", "workspace_grep",
+    "list_dir", "read_file", "grep", "inspect",
+}
+
+
+def _compact_tool_row(row: Any) -> Dict[str, Any]:
+    """Tool row without file bodies: name, small args, ok/error, counts."""
+    if not isinstance(row, dict):
+        return {"tool": "?", "error": "bad row"}
+    out: Dict[str, Any] = {"tool": str(row.get("tool") or "?")}
+    args = row.get("args")
+    if isinstance(args, dict):
+        out["args"] = {k: v for k, v in args.items() if isinstance(v, (str, int, float, bool)) and k != "content"}
+    if row.get("error"):
+        out["error"] = str(row.get("error"))[:200]
+    res = row.get("result")
+    if isinstance(res, dict):
+        slim: Dict[str, Any] = {}
+        for k in ("ok", "error", "path", "count", "total_lines", "bytes"):
+            if k in res:
+                slim[k] = res[k] if not isinstance(res[k], str) else res[k][:200]
+        for k in ("entries", "files", "items", "matches", "lines"):
+            if isinstance(res.get(k), list):
+                slim[k] = [None] * len(res[k])
+                break
+        out["result"] = slim
+    return out
+
+
+def mentioned_paths(text: str) -> List[str]:
+    """Files *and* folders named in free text (reply or ask).
+
+    Superset of ``named_workspace_paths``: also folders (trailing slash or a
+    known repo dir) and bare filenames with an extension like ``games.pgn``.
+    """
+    norm = (text or "").replace("\\", "/")
+    norm = re.sub(r"(?i)\b[A-Za-z]:/RealAI-clean/", "", norm)
+    norm = re.sub(r"https?://\S+", " ", norm)
+    out: List[str] = []
+    seen: set[str] = set()
+
+    def _add(tok: str) -> None:
+        tok = (tok or "").strip().strip("`'\".,;:()[]")
+        if not tok or tok.lower() in seen:
+            return
+        seen.add(tok.lower())
+        out.append(tok)
+
+    for m in _NAMED_DIR_RE.finditer(norm):
+        _add(m.group(1))
+    for m in _NAMED_DIR_NOSLASH_RE.finditer(norm):
+        _add(m.group(1).rstrip("/") + "/")
+    for m in _NAMED_ANY_FILE_RE.finditer(norm):
+        _add(m.group(1))
+    return out
+
+
+def _row_ok(row: Dict[str, Any]) -> bool:
+    if not isinstance(row, dict) or row.get("error"):
+        return False
+    res = row.get("result")
+    if isinstance(res, dict):
+        if res.get("error") or res.get("ok") is False:
+            return False
+    return True
+
+
+def _row_fact(row: Dict[str, Any]) -> str:
+    name = str(row.get("tool") or "?")
+    args = row.get("args") if isinstance(row.get("args"), dict) else {}
+    res = row.get("result") if isinstance(row.get("result"), dict) else {}
+    target = str(args.get("path") or res.get("path") or args.get("query") or args.get("pattern") or "")
+    if not _row_ok(row):
+        err = str(row.get("error") or res.get("error") or "failed")
+        return _one_line(f"{name} {target}: FAIL {err}".replace("  ", " "), 200)
+    bits: List[str] = []
+    for key in ("entries", "files", "items", "matches", "lines"):
+        val = res.get(key)
+        if isinstance(val, list):
+            bits.append(f"{len(val)} {key}")
+            break
+    for key in ("count", "total_lines", "bytes"):
+        if isinstance(res.get(key), (int, float)):
+            bits.append(f"{key}={res.get(key)}")
+    detail = ", ".join(bits) if bits else "ok"
+    return _one_line(f"{name} {target}: {detail}".replace("  ", " "), 200)
+
+
+def build_tool_results(
+    natural: Optional[Dict[str, Any]] = None,
+    applied: Optional[List[Dict[str, Any]]] = None,
+) -> List[str]:
+    """Result facts from real tool rows only. Never from model text."""
+    nat = natural if isinstance(natural, dict) else {}
+    rows = [r for r in (nat.get("tool_results") or []) if isinstance(r, dict)]
+    rows += [r for r in (applied or []) if isinstance(r, dict)]
+    facts = [_row_fact(r) for r in rows]
+    if not facts:
+        names = [
+            str(t) for t in (nat.get("used_tools") or nat.get("tools") or [])
+            if str(t) and str(t) != "post_write_smoke"
+        ]
+        facts = [f"{n}: ran (no detail recorded)" for n in names]
+    smoke = nat.get("post_write_smoke")
+    if isinstance(smoke, dict):
+        facts.append("hive smoke " + ("PASS" if smoke.get("ok") else "FAIL"))
+    return facts[:5] or [NO_TOOL_RESULTS]
+
+
+def verified_paths(
+    natural: Optional[Dict[str, Any]] = None,
+    applied: Optional[List[Dict[str, Any]]] = None,
+) -> set:
+    """Paths a successful read/list/write tool actually touched this turn."""
+    nat = natural if isinstance(natural, dict) else {}
+    rows = [r for r in (nat.get("tool_results") or []) if isinstance(r, dict)]
+    rows += [r for r in (applied or []) if isinstance(r, dict)]
+    out: set = set()
+    for r in rows:
+        if not _row_ok(r):
+            continue
+        args = r.get("args") if isinstance(r.get("args"), dict) else {}
+        res = r.get("result") if isinstance(r.get("result"), dict) else {}
+        for p in (args.get("path"), res.get("path")):
+            if p:
+                out.add(str(p).replace("\\", "/").strip("/").lower())
+    return out
+
+
+def mark_unverified_paths(text: str, verified: set) -> str:
+    """Tag every named file/folder no tool touched as unverified."""
+    body = text or ""
+    for path in mentioned_paths(body):
+        key = path.replace("\\", "/").strip("/").lower()
+        if any(key == v or v.endswith("/" + key) or key.endswith("/" + v) for v in verified):
+            continue
+        body = re.sub(
+            r"(?<![\w./-])" + re.escape(path) + r"(?![\w/\-])(?!\s*\[unverified)",
+            path + " [unverified: no workspace_read/list]",
+            body,
+        )
+    return body
+
+
+def replace_results_section(text: str, facts: List[str]) -> str:
+    """Drop any model-written Results and insert the tool-built one."""
+    body = text or ""
+    block = "Results:\n" + "\n".join(f"- {f}" for f in (facts or [NO_TOOL_RESULTS]))
+    m = re.search(r"(?im)^\s*Results\s*:", body)
+    if m:
+        rest = body[m.end():]
+        stop = _RESULTS_STOP_RE.search(rest)
+        end = m.end() + (stop.start() if stop else len(rest))
+        return (body[: m.start()].rstrip() + "\n" + block + "\n" + body[end:].lstrip("\n")).strip("\n")
+    nxt = re.search(r"(?im)^\s*Next\s*:", body)
+    if nxt:
+        return (body[: nxt.start()].rstrip() + "\n" + block + "\n" + body[nxt.start():].lstrip("\n")).strip("\n")
+    return body.rstrip() + "\n" + block
+
+
+def ground_reply_results(
+    text: str,
+    natural: Optional[Dict[str, Any]] = None,
+    applied: Optional[List[Dict[str, Any]]] = None,
+) -> str:
+    """Contract replies get code-built Results; unread paths get flagged."""
+    body = text or ""
+    if reply_has_contract(body) or re.search(r"(?im)^\s*Results\s*:", body):
+        body = replace_results_section(body, build_tool_results(natural, applied))
+    return mark_unverified_paths(body, verified_paths(natural, applied))
+
+def _args_hash(args: Any) -> str:
+    import hashlib
+    import json
+
+    try:
+        blob = json.dumps(args, sort_keys=True, default=str)
+    except Exception:
+        blob = repr(args)
+    return hashlib.sha256(blob.encode("utf-8", "replace")).hexdigest()[:16]
+
+
+def console_turn_log_dir() -> Path:
+    override = os.environ.get("REALAI_CONSOLE_TURN_LOG_DIR", "").strip()
+    if override:
+        return Path(override)
+    return Path(__file__).resolve().parents[2] / "logs" / "console_turns"
+
+
+def log_console_turn(
+    natural: Optional[Dict[str, Any]] = None,
+    applied: Optional[List[Dict[str, Any]]] = None,
+    *,
+    route: str = "chat",
+) -> Optional[Path]:
+    """Append one console turn's tool calls to logs/console_turns/YYYY-MM-DD.jsonl.
+
+    Only tool names, a sha256 prefix of the args, and ok/fail status. No
+    message text, file contents, args values, headers, or tokens.
+    """
+    import json
+    import time
+
+    nat = natural if isinstance(natural, dict) else {}
+    rows = [r for r in (nat.get("tool_results") or []) if isinstance(r, dict)]
+    rows += [r for r in (applied or []) if isinstance(r, dict)]
+    calls = [
+        {
+            "tool": str(r.get("tool") or "?")[:64],
+            "args_sha256": _args_hash(r.get("args")),
+            "status": "ok" if _row_ok(r) else "fail",
+        }
+        for r in rows
+    ]
+    if not calls:
+        for t in nat.get("used_tools") or nat.get("tools") or []:
+            calls.append({"tool": str(t)[:64], "args_sha256": None, "status": "unknown"})
+    record = {
+        "ts": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "route": str(route)[:32],
+        "hat": str(nat.get("hat") or "")[:32],
+        "job": str(nat.get("job") or "")[:32],
+        "tool_count": len(calls),
+        "tool_calls": calls,
+    }
+    try:
+        d = console_turn_log_dir()
+        d.mkdir(parents=True, exist_ok=True)
+        path = d / (time.strftime("%Y-%m-%d") + ".jsonl")
+        with path.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(record, sort_keys=True) + "\n")
+        return path
+    except Exception:
+        return None
+
+
 def finalize_natural_choice_text(
     text: str,
     natural: Optional[Dict[str, Any]] = None,
@@ -1002,10 +1272,14 @@ def finalize_natural_choice_text(
     hat = normalize_hat(str(nat.get("hat") or "One-Tree"))
     job = normalize_job(str(nat.get("job") or "EXECUTE"))
     body = scrub_unearned_landed(text or "", write_ok=earned)
+    nat_for_results = dict(nat)
+    if smoke is not None:
+        nat_for_results["post_write_smoke"] = smoke
     if reply_has_contract(body):
         body = ensure_mode_active(body, hat)
+        body = ground_reply_results(body, nat_for_results, applied_rows)
         if smoke is not None and not smoke_ok and "fail" not in body.lower():
-            body = body.rstrip() + "\nResults:\n- " + verify
+            body = body.rstrip() + "\n- " + verify
         if smoke_raw and "View raw diagnostic payload" not in body:
             body = body.rstrip() + raw_diagnostic_appendix(smoke_raw)
         return body, smoke
@@ -1048,7 +1322,9 @@ def finalize_natural_choice_text(
             hat=hat,
         )
     if body and body not in shaped:
-        shaped += "\n\n" + body
+        shaped += "\n\n" + mark_unverified_paths(
+            body, verified_paths(nat_for_results, applied_rows)
+        )
     if smoke_raw and "View raw diagnostic payload" not in shaped:
         shaped = shaped.rstrip() + raw_diagnostic_appendix(smoke_raw)
     return scrub_unearned_landed(shaped, write_ok=earned), smoke
@@ -1718,6 +1994,7 @@ def apply_natural_grounding(body: Dict[str, Any], user_text: str) -> Dict[str, A
     meta["tools"] = names
     meta["used_tools"] = names
     meta["tool_count"] = len(results)
+    meta["tool_results"] = [_compact_tool_row(tr) for tr in results]
     meta["auto"] = [k for k, _ in extras]
     meta["admit_failure"] = tools_all_failed(results)
     if meta["admit_failure"]:
