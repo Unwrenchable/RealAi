@@ -429,3 +429,12 @@ def test_prose_invocation_arg_not_flagged():
     text = "Run python -m pytest tests/ -q."
     assert "tests/" not in nm.mentioned_paths(text)
     assert "[unverified" not in nm.mark_unverified_paths(text, set())
+
+
+def test_prompt_mask_is_linear():
+    import time
+
+    t0 = time.time()
+    nm.mentioned_paths("PS " + " PS " * 20000)
+    nm.mentioned_paths("$ " + " $ " * 20000)
+    assert time.time() - t0 < 2.0

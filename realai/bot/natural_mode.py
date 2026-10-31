@@ -1009,7 +1009,29 @@ _CMD_WORDS = (
 #    NOT in this list, so "ls realai/data/chess/ shows 3 files" stays a claim.
 _CMD_FENCE_RE = re.compile(r"```.*?```", re.S)
 _CMD_SPAN_RE = re.compile(r"`\s*" + _CMD_WORDS + r"[^`\n]*`", re.I)
-_CMD_PROMPT_RE = re.compile(r"(?m)(?:^|\s)(?:\$|PS>|PS [^>\n]*>)\s.*$")
+_PS_PROMPT_RE = re.compile(r"^PS(?: [^>\n]{0,200})?>")
+
+
+def _mask_prompt_tails(text: str) -> str:
+    """Blank the rest of a line after a "$ " or "PS>" shell prompt.
+
+    Linear scan per line (no backtracking regex over user text; CodeQL
+    py/polynomial-redos).
+    """
+    out = []
+    for line in (text or "").split("\n"):
+        cut = -1
+        for i, ch in enumerate(line):
+            if i and not line[i - 1].isspace():
+                continue
+            if ch == "$" and line[i + 1 : i + 2] in (" ", "\t"):
+                cut = i
+                break
+            if line.startswith("PS", i) and _PS_PROMPT_RE.match(line[i : i + 210]):
+                cut = i
+                break
+        out.append(line if cut < 0 else line[:cut])
+    return "\n".join(out)
 _CMD_INVOKE_ARGS_RE = re.compile(
     r"(?i)\b(?:python3?\s+-m\s+[\w.]+|py\s+-m\s+[\w.]+|pytest|npx\s+[\w@/.-]+|"
     r"npm\s+(?:run\s+[\w:-]+|test)|pnpm\s+[\w:-]+|ruff\s+(?:check|format)|mypy|eslint|tsc|black)"
@@ -1068,7 +1090,7 @@ def mentioned_paths(text: str) -> List[str]:
     # command arguments, not claims about the workspace.
     dir_text = _CMD_FENCE_RE.sub(" ", norm)
     dir_text = _CMD_SPAN_RE.sub(" ", dir_text)
-    dir_text = _CMD_PROMPT_RE.sub(" ", dir_text)
+    dir_text = _mask_prompt_tails(dir_text)
     dir_text = _CMD_INVOKE_ARGS_RE.sub(" ", dir_text)
     for m in _NAMED_DIR_RE.finditer(dir_text):
         _add(m.group(1))
