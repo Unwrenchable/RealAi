@@ -1001,8 +1001,20 @@ _CMD_WORDS = (
     r"(?:\$\s*)?(?:python3?|py|pytest|pip|git|npm|npx|pnpm|yarn|node|cd|ls|dir|rm|cp|mv|mkdir|"
     r"cat|grep|rg|find|ruff|black|mypy|tsc|eslint|make|bash|sh|powershell|pwsh|uv)\b"
 )
-_CMD_SPAN_RE = re.compile(r"`{1,3}\s*" + _CMD_WORDS + r"[^`]*`{1,3}", re.I)
-_CMD_LINE_RE = re.compile(r"(?im)^[ \t]*(?:\$|>|PS>|PS [^>]*>)?[ \t]*" + _CMD_WORDS + r".*$")
+# Command text whose folder args are not workspace claims:
+#  - fenced code blocks and inline code spans that start with a command word
+#  - the rest of a line after a "$ " or "PS>" prompt
+#  - (narrow, prose) the path args right after a test/lint/build invocation,
+#    e.g. "Run python -m pytest tests/ -q." Bare prose verbs like ls/cat are
+#    NOT in this list, so "ls realai/data/chess/ shows 3 files" stays a claim.
+_CMD_FENCE_RE = re.compile(r"```.*?```", re.S)
+_CMD_SPAN_RE = re.compile(r"`\s*" + _CMD_WORDS + r"[^`\n]*`", re.I)
+_CMD_PROMPT_RE = re.compile(r"(?m)(?:^|\s)(?:\$|PS>|PS [^>\n]*>)\s.*$")
+_CMD_INVOKE_ARGS_RE = re.compile(
+    r"(?i)\b(?:python3?\s+-m\s+[\w.]+|py\s+-m\s+[\w.]+|pytest|npx\s+[\w@/.-]+|"
+    r"npm\s+(?:run\s+[\w:-]+|test)|pnpm\s+[\w:-]+|ruff\s+(?:check|format)|mypy|eslint|tsc|black)"
+    r"((?:\s+(?:-{1,2}[\w=.-]+|[\w.-]+/[\w./-]*))+)"
+)
 _LIST_READ_TOOLS = {
     "read", "list", "ls", "workspace_read", "workspace_list", "workspace_grep",
     "list_dir", "read_file", "grep", "inspect",
@@ -1054,8 +1066,10 @@ def mentioned_paths(text: str) -> List[str]:
 
     # Folders inside a shell command (`pytest tests/ -q`, `$ ls docs/`) are
     # command arguments, not claims about the workspace.
-    dir_text = _CMD_SPAN_RE.sub(" ", norm)
-    dir_text = _CMD_LINE_RE.sub(" ", dir_text)
+    dir_text = _CMD_FENCE_RE.sub(" ", norm)
+    dir_text = _CMD_SPAN_RE.sub(" ", dir_text)
+    dir_text = _CMD_PROMPT_RE.sub(" ", dir_text)
+    dir_text = _CMD_INVOKE_ARGS_RE.sub(" ", dir_text)
     for m in _NAMED_DIR_RE.finditer(dir_text):
         _add(m.group(1))
     for m in _NAMED_DIR_NOSLASH_RE.finditer(dir_text):
@@ -1079,8 +1093,8 @@ def looks_like_bare_file(token: str, *, backticked: bool = False) -> bool:
         return True
     if tok[:1].isdigit():
         return False
-    if tok.lower().endswith(".js") and not backticked:
-        return False
+    if tok.lower().endswith(".js") and tok[:1].isupper() and not backticked:
+        return False  # Node.js / Next.js prose; lowercase index.js is a file
     return True
 
 
@@ -1625,8 +1639,13 @@ def format_grounding_block(
     """Append-only grounding for the last user message."""
     from realai.cli.craft import _format_tools
 
-    tools_txt = _format_tools(results) if results else "(no tool results)"
+    from realai.orchestration.v3_runtime_bridge import redact_text, redact_tool_result
+
     failed = tools_all_failed(results)
+    # Redact every tool result (full text, before any formatter cut), then the
+    # formatted block again, before it reaches the model prompt.
+    safe = [redact_tool_result(r) for r in (results or [])]
+    tools_txt = redact_text(_format_tools(safe)) if safe else "(no tool results)"
     if failed:
         follow = (
             "Tools failed or returned nothing. Say so. Do not invent file contents, "
